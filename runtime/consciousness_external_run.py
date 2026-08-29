@@ -6,8 +6,13 @@ PKG=ROOT/'runtime'/'yado_rc8_v35'
 sys.path.insert(0,str(PKG))
 # Import audit logic from sibling asset loaded by workflow.
 sys.path.insert(0,str(ROOT/'runtime'))
-from yado_rc8_consciousness_readiness_audit_v1 import audit
+import yado_rc8_consciousness_readiness_audit_v1 as auditmod
 from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
+# Bind audit paths to the reconstructed exact v35 package, not this overlay directory.
+auditmod.ROOT=PKG
+auditmod.STATE=PKG/'yado_canonical_state_v3_rc8_external_cognitive.json'
+auditmod.MANIFEST=PKG/'yado_development_manifest_v35.json'
+audit=auditmod.audit
 
 SOURCES=[
  'https://arxiv.org/abs/2308.08708',
