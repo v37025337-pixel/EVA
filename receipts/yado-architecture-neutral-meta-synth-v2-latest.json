@@ -1,0 +1,251 @@
+{
+  "admission_requirements": [
+    "validation>=0.90",
+    "fresh_blind>=0.90",
+    "blind_contains>=4_architecture_families"
+  ],
+  "architecture_answer_hardcoded": false,
+  "blind_families": [
+    "ACTIVE_INFERENCE",
+    "CLASSICAL_COGNITIVE",
+    "GLOBAL_WORKSPACE",
+    "HYPERGRAPH_REFLECTIVE",
+    "LOCAL_SELF_ORGANIZING",
+    "META_NCA",
+    "MULTI_AGENT_LOCAL_GLOBAL",
+    "NEURO_SYMBOLIC",
+    "OPEN_ENDED_EVOLUTION",
+    "WORLD_MODEL"
+  ],
+  "blind_family_count": 10,
+  "canonical_mutation": false,
+  "case_counts": {
+    "all": 298,
+    "blind": 46,
+    "fit": 91,
+    "revealed_refit": 252,
+    "validation": 73
+  },
+  "external_errors": [],
+  "external_source_count": 12,
+  "github_run_id": "33277392622",
+  "github_sha": "a13fbf88f81a7be1bbaaffb3db4012ddd3073b20",
+  "host_role": "corpus_transport_split_and_validation_invariants_only",
+  "kernel_algorithm_bank": [
+    {
+      "family": "CART_AXIS",
+      "max_depth": 1
+    },
+    {
+      "family": "CART_AXIS",
+      "max_depth": 2
+    },
+    {
+      "family": "CART_AXIS",
+      "max_depth": 3
+    },
+    {
+      "family": "CART_AXIS",
+      "max_depth": 4
+    },
+    {
+      "family": "CART_AXIS",
+      "max_depth": 5
+    },
+    {
+      "family": "CART_AXIS",
+      "max_depth": 6
+    },
+    {
+      "family": "CART_AXIS",
+      "max_depth": 7
+    },
+    {
+      "family": "LINEAR_SCORE_SEARCH",
+      "weight_basis": [
+        -1,
+        0,
+        1
+      ]
+    }
+  ],
+  "kernel_mechanism": "UnifiedYADOKernelV30RC8ExternalCognitive.meta_evolve_intelligence",
+  "kernel_result": {
+    "fresh_blind": 0.8043478260869565,
+    "model": {
+      "feature": "evidence_open_ended_evolution",
+      "left": {
+        "feature": "evidence_local_self_organizing",
+        "left": {
+          "feature": "evidence_hypergraph_reflective",
+          "left": {
+            "feature": "evidence_world_model",
+            "left": {
+              "feature": "evidence_world_model",
+              "left": {
+                "feature": "evidence_neuro_symbolic",
+                "left": {
+                  "feature": "evidence_classical_cognitive",
+                  "left": {
+                    "label": "META_NCA"
+                  },
+                  "right": {
+                    "label": "CLASSICAL_COGNITIVE"
+                  },
+                  "threshold": 0.27930763178599527
+                },
+                "right": {
+                  "feature": "evidence_meta_nca",
+                  "left": {
+                    "label": "NEURO_SYMBOLIC"
+                  },
+                  "right": {
+                    "label": "META_NCA"
+                  },
+                  "threshold": 0.32146542827657376
+                },
+                "threshold": 0.2934002869440459
+              },
+              "right": {
+                "label": "ACTIVE_INFERENCE"
+              },
+              "threshold": 0.007575757575757576
+            },
+            "right": {
+              "feature": "evidence_classical_cognitive",
+              "left": {
+                "label": "WORLD_MODEL"
+              },
+              "right": {
+                "feature": "evidence_world_model",
+                "left": {
+                  "label": "CLASSICAL_COGNITIVE"
+                },
+                "right": {
+                  "label": "WORLD_MODEL"
+                },
+                "threshold": 0.3758844339622641
+              },
+              "threshold": 0.3039576622181316
+            },
+            "threshold": 0.14319029850746268
+          },
+          "right": {
+            "feature": "evidence_local_self_organizing",
+            "left": {
+              "label": "HYPERGRAPH_REFLECTIVE"
+            },
+            "right": {
+              "label": "LOCAL_SELF_ORGANIZING"
+            },
+            "threshold": 0.2825361512791991
+          },
+          "threshold": 0.13768115942028986
+        },
+        "right": {
+          "feature": "evidence_meta_nca",
+          "left": {
+            "label": "LOCAL_SELF_ORGANIZING"
+          },
+          "right": {
+            "label": "META_NCA"
+          },
+          "threshold": 0.4487179487179487
+        },
+        "threshold": 0.3145833333333333
+      },
+      "right": {
+        "label": "OPEN_ENDED_EVOLUTION"
+      },
+      "threshold": 0.2972383720930233
+    },
+    "organ": "INTELLIGENCE",
+    "selected_algorithm": {
+      "family": "CART_AXIS",
+      "max_depth": 7
+    },
+    "validation": 0.9178082191780822
+  },
+  "label_derivation": "ARGMAX_EXTERNAL_EVIDENCE_PROFILE_OVER_COMPETING_ARCHITECTURE_FAMILIES",
+  "next_required_capability": "IMPROVE_ARCHITECTURE_NEUTRAL_SELECTOR_BEFORE_CONSTRUCTOR",
+  "promotion_applied": false,
+  "receipt_sha256": "42330b605eaaf47272b63713eb5e899ca0283ab4e6da33e6c7504c6d72c02a0d",
+  "schema": "yado.rc8.shadow.architecture_neutral_meta_synthesizer_v2.v1",
+  "semantic_boundary": "META_SELECTOR_CAPABILITY_NOT_GENERAL_ARCHITECTURE_SELF_REWRITE_AND_NOT_PROOF_OF_AGI",
+  "source_digests": [
+    {
+      "final_url": "https://arxiv.org/abs/1610.08602",
+      "id": "COGARCH_REVIEW_40Y",
+      "sha256": "a8ee28e5cac1473138d4b00191a5c86d2b315d059e2fe49ddbd2f7699a61dac0",
+      "url": "https://arxiv.org/abs/1610.08602"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2604.08206",
+      "id": "GLOBAL_WORKSPACE_AGENTS_2026",
+      "sha256": "2e577d0a2aae784b24d2930448c1b6eaeadd111dc91d956cfb7607a68abeb4be",
+      "url": "https://arxiv.org/abs/2604.08206"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2506.00417",
+      "id": "WORLD_MODELS_COGNITIVE_AGENTS_2025",
+      "sha256": "b88705a90dbed44b2232495d07111589e50c4eb44c0c6f32f99f3a1a4f62c60c",
+      "url": "https://arxiv.org/abs/2506.00417"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2207.06415",
+      "id": "ACTIVE_INFERENCE_DEEP_2022",
+      "sha256": "cc59b25f6dccf4057e924b64c0935200af2ebaad76c1ea2348ea46aff576c295",
+      "url": "https://arxiv.org/abs/2207.06415"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2401.01040",
+      "id": "NEUROSYMBOLIC_COGNITIVE_AI_2024",
+      "sha256": "7d22e5b3872dc87288562f8ed8ee26416f9d7c1ebbb8a07e1d36f37721ca65b2",
+      "url": "https://arxiv.org/abs/2401.01040"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2310.18318",
+      "id": "OPENCOG_HYPERON_2023",
+      "sha256": "4098ca316682f1e0e34e69b8e0937db81cad235b75f6221e821862547dfab015",
+      "url": "https://arxiv.org/abs/2310.18318"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2406.04235",
+      "id": "OPEN_ENDED_LENIA_2024",
+      "sha256": "61d6adc95e1002e66cfccede9dc35e8997d19bd265be93a11c9112b73e0fed20",
+      "url": "https://arxiv.org/abs/2406.04235"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2509.11131",
+      "id": "NEURAL_CELLULAR_AUTOMATA_2025",
+      "sha256": "a3a8742b29852c5cb6a9353d5730344dd1c32450915846b3eea4481229a54ae9",
+      "url": "https://arxiv.org/abs/2509.11131"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2607.07743",
+      "id": "META_NCA_2026",
+      "sha256": "4d66cb841ef45c6db43a57bf0c0f30c785e2f4c00812491a66485dd353c793e4",
+      "url": "https://arxiv.org/abs/2607.07743"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2604.00273",
+      "id": "LOCAL_RULES_EMERGENCE_2026",
+      "sha256": "a457024cb9f13c167609bc1f2c7ec0ca6e445fc3fcca6f32811f37d509a64033",
+      "url": "https://arxiv.org/abs/2604.00273"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2204.05133",
+      "id": "UNIFIED_CONSCIOUS_ARCHITECTURE_2022",
+      "sha256": "b9e1eebdbe0446fae80212efaa58c02e1d83bca1e0ba269d44ca1d230ba025cd",
+      "url": "https://arxiv.org/abs/2204.05133"
+    },
+    {
+      "final_url": "https://arxiv.org/abs/2110.13827",
+      "id": "LOCAL_GLOBAL_MULTI_AGENT_COORDINATION_2021",
+      "sha256": "078952a3450597807660169777a7956507c4897d956954bea8866328de8bbd71",
+      "url": "https://arxiv.org/abs/2110.13827"
+    }
+  ],
+  "status": "WITHHOLD",
+  "working_base": "VERIFIED_V36_RECONSTRUCTED"
+}
