@@ -1,0 +1,51 @@
+name: YADO RC8 v35 self-audit metacognitive training
+on:
+  push:
+    branches: [yado-rc8-v35-training]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rc8-v35:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct exact RC8 v35 package
+        run: python runtime/reconstruct_rc8v35.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v35/requirements-github.txt pytest
+      - name: Full locked unittest regression
+        working-directory: runtime/yado_rc8_v35
+        run: python -W error::ResourceWarning -m unittest discover -q
+      - name: Archive regression
+        working-directory: runtime/yado_rc8_v35
+        run: python -m pytest -q test_yado_evolution_archive_runtime_v1.py test_yado_evolution_archive_integration_v1.py
+      - name: Fresh metacognitive holdout
+        working-directory: runtime/yado_rc8_v35
+        run: python yado_metacognitive_fresh_holdout_v2.py
+      - name: Direct bounded metacognitive internet research
+        working-directory: runtime/yado_rc8_v35
+        run: python yado_rc8_metacognitive_direct_research_v1.py ../metacognitive_internet_receipt.json
+      - name: Exact RC8 v35 boot
+        run: python runtime/boot_rc8v35.py
+      - name: Upload receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-rc8-v35-training-receipts
+          path: |
+            runtime/rc8v35_boot_receipt.json
+            runtime/metacognitive_internet_receipt.json
+            runtime/rc8v35_external.sqlite
+          retention-days: 30
+      - name: Persist receipts
+        run: |
+          mkdir -p receipts
+          cp runtime/rc8v35_boot_receipt.json receipts/yado-rc8-v35-latest.json
+          cp runtime/metacognitive_internet_receipt.json receipts/yado-rc8-v35-internet-latest.json
+          git config user.name "YADO RC8 v35 Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-rc8-v35-latest.json receipts/yado-rc8-v35-internet-latest.json
+          if git diff --cached --quiet; then echo unchanged; else git commit -m "Persist YADO RC8 v35 training receipts [skip ci]"; git push origin HEAD:yado-rc8-v35-training; fi
