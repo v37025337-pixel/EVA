@@ -1,0 +1,31 @@
+name: YADO thinking private helper probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-thinking-private-helper-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect thinking private helpers
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          p=Path('yado_algorithm_component_runtime_native_v1.py')
+          txt=p.read_text(); tree=ast.parse(txt)
+          wanted={'_thinking_predict','_thinking_leaf_fit','plan_acc','learn_edges','plan_with_edges'}
+          for n in tree.body:
+            if isinstance(n,ast.FunctionDef) and n.name in wanted:
+              print('\n---',n.name,'---')
+              print(ast.get_source_segment(txt,n))
+          PY
