@@ -1,0 +1,41 @@
+name: YADO algorithm genesis contract probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-algorithm-genesis-contract-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect RC5 genesis and RC6 metagrammar methods
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          wanted={
+            'yado_core_v3_0_rc5_algorithm_genesis.py':{
+              'synthesize_logic_algorithm_component','synthesize_thinking_algorithm_component','synthesize_intelligence_algorithm_component'
+            },
+            'yado_core_v3_0_rc6_meta_grammar.py':{
+              'synthesize_logic_with_extended_meta_grammar','synthesize_thinking_with_extended_meta_grammar','synthesize_intelligence_with_extended_meta_grammar'
+            }
+          }
+          for name,names in wanted.items():
+            p=Path(name); txt=p.read_text(); tree=ast.parse(txt)
+            print('\n====',name,'====')
+            for n in tree.body:
+              if isinstance(n,ast.ClassDef):
+                for m in n.body:
+                  if isinstance(m,ast.FunctionDef) and m.name in names:
+                    print('\n---',m.name,'---')
+                    print(ast.get_source_segment(txt,m))
+          PY
