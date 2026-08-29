@@ -1,0 +1,40 @@
+name: YADO architecture research interface probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct verified v36
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Discover YADO native research and synthesis interfaces
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import ast, json
+          rows=[]
+          for p in sorted(Path('.').glob('*.py')):
+              low=p.name.lower()
+              if any(k in low for k in ('research','learn','evol','develop','architect','synth','hypoth','frontier')):
+                  try:
+                      tree=ast.parse(p.read_text())
+                  except Exception:
+                      continue
+                  funcs=[]
+                  for n in tree.body:
+                      if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)):
+                          funcs.append(n.name)
+                  rows.append({'file':p.name,'functions':funcs[:50]})
+          print(json.dumps(rows,indent=2,sort_keys=True))
+          PY
