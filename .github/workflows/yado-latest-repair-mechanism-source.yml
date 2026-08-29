@@ -1,0 +1,32 @@
+name: YADO latest repair mechanism source
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-latest-repair-mechanism-source.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Print latest self-construction functions
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          for name in ['yado_stateful_frontier_repair_cycle8.py','yado_stateful_frontier_repair_cycle10.py','yado_stateful_frontier_repair_cycle12.py','yado_stateful_frontier_repair_cycle13.py']:
+              p=Path(name)
+              print("\n====",name,"====")
+              txt=p.read_text()
+              tree=ast.parse(txt)
+              for n in tree.body:
+                  if isinstance(n,ast.FunctionDef) and n.name in {'request','requests','make_request','mechanism','schema_obj','obj','residual_certificate'}:
+                      print(ast.get_source_segment(txt,n))
+          PY
