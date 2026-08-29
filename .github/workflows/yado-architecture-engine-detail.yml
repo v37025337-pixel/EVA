@@ -1,0 +1,42 @@
+name: YADO architecture engine interface detail
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  detail:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Inspect native architecture engines
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import importlib, inspect, json
+          modules=[
+            'yado_rc8_consciousness_direct_research_v1',
+            'yado_evolution_archive_runtime_v1',
+            'yado_frontier_portfolio_runtime',
+            'yado_evolution_runtime_native_v1',
+          ]
+          out={}
+          for mname in modules:
+              m=importlib.import_module(mname)
+              rows=[]
+              for n in dir(m):
+                  if n.startswith('_'): continue
+                  o=getattr(m,n)
+                  if inspect.isfunction(o) or inspect.isclass(o):
+                      try:sig=str(inspect.signature(o))
+                      except Exception:sig='?'
+                      rows.append({'name':n,'kind':'class' if inspect.isclass(o) else 'function','signature':sig})
+              out[mname]=rows
+          print(json.dumps(out,indent=2,sort_keys=True))
+          PY
