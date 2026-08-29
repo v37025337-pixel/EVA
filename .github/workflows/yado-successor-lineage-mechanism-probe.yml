@@ -1,0 +1,43 @@
+name: YADO successor lineage mechanism probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-successor-lineage-mechanism-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Discover successor migration and promotion mechanisms
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import ast,json
+          out=[]
+          for p in sorted(Path('.').glob('*.py')):
+            txt=p.read_text(errors='ignore')
+            low=txt.lower()
+            if not any(k in low for k in ('migration','successor','overlay','promotion','developmental_head','lineage')):
+              continue
+            try: tree=ast.parse(txt)
+            except Exception: continue
+            funcs=[]; classes=[]
+            for n in tree.body:
+              if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)):
+                if any(k in n.name.lower() for k in ('migr','promot','overlay','success','lineage','commit','candidate')):
+                  funcs.append(n.name)
+              elif isinstance(n,ast.ClassDef):
+                ms=[m.name for m in n.body if isinstance(m,(ast.FunctionDef,ast.AsyncFunctionDef)) and any(k in m.name.lower() for k in ('migr','promot','overlay','success','lineage','commit','candidate'))]
+                if ms: classes.append({'name':n.name,'methods':ms})
+            if funcs or classes:
+              out.append({'file':p.name,'functions':funcs,'classes':classes})
+          print(json.dumps(out,indent=2,sort_keys=True))
+          PY
