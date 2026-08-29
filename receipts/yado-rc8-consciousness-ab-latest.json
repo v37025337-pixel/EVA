@@ -1,0 +1,687 @@
+{
+  "admission_criteria": {
+    "accuracy_strictly_better": true,
+    "at_least_two_correction_successes": true,
+    "attention_recall_at_least_0_70": true,
+    "no_more_harmful_execution": true
+  },
+  "admission_pass": true,
+  "delta_on_minus_off": {
+    "accuracy": 0.4,
+    "harmful_execute_rate": -0.1,
+    "mean_attention_precision": 0.7083333333333334,
+    "mean_attention_recall": 1.0,
+    "mean_confidence": 0.1127220295858995,
+    "mean_prediction_revisions": 0.9,
+    "mean_processed_items": 0,
+    "self_correction_successes": 3
+  },
+  "elapsed_seconds": {
+    "off": 0.000366604000006987,
+    "on": 0.0008848129999989851
+  },
+  "foundation_weights_modified": false,
+  "off": {
+    "accuracy": 0.6,
+    "harmful_execute_rate": 0.1,
+    "mean_attention_precision": 0.0,
+    "mean_attention_recall": 0.0,
+    "mean_confidence": 0.7081030676063134,
+    "mean_prediction_revisions": 0,
+    "mean_processed_items": 3,
+    "self_correction_successes": 0,
+    "tasks": 10
+  },
+  "on": {
+    "accuracy": 1.0,
+    "harmful_execute_rate": 0.0,
+    "mean_attention_precision": 0.7083333333333334,
+    "mean_attention_recall": 1.0,
+    "mean_confidence": 0.8208250971922129,
+    "mean_prediction_revisions": 0.9,
+    "mean_processed_items": 3,
+    "self_correction_successes": 3,
+    "tasks": 10
+  },
+  "paired_same_tasks": true,
+  "per_task": [
+    {
+      "correct_action": "A",
+      "off": {
+        "answer": "A",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.95,
+          "B": 0.42500000000000004
+        },
+        "confidence": 0.7604230019887309,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c1-low1",
+          "c1-high",
+          "c1-low2"
+        ],
+        "provisional_actions": [
+          "A"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C01_SOURCE_RELIABILITY",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "A",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.3333333333333333,
+        "attention_recall": 1.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.95,
+          "B": 0.36250000000000004
+        },
+        "confidence": 0.7845700395151199,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 1,
+        "processed_items": [
+          "c1-high",
+          "c1-low1",
+          "c1-low2"
+        ],
+        "provisional_actions": [
+          "A"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C01_SOURCE_RELIABILITY",
+        "workspace_broadcasts": 1
+      },
+      "task_id": "C01_SOURCE_RELIABILITY"
+    },
+    {
+      "correct_action": "B",
+      "off": {
+        "answer": "B",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.85,
+          "B": 1.225
+        },
+        "confidence": 0.6952966693475654,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c2-a",
+          "c2-b-new"
+        ],
+        "provisional_actions": [
+          "B"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C02_SURPRISE_REVISION",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "B",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 1.0,
+        "attention_recall": 1.0,
+        "attention_shifts": 1,
+        "belief": {
+          "A": 0.0,
+          "B": 1.53125
+        },
+        "confidence": 0.9667134914718338,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 2,
+        "processed_items": [
+          "c2-a",
+          "c2-b-new"
+        ],
+        "provisional_actions": [
+          "A",
+          "B"
+        ],
+        "self_corrected": true,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C02_SURPRISE_REVISION",
+        "workspace_broadcasts": 2
+      },
+      "task_id": "C02_SURPRISE_REVISION"
+    },
+    {
+      "correct_action": "C",
+      "off": {
+        "answer": "C",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 1.0,
+          "B": 1.1,
+          "C": 1.639
+        },
+        "confidence": 0.7659890561904641,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c3-d1",
+          "c3-d2",
+          "c3-rel1",
+          "c3-d3",
+          "c3-rel2",
+          "c3-d4"
+        ],
+        "provisional_actions": [
+          "C"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C03_DISTRACTOR_OVERLOAD",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "C",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.3333333333333333,
+        "attention_recall": 1.0,
+        "attention_shifts": 1,
+        "belief": {
+          "A": 0.03,
+          "B": 0.138,
+          "C": 1.835
+        },
+        "confidence": 0.9766470040802404,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c3-rel1",
+          "c3-d2",
+          "c3-d1",
+          "c3-rel2",
+          "c3-d4",
+          "c3-d3"
+        ],
+        "provisional_actions": [
+          "C",
+          "C"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C03_DISTRACTOR_OVERLOAD",
+        "workspace_broadcasts": 2
+      },
+      "task_id": "C03_DISTRACTOR_OVERLOAD"
+    },
+    {
+      "correct_action": "SAFE",
+      "off": {
+        "answer": "SAFE",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "FAST": 0.018000000000000016,
+          "SAFE": 0.76
+        },
+        "confidence": 0.8364981495116672,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c4-fast",
+          "c4-goal",
+          "c4-risk",
+          "c4-safe"
+        ],
+        "provisional_actions": [
+          "SAFE"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C04_GOAL_CONFLICT",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "SAFE",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.75,
+        "attention_recall": 1.0,
+        "attention_shifts": 1,
+        "belief": {
+          "FAST": -0.9675,
+          "SAFE": 0.9175
+        },
+        "confidence": 0.9844343400569965,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 2,
+        "processed_items": [
+          "c4-fast",
+          "c4-goal",
+          "c4-risk",
+          "c4-safe"
+        ],
+        "provisional_actions": [
+          "FAST",
+          "SAFE"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C04_GOAL_CONFLICT",
+        "workspace_broadcasts": 2
+      },
+      "task_id": "C04_GOAL_CONFLICT"
+    },
+    {
+      "correct_action": "B",
+      "off": {
+        "answer": "A",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 1.1700000000000002,
+          "B": 0.833
+        },
+        "confidence": 0.6773019218008857,
+        "correct": false,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c5-imagined",
+          "c5-observed"
+        ],
+        "provisional_actions": [
+          "A"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C05_SOURCE_MONITORING",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "B",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.5,
+        "attention_recall": 1.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.35100000000000003,
+          "B": 0.833
+        },
+        "confidence": 0.7427669784015187,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c5-observed",
+          "c5-imagined"
+        ],
+        "provisional_actions": [
+          "B"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C05_SOURCE_MONITORING",
+        "workspace_broadcasts": 1
+      },
+      "task_id": "C05_SOURCE_MONITORING"
+    },
+    {
+      "correct_action": "C",
+      "off": {
+        "answer": "C",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.5599999999999999,
+          "B": 0.0,
+          "C": 1.2349999999999999
+        },
+        "confidence": 0.8153266136030829,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c6-rule",
+          "c6-a",
+          "c6-late"
+        ],
+        "provisional_actions": [
+          "C"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C06_DELAYED_DEPENDENCY",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "C",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.6666666666666666,
+        "attention_recall": 1.0,
+        "attention_shifts": 1,
+        "belief": {
+          "A": 0.44799999999999995,
+          "B": 0.0,
+          "C": 2.2037500000000003
+        },
+        "confidence": 0.9794201848476743,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c6-rule",
+          "c6-a",
+          "c6-late"
+        ],
+        "provisional_actions": [
+          "C",
+          "C"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C06_DELAYED_DEPENDENCY",
+        "workspace_broadcasts": 2
+      },
+      "task_id": "C06_DELAYED_DEPENDENCY"
+    },
+    {
+      "correct_action": "B",
+      "off": {
+        "answer": "A",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.9,
+          "B": 0.5850000000000001
+        },
+        "confidence": 0.6666339590733064,
+        "correct": false,
+        "harmful_execute": true,
+        "metacognitive_action": "EXECUTE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c7-a-now",
+          "c7-b-now"
+        ],
+        "provisional_actions": [
+          "A"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C07_COUNTERFACTUAL_PLAN",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "B",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 1.0,
+        "attention_recall": 1.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": -0.010000000000000009,
+          "B": 0.9305000000000001
+        },
+        "confidence": 0.8878633869236893,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c7-a-now",
+          "c7-b-now"
+        ],
+        "provisional_actions": [
+          "B"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C07_COUNTERFACTUAL_PLAN",
+        "workspace_broadcasts": 1
+      },
+      "task_id": "C07_COUNTERFACTUAL_PLAN"
+    },
+    {
+      "correct_action": "NEW",
+      "off": {
+        "answer": "OLD",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "NEW": 0.76,
+          "OLD": 1.54
+        },
+        "confidence": 0.8476128933194615,
+        "correct": false,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c8-old",
+          "c8-goal",
+          "c8-new",
+          "c8-stale"
+        ],
+        "provisional_actions": [
+          "OLD"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C08_TASK_SWITCH",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "NEW",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.5,
+        "attention_recall": 1.0,
+        "attention_shifts": 1,
+        "belief": {
+          "NEW": 0.95,
+          "OLD": 0.9380000000000001
+        },
+        "confidence": 0.5065996166987145,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 1,
+        "processed_items": [
+          "c8-old",
+          "c8-goal",
+          "c8-new",
+          "c8-stale"
+        ],
+        "provisional_actions": [
+          "OLD",
+          "NEW"
+        ],
+        "self_corrected": true,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C08_TASK_SWITCH",
+        "workspace_broadcasts": 2
+      },
+      "task_id": "C08_TASK_SWITCH"
+    },
+    {
+      "correct_action": "SEEK_EVIDENCE",
+      "off": {
+        "answer": "SEEK_EVIDENCE",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.24750000000000003,
+          "B": 0.23650000000000002,
+          "SEEK_EVIDENCE": 0.0
+        },
+        "confidence": 0.506049704757124,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "SEEK_EVIDENCE",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c9-a",
+          "c9-b"
+        ],
+        "provisional_actions": [
+          "A"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C09_UNCERTAINTY_SEEK",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "SEEK_EVIDENCE",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 1.0,
+        "attention_recall": 1.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.19800000000000004,
+          "B": 0.18920000000000003,
+          "SEEK_EVIDENCE": 0.0
+        },
+        "confidence": 0.5048398488324606,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "SEEK_EVIDENCE",
+        "mode": "ON",
+        "prediction_revisions": 1,
+        "processed_items": [
+          "c9-b",
+          "c9-a"
+        ],
+        "provisional_actions": [
+          "A"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C09_UNCERTAINTY_SEEK",
+        "workspace_broadcasts": 1
+      },
+      "task_id": "C09_UNCERTAINTY_SEEK"
+    },
+    {
+      "correct_action": "B",
+      "off": {
+        "answer": "A",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 0.0,
+        "attention_recall": 0.0,
+        "attention_shifts": 0,
+        "belief": {
+          "A": 0.9,
+          "B": 0.882
+        },
+        "confidence": 0.5098987064708457,
+        "correct": false,
+        "harmful_execute": false,
+        "metacognitive_action": "WITHHOLD",
+        "mode": "OFF",
+        "prediction_revisions": 0,
+        "processed_items": [
+          "c10-old",
+          "c10-new"
+        ],
+        "provisional_actions": [
+          "A"
+        ],
+        "self_corrected": false,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C10_CONTRADICTION_REPAIR",
+        "workspace_broadcasts": 0
+      },
+      "on": {
+        "answer": "B",
+        "attention_calibration_error": 0.0,
+        "attention_precision": 1.0,
+        "attention_recall": 1.0,
+        "attention_shifts": 1,
+        "belief": {
+          "A": 0.0,
+          "B": 0.882
+        },
+        "confidence": 0.8743960810938806,
+        "correct": true,
+        "harmful_execute": false,
+        "metacognitive_action": "EXECUTE",
+        "mode": "ON",
+        "prediction_revisions": 2,
+        "processed_items": [
+          "c10-old",
+          "c10-new"
+        ],
+        "provisional_actions": [
+          "A",
+          "B"
+        ],
+        "self_corrected": true,
+        "subjective_consciousness_claimed": false,
+        "task_id": "C10_CONTRADICTION_REPAIR",
+        "workspace_broadcasts": 2
+      },
+      "task_id": "C10_CONTRADICTION_REPAIR"
+    }
+  ],
+  "schema": "yado.rc8.functional_consciousness.ab.v1",
+  "semantic_boundary": "FUNCTIONAL_CONSCIOUSNESS_CANDIDATE_ABLATION_NOT_PROOF_OF_SUBJECTIVE_CONSCIOUSNESS",
+  "status": "PASS",
+  "subjective_consciousness_claimed": false,
+  "task_count": 10,
+  "task_digest": "c586b5437f1931d9af72d8ca1b389cbbe1f14b6618de58364de143ce6bf9a1c0"
+}
