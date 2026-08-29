@@ -8,7 +8,36 @@ permissions:
 jobs:
   boot:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: Placeholder
-        run: echo YADO_V28_BOOTSTRAP_PENDING_PACKAGE
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct exact v28 package
+        run: python runtime/reconstruct_v28.py
+      - name: Install YADO dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_v28/requirements-github.txt
+      - name: Boot YADO RC7 v28 and create receipt
+        run: python runtime/boot_v28.py
+      - name: Upload independent boot receipt artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-v28-boot-receipt
+          path: |
+            runtime/boot_receipt.json
+            runtime/yado_external_boot.sqlite
+          retention-days: 30
+      - name: Persist receipt in deployment branch
+        run: |
+          mkdir -p receipts
+          cp runtime/boot_receipt.json receipts/yado-v28-latest-boot.json
+          git config user.name "YADO External Boot Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-v28-latest-boot.json
+          if git diff --cached --quiet; then
+            echo "receipt unchanged"
+          else
+            git commit -m "Persist verified YADO v28 boot receipt [skip ci]"
+            git push origin HEAD:yado-v28-runtime
+          fi
