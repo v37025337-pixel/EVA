@@ -1,0 +1,622 @@
+{
+  "admission_pass": true,
+  "bundle_sha256": "e1f8d289151262c21eae6fde445debb4a231468c65346361dcd3192505461c1c",
+  "components": {
+    "INTELLIGENCE": {
+      "baseline_fresh_blind": 0.0,
+      "fresh_blind": 1.0,
+      "model": {
+        "else": {
+          "algorithm": {
+            "family": "CART_AXIS",
+            "max_depth": 4
+          },
+          "model": {
+            "feature": "integrity_score",
+            "left": {
+              "label": "ROLLBACK"
+            },
+            "right": {
+              "feature": "rollback_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "transfer_score",
+                "left": {
+                  "feature": "evidence_coverage",
+                  "left": {
+                    "label": "RESEARCH_MORE"
+                  },
+                  "right": {
+                    "label": "SHADOW_REPAIR"
+                  },
+                  "threshold": 0.6
+                },
+                "right": {
+                  "label": "PROMOTE_CANDIDATE"
+                },
+                "threshold": 0.655
+              },
+              "threshold": 0.55
+            },
+            "threshold": 0.55
+          },
+          "op": "LEAF"
+        },
+        "op": "IF_PREDICATE",
+        "predicate_program": {
+          "kind": "LINEAR_THRESHOLD",
+          "signals": [
+            "ablation_drop",
+            "fresh_blind"
+          ],
+          "threshold": -1.125,
+          "weights": [
+            -1.0,
+            -1.0
+          ]
+        },
+        "then": {
+          "algorithm": {
+            "family": "CART_AXIS",
+            "max_depth": 3
+          },
+          "model": {
+            "feature": "rollback_score",
+            "left": {
+              "label": "ROLLBACK"
+            },
+            "right": {
+              "feature": "integrity_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "evidence_coverage",
+                "left": {
+                  "label": "RESEARCH_MORE"
+                },
+                "right": {
+                  "label": "SHADOW_REPAIR"
+                },
+                "threshold": 0.6
+              },
+              "threshold": 0.55
+            },
+            "threshold": 0.55
+          },
+          "op": "LEAF"
+        }
+      },
+      "origin": "RC6_META_GRAMMAR",
+      "validation": 1.0
+    },
+    "LOGIC": {
+      "baseline_fresh_blind": 0.125,
+      "fresh_blind": 1.0,
+      "model": {
+        "else": {
+          "algorithm": {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 2
+          },
+          "model": {
+            "label": false
+          },
+          "op": "LEAF"
+        },
+        "op": "IF_SIGNAL",
+        "signal": {
+          "key": "rollback_ready",
+          "source": "INPUT",
+          "threshold": 0.5
+        },
+        "then": {
+          "algorithm": {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 2
+          },
+          "model": {
+            "feature": "integrity_ok",
+            "left": {
+              "label": false
+            },
+            "right": {
+              "feature": "fresh_verified",
+              "left": {
+                "label": false
+              },
+              "right": {
+                "label": true
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "op": "LEAF"
+        }
+      },
+      "origin": "RC5_ALGORITHM_GENESIS",
+      "validation": 1.0
+    },
+    "THINKING": {
+      "baseline_fresh_blind": 0.0,
+      "fresh_blind": 1.0,
+      "model": {
+        "else": {
+          "algorithm": {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 1.0
+          },
+          "model": [
+            {
+              "after": "COMMIT",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "HYPOTHESIZE",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "RESEARCH",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "SIMULATE",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "TEST",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "VERIFY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "COMMIT",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "SIMULATE",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "TEST",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "VERIFY",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "COMMIT",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "HYPOTHESIZE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "RESEARCH",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "SIMULATE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "TEST",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "COMMIT",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "HYPOTHESIZE",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "SIMULATE",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "TEST",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "VERIFY",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "COMMIT",
+              "before": "ROLLBACK",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "HYPOTHESIZE",
+              "before": "ROLLBACK",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "RESEARCH",
+              "before": "ROLLBACK",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "SIMULATE",
+              "before": "ROLLBACK",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "TEST",
+              "before": "ROLLBACK",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "VERIFY",
+              "before": "ROLLBACK",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "COMMIT",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "TEST",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "VERIFY",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "COMMIT",
+              "before": "TEST",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "VERIFY",
+              "before": "TEST",
+              "confidence": 1.0,
+              "support": 15
+            },
+            {
+              "after": "COMMIT",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 15
+            }
+          ],
+          "op": "LEAF"
+        },
+        "op": "IF_PREDICATE",
+        "predicate_program": {
+          "kind": "LINEAR_THRESHOLD",
+          "signals": [
+            "integrity_risk",
+            "uncertainty"
+          ],
+          "threshold": -1.1,
+          "weights": [
+            -1.0,
+            -1.0
+          ]
+        },
+        "then": {
+          "algorithm": {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 1.0
+          },
+          "model": [
+            {
+              "after": "COMMIT",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "TEST",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "VERIFY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "COMMIT",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "SIMULATE",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "TEST",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "VERIFY",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "COMMIT",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "HYPOTHESIZE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "RESEARCH",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "SIMULATE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "TEST",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "COMMIT",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "HYPOTHESIZE",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "SIMULATE",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "TEST",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "VERIFY",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "COMMIT",
+              "before": "ROLLBACK",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "COMMIT",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "TEST",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "VERIFY",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "COMMIT",
+              "before": "TEST",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "TEST",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "VERIFY",
+              "before": "TEST",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "COMMIT",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 21
+            },
+            {
+              "after": "ROLLBACK",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 21
+            }
+          ],
+          "op": "LEAF"
+        }
+      },
+      "origin": "RC6_META_GRAMMAR",
+      "validation": 1.0
+    }
+  },
+  "mutation_applied": false,
+  "parent_state_sha256": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "schema": "yado.rc8.shadow.cognitive_component_bundle.v3"
+}
