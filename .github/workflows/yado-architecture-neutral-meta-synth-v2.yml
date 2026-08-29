@@ -1,0 +1,42 @@
+name: YADO architecture-neutral Meta-Synthesizer V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_architecture_neutral_meta_synthesizer_v2.py"
+      - ".github/workflows/yado-architecture-neutral-meta-synth-v2.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  metasynth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconstruct verified v36
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: YADO self-constructs neutral architecture selector
+        run: python runtime/yado_architecture_neutral_meta_synthesizer_v2.py
+      - name: Upload receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-architecture-neutral-meta-synth-v2
+          path: runtime/yado_architecture_neutral_meta_synthesizer_v2_receipt.json
+          retention-days: 30
+      - name: Persist receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_architecture_neutral_meta_synthesizer_v2_receipt.json receipts/yado-architecture-neutral-meta-synth-v2-latest.json
+          git config user.name "YADO MetaAutoEvolution Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-architecture-neutral-meta-synth-v2-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist YADO architecture-neutral Meta-Synthesizer V2 receipt [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
