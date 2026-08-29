@@ -1,0 +1,45 @@
+name: YADO RC8 Algorithm Genesis Uplift V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_rc8_algorithm_genesis_uplift_v2.py"
+      - ".github/workflows/yado-rc8-algorithm-genesis-uplift-v2.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  genesis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconstruct verified v36 RC8
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: YADO synthesizes new LOGIC THINKING INTELLIGENCE components
+        run: python runtime/yado_rc8_algorithm_genesis_uplift_v2.py
+      - name: Upload component bundle and receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-rc8-algorithm-genesis-uplift-v2
+          path: |
+            runtime/yado_rc8_algorithm_genesis_uplift_v2_receipt.json
+            runtime/rc8_cognitive_genesis_bundle_v2/component_bundle.json
+          retention-days: 30
+      - name: Persist evidence only
+        run: |
+          mkdir -p receipts candidates/rc8-cognitive-genesis-v2
+          cp runtime/yado_rc8_algorithm_genesis_uplift_v2_receipt.json receipts/yado-rc8-algorithm-genesis-uplift-v2-latest.json
+          cp runtime/rc8_cognitive_genesis_bundle_v2/component_bundle.json candidates/rc8-cognitive-genesis-v2/component-bundle.json
+          git config user.name "YADO Algorithm Genesis Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-rc8-algorithm-genesis-uplift-v2-latest.json candidates/rc8-cognitive-genesis-v2/component-bundle.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist YADO Algorithm Genesis V2 evidence [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
