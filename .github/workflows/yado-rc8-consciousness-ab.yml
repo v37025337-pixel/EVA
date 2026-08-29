@@ -1,0 +1,43 @@
+name: YADO RC8 functional consciousness A-B
+on:
+  push:
+    branches: [yado-rc8-consciousness-ab]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  ab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct exact RC8 v35 package
+        run: python runtime/reconstruct_rc8v35.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v35/requirements-github.txt pytest
+      - name: Overlay functional-consciousness candidate and A-B harness
+        run: |
+          cp runtime/yado_functional_consciousness_runtime_v1.py runtime/yado_rc8_v35/
+          cp runtime/yado_consciousness_ab_benchmark_v1.py runtime/yado_rc8_v35/
+      - name: Verify exact v35 bootstrap before experiment
+        working-directory: runtime/yado_rc8_v35
+        run: python -c "import yado_bootstrap, json; print(json.dumps(yado_bootstrap.bootstrap_integrity(), sort_keys=True))"
+      - name: Paired 10-task A-B run
+        working-directory: runtime/yado_rc8_v35
+        run: python yado_consciousness_ab_benchmark_v1.py
+      - name: Upload A-B evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-rc8-consciousness-ab
+          path: runtime/yado_rc8_v35/yado_consciousness_ab_benchmark_v1_report.json
+          retention-days: 30
+      - name: Persist A-B receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_rc8_v35/yado_consciousness_ab_benchmark_v1_report.json receipts/yado-rc8-consciousness-ab-latest.json
+          git config user.name "YADO RC8 Consciousness AB Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-rc8-consciousness-ab-latest.json
+          if git diff --cached --quiet; then echo unchanged; else git commit -m "Persist YADO RC8 consciousness A-B receipt [skip ci]"; git pull --rebase origin yado-rc8-consciousness-ab; git push origin HEAD:yado-rc8-consciousness-ab; fi
