@@ -1,0 +1,43 @@
+name: YADO architecture engine source probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Inspect YADO native research/synthesis source
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import inspect, importlib
+          for mname in [
+              'yado_rc8_consciousness_direct_research_v1',
+              'yado_consciousness_theory_synthesis_v1',
+              'yado_evolution_archive_runtime_v1',
+              'yado_frontier_portfolio_runtime',
+          ]:
+              m=importlib.import_module(mname)
+              print("\n===== MODULE",mname,"=====")
+              for n in dir(m):
+                  if n.startswith('_'): continue
+                  o=getattr(m,n)
+                  if inspect.isclass(o) and getattr(o,'__module__',None)==mname:
+                      print("\n--- CLASS",n,"---")
+                      try: print(inspect.getsource(o)[:16000])
+                      except Exception as e: print("SOURCE_ERR",repr(e))
+                  elif inspect.isfunction(o) and getattr(o,'__module__',None)==mname:
+                      if n in ('run','distill','synthesize_default'):
+                          print("\n--- FUNC",n,"---")
+                          try: print(inspect.getsource(o)[:12000])
+                          except Exception as e: print("SOURCE_ERR",repr(e))
+          PY
