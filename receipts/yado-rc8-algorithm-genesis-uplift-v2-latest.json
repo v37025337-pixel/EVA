@@ -1,0 +1,912 @@
+{
+  "bundle": {
+    "admission_pass": false,
+    "bundle_sha256": "32cc7e6dd178c83196000e2ec05e9a991b8b8a410571a6ffb63e679b210135eb",
+    "components": {
+      "INTELLIGENCE": {
+        "baseline_fresh_blind": 0.0,
+        "fresh_blind": 1.0,
+        "model": {
+          "else": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 4
+            },
+            "model": {
+              "feature": "rollback_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "integrity_score",
+                "left": {
+                  "label": "ROLLBACK"
+                },
+                "right": {
+                  "feature": "transfer_score",
+                  "left": {
+                    "feature": "evidence_coverage",
+                    "left": {
+                      "label": "RESEARCH_MORE"
+                    },
+                    "right": {
+                      "label": "SHADOW_REPAIR"
+                    },
+                    "threshold": 0.6
+                  },
+                  "right": {
+                    "label": "PROMOTE_CANDIDATE"
+                  },
+                  "threshold": 0.655
+                },
+                "threshold": 0.55
+              },
+              "threshold": 0.55
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_PREDICATE",
+          "predicate_program": {
+            "kind": "LINEAR_THRESHOLD",
+            "signals": [
+              "ablation_drop",
+              "fresh_blind"
+            ],
+            "threshold": -1.125,
+            "weights": [
+              -1.0,
+              -1.0
+            ]
+          },
+          "then": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 3
+            },
+            "model": {
+              "feature": "integrity_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "rollback_score",
+                "left": {
+                  "label": "ROLLBACK"
+                },
+                "right": {
+                  "feature": "evidence_coverage",
+                  "left": {
+                    "label": "RESEARCH_MORE"
+                  },
+                  "right": {
+                    "label": "SHADOW_REPAIR"
+                  },
+                  "threshold": 0.6
+                },
+                "threshold": 0.55
+              },
+              "threshold": 0.55
+            },
+            "op": "LEAF"
+          }
+        },
+        "origin": "RC6_META_GRAMMAR",
+        "validation": 1.0
+      },
+      "LOGIC": {
+        "baseline_fresh_blind": 0.0,
+        "fresh_blind": 0.8333333333333334,
+        "model": {
+          "else": {
+            "algorithm": {
+              "criterion": "GINI",
+              "family": "BOOL_DECISION_TREE",
+              "max_depth": 2
+            },
+            "model": {
+              "label": false
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "rollback_ready",
+            "source": "INPUT",
+            "threshold": 0.5
+          },
+          "then": {
+            "algorithm": {
+              "family": "ENUM_BOOLEAN",
+              "max_depth": 3,
+              "refit_timeout_s": 4.0,
+              "semantic_dedup": true,
+              "timeout_s": 1.5
+            },
+            "model": [
+              "AND",
+              [
+                "OR",
+                [
+                  "VAR",
+                  "counterexample_open"
+                ],
+                [
+                  "VAR",
+                  "cross_domain_transfer"
+                ]
+              ],
+              [
+                "AND",
+                [
+                  "VAR",
+                  "fresh_verified"
+                ],
+                [
+                  "VAR",
+                  "integrity_ok"
+                ]
+              ]
+            ],
+            "op": "LEAF"
+          }
+        },
+        "origin": "RC5_ALGORITHM_GENESIS",
+        "validation": 0.8333333333333334
+      },
+      "THINKING": {
+        "baseline_fresh_blind": 0.0,
+        "fresh_blind": 0.0,
+        "model": {
+          "else": {
+            "else": {
+              "algorithm": {
+                "family": "GLOBAL_PRECEDENCE",
+                "min_support": 2,
+                "threshold": 1.0
+              },
+              "model": [],
+              "op": "LEAF"
+            },
+            "op": "IF_SIGNAL",
+            "signal": {
+              "key": "uncertainty",
+              "source": "EPISODE_CONTEXT",
+              "threshold": 0.5
+            },
+            "then": {
+              "algorithm": {
+                "family": "GLOBAL_PRECEDENCE",
+                "min_support": 2,
+                "threshold": 1.0
+              },
+              "model": [],
+              "op": "LEAF"
+            }
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "novelty",
+            "source": "EPISODE_CONTEXT",
+            "threshold": 0.5
+          },
+          "then": {
+            "algorithm": {
+              "family": "GLOBAL_PRECEDENCE",
+              "min_support": 2,
+              "threshold": 1.0
+            },
+            "model": [],
+            "op": "LEAF"
+          }
+        },
+        "origin": "RC5_ALGORITHM_GENESIS",
+        "validation": 0.0
+      }
+    },
+    "mutation_applied": false,
+    "parent_state_sha256": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+    "schema": "yado.rc8.shadow.cognitive_component_bundle.v2"
+  },
+  "canonical_mutation": false,
+  "github_run_id": "33277951199",
+  "github_sha": "de8b1e9722530f65ccc811961987148ebe247d25",
+  "host_role": "benchmark_transport_partition_and_observation_only",
+  "kernel_class": "UnifiedYADOKernelV30RC8ExternalCognitive",
+  "kernel_native_generators": [
+    "RC5_ALGORITHM_GENESIS",
+    "RC6_META_GRAMMAR"
+  ],
+  "lineage_observation": "CURRENT_RC8_INPLACE_ORGAN_REGISTRY_COMMIT_CONFLICTS_WITH_RC8_PRESERVED_PAYLOAD_GUARD",
+  "next_required_capability": "CONTINUE_KERNEL_NATIVE_ALGORITHM_GENESIS_BEFORE_SUCCESSOR",
+  "organ_results": {
+    "INTELLIGENCE": {
+      "admission_pass": true,
+      "baseline_fresh_blind": 0.0,
+      "blind_count": 24,
+      "fit_count": 80,
+      "fresh_gain_over_active_rc8": 1.0,
+      "rc5": {
+        "binding": {
+          "$SIGNAL_0": "rollback_score"
+        },
+        "constructor_id": "C_fac3b284e56b",
+        "fresh_blind": 0.9583333333333334,
+        "model": {
+          "else": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 1
+            },
+            "model": {
+              "label": "ROLLBACK"
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "rollback_score",
+            "source": "INPUT",
+            "threshold": 0.5
+          },
+          "then": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 5
+            },
+            "model": {
+              "feature": "integrity_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "evidence_coverage",
+                "left": {
+                  "feature": "ablation_drop",
+                  "left": {
+                    "label": "RESEARCH_MORE"
+                  },
+                  "right": {
+                    "feature": "transfer_score",
+                    "left": {
+                      "label": "RESEARCH_MORE"
+                    },
+                    "right": {
+                      "feature": "fresh_blind",
+                      "left": {
+                        "label": "RESEARCH_MORE"
+                      },
+                      "right": {
+                        "label": "PROMOTE_CANDIDATE"
+                      },
+                      "threshold": 0.74
+                    },
+                    "threshold": 0.655
+                  },
+                  "threshold": 0.16
+                },
+                "right": {
+                  "feature": "transfer_score",
+                  "left": {
+                    "label": "SHADOW_REPAIR"
+                  },
+                  "right": {
+                    "feature": "fresh_blind",
+                    "left": {
+                      "label": "SHADOW_REPAIR"
+                    },
+                    "right": {
+                      "feature": "ablation_drop",
+                      "left": {
+                        "label": "SHADOW_REPAIR"
+                      },
+                      "right": {
+                        "label": "PROMOTE_CANDIDATE"
+                      },
+                      "threshold": 0.16
+                    },
+                    "threshold": 0.855
+                  },
+                  "threshold": 0.655
+                },
+                "threshold": 0.6
+              },
+              "threshold": 0.55
+            },
+            "op": "LEAF"
+          }
+        },
+        "validation": 0.9583333333333334
+      },
+      "rc6": {
+        "fresh_blind": 1.0,
+        "grammar_extension_id": "G_dde14ca6d763",
+        "model": {
+          "else": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 4
+            },
+            "model": {
+              "feature": "rollback_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "integrity_score",
+                "left": {
+                  "label": "ROLLBACK"
+                },
+                "right": {
+                  "feature": "transfer_score",
+                  "left": {
+                    "feature": "evidence_coverage",
+                    "left": {
+                      "label": "RESEARCH_MORE"
+                    },
+                    "right": {
+                      "label": "SHADOW_REPAIR"
+                    },
+                    "threshold": 0.6
+                  },
+                  "right": {
+                    "label": "PROMOTE_CANDIDATE"
+                  },
+                  "threshold": 0.655
+                },
+                "threshold": 0.55
+              },
+              "threshold": 0.55
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_PREDICATE",
+          "predicate_program": {
+            "kind": "LINEAR_THRESHOLD",
+            "signals": [
+              "ablation_drop",
+              "fresh_blind"
+            ],
+            "threshold": -1.125,
+            "weights": [
+              -1.0,
+              -1.0
+            ]
+          },
+          "then": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 3
+            },
+            "model": {
+              "feature": "integrity_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "rollback_score",
+                "left": {
+                  "label": "ROLLBACK"
+                },
+                "right": {
+                  "feature": "evidence_coverage",
+                  "left": {
+                    "label": "RESEARCH_MORE"
+                  },
+                  "right": {
+                    "label": "SHADOW_REPAIR"
+                  },
+                  "threshold": 0.6
+                },
+                "threshold": 0.55
+              },
+              "threshold": 0.55
+            },
+            "op": "LEAF"
+          }
+        },
+        "predicate_program": {
+          "kind": "LINEAR_THRESHOLD",
+          "signals": [
+            "ablation_drop",
+            "fresh_blind"
+          ],
+          "threshold": -1.125,
+          "weights": [
+            -1.0,
+            -1.0
+          ]
+        },
+        "status": "SUPPORTED",
+        "validation": 1.0
+      },
+      "selected": {
+        "fresh_blind": 1.0,
+        "grammar_extension_id": "G_dde14ca6d763",
+        "model": {
+          "else": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 4
+            },
+            "model": {
+              "feature": "rollback_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "integrity_score",
+                "left": {
+                  "label": "ROLLBACK"
+                },
+                "right": {
+                  "feature": "transfer_score",
+                  "left": {
+                    "feature": "evidence_coverage",
+                    "left": {
+                      "label": "RESEARCH_MORE"
+                    },
+                    "right": {
+                      "label": "SHADOW_REPAIR"
+                    },
+                    "threshold": 0.6
+                  },
+                  "right": {
+                    "label": "PROMOTE_CANDIDATE"
+                  },
+                  "threshold": 0.655
+                },
+                "threshold": 0.55
+              },
+              "threshold": 0.55
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_PREDICATE",
+          "predicate_program": {
+            "kind": "LINEAR_THRESHOLD",
+            "signals": [
+              "ablation_drop",
+              "fresh_blind"
+            ],
+            "threshold": -1.125,
+            "weights": [
+              -1.0,
+              -1.0
+            ]
+          },
+          "then": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 3
+            },
+            "model": {
+              "feature": "integrity_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "rollback_score",
+                "left": {
+                  "label": "ROLLBACK"
+                },
+                "right": {
+                  "feature": "evidence_coverage",
+                  "left": {
+                    "label": "RESEARCH_MORE"
+                  },
+                  "right": {
+                    "label": "SHADOW_REPAIR"
+                  },
+                  "threshold": 0.6
+                },
+                "threshold": 0.55
+              },
+              "threshold": 0.55
+            },
+            "op": "LEAF"
+          }
+        },
+        "predicate_program": {
+          "kind": "LINEAR_THRESHOLD",
+          "signals": [
+            "ablation_drop",
+            "fresh_blind"
+          ],
+          "threshold": -1.125,
+          "weights": [
+            -1.0,
+            -1.0
+          ]
+        },
+        "status": "SUPPORTED",
+        "validation": 1.0
+      },
+      "selected_family": "RC6_META_GRAMMAR",
+      "selected_fresh_blind": 1.0,
+      "selected_validation": 1.0,
+      "validation_count": 24
+    },
+    "LOGIC": {
+      "admission_pass": false,
+      "baseline_fresh_blind": 0.0,
+      "blind_count": 6,
+      "fit_count": 20,
+      "fresh_gain_over_active_rc8": 0.8333333333333334,
+      "rc5": {
+        "binding": {
+          "$SIGNAL_0": "rollback_ready"
+        },
+        "constructor_id": "C_fac3b284e56b",
+        "fresh_blind": 0.8333333333333334,
+        "model": {
+          "else": {
+            "algorithm": {
+              "criterion": "GINI",
+              "family": "BOOL_DECISION_TREE",
+              "max_depth": 2
+            },
+            "model": {
+              "label": false
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "rollback_ready",
+            "source": "INPUT",
+            "threshold": 0.5
+          },
+          "then": {
+            "algorithm": {
+              "family": "ENUM_BOOLEAN",
+              "max_depth": 3,
+              "refit_timeout_s": 4.0,
+              "semantic_dedup": true,
+              "timeout_s": 1.5
+            },
+            "model": [
+              "AND",
+              [
+                "OR",
+                [
+                  "VAR",
+                  "counterexample_open"
+                ],
+                [
+                  "VAR",
+                  "cross_domain_transfer"
+                ]
+              ],
+              [
+                "AND",
+                [
+                  "VAR",
+                  "fresh_verified"
+                ],
+                [
+                  "VAR",
+                  "integrity_ok"
+                ]
+              ]
+            ],
+            "op": "LEAF"
+          }
+        },
+        "validation": 0.8333333333333334
+      },
+      "rc6": {
+        "fresh_blind": 0.8333333333333334,
+        "grammar_extension_id": "G_bffac116de85",
+        "model": {
+          "else": {
+            "algorithm": {
+              "criterion": "GINI",
+              "family": "BOOL_DECISION_TREE",
+              "max_depth": 2
+            },
+            "model": {
+              "label": false
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_PREDICATE",
+          "predicate_program": {
+            "kind": "BOOL_TABLE",
+            "signals": [
+              "fresh_verified",
+              "integrity_ok"
+            ],
+            "table": {
+              "00": false,
+              "01": false,
+              "10": false,
+              "11": true
+            }
+          },
+          "then": {
+            "algorithm": {
+              "family": "ENUM_BOOLEAN",
+              "max_depth": 3,
+              "refit_timeout_s": 4.0,
+              "semantic_dedup": true,
+              "timeout_s": 1.5
+            },
+            "model": [
+              "AND",
+              [
+                "VAR",
+                "rollback_ready"
+              ],
+              [
+                "OR",
+                [
+                  "VAR",
+                  "counterexample_open"
+                ],
+                [
+                  "VAR",
+                  "cross_domain_transfer"
+                ]
+              ]
+            ],
+            "op": "LEAF"
+          }
+        },
+        "predicate_program": {
+          "kind": "BOOL_TABLE",
+          "signals": [
+            "fresh_verified",
+            "integrity_ok"
+          ],
+          "table": {
+            "00": false,
+            "01": false,
+            "10": false,
+            "11": true
+          }
+        },
+        "status": "SUPPORTED",
+        "validation": 0.8333333333333334
+      },
+      "selected": {
+        "binding": {
+          "$SIGNAL_0": "rollback_ready"
+        },
+        "constructor_id": "C_fac3b284e56b",
+        "fresh_blind": 0.8333333333333334,
+        "model": {
+          "else": {
+            "algorithm": {
+              "criterion": "GINI",
+              "family": "BOOL_DECISION_TREE",
+              "max_depth": 2
+            },
+            "model": {
+              "label": false
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "rollback_ready",
+            "source": "INPUT",
+            "threshold": 0.5
+          },
+          "then": {
+            "algorithm": {
+              "family": "ENUM_BOOLEAN",
+              "max_depth": 3,
+              "refit_timeout_s": 4.0,
+              "semantic_dedup": true,
+              "timeout_s": 1.5
+            },
+            "model": [
+              "AND",
+              [
+                "OR",
+                [
+                  "VAR",
+                  "counterexample_open"
+                ],
+                [
+                  "VAR",
+                  "cross_domain_transfer"
+                ]
+              ],
+              [
+                "AND",
+                [
+                  "VAR",
+                  "fresh_verified"
+                ],
+                [
+                  "VAR",
+                  "integrity_ok"
+                ]
+              ]
+            ],
+            "op": "LEAF"
+          }
+        },
+        "validation": 0.8333333333333334
+      },
+      "selected_family": "RC5_ALGORITHM_GENESIS",
+      "selected_fresh_blind": 0.8333333333333334,
+      "selected_validation": 0.8333333333333334,
+      "validation_count": 6
+    },
+    "THINKING": {
+      "admission_pass": false,
+      "baseline_fresh_blind": 0.0,
+      "blind_count": 22,
+      "fit_count": 56,
+      "fresh_gain_over_active_rc8": 0.0,
+      "rc5": {
+        "binding": {
+          "$SIGNAL_0": "uncertainty",
+          "$SIGNAL_1": "novelty"
+        },
+        "constructor_id": "C_65cc0f771747",
+        "fresh_blind": 0.0,
+        "model": {
+          "else": {
+            "else": {
+              "algorithm": {
+                "family": "GLOBAL_PRECEDENCE",
+                "min_support": 2,
+                "threshold": 1.0
+              },
+              "model": [],
+              "op": "LEAF"
+            },
+            "op": "IF_SIGNAL",
+            "signal": {
+              "key": "uncertainty",
+              "source": "EPISODE_CONTEXT",
+              "threshold": 0.5
+            },
+            "then": {
+              "algorithm": {
+                "family": "GLOBAL_PRECEDENCE",
+                "min_support": 2,
+                "threshold": 1.0
+              },
+              "model": [],
+              "op": "LEAF"
+            }
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "novelty",
+            "source": "EPISODE_CONTEXT",
+            "threshold": 0.5
+          },
+          "then": {
+            "algorithm": {
+              "family": "GLOBAL_PRECEDENCE",
+              "min_support": 2,
+              "threshold": 1.0
+            },
+            "model": [],
+            "op": "LEAF"
+          }
+        },
+        "validation": 0.0
+      },
+      "rc6": {
+        "fresh_blind": 0.0,
+        "grammar_extension_id": "G_a510699456d6",
+        "model": {
+          "else": {
+            "algorithm": {
+              "family": "GLOBAL_PRECEDENCE",
+              "min_support": 2,
+              "threshold": 1.0
+            },
+            "model": [],
+            "op": "LEAF"
+          },
+          "op": "IF_PREDICATE",
+          "predicate_program": {
+            "kind": "LINEAR_THRESHOLD",
+            "signals": [
+              "integrity_risk",
+              "novelty"
+            ],
+            "threshold": -1.8452380952380953,
+            "weights": [
+              -1.0,
+              -1.0
+            ]
+          },
+          "then": {
+            "algorithm": {
+              "family": "GLOBAL_PRECEDENCE",
+              "min_support": 2,
+              "threshold": 1.0
+            },
+            "model": [],
+            "op": "LEAF"
+          }
+        },
+        "predicate_program": {
+          "kind": "LINEAR_THRESHOLD",
+          "signals": [
+            "integrity_risk",
+            "novelty"
+          ],
+          "threshold": -1.8452380952380953,
+          "weights": [
+            -1.0,
+            -1.0
+          ]
+        },
+        "status": "SUPPORTED",
+        "validation": 0.0
+      },
+      "selected": {
+        "binding": {
+          "$SIGNAL_0": "uncertainty",
+          "$SIGNAL_1": "novelty"
+        },
+        "constructor_id": "C_65cc0f771747",
+        "fresh_blind": 0.0,
+        "model": {
+          "else": {
+            "else": {
+              "algorithm": {
+                "family": "GLOBAL_PRECEDENCE",
+                "min_support": 2,
+                "threshold": 1.0
+              },
+              "model": [],
+              "op": "LEAF"
+            },
+            "op": "IF_SIGNAL",
+            "signal": {
+              "key": "uncertainty",
+              "source": "EPISODE_CONTEXT",
+              "threshold": 0.5
+            },
+            "then": {
+              "algorithm": {
+                "family": "GLOBAL_PRECEDENCE",
+                "min_support": 2,
+                "threshold": 1.0
+              },
+              "model": [],
+              "op": "LEAF"
+            }
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "novelty",
+            "source": "EPISODE_CONTEXT",
+            "threshold": 0.5
+          },
+          "then": {
+            "algorithm": {
+              "family": "GLOBAL_PRECEDENCE",
+              "min_support": 2,
+              "threshold": 1.0
+            },
+            "model": [],
+            "op": "LEAF"
+          }
+        },
+        "validation": 0.0
+      },
+      "selected_family": "RC5_ALGORITHM_GENESIS",
+      "selected_fresh_blind": 0.0,
+      "selected_validation": 0.0,
+      "validation_count": 18
+    }
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "18510edab3514d9d263bfd3fc63b389c416c16d53b82b257bc0e1edef56579bb",
+  "schema": "yado.rc8.shadow.algorithm_genesis_uplift.v2",
+  "selection_rule": "VALIDATION_ONLY_BLIND_RESERVED_FOR_ADMISSION",
+  "semantic_boundary": "BOUNDED_COMPONENT_GENESIS_NOT_GENERAL_INTELLIGENCE_NOT_SUBJECTIVE_CONSCIOUSNESS",
+  "status": "WITHHOLD",
+  "working_parent": "VERIFIED_V36_RC8_UNCHANGED"
+}

@@ -1,0 +1,208 @@
+{
+  "admission_pass": false,
+  "bundle_sha256": "32cc7e6dd178c83196000e2ec05e9a991b8b8a410571a6ffb63e679b210135eb",
+  "components": {
+    "INTELLIGENCE": {
+      "baseline_fresh_blind": 0.0,
+      "fresh_blind": 1.0,
+      "model": {
+        "else": {
+          "algorithm": {
+            "family": "CART_AXIS",
+            "max_depth": 4
+          },
+          "model": {
+            "feature": "rollback_score",
+            "left": {
+              "label": "ROLLBACK"
+            },
+            "right": {
+              "feature": "integrity_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "transfer_score",
+                "left": {
+                  "feature": "evidence_coverage",
+                  "left": {
+                    "label": "RESEARCH_MORE"
+                  },
+                  "right": {
+                    "label": "SHADOW_REPAIR"
+                  },
+                  "threshold": 0.6
+                },
+                "right": {
+                  "label": "PROMOTE_CANDIDATE"
+                },
+                "threshold": 0.655
+              },
+              "threshold": 0.55
+            },
+            "threshold": 0.55
+          },
+          "op": "LEAF"
+        },
+        "op": "IF_PREDICATE",
+        "predicate_program": {
+          "kind": "LINEAR_THRESHOLD",
+          "signals": [
+            "ablation_drop",
+            "fresh_blind"
+          ],
+          "threshold": -1.125,
+          "weights": [
+            -1.0,
+            -1.0
+          ]
+        },
+        "then": {
+          "algorithm": {
+            "family": "CART_AXIS",
+            "max_depth": 3
+          },
+          "model": {
+            "feature": "integrity_score",
+            "left": {
+              "label": "ROLLBACK"
+            },
+            "right": {
+              "feature": "rollback_score",
+              "left": {
+                "label": "ROLLBACK"
+              },
+              "right": {
+                "feature": "evidence_coverage",
+                "left": {
+                  "label": "RESEARCH_MORE"
+                },
+                "right": {
+                  "label": "SHADOW_REPAIR"
+                },
+                "threshold": 0.6
+              },
+              "threshold": 0.55
+            },
+            "threshold": 0.55
+          },
+          "op": "LEAF"
+        }
+      },
+      "origin": "RC6_META_GRAMMAR",
+      "validation": 1.0
+    },
+    "LOGIC": {
+      "baseline_fresh_blind": 0.0,
+      "fresh_blind": 0.8333333333333334,
+      "model": {
+        "else": {
+          "algorithm": {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 2
+          },
+          "model": {
+            "label": false
+          },
+          "op": "LEAF"
+        },
+        "op": "IF_SIGNAL",
+        "signal": {
+          "key": "rollback_ready",
+          "source": "INPUT",
+          "threshold": 0.5
+        },
+        "then": {
+          "algorithm": {
+            "family": "ENUM_BOOLEAN",
+            "max_depth": 3,
+            "refit_timeout_s": 4.0,
+            "semantic_dedup": true,
+            "timeout_s": 1.5
+          },
+          "model": [
+            "AND",
+            [
+              "OR",
+              [
+                "VAR",
+                "counterexample_open"
+              ],
+              [
+                "VAR",
+                "cross_domain_transfer"
+              ]
+            ],
+            [
+              "AND",
+              [
+                "VAR",
+                "fresh_verified"
+              ],
+              [
+                "VAR",
+                "integrity_ok"
+              ]
+            ]
+          ],
+          "op": "LEAF"
+        }
+      },
+      "origin": "RC5_ALGORITHM_GENESIS",
+      "validation": 0.8333333333333334
+    },
+    "THINKING": {
+      "baseline_fresh_blind": 0.0,
+      "fresh_blind": 0.0,
+      "model": {
+        "else": {
+          "else": {
+            "algorithm": {
+              "family": "GLOBAL_PRECEDENCE",
+              "min_support": 2,
+              "threshold": 1.0
+            },
+            "model": [],
+            "op": "LEAF"
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "uncertainty",
+            "source": "EPISODE_CONTEXT",
+            "threshold": 0.5
+          },
+          "then": {
+            "algorithm": {
+              "family": "GLOBAL_PRECEDENCE",
+              "min_support": 2,
+              "threshold": 1.0
+            },
+            "model": [],
+            "op": "LEAF"
+          }
+        },
+        "op": "IF_SIGNAL",
+        "signal": {
+          "key": "novelty",
+          "source": "EPISODE_CONTEXT",
+          "threshold": 0.5
+        },
+        "then": {
+          "algorithm": {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 1.0
+          },
+          "model": [],
+          "op": "LEAF"
+        }
+      },
+      "origin": "RC5_ALGORITHM_GENESIS",
+      "validation": 0.0
+    }
+  },
+  "mutation_applied": false,
+  "parent_state_sha256": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "schema": "yado.rc8.shadow.cognitive_component_bundle.v2"
+}
