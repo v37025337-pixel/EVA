@@ -1,0 +1,43 @@
+name: YADO RC8 v30 exact package boot
+on:
+  push:
+    branches: [yado-rc8-v30-runtime]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rc8-v30:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct exact RC8 v30 package
+        run: python runtime/reconstruct_rc8v30.py
+      - name: Install YADO dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v30/requirements-github.txt
+      - name: Full locked RC8 unittest regression
+        working-directory: runtime/yado_rc8_v30
+        run: python -W error::ResourceWarning -m unittest discover -v
+      - name: Archive regression
+        working-directory: runtime/yado_rc8_v30
+        run: python -m pytest -q test_yado_evolution_archive_runtime_v1.py test_yado_evolution_archive_integration_v1.py
+      - name: Boot exact RC8 v30 package
+        run: python runtime/boot_rc8v30.py
+      - name: Upload exact RC8 v30 receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-rc8-v30-exact-receipt
+          path: |
+            runtime/rc8_v30_boot_receipt.json
+            runtime/rc8_v30_external.sqlite
+          retention-days: 30
+      - name: Persist exact RC8 v30 receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/rc8_v30_boot_receipt.json receipts/yado-rc8-v30-latest.json
+          git config user.name "YADO RC8 v30 Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-rc8-v30-latest.json
+          if git diff --cached --quiet; then echo "receipt unchanged"; else git commit -m "Persist YADO RC8 v30 exact boot receipt [skip ci]"; git push origin HEAD:yado-rc8-v30-runtime; fi
