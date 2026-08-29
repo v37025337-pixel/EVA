@@ -1,0 +1,40 @@
+name: YADO bounded patch synthesis probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-bounded-patch-synthesis-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Discover bounded patch and code synthesis mechanisms
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import ast,json
+          out=[]
+          for p in sorted(Path('.').glob('*.py')):
+            try: txt=p.read_text(errors='ignore'); tree=ast.parse(txt)
+            except Exception: continue
+            funcs=[]; classes=[]
+            for n in tree.body:
+              if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)):
+                if any(k in n.name.lower() for k in ('patch','repair','synth','generate','rewrite','mutat','implement','candidate')):
+                  funcs.append(n.name)
+              elif isinstance(n,ast.ClassDef):
+                ms=[m.name for m in n.body if isinstance(m,(ast.FunctionDef,ast.AsyncFunctionDef)) and any(k in m.name.lower() for k in ('patch','repair','synth','generate','rewrite','mutat','implement','candidate'))]
+                if ms or any(k in n.name.lower() for k in ('patch','repair','synth','generator','rewrite','implement')):
+                  classes.append({'name':n.name,'methods':ms})
+            if funcs or classes:
+              out.append({'file':p.name,'functions':funcs,'classes':classes})
+          print(json.dumps(out,indent=2,sort_keys=True))
+          PY
