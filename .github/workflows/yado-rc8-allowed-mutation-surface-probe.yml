@@ -1,0 +1,33 @@
+name: YADO RC8 allowed mutation surface probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-rc8-allowed-mutation-surface-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Print RC8 migration allowed keys and evolution state
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('yado_canonical_state_v3_rc8_external_cognitive.json')
+          s=json.loads(p.read_text())
+          print(json.dumps({
+            'allowed_changed_keys':(s.get('rc8_migration') or {}).get('allowed_changed_keys'),
+            'canonical_durable_mutation':s.get('canonical_durable_mutation'),
+            'organ_autoevolution_enabled':s.get('organ_autoevolution_enabled'),
+            'organ_autoevolution_registry':s.get('organ_autoevolution_registry'),
+            'organ_evolution_algorithm_bank':s.get('organ_evolution_algorithm_bank'),
+          },indent=2,sort_keys=True))
+          PY
