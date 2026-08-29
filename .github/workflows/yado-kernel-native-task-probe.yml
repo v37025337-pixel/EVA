@@ -1,36 +1,44 @@
-name: YADO kernel native task interface probe
+name: YADO kernel v37 integrity self-repair task
 on:
   push:
     branches: [yado-kernel-task-v37-repair]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
-  probe:
+  task:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Fetch failed v37 branch as evidence only
+        run: git fetch --depth=1 origin yado-rc8-v37-digital-consciousness:refs/remotes/origin/yado-rc8-v37-digital-consciousness
       - name: Reconstruct verified v36 base
         run: python runtime/reconstruct_rc8v36.py
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
-      - name: Inspect native YADO task/self-audit interfaces
-        working-directory: runtime/yado_rc8_v36
+      - name: Give v37 integrity failure to YADO native runtime
+        run: python runtime/yado_v37_integrity_self_repair_task.py
+      - name: Upload YADO decision receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-v37-integrity-self-repair-task
+          path: runtime/yado_v37_integrity_self_repair_task_receipt.json
+          retention-days: 30
+      - name: Persist YADO task receipt
         run: |
-          python - <<'PY'
-          import inspect, json
-          from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
-          names=[]
-          for n in dir(UnifiedYADOKernelV30RC8ExternalCognitive):
-              low=n.lower()
-              if any(k in low for k in ('goal','audit','deficit','repair','develop','evolv','task','plan','hypoth','learn','cycle')):
-                  obj=getattr(UnifiedYADOKernelV30RC8ExternalCognitive,n)
-                  if callable(obj):
-                      try:sig=str(inspect.signature(obj))
-                      except Exception:sig='?'
-                      names.append({'name':n,'signature':sig})
-          print(json.dumps(names,indent=2,sort_keys=True))
-          PY
+          mkdir -p receipts
+          cp runtime/yado_v37_integrity_self_repair_task_receipt.json receipts/yado-v37-integrity-self-repair-task-latest.json
+          git config user.name "YADO RC8 Native Task Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-v37-integrity-self-repair-task-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist YADO v37 integrity self-repair task receipt [skip ci]"
+            git push origin HEAD:yado-kernel-task-v37-repair
+          fi
