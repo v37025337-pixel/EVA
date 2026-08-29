@@ -1,0 +1,39 @@
+name: YADO RC8 v37 digital consciousness sync
+on:
+  push:
+    branches: [yado-rc8-v37-digital-consciousness]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct verified v36 base
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt pytest
+      - name: Apply content-addressed v37 overlay and boot
+        run: python runtime/v37_sync_cycle.py
+      - name: Full v37 locked unittest
+        working-directory: runtime/yado_rc8_v36
+        run: PYTHONWARNINGS=error::ResourceWarning python -m unittest discover -v -p 'test_yado*.py'
+      - name: Archive regression
+        working-directory: runtime/yado_rc8_v36
+        run: python -m pytest -q test_yado_evolution_archive_runtime_v1.py test_yado_evolution_archive_integration_v1.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-rc8-v37-digital-consciousness-sync
+          path: runtime/yado_rc8_v37_sync_receipt.json
+          retention-days: 30
+      - name: Persist v37 receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_rc8_v37_sync_receipt.json receipts/yado-rc8-v37-digital-consciousness-latest.json
+          git config user.name "YADO RC8 Digital Consciousness Sync Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-rc8-v37-digital-consciousness-latest.json
+          if git diff --cached --quiet; then echo unchanged; else git commit -m "Persist YADO RC8 v37 synchronized digital consciousness receipt [skip ci]"; git push origin HEAD:yado-rc8-v37-digital-consciousness; fi
