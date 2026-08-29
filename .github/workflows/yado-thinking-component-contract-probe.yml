@@ -1,0 +1,32 @@
+name: YADO thinking component contract probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-thinking-component-contract-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Find thinking component helpers
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import ast
+          wanted={'fit_thinking_skeleton','thinking_component_acc','predict_thinking_component'}
+          for p in sorted(Path('.').glob('*.py')):
+            try: txt=p.read_text(); tree=ast.parse(txt)
+            except Exception: continue
+            for n in tree.body:
+              if isinstance(n,ast.FunctionDef) and n.name in wanted:
+                print('\n====',p.name,n.name,'====')
+                print(ast.get_source_segment(txt,n))
+          PY
