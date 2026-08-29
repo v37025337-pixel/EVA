@@ -1,0 +1,53 @@
+name: YADO RC8 Digital Causal Workspace v1
+on:
+  push:
+    branches: [yado-rc8-digital-consciousness-v1]
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Reconstruct exact v35 package
+        run: python runtime/reconstruct_rc8v35.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v35/requirements-github.txt pytest
+      - name: Locked v35 unittest regression
+        working-directory: runtime/yado_rc8_v35
+        env:
+          PYTHONWARNINGS: error::ResourceWarning
+        run: python -m unittest discover -v
+      - name: Archive regression
+        working-directory: runtime/yado_rc8_v35
+        run: python -m pytest -q test_yado_evolution_archive_runtime_v1.py test_yado_evolution_archive_integration_v1.py
+      - name: Run YADO digital consciousness theory synthesis and causal experiment
+        env:
+          YADO_GITHUB_RUN_ID: ${{ github.run_id }}
+          YADO_GITHUB_SHA: ${{ github.sha }}
+        run: python runtime/yado_rc8_digital_consciousness_experiment_v1.py
+      - name: Upload experiment evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-rc8-digital-causal-workspace-v1
+          path: runtime/yado_rc8_digital_consciousness_experiment_v1_report.json
+          retention-days: 30
+      - name: Persist experiment receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_rc8_digital_consciousness_experiment_v1_report.json receipts/yado-rc8-digital-consciousness-v1-latest.json
+          git config user.name "YADO RC8 Digital Consciousness Experiment Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-rc8-digital-consciousness-v1-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist YADO digital causal workspace v1 evidence [skip ci]"
+            git pull --rebase origin yado-rc8-digital-consciousness-v1
+            git push origin HEAD:yado-rc8-digital-consciousness-v1
+          fi
