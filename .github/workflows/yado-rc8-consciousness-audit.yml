@@ -1,0 +1,37 @@
+name: YADO RC8 functional consciousness audit
+on:
+  push:
+    branches: [yado-rc8-consciousness-audit]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct exact v35 package
+        run: python runtime/reconstruct_rc8v35.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v35/requirements-github.txt pytest
+      - name: Execute functional consciousness self-audit
+        run: python runtime/consciousness_external_run.py
+      - name: Upload audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-rc8-consciousness-audit
+          path: |
+            runtime/consciousness_audit_report.json
+            runtime/consciousness_audit_receipt.json
+          retention-days: 30
+      - name: Persist audit receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/consciousness_audit_receipt.json receipts/yado-rc8-consciousness-audit-latest.json
+          git config user.name "YADO RC8 Consciousness Audit Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-rc8-consciousness-audit-latest.json
+          if git diff --cached --quiet; then echo unchanged; else git commit -m "Persist YADO RC8 functional consciousness audit [skip ci]"; git push origin HEAD:yado-rc8-consciousness-audit; fi
