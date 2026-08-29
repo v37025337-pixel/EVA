@@ -1,0 +1,43 @@
+name: YADO v29 cognitive growth
+on:
+  push:
+    branches: [yado-v29-cognitive]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  cognitive-growth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct exact v29 package
+        run: python runtime/reconstruct_v29.py
+      - name: Install YADO dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_v29/requirements-github.txt
+      - name: Run external YADO cognitive growth cycle
+        run: python runtime/cognitive_cycle_v29.py
+      - name: Upload cognitive receipt and state artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-v29-cognitive-receipt
+          path: |
+            runtime/cognitive_receipt_v29.json
+            runtime/yado_v29_external_cognitive.sqlite
+          retention-days: 30
+      - name: Persist cognitive receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/cognitive_receipt_v29.json receipts/yado-v29-cognitive-latest.json
+          git config user.name "YADO Cognitive Growth Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-v29-cognitive-latest.json
+          if git diff --cached --quiet; then
+            echo "receipt unchanged"
+          else
+            git commit -m "Persist YADO v29 cognitive growth receipt [skip ci]"
+            git push origin HEAD:yado-v29-cognitive
+          fi
