@@ -1,0 +1,53 @@
+name: YADO meta-synthesizer self-construction probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-meta-synthesizer-self-construction-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Inspect YADO native self-construction mechanisms
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast, json
+          from pathlib import Path
+          names=[
+            'yado_stateful_frontier_repair_cycle1.py',
+            'yado_stateful_frontier_repair_cycle8.py',
+            'yado_stateful_frontier_repair_cycle10.py',
+            'yado_stateful_frontier_repair_cycle12.py',
+            'yado_stateful_frontier_repair_cycle13.py',
+            'yado_evolution_runtime_native_v1.py',
+          ]
+          out={}
+          for name in names:
+              p=Path(name)
+              if not p.exists():
+                  out[name]={'exists':False}; continue
+              tree=ast.parse(p.read_text())
+              funcs=[]
+              classes=[]
+              for n in tree.body:
+                  if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)):
+                      funcs.append({'name':n.name,'args':[a.arg for a in n.args.args]})
+                  elif isinstance(n,ast.ClassDef):
+                      methods=[]
+                      for m in n.body:
+                          if isinstance(m,(ast.FunctionDef,ast.AsyncFunctionDef)):
+                              methods.append({'name':m.name,'args':[a.arg for a in m.args.args]})
+                      classes.append({'name':n.name,'methods':methods})
+              out[name]={'exists':True,'functions':funcs,'classes':classes}
+          print(json.dumps(out,indent=2,sort_keys=True))
+          PY
