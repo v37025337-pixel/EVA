@@ -28,7 +28,9 @@ jobs:
         run: python yado_metacognitive_fresh_holdout_v2.py
       - name: Direct bounded metacognitive internet research
         working-directory: runtime/yado_rc8_v35
-        run: python yado_rc8_metacognitive_direct_research_v1.py ../metacognitive_internet_receipt.json
+        run: python yado_rc8_metacognitive_direct_research_v1.py
+      - name: Normalize metacognitive research receipt path
+        run: cp runtime/yado_rc8_v35/yado_rc8_metacognitive_internet_receipt.json runtime/metacognitive_internet_receipt.json
       - name: Exact RC8 v35 boot
         run: python runtime/boot_rc8v35.py
       - name: Upload receipts
