@@ -1,0 +1,37 @@
+name: YADO RC7 commit RC8 migration bridge probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-rc7-commit-rc8-migration-bridge-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect RC7 durable commit and RC8 migration cycle
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          for name, wanted in [
+            ('yado_core_v3_0_rc7_deep_integrity.py',{'durable_commit_evolution_bundle'}),
+            ('yado_rc8_migration_cycle1.py',{'validate_migration','main'}),
+          ]:
+            p=Path(name); txt=p.read_text(); tree=ast.parse(txt)
+            print('\n====',name,'====')
+            for n in tree.body:
+              if isinstance(n,ast.FunctionDef) and n.name in wanted:
+                print(ast.get_source_segment(txt,n))
+              if isinstance(n,ast.ClassDef):
+                for m in n.body:
+                  if isinstance(m,ast.FunctionDef) and m.name in wanted:
+                    print(ast.get_source_segment(txt,m))
+          PY
