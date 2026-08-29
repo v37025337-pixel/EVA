@@ -1,0 +1,37 @@
+name: YADO meta-autoevolution method source
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-meta-autoevolution-method-source.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Print meta-autoevolution method bodies
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          for name in ['yado_core_v3_0_rc3_autoevolution.py','yado_core_v3_0_rc4_meta_autoevolution.py']:
+              p=Path(name); txt=p.read_text(); tree=ast.parse(txt)
+              print("\n====",name,"====")
+              for n in tree.body:
+                  if not isinstance(n,ast.ClassDef): continue
+                  for m in n.body:
+                      if isinstance(m,ast.FunctionDef) and m.name in {
+                         'shadow_evolve_logic','shadow_evolve_thinking','shadow_evolve_intelligence',
+                         'autoevolution_gate','meta_evolve_logic','meta_evolve_thinking','meta_evolve_intelligence',
+                         'organ_evolution_algorithm_bank'
+                      }:
+                          print("\n---",m.name,"---")
+                          print(ast.get_source_segment(txt,m))
+          PY
