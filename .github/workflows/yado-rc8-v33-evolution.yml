@@ -1,0 +1,52 @@
+name: YADO RC8 v33 multi-cycle evolution exact boot
+on:
+  push:
+    branches: [yado-rc8-v33-evolution]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rc8-v33:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct exact RC8 v33 package
+        run: python runtime/reconstruct_rc8v33.py
+      - name: Install YADO dependencies and test runner
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v33/requirements-github.txt pytest
+      - name: Full locked RC8 unittest regression
+        working-directory: runtime/yado_rc8_v33
+        run: python -W error::ResourceWarning -m unittest discover -v
+      - name: Archive regression
+        working-directory: runtime/yado_rc8_v33
+        run: python -m pytest -q test_yado_evolution_archive_runtime_v1.py test_yado_evolution_archive_integration_v1.py
+      - name: Direct bounded internet research
+        working-directory: runtime/yado_rc8_v33
+        env:
+          YADO_ALLOWED_DOMAINS: arxiv.org
+        run: |
+          python yado_rc8_internet_research_cycle_v1.py
+          cp yado_rc8_internet_research_receipt.json ../internet_research_receipt.json
+      - name: Exact RC8 v33 boot and receipt
+        run: python runtime/boot_rc8v33.py
+      - name: Upload receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-rc8-v33-evolution-receipts
+          path: |
+            runtime/rc8_v33_external_receipt.json
+            runtime/internet_research_receipt.json
+            runtime/rc8_v33_external.sqlite
+          retention-days: 30
+      - name: Persist exact receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/rc8_v33_external_receipt.json receipts/yado-rc8-v33-latest.json
+          cp runtime/internet_research_receipt.json receipts/yado-rc8-v33-internet-latest.json
+          git config user.name "YADO RC8 v33 Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-rc8-v33-latest.json receipts/yado-rc8-v33-internet-latest.json
+          if git diff --cached --quiet; then echo "receipts unchanged"; else git commit -m "Persist YADO RC8 v33 evolution receipts [skip ci]"; git push origin HEAD:yado-rc8-v33-evolution; fi
