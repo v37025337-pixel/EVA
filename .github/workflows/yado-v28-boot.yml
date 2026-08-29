@@ -1,0 +1,14 @@
+name: YADO v28 boot
+on:
+  push:
+    branches: [yado-v28-runtime]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  boot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder
+        run: echo YADO_V28_BOOTSTRAP_PENDING_PACKAGE
