@@ -97,7 +97,7 @@ try:
             "DEVELOPMENT": lambda xs: k.development_priority(),
             "REGISTRY": lambda xs: k.self_audit_registry(),
         },
-        metacognitive_action=None,
+        metacognitive_action="ROUTE_FRAMEWORK",
         context="v37_sync_integrity_failure",
         action="diagnose_and_select_repair",
         possible_outcomes=(
