@@ -2,7 +2,10 @@ from __future__ import annotations
 import hashlib,json,os,sqlite3,urllib.request
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parent
+SCRIPT_ROOT=Path(__file__).resolve().parent
+ROOT=SCRIPT_ROOT/'yado_v29'
+import sys
+sys.path.insert(0,str(ROOT))
 from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
 
 state=ROOT/'yado_canonical_state_v3_rc8_external_cognitive.json'
