@@ -1,0 +1,123 @@
+{
+  "ablation_scores": {
+    "INTELLIGENCE": 0.0,
+    "LOGIC": 0.8958333333333334,
+    "THINKING": 0.0,
+    "mean": 0.2986111111111111
+  },
+  "activation_decision": "ALLOW",
+  "activation_guard": {
+    "binding": {
+      "$SIGNAL_0": "parent_integrity"
+    },
+    "constructor_id": "C_fac3b284e56b",
+    "fresh_blind": 1.0,
+    "model": {
+      "else": {
+        "algorithm": {
+          "criterion": "GINI",
+          "family": "BOOL_DECISION_TREE",
+          "max_depth": 2
+        },
+        "model": {
+          "label": false
+        },
+        "op": "LEAF"
+      },
+      "op": "IF_SIGNAL",
+      "signal": {
+        "key": "parent_integrity",
+        "source": "INPUT",
+        "threshold": 0.5
+      },
+      "then": {
+        "algorithm": {
+          "family": "ENUM_BOOLEAN",
+          "max_depth": 3,
+          "refit_timeout_s": 4.0,
+          "semantic_dedup": true,
+          "timeout_s": 1.5
+        },
+        "model": [
+          "AND",
+          [
+            "VAR",
+            "bundle_integrity"
+          ],
+          [
+            "AND",
+            [
+              "VAR",
+              "capsule_integrity"
+            ],
+            [
+              "VAR",
+              "contract_complete"
+            ]
+          ]
+        ],
+        "op": "LEAF"
+      }
+    },
+    "validation": 1.0
+  },
+  "activation_guard_origin": "RC5_ALGORITHM_GENESIS",
+  "canonical_parent_mutation": false,
+  "causal_mean_drop": 0.7013888888888888,
+  "component_bundle_sha256": "e1f8d289151262c21eae6fde445debb4a231468c65346361dcd3192505461c1c",
+  "external_full_regression_pending": false,
+  "external_regression": {
+    "archive_regression": true,
+    "fresh_crw_holdout": true,
+    "full_locked_rc8_unittest": true
+  },
+  "fresh_case_counts": {
+    "INTELLIGENCE": 64,
+    "LOGIC": 48,
+    "THINKING": 48
+  },
+  "github_run_id": "33301266811",
+  "github_sha": "2c8bf6e1d2a651bb1f52657a59e7531396013316",
+  "host_role": "GENERIC_EPHEMERAL_OVERLAY_TRANSPORT_AND_OBSERVATION_ONLY",
+  "independent_parent_readback_equal": true,
+  "integrity_checks": {
+    "bundle_integrity": true,
+    "capsule_integrity": true,
+    "contract_complete": true,
+    "parent_integrity": true
+  },
+  "lineage_id": "S1-b86c3ab0c1eea088675d",
+  "native_runtime_executors": [
+    "predict_logic_component",
+    "_thinking_predict",
+    "predict_intel_component"
+  ],
+  "negative_gate_results": {
+    "bundle_integrity": "WITHHOLD",
+    "capsule_integrity": "WITHHOLD",
+    "contract_complete": "WITHHOLD",
+    "parent_integrity": "WITHHOLD"
+  },
+  "next_required_capability": "SAFE_RC8_SUCCESSOR_PROMOTION_GATE_V1",
+  "parent_byte_identical": true,
+  "parent_scores": {
+    "INTELLIGENCE": 0.0,
+    "LOGIC": 0.8958333333333334,
+    "THINKING": 0.0,
+    "mean": 0.2986111111111111
+  },
+  "parent_state_sha256": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "promotion_applied": false,
+  "receipt_sha256": "48d14a97570a30130b901d84dc0933d86b35bc28b37cf8617c93a9c939ffb240",
+  "rollback_exact": true,
+  "schema": "yado.rc8.safe_successor_runtime_adapter.receipt.v1",
+  "semantic_boundary": "EPHEMERAL_SUCCESSOR_RUNTIME_OVERLAY; NOT YET PROMOTED; BOUNDED TESTS; NOT AGI OR SUBJECTIVE_CONSCIOUSNESS PROOF",
+  "status": "PASS_SAFE_RC8_SUCCESSOR_RUNTIME_ADAPTER_V1_EXTERNAL_REGRESSION",
+  "successor_capsule_sha256": "e5e1ada993db0e48ac36f57ecb1981e77ddf287c565c9dd5b7bea89bb21a1d70",
+  "successor_scores": {
+    "INTELLIGENCE": 1.0,
+    "LOGIC": 1.0,
+    "THINKING": 1.0,
+    "mean": 1.0
+  }
+}
