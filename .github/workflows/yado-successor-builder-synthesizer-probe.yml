@@ -1,0 +1,39 @@
+name: YADO successor builder synthesizer probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-successor-builder-synthesizer-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect native mechanism synthesis paths
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          wanted={
+            'yado_core_v2_1.py': {'synthesize_program'},
+            'yado_core_v2_2.py': {'synthesize_best_mechanism','synthesize_candidates'},
+            'yado_core_v2_4_audited.py': {'synthesize_candidates_with_diagnostics'},
+            'yado_core_v2.py': {'propose_candidate','evaluate_candidate'},
+          }
+          for fn,names in wanted.items():
+            p=Path(fn); txt=p.read_text(errors='ignore'); tree=ast.parse(txt)
+            print('\n====',fn,'====')
+            for n in tree.body:
+              if isinstance(n,ast.ClassDef):
+                for m in n.body:
+                  if isinstance(m,ast.FunctionDef) and m.name in names:
+                    print('\n---',n.name+'.'+m.name,'---')
+                    print(ast.get_source_segment(txt,m))
+          PY
