@@ -1,0 +1,106 @@
+name: YADO Experiment Compute Budget Gate V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-experiment-compute-budget-gate-v1.yml"
+  workflow_dispatch:
+permissions:
+  actions: write
+  contents: write
+jobs:
+  budget:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Enforce bounded experiment runtime
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import datetime,json,subprocess,time
+          from pathlib import Path
+
+          RUNS={
+            "33302716666":"G1_S2_COUNTEREXAMPLE_GENESIS",
+            "33302857361":"S2_FAST_COUNTEREXAMPLE_REPAIR",
+            "33303938172":"HEAVY_NATIVE_FILTER_ORDER",
+            "33304361049":"LOGIC_FILTER_THINKING_ORDER",
+          }
+          BUDGET_MINUTES=30.0
+          repo="v37025337-pixel/EVA"
+
+          def gh_json(run_id):
+              raw=subprocess.check_output(
+                  ["gh","api",f"repos/{repo}/actions/runs/{run_id}"],
+                  text=True
+              )
+              return json.loads(raw)
+
+          def parse(t):
+              return datetime.datetime.fromisoformat(t.replace("Z","+00:00"))
+
+          now=datetime.datetime.now(datetime.timezone.utc)
+          rows=[]
+          for rid,name in RUNS.items():
+              before=gh_json(rid)
+              started=parse(before["run_started_at"])
+              elapsed=(now-started).total_seconds()/60.0
+              action="NONE"
+              if before["status"]=="in_progress" and elapsed>BUDGET_MINUTES:
+                  subprocess.run(
+                      ["gh","api","-X","POST",f"repos/{repo}/actions/runs/{rid}/cancel"],
+                      check=True,text=True
+                  )
+                  action="CANCEL_REQUESTED_RESOURCE_BUDGET"
+              rows.append({
+                  "run_id":rid,
+                  "experiment":name,
+                  "status_before":before["status"],
+                  "conclusion_before":before.get("conclusion"),
+                  "run_started_at":before["run_started_at"],
+                  "elapsed_minutes_at_gate":elapsed,
+                  "budget_minutes":BUDGET_MINUTES,
+                  "budget_exceeded":elapsed>BUDGET_MINUTES,
+                  "action":action,
+              })
+
+          receipt={
+              "schema":"yado.experiment_compute_budget_gate.v1",
+              "status":"PASS_EXPERIMENT_COMPUTE_BUDGET_GATE_V1",
+              "policy":{
+                  "default_budget_minutes":BUDGET_MINUTES,
+                  "rule":"IN_PROGRESS_AND_ELAPSED_GT_BUDGET => CANCEL_AND_WITHHOLD_RESOURCE_BUDGET",
+                  "promotion_semantics":"RESOURCE_TIMEOUT_NEVER_COUNTS_AS_CAPABILITY_PASS",
+              },
+              "runs":rows,
+              "canonical_mutation":False,
+              "promotion_applied":False,
+              "next_required_capability":"BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
+          }
+          Path("runtime/yado_experiment_compute_budget_gate_v1_receipt.json").write_text(
+              json.dumps(receipt,indent=2,sort_keys=True)+"\n"
+          )
+          print(json.dumps(receipt,indent=2,sort_keys=True))
+          PY
+      - name: Upload budget receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-experiment-compute-budget-gate-v1
+          path: runtime/yado_experiment_compute_budget_gate_v1_receipt.json
+          retention-days: 30
+      - name: Persist budget evidence
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_experiment_compute_budget_gate_v1_receipt.json receipts/yado-experiment-compute-budget-gate-v1-latest.json
+          git config user.name "YADO Experiment Budget Gate"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-experiment-compute-budget-gate-v1-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist experiment compute budget gate V1 [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
