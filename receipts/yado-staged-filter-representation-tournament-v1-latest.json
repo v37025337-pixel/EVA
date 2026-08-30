@@ -1,0 +1,473 @@
+{
+  "both_ablation_exact": 0.0,
+  "budget_policy": "STAGED_CHEAP_CART_FIRST; NO_UNBOUNDED_GENESIS",
+  "canonical_mutation": false,
+  "component": {
+    "component_digest": "8bf930d538ea38bbdc4d03d43540259755dbda037374c01ee4ef15af1e139fc4",
+    "filter_model": {
+      "feature": "role_index",
+      "left": {
+        "feature": "current_generation_active",
+        "left": {
+          "feature": "role_index",
+          "left": {
+            "label": "DROP"
+          },
+          "right": {
+            "feature": "lineage_verified",
+            "left": {
+              "feature": "role_index",
+              "left": {
+                "label": "KEEP"
+              },
+              "right": {
+                "feature": "historical_state_protected",
+                "left": {
+                  "label": "KEEP"
+                },
+                "right": {
+                  "label": "DROP"
+                },
+                "threshold": 0.5
+              },
+              "threshold": 3.5
+            },
+            "right": {
+              "feature": "role_index",
+              "left": {
+                "label": "DROP"
+              },
+              "right": {
+                "feature": "historical_state_protected",
+                "left": {
+                  "label": "KEEP"
+                },
+                "right": {
+                  "label": "DROP"
+                },
+                "threshold": 0.5
+              },
+              "threshold": 3.5
+            },
+            "threshold": 0.5
+          },
+          "threshold": 2.5
+        },
+        "right": {
+          "feature": "role_index",
+          "left": {
+            "label": "KEEP"
+          },
+          "right": {
+            "feature": "role_index",
+            "left": {
+              "feature": "lineage_verified",
+              "left": {
+                "feature": "role_index",
+                "left": {
+                  "label": "KEEP"
+                },
+                "right": {
+                  "label": "KEEP"
+                },
+                "threshold": 3.5
+              },
+              "right": {
+                "feature": "role_index",
+                "left": {
+                  "label": "DROP"
+                },
+                "right": {
+                  "label": "KEEP"
+                },
+                "threshold": 3.5
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "label": "KEEP"
+            },
+            "threshold": 5.5
+          },
+          "threshold": 2.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "label": "KEEP"
+      },
+      "threshold": 6.5
+    },
+    "filter_selected_depth": 6,
+    "fresh_exact": 0.0,
+    "order_model": [
+      {
+        "after": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "before": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "before": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "before": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "before": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "before": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "before": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "before": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "before": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "before": "INTELLIGENCE_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "before": "INTELLIGENCE_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "before": "INTELLIGENCE_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "before": "INTELLIGENCE_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "before": "INTELLIGENCE_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "REPRESENTATION_INVARIANCE",
+        "before": "INTELLIGENCE_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "INTELLIGENCE_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "before": "INTELLIGENCE_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "before": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "before": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "before": "REPRESENTATION_INVARIANCE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "before": "REPRESENTATION_INVARIANCE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "before": "REPRESENTATION_INVARIANCE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "before": "REPRESENTATION_INVARIANCE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "before": "REPRESENTATION_INVARIANCE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "REPRESENTATION_INVARIANCE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "before": "REPRESENTATION_INVARIANCE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "INTELLIGENCE_BOUNDARY_REASONING",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "REPRESENTATION_INVARIANCE",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "before": "THINKING_BOUNDARY_REASONING",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+        "before": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+        "before": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "DURABILIZE_HOST_CAPABILITY_MODEL",
+        "before": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "HARDEN_DIRECT_EVIDENCE_FETCH",
+        "before": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+        "before": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "confidence": 1.0,
+        "support": 8
+      },
+      {
+        "after": "STRUCTURAL_FRONTIER_ROUTER",
+        "before": "UNIFY_BOOT_AND_STATE_LINEAGE",
+        "confidence": 1.0,
+        "support": 8
+      }
+    ],
+    "order_selected_algorithm": {
+      "family": "GLOBAL_PRECEDENCE",
+      "min_support": 2,
+      "threshold": 0.5
+    },
+    "schema": "yado.staged_filter_representation_tournament.component.v1",
+    "selected_representation": "NUMERIC_ROLE_INDEX"
+  },
+  "composition_fresh_exact": 0.0,
+  "current_effective_priority": [
+    "THINKING_BOUNDARY_REASONING",
+    "INTELLIGENCE_BOUNDARY_REASONING",
+    "REPRESENTATION_INVARIANCE",
+    "ADD_PREIMPORT_DEPENDENCY_LOCK",
+    "HARDEN_DIRECT_EVIDENCE_FETCH",
+    "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+    "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+    "DURABILIZE_HOST_CAPABILITY_MODEL",
+    "STRUCTURAL_FRONTIER_ROUTER"
+  ],
+  "current_expected_priority": [
+    "THINKING_BOUNDARY_REASONING",
+    "INTELLIGENCE_BOUNDARY_REASONING",
+    "REPRESENTATION_INVARIANCE",
+    "ADD_PREIMPORT_DEPENDENCY_LOCK",
+    "HARDEN_DIRECT_EVIDENCE_FETCH",
+    "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+    "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+    "DURABILIZE_HOST_CAPABILITY_MODEL",
+    "STRUCTURAL_FRONTIER_ROUTER"
+  ],
+  "current_pass": true,
+  "filter_ablation_exact": 0.0,
+  "final_filter": {
+    "ablation": 0.0,
+    "fresh_blind": 0.8,
+    "restore": 0.8,
+    "seconds": 0.020208630000070116,
+    "selected_depth": 6,
+    "train": 0.9,
+    "verdict": "WITHHOLD"
+  },
+  "github_run_id": "33307651123",
+  "github_sha": "e8f63c849a722848bf55d3a93baf1cb98780be21",
+  "host_role": "REPRESENTATION_FAMILY_MENU_AND_SPLIT_ONLY; CART DEPTH/MODEL AND ORDER ALGORITHM/MODEL ARE NATIVE YADO",
+  "next_required_capability": "NEW_FILTER_PRIMITIVE_OR_REPRESENTATION_SEARCH",
+  "order": {
+    "fresh_blind": 1.0,
+    "seconds": 0.00628314000005048,
+    "selected_algorithm": {
+      "family": "GLOBAL_PRECEDENCE",
+      "min_support": 2,
+      "threshold": 0.5
+    },
+    "validation": 1.0
+  },
+  "order_ablation_exact": 0.0,
+  "promotion_applied": false,
+  "receipt_sha256": "f68e3f0d7db0cb1517f912d072c48c1069bf6481eba897cfb2fef5a4d860f611",
+  "representation_selection": [
+    {
+      "ablation": 0.0,
+      "candidate_id": "OEC-fb64b9a3e7056481",
+      "representation": "NUMERIC_ROLE_INDEX",
+      "selected_depth": 6,
+      "train": 0.95,
+      "validation": 0.85,
+      "verdict": "WITHHOLD"
+    },
+    {
+      "ablation": 0.0,
+      "candidate_id": "OEC-c068bf73dfcb5a56",
+      "representation": "ONE_HOT_ROLE_IDENTITY",
+      "selected_depth": 6,
+      "train": 0.95,
+      "validation": 0.8,
+      "verdict": "WITHHOLD"
+    },
+    {
+      "ablation": 0.0,
+      "candidate_id": "OEC-b0f846b1974925c8",
+      "representation": "SEMANTIC_ROLE_TYPE",
+      "selected_depth": 6,
+      "train": 0.9,
+      "validation": 0.8,
+      "verdict": "WITHHOLD"
+    }
+  ],
+  "schema": "yado.staged_filter_representation_tournament.receipt.v1",
+  "selected_representation": "NUMERIC_ROLE_INDEX",
+  "selection_seconds": 0.06057743000008031,
+  "semantic_boundary": "BOUNDED DEVELOPMENTAL PRIORITY FILTER/ORDER; NOT GENERAL REASONING OR CANONICAL PROMOTION",
+  "split": {
+    "fresh_blind_contexts": 8,
+    "train_contexts": 16,
+    "validation_contexts": 8
+  },
+  "status": "WITHHOLD_STAGED_FILTER_REPRESENTATION_TOURNAMENT"
+}
