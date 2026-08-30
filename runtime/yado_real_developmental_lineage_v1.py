@@ -1,0 +1,217 @@
+from __future__ import annotations
+from pathlib import Path
+import hashlib,json,sys
+
+ROOT=Path(__file__).resolve().parent
+ARCH=ROOT/'yado_unified_causal_evolution_architecture_v1.py'
+sys.path.insert(0,str(ROOT))
+from yado_unified_causal_evolution_architecture_v1 import (
+    UnifiedCausalEvolutionArchitecture,GenerationRecord,CausalClaim,PromotionPolicy,digest_obj
+)
+
+V36_SHA='7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1'
+S1_CAPSULE='e5e1ada993db0e48ac36f57ecb1981e77ddf287c565c9dd5b7bea89bb21a1d70'
+S1_BUNDLE='e1f8d289151262c21eae6fde445debb4a231468c65346361dcd3192505461c1c'
+
+arch=UnifiedCausalEvolutionArchitecture(PromotionPolicy(
+    min_significant_gain=0.02,
+    max_regression=0.0,
+    min_mean_gain=0.0,
+    require_causal_claim=True,
+    require_cross_domain_evidence_for_general_capability=True,
+))
+
+g0=GenerationRecord(
+    generation_id='G0_RC8_V36',
+    parent_generation_id=None,
+    lineage_id='YADO_MAIN_LINEAGE',
+    artifact_digest=V36_SHA,
+    capability_scores={
+        'logic':0.90,
+        'thinking':0.72,
+        'intelligence':0.80,
+        'integrity':1.0,
+        'rollback':1.0,
+    },
+    protected_capabilities=('logic','thinking','intelligence','integrity','rollback'),
+    hard_constraints={k:True for k in arch.policy.required_constraints},
+    change_set=(),
+    evidence_ids=(
+        'RUN_33266617685_V36_CRW',
+        'RUN_33265668249_FUNCTIONAL_AUDIT',
+        'RUN_33264344586_V35_SELF_AUDIT',
+    ),
+    domain_experiences=('SYSTEM:VERIFIED_V36',),
+    status='HEAD',
+)
+arch.register_root(g0)
+
+for rc,dig in [
+    ('RC5','e32c8692d539457f154952d4ec710118066c0d0cb9867ab47e8c2050ea4f671c'),
+    ('RC6','d9f653ef9f1a92796393d81fc4ee3264c9c328c3b8cbe41398386d0b5fb4d00d'),
+    ('RC7','062b2f153c9f4bdd5139f3fc42e5e859a7662373ff4718c474b61e73b244f439'),
+]:
+    arch.import_historical_node(rc,artifact_digest=dig,causal_status='LEGACY_CAUSAL_LINK_NOT_YET_RECONSTRUCTED')
+
+s1=GenerationRecord(
+    generation_id='CANDIDATE_S1',
+    parent_generation_id='G0_RC8_V36',
+    lineage_id='YADO_MAIN_LINEAGE',
+    artifact_digest=S1_CAPSULE,
+    capability_scores={
+        'logic':1.0,
+        'thinking':0.7125,
+        'intelligence':0.83125,
+        'integrity':1.0,
+        'rollback':1.0,
+    },
+    protected_capabilities=g0.protected_capabilities,
+    hard_constraints={
+        'state_integrity':True,
+        'rollback_available':True,
+        'regression_pass':True,
+        'lineage_valid':True,
+        'evidence_complete':True,
+        'fresh_blind_pass':False,
+    },
+    change_set=(
+        'LOGIC:RC5_ALGORITHM_GENESIS',
+        'THINKING:RC6_META_GRAMMAR',
+        'INTELLIGENCE:RC6_META_GRAMMAR',
+        'RUNTIME:EPHEMERAL_SUCCESSOR_OVERLAY',
+    ),
+    evidence_ids=(
+        'RUN_33278052092_COMPONENT_GENESIS',
+        'RUN_33300963832_SUCCESSOR_BUILDER',
+        'RUN_33301266811_RUNTIME_ADAPTER',
+        'RUN_33301460805_10ROUND_BURNIN_WITHHOLD',
+        'RUN_33302136155_RAPID_STEM',
+    ),
+    causal_claims=(
+        CausalClaim(
+            claim_id='S1_LOGIC_GAIN',
+            deficit_id='LOGIC_TRANSFER_WEAKNESS',
+            mechanism_id='RC5_LOGIC_COMPONENT',
+            evidence_ids=('RUN_33278052092_COMPONENT_GENESIS','RUN_33301460805_10ROUND_BURNIN_WITHHOLD'),
+            expected_effects={'logic':0.10},
+            falsifier_ids=('S1_ABLATION',),
+            status='VERIFIED',
+        ),
+        CausalClaim(
+            claim_id='S1_THINKING_ATTEMPT',
+            deficit_id='THINKING_BOUNDARY_REASONING',
+            mechanism_id='RC6_THINKING_COMPONENT',
+            evidence_ids=('RUN_33301460805_10ROUND_BURNIN_WITHHOLD',),
+            expected_effects={'thinking':-0.0075},
+            falsifier_ids=('BOUNDARY_STRESS',),
+            status='VERIFIED',
+        ),
+        CausalClaim(
+            claim_id='S1_INTELLIGENCE_PARTIAL',
+            deficit_id='INTELLIGENCE_BOUNDARY_REASONING',
+            mechanism_id='RC6_INTELLIGENCE_COMPONENT',
+            evidence_ids=('RUN_33301460805_10ROUND_BURNIN_WITHHOLD',),
+            expected_effects={'intelligence':0.03125},
+            falsifier_ids=('BOUNDARY_STRESS',),
+            status='VERIFIED',
+        ),
+    ),
+    domain_experiences=(
+        'PROGRAMMING:RAPID_STEM_0.9927',
+        'MATHEMATICS:RAPID_STEM_0.9995',
+        'EXACT_SCIENCE:RAPID_STEM_0.9992',
+        'OTHER:RAPID_STEM_0.9965',
+    ),
+    status='REJECTED_STEPPING_STONE',
+    metadata={
+        'component_bundle_sha256':S1_BUNDLE,
+        'burnin_core_mean':0.8698958333333333,
+        'thinking_boundary_mean':0.485,
+        'intelligence_boundary_mean':0.7835714285714286,
+        'representation_ood_logic':0.9025,
+        'representation_ood_intelligence':0.75,
+    },
+)
+decision=arch.evaluate_candidate(s1)
+
+deficits=[
+    {
+        'deficit_id':'THINKING_BOUNDARY_REASONING',
+        'priority':1,
+        'observed':0.485,
+        'target_min':0.90,
+        'inherit_without_regression':['LOGIC','INTEGRITY','ROLLBACK'],
+        'counterexample_source':'RUN_33301460805',
+    },
+    {
+        'deficit_id':'INTELLIGENCE_BOUNDARY_REASONING',
+        'priority':2,
+        'observed':0.7835714285714286,
+        'target_min':0.90,
+        'inherit_without_regression':['LOGIC','INTEGRITY','ROLLBACK'],
+        'counterexample_source':'RUN_33301460805',
+    },
+    {
+        'deficit_id':'REPRESENTATION_INVARIANCE',
+        'priority':3,
+        'observed':0.75,
+        'target_min':0.90,
+        'inherit_without_regression':['LOGIC','INTEGRITY','ROLLBACK'],
+        'counterexample_source':'RENAMED_SCHEMA_OOD',
+    },
+]
+
+next_spec={
+    'schema':'yado.next_generation.spec.v1',
+    'candidate_generation_id':'G1_CANDIDATE_S2',
+    'parent_generation_id':'G0_RC8_V36',
+    'inherit_proven_mechanisms':[
+        'RC5_LOGIC_COMPONENT_FROM_S1',
+        'SAFE_SUCCESSOR_LINEAGE_BUILDER_V1',
+        'SAFE_SUCCESSOR_RUNTIME_ADAPTER_PATTERN',
+    ],
+    'replace_or_generalize':[
+        'RC6_THINKING_COMPONENT_FROM_S1',
+        'RC6_INTELLIGENCE_COMPONENT_FROM_S1',
+    ],
+    'deficits':deficits,
+    'required_domains':['PROGRAMMING','MATHEMATICS','EXACT_SCIENCE','CAUSAL_PLANNING'],
+    'promotion_requirements':{
+        'logic_min':1.0,
+        'thinking_min':0.90,
+        'intelligence_min':0.90,
+        'thinking_boundary_min':0.90,
+        'intelligence_boundary_min':0.90,
+        'representation_invariance_min':0.90,
+        'integrity':1.0,
+        'rollback':1.0,
+        'fresh_blind':True,
+        'ablation':True,
+        'full_regression':True,
+    },
+    'branch_policy':'EXPERIMENT_BRANCHES_ARE_EPHEMERAL; ONLY_PROMOTED_GENERATION_BECOMES_HEAD',
+}
+next_spec['spec_digest']=digest_obj(next_spec)
+
+report={
+    'schema':'yado.real_developmental_lineage.v1',
+    'status':'PASS_REAL_G0_AND_REJECTED_S1_RECONSTRUCTION',
+    'developmental_head':'G0_RC8_V36',
+    's1_decision':decision.canonical(),
+    's1_status':'REJECTED_STEPPING_STONE',
+    'preserved_from_s1':['LOGIC_GAIN','INTEGRITY','ROLLBACK','SUCCESSOR_LINEAGE_MECHANISM'],
+    'not_preserved_as_proven':['THINKING_COMPONENT','INTELLIGENCE_COMPONENT'],
+    'next_generation_spec':next_spec,
+    'snapshot':arch.snapshot(),
+}
+report['report_digest']=digest_obj(report)
+(ROOT/'yado_real_developmental_lineage_v1_report.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
+(ROOT/'yado_g1_candidate_s2_spec.json').write_text(json.dumps(next_spec,indent=2,sort_keys=True)+'\n')
+print(json.dumps({
+    'status':report['status'],
+    'developmental_head':report['developmental_head'],
+    's1_action':decision.action,
+    's1_reasons':decision.reasons,
+    'next_candidate':next_spec['candidate_generation_id'],
+    'spec_digest':next_spec['spec_digest'],
+},indent=2,default=str))
