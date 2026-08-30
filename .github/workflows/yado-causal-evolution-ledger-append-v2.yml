@@ -1,0 +1,40 @@
+name: YADO Causal Evolution Ledger Append V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_causal_evolution_ledger_append_v2.py"
+      - ".github/workflows/yado-causal-evolution-ledger-append-v2.yml"
+permissions:
+  contents: write
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Append and verify causal ledger
+        run: python runtime/yado_causal_evolution_ledger_append_v2.py
+      - name: Upload receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-causal-evolution-ledger-append-v2
+          path: |
+            architecture/evolution-ledger.json
+            runtime/yado_causal_evolution_ledger_append_v2_receipt.json
+          retention-days: 30
+      - name: Persist ledger
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_causal_evolution_ledger_append_v2_receipt.json receipts/yado-causal-evolution-ledger-append-v2-latest.json
+          git config user.name "YADO Evolution Ledger"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json receipts/yado-causal-evolution-ledger-append-v2-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Append conjunctive algorithm events to causal ledger [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
