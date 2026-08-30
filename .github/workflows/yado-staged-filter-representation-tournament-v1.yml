@@ -1,0 +1,43 @@
+name: YADO Staged Filter Representation Tournament V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_staged_filter_representation_tournament_v1.py"
+      - ".github/workflows/yado-staged-filter-representation-tournament-v1.yml"
+permissions:
+  contents: write
+jobs:
+  tournament:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run staged bounded representation tournament
+        run: python runtime/yado_staged_filter_representation_tournament_v1.py
+      - name: Upload receipt and component
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-staged-filter-representation-tournament-v1
+          path: |
+            runtime/yado_staged_filter_representation_tournament_v1_receipt.json
+            runtime/staged_filter_representation_tournament_v1/component.json
+          retention-days: 30
+      - name: Persist tournament evidence
+        run: |
+          mkdir -p receipts candidates/staged-filter-representation-tournament-v1
+          cp runtime/yado_staged_filter_representation_tournament_v1_receipt.json receipts/yado-staged-filter-representation-tournament-v1-latest.json
+          cp runtime/staged_filter_representation_tournament_v1/component.json candidates/staged-filter-representation-tournament-v1/component.json
+          git config user.name "YADO Staged Filter Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-staged-filter-representation-tournament-v1-latest.json candidates/staged-filter-representation-tournament-v1/component.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist staged filter representation tournament [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
