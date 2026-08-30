@@ -1,0 +1,45 @@
+name: YADO G1 S2 Counterexample Genesis V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_g1_candidate_s2_counterexample_genesis_v1.py"
+      - ".github/workflows/yado-g1-s2-counterexample-genesis-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  s2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconstruct verified v36 RC8
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install verified v36 dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Build G1 S2 from S1 counterexamples
+        run: python runtime/yado_g1_candidate_s2_counterexample_genesis_v1.py
+      - name: Upload S2 candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g1-s2-counterexample-genesis-v1
+          path: |
+            runtime/yado_g1_candidate_s2_counterexample_genesis_v1_report.json
+            runtime/yado_g1_candidate_s2_bundle_v1.json
+          retention-days: 30
+      - name: Persist candidate evidence
+        run: |
+          mkdir -p receipts candidates/g1-s2
+          cp runtime/yado_g1_candidate_s2_counterexample_genesis_v1_report.json receipts/yado-g1-s2-counterexample-genesis-v1-latest.json
+          cp runtime/yado_g1_candidate_s2_bundle_v1.json candidates/g1-s2/bundle.json
+          git config user.name "YADO G1 S2 Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-g1-s2-counterexample-genesis-v1-latest.json candidates/g1-s2/bundle.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G1 S2 counterexample candidate [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
