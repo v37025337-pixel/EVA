@@ -1,0 +1,266 @@
+{
+  "canonical_mutation": false,
+  "github_run_id": "33302136155",
+  "parent_byte_identical": true,
+  "receipt_sha256": "50a1d0965443f107b9897ce9eb2df2aaba8101d7e120eedede3caa3d847c62b3",
+  "schema": "yado.rc8.rapid_stem_holdout.v1",
+  "semantic_boundary": "NATIVE INDUCTIVE CLASSIFICATION BENCHMARK; NOT FREEFORM CODE GENERATION OR FORMAL PROOF",
+  "status": "RAPID_STEM_HOLDOUT_COMPLETED",
+  "summary": {
+    "domains": {
+      "EXACT_SCIENCE": {
+        "baseline_mean": 0.428,
+        "mean": 0.9991666666666666,
+        "min": 0.9986666666666667,
+        "task_count": 4
+      },
+      "MATHEMATICS": {
+        "baseline_mean": 0.445,
+        "mean": 0.9995,
+        "min": 0.998,
+        "task_count": 4
+      },
+      "OTHER": {
+        "baseline_mean": 0.3775,
+        "mean": 0.9964999999999999,
+        "min": 0.99,
+        "task_count": 4
+      },
+      "PROGRAMMING": {
+        "baseline_mean": 0.446,
+        "mean": 0.9926666666666667,
+        "min": 0.9786666666666667,
+        "task_count": 4
+      }
+    },
+    "overall_mean": 0.9969583333333334,
+    "overall_min": 0.9786666666666667,
+    "task_count": 16,
+    "tasks_below_0_7": 0,
+    "tasks_ge_0_9": 16,
+    "weakest": [
+      {
+        "baseline": 0.4246666666666667,
+        "blind": 1500,
+        "domain": "PROGRAMMING",
+        "fresh_blind": 0.9786666666666667,
+        "gain": 0.554,
+        "kind": "NATIVE_TREE",
+        "task_id": "P2_SORT_ALGORITHM",
+        "train": 500
+      },
+      {
+        "baseline": 0.416,
+        "blind": 1500,
+        "domain": "OTHER",
+        "fresh_blind": 0.99,
+        "gain": 0.5740000000000001,
+        "kind": "NATIVE_TREE",
+        "task_id": "O3_CONTROL_ACTION",
+        "train": 500
+      },
+      {
+        "baseline": 0.62,
+        "blind": 1500,
+        "domain": "PROGRAMMING",
+        "fresh_blind": 0.9926666666666667,
+        "gain": 0.3726666666666667,
+        "kind": "NATIVE_TREE",
+        "task_id": "P3_CONCURRENCY",
+        "train": 500
+      },
+      {
+        "baseline": 0.354,
+        "blind": 1500,
+        "domain": "OTHER",
+        "fresh_blind": 0.9966666666666667,
+        "gain": 0.6426666666666667,
+        "kind": "NATIVE_TREE",
+        "task_id": "O4_EVIDENCE_POLICY",
+        "train": 500
+      },
+      {
+        "baseline": 0.4866666666666667,
+        "blind": 1500,
+        "domain": "MATHEMATICS",
+        "fresh_blind": 0.998,
+        "gain": 0.5113333333333333,
+        "kind": "NATIVE_TREE",
+        "task_id": "M3_MATRIX_DEFINITENESS",
+        "train": 500
+      },
+      {
+        "baseline": 0.6006666666666667,
+        "blind": 1500,
+        "domain": "EXACT_SCIENCE",
+        "fresh_blind": 0.9986666666666667,
+        "gain": 0.398,
+        "kind": "NATIVE_TREE",
+        "task_id": "S1_REYNOLDS",
+        "train": 500
+      }
+    ]
+  },
+  "tasks": [
+    {
+      "baseline": 0.43333333333333335,
+      "blind": 1500,
+      "domain": "PROGRAMMING",
+      "fresh_blind": 1.0,
+      "gain": 0.5666666666666667,
+      "kind": "NATIVE_TREE",
+      "task_id": "P1_GRAPH_ALGORITHM",
+      "train": 500
+    },
+    {
+      "baseline": 0.4246666666666667,
+      "blind": 1500,
+      "domain": "PROGRAMMING",
+      "fresh_blind": 0.9786666666666667,
+      "gain": 0.554,
+      "kind": "NATIVE_TREE",
+      "task_id": "P2_SORT_ALGORITHM",
+      "train": 500
+    },
+    {
+      "baseline": 0.62,
+      "blind": 1500,
+      "domain": "PROGRAMMING",
+      "fresh_blind": 0.9926666666666667,
+      "gain": 0.3726666666666667,
+      "kind": "NATIVE_TREE",
+      "task_id": "P3_CONCURRENCY",
+      "train": 500
+    },
+    {
+      "baseline": 0.306,
+      "blind": 1500,
+      "domain": "PROGRAMMING",
+      "fresh_blind": 0.9993333333333333,
+      "gain": 0.6933333333333334,
+      "kind": "NATIVE_TREE",
+      "task_id": "P4_NUMERIC_SOLVER",
+      "train": 500
+    },
+    {
+      "baseline": 0.3453333333333333,
+      "blind": 1500,
+      "domain": "MATHEMATICS",
+      "fresh_blind": 1.0,
+      "gain": 0.6546666666666667,
+      "kind": "NATIVE_TREE",
+      "task_id": "M1_QUADRATIC_ROOTS",
+      "train": 500
+    },
+    {
+      "baseline": 0.448,
+      "blind": 1500,
+      "domain": "MATHEMATICS",
+      "fresh_blind": 1.0,
+      "gain": 0.552,
+      "kind": "NATIVE_TREE",
+      "task_id": "M2_LINEAR_SYSTEM_RANK",
+      "train": 500
+    },
+    {
+      "baseline": 0.4866666666666667,
+      "blind": 1500,
+      "domain": "MATHEMATICS",
+      "fresh_blind": 0.998,
+      "gain": 0.5113333333333333,
+      "kind": "NATIVE_TREE",
+      "task_id": "M3_MATRIX_DEFINITENESS",
+      "train": 500
+    },
+    {
+      "baseline": 0.5,
+      "blind": 64,
+      "domain": "MATHEMATICS",
+      "fresh_blind": 1.0,
+      "gain": 0.5,
+      "kind": "NATIVE_BOOL_TREE",
+      "task_id": "M4_SIX_BIT_PARITY",
+      "train": 64
+    },
+    {
+      "baseline": 0.6006666666666667,
+      "blind": 1500,
+      "domain": "EXACT_SCIENCE",
+      "fresh_blind": 0.9986666666666667,
+      "gain": 0.398,
+      "kind": "NATIVE_TREE",
+      "task_id": "S1_REYNOLDS",
+      "train": 500
+    },
+    {
+      "baseline": 0.4553333333333333,
+      "blind": 1500,
+      "domain": "EXACT_SCIENCE",
+      "fresh_blind": 0.9986666666666667,
+      "gain": 0.5433333333333334,
+      "kind": "NATIVE_TREE",
+      "task_id": "S2_MACH",
+      "train": 500
+    },
+    {
+      "baseline": 0.328,
+      "blind": 1500,
+      "domain": "EXACT_SCIENCE",
+      "fresh_blind": 0.9993333333333333,
+      "gain": 0.6713333333333333,
+      "kind": "NATIVE_TREE",
+      "task_id": "S3_ORBIT_ENERGY",
+      "train": 500
+    },
+    {
+      "baseline": 0.328,
+      "blind": 1500,
+      "domain": "EXACT_SCIENCE",
+      "fresh_blind": 1.0,
+      "gain": 0.6719999999999999,
+      "kind": "NATIVE_TREE",
+      "task_id": "S4_DAMPING",
+      "train": 500
+    },
+    {
+      "baseline": 0.3253333333333333,
+      "blind": 1500,
+      "domain": "OTHER",
+      "fresh_blind": 1.0,
+      "gain": 0.6746666666666667,
+      "kind": "NATIVE_TREE",
+      "task_id": "O1_STAT_TEST_SELECTION",
+      "train": 500
+    },
+    {
+      "baseline": 0.4146666666666667,
+      "blind": 1500,
+      "domain": "OTHER",
+      "fresh_blind": 0.9993333333333333,
+      "gain": 0.5846666666666667,
+      "kind": "NATIVE_TREE",
+      "task_id": "O2_CAUSAL_METHOD",
+      "train": 500
+    },
+    {
+      "baseline": 0.416,
+      "blind": 1500,
+      "domain": "OTHER",
+      "fresh_blind": 0.99,
+      "gain": 0.5740000000000001,
+      "kind": "NATIVE_TREE",
+      "task_id": "O3_CONTROL_ACTION",
+      "train": 500
+    },
+    {
+      "baseline": 0.354,
+      "blind": 1500,
+      "domain": "OTHER",
+      "fresh_blind": 0.9966666666666667,
+      "gain": 0.6426666666666667,
+      "kind": "NATIVE_TREE",
+      "task_id": "O4_EVIDENCE_POLICY",
+      "train": 500
+    }
+  ]
+}
