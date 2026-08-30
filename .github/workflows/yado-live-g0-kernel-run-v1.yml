@@ -1,0 +1,42 @@
+name: YADO Live G0 Kernel Run V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_live_g0_kernel_run_v1.py"
+      - ".github/workflows/yado-live-g0-kernel-run-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconstruct verified v36 RC8
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install verified v36 dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Boot and run live G0 kernel
+        run: python runtime/yado_live_g0_kernel_run_v1.py
+      - name: Upload live receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-live-g0-kernel-run-v1
+          path: runtime/yado_live_g0_kernel_run_v1_receipt.json
+          retention-days: 30
+      - name: Persist live receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_live_g0_kernel_run_v1_receipt.json receipts/yado-live-g0-kernel-run-v1-latest.json
+          git config user.name "YADO Live G0 Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-live-g0-kernel-run-v1-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist live G0 kernel run receipt [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
