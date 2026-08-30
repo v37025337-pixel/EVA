@@ -1,0 +1,422 @@
+{
+  "canonical_mutation": false,
+  "component": {
+    "algorithm": {
+      "max_atoms": 64,
+      "max_conjunction": 3,
+      "max_rules": 12,
+      "min_support": 2,
+      "predicate_family": "OBSERVED_SCALAR_EQ"
+    },
+    "component_digest": "3b31c7d26e4e51db3a5135a58ac4fe764f45ce96bf4e80e016172bd212e43150",
+    "cross_domain_task_count": 3,
+    "developmental_filter_program": {
+      "default_output": "KEEP",
+      "digest": "8a09d7c839f5001b6e4bc26f3ca2a786ff456a65845e52c26dffc2215e39fc64",
+      "program_id": "CJ-fd094b469b4d",
+      "rules": [
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "current_generation_active",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "INTELLIGENCE_BOUNDARY_REASONING"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "current_generation_active",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "REPRESENTATION_INVARIANCE"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "current_generation_active",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "THINKING_BOUNDARY_REASONING"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "dependency_lock_verified",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "ADD_PREIMPORT_DEPENDENCY_LOCK"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "evidence_fetch_hardened",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "HARDEN_DIRECT_EVIDENCE_FETCH"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "historical_state_protected",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "PROTECT_HISTORICAL_STATE_FROM_MUTATION"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "lineage_verified",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "UNIFY_BOOT_AND_STATE_LINEAGE"
+            }
+          ],
+          "support": 12
+        }
+      ],
+      "source_digest": "30e11c2cd971c6100414d47617c28b65a3d6b3432cd1de0c6abb1960ecd7bbf7",
+      "status": "SHADOW",
+      "target_capability": "DEVELOPMENTAL_FILTER",
+      "target_organ": "LOGIC",
+      "training_count": 240
+    },
+    "schema": "yado.conjunctive_rule_inducer.component.v1"
+  },
+  "current_effective_priority": [
+    "THINKING_BOUNDARY_REASONING",
+    "INTELLIGENCE_BOUNDARY_REASONING",
+    "REPRESENTATION_INVARIANCE",
+    "ADD_PREIMPORT_DEPENDENCY_LOCK",
+    "HARDEN_DIRECT_EVIDENCE_FETCH",
+    "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+    "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+    "DURABILIZE_HOST_CAPABILITY_MODEL",
+    "STRUCTURAL_FRONTIER_ROUTER"
+  ],
+  "current_expected_priority": [
+    "THINKING_BOUNDARY_REASONING",
+    "INTELLIGENCE_BOUNDARY_REASONING",
+    "REPRESENTATION_INVARIANCE",
+    "ADD_PREIMPORT_DEPENDENCY_LOCK",
+    "HARDEN_DIRECT_EVIDENCE_FETCH",
+    "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+    "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+    "DURABILIZE_HOST_CAPABILITY_MODEL",
+    "STRUCTURAL_FRONTIER_ROUTER"
+  ],
+  "current_pass": true,
+  "developmental_filter_ablation_exact": 0.0,
+  "developmental_filter_fresh_exact": 1.0,
+  "execution_substrate": "EXISTING_YADO_BOUNDED_RULE_SANDBOX",
+  "github_run_id": "33308034691",
+  "github_sha": "2a85de1050b4ed2f9f9194af341ded9dc6642b83",
+  "next_required_capability": "YADO_NATIVE_ALGORITHM_BANK_ADMISSION_AND_META_SELECTION",
+  "origin": "HOST_SCAFFOLDED_GENERIC_ALGORITHM_CANDIDATE_FROM_KERNEL_DIAGNOSED_FILTER_DEFICIT",
+  "promotion_applied": false,
+  "receipt_sha256": "09852b02427441cfbece5ccd72c5639f69c28ff3db9fdbfb6a6b8423e39a6904",
+  "results": {
+    "DEVELOPMENTAL_FILTER": {
+      "ablation": 0.65,
+      "baseline": {
+        "fresh_blind": 0.0,
+        "reason": "ValueError('no stable bounded rule could be synthesized from the examples')",
+        "status": "REJECTED",
+        "validation": 0.0
+      },
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "KEEP",
+        "digest": "c3f39a2bcbdeba6ccb2db2431f6131f05cbfe3c8d9b9c88d4cc0a85d70a8fead",
+        "program_id": "CJ-bb8b6ddfc650",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "DROP",
+            "predicates": [
+              {
+                "field": "dependency_lock_verified",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "ADD_PREIMPORT_DEPENDENCY_LOCK"
+              }
+            ],
+            "support": 8
+          },
+          {
+            "confidence": 1.0,
+            "output": "DROP",
+            "predicates": [
+              {
+                "field": "evidence_fetch_hardened",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "HARDEN_DIRECT_EVIDENCE_FETCH"
+              }
+            ],
+            "support": 8
+          },
+          {
+            "confidence": 1.0,
+            "output": "DROP",
+            "predicates": [
+              {
+                "field": "historical_state_protected",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "PROTECT_HISTORICAL_STATE_FROM_MUTATION"
+              }
+            ],
+            "support": 8
+          },
+          {
+            "confidence": 1.0,
+            "output": "DROP",
+            "predicates": [
+              {
+                "field": "lineage_verified",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "UNIFY_BOOT_AND_STATE_LINEAGE"
+              }
+            ],
+            "support": 8
+          },
+          {
+            "confidence": 1.0,
+            "output": "DROP",
+            "predicates": [
+              {
+                "field": "current_generation_active",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "INTELLIGENCE_BOUNDARY_REASONING"
+              }
+            ],
+            "support": 6
+          },
+          {
+            "confidence": 1.0,
+            "output": "DROP",
+            "predicates": [
+              {
+                "field": "current_generation_active",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "REPRESENTATION_INVARIANCE"
+              }
+            ],
+            "support": 6
+          },
+          {
+            "confidence": 1.0,
+            "output": "DROP",
+            "predicates": [
+              {
+                "field": "current_generation_active",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "THINKING_BOUNDARY_REASONING"
+              }
+            ],
+            "support": 6
+          }
+        ],
+        "source_digest": "f12462c4696cf3840b1963d4f4fda73958a9d7fabe9c9ae059351f33e07c6c5e",
+        "status": "SHADOW",
+        "target_capability": "DEVELOPMENTAL_FILTER",
+        "target_organ": "LOGIC",
+        "training_count": 160
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.01550906200000668,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "PROMOTION_GATE_TRANSFER": {
+      "ablation": 0.928125,
+      "baseline": {
+        "fresh_blind": 0.0,
+        "reason": "ValueError('no stable bounded rule could be synthesized from the examples')",
+        "status": "REJECTED",
+        "validation": 0.0
+      },
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "HOLD",
+        "digest": "439c80d4f976ca0d9640b304a335c79b80bc008a67c60857decea0930d7dbddd",
+        "program_id": "CJ-a73b5f8bfc67",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "PROMOTE",
+            "predicates": [
+              {
+                "field": "tests_passed",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "rollback_ready",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "component",
+                "op": "EQ",
+                "value": "EXPERIMENT"
+              }
+            ],
+            "support": 25
+          }
+        ],
+        "source_digest": "ef2055c3003132a570694905f8a72840fd5d00056b5ac465a07a173c259a200f",
+        "status": "SHADOW",
+        "target_capability": "PROMOTION_GATE_TRANSFER",
+        "target_organ": "LOGIC",
+        "training_count": 320
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.007610870000007708,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "SOURCE_MONITOR_TRANSFER": {
+      "ablation": 0.8,
+      "baseline": {
+        "fresh_blind": 0.0,
+        "reason": "ValueError('no stable bounded rule could be synthesized from the examples')",
+        "status": "REJECTED",
+        "validation": 0.0
+      },
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "ACCEPT",
+        "digest": "7a5e86e6da535fd8c566465e6633b8c110dc4fdf9218cfa91d4f418bbd78932a",
+        "program_id": "CJ-eb81c87b4d5a",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "WITHHOLD",
+            "predicates": [
+              {
+                "field": "verified",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "source_kind",
+                "op": "EQ",
+                "value": "SIMULATED"
+              }
+            ],
+            "support": 27
+          }
+        ],
+        "source_digest": "d0630caef3ca5c4894aad8b58c1c746af2313d0ac45cab342abad229da23d978",
+        "status": "SHADOW",
+        "target_capability": "SOURCE_MONITOR_TRANSFER",
+        "target_organ": "LOGIC",
+        "training_count": 240
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.0056618240000148035,
+      "train": 1.0,
+      "validation": 1.0
+    }
+  },
+  "schema": "yado.conjunctive_rule_inducer.receipt.v1",
+  "semantic_boundary": "GENERIC BOUNDED SYMBOLIC RULE-INDUCTION ALGORITHM; NOT FOUNDATION-MODEL TRAINING OR GENERAL INTELLIGENCE",
+  "status": "PASS_CONJUNCTIVE_RULE_INDUCER_V1"
+}
