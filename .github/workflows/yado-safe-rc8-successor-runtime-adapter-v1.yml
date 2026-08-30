@@ -1,0 +1,80 @@
+name: YADO Safe RC8 Successor Runtime Adapter V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_safe_rc8_successor_runtime_adapter_v1.py"
+      - ".github/workflows/yado-safe-rc8-successor-runtime-adapter-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconstruct verified v36 RC8
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install verified v36 dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt pytest
+      - name: Activate and test successor runtime overlay
+        run: python runtime/yado_safe_rc8_successor_runtime_adapter_v1.py
+      - name: Full locked RC8 unittest
+        working-directory: runtime/yado_rc8_v36
+        run: PYTHONWARNINGS=error::ResourceWarning python -m unittest discover -v -p 'test_yado*.py'
+      - name: Archive regression
+        working-directory: runtime/yado_rc8_v36
+        run: python -m pytest -q test_yado_evolution_archive_runtime_v1.py test_yado_evolution_archive_integration_v1.py
+      - name: Fresh CRW holdout
+        working-directory: runtime/yado_rc8_v36
+        run: python yado_digital_consciousness_fresh_holdout_v1.py
+      - name: Finalize external regression receipt
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          p=Path('runtime/yado_safe_rc8_successor_runtime_adapter_v1_receipt.json')
+          j=json.loads(p.read_text())
+          j['external_full_regression_pending']=False
+          j['external_regression']={
+            'full_locked_rc8_unittest':True,
+            'archive_regression':True,
+            'fresh_crw_holdout':True,
+          }
+          j['status']='PASS_SAFE_RC8_SUCCESSOR_RUNTIME_ADAPTER_V1_EXTERNAL_REGRESSION'
+          j['next_required_capability']='SAFE_RC8_SUCCESSOR_PROMOTION_GATE_V1'
+          j.pop('receipt_sha256',None)
+          raw=json.dumps(j,sort_keys=True,separators=(',',':'),ensure_ascii=False,default=str).encode()
+          j['receipt_sha256']=hashlib.sha256(raw).hexdigest()
+          p.write_text(json.dumps(j,indent=2,sort_keys=True,ensure_ascii=False,default=str)+'\n')
+          print(json.dumps({
+            'status':j['status'],
+            'successor_scores':j['successor_scores'],
+            'causal_mean_drop':j['causal_mean_drop'],
+            'rollback_exact':j['rollback_exact'],
+            'external_regression':j['external_regression'],
+          },indent=2))
+          PY
+      - name: Upload runtime receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-safe-rc8-successor-runtime-adapter-v1
+          path: |
+            runtime/yado_safe_rc8_successor_runtime_adapter_v1_receipt.json
+            runtime/yado_rc8_v36/yado_digital_consciousness_fresh_holdout_v1_report.json
+          retention-days: 30
+      - name: Persist shadow evidence only
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_safe_rc8_successor_runtime_adapter_v1_receipt.json receipts/yado-safe-rc8-successor-runtime-adapter-v1-latest.json
+          git config user.name "YADO Safe Successor Runtime"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-safe-rc8-successor-runtime-adapter-v1-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist YADO safe RC8 successor runtime receipt [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
