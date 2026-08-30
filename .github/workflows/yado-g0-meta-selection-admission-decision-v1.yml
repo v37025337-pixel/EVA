@@ -1,0 +1,46 @@
+name: YADO G0 Meta Selection Admission Decision V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_g0_meta_selection_admission_decision_v1.py"
+      - ".github/workflows/yado-g0-meta-selection-admission-decision-v1.yml"
+permissions:
+  contents: write
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Let G0 decide shadow meta-selection activation
+        run: python runtime/yado_g0_meta_selection_admission_decision_v1.py
+      - name: Upload decision and optional registry entry
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g0-meta-selection-admission-decision-v1
+          path: |
+            runtime/yado_g0_meta_selection_admission_decision_v1_receipt.json
+            runtime/g0_meta_selection_admission_decision_v1/registry_entry.json
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Persist decision
+        run: |
+          mkdir -p receipts candidates/shadow-algorithm-bank
+          cp runtime/yado_g0_meta_selection_admission_decision_v1_receipt.json receipts/yado-g0-meta-selection-admission-decision-v1-latest.json
+          if [ -f runtime/g0_meta_selection_admission_decision_v1/registry_entry.json ]; then
+            cp runtime/g0_meta_selection_admission_decision_v1/registry_entry.json candidates/shadow-algorithm-bank/active-registry-entry.json
+          fi
+          git config user.name "YADO G0 Meta Selection Admission"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-g0-meta-selection-admission-decision-v1-latest.json candidates/shadow-algorithm-bank/active-registry-entry.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G0 shadow meta-selection admission decision [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
