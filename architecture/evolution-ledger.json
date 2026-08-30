@@ -1,7 +1,7 @@
 {
   "current_head": "G0_RC8_V36",
   "current_head_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
-  "event_count": 11,
+  "event_count": 12,
   "events": [
     {
       "canonical_mutation": false,
@@ -178,17 +178,33 @@
       "source_digest": "db564c1c46bc7001b91cc38f651d7ef8176e015f7ab0111be0da63338c3a89bd",
       "source_path": "receipts/yado-experiment-compute-budget-gate-v1-latest.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CONDITIONAL_FILTERING_OF_PRIORITIES",
+      "effect": "GENERIC_BOUNDED_CONJUNCTIVE_RULE_INDUCTION_PASSED_THREE_FRESH_TRANSFER_TASKS_WITH_ABLATION",
+      "event_hash": "bd00ccfa5e60e7f40c5a26a9ed0db9930df3b5d6bf95d19ac543522b34a14143",
+      "event_id": "E0012_CONJUNCTIVE_RULE_INDUCER",
+      "event_type": "EXPERIMENT_RESULT",
+      "generation": "G0_RC8_V36",
+      "index": 11,
+      "parent_event_hash": "48dc3cb087772bb11c84f1b3245ce33d2ab2a684930a55ae7595ac3c38ab595c",
+      "promotion_applied": false,
+      "run_id": "33308034691",
+      "source_digest": "09852b02427441cfbece5ccd72c5639f69c28ff3db9fdbfb6a6b8423e39a6904",
+      "source_path": "receipts/yado-conjunctive-rule-inducer-v1-latest.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; EXACTLY_ONE_PROMOTED_HEAD",
-  "ledger_digest": "3c5bd7f08f3a076abcc74b6a1d70e1bfccbc334097549622f3f792c0bb4c327c",
+  "ledger_digest": "885338a0d85a82de69a6702e017b1e274f10c057d1ade21a89e08903e80c7bb7",
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
     "THINKING_BOUNDARY_REASONING",
     "INTELLIGENCE_BOUNDARY_REASONING",
     "REPRESENTATION_INVARIANCE",
-    "CONDITIONAL_FILTERING_OF_PRIORITIES",
-    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION"
+    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
+    "NATIVE_ALGORITHM_BANK_ADMISSION_AND_META_SELECTION"
   ],
   "resolved_deficits": [
     "DISCONNECTED_VERSION_HISTORY",
@@ -196,5 +212,8 @@
     "UNBOUNDED_EVOLUTION_SEARCH"
   ],
   "schema": "yado.causal_evolution_ledger.v1",
-  "tail_event_hash": "48dc3cb087772bb11c84f1b3245ce33d2ab2a684930a55ae7595ac3c38ab595c"
+  "shadow_resolved_deficits": [
+    "CONDITIONAL_FILTERING_OF_PRIORITIES"
+  ],
+  "tail_event_hash": "bd00ccfa5e60e7f40c5a26a9ed0db9930df3b5d6bf95d19ac543522b34a14143"
 }
