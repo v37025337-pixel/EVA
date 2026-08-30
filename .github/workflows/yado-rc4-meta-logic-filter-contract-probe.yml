@@ -1,0 +1,35 @@
+name: YADO RC4 meta-logic filter contract probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-rc4-meta-logic-filter-contract-probe.yml"
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect meta logic and boolean prediction helpers
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          for fn in ['yado_core_v3_0_rc4_meta_autoevolution.py','yado_evolution_runtime_native_v1.py']:
+            p=Path(fn);txt=p.read_text(errors='ignore');tree=ast.parse(txt)
+            print('\n====',fn,'====')
+            for n in tree.body:
+              if isinstance(n,ast.ClassDef):
+                for m in n.body:
+                  if isinstance(m,ast.FunctionDef) and m.name=='meta_evolve_logic':
+                    print(ast.get_source_segment(txt,m))
+              elif isinstance(n,ast.FunctionDef) and ('logic' in n.name.lower() or 'bool' in n.name.lower()) and n.name not in {'fit_bool_tree'}:
+                if n.name in {'logic_acc','predict_logic_model','eval_logic','_eval_logic','bool_tree_predict','acc_logic_model'}:
+                  print('\n###',n.name)
+                  print(ast.get_source_segment(txt,n))
+          PY
