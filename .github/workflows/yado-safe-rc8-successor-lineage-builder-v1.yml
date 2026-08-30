@@ -1,0 +1,43 @@
+name: YADO Safe RC8 Successor Lineage Builder V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_safe_rc8_successor_lineage_builder_v1.py"
+      - ".github/workflows/yado-safe-rc8-successor-lineage-builder-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconstruct verified v36 RC8
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Synthesize and verify safe successor lineage builder
+        run: python runtime/yado_safe_rc8_successor_lineage_builder_v1.py
+      - name: Upload successor capsule and receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-safe-rc8-successor-lineage-builder-v1
+          path: |
+            runtime/yado_safe_rc8_successor_lineage_builder_v1_receipt.json
+            runtime/safe_rc8_successor_lineage_builder_v1/successor-capsule.json
+          retention-days: 30
+      - name: Persist shadow evidence only
+        run: |
+          mkdir -p receipts candidates/rc8-safe-successor-v1
+          cp runtime/yado_safe_rc8_successor_lineage_builder_v1_receipt.json receipts/yado-safe-rc8-successor-lineage-builder-v1-latest.json
+          cp runtime/safe_rc8_successor_lineage_builder_v1/successor-capsule.json candidates/rc8-safe-successor-v1/successor-capsule.json
+          git config user.name "YADO Safe Successor Builder"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-safe-rc8-successor-lineage-builder-v1-latest.json candidates/rc8-safe-successor-v1/successor-capsule.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist YADO safe RC8 successor capsule [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
