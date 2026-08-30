@@ -1,0 +1,121 @@
+{
+  "autonomous_g0_lineage_decision": "EXECUTE",
+  "autonomous_g0_s1_promotion_decision": "WITHHOLD",
+  "autonomous_g0_s2_repair_decision": "WITHHOLD",
+  "canonical_rc8_mutation": false,
+  "control_plane_snapshot": {
+    "candidate_count": 1,
+    "candidates": [
+      {
+        "artifact_digest": "PENDING_EXPERIMENT_RESULT",
+        "candidate_id": "G1_CANDIDATE_S2",
+        "evidence_status": "EXPERIMENT_IN_PROGRESS_OR_UNADMITTED",
+        "parent_id": "G0_RC8_V36",
+        "promotion_decision": "WITHHOLD_CANDIDATE",
+        "promotion_decision_digest": null,
+        "reason": "G0_METACOGNITIVE_WITHHOLD"
+      }
+    ],
+    "evidence": [
+      {
+        "digest": "17f1297712d5c785eefbea283131fd26fecaeb68a2f2c3cf466711c2a8713dd8",
+        "evidence_id": "G0_AUTONOMOUS_META",
+        "kind": "LIVE_KERNEL",
+        "metadata": {
+          "decisions": [
+            {
+              "AUTO-001-LINEAGE-CONTROL": "EXECUTE"
+            },
+            {
+              "AUTO-002-S1-PROMOTION": "WITHHOLD"
+            },
+            {
+              "AUTO-003-S2-REPAIR": "WITHHOLD"
+            }
+          ]
+        },
+        "status": "PASS_LIVE_G0_AUTONOMOUS_METACOGNITIVE"
+      },
+      {
+        "digest": "50a1d0965443f107b9897ce9eb2df2aaba8101d7e120eedede3caa3d847c62b3",
+        "evidence_id": "RAPID_STEM_V1",
+        "kind": "DOMAIN_EXPERIENCE",
+        "metadata": {
+          "overall_mean": 0.9969583333333334,
+          "task_count": 16
+        },
+        "status": "RAPID_STEM_HOLDOUT_COMPLETED"
+      },
+      {
+        "digest": "6ff4b2bbf511b041c69bca9740cfbfffad703a3f3b94e8f45395b35f79790ddc",
+        "evidence_id": "REAL_LINEAGE_V1",
+        "kind": "LINEAGE",
+        "metadata": {
+          "s1_action": "WITHHOLD_CANDIDATE"
+        },
+        "status": "PASS_REAL_G0_AND_REJECTED_S1_RECONSTRUCTION"
+      }
+    ],
+    "evidence_count": 3,
+    "head_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+    "head_id": "G0_RC8_V36",
+    "history": [
+      {
+        "event": "ROOT_HEAD",
+        "head_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+        "head_id": "G0_RC8_V36"
+      }
+    ],
+    "invariant": "EXACTLY_ONE_DEVELOPMENTAL_HEAD",
+    "rejected": [
+      {
+        "artifact_digest": "e5e1ada993db0e48ac36f57ecb1981e77ddf287c565c9dd5b7bea89bb21a1d70",
+        "candidate_id": "CANDIDATE_S1",
+        "evidence_status": "BURNIN_WITHHOLD",
+        "parent_id": "G0_RC8_V36",
+        "preserve_as_evidence": true,
+        "promotion_decision": "WITHHOLD_CANDIDATE",
+        "promotion_decision_digest": null,
+        "reason": "THINKING_REGRESSION_AND_FRESH_BLIND_FAIL",
+        "rejection_reason": "NO_EXPLICIT_PROMOTION_DECISION;NO_PROMOTION_DECISION_DIGEST;INSUFFICIENT_EVIDENCE_STATUS"
+      }
+    ],
+    "rejected_count": 1,
+    "schema": "yado.developmental_head_control_plane.v1",
+    "snapshot_digest": "15c039390f897bde9d0b5a78e1fd8e0891aef36e4763c8087c5e56c21f567847"
+  },
+  "current_head": "G0_RC8_V36",
+  "current_head_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "domain_experiments_are_evidence_only": true,
+  "manifest_digest": "595ecc4bf989b50a7e9d1bfaa5adbeae1c54a5a99843c88bd4bc6d33c232be47",
+  "one_head_invariant": true,
+  "promotion_applied": false,
+  "s1_evaluation": {
+    "action": "WITHHOLD_CANDIDATE",
+    "artifact_digest": "e5e1ada993db0e48ac36f57ecb1981e77ddf287c565c9dd5b7bea89bb21a1d70",
+    "candidate_id": "CANDIDATE_S1",
+    "current_head": "G0_RC8_V36",
+    "decision_digest": "4a6b5b09c517c211c96cd42870365b9a01d9d05ac6f565a789e62be2fc24dbf4",
+    "parent_id": "G0_RC8_V36",
+    "reasons": [
+      "NO_EXPLICIT_PROMOTION_DECISION",
+      "NO_PROMOTION_DECISION_DIGEST",
+      "INSUFFICIENT_EVIDENCE_STATUS"
+    ]
+  },
+  "s2_evaluation": {
+    "action": "WITHHOLD_CANDIDATE",
+    "artifact_digest": "PENDING_EXPERIMENT_RESULT",
+    "candidate_id": "G1_CANDIDATE_S2",
+    "current_head": "G0_RC8_V36",
+    "decision_digest": "98fb2550207f21cd2403c71fee2d4572994eeeb6460b6df6931541f1cab14ed6",
+    "parent_id": "G0_RC8_V36",
+    "reasons": [
+      "NO_EXPLICIT_PROMOTION_DECISION",
+      "NO_PROMOTION_DECISION_DIGEST",
+      "INSUFFICIENT_EVIDENCE_STATUS"
+    ]
+  },
+  "schema": "yado.real_developmental_head_manifest.v1",
+  "status": "PASS_ONE_HEAD_CONTROL_PLANE"
+}
