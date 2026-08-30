@@ -1,0 +1,33 @@
+name: YADO metacognitive decision contract probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-metacognitive-decision-contract-probe.yml"
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect metacognitive decision contract
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          for p in Path('.').glob('*.py'):
+            try:
+              txt=p.read_text(errors='ignore'); tree=ast.parse(txt)
+            except: continue
+            for n in tree.body:
+              if isinstance(n,ast.ClassDef):
+                for m in n.body:
+                  if isinstance(m,ast.FunctionDef) and m.name in {'metacognitive_decide','capability_profile','metacognitive_profile'}:
+                    print('\n====',p.name,n.name+'.'+m.name,'====')
+                    print(ast.get_source_segment(txt,m))
+          PY
