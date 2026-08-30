@@ -1,0 +1,58 @@
+{
+  "canonical_mutation": false,
+  "next_required_capability": "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
+  "policy": {
+    "default_budget_minutes": 30.0,
+    "promotion_semantics": "RESOURCE_TIMEOUT_NEVER_COUNTS_AS_CAPABILITY_PASS",
+    "rule": "IN_PROGRESS_AND_ELAPSED_GT_BUDGET => CANCEL_AND_WITHHOLD_RESOURCE_BUDGET"
+  },
+  "promotion_applied": false,
+  "runs": [
+    {
+      "action": "CANCEL_REQUESTED_RESOURCE_BUDGET",
+      "budget_exceeded": true,
+      "budget_minutes": 30.0,
+      "conclusion_before": null,
+      "elapsed_minutes_at_gate": 113.98341654999999,
+      "experiment": "G1_S2_COUNTEREXAMPLE_GENESIS",
+      "run_id": "33302716666",
+      "run_started_at": "2026-08-30T08:54:06Z",
+      "status_before": "in_progress"
+    },
+    {
+      "action": "CANCEL_REQUESTED_RESOURCE_BUDGET",
+      "budget_exceeded": true,
+      "budget_minutes": 30.0,
+      "conclusion_before": null,
+      "elapsed_minutes_at_gate": 110.31674988333333,
+      "experiment": "S2_FAST_COUNTEREXAMPLE_REPAIR",
+      "run_id": "33302857361",
+      "run_started_at": "2026-08-30T08:57:46Z",
+      "status_before": "in_progress"
+    },
+    {
+      "action": "CANCEL_REQUESTED_RESOURCE_BUDGET",
+      "budget_exceeded": true,
+      "budget_minutes": 30.0,
+      "conclusion_before": null,
+      "elapsed_minutes_at_gate": 84.48341654999999,
+      "experiment": "HEAVY_NATIVE_FILTER_ORDER",
+      "run_id": "33303938172",
+      "run_started_at": "2026-08-30T09:23:36Z",
+      "status_before": "in_progress"
+    },
+    {
+      "action": "CANCEL_REQUESTED_RESOURCE_BUDGET",
+      "budget_exceeded": true,
+      "budget_minutes": 30.0,
+      "conclusion_before": null,
+      "elapsed_minutes_at_gate": 74.41674988333332,
+      "experiment": "LOGIC_FILTER_THINKING_ORDER",
+      "run_id": "33304361049",
+      "run_started_at": "2026-08-30T09:33:40Z",
+      "status_before": "in_progress"
+    }
+  ],
+  "schema": "yado.experiment_compute_budget_gate.v1",
+  "status": "PASS_EXPERIMENT_COMPUTE_BUDGET_GATE_V1"
+}
