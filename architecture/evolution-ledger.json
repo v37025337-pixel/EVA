@@ -1,7 +1,7 @@
 {
   "current_head": "G0_RC8_V36",
   "current_head_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
-  "event_count": 17,
+  "event_count": 19,
   "events": [
     {
       "canonical_mutation": false,
@@ -274,18 +274,50 @@
       "source_digest": "c830a1ce53b3853f074b6ce0bc712920ac9dbb02d8d9bc10657cfbbb3bdff12f",
       "source_path": "receipts/yado-g0-meta-selection-admission-decision-v1-latest.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LIVE_SHADOW_META_SELECTION_VALIDATION",
+      "effect": "G0_USED_AUTHORIZED_SHADOW_SELECTOR_TO_COMPUTE_LIVE_DEVELOPMENTAL_PRIORITY",
+      "event_hash": "e95477996f7c472284873e276231490ad43febafa6595f168a22b05695439bb9",
+      "event_id": "E0018_LIVE_SHADOW_DEVELOPMENTAL",
+      "event_type": "LIVE_KERNEL_RESULT",
+      "generation": "G0_RC8_V36",
+      "index": 17,
+      "parent_event_hash": "3716856f07b35058f4a8e604c8280e6e2046f42e279e809f270fc41f0551393f",
+      "promotion_applied": false,
+      "run_id": "33314162809",
+      "source_digest": "600ebabacd20b0e14d771be591a08769db1978e8b95bc07b5edc6005d9c9a704",
+      "source_path": "receipts/yado-live-shadow-meta-selection-developmental-v1-latest.json",
+      "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G1_INHERITABLE_SHADOW_ALGORITHM_CAPABILITY",
+      "effect": "CONJUNCTIVE_RULE_INDUCER_AUTHORIZED_FOR_G1_CANDIDATE_SHADOW_ONLY",
+      "event_hash": "32cac0badcd4f46a064339469c6e1a569442c90e04e606a44c953c684ff9bf7c",
+      "event_id": "E0019_G1_SHADOW_CAPABILITY_INHERITANCE",
+      "event_type": "GENERATION_INHERITANCE_GATE",
+      "generation": "G1_CANDIDATE_S2",
+      "index": 18,
+      "parent_event_hash": "e95477996f7c472284873e276231490ad43febafa6595f168a22b05695439bb9",
+      "promotion_applied": false,
+      "run_id": "33323338168",
+      "source_digest": "bad285d24482f25502ebd990a88b4633a29f68814e95f40ec4e443402b35c597",
+      "source_path": "receipts/yado-evaluate-shadow-capability-for-g1-inheritance-v1-latest.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; EXACTLY_ONE_PROMOTED_HEAD",
-  "ledger_digest": "6c2c4ac115c5f0c3ec36301075442b7c1c0d867b21fc5e81c46e07e8cb7561a8",
+  "ledger_digest": "031d9957d3a1596e424327326fa5ade04aa56364260e04dacdf04b5821345cb8",
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "THINKING_BOUNDARY_REASONING",
+    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
     "INTELLIGENCE_BOUNDARY_REASONING",
     "REPRESENTATION_INVARIANCE",
-    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
-    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
-    "LIVE_SHADOW_META_SELECTION_VALIDATION"
+    "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
+    "THINKING_BOUNDARY_REASONING"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -296,7 +328,9 @@
   ],
   "schema": "yado.causal_evolution_ledger.v1",
   "shadow_resolved_deficits": [
-    "CONDITIONAL_FILTERING_OF_PRIORITIES"
+    "CONDITIONAL_FILTERING_OF_PRIORITIES",
+    "G1_INHERITABLE_SHADOW_ALGORITHM_CAPABILITY",
+    "LIVE_SHADOW_META_SELECTION_VALIDATION"
   ],
-  "tail_event_hash": "3716856f07b35058f4a8e604c8280e6e2046f42e279e809f270fc41f0551393f"
+  "tail_event_hash": "32cac0badcd4f46a064339469c6e1a569442c90e04e606a44c953c684ff9bf7c"
 }

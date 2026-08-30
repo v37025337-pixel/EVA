@@ -1,0 +1,241 @@
+{
+  "candidate_digest": "c8b5cc9ecd4e553b49912905b52590e7e49a139511e20ee1abd3947177a8f198",
+  "candidate_generation_id": "G1_CANDIDATE_S2",
+  "canonical_mutation": false,
+  "canonical_parent_byte_identical": true,
+  "canonical_parent_sha256_after": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "canonical_parent_sha256_before": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "developmental_head": "G0_RC8_V36",
+  "fresh_generation_results": {
+    "G1_CROSS_DOMAIN_EVIDENCE": {
+      "ablation": 0.8652777777777778,
+      "baseline": {
+        "fresh_blind": 0.0,
+        "reason": "ValueError('no stable bounded rule could be synthesized from the examples')",
+        "status": "REJECTED",
+        "validation": 0.0
+      },
+      "causal_drop": 0.1347222222222222,
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "SEEK_MORE",
+        "digest": "5a5bd36c63fbd294558c81b76f28b51140ac6d929e794412edf34c439cc5e948",
+        "program_id": "CJ-e3375bd121ae",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "TRUST",
+            "predicates": [
+              {
+                "field": "mathematics_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "exact_science_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "programming_ok",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 71
+          }
+        ],
+        "source_digest": "62a38837951f23b33836c3f1e21b74eb3b8190d52dd4d4c736fc67f580d50a40",
+        "status": "SHADOW",
+        "target_capability": "G1_CROSS_DOMAIN_EVIDENCE",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.020249980000016876,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "G1_DEFICIT_REPAIR": {
+      "ablation": 0.8777777777777778,
+      "baseline": {
+        "fresh_blind": 0.0,
+        "reason": "ValueError('no stable bounded rule could be synthesized from the examples')",
+        "status": "REJECTED",
+        "validation": 0.0
+      },
+      "causal_drop": 0.12222222222222223,
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "REJECT",
+        "digest": "365ec518a31b46faca06058f698779cb8b4889b498ffe7e18a05c5cd154fe725",
+        "program_id": "CJ-40aaa55943b7",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "RETAIN",
+            "predicates": [
+              {
+                "field": "causal_mechanism",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "ablation_pass",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "counterexample_fresh",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 51
+          }
+        ],
+        "source_digest": "b2ed8e30f1a73fdb8dd81ce5815604297a10942d9bb8990bad874e209b5c4836",
+        "status": "SHADOW",
+        "target_capability": "G1_DEFICIT_REPAIR",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.026076885000009042,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "G1_META_SELECTION": {
+      "ablation": 0.8597222222222223,
+      "baseline": {
+        "fresh_blind": 0.0,
+        "reason": "ValueError('no stable bounded rule could be synthesized from the examples')",
+        "status": "REJECTED",
+        "validation": 0.0
+      },
+      "causal_drop": 0.14027777777777772,
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "HOLD",
+        "digest": "3bfe87756f18b294c4e6f6c7a88460c071934b22050f627bb02ca4c8075f40c5",
+        "program_id": "CJ-580fb2bb1274",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "SELECT",
+            "predicates": [
+              {
+                "field": "candidate_active",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "no_protected_regression",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "evidence_complete",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 60
+          }
+        ],
+        "source_digest": "a8a99287a96c4f34de63988509ff1e8766b2fb485d6fc10ef288484bb3dc7e22",
+        "status": "SHADOW",
+        "target_capability": "G1_META_SELECTION",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.019608322000010503,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "G1_SUCCESSOR_LINEAGE": {
+      "ablation": 0.8527777777777777,
+      "baseline": {
+        "fresh_blind": 0.0,
+        "reason": "ValueError('no stable bounded rule could be synthesized from the examples')",
+        "status": "REJECTED",
+        "validation": 0.0
+      },
+      "causal_drop": 0.14722222222222225,
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "WITHHOLD",
+        "digest": "5a0f373ead149db0c9fd916b7d6a09a1abe451fa071ea9917a11b9c1f7d3074b",
+        "program_id": "CJ-0069c489f721",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "INHERIT",
+            "predicates": [
+              {
+                "field": "rollback_ready",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "regression_clean",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "ancestor_ok",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 53
+          }
+        ],
+        "source_digest": "481b19f367d810242b161f33667f0f054a3706c5ab4fa31380491f612b6e30e6",
+        "status": "SHADOW",
+        "target_capability": "G1_SUCCESSOR_LINEAGE",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.023861515000021427,
+      "train": 1.0,
+      "validation": 1.0
+    }
+  },
+  "g0_metacognitive_decision": {
+    "action": "EXECUTE",
+    "effective_confidence": 0.7681285714285713,
+    "profile_confidence": 0.8571428571428571,
+    "reason": "CAPABILITY_AND_EVIDENCE_ALIGNED",
+    "self_disagreement": 0.09285714285714286
+  },
+  "github_run_id": "33323338168",
+  "github_sha": "6360f0777eac16863aeebc64e04c41708924b98f",
+  "inheritance_scope": "G1_CANDIDATE_SHADOW_ONLY",
+  "inherited_capability_id": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+  "inherited_family": "CONJUNCTIVE_RULE_INDUCTION",
+  "next_required_capability": "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE_V1",
+  "parent_generation_id": "G0_RC8_V36",
+  "planned_ledger_events": [
+    "E0018_LIVE_SHADOW_DEVELOPMENTAL",
+    "E0019_G1_SHADOW_CAPABILITY_INHERITANCE"
+  ],
+  "promotion_applied": false,
+  "receipt_sha256": "bad285d24482f25502ebd990a88b4633a29f68814e95f40ec4e443402b35c597",
+  "schema": "yado.evaluate_shadow_capability_for_g1_inheritance.v1",
+  "semantic_boundary": "BOUNDED SYMBOLIC ALGORITHM INHERITANCE INTO AN EPHEMERAL G1 CANDIDATE; NOT CANONICAL PROMOTION, AGI, OR SUBJECTIVE CONSCIOUSNESS PROOF",
+  "status": "PASS_G1_SHADOW_CAPABILITY_INHERITANCE_V1",
+  "summary": {
+    "all_restore_exact": true,
+    "min_causal_ablation_drop": 0.12222222222222223,
+    "min_fresh_blind": 1.0,
+    "task_count": 4,
+    "tasks_passed": 4
+  }
+}
