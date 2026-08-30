@@ -1,0 +1,158 @@
+{
+  "all_selected_fresh_blind_ge_0_97": true,
+  "candidate_scope": "SHADOW_ALGORITHM_BANK",
+  "canonical_mutation": false,
+  "github_run_id": "33313898337",
+  "github_sha": "7d1cceb409a0fe93b814cdbbd98bb17136516506",
+  "next_required_capability": "G0_META_SELECTION_ADMISSION_DECISION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "27288639296ed70d1c940e9056810561fc40f8ba78cc5c069d39cb39027f7222",
+  "results": {
+    "ARTIFACT_INTEGRITY": {
+      "ablation": 0.74375,
+      "candidates": [
+        {
+          "complexity": 3,
+          "error": null,
+          "family": "CONJUNCTIVE_RULE_INDUCTION",
+          "seconds": 0.010683523999972522,
+          "validation": 1.0
+        },
+        {
+          "complexity": 1000000000,
+          "error": "ValueError('no stable bounded rule could be synthesized from the examples')",
+          "family": "EXISTING_RULE_PROGRAM_SYNTHESIZER",
+          "seconds": 0.0,
+          "validation": 0.0
+        }
+      ],
+      "fresh_blind": 1.0,
+      "selected_complexity": 3,
+      "selected_family": "CONJUNCTIVE_RULE_INDUCTION",
+      "selected_validation": 1.0
+    },
+    "DATA_PROVENANCE": {
+      "ablation": 0.5958333333333333,
+      "candidates": [
+        {
+          "complexity": 7,
+          "error": null,
+          "family": "CONJUNCTIVE_RULE_INDUCTION",
+          "seconds": 0.016171756000005644,
+          "validation": 1.0
+        },
+        {
+          "complexity": 1000000000,
+          "error": "ValueError('no stable bounded rule could be synthesized from the examples')",
+          "family": "EXISTING_RULE_PROGRAM_SYNTHESIZER",
+          "seconds": 0.0,
+          "validation": 0.0
+        }
+      ],
+      "fresh_blind": 1.0,
+      "selected_complexity": 7,
+      "selected_family": "CONJUNCTIVE_RULE_INDUCTION",
+      "selected_validation": 1.0
+    },
+    "DEPLOYMENT_POLICY": {
+      "ablation": 0.68125,
+      "candidates": [
+        {
+          "complexity": 12,
+          "error": null,
+          "family": "CONJUNCTIVE_RULE_INDUCTION",
+          "seconds": 0.014888240999994196,
+          "validation": 1.0
+        },
+        {
+          "complexity": 1000000000,
+          "error": "ValueError('no stable bounded rule could be synthesized from the examples')",
+          "family": "EXISTING_RULE_PROGRAM_SYNTHESIZER",
+          "seconds": 0.0,
+          "validation": 0.0
+        }
+      ],
+      "fresh_blind": 1.0,
+      "selected_complexity": 12,
+      "selected_family": "CONJUNCTIVE_RULE_INDUCTION",
+      "selected_validation": 1.0
+    },
+    "DISTRIBUTED_COMMIT": {
+      "ablation": 0.8979166666666667,
+      "candidates": [
+        {
+          "complexity": 4,
+          "error": null,
+          "family": "CONJUNCTIVE_RULE_INDUCTION",
+          "seconds": 0.014689126999996915,
+          "validation": 1.0
+        },
+        {
+          "complexity": 1000000000,
+          "error": "ValueError('no stable bounded rule could be synthesized from the examples')",
+          "family": "EXISTING_RULE_PROGRAM_SYNTHESIZER",
+          "seconds": 0.0,
+          "validation": 0.0
+        }
+      ],
+      "fresh_blind": 1.0,
+      "selected_complexity": 4,
+      "selected_family": "CONJUNCTIVE_RULE_INDUCTION",
+      "selected_validation": 1.0
+    },
+    "INSTRUMENT_CALIBRATION": {
+      "ablation": 0.59375,
+      "candidates": [
+        {
+          "complexity": 7,
+          "error": null,
+          "family": "CONJUNCTIVE_RULE_INDUCTION",
+          "seconds": 0.015550958999995146,
+          "validation": 1.0
+        },
+        {
+          "complexity": 1000000000,
+          "error": "ValueError('no stable bounded rule could be synthesized from the examples')",
+          "family": "EXISTING_RULE_PROGRAM_SYNTHESIZER",
+          "seconds": 0.0,
+          "validation": 0.0
+        }
+      ],
+      "fresh_blind": 1.0,
+      "selected_complexity": 7,
+      "selected_family": "CONJUNCTIVE_RULE_INDUCTION",
+      "selected_validation": 1.0
+    },
+    "UNARY_SANITY": {
+      "ablation": 0.5020833333333333,
+      "candidates": [
+        {
+          "complexity": 2,
+          "error": null,
+          "family": "EXISTING_RULE_PROGRAM_SYNTHESIZER",
+          "seconds": 0.00516955300000177,
+          "validation": 1.0
+        },
+        {
+          "complexity": 2,
+          "error": null,
+          "family": "CONJUNCTIVE_RULE_INDUCTION",
+          "seconds": 0.008163292000006095,
+          "validation": 1.0
+        }
+      ],
+      "fresh_blind": 1.0,
+      "selected_complexity": 2,
+      "selected_family": "EXISTING_RULE_PROGRAM_SYNTHESIZER",
+      "selected_validation": 1.0
+    }
+  },
+  "schema": "yado.fresh_meta_selection.conjunctive_vs_existing.v1",
+  "selected_counts": {
+    "CONJUNCTIVE_RULE_INDUCTION": 5,
+    "EXISTING_RULE_PROGRAM_SYNTHESIZER": 1
+  },
+  "selection_rule": "VALIDATION_ONLY_THEN_COMPLEXITY_THEN_EXISTING_ON_EXACT_TIE; BLIND_RESERVED_FOR_FINAL_GATE",
+  "status": "PASS_FRESH_META_SELECTION_CONJUNCTIVE_VS_EXISTING_V1",
+  "task_count": 6
+}
