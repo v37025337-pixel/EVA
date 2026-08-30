@@ -1,14 +1,4 @@
-from 
-  {
-    'event_id':'E0011_EXPERIMENT_COMPUTE_BUDGET_GATE',
-    'event_type':'CONTROL_PLANE_RESULT',
-    'status':'PASS',
-    'generation':'G0_RC8_V36',
-    'deficit':'UNBOUNDED_EVOLUTION_SEARCH',
-    'effect':'FOUR_OVERBUDGET_EXPERIMENTS_CANCELLED; FUTURE_SEARCH_MUST_BE_BOUNDED',
-    'source_path':'receipts/yado-experiment-compute-budget-gate-v1-latest.json',
-    'run_id':'33307348264',
-  },__future__ import annotations
+from __future__ import annotations
 from pathlib import Path
 import copy,hashlib,json
 
@@ -135,7 +125,17 @@ sources=[
     'effect':'ORDER_SOLVED; FILTER_REMAINS_LIMITING',
     'source_path':'receipts/yado-budget-aware-sequence-transform-v1-latest.json',
     'run_id':'33304206212',
+  },  {
+    'event_id':'E0011_EXPERIMENT_COMPUTE_BUDGET_GATE',
+    'event_type':'CONTROL_PLANE_RESULT',
+    'status':'PASS',
+    'generation':'G0_RC8_V36',
+    'deficit':'UNBOUNDED_EVOLUTION_SEARCH',
+    'effect':'FOUR_OVERBUDGET_EXPERIMENTS_CANCELLED; FUTURE_SEARCH_MUST_BE_BOUNDED',
+    'source_path':'receipts/yado-experiment-compute-budget-gate-v1-latest.json',
+    'run_id':'33307348264',
   },
+
 ]
 
 # Resolve and verify source evidence.
@@ -218,10 +218,12 @@ ledger['open_deficits']=[
   'INTELLIGENCE_BOUNDARY_REASONING',
   'REPRESENTATION_INVARIANCE',
   'CONDITIONAL_FILTERING_OF_PRIORITIES',
+  'BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION',
 ]
 ledger['resolved_deficits']=[
   'DISCONNECTED_VERSION_HISTORY',
   'BRANCH_PROLIFERATION',
+  'UNBOUNDED_EVOLUTION_SEARCH',
 ]
 ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
 
