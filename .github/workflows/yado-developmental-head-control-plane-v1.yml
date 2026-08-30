@@ -1,0 +1,39 @@
+name: YADO Developmental Head Control Plane V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado_developmental_head_control_plane_v1.py"
+      - ".github/workflows/yado-developmental-head-control-plane-v1.yml"
+permissions:
+  contents: write
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run one-head developmental control plane
+        run: python architecture/yado_developmental_head_control_plane_v1.py
+      - name: Upload report and manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-developmental-head-control-plane-v1
+          path: |
+            runtime/yado_developmental_head_control_plane_v1_report.json
+            architecture/developmental-head-manifest.json
+          retention-days: 30
+      - name: Persist control-plane evidence
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_developmental_head_control_plane_v1_report.json receipts/yado-developmental-head-control-plane-v1-latest.json
+          git config user.name "YADO Developmental Head Control"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-developmental-head-control-plane-v1-latest.json architecture/developmental-head-manifest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist one-head developmental control plane [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
