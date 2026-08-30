@@ -1,7 +1,7 @@
 {
   "current_head": "G0_RC8_V36",
   "current_head_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
-  "event_count": 12,
+  "event_count": 17,
   "events": [
     {
       "canonical_mutation": false,
@@ -194,26 +194,109 @@
       "source_digest": "09852b02427441cfbece5ccd72c5639f69c28ff3db9fdbfb6a6b8423e39a6904",
       "source_path": "receipts/yado-conjunctive-rule-inducer-v1-latest.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CONJUNCTIVE_RULE_INDUCTION_GENERALIZATION",
+      "effect": "FOUR_OF_FIVE_NEW_DOMAINS_PASS; ACCESS_CONTROL_RETAINED_AS_COUNTEREXAMPLE",
+      "event_hash": "68107ae683355e8e98bcd408617f1aabbb2b25ffbf783a376ea321322524cb0f",
+      "event_id": "E0013_CONJUNCTIVE_EXTENDED_TRANSFER",
+      "event_type": "EXPERIMENT_RESULT",
+      "generation": "G0_RC8_V36",
+      "index": 12,
+      "parent_event_hash": "bd00ccfa5e60e7f40c5a26a9ed0db9930df3b5d6bf95d19ac543522b34a14143",
+      "promotion_applied": false,
+      "run_id": "33313603775",
+      "source_digest": "7df93a3f3deae250facef77bcaf42ef822e74a87edeb28fd0b517003f6057a52",
+      "source_path": "receipts/yado-conjunctive-rule-inducer-extended-transfer-v1-latest.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ALGORITHM_BANK_ADMISSION",
+      "effect": "G0_DECISION_WITHHOLD_TO_EXECUTE_AFTER_EXTENDED_EVIDENCE",
+      "event_hash": "9a446aed8dfdc043f532cc7ae066be5149a1cf1d9c24bea108e2a9c290152fc8",
+      "event_id": "E0014_G0_CONJUNCTIVE_READMISSION",
+      "event_type": "LIVE_KERNEL_RESULT",
+      "generation": "G0_RC8_V36",
+      "index": 13,
+      "parent_event_hash": "68107ae683355e8e98bcd408617f1aabbb2b25ffbf783a376ea321322524cb0f",
+      "promotion_applied": false,
+      "run_id": "33313727864",
+      "source_digest": "bbf45a3bd7fac26df88f5252026df64573f24de60cec1cfad1eba49b9ffbb3ef",
+      "source_path": "receipts/yado-g0-conjunctive-algorithm-readmission-v2-latest.json",
+      "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "SHADOW_ALGORITHM_BANK_ENTRY",
+      "effect": "CONJUNCTIVE_RULE_INDUCER_REGISTERED_SHADOW_ONLY",
+      "event_hash": "1d150864acc6f8982a6f68635a8a843023756e4a2787793e2df393dcf9705dea",
+      "event_id": "E0015_SHADOW_ALGORITHM_BANK_ADMISSION",
+      "event_type": "CONTROL_PLANE_RESULT",
+      "generation": "G0_RC8_V36",
+      "index": 14,
+      "parent_event_hash": "9a446aed8dfdc043f532cc7ae066be5149a1cf1d9c24bea108e2a9c290152fc8",
+      "promotion_applied": false,
+      "run_id": "33313830992",
+      "source_digest": "2a8aa343293b25ea2d4aaa75d2eee8a0467606460cac0336a868c56c3d8af71a",
+      "source_path": "receipts/yado-shadow-algorithm-bank-admission-v1-latest.json",
+      "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ALGORITHM_META_SELECTION",
+      "effect": "EXISTING_WINS_SIMPLE_UNARY; CONJUNCTIVE_WINS_FIVE_HARDER_TASKS_ALL_BLIND_1_0",
+      "event_hash": "332cbfd43dc5790202e04471aacf08fdeefbc656f6b775b2e7eb86cab93bf30b",
+      "event_id": "E0016_FRESH_META_SELECTION",
+      "event_type": "EXPERIMENT_RESULT",
+      "generation": "G0_RC8_V36",
+      "index": 15,
+      "parent_event_hash": "1d150864acc6f8982a6f68635a8a843023756e4a2787793e2df393dcf9705dea",
+      "promotion_applied": false,
+      "run_id": "33313898337",
+      "source_digest": "27288639296ed70d1c940e9056810561fc40f8ba78cc5c069d39cb39027f7222",
+      "source_path": "receipts/yado-fresh-meta-selection-conjunctive-vs-existing-v1-latest.json",
+      "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "SHADOW_META_SELECTION_ACTIVATION",
+      "effect": "G0_EXECUTE_ENABLE_SHADOW_META_SELECTION",
+      "event_hash": "3716856f07b35058f4a8e604c8280e6e2046f42e279e809f270fc41f0551393f",
+      "event_id": "E0017_G0_META_SELECTION_ADMISSION",
+      "event_type": "LIVE_KERNEL_RESULT",
+      "generation": "G0_RC8_V36",
+      "index": 16,
+      "parent_event_hash": "332cbfd43dc5790202e04471aacf08fdeefbc656f6b775b2e7eb86cab93bf30b",
+      "promotion_applied": false,
+      "run_id": "33314014798",
+      "source_digest": "c830a1ce53b3853f074b6ce0bc712920ac9dbb02d8d9bc10657cfbbb3bdff12f",
+      "source_path": "receipts/yado-g0-meta-selection-admission-decision-v1-latest.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; EXACTLY_ONE_PROMOTED_HEAD",
-  "ledger_digest": "885338a0d85a82de69a6702e017b1e274f10c057d1ade21a89e08903e80c7bb7",
+  "ledger_digest": "6c2c4ac115c5f0c3ec36301075442b7c1c0d867b21fc5e81c46e07e8cb7561a8",
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
     "THINKING_BOUNDARY_REASONING",
     "INTELLIGENCE_BOUNDARY_REASONING",
     "REPRESENTATION_INVARIANCE",
     "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
-    "NATIVE_ALGORITHM_BANK_ADMISSION_AND_META_SELECTION"
+    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+    "LIVE_SHADOW_META_SELECTION_VALIDATION"
   ],
   "resolved_deficits": [
-    "DISCONNECTED_VERSION_HISTORY",
     "BRANCH_PROLIFERATION",
+    "CONDITIONAL_FILTERING_OF_PRIORITIES",
+    "DISCONNECTED_VERSION_HISTORY",
+    "NATIVE_ALGORITHM_BANK_ADMISSION_AND_META_SELECTION",
     "UNBOUNDED_EVOLUTION_SEARCH"
   ],
   "schema": "yado.causal_evolution_ledger.v1",
   "shadow_resolved_deficits": [
     "CONDITIONAL_FILTERING_OF_PRIORITIES"
   ],
-  "tail_event_hash": "bd00ccfa5e60e7f40c5a26a9ed0db9930df3b5d6bf95d19ac543522b34a14143"
+  "tail_event_hash": "3716856f07b35058f4a8e604c8280e6e2046f42e279e809f270fc41f0551393f"
 }
