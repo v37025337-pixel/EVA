@@ -1,0 +1,560 @@
+{
+  "candidate_component_digest": "3b31c7d26e4e51db3a5135a58ac4fe764f45ce96bf4e80e016172bd212e43150",
+  "canonical_mutation": false,
+  "domains": [
+    "ACCESS_CONTROL",
+    "COMPILER_OPTIMIZATION",
+    "SCIENTIFIC_EVIDENCE",
+    "FAULT_ISOLATION",
+    "RESOURCE_SCHEDULING"
+  ],
+  "github_run_id": "33313603775",
+  "github_sha": "b3dc50984d5e10cbfb57e0eeab6d0a85336b65cc",
+  "promotion_applied": false,
+  "receipt_sha256": "7df93a3f3deae250facef77bcaf42ef822e74a87edeb28fd0b517003f6057a52",
+  "results": {
+    "ACCESS_CONTROL_TRANSFER": {
+      "ablation": 0.8683333333333333,
+      "blind_count": 600,
+      "fresh_blind": 0.9766666666666667,
+      "pass": false,
+      "program": {
+        "default_output": "DENY",
+        "digest": "3431509b2c24a6c1551f4dbed93a9be6b08826605d37aea01e065a2448e4cff1",
+        "program_id": "CJ-259f24b9262d",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "ALLOW",
+            "predicates": [
+              {
+                "field": "identity_verified",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "session_risk",
+                "op": "EQ",
+                "value": "MEDIUM"
+              },
+              {
+                "field": "resource_class",
+                "op": "EQ",
+                "value": "INTERNAL"
+              }
+            ],
+            "support": 32
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALLOW",
+            "predicates": [
+              {
+                "field": "identity_verified",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "resource_class",
+                "op": "EQ",
+                "value": "INTERNAL"
+              },
+              {
+                "field": "session_risk",
+                "op": "EQ",
+                "value": "LOW"
+              }
+            ],
+            "support": 31
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALLOW",
+            "predicates": [
+              {
+                "field": "identity_verified",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "session_risk",
+                "op": "EQ",
+                "value": "LOW"
+              },
+              {
+                "field": "unseen_noise_a",
+                "op": "EQ",
+                "value": 2
+              }
+            ],
+            "support": 5
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALLOW",
+            "predicates": [
+              {
+                "field": "identity_verified",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "session_risk",
+                "op": "EQ",
+                "value": "LOW"
+              },
+              {
+                "field": "unseen_noise_a",
+                "op": "EQ",
+                "value": -4
+              }
+            ],
+            "support": 4
+          }
+        ],
+        "source_digest": "5fced8c2bd873374109a0b661e3e32df5142482dbb7cd23dc4af217162fb9f05",
+        "status": "SHADOW",
+        "target_capability": "ACCESS_CONTROL_TRANSFER",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 0.9766666666666667,
+      "synthesis_seconds": 0.03212566100000913,
+      "train": 0.9666666666666667,
+      "train_count": 480,
+      "validation": 0.9583333333333334,
+      "validation_count": 240
+    },
+    "COMPILER_OPTIMIZATION_TRANSFER": {
+      "ablation": 0.7316666666666667,
+      "blind_count": 600,
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "KEEP_BASELINE",
+        "digest": "2fbcb04e8f229c329a30039aba0bdb62478d3521be16dd7d010f7b34270220f5",
+        "program_id": "CJ-b534e486a3d2",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "HOIST",
+            "predicates": [
+              {
+                "field": "overflow_safe",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "loop_invariant",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "alias_free",
+                "op": "EQ",
+                "value": false
+              }
+            ],
+            "support": 63
+          },
+          {
+            "confidence": 1.0,
+            "output": "HOIST",
+            "predicates": [
+              {
+                "field": "overflow_safe",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "loop_invariant",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "vector_width",
+                "op": "EQ",
+                "value": "SIMD128"
+              }
+            ],
+            "support": 49
+          },
+          {
+            "confidence": 1.0,
+            "output": "VECTORIZE",
+            "predicates": [
+              {
+                "field": "alias_free",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "loop_invariant",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "vector_width",
+                "op": "EQ",
+                "value": "SIMD256"
+              }
+            ],
+            "support": 43
+          },
+          {
+            "confidence": 1.0,
+            "output": "HOIST",
+            "predicates": [
+              {
+                "field": "overflow_safe",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "loop_invariant",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "vector_width",
+                "op": "EQ",
+                "value": "SCALAR"
+              }
+            ],
+            "support": 40
+          }
+        ],
+        "source_digest": "2d4c5bf93751daa548a835094fb0dae90233a3a950213ef9406285738490aa9d",
+        "status": "SHADOW",
+        "target_capability": "COMPILER_OPTIMIZATION_TRANSFER",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.027399886000011975,
+      "train": 1.0,
+      "train_count": 480,
+      "validation": 1.0,
+      "validation_count": 240
+    },
+    "FAULT_ISOLATION_TRANSFER": {
+      "ablation": 0.5816666666666667,
+      "blind_count": 600,
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "CONTINUE",
+        "digest": "ceab88d9ff9163df9fad5aa7a57459fc7be831a7cfd491f1542d428e6ea5ea14",
+        "program_id": "CJ-c256010933de",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "EMERGENCY_SHUTDOWN",
+            "predicates": [
+              {
+                "field": "redundancy_ok",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "thermal_alarm",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "voltage_alarm",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 70
+          },
+          {
+            "confidence": 1.0,
+            "output": "ISOLATE_AND_RECHECK",
+            "predicates": [
+              {
+                "field": "sensor_agrees",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "voltage_alarm",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "thermal_alarm",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 66
+          },
+          {
+            "confidence": 1.0,
+            "output": "ISOLATE_AND_RECHECK",
+            "predicates": [
+              {
+                "field": "sensor_agrees",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "thermal_alarm",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "voltage_alarm",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 61
+          },
+          {
+            "confidence": 1.0,
+            "output": "ISOLATE_AND_RECHECK",
+            "predicates": [
+              {
+                "field": "sensor_agrees",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "thermal_alarm",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "redundancy_ok",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 58
+          }
+        ],
+        "source_digest": "7ea88ac02182b2fc0cee7ce9ce99f19e982ed9902c66da8768817f41e1c97656",
+        "status": "SHADOW",
+        "target_capability": "FAULT_ISOLATION_TRANSFER",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.025994681000014452,
+      "train": 1.0,
+      "train_count": 480,
+      "validation": 1.0,
+      "validation_count": 240
+    },
+    "RESOURCE_SCHEDULING_TRANSFER": {
+      "ablation": 0.6533333333333333,
+      "blind_count": 600,
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "RUN",
+        "digest": "71d503409b92155e31ddc026562376c74c0adc94744827dd7200c92d10506c3a",
+        "program_id": "CJ-0fef79b8e5f5",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "DEPRIORITIZE_CPU",
+            "predicates": [
+              {
+                "field": "memory_pressure",
+                "op": "EQ",
+                "value": "LOW"
+              },
+              {
+                "field": "io_bound",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 127
+          },
+          {
+            "confidence": 1.0,
+            "output": "PREEMPT_AND_CHECKPOINT",
+            "predicates": [
+              {
+                "field": "deadline_tight",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "checkpoint_ready",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "memory_pressure",
+                "op": "EQ",
+                "value": "HIGH"
+              }
+            ],
+            "support": 52
+          }
+        ],
+        "source_digest": "3cc9234e7a93946773cb63346749dcf319282db432df4dca4eb34c20dbae32ac",
+        "status": "SHADOW",
+        "target_capability": "RESOURCE_SCHEDULING_TRANSFER",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.026112071000000014,
+      "train": 1.0,
+      "train_count": 480,
+      "validation": 1.0,
+      "validation_count": 240
+    },
+    "SCIENTIFIC_EVIDENCE_TRANSFER": {
+      "ablation": 0.6283333333333333,
+      "blind_count": 600,
+      "fresh_blind": 1.0,
+      "pass": true,
+      "program": {
+        "default_output": "INSUFFICIENT",
+        "digest": "5b89df1814bbbeae0b82aa5d9b449d7fd01c62705c1a9900e22b372e0aa4cee9",
+        "program_id": "CJ-c39f6c759297",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "STRONG_EVIDENCE",
+            "predicates": [
+              {
+                "field": "preregistered",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "replicated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "blinded",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 62
+          },
+          {
+            "confidence": 1.0,
+            "output": "MODERATE_EVIDENCE",
+            "predicates": [
+              {
+                "field": "blinded",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "replicated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "effect_direction",
+                "op": "EQ",
+                "value": "POSITIVE"
+              }
+            ],
+            "support": 47
+          },
+          {
+            "confidence": 1.0,
+            "output": "MODERATE_EVIDENCE",
+            "predicates": [
+              {
+                "field": "replicated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "preregistered",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "effect_direction",
+                "op": "EQ",
+                "value": "POSITIVE"
+              }
+            ],
+            "support": 43
+          },
+          {
+            "confidence": 1.0,
+            "output": "MODERATE_EVIDENCE",
+            "predicates": [
+              {
+                "field": "replicated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "preregistered",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "effect_direction",
+                "op": "EQ",
+                "value": "NEGATIVE"
+              }
+            ],
+            "support": 38
+          },
+          {
+            "confidence": 1.0,
+            "output": "MODERATE_EVIDENCE",
+            "predicates": [
+              {
+                "field": "blinded",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "replicated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "effect_direction",
+                "op": "EQ",
+                "value": "NEGATIVE"
+              }
+            ],
+            "support": 37
+          }
+        ],
+        "source_digest": "256331af591127346a659ab0eda31de152a96200e3e68fd8fe525bfe002fc533",
+        "status": "SHADOW",
+        "target_capability": "SCIENTIFIC_EVIDENCE_TRANSFER",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "restore": 1.0,
+      "synthesis_seconds": 0.027780782000007775,
+      "train": 1.0,
+      "train_count": 480,
+      "validation": 1.0,
+      "validation_count": 240
+    }
+  },
+  "schema": "yado.conjunctive_rule_inducer.extended_transfer.v1",
+  "semantic_boundary": "FIVE NEW HOST-DEFINED BOUNDED RULE-INDUCTION DOMAINS; TESTS ALGORITHM TRANSFER, NOT GENERAL REASONING",
+  "status": "WITHHOLD_CONJUNCTIVE_RULE_INDUCER_EXTENDED_TRANSFER_V1",
+  "summary": {
+    "all_pass": false,
+    "mean_fresh_blind": 0.9953333333333333,
+    "min_fresh_blind": 0.9766666666666667,
+    "task_count": 5,
+    "tasks_passed": 4
+  }
+}
