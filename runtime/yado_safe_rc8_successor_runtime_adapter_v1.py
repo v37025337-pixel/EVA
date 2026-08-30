@@ -52,39 +52,51 @@ checks={
 
 k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(OUT/'runtime.sqlite'))
 
-# YADO learns the activation law from a complete truth table. A nuisance bit is
-# reserved for blind transfer and cannot help solve the training cases.
-gate_train=[]; gate_blind=[]
+# YADO synthesizes the activation law with its newer Algorithm Genesis / Meta-Grammar.
+# Fit/validation contain the complete semantic truth table under different nuisance contexts;
+# blind adds a fresh irrelevant transport feature that cannot solve the task.
+gate_fit=[]; gate_val=[]; gate_blind=[]
 for vals in itertools.product([False,True],repeat=4):
     f=dict(zip(['parent_integrity','bundle_integrity','capsule_integrity','contract_complete'],vals))
     y=all(vals)
-    gate_train.append((dict(f,transport_nonce=False),y))
-    gate_blind.append((dict(f,transport_nonce=True),y))
+    gate_fit.append((dict(f,transport_nonce=False),y))
+    gate_val.append((dict(f,transport_nonce=True),y))
+    gate_blind.append((dict(f,transport_nonce=False,observer_nonce=True),y))
+gate_revealed=gate_fit+gate_val
 
-activation_candidate=k.shadow_evolve_logic(
-    gate_train,gate_blind,capability='safe_rc8_successor_activation_guard_v1'
+gate_rc5=k.synthesize_logic_algorithm_component(
+    gate_fit,gate_val,gate_revealed,gate_blind
 )
-if float(activation_candidate.get('fresh_blind',0.0))!=1.0:
+gate_rc6=k.synthesize_logic_with_extended_meta_grammar(
+    gate_fit,gate_val,gate_revealed,gate_blind
+)
+
+def _gate_score(c,key):
+    return float(c.get(key,0.0)) if isinstance(c,dict) else 0.0
+
+if _gate_score(gate_rc6,'validation') > _gate_score(gate_rc5,'validation'):
+    activation_guard_origin='RC6_META_GRAMMAR'
+    activation_candidate=gate_rc6
+else:
+    activation_guard_origin='RC5_ALGORITHM_GENESIS'
+    activation_candidate=gate_rc5
+
+if _gate_score(activation_candidate,'validation')!=1.0 or _gate_score(activation_candidate,'fresh_blind')!=1.0:
     raise RuntimeError('ACTIVATION_GUARD_BLIND_FAIL')
 
-# Execute YADO-generated gate in-memory via the kernel's own evolved-logic route.
-saved_registry=copy.deepcopy(k.canonical_state.get('organ_autoevolution_registry') or {})
-k.canonical_state['organ_autoevolution_registry']=copy.deepcopy(saved_registry)
-k.canonical_state['organ_autoevolution_registry']['LOGIC']=activation_candidate
-activation_decision=k.logic_evolved_decision(dict(checks,transport_nonce=True))
-k.canonical_state['organ_autoevolution_registry']=saved_registry
+activation_ok=predict_logic_component(
+    activation_candidate.get('model'),dict(checks,transport_nonce=True,observer_nonce=True)
+)
+activation_decision='ALLOW' if activation_ok else 'WITHHOLD'
 if activation_decision!='ALLOW':
     raise RuntimeError('SUCCESSOR_ACTIVATION_WITHHELD')
 
 # Negative integrity probes must all fail closed.
 negative_gate_results={}
 for name in sorted(checks):
-    bad=dict(checks,transport_nonce=True)
+    bad=dict(checks,transport_nonce=True,observer_nonce=True)
     bad[name]=False
-    k.canonical_state['organ_autoevolution_registry']=copy.deepcopy(saved_registry)
-    k.canonical_state['organ_autoevolution_registry']['LOGIC']=activation_candidate
-    negative_gate_results[name]=k.logic_evolved_decision(bad)
-    k.canonical_state['organ_autoevolution_registry']=saved_registry
+    negative_gate_results[name]='ALLOW' if predict_logic_component(activation_candidate.get('model'),bad) else 'WITHHOLD'
 if any(v!='WITHHOLD' for v in negative_gate_results.values()):
     raise RuntimeError('ACTIVATION_GUARD_NEGATIVE_PROBE_FAIL')
 
@@ -235,6 +247,7 @@ receipt={
  'successor_capsule_sha256':capsule.get('capsule_sha256'),
  'host_role':'GENERIC_EPHEMERAL_OVERLAY_TRANSPORT_AND_OBSERVATION_ONLY',
  'native_runtime_executors':['predict_logic_component','_thinking_predict','predict_intel_component'],
+ 'activation_guard_origin':activation_guard_origin,
  'activation_guard':activation_candidate,
  'activation_decision':activation_decision,
  'integrity_checks':checks,
