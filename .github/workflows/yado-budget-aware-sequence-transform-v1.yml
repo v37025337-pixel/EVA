@@ -1,0 +1,42 @@
+name: YADO Budget-Aware Sequence Transform V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_budget_aware_sequence_transform_v1.py"
+      - ".github/workflows/yado-budget-aware-sequence-transform-v1.yml"
+permissions:
+  contents: write
+jobs:
+  transform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run budget-aware meta-evolution sequence transform
+        run: python runtime/yado_budget_aware_sequence_transform_v1.py
+      - name: Upload receipt and component
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-budget-aware-sequence-transform-v1
+          path: |
+            runtime/yado_budget_aware_sequence_transform_v1_receipt.json
+            runtime/budget_aware_sequence_transform_v1/component.json
+          retention-days: 30
+      - name: Persist evidence
+        run: |
+          mkdir -p receipts candidates/budget-aware-sequence-transform-v1
+          cp runtime/yado_budget_aware_sequence_transform_v1_receipt.json receipts/yado-budget-aware-sequence-transform-v1-latest.json
+          cp runtime/budget_aware_sequence_transform_v1/component.json candidates/budget-aware-sequence-transform-v1/component.json
+          git config user.name "YADO Budget Meta Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-budget-aware-sequence-transform-v1-latest.json candidates/budget-aware-sequence-transform-v1/component.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist budget-aware sequence transform evidence [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
