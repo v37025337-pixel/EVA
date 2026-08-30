@@ -1,0 +1,57 @@
+name: YADO legacy causal lineage reconstruction
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-legacy-causal-lineage-reconstruction.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Reconstruct RC5 RC6 RC7 RC8 structural lineage
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast,json,hashlib
+          from pathlib import Path
+          files=[
+            'yado_core_v3_0_rc5_algorithm_genesis.py',
+            'yado_core_v3_0_rc6_meta_grammar.py',
+            'yado_core_v3_0_rc7_deep_integrity.py',
+            'yado_core_v3_0_rc8_external_cognitive.py',
+          ]
+          out=[]
+          for fn in files:
+            p=Path(fn); txt=p.read_text()
+            tree=ast.parse(txt)
+            imports=[]
+            classes=[]
+            for n in tree.body:
+              if isinstance(n,ast.ImportFrom):
+                imports.append({'module':n.module,'names':[a.name for a in n.names]})
+              elif isinstance(n,ast.Import):
+                imports.extend({'module':a.name,'names':[]} for a in n.names)
+              elif isinstance(n,ast.ClassDef):
+                bases=[]
+                for b in n.bases:
+                  try:bases.append(ast.unparse(b))
+                  except Exception:bases.append(type(b).__name__)
+                classes.append({'name':n.name,'bases':bases})
+            out.append({
+              'file':fn,
+              'sha256':hashlib.sha256(txt.encode()).hexdigest(),
+              'imports':imports,
+              'classes':classes,
+            })
+          # migration/state metadata
+          state=json.loads(Path('yado_canonical_state_v3_rc8_external_cognitive.json').read_text())
+          keys={k:v for k,v in state.items() if any(t in k.lower() for t in ('migration','parent','previous','lineage','rc7','rc8'))}
+          print(json.dumps({'modules':out,'rc8_state_lineage_fields':keys},indent=2,sort_keys=True,default=str))
+          PY
