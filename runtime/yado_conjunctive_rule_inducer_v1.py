@@ -30,7 +30,7 @@ class ConjunctiveRuleInducerV1:
     No domain field names, labels, or hand-written target rules are embedded.
     """
     MAX_ATOMS=64
-    MAX_CONJUNCTION=2
+    MAX_CONJUNCTION=3
 
     @classmethod
     def synthesize(cls,target_capability:str,target_organ:str,examples:Sequence[Mapping[str,Any]],
@@ -61,8 +61,12 @@ class ConjunctiveRuleInducerV1:
         atoms=atoms[:cls.MAX_ATOMS]
 
         cands=[]
+        candidate_combinations=0
         for width in range(1,cls.MAX_CONJUNCTION+1):
             for ks in combinations(atoms,width):
+                candidate_combinations += 1
+                if candidate_combinations > 50_000:
+                    raise ValueError('bounded conjunction search budget exceeded')
                 # Repeating the same field with different values can never match.
                 if len({k[1] for k in ks})<len(ks):
                     continue
@@ -86,12 +90,24 @@ class ConjunctiveRuleInducerV1:
 
         selected=[]
         signatures=set()
+        # Greedy evidence coverage: stop when every non-default training case is
+        # explained. This prevents adding low-support accidental rules after the
+        # actual capability has already been covered.
+        uncovered={i for i,y in enumerate(outputs) if y!=default_key}
         for _,_,_,r in cands:
             sig=(freeze(r.output),canon([asdict(p) for p in r.predicates]))
             if sig in signatures:
                 continue
+            matched=set()
+            for i,(payload,_) in enumerate(normalized):
+                if all(BoundedRuleSandbox._match(p,payload) for p in r.predicates):
+                    matched.add(i)
+            gain=matched & uncovered
+            if not gain:
+                continue
             selected.append(r);signatures.add(sig)
-            if len(selected)>=min(max_rules,BoundedRuleSandbox.MAX_RULES):
+            uncovered -= gain
+            if not uncovered or len(selected)>=min(max_rules,BoundedRuleSandbox.MAX_RULES):
                 break
         if not selected:
             raise ValueError('no stable conjunctive rule found')
@@ -161,9 +177,16 @@ def dev_cases(ctxs,noise_seed):
     return out
 
 cs=contexts()
-dev_train=dev_cases([c for i,c in enumerate(cs) if i%4 in (0,1)],1001)
-dev_val=dev_cases([c for i,c in enumerate(cs) if i%4==2],2002)
-dev_blind=dev_cases([c for i,c in enumerate(cs) if i%4==3],3003)
+def split_bucket(ctx):
+    bits=[int(ctx[k]) for k in (
+      'lineage_verified','dependency_lock_verified','evidence_fetch_hardened',
+      'historical_state_protected','current_generation_active'
+    )]
+    return (bits[0]+bits[1]+bits[2]+bits[3]+2*bits[4])%4
+
+dev_train=dev_cases([x for x in cs if split_bucket(x) in (0,1)],1001)
+dev_val=dev_cases([x for x in cs if split_bucket(x)==2],2002)
+dev_blind=dev_cases([x for x in cs if split_bucket(x)==3],3003)
 
 # ---------------- Transfer tasks ----------------
 def transfer_a_cases(seed,n):
@@ -246,8 +269,8 @@ def effective(ctx,ablated=False):
             out.append(role)
     return out
 
-dev_exact=sum(effective(c)==active(c) for c in [x for i,x in enumerate(cs) if i%4==3])/8
-dev_ab_exact=sum(effective(c,True)==active(c) for c in [x for i,x in enumerate(cs) if i%4==3])/8
+dev_exact=sum(effective(x)==active(x) for x in [x for x in cs if split_bucket(x)==3])/8
+dev_ab_exact=sum(effective(x,True)==active(x) for x in [x for x in cs if split_bucket(x)==3])/8
 current_ctx={'lineage_verified':True,'dependency_lock_verified':False,'evidence_fetch_hardened':False,
              'historical_state_protected':False,'current_generation_active':True}
 current=effective(current_ctx);current_expected=active(current_ctx)
