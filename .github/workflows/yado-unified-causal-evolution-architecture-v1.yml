@@ -1,0 +1,39 @@
+name: YADO Unified Causal Evolution Architecture V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_unified_causal_evolution_architecture_v1.py"
+      - ".github/workflows/yado-unified-causal-evolution-architecture-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  evolution:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run unified causal evolution architecture self-test
+        run: python runtime/yado_unified_causal_evolution_architecture_v1.py
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-unified-causal-evolution-architecture-v1
+          path: runtime/yado_unified_causal_evolution_architecture_v1_report.json
+          retention-days: 30
+      - name: Persist report and architecture snapshot
+        run: |
+          mkdir -p receipts architecture
+          cp runtime/yado_unified_causal_evolution_architecture_v1_report.json receipts/yado-unified-causal-evolution-architecture-v1-latest.json
+          cp runtime/yado_unified_causal_evolution_architecture_v1.py architecture/yado_unified_causal_evolution_architecture_v1.py
+          git config user.name "YADO Unified Evolution Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-unified-causal-evolution-architecture-v1-latest.json architecture/yado_unified_causal_evolution_architecture_v1.py
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist unified causal evolution architecture V1 [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
