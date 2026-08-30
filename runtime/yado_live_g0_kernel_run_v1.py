@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-import inspect, json, os, sys, hashlib, traceback
+import copy, inspect, json, os, sys, hashlib, traceback
 
 ROOT=Path(__file__).resolve().parent
 PKG=ROOT/'yado_rc8_v36'
@@ -41,57 +41,142 @@ report={
 for method in ['audit_snapshot','integrity_control_plane','development_priority','self_audit_registry','unified_snapshot']:
     report['boot'][method]=safe_call(k,method)
 
-# Give the live kernel a bounded developmental task through its native workspace.
-tasks=[
+# Run the live kernel through its native causal-reflective workspace.
+# The transport supplies evidence items and safe metacognitive modes; selection,
+# broadcast, attention, prediction, episode chaining and source monitoring are native YADO.
+
+def consumer_summary(xs):
+    return {
+        'count':len(xs),
+        'ids':[x.item_id for x in xs],
+        'source_kinds':[x.source_kind for x in xs],
+    }
+
+def consumer_deficits(xs):
+    out=[]
+    for x in xs:
+        c=x.content
+        if isinstance(c,dict):
+            ds=c.get('deficits') or c.get('known_deficits') or ()
+            if isinstance(ds,(list,tuple)):
+                out.extend(map(str,ds))
+    return sorted(set(out))
+
+def consumer_evidence(xs):
+    return [
+        {'item_id':x.item_id,'source':x.source,'confidence':x.confidence,'epistemic_risk':x.epistemic_risk}
+        for x in xs
+    ]
+
+consumers={
+    'EXECUTIVE_SUMMARY':consumer_summary,
+    'DEFICIT_VIEW':consumer_deficits,
+    'EVIDENCE_VIEW':consumer_evidence,
+}
+
+base_items=[
   {
-    'task_id':'LIVE-G0-001',
-    'kind':'DEVELOPMENTAL_OBSERVATION',
-    'goal':'Observe current G0 developmental state and identify the highest-priority bounded weakness without mutating the canonical parent.',
-    'evidence':{
+    'item_id':'G0-SELF-MODEL',
+    'source':'RC8_SELF_MODEL',
+    'source_kind':'self_model',
+    'content':{
       'current_head':'G0_RC8_V36',
-      'rejected_stepping_stone':'CANDIDATE_S1',
       'known_deficits':['THINKING_BOUNDARY_REASONING','INTELLIGENCE_BOUNDARY_REASONING','REPRESENTATION_INVARIANCE'],
+      'protected':['LOGIC','INTEGRITY','ROLLBACK'],
     },
-    'constraints':['NO_CANONICAL_PARENT_MUTATION','FAIL_CLOSED','EVIDENCE_BOUND'],
+    'confidence':0.96,'goal_relevance':0.98,'novelty':0.35,'urgency':0.80,'epistemic_risk':0.08,
+    'tags':('development','self_model'),
   },
   {
-    'task_id':'LIVE-G0-002',
-    'kind':'CAUSAL_DEVELOPMENT',
-    'goal':'Choose a bounded next developmental action consistent with one-head causal evolution.',
-    'evidence':{
-      'inherit_proven':['LOGIC_GAIN','INTEGRITY','ROLLBACK'],
-      'replace_or_generalize':['THINKING_COMPONENT','INTELLIGENCE_COMPONENT'],
+    'item_id':'S1-BURNIN-OBS',
+    'source':'RUN_33301460805',
+    'source_kind':'tool_observation',
+    'content':{
+      'candidate':'S1','status':'WITHHOLD_S1_BURNIN',
+      'logic_min':1.0,'thinking_min':0.7125,'intelligence_min':0.83125,
+      'thinking_boundary_mean':0.485,'intelligence_boundary_mean':0.7835714285714286,
     },
-    'constraints':['PRESERVE_PROTECTED_CAPABILITIES','REQUIRE_FRESH_BLIND','REQUIRE_ROLLBACK'],
+    'confidence':1.0,'goal_relevance':1.0,'novelty':0.92,'urgency':0.95,'epistemic_risk':0.0,
+    'tags':('fresh_blind','counterexample'),
   },
   {
-    'task_id':'LIVE-G0-003',
-    'kind':'METACOGNITIVE_CHECK',
-    'goal':'Assess whether current evidence justifies promotion of any successor generation.',
-    'evidence':{
-      's1_burnin':'WITHHOLD_S1_BURNIN',
-      'logic_min':1.0,
-      'thinking_min':0.7125,
-      'intelligence_min':0.83125,
+    'item_id':'STEM-HOLDOUT-OBS',
+    'source':'RUN_33302136155',
+    'source_kind':'tool_observation',
+    'content':{
+      'status':'RAPID_STEM_HOLDOUT_COMPLETED','task_count':16,
+      'overall_mean':0.9969583333333334,'overall_min':0.9786666666666667,
+      'semantic_boundary':'STRUCTURED_INDUCTION_NOT_FREEFORM_PROOF_OR_CODE_GENERATION',
     },
-    'constraints':['NO_PROMOTION_WITH_REGRESSION','NO_PROMOTION_WITHOUT_FRESH_PASS'],
+    'confidence':1.0,'goal_relevance':0.82,'novelty':0.72,'urgency':0.45,'epistemic_risk':0.02,
+    'tags':('transfer','stem'),
+  },
+  {
+    'item_id':'LINEAGE-OBS',
+    'source':'RUN_33302653581',
+    'source_kind':'tool_observation',
+    'content':{
+      'developmental_head':'G0_RC8_V36',
+      'rejected_stepping_stone':'S1',
+      'next_candidate':'G1_CANDIDATE_S2',
+      'branch_policy':'ONLY_PROMOTED_GENERATION_BECOMES_HEAD',
+    },
+    'confidence':1.0,'goal_relevance':0.96,'novelty':0.88,'urgency':0.78,'epistemic_risk':0.0,
+    'tags':('lineage','evolution'),
   },
 ]
 
-for t in tasks:
-    cycle={'task':t}
-    fn=getattr(k,'digital_conscious_cycle',None)
-    if fn is not None:
-        try:
-            sig=str(inspect.signature(fn))
-            cycle['digital_conscious_cycle_signature']=sig
-            cycle['digital_conscious_cycle']=fn(t)
-        except Exception as e:
-            cycle['digital_conscious_cycle']={'error':repr(e),'trace':traceback.format_exc()}
-    else:
-        cycle['digital_conscious_cycle']={'status':'METHOD_MISSING'}
+cycle_specs=[
+  {
+    'cycle_id':'LIVE-G0-001',
+    'goal':'Observe current G0 developmental state and concentrate attention on the strongest evidence about the next bounded weakness.',
+    'mode':'SEEK_EVIDENCE',
+    'context':'G0_DEVELOPMENTAL_OBSERVATION',
+    'action':'OBSERVE_G0',
+    'possible_outcomes':('STABLE_HEAD','UNRESOLVED_DEFICIT','PROMOTION_READY'),
+    'observed_outcome':'UNRESOLVED_DEFICIT',
+  },
+  {
+    'cycle_id':'LIVE-G0-002',
+    'goal':'Route the current developmental deficit toward a bounded mechanism family while preserving proven capabilities and one-head lineage.',
+    'mode':'ROUTE_FRAMEWORK',
+    'context':'G0_CAUSAL_DEVELOPMENT',
+    'action':'ROUTE_NEXT_DEVELOPMENT',
+    'possible_outcomes':('COUNTEREXAMPLE_REPAIR','RESEARCH_MORE','WITHHOLD'),
+    'observed_outcome':'COUNTEREXAMPLE_REPAIR',
+  },
+  {
+    'cycle_id':'LIVE-G0-003',
+    'goal':'Evaluate whether current evidence is sufficient to promote a successor generation without regression.',
+    'mode':'WITHHOLD',
+    'context':'G0_PROMOTION_CHECK',
+    'action':'EVALUATE_PROMOTION',
+    'possible_outcomes':('PROMOTE','WITHHOLD'),
+    'observed_outcome':'WITHHOLD',
+  },
+]
 
-    # Re-read live state after each cognitive cycle.
+for spec in cycle_specs:
+    cycle={'cycle_id':spec['cycle_id'],'goal':spec['goal'],'mode':spec['mode']}
+    try:
+        ep=k.digital_conscious_cycle(
+            goal=spec['goal'],
+            items=copy.deepcopy(base_items),
+            consumers=consumers,
+            metacognitive_action=spec['mode'],
+            context=spec['context'],
+            action=spec['action'],
+            possible_outcomes=spec['possible_outcomes'],
+            observed_outcome=spec['observed_outcome'],
+            proposed_belief_ids=(),
+        )
+        if hasattr(ep,'__dict__'):
+            cycle['episode']=dict(ep.__dict__)
+        else:
+            cycle['episode']=str(ep)
+    except Exception as e:
+        cycle['error']=repr(e)
+        cycle['trace']=traceback.format_exc()
     cycle['development_priority_after']=safe_call(k,'development_priority')
     cycle['integrity_after']=safe_call(k,'integrity_control_plane')
     report['cycles'].append(cycle)
