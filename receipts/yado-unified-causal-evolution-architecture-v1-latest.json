@@ -1,0 +1,352 @@
+{
+  "broken_decision": {
+    "action": "WITHHOLD_CANDIDATE",
+    "candidate_generation_id": "G2_BROKEN",
+    "decision_digest": "59cf55bc25c780e3688a12f75634b3ab671adc7c12431bec829dea8d5ef6b9cc",
+    "gains": {
+      "integrity": 0.0,
+      "intelligence": 0.040000000000000036,
+      "logic": 0.029999999999999916,
+      "rollback": 0.0,
+      "thinking": 0.020000000000000018
+    },
+    "mean_gain": 0.017999999999999995,
+    "parent_generation_id": "G1_GOOD",
+    "protected_regressions": {},
+    "reasons": [
+      "HARD_CONSTRAINT_FAIL:rollback_available"
+    ],
+    "significant_improvements": [
+      "intelligence",
+      "logic",
+      "thinking"
+    ]
+  },
+  "good_decision": {
+    "action": "PROMOTE_GENERATION",
+    "candidate_generation_id": "G1_GOOD",
+    "decision_digest": "22cbce9c1390c69af1af1c719cddf950d3b957347b9a60043f90b52880028b54",
+    "gains": {
+      "integrity": 0.0,
+      "intelligence": 0.039999999999999925,
+      "logic": 0.030000000000000027,
+      "rollback": 0.0,
+      "thinking": 0.06000000000000005
+    },
+    "mean_gain": 0.026000000000000002,
+    "parent_generation_id": "G0_RC8_V36",
+    "protected_regressions": {},
+    "reasons": [],
+    "significant_improvements": [
+      "intelligence",
+      "logic",
+      "thinking"
+    ]
+  },
+  "no_gain_decision": {
+    "action": "WITHHOLD_CANDIDATE",
+    "candidate_generation_id": "G2_NOGAIN",
+    "decision_digest": "e86d0ac56994f770c085505fe984835cba677f2fe6a0275b5171021370e5b4ba",
+    "gains": {
+      "integrity": 0.0,
+      "intelligence": 0.0,
+      "logic": 0.0,
+      "rollback": 0.0,
+      "thinking": 0.0
+    },
+    "mean_gain": 0.0,
+    "parent_generation_id": "G1_GOOD",
+    "protected_regressions": {},
+    "reasons": [
+      "NO_SIGNIFICANT_IMPROVEMENT",
+      "SIGNIFICANT_GAIN_NOT_CAUSALLY_ATTRIBUTED"
+    ],
+    "significant_improvements": []
+  },
+  "regression_decision": {
+    "action": "WITHHOLD_CANDIDATE",
+    "candidate_generation_id": "G2_REGRESS",
+    "decision_digest": "7500b37c6f21aa57612469b4194eb89a9a5338c4ec2b81ce5d61b8855f790bf2",
+    "gains": {
+      "integrity": 0.0,
+      "intelligence": 0.06000000000000005,
+      "logic": 0.019999999999999907,
+      "rollback": 0.0,
+      "thinking": -0.08000000000000007
+    },
+    "mean_gain": -2.2204460492503132e-17,
+    "parent_generation_id": "G1_GOOD",
+    "protected_regressions": {
+      "thinking": -0.08000000000000007
+    },
+    "reasons": [
+      "PROTECTED_CAPABILITY_REGRESSION",
+      "MEAN_CAPABILITY_REGRESSION",
+      "INSUFFICIENT_CROSS_DOMAIN_EVIDENCE"
+    ],
+    "significant_improvements": [
+      "intelligence"
+    ]
+  },
+  "snapshot": {
+    "decisions": [
+      {
+        "action": "PROMOTE_GENERATION",
+        "candidate_generation_id": "G1_GOOD",
+        "decision_digest": "22cbce9c1390c69af1af1c719cddf950d3b957347b9a60043f90b52880028b54",
+        "gains": {
+          "integrity": 0.0,
+          "intelligence": 0.039999999999999925,
+          "logic": 0.030000000000000027,
+          "rollback": 0.0,
+          "thinking": 0.06000000000000005
+        },
+        "mean_gain": 0.026000000000000002,
+        "parent_generation_id": "G0_RC8_V36",
+        "protected_regressions": {},
+        "reasons": [],
+        "significant_improvements": [
+          "intelligence",
+          "logic",
+          "thinking"
+        ]
+      },
+      {
+        "action": "WITHHOLD_CANDIDATE",
+        "candidate_generation_id": "G2_REGRESS",
+        "decision_digest": "7500b37c6f21aa57612469b4194eb89a9a5338c4ec2b81ce5d61b8855f790bf2",
+        "gains": {
+          "integrity": 0.0,
+          "intelligence": 0.06000000000000005,
+          "logic": 0.019999999999999907,
+          "rollback": 0.0,
+          "thinking": -0.08000000000000007
+        },
+        "mean_gain": -2.2204460492503132e-17,
+        "parent_generation_id": "G1_GOOD",
+        "protected_regressions": {
+          "thinking": -0.08000000000000007
+        },
+        "reasons": [
+          "PROTECTED_CAPABILITY_REGRESSION",
+          "MEAN_CAPABILITY_REGRESSION",
+          "INSUFFICIENT_CROSS_DOMAIN_EVIDENCE"
+        ],
+        "significant_improvements": [
+          "intelligence"
+        ]
+      },
+      {
+        "action": "WITHHOLD_CANDIDATE",
+        "candidate_generation_id": "G2_NOGAIN",
+        "decision_digest": "e86d0ac56994f770c085505fe984835cba677f2fe6a0275b5171021370e5b4ba",
+        "gains": {
+          "integrity": 0.0,
+          "intelligence": 0.0,
+          "logic": 0.0,
+          "rollback": 0.0,
+          "thinking": 0.0
+        },
+        "mean_gain": 0.0,
+        "parent_generation_id": "G1_GOOD",
+        "protected_regressions": {},
+        "reasons": [
+          "NO_SIGNIFICANT_IMPROVEMENT",
+          "SIGNIFICANT_GAIN_NOT_CAUSALLY_ATTRIBUTED"
+        ],
+        "significant_improvements": []
+      },
+      {
+        "action": "WITHHOLD_CANDIDATE",
+        "candidate_generation_id": "G2_BROKEN",
+        "decision_digest": "59cf55bc25c780e3688a12f75634b3ab671adc7c12431bec829dea8d5ef6b9cc",
+        "gains": {
+          "integrity": 0.0,
+          "intelligence": 0.040000000000000036,
+          "logic": 0.029999999999999916,
+          "rollback": 0.0,
+          "thinking": 0.020000000000000018
+        },
+        "mean_gain": 0.017999999999999995,
+        "parent_generation_id": "G1_GOOD",
+        "protected_regressions": {},
+        "reasons": [
+          "HARD_CONSTRAINT_FAIL:rollback_available"
+        ],
+        "significant_improvements": [
+          "intelligence",
+          "logic",
+          "thinking"
+        ]
+      }
+    ],
+    "developmental_head": "G1_GOOD",
+    "generation_count": 2,
+    "generations": [
+      {
+        "artifact_digest": "root-artifact",
+        "capability_scores": {
+          "integrity": 1.0,
+          "intelligence": 0.8,
+          "logic": 0.9,
+          "rollback": 1.0,
+          "thinking": 0.72
+        },
+        "causal_claims": [],
+        "change_set": [],
+        "domain_experiences": [
+          "SYSTEM:verified_rc8_v36"
+        ],
+        "evidence_ids": [
+          "VERIFIED_V36"
+        ],
+        "generation_id": "G0_RC8_V36",
+        "hard_constraints": {
+          "evidence_complete": true,
+          "fresh_blind_pass": true,
+          "lineage_valid": true,
+          "regression_pass": true,
+          "rollback_available": true,
+          "state_integrity": true
+        },
+        "lineage_id": "YADO_MAIN_LINEAGE",
+        "metadata": {},
+        "parent_generation_id": null,
+        "protected_capabilities": [
+          "integrity",
+          "intelligence",
+          "logic",
+          "rollback",
+          "thinking"
+        ],
+        "status": "HEAD"
+      },
+      {
+        "artifact_digest": "good-artifact",
+        "capability_scores": {
+          "integrity": 1.0,
+          "intelligence": 0.84,
+          "logic": 0.93,
+          "rollback": 1.0,
+          "thinking": 0.78
+        },
+        "causal_claims": [
+          {
+            "claim_id": "C1",
+            "deficit_id": "BOUNDARY_REASONING_WEAKNESS",
+            "evidence_ids": [
+              "fresh-thinking",
+              "fresh-intelligence",
+              "ablation"
+            ],
+            "expected_effects": {
+              "intelligence": 0.04,
+              "thinking": 0.06
+            },
+            "falsifier_ids": [
+              "ablation"
+            ],
+            "mechanism_id": "COGNITIVE_BUNDLE_VNEXT",
+            "status": "VERIFIED"
+          },
+          {
+            "claim_id": "C2",
+            "deficit_id": "LOGIC_TRANSFER_WEAKNESS",
+            "evidence_ids": [
+              "fresh-logic"
+            ],
+            "expected_effects": {
+              "logic": 0.03
+            },
+            "falsifier_ids": [],
+            "mechanism_id": "LOGIC_VNEXT",
+            "status": "VERIFIED"
+          }
+        ],
+        "change_set": [
+          "INTELLIGENCE:NEW_COMPONENT",
+          "LOGIC:NEW_COMPONENT",
+          "THINKING:NEW_COMPONENT"
+        ],
+        "domain_experiences": [
+          "EXACT_SCIENCE:blind",
+          "MATHEMATICS:blind",
+          "PROGRAMMING:blind"
+        ],
+        "evidence_ids": [
+          "ablation",
+          "fresh-intelligence",
+          "fresh-logic",
+          "fresh-thinking",
+          "rollback"
+        ],
+        "generation_id": "G1_GOOD",
+        "hard_constraints": {
+          "evidence_complete": true,
+          "fresh_blind_pass": true,
+          "lineage_valid": true,
+          "regression_pass": true,
+          "rollback_available": true,
+          "state_integrity": true
+        },
+        "lineage_id": "YADO_MAIN_LINEAGE",
+        "metadata": {},
+        "parent_generation_id": "G0_RC8_V36",
+        "protected_capabilities": [
+          "integrity",
+          "intelligence",
+          "logic",
+          "rollback",
+          "thinking"
+        ],
+        "status": "CANDIDATE"
+      }
+    ],
+    "historical_node_count": 4,
+    "historical_nodes": [
+      {
+        "artifact_digest": "e32c8692d539457f154952d4ec710118066c0d0cb9867ab47e8c2050ea4f671c",
+        "causal_status": "LEGACY_CAUSAL_LINK_NOT_YET_RECONSTRUCTED",
+        "metadata": {},
+        "node_id": "RC5"
+      },
+      {
+        "artifact_digest": "d9f653ef9f1a92796393d81fc4ee3264c9c328c3b8cbe41398386d0b5fb4d00d",
+        "causal_status": "LEGACY_CAUSAL_LINK_NOT_YET_RECONSTRUCTED",
+        "metadata": {},
+        "node_id": "RC6"
+      },
+      {
+        "artifact_digest": "062b2f153c9f4bdd5139f3fc42e5e859a7662373ff4718c474b61e73b244f439",
+        "causal_status": "LEGACY_CAUSAL_LINK_NOT_YET_RECONSTRUCTED",
+        "metadata": {},
+        "node_id": "RC7"
+      },
+      {
+        "artifact_digest": "d65ec467b71ff0958a1448eda1b24d7d504a16cbabe4de84967cbab6c504a10e",
+        "causal_status": "LEGACY_CAUSAL_LINK_NOT_YET_RECONSTRUCTED",
+        "metadata": {},
+        "node_id": "RC8_PRE_V36"
+      }
+    ],
+    "policy": {
+      "max_regression": 0.0,
+      "min_mean_gain": 0.0,
+      "min_significant_gain": 0.02,
+      "require_causal_claim": true,
+      "require_cross_domain_evidence_for_general_capability": true,
+      "required_constraints": [
+        "state_integrity",
+        "rollback_available",
+        "regression_pass",
+        "lineage_valid",
+        "evidence_complete",
+        "fresh_blind_pass"
+      ]
+    },
+    "principle": "ONE_DEVELOPMENTAL_HEAD_EACH_PROMOTED_CHILD_CAUSALLY_BETTER_THAN_PARENT_ON_MEASURED_CAPABILITY_VECTOR",
+    "schema": "yado.unified_causal_evolution_architecture.v1",
+    "snapshot_digest": "bc0d18a6cee441c1d599ef3ab6af7d7fc4b0e7c265ad01ad9fb286d138747ef7"
+  },
+  "status": "PASS_UNIFIED_CAUSAL_EVOLUTION_ARCHITECTURE_V1_SELF_TEST"
+}
