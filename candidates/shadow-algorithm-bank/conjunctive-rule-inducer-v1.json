@@ -1,0 +1,194 @@
+{
+  "admission": {
+    "authority": "G0_METACOGNITIVE_EXECUTE",
+    "base_evidence_receipt_sha256": "09852b02427441cfbece5ccd72c5639f69c28ff3db9fdbfb6a6b8423e39a6904",
+    "decision": {
+      "action": "EXECUTE",
+      "effective_confidence": 0.6884428571428574,
+      "profile_confidence": 0.7142857142857143,
+      "reason": "CAPABILITY_AND_EVIDENCE_ALIGNED",
+      "self_disagreement": 0.21571428571428575
+    },
+    "decision_receipt_sha256": "bbf45a3bd7fac26df88f5252026df64573f24de60cec1cfad1eba49b9ffbb3ef",
+    "extended_transfer_receipt_sha256": "7df93a3f3deae250facef77bcaf42ef822e74a87edeb28fd0b517003f6057a52",
+    "extended_transfer_summary": {
+      "all_pass": false,
+      "mean_fresh_blind": 0.9953333333333333,
+      "min_fresh_blind": 0.9766666666666667,
+      "task_count": 5,
+      "tasks_passed": 4
+    }
+  },
+  "algorithm_source_path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+  "canonical_active": false,
+  "canonical_mutation": false,
+  "canonical_parent_sha256": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "component": {
+    "algorithm": {
+      "max_atoms": 64,
+      "max_conjunction": 3,
+      "max_rules": 12,
+      "min_support": 2,
+      "predicate_family": "OBSERVED_SCALAR_EQ"
+    },
+    "component_digest": "3b31c7d26e4e51db3a5135a58ac4fe764f45ce96bf4e80e016172bd212e43150",
+    "cross_domain_task_count": 3,
+    "developmental_filter_program": {
+      "default_output": "KEEP",
+      "digest": "8a09d7c839f5001b6e4bc26f3ca2a786ff456a65845e52c26dffc2215e39fc64",
+      "program_id": "CJ-fd094b469b4d",
+      "rules": [
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "current_generation_active",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "INTELLIGENCE_BOUNDARY_REASONING"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "current_generation_active",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "REPRESENTATION_INVARIANCE"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "current_generation_active",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "THINKING_BOUNDARY_REASONING"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "dependency_lock_verified",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "ADD_PREIMPORT_DEPENDENCY_LOCK"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "evidence_fetch_hardened",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "HARDEN_DIRECT_EVIDENCE_FETCH"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "historical_state_protected",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "PROTECT_HISTORICAL_STATE_FROM_MUTATION"
+            }
+          ],
+          "support": 12
+        },
+        {
+          "confidence": 1.0,
+          "output": "DROP",
+          "predicates": [
+            {
+              "field": "lineage_verified",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "role",
+              "op": "EQ",
+              "value": "UNIFY_BOOT_AND_STATE_LINEAGE"
+            }
+          ],
+          "support": 12
+        }
+      ],
+      "source_digest": "30e11c2cd971c6100414d47617c28b65a3d6b3432cd1de0c6abb1960ecd7bbf7",
+      "status": "SHADOW",
+      "target_capability": "DEVELOPMENTAL_FILTER",
+      "target_organ": "LOGIC",
+      "training_count": 240
+    },
+    "schema": "yado.conjunctive_rule_inducer.component.v1"
+  },
+  "component_digest": "3b31c7d26e4e51db3a5135a58ac4fe764f45ce96bf4e80e016172bd212e43150",
+  "developmental_head": "G0_RC8_V36",
+  "eligible_for_meta_selection": true,
+  "entry_digest": "3ef25325ecb365ffebd0a59383510960cadfc98b7fefb46e7f886b8ef03043c1",
+  "entry_id": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+  "family": "CONJUNCTIVE_RULE_INDUCTION",
+  "known_limitations": [
+    {
+      "evidence": "ACCESS_CONTROL_TRANSFER",
+      "fresh_blind": 0.9766666666666667,
+      "interpretation": "STRICT_ADMISSION_THRESHOLD_NOT_MET; RETAIN_AS_COUNTEREXAMPLE",
+      "validation": 0.9583333333333334
+    }
+  ],
+  "organ": "LOGIC",
+  "promotion_applied": false,
+  "promotion_requirements": [
+    "FRESH_META_SELECTION_VS_EXISTING_BANK",
+    "NO_PROTECTED_CAPABILITY_REGRESSION",
+    "ABLATION",
+    "ROLLBACK",
+    "FULL_REGRESSION"
+  ],
+  "schema": "yado.shadow_algorithm_bank.entry.v1",
+  "scope": "SHADOW_ONLY"
+}
