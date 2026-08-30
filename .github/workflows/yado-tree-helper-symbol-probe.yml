@@ -1,0 +1,23 @@
+name: YADO tree helper symbol probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-tree-helper-symbol-probe.yml"
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect tree helper symbols
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import yado_evolution_runtime_native_v1 as m
+          print([x for x in dir(m) if 'tree' in x.lower()])
+          PY
