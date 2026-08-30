@@ -1,0 +1,30 @@
+name: YADO CART execution helper probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - ".github/workflows/yado-cart-execution-helper-probe.yml"
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect CART and intelligence prediction helpers
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          for fn in ['yado_evolution_runtime_native_v1.py','yado_algorithm_component_runtime_native_v1.py']:
+            p=Path(fn);txt=p.read_text(errors='ignore');tree=ast.parse(txt)
+            print('\n====',fn,'====')
+            for n in tree.body:
+              if isinstance(n,ast.FunctionDef) and ('tree' in n.name.lower() or n.name=='predict_intel_component'):
+                print('\n###',n.name)
+                print(ast.get_source_segment(txt,n))
+          PY
