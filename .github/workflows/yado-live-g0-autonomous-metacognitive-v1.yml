@@ -1,0 +1,39 @@
+name: YADO Live G0 Autonomous Metacognitive V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_live_g0_autonomous_metacognitive_v1.py"
+      - ".github/workflows/yado-live-g0-autonomous-metacognitive-v1.yml"
+permissions:
+  contents: write
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run autonomous metacognitive developmental decisions
+        run: python runtime/yado_live_g0_autonomous_metacognitive_v1.py
+      - name: Upload receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-live-g0-autonomous-metacognitive-v1
+          path: runtime/yado_live_g0_autonomous_metacognitive_v1_receipt.json
+          retention-days: 30
+      - name: Persist receipt
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_live_g0_autonomous_metacognitive_v1_receipt.json receipts/yado-live-g0-autonomous-metacognitive-v1-latest.json
+          git config user.name "YADO G0 Meta Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-live-g0-autonomous-metacognitive-v1-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G0 autonomous metacognitive receipt [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
