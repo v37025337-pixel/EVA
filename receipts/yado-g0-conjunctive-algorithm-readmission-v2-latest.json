@@ -1,0 +1,102 @@
+{
+  "admission_authorized": true,
+  "base_evidence_receipt": "09852b02427441cfbece5ccd72c5639f69c28ff3db9fdbfb6a6b8423e39a6904",
+  "canonical_mutation": false,
+  "canonical_parent_byte_identical": true,
+  "canonical_state_sha256_after": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "canonical_state_sha256_before": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "decision": {
+    "action": "EXECUTE",
+    "effective_confidence": 0.6884428571428574,
+    "profile_confidence": 0.7142857142857143,
+    "reason": "CAPABILITY_AND_EVIDENCE_ALIGNED",
+    "self_disagreement": 0.21571428571428575
+  },
+  "developmental_head": "G0_RC8_V36",
+  "episode": {
+    "action": "EVALUATE_CONJUNCTIVE_RULE_INDUCER_EXTENDED",
+    "attention_prediction": "tool_observation",
+    "broadcasts": {
+      "EVIDENCE_SUMMARY": [
+        {
+          "confidence": 1.0,
+          "id": "CJ-EXTENDED-EVIDENCE",
+          "source": "RUN_33313603775"
+        },
+        {
+          "confidence": 1.0,
+          "id": "CJ-BASE-EVIDENCE",
+          "source": "33308034691"
+        },
+        {
+          "confidence": 1.0,
+          "id": "G0-HEAD",
+          "source": "DEVELOPMENTAL_HEAD_CONTROL_PLANE_V1"
+        }
+      ]
+    },
+    "commit_candidates": [],
+    "committed_beliefs": [],
+    "episode_hash": "976cb0e74307136f400085ba8323ef9960f52dab0a5ca32620289397e050251c",
+    "episode_id": "CRW-00000001-976cb0e74307",
+    "goal": "Re-evaluate bounded conjunctive rule induction for shadow algorithm-bank admission using five additional unseen transfer domains including one strict-threshold failure.",
+    "metacognitive_action": "EXECUTE",
+    "observed_outcome": "SHADOW_BANK_ADMISSION_AUTHORIZED",
+    "parent_hash": null,
+    "predicted_outcomes": {
+      "ADMISSION_WITHHELD": 0.3333333333333333,
+      "SEEK_MORE_EVIDENCE": 0.3333333333333333,
+      "SHADOW_BANK_ADMISSION_AUTHORIZED": 0.3333333333333333
+    },
+    "prediction_error": 0.6666666666666667,
+    "selected_ids": [
+      "CJ-EXTENDED-EVIDENCE",
+      "CJ-BASE-EVIDENCE",
+      "G0-HEAD"
+    ],
+    "selected_source_kinds": [
+      "tool_observation",
+      "tool_observation",
+      "self_model"
+    ],
+    "timestamp_ns": 1788095817161214287
+  },
+  "extended_evidence_receipt": "7df93a3f3deae250facef77bcaf42ef822e74a87edeb28fd0b517003f6057a52",
+  "extended_summary": {
+    "all_pass": false,
+    "mean_fresh_blind": 0.9953333333333333,
+    "min_fresh_blind": 0.9766666666666667,
+    "task_count": 5,
+    "tasks_passed": 4
+  },
+  "github_run_id": "33313727864",
+  "github_sha": "305f22abed3e37d8ab39e59fc748ab2c886f0015",
+  "next_required_capability": "SHADOW_ALGORITHM_BANK_ENTRY_V1",
+  "profile": {
+    "bins": {
+      "CONJUNCTIVE_RULE_INDUCTION:2": {
+        "failure": 0,
+        "success": 3
+      },
+      "CONJUNCTIVE_RULE_INDUCTION:3": {
+        "failure": 2,
+        "success": 5
+      }
+    },
+    "prior_failure": 1.0,
+    "prior_success": 1.0
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "bbf45a3bd7fac26df88f5252026df64573f24de60cec1cfad1eba49b9ffbb3ef",
+  "schema": "yado.g0.conjunctive_algorithm.readmission.v2",
+  "status": "PASS_G0_CONJUNCTIVE_READMISSION_DECISION_V2",
+  "task": {
+    "capability": "CONJUNCTIVE_RULE_INDUCTION",
+    "difficulty": 0.88,
+    "evidence_coverage": 0.995,
+    "framework_conflict": false,
+    "novelty": 0.82,
+    "task_id": "G0-ALG-READMISSION-002",
+    "verbal_confidence": 0.93
+  }
+}
