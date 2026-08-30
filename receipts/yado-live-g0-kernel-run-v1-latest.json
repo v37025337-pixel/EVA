@@ -1667,6 +1667,7 @@
   "canonical_state_sha256": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
   "cycles": [
     {
+      "cycle_id": "LIVE-G0-001",
       "development_priority_after": {
         "method": "development_priority",
         "result": [
@@ -1680,66 +1681,86 @@
         ],
         "status": "OK"
       },
-      "digital_conscious_cycle": {
-        "error": "TypeError('UnifiedYADOKernelV30RC8ExternalCognitive.digital_conscious_cycle() takes 1 positional argument but 2 were given')",
-        "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/EVA/EVA/runtime/yado_live_g0_kernel_run_v1.py\", line 88, in <module>\n    cycle['digital_conscious_cycle']=fn(t)\n                                     ^^^^^\nTypeError: UnifiedYADOKernelV30RC8ExternalCognitive.digital_conscious_cycle() takes 1 positional argument but 2 were given\n"
-      },
-      "digital_conscious_cycle_signature": "(*, goal, items, consumers, metacognitive_action=None, metacognitive_task=None, capability_profile=None, context='default', action=None, possible_outcomes=(), observed_outcome=None, proposed_belief_ids=())",
-      "integrity_after": {
-        "method": "integrity_control_plane",
-        "result": {
-          "active_contract_required": true,
-          "canonical_bootstrap": "yado_bootstrap.py",
-          "final_regression_required": true,
-          "historical_state_immutable": true,
-          "manifest": "yado_development_manifest_v18.json",
-          "parent_state": "yado_canonical_state_v3_rc6_r6_schema_adaptation.json",
-          "parent_state_sha256": "b910356f172069e97437802955decee262608fab4330b675148b167acfe523b3",
-          "preimport_dependency_lock_required": true,
-          "split_brain_fail_closed": true,
-          "status": "ACTIVE_BOUNDED_LOCAL_FINAL"
-        },
-        "status": "OK"
-      },
-      "task": {
-        "constraints": [
-          "NO_CANONICAL_PARENT_MUTATION",
-          "FAIL_CLOSED",
-          "EVIDENCE_BOUND"
-        ],
-        "evidence": {
-          "current_head": "G0_RC8_V36",
-          "known_deficits": [
-            "THINKING_BOUNDARY_REASONING",
+      "episode": {
+        "action": "OBSERVE_G0",
+        "attention_prediction": "tool_observation",
+        "broadcasts": {
+          "DEFICIT_VIEW": [
             "INTELLIGENCE_BOUNDARY_REASONING",
-            "REPRESENTATION_INVARIANCE"
+            "REPRESENTATION_INVARIANCE",
+            "THINKING_BOUNDARY_REASONING"
           ],
-          "rejected_stepping_stone": "CANDIDATE_S1"
+          "EVIDENCE_VIEW": [
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.0,
+              "item_id": "S1-BURNIN-OBS",
+              "source": "RUN_33301460805"
+            },
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.0,
+              "item_id": "LINEAGE-OBS",
+              "source": "RUN_33302653581"
+            },
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.02,
+              "item_id": "STEM-HOLDOUT-OBS",
+              "source": "RUN_33302136155"
+            },
+            {
+              "confidence": 0.96,
+              "epistemic_risk": 0.08,
+              "item_id": "G0-SELF-MODEL",
+              "source": "RC8_SELF_MODEL"
+            }
+          ],
+          "EXECUTIVE_SUMMARY": {
+            "count": 4,
+            "ids": [
+              "S1-BURNIN-OBS",
+              "LINEAGE-OBS",
+              "STEM-HOLDOUT-OBS",
+              "G0-SELF-MODEL"
+            ],
+            "source_kinds": [
+              "tool_observation",
+              "tool_observation",
+              "tool_observation",
+              "self_model"
+            ]
+          }
         },
-        "goal": "Observe current G0 developmental state and identify the highest-priority bounded weakness without mutating the canonical parent.",
-        "kind": "DEVELOPMENTAL_OBSERVATION",
-        "task_id": "LIVE-G0-001"
-      }
-    },
-    {
-      "development_priority_after": {
-        "method": "development_priority",
-        "result": [
-          "UNIFY_BOOT_AND_STATE_LINEAGE",
-          "ADD_PREIMPORT_DEPENDENCY_LOCK",
-          "HARDEN_DIRECT_EVIDENCE_FETCH",
-          "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
-          "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
-          "DURABILIZE_HOST_CAPABILITY_MODEL",
-          "STRUCTURAL_FRONTIER_ROUTER"
+        "commit_candidates": [],
+        "committed_beliefs": [],
+        "episode_hash": "3498dc03e62257c8c5e07e3924a6d9b63142295c9043f0dbbc737f885fccccd5",
+        "episode_id": "CRW-00000001-3498dc03e622",
+        "goal": "Observe current G0 developmental state and concentrate attention on the strongest evidence about the next bounded weakness.",
+        "metacognitive_action": "SEEK_EVIDENCE",
+        "observed_outcome": "UNRESOLVED_DEFICIT",
+        "parent_hash": null,
+        "predicted_outcomes": {
+          "PROMOTION_READY": 0.3333333333333333,
+          "STABLE_HEAD": 0.3333333333333333,
+          "UNRESOLVED_DEFICIT": 0.3333333333333333
+        },
+        "prediction_error": 0.6666666666666667,
+        "selected_ids": [
+          "S1-BURNIN-OBS",
+          "LINEAGE-OBS",
+          "STEM-HOLDOUT-OBS",
+          "G0-SELF-MODEL"
         ],
-        "status": "OK"
+        "selected_source_kinds": [
+          "tool_observation",
+          "tool_observation",
+          "tool_observation",
+          "self_model"
+        ],
+        "timestamp_ns": 1788080847464120213
       },
-      "digital_conscious_cycle": {
-        "error": "TypeError('UnifiedYADOKernelV30RC8ExternalCognitive.digital_conscious_cycle() takes 1 positional argument but 2 were given')",
-        "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/EVA/EVA/runtime/yado_live_g0_kernel_run_v1.py\", line 88, in <module>\n    cycle['digital_conscious_cycle']=fn(t)\n                                     ^^^^^\nTypeError: UnifiedYADOKernelV30RC8ExternalCognitive.digital_conscious_cycle() takes 1 positional argument but 2 were given\n"
-      },
-      "digital_conscious_cycle_signature": "(*, goal, items, consumers, metacognitive_action=None, metacognitive_task=None, capability_profile=None, context='default', action=None, possible_outcomes=(), observed_outcome=None, proposed_belief_ids=())",
+      "goal": "Observe current G0 developmental state and concentrate attention on the strongest evidence about the next bounded weakness.",
       "integrity_after": {
         "method": "integrity_control_plane",
         "result": {
@@ -1756,29 +1777,10 @@
         },
         "status": "OK"
       },
-      "task": {
-        "constraints": [
-          "PRESERVE_PROTECTED_CAPABILITIES",
-          "REQUIRE_FRESH_BLIND",
-          "REQUIRE_ROLLBACK"
-        ],
-        "evidence": {
-          "inherit_proven": [
-            "LOGIC_GAIN",
-            "INTEGRITY",
-            "ROLLBACK"
-          ],
-          "replace_or_generalize": [
-            "THINKING_COMPONENT",
-            "INTELLIGENCE_COMPONENT"
-          ]
-        },
-        "goal": "Choose a bounded next developmental action consistent with one-head causal evolution.",
-        "kind": "CAUSAL_DEVELOPMENT",
-        "task_id": "LIVE-G0-002"
-      }
+      "mode": "SEEK_EVIDENCE"
     },
     {
+      "cycle_id": "LIVE-G0-002",
       "development_priority_after": {
         "method": "development_priority",
         "result": [
@@ -1792,11 +1794,86 @@
         ],
         "status": "OK"
       },
-      "digital_conscious_cycle": {
-        "error": "TypeError('UnifiedYADOKernelV30RC8ExternalCognitive.digital_conscious_cycle() takes 1 positional argument but 2 were given')",
-        "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/EVA/EVA/runtime/yado_live_g0_kernel_run_v1.py\", line 88, in <module>\n    cycle['digital_conscious_cycle']=fn(t)\n                                     ^^^^^\nTypeError: UnifiedYADOKernelV30RC8ExternalCognitive.digital_conscious_cycle() takes 1 positional argument but 2 were given\n"
+      "episode": {
+        "action": "ROUTE_NEXT_DEVELOPMENT",
+        "attention_prediction": "tool_observation",
+        "broadcasts": {
+          "DEFICIT_VIEW": [
+            "INTELLIGENCE_BOUNDARY_REASONING",
+            "REPRESENTATION_INVARIANCE",
+            "THINKING_BOUNDARY_REASONING"
+          ],
+          "EVIDENCE_VIEW": [
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.0,
+              "item_id": "S1-BURNIN-OBS",
+              "source": "RUN_33301460805"
+            },
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.0,
+              "item_id": "LINEAGE-OBS",
+              "source": "RUN_33302653581"
+            },
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.02,
+              "item_id": "STEM-HOLDOUT-OBS",
+              "source": "RUN_33302136155"
+            },
+            {
+              "confidence": 0.96,
+              "epistemic_risk": 0.08,
+              "item_id": "G0-SELF-MODEL",
+              "source": "RC8_SELF_MODEL"
+            }
+          ],
+          "EXECUTIVE_SUMMARY": {
+            "count": 4,
+            "ids": [
+              "S1-BURNIN-OBS",
+              "LINEAGE-OBS",
+              "STEM-HOLDOUT-OBS",
+              "G0-SELF-MODEL"
+            ],
+            "source_kinds": [
+              "tool_observation",
+              "tool_observation",
+              "tool_observation",
+              "self_model"
+            ]
+          }
+        },
+        "commit_candidates": [],
+        "committed_beliefs": [],
+        "episode_hash": "1935b71b6cff1ae551d61c9244d1429147676665fcc0eec5a2c95ba64faa7970",
+        "episode_id": "CRW-00000002-1935b71b6cff",
+        "goal": "Route the current developmental deficit toward a bounded mechanism family while preserving proven capabilities and one-head lineage.",
+        "metacognitive_action": "ROUTE_FRAMEWORK",
+        "observed_outcome": "COUNTEREXAMPLE_REPAIR",
+        "parent_hash": "3498dc03e62257c8c5e07e3924a6d9b63142295c9043f0dbbc737f885fccccd5",
+        "predicted_outcomes": {
+          "COUNTEREXAMPLE_REPAIR": 0.3333333333333333,
+          "RESEARCH_MORE": 0.3333333333333333,
+          "WITHHOLD": 0.3333333333333333
+        },
+        "prediction_error": 0.6666666666666667,
+        "selected_ids": [
+          "S1-BURNIN-OBS",
+          "LINEAGE-OBS",
+          "STEM-HOLDOUT-OBS",
+          "G0-SELF-MODEL"
+        ],
+        "selected_source_kinds": [
+          "tool_observation",
+          "tool_observation",
+          "tool_observation",
+          "self_model"
+        ],
+        "timestamp_ns": 1788080847464356854
       },
-      "digital_conscious_cycle_signature": "(*, goal, items, consumers, metacognitive_action=None, metacognitive_task=None, capability_profile=None, context='default', action=None, possible_outcomes=(), observed_outcome=None, proposed_belief_ids=())",
+      "goal": "Route the current developmental deficit toward a bounded mechanism family while preserving proven capabilities and one-head lineage.",
       "integrity_after": {
         "method": "integrity_control_plane",
         "result": {
@@ -1813,25 +1890,123 @@
         },
         "status": "OK"
       },
-      "task": {
-        "constraints": [
-          "NO_PROMOTION_WITH_REGRESSION",
-          "NO_PROMOTION_WITHOUT_FRESH_PASS"
+      "mode": "ROUTE_FRAMEWORK"
+    },
+    {
+      "cycle_id": "LIVE-G0-003",
+      "development_priority_after": {
+        "method": "development_priority",
+        "result": [
+          "UNIFY_BOOT_AND_STATE_LINEAGE",
+          "ADD_PREIMPORT_DEPENDENCY_LOCK",
+          "HARDEN_DIRECT_EVIDENCE_FETCH",
+          "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+          "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+          "DURABILIZE_HOST_CAPABILITY_MODEL",
+          "STRUCTURAL_FRONTIER_ROUTER"
         ],
-        "evidence": {
-          "intelligence_min": 0.83125,
-          "logic_min": 1.0,
-          "s1_burnin": "WITHHOLD_S1_BURNIN",
-          "thinking_min": 0.7125
+        "status": "OK"
+      },
+      "episode": {
+        "action": "EVALUATE_PROMOTION",
+        "attention_prediction": "tool_observation",
+        "broadcasts": {
+          "DEFICIT_VIEW": [
+            "INTELLIGENCE_BOUNDARY_REASONING",
+            "REPRESENTATION_INVARIANCE",
+            "THINKING_BOUNDARY_REASONING"
+          ],
+          "EVIDENCE_VIEW": [
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.0,
+              "item_id": "S1-BURNIN-OBS",
+              "source": "RUN_33301460805"
+            },
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.0,
+              "item_id": "LINEAGE-OBS",
+              "source": "RUN_33302653581"
+            },
+            {
+              "confidence": 1.0,
+              "epistemic_risk": 0.02,
+              "item_id": "STEM-HOLDOUT-OBS",
+              "source": "RUN_33302136155"
+            },
+            {
+              "confidence": 0.96,
+              "epistemic_risk": 0.08,
+              "item_id": "G0-SELF-MODEL",
+              "source": "RC8_SELF_MODEL"
+            }
+          ],
+          "EXECUTIVE_SUMMARY": {
+            "count": 4,
+            "ids": [
+              "S1-BURNIN-OBS",
+              "LINEAGE-OBS",
+              "STEM-HOLDOUT-OBS",
+              "G0-SELF-MODEL"
+            ],
+            "source_kinds": [
+              "tool_observation",
+              "tool_observation",
+              "tool_observation",
+              "self_model"
+            ]
+          }
         },
-        "goal": "Assess whether current evidence justifies promotion of any successor generation.",
-        "kind": "METACOGNITIVE_CHECK",
-        "task_id": "LIVE-G0-003"
-      }
+        "commit_candidates": [],
+        "committed_beliefs": [],
+        "episode_hash": "69a60f3662ffc31dc200c2dbebac7c40434b69d66943c79d962939f8e55611ab",
+        "episode_id": "CRW-00000003-69a60f3662ff",
+        "goal": "Evaluate whether current evidence is sufficient to promote a successor generation without regression.",
+        "metacognitive_action": "WITHHOLD",
+        "observed_outcome": "WITHHOLD",
+        "parent_hash": "1935b71b6cff1ae551d61c9244d1429147676665fcc0eec5a2c95ba64faa7970",
+        "predicted_outcomes": {
+          "PROMOTE": 0.5,
+          "WITHHOLD": 0.5
+        },
+        "prediction_error": 0.5,
+        "selected_ids": [
+          "S1-BURNIN-OBS",
+          "LINEAGE-OBS",
+          "STEM-HOLDOUT-OBS",
+          "G0-SELF-MODEL"
+        ],
+        "selected_source_kinds": [
+          "tool_observation",
+          "tool_observation",
+          "tool_observation",
+          "self_model"
+        ],
+        "timestamp_ns": 1788080847464564681
+      },
+      "goal": "Evaluate whether current evidence is sufficient to promote a successor generation without regression.",
+      "integrity_after": {
+        "method": "integrity_control_plane",
+        "result": {
+          "active_contract_required": true,
+          "canonical_bootstrap": "yado_bootstrap.py",
+          "final_regression_required": true,
+          "historical_state_immutable": true,
+          "manifest": "yado_development_manifest_v18.json",
+          "parent_state": "yado_canonical_state_v3_rc6_r6_schema_adaptation.json",
+          "parent_state_sha256": "b910356f172069e97437802955decee262608fab4330b675148b167acfe523b3",
+          "preimport_dependency_lock_required": true,
+          "split_brain_fail_closed": true,
+          "status": "ACTIVE_BOUNDED_LOCAL_FINAL"
+        },
+        "status": "OK"
+      },
+      "mode": "WITHHOLD"
     }
   ],
   "developmental_head": "G0_RC8_V36",
-  "error_count": 3,
+  "error_count": 0,
   "final": {
     "audit_snapshot": {
       "method": "audit_snapshot",
@@ -1877,11 +2052,11 @@
       "status": "OK"
     }
   },
-  "github_run_id": "33303105326",
-  "github_sha": "2e12fdb8ce17816e151df04a7f45875e339fec19",
+  "github_run_id": "33303247621",
+  "github_sha": "cd02357e8f421aafcf849fc0f38f0e7d87eaf532",
   "kernel_class": "UnifiedYADOKernelV30RC8ExternalCognitive",
   "promotion_applied": false,
-  "receipt_sha256": "cf5f1177327ae1b032712ba683cabf183f780c6ff96c9d245be9f5d0f6b2b414",
+  "receipt_sha256": "ee8bcc621607cb6af94754e0b226a38271d881eda770837a05cd81722a17875e",
   "schema": "yado.github.live_g0_kernel_run.v1",
-  "status": "LIVE_G0_KERNEL_RUN_WITH_ERRORS"
+  "status": "PASS_LIVE_G0_KERNEL_RUN"
 }
