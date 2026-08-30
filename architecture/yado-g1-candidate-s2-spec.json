@@ -1,0 +1,73 @@
+{
+  "branch_policy": "EXPERIMENT_BRANCHES_ARE_EPHEMERAL; ONLY_PROMOTED_GENERATION_BECOMES_HEAD",
+  "candidate_generation_id": "G1_CANDIDATE_S2",
+  "deficits": [
+    {
+      "counterexample_source": "RUN_33301460805",
+      "deficit_id": "THINKING_BOUNDARY_REASONING",
+      "inherit_without_regression": [
+        "LOGIC",
+        "INTEGRITY",
+        "ROLLBACK"
+      ],
+      "observed": 0.485,
+      "priority": 1,
+      "target_min": 0.9
+    },
+    {
+      "counterexample_source": "RUN_33301460805",
+      "deficit_id": "INTELLIGENCE_BOUNDARY_REASONING",
+      "inherit_without_regression": [
+        "LOGIC",
+        "INTEGRITY",
+        "ROLLBACK"
+      ],
+      "observed": 0.7835714285714286,
+      "priority": 2,
+      "target_min": 0.9
+    },
+    {
+      "counterexample_source": "RENAMED_SCHEMA_OOD",
+      "deficit_id": "REPRESENTATION_INVARIANCE",
+      "inherit_without_regression": [
+        "LOGIC",
+        "INTEGRITY",
+        "ROLLBACK"
+      ],
+      "observed": 0.75,
+      "priority": 3,
+      "target_min": 0.9
+    }
+  ],
+  "inherit_proven_mechanisms": [
+    "RC5_LOGIC_COMPONENT_FROM_S1",
+    "SAFE_SUCCESSOR_LINEAGE_BUILDER_V1",
+    "SAFE_SUCCESSOR_RUNTIME_ADAPTER_PATTERN"
+  ],
+  "parent_generation_id": "G0_RC8_V36",
+  "promotion_requirements": {
+    "ablation": true,
+    "fresh_blind": true,
+    "full_regression": true,
+    "integrity": 1.0,
+    "intelligence_boundary_min": 0.9,
+    "intelligence_min": 0.9,
+    "logic_min": 1.0,
+    "representation_invariance_min": 0.9,
+    "rollback": 1.0,
+    "thinking_boundary_min": 0.9,
+    "thinking_min": 0.9
+  },
+  "replace_or_generalize": [
+    "RC6_THINKING_COMPONENT_FROM_S1",
+    "RC6_INTELLIGENCE_COMPONENT_FROM_S1"
+  ],
+  "required_domains": [
+    "PROGRAMMING",
+    "MATHEMATICS",
+    "EXACT_SCIENCE",
+    "CAUSAL_PLANNING"
+  ],
+  "schema": "yado.next_generation.spec.v1",
+  "spec_digest": "9b36061dbfdaf016cae6b4cb7f4656a8e350403e55a25573a678465ecdfc607a"
+}

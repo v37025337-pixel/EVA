@@ -1,0 +1,227 @@
+{
+  "developmental_head": "G0_RC8_V36",
+  "next_generation_spec": {
+    "branch_policy": "EXPERIMENT_BRANCHES_ARE_EPHEMERAL; ONLY_PROMOTED_GENERATION_BECOMES_HEAD",
+    "candidate_generation_id": "G1_CANDIDATE_S2",
+    "deficits": [
+      {
+        "counterexample_source": "RUN_33301460805",
+        "deficit_id": "THINKING_BOUNDARY_REASONING",
+        "inherit_without_regression": [
+          "LOGIC",
+          "INTEGRITY",
+          "ROLLBACK"
+        ],
+        "observed": 0.485,
+        "priority": 1,
+        "target_min": 0.9
+      },
+      {
+        "counterexample_source": "RUN_33301460805",
+        "deficit_id": "INTELLIGENCE_BOUNDARY_REASONING",
+        "inherit_without_regression": [
+          "LOGIC",
+          "INTEGRITY",
+          "ROLLBACK"
+        ],
+        "observed": 0.7835714285714286,
+        "priority": 2,
+        "target_min": 0.9
+      },
+      {
+        "counterexample_source": "RENAMED_SCHEMA_OOD",
+        "deficit_id": "REPRESENTATION_INVARIANCE",
+        "inherit_without_regression": [
+          "LOGIC",
+          "INTEGRITY",
+          "ROLLBACK"
+        ],
+        "observed": 0.75,
+        "priority": 3,
+        "target_min": 0.9
+      }
+    ],
+    "inherit_proven_mechanisms": [
+      "RC5_LOGIC_COMPONENT_FROM_S1",
+      "SAFE_SUCCESSOR_LINEAGE_BUILDER_V1",
+      "SAFE_SUCCESSOR_RUNTIME_ADAPTER_PATTERN"
+    ],
+    "parent_generation_id": "G0_RC8_V36",
+    "promotion_requirements": {
+      "ablation": true,
+      "fresh_blind": true,
+      "full_regression": true,
+      "integrity": 1.0,
+      "intelligence_boundary_min": 0.9,
+      "intelligence_min": 0.9,
+      "logic_min": 1.0,
+      "representation_invariance_min": 0.9,
+      "rollback": 1.0,
+      "thinking_boundary_min": 0.9,
+      "thinking_min": 0.9
+    },
+    "replace_or_generalize": [
+      "RC6_THINKING_COMPONENT_FROM_S1",
+      "RC6_INTELLIGENCE_COMPONENT_FROM_S1"
+    ],
+    "required_domains": [
+      "PROGRAMMING",
+      "MATHEMATICS",
+      "EXACT_SCIENCE",
+      "CAUSAL_PLANNING"
+    ],
+    "schema": "yado.next_generation.spec.v1",
+    "spec_digest": "9b36061dbfdaf016cae6b4cb7f4656a8e350403e55a25573a678465ecdfc607a"
+  },
+  "not_preserved_as_proven": [
+    "THINKING_COMPONENT",
+    "INTELLIGENCE_COMPONENT"
+  ],
+  "preserved_from_s1": [
+    "LOGIC_GAIN",
+    "INTEGRITY",
+    "ROLLBACK",
+    "SUCCESSOR_LINEAGE_MECHANISM"
+  ],
+  "report_digest": "6ff4b2bbf511b041c69bca9740cfbfffad703a3f3b94e8f45395b35f79790ddc",
+  "s1_decision": {
+    "action": "WITHHOLD_CANDIDATE",
+    "candidate_generation_id": "CANDIDATE_S1",
+    "decision_digest": "5cd5d1f00c06c54320518e8ea72ca7b64aaa9f6576c02cad2b09a41395c730de",
+    "gains": {
+      "integrity": 0.0,
+      "intelligence": 0.03125,
+      "logic": 0.09999999999999998,
+      "rollback": 0.0,
+      "thinking": -0.007499999999999951
+    },
+    "mean_gain": 0.024750000000000005,
+    "parent_generation_id": "G0_RC8_V36",
+    "protected_regressions": {
+      "thinking": -0.007499999999999951
+    },
+    "reasons": [
+      "HARD_CONSTRAINT_FAIL:fresh_blind_pass",
+      "PROTECTED_CAPABILITY_REGRESSION"
+    ],
+    "significant_improvements": [
+      "intelligence",
+      "logic"
+    ]
+  },
+  "s1_status": "REJECTED_STEPPING_STONE",
+  "schema": "yado.real_developmental_lineage.v1",
+  "snapshot": {
+    "decisions": [
+      {
+        "action": "WITHHOLD_CANDIDATE",
+        "candidate_generation_id": "CANDIDATE_S1",
+        "decision_digest": "5cd5d1f00c06c54320518e8ea72ca7b64aaa9f6576c02cad2b09a41395c730de",
+        "gains": {
+          "integrity": 0.0,
+          "intelligence": 0.03125,
+          "logic": 0.09999999999999998,
+          "rollback": 0.0,
+          "thinking": -0.007499999999999951
+        },
+        "mean_gain": 0.024750000000000005,
+        "parent_generation_id": "G0_RC8_V36",
+        "protected_regressions": {
+          "thinking": -0.007499999999999951
+        },
+        "reasons": [
+          "HARD_CONSTRAINT_FAIL:fresh_blind_pass",
+          "PROTECTED_CAPABILITY_REGRESSION"
+        ],
+        "significant_improvements": [
+          "intelligence",
+          "logic"
+        ]
+      }
+    ],
+    "developmental_head": "G0_RC8_V36",
+    "generation_count": 1,
+    "generations": [
+      {
+        "artifact_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+        "capability_scores": {
+          "integrity": 1.0,
+          "intelligence": 0.8,
+          "logic": 0.9,
+          "rollback": 1.0,
+          "thinking": 0.72
+        },
+        "causal_claims": [],
+        "change_set": [],
+        "domain_experiences": [
+          "SYSTEM:VERIFIED_V36"
+        ],
+        "evidence_ids": [
+          "RUN_33264344586_V35_SELF_AUDIT",
+          "RUN_33265668249_FUNCTIONAL_AUDIT",
+          "RUN_33266617685_V36_CRW"
+        ],
+        "generation_id": "G0_RC8_V36",
+        "hard_constraints": {
+          "evidence_complete": true,
+          "fresh_blind_pass": true,
+          "lineage_valid": true,
+          "regression_pass": true,
+          "rollback_available": true,
+          "state_integrity": true
+        },
+        "lineage_id": "YADO_MAIN_LINEAGE",
+        "metadata": {},
+        "parent_generation_id": null,
+        "protected_capabilities": [
+          "integrity",
+          "intelligence",
+          "logic",
+          "rollback",
+          "thinking"
+        ],
+        "status": "HEAD"
+      }
+    ],
+    "historical_node_count": 3,
+    "historical_nodes": [
+      {
+        "artifact_digest": "e32c8692d539457f154952d4ec710118066c0d0cb9867ab47e8c2050ea4f671c",
+        "causal_status": "LEGACY_CAUSAL_LINK_NOT_YET_RECONSTRUCTED",
+        "metadata": {},
+        "node_id": "RC5"
+      },
+      {
+        "artifact_digest": "d9f653ef9f1a92796393d81fc4ee3264c9c328c3b8cbe41398386d0b5fb4d00d",
+        "causal_status": "LEGACY_CAUSAL_LINK_NOT_YET_RECONSTRUCTED",
+        "metadata": {},
+        "node_id": "RC6"
+      },
+      {
+        "artifact_digest": "062b2f153c9f4bdd5139f3fc42e5e859a7662373ff4718c474b61e73b244f439",
+        "causal_status": "LEGACY_CAUSAL_LINK_NOT_YET_RECONSTRUCTED",
+        "metadata": {},
+        "node_id": "RC7"
+      }
+    ],
+    "policy": {
+      "max_regression": 0.0,
+      "min_mean_gain": 0.0,
+      "min_significant_gain": 0.02,
+      "require_causal_claim": true,
+      "require_cross_domain_evidence_for_general_capability": true,
+      "required_constraints": [
+        "state_integrity",
+        "rollback_available",
+        "regression_pass",
+        "lineage_valid",
+        "evidence_complete",
+        "fresh_blind_pass"
+      ]
+    },
+    "principle": "ONE_DEVELOPMENTAL_HEAD_EACH_PROMOTED_CHILD_CAUSALLY_BETTER_THAN_PARENT_ON_MEASURED_CAPABILITY_VECTOR",
+    "schema": "yado.unified_causal_evolution_architecture.v1",
+    "snapshot_digest": "a885df85e8aa820a483c0945f6b4524f0db044c992e75e778a30b97a714a7cec"
+  },
+  "status": "PASS_REAL_G0_AND_REJECTED_S1_RECONSTRUCTION"
+}
