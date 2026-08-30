@@ -135,6 +135,16 @@ sources=[
     'source_path':'receipts/yado-experiment-compute-budget-gate-v1-latest.json',
     'run_id':'33307348264',
   },
+  {
+    'event_id':'E0012_CONJUNCTIVE_RULE_INDUCER',
+    'event_type':'EXPERIMENT_RESULT',
+    'status':'PASS_SHADOW',
+    'generation':'G0_RC8_V36',
+    'deficit':'CONDITIONAL_FILTERING_OF_PRIORITIES',
+    'effect':'GENERIC_BOUNDED_CONJUNCTIVE_RULE_INDUCTION_PASSED_THREE_FRESH_TRANSFER_TASKS_WITH_ABLATION',
+    'source_path':'receipts/yado-conjunctive-rule-inducer-v1-latest.json',
+    'run_id':'33308034691',
+  },
 
 ]
 
@@ -217,13 +227,16 @@ ledger['open_deficits']=[
   'THINKING_BOUNDARY_REASONING',
   'INTELLIGENCE_BOUNDARY_REASONING',
   'REPRESENTATION_INVARIANCE',
-  'CONDITIONAL_FILTERING_OF_PRIORITIES',
   'BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION',
+  'NATIVE_ALGORITHM_BANK_ADMISSION_AND_META_SELECTION',
 ]
 ledger['resolved_deficits']=[
   'DISCONNECTED_VERSION_HISTORY',
   'BRANCH_PROLIFERATION',
   'UNBOUNDED_EVOLUTION_SEARCH',
+]
+ledger['shadow_resolved_deficits']=[
+  'CONDITIONAL_FILTERING_OF_PRIORITIES',
 ]
 ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
 
