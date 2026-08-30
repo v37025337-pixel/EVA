@@ -1,0 +1,40 @@
+name: YADO Causal Evolution Ledger V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_causal_evolution_ledger_v1.py"
+      - "receipts/yado-s1-burnin-10rounds-v1-recovered.json"
+      - ".github/workflows/yado-causal-evolution-ledger-v1.yml"
+permissions:
+  contents: write
+jobs:
+  ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Build and verify causal evolution ledger
+        run: python runtime/yado_causal_evolution_ledger_v1.py
+      - name: Upload ledger and receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-causal-evolution-ledger-v1
+          path: |
+            architecture/evolution-ledger.json
+            runtime/yado_causal_evolution_ledger_v1_receipt.json
+          retention-days: 30
+      - name: Persist ledger
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_causal_evolution_ledger_v1_receipt.json receipts/yado-causal-evolution-ledger-v1-latest.json
+          git config user.name "YADO Evolution Ledger"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json receipts/yado-causal-evolution-ledger-v1-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist causal evolution ledger V1 [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
