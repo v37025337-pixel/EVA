@@ -1,0 +1,40 @@
+name: YADO S2 Fast Counterexample Repair Probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_s2_fast_counterexample_repair_probe.py"
+      - ".github/workflows/yado-s2-fast-counterexample-repair-probe.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run fast counterexample repair probe
+        run: python runtime/yado_s2_fast_counterexample_repair_probe.py
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-s2-fast-counterexample-repair-probe
+          path: runtime/yado_s2_fast_counterexample_repair_probe_report.json
+          retention-days: 30
+      - name: Persist report
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_s2_fast_counterexample_repair_probe_report.json receipts/yado-s2-fast-counterexample-repair-probe-latest.json
+          git config user.name "YADO S2 Repair Probe"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-s2-fast-counterexample-repair-probe-latest.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist S2 fast repair probe [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
