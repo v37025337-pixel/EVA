@@ -34,10 +34,12 @@ jobs:
         run: |
           mkdir -p receipts resources
           cp runtime/yado_unified_external_resource_portfolio_v1_receipt.json receipts/yado-unified-external-resource-portfolio-v1-latest.json
+          cp runtime/yado_unified_external_resource_portfolio_v1_receipt.json "receipts/yado-unified-external-resource-portfolio-v1-run-${GITHUB_RUN_ID}.json"
           git config user.name "YADO Resource Intelligence"
           git config user.email "actions@users.noreply.github.com"
           git add \
             receipts/yado-unified-external-resource-portfolio-v1-latest.json \
+            "receipts/yado-unified-external-resource-portfolio-v1-run-${GITHUB_RUN_ID}.json" \
             resources/yado-unified-external-resource-portfolio-v1.json \
             architecture/evolution-ledger.json
           if git diff --cached --quiet; then
