@@ -60,7 +60,7 @@ class UnifiedYADOCoreV1:
             'ledger_head_digest_matches':self.ledger.get('current_head_digest')==self.head.get('canonical_head_digest'),
             'g2_architecture_canonical':self.architecture.get('canonical_active') is True and self.architecture.get('promotion_applied') is True,
             'experience_registry_bound':self.manifest.get('experience_registry')=='canonical/yado-unified-experience-registry-v1.json',
-            'raw_grounding_frontier_preserved':self.manifest.get('current_frontier')=='G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1',
+            'developmental_frontier_coherent':bool(self.manifest.get('current_frontier')) and self.manifest.get('current_frontier')==self.head.get('current_frontier') and isinstance(self.ledger.get('open_deficits'),list) and len(self.ledger.get('open_deficits'))>=1,
             'g3_blocked':self.manifest.get('g3_genesis_performed') is False and self.experience.get('policy',{}).get('g3_genesis_blocked') is True,
             'shadow_context_not_smuggled_canonical':self.shadow_context.get('canonical_active') is False,
             'required_active_families_present':all(x in active_components for x in [

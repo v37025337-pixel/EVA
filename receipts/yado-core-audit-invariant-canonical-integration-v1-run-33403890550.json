@@ -1,0 +1,58 @@
+{
+  "candidate_digest": "9510d1d083318a5a53de2ef33860ef6960b36c357fb61ee92ab640196b152fce",
+  "canonical_mutation": true,
+  "checks": {
+    "bounded_single_line_audit_diff": true,
+    "candidate_current_audit_pass": true,
+    "fresh_admission_all_checks": true,
+    "general_frontier_check_present": true,
+    "head_ledger_coherent": true,
+    "old_hardcoded_frontier_check_absent": true
+  },
+  "diff": [
+    {
+      "line": 63,
+      "new": "            'developmental_frontier_coherent':bool(self.manifest.get('current_frontier')) and self.manifest.get('current_frontier')==self.head.get('current_frontier') and isinstance(self.ledger.get('open_deficits'),list) and len(self.ledger.get('open_deficits'))>=1,",
+      "old": "            'raw_grounding_frontier_preserved':self.manifest.get('current_frontier')=='G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1',"
+    }
+  ],
+  "fresh_admission_receipt": "7ad9f2b447619bb6b03ad6dd8940e2b37aa77ca98dc37e6b908122cee2d53fde",
+  "fresh_audit": {
+    "branch_count": 14,
+    "checks": {
+      "all_other_branches_experience_only": true,
+      "branch_inventory_complete": true,
+      "core_id": true,
+      "developmental_frontier_coherent": true,
+      "experience_registry_bound": true,
+      "g2_architecture_canonical": true,
+      "g3_blocked": true,
+      "generation_is_g2": true,
+      "ledger_head_digest_matches": true,
+      "ledger_head_matches_generation": true,
+      "legacy_auto_execution_forbidden": true,
+      "one_active_experience_lineage": true,
+      "required_active_families_present": true,
+      "shadow_context_not_smuggled_canonical": true
+    },
+    "core_id": "UNIFIED_YADO_CORE_V1",
+    "current_frontier": "G2_REAL_WORLD_TRANSFER_RECHECK_WITH_CANONICAL_REPRESENTATION_V1",
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "legacy_experience_count": 13,
+    "open_deficits": [
+      "CORE_AUDIT_INVARIANT_CANONICAL_INTEGRATION_V1"
+    ],
+    "pass": true
+  },
+  "generation_transition": false,
+  "github_run_id": "33403890550",
+  "github_sha": "cdb4473bcb8c04b099a78a49a56c30ffa27bab84",
+  "next_required_capability": "LEGACY_EXPERIENCE_RETRIEVAL_CANONICAL_INTEGRATION_V1",
+  "post_core_digest": "730086f8ebeb6945c732a318e07316bb3b17d3a84df40d1e4a1a851c7eaa9ce8",
+  "post_head_digest": "2be3708e0622a09a7947d83cd69d0a58c5c572f10cae363734930beae46e7420",
+  "promotion_applied": false,
+  "receipt_sha256": "69e82946faf4377141ad39d50e64893aec4bb16d94cb2dc82484c0549d5024a3",
+  "schema": "yado.g2.core_audit_invariant_canonical_integration.v1",
+  "semantic_boundary": "SAME-GENERATION CANONICALIZATION OF A SELF-EVOLVED AUDIT INVARIANT. ONLY ONE AUDIT CHECK LINE MAY CHANGE; COGNITIVE ALGORITHMS ARE UNCHANGED.",
+  "status": "PASS_CORE_AUDIT_INVARIANT_CANONICAL_INTEGRATION_V1"
+}
