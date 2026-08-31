@@ -200,3 +200,23 @@ class LearnedFieldMapper:
             out[canonical]=x[alias]
         return out
     def canonical(self):return {'kind':'PAIRED_CORRELATION_FIELD_MAPPER','mapping':self.mapping}
+
+
+def predict_linear_spec(spec,x):
+    try:s=sum(float(x[f])*float(w) for f,w in zip(spec['features'],spec['weights']))
+    except Exception:return spec['negative_label']
+    pos=s>=float(spec['threshold']) if spec['positive_if_ge'] else s<float(spec['threshold'])
+    return spec['positive_label'] if pos else spec['negative_label']
+
+def predict_dnf_spec(spec,x):
+    for clause in spec['clauses']:
+        ok=True
+        for p in clause:
+            try:v=float(x[p['field']])
+            except Exception:ok=False;break
+            if p['op']=='LT':
+                if not v<float(p['threshold']):ok=False;break
+            else:
+                if not v>=float(p['threshold']):ok=False;break
+        if ok:return spec['positive_label']
+    return spec['negative_label']
