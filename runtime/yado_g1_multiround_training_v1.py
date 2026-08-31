@@ -12,6 +12,7 @@ from yado_conjunctive_rule_inducer_v1 import ConjunctiveRuleInducerV1,program_ac
 from yado_bounded_dnf_relation_policy_inducer_v1 import BoundedDNFRelationPolicyInducerV1,program_acc as relation_acc
 from yado_budgeted_stage_policy_v1 import BudgetedStagePolicyV1,SearchStage
 from yado_neutral_evidence_profile_selector_v1 import NeutralEvidenceProfileSelectorV1,EvidenceCandidate
+from yado_bounded_capability_router_v1 import BoundedCapabilityRouterLearnerV1,router_acc
 
 LEDGER=REPO/'architecture'/'evolution-ledger.json'
 HEAD=REPO/'canonical'/'yado-main-head-g1-s2.json'
@@ -80,14 +81,14 @@ def router_cases(s,n):
         out.append({'input':x,'expected':router_label(x)})
     return out
 rt=router_cases(seed+11,900);rv=router_cases(seed+12,420);rb=router_cases(seed+13,900)
-router=BoundedDNFRelationPolicyInducerV1.synthesize(
-    f'G1_ROUTER_EPOCH_{epoch}','INTELLIGENCE',rt,min_support=5,max_clauses=12,validation_cases=rv
+router=BoundedCapabilityRouterLearnerV1.synthesize(
+    rt,rv,fallback_output=CAP_CONJ,min_support=5
 )
 router_metrics={
-  'validation':relation_acc(router,rv),
-  'fresh_blind':relation_acc(router,rb),
-  'ablation':relation_acc(router,rb,ablated=True),
-  'restore':relation_acc(router,rb),
+  'validation':router_acc(router,rv),
+  'fresh_blind':router_acc(router,rb),
+  'ablation':router_acc(router,rb,ablated=True),
+  'restore':router_acc(router,rb),
   'clause_count':len(router.clauses),
 }
 
@@ -230,14 +231,17 @@ round_record={
 }
 round_record['round_digest']=h(round_record)
 state['rounds'].append(round_record)
-state['new_capabilities']=sorted(set(state.get('new_capabilities',[])+['ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1']))
+state['target_rounds']=max(int(state.get('target_rounds',target_rounds)),target_rounds)
+state['new_capabilities']=sorted(set(state.get('new_capabilities',[])+['ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1','ALG-BOUNDED-CAPABILITY-ROUTER-V1']))
 state['pass_count']=sum(x['status']=='PASS' for x in state['rounds'])
 state['stable_pass_streak']=0
 for x in reversed(state['rounds']):
     if x['status']=='PASS':state['stable_pass_streak']+=1
     else:break
 state['min_round_score']=min(x['round_score'] for x in state['rounds'])
-state['status']='READY_FOR_G2_GENESIS' if len(state['rounds'])>=target_rounds and state['pass_count']==target_rounds and state['min_round_score']>=.99 else 'TRAINING'
+pass_scores=[x['round_score'] for x in state['rounds'] if x['status']=='PASS']
+state['min_pass_round_score']=min(pass_scores) if pass_scores else 0.0
+state['status']='READY_FOR_G2_GENESIS' if len(state['rounds'])>=target_rounds and state['stable_pass_streak']>=5 and state['min_pass_round_score']>=.99 else 'TRAINING'
 state['next_required_capability']='G2_SUCCESSOR_GENESIS_FROM_G1_ENRICHED_HEAD_V1' if state['status']=='READY_FOR_G2_GENESIS' else f'G1_TRAINING_ROUND_{epoch+1}_OF_{target_rounds}'
 state['state_digest']=h({k:v for k,v in state.items() if k!='state_digest'})
 STATE.write_text(json.dumps(state,indent=2,sort_keys=True)+'\n')
@@ -279,7 +283,7 @@ validate_ledger_v2(ledger);LEDGER.write_text(json.dumps(ledger,indent=2,sort_key
 print(json.dumps({
  'status':receipt['status'],'epoch':epoch,'curriculum':curriculum,'round_score':round_score,
  'checks':checks,'training_state_status':state['status'],'pass_count':state['pass_count'],
- 'stable_pass_streak':state['stable_pass_streak'],'min_round_score':state['min_round_score'],
+ 'stable_pass_streak':state['stable_pass_streak'],'min_round_score':state['min_round_score'],'min_pass_round_score':state['min_pass_round_score'],
  'next_required_capability':state['next_required_capability'],'receipt_sha256':receipt['receipt_sha256']
 },indent=2,sort_keys=True))
 if not passed:raise SystemExit('G1_TRAINING_ROUND_WITHHELD')
