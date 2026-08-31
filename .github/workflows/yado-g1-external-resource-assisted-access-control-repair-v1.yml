@@ -39,11 +39,11 @@ jobs:
         if: always()
         run: |
           mkdir -p receipts candidates/g1-algorithms
-          cp runtime/yado_g1_external_resource_assisted_access_control_repair_v1_receipt.json receipts/yado-g1-external-resource-assisted-access-control-repair-v1-latest.json
+          cp runtime/yado_g1_external_resource_assisted_access_control_repair_v1_receipt.json "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-${GITHUB_RUN_ID}.json"
           git config user.name "YADO G1 Access Policy Learner"
           git config user.email "actions@users.noreply.github.com"
           git add \
-            receipts/yado-g1-external-resource-assisted-access-control-repair-v1-latest.json \
+            "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-${GITHUB_RUN_ID}.json" \
             candidates/g1-algorithms/bounded-dnf-relation-policy-inducer-v1.json \
             architecture/evolution-ledger.json
           if git diff --cached --quiet; then
