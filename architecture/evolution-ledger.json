@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 46,
+  "event_count": 47,
   "events": [
     {
       "canonical_mutation": false,
@@ -746,10 +746,26 @@
       "source_digest": "607cbc5effe4f5ab07bf0a6531d440f1e750feebee5170074b8fc702eb1549f3",
       "source_path": "receipts/yado-g2-self-directed-development-cycle-v1-run-33361378742.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_V1",
+      "effect": "G2_CYCLE_3_PASS; SELECTED=BOUNDED_STREAM_CONTEXT_MAP; STATE=DEVELOPING",
+      "event_hash": "abfa4b06eea6a769780767ef2d04634d8eeb36b5c5a7602e287ed20af8b39a1e",
+      "event_id": "E0047_G2_SELF_DIRECTED_CYCLE_3",
+      "event_type": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 46,
+      "parent_event_hash": "5246926cb0a4771ad2a7ef652e19a6d3838b9537ee835bc567b18340d680350d",
+      "promotion_applied": false,
+      "run_id": "33361615166",
+      "source_digest": "2b1a7dc851220371e1ba3d3ed40f300733837b90b92008fcaedbcf35cce89e2c",
+      "source_path": "receipts/yado-g2-self-directed-development-cycle-v1-run-33361615166.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "a2d16de923beb7ea6ddcee3f5bd5f590493ee5985d988625b49b33c2efeec8fa",
+  "ledger_digest": "b129d8d40472e52234952ed42665891bfecea4aa5a6abbf714ae1b77861e163f",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -782,5 +798,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "5246926cb0a4771ad2a7ef652e19a6d3838b9537ee835bc567b18340d680350d"
+  "tail_event_hash": "abfa4b06eea6a769780767ef2d04634d8eeb36b5c5a7602e287ed20af8b39a1e"
 }

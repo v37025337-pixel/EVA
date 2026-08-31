@@ -203,6 +203,122 @@
           "token": "opaque_2de453e3b49e896217"
         }
       }
+    },
+    {
+      "base_router_same_blind": {
+        "capability_accuracy": 0.25277777777777777,
+        "n": 720,
+        "result_accuracy": 0.25277777777777777,
+        "score": 0.25277777777777777
+      },
+      "checks": {
+        "canonical_g2_immutable": true,
+        "context_causal_drop": true,
+        "fresh_blind": true,
+        "memory_causal_drop": true,
+        "representation_transfer": true,
+        "resource_portfolio_present": true,
+        "selected_contextual_strategy": true
+      },
+      "curriculum": "BOUNDED_ASSOCIATIVE_STREAM_MEMORY_REPAIR",
+      "cycle": 3,
+      "cycle_digest": "052f446c9ee05293bd7ba20efd94e76a17f89a0dbf8392af1d2b020dac39295f",
+      "fresh_blind": {
+        "capability_accuracy": 1.0,
+        "n": 720,
+        "result_accuracy": 1.0,
+        "score": 1.0
+      },
+      "github_run_id": "33361615166",
+      "memory_ablation_score": 0.26458333333333334,
+      "neutral_selection": {
+        "candidate_count": 5,
+        "ranking": [
+          {
+            "score": 1.0010000000000001,
+            "token": "opaque_63eaea062cf40870dc"
+          },
+          {
+            "score": 0.35533333333333333,
+            "token": "opaque_fec07abd4c35dc6fab"
+          },
+          {
+            "score": 0.23299999999999998,
+            "token": "opaque_da77b7ad5a6454d8c4"
+          },
+          {
+            "score": 0.22633333333333333,
+            "token": "opaque_4d78ae0f78c07ec7c5"
+          },
+          {
+            "score": 0.1741666666666667,
+            "token": "opaque_ee61483bed8a8923c8"
+          }
+        ],
+        "selected_score": 1.0010000000000001,
+        "selected_token": "opaque_63eaea062cf40870dc"
+      },
+      "representation_transfer": {
+        "capability_accuracy": 1.0,
+        "n": 420,
+        "result_accuracy": 1.0,
+        "score": 1.0
+      },
+      "seed": 5300029,
+      "selected_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+      "status": "PASS",
+      "validation_strategy_scores": {
+        "BASE_ROUTER_ONLY": {
+          "capability_accuracy": 0.23333333333333334,
+          "complexity": 0.1,
+          "n": 240,
+          "novelty": 0.1,
+          "result_accuracy": 0.23333333333333334,
+          "risk": 0.02,
+          "score": 0.23333333333333334,
+          "token": "opaque_4d78ae0f78c07ec7c5"
+        },
+        "BOUNDED_STREAM_CONTEXT_MAP": {
+          "capability_accuracy": 1.0,
+          "complexity": 0.3,
+          "n": 240,
+          "novelty": 0.95,
+          "result_accuracy": 1.0,
+          "risk": 0.05,
+          "score": 1.0,
+          "token": "opaque_63eaea062cf40870dc"
+        },
+        "GLOBAL_LAST_CAPABILITY": {
+          "capability_accuracy": 0.21666666666666667,
+          "complexity": 0.16,
+          "n": 240,
+          "novelty": 0.35,
+          "result_accuracy": 0.21666666666666667,
+          "risk": 0.18,
+          "score": 0.21666666666666667,
+          "token": "opaque_ee61483bed8a8923c8"
+        },
+        "LAST_STREAM_CAPABILITY": {
+          "capability_accuracy": 0.35833333333333334,
+          "complexity": 0.22,
+          "n": 240,
+          "novelty": 0.6,
+          "result_accuracy": 0.35833333333333334,
+          "risk": 0.04,
+          "score": 0.35833333333333334,
+          "token": "opaque_fec07abd4c35dc6fab"
+        },
+        "RESOURCE_FIRST_ON_AMBIGUITY": {
+          "capability_accuracy": 0.2875,
+          "complexity": 0.14,
+          "n": 240,
+          "novelty": 0.25,
+          "result_accuracy": 0.2875,
+          "risk": 0.22,
+          "score": 0.2875,
+          "token": "opaque_da77b7ad5a6454d8c4"
+        }
+      }
     }
   ],
   "generation": "G2_CANDIDATE_TRCG_V1",
@@ -211,11 +327,11 @@
   "new_shadow_capabilities": [
     "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1"
   ],
-  "next_required_capability": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_3_OF_5",
-  "pass_count": 1,
+  "next_required_capability": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_4_OF_7",
+  "pass_count": 2,
   "schema": "yado.g2.self_directed_development_state.v1",
-  "stable_pass_streak": 0,
-  "state_digest": "ea9dc8d93de412a4170d970f46a1b36ea5ac548b16667ba626e28bf4f16ac06f",
+  "stable_pass_streak": 1,
+  "state_digest": "6194de470449fefad7a6f2a724b312976e3b98b66ae7bcc63a2a9607b24c3d60",
   "status": "DEVELOPING",
-  "target_cycles": 5
+  "target_cycles": 7
 }

@@ -1,62 +1,68 @@
 {
   "base_router_same_blind": {
-    "capability_accuracy": 0.24027777777777778,
+    "capability_accuracy": 0.25277777777777777,
     "n": 720,
-    "result_accuracy": 0.24027777777777778,
-    "score": 0.24027777777777778
+    "result_accuracy": 0.25277777777777777,
+    "score": 0.25277777777777777
   },
-  "candidate_digest": "62963cda531e182724bc13c904db5d61d6b4af546ee41ada58176bf717c238db",
+  "candidate_digest": "40fab2d5a733bbf6a7713dfd550e02a4318d4f5644f63065f32dbd67294b4a06",
   "canonical_active": false,
   "component": {
+    "associative_stream_memory": "BOUNDED_LRU",
     "canonical_active": false,
-    "component_digest": "0d42671ee2dcaa6e4a23a3527806a15f330cf655d97f4b197482475c3c300e26",
+    "component_digest": "57f2f81c88da0143503a310325cc5a4d8ea07faff66278d9d9d0c586ccacf801",
     "component_id": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
     "family": "RECURRENT_CONTEXT_CONDITIONED_CAPABILITY_ROUTING",
     "max_lookback": 128,
+    "max_stream_contexts": 1024,
     "parent_runtime_modified": false,
     "schema": "yado.g2.contextual_stream_capability_adapter.v1"
   },
   "fresh_blind": {
-    "capability_accuracy": 0.2569444444444444,
+    "capability_accuracy": 1.0,
     "n": 720,
-    "result_accuracy": 0.2569444444444444,
-    "score": 0.2569444444444444
+    "result_accuracy": 1.0,
+    "score": 1.0
   },
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "memory_ablation_score": 0.23958333333333334,
+  "memory_ablation_score": 0.26458333333333334,
   "parent_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
   "promotion_applied": false,
   "representation_transfer": {
-    "capability_accuracy": 0.27380952380952384,
+    "capability_accuracy": 1.0,
     "n": 420,
-    "result_accuracy": 0.27380952380952384,
-    "score": 0.27380952380952384
+    "result_accuracy": 1.0,
+    "score": 1.0
   },
   "schema": "yado.g2.contextual_stream_capability_candidate.v1",
-  "selected_strategy": "LAST_STREAM_CAPABILITY",
+  "selected_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
   "selection_evidence": {
-    "candidate_count": 4,
+    "candidate_count": 5,
     "ranking": [
       {
-        "score": 0.32233333333333336,
-        "token": "opaque_b1be2c5379fe3aa4f0"
+        "score": 1.0010000000000001,
+        "token": "opaque_63eaea062cf40870dc"
+      },
+      {
+        "score": 0.35533333333333333,
+        "token": "opaque_fec07abd4c35dc6fab"
       },
       {
         "score": 0.23299999999999998,
-        "token": "opaque_2de453e3b49e896217"
+        "token": "opaque_da77b7ad5a6454d8c4"
       },
       {
-        "score": 0.23250000000000004,
-        "token": "opaque_a7c7b3745639e02ec9"
+        "score": 0.22633333333333333,
+        "token": "opaque_4d78ae0f78c07ec7c5"
       },
       {
-        "score": 0.20133333333333334,
-        "token": "opaque_c306d19f42ab1451cf"
+        "score": 0.1741666666666667,
+        "token": "opaque_ee61483bed8a8923c8"
       }
     ],
-    "selected_score": 0.32233333333333336,
-    "selected_token": "opaque_b1be2c5379fe3aa4f0"
+    "selected_score": 1.0010000000000001,
+    "selected_token": "opaque_63eaea062cf40870dc"
   },
   "semantic_boundary": "HOST-SCAFFOLDED BOUNDED STRATEGY BANK; G2 SELECTS BY FRESH EVIDENCE AND RECURRENT CAUSAL TESTS. NOT UNRESTRICTED SELF-MODIFYING CODE.",
-  "state": "WITHHOLD"
+  "state": "AUTHORIZED_FOR_G2_SHADOW_DEVELOPMENT"
 }
