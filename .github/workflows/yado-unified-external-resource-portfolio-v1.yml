@@ -1,0 +1,48 @@
+name: YADO Unified External Resource Portfolio V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "resources/yado-unified-external-resource-seed-v1.json"
+      - "runtime/yado_unified_external_resource_portfolio_v1.py"
+      - ".github/workflows/yado-unified-external-resource-portfolio-v1.yml"
+permissions:
+  contents: write
+concurrency:
+  group: yado-unified-resource-portfolio
+  cancel-in-progress: true
+jobs:
+  portfolio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Build unified resource portfolio
+        run: python runtime/yado_unified_external_resource_portfolio_v1.py
+      - name: Upload portfolio evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-unified-external-resource-portfolio-v1
+          path: |
+            runtime/yado_unified_external_resource_portfolio_v1_receipt.json
+            resources/yado-unified-external-resource-portfolio-v1.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist portfolio
+        run: |
+          mkdir -p receipts resources
+          cp runtime/yado_unified_external_resource_portfolio_v1_receipt.json receipts/yado-unified-external-resource-portfolio-v1-latest.json
+          git config user.name "YADO Resource Intelligence"
+          git config user.email "actions@users.noreply.github.com"
+          git add \
+            receipts/yado-unified-external-resource-portfolio-v1-latest.json \
+            resources/yado-unified-external-resource-portfolio-v1.json \
+            architecture/evolution-ledger.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist unified YADO external resource portfolio [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
