@@ -2,7 +2,7 @@
   "current_head": "G1_CANDIDATE_S2",
   "current_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
   "current_head_event_id": "E0024_G1_PROMOTION",
-  "event_count": 36,
+  "event_count": 37,
   "events": [
     {
       "canonical_mutation": false,
@@ -582,10 +582,26 @@
       "source_digest": "a4f2bd3395c96c797ae1e93ec707a2418e7cfb0f2d74f3e80eff93b02b804db9",
       "source_path": "receipts/yado-g1-post-resource-assisted-development-regression-admission-v1-run-33355904404.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_SUCCESSOR_GENESIS_FROM_G1_ENRICHED_HEAD_V1",
+      "effect": "G1_TRAINING_ROUND_1_WITHHOLD; STATE=TRAINING",
+      "event_hash": "bec2483c706667cdd46b9d96becc3aef9890c106c485c71dcc883e749d650eeb",
+      "event_id": "E0037_G1_TRAINING_ROUND_1",
+      "event_type": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+      "generation": "G1_CANDIDATE_S2",
+      "index": 36,
+      "parent_event_hash": "1a623fad704f65c80072532bd9506e233c501705bcb70f044d013a64df3b770f",
+      "promotion_applied": false,
+      "run_id": "33356298239",
+      "source_digest": "91f275206095d4d824efc4f4d442df13a13a92cc342c30ab5bce9458aef6bcfb",
+      "source_path": "receipts/yado-g1-multiround-training-v1-run-33356298239.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "1ffbba26ca1cbf5d37c9b92bddc18196fb1f3bb8453c78b3d6da387f366b0e35",
+  "ledger_digest": "3a785f06a440968713c240b76a436226344da67ae12a5b858f01655c7a18ccbb",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -618,5 +634,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "1a623fad704f65c80072532bd9506e233c501705bcb70f044d013a64df3b770f"
+  "tail_event_hash": "bec2483c706667cdd46b9d96becc3aef9890c106c485c71dcc883e749d650eeb"
 }
