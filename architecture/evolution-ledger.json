@@ -48,7 +48,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "1aab7c4353b455ec5e5ef1367326b28e521cf821208ec97afbfb0fd752c4a4fa",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 92,
+  "event_count": 93,
   "events": [
     {
       "canonical_mutation": false,
@@ -1552,14 +1552,30 @@
       "source_digest": "f870ebf9767c73fd19f3a6e7a9810fde89319f0e69cb438746d3259505b1bdc2",
       "source_path": "receipts/yado-mathematical-reasoning-canonical-integration-v1-run-33416690004.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=19; BLOCKING=2",
+      "event_hash": "92c95ce038a9e5a44b84d94e16057a72a8693c24109027e0a05aaa082a0acf83",
+      "event_id": "E0093_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 92,
+      "parent_event_hash": "a797a7dbb4e7b50866cde4b3c8b53222990992cfe67f7bc58b2cc9d7c16492e2",
+      "promotion_applied": false,
+      "run_id": "33416781057",
+      "source_digest": "86a883384fcab86d4a559f4e0ea74864146291b94db896fbd7b1257e8543e77f",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33416781057.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "499d572f960abda33eaa7056b71da2f3cf4705ce75fe059932c2db3f224003eb",
+  "ledger_digest": "cf6ddbca670d3eadded22101ad0f0c452fb5621924b937be83eabcb2f7fe38ab",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_MATHEMATICAL_REASONING_SELF_AUDIT_V1"
+    "REAL_WORLD_GENERALIZATION_SCOPE"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1588,5 +1604,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "a797a7dbb4e7b50866cde4b3c8b53222990992cfe67f7bc58b2cc9d7c16492e2"
+  "tail_event_hash": "92c95ce038a9e5a44b84d94e16057a72a8693c24109027e0a05aaa082a0acf83"
 }
