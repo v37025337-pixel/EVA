@@ -169,15 +169,21 @@ def make_payload_task(r,mode,sid,index,ambiguous=False):
 def evaluate_strategy(strategy_id,s,nstreams):
     r=random.Random(s);runtime=make_runtime();adapter=ContextualStreamCapabilityAdapterV1(runtime,strategy_id)
     modes=[CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES]
-    cap_ok=res_ok=0;total=0
+    prepared=[]
+    # Phase 1: establish many independent stream contexts.
     for i in range(nstreams):
         sid=f'S{epoch}_{s}_{i}'
         mode=modes[(i+r.randrange(0,4))%4]
-        prime,prime_exp=make_payload_task(r,mode,sid,i,False)
-        p=runtime.run(prime)
-        # prime itself must establish the correct stream context
-        if p['selected_capability']!=mode:raise RuntimeError('PRIME_ROUTING_FAILED')
+        prime,_=make_payload_task(r,mode,sid,i,False)
         follow,exp=make_payload_task(r,mode,sid,i+100000,True)
+        p=runtime.run(prime)
+        if p['selected_capability']!=mode:raise RuntimeError('PRIME_ROUTING_FAILED')
+        prepared.append((sid,mode,follow,exp))
+    # Phase 2: interleave/shuffle follow-ups so GLOBAL_LAST_CAPABILITY cannot
+    # masquerade as stream-specific recurrent memory.
+    r.shuffle(prepared)
+    cap_ok=res_ok=0;total=0
+    for sid,mode,follow,exp in prepared:
         out=adapter.run(follow)
         total+=1
         cap_ok+=out['context_selected_capability']==mode
