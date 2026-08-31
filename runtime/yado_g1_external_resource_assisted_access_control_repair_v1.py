@@ -52,14 +52,32 @@ tasks['ACCESS_CONTROL_HISTORICAL']={
 }
 
 # Fresh relation tasks. Blind identifiers are disjoint so memorized equality values cannot transfer.
-def rel_task(name,seed,base_fields,base_vals,law,rel_fields):
-    train_pool={f:[f'T{i}' for i in range(10)] for f in rel_fields}
-    val_pool={f:[f'T{i}' for i in range(5,15)] for f in rel_fields}
-    blind_pool={f:[f'T{i}' for i in range(15,35)] for f in rel_fields}
+# Equality/inequality cases are intentionally represented often enough for a meaningful causal ablation.
+def relation_cases(seed,n,base_fields,base_vals,law,pairs,pool):
+    r=random.Random(seed);out=[]
+    relation_fields=sorted(set(f for pair in pairs for f in pair))
+    for _ in range(n):
+        x={}
+        for f in base_fields:
+            x[f]=r.choice(pool) if f in relation_fields else r.choice(base_vals[f])
+        for a,b in pairs:
+            if r.random()<0.40:
+                x[b]=x[a]
+            else:
+                choices=[v for v in pool if v!=x[a]]
+                x[b]=r.choice(choices)
+        x['unseen_noise_a']=r.randint(-20,20);x['unseen_noise_b']=r.choice(['Z0','Z1','Z2','Z3','Z4'])
+        out.append({'input':x,'expected':law(x)})
+    return out
+
+def rel_task(name,seed,base_fields,base_vals,law,pairs):
+    train_pool=[f'T{i}' for i in range(10)]
+    val_pool=[f'T{i}' for i in range(5,15)]
+    blind_pool=[f'T{i}' for i in range(15,35)]
     tasks[name]={
-      'train':cases(seed,720,base_fields,base_vals,law,train_pool),
-      'val':cases(seed+1,360,base_fields,base_vals,law,val_pool),
-      'blind':cases(seed+2,900,base_fields,base_vals,law,blind_pool)
+      'train':relation_cases(seed,720,base_fields,base_vals,law,pairs,train_pool),
+      'val':relation_cases(seed+1,360,base_fields,base_vals,law,pairs,val_pool),
+      'blind':relation_cases(seed+2,900,base_fields,base_vals,law,pairs,blind_pool)
     }
 
 fields=['actor_id','owner_id','actor_team','resource_team','role','classification','device_trusted']
@@ -69,7 +87,7 @@ def doc(x):
     if x['actor_team']==x['resource_team'] and x['role']=='EDITOR' and x['classification']=='INTERNAL' and x['device_trusted']:return 'ALLOW'
     if x['role']=='ADMIN' and x['device_trusted']:return 'ALLOW'
     return 'DENY'
-rel_task('DOCUMENT_RELATION_POLICY',71000,fields,vals,doc,['actor_id','owner_id','actor_team','resource_team'])
+rel_task('DOCUMENT_RELATION_POLICY',71000,fields,vals,doc,[('actor_id','owner_id'),('actor_team','resource_team')])
 
 fields=['requester','service_owner','requester_team','service_team','role','tests_pass','environment']
 vals={'requester':['x'],'service_owner':['x'],'requester_team':['x'],'service_team':['x'],'role':['DEV','RELEASE_ADMIN','AUDITOR'],'tests_pass':[True,False],'environment':['DEV','STAGING','PROD']}
@@ -78,7 +96,7 @@ def deploy(x):
     if x['requester']==x['service_owner'] and x['tests_pass'] and x['environment']=='STAGING':return 'APPROVE'
     if x['requester_team']==x['service_team'] and x['role']=='DEV' and x['tests_pass'] and x['environment']=='DEV':return 'APPROVE'
     return 'DENY'
-rel_task('DEPLOY_RELATION_POLICY',72000,fields,vals,deploy,['requester','service_owner','requester_team','service_team'])
+rel_task('DEPLOY_RELATION_POLICY',72000,fields,vals,deploy,[('requester','service_owner'),('requester_team','service_team')])
 
 fields=['principal_lab','dataset_lab','principal_id','dataset_owner','role','ethics_ok','purpose']
 vals={'principal_lab':['x'],'dataset_lab':['x'],'principal_id':['x'],'dataset_owner':['x'],'role':['RESEARCHER','DATA_STEWARD','GUEST'],'ethics_ok':[True,False],'purpose':['RESEARCH','COMMERCIAL','TEACHING']}
@@ -87,7 +105,7 @@ def science(x):
     if x['principal_id']==x['dataset_owner'] and x['ethics_ok']:return 'ACCESS'
     if x['principal_lab']==x['dataset_lab'] and x['role']=='RESEARCHER' and x['ethics_ok'] and x['purpose']=='RESEARCH':return 'ACCESS'
     return 'DENY'
-rel_task('SCIENTIFIC_DATA_RELATION_POLICY',73000,fields,vals,science,['principal_lab','dataset_lab','principal_id','dataset_owner'])
+rel_task('SCIENTIFIC_DATA_RELATION_POLICY',73000,fields,vals,science,[('principal_lab','dataset_lab'),('principal_id','dataset_owner')])
 
 fields=['controller_zone','device_zone','controller_id','device_owner','role','authenticated','severity']
 vals={'controller_zone':['x'],'device_zone':['x'],'controller_id':['x'],'device_owner':['x'],'role':['OPERATOR','SAFETY_ADMIN','OBSERVER'],'authenticated':[True,False],'severity':['LOW','MEDIUM','HIGH']}
@@ -96,7 +114,7 @@ def control(x):
     if x['controller_id']==x['device_owner'] and x['authenticated'] and x['severity']!='LOW':return 'EXECUTE'
     if x['controller_zone']==x['device_zone'] and x['role']=='OPERATOR' and x['authenticated'] and x['severity']=='HIGH':return 'EXECUTE'
     return 'BLOCK'
-rel_task('CONTROL_RELATION_POLICY',74000,fields,vals,control,['controller_zone','device_zone','controller_id','device_owner'])
+rel_task('CONTROL_RELATION_POLICY',74000,fields,vals,control,[('controller_zone','device_zone'),('controller_id','device_owner')])
 
 def relation_ablated_acc(p,cases):
     ok=0
@@ -134,7 +152,7 @@ for name,d in tasks.items():
 
 hist=results['ACCESS_CONTROL_HISTORICAL']
 relation_tasks=[v for k,v in results.items() if k!='ACCESS_CONTROL_HISTORICAL']
-relation_causal=all(v['fresh_blind']>v['relation_ablation']+.02 for v in relation_tasks)
+relation_causal=all(v['fresh_blind']>v['relation_ablation']+.08 for v in relation_tasks)
 all_pass=all(v['pass'] for v in results.values()) and hist['fresh_blind']>=.995 and hist['gain_over_old']>.01 and relation_causal
 
 component={
@@ -161,6 +179,7 @@ report={
  'github_run_id':os.getenv('GITHUB_RUN_ID'),'github_sha':os.getenv('GITHUB_SHA'),
  'generation':ledger['current_head'],'resource_scout_digest':scout['receipt_sha256'],
  'resource_derived_hypothesis':hyp[0],
+ 'prior_withheld_attempts_path':'receipts/yado-g1-access-control-repair-withheld-attempts-recovered.json',
  'results':results,
  'summary':{
    'task_count':len(results),'tasks_passed':sum(v['pass'] for v in results.values()),
