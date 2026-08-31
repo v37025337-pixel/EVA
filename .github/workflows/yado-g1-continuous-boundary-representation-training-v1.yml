@@ -1,0 +1,47 @@
+name: YADO G1 Continuous Boundary Representation Training V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_numeric_boundary_and_representation_learner_v1.py"
+      - "runtime/yado_g1_repair_continuous_boundary_and_representation_v1.py"
+      - ".github/workflows/yado-g1-continuous-boundary-representation-training-v1.yml"
+permissions:
+  contents: write
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconstruct verified RC8 v36
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install verified dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run five cumulative G1 training passes
+        run: python runtime/yado_g1_repair_continuous_boundary_and_representation_v1.py
+      - name: Upload training evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g1-continuous-boundary-representation-training-v1
+          path: |
+            runtime/yado_g1_repair_continuous_boundary_and_representation_v1_receipt.json
+            runtime/g1_repair_continuous_boundary_and_representation_v1/g1-candidate-s2-repaired-continuous-bundle-v3.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist training evidence
+        run: |
+          mkdir -p receipts candidates/g1-s2-repaired-v3
+          cp runtime/yado_g1_repair_continuous_boundary_and_representation_v1_receipt.json receipts/yado-g1-repair-continuous-boundary-and-representation-v1-latest.json
+          cp runtime/g1_repair_continuous_boundary_and_representation_v1/g1-candidate-s2-repaired-continuous-bundle-v3.json candidates/g1-s2-repaired-v3/bundle.json
+          git config user.name "YADO G1 Counterexample Trainer"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-g1-repair-continuous-boundary-and-representation-v1-latest.json candidates/g1-s2-repaired-v3/bundle.json architecture/evolution-ledger.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G1 continuous boundary representation training [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
