@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import copy,hashlib,json
 
 from yado_budgeted_stage_policy_v1 import BudgetedStagePolicyV1,SearchStage
+from yado_core_v2_1 import BoundedRuleSandbox
 from yado_neutral_evidence_profile_selector_v1 import NeutralEvidenceProfileSelectorV1,EvidenceCandidate
 
 CAP_CONJ='ALG-CONJUNCTIVE-RULE-INDUCER-V1'
@@ -66,7 +67,13 @@ class G2TypedRecurrentCapabilityGraphRuntimeV1:
         selected=self.router.fallback_output if ablated_router else self.router.execute(descriptor)
         result=None
         if selected==CAP_CONJ:
-            result=self.scalar.execute(task['payload'])
+            # Cross-generation execution adapter: G1 conjunctive programs are
+            # RuleProgram objects executed by the proven bounded sandbox rather
+            # than by a method on the program itself.
+            if hasattr(self.scalar,'execute'):
+                result=self.scalar.execute(task['payload'])
+            else:
+                result=BoundedRuleSandbox.execute(self.scalar,task['payload'])
         elif selected==CAP_REL:
             result=self.relation.execute(task['payload'])
         elif selected==CAP_BUD:
