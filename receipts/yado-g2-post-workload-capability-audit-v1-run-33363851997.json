@@ -1,0 +1,107 @@
+{
+  "audit_conclusion": "G2 IS STABLE INSIDE THE CURRENT BOUNDED STRUCTURED TEST REGION, BUT REAL-WORLD/UNSTRUCTURED TRANSFER IS NOT YET PROVEN.",
+  "canonical_mutation": false,
+  "coverage": {
+    "burnin_operations_total": 70500,
+    "burnin_runs": 5,
+    "development_cycles": 7,
+    "tested_domains": [
+      "PROGRAMMING_POLICY",
+      "MATHEMATICS_PROOF_GATE",
+      "EXACT_SCIENCE_EVIDENCE_POLICY",
+      "CAUSAL_PLANNING",
+      "MULTI_AGENT_COORDINATION"
+    ],
+    "workload_runs": 3,
+    "workload_steps_total": 72000
+  },
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
+  "github_run_id": "33363851997",
+  "github_sha": "d584ba91c3977afe4f411de22ab3c5bc219fdcb4",
+  "high_unproven_count": 5,
+  "limitations": [
+    {
+      "evidence": "Applied workload receipt explicitly says bounded synthetic applied workloads.",
+      "id": "REAL_UNSTRUCTURED_INPUT_TRANSFER",
+      "required_test": "Feed raw/unstructured real task descriptions and require autonomous representation/routing without host-provided structured fields.",
+      "severity": "HIGH",
+      "status": "NOT_PROVEN"
+    },
+    {
+      "evidence": "Programming workload models release/test/budget policies but is not a real compiler/runtime benchmark.",
+      "id": "REAL_PROGRAM_EXECUTION_TRANSFER",
+      "required_test": "Run fresh real code tasks with executable tests, hidden cases, failure repair, and regression.",
+      "severity": "HIGH",
+      "status": "NOT_PROVEN"
+    },
+    {
+      "evidence": "Mathematics workload uses symbolic proof-gate contracts; not theorem proving.",
+      "id": "REAL_MATHEMATICAL_REASONING_TRANSFER",
+      "required_test": "Use fresh formal or checkable mathematical problems with independent answer verification.",
+      "severity": "HIGH",
+      "status": "NOT_PROVEN"
+    },
+    {
+      "evidence": "Exact-science workload uses evidence-policy simulation, not external scientific datasets or measurements.",
+      "id": "REAL_SCIENCE_DATA_TRANSFER",
+      "required_test": "Use public datasets/documents with quantitative predictions or evidence integration verified independently.",
+      "severity": "HIGH",
+      "status": "NOT_PROVEN"
+    },
+    {
+      "evidence": "Resource routing is proven against stored portfolio; live availability/content drift not tested in workload suite.",
+      "id": "LIVE_EXTERNAL_RESOURCE_ROBUSTNESS",
+      "required_test": "Live-fetch a bounded sample of eligible public resources and handle unavailable/stale/conflicting sources.",
+      "severity": "MEDIUM",
+      "status": "NOT_PROVEN"
+    },
+    {
+      "evidence": "LRU semantics verified exactly at 1024; older contexts are intentionally evicted.",
+      "id": "STREAM_MEMORY_BEYOND_1024_ACTIVE_CONTEXTS",
+      "required_test": "Either accept/document capacity bound or synthesize hierarchical/persistent context retrieval before claiming broader memory.",
+      "severity": "MEDIUM",
+      "status": "BOUNDED_LIMITATION"
+    },
+    {
+      "evidence": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1 remains canonical_active=false.",
+      "id": "CONTEXT_ADAPTER_CANONICALIZATION",
+      "required_test": "Independent fresh admission gate before integrating into canonical G2 or inheriting to G3.",
+      "severity": "MEDIUM",
+      "status": "SHADOW_ONLY"
+    },
+    {
+      "evidence": "Current developmental task generators and strategy bank are host-scaffolded bounded environments.",
+      "id": "HOST_SCAFFOLD_DEPENDENCE",
+      "required_test": "Require G2 to derive task representation/strategy from less prestructured inputs and compare against host-scaffold ablation.",
+      "severity": "HIGH",
+      "status": "NOT_PROVEN"
+    }
+  ],
+  "next_required_capability": "G2_REAL_WORLD_TRANSFER_BENCHMARK_V1",
+  "promotion_applied": false,
+  "proven_region": {
+    "applied_min_domain_accuracy": 1.0,
+    "applied_workload_pass_streak": 3,
+    "burnin_min_accuracy": 1.0,
+    "burnin_pass_streak": 5,
+    "canonical_g2_integrity": 1.0,
+    "capability_routing": 1.0,
+    "contextual_stream_memory_fresh": 1.0,
+    "contextual_stream_memory_representation_transfer": 1.0,
+    "end_to_end_runtime": 1.0,
+    "intelligence": 1.0,
+    "logic": 1.0,
+    "recurrent_memory_base": 1.0,
+    "relational_policy": 1.0,
+    "resource_intelligence_structured": 1.0,
+    "rollback": 1.0,
+    "scalar_rule_induction": 1.0,
+    "thinking": 0.9996875
+  },
+  "receipt_sha256": "43d2cbef225447584e3b92180c58b69ef2be83f2cce3a86ab8550e644b4cb3a5",
+  "schema": "yado.g2.post_workload_capability_audit.receipt.v1",
+  "semantic_boundary": "AUDIT DISTINGUISHES VERIFIED SOFTWARE CAPABILITIES FROM UNPROVEN REAL-WORLD GENERALIZATION. IT DOES NOT CLAIM AGI, SUBJECTIVE CONSCIOUSNESS, OR GENERAL THEOREM/PROGRAM/SCIENCE COMPETENCE.",
+  "status": "PASS_G2_POST_WORKLOAD_CAPABILITY_AUDIT_V1"
+}
