@@ -2,7 +2,7 @@
   "current_head": "G1_CANDIDATE_S2",
   "current_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
   "current_head_event_id": "E0024_G1_PROMOTION",
-  "event_count": 25,
+  "event_count": 26,
   "events": [
     {
       "canonical_mutation": false,
@@ -406,10 +406,26 @@
       "source_digest": "aed269bfc5f9a07c827572cd1126e3e08815f3d691861629bedf3526c30dfd42",
       "source_path": "receipts/yado-free-for-dev-capability-scout-v1-latest.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "effect": "ACCESS_CONTROL_REPAIR_WITHHELD",
+      "event_hash": "0d89cedea700d327a41637eb58768999d1e909b47073ddb641f9268108af79c9",
+      "event_id": "E0026_G1_ACCESS_CONTROL_RESOURCE_ASSISTED_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "index": 25,
+      "parent_event_hash": "5c5bdf8799e904d1a8f19d8258718f242ab9705cdc79ca671afa11f479b6974e",
+      "promotion_applied": false,
+      "run_id": "33348209373",
+      "source_digest": "e22ace6e4d8f9df83ebcf3d17f0afbdcfaae190deeb73b04910c4127a8135258",
+      "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-latest.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "afa525a2d3d551bbe1a1cd62400b35cc631979d7e9f3123fa3150183f483969a",
+  "ledger_digest": "4bd96fc7a51f903fcfebc40f92af3088acd3693d1ab3d890914749deecd54b86",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -438,5 +454,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "5c5bdf8799e904d1a8f19d8258718f242ab9705cdc79ca671afa11f479b6974e"
+  "tail_event_hash": "0d89cedea700d327a41637eb58768999d1e909b47073ddb641f9268108af79c9"
 }
