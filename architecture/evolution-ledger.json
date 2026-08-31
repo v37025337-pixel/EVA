@@ -56,7 +56,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "a860f96f6903c948d7b6832c7b4c70d85a6c12f766b6aed994bfae396f1ae1bd",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 106,
+  "event_count": 107,
   "events": [
     {
       "canonical_mutation": false,
@@ -1793,14 +1793,30 @@
       "source_digest": "97a7d634195c19834c296509b54752940db9355d23465dca7a7daeee4cf23ab2",
       "source_path": "receipts/yado-science-data-native-canonical-integration-v1-run-33436389858.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=20; BLOCKING=2",
+      "event_hash": "0452fb362f3f91e5beca470a5a9651f1dc228087e645284cf36f4a2ac391660a",
+      "event_id": "E0107_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 106,
+      "parent_event_hash": "a6ed029c9543fe6143e7e55010a4c2acc3cdcc8541941f904fde1b26767144d2",
+      "promotion_applied": false,
+      "run_id": "33436481532",
+      "source_digest": "d6b7f9ea7d6c7b700c1002cb41dea27ddc74d6af60ef45538fbbdfbb7b2d45dc",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33436481532.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "4938643176c54f2d6ad4fcf0e1ba1eff8ed8494aa979c6918ef3cd616724d01f",
+  "ledger_digest": "70577d7f955524526e1daafdfd6d42fc70b64bf710b22fca9c4fa632a494ca3f",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_SCIENCE_DATA_SELF_AUDIT_V1"
+    "REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1829,5 +1845,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "a6ed029c9543fe6143e7e55010a4c2acc3cdcc8541941f904fde1b26767144d2"
+  "tail_event_hash": "0452fb362f3f91e5beca470a5a9651f1dc228087e645284cf36f4a2ac391660a"
 }
