@@ -21,7 +21,14 @@ def load(p):return json.loads(p.read_text(encoding='utf-8'))
 
 head=load(HEAD);ledger=load(LEDGER);meta=load(META)
 validate_ledger_v2(ledger)
-if ledger.get('open_deficits')!=['THINKING_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1']:raise RuntimeError('UNEXPECTED_FRONTIER')
+allowed=[['THINKING_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1'],['THINKING_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2']]
+if ledger.get('open_deficits') not in allowed:raise RuntimeError('UNEXPECTED_FRONTIER')
+if ledger.get('open_deficits')==['THINKING_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2']:
+    prev=REPO/'receipts'/'yado-thinking-architectural-ceiling-fresh-admission-v1-run-33441644452.json'
+    if not prev.exists():raise RuntimeError('GATE_REPAIR_RETRY_WITHOUT_PRIOR_WITHHOLD')
+    pr=load(prev)
+    if pr.get('status')!='WITHHOLD_THINKING_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1' or pr.get('candidate_source_sha256')!=meta.get('candidate_source_sha256'):
+        raise RuntimeError('GATE_REPAIR_RETRY_SOURCE_MISMATCH')
 if meta.get('state')!='AUTHORIZED_FOR_SHADOW_ADMISSION':raise RuntimeError('CANDIDATE_NOT_AUTHORIZED')
 if fsha(SRC)!=meta.get('candidate_source_sha256'):raise RuntimeError('SOURCE_DRIFT')
 if ledger.get('current_head_digest')!=head.get('canonical_head_digest'):raise RuntimeError('HEAD_LEDGER_MISMATCH')
@@ -63,8 +70,8 @@ for i in range(d_n):
     stages=[Stage(ids[0],1,.08,1,True,.1,False,())]
     for j in range(1,5):
         stages.append(Stage(ids[j],1,.16,1,False,.1,False,(ids[j-1],)))
-    p=Planner.next_after_observation(.28,.80,6.0,stages,ids[0],.08)
-    d_ok+=p.action==ids[1] and p.sequence[:4]==ids[1:5] and p.expected_confidence>=.80-1e-9
+    p=Planner.next_after_observation(.28,.96,6.0,stages,ids[0],.08)
+    d_ok+=p.action==ids[1] and p.sequence[:4]==ids[1:5] and p.expected_confidence>=.96-1e-9
 dependency_score=d_ok/d_n
 
 # Fresh 4: mixed signed setback + dependency chain + bounded budget.
