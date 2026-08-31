@@ -1,7 +1,8 @@
 {
-  "current_head": "G0_RC8_V36",
-  "current_head_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
-  "event_count": 23,
+  "current_head": "G1_CANDIDATE_S2",
+  "current_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
+  "current_head_event_id": "E0024_G1_PROMOTION",
+  "event_count": 24,
   "events": [
     {
       "canonical_mutation": false,
@@ -370,25 +371,45 @@
       "source_digest": "ff39d5208c4165778e12b22812ec88f5b778187b1a1f8068b21046b53d2efb4f",
       "source_path": "receipts/yado-g1-s2-full-cross-domain-regression-causal-gate-v2-latest.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "G1_S2_PROMOTION_DECISION_GATE",
+      "effect": "CURRENT_HEAD_TRANSITION_G0_TO_G1_AFTER_FULL_CAUSAL_CROSS_DOMAIN_GATE",
+      "event_hash": "ce8949f4a32666f2309d6189d89c4216576ca38dbcdc9ebc43a6d526de5d33a1",
+      "event_id": "E0024_G1_PROMOTION",
+      "event_type": "GENERATION_HEAD_TRANSITION",
+      "from_generation": "G0_RC8_V36",
+      "generation": "G1_CANDIDATE_S2",
+      "index": 23,
+      "new_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
+      "parent_event_hash": "311e74b6c5122787462e77c4e261e9c847e249b6caff3f7e4045b8e060e003bd",
+      "promotion_applied": true,
+      "run_id": "33347635985",
+      "source_digest": "42fd394392d820e7bb1a0d6f91e3fb83e1ebba8670007e4f5c631f9da9fedd95",
+      "source_path": "receipts/yado-g1-s2-promotion-decision-gate-v1-latest.json",
+      "status": "PROMOTED",
+      "to_generation": "G1_CANDIDATE_S2"
     }
   ],
-  "invariant": "APPEND_ONLY_HASH_CHAIN; EXACTLY_ONE_PROMOTED_HEAD",
-  "ledger_digest": "1d59118047374c7dbffc8a0639e44ded5132a053cea12bd837c29d0722dc2f73",
+  "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
+  "ledger_digest": "927d5dda1a6e71dc18abab87fb23ee8f8c68fa4ee5872c1917b0c9dd2f480987",
+  "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
     "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
-    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
-    "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE",
-    "G1_S2_PROMOTION_DECISION_GATE"
+    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
     "CONDITIONAL_FILTERING_OF_PRIORITIES",
     "DISCONNECTED_VERSION_HISTORY",
+    "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE",
+    "G1_S2_PROMOTION_DECISION_GATE",
     "NATIVE_ALGORITHM_BANK_ADMISSION_AND_META_SELECTION",
     "UNBOUNDED_EVOLUTION_SEARCH"
   ],
-  "schema": "yado.causal_evolution_ledger.v1",
+  "schema": "yado.causal_evolution_ledger.v2",
   "shadow_resolved_deficits": [
     "CONDITIONAL_FILTERING_OF_PRIORITIES",
     "G1_INHERITABLE_SHADOW_ALGORITHM_CAPABILITY",
@@ -400,5 +421,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "311e74b6c5122787462e77c4e261e9c847e249b6caff3f7e4045b8e060e003bd"
+  "tail_event_hash": "ce8949f4a32666f2309d6189d89c4216576ca38dbcdc9ebc43a6d526de5d33a1"
 }
