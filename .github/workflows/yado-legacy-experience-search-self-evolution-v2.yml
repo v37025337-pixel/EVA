@@ -1,0 +1,62 @@
+name: YADO Legacy Experience Search Self Evolution V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-legacy-experience-search-evolution-v2-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-legacy-experience-search-evolution-v2
+  cancel-in-progress: true
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run search-layer self-evolution
+        id: evolve
+        continue-on-error: true
+        run: python runtime/yado_legacy_experience_search_self_evolution_v2.py
+      - name: Upload evolved V2 and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-legacy-experience-search-evolution-v2
+          path: |
+            runtime/yado_legacy_experience_search_self_evolution_v2_receipt.json
+            candidates/g2-self-evolution/legacy_experience_retriever_v2.py
+            candidates/g2-self-evolution/legacy_experience_retriever_v2.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist evolved V2 and evidence
+        if: always()
+        run: |
+          mkdir -p receipts candidates/g2-self-evolution
+          if [ -f runtime/yado_legacy_experience_search_self_evolution_v2_receipt.json ]; then
+            cp runtime/yado_legacy_experience_search_self_evolution_v2_receipt.json "receipts/yado-legacy-experience-search-self-evolution-v2-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Search Code Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          for f in candidates/g2-self-evolution/legacy_experience_retriever_v2.py candidates/g2-self-evolution/legacy_experience_retriever_v2.json "receipts/yado-legacy-experience-search-self-evolution-v2-run-${GITHUB_RUN_ID}.json"; do [ -f "$f" ] && files+=("$f"); done
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist YADO search-layer self-evolution V2 [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Preserve semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_legacy_experience_search_self_evolution_v2_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_SEARCH_EVOLUTION_RECEIPT")
+          r=json.loads(p.read_text())
+          print(r["status"])
+          PY
