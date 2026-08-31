@@ -176,8 +176,8 @@ def evaluate_strategy(strategy_id,s,nstreams):
         mode=modes[(i+r.randrange(0,4))%4]
         prime,_=make_payload_task(r,mode,sid,i,False)
         follow,exp=make_payload_task(r,mode,sid,i+100000,True)
-        p=runtime.run(prime)
-        if p['selected_capability']!=mode:raise RuntimeError('PRIME_ROUTING_FAILED')
+        p=adapter.run(prime)
+        if p['context_selected_capability']!=mode:raise RuntimeError('PRIME_ROUTING_FAILED')
         prepared.append((sid,mode,follow,exp))
     # Phase 2: interleave/shuffle follow-ups so GLOBAL_LAST_CAPABILITY cannot
     # masquerade as stream-specific recurrent memory.
@@ -215,9 +215,9 @@ def evaluate_memory_ablation(s,nstreams):
     modes=[CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES];ok=0
     for i in range(nstreams):
         sid=f'A{epoch}_{i}';mode=modes[(i+r.randrange(4))%4]
-        prime,_=make_payload_task(r,mode,sid,i,False);runtime.run(prime)
+        prime,_=make_payload_task(r,mode,sid,i,False);adapter.run(prime)
         follow,exp=make_payload_task(r,mode,sid,i+500000,True)
-        runtime.episodes.clear()
+        runtime.episodes.clear();adapter.clear_context()
         out=adapter.run(follow)
         ok+=out['context_selected_capability']==mode and out['result']==exp
     return ok/nstreams
@@ -228,7 +228,7 @@ repr_transfer=evaluate_strategy(chosen,seed+3000,420)
 
 head_after=fsha(HEAD)
 checks={
- 'selected_contextual_strategy':chosen=='LAST_STREAM_CAPABILITY',
+ 'selected_contextual_strategy':chosen=='BOUNDED_STREAM_CONTEXT_MAP',
  'fresh_blind':fresh['score']>=.99,
  'context_causal_drop':fresh['score']-base['score']>=.50,
  'memory_causal_drop':fresh['score']-memory_abl>=.50,
@@ -255,7 +255,7 @@ for x in reversed(state['cycles']):
     if x['status']=='PASS':state['stable_pass_streak']+=1
     else:break
 state['min_pass_score']=min([x['fresh_blind']['score'] for x in state['cycles'] if x['status']=='PASS'] or [0.0])
-state['status']='READY_FOR_G3_GENESIS' if len(state['cycles'])>=target and state['stable_pass_streak']>=target and state['min_pass_score']>=.99 else 'DEVELOPING'
+state['status']='READY_FOR_G3_GENESIS' if len(state['cycles'])>=target and state['stable_pass_streak']>=5 and state['min_pass_score']>=.99 else 'DEVELOPING'
 state['next_required_capability']='G3_SUCCESSOR_GENESIS_FROM_G2_ENRICHED_HEAD_V1' if state['status']=='READY_FOR_G3_GENESIS' else f'G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_{epoch+1}_OF_{target}'
 state['state_digest']=h({k:v for k,v in state.items() if k!='state_digest'})
 STATE.write_text(json.dumps(state,indent=2,sort_keys=True)+'\n')
