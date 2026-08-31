@@ -1,0 +1,49 @@
+name: YADO Free For Dev Capability Scout V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_free_for_dev_capability_scout_v1.py"
+      - ".github/workflows/yado-free-for-dev-capability-scout-v1.yml"
+permissions:
+  contents: write
+concurrency:
+  group: yado-free-for-dev-capability-scout
+  cancel-in-progress: true
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run free-for-dev capability scout from current G1 head
+        run: python runtime/yado_free_for_dev_capability_scout_v1.py
+      - name: Upload scout evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-free-for-dev-capability-scout-v1
+          path: |
+            runtime/yado_free_for_dev_capability_scout_v1_receipt.json
+            resources/free-for-dev-source-v1.json
+            resources/free-for-dev-selected-v1.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist scout evidence
+        run: |
+          mkdir -p receipts resources
+          cp runtime/yado_free_for_dev_capability_scout_v1_receipt.json receipts/yado-free-for-dev-capability-scout-v1-latest.json
+          git config user.name "YADO G1 Resource Scout"
+          git config user.email "actions@users.noreply.github.com"
+          git add \
+            receipts/yado-free-for-dev-capability-scout-v1-latest.json \
+            resources/free-for-dev-source-v1.json \
+            resources/free-for-dev-selected-v1.json \
+            architecture/evolution-ledger.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G1 free-for-dev capability scout evidence [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
