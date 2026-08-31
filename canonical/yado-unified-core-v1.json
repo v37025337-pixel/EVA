@@ -41,7 +41,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "0dac5f7a8614f1fa0526f95d8a552ebfbd49e4fcce5e9c24db33e482056d322e",
+  "core_digest": "265227253b5db775868fd889fd469ff5e26448a857ecbe4fd7d30667eb979315",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -95,7 +95,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "UNIFIED_CORE_POST_HEAD_CAPABILITY_BINDING_AUDIT_V1",
+  "current_frontier": "UNIFIED_CORE_POST_LEGACY_PROVENANCE_SELF_AUDIT_V1",
   "deep_self_audit": {
     "candidate_digest": "1f63d96b7b396add55769c7212c739a2924f97f7772ab25a67e280f0670f0902",
     "canonical_integration_run_id": "33436928912",
@@ -107,7 +107,7 @@
     "source_sha256": "6c766310286280ee9c69a8abe373ad68adb1e43b0602b293cf691a68e9c101e0"
   },
   "experience_registry": "canonical/yado-unified-experience-registry-v1.json",
-  "experience_registry_digest": "af6f482d828957fbc0343cf3d81e90d3efdff168367cfb1b695ef5f16b4a58cf",
+  "experience_registry_digest": "63ee5601c1931fad629f723fb6516886b22e40da65ecef7a462041b39426c1ef",
   "g3_genesis_performed": false,
   "generation": "G2_CANDIDATE_TRCG_V1",
   "invariants": [
@@ -119,6 +119,16 @@
     "SHADOW_CAPABILITIES_STAY_SHADOW_UNTIL_ADMISSION",
     "G3_GENESIS_BLOCKED_DURING_CONSOLIDATION"
   ],
+  "legacy_experience_provenance": {
+    "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+    "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+    "gate_run_id": "33438207406",
+    "host_summary_class": "HOST_CURATED_REGISTRY_SUMMARY",
+    "legacy_branch_coverage": 13,
+    "rederived_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE",
+    "registered_path_coverage": 1.0,
+    "semantic_equivalence_claimed": false
+  },
   "legacy_experience_retrieval": {
     "candidate_digest": "3d63b6de2e8add2033d1fad5320e1dc05e069507341982772b5ea673e4b6df2a",
     "component_id": "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
@@ -169,6 +179,7 @@
         "bounded_stream_context",
         "counterexample_memory",
         "episodic_memory",
+        "legacy_experience_provenance_separation",
         "legacy_experience_retrieval",
         "persistent_counterexample_lineage_memory"
       ],
@@ -295,7 +306,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "b40ba382d8bb9485ae9ee2083e7ffb0695be95dfc2144aa08a7d7a5263a5ee79",
+  "runtime_sha256": "911ba2905e4fd496f39ff95452e400b8d91427f66bee9dcbcacc40b64dee6005",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {

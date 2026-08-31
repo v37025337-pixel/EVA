@@ -109,6 +109,8 @@ class UnifiedYADOCoreV1:
                     'score':score,
                     'tags':entry.get('tags',[]),
                     'lessons':entry.get('lessons',[]),
+                    'lesson_provenance':entry.get('lesson_provenance'),
+                    'rederived_evidence':entry.get('rederived_evidence'),
                     'evidence':entry.get('evidence',[]),
                     'claim_boundary':entry.get('claim_boundary'),
                 })
