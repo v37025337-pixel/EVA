@@ -1,0 +1,160 @@
+{
+  "generation": "G1_CANDIDATE_S2",
+  "mechanism_hypotheses": [
+    {
+      "candidate_algorithm_family": "BOUNDED_DNF_PLUS_RELATION_POLICY_INDUCTION",
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "evidence_terms": [
+        "RBAC",
+        "ABAC",
+        "ReBAC"
+      ],
+      "hypothesis": "CURRENT_CONJUNCTIVE_POLICY_FAMILY_IS_TOO_NARROW; ADD_BOUNDED_DISJUNCTIVE_AND_RELATIONAL_POLICY_COMPOSITION"
+    },
+    {
+      "candidate_algorithm_family": "BUDGETED_STAGE_POLICY",
+      "deficit": "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
+      "evidence_terms": [
+        "cost",
+        "quota/free-tier",
+        "staged execution"
+      ],
+      "hypothesis": "SEARCH_SHOULD_MODEL_RESOURCE_COST_AND_QUOTA_AS_FIRST_CLASS_STATE_AND_ESCALATE_ONLY_AFTER_CHEAPER_STAGE_FAILS"
+    }
+  ],
+  "selected_resources": {
+    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE": [
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "Authentication, Authorization, and User Management",
+        "description": "Auhtorization-as-a-service provider platform enabling RBAC, ABAC, and ReBAC for scalable microservices with real-time updates and a no-code policy UI. A 1000 Monthly Active User free tier.",
+        "name": "Permit.io",
+        "score": 22.0,
+        "url": "https://permit.io"
+      },
+      {
+        "access_class": "RESEARCH_REFERENCE",
+        "category": "Authentication, Authorization, and User Management",
+        "description": "A complete authorization management system for authoring, testing, and deploying access policies. Fine-grained authorization and access control, free up to 100 monthly active principals.",
+        "name": "Cerbos Hub",
+        "score": 16.0,
+        "url": "https://www.cerbos.dev/product-cerbos-hub"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "Authentication, Authorization, and User Management",
+        "description": "Fine-grained authorization as a service for applications and APIs. Free up to 1000 MAUs and 100 authorizer instances.",
+        "name": "Aserto",
+        "score": 13.0,
+        "url": "https://www.aserto.com"
+      },
+      {
+        "access_class": "RESEARCH_REFERENCE",
+        "category": "Authentication, Authorization, and User Management",
+        "description": "AuthN/AuthZ/OAuth2.0/Zero Trust managed security platform. Forever free developer accounts with all security features, unlimited team members, 200 daily active users, and 25k/mo permission checks.",
+        "name": "Ory",
+        "score": 12.0,
+        "url": "https://ory.sh/"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "Authentication, Authorization, and User Management",
+        "description": "Authentication login and access control, unlimited identity providers for any project. Facebook, Google, Twitter and more. The first 1000 API calls are free.",
+        "name": "Authress",
+        "score": 10.5,
+        "url": "https://authress.io/"
+      },
+      {
+        "access_class": "RESEARCH_REFERENCE",
+        "category": "Authentication, Authorization, and User Management",
+        "description": "Develop, secure, and manage user identities of your product - for both authentication and authorization. Free for up to 5,000 MAUs with open-source self-hosted option available.",
+        "name": "Logto",
+        "score": 9.7,
+        "url": "https://logto.io/"
+      },
+      {
+        "access_class": "RESEARCH_REFERENCE",
+        "category": "Authentication, Authorization, and User Management",
+        "description": "User management, authentication and authorization. Free for up to 100 monthly active users.",
+        "name": "Okta",
+        "score": 9.0,
+        "url": "https://developer.okta.com/signup/"
+      },
+      {
+        "access_class": "RESEARCH_REFERENCE",
+        "category": "Authentication, Authorization, and User Management",
+        "description": "Keycloak Open Source Identity and Access Management. Free realm up to 1000 users, up to 10 SSO connections, leveraging Phase Two's Keycloak enhanced container which includes the [Organization](https://phasetwo.io/product/organizations/) extension.",
+        "name": "Phase Two",
+        "score": 8.2,
+        "url": "https://phasetwo.io"
+      }
+    ],
+    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION": [
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "Cloud management solutions",
+        "description": "Scan AWS and Azure for cost waste with 92 automated checks including idle NAT gateways, gp2 volumes, and over-provisioned instances. Get savings estimates in a read-only, developer-first CLI. Free tier covers up to 5,000 resources per scan on one AWS account. Paid tiers add resource IDs and exact remediation steps.",
+        "name": "Cloud Cost Analyzer",
+        "score": 9.5,
+        "url": "https://cca.dragonfractal.com/"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "PaaS",
+        "description": "Headless backend and services, purpose built for AI agents. Includes hosting, databases, storage, LLMs, and third-party APIs. Agentic signup. Free tier includes 10 projects, 100K edge requests, 10 GB object storage, 100 emails, and 5 USD/month in credits for AI and search.",
+        "name": "Cohesivity",
+        "score": 9.5,
+        "url": "https://cohesivity.ai"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "PaaS",
+        "description": "Deploy web services, databases, and more on your own AWS account with a Git push style workflow. Free tier for users with 1 developer on personal GitHub repos. AWS costs are billed through AWS, but you can use credits and the AWS free tier.",
+        "name": "flightcontrol.dev",
+        "score": 9.5,
+        "url": "https://flightcontrol.dev/"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "Generative AI",
+        "description": "Open-source platform to evaluate, observe, and improve LLM and AI agent apps, with tracing, evals, simulations, and guardrails. Free tier includes 50GB storage, 2K eval credits, 100K AI-gateway requests/month, 1M tokens of text agent simulation and 60 min of voice simulation, plus unlimited projects/seats and BYOK LLM-as-judge at $0 platform cost. [#opensource](https://github.com/future-agi/future-agi)",
+        "name": "Future AGI",
+        "score": 9.2,
+        "url": "https://futureagi.com"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "APIs, Data, and ML",
+        "description": "SmartParse is a data migration and CSV to API platform that offers time- and cost-saving developer tools. The Free tier includes 300 Processing Units per month, Browser uploads, Data quarantining, Circuit breakers, and Job Alerts.",
+        "name": "SmartParse",
+        "score": 9.0,
+        "url": "https://smartparse.io"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "APIs, Data, and ML",
+        "description": "X/Twitter read REST API (profiles, search, timelines) plus account monitors. Free tier: 1,000 API calls/month, 1 monitor, instant API key. HTTP webhooks on paid plans from $19/mo.",
+        "name": "XFlux",
+        "score": 9.0,
+        "url": "https://www.xfluxapi.com"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "APIs, Data, and ML",
+        "description": "Independent web, news, image, video search and AI/LLM context API, suitable for RAG pipelines and AI agents. Free tier includes $5 in monthly credits (credit card required for verification).",
+        "name": "Brave Search API",
+        "score": 8.5,
+        "url": "https://brave.com/search/api/"
+      },
+      {
+        "access_class": "REQUIRES_PROVIDER_VALIDATION_OR_ACCOUNT",
+        "category": "APIs, Data, and ML",
+        "description": "Treblle helps teams build, ship, and govern APIs. With advanced API log aggregation, observability, docs, and debugging. You get all features for free, but there is a limit of up to 250k requests per month on the free tier.",
+        "name": "Treblle",
+        "score": 8.0,
+        "url": "https://www.treblle.com"
+      }
+    ]
+  },
+  "source_digest": "7e2bcd64537ccb55bbdc2fea53abebfeb50f9b233e00b5e2510a43e73a1e41a7"
+}
