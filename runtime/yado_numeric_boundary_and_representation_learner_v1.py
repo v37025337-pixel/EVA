@@ -57,13 +57,34 @@ class BoundedLinearThresholdLearner:
                         except Exception:valid=False;break
                         scores.append(s)
                     if not valid:continue
-                    uniq=sorted(set(scores))
-                    if not uniq:continue
-                    cuts=[uniq[0]-1e-9,uniq[-1]+1e-9]
-                    cuts += [(a+b)/2 for a,b in zip(uniq,uniq[1:])]
-                    for ge in (True,False):
-                        for t in cuts:
-                            ok=sum(((s>=t) if ge else (s<t))==yy for s,yy in zip(scores,y))
+                    pairs=sorted(zip(scores,y),key=lambda z:z[0])
+                    if not pairs:continue
+                    # Prefix scan: O(n log n) per projection instead of rescoring every cut.
+                    total_pos=sum(1 for _,yy in pairs if yy); total_neg=len(pairs)-total_pos
+                    left_pos=left_neg=0
+                    groups=[]
+                    j=0
+                    while j<len(pairs):
+                        s0=pairs[j][0];gp=gn=0
+                        while j<len(pairs) and pairs[j][0]==s0:
+                            if pairs[j][1]:gp+=1
+                            else:gn+=1
+                            j+=1
+                        groups.append((s0,gp,gn))
+                    # threshold before first group
+                    candidates=[(groups[0][0]-1e-9,0,0)]
+                    lp=ln=0
+                    for gi,(sv,gp,gn) in enumerate(groups):
+                        lp+=gp;ln+=gn
+                        if gi+1<len(groups):
+                            t=(sv+groups[gi+1][0])/2
+                        else:t=sv+1e-9
+                        candidates.append((t,lp,ln))
+                    for t,lp,ln in candidates:
+                        # GE => positive on right; LT => positive on left.
+                        ok_ge=(total_pos-lp)+ln
+                        ok_lt=lp+(total_neg-ln)
+                        for ge,ok in ((True,ok_ge),(False,ok_lt)):
                             acc=ok/len(rows)
                             cand=(acc,-width,tuple(fs),tuple(ws),t,ge)
                             if best is None or cand>best[0]:
@@ -101,7 +122,7 @@ class BoundedNumericDNFLearner:
     MAX_THRESHOLDS_PER_FEATURE=14
     MAX_CLAUSE_WIDTH=3
     MAX_CLAUSES=3
-    MAX_PREDICATES_FOR_CONJUNCTION=28
+    MAX_PREDICATES_FOR_CONJUNCTION=16
     @classmethod
     def _predicates(cls,rows):
         keys=_numeric_keys(rows); out=[]
