@@ -1,0 +1,71 @@
+name: YADO G1 Post Resource Assisted Regression Admission V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_g1_post_resource_assisted_development_regression_admission_v1.py"
+      - "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py"
+      - "runtime/yado_budgeted_stage_policy_v1.py"
+      - "resources/yado-unified-external-resource-portfolio-v1.json"
+      - ".github/workflows/yado-g1-post-resource-assisted-regression-admission-v1.yml"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g1-post-resource-assisted-regression-admission
+  cancel-in-progress: true
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run unified G1 regression/admission gate
+        id: gate
+        continue-on-error: true
+        run: python runtime/yado_g1_post_resource_assisted_development_regression_admission_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g1-post-resource-assisted-regression-admission-v1
+          path: |
+            runtime/yado_g1_post_resource_assisted_development_regression_admission_v1_receipt.json
+            architecture/g1-developmental-capability-registry-v1.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist evidence
+        if: always()
+        run: |
+          mkdir -p receipts architecture
+          if [ -f runtime/yado_g1_post_resource_assisted_development_regression_admission_v1_receipt.json ]; then
+            cp runtime/yado_g1_post_resource_assisted_development_regression_admission_v1_receipt.json "receipts/yado-g1-post-resource-assisted-development-regression-admission-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO G1 Developmental Admission"
+          git config user.email "actions@users.noreply.github.com"
+          git add \
+            "receipts/yado-g1-post-resource-assisted-development-regression-admission-v1-run-${GITHUB_RUN_ID}.json" \
+            architecture/g1-developmental-capability-registry-v1.json \
+            architecture/evolution-ledger.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G1 post-resource developmental admission evidence [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path("runtime/yado_g1_post_resource_assisted_development_regression_admission_v1_receipt.json")
+          if not p.exists():
+              raise SystemExit("MISSING_ADMISSION_RECEIPT")
+          r=json.loads(p.read_text())
+          if not str(r.get("status","")).startswith("PASS_"):
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
