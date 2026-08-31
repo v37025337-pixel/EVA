@@ -1,0 +1,64 @@
+name: YADO Head Capability Core Binding Reconciliation V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-head-capability-core-binding-reconciliation-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-head-capability-core-binding-reconciliation-v1
+  cancel-in-progress: true
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run head capability binding reconciliation
+        id: reconcile
+        continue-on-error: true
+        run: python runtime/yado_head_capability_core_binding_reconciliation_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-head-capability-core-binding-reconciliation-v1
+          path: |
+            runtime/yado_head_capability_core_binding_reconciliation_v1_receipt.json
+            canonical/yado-unified-core-v1.json
+            canonical/yado-main-head-g2.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist reconciliation
+        if: always()
+        run: |
+          mkdir -p receipts
+          if [ -f runtime/yado_head_capability_core_binding_reconciliation_v1_receipt.json ]; then
+            cp runtime/yado_head_capability_core_binding_reconciliation_v1_receipt.json "receipts/yado-head-capability-core-binding-reconciliation-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Capability Binding Reconciliation"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          for f in canonical/yado-unified-core-v1.json canonical/yado-main-head-g2.json "receipts/yado-head-capability-core-binding-reconciliation-v1-run-${GITHUB_RUN_ID}.json"; do [ -f "$f" ] && files+=("$f"); done
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist YADO head capability binding reconciliation [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_head_capability_core_binding_reconciliation_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_BINDING_RECONCILIATION_RECEIPT")
+          r=json.loads(p.read_text())
+          if r.get("status")!="PASS_HEAD_CAPABILITY_CORE_BINDING_RECONCILIATION_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
