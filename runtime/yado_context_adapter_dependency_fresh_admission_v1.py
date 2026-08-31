@@ -181,7 +181,7 @@ checks={
  'lru_bound_respected':lru_size<=ContextualStreamCapabilityAdapterV1.MAX_STREAM_CONTEXTS,
  'oldest_evicted':oldest_evicted,
  'newest_retained':newest_retained,
- 'source_unchanged':fsha(SRC)==hashlib.sha256(SRC.read_bytes()).hexdigest(),
+ 'component_digest_matches_registered_shadow':ContextualStreamCapabilityAdapterV1.component().get('component_digest')==meta.get('component',{}).get('component_digest'),
  'canonical_head_immutable':ledger.get('current_head_digest')==head.get('canonical_head_digest'),
 }
 passed=all(checks.values())
