@@ -6,6 +6,9 @@ on:
       - "runtime/yado_numeric_boundary_and_representation_learner_v1.py"
       - "runtime/yado_g1_repair_continuous_boundary_and_representation_v1.py"
       - ".github/workflows/yado-g1-continuous-boundary-representation-training-v1.yml"
+concurrency:
+  group: yado-g1-continuous-boundary-representation-training
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
