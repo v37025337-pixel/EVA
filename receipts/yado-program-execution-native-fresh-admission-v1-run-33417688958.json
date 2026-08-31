@@ -1,0 +1,386 @@
+{
+  "ablation": [
+    {
+      "id": "F1_ODD",
+      "passes_without_family": true,
+      "removed_family": "compare"
+    },
+    {
+      "id": "F2_MIN",
+      "passes_without_family": false,
+      "removed_family": "compare"
+    },
+    {
+      "id": "F3_FLOOR_DEC",
+      "passes_without_family": true,
+      "removed_family": "binop"
+    },
+    {
+      "id": "F4_OUTSIDE",
+      "passes_without_family": false,
+      "removed_family": "boolop"
+    },
+    {
+      "id": "F5_ANY_ZERO",
+      "passes_without_family": false,
+      "removed_family": "compare"
+    },
+    {
+      "id": "F6_LEN_AT_LEAST",
+      "passes_without_family": true,
+      "removed_family": "compare"
+    },
+    {
+      "id": "F7_SHIFT_DOWN",
+      "passes_without_family": false,
+      "removed_family": "binop"
+    },
+    {
+      "id": "F8_NONNEG",
+      "passes_without_family": true,
+      "removed_family": "compare"
+    }
+  ],
+  "candidate_digest": "d9aaa718fdc7097beb71d64aac3971ef75131c80277dc6c77f10af73d098ba51",
+  "candidate_source_sha256": "7407c0ee2a3996d7b3eb34e8db12d85ee4a76d2d561cd53fe36ba4cef3eb545c",
+  "canonical_mutation": false,
+  "checks": {
+    "bounded_candidate_budget": true,
+    "canonical_head_immutable": true,
+    "causal_family_ablation": true,
+    "fresh_hidden_score": true,
+    "negative_safety_rejection": true,
+    "source_unchanged": true
+  },
+  "fresh_score": 1.0,
+  "fresh_tasks": [
+    {
+      "blind": [
+        {
+          "args": [
+            0
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            7
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        },
+        {
+          "args": [
+            -10
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            101
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 3,
+      "family": "compare",
+      "found": true,
+      "id": "F1_ODD",
+      "source": "def is_odd(n):\n    return n % 2 > 0\n",
+      "tried": 17
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            9,
+            9
+          ],
+          "expected": 9,
+          "got": 9,
+          "ok": true
+        },
+        {
+          "args": [
+            -4,
+            3
+          ],
+          "expected": -4,
+          "got": -4,
+          "ok": true
+        },
+        {
+          "args": [
+            100,
+            -1
+          ],
+          "expected": -1,
+          "got": -1,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 2,
+      "family": "compare",
+      "found": true,
+      "id": "F2_MIN",
+      "source": "def min2(a, b):\n    return a if a < b else b\n",
+      "tried": 5
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            9,
+            3
+          ],
+          "expected": 8,
+          "got": 8,
+          "ok": true
+        },
+        {
+          "args": [
+            3,
+            3
+          ],
+          "expected": 3,
+          "got": 3,
+          "ok": true
+        },
+        {
+          "args": [
+            -8,
+            -10
+          ],
+          "expected": -9,
+          "got": -9,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 2,
+      "family": "binop",
+      "found": true,
+      "id": "F3_FLOOR_DEC",
+      "source": "def floor_dec(x, floor):\n    return max(x - 1, floor)\n",
+      "tried": 7
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            1,
+            1,
+            10
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            10,
+            1,
+            10
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            -9,
+            -5,
+            5
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 1,
+      "family": "boolop",
+      "found": true,
+      "id": "F4_OUTSIDE",
+      "source": "def outside(x, lo, hi):\n    return x < lo or x > hi\n",
+      "tried": 11
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            [
+              -1,
+              0
+            ]
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        },
+        {
+          "args": [
+            [
+              5
+            ]
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            [
+              0
+            ]
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 2,
+      "family": "compare",
+      "found": true,
+      "id": "F5_ANY_ZERO",
+      "source": "def any_zero(xs):\n    return any((x <= 0 for x in xs))\n",
+      "tried": 10
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            []
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            [
+              9,
+              8
+            ]
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ]
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 2,
+      "family": "compare",
+      "found": true,
+      "id": "F6_LEN_AT_LEAST",
+      "source": "def enough(xs):\n    return len(xs) > 1\n",
+      "tried": 9
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            10
+          ],
+          "expected": 8,
+          "got": 8,
+          "ok": true
+        },
+        {
+          "args": [
+            2
+          ],
+          "expected": 0,
+          "got": 0,
+          "ok": true
+        },
+        {
+          "args": [
+            -9
+          ],
+          "expected": -11,
+          "got": -11,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 1,
+      "family": "binop",
+      "found": true,
+      "id": "F7_SHIFT_DOWN",
+      "source": "def shift(x):\n    return x - 2\n",
+      "tried": 7
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            7
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        },
+        {
+          "args": [
+            -8
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            0
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 2,
+      "family": "compare",
+      "found": true,
+      "id": "F8_NONNEG",
+      "source": "def nonnegative(x):\n    return x > -1\n",
+      "tried": 10
+    }
+  ],
+  "g3_genesis_performed": false,
+  "negative_safety": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "next_required_capability": "REAL_PROGRAM_EXECUTION_TRANSFER_CANONICAL_INTEGRATION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "a10f74b0c924b6101d0705304b78a2803a5f013c19bbcc8588b3002ad2d89f93",
+  "schema": "yado.g2.program_execution_native_fresh_admission.v1",
+  "semantic_boundary": "BOUNDED SINGLE-AST-EDIT REPAIR OF ONE SAFE PYTHON FUNCTION FROM I/O EXAMPLES WITH ALLOWLISTED BUILTINS. NOT GENERAL PROGRAM SYNTHESIS.",
+  "status": "PASS_PROGRAM_EXECUTION_NATIVE_FRESH_ADMISSION_V1"
+}
