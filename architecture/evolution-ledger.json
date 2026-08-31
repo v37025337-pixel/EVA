@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "21a25181ea637e96e8dc87a9f5c3b54ae88c1d4e588ad77105c3183f730a9f49",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 68,
+  "event_count": 69,
   "events": [
     {
       "canonical_mutation": false,
@@ -1105,10 +1105,26 @@
       "source_digest": "615eaec2bc3c8caf3b03a73ea379ead9776169ef658cf57f26e8fddfe9afbd00",
       "source_path": "receipts/yado-runtime-control-plane-binding-canonical-gate-v1-run-33391800337.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=18; BLOCKING=4",
+      "event_hash": "2c53c198a23d5da6998238f2ee742437a37ea524a7d247b2694707863fa579f2",
+      "event_id": "E0069_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 68,
+      "parent_event_hash": "ea1a7e77f88db14fdb3d28e2eb92f4c169ce46f58c379422dab8e5d696ce959a",
+      "promotion_applied": false,
+      "run_id": "33391906770",
+      "source_digest": "ed4144704de662ed2ceefc7666a8ba3a6e4d0f85e795a7417ae76912e9ccbd1c",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33391906770.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "23911bea4cf53f942f23f9d3569991c1a3e58e97b36781718886a2ab360cfc55",
+  "ledger_digest": "0002918e019fec1758b4feed122724346b89f6d5fff4a9d9ade263da797f53bd",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -1141,5 +1157,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "ea1a7e77f88db14fdb3d28e2eb92f4c169ce46f58c379422dab8e5d696ce959a"
+  "tail_event_hash": "2c53c198a23d5da6998238f2ee742437a37ea524a7d247b2694707863fa579f2"
 }
