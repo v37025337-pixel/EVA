@@ -101,6 +101,108 @@
           "token": "opaque_684ae2580bad4b2ad6"
         }
       }
+    },
+    {
+      "base_router_same_blind": {
+        "capability_accuracy": 0.24027777777777778,
+        "n": 720,
+        "result_accuracy": 0.24027777777777778,
+        "score": 0.24027777777777778
+      },
+      "checks": {
+        "canonical_g2_immutable": true,
+        "context_causal_drop": false,
+        "fresh_blind": false,
+        "memory_causal_drop": false,
+        "representation_transfer": false,
+        "resource_portfolio_present": true,
+        "selected_contextual_strategy": true
+      },
+      "curriculum": "INTERLEAVED_STREAM_MEMORY_AND_CONTEXT_DISAMBIGUATION",
+      "cycle": 2,
+      "cycle_digest": "ed5cac9e5fdd63507b37a7cf2c8fac6c2f4ada9dd40749163786ee1195d7d13d",
+      "fresh_blind": {
+        "capability_accuracy": 0.2569444444444444,
+        "n": 720,
+        "result_accuracy": 0.2569444444444444,
+        "score": 0.2569444444444444
+      },
+      "github_run_id": "33361378742",
+      "memory_ablation_score": 0.23958333333333334,
+      "neutral_selection": {
+        "candidate_count": 4,
+        "ranking": [
+          {
+            "score": 0.32233333333333336,
+            "token": "opaque_b1be2c5379fe3aa4f0"
+          },
+          {
+            "score": 0.23299999999999998,
+            "token": "opaque_2de453e3b49e896217"
+          },
+          {
+            "score": 0.23250000000000004,
+            "token": "opaque_a7c7b3745639e02ec9"
+          },
+          {
+            "score": 0.20133333333333334,
+            "token": "opaque_c306d19f42ab1451cf"
+          }
+        ],
+        "selected_score": 0.32233333333333336,
+        "selected_token": "opaque_b1be2c5379fe3aa4f0"
+      },
+      "representation_transfer": {
+        "capability_accuracy": 0.27380952380952384,
+        "n": 420,
+        "result_accuracy": 0.27380952380952384,
+        "score": 0.27380952380952384
+      },
+      "seed": 5200019,
+      "selected_strategy": "LAST_STREAM_CAPABILITY",
+      "status": "WITHHOLD",
+      "validation_strategy_scores": {
+        "BASE_ROUTER_ONLY": {
+          "capability_accuracy": 0.20833333333333334,
+          "complexity": 0.1,
+          "n": 240,
+          "novelty": 0.1,
+          "result_accuracy": 0.20833333333333334,
+          "risk": 0.02,
+          "score": 0.20833333333333334,
+          "token": "opaque_c306d19f42ab1451cf"
+        },
+        "GLOBAL_LAST_CAPABILITY": {
+          "capability_accuracy": 0.275,
+          "complexity": 0.16,
+          "n": 240,
+          "novelty": 0.35,
+          "result_accuracy": 0.275,
+          "risk": 0.18,
+          "score": 0.275,
+          "token": "opaque_a7c7b3745639e02ec9"
+        },
+        "LAST_STREAM_CAPABILITY": {
+          "capability_accuracy": 0.32083333333333336,
+          "complexity": 0.22,
+          "n": 240,
+          "novelty": 0.75,
+          "result_accuracy": 0.32083333333333336,
+          "risk": 0.04,
+          "score": 0.32083333333333336,
+          "token": "opaque_b1be2c5379fe3aa4f0"
+        },
+        "RESOURCE_FIRST_ON_AMBIGUITY": {
+          "capability_accuracy": 0.2875,
+          "complexity": 0.14,
+          "n": 240,
+          "novelty": 0.25,
+          "result_accuracy": 0.2875,
+          "risk": 0.22,
+          "score": 0.2875,
+          "token": "opaque_2de453e3b49e896217"
+        }
+      }
     }
   ],
   "generation": "G2_CANDIDATE_TRCG_V1",
@@ -109,11 +211,11 @@
   "new_shadow_capabilities": [
     "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1"
   ],
-  "next_required_capability": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_2_OF_5",
+  "next_required_capability": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_3_OF_5",
   "pass_count": 1,
   "schema": "yado.g2.self_directed_development_state.v1",
-  "stable_pass_streak": 1,
-  "state_digest": "6d0acfcba289b74b2e947359edfd54a242b607fe4bd2806751163c4217b1d7a0",
+  "stable_pass_streak": 0,
+  "state_digest": "ea9dc8d93de412a4170d970f46a1b36ea5ac548b16667ba626e28bf4f16ac06f",
   "status": "DEVELOPING",
   "target_cycles": 5
 }
