@@ -249,9 +249,9 @@ for q,expected_branch in queries.items():
 
 source_text=CAND_SRC.read_text(encoding='utf-8')
 safety={
- 'no_exec':not re.search(r'\\bexec\\s*\\(',source_text),
- 'no_eval':not re.search(r'\\beval\\s*\\(',source_text),
- 'no_legacy_import':not re.search(r'from\\s+yado_(v28|v29|rc8)',source_text),
+ 'no_exec':not re.search(r'\bexec\s*\(',source_text),
+ 'no_eval':not re.search(r'\beval\s*\(',source_text),
+ 'no_legacy_import':not re.search(r'from\s+yado_(v28|v29|rc8)',source_text),
  'registered_paths_only':'EVIDENCE_PATH_NOT_REGISTERED' in source_text,
  'read_only_no_git_push':'git","push' not in source_text and 'git","commit' not in source_text,
 }
