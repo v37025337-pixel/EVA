@@ -1,8 +1,8 @@
 {
   "generation": "G1_CANDIDATE_S2",
   "generation_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
-  "portfolio_digest": "18adb1b7b8dca5ccf86603f3f55e7ed3492186002db9c85c16297f3a641a7a6c",
-  "resource_count": 76,
+  "portfolio_digest": "1b59c5e8584b38d7daa02e88c4ea0b4f52f7cd51d8b2ea9c99f4e539d4372490",
+  "resource_count": 80,
   "resources": [
     {
       "access_tier": 0,
@@ -291,6 +291,82 @@
       "locator": "https://arxiv.org/abs/2607.07743",
       "policy": "ELIGIBLE",
       "provenance": "REPO_VERIFIED_RECEIPT",
+      "verification_state": "VERIFIED_REPO_EVIDENCE"
+    },
+    {
+      "access_tier": 0,
+      "capabilities": [
+        "COUNTEREXAMPLE_LEARNING",
+        "RESOURCE_ASSISTED_ALGORITHM_GENESIS"
+      ],
+      "description": "Successful resource-assisted algorithm genesis after preserved WITHHOLD attempts.",
+      "estimated_access_cost": 0.05,
+      "evidence_sources": [
+        "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json"
+      ],
+      "id": "LOCAL_ACCESS_CONTROL_REPAIR_LINEAGE",
+      "kind": "local_evidence",
+      "locator": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json",
+      "policy": "ELIGIBLE",
+      "provenance": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json",
+      "verification_state": "VERIFIED_REPO_EVIDENCE"
+    },
+    {
+      "access_tier": 0,
+      "capabilities": [
+        "BUDGET_AWARE_SEARCH",
+        "COUNTEREXAMPLE_HISTORY",
+        "SEQUENCE_TRANSFORMATION"
+      ],
+      "content_sha256": "ed110f4e5d8d084a2bafd5da90b89f457cb89781244bcc93bfe351deec75619e",
+      "description": "Historical budget-aware sequence transform WITHHOLD; fresh exact 0.25.",
+      "estimated_access_cost": 0.05,
+      "evidence_sources": [
+        "receipts/yado-budget-aware-sequence-transform-v1-latest.json"
+      ],
+      "id": "LOCAL_BUDGET_SEQUENCE_WITHHOLD",
+      "kind": "local_evidence",
+      "locator": "receipts/yado-budget-aware-sequence-transform-v1-latest.json",
+      "policy": "ELIGIBLE",
+      "provenance": "receipts/yado-budget-aware-sequence-transform-v1-latest.json",
+      "verification_state": "VERIFIED_REPO_EVIDENCE"
+    },
+    {
+      "access_tier": 0,
+      "capabilities": [
+        "BUDGET_AWARE_SEARCH",
+        "RESOURCE_LIMITS",
+        "TIMEOUT_CONTROL"
+      ],
+      "description": "Observed over-budget experiment cancellations and budget semantics.",
+      "estimated_access_cost": 0.05,
+      "evidence_sources": [
+        "receipts/yado-experiment-compute-budget-gate-v1-latest.json"
+      ],
+      "id": "LOCAL_COMPUTE_BUDGET_GATE",
+      "kind": "local_evidence",
+      "locator": "receipts/yado-experiment-compute-budget-gate-v1-latest.json",
+      "policy": "ELIGIBLE",
+      "provenance": "receipts/yado-experiment-compute-budget-gate-v1-latest.json",
+      "verification_state": "VERIFIED_REPO_EVIDENCE"
+    },
+    {
+      "access_tier": 0,
+      "capabilities": [
+        "CAUSAL_LINEAGE",
+        "COUNTEREXAMPLE_HISTORY",
+        "DEVELOPMENTAL_STATE"
+      ],
+      "description": "Append-only causal history including PASS/WITHHOLD and generation transitions.",
+      "estimated_access_cost": 0.05,
+      "evidence_sources": [
+        "architecture/evolution-ledger.json"
+      ],
+      "id": "LOCAL_EVOLUTION_LEDGER",
+      "kind": "local_evidence",
+      "locator": "architecture/evolution-ledger.json",
+      "policy": "ELIGIBLE",
+      "provenance": "architecture/evolution-ledger.json",
       "verification_state": "VERIFIED_REPO_EVIDENCE"
     },
     {
@@ -1348,44 +1424,34 @@
   "routes_for_current_open_deficits": {
     "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION": [
       {
-        "access_tier": 3,
-        "estimated_access_cost": 2.0,
-        "kind": "service_or_tool",
-        "locator": "https://futureagi.com",
+        "access_tier": 0,
+        "estimated_access_cost": 0.05,
+        "kind": "local_evidence",
+        "locator": "receipts/yado-experiment-compute-budget-gate-v1-latest.json",
         "policy": "ELIGIBLE",
-        "resource_id": "FREEDEV_FUTURE_AGI",
-        "score": 26.7,
+        "resource_id": "LOCAL_COMPUTE_BUDGET_GATE",
+        "score": 21.48,
         "verification_state": "VERIFIED_REPO_EVIDENCE"
       },
       {
-        "access_tier": 3,
-        "estimated_access_cost": 2.0,
-        "kind": "service_or_tool",
-        "locator": "https://brave.com/search/api/",
+        "access_tier": 0,
+        "estimated_access_cost": 0.05,
+        "kind": "local_evidence",
+        "locator": "receipts/yado-budget-aware-sequence-transform-v1-latest.json",
         "policy": "ELIGIBLE",
-        "resource_id": "FREEDEV_BRAVE_SEARCH_API",
-        "score": 25.2,
+        "resource_id": "LOCAL_BUDGET_SEQUENCE_WITHHOLD",
+        "score": 18.48,
         "verification_state": "VERIFIED_REPO_EVIDENCE"
       },
       {
-        "access_tier": 3,
-        "estimated_access_cost": 2.0,
-        "kind": "service_or_tool",
-        "locator": "https://cohesivity.ai",
+        "access_tier": 0,
+        "estimated_access_cost": 0.05,
+        "kind": "local_evidence",
+        "locator": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json",
         "policy": "ELIGIBLE",
-        "resource_id": "FREEDEV_COHESIVITY",
-        "score": 25.2,
+        "resource_id": "LOCAL_ACCESS_CONTROL_REPAIR_LINEAGE",
+        "score": 11.48,
         "verification_state": "VERIFIED_REPO_EVIDENCE"
-      },
-      {
-        "access_tier": 1,
-        "estimated_access_cost": 0.2,
-        "kind": "catalog",
-        "locator": "https://github.com/ripienaar/free-for-dev",
-        "policy": "ELIGIBLE",
-        "resource_id": "CATALOG_FREE_FOR_DEV",
-        "score": 12.92,
-        "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
         "access_tier": 0,
@@ -1418,96 +1484,96 @@
         "verification_state": "VERIFIED_REPO_EVIDENCE"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "research_tool",
-        "locator": "Connected Papers",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "catalog",
+        "locator": "https://github.com/ripienaar/free-for-dev",
         "policy": "ELIGIBLE",
-        "resource_id": "RESEARCH_CONNECTED_PAPERS",
-        "score": 3.22,
+        "resource_id": "CATALOG_FREE_FOR_DEV",
+        "score": 12.92,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "research_tool",
-        "locator": "Elicit",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "catalog",
+        "locator": "https://github.com/Furthir/awesome-useful-projects",
         "policy": "ELIGIBLE",
-        "resource_id": "RESEARCH_ELICIT",
-        "score": 3.22,
+        "resource_id": "CATALOG_AWESOME_USEFUL_PROJECTS",
+        "score": 1.42,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "research_tool",
-        "locator": "SciSpace",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "documentation",
+        "locator": "https://docs.github.com/en/rest",
         "policy": "ELIGIBLE",
-        "resource_id": "RESEARCH_SCISPACE",
-        "score": 3.22,
+        "resource_id": "DOC_GITHUB_REST",
+        "score": 0.92,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "developer_tool",
-        "locator": "Phind",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "code_platform",
+        "locator": "Bitbucket",
         "policy": "ELIGIBLE",
-        "resource_id": "DEV_PHIND",
-        "score": 2.22,
+        "resource_id": "PLATFORM_BITBUCKET",
+        "score": 0.92,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "search_tool",
-        "locator": "TinEye",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "code_platform",
+        "locator": "GitLab",
         "policy": "ELIGIBLE",
-        "resource_id": "VISION_TINEYE",
-        "score": 2.22,
+        "resource_id": "PLATFORM_GITLAB",
+        "score": 0.92,
+        "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
+      },
+      {
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "api_catalog",
+        "locator": "RapidAPI",
+        "policy": "ELIGIBLE",
+        "resource_id": "PLATFORM_RAPIDAPI",
+        "score": 0.92,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       }
     ],
     "G1_BUDGET_AWARE_SEARCH_REPAIR_V1": [
       {
-        "access_tier": 3,
-        "estimated_access_cost": 2.0,
-        "kind": "service_or_tool",
-        "locator": "https://futureagi.com",
+        "access_tier": 0,
+        "estimated_access_cost": 0.05,
+        "kind": "local_evidence",
+        "locator": "receipts/yado-experiment-compute-budget-gate-v1-latest.json",
         "policy": "ELIGIBLE",
-        "resource_id": "FREEDEV_FUTURE_AGI",
-        "score": 26.7,
+        "resource_id": "LOCAL_COMPUTE_BUDGET_GATE",
+        "score": 21.48,
         "verification_state": "VERIFIED_REPO_EVIDENCE"
       },
       {
-        "access_tier": 3,
-        "estimated_access_cost": 2.0,
-        "kind": "service_or_tool",
-        "locator": "https://brave.com/search/api/",
+        "access_tier": 0,
+        "estimated_access_cost": 0.05,
+        "kind": "local_evidence",
+        "locator": "receipts/yado-budget-aware-sequence-transform-v1-latest.json",
         "policy": "ELIGIBLE",
-        "resource_id": "FREEDEV_BRAVE_SEARCH_API",
-        "score": 25.2,
+        "resource_id": "LOCAL_BUDGET_SEQUENCE_WITHHOLD",
+        "score": 18.48,
         "verification_state": "VERIFIED_REPO_EVIDENCE"
       },
       {
-        "access_tier": 3,
-        "estimated_access_cost": 2.0,
-        "kind": "service_or_tool",
-        "locator": "https://cohesivity.ai",
+        "access_tier": 0,
+        "estimated_access_cost": 0.05,
+        "kind": "local_evidence",
+        "locator": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json",
         "policy": "ELIGIBLE",
-        "resource_id": "FREEDEV_COHESIVITY",
-        "score": 25.2,
+        "resource_id": "LOCAL_ACCESS_CONTROL_REPAIR_LINEAGE",
+        "score": 11.48,
         "verification_state": "VERIFIED_REPO_EVIDENCE"
-      },
-      {
-        "access_tier": 1,
-        "estimated_access_cost": 0.2,
-        "kind": "catalog",
-        "locator": "https://github.com/ripienaar/free-for-dev",
-        "policy": "ELIGIBLE",
-        "resource_id": "CATALOG_FREE_FOR_DEV",
-        "score": 12.92,
-        "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
         "access_tier": 0,
@@ -1540,53 +1606,63 @@
         "verification_state": "VERIFIED_REPO_EVIDENCE"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "research_tool",
-        "locator": "Connected Papers",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "catalog",
+        "locator": "https://github.com/ripienaar/free-for-dev",
         "policy": "ELIGIBLE",
-        "resource_id": "RESEARCH_CONNECTED_PAPERS",
-        "score": 3.22,
+        "resource_id": "CATALOG_FREE_FOR_DEV",
+        "score": 12.92,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "research_tool",
-        "locator": "Elicit",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "catalog",
+        "locator": "https://github.com/Furthir/awesome-useful-projects",
         "policy": "ELIGIBLE",
-        "resource_id": "RESEARCH_ELICIT",
-        "score": 3.22,
+        "resource_id": "CATALOG_AWESOME_USEFUL_PROJECTS",
+        "score": 1.42,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "research_tool",
-        "locator": "SciSpace",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "documentation",
+        "locator": "https://docs.github.com/en/rest",
         "policy": "ELIGIBLE",
-        "resource_id": "RESEARCH_SCISPACE",
-        "score": 3.22,
+        "resource_id": "DOC_GITHUB_REST",
+        "score": 0.92,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "developer_tool",
-        "locator": "Phind",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "code_platform",
+        "locator": "Bitbucket",
         "policy": "ELIGIBLE",
-        "resource_id": "DEV_PHIND",
-        "score": 2.22,
+        "resource_id": "PLATFORM_BITBUCKET",
+        "score": 0.92,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       },
       {
-        "access_tier": 2,
-        "estimated_access_cost": 0.7,
-        "kind": "search_tool",
-        "locator": "TinEye",
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "code_platform",
+        "locator": "GitLab",
         "policy": "ELIGIBLE",
-        "resource_id": "VISION_TINEYE",
-        "score": 2.22,
+        "resource_id": "PLATFORM_GITLAB",
+        "score": 0.92,
+        "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
+      },
+      {
+        "access_tier": 1,
+        "estimated_access_cost": 0.2,
+        "kind": "api_catalog",
+        "locator": "RapidAPI",
+        "policy": "ELIGIBLE",
+        "resource_id": "PLATFORM_RAPIDAPI",
+        "score": 0.92,
         "verification_state": "PRIOR_REFERENCE_NOT_LIVE_REVERIFIED"
       }
     ]
@@ -1609,7 +1685,7 @@
     "excluded": 4,
     "prior_reference_not_live_reverified": 44,
     "research_papers": 30,
-    "total_unique_resources": 76,
-    "verified_repo_evidence": 32
+    "total_unique_resources": 80,
+    "verified_repo_evidence": 36
   }
 }
