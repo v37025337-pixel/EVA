@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 53,
+  "event_count": 54,
   "events": [
     {
       "canonical_mutation": false,
@@ -858,10 +858,26 @@
       "source_digest": "554a17b2c0b3254407899959b80ebde4d469defb76eb98af4edd731f5b4ff48f",
       "source_path": "receipts/yado-g2-burnin-stress-v1-run-33363258877.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_BURNIN_BEFORE_G3",
+      "effect": "G2_BURNIN_3_PASS; STATE=BURNIN",
+      "event_hash": "60497d4c0e28730451e1d90728b1053e62510db1b37b3c4e1357606414ce59c8",
+      "event_id": "E0054_G2_BURNIN_3",
+      "event_type": "G2_BURNIN_STRESS",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 53,
+      "parent_event_hash": "6af4fe0bd16f8cff844ff7eb48d0e2fcf182497b3703c508600c37c89c2fc032",
+      "promotion_applied": false,
+      "run_id": "33363310551",
+      "source_digest": "92009d1d4e6df067dafac23cdbb9bd7dbc476f4c6d977870010c9cda11c69e56",
+      "source_path": "receipts/yado-g2-burnin-stress-v1-run-33363310551.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "e21ddc8b48ecc05a3f931ac009a7400ef4bc886b850c1937eb10764b76fc9931",
+  "ledger_digest": "0c063817fab1bf410dc7c4e9036a91e69f5be44e323f9cf19035e47e65822792",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -894,5 +910,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "6af4fe0bd16f8cff844ff7eb48d0e2fcf182497b3703c508600c37c89c2fc032"
+  "tail_event_hash": "60497d4c0e28730451e1d90728b1053e62510db1b37b3c4e1357606414ce59c8"
 }
