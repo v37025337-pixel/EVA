@@ -59,13 +59,22 @@ class BudgetedStagePolicyV1:
                 conf=min(1.0,current+sum(max(0.0,float(s.expected_gain)) for s in seq))
                 latency=sum(max(0.0,float(s.latency)) for s in seq)
                 reaches=conf>=target
-                key=(
-                  0 if reaches else 1,
-                  cost if reaches else -conf,
-                  depth,
-                  latency,
-                  tuple(s.stage_id for s in seq),
-                )
+                if reaches:
+                    key=(
+                      0,
+                      depth if ignore_budget else cost,
+                      -conf if ignore_budget else depth,
+                      latency,
+                      tuple(s.stage_id for s in seq),
+                    )
+                else:
+                    key=(
+                      1,
+                      -conf,
+                      depth if ignore_budget else cost,
+                      latency,
+                      tuple(s.stage_id for s in seq),
+                    )
                 candidates.append((key,seq,cost,conf,reaches))
         if not candidates:
             return StagePlan('WITHHOLD',[],current,0.0,False,'BUDGET_OR_QUOTA_BLOCKED')
