@@ -1,0 +1,184 @@
+{
+  "architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
+  "architecture_family": "TYPED_RECURRENT_CAPABILITY_GRAPH",
+  "architecture_id": "G2_ARCH_3bd5db0089f7a52f",
+  "candidate_digest": "b292c7ed0bd9e060a2ce736a33ac30e92403ca8d57c94a8f2d354538f584eaa0",
+  "candidate_generation_id": "G2_CANDIDATE_TRCG_V1",
+  "canonical_mutation": false,
+  "causal": {
+    "budget_drop": 0.9042857142857142,
+    "relation_drop": 0.14400000000000002,
+    "router_drop": 0.838,
+    "scalar_drop": 0.13111111111111107
+  },
+  "checks": {
+    "budget_fresh": true,
+    "g1_head_immutable": true,
+    "g1_training_ready": true,
+    "relation_fresh": true,
+    "resource_routing": true,
+    "router_fresh": true,
+    "scalar_fresh": true,
+    "selected_full_architecture": true
+  },
+  "component_evidence": {
+    "budget": 1.0,
+    "neutral_selector": 1.0,
+    "relation": 1.0,
+    "resource": 1.0,
+    "router": 1.0,
+    "scalar": 1.0
+  },
+  "github_run_id": "33356738246",
+  "github_sha": "828bcb1afc2b78f963d98c80c7a9bae13ea0edd4",
+  "next_required_capability": "G2_FULL_FRESH_REGRESSION_AND_PROMOTION_GATE_V1",
+  "parent_generation_id": "G1_CANDIDATE_S2",
+  "promotion_applied": false,
+  "receipt_sha256": "1bbee83fd7a9398ba8bf045274983e2fd465125b1fcf0438e5bc11ad64d77807",
+  "schema": "yado.g2.successor_genesis_from_g1_enriched_head.receipt.v1",
+  "semantic_boundary": "G2 CANDIDATE GENESIS AND ARCHITECTURE SELECTION ONLY. G1 REMAINS CANONICAL UNTIL A SEPARATE FRESH PROMOTION GATE PASSES.",
+  "status": "PASS_G2_SUCCESSOR_GENESIS_FROM_G1_ENRICHED_HEAD_V1",
+  "variant_selection": {
+    "neutral_selector_result": {
+      "candidate_count": 6,
+      "ranking": [
+        {
+          "score": 1.002,
+          "token": "arch_1b381db1becbb4be"
+        },
+        {
+          "score": 0.829,
+          "token": "arch_9f9d3538e6fa8cc8"
+        },
+        {
+          "score": 0.7856666666666667,
+          "token": "arch_30ce44325dd2bb4c"
+        },
+        {
+          "score": 0.7856666666666667,
+          "token": "arch_468fc1d6d4f2396d"
+        },
+        {
+          "score": 0.7856666666666667,
+          "token": "arch_613e5bfe8868927e"
+        },
+        {
+          "score": 0.7856666666666667,
+          "token": "arch_b1a96050c530de21"
+        }
+      ],
+      "selected_score": 1.002,
+      "selected_token": "arch_1b381db1becbb4be"
+    },
+    "selected_variant": {
+      "ablation": null,
+      "complexity": 0.5,
+      "evidence": 1.0,
+      "novelty": 0.9,
+      "present": [
+        "budget",
+        "neutral_selector",
+        "relation",
+        "resource",
+        "router",
+        "scalar"
+      ],
+      "risk": 0.0,
+      "token": "arch_1b381db1becbb4be"
+    },
+    "variants": [
+      {
+        "ablation": null,
+        "complexity": 0.5,
+        "evidence": 1.0,
+        "novelty": 0.9,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "relation",
+          "resource",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.0,
+        "token": "arch_1b381db1becbb4be"
+      },
+      {
+        "ablation": "relation",
+        "complexity": 0.45,
+        "evidence": 0.8333333333333334,
+        "novelty": 0.55,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "resource",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.16666666666666666,
+        "token": "arch_613e5bfe8868927e"
+      },
+      {
+        "ablation": "budget",
+        "complexity": 0.45,
+        "evidence": 0.8333333333333334,
+        "novelty": 0.55,
+        "present": [
+          "neutral_selector",
+          "relation",
+          "resource",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.16666666666666666,
+        "token": "arch_30ce44325dd2bb4c"
+      },
+      {
+        "ablation": "router",
+        "complexity": 0.45,
+        "evidence": 0.8333333333333334,
+        "novelty": 0.55,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "relation",
+          "resource",
+          "scalar"
+        ],
+        "risk": 0.16666666666666666,
+        "token": "arch_b1a96050c530de21"
+      },
+      {
+        "ablation": "resource",
+        "complexity": 0.45,
+        "evidence": 0.8333333333333334,
+        "novelty": 0.55,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "relation",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.16666666666666666,
+        "token": "arch_468fc1d6d4f2396d"
+      },
+      {
+        "ablation": "memory",
+        "complexity": 0.45,
+        "evidence": 0.88,
+        "novelty": 0.55,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "relation",
+          "resource",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.18,
+        "token": "arch_9f9d3538e6fa8cc8"
+      }
+    ]
+  }
+}
