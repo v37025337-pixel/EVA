@@ -1,0 +1,44 @@
+name: YADO G1 S2 Full Cross Domain Regression Causal Gate V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_g1_s2_full_cross_domain_regression_causal_gate_v1.py"
+      - ".github/workflows/yado-g1-s2-full-cross-domain-regression-causal-gate-v1.yml"
+permissions:
+  contents: write
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconstruct verified RC8 v36
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install verified dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run full G1 cross-domain regression and causal gate
+        run: python runtime/yado_g1_s2_full_cross_domain_regression_causal_gate_v1.py
+      - name: Upload gate evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g1-s2-full-cross-domain-regression-causal-gate-v1
+          path: |
+            runtime/yado_g1_s2_full_cross_domain_regression_causal_gate_v1_receipt.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist gate evidence
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g1_s2_full_cross_domain_regression_causal_gate_v1_receipt.json receipts/yado-g1-s2-full-cross-domain-regression-causal-gate-v1-latest.json
+          git config user.name "YADO G1 Full Gate"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/yado-g1-s2-full-cross-domain-regression-causal-gate-v1-latest.json architecture/evolution-ledger.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G1 S2 full cross-domain regression causal gate [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
