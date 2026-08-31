@@ -5,7 +5,9 @@ import copy,hashlib,json,sys
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
+PKG=ROOT/'yado_rc8_v36'
 sys.path.insert(0,str(ROOT))
+sys.path.insert(0,str(PKG))
 
 from yado_evolution_ledger_v2 import validate_ledger_v2
 from yado_g2_typed_recurrent_capability_graph_runtime_v1 import G2TypedRecurrentCapabilityGraphRuntimeV1
