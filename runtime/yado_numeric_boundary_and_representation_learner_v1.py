@@ -101,13 +101,22 @@ class BoundedNumericDNFLearner:
     MAX_THRESHOLDS_PER_FEATURE=14
     MAX_CLAUSE_WIDTH=3
     MAX_CLAUSES=3
+    MAX_PREDICATES_FOR_CONJUNCTION=28
     @classmethod
     def _predicates(cls,rows):
         keys=_numeric_keys(rows); out=[]
         for k in keys:
             vals=sorted(set(float(x[k]) for x,_ in rows if k in x))
             if len(vals)<2:continue
-            mids=[(a+b)/2 for a,b in zip(vals,vals[1:])]
+            label_by={}
+            for x,y in rows:
+                if k in x: label_by.setdefault(float(x[k]),set()).add(y)
+            mids=[]
+            for a,b in zip(vals,vals[1:]):
+                la=label_by.get(a,set()); lb=label_by.get(b,set())
+                if la!=lb or len(la)>1 or len(lb)>1:
+                    mids.append((a+b)/2)
+            if not mids:mids=[(a+b)/2 for a,b in zip(vals,vals[1:])]
             if len(mids)>cls.MAX_THRESHOLDS_PER_FEATURE:
                 idx=[round(i*(len(mids)-1)/(cls.MAX_THRESHOLDS_PER_FEATURE-1)) for i in range(cls.MAX_THRESHOLDS_PER_FEATURE)]
                 mids=[mids[i] for i in sorted(set(idx))]
@@ -123,9 +132,19 @@ class BoundedNumericDNFLearner:
         clauses=[]
         uncovered=set(pos_idx)
         # Generate only perfect-precision clauses; greedily cover positive counterexamples.
+        # Rank atomic predicates by positive enrichment so width-3 search stays bounded.
+        ranked=[]
+        for j,p in enumerate(preds):
+            cc=NumericClause([p])
+            cov={i for i,(x,_) in enumerate(rows) if cc.match(x)}
+            tp=len(cov&pos_idx); fp=len(cov&neg_idx)
+            precision=tp/max(1,tp+fp); recall=tp/max(1,len(pos_idx))
+            ranked.append((precision*0.7+recall*0.3,tp,-fp,j))
+        ranked.sort(reverse=True)
+        selected=sorted(z[3] for z in ranked[:cls.MAX_PREDICATES_FOR_CONJUNCTION])
         candidates=[]
         for width in range(1,cls.MAX_CLAUSE_WIDTH+1):
-            for inds in combinations(range(len(preds)),width):
+            for inds in combinations(selected,width):
                 ps=[preds[i] for i in inds]
                 # avoid same field contradictory duplicates except useful bounded intervals.
                 c=NumericClause(ps)
