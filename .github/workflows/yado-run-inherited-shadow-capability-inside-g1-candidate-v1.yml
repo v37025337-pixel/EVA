@@ -1,52 +1,56 @@
-name: YADO Run Inherited Shadow Capability Inside G1 Candidate V1
+name: YADO Run Inherited Shadow Capability Inside G1 Candidate V2
 on:
   push:
     branches: [yado-architecture-shadow-search]
     paths:
-      - "runtime/yado_run_inherited_shadow_capability_inside_g1_candidate_v1.py"
+      - "runtime/yado_g1_candidate_s2_bounded_genesis_v2.py"
+      - "runtime/yado_run_inherited_shadow_capability_inside_g1_candidate_v2.py"
       - ".github/workflows/yado-run-inherited-shadow-capability-inside-g1-candidate-v1.yml"
 permissions:
   contents: write
 jobs:
   g1-live:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: python runtime/reconstruct_rc8v36.py
       - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
-      - name: Rebuild G1 candidate S2 from preserved counterexamples
-        run: python runtime/yado_g1_candidate_s2_counterexample_genesis_v1.py
-      - name: Run inherited shadow capability inside G1 candidate
-        run: python runtime/yado_run_inherited_shadow_capability_inside_g1_candidate_v1.py
+      - name: Build bounded G1 candidate S2 V2
+        run: python runtime/yado_g1_candidate_s2_bounded_genesis_v2.py
+      - name: Run inherited capability inside bounded G1 candidate
+        run: python runtime/yado_run_inherited_shadow_capability_inside_g1_candidate_v2.py
       - name: Upload evidence
         uses: actions/upload-artifact@v4
         with:
-          name: yado-run-inherited-shadow-capability-inside-g1-candidate-v1
+          name: yado-run-inherited-shadow-capability-inside-g1-candidate-v2
           path: |
-            runtime/yado_run_inherited_shadow_capability_inside_g1_candidate_v1_receipt.json
-            runtime/run_inherited_shadow_capability_inside_g1_candidate_v1/g1-developmental-episode.json
-            runtime/yado_g1_candidate_s2_bundle_v1.json
+            runtime/yado_g1_candidate_s2_bounded_genesis_v2_receipt.json
+            runtime/yado_g1_candidate_s2_bounded_bundle_v2.json
+            runtime/yado_run_inherited_shadow_capability_inside_g1_candidate_v2_receipt.json
+            runtime/run_inherited_shadow_capability_inside_g1_candidate_v2/g1-bounded-developmental-episode-v2.json
             architecture/evolution-ledger.json
           retention-days: 30
-      - name: Persist G1 live developmental evidence
+      - name: Persist bounded G1 live developmental evidence
         run: |
-          mkdir -p receipts candidates/g1-s2-live
-          cp runtime/yado_run_inherited_shadow_capability_inside_g1_candidate_v1_receipt.json receipts/yado-run-inherited-shadow-capability-inside-g1-candidate-v1-latest.json
-          cp runtime/run_inherited_shadow_capability_inside_g1_candidate_v1/g1-developmental-episode.json candidates/g1-s2-live/developmental-episode-v1.json
-          cp runtime/yado_g1_candidate_s2_bundle_v1.json candidates/g1-s2-live/g1-candidate-s2-bundle-v1.json
-          git config user.name "YADO G1 Candidate Live Runtime"
+          mkdir -p receipts candidates/g1-s2-bounded-live
+          cp runtime/yado_g1_candidate_s2_bounded_genesis_v2_receipt.json receipts/yado-g1-candidate-s2-bounded-genesis-v2-latest.json
+          cp runtime/yado_run_inherited_shadow_capability_inside_g1_candidate_v2_receipt.json receipts/yado-run-inherited-shadow-capability-inside-g1-candidate-v2-latest.json
+          cp runtime/yado_g1_candidate_s2_bounded_bundle_v2.json candidates/g1-s2-bounded-live/bundle-v2.json
+          cp runtime/run_inherited_shadow_capability_inside_g1_candidate_v2/g1-bounded-developmental-episode-v2.json candidates/g1-s2-bounded-live/developmental-episode-v2.json
+          git config user.name "YADO G1 Bounded Candidate Runtime"
           git config user.email "actions@users.noreply.github.com"
           git add \
-            receipts/yado-run-inherited-shadow-capability-inside-g1-candidate-v1-latest.json \
-            candidates/g1-s2-live/developmental-episode-v1.json \
-            candidates/g1-s2-live/g1-candidate-s2-bundle-v1.json \
+            receipts/yado-g1-candidate-s2-bounded-genesis-v2-latest.json \
+            receipts/yado-run-inherited-shadow-capability-inside-g1-candidate-v2-latest.json \
+            candidates/g1-s2-bounded-live/bundle-v2.json \
+            candidates/g1-s2-bounded-live/developmental-episode-v2.json \
             architecture/evolution-ledger.json
           if git diff --cached --quiet; then
             echo unchanged
           else
-            git commit -m "Persist G1 inherited shadow live-use evidence [skip ci]"
+            git commit -m "Persist bounded G1 inherited shadow live-use evidence [skip ci]"
             git push origin HEAD:yado-architecture-shadow-search
           fi
