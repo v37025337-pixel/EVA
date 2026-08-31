@@ -133,7 +133,7 @@ class BoundedDNFRelationPolicyInducerV1:
         # Reserve a bounded part of the pool for FIELD_EQ/FIELD_NEQ so scalar EQ atoms
         # cannot crowd them out. Still rank relations by observed label gain; no field-pair
         # names are supplied by the host.
-        rel=[z for z in ranked if z[4].op.startswith('FIELD_') and z[0]>0]
+        rel=[z for z in ranked if z[4].op.startswith('FIELD_')]
         scalar=[z for z in ranked if z[4].op=='EQ']
         relation_slots=min(12,len(rel),cls.MAX_ATOMS_FOR_COMBINATION//2) if rel else 0
         chosen=rel[:relation_slots]
