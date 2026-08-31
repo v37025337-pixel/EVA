@@ -1,15 +1,15 @@
 {
   "audit_blockers": [
-    "REAL_WORLD_GENERALIZATION_SCOPE",
+    "REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1",
     "SHADOW_CONTEXT_ADAPTER_DEPENDENCE"
   ],
   "audit_priority": [
     {
-      "area": "REPRESENTATION_AND_GROUNDING",
+      "area": "RESOURCE_AND_EVIDENCE",
       "blocking": true,
-      "code": "REAL_WORLD_GENERALIZATION_SCOPE",
+      "code": "REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1",
       "rank": 1,
-      "recommended_action": "Do not promote bounded synthetic workload scores into claims about real programming, theorem proving, science, or general intelligence.",
+      "recommended_action": "Create and independently admit a bounded native scientific-data reasoning capability over fresh public datasets.",
       "severity": "HIGH"
     },
     {
@@ -37,10 +37,18 @@
       "severity": "MEDIUM"
     },
     {
+      "area": "REPRESENTATION_AND_GROUNDING",
+      "blocking": false,
+      "code": "REAL_WORLD_GENERALIZATION_SCOPE",
+      "rank": 5,
+      "recommended_action": "Continue only on native capabilities still missing; do not reopen capabilities already admitted through canonical gates.",
+      "severity": "MEDIUM"
+    },
+    {
       "area": "RESOURCE_AND_EVIDENCE",
       "blocking": false,
       "code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
-      "rank": 5,
+      "rank": 6,
       "recommended_action": "Re-check live resources on demand and separately test content comprehension/conflict resolution.",
       "severity": "LOW"
     }
@@ -48,7 +56,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "3f04cca76cb66a481dfa04b6a08d6aa9ed5406f67b3a1a2d079a484200e14b6d",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 102,
+  "event_count": 103,
   "events": [
     {
       "canonical_mutation": false,
@@ -1718,14 +1726,30 @@
       "source_digest": "0c0d56662d13d7c728a47e979143bb36746612b98b1a5dbd2f94bba21257d5f9",
       "source_path": "receipts/yado-real-world-evidence-audit-canonical-integration-v1-run-33418814723.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=20; BLOCKING=2",
+      "event_hash": "4ff205a3155c9b2324c65116658f2e47389f64842a50c026639c26acb674325b",
+      "event_id": "E0103_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 102,
+      "parent_event_hash": "813e43496afa3deb9159b17b7747dba9afa60d04b895689eaf1be6c588ab935d",
+      "promotion_applied": false,
+      "run_id": "33418891086",
+      "source_digest": "4f142acba49c8b6e2b81d97e36a9e316090cbe086238a09c2b3c897995099111",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33418891086.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "cd30637352cc6e05c04b10f188eecaa0d82ddc01584cc060e4839384684e3e1e",
+  "ledger_digest": "8a89d6fdc4843769257ad2be497e17855f229d9bc03e2bbdb737df66a1cbe3eb",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_REAL_WORLD_EVIDENCE_AUDIT_V4"
+    "REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1754,5 +1778,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "813e43496afa3deb9159b17b7747dba9afa60d04b895689eaf1be6c588ab935d"
+  "tail_event_hash": "4ff205a3155c9b2324c65116658f2e47389f64842a50c026639c26acb674325b"
 }
