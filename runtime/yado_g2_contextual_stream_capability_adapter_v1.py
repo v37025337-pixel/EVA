@@ -43,6 +43,8 @@ class ContextualStreamCapabilityAdapterV1:
 
     @staticmethod
     def _ambiguous(desc):
+        if 'context_ambiguous' in desc:
+            return bool(desc.get('context_ambiguous'))
         keys=('budget_limited','quota_limited','external_evidence_needed','relation_needed','disjunction_needed')
         return not any(bool(desc.get(k,False)) for k in keys)
 
