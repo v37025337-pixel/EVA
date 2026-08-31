@@ -66,7 +66,6 @@ else:
     ledger['event_count']=len(ledger['events'])
     ledger['tail_event_hash']=event['event_hash']
     ledger['current_head_digest']=target_digest
-    ledger['current_head_event_id']=event['event_id']
     ledger['open_deficits']=sorted(set(
         [x for x in ledger.get('open_deficits',[]) if x not in ('UNIFIED_YADO_CORE_FROM_ALL_BRANCHES_V1',)]
         +['G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1']
@@ -92,6 +91,7 @@ result={
   'checks':{
     'head_ledger_digest_match':ledger['current_head_digest']==head['canonical_head_digest'],
     'consolidation_event_present':any(e.get('event_id')=='E0062_G2_UNIFIED_CORE_CONSOLIDATION' for e in ledger['events']),
+    'generation_promotion_event_preserved':ledger.get('current_head_event_id')=='E0044_G2_PROMOTION',
     'unified_core_bound':head.get('unified_core',{}).get('core_id')=='UNIFIED_YADO_CORE_V1',
     'frontier_preserved':ledger.get('open_deficits')==['G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1'],
     'g3_not_created':head.get('g3_genesis_performed') is False,
