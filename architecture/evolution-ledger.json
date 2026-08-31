@@ -56,7 +56,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "a860f96f6903c948d7b6832c7b4c70d85a6c12f766b6aed994bfae396f1ae1bd",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 108,
+  "event_count": 109,
   "events": [
     {
       "canonical_mutation": false,
@@ -1825,14 +1825,30 @@
       "source_digest": "808680497c9488e37903a0afe202dc133cb65712e5b6754c9dd6516e403bbaec",
       "source_path": "receipts/yado-science-evidence-audit-self-evolution-v1-run-33436652034.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "SCIENCE_EVIDENCE_AUDIT_FRESH_ADMISSION_V1",
+      "effect": "AUDIT_V5_FRESH_ADMISSION; NEXT=SCIENCE_EVIDENCE_AUDIT_CANONICAL_INTEGRATION_V1",
+      "event_hash": "6b59bfcef8e96c442b774406f70260282b014a696d317903f03040f7fe6e1e79",
+      "event_id": "E0109_G2_SCIENCE_EVIDENCE_AUDIT_FRESH_ADMISSION",
+      "event_type": "SELF_AUDIT_SCIENCE_EVIDENCE_FRESH_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 108,
+      "parent_event_hash": "42af56834edd58eef25482c5d1ec1700831f61910afea5600cf313767f91c1c7",
+      "promotion_applied": false,
+      "run_id": "33436790922",
+      "source_digest": "07ffb0aae4110019e7b65b850bd071b72d2b908bb5ef09fb22d9a2cbee8cd207",
+      "source_path": "receipts/yado-science-evidence-audit-fresh-admission-v1-run-33436790922.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "1e3e006315105dec89675e041dc1c23299fa29d8d8a7c9552158e262f140d09a",
+  "ledger_digest": "83ab2b62cc3be86ed12eada65987fd03dfc996025ac2d236fe1971f1c7a7c943",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "SCIENCE_EVIDENCE_AUDIT_FRESH_ADMISSION_V1"
+    "SCIENCE_EVIDENCE_AUDIT_CANONICAL_INTEGRATION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1861,5 +1877,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "42af56834edd58eef25482c5d1ec1700831f61910afea5600cf313767f91c1c7"
+  "tail_event_hash": "6b59bfcef8e96c442b774406f70260282b014a696d317903f03040f7fe6e1e79"
 }
