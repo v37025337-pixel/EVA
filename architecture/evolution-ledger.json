@@ -1,22 +1,13 @@
 {
   "audit_blockers": [
-    "REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1",
     "SHADOW_CONTEXT_ADAPTER_DEPENDENCE"
   ],
   "audit_priority": [
     {
-      "area": "RESOURCE_AND_EVIDENCE",
-      "blocking": true,
-      "code": "REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1",
-      "rank": 1,
-      "recommended_action": "Create and independently admit a bounded native scientific-data reasoning capability over fresh public datasets.",
-      "severity": "HIGH"
-    },
-    {
       "area": "MEMORY_AND_EXPERIENCE",
       "blocking": true,
       "code": "SHADOW_CONTEXT_ADAPTER_DEPENDENCE",
-      "rank": 2,
+      "rank": 1,
       "recommended_action": "Either admit the contextual stream adapter through an independent canonical gate or repeat key workload claims without it.",
       "severity": "HIGH"
     },
@@ -24,7 +15,7 @@
       "area": "WORKSPACE_AND_INTEGRATION",
       "blocking": false,
       "code": "HEAD_CAPABILITY_TO_CORE_BINDING",
-      "rank": 3,
+      "rank": 2,
       "recommended_action": "Every claimed active capability should have an explicit runtime/component binding in the unified core manifest.",
       "severity": "MEDIUM"
     },
@@ -32,23 +23,15 @@
       "area": "MEMORY_AND_EXPERIENCE",
       "blocking": false,
       "code": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
-      "rank": 4,
+      "rank": 3,
       "recommended_action": "Distinguish host-curated lesson summaries from lessons independently re-derived by YADO from raw historical evidence.",
-      "severity": "MEDIUM"
-    },
-    {
-      "area": "REPRESENTATION_AND_GROUNDING",
-      "blocking": false,
-      "code": "REAL_WORLD_GENERALIZATION_SCOPE",
-      "rank": 5,
-      "recommended_action": "Continue only on native capabilities still missing; do not reopen capabilities already admitted through canonical gates.",
       "severity": "MEDIUM"
     },
     {
       "area": "RESOURCE_AND_EVIDENCE",
       "blocking": false,
       "code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
-      "rank": 6,
+      "rank": 4,
       "recommended_action": "Re-check live resources on demand and separately test content comprehension/conflict resolution.",
       "severity": "LOW"
     }
@@ -56,7 +39,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "5d7612be65fa8fda0dc1e30a0a773f355f1e4a8e59cddb106cf75f96a7a03529",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 110,
+  "event_count": 111,
   "events": [
     {
       "canonical_mutation": false,
@@ -1860,14 +1843,30 @@
       "source_digest": "363e748a7028373bacf277379dc54a03b13b41f24873c078b3b08aac7432b7f9",
       "source_path": "receipts/yado-science-evidence-audit-canonical-integration-v1-run-33436928912.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=20; BLOCKING=1",
+      "event_hash": "d322f86a188781fde98cf67039e9a0bccbc2a4ae35b7a51b184e2989494ada4b",
+      "event_id": "E0111_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 110,
+      "parent_event_hash": "360feb306b140e80f1115034a08b3c71cdd84babe499f64a4a5374f7979ce3c5",
+      "promotion_applied": false,
+      "run_id": "33437004783",
+      "source_digest": "a4b819f67096f5806ab200e8ec667418ce36165f4859919134910103cb07f309",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33437004783.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "69cf48d9ea3c07b9e86b9619061f8b8f485702e1d8cb6edf2a63b454d4daf76d",
+  "ledger_digest": "73e4be9681d66fc5ebb741fc3d99976b1e8c6b8c1a0472612246f76549aafece",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_SCIENCE_EVIDENCE_AUDIT_V5"
+    "SHADOW_CONTEXT_ADAPTER_DEPENDENCE"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1896,5 +1895,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "360feb306b140e80f1115034a08b3c71cdd84babe499f64a4a5374f7979ce3c5"
+  "tail_event_hash": "d322f86a188781fde98cf67039e9a0bccbc2a4ae35b7a51b184e2989494ada4b"
 }
