@@ -1,0 +1,50 @@
+name: YADO G1 External Resource Assisted Access Control Repair V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py"
+      - "runtime/yado_g1_external_resource_assisted_access_control_repair_v1.py"
+      - ".github/workflows/yado-g1-external-resource-assisted-access-control-repair-v1.yml"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g1-access-control-repair
+  cancel-in-progress: true
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run resource-assisted access-control repair
+        run: python runtime/yado_g1_external_resource_assisted_access_control_repair_v1.py
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g1-resource-assisted-access-control-repair-v1
+          path: |
+            runtime/yado_g1_external_resource_assisted_access_control_repair_v1_receipt.json
+            candidates/g1-algorithms/bounded-dnf-relation-policy-inducer-v1.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist evidence
+        run: |
+          mkdir -p receipts candidates/g1-algorithms
+          cp runtime/yado_g1_external_resource_assisted_access_control_repair_v1_receipt.json receipts/yado-g1-external-resource-assisted-access-control-repair-v1-latest.json
+          git config user.name "YADO G1 Access Policy Learner"
+          git config user.email "actions@users.noreply.github.com"
+          git add \
+            receipts/yado-g1-external-resource-assisted-access-control-repair-v1-latest.json \
+            candidates/g1-algorithms/bounded-dnf-relation-policy-inducer-v1.json \
+            architecture/evolution-ledger.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G1 resource-assisted access-control repair [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
