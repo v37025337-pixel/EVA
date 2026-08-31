@@ -17,6 +17,7 @@ from yado_legacy_experience_retriever_v2 import LegacyExperienceRetrieverV1
 from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesizerV1
 from yado_bounded_program_repair_v2 import BoundedProgramRepairV1
 from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReasonerV1
+from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingentPlannerV1, ContingentStage
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -45,6 +46,7 @@ class UnifiedYADOCoreV1:
         self.semantic_expression_synthesizer=SemanticExpressionSynthesizerV1
         self.bounded_program_repair=BoundedProgramRepairV1
         self.scientific_data_reasoner=BoundedScientificDataReasonerV1
+        self.adaptive_contingent_planner=BoundedAdaptiveContingentPlannerV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -138,6 +140,24 @@ class UnifiedYADOCoreV1:
 
     def test_scientific_hypothesis(self,rows:list[dict[str,Any]],spec:dict[str,Any])->dict[str,Any]:
         return self.scientific_data_reasoner.evaluate_hypothesis(rows,spec)
+
+    @staticmethod
+    def _contingent_stage_from_dict(x:dict[str,Any])->ContingentStage:
+        return ContingentStage(
+            str(x["stage_id"]),float(x["cost"]),float(x["expected_gain"]),int(x.get("quota_remaining",1)),
+            bool(x.get("available",True)),float(x.get("latency",1.0)),bool(x.get("attempted",False)),
+            tuple(str(z) for z in x.get("requires",()))
+        )
+
+    def plan_contingent(self,current_confidence:float,target_confidence:float,remaining_budget:float,stages:list[dict[str,Any]],completed=()):
+        xs=[self._contingent_stage_from_dict(x) for x in stages]
+        return self.adaptive_contingent_planner.plan(current_confidence,target_confidence,remaining_budget,xs,completed=completed)
+
+    def update_contingent_plan(self,current_confidence:float,target_confidence:float,remaining_budget:float,stages:list[dict[str,Any]],completed_stage_id:str,observed_gain:float,completed=()):
+        xs=[self._contingent_stage_from_dict(x) for x in stages]
+        return self.adaptive_contingent_planner.next_after_observation(
+            current_confidence,target_confidence,remaining_budget,xs,completed_stage_id,observed_gain,completed=completed
+        )
 
     def repair_program(self,source:str,function_name:str,train_examples:list[tuple[tuple[Any,...],Any]],max_candidates:int=10000)->dict[str,Any]:
         return self.bounded_program_repair.repair(source,function_name,train_examples,max_candidates=max_candidates)

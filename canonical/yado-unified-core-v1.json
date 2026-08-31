@@ -1,5 +1,6 @@
 {
   "active_runtime_sources": [
+    "runtime/yado_bounded_adaptive_contingent_planner_v1.py",
     "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
     "runtime/yado_bounded_program_repair_v2.py",
@@ -41,7 +42,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "8263ce0d6ce2e68f0da4aa0885d84d290593a3a4b299fc1c41d2bb114944ce24",
+  "core_digest": "fabdb1cc924659db7a16a4fa5a36fa535cff265a0a718f66b22171d33b231157",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -95,7 +96,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "LOGIC_THINKING_INTELLIGENCE_ARCHITECTURAL_CEILING_V1",
+  "current_frontier": "LTI_ARCHITECTURAL_CEILING_RECHECK_V2",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -203,14 +204,19 @@
     {
       "active_components": [
         "ALG-BUDGETED-STAGE-POLICY-V1",
+        "ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1",
         "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2"
       ],
       "plane_id": "THINKING_AND_PLANNING",
       "responsibilities": [
+        "bounded_contingent_planning",
+        "bounded_long_horizon_search",
         "bounded_program_repair_and_execution",
         "bounded_search",
         "cost_aware_planning",
-        "quota_aware_staging"
+        "prerequisite_aware_planning",
+        "quota_aware_staging",
+        "signed_evidence_update"
       ]
     },
     {
@@ -307,7 +313,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "911ba2905e4fd496f39ff95452e400b8d91427f66bee9dcbcacc40b64dee6005",
+  "runtime_sha256": "76964f1e664e65dc0cfbc3ccc6c2ddd86afbfbbb4c05781b1b6e38f0c24c3262",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
@@ -324,5 +330,26 @@
   },
   "semantic_boundary": "UNIFIED SOFTWARE COGNITIVE KERNEL CANDIDATE. LEGACY CONSCIOUSNESS EXPERIMENTS ARE HISTORICAL FUNCTIONAL EVIDENCE ONLY; THIS IS NOT A CLAIM OF SUBJECTIVE CONSCIOUSNESS OR AGI.",
   "shadow_runtime_sources": [],
-  "source_generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c"
+  "source_generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
+  "thinking_ceiling": {
+    "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+    "candidate_digest": "70a20d5cf002e68fa6849fa5774ce438c010e8463a3bc93edc50c9046c108deb",
+    "causal": {
+      "dependency": true,
+      "depth": true,
+      "signed": true
+    },
+    "component_id": "ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1",
+    "fresh_admission_receipt_sha256": "6bde35fc82fb8722d443c46e53908dc1ef975ca6307acc4d779c9e1a4c5edfea",
+    "fresh_score": 1.0,
+    "gate_run_id": "33441946853",
+    "mode": "ACTIVE_FIXED_ARCHITECTURE_ADAPTIVE_CONTINGENT_PLANNING",
+    "selected_features": {
+      "dependency_aware": true,
+      "max_depth": 8,
+      "signed_observation": true
+    },
+    "selected_strategy": "ADAPTIVE_CONTINGENT",
+    "source_sha256": "3250bff5b6131f29520b74b721d68fc66114137b4e799a32370cb25da049da77"
+  }
 }
