@@ -2,18 +2,10 @@
   "audit_blockers": [],
   "audit_priority": [
     {
-      "area": "WORKSPACE_AND_INTEGRATION",
-      "blocking": false,
-      "code": "HEAD_CAPABILITY_TO_CORE_BINDING",
-      "rank": 1,
-      "recommended_action": "Every claimed active capability should have an explicit runtime/component binding in the unified core manifest.",
-      "severity": "MEDIUM"
-    },
-    {
       "area": "MEMORY_AND_EXPERIENCE",
       "blocking": false,
       "code": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
-      "rank": 2,
+      "rank": 1,
       "recommended_action": "Distinguish host-curated lesson summaries from lessons independently re-derived by YADO from raw historical evidence.",
       "severity": "MEDIUM"
     },
@@ -21,7 +13,7 @@
       "area": "RESOURCE_AND_EVIDENCE",
       "blocking": false,
       "code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
-      "rank": 3,
+      "rank": 2,
       "recommended_action": "Re-check live resources on demand and separately test content comprehension/conflict resolution.",
       "severity": "LOW"
     }
@@ -29,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "ba429729c449160b82e2c792882e3a22d12389fce0aafcf19769c52af8d128b6",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 115,
+  "event_count": 116,
   "events": [
     {
       "canonical_mutation": false,
@@ -1919,14 +1911,30 @@
       "source_digest": "35985013c8d2469b1a239f556d918724e4043375712a72ee22687351a5bc245f",
       "source_path": "receipts/yado-head-capability-core-binding-reconciliation-v1-run-33437752939.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0",
+      "event_hash": "701aaff3335fdf2dd22a34f6dbc4f6494c90d9a64258e5a4f6345801d54a59bd",
+      "event_id": "E0116_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 115,
+      "parent_event_hash": "866d72a47ed9459586e403744ad8f51bd3586d731ab097ffbac7429bf129d186",
+      "promotion_applied": false,
+      "run_id": "33437802314",
+      "source_digest": "cebb3f71d7e6a28d670464e4b4398c3f55511a74fa7a6a778213f2a5a8e33704",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33437802314.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "db2f6b235a6f83e098f88704523cee904c29e685832ea8a8de50337c6e581d8d",
+  "ledger_digest": "3fbc84ccb26af1298fba7b68abec1b11186fee2552f19e763a24024b2375490c",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_HEAD_CAPABILITY_BINDING_AUDIT_V1"
+    "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1955,5 +1963,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "866d72a47ed9459586e403744ad8f51bd3586d731ab097ffbac7429bf129d186"
+  "tail_event_hash": "701aaff3335fdf2dd22a34f6dbc4f6494c90d9a64258e5a4f6345801d54a59bd"
 }
