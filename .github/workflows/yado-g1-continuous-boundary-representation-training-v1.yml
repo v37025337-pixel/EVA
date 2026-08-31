@@ -38,7 +38,7 @@ jobs:
         run: |
           mkdir -p receipts candidates/g1-s2-repaired-v3
           cp runtime/yado_g1_repair_continuous_boundary_and_representation_v1_receipt.json receipts/yado-g1-repair-continuous-boundary-and-representation-v1-latest.json
-          cp runtime/g1_repair_continuous_boundary_and_representation_v1/g1-candidate-s2-repaired-continuous-bundle-v3.json candidates/g1-s2-repaired-v3/bundle.json
+          cp runtime/g1-candidate-s2-repaired-continuous-bundle-v3.json candidates/g1-s2-repaired-v3/bundle.json
           git config user.name "YADO G1 Counterexample Trainer"
           git config user.email "actions@users.noreply.github.com"
           git add receipts/yado-g1-repair-continuous-boundary-and-representation-v1-latest.json candidates/g1-s2-repaired-v3/bundle.json architecture/evolution-ledger.json
