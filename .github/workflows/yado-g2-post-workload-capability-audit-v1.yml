@@ -1,0 +1,60 @@
+name: YADO G2 Post Workload Capability Audit V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/g2-post-workload-audit-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-post-workload-capability-audit
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run post-workload audit
+        id: audit
+        continue-on-error: true
+        run: python runtime/yado_g2_post_workload_capability_audit_v1.py
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-post-workload-capability-audit-v1
+          path: |
+            runtime/yado_g2_post_workload_capability_audit_v1_receipt.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist audit evidence
+        if: always()
+        run: |
+          mkdir -p receipts architecture
+          if [ -f runtime/yado_g2_post_workload_capability_audit_v1_receipt.json ]; then
+            cp runtime/yado_g2_post_workload_capability_audit_v1_receipt.json "receipts/yado-g2-post-workload-capability-audit-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO G2 Post Workload Audit"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          if [ -f "receipts/yado-g2-post-workload-capability-audit-v1-run-${GITHUB_RUN_ID}.json" ]; then files+=("receipts/yado-g2-post-workload-capability-audit-v1-run-${GITHUB_RUN_ID}.json"); fi
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist G2 post-workload capability audit [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_g2_post_workload_capability_audit_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_G2_AUDIT_RECEIPT")
+          r=json.loads(p.read_text())
+          if not str(r.get("status","")).startswith("PASS_"): raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
