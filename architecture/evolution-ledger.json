@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "2f6d9a91e236d4ffd17b8b5fb20f03c1f1f0aab3a1b932b8440f42bf65ff1f2c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 66,
+  "event_count": 67,
   "events": [
     {
       "canonical_mutation": false,
@@ -1070,14 +1070,30 @@
       "source_digest": "34fbe27ebbd37bf89f6950500331367086b1e6dbe03636946848e6b54d9032b1",
       "source_path": "receipts/yado-raw-task-representation-canonical-admission-gate-v1-run-33391439609.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "RUNTIME_CONTROL_PLANE_BINDING_REPAIR_V1",
+      "effect": "CANONICAL_CONTROL_PLANE_BINDING_CANDIDATE_PASS",
+      "event_hash": "594cbb79a317085946b119a7e65375e80944850cb8b2fac062df2763fd58537d",
+      "event_id": "E0067_G2_RUNTIME_CONTROL_PLANE_SELF_REPAIR",
+      "event_type": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 66,
+      "parent_event_hash": "6d7b27d45bfed9de39f4e5a23e4929eafe8dffeb6b2061a20cfd39ebfdf8f9b1",
+      "promotion_applied": false,
+      "run_id": "33391606240",
+      "source_digest": "848d64d4cacfcc95ecd3ece72e84da94bbfecfcaab7d412ac7ba25a8a8dae33d",
+      "source_path": "receipts/yado-runtime-control-plane-binding-self-repair-v1-run-33391606240.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "8e310712ed4540465697fe2d1c7bb9ded6515b6a8010a3cdddc02bc841c6bdf0",
+  "ledger_digest": "325e909a0fa0e1deff47bd96838f43f1fb0d07656afadc310da793aba2ab65f0",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "RUNTIME_CONTROL_PLANE_BINDING_REPAIR_V1"
+    "RUNTIME_CONTROL_PLANE_BINDING_CANONICAL_GATE_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1106,5 +1122,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "6d7b27d45bfed9de39f4e5a23e4929eafe8dffeb6b2061a20cfd39ebfdf8f9b1"
+  "tail_event_hash": "594cbb79a317085946b119a7e65375e80944850cb8b2fac062df2763fd58537d"
 }
