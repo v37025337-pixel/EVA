@@ -66,32 +66,44 @@ class BoundedDNFRelationPolicyInducerV1:
 
     @classmethod
     def _atoms(cls,cases):
-        fields=sorted(set().union(*(set(e['input']) for e in cases)))
-        # Ignore obvious nonce/noise fields unless they are predictive enough later.
-        fields=fields[:cls.MAX_FIELDS]
+        fields=sorted(set().union(*(set(e['input']) for e in cases)))[:cls.MAX_FIELDS]
         atoms=[]
+        distinct={}
+        types={}
         for f in fields:
             vals=[]
+            ts=set()
             for e in cases:
-                v=e['input'].get(f)
-                if isinstance(v,(str,bool,int,float)) and v not in vals:vals.append(v)
-            vals=vals[:cls.MAX_VALUES_PER_FIELD]
-            for v in vals:atoms.append(Atom('EQ',f,v))
-        # Cross-field relational atoms only when fields share at least one observed scalar value/type.
+                if f not in e['input']: continue
+                v=e['input'][f]
+                if isinstance(v,(str,bool,int,float)):
+                    ts.add(type(v))
+                    if v not in vals: vals.append(v)
+            distinct[f]=vals
+            types[f]=ts
+            # Low-cardinality fields are categorical attributes and can be tested literally.
+            # High-cardinality fields are treated as identifiers: do not memorize their values.
+            if 1 < len(vals) <= 6:
+                for v in vals[:cls.MAX_VALUES_PER_FIELD]:
+                    atoms.append(Atom('EQ',f,v))
+
+        # Relations are admitted only between identifier-like fields of the same scalar type.
+        # This blocks accidental boolean/enum equality such as identity_verified == mfa.
         for a,b in combinations(fields,2):
-            comparable=False
-            for e in cases[:120]:
-                if a in e['input'] and b in e['input']:
-                    va,vb=e['input'][a],e['input'][b]
-                    if type(va) is type(vb) and isinstance(va,(str,bool,int,float)):
-                        comparable=True;break
-            if comparable:
+            if len(distinct.get(a,())) < 7 or len(distinct.get(b,())) < 7:
+                continue
+            if len(types.get(a,set()))!=1 or types.get(a)!=types.get(b):
+                continue
+            eq_support=sum(1 for e in cases if a in e['input'] and b in e['input'] and e['input'][a]==e['input'][b])
+            neq_support=sum(1 for e in cases if a in e['input'] and b in e['input'] and e['input'][a]!=e['input'][b])
+            if eq_support:
                 atoms.append(Atom('FIELD_EQ',a,other_field=b))
+            if neq_support:
                 atoms.append(Atom('FIELD_NEQ',a,other_field=b))
         return atoms
 
     @classmethod
-    def synthesize(cls,target_capability,target_organ,cases,min_support=3,max_clauses=None):
+    def synthesize(cls,target_capability,target_organ,cases,min_support=3,max_clauses=None,validation_cases=None):
         if not cases:raise ValueError('EMPTY_CASES')
         max_clauses=min(max_clauses or cls.MAX_CLAUSES,cls.MAX_CLAUSES)
         labels=Counter(e['expected'] for e in cases)
@@ -134,13 +146,14 @@ class BoundedDNFRelationPolicyInducerV1:
 
         candidates=defaultdict(list)
         n=len(cases)
+        min_clause_support=max(min_support,int(n*0.015))
         for width in range(1,cls.MAX_CLAUSE_WIDTH+1):
             for combo in combinations(pool,width):
                 # Skip duplicate EQ constraints on same field with different values.
                 eq_fields=[a.field for a in combo if a.op=='EQ']
                 if len(eq_fields)!=len(set(eq_fields)):continue
                 covered=[idx for idx,e in enumerate(cases) if all(a.match(e['input']) for a in combo)]
-                if len(covered)<min_support:continue
+                if len(covered)<min_clause_support:continue
                 outcnt=Counter(cases[i]['expected'] for i in covered)
                 out,count=outcnt.most_common(1)[0]
                 if out==default:continue
@@ -149,24 +162,38 @@ class BoundedDNFRelationPolicyInducerV1:
                 good={i for i in covered if cases[i]['expected']==out}
                 bad={i for i in covered if cases[i]['expected']!=out}
                 if not good:continue
-                candidates[out].append((len(good),-len(bad),-width,canon([a.canonical() for a in combo]),combo,good,conf))
+
+                val_precision=1.0
+                val_support=0
+                if validation_cases:
+                    vm=[e for e in validation_cases if all(a.match(e['input']) for a in combo)]
+                    val_support=len(vm)
+                    min_val_support=max(2,int(len(validation_cases)*0.01))
+                    if val_support<min_val_support:continue
+                    val_precision=sum(e['expected']==out for e in vm)/val_support
+                    if val_precision<0.98:continue
+
+                candidates[out].append((
+                    len(good),val_support,val_precision,-len(bad),-width,
+                    canon([a.canonical() for a in combo]),combo,good,conf
+                ))
 
         clauses=[]
         for out in sorted(candidates,key=lambda x:str(x)):
             positives={i for i,e in enumerate(cases) if e['expected']==out}
             uncovered=set(positives)
-            cands=sorted(candidates[out],reverse=True,key=lambda z:(z[0],z[1],z[2],z[3]))
+            cands=sorted(candidates[out],reverse=True,key=lambda z:(z[2],z[1],z[0],z[3],z[4],z[5]))
             while uncovered and len(clauses)<max_clauses:
                 best=None
                 for z in cands:
-                    gain=len(z[5]&uncovered)
+                    gain=len(z[7]&uncovered)
                     if gain<=0:continue
-                    key=(gain,z[0],z[1],z[2],z[3])
+                    key=(gain,z[2],z[1],z[0],z[3],z[4],z[5])
                     if best is None or key>best[0]:best=(key,z)
                 if best is None:break
                 z=best[1]
-                clauses.append(Clause(list(z[4]),out,z[0],z[6]))
-                uncovered-=z[5]
+                clauses.append(Clause(list(z[6]),out,z[0],z[8]))
+                uncovered-=z[7]
 
         # Order more specific clauses first, then support.
         clauses.sort(key=lambda c:(-len(c.atoms),-c.support,str(c.output)))
