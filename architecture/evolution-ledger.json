@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "3f415bd74bf3f81d5cfdfa8b032ad85cc12f5d8d93d524bf0fb63c4266e352c2",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 71,
+  "event_count": 72,
   "events": [
     {
       "canonical_mutation": false,
@@ -1156,10 +1156,26 @@
       "source_digest": "727961e66413f4d79f97d1928d81949a3e42a9c50ab14b72e950aade2123ff6f",
       "source_path": "receipts/yado-g2-real-world-transfer-recheck-canonical-v1-run-33392443613.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=18; BLOCKING=4",
+      "event_hash": "f0b6ec1eca24c9fd66ddd91ec977a64ae544b7dd58e955a6cd628319f4aed0e6",
+      "event_id": "E0072_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 71,
+      "parent_event_hash": "45b0d6b8031a3460f34bad35f052d6f5e84e53903b00a88b2f3d4128045a152a",
+      "promotion_applied": false,
+      "run_id": "33392550684",
+      "source_digest": "85761dc1043afde916c5df7c9bec4b04b7b20b5a2c8ff5b37d43e5280cbbb69b",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33392550684.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "4d2cef81a99a6bfb294d983918417a6873dd21b2d6a35958b00b38961cedd66c",
+  "ledger_digest": "f7cbe5e9763be59935be8819c7126becd38fc23a99c4dc2132cbcbd702eb1ca5",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -1192,5 +1208,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "45b0d6b8031a3460f34bad35f052d6f5e84e53903b00a88b2f3d4128045a152a"
+  "tail_event_hash": "f0b6ec1eca24c9fd66ddd91ec977a64ae544b7dd58e955a6cd628319f4aed0e6"
 }
