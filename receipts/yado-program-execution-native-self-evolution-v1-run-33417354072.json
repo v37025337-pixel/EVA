@@ -1,0 +1,228 @@
+{
+  "ablation_scores": {
+    "binop": 0.5,
+    "boolop": 0.5,
+    "compare": 0.5,
+    "constant": 0.6666666666666666
+  },
+  "candidate_digest": "9e29ca81350e6d808dfb9c481c4aeffa80bb031fce493b8317be2f77f24023ab",
+  "candidate_source_sha256": "bdef2b0a7cd20379f59db8f63ab6229f879ac29261c943a8eb6258d2340081b3",
+  "canonical_mutation": false,
+  "checks": {
+    "canonical_head_immutable": true,
+    "causal_mutation_family_dependence": true,
+    "fresh_blind_within_evolution": false,
+    "repairs_confirmed_counterexamples": false,
+    "source_safety_guards": true
+  },
+  "g3_genesis_performed": false,
+  "next_required_capability": "REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V2",
+  "promotion_applied": false,
+  "receipt_sha256": "d356dff411eb20a06faac3f90f033e2a3c5bee05a8bc5935c04cdfbdc43f8b33",
+  "schema": "yado.g2.program_execution_native_self_evolution.v1",
+  "score": 0.6666666666666666,
+  "semantic_boundary": "BOUNDED SINGLE-AST-EDIT REPAIR OF ONE SAFE PYTHON FUNCTION FROM I/O EXAMPLES. NOT GENERAL PROGRAM SYNTHESIS OR UNRESTRICTED CODE EXECUTION.",
+  "source_checks": {
+    "bounded_candidate_budget": true,
+    "candidate_source_present": true,
+    "no_imports_beyond_ast_copy": true,
+    "single_function_execution_guard": true,
+    "unsafe_calls_rejected": true
+  },
+  "status": "WITHHOLD_PROGRAM_EXECUTION_NATIVE_SELF_EVOLUTION_V1",
+  "tasks": [
+    {
+      "blind": [
+        {
+          "args": [
+            0
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        },
+        {
+          "args": [
+            -8
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        },
+        {
+          "args": [
+            101
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            44
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 3,
+      "found": true,
+      "id": "E1_EVEN",
+      "repaired_source": "def is_even(n):\n    return n % 2 < 1\n",
+      "tried": 16
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            9,
+            9
+          ],
+          "expected": 9,
+          "got": 9,
+          "ok": true
+        },
+        {
+          "args": [
+            -4,
+            3
+          ],
+          "expected": 3,
+          "got": 3,
+          "ok": true
+        },
+        {
+          "args": [
+            100,
+            -1
+          ],
+          "expected": 100,
+          "got": 100,
+          "ok": true
+        },
+        {
+          "args": [
+            -7,
+            -3
+          ],
+          "expected": -3,
+          "got": -3,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 2,
+      "found": true,
+      "id": "E2_MAX",
+      "repaired_source": "def max2(a, b):\n    return a if a > b else b\n",
+      "tried": 5
+    },
+    {
+      "blind": [],
+      "blind_pass": false,
+      "candidate_count": 0,
+      "found": false,
+      "id": "E3_INC",
+      "repaired_source": null,
+      "tried": 7
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            1,
+            1,
+            10
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        },
+        {
+          "args": [
+            10,
+            1,
+            10
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        },
+        {
+          "args": [
+            -9,
+            -5,
+            5
+          ],
+          "expected": false,
+          "got": false,
+          "ok": true
+        },
+        {
+          "args": [
+            3,
+            -5,
+            5
+          ],
+          "expected": true,
+          "got": true,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 1,
+      "found": true,
+      "id": "E4_RANGE",
+      "repaired_source": "def in_range(x, lo, hi):\n    return lo <= x and x <= hi\n",
+      "tried": 11
+    },
+    {
+      "blind": [],
+      "blind_pass": false,
+      "candidate_count": 0,
+      "found": false,
+      "id": "E5_POSITIVE",
+      "repaired_source": null,
+      "tried": 10
+    },
+    {
+      "blind": [
+        {
+          "args": [
+            10,
+            0.5
+          ],
+          "expected": 5.0,
+          "got": 5.0,
+          "ok": true
+        },
+        {
+          "args": [
+            80,
+            0.25
+          ],
+          "expected": 60.0,
+          "got": 60.0,
+          "ok": true
+        },
+        {
+          "args": [
+            7,
+            0.0
+          ],
+          "expected": 7.0,
+          "got": 7.0,
+          "ok": true
+        }
+      ],
+      "blind_pass": true,
+      "candidate_count": 1,
+      "found": true,
+      "id": "E6_DISCOUNT",
+      "repaired_source": "def discount(price, rate):\n    return price * (1 - rate)\n",
+      "tried": 10
+    }
+  ]
+}

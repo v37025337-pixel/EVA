@@ -48,7 +48,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "1aab7c4353b455ec5e5ef1367326b28e521cf821208ec97afbfb0fd752c4a4fa",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 94,
+  "event_count": 95,
   "events": [
     {
       "canonical_mutation": false,
@@ -1584,14 +1584,30 @@
       "source_digest": "674594407bbb06075690aaebe40c3ae8491941fa3310203e8d7aec0067a0f397",
       "source_path": "receipts/yado-real-world-generalization-self-directed-v2-run-33417121418.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V1",
+      "effect": "BOUNDED_PROGRAM_REPAIR_CANDIDATE; SCORE=0.6666666666666666; NEXT=REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V2",
+      "event_hash": "0a2d766bd9b6776cbe71905b614890cd1b9126974f38c9e436306b1a4549db33",
+      "event_id": "E0095_G2_PROGRAM_EXECUTION_NATIVE_SELF_EVOLUTION",
+      "event_type": "KERNEL_SELF_EVOLVED_PROGRAM_REPAIR_CANDIDATE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 94,
+      "parent_event_hash": "42efcbef9a11630ed257f1f54442020d7a4b567dfb1c73e07b7c400bf842b861",
+      "promotion_applied": false,
+      "run_id": "33417354072",
+      "source_digest": "d356dff411eb20a06faac3f90f033e2a3c5bee05a8bc5935c04cdfbdc43f8b33",
+      "source_path": "receipts/yado-program-execution-native-self-evolution-v1-run-33417354072.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "9500bb8cff28144fb396fb0ef194ed5e4cad0cbcd39a6832d88570e8cfe2ff02",
+  "ledger_digest": "cb9c89472515be582513599d893ac9b937c22c2e51c33a387cd844a878a693c9",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V1"
+    "REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V2"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1620,5 +1636,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "42efcbef9a11630ed257f1f54442020d7a4b567dfb1c73e07b7c400bf842b861"
+  "tail_event_hash": "0a2d766bd9b6776cbe71905b614890cd1b9126974f38c9e436306b1a4549db33"
 }
