@@ -22,7 +22,9 @@ SHADOW=REPO/'candidates'/'g2-development'/'contextual-stream-capability-adapter-
 BURN=REPO/'architecture'/'g2-burnin-state-v1.json'
 WORK=REPO/'architecture'/'g2-applied-workload-state-v1.json'
 DEV=REPO/'architecture'/'g2-development-state-v1.json'
-REAL=REPO/'receipts'/'yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json'
+REAL_LEGACY=REPO/'receipts'/'yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json'
+REAL_LATEST=REPO/'receipts'/'yado-g2-real-world-transfer-recheck-canonical-v1-latest.json'
+REAL=REAL_LATEST if REAL_LATEST.exists() else REAL_LEGACY
 POST=REPO/'receipts'/'yado-g2-post-workload-capability-audit-v1-run-33363851997.json'
 CONSOL=REPO/'receipts'/'yado-unified-core-consolidation-gate-v1-run-33371375385.json'
 RECON=REPO/'receipts'/'yado-unified-core-ledger-reconciliation-v1-run-33371661769.json'
@@ -37,7 +39,8 @@ def load(p:Path)->dict[str,Any]:return json.loads(p.read_text(encoding='utf-8'))
 core=UnifiedYADOCoreV1(REPO)
 head=load(HEAD);arch=load(ARCH);ccore=load(CORE);cexp=load(EXP)
 cand_core=load(CAND_CORE);cand_exp=load(CAND_EXP);ledger=load(LEDGER);shadow=load(SHADOW)
-burn=load(BURN);work=load(WORK);dev=load(DEV);real=load(REAL);post=load(POST);consol=load(CONSOL);recon=load(RECON)
+burn=load(BURN);work=load(WORK);dev=load(DEV);real=load(REAL);legacy_real=load(REAL_LEGACY);post=load(POST);consol=load(CONSOL);recon=load(RECON)
+real_evidence_source=str(REAL.relative_to(REPO)).replace('\\','/')
 validate_ledger_v2(ledger)
 
 findings=[]
@@ -183,14 +186,29 @@ add('SHADOW_CONTEXT_ADAPTER_DEPENDENCE','MEMORY_AND_EXPERIENCE','HIGH' if shadow
     shadow_dependency)
 
 # ---------- real-world transfer boundary ----------
-raw=real.get('raw_unstructured',{}).get('accuracy')
-structured=real.get('structured_mirror_accuracy')
+if 'canonical_raw_routing' in real:
+    raw=real.get('canonical_raw_routing',{}).get('accuracy')
+    raw_task_count=real.get('canonical_raw_routing',{}).get('task_count')
+    structured=legacy_real.get('structured_mirror_accuracy')
+    raw_evidence_mode='CANONICAL_RECHECK'
+else:
+    raw=real.get('raw_unstructured',{}).get('accuracy')
+    raw_task_count=real.get('raw_unstructured',{}).get('task_count')
+    structured=real.get('structured_mirror_accuracy')
+    raw_evidence_mode='LEGACY_BASELINE'
 raw_block=(isinstance(raw,(int,float)) and raw<0.8 and isinstance(structured,(int,float)) and structured>=0.99)
+add('SELF_AUDIT_EVIDENCE_FRESHNESS','SELF_AUDIT_AND_REPAIR','INFO',
+    'PASS',
+    {'selected_evidence_source':real_evidence_source,'mode':raw_evidence_mode,
+     'latest_canonical_recheck_available':REAL_LATEST.exists()},
+    'Always select the newest verified canonical evidence compatible with the audited capability.',
+    False)
 add('RAW_TASK_REPRESENTATION_GAP','REPRESENTATION_AND_GROUNDING','CRITICAL' if raw_block else 'INFO',
     'FAIL' if raw_block else 'PASS',
-    {'raw_unstructured_accuracy':raw,'structured_mirror_accuracy':structured,'task_count':real.get('raw_unstructured',{}).get('task_count'),
+    {'raw_unstructured_accuracy':raw,'structured_mirror_accuracy':structured,'task_count':raw_task_count,
+     'evidence_source':real_evidence_source,'evidence_mode':raw_evidence_mode,
      'next_required_capability':real.get('next_required_capability')},
-    'Build a bounded raw-task representation/grounding layer without secret host feature extraction, then repeat fresh real-world transfer.',
+    'Build or improve a bounded raw-task representation/grounding layer without secret host feature extraction, then repeat fresh real-world transfer.',
     raw_block)
 
 # Prior audit boundaries remain relevant.
@@ -199,7 +217,9 @@ high_unproven=[x for x in limits if x.get('severity')=='HIGH' and x.get('status'
 add('REAL_WORLD_GENERALIZATION_SCOPE','REPRESENTATION_AND_GROUNDING','HIGH' if high_unproven else 'INFO',
     'PARTIAL' if high_unproven else 'PASS',
     {'high_unproven_count':len(high_unproven),'items':[x.get('id') for x in high_unproven],
-     'audit_conclusion':post.get('audit_conclusion')},
+     'audit_conclusion':post.get('audit_conclusion'),
+     'latest_transfer_scope_limitations':real.get('remaining_scope_limitations',[]),
+     'latest_transfer_evidence_source':real_evidence_source},
     'Do not promote bounded synthetic workload scores into claims about real programming, theorem proving, science, or general intelligence.',
     bool(high_unproven))
 
@@ -256,6 +276,13 @@ summary={
 verdict='WITHHOLD_FURTHER_GENERATION_ADVANCE' if summary['blocking_findings'] else 'PASS_WITH_LIMITATIONS'
 next_step=priority[0]['code'] if priority else core.developmental_frontier().get('manifest_frontier')
 
+# Close the self-audit -> developmental-control loop without discarding the backlog.
+audit_blockers=[p['code'] for p in priority if p.get('blocking')]
+ledger['audit_blockers']=audit_blockers
+ledger['audit_priority']=copy.deepcopy(priority)
+if next_step:
+    ledger['open_deficits']=[next_step]
+
 receipt={
  'schema':'yado.unified_core.deep_self_audit.receipt.v1',
  'status':'PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1',
@@ -272,6 +299,7 @@ receipt={
  'findings':findings,
  'self_selected_priority':priority,
  'self_selected_next_step':next_step,
+ 'audit_frontier_binding':{'open_deficit':next_step,'blocking_backlog':audit_blockers},
  'canonical_mutation':False,
  'repair_applied':False,
  'g3_genesis_performed':False,
