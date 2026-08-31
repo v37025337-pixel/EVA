@@ -32,8 +32,8 @@ class UnifiedYADOCoreV1:
         self.architecture=self._load('canonical/yado-g2-architecture-v1.json')
         self.ledger=self._load('architecture/evolution-ledger.json')
         self.portfolio=self._load('resources/yado-unified-external-resource-portfolio-v1.json')
-        self.manifest=self._load('candidates/unified-core-v1/manifest.json')
-        self.experience=self._load('candidates/unified-core-v1/experience-registry.json')
+        self.manifest=self._load('canonical/yado-unified-core-v1.json')
+        self.experience=self._load('canonical/yado-unified-experience-registry-v1.json')
         self.shadow_context=self._load('candidates/g2-development/contextual-stream-capability-adapter-v1.json')
         validate_ledger_v2(self.ledger)
 
@@ -57,7 +57,7 @@ class UnifiedYADOCoreV1:
             'ledger_head_matches_generation':self.ledger.get('current_head')==self.head.get('generation_id'),
             'ledger_head_digest_matches':self.ledger.get('current_head_digest')==self.head.get('canonical_head_digest'),
             'g2_architecture_canonical':self.architecture.get('canonical_active') is True and self.architecture.get('promotion_applied') is True,
-            'experience_registry_bound':self.manifest.get('experience_registry')=='candidates/unified-core-v1/experience-registry.json',
+            'experience_registry_bound':self.manifest.get('experience_registry')=='canonical/yado-unified-experience-registry-v1.json',
             'raw_grounding_frontier_preserved':self.manifest.get('current_frontier')=='G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1',
             'g3_blocked':self.manifest.get('g3_genesis_performed') is False and self.experience.get('policy',{}).get('g3_genesis_blocked') is True,
             'shadow_context_not_smuggled_canonical':self.shadow_context.get('canonical_active') is False,

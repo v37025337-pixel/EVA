@@ -1,8 +1,8 @@
 {
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "2f6d9a91e236d4ffd17b8b5fb20f03c1f1f0aab3a1b932b8440f42bf65ff1f2c",
+  "current_head_digest": "21a25181ea637e96e8dc87a9f5c3b54ae88c1d4e588ad77105c3183f730a9f49",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 67,
+  "event_count": 68,
   "events": [
     {
       "canonical_mutation": false,
@@ -1086,14 +1086,33 @@
       "source_digest": "848d64d4cacfcc95ecd3ece72e84da94bbfecfcaab7d412ac7ba25a8a8dae33d",
       "source_path": "receipts/yado-runtime-control-plane-binding-self-repair-v1-run-33391606240.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "RUNTIME_CONTROL_PLANE_BINDING_CANONICAL_GATE_V1",
+      "effect": "RUNTIME_CONTROL_PLANE_REBOUND_TO_CANONICAL_CONFIG",
+      "event_hash": "ea1a7e77f88db14fdb3d28e2eb92f4c169ce46f58c379422dab8e5d696ce959a",
+      "event_id": "E0068_G2_RUNTIME_CONTROL_PLANE_CANONICAL_GATE",
+      "event_type": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 67,
+      "new_head_digest": "21a25181ea637e96e8dc87a9f5c3b54ae88c1d4e588ad77105c3183f730a9f49",
+      "parent_event_hash": "594cbb79a317085946b119a7e65375e80944850cb8b2fac062df2763fd58537d",
+      "previous_head_digest": "2f6d9a91e236d4ffd17b8b5fb20f03c1f1f0aab3a1b932b8440f42bf65ff1f2c",
+      "promotion_applied": false,
+      "run_id": "33391800337",
+      "source_digest": "615eaec2bc3c8caf3b03a73ea379ead9776169ef658cf57f26e8fddfe9afbd00",
+      "source_path": "receipts/yado-runtime-control-plane-binding-canonical-gate-v1-run-33391800337.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "325e909a0fa0e1deff47bd96838f43f1fb0d07656afadc310da793aba2ab65f0",
+  "ledger_digest": "23911bea4cf53f942f23f9d3569991c1a3e58e97b36781718886a2ab360cfc55",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "RUNTIME_CONTROL_PLANE_BINDING_CANONICAL_GATE_V1"
+    "UNIFIED_CORE_POST_CONTROL_PLANE_SELF_AUDIT_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1122,5 +1141,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "594cbb79a317085946b119a7e65375e80944850cb8b2fac062df2763fd58537d"
+  "tail_event_hash": "ea1a7e77f88db14fdb3d28e2eb92f4c169ce46f58c379422dab8e5d696ce959a"
 }
