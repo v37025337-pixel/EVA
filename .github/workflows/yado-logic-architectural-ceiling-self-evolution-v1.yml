@@ -1,0 +1,67 @@
+name: YADO Logic Architectural Ceiling Self Evolution V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-logic-architectural-ceiling-self-evolution-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-logic-architectural-ceiling-self-evolution-v1
+  cancel-in-progress: true
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run logic ceiling self-evolution
+        id: evolve
+        continue-on-error: true
+        run: python runtime/yado_logic_architectural_ceiling_self_evolution_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-logic-architectural-ceiling-self-evolution-v1
+          path: |
+            runtime/yado_logic_architectural_ceiling_self_evolution_v1_receipt.json
+            candidates/g2-self-evolution/bounded_compositional_logic_v1.py
+            candidates/g2-self-evolution/bounded_compositional_logic_v1.json
+            architecture/yado-g2-lti-ceiling-state-v1.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist evidence
+        if: always()
+        run: |
+          mkdir -p receipts candidates/g2-self-evolution
+          if [ -f runtime/yado_logic_architectural_ceiling_self_evolution_v1_receipt.json ]; then
+            cp runtime/yado_logic_architectural_ceiling_self_evolution_v1_receipt.json "receipts/yado-logic-architectural-ceiling-self-evolution-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Logic Ceiling Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json architecture/yado-g2-lti-ceiling-state-v1.json)
+          for f in candidates/g2-self-evolution/bounded_compositional_logic_v1.py candidates/g2-self-evolution/bounded_compositional_logic_v1.json "receipts/yado-logic-architectural-ceiling-self-evolution-v1-run-${GITHUB_RUN_ID}.json"; do [ -f "$f" ] && files+=("$f"); done
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist YADO logic ceiling self-evolution V1 [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_logic_architectural_ceiling_self_evolution_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_LOGIC_CEILING_RECEIPT")
+          r=json.loads(p.read_text())
+          if r.get("status")!="PASS_LOGIC_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
