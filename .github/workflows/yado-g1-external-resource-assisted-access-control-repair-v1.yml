@@ -22,8 +22,11 @@ jobs:
       - run: python runtime/reconstruct_rc8v36.py
       - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
       - name: Run resource-assisted access-control repair
+        id: repair
+        continue-on-error: true
         run: python runtime/yado_g1_external_resource_assisted_access_control_repair_v1.py
       - name: Upload evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: yado-g1-resource-assisted-access-control-repair-v1
@@ -33,6 +36,7 @@ jobs:
             architecture/evolution-ledger.json
           retention-days: 30
       - name: Persist evidence
+        if: always()
         run: |
           mkdir -p receipts candidates/g1-algorithms
           cp runtime/yado_g1_external_resource_assisted_access_control_repair_v1_receipt.json receipts/yado-g1-external-resource-assisted-access-control-repair-v1-latest.json
@@ -48,3 +52,16 @@ jobs:
             git commit -m "Persist G1 resource-assisted access-control repair [skip ci]"
             git push origin HEAD:yado-architecture-shadow-search
           fi
+      - name: Enforce semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path("runtime/yado_g1_external_resource_assisted_access_control_repair_v1_receipt.json")
+          if not p.exists():
+              raise SystemExit("MISSING_REPAIR_RECEIPT")
+          r=json.loads(p.read_text())
+          if not str(r.get("status","")).startswith("PASS_"):
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
