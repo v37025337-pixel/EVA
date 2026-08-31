@@ -1,7 +1,7 @@
 {
   "current_head": "G0_RC8_V36",
   "current_head_digest": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
-  "event_count": 20,
+  "event_count": 21,
   "events": [
     {
       "canonical_mutation": false,
@@ -322,14 +322,31 @@
       "source_digest": "0261cd4bc9dc958b2a4cf7c15adf6c051ef22377a6f8e12d363ed2ecf9211b96",
       "source_path": "receipts/yado-run-inherited-shadow-capability-inside-g1-candidate-v2-latest.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE",
+      "effect": "FULL_GATE_WITHHOLD; FAILED=thinking_min,thinking_boundary_min,intelligence_min,intelligence_boundary_min,representation_invariance_min,full_regression; NEXT=G1_REPAIR_CONTINUOUS_BOUNDARY_AND_REPRESENTATION_V1",
+      "event_hash": "36da7b626e0bb1e27c011e7d1ac0e21f274c4a9d73f30725c7c20c40cf1d36bc",
+      "event_id": "E0021_G1_FULL_CROSS_DOMAIN_REGRESSION_CAUSAL_GATE",
+      "event_type": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+      "generation": "G1_CANDIDATE_S2",
+      "index": 20,
+      "parent_event_hash": "76d4ee52b8e04dc82242c16625c4cd55465dc2f65a71a6f8c14f505abef14e0d",
+      "promotion_applied": false,
+      "run_id": "33346362115",
+      "source_digest": "4b7356df6b403fdb30139d715198d0378d14bb9df56ea8b0577e13e4ac53d7f0",
+      "source_path": "receipts/yado-g1-s2-full-cross-domain-regression-causal-gate-v1-latest.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; EXACTLY_ONE_PROMOTED_HEAD",
-  "ledger_digest": "3a179eb0e9f14d109b7a40c15efb68b32f603b38c2a9c1b176292650559e96e9",
+  "ledger_digest": "22136b4d4500c8e1b205a69e3a65fae319272de17aca7ce0a4b72df4fd7ad603",
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
     "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
     "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
+    "G1_REPAIR_CONTINUOUS_BOUNDARY_AND_REPRESENTATION_V1",
     "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE",
     "INTELLIGENCE_BOUNDARY_REASONING",
     "REPRESENTATION_INVARIANCE",
@@ -349,5 +366,5 @@
     "LIVE_SHADOW_META_SELECTION_VALIDATION",
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE"
   ],
-  "tail_event_hash": "76d4ee52b8e04dc82242c16625c4cd55465dc2f65a71a6f8c14f505abef14e0d"
+  "tail_event_hash": "36da7b626e0bb1e27c011e7d1ac0e21f274c4a9d73f30725c7c20c40cf1d36bc"
 }
