@@ -135,7 +135,7 @@ class BoundedDNFRelationPolicyInducerV1:
         # names are supplied by the host.
         rel=[z for z in ranked if z[4].op.startswith('FIELD_') and z[0]>0]
         scalar=[z for z in ranked if z[4].op=='EQ']
-        relation_slots=min(10,max(4,cls.MAX_ATOMS_FOR_COMBINATION//3)) if rel else 0
+        relation_slots=min(12,len(rel),cls.MAX_ATOMS_FOR_COMBINATION//2) if rel else 0
         chosen=rel[:relation_slots]
         remaining=cls.MAX_ATOMS_FOR_COMBINATION-len(chosen)
         chosen+=scalar[:remaining]
