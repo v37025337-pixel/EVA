@@ -1,0 +1,226 @@
+{
+  "analysis": {
+    "correlations": {
+      "petal_length|petal_width": 0.962865431402796,
+      "sepal_length|petal_length": 0.8717537758865833,
+      "sepal_length|petal_width": 0.8179411262715757,
+      "sepal_length|sepal_width": -0.11756978413300204,
+      "sepal_width|petal_length": -0.4284401043305397,
+      "sepal_width|petal_width": -0.36612593253643905
+    },
+    "group_means": {
+      "species|petal_length": {
+        "setosa": {
+          "count": 50,
+          "mean": 1.462
+        },
+        "versicolor": {
+          "count": 50,
+          "mean": 4.26
+        },
+        "virginica": {
+          "count": 50,
+          "mean": 5.5520000000000005
+        }
+      },
+      "species|petal_width": {
+        "setosa": {
+          "count": 50,
+          "mean": 0.24600000000000002
+        },
+        "versicolor": {
+          "count": 50,
+          "mean": 1.3259999999999998
+        },
+        "virginica": {
+          "count": 50,
+          "mean": 2.026
+        }
+      },
+      "species|sepal_length": {
+        "setosa": {
+          "count": 50,
+          "mean": 5.006
+        },
+        "versicolor": {
+          "count": 50,
+          "mean": 5.936
+        },
+        "virginica": {
+          "count": 50,
+          "mean": 6.587999999999999
+        }
+      },
+      "species|sepal_width": {
+        "setosa": {
+          "count": 50,
+          "mean": 3.428
+        },
+        "versicolor": {
+          "count": 50,
+          "mean": 2.77
+        },
+        "virginica": {
+          "count": 50,
+          "mean": 2.9739999999999998
+        }
+      }
+    },
+    "linear_fits": {
+      "petal_length|petal_width": {
+        "intercept": -0.36307552131902887,
+        "n": 150,
+        "r2": 0.9271098389904925,
+        "slope": 0.4157554163524114
+      },
+      "sepal_length|petal_length": {
+        "intercept": -7.101443369602453,
+        "n": 150,
+        "r2": 0.7599546457725154,
+        "slope": 1.858432978254841
+      },
+      "sepal_length|petal_width": {
+        "intercept": -3.2002150046491904,
+        "n": 150,
+        "r2": 0.6690276860464137,
+        "slope": 0.7529175706758454
+      },
+      "sepal_length|sepal_width": {
+        "intercept": 3.418946836103816,
+        "n": 150,
+        "r2": 0.013822654141080698,
+        "slope": -0.06188479796414413
+      },
+      "sepal_width|petal_length": {
+        "intercept": 9.063150606211906,
+        "n": 150,
+        "r2": 0.18356092299876373,
+        "slope": -1.735221524055355
+      },
+      "sepal_width|petal_width": {
+        "intercept": 3.1568722857062115,
+        "n": 150,
+        "r2": 0.13404819847567712,
+        "slope": -0.6402765871258868
+      }
+    },
+    "numeric_summary": {
+      "petal_length": {
+        "count": 150,
+        "max": 6.9,
+        "mean": 3.7580000000000005,
+        "min": 1.0,
+        "stdev": 1.7652982332594664
+      },
+      "petal_width": {
+        "count": 150,
+        "max": 2.5,
+        "mean": 1.1993333333333334,
+        "min": 0.1,
+        "stdev": 0.7622376689603466
+      },
+      "sepal_length": {
+        "count": 150,
+        "max": 7.9,
+        "mean": 5.843333333333334,
+        "min": 4.3,
+        "stdev": 0.8280661279778629
+      },
+      "sepal_width": {
+        "count": 150,
+        "max": 4.4,
+        "mean": 3.0573333333333337,
+        "min": 2.0,
+        "stdev": 0.4358662849366982
+      }
+    },
+    "row_count": 150,
+    "schema": {
+      "categorical": [
+        "species"
+      ],
+      "columns": [
+        "sepal_length",
+        "sepal_width",
+        "petal_length",
+        "petal_width",
+        "species"
+      ],
+      "numeric": [
+        "sepal_length",
+        "sepal_width",
+        "petal_length",
+        "petal_width"
+      ]
+    },
+    "strongest_numeric_pair": {
+      "correlation": 0.962865431402796,
+      "pair": [
+        "petal_length",
+        "petal_width"
+      ]
+    }
+  },
+  "candidate_digest": "f215b36c48bf0319f009dbe1516e0d8d917ad6a2c2f539680c3cdd46d2ed4b45",
+  "candidate_source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b",
+  "canonical_mutation": false,
+  "checks": {
+    "all_hypotheses_supported": true,
+    "bounded_claim_surface": true,
+    "canonical_head_immutable": true,
+    "causal_analysis_ablation": true,
+    "live_public_dataset_loaded": true,
+    "no_network_inside_candidate": true,
+    "schema_inferred": true,
+    "strongest_pair_correct": true
+  },
+  "dataset": {
+    "rows": 150,
+    "sha256": "9cc1c345c71bcc9b486b74cbf6063fa66f4bb5e0f603a4b3c3471ec2e5e8e355",
+    "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+  },
+  "g3_genesis_performed": false,
+  "hypotheses": [
+    {
+      "observed": 0.962865431402796,
+      "supported": true,
+      "threshold": 0.95,
+      "type": "CORRELATION_ABS_AT_LEAST"
+    },
+    {
+      "group_means": {
+        "setosa": {
+          "count": 50,
+          "mean": 1.462
+        },
+        "versicolor": {
+          "count": 50,
+          "mean": 4.26
+        },
+        "virginica": {
+          "count": 50,
+          "mean": 5.5520000000000005
+        }
+      },
+      "supported": true,
+      "type": "GROUP_MEAN_ORDER"
+    },
+    {
+      "fit": {
+        "intercept": -0.36307552131902887,
+        "n": 150,
+        "r2": 0.9271098389904925,
+        "slope": 0.4157554163524114
+      },
+      "supported": true,
+      "threshold": 0.9,
+      "type": "LINEAR_R2_AT_LEAST"
+    }
+  ],
+  "next_required_capability": "REAL_SCIENCE_DATA_TRANSFER_FRESH_ADMISSION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "629ab495dfc9827cc0d4328da70d0dc82ee39d27e6e2de989501526a8627868e",
+  "schema": "yado.g2.science_data_native_self_evolution.v1",
+  "semantic_boundary": "BOUNDED TABULAR DESCRIPTIVE STATISTICS, PEARSON CORRELATION, SIMPLE LINEAR FIT, GROUP MEANS, AND THREE EXPLICIT HYPOTHESIS FORMS. NOT CAUSAL INFERENCE OR GENERAL SCIENTIFIC REASONING.",
+  "status": "PASS_SCIENCE_DATA_NATIVE_SELF_EVOLUTION_V1"
+}
