@@ -1,0 +1,186 @@
+{
+  "candidate_digest": "853922549dcba42b98ea75a3f250cea840d606ae12342d75062a6c7d09f83e6b",
+  "candidate_source_sha256": "03f0aa5559d4b7d26e0b3f14c2b62668ebaf60ac954ac099787c7ef37e362575",
+  "canonical_active": false,
+  "checks": {
+    "candidate_finding_pass": true,
+    "candidate_no_longer_blocks_legacy": true,
+    "current_component_bound": true,
+    "current_probe_pass": true,
+    "current_runtime_bound": true,
+    "head_ledger_immutable": true,
+    "selected_rule_generalizes": true
+  },
+  "probe_evidence": {
+    "branch": "main",
+    "bytes": 2087,
+    "commit": "e5dc6a0d374d944974926296168900b0cc1968bb",
+    "path": ".github/workflows/yado-rc8-consciousness-ab.yml",
+    "sha256": "b930adfff5e87f0a38b6dc94131869f2f184a6edc08e495792161042a051ad5e",
+    "transport": "RAW_HTTPS_EXACT"
+  },
+  "promotion_applied": false,
+  "rule_results": [
+    {
+      "accuracy": 1.0,
+      "complexity": 0.14,
+      "risk": 0.04,
+      "rows": [
+        {
+          "case": "CURRENT_CANONICAL",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "MANIFEST_ONLY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "RUNTIME_ONLY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "READ_FAIL",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NONE",
+          "correct": true,
+          "expected": false,
+          "got": false
+        }
+      ],
+      "rule": "MANIFEST_PLUS_RUNTIME_BEHAVIOR",
+      "score": 0.9927999999999999
+    },
+    {
+      "accuracy": 0.8,
+      "complexity": 0.1,
+      "risk": 0.12,
+      "rows": [
+        {
+          "case": "CURRENT_CANONICAL",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "MANIFEST_ONLY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "RUNTIME_ONLY",
+          "correct": false,
+          "expected": false,
+          "got": true
+        },
+        {
+          "case": "READ_FAIL",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NONE",
+          "correct": true,
+          "expected": false,
+          "got": false
+        }
+      ],
+      "rule": "RUNTIME_BEHAVIOR",
+      "score": 0.7912
+    },
+    {
+      "accuracy": 0.8,
+      "complexity": 0.02,
+      "risk": 0.35,
+      "rows": [
+        {
+          "case": "CURRENT_CANONICAL",
+          "correct": false,
+          "expected": true,
+          "got": false
+        },
+        {
+          "case": "MANIFEST_ONLY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "RUNTIME_ONLY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "READ_FAIL",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NONE",
+          "correct": true,
+          "expected": false,
+          "got": false
+        }
+      ],
+      "rule": "SOURCE_LITERAL",
+      "score": 0.7852
+    },
+    {
+      "accuracy": 0.6,
+      "complexity": 0.05,
+      "risk": 0.22,
+      "rows": [
+        {
+          "case": "CURRENT_CANONICAL",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "MANIFEST_ONLY",
+          "correct": false,
+          "expected": false,
+          "got": true
+        },
+        {
+          "case": "RUNTIME_ONLY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "READ_FAIL",
+          "correct": false,
+          "expected": false,
+          "got": true
+        },
+        {
+          "case": "NONE",
+          "correct": true,
+          "expected": false,
+          "got": false
+        }
+      ],
+      "rule": "MANIFEST_BOUND",
+      "score": 0.5892
+    }
+  ],
+  "schema": "yado.g2.legacy_retrieval_audit_candidate.v3",
+  "selected_rule": "MANIFEST_PLUS_RUNTIME_BEHAVIOR",
+  "semantic_boundary": "EVOLVES ONLY SELF-AUDIT RECOGNITION OF AN ALREADY CANONICAL READ-ONLY LEGACY RETRIEVER; RETRIEVAL CODE ITSELF IS UNCHANGED.",
+  "source_runtime_sha256": "efe12464d11c0f51a996a5cebc6dc6ebc599e5e46991dd9c877746c81da6df27",
+  "state": "AUTHORIZED_FOR_SHADOW_ADMISSION"
+}
