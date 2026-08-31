@@ -1,12 +1,14 @@
 {
   "active_runtime_sources": [
-    "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
-    "runtime/yado_conjunctive_rule_inducer_v1.py",
+    "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
     "runtime/yado_budgeted_stage_policy_v1.py",
-    "runtime/yado_bounded_capability_router_v1.py",
+    "runtime/yado_conjunctive_rule_inducer_v1.py",
+    "runtime/yado_evolution_ledger_v2.py",
+    "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
     "runtime/yado_neutral_evidence_profile_selector_v1.py",
-    "runtime/yado_evolution_ledger_v2.py"
+    "runtime/yado_raw_task_representation_learner_v1.py",
+    "runtime/yado_raw_task_representation_runtime_v1.py"
   ],
   "canonical_active": true,
   "canonical_mutation": false,
@@ -14,9 +16,9 @@
   "consolidation_gate_run_id": "33371375385",
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "388a3cf4c520cead1fdd63c38414ab5d7675db20f4942440229cf5af63781e40",
+  "core_digest": "b64a8ab7c63a25e8a428fa390b45d59428b9de31902754af399e64898e3263e7",
   "core_id": "UNIFIED_YADO_CORE_V1",
-  "current_frontier": "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1",
+  "current_frontier": "G2_REAL_WORLD_TRANSFER_RECHECK_WITH_CANONICAL_REPRESENTATION_V1",
   "experience_registry": "canonical/yado-unified-experience-registry-v1.json",
   "experience_registry_digest": "af6f482d828957fbc0343cf3d81e90d3efdff168367cfb1b695ef5f16b4a58cf",
   "g3_genesis_performed": false,
@@ -141,25 +143,33 @@
       ]
     },
     {
-      "active_components": [],
+      "active_components": [
+        "ALG-G2-RAW-TASK-REPRESENTATION-V1"
+      ],
       "experience_sources": [
         "yado-v29-cognitive",
         "yado-rc8-consciousness-ab",
         "yado-rc8-digital-consciousness-v1"
       ],
-      "frontier": "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1",
+      "frontier": "REAL_WORLD_TRANSFER_RECHECK",
       "plane_id": "REPRESENTATION_AND_GROUNDING",
       "responsibilities": [
         "raw_task_to_internal_representation",
         "semantic_grounding",
         "host_scaffold_reduction"
       ],
-      "status": "OPEN_FRONTIER"
+      "status": "ACTIVE_BOUNDED"
     }
   ],
   "promotion_applied": false,
   "purpose": "ONE_ACTIVE_KERNEL_WITH_LEGACY_BRANCHES_AS_READ_ONLY_DEVELOPMENTAL_EXPERIENCE",
-  "runtime_sha256": "252070c677d29316ee7ac6a87db8df9f5452715de5b80d9427570e571314a530",
+  "raw_task_representation": {
+    "admission_run_id": "33392211618",
+    "component_digest": "3d7ab8c5b30f5650e8a18f562f13ca5e696d6ae36c25ab6cd8d41fb21ba7b36c",
+    "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
+    "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
+  },
+  "runtime_sha256": "f96d5531932ab5943a08d830b264c1b037632d206dc4334d1df015546d880f47",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "semantic_boundary": "UNIFIED SOFTWARE COGNITIVE KERNEL CANDIDATE. LEGACY CONSCIOUSNESS EXPERIMENTS ARE HISTORICAL FUNCTIONAL EVIDENCE ONLY; THIS IS NOT A CLAIM OF SUBJECTIVE CONSCIOUSNESS OR AGI.",
