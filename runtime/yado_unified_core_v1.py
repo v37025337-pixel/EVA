@@ -16,6 +16,7 @@ from yado_raw_task_representation_runtime_v1 import RawTaskRepresentationRuntime
 from yado_legacy_experience_retriever_v2 import LegacyExperienceRetrieverV1
 from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesizerV1
 from yado_bounded_program_repair_v2 import BoundedProgramRepairV1
+from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReasonerV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -43,6 +44,7 @@ class UnifiedYADOCoreV1:
         self.legacy_experience_retriever=LegacyExperienceRetrieverV1(self.repo,self.experience)
         self.semantic_expression_synthesizer=SemanticExpressionSynthesizerV1
         self.bounded_program_repair=BoundedProgramRepairV1
+        self.scientific_data_reasoner=BoundedScientificDataReasonerV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -128,6 +130,12 @@ class UnifiedYADOCoreV1:
 
     def experience_search_verified(self,query:str,limit:int=8)->list[dict[str,Any]]:
         return self.legacy_experience_retriever.search_content(query,limit=limit)
+
+    def analyze_science_data(self,rows:list[dict[str,Any]],enable:tuple[str,...]=('summary','correlation','group','linear'))->dict[str,Any]:
+        return self.scientific_data_reasoner.analyze(rows,enable=enable)
+
+    def test_scientific_hypothesis(self,rows:list[dict[str,Any]],spec:dict[str,Any])->dict[str,Any]:
+        return self.scientific_data_reasoner.evaluate_hypothesis(rows,spec)
 
     def repair_program(self,source:str,function_name:str,train_examples:list[tuple[tuple[Any,...],Any]],max_candidates:int=10000)->dict[str,Any]:
         return self.bounded_program_repair.repair(source,function_name,train_examples,max_candidates=max_candidates)

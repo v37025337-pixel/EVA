@@ -3,6 +3,7 @@
     "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
     "runtime/yado_bounded_program_repair_v2.py",
+    "runtime/yado_bounded_scientific_data_reasoner_v1.py",
     "runtime/yado_budgeted_stage_policy_v1.py",
     "runtime/yado_conjunctive_rule_inducer_v1.py",
     "runtime/yado_core_audit_invariant_self_evolution_v1.py",
@@ -27,9 +28,9 @@
   "consolidation_gate_run_id": "33371375385",
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "d221edf119cdf136a5f31df8966a7ed8b852fc4a94da3f039e1ec0c9b26f47cd",
+  "core_digest": "b6f0690d31dd1cae95662ecf01b4bb8b4b0547c6037aa19a6730c03ff9885783",
   "core_id": "UNIFIED_YADO_CORE_V1",
-  "current_frontier": "UNIFIED_CORE_POST_REAL_WORLD_EVIDENCE_AUDIT_V4",
+  "current_frontier": "UNIFIED_CORE_POST_SCIENCE_DATA_SELF_AUDIT_V1",
   "deep_self_audit": {
     "candidate_digest": "9682044f9b10f34517468a7f14eebc5e497bb44865c1b9f7c63ef91c0a21e88f",
     "canonical_integration_run_id": "33418814723",
@@ -163,13 +164,15 @@
     },
     {
       "active_components": [
+        "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1",
         "RESOURCE-PORTFOLIO-V1"
       ],
       "plane_id": "RESOURCE_AND_EVIDENCE",
       "responsibilities": [
         "bounded_external_resource_routing",
-        "evidence_source_selection",
-        "costed_resource_use"
+        "bounded_tabular_scientific_reasoning",
+        "costed_resource_use",
+        "evidence_source_selection"
       ]
     },
     {
@@ -225,9 +228,21 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "19778fbc37dda0052b4fa1a1c46b2a2863eec91caf51c38cc38374320ac07d48",
+  "runtime_sha256": "ac42172b9f1c53c5bfaaccdfe3df9e15685650345a818076925cc9ec70acf3b7",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
+  "science_reasoning": {
+    "candidate_digest": "f215b36c48bf0319f009dbe1516e0d8d917ad6a2c2f539680c3cdd46d2ed4b45",
+    "component_id": "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1",
+    "fresh_admission_receipt_sha256": "31c5197a44aa4621719bf2c532443a8407b12d820262f145bfdab0389ef6b859",
+    "fresh_datasets": [
+      "PENGUINS",
+      "TIPS"
+    ],
+    "gate_run_id": "33436389858",
+    "mode": "ACTIVE_BOUNDED_TABULAR_SCIENTIFIC_REASONING",
+    "source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b"
+  },
   "semantic_boundary": "UNIFIED SOFTWARE COGNITIVE KERNEL CANDIDATE. LEGACY CONSCIOUSNESS EXPERIMENTS ARE HISTORICAL FUNCTIONAL EVIDENCE ONLY; THIS IS NOT A CLAIM OF SUBJECTIVE CONSCIOUSNESS OR AGI.",
   "shadow_runtime_sources": [
     "runtime/yado_g2_contextual_stream_capability_adapter_v1.py"
