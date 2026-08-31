@@ -1,23 +1,14 @@
 {
   "audit_blockers": [
-    "LEGACY_EXPERIENCE_CONTENT_RETRIEVAL",
     "REAL_WORLD_GENERALIZATION_SCOPE",
     "SHADOW_CONTEXT_ADAPTER_DEPENDENCE"
   ],
   "audit_priority": [
     {
-      "area": "MEMORY_AND_EXPERIENCE",
-      "blocking": true,
-      "code": "LEGACY_EXPERIENCE_CONTENT_RETRIEVAL",
-      "rank": 1,
-      "recommended_action": "Add bounded read-only retrieval of the exact receipt/code bytes from the registered legacy branch, with branch+commit+hash provenance.",
-      "severity": "HIGH"
-    },
-    {
       "area": "REPRESENTATION_AND_GROUNDING",
       "blocking": true,
       "code": "REAL_WORLD_GENERALIZATION_SCOPE",
-      "rank": 2,
+      "rank": 1,
       "recommended_action": "Do not promote bounded synthetic workload scores into claims about real programming, theorem proving, science, or general intelligence.",
       "severity": "HIGH"
     },
@@ -25,7 +16,7 @@
       "area": "MEMORY_AND_EXPERIENCE",
       "blocking": true,
       "code": "SHADOW_CONTEXT_ADAPTER_DEPENDENCE",
-      "rank": 3,
+      "rank": 2,
       "recommended_action": "Either admit the contextual stream adapter through an independent canonical gate or repeat key workload claims without it.",
       "severity": "HIGH"
     },
@@ -33,7 +24,7 @@
       "area": "WORKSPACE_AND_INTEGRATION",
       "blocking": false,
       "code": "HEAD_CAPABILITY_TO_CORE_BINDING",
-      "rank": 4,
+      "rank": 3,
       "recommended_action": "Every claimed active capability should have an explicit runtime/component binding in the unified core manifest.",
       "severity": "MEDIUM"
     },
@@ -41,23 +32,15 @@
       "area": "MEMORY_AND_EXPERIENCE",
       "blocking": false,
       "code": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
-      "rank": 5,
+      "rank": 4,
       "recommended_action": "Distinguish host-curated lesson summaries from lessons independently re-derived by YADO from raw historical evidence.",
-      "severity": "MEDIUM"
-    },
-    {
-      "area": "SELF_AUDIT_AND_REPAIR",
-      "blocking": false,
-      "code": "SELF_AUDIT_RUNTIME_BINDING",
-      "rank": 6,
-      "recommended_action": "If this deep self-audit survives independent comparison, admit it as a bounded canonical self-audit capability.",
       "severity": "MEDIUM"
     },
     {
       "area": "RESOURCE_AND_EVIDENCE",
       "blocking": false,
       "code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
-      "rank": 7,
+      "rank": 5,
       "recommended_action": "Re-check live resources on demand and separately test content comprehension/conflict resolution.",
       "severity": "LOW"
     }
@@ -65,7 +48,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "ce84a3468badfc37b84ffbe22a6b8e40f67e6f400769d4299274001e8fd38733",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 86,
+  "event_count": 87,
   "events": [
     {
       "canonical_mutation": false,
@@ -1469,14 +1452,30 @@
       "source_digest": "6019d1b01735c1a89291d03bc439d09568b10776c6dbd164d1ebeb4d9b238169",
       "source_path": "receipts/yado-legacy-retrieval-audit-canonical-integration-v3-run-33404945429.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=19; BLOCKING=2",
+      "event_hash": "b4da2b10c7756fdac0791840b265c1b7cb9f04b936d660728757de0a8f5e556a",
+      "event_id": "E0087_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 86,
+      "parent_event_hash": "169cad3d4caa380fe2be6ce80befe57d3212f20de532b6e77c3e7cee8347a6e1",
+      "promotion_applied": false,
+      "run_id": "33405098806",
+      "source_digest": "c9595d52df504ef58ecb6d13667945461985121abe31366800e3fcf1da7f3ee8",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33405098806.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "1732367b24568d72acfbcb61f58e1aa72217107dd26496a3e47917749a999208",
+  "ledger_digest": "790d1917b5720cbf277409b2a7695c501203ac831603a4eafda5607434850938",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_SELF_AUDIT_V3"
+    "REAL_WORLD_GENERALIZATION_SCOPE"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1505,5 +1504,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "169cad3d4caa380fe2be6ce80befe57d3212f20de532b6e77c3e7cee8347a6e1"
+  "tail_event_hash": "b4da2b10c7756fdac0791840b265c1b7cb9f04b936d660728757de0a8f5e556a"
 }
