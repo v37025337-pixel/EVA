@@ -2,8 +2,8 @@
   "generation": "G2_CANDIDATE_TRCG_V1",
   "generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
   "min_domain_accuracy": 1.0,
-  "next_required_capability": "G2_APPLIED_WORKLOAD_RUN_3_OF_3",
-  "pass_count": 2,
+  "next_required_capability": "G2_POST_WORKLOAD_CAPABILITY_AUDIT_V1",
+  "pass_count": 3,
   "runs": [
     {
       "checks": {
@@ -116,11 +116,67 @@
       "run_digest": "6da4ed40b2871fa8b783bfaba6488e5a7ce53d89e0b56d724b8e76675c44afd7",
       "seed": 7200017,
       "status": "PASS"
+    },
+    {
+      "checks": {
+        "CAUSAL_PLANNING": true,
+        "EXACT_SCIENCE": true,
+        "MATHEMATICS": true,
+        "MULTI_AGENT": true,
+        "PROGRAMMING": true,
+        "canonical_g2_immutable": true,
+        "mixed_domain_accuracy": true
+      },
+      "domain_results": {
+        "CAUSAL_PLANNING": {
+          "accuracy": 1.0,
+          "budget_violations": 0,
+          "context_ablation_accuracy": 0.25,
+          "context_causal_drop": 0.75,
+          "steps": 4000
+        },
+        "EXACT_SCIENCE": {
+          "accuracy": 1.0,
+          "budget_violations": 0,
+          "context_ablation_accuracy": 0.25,
+          "context_causal_drop": 0.75,
+          "steps": 4000
+        },
+        "MATHEMATICS": {
+          "accuracy": 1.0,
+          "budget_violations": 0,
+          "context_ablation_accuracy": 0.25,
+          "context_causal_drop": 0.75,
+          "steps": 4000
+        },
+        "MULTI_AGENT": {
+          "accuracy": 1.0,
+          "budget_violations": 0,
+          "context_ablation_accuracy": 0.25,
+          "context_causal_drop": 0.75,
+          "steps": 4000
+        },
+        "PROGRAMMING": {
+          "accuracy": 1.0,
+          "budget_violations": 0,
+          "context_ablation_accuracy": 0.25,
+          "context_causal_drop": 0.75,
+          "steps": 4000
+        }
+      },
+      "github_run_id": "33363707192",
+      "mixed_domain_accuracy": 1.0,
+      "mixed_steps": 4000,
+      "profile": "FINAL_MULTI_DOMAIN_COMPOSITE_LOAD",
+      "run": 3,
+      "run_digest": "af645b771ee1ad46da3e3cddab935648b71804f1bcfc3ed0559febd969c67f16",
+      "seed": 7300029,
+      "status": "PASS"
     }
   ],
   "schema": "yado.g2.applied_workload_state.v1",
-  "stable_pass_streak": 2,
-  "state_digest": "65f4e5a4a3f7b6e290114f1395ebae9930445dc4c928b3ceacc377a079b69e1a",
-  "status": "WORKLOAD",
+  "stable_pass_streak": 3,
+  "state_digest": "7be9f31a0fd525f65f6e465a294cede532e7a8257720900f93d8d96062461505",
+  "status": "APPLIED_WORKLOAD_PASS",
   "target_runs": 3
 }
