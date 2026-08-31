@@ -71,11 +71,11 @@ class G2TypedRecurrentCapabilityGraphRuntimeV1:
             # RuleProgram objects executed by the proven bounded sandbox rather
             # than by a method on the program itself.
             if hasattr(self.scalar,'execute'):
-                result=self.scalar.execute(task['payload'])
+                result=self.scalar.execute(task.get('payload',{}))
             else:
-                result=BoundedRuleSandbox.execute(self.scalar,task['payload'])
+                result=BoundedRuleSandbox.execute(self.scalar,task.get('payload',{}))
         elif selected==CAP_REL:
-            result=self.relation.execute(task['payload'])
+            result=self.relation.execute(task.get('payload',{}))
         elif selected==CAP_BUD:
             stages=self._budget_stages(task,ablated_memory=ablated_memory)
             plan=BudgetedStagePolicyV1.plan(
