@@ -2,7 +2,7 @@
   "current_head": "G1_CANDIDATE_S2",
   "current_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
   "current_head_event_id": "E0024_G1_PROMOTION",
-  "event_count": 31,
+  "event_count": 32,
   "events": [
     {
       "canonical_mutation": false,
@@ -502,10 +502,26 @@
       "source_digest": "efdeddc624a3d0f9a9a602bfb81a12bc273cb1b70fbbcd7c7a160960646986c5",
       "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FRAGMENTED_EXTERNAL_RESOURCE_MEMORY",
+      "effect": "ALL_RECOVERABLE_PRIOR_RESOURCES_UNIFIED_AND_ROUTED_BY_DEFICIT_COST_ACCESS_AND_EVIDENCE_STATE",
+      "event_hash": "18676a637a446137204348046c4d6bb75b1a3d0060bb70817bb7e0b6ec5290f8",
+      "event_id": "E0032_G1_UNIFIED_EXTERNAL_RESOURCE_PORTFOLIO",
+      "event_type": "RESOURCE_INTELLIGENCE_PORTFOLIO",
+      "generation": "G1_CANDIDATE_S2",
+      "index": 31,
+      "parent_event_hash": "4783e2525f3dbbf09da62e5b5c27f8dc03035bfb021583e6a6d98fc1bc356f77",
+      "promotion_applied": false,
+      "run_id": "33355588352",
+      "source_digest": "498ce72cbeaad531242d9efd70558dde2c6aff54916e3f541e8560f22e717bad",
+      "source_path": "receipts/yado-unified-external-resource-portfolio-v1-latest.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "87d9caec7a724c6db371e0a6d6f6d9e17da0334eb8daf1a6a6bbdf8d449a05d0",
+  "ledger_digest": "8e534067ce40fb8d932ba136679a38ba6382f8a96efb1d528bfd5fa8d0640b53",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -516,6 +532,7 @@
     "BRANCH_PROLIFERATION",
     "CONDITIONAL_FILTERING_OF_PRIORITIES",
     "DISCONNECTED_VERSION_HISTORY",
+    "FRAGMENTED_EXTERNAL_RESOURCE_MEMORY",
     "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE",
     "G1_S2_PROMOTION_DECISION_GATE",
     "NATIVE_ALGORITHM_BANK_ADMISSION_AND_META_SELECTION",
@@ -535,5 +552,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "4783e2525f3dbbf09da62e5b5c27f8dc03035bfb021583e6a6d98fc1bc356f77"
+  "tail_event_hash": "18676a637a446137204348046c4d6bb75b1a3d0060bb70817bb7e0b6ec5290f8"
 }
