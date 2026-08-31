@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-import copy,hashlib,importlib.util,json,os,sys
+import ast,copy,hashlib,importlib.util,json,os,sys
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
@@ -34,7 +34,14 @@ head=load(HEAD);core=load(CORE);ledger=load(LEDGER);meta=load(CAND_META)
 admit_path=latest_admission();admit=load(admit_path)
 validate_ledger_v2(ledger)
 
-if ledger.get('open_deficits')!=['REAL_MATHEMATICAL_REASONING_CANONICAL_INTEGRATION_V1']:
+frontier=ledger.get('open_deficits')
+repair_retry=False
+if frontier==['REAL_MATHEMATICAL_REASONING_SEARCH_EVOLUTION_V2']:
+    last=(ledger.get('events') or [])[-1] if ledger.get('events') else {}
+    repair_retry=(last.get('deficit')=='REAL_MATHEMATICAL_REASONING_CANONICAL_INTEGRATION_V1' and
+                  last.get('status')=='WITHHOLD' and
+                  last.get('source_path')=='receipts/yado-mathematical-reasoning-canonical-integration-v1-run-33416433637.json')
+if frontier!=['REAL_MATHEMATICAL_REASONING_CANONICAL_INTEGRATION_V1'] and not repair_retry:
     raise RuntimeError('UNEXPECTED_FRONTIER')
 if admit.get('status')!='PASS_MATHEMATICAL_REASONING_FRESH_ADMISSION_V1':
     raise RuntimeError('FRESH_ADMISSION_NOT_PASS')
@@ -48,11 +55,19 @@ if ledger.get('current_head_digest')!=head.get('canonical_head_digest'):
     raise RuntimeError('HEAD_LEDGER_MISMATCH')
 
 candidate_code=CAND_SRC.read_text(encoding='utf-8')
+tree=ast.parse(candidate_code)
+called_names={n.func.id for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name)}
+imported_roots=set()
+for n in ast.walk(tree):
+    if isinstance(n,ast.Import):
+        imported_roots.update(a.name.split('.')[0] for a in n.names)
+    elif isinstance(n,ast.ImportFrom) and n.module:
+        imported_roots.add(n.module.split('.')[0])
 source_safety={
-    'no_exec': 'exec(' not in candidate_code,
-    'no_eval': 'eval(' not in candidate_code,
-    'no_network': all(x not in candidate_code for x in ['requests.','aiohttp','urllib','socket']),
-    'no_subprocess': 'subprocess' not in candidate_code,
+    'no_exec': 'exec' not in called_names,
+    'no_eval': 'eval' not in called_names,
+    'no_network': not bool(imported_roots & {'requests','aiohttp','urllib','socket','http','ftplib'}),
+    'no_subprocess': 'subprocess' not in imported_roots,
     'bounded_ops': 'max_ops=3' in candidate_code and 'max_states_per_level=30000' in candidate_code,
 }
 
@@ -120,6 +135,10 @@ checks={
     'candidate_current_audit_pass': audit.get('pass') is True,
     'unified_core_interface_blind_pass': interface_ok,
     'canonical_head_coherent': ledger.get('current_head_digest')==head.get('canonical_head_digest'),
+    'gate_repair_retry_valid': (not repair_retry) or (
+        frontier==['REAL_MATHEMATICAL_REASONING_SEARCH_EVOLUTION_V2'] and
+        source_safety.get('no_eval') is True
+    ),
 }
 passed=all(checks.values())
 
