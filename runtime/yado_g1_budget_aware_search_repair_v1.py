@@ -13,6 +13,7 @@ LEDGER=ROOT.parent/'architecture'/'evolution-ledger.json'
 HEAD=ROOT.parent/'canonical'/'yado-main-head-g1-s2.json'
 SCOUT=ROOT.parent/'receipts'/'yado-free-for-dev-capability-scout-v1-latest.json'
 ACCESS_PASS=ROOT.parent/'receipts'/'yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json'
+PORTFOLIO=ROOT.parent/'resources'/'yado-unified-external-resource-portfolio-v1.json'
 OUT=ROOT/'g1_budget_aware_search_repair_v1'
 OUT.mkdir(exist_ok=True)
 
@@ -31,11 +32,23 @@ ledger=json.loads(LEDGER.read_text())
 head=json.loads(HEAD.read_text())
 scout=json.loads(SCOUT.read_text())
 access=json.loads(ACCESS_PASS.read_text())
+portfolio=json.loads(PORTFOLIO.read_text())
 validate_ledger_v2(ledger)
 if ledger['current_head']!='G1_CANDIDATE_S2':raise RuntimeError('G1_NOT_HEAD')
 if head.get('canonical_head_digest')!=ledger.get('current_head_digest'):raise RuntimeError('HEAD_DIGEST_MISMATCH')
 if access.get('status')!='PASS_G1_EXTERNAL_RESOURCE_ASSISTED_ACCESS_CONTROL_REPAIR_V1':
     raise RuntimeError('ACCESS_REPAIR_NOT_PASS')
+pcheck=copy.deepcopy(portfolio)
+declared_portfolio_digest=pcheck.pop('portfolio_digest',None)
+if declared_portfolio_digest!=h(pcheck):
+    raise RuntimeError('UNIFIED_RESOURCE_PORTFOLIO_DIGEST_MISMATCH')
+if portfolio.get('generation')!=ledger['current_head'] or portfolio.get('generation_head_digest')!=ledger['current_head_digest']:
+    raise RuntimeError('UNIFIED_RESOURCE_PORTFOLIO_HEAD_MISMATCH')
+route=portfolio.get('routes_for_current_open_deficits',{}).get('G1_BUDGET_AWARE_SEARCH_REPAIR_V1',[])
+if not route or route[0].get('kind')!='local_evidence':
+    raise RuntimeError('RESOURCE_ROUTE_NOT_LOCAL_FIRST')
+if any(str(x.get('policy','')).startswith('EXCLUDED') for x in route):
+    raise RuntimeError('EXCLUDED_RESOURCE_SELECTED')
 hyp=[x for x in scout['mechanism_hypotheses'] if x['deficit']=='BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION']
 if not hyp or hyp[0]['candidate_algorithm_family']!='BUDGETED_STAGE_POLICY':
     raise RuntimeError('BUDGET_HYPOTHESIS_MISSING')
@@ -199,6 +212,7 @@ component={
  'generation':ledger['current_head'],
  'source_module':'runtime/yado_budgeted_stage_policy_v1.py',
  'origin_resource_scout_digest':scout['receipt_sha256'],
+ 'unified_resource_portfolio_digest':declared_portfolio_digest,
  'profile_evidence_digest':profiles['profile_digest'],
  'max_stages':BudgetedStagePolicyV1.MAX_STAGES,
  'max_plan_depth':BudgetedStagePolicyV1.MAX_PLAN_DEPTH,
@@ -219,6 +233,8 @@ report={
  'github_run_id':os.getenv('GITHUB_RUN_ID'),'github_sha':os.getenv('GITHUB_SHA'),
  'generation':ledger['current_head'],'generation_head_digest_before':head_before,
  'resource_derived_hypothesis':hyp[0],
+ 'unified_resource_portfolio_digest':declared_portfolio_digest,
+ 'resource_route_used':route,
  'budget_profile_evidence_digest':profiles['profile_digest'],
  'domain_results':domain_results,'escalation_results':escalation,
  'summary':{
@@ -238,7 +254,7 @@ report={
  'component':component,'canonical_mutation':False,'promotion_applied':False,
  'generation_head_digest_after':ledger['current_head_digest'],
  'next_required_capability':'G1_POST_RESOURCE_ASSISTED_DEVELOPMENT_REGRESSION_AND_ADMISSION_V1' if pass_gate else 'CONTINUE_G1_BUDGET_AWARE_SEARCH_REPAIR',
- 'semantic_boundary':'BOUNDED SYNTHETIC SEARCH-PLANNING EVALUATION. FREE-FOR-DEV CATALOG INSPIRES RESOURCE STATE VARIABLES; NO PAID SERVICE IS AUTO-CREATED OR CALLED',
+ 'semantic_boundary':'BOUNDED SYNTHETIC SEARCH-PLANNING EVALUATION USING THE UNIFIED PRIOR-RESOURCE PORTFOLIO. LOCAL EVIDENCE IS ROUTED FIRST; NO PAID SERVICE IS AUTO-CREATED OR CALLED',
 }
 report['receipt_sha256']=h(report)
 (ROOT/'yado_g1_budget_aware_search_repair_v1_receipt.json').write_text(json.dumps(report,indent=2,sort_keys=True,default=str)+'\n')
