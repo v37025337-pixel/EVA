@@ -65,7 +65,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "3f415bd74bf3f81d5cfdfa8b032ad85cc12f5d8d93d524bf0fb63c4266e352c2",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 79,
+  "event_count": 80,
   "events": [
     {
       "canonical_mutation": false,
@@ -1348,14 +1348,30 @@
       "source_digest": "3ec8cc13306b36563fcc3f0749a91bfc316a65bdf82c2128decae355efb897f3",
       "source_path": "receipts/yado-core-audit-invariant-self-evolution-v1-run-33396775177.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CORE_AUDIT_INVARIANT_FRESH_ADMISSION_V1",
+      "effect": "EVOLVED_FRONTIER_AUDIT_INVARIANT_FRESH_ADMISSION_PASS",
+      "event_hash": "c4961a4a616bbb7091fde106fc5eca870803f6b87b7b241edf0f66b3eca36c5b",
+      "event_id": "E0080_G2_CORE_AUDIT_INVARIANT_FRESH_ADMISSION",
+      "event_type": "KERNEL_EVOLVED_AUDIT_FRESH_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 79,
+      "parent_event_hash": "9706a153ac604bfcda852eee144f5ee27e028c847bad1078df1b506561426716",
+      "promotion_applied": false,
+      "run_id": "33397076738",
+      "source_digest": "7ad9f2b447619bb6b03ad6dd8940e2b37aa77ca98dc37e6b908122cee2d53fde",
+      "source_path": "receipts/yado-core-audit-invariant-fresh-admission-v1-run-33397076738.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "a69eb21f62428c3e6282b686412bed208a85badd095bbcfebc01d58a985cb879",
+  "ledger_digest": "e42d50c3fe377abd1617dcd6468c43d159964428ec7943e79a7925cde7ffe842",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "CORE_AUDIT_INVARIANT_FRESH_ADMISSION_V1"
+    "CORE_AUDIT_INVARIANT_CANONICAL_INTEGRATION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1384,5 +1400,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "9706a153ac604bfcda852eee144f5ee27e028c847bad1078df1b506561426716"
+  "tail_event_hash": "c4961a4a616bbb7091fde106fc5eca870803f6b87b7b241edf0f66b3eca36c5b"
 }

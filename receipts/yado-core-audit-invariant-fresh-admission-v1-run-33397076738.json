@@ -1,0 +1,93 @@
+{
+  "candidate_digest": "9510d1d083318a5a53de2ef33860ef6960b36c357fb61ee92ab640196b152fce",
+  "candidate_source_sha256": "59ec11f4ab9659cba81a41ddc63dfd30b2aa07fdb47379e88f5e43d4db82d32d",
+  "canonical_mutation": false,
+  "checks": {
+    "all_fresh_cases": true,
+    "current_full_audit_pass": true,
+    "empty_ledger_rejected": true,
+    "head_ledger_immutable": true,
+    "old_exact_frontier_literal_removed": true,
+    "split_brain_rejected": true,
+    "unseen_coherent_frontier_passes": true
+  },
+  "current_audit": {
+    "branch_count": 14,
+    "checks": {
+      "all_other_branches_experience_only": true,
+      "branch_inventory_complete": true,
+      "core_id": true,
+      "developmental_frontier_coherent": true,
+      "experience_registry_bound": true,
+      "g2_architecture_canonical": true,
+      "g3_blocked": true,
+      "generation_is_g2": true,
+      "ledger_head_digest_matches": true,
+      "ledger_head_matches_generation": true,
+      "legacy_auto_execution_forbidden": true,
+      "one_active_experience_lineage": true,
+      "required_active_families_present": true,
+      "shadow_context_not_smuggled_canonical": true
+    },
+    "core_id": "UNIFIED_YADO_CORE_V1",
+    "current_frontier": "G2_REAL_WORLD_TRANSFER_RECHECK_WITH_CANONICAL_REPRESENTATION_V1",
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "legacy_experience_count": 13,
+    "open_deficits": [
+      "CORE_AUDIT_INVARIANT_FRESH_ADMISSION_V1"
+    ],
+    "pass": true
+  },
+  "fresh_cases": [
+    {
+      "correct": true,
+      "expected": true,
+      "got": true,
+      "name": "CURRENT"
+    },
+    {
+      "correct": true,
+      "expected": true,
+      "got": true,
+      "name": "FRESH_UNKNOWN_BUT_COHERENT"
+    },
+    {
+      "correct": true,
+      "expected": false,
+      "got": false,
+      "name": "MANIFEST_EMPTY"
+    },
+    {
+      "correct": true,
+      "expected": false,
+      "got": false,
+      "name": "HEAD_EMPTY"
+    },
+    {
+      "correct": true,
+      "expected": false,
+      "got": false,
+      "name": "HEAD_MANIFEST_SPLIT"
+    },
+    {
+      "correct": true,
+      "expected": false,
+      "got": false,
+      "name": "EMPTY_LEDGER_BACKLOG"
+    },
+    {
+      "correct": true,
+      "expected": true,
+      "got": true,
+      "name": "DIFFERENT_LEDGER_ITEM_BUT_NONEMPTY"
+    }
+  ],
+  "g3_genesis_performed": false,
+  "next_required_capability": "CORE_AUDIT_INVARIANT_CANONICAL_INTEGRATION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "7ad9f2b447619bb6b03ad6dd8940e2b37aa77ca98dc37e6b908122cee2d53fde",
+  "schema": "yado.g2.core_audit_invariant_fresh_admission.receipt.v1",
+  "selected_rule": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
+  "semantic_boundary": "FRESH ADMISSION OF A GENERAL DEVELOPMENTAL-FRONTIER COHERENCE INVARIANT. HEAD/LEDGER, INTEGRITY, AND G3 CHECKS REMAIN UNCHANGED.",
+  "status": "PASS_CORE_AUDIT_INVARIANT_FRESH_ADMISSION_V1"
+}
