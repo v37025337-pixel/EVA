@@ -1,0 +1,1304 @@
+{
+  "best_training_round": 1,
+  "bundle_digest": "970b48d06092803f4a48279beaf6697f19173ae4e2e5d00b1a7d9174d24de2ef",
+  "candidate_generation_id": "G1_CANDIDATE_S2",
+  "canonical_mutation": false,
+  "canonical_parent_byte_identical": true,
+  "canonical_parent_sha256_after": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "canonical_parent_sha256_before": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "causal": {
+    "intelligence_ablation": 0.104,
+    "intelligence_drop": 0.895,
+    "intelligence_fresh": 0.999,
+    "restore_exact": true,
+    "thinking_ablation": 0.516,
+    "thinking_drop": 0.481,
+    "thinking_fresh": 0.997
+  },
+  "counterexample_source_run": "33346362115",
+  "final_holdout_domains": {
+    "CAUSAL_PLANNING": {
+      "intelligence": 0.9980769230769231,
+      "intelligence_boundary": 0.9973262032085561,
+      "intelligence_mapper": {
+        "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+        "mapping": {
+          "ablation_drop": "cause_measure_6_3",
+          "evidence_coverage": "cause_measure_6_5",
+          "fresh_blind": "cause_measure_6_2",
+          "integrity_score": "cause_measure_6_0",
+          "novelty": "cause_measure_6_6",
+          "rollback_score": "cause_measure_6_1",
+          "transfer_score": "cause_measure_6_4"
+        }
+      },
+      "representation_transfer": 0.9980769230769231,
+      "thinking": 0.9980769230769231,
+      "thinking_boundary": 0.9972527472527473,
+      "thinking_mapper": {
+        "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+        "mapping": {
+          "integrity_risk": "cause_signal_6_0",
+          "novelty": "cause_signal_6_2",
+          "uncertainty": "cause_signal_6_1"
+        }
+      }
+    },
+    "EXACT_SCIENCE": {
+      "intelligence": 0.9961538461538462,
+      "intelligence_boundary": 0.9946524064171123,
+      "intelligence_mapper": {
+        "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+        "mapping": {
+          "ablation_drop": "lab_measure_6_3",
+          "evidence_coverage": "lab_measure_6_5",
+          "fresh_blind": "lab_measure_6_2",
+          "integrity_score": "lab_measure_6_0",
+          "novelty": "lab_measure_6_6",
+          "rollback_score": "lab_measure_6_1",
+          "transfer_score": "lab_measure_6_4"
+        }
+      },
+      "representation_transfer": 0.9971153846153846,
+      "thinking": 0.9980769230769231,
+      "thinking_boundary": 0.9972527472527473,
+      "thinking_mapper": {
+        "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+        "mapping": {
+          "integrity_risk": "lab_signal_6_0",
+          "novelty": "lab_signal_6_2",
+          "uncertainty": "lab_signal_6_1"
+        }
+      }
+    },
+    "MATHEMATICS": {
+      "intelligence": 0.9980769230769231,
+      "intelligence_boundary": 0.9973262032085561,
+      "intelligence_mapper": {
+        "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+        "mapping": {
+          "ablation_drop": "proof_measure_6_3",
+          "evidence_coverage": "proof_measure_6_5",
+          "fresh_blind": "proof_measure_6_2",
+          "integrity_score": "proof_measure_6_0",
+          "novelty": "proof_measure_6_6",
+          "rollback_score": "proof_measure_6_1",
+          "transfer_score": "proof_measure_6_4"
+        }
+      },
+      "representation_transfer": 0.9990384615384615,
+      "thinking": 1.0,
+      "thinking_boundary": 1.0,
+      "thinking_mapper": {
+        "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+        "mapping": {
+          "integrity_risk": "proof_signal_6_0",
+          "novelty": "proof_signal_6_2",
+          "uncertainty": "proof_signal_6_1"
+        }
+      }
+    },
+    "PROGRAMMING": {
+      "intelligence": 0.9980769230769231,
+      "intelligence_boundary": 0.9973262032085561,
+      "intelligence_mapper": {
+        "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+        "mapping": {
+          "ablation_drop": "code_measure_6_3",
+          "evidence_coverage": "code_measure_6_5",
+          "fresh_blind": "code_measure_6_2",
+          "integrity_score": "code_measure_6_0",
+          "novelty": "code_measure_6_6",
+          "rollback_score": "code_measure_6_1",
+          "transfer_score": "code_measure_6_4"
+        }
+      },
+      "representation_transfer": 0.9990384615384615,
+      "thinking": 1.0,
+      "thinking_boundary": 1.0,
+      "thinking_mapper": {
+        "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+        "mapping": {
+          "integrity_risk": "code_signal_6_0",
+          "novelty": "code_signal_6_2",
+          "uncertainty": "code_signal_6_1"
+        }
+      }
+    }
+  },
+  "final_holdout_metrics": {
+    "intelligence": 0.9975961538461539,
+    "intelligence_boundary": 0.9966577540106952,
+    "representation_min": 0.9971153846153846,
+    "thinking": 0.9990384615384615,
+    "thinking_boundary": 0.9986263736263736
+  },
+  "final_min_gate_metric": 0.9966577540106952,
+  "github_run_id": "33347112712",
+  "github_sha": "02ca83aea0b36af5c11b723d46e6e1aa4b2d0f2b",
+  "next_required_capability": "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE_V2",
+  "promotion_applied": false,
+  "receipt_sha256": "6798a6a1740cef3792944d5190d5fdd732c1f50bba300e0385d0e76a5540567d",
+  "rounds": [
+    {
+      "counterexamples_in": {
+        "intelligence": 0,
+        "thinking": 0
+      },
+      "counterexamples_out": {
+        "intelligence": 1,
+        "thinking": 1
+      },
+      "domain_results": {
+        "CAUSAL_PLANNING": {
+          "intelligence": 0.996875,
+          "intelligence_boundary": 0.9956521739130435,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "cause_measure_1_3",
+              "evidence_coverage": "cause_measure_1_5",
+              "fresh_blind": "cause_measure_1_2",
+              "integrity_score": "cause_measure_1_0",
+              "novelty": "cause_measure_1_6",
+              "rollback_score": "cause_measure_1_1",
+              "transfer_score": "cause_measure_1_4"
+            }
+          },
+          "representation_transfer": 0.9984375,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "cause_signal_1_0",
+              "novelty": "cause_signal_1_2",
+              "uncertainty": "cause_signal_1_1"
+            }
+          }
+        },
+        "EXACT_SCIENCE": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "lab_measure_1_3",
+              "evidence_coverage": "lab_measure_1_5",
+              "fresh_blind": "lab_measure_1_2",
+              "integrity_score": "lab_measure_1_0",
+              "novelty": "lab_measure_1_6",
+              "rollback_score": "lab_measure_1_1",
+              "transfer_score": "lab_measure_1_4"
+            }
+          },
+          "representation_transfer": 0.9984375,
+          "thinking": 0.996875,
+          "thinking_boundary": 0.9955357142857143,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "lab_signal_1_0",
+              "novelty": "lab_signal_1_2",
+              "uncertainty": "lab_signal_1_1"
+            }
+          }
+        },
+        "MATHEMATICS": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "proof_measure_1_3",
+              "evidence_coverage": "proof_measure_1_5",
+              "fresh_blind": "proof_measure_1_2",
+              "integrity_score": "proof_measure_1_0",
+              "novelty": "proof_measure_1_6",
+              "rollback_score": "proof_measure_1_1",
+              "transfer_score": "proof_measure_1_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "proof_signal_1_0",
+              "novelty": "proof_signal_1_2",
+              "uncertainty": "proof_signal_1_1"
+            }
+          }
+        },
+        "PROGRAMMING": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "code_measure_1_3",
+              "evidence_coverage": "code_measure_1_5",
+              "fresh_blind": "code_measure_1_2",
+              "integrity_score": "code_measure_1_0",
+              "novelty": "code_measure_1_6",
+              "rollback_score": "code_measure_1_1",
+              "transfer_score": "code_measure_1_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "code_signal_1_0",
+              "novelty": "code_signal_1_2",
+              "uncertainty": "code_signal_1_1"
+            }
+          }
+        }
+      },
+      "intelligence_models": {
+        "promotion": {
+          "clauses": [
+            [
+              {
+                "field": "ablation_drop",
+                "op": "GE",
+                "threshold": 0.20360985395882442
+              },
+              {
+                "field": "fresh_blind",
+                "op": "GE",
+                "threshold": 0.9019844148646945
+              },
+              {
+                "field": "transfer_score",
+                "op": "GE",
+                "threshold": 0.8038983851517181
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "PROMOTE_CANDIDATE",
+          "training_score": 1.0
+        },
+        "research": {
+          "clauses": [
+            [
+              {
+                "field": "evidence_coverage",
+                "op": "LT",
+                "threshold": 0.5999766729561063
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "RESEARCH_MORE",
+          "training_score": 1.0
+        },
+        "rollback": {
+          "clauses": [
+            [
+              {
+                "field": "rollback_score",
+                "op": "LT",
+                "threshold": 0.500012939465914
+              }
+            ],
+            [
+              {
+                "field": "integrity_score",
+                "op": "LT",
+                "threshold": 0.5000233486339474
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "ROLLBACK",
+          "training_score": 1.0
+        }
+      },
+      "metrics": {
+        "intelligence": 0.99921875,
+        "intelligence_boundary": 0.9989130434782608,
+        "representation_min": 0.9984375,
+        "thinking": 0.99921875,
+        "thinking_boundary": 0.9988839285714286
+      },
+      "min_gate_metric": 0.9984375,
+      "round": 1,
+      "thinking_model": {
+        "features": [
+          "integrity_risk",
+          "uncertainty"
+        ],
+        "kind": "BOUNDED_LINEAR_THRESHOLD",
+        "negative_label": [
+          "OBSERVE",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "DIAGNOSE",
+          "TEST",
+          "VERIFY",
+          "ROLLBACK",
+          "COMMIT"
+        ],
+        "positive_if_ge": true,
+        "positive_label": [
+          "OBSERVE",
+          "DIAGNOSE",
+          "ROLLBACK",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "TEST",
+          "VERIFY",
+          "COMMIT"
+        ],
+        "threshold": 2.0008412703799063,
+        "training_score": 1.0,
+        "weights": [
+          2.0,
+          2.0
+        ]
+      },
+      "train_intelligence_count": 1150,
+      "train_thinking_count": 620
+    },
+    {
+      "counterexamples_in": {
+        "intelligence": 1,
+        "thinking": 1
+      },
+      "counterexamples_out": {
+        "intelligence": 3,
+        "thinking": 0
+      },
+      "domain_results": {
+        "CAUSAL_PLANNING": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "cause_measure_2_3",
+              "evidence_coverage": "cause_measure_2_5",
+              "fresh_blind": "cause_measure_2_2",
+              "integrity_score": "cause_measure_2_0",
+              "novelty": "cause_measure_2_6",
+              "rollback_score": "cause_measure_2_1",
+              "transfer_score": "cause_measure_2_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "cause_signal_2_0",
+              "novelty": "cause_signal_2_2",
+              "uncertainty": "cause_signal_2_1"
+            }
+          }
+        },
+        "EXACT_SCIENCE": {
+          "intelligence": 0.99375,
+          "intelligence_boundary": 0.991304347826087,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "lab_measure_2_3",
+              "evidence_coverage": "lab_measure_2_5",
+              "fresh_blind": "lab_measure_2_2",
+              "integrity_score": "lab_measure_2_0",
+              "novelty": "lab_measure_2_6",
+              "rollback_score": "lab_measure_2_1",
+              "transfer_score": "lab_measure_2_4"
+            }
+          },
+          "representation_transfer": 0.996875,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "lab_signal_2_0",
+              "novelty": "lab_signal_2_2",
+              "uncertainty": "lab_signal_2_1"
+            }
+          }
+        },
+        "MATHEMATICS": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "proof_measure_2_3",
+              "evidence_coverage": "proof_measure_2_5",
+              "fresh_blind": "proof_measure_2_2",
+              "integrity_score": "proof_measure_2_0",
+              "novelty": "proof_measure_2_6",
+              "rollback_score": "proof_measure_2_1",
+              "transfer_score": "proof_measure_2_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "proof_signal_2_0",
+              "novelty": "proof_signal_2_2",
+              "uncertainty": "proof_signal_2_1"
+            }
+          }
+        },
+        "PROGRAMMING": {
+          "intelligence": 0.996875,
+          "intelligence_boundary": 0.9956521739130435,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "code_measure_2_3",
+              "evidence_coverage": "code_measure_2_5",
+              "fresh_blind": "code_measure_2_2",
+              "integrity_score": "code_measure_2_0",
+              "novelty": "code_measure_2_6",
+              "rollback_score": "code_measure_2_1",
+              "transfer_score": "code_measure_2_4"
+            }
+          },
+          "representation_transfer": 0.9984375,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "code_signal_2_0",
+              "novelty": "code_signal_2_2",
+              "uncertainty": "code_signal_2_1"
+            }
+          }
+        }
+      },
+      "intelligence_models": {
+        "promotion": {
+          "clauses": [
+            [
+              {
+                "field": "ablation_drop",
+                "op": "GE",
+                "threshold": 0.20063423666534347
+              },
+              {
+                "field": "fresh_blind",
+                "op": "GE",
+                "threshold": 0.9026979580670145
+              },
+              {
+                "field": "transfer_score",
+                "op": "GE",
+                "threshold": 0.8007316790074552
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "PROMOTE_CANDIDATE",
+          "training_score": 1.0
+        },
+        "research": {
+          "clauses": [
+            [
+              {
+                "field": "evidence_coverage",
+                "op": "LT",
+                "threshold": 0.5999766729561063
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "RESEARCH_MORE",
+          "training_score": 1.0
+        },
+        "rollback": {
+          "clauses": [
+            [
+              {
+                "field": "rollback_score",
+                "op": "LT",
+                "threshold": 0.4999686676716599
+              }
+            ],
+            [
+              {
+                "field": "integrity_score",
+                "op": "LT",
+                "threshold": 0.5000429408602596
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "ROLLBACK",
+          "training_score": 1.0
+        }
+      },
+      "metrics": {
+        "intelligence": 0.99765625,
+        "intelligence_boundary": 0.9967391304347826,
+        "representation_min": 0.996875,
+        "thinking": 1.0,
+        "thinking_boundary": 1.0
+      },
+      "min_gate_metric": 0.9967391304347826,
+      "round": 2,
+      "thinking_model": {
+        "features": [
+          "integrity_risk",
+          "uncertainty"
+        ],
+        "kind": "BOUNDED_LINEAR_THRESHOLD",
+        "negative_label": [
+          "OBSERVE",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "DIAGNOSE",
+          "TEST",
+          "VERIFY",
+          "ROLLBACK",
+          "COMMIT"
+        ],
+        "positive_if_ge": true,
+        "positive_label": [
+          "OBSERVE",
+          "DIAGNOSE",
+          "ROLLBACK",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "TEST",
+          "VERIFY",
+          "COMMIT"
+        ],
+        "threshold": 1.9999533942789447,
+        "training_score": 1.0,
+        "weights": [
+          2.0,
+          2.0
+        ]
+      },
+      "train_intelligence_count": 2301,
+      "train_thinking_count": 1241
+    },
+    {
+      "counterexamples_in": {
+        "intelligence": 3,
+        "thinking": 0
+      },
+      "counterexamples_out": {
+        "intelligence": 3,
+        "thinking": 0
+      },
+      "domain_results": {
+        "CAUSAL_PLANNING": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "cause_measure_3_3",
+              "evidence_coverage": "cause_measure_3_5",
+              "fresh_blind": "cause_measure_3_2",
+              "integrity_score": "cause_measure_3_0",
+              "novelty": "cause_measure_3_6",
+              "rollback_score": "cause_measure_3_1",
+              "transfer_score": "cause_measure_3_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "cause_signal_3_0",
+              "novelty": "cause_signal_3_2",
+              "uncertainty": "cause_signal_3_1"
+            }
+          }
+        },
+        "EXACT_SCIENCE": {
+          "intelligence": 0.996875,
+          "intelligence_boundary": 0.9956521739130435,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "lab_measure_3_3",
+              "evidence_coverage": "lab_measure_3_5",
+              "fresh_blind": "lab_measure_3_2",
+              "integrity_score": "lab_measure_3_0",
+              "novelty": "lab_measure_3_6",
+              "rollback_score": "lab_measure_3_1",
+              "transfer_score": "lab_measure_3_4"
+            }
+          },
+          "representation_transfer": 0.9984375,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "lab_signal_3_0",
+              "novelty": "lab_signal_3_2",
+              "uncertainty": "lab_signal_3_1"
+            }
+          }
+        },
+        "MATHEMATICS": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "proof_measure_3_3",
+              "evidence_coverage": "proof_measure_3_5",
+              "fresh_blind": "proof_measure_3_2",
+              "integrity_score": "proof_measure_3_0",
+              "novelty": "proof_measure_3_6",
+              "rollback_score": "proof_measure_3_1",
+              "transfer_score": "proof_measure_3_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "proof_signal_3_0",
+              "novelty": "proof_signal_3_2",
+              "uncertainty": "proof_signal_3_1"
+            }
+          }
+        },
+        "PROGRAMMING": {
+          "intelligence": 0.99375,
+          "intelligence_boundary": 0.991304347826087,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "code_measure_3_3",
+              "evidence_coverage": "code_measure_3_5",
+              "fresh_blind": "code_measure_3_2",
+              "integrity_score": "code_measure_3_0",
+              "novelty": "code_measure_3_6",
+              "rollback_score": "code_measure_3_1",
+              "transfer_score": "code_measure_3_4"
+            }
+          },
+          "representation_transfer": 0.996875,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "code_signal_3_0",
+              "novelty": "code_signal_3_2",
+              "uncertainty": "code_signal_3_1"
+            }
+          }
+        }
+      },
+      "intelligence_models": {
+        "promotion": {
+          "clauses": [
+            [
+              {
+                "field": "ablation_drop",
+                "op": "GE",
+                "threshold": 0.20043739785035075
+              },
+              {
+                "field": "fresh_blind",
+                "op": "GE",
+                "threshold": 0.9009683616228754
+              },
+              {
+                "field": "transfer_score",
+                "op": "GE",
+                "threshold": 0.8010210484116123
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "PROMOTE_CANDIDATE",
+          "training_score": 1.0
+        },
+        "research": {
+          "clauses": [
+            [
+              {
+                "field": "evidence_coverage",
+                "op": "LT",
+                "threshold": 0.5999766729561063
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "RESEARCH_MORE",
+          "training_score": 1.0
+        },
+        "rollback": {
+          "clauses": [
+            [
+              {
+                "field": "integrity_score",
+                "op": "LT",
+                "threshold": 0.5000429408602596
+              }
+            ],
+            [
+              {
+                "field": "rollback_score",
+                "op": "LT",
+                "threshold": 0.4999686676716599
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "ROLLBACK",
+          "training_score": 1.0
+        }
+      },
+      "metrics": {
+        "intelligence": 0.99765625,
+        "intelligence_boundary": 0.9967391304347826,
+        "representation_min": 0.996875,
+        "thinking": 1.0,
+        "thinking_boundary": 1.0
+      },
+      "min_gate_metric": 0.9967391304347826,
+      "round": 3,
+      "thinking_model": {
+        "features": [
+          "integrity_risk",
+          "uncertainty"
+        ],
+        "kind": "BOUNDED_LINEAR_THRESHOLD",
+        "negative_label": [
+          "OBSERVE",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "DIAGNOSE",
+          "TEST",
+          "VERIFY",
+          "ROLLBACK",
+          "COMMIT"
+        ],
+        "positive_if_ge": true,
+        "positive_label": [
+          "OBSERVE",
+          "DIAGNOSE",
+          "ROLLBACK",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "TEST",
+          "VERIFY",
+          "COMMIT"
+        ],
+        "threshold": 1.9999533942789447,
+        "training_score": 1.0,
+        "weights": [
+          2.0,
+          2.0
+        ]
+      },
+      "train_intelligence_count": 3454,
+      "train_thinking_count": 1861
+    },
+    {
+      "counterexamples_in": {
+        "intelligence": 3,
+        "thinking": 0
+      },
+      "counterexamples_out": {
+        "intelligence": 1,
+        "thinking": 0
+      },
+      "domain_results": {
+        "CAUSAL_PLANNING": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "cause_measure_4_3",
+              "evidence_coverage": "cause_measure_4_5",
+              "fresh_blind": "cause_measure_4_2",
+              "integrity_score": "cause_measure_4_0",
+              "novelty": "cause_measure_4_6",
+              "rollback_score": "cause_measure_4_1",
+              "transfer_score": "cause_measure_4_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "cause_signal_4_0",
+              "novelty": "cause_signal_4_2",
+              "uncertainty": "cause_signal_4_1"
+            }
+          }
+        },
+        "EXACT_SCIENCE": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "lab_measure_4_3",
+              "evidence_coverage": "lab_measure_4_5",
+              "fresh_blind": "lab_measure_4_2",
+              "integrity_score": "lab_measure_4_0",
+              "novelty": "lab_measure_4_6",
+              "rollback_score": "lab_measure_4_1",
+              "transfer_score": "lab_measure_4_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "lab_signal_4_0",
+              "novelty": "lab_signal_4_2",
+              "uncertainty": "lab_signal_4_1"
+            }
+          }
+        },
+        "MATHEMATICS": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "proof_measure_4_3",
+              "evidence_coverage": "proof_measure_4_5",
+              "fresh_blind": "proof_measure_4_2",
+              "integrity_score": "proof_measure_4_0",
+              "novelty": "proof_measure_4_6",
+              "rollback_score": "proof_measure_4_1",
+              "transfer_score": "proof_measure_4_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "proof_signal_4_0",
+              "novelty": "proof_signal_4_2",
+              "uncertainty": "proof_signal_4_1"
+            }
+          }
+        },
+        "PROGRAMMING": {
+          "intelligence": 0.996875,
+          "intelligence_boundary": 0.9956521739130435,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "code_measure_4_3",
+              "evidence_coverage": "code_measure_4_5",
+              "fresh_blind": "code_measure_4_2",
+              "integrity_score": "code_measure_4_0",
+              "novelty": "code_measure_4_6",
+              "rollback_score": "code_measure_4_1",
+              "transfer_score": "code_measure_4_4"
+            }
+          },
+          "representation_transfer": 0.9984375,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "code_signal_4_0",
+              "novelty": "code_signal_4_2",
+              "uncertainty": "code_signal_4_1"
+            }
+          }
+        }
+      },
+      "intelligence_models": {
+        "promotion": {
+          "clauses": [
+            [
+              {
+                "field": "ablation_drop",
+                "op": "GE",
+                "threshold": 0.20043739785035075
+              },
+              {
+                "field": "fresh_blind",
+                "op": "GE",
+                "threshold": 0.9005371672559901
+              },
+              {
+                "field": "transfer_score",
+                "op": "GE",
+                "threshold": 0.800396309914164
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "PROMOTE_CANDIDATE",
+          "training_score": 1.0
+        },
+        "research": {
+          "clauses": [
+            [
+              {
+                "field": "evidence_coverage",
+                "op": "LT",
+                "threshold": 0.5999766729561063
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "RESEARCH_MORE",
+          "training_score": 1.0
+        },
+        "rollback": {
+          "clauses": [
+            [
+              {
+                "field": "integrity_score",
+                "op": "LT",
+                "threshold": 0.5000958800000213
+              }
+            ],
+            [
+              {
+                "field": "rollback_score",
+                "op": "LT",
+                "threshold": 0.4999686676716599
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "ROLLBACK",
+          "training_score": 1.0
+        }
+      },
+      "metrics": {
+        "intelligence": 0.99921875,
+        "intelligence_boundary": 0.9989130434782608,
+        "representation_min": 0.9984375,
+        "thinking": 1.0,
+        "thinking_boundary": 1.0
+      },
+      "min_gate_metric": 0.9984375,
+      "round": 4,
+      "thinking_model": {
+        "features": [
+          "integrity_risk",
+          "uncertainty"
+        ],
+        "kind": "BOUNDED_LINEAR_THRESHOLD",
+        "negative_label": [
+          "OBSERVE",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "DIAGNOSE",
+          "TEST",
+          "VERIFY",
+          "ROLLBACK",
+          "COMMIT"
+        ],
+        "positive_if_ge": true,
+        "positive_label": [
+          "OBSERVE",
+          "DIAGNOSE",
+          "ROLLBACK",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "TEST",
+          "VERIFY",
+          "COMMIT"
+        ],
+        "threshold": 1.9999533942789447,
+        "training_score": 1.0,
+        "weights": [
+          2.0,
+          2.0
+        ]
+      },
+      "train_intelligence_count": 4607,
+      "train_thinking_count": 2481
+    },
+    {
+      "counterexamples_in": {
+        "intelligence": 1,
+        "thinking": 0
+      },
+      "counterexamples_out": {
+        "intelligence": 2,
+        "thinking": 0
+      },
+      "domain_results": {
+        "CAUSAL_PLANNING": {
+          "intelligence": 0.996875,
+          "intelligence_boundary": 0.9956521739130435,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "cause_measure_5_3",
+              "evidence_coverage": "cause_measure_5_5",
+              "fresh_blind": "cause_measure_5_2",
+              "integrity_score": "cause_measure_5_0",
+              "novelty": "cause_measure_5_6",
+              "rollback_score": "cause_measure_5_1",
+              "transfer_score": "cause_measure_5_4"
+            }
+          },
+          "representation_transfer": 0.9984375,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "cause_signal_5_0",
+              "novelty": "cause_signal_5_2",
+              "uncertainty": "cause_signal_5_1"
+            }
+          }
+        },
+        "EXACT_SCIENCE": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "lab_measure_5_3",
+              "evidence_coverage": "lab_measure_5_5",
+              "fresh_blind": "lab_measure_5_2",
+              "integrity_score": "lab_measure_5_0",
+              "novelty": "lab_measure_5_6",
+              "rollback_score": "lab_measure_5_1",
+              "transfer_score": "lab_measure_5_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "lab_signal_5_0",
+              "novelty": "lab_signal_5_2",
+              "uncertainty": "lab_signal_5_1"
+            }
+          }
+        },
+        "MATHEMATICS": {
+          "intelligence": 1.0,
+          "intelligence_boundary": 1.0,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "proof_measure_5_3",
+              "evidence_coverage": "proof_measure_5_5",
+              "fresh_blind": "proof_measure_5_2",
+              "integrity_score": "proof_measure_5_0",
+              "novelty": "proof_measure_5_6",
+              "rollback_score": "proof_measure_5_1",
+              "transfer_score": "proof_measure_5_4"
+            }
+          },
+          "representation_transfer": 1.0,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "proof_signal_5_0",
+              "novelty": "proof_signal_5_2",
+              "uncertainty": "proof_signal_5_1"
+            }
+          }
+        },
+        "PROGRAMMING": {
+          "intelligence": 0.996875,
+          "intelligence_boundary": 0.9956521739130435,
+          "intelligence_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "ablation_drop": "code_measure_5_3",
+              "evidence_coverage": "code_measure_5_5",
+              "fresh_blind": "code_measure_5_2",
+              "integrity_score": "code_measure_5_0",
+              "novelty": "code_measure_5_6",
+              "rollback_score": "code_measure_5_1",
+              "transfer_score": "code_measure_5_4"
+            }
+          },
+          "representation_transfer": 0.9984375,
+          "thinking": 1.0,
+          "thinking_boundary": 1.0,
+          "thinking_mapper": {
+            "kind": "PAIRED_CORRELATION_FIELD_MAPPER",
+            "mapping": {
+              "integrity_risk": "code_signal_5_0",
+              "novelty": "code_signal_5_2",
+              "uncertainty": "code_signal_5_1"
+            }
+          }
+        }
+      },
+      "intelligence_models": {
+        "promotion": {
+          "clauses": [
+            [
+              {
+                "field": "ablation_drop",
+                "op": "GE",
+                "threshold": 0.19981528359327227
+              },
+              {
+                "field": "fresh_blind",
+                "op": "GE",
+                "threshold": 0.9005587004570097
+              },
+              {
+                "field": "transfer_score",
+                "op": "GE",
+                "threshold": 0.800396309914164
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "PROMOTE_CANDIDATE",
+          "training_score": 1.0
+        },
+        "research": {
+          "clauses": [
+            [
+              {
+                "field": "evidence_coverage",
+                "op": "LT",
+                "threshold": 0.5999604097829156
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "RESEARCH_MORE",
+          "training_score": 1.0
+        },
+        "rollback": {
+          "clauses": [
+            [
+              {
+                "field": "rollback_score",
+                "op": "LT",
+                "threshold": 0.4999997873127384
+              }
+            ],
+            [
+              {
+                "field": "integrity_score",
+                "op": "LT",
+                "threshold": 0.49999293172904435
+              }
+            ]
+          ],
+          "kind": "BOUNDED_NUMERIC_DNF",
+          "negative_label": "CONTINUE",
+          "positive_label": "ROLLBACK",
+          "training_score": 1.0
+        }
+      },
+      "metrics": {
+        "intelligence": 0.9984375,
+        "intelligence_boundary": 0.9978260869565218,
+        "representation_min": 0.9984375,
+        "thinking": 1.0,
+        "thinking_boundary": 1.0
+      },
+      "min_gate_metric": 0.9978260869565218,
+      "round": 5,
+      "thinking_model": {
+        "features": [
+          "integrity_risk",
+          "uncertainty"
+        ],
+        "kind": "BOUNDED_LINEAR_THRESHOLD",
+        "negative_label": [
+          "OBSERVE",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "DIAGNOSE",
+          "TEST",
+          "VERIFY",
+          "ROLLBACK",
+          "COMMIT"
+        ],
+        "positive_if_ge": true,
+        "positive_label": [
+          "OBSERVE",
+          "DIAGNOSE",
+          "ROLLBACK",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "TEST",
+          "VERIFY",
+          "COMMIT"
+        ],
+        "threshold": 1.9999743657154876,
+        "training_score": 1.0,
+        "weights": [
+          2.0,
+          2.0
+        ]
+      },
+      "train_intelligence_count": 4800,
+      "train_thinking_count": 2600
+    }
+  ],
+  "schema": "yado.g1_repair_continuous_boundary_and_representation.v1",
+  "semantic_boundary": "FIVE CUMULATIVE COUNTEREXAMPLE TRAINING PASSES; NUMERIC BOUNDARIES ARE LEARNED FROM LABELED DATA; FRESH RENAMED SCHEMAS ARE ADAPTED FROM SMALL PAIRED CALIBRATION SETS, NOT ZERO-SHOT NAME SEMANTICS; NO CANONICAL PROMOTION",
+  "stable_last3_min": 0.9967391304347826,
+  "status": "PASS_G1_REPAIR_CONTINUOUS_BOUNDARY_AND_REPRESENTATION_V1",
+  "training_round_count": 5
+}
