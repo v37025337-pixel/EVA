@@ -2,6 +2,7 @@
   "active_runtime_sources": [
     "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+    "runtime/yado_bounded_program_repair_v2.py",
     "runtime/yado_budgeted_stage_policy_v1.py",
     "runtime/yado_conjunctive_rule_inducer_v1.py",
     "runtime/yado_core_audit_invariant_self_evolution_v1.py",
@@ -26,9 +27,9 @@
   "consolidation_gate_run_id": "33371375385",
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "50a2b10919d477f6939de4449096671ce9642ff2703ace5e7825146dfbb0fcb0",
+  "core_digest": "45e483479ae53c5fb767e460eaaea578e505bb427c28502551822f0caa4f6b34",
   "core_id": "UNIFIED_YADO_CORE_V1",
-  "current_frontier": "UNIFIED_CORE_POST_MATHEMATICAL_REASONING_SELF_AUDIT_V1",
+  "current_frontier": "UNIFIED_CORE_POST_PROGRAM_EXECUTION_SELF_AUDIT_V1",
   "deep_self_audit": {
     "candidate_digest": "853922549dcba42b98ea75a3f250cea840d606ae12342d75062a6c7d09f83e6b",
     "canonical_integration_run_id": "33404945429",
@@ -119,10 +120,12 @@
     },
     {
       "active_components": [
-        "ALG-BUDGETED-STAGE-POLICY-V1"
+        "ALG-BUDGETED-STAGE-POLICY-V1",
+        "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2"
       ],
       "plane_id": "THINKING_AND_PLANNING",
       "responsibilities": [
+        "bounded_program_repair_and_execution",
         "bounded_search",
         "cost_aware_planning",
         "quota_aware_staging"
@@ -203,6 +206,15 @@
       "status": "ACTIVE_BOUNDED"
     }
   ],
+  "program_execution": {
+    "candidate_digest": "d9aaa718fdc7097beb71d64aac3971ef75131c80277dc6c77f10af73d098ba51",
+    "component_id": "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2",
+    "fresh_admission_receipt_sha256": "a10f74b0c924b6101d0705304b78a2803a5f013c19bbcc8588b3002ad2d89f93",
+    "fresh_score": 1.0,
+    "gate_run_id": "33417831032",
+    "mode": "ACTIVE_BOUNDED_SINGLE_FUNCTION_REPAIR",
+    "source_sha256": "7407c0ee2a3996d7b3eb34e8db12d85ee4a76d2d561cd53fe36ba4cef3eb545c"
+  },
   "promotion_applied": false,
   "purpose": "ONE_ACTIVE_KERNEL_WITH_LEGACY_BRANCHES_AS_READ_ONLY_DEVELOPMENTAL_EXPERIENCE",
   "raw_task_representation": {
@@ -211,7 +223,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "6392ef0c903e31e2584eef401400416f1ff555f37f4b1920ddf65bb824681375",
+  "runtime_sha256": "19778fbc37dda0052b4fa1a1c46b2a2863eec91caf51c38cc38374320ac07d48",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "semantic_boundary": "UNIFIED SOFTWARE COGNITIVE KERNEL CANDIDATE. LEGACY CONSCIOUSNESS EXPERIMENTS ARE HISTORICAL FUNCTIONAL EVIDENCE ONLY; THIS IS NOT A CLAIM OF SUBJECTIVE CONSCIOUSNESS OR AGI.",

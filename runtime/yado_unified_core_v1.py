@@ -15,6 +15,7 @@ from yado_g2_contextual_stream_capability_adapter_v1 import ContextualStreamCapa
 from yado_raw_task_representation_runtime_v1 import RawTaskRepresentationRuntimeV1
 from yado_legacy_experience_retriever_v2 import LegacyExperienceRetrieverV1
 from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesizerV1
+from yado_bounded_program_repair_v2 import BoundedProgramRepairV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -41,6 +42,7 @@ class UnifiedYADOCoreV1:
         self.raw_representation=RawTaskRepresentationRuntimeV1.from_path(self.repo/'canonical/yado-raw-task-representation-v1.json')
         self.legacy_experience_retriever=LegacyExperienceRetrieverV1(self.repo,self.experience)
         self.semantic_expression_synthesizer=SemanticExpressionSynthesizerV1
+        self.bounded_program_repair=BoundedProgramRepairV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -126,6 +128,12 @@ class UnifiedYADOCoreV1:
 
     def experience_search_verified(self,query:str,limit:int=8)->list[dict[str,Any]]:
         return self.legacy_experience_retriever.search_content(query,limit=limit)
+
+    def repair_program(self,source:str,function_name:str,train_examples:list[tuple[tuple[Any,...],Any]],max_candidates:int=10000)->dict[str,Any]:
+        return self.bounded_program_repair.repair(source,function_name,train_examples,max_candidates=max_candidates)
+
+    def execute_program_task(self,source:str,function_name:str,args:tuple[Any,...])->Any:
+        return self.bounded_program_repair.execute(source,function_name,args)
 
     def synthesize_mathematical_expression(self,train_rows:list[dict[str,Any]],max_ops:int=3,max_states_per_level:int=30000)->dict[str,Any]:
         return self.semantic_expression_synthesizer.synthesize(train_rows,max_ops=max_ops,max_states_per_level=max_states_per_level)
