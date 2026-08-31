@@ -65,7 +65,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "3f415bd74bf3f81d5cfdfa8b032ad85cc12f5d8d93d524bf0fb63c4266e352c2",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 73,
+  "event_count": 74,
   "events": [
     {
       "canonical_mutation": false,
@@ -1251,14 +1251,30 @@
       "source_digest": "44014076dbc3b47a6b84af3c42f7df01e6f7730eb8992cf57fae1d7b5ef81e03",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33394273327.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_CONTENT_RETRIEVAL",
+      "effect": "KERNEL_GENERATED_READ_ONLY_LEGACY_EXPERIENCE_RETRIEVER",
+      "event_hash": "5778e487550b8e7f33a435662164d5f02a3e61eb1c86d09711b3cceaebe4f1db",
+      "event_id": "E0074_G2_LEGACY_EXPERIENCE_RETRIEVAL_SELF_EVOLUTION",
+      "event_type": "KERNEL_NATIVE_CODE_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 73,
+      "parent_event_hash": "b113a1acec5e68cc869e2f64f3e98e1daa839171a3997c1a0f5cb9ca63a01b0e",
+      "promotion_applied": false,
+      "run_id": "33395356490",
+      "source_digest": "2c8dac1ff594687bde79f04f6f65a105e14fcbcbd1ae7a91e7c11a7519db2eea",
+      "source_path": "receipts/yado-legacy-experience-retrieval-self-evolution-v1-run-33395356490.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "af0cc893baeaf81c0350f0af13c28d96bd1c3fed332ff7431e3e5d868f9347bc",
+  "ledger_digest": "077edb852c1f744fe07eb6ec73b25860d846c01c8801b3a1309e08e7c56b5b60",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "LEGACY_EXPERIENCE_CONTENT_RETRIEVAL"
+    "LEGACY_EXPERIENCE_RETRIEVAL_FRESH_ADMISSION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1287,5 +1303,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "b113a1acec5e68cc869e2f64f3e98e1daa839171a3997c1a0f5cb9ca63a01b0e"
+  "tail_event_hash": "5778e487550b8e7f33a435662164d5f02a3e61eb1c86d09711b3cceaebe4f1db"
 }
