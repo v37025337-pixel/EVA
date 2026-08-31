@@ -60,7 +60,7 @@ class BoundedDNFRelationPolicyInducerV1:
     MAX_FIELDS=12
     MAX_VALUES_PER_FIELD=12
     MAX_CLAUSE_WIDTH=4
-    MAX_ATOMS_FOR_COMBINATION=22
+    MAX_ATOMS_FOR_COMBINATION=24
     MAX_CLAUSES=12
     MIN_PRECISION=0.995
 
@@ -100,14 +100,25 @@ class BoundedDNFRelationPolicyInducerV1:
 
         # Rank atoms by label purity/information-like utility, then bound conjunction search.
         ranked=[]
+        global_freq={lab:n/len(cases) for lab,n in labels.items()}
+        min_atom_support=max(min_support*2,int(len(cases)*0.03))
         for i,a in enumerate(atoms):
             covered=[e for e in cases if a.match(e['input'])]
-            if not covered:continue
+            if len(covered)<min_atom_support:continue
             cnt=Counter(e['expected'] for e in covered)
-            purity=cnt.most_common(1)[0][1]/len(covered)
-            ranked.append((purity,len(covered),-i,a))
-        ranked.sort(reverse=True,key=lambda z:(z[0],z[1],z[2]))
-        pool=[z[3] for z in ranked[:cls.MAX_ATOMS_FOR_COMBINATION]]
+            # Score against the global class frequency. This suppresses rare accidental
+            # noise atoms while retaining weak individual atoms that become useful jointly.
+            best_gain=-1.0
+            best_precision=0.0
+            for lab,nlab in cnt.items():
+                if lab==default:continue
+                precision=nlab/len(covered)
+                gain=(precision-global_freq.get(lab,0.0))*(len(covered)**0.5)
+                if gain>best_gain:
+                    best_gain=gain;best_precision=precision
+            ranked.append((best_gain,best_precision,len(covered),-i,a))
+        ranked.sort(reverse=True,key=lambda z:(z[0],z[1],z[2],z[3]))
+        pool=[z[4] for z in ranked[:cls.MAX_ATOMS_FOR_COMBINATION]]
 
         candidates=defaultdict(list)
         n=len(cases)
