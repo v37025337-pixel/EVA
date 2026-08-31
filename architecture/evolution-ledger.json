@@ -54,9 +54,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "a860f96f6903c948d7b6832c7b4c70d85a6c12f766b6aed994bfae396f1ae1bd",
+  "current_head_digest": "5d7612be65fa8fda0dc1e30a0a773f355f1e4a8e59cddb106cf75f96a7a03529",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 109,
+  "event_count": 110,
   "events": [
     {
       "canonical_mutation": false,
@@ -1841,14 +1841,33 @@
       "source_digest": "07ffb0aae4110019e7b65b850bd071b72d2b908bb5ef09fb22d9a2cbee8cd207",
       "source_path": "receipts/yado-science-evidence-audit-fresh-admission-v1-run-33436790922.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "SCIENCE_EVIDENCE_AUDIT_CANONICAL_INTEGRATION_V1",
+      "effect": "SELF_AUDIT_V5_SCIENCE_EVIDENCE_SELECTOR_CANONICAL",
+      "event_hash": "360feb306b140e80f1115034a08b3c71cdd84babe499f64a4a5374f7979ce3c5",
+      "event_id": "E0110_G2_SCIENCE_EVIDENCE_AUDIT_CANONICAL_INTEGRATION",
+      "event_type": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 109,
+      "new_head_digest": "5d7612be65fa8fda0dc1e30a0a773f355f1e4a8e59cddb106cf75f96a7a03529",
+      "parent_event_hash": "6b59bfcef8e96c442b774406f70260282b014a696d317903f03040f7fe6e1e79",
+      "previous_head_digest": "a860f96f6903c948d7b6832c7b4c70d85a6c12f766b6aed994bfae396f1ae1bd",
+      "promotion_applied": false,
+      "run_id": "33436928912",
+      "source_digest": "363e748a7028373bacf277379dc54a03b13b41f24873c078b3b08aac7432b7f9",
+      "source_path": "receipts/yado-science-evidence-audit-canonical-integration-v1-run-33436928912.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "83ab2b62cc3be86ed12eada65987fd03dfc996025ac2d236fe1971f1c7a7c943",
+  "ledger_digest": "69cf48d9ea3c07b9e86b9619061f8b8f485702e1d8cb6edf2a63b454d4daf76d",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "SCIENCE_EVIDENCE_AUDIT_CANONICAL_INTEGRATION_V1"
+    "UNIFIED_CORE_POST_SCIENCE_EVIDENCE_AUDIT_V5"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1877,5 +1896,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "6b59bfcef8e96c442b774406f70260282b014a696d317903f03040f7fe6e1e79"
+  "tail_event_hash": "360feb306b140e80f1115034a08b3c71cdd84babe499f64a4a5374f7979ce3c5"
 }

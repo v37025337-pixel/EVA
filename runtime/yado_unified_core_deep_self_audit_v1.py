@@ -242,7 +242,11 @@ program_bound=ccore.get('program_execution',{}).get('mode')=='ACTIVE_BOUNDED_SIN
 raw_proven=native_pass.get('REAL_UNSTRUCTURED_INPUT_TRANSFER') is True
 math_proven=(native_pass.get('REAL_MATHEMATICAL_REASONING_TRANSFER') is True and math_bound)
 program_proven=(program_bound and float(ccore.get('program_execution',{}).get('fresh_score',0.0))>=1.0)
-science_proven=(native_pass.get('REAL_SCIENCE_DATA_TRANSFER') is True and bool(ccore.get('science_reasoning')))
+science_binding=ccore.get('science_reasoning',{}) if isinstance(ccore.get('science_reasoning',{}),dict) else {}
+science_bound=science_binding.get('mode')=='ACTIVE_BOUNDED_TABULAR_SCIENTIFIC_REASONING'
+science_fresh_receipt=bool(science_binding.get('fresh_admission_receipt_sha256'))
+science_fresh_datasets=set(science_binding.get('fresh_datasets',[]))
+science_proven=(science_bound and science_fresh_receipt and {'PENGUINS','TIPS'}.issubset(science_fresh_datasets))
 remaining=[]
 if not raw_proven:remaining.append('REAL_UNSTRUCTURED_INPUT_TRANSFER')
 if not math_proven:remaining.append('REAL_MATHEMATICAL_REASONING_TRANSFER')
@@ -262,7 +266,7 @@ add('REAL_WORLD_GENERALIZATION_SCOPE','REPRESENTATION_AND_GROUNDING','MEDIUM' if
 add('REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1','RESOURCE_AND_EVIDENCE','HIGH' if not science_proven else 'INFO',
     'FAIL' if not science_proven else 'PASS',
     {'public_data_download_seen':native_v2.get('domain_scores',{}).get('REAL_SCIENCE_DATA_TRANSFER') is not None,
-     'native_scientific_reasoning_present':science_proven,
+     'native_scientific_reasoning_present':science_proven,'science_canonical_bound':science_bound,'science_fresh_receipt_bound':science_fresh_receipt,'science_fresh_datasets':sorted(science_fresh_datasets),
      'program_capability_now_canonical':program_bound,'mathematics_capability_now_canonical':math_bound},
     'Create and independently admit a bounded native scientific-data reasoning capability over fresh public datasets.',
     not science_proven)
