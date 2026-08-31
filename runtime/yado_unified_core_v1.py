@@ -14,6 +14,7 @@ from yado_g2_typed_recurrent_capability_graph_runtime_v1 import G2TypedRecurrent
 from yado_g2_contextual_stream_capability_adapter_v1 import ContextualStreamCapabilityAdapterV1
 from yado_raw_task_representation_runtime_v1 import RawTaskRepresentationRuntimeV1
 from yado_legacy_experience_retriever_v2 import LegacyExperienceRetrieverV1
+from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesizerV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -39,6 +40,7 @@ class UnifiedYADOCoreV1:
         self.shadow_context=self._load('candidates/g2-development/contextual-stream-capability-adapter-v1.json')
         self.raw_representation=RawTaskRepresentationRuntimeV1.from_path(self.repo/'canonical/yado-raw-task-representation-v1.json')
         self.legacy_experience_retriever=LegacyExperienceRetrieverV1(self.repo,self.experience)
+        self.semantic_expression_synthesizer=SemanticExpressionSynthesizerV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -124,6 +126,12 @@ class UnifiedYADOCoreV1:
 
     def experience_search_verified(self,query:str,limit:int=8)->list[dict[str,Any]]:
         return self.legacy_experience_retriever.search_content(query,limit=limit)
+
+    def synthesize_mathematical_expression(self,train_rows:list[dict[str,Any]],max_ops:int=3,max_states_per_level:int=30000)->dict[str,Any]:
+        return self.semantic_expression_synthesizer.synthesize(train_rows,max_ops=max_ops,max_states_per_level=max_states_per_level)
+
+    def predict_mathematical_expression(self,result:dict[str,Any],x:float,y:float)->Any:
+        return self.semantic_expression_synthesizer.predict(result,x,y)
 
     def represent_raw_task(self,raw_text:str)->dict[str,Any]:
         return self.raw_representation.descriptor(raw_text)
