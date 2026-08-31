@@ -1,0 +1,119 @@
+{
+  "cycles": [
+    {
+      "base_router_same_blind": {
+        "capability_accuracy": 0.24444444444444444,
+        "n": 720,
+        "result_accuracy": 0.24444444444444444,
+        "score": 0.24444444444444444
+      },
+      "checks": {
+        "canonical_g2_immutable": true,
+        "context_causal_drop": true,
+        "fresh_blind": true,
+        "memory_causal_drop": true,
+        "representation_transfer": true,
+        "resource_portfolio_present": true,
+        "selected_contextual_strategy": true
+      },
+      "curriculum": "RECURRENT_CONTEXTUAL_CAPABILITY_ROUTING",
+      "cycle": 1,
+      "cycle_digest": "6c63fb69f6095924b41397ffac4a0dfd2a5343aff95d0b84c1f4d1ae4ff3afcc",
+      "fresh_blind": {
+        "capability_accuracy": 1.0,
+        "n": 720,
+        "result_accuracy": 1.0,
+        "score": 1.0
+      },
+      "github_run_id": "33361302210",
+      "memory_ablation_score": 0.29375,
+      "neutral_selection": {
+        "candidate_count": 4,
+        "ranking": [
+          {
+            "score": 1.0015,
+            "token": "opaque_bb85731e48bc4b7c35"
+          },
+          {
+            "score": 0.9574999999999999,
+            "token": "opaque_b4e068bd17e4cc0090"
+          },
+          {
+            "score": 0.23883333333333331,
+            "token": "opaque_99bb40f3d4f9c9f48b"
+          },
+          {
+            "score": 0.23299999999999998,
+            "token": "opaque_684ae2580bad4b2ad6"
+          }
+        ],
+        "selected_score": 1.0015,
+        "selected_token": "opaque_bb85731e48bc4b7c35"
+      },
+      "representation_transfer": {
+        "capability_accuracy": 1.0,
+        "n": 420,
+        "result_accuracy": 1.0,
+        "score": 1.0
+      },
+      "seed": 5100011,
+      "selected_strategy": "LAST_STREAM_CAPABILITY",
+      "status": "PASS",
+      "validation_strategy_scores": {
+        "BASE_ROUTER_ONLY": {
+          "capability_accuracy": 0.24583333333333332,
+          "complexity": 0.1,
+          "n": 240,
+          "novelty": 0.1,
+          "result_accuracy": 0.24583333333333332,
+          "risk": 0.02,
+          "score": 0.24583333333333332,
+          "token": "opaque_99bb40f3d4f9c9f48b"
+        },
+        "GLOBAL_LAST_CAPABILITY": {
+          "capability_accuracy": 1.0,
+          "complexity": 0.16,
+          "n": 240,
+          "novelty": 0.35,
+          "result_accuracy": 1.0,
+          "risk": 0.18,
+          "score": 1.0,
+          "token": "opaque_b4e068bd17e4cc0090"
+        },
+        "LAST_STREAM_CAPABILITY": {
+          "capability_accuracy": 1.0,
+          "complexity": 0.22,
+          "n": 240,
+          "novelty": 0.75,
+          "result_accuracy": 1.0,
+          "risk": 0.04,
+          "score": 1.0,
+          "token": "opaque_bb85731e48bc4b7c35"
+        },
+        "RESOURCE_FIRST_ON_AMBIGUITY": {
+          "capability_accuracy": 0.2875,
+          "complexity": 0.14,
+          "n": 240,
+          "novelty": 0.25,
+          "result_accuracy": 0.2875,
+          "risk": 0.22,
+          "score": 0.2875,
+          "token": "opaque_684ae2580bad4b2ad6"
+        }
+      }
+    }
+  ],
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
+  "min_pass_score": 1.0,
+  "new_shadow_capabilities": [
+    "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1"
+  ],
+  "next_required_capability": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_2_OF_5",
+  "pass_count": 1,
+  "schema": "yado.g2.self_directed_development_state.v1",
+  "stable_pass_streak": 1,
+  "state_digest": "6d0acfcba289b74b2e947359edfd54a242b607fe4bd2806751163c4217b1d7a0",
+  "status": "DEVELOPING",
+  "target_cycles": 5
+}

@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 44,
+  "event_count": 45,
   "events": [
     {
       "canonical_mutation": false,
@@ -714,10 +714,26 @@
       "source_path": "receipts/yado-g2-full-fresh-regression-and-promotion-gate-v1-run-33357100322.json",
       "status": "PROMOTED",
       "to_generation": "G2_CANDIDATE_TRCG_V1"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_V1",
+      "effect": "G2_CYCLE_1_PASS; SELECTED=LAST_STREAM_CAPABILITY; STATE=DEVELOPING",
+      "event_hash": "6a51d7c58a011b236e0e280e8f58fd5554bb648a1dcfee384ef562e2a34934a6",
+      "event_id": "E0045_G2_SELF_DIRECTED_CYCLE_1",
+      "event_type": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 44,
+      "parent_event_hash": "5ebdbc2e8732d76966ce898211653a5dcc5613d6b4bb6afbd9172682c1682bed",
+      "promotion_applied": false,
+      "run_id": "33361302210",
+      "source_digest": "cde3243dcc292612d1bd734d936683453243bdcfce55c47e4e849fbdc35cae3e",
+      "source_path": "receipts/yado-g2-self-directed-development-cycle-v1-run-33361302210.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "8791e2e046e9ad9cf39f323d4ae43db58e01becddb6963d58df41c3e4964e4a5",
+  "ledger_digest": "1c5b0548b053e9d5b009912b0a7c83982ba764c0f2e8b51bbca47439adae9a6b",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -750,5 +766,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "5ebdbc2e8732d76966ce898211653a5dcc5613d6b4bb6afbd9172682c1682bed"
+  "tail_event_hash": "6a51d7c58a011b236e0e280e8f58fd5554bb648a1dcfee384ef562e2a34934a6"
 }
