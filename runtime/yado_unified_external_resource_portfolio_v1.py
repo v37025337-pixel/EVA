@@ -267,7 +267,7 @@ e={
  'generation':ledger['current_head'],
  'deficit':'FRAGMENTED_EXTERNAL_RESOURCE_MEMORY',
  'effect':'ALL_RECOVERABLE_PRIOR_RESOURCES_UNIFIED_AND_ROUTED_BY_DEFICIT_COST_ACCESS_AND_EVIDENCE_STATE',
- 'source_path':'receipts/yado-unified-external-resource-portfolio-v1-latest.json',
+ 'source_path':f"receipts/yado-unified-external-resource-portfolio-v1-run-{os.getenv('GITHUB_RUN_ID') or 'LOCAL'}.json",
  'source_digest':report['receipt_sha256'],
  'run_id':str(os.getenv('GITHUB_RUN_ID') or 'LOCAL'),
  'parent_event_hash':ledger['tail_event_hash'],
