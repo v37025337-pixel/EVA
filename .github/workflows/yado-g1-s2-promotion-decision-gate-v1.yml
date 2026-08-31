@@ -1,0 +1,50 @@
+name: YADO G1 S2 Promotion Decision Gate V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_evolution_ledger_v2.py"
+      - "runtime/yado_g1_s2_promotion_decision_gate_v1.py"
+      - ".github/workflows/yado-g1-s2-promotion-decision-gate-v1.yml"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g1-s2-promotion
+  cancel-in-progress: true
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run G1 promotion decision
+        run: python runtime/yado_g1_s2_promotion_decision_gate_v1.py
+      - name: Upload promotion evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g1-s2-promotion-decision-gate-v1
+          path: |
+            runtime/yado_g1_s2_promotion_decision_gate_v1_receipt.json
+            canonical/yado-main-head-g1-s2.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist promoted head
+        run: |
+          mkdir -p receipts canonical
+          cp runtime/yado_g1_s2_promotion_decision_gate_v1_receipt.json receipts/yado-g1-s2-promotion-decision-gate-v1-latest.json
+          git config user.name "YADO Generation Promotion"
+          git config user.email "actions@users.noreply.github.com"
+          git add \
+            receipts/yado-g1-s2-promotion-decision-gate-v1-latest.json \
+            canonical/yado-main-head-g1-s2.json \
+            architecture/evolution-ledger.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Promote G1 S2 as current developmental head [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
