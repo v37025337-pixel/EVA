@@ -1,0 +1,539 @@
+{
+  "ablation": [
+    {
+      "found": false,
+      "id": "M3_SQUARES"
+    },
+    {
+      "found": false,
+      "id": "M4_DIFF_SQUARES"
+    }
+  ],
+  "candidate_digest": "a47a32ac13a65cbf0062a439cd238f313be7c30d1faac9c83162a80e51423f19",
+  "candidate_source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
+  "canonical_mutation": false,
+  "checks": {
+    "bounded_state_counts": true,
+    "candidate_source_present": true,
+    "canonical_head_immutable": true,
+    "causal_depth_ablation": true,
+    "fresh_math_transfer": true,
+    "gain_over_old_math": true,
+    "repairs_original_math_counterexamples": true
+  },
+  "fresh_score": 1.0,
+  "fresh_tasks": [
+    {
+      "blind": [
+        {
+          "expected": 16,
+          "got": 16,
+          "ok": true,
+          "x": -5,
+          "y": 7
+        },
+        {
+          "expected": 1,
+          "got": 1,
+          "ok": true,
+          "x": -2,
+          "y": -9
+        },
+        {
+          "expected": 4,
+          "got": 4,
+          "ok": true,
+          "x": 1,
+          "y": 8
+        },
+        {
+          "expected": 16,
+          "got": 16,
+          "ok": true,
+          "x": 3,
+          "y": 6
+        },
+        {
+          "expected": 64,
+          "got": 64,
+          "ok": true,
+          "x": 7,
+          "y": 2
+        },
+        {
+          "expected": 100,
+          "got": 100,
+          "ok": true,
+          "x": 9,
+          "y": -4
+        },
+        {
+          "expected": 144,
+          "got": 144,
+          "ok": true,
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "blind_pass": true,
+      "expression": "(((2+x)*x)+1)",
+      "id": "MF1_SHIFT_SQUARE",
+      "ops": 3,
+      "states": [
+        9,
+        57,
+        365,
+        2695
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": -84,
+          "got": -84,
+          "ok": true,
+          "x": -5,
+          "y": 7
+        },
+        {
+          "expected": -63,
+          "got": -63,
+          "ok": true,
+          "x": -2,
+          "y": -9
+        },
+        {
+          "expected": -56,
+          "got": -56,
+          "ok": true,
+          "x": 1,
+          "y": 8
+        },
+        {
+          "expected": -18,
+          "got": -18,
+          "ok": true,
+          "x": 3,
+          "y": 6
+        },
+        {
+          "expected": 10,
+          "got": 10,
+          "ok": true,
+          "x": 7,
+          "y": 2
+        },
+        {
+          "expected": -52,
+          "got": -52,
+          "ok": true,
+          "x": 9,
+          "y": -4
+        },
+        {
+          "expected": 30,
+          "got": 30,
+          "ok": true,
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((x-y)*y)",
+      "id": "MF2_FACTORED",
+      "ops": 2,
+      "states": [
+        9,
+        57,
+        365
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": 144,
+          "got": 144,
+          "ok": true,
+          "x": -5,
+          "y": 7
+        },
+        {
+          "expected": 49,
+          "got": 49,
+          "ok": true,
+          "x": -2,
+          "y": -9
+        },
+        {
+          "expected": 49,
+          "got": 49,
+          "ok": true,
+          "x": 1,
+          "y": 8
+        },
+        {
+          "expected": 9,
+          "got": 9,
+          "ok": true,
+          "x": 3,
+          "y": 6
+        },
+        {
+          "expected": 25,
+          "got": 25,
+          "ok": true,
+          "x": 7,
+          "y": 2
+        },
+        {
+          "expected": 169,
+          "got": 169,
+          "ok": true,
+          "x": 9,
+          "y": -4
+        },
+        {
+          "expected": 36,
+          "got": 36,
+          "ok": true,
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((x-y)*(x-y))",
+      "id": "MF3_DISTANCE_SQUARE",
+      "ops": 3,
+      "states": [
+        9,
+        57,
+        365,
+        2695
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": -22,
+          "got": -22,
+          "ok": true,
+          "x": -5,
+          "y": 7
+        },
+        {
+          "expected": 3,
+          "got": 3,
+          "ok": true,
+          "x": -2,
+          "y": -9
+        },
+        {
+          "expected": -5,
+          "got": -5,
+          "ok": true,
+          "x": 1,
+          "y": 8
+        },
+        {
+          "expected": 3,
+          "got": 3,
+          "ok": true,
+          "x": 3,
+          "y": 6
+        },
+        {
+          "expected": 19,
+          "got": 19,
+          "ok": true,
+          "x": 7,
+          "y": 2
+        },
+        {
+          "expected": 31,
+          "got": 31,
+          "ok": true,
+          "x": 9,
+          "y": -4
+        },
+        {
+          "expected": 28,
+          "got": 28,
+          "ok": true,
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((3*x)-y)",
+      "id": "MF4_LINEAR",
+      "ops": 2,
+      "states": [
+        9,
+        57,
+        365
+      ]
+    }
+  ],
+  "g3_genesis_performed": false,
+  "next_required_capability": "REAL_MATHEMATICAL_REASONING_TRANSFER_FRESH_ADMISSION_V1",
+  "old_score": 0.5,
+  "promotion_applied": false,
+  "receipt_sha256": "ed6ad93dc762ae599723cda8686cb211ac35304d55aa15ab054c94c47ded72fa",
+  "repaired_score": 1.0,
+  "repaired_tasks": [
+    {
+      "blind": [
+        {
+          "expected": -7,
+          "got": -7,
+          "ok": true,
+          "x": -5,
+          "y": 7
+        },
+        {
+          "expected": -1,
+          "got": -1,
+          "ok": true,
+          "x": -2,
+          "y": -9
+        },
+        {
+          "expected": 5,
+          "got": 5,
+          "ok": true,
+          "x": 1,
+          "y": 8
+        },
+        {
+          "expected": 9,
+          "got": 9,
+          "ok": true,
+          "x": 3,
+          "y": 6
+        },
+        {
+          "expected": 17,
+          "got": 17,
+          "ok": true,
+          "x": 7,
+          "y": 2
+        },
+        {
+          "expected": 21,
+          "got": 21,
+          "ok": true,
+          "x": 9,
+          "y": -4
+        },
+        {
+          "expected": 25,
+          "got": 25,
+          "ok": true,
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((2*x)+3)",
+      "id": "M1_AFFINE",
+      "ops": 2,
+      "states": [
+        9,
+        57,
+        365
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": -40,
+          "got": -40,
+          "ok": true,
+          "x": -5,
+          "y": 7
+        },
+        {
+          "expected": 16,
+          "got": 16,
+          "ok": true,
+          "x": -2,
+          "y": -9
+        },
+        {
+          "expected": 9,
+          "got": 9,
+          "ok": true,
+          "x": 1,
+          "y": 8
+        },
+        {
+          "expected": 21,
+          "got": 21,
+          "ok": true,
+          "x": 3,
+          "y": 6
+        },
+        {
+          "expected": 21,
+          "got": 21,
+          "ok": true,
+          "x": 7,
+          "y": 2
+        },
+        {
+          "expected": -27,
+          "got": -27,
+          "ok": true,
+          "x": 9,
+          "y": -4
+        },
+        {
+          "expected": 66,
+          "got": 66,
+          "ok": true,
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((1+y)*x)",
+      "id": "M2_BILINEAR",
+      "ops": 2,
+      "states": [
+        9,
+        57,
+        365
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": 74,
+          "got": 74,
+          "ok": true,
+          "x": -5,
+          "y": 7
+        },
+        {
+          "expected": 85,
+          "got": 85,
+          "ok": true,
+          "x": -2,
+          "y": -9
+        },
+        {
+          "expected": 65,
+          "got": 65,
+          "ok": true,
+          "x": 1,
+          "y": 8
+        },
+        {
+          "expected": 45,
+          "got": 45,
+          "ok": true,
+          "x": 3,
+          "y": 6
+        },
+        {
+          "expected": 53,
+          "got": 53,
+          "ok": true,
+          "x": 7,
+          "y": 2
+        },
+        {
+          "expected": 97,
+          "got": 97,
+          "ok": true,
+          "x": 9,
+          "y": -4
+        },
+        {
+          "expected": 146,
+          "got": 146,
+          "ok": true,
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((x*x)+(y*y))",
+      "id": "M3_SQUARES",
+      "ops": 3,
+      "states": [
+        9,
+        57,
+        365,
+        2695
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": -24,
+          "got": -24,
+          "ok": true,
+          "x": -5,
+          "y": 7
+        },
+        {
+          "expected": -77,
+          "got": -77,
+          "ok": true,
+          "x": -2,
+          "y": -9
+        },
+        {
+          "expected": -63,
+          "got": -63,
+          "ok": true,
+          "x": 1,
+          "y": 8
+        },
+        {
+          "expected": -27,
+          "got": -27,
+          "ok": true,
+          "x": 3,
+          "y": 6
+        },
+        {
+          "expected": 45,
+          "got": 45,
+          "ok": true,
+          "x": 7,
+          "y": 2
+        },
+        {
+          "expected": 65,
+          "got": 65,
+          "ok": true,
+          "x": 9,
+          "y": -4
+        },
+        {
+          "expected": 96,
+          "got": 96,
+          "ok": true,
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((x*x)-(y*y))",
+      "id": "M4_DIFF_SQUARES",
+      "ops": 3,
+      "states": [
+        9,
+        57,
+        365,
+        2695
+      ]
+    }
+  ],
+  "schema": "yado.g2.mathematical_reasoning_self_evolution.v1",
+  "semantic_boundary": "BOUNDED SYMBOLIC EXPRESSION SYNTHESIS BY TRAIN-SEMANTIC SIGNATURES; NOT GENERAL THEOREM PROVING OR MATHEMATICAL UNDERSTANDING.",
+  "source_diagnostic_receipt": "6771d705bcc05f80143d199f6127b40d3f4ac453cd9a3cfe480383b1a23ba02c",
+  "status": "PASS_MATHEMATICAL_REASONING_SELF_EVOLUTION_V1"
+}
