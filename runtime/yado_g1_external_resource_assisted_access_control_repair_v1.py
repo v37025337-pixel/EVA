@@ -72,8 +72,8 @@ def relation_cases(seed,n,base_fields,base_vals,law,pairs,pool):
 
 def rel_task(name,seed,base_fields,base_vals,law,pairs):
     train_pool=[f'T{i}' for i in range(10)]
-    val_pool=[f'T{i}' for i in range(5,15)]
-    blind_pool=[f'T{i}' for i in range(15,35)]
+    val_pool=[f'T{i}' for i in range(10,20)]
+    blind_pool=[f'T{i}' for i in range(20,40)]
     tasks[name]={
       'train':relation_cases(seed,720,base_fields,base_vals,law,pairs,train_pool),
       'val':relation_cases(seed+1,360,base_fields,base_vals,law,pairs,val_pool),
@@ -129,7 +129,9 @@ def relation_ablated_acc(p,cases):
 results={}
 for name,d in tasks.items():
     t0=time.perf_counter()
-    new=BoundedDNFRelationPolicyInducerV1.synthesize(name,'LOGIC',d['train'],min_support=4,max_clauses=12)
+    new=BoundedDNFRelationPolicyInducerV1.synthesize(
+        name,'LOGIC',d['train'],min_support=4,max_clauses=12,validation_cases=d['val']
+    )
     sec=time.perf_counter()-t0
     nr={
       'train':program_acc(new,d['train']),
@@ -200,7 +202,7 @@ e={
  'event_type':'EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS','status':'PASS_SHADOW' if all_pass else 'WITHHOLD',
  'generation':ledger['current_head'],'deficit':'ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE',
  'effect':'BOUNDED_DNF_RELATION_POLICY_INDUCER_RESOLVED_HISTORICAL_ACCESS_COUNTEREXAMPLE_AND_TRANSFERRED' if all_pass else 'ACCESS_CONTROL_REPAIR_WITHHELD',
- 'source_path':'receipts/yado-g1-external-resource-assisted-access-control-repair-v1-latest.json','source_digest':report['receipt_sha256'],
+ 'source_path':f"receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-{os.getenv('GITHUB_RUN_ID') or 'LOCAL'}.json",'source_digest':report['receipt_sha256'],
  'run_id':str(os.getenv('GITHUB_RUN_ID') or 'LOCAL'),'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':False,'promotion_applied':False,
 }
 e['event_hash']=event_hash(e);ledger['events'].append(e);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=e['event_hash']
