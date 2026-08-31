@@ -1,0 +1,63 @@
+name: YADO Runtime Control Plane Binding Self Repair V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-runtime-control-plane-binding-repair-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-runtime-control-plane-binding-repair
+  cancel-in-progress: true
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run kernel-native control-plane repair
+        run: python runtime/yado_runtime_control_plane_binding_self_repair_v1.py
+      - name: Upload repair evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-runtime-control-plane-binding-repair-v1
+          path: |
+            runtime/yado_runtime_control_plane_binding_self_repair_v1_receipt.json
+            candidates/g2-self-repair/runtime-control-plane-binding-v1.py
+            candidates/g2-self-repair/runtime-control-plane-binding-v1.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist repair evidence
+        if: always()
+        run: |
+          mkdir -p receipts candidates/g2-self-repair
+          if [ -f runtime/yado_runtime_control_plane_binding_self_repair_v1_receipt.json ]; then
+            cp runtime/yado_runtime_control_plane_binding_self_repair_v1_receipt.json "receipts/yado-runtime-control-plane-binding-self-repair-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Runtime Binding Self Repair"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          if [ -f candidates/g2-self-repair/runtime-control-plane-binding-v1.py ]; then files+=("candidates/g2-self-repair/runtime-control-plane-binding-v1.py"); fi
+          if [ -f candidates/g2-self-repair/runtime-control-plane-binding-v1.json ]; then files+=("candidates/g2-self-repair/runtime-control-plane-binding-v1.json"); fi
+          if [ -f "receipts/yado-runtime-control-plane-binding-self-repair-v1-run-${GITHUB_RUN_ID}.json" ]; then files+=("receipts/yado-runtime-control-plane-binding-self-repair-v1-run-${GITHUB_RUN_ID}.json"); fi
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist runtime control-plane self-repair evidence [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Preserve semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_runtime_control_plane_binding_self_repair_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_RUNTIME_BINDING_REPAIR_RECEIPT")
+          r=json.loads(p.read_text())
+          print(r["status"])
+          PY
