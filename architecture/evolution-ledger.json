@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "ca0f850e74c1ce5e3aa58c37e6e90116e29a6919176aec61e89838e51c9268bf",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 124,
+  "event_count": 125,
   "events": [
     {
       "canonical_mutation": false,
@@ -2061,14 +2061,30 @@
       "source_digest": "a93a01bb34fe5cf7e668c5a418db3b111bf3285f81fc6697621bfb96aa13b81f",
       "source_path": "receipts/yado-thinking-architectural-ceiling-fresh-admission-v1-run-33441644452.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "THINKING_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1",
+      "effect": "FRESH=1.000000; SIGNED=True; DEPENDENCY=True; DEPTH=True; NEXT=THINKING_ARCHITECTURAL_CEILING_CANONICAL_INTEGRATION_V1",
+      "event_hash": "f632cdfe0704f4ba79d562952cab885284ef6e72c903a8b701e6fd22b1ba80f7",
+      "event_id": "E0125_G2_THINKING_CEILING_FRESH_ADMISSION",
+      "event_type": "THINKING_CAPABILITY_FRESH_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 124,
+      "parent_event_hash": "3a7ce5de8842abc1e732e1ed94ea3386c503ccf2269a6423dcdf8010448b548c",
+      "promotion_applied": false,
+      "run_id": "33441762902",
+      "source_digest": "6bde35fc82fb8722d443c46e53908dc1ef975ca6307acc4d779c9e1a4c5edfea",
+      "source_path": "receipts/yado-thinking-architectural-ceiling-fresh-admission-v1-run-33441762902.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "d1afbb6bcd811b9604601729d8baf67115cf2e9e215607d5e7ffc3de54fbc06a",
+  "ledger_digest": "1343ed2ed19bac0f28ca73d6ed201192fd189eb4193f591816e14860628995ea",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "THINKING_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2"
+    "THINKING_ARCHITECTURAL_CEILING_CANONICAL_INTEGRATION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -2097,5 +2113,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "3a7ce5de8842abc1e732e1ed94ea3386c503ccf2269a6423dcdf8010448b548c"
+  "tail_event_hash": "f632cdfe0704f4ba79d562952cab885284ef6e72c903a8b701e6fd22b1ba80f7"
 }
