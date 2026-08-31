@@ -1,0 +1,64 @@
+name: YADO G2 Canonical Raw Transfer Recheck V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-canonical-raw-transfer-recheck-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-canonical-raw-transfer-recheck
+  cancel-in-progress: true
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run canonical raw transfer recheck
+        id: recheck
+        continue-on-error: true
+        run: python runtime/yado_g2_real_world_transfer_recheck_canonical_representation_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-canonical-raw-transfer-recheck-v1
+          path: |
+            runtime/yado_g2_real_world_transfer_recheck_canonical_representation_v1_receipt.json
+            receipts/yado-g2-real-world-transfer-recheck-canonical-v1-latest.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist recheck evidence
+        if: always()
+        run: |
+          mkdir -p receipts
+          if [ -f runtime/yado_g2_real_world_transfer_recheck_canonical_representation_v1_receipt.json ]; then
+            cp runtime/yado_g2_real_world_transfer_recheck_canonical_representation_v1_receipt.json "receipts/yado-g2-real-world-transfer-recheck-canonical-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Canonical Raw Recheck"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          for f in "receipts/yado-g2-real-world-transfer-recheck-canonical-v1-run-${GITHUB_RUN_ID}.json" receipts/yado-g2-real-world-transfer-recheck-canonical-v1-latest.json; do [ -f "$f" ] && files+=("$f"); done
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist canonical raw transfer recheck [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_g2_real_world_transfer_recheck_canonical_representation_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_CANONICAL_RAW_RECHECK_RECEIPT")
+          r=json.loads(p.read_text())
+          if r.get("status")!="PASS_G2_REAL_WORLD_TRANSFER_RECHECK_CANONICAL_REPRESENTATION_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
