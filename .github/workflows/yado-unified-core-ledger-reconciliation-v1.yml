@@ -1,0 +1,35 @@
+name: YADO Unified Core Ledger Reconciliation V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-unified-core-ledger-reconciliation-request.json"
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Reconcile unified core head and ledger
+        run: python runtime/yado_unified_core_ledger_reconciliation_v1.py
+      - name: Upload reconciliation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-unified-core-ledger-reconciliation-v1
+          path: |
+            runtime/yado_unified_core_ledger_reconciliation_v1_receipt.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist reconciliation evidence
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_unified_core_ledger_reconciliation_v1_receipt.json "receipts/yado-unified-core-ledger-reconciliation-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO Unified Core Reconciliation"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json "receipts/yado-unified-core-ledger-reconciliation-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m 'Reconcile unified-core head and causal ledger [skip ci]'
+          git push origin HEAD:yado-architecture-shadow-search
