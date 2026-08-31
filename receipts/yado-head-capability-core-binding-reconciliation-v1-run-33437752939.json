@@ -1,0 +1,63 @@
+{
+  "canonical_mutation": true,
+  "checks": {
+    "exact_unbound_capability": true,
+    "g3_not_started": true,
+    "head_claim_present": true,
+    "not_already_bound": true,
+    "persistence_invariant_present": true,
+    "readable_counterexample_receipts": true,
+    "receipt_lineage_present": true,
+    "withhold_history_present": true
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "next_required_capability": "UNIFIED_CORE_POST_HEAD_CAPABILITY_BINDING_AUDIT_V1",
+  "post_core_digest": "0dac5f7a8614f1fa0526f95d8a552ebfbd49e4fcce5e9c24db33e482056d322e",
+  "post_head_digest": "ba429729c449160b82e2c792882e3a22d12389fce0aafcf19769c52af8d128b6",
+  "promotion_applied": false,
+  "readable_receipt_count": 113,
+  "receipt_backed_event_count": 113,
+  "receipt_sha256": "35985013c8d2469b1a239f556d918724e4043375712a72ee22687351a5bc245f",
+  "sample_counterexamples": [
+    {
+      "event_id": "E0061_G2_REAL_WORLD_TRANSFER",
+      "source_path": "receipts/yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json"
+    },
+    {
+      "event_id": "E0066_G2_RAW_REPRESENTATION_CANONICAL_ADMISSION",
+      "source_path": "receipts/yado-raw-task-representation-canonical-admission-gate-v1-run-33391439609.json"
+    },
+    {
+      "event_id": "E0075_G2_LEGACY_EXPERIENCE_RETRIEVAL_FRESH_ADMISSION",
+      "source_path": "receipts/yado-legacy-experience-retrieval-fresh-admission-v1-run-33395616417.json"
+    },
+    {
+      "event_id": "E0078_G2_LEGACY_EXPERIENCE_RETRIEVAL_CANONICAL_INTEGRATION",
+      "source_path": "receipts/yado-legacy-experience-retrieval-canonical-integration-v1-run-33396446766.json"
+    },
+    {
+      "event_id": "E0088_G2_REAL_WORLD_GENERALIZATION_DIAGNOSTIC",
+      "source_path": "receipts/yado-real-world-generalization-self-directed-v1-run-33405588896.json"
+    },
+    {
+      "event_id": "E0091_G2_MATHEMATICAL_REASONING_CANONICAL_INTEGRATION",
+      "source_path": "receipts/yado-mathematical-reasoning-canonical-integration-v1-run-33416433637.json"
+    },
+    {
+      "event_id": "E0094_G2_REAL_WORLD_GENERALIZATION_V2",
+      "source_path": "receipts/yado-real-world-generalization-self-directed-v2-run-33417121418.json"
+    },
+    {
+      "event_id": "E0095_G2_PROGRAM_EXECUTION_NATIVE_SELF_EVOLUTION",
+      "source_path": "receipts/yado-program-execution-native-self-evolution-v1-run-33417354072.json"
+    }
+  ],
+  "schema": "yado.g2.head_capability_core_binding_reconciliation.v1",
+  "semantic_boundary": "RECONCILES AN EXISTING HEAD CAPABILITY CLAIM WITH ITS ACTUAL LEDGER/RECEIPT IMPLEMENTATION; DOES NOT ADD A NEW COGNITIVE CAPABILITY.",
+  "status": "PASS_HEAD_CAPABILITY_CORE_BINDING_RECONCILIATION_V1",
+  "unbound_before": [
+    "COUNTEREXAMPLE_LINEAGE_MEMORY_V1"
+  ],
+  "withhold_event_count": 20
+}

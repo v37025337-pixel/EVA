@@ -27,9 +27,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "de4702511f371ac9432dfa5ecd2833ce4185722f98090959c1944093b90b5936",
+  "current_head_digest": "ba429729c449160b82e2c792882e3a22d12389fce0aafcf19769c52af8d128b6",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 114,
+  "event_count": 115,
   "events": [
     {
       "canonical_mutation": false,
@@ -1900,14 +1900,33 @@
       "source_digest": "5f432b8b774078a23aeb202abf7b667708e57309b86f6e2e29aaeaa33a9c9817",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33437540417.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "HEAD_CAPABILITY_TO_CORE_BINDING",
+      "effect": "COUNTEREXAMPLE_LINEAGE_MEMORY_BOUND_TO_LEDGER_AND_RECEIPTS",
+      "event_hash": "866d72a47ed9459586e403744ad8f51bd3586d731ab097ffbac7429bf129d186",
+      "event_id": "E0115_G2_HEAD_CAPABILITY_CORE_BINDING_RECONCILIATION",
+      "event_type": "CONTROL_PLANE_CAPABILITY_BINDING_RECONCILIATION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 114,
+      "new_head_digest": "ba429729c449160b82e2c792882e3a22d12389fce0aafcf19769c52af8d128b6",
+      "parent_event_hash": "e681af6b895a8a63f9faeb574697d1512dcb452c418d13a3e8b819f966a2927f",
+      "previous_head_digest": "de4702511f371ac9432dfa5ecd2833ce4185722f98090959c1944093b90b5936",
+      "promotion_applied": false,
+      "run_id": "33437752939",
+      "source_digest": "35985013c8d2469b1a239f556d918724e4043375712a72ee22687351a5bc245f",
+      "source_path": "receipts/yado-head-capability-core-binding-reconciliation-v1-run-33437752939.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "a6e154e4fbd81e5bfbec11fb04635b6736bd3d601f9ed21e6c3648cf55ac7289",
+  "ledger_digest": "db2f6b235a6f83e098f88704523cee904c29e685832ea8a8de50337c6e581d8d",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "HEAD_CAPABILITY_TO_CORE_BINDING"
+    "UNIFIED_CORE_POST_HEAD_CAPABILITY_BINDING_AUDIT_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1936,5 +1955,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "e681af6b895a8a63f9faeb574697d1512dcb452c418d13a3e8b819f966a2927f"
+  "tail_event_hash": "866d72a47ed9459586e403744ad8f51bd3586d731ab097ffbac7429bf129d186"
 }

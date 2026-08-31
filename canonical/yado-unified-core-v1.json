@@ -41,9 +41,61 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "a6cdf3934417845e9647dd7d271c2b157ea8e04c56c8dd785120d9f4960514ce",
+  "core_digest": "0dac5f7a8614f1fa0526f95d8a552ebfbd49e4fcce5e9c24db33e482056d322e",
   "core_id": "UNIFIED_YADO_CORE_V1",
-  "current_frontier": "UNIFIED_CORE_POST_CONTEXT_ADAPTER_SELF_AUDIT_V1",
+  "counterexample_lineage_memory": {
+    "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
+    "gate_run_id": "33437752939",
+    "ledger": "architecture/evolution-ledger.json",
+    "mode": "ACTIVE_LEDGER_AND_RECEIPT_BOUND_MEMORY",
+    "receipt_backed_event_count_at_binding": 113,
+    "receipt_namespace": "receipts/",
+    "semantic_boundary": "PERSISTENT CAUSAL LEDGER/RECEIPT MEMORY OF FAILURES, WITHHOLDS, AND COUNTEREXAMPLES; NOT GENERAL EPISODIC OR SEMANTIC MEMORY.",
+    "verified_readable_counterexample_samples": [
+      {
+        "event_id": "E0061_G2_REAL_WORLD_TRANSFER",
+        "source_digest": "1a369b81356ff0159d16e2626dee3e806dc87fe3af13790c24f27327440ee1d9",
+        "source_path": "receipts/yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json"
+      },
+      {
+        "event_id": "E0066_G2_RAW_REPRESENTATION_CANONICAL_ADMISSION",
+        "source_digest": "34fbe27ebbd37bf89f6950500331367086b1e6dbe03636946848e6b54d9032b1",
+        "source_path": "receipts/yado-raw-task-representation-canonical-admission-gate-v1-run-33391439609.json"
+      },
+      {
+        "event_id": "E0075_G2_LEGACY_EXPERIENCE_RETRIEVAL_FRESH_ADMISSION",
+        "source_digest": "595e332ec4ac609d0bf6781da0b3462615abe97161384e9610a354b8fb7a4774",
+        "source_path": "receipts/yado-legacy-experience-retrieval-fresh-admission-v1-run-33395616417.json"
+      },
+      {
+        "event_id": "E0078_G2_LEGACY_EXPERIENCE_RETRIEVAL_CANONICAL_INTEGRATION",
+        "source_digest": "3b5c7e46c30b231244e2953bf2062cca51c3d8119a187d93071bf83cbfa44244",
+        "source_path": "receipts/yado-legacy-experience-retrieval-canonical-integration-v1-run-33396446766.json"
+      },
+      {
+        "event_id": "E0088_G2_REAL_WORLD_GENERALIZATION_DIAGNOSTIC",
+        "source_digest": "6771d705bcc05f80143d199f6127b40d3f4ac453cd9a3cfe480383b1a23ba02c",
+        "source_path": "receipts/yado-real-world-generalization-self-directed-v1-run-33405588896.json"
+      },
+      {
+        "event_id": "E0091_G2_MATHEMATICAL_REASONING_CANONICAL_INTEGRATION",
+        "source_digest": "d5e1e990227a01d4d49497b0d7359935d116820a783d60403335b29ca8031da2",
+        "source_path": "receipts/yado-mathematical-reasoning-canonical-integration-v1-run-33416433637.json"
+      },
+      {
+        "event_id": "E0094_G2_REAL_WORLD_GENERALIZATION_V2",
+        "source_digest": "674594407bbb06075690aaebe40c3ae8491941fa3310203e8d7aec0067a0f397",
+        "source_path": "receipts/yado-real-world-generalization-self-directed-v2-run-33417121418.json"
+      },
+      {
+        "event_id": "E0095_G2_PROGRAM_EXECUTION_NATIVE_SELF_EVOLUTION",
+        "source_digest": "d356dff411eb20a06faac3f90f033e2a3c5bee05a8bc5935c04cdfbdc43f8b33",
+        "source_path": "receipts/yado-program-execution-native-self-evolution-v1-run-33417354072.json"
+      }
+    ],
+    "withhold_event_count_at_binding": 20
+  },
+  "current_frontier": "UNIFIED_CORE_POST_HEAD_CAPABILITY_BINDING_AUDIT_V1",
   "deep_self_audit": {
     "candidate_digest": "1f63d96b7b396add55769c7212c739a2924f97f7772ab25a67e280f0670f0902",
     "canonical_integration_run_id": "33436928912",
@@ -104,6 +156,7 @@
       "active_components": [
         "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
         "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
+        "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
       ],
       "experience_components": [
@@ -116,7 +169,8 @@
         "bounded_stream_context",
         "counterexample_memory",
         "episodic_memory",
-        "legacy_experience_retrieval"
+        "legacy_experience_retrieval",
+        "persistent_counterexample_lineage_memory"
       ],
       "shadow_components": []
     },
