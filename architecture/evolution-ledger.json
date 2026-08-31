@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "834a63e4f326230fcde6675556d5b6236a31cbdb5cfcaf0b3374154e01e33a11",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 117,
+  "event_count": 118,
   "events": [
     {
       "canonical_mutation": false,
@@ -1946,14 +1946,30 @@
       "source_digest": "30fbb885198f2f4e362e2c6eacc215419fa544415ecc4320525494cf4404f448",
       "source_path": "receipts/yado-legacy-experience-provenance-rederivation-v1-run-33438207406.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0",
+      "event_hash": "98f43a377927baa79f90093ae7c78f99f38f6aa0d77d22752904c3531e08966c",
+      "event_id": "E0118_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 117,
+      "parent_event_hash": "a460764fcf1b35ff758a5ede6fd2e168eace67ff7892215466a7ac243baca72f",
+      "promotion_applied": false,
+      "run_id": "33438264009",
+      "source_digest": "0881758c029f6563cb782eaee75360c8a9730e812250dd6a4a3cabf274a5f7b9",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33438264009.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "46f3a7c63922d9b6c717473cd34fb8c4d8d058009db7d40365e78c38815eb444",
+  "ledger_digest": "74184e58ef7e729010eefb112b2b0318f44d38faad341d0888eff57fd52b288e",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_LEGACY_PROVENANCE_SELF_AUDIT_V1"
+    "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1982,5 +1998,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "a460764fcf1b35ff758a5ede6fd2e168eace67ff7892215466a7ac243baca72f"
+  "tail_event_hash": "98f43a377927baa79f90093ae7c78f99f38f6aa0d77d22752904c3531e08966c"
 }
