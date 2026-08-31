@@ -70,7 +70,7 @@ class UnifiedYADOCoreV1:
             'experience_registry_bound':self.manifest.get('experience_registry')=='canonical/yado-unified-experience-registry-v1.json',
             'developmental_frontier_coherent':bool(self.manifest.get('current_frontier')) and self.manifest.get('current_frontier')==self.head.get('current_frontier') and isinstance(self.ledger.get('open_deficits'),list) and len(self.ledger.get('open_deficits'))>=1,
             'g3_blocked':self.manifest.get('g3_genesis_performed') is False and self.experience.get('policy',{}).get('g3_genesis_blocked') is True,
-            'shadow_context_not_smuggled_canonical':self.shadow_context.get('canonical_active') is False,
+            'context_adapter_binding_coherent':(('ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1' in active_components)==(self.shadow_context.get('canonical_active') is True)),
             'required_active_families_present':all(x in active_components for x in [
                 'ALG-CONJUNCTIVE-RULE-INDUCER-V1',
                 'ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1',

@@ -8,6 +8,7 @@
     "runtime/yado_conjunctive_rule_inducer_v1.py",
     "runtime/yado_core_audit_invariant_self_evolution_v1.py",
     "runtime/yado_evolution_ledger_v2.py",
+    "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
     "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
     "runtime/yado_legacy_experience_retriever_v2.py",
     "runtime/yado_neutral_evidence_profile_selector_v1.py",
@@ -26,11 +27,23 @@
   "canonical_mutation": false,
   "consolidation_applied": true,
   "consolidation_gate_run_id": "33371375385",
+  "contextual_stream_adapter": {
+    "base_score": 0.25,
+    "candidate_digest": "f57b45a68f0f752c5b4424826a8830b8a67fdcd90e1f4a9bac56cb47170a4982",
+    "component_id": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+    "fresh_admission_receipt_sha256": "be56a42c3e69f29e880c7d2e570f619b73de1ebdfc3e9e6757a4d9c51c1819e5",
+    "fresh_score": 1.0,
+    "gate_run_id": "33437453214",
+    "max_stream_contexts": 1024,
+    "memory_ablation_score": 0.25,
+    "mode": "ACTIVE_BOUNDED_STREAM_CONTEXT_MAP",
+    "source_sha256": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52"
+  },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "47641fe7c889f18e662fcde5e88caec18185d8191eaf11cf92df4e337195d427",
+  "core_digest": "a6cdf3934417845e9647dd7d271c2b157ea8e04c56c8dd785120d9f4960514ce",
   "core_id": "UNIFIED_YADO_CORE_V1",
-  "current_frontier": "UNIFIED_CORE_POST_SCIENCE_EVIDENCE_AUDIT_V5",
+  "current_frontier": "UNIFIED_CORE_POST_CONTEXT_ADAPTER_SELF_AUDIT_V1",
   "deep_self_audit": {
     "candidate_digest": "1f63d96b7b396add55769c7212c739a2924f97f7772ab25a67e280f0670f0902",
     "canonical_integration_run_id": "33436928912",
@@ -89,6 +102,7 @@
     },
     {
       "active_components": [
+        "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
         "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
       ],
@@ -98,14 +112,13 @@
       "legacy_experience_retrieval": "ACTIVE_READ_ONLY_EXACT",
       "plane_id": "MEMORY_AND_EXPERIENCE",
       "responsibilities": [
-        "episodic_memory",
+        "bounded_context_conditioned_stream_routing",
         "bounded_stream_context",
-        "legacy_experience_retrieval",
-        "counterexample_memory"
+        "counterexample_memory",
+        "episodic_memory",
+        "legacy_experience_retrieval"
       ],
-      "shadow_components": [
-        "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1"
-      ]
+      "shadow_components": []
     },
     {
       "active_components": [
@@ -228,7 +241,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "ac42172b9f1c53c5bfaaccdfe3df9e15685650345a818076925cc9ec70acf3b7",
+  "runtime_sha256": "b40ba382d8bb9485ae9ee2083e7ffb0695be95dfc2144aa08a7d7a5263a5ee79",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
@@ -244,8 +257,6 @@
     "source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b"
   },
   "semantic_boundary": "UNIFIED SOFTWARE COGNITIVE KERNEL CANDIDATE. LEGACY CONSCIOUSNESS EXPERIMENTS ARE HISTORICAL FUNCTIONAL EVIDENCE ONLY; THIS IS NOT A CLAIM OF SUBJECTIVE CONSCIOUSNESS OR AGI.",
-  "shadow_runtime_sources": [
-    "runtime/yado_g2_contextual_stream_capability_adapter_v1.py"
-  ],
+  "shadow_runtime_sources": [],
   "source_generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c"
 }
