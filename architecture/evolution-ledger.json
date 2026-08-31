@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "834a63e4f326230fcde6675556d5b6236a31cbdb5cfcaf0b3374154e01e33a11",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 118,
+  "event_count": 119,
   "events": [
     {
       "canonical_mutation": false,
@@ -1962,14 +1962,30 @@
       "source_digest": "0881758c029f6563cb782eaee75360c8a9730e812250dd6a4a3cabf274a5f7b9",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33438264009.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+      "effect": "AUDIT_V6_PROVENANCE_RECOGNITION; NEXT=LEGACY_PROVENANCE_AUDIT_FRESH_ADMISSION_V1",
+      "event_hash": "abd907fdff3d2d7d031b2a47e90eb2a7c02151a45221f8cc189d7050f5a20a8a",
+      "event_id": "E0119_G2_LEGACY_PROVENANCE_AUDIT_SELF_EVOLUTION",
+      "event_type": "KERNEL_SELF_AUDIT_PROVENANCE_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 118,
+      "parent_event_hash": "98f43a377927baa79f90093ae7c78f99f38f6aa0d77d22752904c3531e08966c",
+      "promotion_applied": false,
+      "run_id": "33438415510",
+      "source_digest": "76d35a345a0edde5bc59e76e4af56ee931f6a32849e00c01cacbcd5f0c3cc5f8",
+      "source_path": "receipts/yado-legacy-provenance-audit-self-evolution-v1-run-33438415510.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "74184e58ef7e729010eefb112b2b0318f44d38faad341d0888eff57fd52b288e",
+  "ledger_digest": "c5d9863367aa1ab39296e979e5b9498f2418652c75660d93b500bd754e477115",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE"
+    "LEGACY_PROVENANCE_AUDIT_FRESH_ADMISSION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1998,5 +2014,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "98f43a377927baa79f90093ae7c78f99f38f6aa0d77d22752904c3531e08966c"
+  "tail_event_hash": "abd907fdff3d2d7d031b2a47e90eb2a7c02151a45221f8cc189d7050f5a20a8a"
 }
