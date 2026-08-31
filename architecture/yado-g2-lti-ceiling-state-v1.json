@@ -18,6 +18,16 @@
       "plane": "THINKING",
       "round": 1,
       "status": "CANONICAL_ACTIVE"
+    },
+    {
+      "baseline_score": 0.4772135416666667,
+      "candidate_digest": "3fbc845da054cf8f7e85559256173f230fe0e8a67ebe47a5a3fa647781049917",
+      "causal_drop": 0.5227864583333333,
+      "fresh_score": 1.0,
+      "plane": "LOGIC",
+      "round": 2,
+      "selected_strategy": "COMPOSITIONAL_LOGIC_D3",
+      "status": "PASS_SHADOW"
     }
   ],
   "ceiling_definition": {
@@ -48,7 +58,7 @@
   },
   "fixed_architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "next_required_capability": "LOGIC_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+  "next_required_capability": "LOGIC_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1",
   "planes": {
     "INTELLIGENCE": {
       "families": {
@@ -60,6 +70,15 @@
       "score": 0.5895833333333333
     },
     "LOGIC": {
+      "candidate_families": {
+        "CARDINALITY5OF8": 1.0,
+        "EXACT3OF7": 1.0,
+        "PARITY6": 1.0,
+        "POLY_D2_TRANSFER": 1.0,
+        "POLY_D3_TRANSFER": 1.0,
+        "RELATIONAL_REGRESSION": 1.0
+      },
+      "candidate_score": 1.0,
       "families": {
         "CARDINALITY_4_OF_7": 0.8203125,
         "DEEP_COMPOSITION_EXPRESSION": 0.0,
@@ -87,6 +106,6 @@
   "round": 2,
   "schema": "yado.g2.lti_architectural_ceiling_state.v1",
   "self_selected_weakest_plane": "LOGIC",
-  "state_digest": "67e4314025090fecb8c42ac2e212e6145bfea69c1dd781cd319a8429409ac638",
+  "state_digest": "05708b16773b5dd06593b5b4b8d770fc3e1cbfea36e29f9f9462bb40ec93dc98",
   "status": "EVOLVING_TO_CEILING"
 }
