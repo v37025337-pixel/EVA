@@ -65,7 +65,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "3f415bd74bf3f81d5cfdfa8b032ad85cc12f5d8d93d524bf0fb63c4266e352c2",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 75,
+  "event_count": 76,
   "events": [
     {
       "canonical_mutation": false,
@@ -1283,14 +1283,30 @@
       "source_digest": "595e332ec4ac609d0bf6781da0b3462615abe97161384e9610a354b8fb7a4774",
       "source_path": "receipts/yado-legacy-experience-retrieval-fresh-admission-v1-run-33395616417.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_RETRIEVAL_EVOLUTION_REPAIR_V1",
+      "effect": "SEARCH_RANKING_EVOLVED_FROM_FRESH_ADMISSION_COUNTEREXAMPLE",
+      "event_hash": "59f1159743c2f95d99be30349dcec4cedf620637db107ddace7121377731388c",
+      "event_id": "E0076_G2_LEGACY_EXPERIENCE_SEARCH_EVOLUTION_V2",
+      "event_type": "KERNEL_NATIVE_CODE_EVOLUTION_FROM_COUNTEREXAMPLE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 75,
+      "parent_event_hash": "eee32a1b8c06bc47d730b13958eb6e61167503bbd47f734f4bb2eeb92ea6ef36",
+      "promotion_applied": false,
+      "run_id": "33395951315",
+      "source_digest": "f48edd918983a880696458493ae3c72be9d43d86490815f380ab455ef83c1a3d",
+      "source_path": "receipts/yado-legacy-experience-search-self-evolution-v2-run-33395951315.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "3ee91a85ca475d0c2a0054290bf8f814acb5b320a070283924d6e0f364a91404",
+  "ledger_digest": "e2d3f476be2fffe30c543ffc3c2cf2fd3de2551dec08608a8e52d357264d1083",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "LEGACY_EXPERIENCE_RETRIEVAL_EVOLUTION_REPAIR_V1"
+    "LEGACY_EXPERIENCE_RETRIEVAL_FRESH_ADMISSION_V2"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1319,5 +1335,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "eee32a1b8c06bc47d730b13958eb6e61167503bbd47f734f4bb2eeb92ea6ef36"
+  "tail_event_hash": "59f1159743c2f95d99be30349dcec4cedf620637db107ddace7121377731388c"
 }
