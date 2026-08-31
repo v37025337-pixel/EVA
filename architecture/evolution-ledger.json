@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 60,
+  "event_count": 61,
   "events": [
     {
       "canonical_mutation": false,
@@ -970,14 +970,30 @@
       "source_digest": "43d2cbef225447584e3b92180c58b69ef2be83f2cce3a86ab8550e644b4cb3a5",
       "source_path": "receipts/yado-g2-post-workload-capability-audit-v1-run-33363851997.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_REAL_WORLD_TRANSFER_BENCHMARK_V1",
+      "effect": "RAW_UNSTRUCTURED_TRANSFER_BLOCKED; STRUCTURED_DOWNSTREAM_REMAINS_STRONG",
+      "event_hash": "2bb150ce2a66330ddc2c57d8a56c2429a26c7acea776e53f8fdbe416fea83a46",
+      "event_id": "E0061_G2_REAL_WORLD_TRANSFER",
+      "event_type": "G2_REAL_WORLD_TRANSFER_BENCHMARK",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 60,
+      "parent_event_hash": "563934616b512bacb2246923fcde3b8412bb6dce6e1c51393dbe96ff4470c526",
+      "promotion_applied": false,
+      "run_id": "33363995201",
+      "source_digest": "1a369b81356ff0159d16e2626dee3e806dc87fe3af13790c24f27327440ee1d9",
+      "source_path": "receipts/yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "6ae122919944bbb998bee2b86e0d1d3dd345406785702316f86bf50f24d0aefa",
+  "ledger_digest": "25472e000460bcc16d5c23253e7ec27ea0bb0b49255672c2b44ed179d6bb16b7",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "G2_REAL_WORLD_TRANSFER_BENCHMARK_V1"
+    "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1006,5 +1022,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "563934616b512bacb2246923fcde3b8412bb6dce6e1c51393dbe96ff4470c526"
+  "tail_event_hash": "2bb150ce2a66330ddc2c57d8a56c2429a26c7acea776e53f8fdbe416fea83a46"
 }

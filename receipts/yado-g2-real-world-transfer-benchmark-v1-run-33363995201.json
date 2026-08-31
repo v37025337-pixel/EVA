@@ -1,0 +1,230 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "canonical_g2_immutable": true,
+    "live_resource_infrastructure": true,
+    "raw_unstructured_transfer": false,
+    "real_code_execution_infrastructure": true,
+    "structured_downstream_transfer": true
+  },
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
+  "github_run_id": "33363995201",
+  "github_sha": "09f2bbe7cb2a4963962c1df14142764996c1134b",
+  "live_resource_availability": {
+    "rows": [
+      {
+        "ok": true,
+        "sample_bytes": 4096,
+        "sample_sha256": "cc847850ae5b68c467559f3e17f35d6fc686491a89d6e3dfe0c2c5057d236f56",
+        "status": 200,
+        "url": "https://docs.github.com/en/rest"
+      },
+      {
+        "ok": true,
+        "sample_bytes": 4096,
+        "sample_sha256": "0c398409b11d2085759af8f422dff429661e4646333a695d579a30cfe8daac67",
+        "status": 200,
+        "url": "https://huggingface.co/docs/datasets/v4.7.0/stream"
+      },
+      {
+        "ok": true,
+        "sample_bytes": 4096,
+        "sample_sha256": "48cfac99581d943e4ed5ffbbff714b81b1b504f33c3829a2eb2b7b9e27b58c3e",
+        "status": 200,
+        "url": "https://arxiv.org/abs/2608.14595"
+      },
+      {
+        "ok": true,
+        "sample_bytes": 4096,
+        "sample_sha256": "fb151ebc61f16df823985a064714db2d662300a8ca3675237b4f6edc8bf1cdcd",
+        "status": 200,
+        "url": "https://github.com/ripienaar/free-for-dev"
+      },
+      {
+        "ok": true,
+        "sample_bytes": 4096,
+        "sample_sha256": "67d7499590cda52506bac6a2a237f43b34929fc4c46990da31ace3172a19797f",
+        "status": 200,
+        "url": "https://arxiv.org/abs/2608.19854"
+      }
+    ],
+    "score": 1.0,
+    "successes": 5,
+    "total": 5
+  },
+  "next_required_capability": "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1",
+  "promotion_applied": false,
+  "raw_unstructured": {
+    "accuracy": 0.25,
+    "rows": [
+      {
+        "correct": true,
+        "domain": "PROGRAMMING",
+        "expected": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "A repository has failing tests and a release must wait until all checks and rollback conditions are satisfied."
+      },
+      {
+        "correct": false,
+        "domain": "PROGRAMMING",
+        "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Choose the cheapest sequence of CI stages that can reach the required confidence without exceeding the compute budget."
+      },
+      {
+        "correct": false,
+        "domain": "PROGRAMMING",
+        "expected": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Decide whether this contributor may modify the protected artifact given ownership, team and verified role relationships."
+      },
+      {
+        "correct": false,
+        "domain": "PROGRAMMING",
+        "expected": "RESOURCE-PORTFOLIO-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Find an external public source that documents the API behavior needed to resolve this implementation uncertainty."
+      },
+      {
+        "correct": true,
+        "domain": "MATHEMATICS",
+        "expected": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Check whether all premises, the derivation step and the absence of a counterexample jointly justify accepting the proof."
+      },
+      {
+        "correct": false,
+        "domain": "MATHEMATICS",
+        "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Allocate a limited search budget among lemma checking, local search and formal verification."
+      },
+      {
+        "correct": false,
+        "domain": "MATHEMATICS",
+        "expected": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Determine whether two symbolic entities refer to the same object and whether that relation permits the inference."
+      },
+      {
+        "correct": false,
+        "domain": "MATHEMATICS",
+        "expected": "RESOURCE-PORTFOLIO-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Consult an external mathematical reference because the current evidence is insufficient."
+      },
+      {
+        "correct": true,
+        "domain": "EXACT_SCIENCE",
+        "expected": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Accept the experimental conclusion only if calibration, replication and evidence quality all pass."
+      },
+      {
+        "correct": false,
+        "domain": "EXACT_SCIENCE",
+        "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Choose which experiment or dataset to inspect next under a limited acquisition budget."
+      },
+      {
+        "correct": false,
+        "domain": "EXACT_SCIENCE",
+        "expected": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Determine whether a measurement belongs to the same experimental group and satisfies the verified-role relation."
+      },
+      {
+        "correct": false,
+        "domain": "EXACT_SCIENCE",
+        "expected": "RESOURCE-PORTFOLIO-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Retrieve a public scientific source to resolve a conflict between two stored claims."
+      },
+      {
+        "correct": true,
+        "domain": "CAUSAL_PLANNING",
+        "expected": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Commit an intervention only when the causal assumption, confounder control and rollback condition all hold."
+      },
+      {
+        "correct": false,
+        "domain": "CAUSAL_PLANNING",
+        "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Select the next intervention or simulation under a fixed cost budget."
+      },
+      {
+        "correct": false,
+        "domain": "CAUSAL_PLANNING",
+        "expected": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Reason about whether the acting entity is the owner or belongs to the same authorized group."
+      },
+      {
+        "correct": false,
+        "domain": "CAUSAL_PLANNING",
+        "expected": "RESOURCE-PORTFOLIO-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Seek external causal evidence because the local model is underdetermined."
+      },
+      {
+        "correct": true,
+        "domain": "MULTI_AGENT",
+        "expected": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Proceed only if identity, goal compatibility and safety constraints all hold."
+      },
+      {
+        "correct": false,
+        "domain": "MULTI_AGENT",
+        "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Choose the next coordination stage while respecting cost and quota limits."
+      },
+      {
+        "correct": false,
+        "domain": "MULTI_AGENT",
+        "expected": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Resolve whether the requesting agent is owner, same-team member, or verified lead."
+      },
+      {
+        "correct": false,
+        "domain": "MULTI_AGENT",
+        "expected": "RESOURCE-PORTFOLIO-V1",
+        "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "raw_text": "Consult an external coordination resource because local evidence is incomplete."
+      }
+    ],
+    "task_count": 20
+  },
+  "real_code_execution_infrastructure": {
+    "rows": [
+      {
+        "ok": true,
+        "path": "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
+        "stderr": ""
+      },
+      {
+        "ok": true,
+        "path": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
+        "stderr": ""
+      },
+      {
+        "ok": true,
+        "path": "runtime/yado_budgeted_stage_policy_v1.py",
+        "stderr": ""
+      }
+    ],
+    "score": 1.0
+  },
+  "receipt_sha256": "1a369b81356ff0159d16e2626dee3e806dc87fe3af13790c24f27327440ee1d9",
+  "schema": "yado.g2.real_world_transfer_benchmark.receipt.v1",
+  "semantic_boundary": "REAL-WORLD TRANSFER BOUNDARY TEST. LIVE PUBLIC FETCH AND REAL REPOSITORY PYTHON COMPILATION ARE INFRASTRUCTURE CHECKS. RAW-TEXT ROUTING IS TESTED WITHOUT SECRET HOST FEATURE EXTRACTION. FAILURE THERE MEANS G2 LACKS A RAW TASK REPRESENTATION/GROUNDING LAYER.",
+  "status": "WITHHOLD_G2_REAL_WORLD_TRANSFER_BENCHMARK_V1",
+  "structured_mirror_accuracy": 1.0
+}
