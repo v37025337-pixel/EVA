@@ -1,8 +1,8 @@
 {
-  "current_head": "G1_CANDIDATE_S2",
-  "current_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
-  "current_head_event_id": "E0024_G1_PROMOTION",
-  "event_count": 43,
+  "current_head": "G2_CANDIDATE_TRCG_V1",
+  "current_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
+  "current_head_event_id": "E0044_G2_PROMOTION",
+  "event_count": 44,
   "events": [
     {
       "canonical_mutation": false,
@@ -695,14 +695,33 @@
       "source_digest": "1bbee83fd7a9398ba8bf045274983e2fd465125b1fcf0438e5bc11ad64d77807",
       "source_path": "receipts/yado-g2-successor-genesis-from-g1-enriched-head-v1-run-33356738246.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "G2_FULL_FRESH_REGRESSION_AND_PROMOTION_GATE_V1",
+      "effect": "CURRENT_HEAD_TRANSITION_G1_TO_G2_TYPED_RECURRENT_ARCHITECTURE",
+      "event_hash": "5ebdbc2e8732d76966ce898211653a5dcc5613d6b4bb6afbd9172682c1682bed",
+      "event_id": "E0044_G2_PROMOTION",
+      "event_type": "GENERATION_HEAD_TRANSITION",
+      "from_generation": "G1_CANDIDATE_S2",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 43,
+      "new_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
+      "parent_event_hash": "135d099b024d48f2caa81aea3d8c6ccabd96170cb966f9005a4d9848e8fc15b3",
+      "promotion_applied": true,
+      "run_id": "33357100322",
+      "source_digest": "eda2cb35e9f30d53cad40f4213157e843e4afbd3c00701fef523debe8288b511",
+      "source_path": "receipts/yado-g2-full-fresh-regression-and-promotion-gate-v1-run-33357100322.json",
+      "status": "PROMOTED",
+      "to_generation": "G2_CANDIDATE_TRCG_V1"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "1287d1bb369c125efa5b329f07c70695936f3b12b23d8ea695db15ec7671734a",
+  "ledger_digest": "8791e2e046e9ad9cf39f323d4ae43db58e01becddb6963d58df41c3e4964e4a5",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "G2_FULL_FRESH_REGRESSION_AND_PROMOTION_GATE_V1"
+    "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -731,5 +750,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "135d099b024d48f2caa81aea3d8c6ccabd96170cb966f9005a4d9848e8fc15b3"
+  "tail_event_hash": "5ebdbc2e8732d76966ce898211653a5dcc5613d6b4bb6afbd9172682c1682bed"
 }

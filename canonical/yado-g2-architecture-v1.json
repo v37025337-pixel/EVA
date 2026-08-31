@@ -1,0 +1,269 @@
+{
+  "architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
+  "architecture_family": "TYPED_RECURRENT_CAPABILITY_GRAPH",
+  "architecture_id": "G2_ARCH_3bd5db0089f7a52f",
+  "architecture_selection": {
+    "neutral_selector_result": {
+      "candidate_count": 6,
+      "ranking": [
+        {
+          "score": 1.002,
+          "token": "arch_1b381db1becbb4be"
+        },
+        {
+          "score": 0.829,
+          "token": "arch_9f9d3538e6fa8cc8"
+        },
+        {
+          "score": 0.7856666666666667,
+          "token": "arch_30ce44325dd2bb4c"
+        },
+        {
+          "score": 0.7856666666666667,
+          "token": "arch_468fc1d6d4f2396d"
+        },
+        {
+          "score": 0.7856666666666667,
+          "token": "arch_613e5bfe8868927e"
+        },
+        {
+          "score": 0.7856666666666667,
+          "token": "arch_b1a96050c530de21"
+        }
+      ],
+      "selected_score": 1.002,
+      "selected_token": "arch_1b381db1becbb4be"
+    },
+    "selected_variant": {
+      "ablation": null,
+      "complexity": 0.5,
+      "evidence": 1.0,
+      "novelty": 0.9,
+      "present": [
+        "budget",
+        "neutral_selector",
+        "relation",
+        "resource",
+        "router",
+        "scalar"
+      ],
+      "risk": 0.0,
+      "token": "arch_1b381db1becbb4be"
+    },
+    "variants": [
+      {
+        "ablation": null,
+        "complexity": 0.5,
+        "evidence": 1.0,
+        "novelty": 0.9,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "relation",
+          "resource",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.0,
+        "token": "arch_1b381db1becbb4be"
+      },
+      {
+        "ablation": "relation",
+        "complexity": 0.45,
+        "evidence": 0.8333333333333334,
+        "novelty": 0.55,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "resource",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.16666666666666666,
+        "token": "arch_613e5bfe8868927e"
+      },
+      {
+        "ablation": "budget",
+        "complexity": 0.45,
+        "evidence": 0.8333333333333334,
+        "novelty": 0.55,
+        "present": [
+          "neutral_selector",
+          "relation",
+          "resource",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.16666666666666666,
+        "token": "arch_30ce44325dd2bb4c"
+      },
+      {
+        "ablation": "router",
+        "complexity": 0.45,
+        "evidence": 0.8333333333333334,
+        "novelty": 0.55,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "relation",
+          "resource",
+          "scalar"
+        ],
+        "risk": 0.16666666666666666,
+        "token": "arch_b1a96050c530de21"
+      },
+      {
+        "ablation": "resource",
+        "complexity": 0.45,
+        "evidence": 0.8333333333333334,
+        "novelty": 0.55,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "relation",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.16666666666666666,
+        "token": "arch_468fc1d6d4f2396d"
+      },
+      {
+        "ablation": "memory",
+        "complexity": 0.45,
+        "evidence": 0.88,
+        "novelty": 0.55,
+        "present": [
+          "budget",
+          "neutral_selector",
+          "relation",
+          "resource",
+          "router",
+          "scalar"
+        ],
+        "risk": 0.18,
+        "token": "arch_9f9d3538e6fa8cc8"
+      }
+    ]
+  },
+  "canonical_active": true,
+  "canonical_architecture_digest": "8fe27f47332cad8c0b47a24537817db3f28cb8d9c671582ee1583bcf9ef72dec",
+  "counterexample_memory_bound": true,
+  "edges": [
+    {
+      "channel": "COUNTEREXAMPLE_AND_PROVENANCE",
+      "dst": "P_INTELLIGENCE",
+      "src": "P_MEMORY_LINEAGE"
+    },
+    {
+      "channel": "COSTED_EVIDENCE_OPTIONS",
+      "dst": "P_THINKING",
+      "src": "P_RESOURCE_EVIDENCE"
+    },
+    {
+      "channel": "PLANNED_REASONING_TASK",
+      "dst": "P_LOGIC",
+      "src": "P_THINKING"
+    },
+    {
+      "channel": "STRUCTURED_INFERENCE_RESULT",
+      "dst": "P_INTELLIGENCE",
+      "src": "P_LOGIC"
+    },
+    {
+      "channel": "SELECTED_ACTION_AND_SELF_MODEL_UPDATE",
+      "dst": "P_WORKSPACE",
+      "src": "P_INTELLIGENCE"
+    },
+    {
+      "channel": "RECURRENT_GOAL_CONTEXT",
+      "dst": "P_THINKING",
+      "src": "P_WORKSPACE"
+    },
+    {
+      "channel": "EPISODE_COMMIT",
+      "dst": "P_MEMORY_LINEAGE",
+      "src": "P_WORKSPACE"
+    },
+    {
+      "channel": "TEMPORAL_CONTEXT_RESTORE",
+      "dst": "P_WORKSPACE",
+      "src": "P_MEMORY_LINEAGE"
+    }
+  ],
+  "inherited_capabilities": [
+    "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+    "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+    "ALG-BUDGETED-STAGE-POLICY-V1",
+    "RESOURCE-PORTFOLIO-V1"
+  ],
+  "inherited_registry_digest": "2ff90dfac3b8d35d9e043da109932aa705471a39aaad25be2251425ace32a21b",
+  "new_capabilities": [
+    "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+    "COUNTEREXAMPLE_LINEAGE_MEMORY_V1"
+  ],
+  "parent_generation_id": "G1_CANDIDATE_S2",
+  "parent_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
+  "planes": [
+    {
+      "kind": "MEMORY_LINEAGE",
+      "members": [
+        "EVOLUTION_LEDGER",
+        "G1_TRAINING_STATE"
+      ],
+      "plane_id": "P_MEMORY_LINEAGE",
+      "stateful": true
+    },
+    {
+      "kind": "RESOURCE_EVIDENCE",
+      "members": [
+        "RESOURCE-PORTFOLIO-V1"
+      ],
+      "plane_id": "P_RESOURCE_EVIDENCE",
+      "stateful": true
+    },
+    {
+      "kind": "LOGIC_CAPABILITY",
+      "members": [
+        "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+        "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+      ],
+      "plane_id": "P_LOGIC",
+      "stateful": false
+    },
+    {
+      "kind": "THINKING_PLANNING",
+      "members": [
+        "ALG-BUDGETED-STAGE-POLICY-V1"
+      ],
+      "plane_id": "P_THINKING",
+      "stateful": false
+    },
+    {
+      "kind": "INTELLIGENCE_META",
+      "members": [
+        "RESOURCE-PORTFOLIO-V1",
+        "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+        "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
+      ],
+      "plane_id": "P_INTELLIGENCE",
+      "stateful": false
+    },
+    {
+      "kind": "RECURRENT_WORKSPACE_CORE",
+      "members": [
+        "G1_CANONICAL_COGNITIVE_CORE"
+      ],
+      "plane_id": "P_WORKSPACE",
+      "stateful": true
+    }
+  ],
+  "promotion_applied": true,
+  "promotion_gate_run_id": "33357100322",
+  "recurrent": true,
+  "resource_cost_aware": true,
+  "schema": "yado.g2.typed_recurrent_capability_graph.v1",
+  "semantic_boundary": "EXECUTABLE-STRUCTURE CANDIDATE BUILT FROM VERIFIED G1 CAPABILITIES; NOT A CLAIM OF AGI OR SUBJECTIVE CONSCIOUSNESS",
+  "source_candidate_architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
+  "typed_channels": true
+}
