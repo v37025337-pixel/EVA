@@ -1,0 +1,57 @@
+name: YADO Raw Task Representation Fresh Admission V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-raw-task-representation-admission-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-raw-task-representation-admission
+  cancel-in-progress: true
+jobs:
+  admit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run fresh admission
+        run: python runtime/yado_raw_task_representation_fresh_admission_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-raw-task-representation-fresh-admission-v1
+          path: |
+            runtime/yado_raw_task_representation_fresh_admission_v1_receipt.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist evidence
+        if: always()
+        run: |
+          mkdir -p receipts
+          if [ -f runtime/yado_raw_task_representation_fresh_admission_v1_receipt.json ]; then
+            cp runtime/yado_raw_task_representation_fresh_admission_v1_receipt.json "receipts/yado-raw-task-representation-fresh-admission-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Raw Representation Admission"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          if [ -f "receipts/yado-raw-task-representation-fresh-admission-v1-run-${GITHUB_RUN_ID}.json" ]; then files+=("receipts/yado-raw-task-representation-fresh-admission-v1-run-${GITHUB_RUN_ID}.json"); fi
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist raw-task representation admission evidence [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Preserve PASS or WITHHOLD
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_raw_task_representation_fresh_admission_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_ADMISSION_RECEIPT")
+          r=json.loads(p.read_text())
+          print(r["status"])
+          PY
