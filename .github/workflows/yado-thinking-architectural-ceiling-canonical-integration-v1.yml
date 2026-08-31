@@ -1,0 +1,69 @@
+name: YADO Thinking Architectural Ceiling Canonical Integration V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-thinking-architectural-ceiling-canonical-integration-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-thinking-architectural-ceiling-canonical-integration-v1
+  cancel-in-progress: true
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run thinking ceiling canonical integration
+        id: integrate
+        continue-on-error: true
+        run: python runtime/yado_thinking_architectural_ceiling_canonical_integration_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-thinking-architectural-ceiling-canonical-integration-v1
+          path: |
+            runtime/yado_thinking_architectural_ceiling_canonical_integration_v1_receipt.json
+            runtime/yado_bounded_adaptive_contingent_planner_v1.py
+            runtime/yado_unified_core_v1.py
+            canonical/yado-unified-core-v1.json
+            canonical/yado-main-head-g2.json
+            architecture/yado-g2-lti-ceiling-state-v1.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist canonical integration
+        if: always()
+        run: |
+          mkdir -p receipts
+          if [ -f runtime/yado_thinking_architectural_ceiling_canonical_integration_v1_receipt.json ]; then
+            cp runtime/yado_thinking_architectural_ceiling_canonical_integration_v1_receipt.json "receipts/yado-thinking-architectural-ceiling-canonical-integration-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Thinking Ceiling Integration"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json architecture/yado-g2-lti-ceiling-state-v1.json)
+          for f in runtime/yado_bounded_adaptive_contingent_planner_v1.py runtime/yado_unified_core_v1.py canonical/yado-unified-core-v1.json canonical/yado-main-head-g2.json "receipts/yado-thinking-architectural-ceiling-canonical-integration-v1-run-${GITHUB_RUN_ID}.json"; do [ -f "$f" ] && files+=("$f"); done
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist YADO thinking ceiling canonical integration V1 [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_thinking_architectural_ceiling_canonical_integration_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_THINKING_CANONICAL_RECEIPT")
+          r=json.loads(p.read_text())
+          if r.get("status")!="PASS_THINKING_ARCHITECTURAL_CEILING_CANONICAL_INTEGRATION_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
