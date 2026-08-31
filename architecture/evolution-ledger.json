@@ -2,7 +2,7 @@
   "current_head": "G1_CANDIDATE_S2",
   "current_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
   "current_head_event_id": "E0024_G1_PROMOTION",
-  "event_count": 41,
+  "event_count": 42,
   "events": [
     {
       "canonical_mutation": false,
@@ -662,10 +662,26 @@
       "source_digest": "b3340343980f6dffce24f695ecf6c5719d8ec5b6a513901e8360f96dda495d01",
       "source_path": "receipts/yado-g1-multiround-training-v1-run-33356570277.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_SUCCESSOR_GENESIS_FROM_G1_ENRICHED_HEAD_V1",
+      "effect": "G1_TRAINING_ROUND_6_PASS; STATE=READY_FOR_G2_GENESIS",
+      "event_hash": "f4c67b0827957c7a4c4da32f2b03e13d1257c2c1765cdca517857974b3dc763b",
+      "event_id": "E0042_G1_TRAINING_ROUND_6",
+      "event_type": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+      "generation": "G1_CANDIDATE_S2",
+      "index": 41,
+      "parent_event_hash": "bdae997fba2e40fe29970517dbe7395d88c35908038257d2249472ff642748fd",
+      "promotion_applied": false,
+      "run_id": "33356625562",
+      "source_digest": "ab0e0fa2230742547843c89ac43d9a1262a805292134c9b3c338ba8f76e0709a",
+      "source_path": "receipts/yado-g1-multiround-training-v1-run-33356625562.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "98e5aba8e5cb61a8bb6cbfa5483c69aef5c7e78b6b3678973e0ba016396aecfb",
+  "ledger_digest": "e31ef87475958cf5ae922d3a2a5c9cb36bb1a2dc8265ca49436270f33cb1ca5e",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -698,5 +714,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "bdae997fba2e40fe29970517dbe7395d88c35908038257d2249472ff642748fd"
+  "tail_event_hash": "f4c67b0827957c7a4c4da32f2b03e13d1257c2c1765cdca517857974b3dc763b"
 }

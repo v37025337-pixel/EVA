@@ -7,8 +7,8 @@
     "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
     "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
   ],
-  "next_required_capability": "G1_TRAINING_ROUND_6_OF_6",
-  "pass_count": 4,
+  "next_required_capability": "G2_SUCCESSOR_GENESIS_FROM_G1_ENRICHED_HEAD_V1",
+  "pass_count": 5,
   "rounds": [
     {
       "budget_metrics": {
@@ -279,11 +279,65 @@
         "permutation_invariance": 1.0
       },
       "status": "PASS"
+    },
+    {
+      "budget_metrics": {
+        "budget_ablation_exact": 0.09838709677419355,
+        "budget_violation_rate": 0.0,
+        "cost_scale_invariance": 1.0,
+        "fresh_exact": 1.0
+      },
+      "checks": {
+        "budget": true,
+        "canonical_head_unchanged": true,
+        "conjunctive": true,
+        "neutral_selector": true,
+        "portfolio": true,
+        "relation": true,
+        "router": true
+      },
+      "conjunctive_metrics": {
+        "ablation": 0.8576923076923076,
+        "fresh_blind": 1.0,
+        "validation": 1.0
+      },
+      "curriculum": "ARCHITECTURE_READINESS_STRESS_AND_SUCCESSOR_PREPARATION",
+      "epoch": 6,
+      "github_run_id": "33356625562",
+      "portfolio_metrics": {
+        "all_routes_local_first": true,
+        "digest": "1b59c5e8584b38d7daa02e88c4ea0b4f52f7cd51d8b2ea9c99f4e539d4372490",
+        "excluded_selected": 0,
+        "resource_count": 80
+      },
+      "relation_metrics": {
+        "clause_count": 3,
+        "fresh_blind": 1.0,
+        "relation_ablation": 0.8565217391304348,
+        "restore": 1.0,
+        "validation": 1.0
+      },
+      "round_digest": "cfad4fff1337598a0a2e0acd6e52db73d22d8fdee045683ac199f05bd8b57326",
+      "round_score": 1.0,
+      "router_metrics": {
+        "ablation": 0.20444444444444446,
+        "clause_count": 5,
+        "fresh_blind": 1.0,
+        "restore": 1.0,
+        "validation": 1.0
+      },
+      "seed": 2600033,
+      "selector_metrics": {
+        "architecture_names_hardcoded": false,
+        "fresh_exact": 1.0,
+        "permutation_invariance": 1.0
+      },
+      "status": "PASS"
     }
   ],
   "schema": "yado.g1.multiround_training_state.v1",
-  "stable_pass_streak": 4,
-  "state_digest": "6d548faa8e8531ecc21182b95cb7810fb69a1d096983045c6e86e35e6e885027",
-  "status": "TRAINING",
+  "stable_pass_streak": 5,
+  "state_digest": "78bba5d956c5e1a992581b19e9a0ecbc02d3c5584c929905801d1af55443aee7",
+  "status": "READY_FOR_G2_GENESIS",
   "target_rounds": 6
 }
