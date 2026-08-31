@@ -18,6 +18,7 @@ from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesize
 from yado_bounded_program_repair_v2 import BoundedProgramRepairV1
 from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReasonerV1
 from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingentPlannerV1, ContingentStage
+from yado_bounded_compositional_logic_v1 import BoundedCompositionalLogicV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -47,6 +48,7 @@ class UnifiedYADOCoreV1:
         self.bounded_program_repair=BoundedProgramRepairV1
         self.scientific_data_reasoner=BoundedScientificDataReasonerV1
         self.adaptive_contingent_planner=BoundedAdaptiveContingentPlannerV1
+        self.compositional_logic=BoundedCompositionalLogicV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -148,6 +150,18 @@ class UnifiedYADOCoreV1:
             bool(x.get("available",True)),float(x.get("latency",1.0)),bool(x.get("attempted",False)),
             tuple(str(z) for z in x.get("requires",()))
         )
+
+    def learn_symmetric_logic(self,rows:list[dict[str,Any]])->dict[str,Any]:
+        return self.compositional_logic.learn_symmetric_boolean(rows)
+
+    def predict_symmetric_logic(self,model:dict[str,Any],x:dict[str,Any])->Any:
+        return self.compositional_logic.predict_symmetric_boolean(model,x)
+
+    def fit_polynomial_logic(self,rows:list[dict[str,Any]],max_degree:int=3)->dict[str,Any]:
+        return self.compositional_logic.fit_polynomial(rows,max_degree=max_degree)
+
+    def predict_polynomial_logic(self,model:dict[str,Any],x:float,y:float)->Any:
+        return self.compositional_logic.predict_polynomial(model,x,y)
 
     def plan_contingent(self,current_confidence:float,target_confidence:float,remaining_budget:float,stages:list[dict[str,Any]],completed=()):
         xs=[self._contingent_stage_from_dict(x) for x in stages]

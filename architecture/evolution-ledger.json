@@ -19,9 +19,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "ab19c153412c940ee457c205e86e682618fc3ef38549a61276797f15bdef49ac",
+  "current_head_digest": "117ef0487b178d23841388fbda24935fe62d579dbdfca642f6530426c24d6e00",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 129,
+  "event_count": 130,
   "events": [
     {
       "canonical_mutation": false,
@@ -2144,14 +2144,33 @@
       "source_digest": "e516ed017dfca38af49414b50d93d0c68063360cae8159143c71d2b49ea531ad",
       "source_path": "receipts/yado-logic-architectural-ceiling-fresh-admission-v1-run-33442565092.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "LOGIC_ARCHITECTURAL_CEILING_CANONICAL_INTEGRATION_V1",
+      "effect": "COMPOSITIONAL_LOGIC_BOUND_TO_EXISTING_LOGIC_PLANE",
+      "event_hash": "7d06db45a7c9e11b436a393b319f4816af49e0cfc4e2cfd42b8b0c0d6a671a71",
+      "event_id": "E0130_G2_LOGIC_CEILING_CANONICAL_INTEGRATION",
+      "event_type": "FIXED_ARCHITECTURE_LOGIC_CAPABILITY_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 129,
+      "new_head_digest": "117ef0487b178d23841388fbda24935fe62d579dbdfca642f6530426c24d6e00",
+      "parent_event_hash": "d6bf58dfdbcf5b53a4ba5b9131760f25115c66a9fb7c6dbe3a791fc8c6d01396",
+      "previous_head_digest": "ab19c153412c940ee457c205e86e682618fc3ef38549a61276797f15bdef49ac",
+      "promotion_applied": false,
+      "run_id": "33442720000",
+      "source_digest": "fa1e7b9b0d373e84b82172e989c1bf7ace7331f13ad0d2932c3926cceef0259c",
+      "source_path": "receipts/yado-logic-architectural-ceiling-canonical-integration-v1-run-33442720000.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "ddd4701610727475cea98a3aee3351c10befcb456d93daed0f12e18ef83ce54a",
+  "ledger_digest": "27779226609c5b451957fd908e09d59b5cd4b48e96ad1337180c8a4ae3fd750e",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "LOGIC_ARCHITECTURAL_CEILING_CANONICAL_INTEGRATION_V1"
+    "LTI_ARCHITECTURAL_CEILING_RECHECK_V3"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -2180,5 +2199,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "d6bf58dfdbcf5b53a4ba5b9131760f25115c66a9fb7c6dbe3a791fc8c6d01396"
+  "tail_event_hash": "7d06db45a7c9e11b436a393b319f4816af49e0cfc4e2cfd42b8b0c0d6a671a71"
 }

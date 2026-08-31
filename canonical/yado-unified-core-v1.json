@@ -2,6 +2,7 @@
   "active_runtime_sources": [
     "runtime/yado_bounded_adaptive_contingent_planner_v1.py",
     "runtime/yado_bounded_capability_router_v1.py",
+    "runtime/yado_bounded_compositional_logic_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
     "runtime/yado_bounded_program_repair_v2.py",
     "runtime/yado_bounded_scientific_data_reasoner_v1.py",
@@ -42,7 +43,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "fabdb1cc924659db7a16a4fa5a36fa535cff265a0a718f66b22171d33b231157",
+  "core_digest": "3b51c66295113d4b04352a28834fc101702c57c8ebb8fe2902aa76b154c22a93",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -96,7 +97,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "LTI_ARCHITECTURAL_CEILING_RECHECK_V2",
+  "current_frontier": "LTI_ARCHITECTURAL_CEILING_RECHECK_V3",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -140,6 +141,29 @@
     "mode": "READ_ONLY_PINNED_HISTORICAL_EVIDENCE",
     "source_sha256": "a1d55c139543a1d96ffa72439824f417f8a528975cee2b68792b760c82c1d804",
     "transport": "METADATA_FIRST"
+  },
+  "logic_ceiling": {
+    "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+    "candidate_digest": "3fbc845da054cf8f7e85559256173f230fe0e8a67ebe47a5a3fa647781049917",
+    "causal": {
+      "baseline_parity": 0.5,
+      "baseline_polynomial": 0.0,
+      "new_parity": 1.0,
+      "new_polynomial": 1.0,
+      "polynomial": true,
+      "symmetric_boolean": true
+    },
+    "component_id": "ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1",
+    "fresh_admission_receipt_sha256": "e516ed017dfca38af49414b50d93d0c68063360cae8159143c71d2b49ea531ad",
+    "fresh_score": 1.0,
+    "gate_run_id": "33442720000",
+    "mode": "ACTIVE_FIXED_ARCHITECTURE_COMPOSITIONAL_LOGIC",
+    "selected_features": {
+      "max_polynomial_degree": 3,
+      "symmetric_boolean": true
+    },
+    "selected_strategy": "COMPOSITIONAL_LOGIC_D3",
+    "source_sha256": "932a45f2848f251a62cb4848a8f32bfcf47841f9d484747d91aaa468858611f3"
   },
   "mathematical_reasoning": {
     "candidate_digest": "a47a32ac13a65cbf0062a439cd238f313be7c30d1faac9c83162a80e51423f19",
@@ -191,12 +215,15 @@
       "active_components": [
         "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
         "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1",
         "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1"
       ],
       "plane_id": "LOGIC",
       "responsibilities": [
         "bounded_conjunction",
         "bounded_semantic_expression_synthesis",
+        "bounded_symmetric_boolean_induction",
+        "exact_low_degree_polynomial_induction",
         "fresh_rule_induction",
         "relation_policy"
       ]
@@ -313,7 +340,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "76964f1e664e65dc0cfbc3ccc6c2ddd86afbfbbb4c05781b1b6e38f0c24c3262",
+  "runtime_sha256": "6a0ffc92aee2471c90505450b202c590a6ff37aa1468f33f6d1cc9451d6572e9",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
