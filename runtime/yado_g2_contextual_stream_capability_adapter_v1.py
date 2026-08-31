@@ -84,7 +84,10 @@ class ContextualStreamCapabilityAdapterV1:
         selected=self.runtime.router.execute(task.get('descriptor',{})) if ablated_context else self.choose(task)
         shadow=copy.deepcopy(task)
         shadow['descriptor']=self._explicit_descriptor(selected)
-        out=self.runtime.run(shadow)
+        try:
+            out=self.runtime.run(shadow)
+        except (KeyError,ValueError,TypeError) as exc:
+            out={'selected_capability':selected,'result':'EXECUTION_MISMATCH:'+type(exc).__name__}
         out['context_strategy']=self.strategy_id
         out['context_selected_capability']=selected
         return out
