@@ -1,0 +1,572 @@
+{
+  "schema": "yado.unified_external_resource_seed.v1",
+  "scope": "ALL_RECOVERABLE_PRIOR_YADO_NOESIS_EXTERNAL_DEVELOPMENT_RESOURCES",
+  "policies": {
+    "default": "RESEARCH_OR_CAPABILITY_DISCOVERY_ONLY_UNTIL_LIVE_VALIDATED",
+    "no_auto_signup": true,
+    "no_secret_transmission": true,
+    "durable_identity_exclusions": [
+      "Privnote",
+      "Temp-Mail",
+      "file.io",
+      "10MinuteMail"
+    ]
+  },
+  "resources": [
+    {
+      "id": "CATALOG_FREE_FOR_DEV",
+      "kind": "catalog",
+      "locator": "https://github.com/ripienaar/free-for-dev",
+      "capabilities": [
+        "RESOURCE_DISCOVERY",
+        "COST_QUOTA_AWARENESS",
+        "DEV_SERVICES"
+      ],
+      "provenance": "CURRENT_PROJECT"
+    },
+    {
+      "id": "CATALOG_AWESOME_USEFUL_PROJECTS",
+      "kind": "catalog",
+      "locator": "https://github.com/Furthir/awesome-useful-projects",
+      "capabilities": [
+        "RESOURCE_DISCOVERY",
+        "OPEN_SOURCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "REPO_EVA",
+      "kind": "code_repository",
+      "locator": "https://github.com/v37025337-pixel/EVA",
+      "capabilities": [
+        "YADO_RUNTIME",
+        "CI",
+        "EVOLUTION_LEDGER"
+      ],
+      "provenance": "CURRENT_PROJECT"
+    },
+    {
+      "id": "REPO_FHKNBV",
+      "kind": "code_repository",
+      "locator": "https://github.com/v37025337-pixel/fhknbv",
+      "capabilities": [
+        "OPEN_SOURCE_REFERENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "DOC_GITHUB_REST",
+      "kind": "documentation",
+      "locator": "https://docs.github.com/en/rest",
+      "capabilities": [
+        "CODE_HOSTING_API",
+        "REPOSITORY_AUTOMATION"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "DOC_HF_DATASETS_STREAM",
+      "kind": "documentation",
+      "locator": "https://huggingface.co/docs/datasets/v4.7.0/stream",
+      "capabilities": [
+        "DATASET_STREAMING",
+        "TRAINING_DATA"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "PLATFORM_GITLAB",
+      "kind": "code_platform",
+      "locator": "GitLab",
+      "capabilities": [
+        "CODE_HOSTING",
+        "CI_CD"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "PLATFORM_BITBUCKET",
+      "kind": "code_platform",
+      "locator": "Bitbucket",
+      "capabilities": [
+        "CODE_HOSTING",
+        "CI_CD"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "PLATFORM_SOURCEFORGE",
+      "kind": "code_platform",
+      "locator": "SourceForge",
+      "capabilities": [
+        "OPEN_SOURCE_DISCOVERY"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "PLATFORM_RAPIDAPI",
+      "kind": "api_catalog",
+      "locator": "RapidAPI",
+      "capabilities": [
+        "API_DISCOVERY"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "RESEARCH_SEMANTIC_SCHOLAR",
+      "kind": "research_tool",
+      "locator": "Semantic Scholar",
+      "capabilities": [
+        "PAPER_DISCOVERY",
+        "CITATION_GRAPH"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "RESEARCH_ELICIT",
+      "kind": "research_tool",
+      "locator": "Elicit",
+      "capabilities": [
+        "LITERATURE_REVIEW",
+        "EVIDENCE_SYNTHESIS"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "RESEARCH_CONSENSUS",
+      "kind": "research_tool",
+      "locator": "Consensus",
+      "capabilities": [
+        "LITERATURE_SEARCH",
+        "EVIDENCE_SYNTHESIS"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "RESEARCH_CONNECTED_PAPERS",
+      "kind": "research_tool",
+      "locator": "Connected Papers",
+      "capabilities": [
+        "CITATION_GRAPH",
+        "PAPER_DISCOVERY"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "RESEARCH_SCISPACE",
+      "kind": "research_tool",
+      "locator": "SciSpace",
+      "capabilities": [
+        "PAPER_READING",
+        "LITERATURE_REVIEW"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "DEV_PHIND",
+      "kind": "developer_tool",
+      "locator": "Phind",
+      "capabilities": [
+        "PROGRAMMING_RESEARCH"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "DEV_EXPLAINSHELL",
+      "kind": "developer_tool",
+      "locator": "ExplainShell",
+      "capabilities": [
+        "SHELL_REASONING"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "DEV_REGEX101",
+      "kind": "developer_tool",
+      "locator": "regex101",
+      "capabilities": [
+        "REGEX_TESTING"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "SEC_VIRUSTOTAL",
+      "kind": "security_tool",
+      "locator": "VirusTotal",
+      "capabilities": [
+        "SECURITY_ANALYSIS"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "KNOWLEDGE_RAINDROP",
+      "kind": "knowledge_tool",
+      "locator": "Raindrop",
+      "capabilities": [
+        "RESOURCE_ARCHIVE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "VISION_TINEYE",
+      "kind": "search_tool",
+      "locator": "TinEye",
+      "capabilities": [
+        "IMAGE_SEARCH"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "DEPLOY_CLOUDFLARE_WORKER",
+      "kind": "deployment",
+      "locator": "Cloudflare Workers",
+      "capabilities": [
+        "SERVERLESS",
+        "WEB_EGRESS"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "DEPLOY_GOOGLE_APPS_SCRIPT",
+      "kind": "deployment",
+      "locator": "Google Apps Script",
+      "capabilities": [
+        "AUTOMATION",
+        "GOOGLE_INTEGRATION"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "DEPLOY_VERCEL_FUNCTION",
+      "kind": "deployment",
+      "locator": "Vercel Functions",
+      "capabilities": [
+        "SERVERLESS",
+        "DEPLOYMENT"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "NOTION_YADO_BRIDGE_2026_08_27",
+      "kind": "workspace_reference",
+      "locator": "YADO Notion Bridge — 2026-08-27",
+      "capabilities": [
+        "PROJECT_MEMORY",
+        "INTEGRATION"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "NOTION_RESOURCE_INTELLIGENCE_2026_08_27",
+      "kind": "workspace_reference",
+      "locator": "YADO Resource Intelligence — Learning/Transfer Checkpoint 2026-08-27",
+      "capabilities": [
+        "RESOURCE_INTELLIGENCE",
+        "LEARNING_CHECKPOINT"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "EXCLUDED_PRIVNOTE",
+      "kind": "temporary_service",
+      "locator": "Privnote",
+      "capabilities": [],
+      "provenance": "PRIOR_SESSION",
+      "policy": "EXCLUDED_DURABLE_IDENTITY_RECOVERY"
+    },
+    {
+      "id": "EXCLUDED_TEMP_MAIL",
+      "kind": "temporary_service",
+      "locator": "Temp-Mail",
+      "capabilities": [],
+      "provenance": "PRIOR_SESSION",
+      "policy": "EXCLUDED_DURABLE_IDENTITY_RECOVERY"
+    },
+    {
+      "id": "EXCLUDED_FILE_IO",
+      "kind": "temporary_service",
+      "locator": "file.io",
+      "capabilities": [],
+      "provenance": "PRIOR_SESSION",
+      "policy": "EXCLUDED_DURABLE_IDENTITY_RECOVERY"
+    },
+    {
+      "id": "EXCLUDED_10MINMAIL",
+      "kind": "temporary_service",
+      "locator": "10MinuteMail",
+      "capabilities": [],
+      "provenance": "PRIOR_SESSION",
+      "policy": "EXCLUDED_DURABLE_IDENTITY_RECOVERY"
+    },
+    {
+      "id": "ARXIV_2308_08708",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2308.08708",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2512_19155",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2512.19155",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2410_11407",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2410.11407",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2204_05133",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2204.05133",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2501_07290",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2501.07290",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_1610_08602",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/1610.08602",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2604_08206",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2604.08206",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2506_00417",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2506.00417",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2207_06415",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2207.06415",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2401_01040",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2401.01040",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2310_18318",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2310.18318",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2406_04235",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2406.04235",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2509_11131",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2509.11131",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2607_07743",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2607.07743",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2604_00273",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2604.00273",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2110_13827",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2110.13827",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "REPO_VERIFIED_RECEIPT"
+    },
+    {
+      "id": "ARXIV_2605_24468",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2605.24468",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2603_01896",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2603.01896",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2606_05661",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2606.05661",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2601_14027",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2601.14027",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2604_20087",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2604.20087",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2607_07779",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2607.07779",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2606_02461",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2606.02461",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2601_03731",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2601.03731",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2608_14595",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2608.14595",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2608_14574",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2608.14574",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2608_19854",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2608.19854",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2608_18744",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2608.18744",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2608_18160",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2608.18160",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    },
+    {
+      "id": "ARXIV_2605_06965",
+      "kind": "research_paper",
+      "locator": "https://arxiv.org/abs/2605.06965",
+      "capabilities": [
+        "RESEARCH_EVIDENCE"
+      ],
+      "provenance": "PRIOR_SESSION"
+    }
+  ]
+}
