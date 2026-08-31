@@ -11,6 +11,8 @@ SEED=REPO/'resources'/'yado-unified-external-resource-seed-v1.json'
 FREE=REPO/'receipts'/'yado-free-for-dev-capability-scout-v1-latest.json'
 CONSC=REPO/'receipts'/'yado-rc8-v36-consciousness-theory-research-latest.json'
 ARCH=REPO/'receipts'/'yado-shadow-meta-architecture-study-v1-latest.json'
+OLD_BUDGET=REPO/'receipts'/'yado-budget-aware-sequence-transform-v1-latest.json'
+BUDGET_GATE=REPO/'receipts'/'yado-experiment-compute-budget-gate-v1-latest.json'
 LEDGER=REPO/'architecture'/'evolution-ledger.json'
 HEAD=REPO/'canonical'/'yado-main-head-g1-s2.json'
 OUT=REPO/'resources'
@@ -23,6 +25,8 @@ seed=json.loads(SEED.read_text())
 free=json.loads(FREE.read_text())
 consc=json.loads(CONSC.read_text())
 arch=json.loads(ARCH.read_text())
+old_budget=json.loads(OLD_BUDGET.read_text())
+budget_gate=json.loads(BUDGET_GATE.read_text())
 ledger=json.loads(LEDGER.read_text())
 head=json.loads(HEAD.read_text())
 validate_ledger_v2(ledger)
@@ -77,6 +81,41 @@ for receipt_name,receipt in [
           'policy':'ELIGIBLE',
         },receipt_name,True)
 
+# First-class local developmental evidence. These are always cheaper and more causally
+# relevant than going back to the network for a problem YADO has already observed.
+for local in [
+    {
+      'id':'LOCAL_EVOLUTION_LEDGER',
+      'kind':'local_evidence',
+      'locator':'architecture/evolution-ledger.json',
+      'capabilities':['CAUSAL_LINEAGE','COUNTEREXAMPLE_HISTORY','DEVELOPMENTAL_STATE'],
+      'description':'Append-only causal history including PASS/WITHHOLD and generation transitions.',
+    },
+    {
+      'id':'LOCAL_BUDGET_SEQUENCE_WITHHOLD',
+      'kind':'local_evidence',
+      'locator':'receipts/yado-budget-aware-sequence-transform-v1-latest.json',
+      'capabilities':['BUDGET_AWARE_SEARCH','COUNTEREXAMPLE_HISTORY','SEQUENCE_TRANSFORMATION'],
+      'description':'Historical budget-aware sequence transform WITHHOLD; fresh exact 0.25.',
+      'content_sha256':old_budget.get('receipt_sha256'),
+    },
+    {
+      'id':'LOCAL_COMPUTE_BUDGET_GATE',
+      'kind':'local_evidence',
+      'locator':'receipts/yado-experiment-compute-budget-gate-v1-latest.json',
+      'capabilities':['BUDGET_AWARE_SEARCH','RESOURCE_LIMITS','TIMEOUT_CONTROL'],
+      'description':'Observed over-budget experiment cancellations and budget semantics.',
+    },
+    {
+      'id':'LOCAL_ACCESS_CONTROL_REPAIR_LINEAGE',
+      'kind':'local_evidence',
+      'locator':'receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json',
+      'capabilities':['COUNTEREXAMPLE_LEARNING','RESOURCE_ASSISTED_ALGORITHM_GENESIS'],
+      'description':'Successful resource-assisted algorithm genesis after preserved WITHHOLD attempts.',
+    },
+]:
+    add(local,local['locator'],True)
+
 # Add all concrete free-for-dev choices, retaining cost/quota text as pinned catalog evidence.
 for deficit,arr in free.get('selected_resources',{}).items():
     for item in arr:
@@ -98,6 +137,7 @@ for deficit,arr in free.get('selected_resources',{}).items():
 
 def access_tier(r):
     if r.get('policy','').startswith('EXCLUDED'): return 99
+    if r.get('kind')=='local_evidence' and r.get('verification_state')=='VERIFIED_REPO_EVIDENCE': return 0
     if r.get('verification_state')=='VERIFIED_REPO_EVIDENCE' and r.get('kind')=='research_paper': return 0
     k=r.get('kind','')
     ac=str(r.get('access_class',''))
@@ -135,6 +175,7 @@ def score_for(deficit,r):
         }.items():
             if token in txt: score+=w
     if r.get('verification_state')=='VERIFIED_REPO_EVIDENCE': score+=2
+    if r.get('kind')=='local_evidence': score+=8
     score-=estimated_cost(access_tier(r))*0.4
     return round(score,3)
 
@@ -154,7 +195,7 @@ for deficit in open_deficits:
         s=score_for(deficit,r)
         if s<=0: continue
         ranked.append((s,r['access_tier'],str(r.get('id','')),r))
-    ranked.sort(key=lambda z:(-z[0],z[1],z[2]))
+    ranked.sort(key=lambda z:(z[1],-z[0],z[2]))
     chosen=[]
     kind_counts={}
     for s,t,_,r in ranked:
