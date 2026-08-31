@@ -1,0 +1,794 @@
+{
+  "canonical_mutation": false,
+  "component": {
+    "activation_scope": "G1_SHADOW_ALGORITHM_BANK",
+    "canonical_active": false,
+    "component_digest": "844b5eb1f6be87bb244a7c9face7cab49888d8e0f23acacc977539fe0fd454bc",
+    "component_id": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+    "family": "BOUNDED_DNF_PLUS_RELATION_POLICY_INDUCTION",
+    "generation": "G1_CANDIDATE_S2",
+    "historical_counterexample_fresh_blind": 1.0,
+    "historical_gain_over_old": 0.03500000000000003,
+    "organ": "LOGIC",
+    "origin_resource_scout_digest": "aed269bfc5f9a07c827572cd1126e3e08815f3d691861629bedf3526c30dfd42",
+    "relation_ablation_max": 0.9133333333333333,
+    "schema": "yado.algorithm_component.bounded_dnf_relation_policy_inducer.v1",
+    "source_module": "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+    "transfer_task_min_fresh_blind": 0.9311111111111111
+  },
+  "generation": "G1_CANDIDATE_S2",
+  "github_run_id": "33348209373",
+  "github_sha": "f70bcc306bd4d8f5fa72c83682b6a04fc7f4fee2",
+  "next_required_capability": "CONTINUE_G1_ACCESS_CONTROL_COUNTEREXAMPLE_REPAIR",
+  "prior_withheld_attempts_path": "receipts/yado-g1-access-control-repair-withheld-attempts-recovered.json",
+  "promotion_applied": false,
+  "receipt_sha256": "e22ace6e4d8f9df83ebcf3d17f0afbdcfaae190deeb73b04910c4127a8135258",
+  "resource_derived_hypothesis": {
+    "candidate_algorithm_family": "BOUNDED_DNF_PLUS_RELATION_POLICY_INDUCTION",
+    "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+    "evidence_terms": [
+      "RBAC",
+      "ABAC",
+      "ReBAC"
+    ],
+    "hypothesis": "CURRENT_CONJUNCTIVE_POLICY_FAMILY_IS_TOO_NARROW; ADD_BOUNDED_DISJUNCTIVE_AND_RELATIONAL_POLICY_COMPOSITION"
+  },
+  "resource_scout_digest": "aed269bfc5f9a07c827572cd1126e3e08815f3d691861629bedf3526c30dfd42",
+  "results": {
+    "ACCESS_CONTROL_HISTORICAL": {
+      "ablation": 0.8466666666666667,
+      "fresh_blind": 1.0,
+      "gain_over_old": 0.03500000000000003,
+      "old_conjunctive_fresh_blind": 0.965,
+      "pass": true,
+      "program": {
+        "clauses": [
+          {
+            "atoms": [
+              {
+                "field": "identity_verified",
+                "op": "FIELD_EQ",
+                "other_field": "mfa"
+              },
+              {
+                "field": "session_risk",
+                "op": "EQ",
+                "value": "LOW"
+              },
+              {
+                "field": "mfa",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "resource_class",
+                "op": "EQ",
+                "value": "RESTRICTED"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALLOW",
+            "support": 16
+          },
+          {
+            "atoms": [
+              {
+                "field": "resource_class",
+                "op": "EQ",
+                "value": "INTERNAL"
+              },
+              {
+                "field": "identity_verified",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "session_risk",
+                "op": "EQ",
+                "value": "MEDIUM"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALLOW",
+            "support": 38
+          },
+          {
+            "atoms": [
+              {
+                "field": "resource_class",
+                "op": "EQ",
+                "value": "INTERNAL"
+              },
+              {
+                "field": "identity_verified",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "session_risk",
+                "op": "EQ",
+                "value": "LOW"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALLOW",
+            "support": 28
+          }
+        ],
+        "default_output": "DENY",
+        "digest": "745646e186bc718891f6550bc0a75a13608ff634392bd734a64a09e151d3855d",
+        "program_id": "DNFR-c00c7df8e3c6",
+        "source_digest": "e78af794dafd0787ca59ad6f76676f68b3c15778dab1e522f017b86c1ced1ade",
+        "status": "SHADOW",
+        "target_capability": "ACCESS_CONTROL_HISTORICAL",
+        "target_organ": "LOGIC",
+        "training_count": 480
+      },
+      "relation_ablation": 0.9683333333333334,
+      "restore": 1.0,
+      "synthesis_seconds": 2.9074546500000054,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "CONTROL_RELATION_POLICY": {
+      "ablation": 0.73,
+      "fresh_blind": 0.9311111111111111,
+      "gain_over_old": 0.04555555555555557,
+      "old_conjunctive_fresh_blind": 0.8855555555555555,
+      "pass": false,
+      "program": {
+        "clauses": [
+          {
+            "atoms": [
+              {
+                "field": "controller_zone",
+                "op": "FIELD_NEQ",
+                "other_field": "device_owner"
+              },
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "severity",
+                "op": "EQ",
+                "value": "HIGH"
+              },
+              {
+                "field": "device_owner",
+                "op": "EQ",
+                "value": "T8"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 11
+          },
+          {
+            "atoms": [
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "severity",
+                "op": "EQ",
+                "value": "HIGH"
+              },
+              {
+                "field": "device_owner",
+                "op": "EQ",
+                "value": "T6"
+              },
+              {
+                "field": "unseen_noise_b",
+                "op": "EQ",
+                "value": "Z2"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 8
+          },
+          {
+            "atoms": [
+              {
+                "field": "controller_id",
+                "op": "FIELD_EQ",
+                "other_field": "device_owner"
+              },
+              {
+                "field": "controller_zone",
+                "op": "FIELD_EQ",
+                "other_field": "device_zone"
+              },
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "device_zone",
+                "op": "EQ",
+                "value": "T6"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 7
+          },
+          {
+            "atoms": [
+              {
+                "field": "controller_id",
+                "op": "FIELD_EQ",
+                "other_field": "device_owner"
+              },
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "device_owner",
+                "op": "EQ",
+                "value": "T0"
+              },
+              {
+                "field": "unseen_noise_b",
+                "op": "EQ",
+                "value": "Z2"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 6
+          },
+          {
+            "atoms": [
+              {
+                "field": "controller_zone",
+                "op": "FIELD_EQ",
+                "other_field": "device_zone"
+              },
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "device_zone",
+                "op": "EQ",
+                "value": "T2"
+              },
+              {
+                "field": "unseen_noise_b",
+                "op": "EQ",
+                "value": "Z2"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 4
+          },
+          {
+            "atoms": [
+              {
+                "field": "controller_zone",
+                "op": "FIELD_EQ",
+                "other_field": "device_zone"
+              },
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "severity",
+                "op": "EQ",
+                "value": "HIGH"
+              },
+              {
+                "field": "controller_id",
+                "op": "EQ",
+                "value": "T2"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 4
+          },
+          {
+            "atoms": [
+              {
+                "field": "controller_zone",
+                "op": "FIELD_EQ",
+                "other_field": "device_zone"
+              },
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "controller_zone",
+                "op": "EQ",
+                "value": "T9"
+              },
+              {
+                "field": "unseen_noise_b",
+                "op": "EQ",
+                "value": "Z4"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 4
+          },
+          {
+            "atoms": [
+              {
+                "field": "controller_id",
+                "op": "FIELD_EQ",
+                "other_field": "device_owner"
+              },
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "severity",
+                "op": "EQ",
+                "value": "HIGH"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 49
+          },
+          {
+            "atoms": [
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "controller_zone",
+                "op": "EQ",
+                "value": "T9"
+              },
+              {
+                "field": "device_owner",
+                "op": "EQ",
+                "value": "T8"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 4
+          },
+          {
+            "atoms": [
+              {
+                "field": "authenticated",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "SAFETY_ADMIN"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "EXECUTE",
+            "support": 116
+          }
+        ],
+        "default_output": "BLOCK",
+        "digest": "74968548c5918e9176e94f5175488255a5969f4c0bc741ed48bee356bdd029a8",
+        "program_id": "DNFR-a3779b39a6d1",
+        "source_digest": "a643af216554ca2dac7ca7306106504fd5e2db3b72dbcd2873bc46f2cae66804",
+        "status": "SHADOW",
+        "target_capability": "CONTROL_RELATION_POLICY",
+        "target_organ": "LOGIC",
+        "training_count": 720
+      },
+      "relation_ablation": 0.8855555555555555,
+      "restore": 0.9311111111111111,
+      "synthesis_seconds": 7.231633180000017,
+      "train": 0.9680555555555556,
+      "validation": 0.9333333333333333
+    },
+    "DEPLOY_RELATION_POLICY": {
+      "ablation": 0.7511111111111111,
+      "fresh_blind": 0.9766666666666667,
+      "gain_over_old": 0.06333333333333335,
+      "old_conjunctive_fresh_blind": 0.9133333333333333,
+      "pass": false,
+      "program": {
+        "clauses": [
+          {
+            "atoms": [
+              {
+                "field": "requester",
+                "op": "FIELD_EQ",
+                "other_field": "service_owner"
+              },
+              {
+                "field": "tests_pass",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "requester",
+                "op": "EQ",
+                "value": "T4"
+              },
+              {
+                "field": "requester_team",
+                "op": "EQ",
+                "value": "T2"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "APPROVE",
+            "support": 4
+          },
+          {
+            "atoms": [
+              {
+                "field": "requester",
+                "op": "FIELD_EQ",
+                "other_field": "service_owner"
+              },
+              {
+                "field": "tests_pass",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "environment",
+                "op": "EQ",
+                "value": "STAGING"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "APPROVE",
+            "support": 51
+          },
+          {
+            "atoms": [
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "RELEASE_ADMIN"
+              },
+              {
+                "field": "tests_pass",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "confidence": 1.0,
+            "output": "APPROVE",
+            "support": 131
+          }
+        ],
+        "default_output": "DENY",
+        "digest": "b850f82ad0a4db04f86953d305bd580527c6eefcb1e3f4fa97312444895f0064",
+        "program_id": "DNFR-a006c1c1ea0a",
+        "source_digest": "6b7eebb0d2d986725a596cf715e890b3a904fab492bf8e20eba8649458649b4d",
+        "status": "SHADOW",
+        "target_capability": "DEPLOY_RELATION_POLICY",
+        "target_organ": "LOGIC",
+        "training_count": 720
+      },
+      "relation_ablation": 0.9133333333333333,
+      "restore": 0.9766666666666667,
+      "synthesis_seconds": 6.811023104999975,
+      "train": 0.9888888888888889,
+      "validation": 0.9555555555555556
+    },
+    "DOCUMENT_RELATION_POLICY": {
+      "ablation": 0.5133333333333333,
+      "fresh_blind": 0.9855555555555555,
+      "gain_over_old": 0.46777777777777774,
+      "old_conjunctive_fresh_blind": 0.5177777777777778,
+      "pass": false,
+      "program": {
+        "clauses": [
+          {
+            "atoms": [
+              {
+                "field": "actor_id",
+                "op": "FIELD_NEQ",
+                "other_field": "owner_id"
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "EDITOR"
+              },
+              {
+                "field": "resource_team",
+                "op": "EQ",
+                "value": "T4"
+              },
+              {
+                "field": "unseen_noise_b",
+                "op": "EQ",
+                "value": "Z4"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "DENY",
+            "support": 5
+          },
+          {
+            "atoms": [
+              {
+                "field": "actor_id",
+                "op": "FIELD_NEQ",
+                "other_field": "owner_id"
+              },
+              {
+                "field": "actor_team",
+                "op": "FIELD_NEQ",
+                "other_field": "resource_team"
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "EDITOR"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "DENY",
+            "support": 82
+          },
+          {
+            "atoms": [
+              {
+                "field": "actor_id",
+                "op": "FIELD_NEQ",
+                "other_field": "owner_id"
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "EDITOR"
+              },
+              {
+                "field": "classification",
+                "op": "EQ",
+                "value": "SECRET"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "DENY",
+            "support": 45
+          },
+          {
+            "atoms": [
+              {
+                "field": "actor_id",
+                "op": "FIELD_NEQ",
+                "other_field": "owner_id"
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "EDITOR"
+              },
+              {
+                "field": "owner_id",
+                "op": "EQ",
+                "value": "T2"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "DENY",
+            "support": 19
+          },
+          {
+            "atoms": [
+              {
+                "field": "actor_id",
+                "op": "FIELD_NEQ",
+                "other_field": "owner_id"
+              },
+              {
+                "field": "device_trusted",
+                "op": "EQ",
+                "value": false
+              }
+            ],
+            "confidence": 1.0,
+            "output": "DENY",
+            "support": 205
+          },
+          {
+            "atoms": [
+              {
+                "field": "actor_id",
+                "op": "FIELD_NEQ",
+                "other_field": "owner_id"
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "VIEWER"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "DENY",
+            "support": 138
+          }
+        ],
+        "default_output": "ALLOW",
+        "digest": "4267bf622d9f664aa245c7eca62bf271bf4a86287757546fdeb6d2221b83c628",
+        "program_id": "DNFR-5a912abe59b8",
+        "source_digest": "13743ea610f3a8870919e30b28a2aec64092d3dda8257dff4fb182496d995fab",
+        "status": "SHADOW",
+        "target_capability": "DOCUMENT_RELATION_POLICY",
+        "target_organ": "LOGIC",
+        "training_count": 720
+      },
+      "relation_ablation": 0.5133333333333333,
+      "restore": 0.9855555555555555,
+      "synthesis_seconds": 7.259790672000008,
+      "train": 0.9916666666666667,
+      "validation": 0.9861111111111112
+    },
+    "SCIENTIFIC_DATA_RELATION_POLICY": {
+      "ablation": 0.6833333333333333,
+      "fresh_blind": 0.9877777777777778,
+      "gain_over_old": 0.14111111111111108,
+      "old_conjunctive_fresh_blind": 0.8466666666666667,
+      "pass": false,
+      "program": {
+        "clauses": [
+          {
+            "atoms": [
+              {
+                "field": "dataset_lab",
+                "op": "FIELD_NEQ",
+                "other_field": "principal_id"
+              },
+              {
+                "field": "ethics_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "principal_id",
+                "op": "EQ",
+                "value": "T3"
+              },
+              {
+                "field": "purpose",
+                "op": "EQ",
+                "value": "RESEARCH"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ACCESS",
+            "support": 6
+          },
+          {
+            "atoms": [
+              {
+                "field": "dataset_lab",
+                "op": "FIELD_EQ",
+                "other_field": "principal_lab"
+              },
+              {
+                "field": "ethics_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "dataset_owner",
+                "op": "EQ",
+                "value": "T7"
+              },
+              {
+                "field": "unseen_noise_b",
+                "op": "EQ",
+                "value": "Z3"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ACCESS",
+            "support": 5
+          },
+          {
+            "atoms": [
+              {
+                "field": "ethics_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "dataset_owner",
+                "op": "EQ",
+                "value": "T4"
+              },
+              {
+                "field": "dataset_lab",
+                "op": "EQ",
+                "value": "T0"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ACCESS",
+            "support": 5
+          },
+          {
+            "atoms": [
+              {
+                "field": "dataset_owner",
+                "op": "FIELD_EQ",
+                "other_field": "principal_id"
+              },
+              {
+                "field": "ethics_ok",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ACCESS",
+            "support": 126
+          },
+          {
+            "atoms": [
+              {
+                "field": "ethics_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "role",
+                "op": "EQ",
+                "value": "DATA_STEWARD"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ACCESS",
+            "support": 114
+          }
+        ],
+        "default_output": "DENY",
+        "digest": "65c0dbd97e7da02eee75709bdd33336f1ccb4800642b0ff16a00b5addafab66b",
+        "program_id": "DNFR-3405aca59e40",
+        "source_digest": "4a5f45c4930b3fb263ea9c55b3d4040ca32190b465c192cdd87e193e08d3e1e2",
+        "status": "SHADOW",
+        "target_capability": "SCIENTIFIC_DATA_RELATION_POLICY",
+        "target_organ": "LOGIC",
+        "training_count": 720
+      },
+      "relation_ablation": 0.8466666666666667,
+      "restore": 0.9877777777777778,
+      "synthesis_seconds": 6.811790400999996,
+      "train": 0.9902777777777778,
+      "validation": 0.9833333333333333
+    }
+  },
+  "schema": "yado.g1.external_resource_assisted_access_control_repair.v1",
+  "semantic_boundary": "EXTERNAL CATALOG INSPIRED A GENERAL BOUNDED POLICY REPRESENTATION; THE EVALUATION USES HOST-DEFINED SYNTHETIC TASKS AND DOES NOT PROVE REAL-WORLD AUTHORIZATION SECURITY",
+  "status": "WITHHOLD_G1_EXTERNAL_RESOURCE_ASSISTED_ACCESS_CONTROL_REPAIR_V1",
+  "summary": {
+    "historical_access_new": 1.0,
+    "historical_access_old": 0.965,
+    "min_fresh_blind": 0.9311111111111111,
+    "relation_causal": false,
+    "task_count": 5,
+    "tasks_passed": 1
+  }
+}
