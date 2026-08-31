@@ -126,14 +126,14 @@ def budget_oracle(cur,target_conf,cap,stages):
     cand.sort(key=lambda z:z[0]);return cand[0][1][0].stage_id
 
 def explicit_desc(mode):
-    d={'budget_limited':False,'quota_limited':False,'external_evidence_needed':False,'relation_needed':False,'disjunction_needed':False}
+    d={'budget_limited':False,'quota_limited':False,'external_evidence_needed':False,'relation_needed':False,'disjunction_needed':False,'context_ambiguous':False}
     if mode==CAP_BUD:d['budget_limited']=True
     elif mode==CAP_RES:d['external_evidence_needed']=True
     elif mode==CAP_REL:d['relation_needed']=True
     return d
 
 def ambiguous_desc():
-    return {'budget_limited':False,'quota_limited':False,'external_evidence_needed':False,'relation_needed':False,'disjunction_needed':False}
+    return {'budget_limited':False,'quota_limited':False,'external_evidence_needed':False,'relation_needed':False,'disjunction_needed':False,'context_ambiguous':True}
 
 def make_payload_task(r,mode,sid,index,ambiguous=False):
     desc=ambiguous_desc() if ambiguous else explicit_desc(mode)
