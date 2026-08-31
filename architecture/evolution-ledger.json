@@ -1,21 +1,11 @@
 {
-  "audit_blockers": [
-    "SHADOW_CONTEXT_ADAPTER_DEPENDENCE"
-  ],
+  "audit_blockers": [],
   "audit_priority": [
-    {
-      "area": "MEMORY_AND_EXPERIENCE",
-      "blocking": true,
-      "code": "SHADOW_CONTEXT_ADAPTER_DEPENDENCE",
-      "rank": 1,
-      "recommended_action": "Either admit the contextual stream adapter through an independent canonical gate or repeat key workload claims without it.",
-      "severity": "HIGH"
-    },
     {
       "area": "WORKSPACE_AND_INTEGRATION",
       "blocking": false,
       "code": "HEAD_CAPABILITY_TO_CORE_BINDING",
-      "rank": 2,
+      "rank": 1,
       "recommended_action": "Every claimed active capability should have an explicit runtime/component binding in the unified core manifest.",
       "severity": "MEDIUM"
     },
@@ -23,7 +13,7 @@
       "area": "MEMORY_AND_EXPERIENCE",
       "blocking": false,
       "code": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
-      "rank": 3,
+      "rank": 2,
       "recommended_action": "Distinguish host-curated lesson summaries from lessons independently re-derived by YADO from raw historical evidence.",
       "severity": "MEDIUM"
     },
@@ -31,7 +21,7 @@
       "area": "RESOURCE_AND_EVIDENCE",
       "blocking": false,
       "code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
-      "rank": 4,
+      "rank": 3,
       "recommended_action": "Re-check live resources on demand and separately test content comprehension/conflict resolution.",
       "severity": "LOW"
     }
@@ -39,7 +29,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "de4702511f371ac9432dfa5ecd2833ce4185722f98090959c1944093b90b5936",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 113,
+  "event_count": 114,
   "events": [
     {
       "canonical_mutation": false,
@@ -1894,14 +1884,30 @@
       "source_digest": "dd11d43d3f1d2cd855279004dc3892e9f9d4d66238d0efda118baaee986d49db",
       "source_path": "receipts/yado-context-adapter-canonical-integration-v1-run-33437453214.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0",
+      "event_hash": "e681af6b895a8a63f9faeb574697d1512dcb452c418d13a3e8b819f966a2927f",
+      "event_id": "E0114_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 113,
+      "parent_event_hash": "f112101ddd9e6e1e3e85801ebb350f694843df3a76aff87cc640a2c5972cbf55",
+      "promotion_applied": false,
+      "run_id": "33437540417",
+      "source_digest": "5f432b8b774078a23aeb202abf7b667708e57309b86f6e2e29aaeaa33a9c9817",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33437540417.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "0bdd9e5f9b70c39c4cb72fda9602d5cb768809e669489a673f59cdc09b2c4db0",
+  "ledger_digest": "a6e154e4fbd81e5bfbec11fb04635b6736bd3d601f9ed21e6c3648cf55ac7289",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_CONTEXT_ADAPTER_SELF_AUDIT_V1"
+    "HEAD_CAPABILITY_TO_CORE_BINDING"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1930,5 +1936,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "f112101ddd9e6e1e3e85801ebb350f694843df3a76aff87cc640a2c5972cbf55"
+  "tail_event_hash": "e681af6b895a8a63f9faeb574697d1512dcb452c418d13a3e8b819f966a2927f"
 }
