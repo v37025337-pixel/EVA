@@ -139,24 +139,46 @@ add('REMOTE_BRANCH_INVENTORY_MATCH','MEMORY_AND_EXPERIENCE',
     False)
 
 # Is the experience actually retrievable, or only summarized metadata?
+# Is the experience actually retrievable, or only summarized metadata?
 runtime_text=RUNTIME.read_text(encoding='utf-8')
 legacy_missing_refs=[]
 for entry in legacy:
     for ep in entry.get('evidence',[]):
         if not (REPO/ep).exists():
             legacy_missing_refs.append({'branch':entry.get('branch'),'path':ep})
-has_legacy_content_loader=('git show' in runtime_text or 'git_show' in runtime_text or 'ls-remote' in runtime_text)
-full_experience_retrieval=(not legacy_missing_refs) or has_legacy_content_loader
+
+mem_plane=next((x for x in ccore.get('planes',[]) if x.get('plane_id')=='MEMORY_AND_EXPERIENCE'),{})
+legacy_component_bound='ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1' in mem_plane.get('active_components',[])
+legacy_runtime_bound=hasattr(core,'experience_read_exact') and hasattr(core,'experience_search_verified')
+legacy_probe_ok=False
+legacy_probe_evidence=None
+try:
+    probe_entry=next(x for x in core.experience.get('branches',[]) if x.get('mode')=='EXPERIENCE_ONLY' and x.get('evidence'))
+    probe_path=probe_entry['evidence'][0]
+    probe_item=core.experience_read_exact(probe_entry['branch'],probe_path)
+    legacy_probe_ok=(probe_item.get('branch')==probe_entry['branch']
+        and probe_item.get('registered_commit')==probe_entry['head_sha']
+        and probe_item.get('path')==probe_path
+        and probe_item.get('bytes',0)>0
+        and len(probe_item.get('sha256',''))==64)
+    legacy_probe_evidence={'branch':probe_entry['branch'],'commit':probe_entry['head_sha'],'path':probe_path,
+        'sha256':probe_item.get('sha256'),'bytes':probe_item.get('bytes'),'transport':probe_item.get('transport')}
+except Exception as exc:
+    legacy_probe_evidence={'error':type(exc).__name__+':'+str(exc)[:180]}
+
+full_experience_retrieval=legacy_component_bound and legacy_runtime_bound and legacy_probe_ok
 add('LEGACY_EXPERIENCE_CONTENT_RETRIEVAL','MEMORY_AND_EXPERIENCE','HIGH' if not full_experience_retrieval else 'INFO',
     'PASS' if full_experience_retrieval else 'FAIL',
     {'missing_current_branch_evidence_paths':legacy_missing_refs[:30],'missing_count':len(legacy_missing_refs),
-     'runtime_has_legacy_content_loader':has_legacy_content_loader,
-     'experience_search_returns_metadata_only':True},
-    'Add bounded read-only retrieval of the exact receipt/code bytes from the registered legacy branch, with branch+commit+hash provenance.',
+     'legacy_component_bound':legacy_component_bound,'legacy_runtime_bound':legacy_runtime_bound,
+     'legacy_probe_ok':legacy_probe_ok,'legacy_probe_evidence':legacy_probe_evidence,
+     'experience_search_returns_metadata_only':not full_experience_retrieval},
+    'Maintain bounded read-only exact legacy retrieval with canonical component binding and live provenance probe.',
     not full_experience_retrieval)
 
 add('LEGACY_EXPERIENCE_SUMMARY_PROVENANCE','MEMORY_AND_EXPERIENCE','MEDIUM','PARTIAL',
-    {'registry_lessons_are_precompiled_summaries':True,'raw_legacy_content_not_loaded_by_core':not has_legacy_content_loader},
+    {'registry_lessons_are_precompiled_summaries':True,'raw_legacy_content_not_loaded_by_core':not full_experience_retrieval,
+     'verified_raw_retrieval_available':full_experience_retrieval},
     'Distinguish host-curated lesson summaries from lessons independently re-derived by YADO from raw historical evidence.',
     False)
 

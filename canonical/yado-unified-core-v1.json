@@ -10,7 +10,8 @@
     "runtime/yado_legacy_experience_retriever_v2.py",
     "runtime/yado_neutral_evidence_profile_selector_v1.py",
     "runtime/yado_raw_task_representation_learner_v1.py",
-    "runtime/yado_raw_task_representation_runtime_v1.py"
+    "runtime/yado_raw_task_representation_runtime_v1.py",
+    "runtime/yado_unified_core_deep_self_audit_v1.py"
   ],
   "audit_invariant": {
     "candidate_digest": "9510d1d083318a5a53de2ef33860ef6960b36c357fb61ee92ab640196b152fce",
@@ -24,9 +25,17 @@
   "consolidation_gate_run_id": "33371375385",
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "1971c9dc4f0bca681732471a07cc29441cfbe6c30b7b8d5225a87ea86148ce1e",
+  "core_digest": "b501f096a812c0fd2ec0ddcc10c49378b8bb2da308b7b7389c1b99b2a2245262",
   "core_id": "UNIFIED_YADO_CORE_V1",
-  "current_frontier": "UNIFIED_CORE_POST_LEGACY_EXPERIENCE_SELF_AUDIT_V1",
+  "current_frontier": "UNIFIED_CORE_POST_SELF_AUDIT_V3",
+  "deep_self_audit": {
+    "candidate_digest": "853922549dcba42b98ea75a3f250cea840d606ae12342d75062a6c7d09f83e6b",
+    "canonical_integration_run_id": "33404945429",
+    "component_id": "ALG-G2-DEEP-SELF-AUDIT-V1",
+    "fresh_admission_receipt_sha256": "1141f5ca4b83bba7450793169463422b908ce458b7169c68391706378ee3c6ad",
+    "legacy_retrieval_detector": "MANIFEST_PLUS_RUNTIME_BEHAVIOR",
+    "source_sha256": "03f0aa5559d4b7d26e0b3f14c2b62668ebaf60ac954ac099787c7ef37e362575"
+  },
   "experience_registry": "canonical/yado-unified-experience-registry-v1.json",
   "experience_registry_digest": "af6f482d828957fbc0343cf3d81e90d3efdff168367cfb1b695ef5f16b4a58cf",
   "g3_genesis_performed": false,
@@ -148,6 +157,7 @@
     },
     {
       "active_components": [
+        "ALG-G2-DEEP-SELF-AUDIT-V1",
         "architecture/evolution-ledger.json"
       ],
       "experience_sources": [
