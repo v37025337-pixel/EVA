@@ -65,7 +65,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "2e4f464bc7984f3c8d018d7623235b98fb10441947c5b6d58806dcabdd2f6426",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 82,
+  "event_count": 83,
   "events": [
     {
       "canonical_mutation": false,
@@ -1402,14 +1402,30 @@
       "source_digest": "fb7b88ad8cf2c8034e72e141e297e051660ec2bf7dd786c0113bb0fb04a2db9b",
       "source_path": "receipts/yado-legacy-experience-retrieval-canonical-integration-v1-run-33404019379.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=19; BLOCKING=3",
+      "event_hash": "8bdd7aa8f8b2f256a66237a9113b05e5cede82b5e8e34fb3b6a5675e523adb71",
+      "event_id": "E0083_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 82,
+      "parent_event_hash": "e503ced920c67ca5f6e5e5d257b95b816efc36b33cf72cd21924194103e7d3b3",
+      "promotion_applied": false,
+      "run_id": "33404158164",
+      "source_digest": "17fd16c4a61f3d90516cc318e31a19c4c1c433325e5e4b72c78090b1212822a1",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33404158164.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "4e1162ad1aa4d57044c102f1979f5bb49a20029f9dc1ca512db16bb8bca6373e",
+  "ledger_digest": "a01e615e6631f5e3a3cec20f07d24a78deb9364131a4d1cae55212f6002b04c4",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "UNIFIED_CORE_POST_LEGACY_EXPERIENCE_SELF_AUDIT_V1"
+    "LEGACY_EXPERIENCE_CONTENT_RETRIEVAL"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1438,5 +1454,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "e503ced920c67ca5f6e5e5d257b95b816efc36b33cf72cd21924194103e7d3b3"
+  "tail_event_hash": "8bdd7aa8f8b2f256a66237a9113b05e5cede82b5e8e34fb3b6a5675e523adb71"
 }
