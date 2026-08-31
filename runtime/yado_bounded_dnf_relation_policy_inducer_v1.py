@@ -146,7 +146,7 @@ class BoundedDNFRelationPolicyInducerV1:
 
         candidates=defaultdict(list)
         n=len(cases)
-        min_clause_support=max(min_support,int(n*0.015))
+        min_clause_support=max(min_support,int(n*0.01))
         for width in range(1,cls.MAX_CLAUSE_WIDTH+1):
             for combo in combinations(pool,width):
                 # Skip duplicate EQ constraints on same field with different values.
