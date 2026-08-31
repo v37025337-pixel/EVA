@@ -1,0 +1,70 @@
+name: YADO G1 Budget Aware Search Repair V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "runtime/yado_budgeted_stage_policy_v1.py"
+      - "runtime/yado_g1_budget_aware_search_repair_v1.py"
+      - "resources/yado-unified-external-resource-portfolio-v1.json"
+      - ".github/workflows/yado-g1-budget-aware-search-repair-v1.yml"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g1-budget-aware-search-repair
+  cancel-in-progress: true
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run budget-aware staged-search repair
+        id: repair
+        continue-on-error: true
+        run: python runtime/yado_g1_budget_aware_search_repair_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g1-budget-aware-search-repair-v1
+          path: |
+            runtime/yado_g1_budget_aware_search_repair_v1_receipt.json
+            candidates/g1-algorithms/budgeted-stage-policy-v1.json
+            resources/free-for-dev-budget-profile-evidence-v1.json
+            architecture/evolution-ledger.json
+          retention-days: 30
+      - name: Persist evidence
+        if: always()
+        run: |
+          mkdir -p receipts candidates/g1-algorithms resources
+          if [ -f runtime/yado_g1_budget_aware_search_repair_v1_receipt.json ]; then
+            cp runtime/yado_g1_budget_aware_search_repair_v1_receipt.json "receipts/yado-g1-budget-aware-search-repair-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO G1 Budgeted Search Learner"
+          git config user.email "actions@users.noreply.github.com"
+          git add \
+            "receipts/yado-g1-budget-aware-search-repair-v1-run-${GITHUB_RUN_ID}.json" \
+            candidates/g1-algorithms/budgeted-stage-policy-v1.json \
+            resources/free-for-dev-budget-profile-evidence-v1.json \
+            architecture/evolution-ledger.json
+          if git diff --cached --quiet; then
+            echo unchanged
+          else
+            git commit -m "Persist G1 budget-aware search repair evidence [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path("runtime/yado_g1_budget_aware_search_repair_v1_receipt.json")
+          if not p.exists():
+              raise SystemExit("MISSING_BUDGET_REPAIR_RECEIPT")
+          r=json.loads(p.read_text())
+          if not str(r.get("status","")).startswith("PASS_"):
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
