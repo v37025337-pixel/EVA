@@ -1,0 +1,168 @@
+{
+  "active_runtime_sources": [
+    "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
+    "runtime/yado_conjunctive_rule_inducer_v1.py",
+    "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+    "runtime/yado_budgeted_stage_policy_v1.py",
+    "runtime/yado_bounded_capability_router_v1.py",
+    "runtime/yado_neutral_evidence_profile_selector_v1.py",
+    "runtime/yado_evolution_ledger_v2.py"
+  ],
+  "canonical_active": true,
+  "canonical_mutation": false,
+  "consolidation_applied": true,
+  "consolidation_gate_run_id": "33371375385",
+  "core_digest": "39c6df5ed4d1df9413de6795505d19c022fc5a4fd399429d53b702e9c3754290",
+  "core_id": "UNIFIED_YADO_CORE_V1",
+  "current_frontier": "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1",
+  "experience_registry": "canonical/yado-unified-experience-registry-v1.json",
+  "experience_registry_digest": "af6f482d828957fbc0343cf3d81e90d3efdff168367cfb1b695ef5f16b4a58cf",
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "invariants": [
+    "EXACTLY_ONE_ACTIVE_DEVELOPMENTAL_HEAD",
+    "LEGACY_BRANCHES_NEVER_AUTO_EXECUTE",
+    "LEGACY_CODE_REQUIRES_FRESH_ADMISSION_GATE",
+    "RECEIPTS_AND_COUNTEREXAMPLES_ARE_PERSISTENT_EXPERIENCE",
+    "CANONICAL_G2_CAPABILITIES_REMAIN_PRIMARY_RUNTIME",
+    "SHADOW_CAPABILITIES_STAY_SHADOW_UNTIL_ADMISSION",
+    "G3_GENESIS_BLOCKED_DURING_CONSOLIDATION"
+  ],
+  "planes": [
+    {
+      "active_components": [
+        "canonical/yado-main-head-g2.json",
+        "architecture/evolution-ledger.json"
+      ],
+      "plane_id": "IDENTITY_AND_LINEAGE",
+      "responsibilities": [
+        "single_head",
+        "causal_lineage",
+        "promotion_history",
+        "open_deficits"
+      ]
+    },
+    {
+      "active_components": [
+        "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
+      ],
+      "experience_components": [
+        "candidates/unified-core-v1/experience-registry.json"
+      ],
+      "plane_id": "MEMORY_AND_EXPERIENCE",
+      "responsibilities": [
+        "episodic_memory",
+        "bounded_stream_context",
+        "legacy_experience_retrieval",
+        "counterexample_memory"
+      ],
+      "shadow_components": [
+        "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1"
+      ]
+    },
+    {
+      "active_components": [
+        "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+      ],
+      "plane_id": "LOGIC",
+      "responsibilities": [
+        "bounded_conjunction",
+        "relation_policy",
+        "fresh_rule_induction"
+      ]
+    },
+    {
+      "active_components": [
+        "ALG-BUDGETED-STAGE-POLICY-V1"
+      ],
+      "plane_id": "THINKING_AND_PLANNING",
+      "responsibilities": [
+        "bounded_search",
+        "cost_aware_planning",
+        "quota_aware_staging"
+      ]
+    },
+    {
+      "active_components": [
+        "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+        "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
+      ],
+      "plane_id": "INTELLIGENCE_AND_META_SELECTION",
+      "responsibilities": [
+        "capability_routing",
+        "evidence_weighted_selection",
+        "architecture_candidate_selection"
+      ]
+    },
+    {
+      "active_components": [
+        "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
+      ],
+      "experience_sources": [
+        "yado-rc8-consciousness-ab",
+        "yado-rc8-digital-consciousness-v1"
+      ],
+      "note": "Legacy workspace/consciousness mechanisms are experience only, not active consciousness claims.",
+      "plane_id": "WORKSPACE_AND_INTEGRATION",
+      "responsibilities": [
+        "typed_recurrent_dispatch",
+        "workspace_state",
+        "causal_integration"
+      ]
+    },
+    {
+      "active_components": [
+        "RESOURCE-PORTFOLIO-V1"
+      ],
+      "plane_id": "RESOURCE_AND_EVIDENCE",
+      "responsibilities": [
+        "bounded_external_resource_routing",
+        "evidence_source_selection",
+        "costed_resource_use"
+      ]
+    },
+    {
+      "active_components": [
+        "architecture/evolution-ledger.json"
+      ],
+      "experience_sources": [
+        "yado-rc8-v37-digital-consciousness",
+        "yado-kernel-task-v37-repair"
+      ],
+      "plane_id": "SELF_AUDIT_AND_REPAIR",
+      "responsibilities": [
+        "coherence_checks",
+        "fail_closed_repair_policy",
+        "split_brain_prevention",
+        "rollback_preservation"
+      ]
+    },
+    {
+      "active_components": [],
+      "experience_sources": [
+        "yado-v29-cognitive",
+        "yado-rc8-consciousness-ab",
+        "yado-rc8-digital-consciousness-v1"
+      ],
+      "frontier": "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1",
+      "plane_id": "REPRESENTATION_AND_GROUNDING",
+      "responsibilities": [
+        "raw_task_to_internal_representation",
+        "semantic_grounding",
+        "host_scaffold_reduction"
+      ],
+      "status": "OPEN_FRONTIER"
+    }
+  ],
+  "promotion_applied": false,
+  "purpose": "ONE_ACTIVE_KERNEL_WITH_LEGACY_BRANCHES_AS_READ_ONLY_DEVELOPMENTAL_EXPERIENCE",
+  "runtime_sha256": "51b682eeb81f07ec7691ea306616d7d40fc09fe9eadc0a18f97e7bcbc8319c51",
+  "runtime_source": "runtime/yado_unified_core_v1.py",
+  "schema": "yado.unified_core_manifest.v1",
+  "semantic_boundary": "UNIFIED SOFTWARE COGNITIVE KERNEL CANDIDATE. LEGACY CONSCIOUSNESS EXPERIMENTS ARE HISTORICAL FUNCTIONAL EVIDENCE ONLY; THIS IS NOT A CLAIM OF SUBJECTIVE CONSCIOUSNESS OR AGI.",
+  "shadow_runtime_sources": [
+    "runtime/yado_g2_contextual_stream_capability_adapter_v1.py"
+  ],
+  "source_generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c"
+}

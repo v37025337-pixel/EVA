@@ -1,0 +1,312 @@
+{
+  "audit": {
+    "branch_count": 14,
+    "checks": {
+      "all_other_branches_experience_only": true,
+      "branch_inventory_complete": true,
+      "core_id": true,
+      "experience_registry_bound": true,
+      "g2_architecture_canonical": true,
+      "g3_blocked": true,
+      "generation_is_g2": true,
+      "ledger_head_digest_matches": true,
+      "ledger_head_matches_generation": true,
+      "legacy_auto_execution_forbidden": true,
+      "one_active_experience_lineage": true,
+      "raw_grounding_frontier_preserved": true,
+      "required_active_families_present": true,
+      "shadow_context_not_smuggled_canonical": true
+    },
+    "core_id": "UNIFIED_YADO_CORE_V1",
+    "current_frontier": "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1",
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "legacy_experience_count": 13,
+    "open_deficits": [
+      "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1"
+    ],
+    "pass": true
+  },
+  "canonical_mutation": true,
+  "checks": {
+    "13_legacy_branches_experience_only": true,
+    "all_14_branches_accounted": true,
+    "cognitive_v29_retrieved": true,
+    "core_audit_pass": true,
+    "frontier_preserved": true,
+    "g3_not_created": true,
+    "head_unchanged_before_gate": true,
+    "integrity_repair_history_retrieved": true,
+    "no_legacy_runtime_import": true,
+    "single_entry_relation_dispatch": true,
+    "single_entry_scalar_dispatch": true,
+    "v37_coherence_history_retrieved": true,
+    "workspace_history_retrieved": true
+  },
+  "execution_smoke": {
+    "relation": {
+      "result": "ALLOW",
+      "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+    },
+    "scalar": {
+      "result": "PASS",
+      "selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+    }
+  },
+  "experience_queries": {
+    "cognitive": [
+      {
+        "branch": "yado-v29-cognitive",
+        "claim_boundary": null,
+        "evidence": [
+          "runtime/cognitive_cycle_v29.py",
+          "receipts/yado-v29-cognitive-latest.json"
+        ],
+        "lessons": [
+          "BOUNDED_LOGIC_SYNTHESIS_CAN_GENERALIZE_ON_FRESH_PARITY",
+          "CONTEXT_CONDITIONED_THINKING_PRECEDENCE_CAN_TRANSFER_TO_FRESH_ACTION_IDS",
+          "FEATURE_SELECTED_INTELLIGENCE_STRATEGY_INDUCTION",
+          "LEARNING_EVENT_MUST_CLOSE_LOOP_IN_PERSISTENT_MEMORY"
+        ],
+        "role": "COGNITIVE_GROWTH_EXPERIENCE",
+        "score": 6,
+        "tags": [
+          "logic",
+          "thinking",
+          "intelligence",
+          "memory",
+          "internet",
+          "closed_loop"
+        ]
+      },
+      {
+        "branch": "yado-rc8-v35-training",
+        "claim_boundary": null,
+        "evidence": [
+          "receipts/yado-rc8-v35-latest.json",
+          "receipts/yado-rc8-v35-internet-latest.json"
+        ],
+        "lessons": [
+          "TRAINING_RESULTS_REQUIRE_EXTERNAL_RECEIPTS",
+          "INTERNET_ACCESS_IS_EVIDENCE_TRANSPORT_NOT_INTELLIGENCE_BY_ITSELF"
+        ],
+        "role": "TRAINING_AND_INTERNET_EXPERIENCE",
+        "score": 1,
+        "tags": [
+          "training",
+          "internet",
+          "development"
+        ]
+      }
+    ],
+    "integrity": [
+      {
+        "branch": "yado-kernel-task-v37-repair",
+        "claim_boundary": null,
+        "evidence": [
+          "runtime/yado_v37_integrity_self_repair_task.py",
+          "receipts/yado-v37-integrity-self-repair-task-latest.json"
+        ],
+        "lessons": [
+          "DO_NOT_WEAKEN_CONTENT_ADDRESSED_INTEGRITY_TO_MAKE_A_CANDIDATE_PASS",
+          "PRESERVE_LAST_VERIFIED_LINEAGE_UNTIL_REPAIR_PASSES_FRESH_REGRESSION",
+          "PREFER_SMALLEST_EVIDENCE_BACKED_REPAIR",
+          "DIAGNOSIS_AND_REPAIR_SELECTION_CAN_BE_SEPARATE_FROM_REPAIR_APPLICATION"
+        ],
+        "role": "FAIL_CLOSED_SELF_REPAIR_EXPERIENCE",
+        "score": 4,
+        "tags": [
+          "self_repair",
+          "integrity",
+          "rollback",
+          "diagnosis",
+          "fail_closed"
+        ]
+      },
+      {
+        "branch": "yado-rc8-v37-digital-consciousness",
+        "claim_boundary": null,
+        "evidence": [
+          "runtime/v37_overlay/yado_rc8_self_audit_consistency_v1.py",
+          "runtime/v37_overlay/yado_development_manifest_v37.json"
+        ],
+        "lessons": [
+          "SELF_MODEL_CAPABILITIES_MUST_MATCH_VERIFIED_LINEAGE",
+          "PENDING_FLAGS_MUST_NOT_STAY_STALE_AFTER_EXTERNAL_VERIFICATION",
+          "SPLIT_BRAIN_BETWEEN_HEAD_MANIFEST_STATE_AND_EXTERNAL_RECEIPTS_MUST_FAIL_CLOSED",
+          "REGRESSION_COUNTS_MUST_BE_COHERENT_ACROSS_PACKAGE"
+        ],
+        "role": "SELF_AUDIT_AND_PACKAGE_COHERENCE_EXPERIENCE",
+        "score": 2,
+        "tags": [
+          "self_audit",
+          "integrity",
+          "consistency",
+          "split_brain",
+          "external_verification",
+          "consciousness"
+        ]
+      },
+      {
+        "branch": "yado-rc8-digital-consciousness-v1",
+        "claim_boundary": "FUNCTIONAL_DIGITAL_CONSCIOUSNESS_ARCHITECTURE_NOT_PROOF_OF_SUBJECTIVE_EXPERIENCE",
+        "evidence": [
+          "runtime/yado_rc8_digital_causal_workspace_v1.py",
+          "receipts/yado-rc8-digital-consciousness-v1-latest.json"
+        ],
+        "lessons": [
+          "PROOF_CARRYING_BROADCAST",
+          "EVIDENCE_LINEAGE_BEFORE_GLOBAL_ACCESS",
+          "PREDICTED_EFFECT_VS_OBSERVED_EFFECT_RECEIPT",
+          "SOURCE_MONITORING_EXTERNAL_VS_SIMULATED",
+          "EVENT_DRIVEN_TEMPORAL_CONTINUITY",
+          "FAIL_CLOSED_METACOGNITIVE_EXECUTION"
+        ],
+        "role": "DIGITAL_CAUSAL_WORKSPACE_EXPERIENCE",
+        "score": 1,
+        "tags": [
+          "consciousness",
+          "causal_workspace",
+          "broadcast",
+          "attention_schema",
+          "prediction_error",
+          "source_monitoring",
+          "temporal_continuity"
+        ]
+      },
+      {
+        "branch": "yado-v28-runtime",
+        "claim_boundary": null,
+        "evidence": [
+          "runtime/boot_v28.py",
+          "receipts/yado-v28-latest-boot.json"
+        ],
+        "lessons": [
+          "CONTENT_ADDRESSED_BOOTSTRAP",
+          "RUNTIME_RECONSTRUCTION_AS_REPRODUCIBILITY"
+        ],
+        "role": "EARLY_RUNTIME_BOOTSTRAP",
+        "score": 1,
+        "tags": [
+          "runtime",
+          "bootstrap",
+          "integrity",
+          "reconstruction"
+        ]
+      }
+    ],
+    "workspace": [
+      {
+        "branch": "yado-rc8-consciousness-ab",
+        "claim_boundary": "FUNCTIONAL_ENGINEERING_EXPERIMENT_NOT_SUBJECTIVE_CONSCIOUSNESS",
+        "evidence": [
+          "runtime/yado_functional_consciousness_runtime_v1.py",
+          "receipts/yado-rc8-consciousness-ab-latest.json"
+        ],
+        "lessons": [
+          "LIMITED_CAPACITY_GLOBAL_WORKSPACE",
+          "COMPETITIVE_SELECTIVE_ATTENTION",
+          "RECURRENT_SELF_WORLD_PREDICTION_ERROR_UPDATE",
+          "SOURCE_MONITORING_EXTERNAL_VS_INTERNAL",
+          "METACOGNITION_BEFORE_EXECUTION",
+          "FUNCTIONAL_BENEFIT_MUST_SURVIVE_ABLATION_COMPARISON"
+        ],
+        "role": "FUNCTIONAL_CONSCIOUSNESS_AB_EXPERIENCE",
+        "score": 5,
+        "tags": [
+          "consciousness",
+          "workspace",
+          "attention",
+          "self_world_model",
+          "source_monitoring",
+          "metacognition",
+          "ablation"
+        ]
+      },
+      {
+        "branch": "yado-rc8-consciousness-audit",
+        "claim_boundary": null,
+        "evidence": [
+          "runtime/yado_rc8_consciousness_readiness_audit_v1.py",
+          "receipts/yado-rc8-consciousness-audit-latest.json"
+        ],
+        "lessons": [
+          "CONSCIOUSNESS_CLAIMS_REQUIRE_EXPLICIT_INDICATORS_AND_MISSING_MARKERS_MUST_REMAIN_VISIBLE"
+        ],
+        "role": "CONSCIOUSNESS_READINESS_NEGATIVE_AND_PARTIAL_EVIDENCE",
+        "score": 3,
+        "tags": [
+          "consciousness",
+          "audit",
+          "metacognition",
+          "workspace",
+          "limitations"
+        ]
+      },
+      {
+        "branch": "yado-rc8-digital-consciousness-v1",
+        "claim_boundary": "FUNCTIONAL_DIGITAL_CONSCIOUSNESS_ARCHITECTURE_NOT_PROOF_OF_SUBJECTIVE_EXPERIENCE",
+        "evidence": [
+          "runtime/yado_rc8_digital_causal_workspace_v1.py",
+          "receipts/yado-rc8-digital-consciousness-v1-latest.json"
+        ],
+        "lessons": [
+          "PROOF_CARRYING_BROADCAST",
+          "EVIDENCE_LINEAGE_BEFORE_GLOBAL_ACCESS",
+          "PREDICTED_EFFECT_VS_OBSERVED_EFFECT_RECEIPT",
+          "SOURCE_MONITORING_EXTERNAL_VS_SIMULATED",
+          "EVENT_DRIVEN_TEMPORAL_CONTINUITY",
+          "FAIL_CLOSED_METACOGNITIVE_EXECUTION"
+        ],
+        "role": "DIGITAL_CAUSAL_WORKSPACE_EXPERIENCE",
+        "score": 1,
+        "tags": [
+          "consciousness",
+          "causal_workspace",
+          "broadcast",
+          "attention_schema",
+          "prediction_error",
+          "source_monitoring",
+          "temporal_continuity"
+        ]
+      },
+      {
+        "branch": "yado-rc8-v37-digital-consciousness",
+        "claim_boundary": null,
+        "evidence": [
+          "runtime/v37_overlay/yado_rc8_self_audit_consistency_v1.py",
+          "runtime/v37_overlay/yado_development_manifest_v37.json"
+        ],
+        "lessons": [
+          "SELF_MODEL_CAPABILITIES_MUST_MATCH_VERIFIED_LINEAGE",
+          "PENDING_FLAGS_MUST_NOT_STAY_STALE_AFTER_EXTERNAL_VERIFICATION",
+          "SPLIT_BRAIN_BETWEEN_HEAD_MANIFEST_STATE_AND_EXTERNAL_RECEIPTS_MUST_FAIL_CLOSED",
+          "REGRESSION_COUNTS_MUST_BE_COHERENT_ACROSS_PACKAGE"
+        ],
+        "role": "SELF_AUDIT_AND_PACKAGE_COHERENCE_EXPERIENCE",
+        "score": 1,
+        "tags": [
+          "self_audit",
+          "integrity",
+          "consistency",
+          "split_brain",
+          "external_verification",
+          "consciousness"
+        ]
+      }
+    ]
+  },
+  "experience_registry_digest": "af6f482d828957fbc0343cf3d81e90d3efdff168367cfb1b695ef5f16b4a58cf",
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "generation_transition": false,
+  "github_run_id": "33371375385",
+  "github_sha": "4985e2986459609290d530114db07d09d083cd96",
+  "next_required_capability": "G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1",
+  "post_consolidation_head_digest": "2f6d9a91e236d4ffd17b8b5fb20f03c1f1f0aab3a1b932b8440f42bf65ff1f2c",
+  "pre_consolidation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
+  "receipt_sha256": "91e3b1cfefa69e51179cc1a0d30b9267952d4e49534649af30f798e98dcb8439",
+  "schema": "yado.unified_core_consolidation_gate.receipt.v1",
+  "semantic_boundary": "CONSOLIDATES ONE ACTIVE G2 SOFTWARE KERNEL AND 13 LEGACY YADO BRANCHES AS READ-ONLY EXPERIENCE. DOES NOT ACTIVATE LEGACY CONSCIOUSNESS CODE, CREATE G3, OR CLAIM AGI/SUBJECTIVE CONSCIOUSNESS.",
+  "status": "PASS_UNIFIED_YADO_CORE_V1_CONSOLIDATION",
+  "unified_core_digest": "39c6df5ed4d1df9413de6795505d19c022fc5a4fd399429d53b702e9c3754290"
+}
