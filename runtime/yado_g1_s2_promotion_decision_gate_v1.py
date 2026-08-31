@@ -187,9 +187,14 @@ else:
 ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
 if promote:
     validation=validate_ledger_v2(ledger)
+    report['ledger_validation']={
+      'valid':validation['valid'],
+      'historical_promotion_count':validation['historical_promotion_count'],
+      'current_head':validation['current_head'],
+      'current_head_event_id':validation['current_head_event_id'],
+    }
 else:
-    validation={'valid':True,'current_head':ledger['current_head']}
-report['ledger_validation']=validation
+    report['ledger_validation']={'valid':True,'current_head':ledger['current_head']}
 report['receipt_sha256']=h({k:v for k,v in report.items() if k!='receipt_sha256'})
 # event source digest must match final report digest, so update event deterministically and re-chain only last event.
 ledger['events'][-1]['source_digest']=report['receipt_sha256']
