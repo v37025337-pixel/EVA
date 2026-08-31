@@ -1,0 +1,182 @@
+{
+  "candidate_audit": {
+    "branch_count": 14,
+    "checks": {
+      "all_other_branches_experience_only": true,
+      "branch_inventory_complete": true,
+      "core_id": true,
+      "developmental_frontier_coherent": true,
+      "experience_registry_bound": true,
+      "g2_architecture_canonical": true,
+      "g3_blocked": true,
+      "generation_is_g2": true,
+      "ledger_head_digest_matches": true,
+      "ledger_head_matches_generation": true,
+      "legacy_auto_execution_forbidden": true,
+      "one_active_experience_lineage": true,
+      "required_active_families_present": true,
+      "shadow_context_not_smuggled_canonical": true
+    },
+    "core_id": "UNIFIED_YADO_CORE_V1",
+    "current_frontier": "G2_REAL_WORLD_TRANSFER_RECHECK_WITH_CANONICAL_REPRESENTATION_V1",
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "legacy_experience_count": 13,
+    "open_deficits": [
+      "LEGACY_EXPERIENCE_SEARCH_EVOLUTION_REPAIR_V3"
+    ],
+    "pass": true
+  },
+  "candidate_digest": "9510d1d083318a5a53de2ef33860ef6960b36c357fb61ee92ab640196b152fce",
+  "candidate_source_sha256": "59ec11f4ab9659cba81a41ddc63dfd30b2aa07fdb47379e88f5e43d4db82d32d",
+  "canonical_mutation": false,
+  "checks": {
+    "current_core_audit_pass": true,
+    "head_ledger_immutable": true,
+    "old_exact_frontier_removed": true,
+    "only_audit_invariant_changed": true,
+    "selected_rule_generalizes": true
+  },
+  "g3_genesis_performed": false,
+  "next_required_capability": "CORE_AUDIT_INVARIANT_FRESH_ADMISSION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "3ec8cc13306b36563fcc3f0749a91bfc316a65bdf82c2128decae355efb897f3",
+  "rule_results": [
+    {
+      "accuracy": 1.0,
+      "complexity": 0.09,
+      "risk": 0.05,
+      "rows": [
+        {
+          "case": "CURRENT",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "EMPTY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "HEAD_MANIFEST_SPLIT",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NO_LEDGER_FRONTIER",
+          "correct": true,
+          "expected": false,
+          "got": false
+        }
+      ],
+      "rule": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
+      "score": 0.9930000000000001
+    },
+    {
+      "accuracy": 0.75,
+      "complexity": 0.06,
+      "risk": 0.1,
+      "rows": [
+        {
+          "case": "CURRENT",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "EMPTY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "HEAD_MANIFEST_SPLIT",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NO_LEDGER_FRONTIER",
+          "correct": false,
+          "expected": false,
+          "got": true
+        }
+      ],
+      "rule": "HEAD_MANIFEST_CONSISTENT",
+      "score": 0.742
+    },
+    {
+      "accuracy": 0.75,
+      "complexity": 0.02,
+      "risk": 0.3,
+      "rows": [
+        {
+          "case": "CURRENT",
+          "correct": false,
+          "expected": true,
+          "got": false
+        },
+        {
+          "case": "EMPTY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "HEAD_MANIFEST_SPLIT",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NO_LEDGER_FRONTIER",
+          "correct": true,
+          "expected": false,
+          "got": false
+        }
+      ],
+      "rule": "EXACT_OLD",
+      "score": 0.734
+    },
+    {
+      "accuracy": 0.5,
+      "complexity": 0.03,
+      "risk": 0.22,
+      "rows": [
+        {
+          "case": "CURRENT",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "EMPTY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "HEAD_MANIFEST_SPLIT",
+          "correct": false,
+          "expected": false,
+          "got": true
+        },
+        {
+          "case": "NO_LEDGER_FRONTIER",
+          "correct": false,
+          "expected": false,
+          "got": true
+        }
+      ],
+      "rule": "NONEMPTY",
+      "score": 0.4875
+    }
+  ],
+  "schema": "yado.g2.core_audit_invariant_self_evolution.receipt.v1",
+  "selected_rule": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
+  "semantic_boundary": "KERNEL EVOLVED ITS OWN STALE AUDIT INVARIANT FROM A CANONICAL-GATE COUNTEREXAMPLE; OTHER AUDIT CHECKS ARE UNCHANGED.",
+  "source_withhold_receipt": "3b5c7e46c30b231244e2953bf2062cca51c3d8119a187d93071bf83cbfa44244",
+  "status": "PASS_CORE_AUDIT_INVARIANT_SELF_EVOLUTION_V1"
+}

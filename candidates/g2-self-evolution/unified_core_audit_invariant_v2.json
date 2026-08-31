@@ -1,0 +1,152 @@
+{
+  "candidate_digest": "9510d1d083318a5a53de2ef33860ef6960b36c357fb61ee92ab640196b152fce",
+  "candidate_source_sha256": "59ec11f4ab9659cba81a41ddc63dfd30b2aa07fdb47379e88f5e43d4db82d32d",
+  "canonical_active": false,
+  "checks": {
+    "current_core_audit_pass": true,
+    "head_ledger_immutable": true,
+    "old_exact_frontier_removed": true,
+    "only_audit_invariant_changed": true,
+    "selected_rule_generalizes": true
+  },
+  "promotion_applied": false,
+  "rule_results": [
+    {
+      "accuracy": 1.0,
+      "complexity": 0.09,
+      "risk": 0.05,
+      "rows": [
+        {
+          "case": "CURRENT",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "EMPTY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "HEAD_MANIFEST_SPLIT",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NO_LEDGER_FRONTIER",
+          "correct": true,
+          "expected": false,
+          "got": false
+        }
+      ],
+      "rule": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
+      "score": 0.9930000000000001
+    },
+    {
+      "accuracy": 0.75,
+      "complexity": 0.06,
+      "risk": 0.1,
+      "rows": [
+        {
+          "case": "CURRENT",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "EMPTY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "HEAD_MANIFEST_SPLIT",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NO_LEDGER_FRONTIER",
+          "correct": false,
+          "expected": false,
+          "got": true
+        }
+      ],
+      "rule": "HEAD_MANIFEST_CONSISTENT",
+      "score": 0.742
+    },
+    {
+      "accuracy": 0.75,
+      "complexity": 0.02,
+      "risk": 0.3,
+      "rows": [
+        {
+          "case": "CURRENT",
+          "correct": false,
+          "expected": true,
+          "got": false
+        },
+        {
+          "case": "EMPTY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "HEAD_MANIFEST_SPLIT",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "NO_LEDGER_FRONTIER",
+          "correct": true,
+          "expected": false,
+          "got": false
+        }
+      ],
+      "rule": "EXACT_OLD",
+      "score": 0.734
+    },
+    {
+      "accuracy": 0.5,
+      "complexity": 0.03,
+      "risk": 0.22,
+      "rows": [
+        {
+          "case": "CURRENT",
+          "correct": true,
+          "expected": true,
+          "got": true
+        },
+        {
+          "case": "EMPTY",
+          "correct": true,
+          "expected": false,
+          "got": false
+        },
+        {
+          "case": "HEAD_MANIFEST_SPLIT",
+          "correct": false,
+          "expected": false,
+          "got": true
+        },
+        {
+          "case": "NO_LEDGER_FRONTIER",
+          "correct": false,
+          "expected": false,
+          "got": true
+        }
+      ],
+      "rule": "NONEMPTY",
+      "score": 0.4875
+    }
+  ],
+  "schema": "yado.g2.core_audit_invariant_candidate.v1",
+  "selected_rule": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
+  "semantic_boundary": "EVOLVES ONLY A STALE DEVELOPMENTAL-FRONTIER AUDIT INVARIANT. DOES NOT WEAKEN HEAD/LEDGER, INTEGRITY, OR G3 BLOCKS.",
+  "source_runtime_sha256": "f96d5531932ab5943a08d830b264c1b037632d206dc4334d1df015546d880f47",
+  "state": "AUTHORIZED_FOR_SHADOW_ADMISSION"
+}
