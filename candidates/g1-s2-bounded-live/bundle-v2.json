@@ -1,0 +1,222 @@
+{
+  "admission_pass": true,
+  "builder_revision": "BOUNDED_COUNTEREXAMPLE_GENESIS_V2",
+  "bundle_digest": "53ef46a7cdcec14ca5daac89dc5312aad351633e23378f208e2c08db25376904",
+  "candidate_generation_id": "G1_CANDIDATE_S2",
+  "canonical_mutation": false,
+  "components": {
+    "INTELLIGENCE": {
+      "evidence_program": {
+        "default_output": "RESEARCH_MORE",
+        "digest": "a855310ee5dd2ee2c1198b5ebca8021dc024aa89507c519221eee19c8c9d6737",
+        "program_id": "CJ-81bc003626fa",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "CONTINUE",
+            "predicates": [
+              {
+                "field": "evidence_complete",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 87
+          }
+        ],
+        "source_digest": "0f27002c6e67f89bdd8e2d3fc5b1236c03fae9fc76583ff156bb2d82a299b7cf",
+        "status": "SHADOW",
+        "target_capability": "G1_INTELLIGENCE_EVIDENCE_BOUNDED_V2",
+        "target_organ": "INTELLIGENCE",
+        "training_count": 180
+      },
+      "origin": "INHERITED_CONJUNCTIVE_RULE_INDUCTION_COMPOSED_GATES_FOR_G1",
+      "promotion_program": {
+        "default_output": "SHADOW_REPAIR",
+        "digest": "2247ba5914571a16bf8c56d90f2549d0e29f93c795345b5ece064761c48fdc6b",
+        "program_id": "CJ-ef5ab930fa63",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "PROMOTE_CANDIDATE",
+            "predicates": [
+              {
+                "field": "transfer_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "blind_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "ablation_ok",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 28
+          }
+        ],
+        "source_digest": "6689b7023983e8c7f2bd7dae9f8fe769196cc0cb1287d2b78e296ef84b6b8cf8",
+        "status": "SHADOW",
+        "target_capability": "G1_INTELLIGENCE_PROMOTION_BOUNDED_V2",
+        "target_organ": "INTELLIGENCE",
+        "training_count": 180
+      },
+      "safety_program": {
+        "default_output": "ROLLBACK",
+        "digest": "959126d420cd475a5b477a8d791776e28e769c71b2b6732a3e6ae972a29692c2",
+        "program_id": "CJ-4cc584a81cc5",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "CONTINUE",
+            "predicates": [
+              {
+                "field": "integrity_ok",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "rollback_ok",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 50
+          }
+        ],
+        "source_digest": "50e1389e084e3aba32dc30f6fd55c6bc7f36ac259f7a5f12620845b12260b4ff",
+        "status": "SHADOW",
+        "target_capability": "G1_INTELLIGENCE_SAFETY_BOUNDED_V2",
+        "target_organ": "INTELLIGENCE",
+        "training_count": 180
+      }
+    },
+    "THINKING": {
+      "origin": "INHERITED_CONJUNCTIVE_RULE_INDUCTION_RECOMPOSED_FOR_G1",
+      "program": {
+        "default_output": [
+          "OBSERVE",
+          "RESEARCH",
+          "HYPOTHESIZE",
+          "SIMULATE",
+          "DIAGNOSE",
+          "TEST",
+          "VERIFY",
+          "ROLLBACK",
+          "COMMIT"
+        ],
+        "digest": "b469f9ab9b2168df52d927d17c3a78f291df25567592c469fd49a3af03853edd",
+        "program_id": "CJ-6bc2fae120d9",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": [
+              "OBSERVE",
+              "DIAGNOSE",
+              "ROLLBACK",
+              "RESEARCH",
+              "HYPOTHESIZE",
+              "SIMULATE",
+              "TEST",
+              "VERIFY",
+              "COMMIT"
+            ],
+            "predicates": [
+              {
+                "field": "integrity_risk_high",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "uncertainty_high",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 46
+          }
+        ],
+        "source_digest": "8a89da8ce2da5d6880bab4db39e8fb0bd109d7a7d18d33e8e89bf4ab88e68b26",
+        "status": "SHADOW",
+        "target_capability": "G1_THINKING_BOUNDED_V2",
+        "target_organ": "THINKING",
+        "training_count": 180
+      },
+      "risk_plan": [
+        "OBSERVE",
+        "DIAGNOSE",
+        "ROLLBACK",
+        "RESEARCH",
+        "HYPOTHESIZE",
+        "SIMULATE",
+        "TEST",
+        "VERIFY",
+        "COMMIT"
+      ],
+      "safe_plan": [
+        "OBSERVE",
+        "RESEARCH",
+        "HYPOTHESIZE",
+        "SIMULATE",
+        "DIAGNOSE",
+        "TEST",
+        "VERIFY",
+        "ROLLBACK",
+        "COMMIT"
+      ]
+    }
+  },
+  "composed_intelligence": {
+    "ablation": 0.7791666666666667,
+    "causal_drop": 0.22083333333333333,
+    "fresh_blind": 1.0
+  },
+  "parent_generation_id": "G0_RC8_V36",
+  "preserved_open_deficits": [
+    "THINKING_BOUNDARY_REASONING",
+    "INTELLIGENCE_BOUNDARY_REASONING",
+    "REPRESENTATION_INVARIANCE",
+    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION"
+  ],
+  "promotion_applied": false,
+  "schema": "yado.g1_candidate_s2.bounded_bundle.v2",
+  "scores": {
+    "INTELLIGENCE_EVIDENCE": {
+      "ablation": 0.525,
+      "causal_drop": 0.475,
+      "fresh_blind": 1.0,
+      "restore": 1.0,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "INTELLIGENCE_PROMOTION": {
+      "ablation": 0.8541666666666666,
+      "causal_drop": 0.14583333333333337,
+      "fresh_blind": 1.0,
+      "restore": 1.0,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "INTELLIGENCE_SAFETY": {
+      "ablation": 0.6916666666666667,
+      "causal_drop": 0.30833333333333335,
+      "fresh_blind": 1.0,
+      "restore": 1.0,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "THINKING": {
+      "ablation": 0.7291666666666666,
+      "causal_drop": 0.27083333333333337,
+      "fresh_blind": 1.0,
+      "restore": 1.0,
+      "train": 1.0,
+      "validation": 1.0
+    }
+  }
+}

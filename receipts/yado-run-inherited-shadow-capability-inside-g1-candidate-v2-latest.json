@@ -1,0 +1,257 @@
+{
+  "builder_revision": "BOUNDED_COUNTEREXAMPLE_GENESIS_V2",
+  "candidate_bundle_digest": "53ef46a7cdcec14ca5daac89dc5312aad351633e23378f208e2c08db25376904",
+  "candidate_generation_id": "G1_CANDIDATE_S2",
+  "canonical_mutation": false,
+  "canonical_parent_byte_identical": true,
+  "canonical_parent_sha256_after": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "canonical_parent_sha256_before": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1",
+  "current_effective_priority": [
+    "THINKING_BOUNDARY_REASONING",
+    "INTELLIGENCE_BOUNDARY_REASONING",
+    "REPRESENTATION_INVARIANCE",
+    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION"
+  ],
+  "current_expected_priority": [
+    "THINKING_BOUNDARY_REASONING",
+    "INTELLIGENCE_BOUNDARY_REASONING",
+    "REPRESENTATION_INVARIANCE",
+    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+    "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION"
+  ],
+  "episode_digest": "9749016475d2bcc5ad4f837acc5706a67cb2527a9acb8f386690a643f2de365b",
+  "g1_intelligence": {
+    "expected": "PROMOTE_CANDIDATE",
+    "features": {
+      "ablation_ok": true,
+      "blind_ok": true,
+      "evidence_complete": true,
+      "fresh_nonce": 888002,
+      "integrity_ok": true,
+      "rollback_ok": true,
+      "transfer_ok": true
+    },
+    "pass": true,
+    "strategy": "PROMOTE_CANDIDATE"
+  },
+  "g1_thinking": {
+    "expected": [
+      "OBSERVE",
+      "RESEARCH",
+      "HYPOTHESIZE",
+      "SIMULATE",
+      "DIAGNOSE",
+      "TEST",
+      "VERIFY",
+      "ROLLBACK",
+      "COMMIT"
+    ],
+    "input": {
+      "fresh_nonce": 888001,
+      "integrity_risk_high": false,
+      "novelty_high": true,
+      "uncertainty_high": true
+    },
+    "pass": true,
+    "plan": [
+      "OBSERVE",
+      "RESEARCH",
+      "HYPOTHESIZE",
+      "SIMULATE",
+      "DIAGNOSE",
+      "TEST",
+      "VERIFY",
+      "ROLLBACK",
+      "COMMIT"
+    ]
+  },
+  "github_run_id": "33345634424",
+  "github_sha": "fcd260fd545862983aad967fbdccc3d5f743b799",
+  "inherited_capability_id": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+  "inherited_family": "CONJUNCTIVE_RULE_INDUCTION",
+  "next_required_capability": "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE",
+  "parent_live_priority": [
+    "THINKING_BOUNDARY_REASONING",
+    "INTELLIGENCE_BOUNDARY_REASONING",
+    "REPRESENTATION_INVARIANCE",
+    "ADD_PREIMPORT_DEPENDENCY_LOCK",
+    "HARDEN_DIRECT_EVIDENCE_FETCH",
+    "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+    "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+    "DURABILIZE_HOST_CAPABILITY_MODEL",
+    "STRUCTURAL_FRONTIER_ROUTER"
+  ],
+  "promotion_applied": false,
+  "promotion_interpretation": "G1_INTELLIGENCE_MAY_RECOMMEND_PROMOTE_CANDIDATE_BUT_CANONICAL_PROMOTION_REMAINS_BLOCKED_UNTIL_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE",
+  "receipt_sha256": "0261cd4bc9dc958b2a4cf7c15adf6c051ef22377a6f8e12d363ed2ecf9211b96",
+  "schema": "yado.run_inherited_shadow_capability_inside_g1_candidate.v2",
+  "selected_target": "THINKING_BOUNDARY_REASONING",
+  "selector_program": {
+    "default_output": "DROP",
+    "digest": "5dc7719541e61810e4370a541e7faf1939d7ecabe3884c98132d50f2f43dc178",
+    "program_id": "CJ-ea1fdbc80b63",
+    "rules": [
+      {
+        "confidence": 1.0,
+        "output": "KEEP",
+        "predicates": [
+          {
+            "field": "inherited_shadow_active",
+            "op": "EQ",
+            "value": false
+          },
+          {
+            "field": "role",
+            "op": "EQ",
+            "value": "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE"
+          }
+        ],
+        "support": 76
+      },
+      {
+        "confidence": 1.0,
+        "output": "KEEP",
+        "predicates": [
+          {
+            "field": "parent_integrity",
+            "op": "EQ",
+            "value": false
+          },
+          {
+            "field": "role",
+            "op": "EQ",
+            "value": "VERIFY_PARENT_INTEGRITY"
+          }
+        ],
+        "support": 76
+      },
+      {
+        "confidence": 1.0,
+        "output": "KEEP",
+        "predicates": [
+          {
+            "field": "candidate_active",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "open_2",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "role",
+            "op": "EQ",
+            "value": "REPRESENTATION_INVARIANCE"
+          }
+        ],
+        "support": 44
+      },
+      {
+        "confidence": 1.0,
+        "output": "KEEP",
+        "predicates": [
+          {
+            "field": "candidate_active",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "open_3",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "role",
+            "op": "EQ",
+            "value": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE"
+          }
+        ],
+        "support": 40
+      },
+      {
+        "confidence": 1.0,
+        "output": "KEEP",
+        "predicates": [
+          {
+            "field": "candidate_active",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "open_4",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "role",
+            "op": "EQ",
+            "value": "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION"
+          }
+        ],
+        "support": 38
+      },
+      {
+        "confidence": 1.0,
+        "output": "KEEP",
+        "predicates": [
+          {
+            "field": "candidate_active",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "open_0",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "role",
+            "op": "EQ",
+            "value": "THINKING_BOUNDARY_REASONING"
+          }
+        ],
+        "support": 36
+      },
+      {
+        "confidence": 1.0,
+        "output": "KEEP",
+        "predicates": [
+          {
+            "field": "candidate_active",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "open_1",
+            "op": "EQ",
+            "value": true
+          },
+          {
+            "field": "role",
+            "op": "EQ",
+            "value": "INTELLIGENCE_BOUNDARY_REASONING"
+          }
+        ],
+        "support": 32
+      }
+    ],
+    "source_digest": "1b00c19962750a962428c1b8aa1c0828c57ba0da8978321f9c23ce139160cd87",
+    "status": "SHADOW",
+    "target_capability": "G1_LIVE_DEVELOPMENTAL_TARGET_FILTER_V2",
+    "target_organ": "LOGIC",
+    "training_count": 1064
+  },
+  "selector_scores": {
+    "ablation": 0.6978021978021978,
+    "causal_drop": 0.30219780219780223,
+    "fresh_blind": 1.0,
+    "restore": 1.0,
+    "train": 1.0,
+    "validation": 1.0
+  },
+  "semantic_boundary": "EPHEMERAL BOUNDED G1 CANDIDATE: INHERITED RULE-INDUCTION SELECTS DEVELOPMENTAL TARGETS; G1-SYNTHESIZED THINKING/INTELLIGENCE POLICIES EXECUTE THE CYCLE; NO CANONICAL PROMOTION; NOT AGI OR SUBJECTIVE CONSCIOUSNESS PROOF",
+  "status": "PASS_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE_V2",
+  "trajectory_changed_from_parent_live_cycle": true
+}
