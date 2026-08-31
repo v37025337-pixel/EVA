@@ -178,10 +178,53 @@ add('LEGACY_EXPERIENCE_CONTENT_RETRIEVAL','MEMORY_AND_EXPERIENCE','HIGH' if not 
     'Maintain bounded read-only exact legacy retrieval with canonical component binding and live provenance probe.',
     not full_experience_retrieval)
 
-add('LEGACY_EXPERIENCE_SUMMARY_PROVENANCE','MEMORY_AND_EXPERIENCE','MEDIUM','PARTIAL',
-    {'registry_lessons_are_precompiled_summaries':True,'raw_legacy_content_not_loaded_by_core':not full_experience_retrieval,
-     'verified_raw_retrieval_available':full_experience_retrieval},
-    'Distinguish host-curated lesson summaries from lessons independently re-derived by YADO from raw historical evidence.',
+# ---------- legacy summary provenance separation ----------
+prov_cfg=ccore.get('legacy_experience_provenance',{}) if isinstance(ccore.get('legacy_experience_provenance',{}),dict) else {}
+prov_path=REPO/prov_cfg.get('artifact','__missing__')
+prov_art={}
+prov_error=None
+try:
+    prov_art=load(prov_path)
+except Exception as exc:
+    prov_error=type(exc).__name__+':'+str(exc)[:180]
+prov_tmp=copy.deepcopy(prov_art) if isinstance(prov_art,dict) else {}
+prov_stored=prov_tmp.pop('artifact_digest',None) if isinstance(prov_tmp,dict) else None
+prov_digest_ok=bool(prov_stored) and prov_stored==h(prov_tmp) and prov_stored==prov_cfg.get('artifact_digest')
+legacy_entries=[x for x in cexp.get('branches',[]) if x.get('mode')=='EXPERIENCE_ONLY']
+registry_labels_ok=bool(legacy_entries) and all(
+    x.get('lesson_provenance',{}).get('source_class')=='HOST_CURATED_REGISTRY_SUMMARY'
+    and x.get('lesson_provenance',{}).get('semantic_validation_by_rederivation') is False
+    and x.get('rederived_evidence',{}).get('source_class')=='YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE'
+    and x.get('rederived_evidence',{}).get('semantic_equivalence_to_host_lessons_claimed') is False
+    for x in legacy_entries
+)
+prov_policy=prov_art.get('provenance_policy',{}) if isinstance(prov_art,dict) else {}
+prov_retrieval=prov_art.get('retrieval',{}) if isinstance(prov_art,dict) else {}
+prov_branch_coverage=prov_art.get('legacy_branch_count')==len(legacy_entries)==13
+prov_raw_coverage=(prov_retrieval.get('ratio')==1.0 and not prov_retrieval.get('failures'))
+prov_no_overclaim=(
+    prov_policy.get('host_curated_lessons')=='PRESERVED_UNCHANGED_AND_EXPLICITLY_LABELLED'
+    and prov_policy.get('yado_rederived_observations')=='DERIVED_ONLY_FROM_EXACT_REGISTERED_RAW_EVIDENCE'
+    and prov_policy.get('semantic_equivalence_claimed') is False
+    and prov_policy.get('legacy_code_execution') is False
+)
+runtime_provenance_exposed=('lesson_provenance' in runtime_text and 'rederived_evidence' in runtime_text)
+provenance_ok=all([full_experience_retrieval,prov_digest_ok,registry_labels_ok,prov_branch_coverage,
+                   prov_raw_coverage,prov_no_overclaim,runtime_provenance_exposed])
+add('LEGACY_EXPERIENCE_SUMMARY_PROVENANCE','MEMORY_AND_EXPERIENCE','INFO' if provenance_ok else 'MEDIUM',
+    'PASS' if provenance_ok else 'PARTIAL',
+    {'registry_lessons_are_precompiled_summaries':True,
+     'host_summaries_explicitly_labelled':registry_labels_ok,
+     'verified_raw_retrieval_available':full_experience_retrieval,
+     'rederived_artifact_path':prov_cfg.get('artifact'),
+     'rederived_artifact_digest_ok':prov_digest_ok,
+     'legacy_branch_coverage':prov_branch_coverage,
+     'registered_raw_path_coverage':prov_retrieval.get('ratio'),
+     'raw_retrieval_failures':prov_retrieval.get('failures'),
+     'semantic_equivalence_claimed':prov_policy.get('semantic_equivalence_claimed'),
+     'runtime_provenance_exposed':runtime_provenance_exposed,
+     'error':prov_error},
+    'Keep host-curated summaries separate from exact raw-evidence-derived observations; never silently promote lexical/structural observations into semantic validation.',
     False)
 
 # ---------- capability/evidence scope ----------
