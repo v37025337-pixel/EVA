@@ -1,0 +1,67 @@
+name: YADO Legacy Experience Provenance Rederivation V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-legacy-experience-provenance-rederivation-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-legacy-experience-provenance-rederivation-v1
+  cancel-in-progress: true
+jobs:
+  rederive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Re-derive exact legacy provenance
+        id: rederive
+        continue-on-error: true
+        run: python runtime/yado_legacy_experience_provenance_rederivation_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-legacy-experience-provenance-rederivation-v1
+          path: |
+            runtime/yado_legacy_experience_provenance_rederivation_v1_receipt.json
+            canonical/yado-legacy-experience-derived-provenance-v1.json
+            canonical/yado-unified-experience-registry-v1.json
+            canonical/yado-unified-core-v1.json
+            canonical/yado-main-head-g2.json
+            runtime/yado_unified_core_v1.py
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist provenance
+        if: always()
+        run: |
+          mkdir -p receipts canonical
+          if [ -f runtime/yado_legacy_experience_provenance_rederivation_v1_receipt.json ]; then
+            cp runtime/yado_legacy_experience_provenance_rederivation_v1_receipt.json "receipts/yado-legacy-experience-provenance-rederivation-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Legacy Provenance"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          for f in canonical/yado-legacy-experience-derived-provenance-v1.json canonical/yado-unified-experience-registry-v1.json canonical/yado-unified-core-v1.json canonical/yado-main-head-g2.json runtime/yado_unified_core_v1.py "receipts/yado-legacy-experience-provenance-rederivation-v1-run-${GITHUB_RUN_ID}.json"; do [ -f "$f" ] && files+=("$f"); done
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist YADO legacy experience provenance rederivation V1 [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_legacy_experience_provenance_rederivation_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_LEGACY_PROVENANCE_RECEIPT")
+          r=json.loads(p.read_text())
+          if r.get("status")!="PASS_LEGACY_EXPERIENCE_PROVENANCE_REDERIVATION_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
