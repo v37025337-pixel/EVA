@@ -25,6 +25,7 @@ DEV=REPO/'architecture'/'g2-development-state-v1.json'
 REAL_LEGACY=REPO/'receipts'/'yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json'
 REAL_LATEST=REPO/'receipts'/'yado-g2-real-world-transfer-recheck-canonical-v1-latest.json'
 REAL=REAL_LATEST if REAL_LATEST.exists() else REAL_LEGACY
+REAL_NATIVE_V2=REPO/'architecture'/'yado-real-world-generalization-state-v2.json'
 POST=REPO/'receipts'/'yado-g2-post-workload-capability-audit-v1-run-33363851997.json'
 CONSOL=REPO/'receipts'/'yado-unified-core-consolidation-gate-v1-run-33371375385.json'
 RECON=REPO/'receipts'/'yado-unified-core-ledger-reconciliation-v1-run-33371661769.json'
@@ -40,6 +41,7 @@ core=UnifiedYADOCoreV1(REPO)
 head=load(HEAD);arch=load(ARCH);ccore=load(CORE);cexp=load(EXP)
 cand_core=load(CAND_CORE);cand_exp=load(CAND_EXP);ledger=load(LEDGER);shadow=load(SHADOW)
 burn=load(BURN);work=load(WORK);dev=load(DEV);real=load(REAL);legacy_real=load(REAL_LEGACY);post=load(POST);consol=load(CONSOL);recon=load(RECON)
+native_v2=load(REAL_NATIVE_V2) if REAL_NATIVE_V2.exists() else {}
 real_evidence_source=str(REAL.relative_to(REPO)).replace('\\','/')
 validate_ledger_v2(ledger)
 
@@ -233,17 +235,37 @@ add('RAW_TASK_REPRESENTATION_GAP','REPRESENTATION_AND_GROUNDING','CRITICAL' if r
     'Build or improve a bounded raw-task representation/grounding layer without secret host feature extraction, then repeat fresh real-world transfer.',
     raw_block)
 
-# Prior audit boundaries remain relevant.
-limits=post.get('limitations',[])
-high_unproven=[x for x in limits if x.get('severity')=='HIGH' and x.get('status')=='NOT_PROVEN']
-add('REAL_WORLD_GENERALIZATION_SCOPE','REPRESENTATION_AND_GROUNDING','HIGH' if high_unproven else 'INFO',
-    'PARTIAL' if high_unproven else 'PASS',
-    {'high_unproven_count':len(high_unproven),'items':[x.get('id') for x in high_unproven],
-     'audit_conclusion':post.get('audit_conclusion'),
-     'latest_transfer_scope_limitations':real.get('remaining_scope_limitations',[]),
-     'latest_transfer_evidence_source':real_evidence_source},
-    'Do not promote bounded synthetic workload scores into claims about real programming, theorem proving, science, or general intelligence.',
-    bool(high_unproven))
+# Current native-only transfer evidence supersedes stale pre-integration capability claims.
+native_pass=native_v2.get('domain_pass',{}) if isinstance(native_v2,dict) else {}
+math_bound=ccore.get('mathematical_reasoning',{}).get('mode')=='ACTIVE_BOUNDED_SEMANTIC_EXPRESSION_SYNTHESIS'
+program_bound=ccore.get('program_execution',{}).get('mode')=='ACTIVE_BOUNDED_SINGLE_FUNCTION_REPAIR'
+raw_proven=native_pass.get('REAL_UNSTRUCTURED_INPUT_TRANSFER') is True
+math_proven=(native_pass.get('REAL_MATHEMATICAL_REASONING_TRANSFER') is True and math_bound)
+program_proven=(program_bound and float(ccore.get('program_execution',{}).get('fresh_score',0.0))>=1.0)
+science_proven=(native_pass.get('REAL_SCIENCE_DATA_TRANSFER') is True and bool(ccore.get('science_reasoning')))
+remaining=[]
+if not raw_proven:remaining.append('REAL_UNSTRUCTURED_INPUT_TRANSFER')
+if not math_proven:remaining.append('REAL_MATHEMATICAL_REASONING_TRANSFER')
+if not program_proven:remaining.append('REAL_PROGRAM_EXECUTION_TRANSFER')
+if not science_proven:remaining.append('REAL_SCIENCE_DATA_TRANSFER')
+host_scaffold_dependence=not science_proven
+
+add('REAL_WORLD_GENERALIZATION_SCOPE','REPRESENTATION_AND_GROUNDING','MEDIUM' if remaining else 'INFO',
+    'PARTIAL' if remaining else 'PASS',
+    {'remaining_native_domains':remaining,'raw_proven':raw_proven,'math_proven':math_proven,
+     'program_proven':program_proven,'science_proven':science_proven,
+     'host_scaffold_dependence':host_scaffold_dependence,
+     'native_v2_state_source':str(REAL_NATIVE_V2.relative_to(REPO)).replace('\\','/')},
+    'Continue only on native capabilities still missing; do not reopen capabilities already admitted through canonical gates.',
+    False)
+
+add('REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1','RESOURCE_AND_EVIDENCE','HIGH' if not science_proven else 'INFO',
+    'FAIL' if not science_proven else 'PASS',
+    {'public_data_download_seen':native_v2.get('domain_scores',{}).get('REAL_SCIENCE_DATA_TRANSFER') is not None,
+     'native_scientific_reasoning_present':science_proven,
+     'program_capability_now_canonical':program_bound,'mathematics_capability_now_canonical':math_bound},
+    'Create and independently admit a bounded native scientific-data reasoning capability over fresh public datasets.',
+    not science_proven)
 
 # ---------- self-audit and repair plane ----------
 self_audit_plane=next((x for x in ccore.get('planes',[]) if x.get('plane_id')=='SELF_AUDIT_AND_REPAIR'),{})
