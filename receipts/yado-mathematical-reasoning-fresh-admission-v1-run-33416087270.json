@@ -1,0 +1,430 @@
+{
+  "ablation": [
+    {
+      "full_found": true,
+      "id": "F1_SUM_SQUARE",
+      "shallow_found": false
+    },
+    {
+      "full_found": true,
+      "id": "F2_FACTORED_X",
+      "shallow_found": false
+    },
+    {
+      "full_found": true,
+      "id": "F3_SCALED_PRODUCT",
+      "shallow_found": false
+    },
+    {
+      "full_found": true,
+      "id": "F4_QUADRATIC_LINEAR",
+      "shallow_found": false
+    }
+  ],
+  "bounded_withhold": {
+    "found": false,
+    "states": [
+      9,
+      57,
+      365,
+      2695
+    ],
+    "target": "x*x+y*y+3"
+  },
+  "candidate_digest": "a47a32ac13a65cbf0062a439cd238f313be7c30d1faac9c83162a80e51423f19",
+  "candidate_source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
+  "canonical_mutation": false,
+  "checks": {
+    "bounded_withhold_beyond_depth": true,
+    "canonical_head_immutable": true,
+    "causal_depth_dependence": true,
+    "fresh_hidden_accuracy": true,
+    "source_unchanged": true,
+    "state_budget_respected": true
+  },
+  "fresh_score": 1.0,
+  "fresh_tasks": [
+    {
+      "blind": [
+        {
+          "expected": 25,
+          "got": 25,
+          "ok": true,
+          "x": -7,
+          "y": 2
+        },
+        {
+          "expected": 121,
+          "got": 121,
+          "ok": true,
+          "x": -3,
+          "y": -8
+        },
+        {
+          "expected": 121,
+          "got": 121,
+          "ok": true,
+          "x": 2,
+          "y": 9
+        },
+        {
+          "expected": 1,
+          "got": 1,
+          "ok": true,
+          "x": 4,
+          "y": -5
+        },
+        {
+          "expected": 121,
+          "got": 121,
+          "ok": true,
+          "x": 5,
+          "y": 6
+        },
+        {
+          "expected": 64,
+          "got": 64,
+          "ok": true,
+          "x": 10,
+          "y": -2
+        },
+        {
+          "expected": 361,
+          "got": 361,
+          "ok": true,
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((x+y)*(x+y))",
+      "id": "F1_SUM_SQUARE",
+      "ops": 3,
+      "states": [
+        9,
+        57,
+        365,
+        2695
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": 63,
+          "got": 63,
+          "ok": true,
+          "x": -7,
+          "y": 2
+        },
+        {
+          "expected": -15,
+          "got": -15,
+          "ok": true,
+          "x": -3,
+          "y": -8
+        },
+        {
+          "expected": -14,
+          "got": -14,
+          "ok": true,
+          "x": 2,
+          "y": 9
+        },
+        {
+          "expected": 36,
+          "got": 36,
+          "ok": true,
+          "x": 4,
+          "y": -5
+        },
+        {
+          "expected": -5,
+          "got": -5,
+          "ok": true,
+          "x": 5,
+          "y": 6
+        },
+        {
+          "expected": 120,
+          "got": 120,
+          "ok": true,
+          "x": 10,
+          "y": -2
+        },
+        {
+          "expected": 60,
+          "got": 60,
+          "ok": true,
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((x-y)*x)",
+      "id": "F2_FACTORED_X",
+      "ops": 2,
+      "states": [
+        9,
+        57,
+        365
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": -25,
+          "got": -25,
+          "ok": true,
+          "x": -7,
+          "y": 2
+        },
+        {
+          "expected": 51,
+          "got": 51,
+          "ok": true,
+          "x": -3,
+          "y": -8
+        },
+        {
+          "expected": 39,
+          "got": 39,
+          "ok": true,
+          "x": 2,
+          "y": 9
+        },
+        {
+          "expected": -37,
+          "got": -37,
+          "ok": true,
+          "x": 4,
+          "y": -5
+        },
+        {
+          "expected": 63,
+          "got": 63,
+          "ok": true,
+          "x": 5,
+          "y": 6
+        },
+        {
+          "expected": -37,
+          "got": -37,
+          "ok": true,
+          "x": 10,
+          "y": -2
+        },
+        {
+          "expected": 171,
+          "got": 171,
+          "ok": true,
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "blind_pass": true,
+      "expression": "(((2*x)*y)+3)",
+      "id": "F3_SCALED_PRODUCT",
+      "ops": 3,
+      "states": [
+        9,
+        57,
+        365,
+        2695
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": 44,
+          "got": 44,
+          "ok": true,
+          "x": -7,
+          "y": 2
+        },
+        {
+          "expected": -2,
+          "got": -2,
+          "ok": true,
+          "x": -3,
+          "y": -8
+        },
+        {
+          "expected": 15,
+          "got": 15,
+          "ok": true,
+          "x": 2,
+          "y": 9
+        },
+        {
+          "expected": 15,
+          "got": 15,
+          "ok": true,
+          "x": 4,
+          "y": -5
+        },
+        {
+          "expected": 36,
+          "got": 36,
+          "ok": true,
+          "x": 5,
+          "y": 6
+        },
+        {
+          "expected": 108,
+          "got": 108,
+          "ok": true,
+          "x": 10,
+          "y": -2
+        },
+        {
+          "expected": 163,
+          "got": 163,
+          "ok": true,
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "blind_pass": true,
+      "expression": "(((1+x)*x)+y)",
+      "id": "F4_QUADRATIC_LINEAR",
+      "ops": 3,
+      "states": [
+        9,
+        57,
+        365,
+        2695
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": -1,
+          "got": -1,
+          "ok": true,
+          "x": -7,
+          "y": 2
+        },
+        {
+          "expected": -27,
+          "got": -27,
+          "ok": true,
+          "x": -3,
+          "y": -8
+        },
+        {
+          "expected": 29,
+          "got": 29,
+          "ok": true,
+          "x": 2,
+          "y": 9
+        },
+        {
+          "expected": -11,
+          "got": -11,
+          "ok": true,
+          "x": 4,
+          "y": -5
+        },
+        {
+          "expected": 23,
+          "got": 23,
+          "ok": true,
+          "x": 5,
+          "y": 6
+        },
+        {
+          "expected": 4,
+          "got": 4,
+          "ok": true,
+          "x": 10,
+          "y": -2
+        },
+        {
+          "expected": 33,
+          "got": 33,
+          "ok": true,
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((3*y)+x)",
+      "id": "F5_LINEAR_MIX",
+      "ops": 2,
+      "states": [
+        9,
+        57,
+        365
+      ]
+    },
+    {
+      "blind": [
+        {
+          "expected": -18,
+          "got": -18,
+          "ok": true,
+          "x": -7,
+          "y": 2
+        },
+        {
+          "expected": 40,
+          "got": 40,
+          "ok": true,
+          "x": -3,
+          "y": -8
+        },
+        {
+          "expected": 0,
+          "got": 0,
+          "ok": true,
+          "x": 2,
+          "y": 9
+        },
+        {
+          "expected": -10,
+          "got": -10,
+          "ok": true,
+          "x": 4,
+          "y": -5
+        },
+        {
+          "expected": 18,
+          "got": 18,
+          "ok": true,
+          "x": 5,
+          "y": 6
+        },
+        {
+          "expected": -16,
+          "got": -16,
+          "ok": true,
+          "x": 10,
+          "y": -2
+        },
+        {
+          "expected": 70,
+          "got": 70,
+          "ok": true,
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "blind_pass": true,
+      "expression": "((x-2)*y)",
+      "id": "F6_FACTORED_Y",
+      "ops": 2,
+      "states": [
+        9,
+        57,
+        365
+      ]
+    }
+  ],
+  "g3_genesis_performed": false,
+  "next_required_capability": "REAL_MATHEMATICAL_REASONING_CANONICAL_INTEGRATION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "b769e60eed94a611db24737de404bb92e736c736a5097dc34e24ce8d4e74f27d",
+  "schema": "yado.g2.mathematical_reasoning_fresh_admission.v1",
+  "semantic_boundary": "FRESH ADMISSION OF BOUNDED SEMANTIC-SIGNATURE EXPRESSION SYNTHESIS. PASS IS NOT GENERAL THEOREM PROVING.",
+  "status": "PASS_MATHEMATICAL_REASONING_FRESH_ADMISSION_V1"
+}
