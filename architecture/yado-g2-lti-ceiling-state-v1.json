@@ -36,71 +36,57 @@
   ],
   "failed_families": {
     "INTELLIGENCE": [
-      "MULTI_CAPABILITY_COMPOSITION",
-      "ZERO_SHOT_SCHEMA_ALIAS"
+      "MULTI_CAPABILITY_COMPOSITION_V2",
+      "ZERO_SHOT_SCHEMA_ALIAS_V2"
     ],
     "LOGIC": [
-      "PARITY4",
-      "EXPRESSION_BEYOND_DEPTH3"
+      "PARITY5",
+      "CARDINALITY_4_OF_7",
+      "DEEP_COMPOSITION_EXPRESSION"
     ],
-    "THINKING": [
-      "HORIZON_5_REQUIRED",
-      "NEGATIVE_EVIDENCE_UPDATE",
-      "DEPENDENCY_UNLOCK"
-    ]
+    "THINKING": []
   },
   "fixed_architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "next_required_capability": "LTI_ARCHITECTURAL_CEILING_RECHECK_V2",
+  "next_required_capability": "LOGIC_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
   "planes": {
     "INTELLIGENCE": {
       "families": {
-        "CONTEXTUAL_STREAM_ROUTING": 1.0,
-        "EVIDENCE_META_SELECTION": 1.0,
-        "MULTI_CAPABILITY_COMPOSITION": 0.0,
-        "SINGLE_CAPABILITY_ROUTING": 1.0,
-        "ZERO_SHOT_SCHEMA_ALIAS": 0.415
+        "EVIDENCE_META_SELECTION_V2": 1.0,
+        "MULTI_CAPABILITY_COMPOSITION_V2": 0.0,
+        "SINGLE_ROUTING_V2": 1.0,
+        "ZERO_SHOT_SCHEMA_ALIAS_V2": 0.35833333333333334
       },
-      "score": 0.683
+      "score": 0.5895833333333333
     },
     "LOGIC": {
       "families": {
-        "CARDINALITY_3_OF_6": 0.953125,
-        "EXPRESSION_BEYOND_DEPTH3": 0.0,
-        "PARITY4": 0.5,
-        "RELATIONAL_TRANSFER": 1.0
+        "CARDINALITY_4_OF_7": 0.8203125,
+        "DEEP_COMPOSITION_EXPRESSION": 0.0,
+        "PARITY5": 0.5,
+        "RELATIONAL_TRANSFER_V2": 1.0
       },
-      "score": 0.61328125
+      "score": 0.580078125
     },
     "THINKING": {
-      "candidate_families": {
-        "ADDITIVE_BUDGET_PLAN": 1.0,
-        "DEPENDENCY_UNLOCK": 1.0,
-        "LONG_HORIZON_REQUIRED": 1.0,
-        "MIXED_CONTINGENT_CHAIN": 1.0,
-        "SIGNED_NEGATIVE_EVIDENCE": 1.0
-      },
-      "candidate_score": 1.0,
-      "canonical_component": "ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1",
-      "canonical_score": 1.0,
       "families": {
-        "ADDITIVE_BUDGET_PLAN": 1.0,
-        "DEPENDENCY_UNLOCK": 0.0,
-        "HORIZON_5_REQUIRED": 0.0,
-        "NEGATIVE_EVIDENCE_UPDATE": 0.0
+        "DEPENDENCY_CHAIN5": 1.0,
+        "FAIL_CLOSED_BUDGET": 1.0,
+        "LONG_HORIZON_7": 1.0,
+        "SIGNED_NEGATIVE_V2": 1.0
       },
-      "score": 0.25
+      "score": 1.0
     }
   },
   "plateau_streak": 0,
   "ranking": [
-    "THINKING",
     "LOGIC",
-    "INTELLIGENCE"
+    "INTELLIGENCE",
+    "THINKING"
   ],
-  "round": 1,
+  "round": 2,
   "schema": "yado.g2.lti_architectural_ceiling_state.v1",
-  "self_selected_weakest_plane": "THINKING",
-  "state_digest": "f2448107aa250ba07a783fdd21dffa9ea1028e7c242d7a4fdc2dbf81a147ec3e",
-  "status": "DIAGNOSED"
+  "self_selected_weakest_plane": "LOGIC",
+  "state_digest": "67e4314025090fecb8c42ac2e212e6145bfea69c1dd781cd319a8429409ac638",
+  "status": "EVOLVING_TO_CEILING"
 }
