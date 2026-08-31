@@ -1,0 +1,69 @@
+name: YADO Runtime Control Plane Binding Canonical Gate V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-runtime-control-plane-binding-canonical-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-runtime-control-plane-binding-canonical
+  cancel-in-progress: true
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run canonical binding gate
+        id: gate
+        continue-on-error: true
+        run: python runtime/yado_runtime_control_plane_binding_canonical_gate_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-runtime-control-plane-binding-canonical-gate-v1
+          path: |
+            runtime/yado_runtime_control_plane_binding_canonical_gate_v1_receipt.json
+            runtime/yado_unified_core_v1.py
+            canonical/yado-unified-core-v1.json
+            canonical/yado-main-head-g2.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist evidence and canonical repair
+        if: always()
+        run: |
+          mkdir -p receipts canonical
+          if [ -f runtime/yado_runtime_control_plane_binding_canonical_gate_v1_receipt.json ]; then
+            cp runtime/yado_runtime_control_plane_binding_canonical_gate_v1_receipt.json "receipts/yado-runtime-control-plane-binding-canonical-gate-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Runtime Binding Canonical Gate"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          if [ -f "receipts/yado-runtime-control-plane-binding-canonical-gate-v1-run-${GITHUB_RUN_ID}.json" ]; then files+=("receipts/yado-runtime-control-plane-binding-canonical-gate-v1-run-${GITHUB_RUN_ID}.json"); fi
+          if [ -f runtime/yado_unified_core_v1.py ]; then files+=("runtime/yado_unified_core_v1.py"); fi
+          if [ -f canonical/yado-unified-core-v1.json ]; then files+=("canonical/yado-unified-core-v1.json"); fi
+          if [ -f canonical/yado-main-head-g2.json ]; then files+=("canonical/yado-main-head-g2.json"); fi
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist canonical runtime control-plane self-repair [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_runtime_control_plane_binding_canonical_gate_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_CONTROL_PLANE_GATE_RECEIPT")
+          r=json.loads(p.read_text())
+          if r.get("status")!="PASS_RUNTIME_CONTROL_PLANE_BINDING_CANONICAL_GATE_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
