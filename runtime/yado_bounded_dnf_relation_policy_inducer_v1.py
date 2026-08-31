@@ -106,8 +106,6 @@ class BoundedDNFRelationPolicyInducerV1:
             covered=[e for e in cases if a.match(e['input'])]
             if len(covered)<min_atom_support:continue
             cnt=Counter(e['expected'] for e in covered)
-            # Score against the global class frequency. This suppresses rare accidental
-            # noise atoms while retaining weak individual atoms that become useful jointly.
             best_gain=-1.0
             best_precision=0.0
             for lab,nlab in cnt.items():
@@ -118,7 +116,21 @@ class BoundedDNFRelationPolicyInducerV1:
                     best_gain=gain;best_precision=precision
             ranked.append((best_gain,best_precision,len(covered),-i,a))
         ranked.sort(reverse=True,key=lambda z:(z[0],z[1],z[2],z[3]))
-        pool=[z[4] for z in ranked[:cls.MAX_ATOMS_FOR_COMBINATION]]
+
+        # Counterexample correction: relational atoms are first-class search primitives.
+        # Reserve a bounded part of the pool for FIELD_EQ/FIELD_NEQ so scalar EQ atoms
+        # cannot crowd them out. Still rank relations by observed label gain; no field-pair
+        # names are supplied by the host.
+        rel=[z for z in ranked if z[4].op.startswith('FIELD_') and z[0]>0]
+        scalar=[z for z in ranked if z[4].op=='EQ']
+        relation_slots=min(10,max(4,cls.MAX_ATOMS_FOR_COMBINATION//3)) if rel else 0
+        chosen=rel[:relation_slots]
+        remaining=cls.MAX_ATOMS_FOR_COMBINATION-len(chosen)
+        chosen+=scalar[:remaining]
+        if len(chosen)<cls.MAX_ATOMS_FOR_COMBINATION:
+            chosen_ids={id(z[4]) for z in chosen}
+            chosen += [z for z in ranked if id(z[4]) not in chosen_ids][:cls.MAX_ATOMS_FOR_COMBINATION-len(chosen)]
+        pool=[z[4] for z in chosen]
 
         candidates=defaultdict(list)
         n=len(cases)
