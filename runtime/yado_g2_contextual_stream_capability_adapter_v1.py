@@ -1,5 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
+from collections import OrderedDict
 import copy,hashlib,json
 
 CAP_CONJ='ALG-CONJUNCTIVE-RULE-INDUCER-V1'
@@ -19,22 +20,26 @@ class StrategySpec:
 
 STRATEGIES=[
     StrategySpec('BASE_ROUTER_ONLY',0.10,0.02,0.10),
-    StrategySpec('LAST_STREAM_CAPABILITY',0.22,0.04,0.75),
+    StrategySpec('LAST_STREAM_CAPABILITY',0.22,0.04,0.60),
+    StrategySpec('BOUNDED_STREAM_CONTEXT_MAP',0.30,0.05,0.95),
     StrategySpec('GLOBAL_LAST_CAPABILITY',0.16,0.18,0.35),
     StrategySpec('RESOURCE_FIRST_ON_AMBIGUITY',0.14,0.22,0.25),
 ]
 
 class ContextualStreamCapabilityAdapterV1:
     """Bounded temporal adapter over the canonical G2 runtime.
-    It does not modify the parent runtime. It can reuse the most recent
-    capability selected for the same stream only when the current routing
-    descriptor is intentionally ambiguous.
+    The first strategy can read the canonical recurrent episode buffer.
+    The evolved strategy maintains a separate bounded LRU stream->capability
+    associative memory so long-lived interleaved streams do not compete for
+    the 128-slot episodic ring buffer.
     """
     MAX_LOOKBACK=128
+    MAX_STREAM_CONTEXTS=1024
 
-    def __init__(self,runtime,strategy_id='LAST_STREAM_CAPABILITY'):
+    def __init__(self,runtime,strategy_id='BOUNDED_STREAM_CONTEXT_MAP'):
         self.runtime=runtime
         self.strategy_id=str(strategy_id)
+        self.stream_context=OrderedDict()
 
     @staticmethod
     def _ambiguous(desc):
@@ -57,6 +62,27 @@ class ContextualStreamCapabilityAdapterV1:
                 return e.get('selected_capability')
         return None
 
+    def _map_get(self,stream_id):
+        sid=str(stream_id)
+        if sid not in self.stream_context:
+            return None
+        value=self.stream_context.pop(sid)
+        self.stream_context[sid]=value
+        return value
+
+    def _map_put(self,stream_id,capability):
+        sid=str(stream_id)
+        if not sid:
+            return
+        if sid in self.stream_context:
+            self.stream_context.pop(sid)
+        self.stream_context[sid]=capability
+        while len(self.stream_context)>self.MAX_STREAM_CONTEXTS:
+            self.stream_context.popitem(last=False)
+
+    def clear_context(self):
+        self.stream_context.clear()
+
     @staticmethod
     def _explicit_descriptor(capability):
         d={'budget_limited':False,'quota_limited':False,'external_evidence_needed':False,
@@ -74,6 +100,8 @@ class ContextualStreamCapabilityAdapterV1:
             return self.runtime.router.execute(desc)
         if self.strategy_id=='LAST_STREAM_CAPABILITY':
             return self._last_stream_capability(task.get('stream_id','')) or self.runtime.router.execute(desc)
+        if self.strategy_id=='BOUNDED_STREAM_CONTEXT_MAP':
+            return self._map_get(task.get('stream_id','')) or self.runtime.router.execute(desc)
         if self.strategy_id=='GLOBAL_LAST_CAPABILITY':
             return self._global_last_capability() or self.runtime.router.execute(desc)
         if self.strategy_id=='RESOURCE_FIRST_ON_AMBIGUITY':
@@ -88,6 +116,9 @@ class ContextualStreamCapabilityAdapterV1:
             out=self.runtime.run(shadow)
         except (KeyError,ValueError,TypeError) as exc:
             out={'selected_capability':selected,'result':'EXECUTION_MISMATCH:'+type(exc).__name__}
+        if not ablated_context and not self._ambiguous(task.get('descriptor',{})):
+            # Explicitly routed episodes teach the bounded stream context map.
+            self._map_put(task.get('stream_id',''),selected)
         out['context_strategy']=self.strategy_id
         out['context_selected_capability']=selected
         return out
@@ -99,6 +130,8 @@ class ContextualStreamCapabilityAdapterV1:
           'component_id':'ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1',
           'family':'RECURRENT_CONTEXT_CONDITIONED_CAPABILITY_ROUTING',
           'max_lookback':cls.MAX_LOOKBACK,
+          'max_stream_contexts':cls.MAX_STREAM_CONTEXTS,
+          'associative_stream_memory':'BOUNDED_LRU',
           'parent_runtime_modified':False,
           'canonical_active':False,
         }
