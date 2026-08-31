@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 55,
+  "event_count": 56,
   "events": [
     {
       "canonical_mutation": false,
@@ -890,14 +890,30 @@
       "source_digest": "c0ac9be18466c449f3847b5de2fea955a18c5833a9523296808e991036671e15",
       "source_path": "receipts/yado-g2-burnin-stress-v1-run-33363364114.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_BURNIN_BEFORE_G3",
+      "effect": "G2_BURNIN_5_PASS; STATE=BURNIN_PASS",
+      "event_hash": "3db5b339f928a2bf535fa805ba95ee6a2416ca27f72cf636cc5b99d3c96eefd0",
+      "event_id": "E0056_G2_BURNIN_5",
+      "event_type": "G2_BURNIN_STRESS",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 55,
+      "parent_event_hash": "8c402d784cde591ce5754128792954d47b0191d937ba965730adbac2fba02fb5",
+      "promotion_applied": false,
+      "run_id": "33363423708",
+      "source_digest": "50e8d9c077df4d8e2d0e3a7b09ea3bc6f55e06481497bdf54bc78f5bfd7cf8af",
+      "source_path": "receipts/yado-g2-burnin-stress-v1-run-33363423708.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "90e109269ce24737840e11063e02594c28dc6200e82404fd1168007a4e558d34",
+  "ledger_digest": "66e0589adb45ce5024a2a48e6022c15681193c7ef5f485537f1466897d33e5fd",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "G3_SUCCESSOR_GENESIS_FROM_G2_ENRICHED_HEAD_V1"
+    "G2_APPLIED_WORKLOAD_SUITE_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -926,5 +942,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "8c402d784cde591ce5754128792954d47b0191d937ba965730adbac2fba02fb5"
+  "tail_event_hash": "3db5b339f928a2bf535fa805ba95ee6a2416ca27f72cf636cc5b99d3c96eefd0"
 }
