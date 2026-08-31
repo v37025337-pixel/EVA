@@ -79,11 +79,15 @@ CAND_DIR.mkdir(parents=True,exist_ok=True);CAND_SRC.write_text(new,encoding='utf
 ledger_bytes=LEDGER.read_bytes()
 out_path=ROOT/'yado_unified_core_deep_self_audit_v1_receipt.json'
 old_out=out_path.read_bytes() if out_path.exists() else None
+tmp_candidate=ROOT/'_audit_v4_shadow_candidate.py'
+tmp_candidate.write_text(new,encoding='utf-8')
 try:
-    sp=importlib.util.spec_from_file_location('_audit_v4_shadow',CAND_SRC)
+    sp=importlib.util.spec_from_file_location('_audit_v4_shadow',tmp_candidate)
     mod=importlib.util.module_from_spec(sp);sp.loader.exec_module(mod)
     candidate_receipt=load(out_path)
 finally:
+    try:tmp_candidate.unlink()
+    except FileNotFoundError:pass
     LEDGER.write_bytes(ledger_bytes)
     if old_out is None:
         try:out_path.unlink()
