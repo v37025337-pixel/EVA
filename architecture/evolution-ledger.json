@@ -2,7 +2,7 @@
   "current_head": "G1_CANDIDATE_S2",
   "current_head_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
   "current_head_event_id": "E0024_G1_PROMOTION",
-  "event_count": 30,
+  "event_count": 31,
   "events": [
     {
       "canonical_mutation": false,
@@ -486,16 +486,31 @@
       "source_digest": "b7020455545b57af3a835c28cddea87aa0ad4b54072c095ffea80547df639da5",
       "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348605126.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "effect": "BOUNDED_DNF_RELATION_POLICY_INDUCER_RESOLVED_HISTORICAL_ACCESS_COUNTEREXAMPLE_AND_TRANSFERRED",
+      "event_hash": "4783e2525f3dbbf09da62e5b5c27f8dc03035bfb021583e6a6d98fc1bc356f77",
+      "event_id": "E0031_G1_ACCESS_CONTROL_RESOURCE_ASSISTED_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "index": 30,
+      "parent_event_hash": "9d49104d7e4abe40f641fca5d0f1439cc5927e632ad545f0a7c27c75b59c4a11",
+      "promotion_applied": false,
+      "run_id": "33348693351",
+      "source_digest": "efdeddc624a3d0f9a9a602bfb81a12bc273cb1b70fbbcd7c7a160960646986c5",
+      "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "fad7c55d47a61bd547cfb8804364622e06fa7d9fc0db5ffa17ca880daaac425d",
+  "ledger_digest": "87d9caec7a724c6db371e0a6d6f6d9e17da0334eb8daf1a6a6bbdf8d449a05d0",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
     "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
-    "G1_EXTERNAL_RESOURCE_ASSISTED_ACCESS_CONTROL_REPAIR_V1"
+    "G1_BUDGET_AWARE_SEARCH_REPAIR_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -508,7 +523,9 @@
   ],
   "schema": "yado.causal_evolution_ledger.v2",
   "shadow_resolved_deficits": [
+    "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
     "CONDITIONAL_FILTERING_OF_PRIORITIES",
+    "G1_EXTERNAL_RESOURCE_ASSISTED_ACCESS_CONTROL_REPAIR_V1",
     "G1_INHERITABLE_SHADOW_ALGORITHM_CAPABILITY",
     "G1_REPAIR_CONTINUOUS_BOUNDARY_AND_REPRESENTATION_V1",
     "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE_V2",
@@ -518,5 +535,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "9d49104d7e4abe40f641fca5d0f1439cc5927e632ad545f0a7c27c75b59c4a11"
+  "tail_event_hash": "4783e2525f3dbbf09da62e5b5c27f8dc03035bfb021583e6a6d98fc1bc356f77"
 }
