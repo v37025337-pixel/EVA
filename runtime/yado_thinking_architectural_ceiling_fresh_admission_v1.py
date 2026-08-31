@@ -28,7 +28,7 @@ if ledger.get('current_head_digest')!=head.get('canonical_head_digest'):raise Ru
 arch_sha=fsha(ARCH);head_file_sha=fsha(HEAD)
 
 spec=importlib.util.spec_from_file_location('_thinking_candidate',SRC)
-mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
+mod=importlib.util.module_from_spec(spec);sys.modules[spec.name]=mod;spec.loader.exec_module(mod)
 Planner=mod.BoundedAdaptiveContingentPlannerV1;Stage=mod.ContingentStage
 
 # Fresh 1: horizon 7 with uneven gains/costs; a valid reaching plan needs >4 steps.
