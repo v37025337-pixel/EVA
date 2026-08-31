@@ -13,6 +13,7 @@ from yado_evolution_ledger_v2 import validate_ledger_v2
 from yado_g2_typed_recurrent_capability_graph_runtime_v1 import G2TypedRecurrentCapabilityGraphRuntimeV1
 from yado_g2_contextual_stream_capability_adapter_v1 import ContextualStreamCapabilityAdapterV1
 from yado_raw_task_representation_runtime_v1 import RawTaskRepresentationRuntimeV1
+from yado_legacy_experience_retriever_v2 import LegacyExperienceRetrieverV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -37,6 +38,7 @@ class UnifiedYADOCoreV1:
         self.experience=self._load('canonical/yado-unified-experience-registry-v1.json')
         self.shadow_context=self._load('candidates/g2-development/contextual-stream-capability-adapter-v1.json')
         self.raw_representation=RawTaskRepresentationRuntimeV1.from_path(self.repo/'canonical/yado-raw-task-representation-v1.json')
+        self.legacy_experience_retriever=LegacyExperienceRetrieverV1(self.repo,self.experience)
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -116,6 +118,12 @@ class UnifiedYADOCoreV1:
                 ['representation','grounding','workspace','attention','thinking','self_audit'],limit=6
             ),
         }
+
+    def experience_read_exact(self,branch:str,path:str)->dict[str,Any]:
+        return self.legacy_experience_retriever.read_registered(branch,path)
+
+    def experience_search_verified(self,query:str,limit:int=8)->list[dict[str,Any]]:
+        return self.legacy_experience_retriever.search_content(query,limit=limit)
 
     def represent_raw_task(self,raw_text:str)->dict[str,Any]:
         return self.raw_representation.descriptor(raw_text)

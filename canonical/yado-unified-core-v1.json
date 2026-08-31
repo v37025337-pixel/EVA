@@ -7,6 +7,7 @@
     "runtime/yado_core_audit_invariant_self_evolution_v1.py",
     "runtime/yado_evolution_ledger_v2.py",
     "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
+    "runtime/yado_legacy_experience_retriever_v2.py",
     "runtime/yado_neutral_evidence_profile_selector_v1.py",
     "runtime/yado_raw_task_representation_learner_v1.py",
     "runtime/yado_raw_task_representation_runtime_v1.py"
@@ -23,9 +24,9 @@
   "consolidation_gate_run_id": "33371375385",
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "730086f8ebeb6945c732a318e07316bb3b17d3a84df40d1e4a1a851c7eaa9ce8",
+  "core_digest": "1971c9dc4f0bca681732471a07cc29441cfbe6c30b7b8d5225a87ea86148ce1e",
   "core_id": "UNIFIED_YADO_CORE_V1",
-  "current_frontier": "G2_REAL_WORLD_TRANSFER_RECHECK_WITH_CANONICAL_REPRESENTATION_V1",
+  "current_frontier": "UNIFIED_CORE_POST_LEGACY_EXPERIENCE_SELF_AUDIT_V1",
   "experience_registry": "canonical/yado-unified-experience-registry-v1.json",
   "experience_registry_digest": "af6f482d828957fbc0343cf3d81e90d3efdff168367cfb1b695ef5f16b4a58cf",
   "g3_genesis_performed": false,
@@ -39,6 +40,16 @@
     "SHADOW_CAPABILITIES_STAY_SHADOW_UNTIL_ADMISSION",
     "G3_GENESIS_BLOCKED_DURING_CONSOLIDATION"
   ],
+  "legacy_experience_retrieval": {
+    "candidate_digest": "3d63b6de2e8add2033d1fad5320e1dc05e069507341982772b5ea673e4b6df2a",
+    "component_id": "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
+    "fresh_admission_receipt_sha256": "927c795fda6d5b9540fa1c67285a3bf2f2c9c989a3ae88a66322ae4c39bd124d",
+    "gate_run_id": "33404019379",
+    "implementation_version": 2,
+    "mode": "READ_ONLY_PINNED_HISTORICAL_EVIDENCE",
+    "source_sha256": "a1d55c139543a1d96ffa72439824f417f8a528975cee2b68792b760c82c1d804",
+    "transport": "METADATA_FIRST"
+  },
   "planes": [
     {
       "active_components": [
@@ -55,11 +66,13 @@
     },
     {
       "active_components": [
+        "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
       ],
       "experience_components": [
         "candidates/unified-core-v1/experience-registry.json"
       ],
+      "legacy_experience_retrieval": "ACTIVE_READ_ONLY_EXACT",
       "plane_id": "MEMORY_AND_EXPERIENCE",
       "responsibilities": [
         "episodic_memory",
@@ -176,7 +189,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "59ec11f4ab9659cba81a41ddc63dfd30b2aa07fdb47379e88f5e43d4db82d32d",
+  "runtime_sha256": "48b0a83ad61f782f35c020df1238eef6e3e2a1cf3fb3ca0de14239aed0320ad3",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "semantic_boundary": "UNIFIED SOFTWARE COGNITIVE KERNEL CANDIDATE. LEGACY CONSCIOUSNESS EXPERIMENTS ARE HISTORICAL FUNCTIONAL EVIDENCE ONLY; THIS IS NOT A CLAIM OF SUBJECTIVE CONSCIOUSNESS OR AGI.",
