@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 56,
+  "event_count": 57,
   "events": [
     {
       "canonical_mutation": false,
@@ -906,10 +906,26 @@
       "source_digest": "50e8d9c077df4d8e2d0e3a7b09ea3bc6f55e06481497bdf54bc78f5bfd7cf8af",
       "source_path": "receipts/yado-g2-burnin-stress-v1-run-33363423708.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_APPLIED_WORKLOAD_SUITE_V1",
+      "effect": "G2_APPLIED_WORKLOAD_1_PASS; STATE=WORKLOAD",
+      "event_hash": "b1eb7fb4be5d61ddb2f047b6f795349ac24afb11b1a98c19b17efa33097ecf56",
+      "event_id": "E0057_G2_APPLIED_WORKLOAD_1",
+      "event_type": "G2_APPLIED_WORKLOAD",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 56,
+      "parent_event_hash": "3db5b339f928a2bf535fa805ba95ee6a2416ca27f72cf636cc5b99d3c96eefd0",
+      "promotion_applied": false,
+      "run_id": "33363583993",
+      "source_digest": "a6fedf7a2fca7d96c3b21a79203147e140d0512b4b1cff941b23b6710900cd6e",
+      "source_path": "receipts/yado-g2-applied-workload-suite-v1-run-33363583993.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "66e0589adb45ce5024a2a48e6022c15681193c7ef5f485537f1466897d33e5fd",
+  "ledger_digest": "5bdc5fb4b3ed220f102208f66da4a2c2f5672b14ffacf004ff4a0dfbd4ac4059",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -942,5 +958,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "3db5b339f928a2bf535fa805ba95ee6a2416ca27f72cf636cc5b99d3c96eefd0"
+  "tail_event_hash": "b1eb7fb4be5d61ddb2f047b6f795349ac24afb11b1a98c19b17efa33097ecf56"
 }
