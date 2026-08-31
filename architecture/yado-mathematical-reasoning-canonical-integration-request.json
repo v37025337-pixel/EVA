@@ -6,6 +6,6 @@
   "mode": "SAME_GENERATION_CANONICAL_INTEGRATION",
   "promotion_applied": false,
   "g3_genesis": false,
-  "retry": "runtime_reconstruction_fix_v1",
-  "retry_reason": "Previous integration gate failed before semantic evaluation because reconstructed RC8 substrate was missing."
+  "retry": "ast_safety_gate_fix_v2",
+  "retry_reason": "Previous semantic WITHHOLD was caused only by lexical false-positive on method name _eval; retry uses AST call/import safety analysis."
 }
