@@ -1,0 +1,68 @@
+name: YADO Unified Core Consolidation Gate V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-unified-core-consolidation-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-unified-core-consolidation
+  cancel-in-progress: true
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run unified core consolidation gate
+        id: gate
+        continue-on-error: true
+        run: python runtime/yado_unified_core_consolidation_gate_v1.py
+      - name: Upload consolidation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-unified-core-consolidation-v1
+          path: |
+            runtime/yado_unified_core_consolidation_gate_v1_receipt.json
+            canonical/yado-unified-core-v1.json
+            canonical/yado-unified-experience-registry-v1.json
+            canonical/yado-main-head-g2.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist consolidation evidence
+        if: always()
+        run: |
+          mkdir -p receipts canonical architecture
+          if [ -f runtime/yado_unified_core_consolidation_gate_v1_receipt.json ]; then
+            cp runtime/yado_unified_core_consolidation_gate_v1_receipt.json "receipts/yado-unified-core-consolidation-gate-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO Unified Core Consolidation"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json canonical/yado-main-head-g2.json)
+          if [ -f canonical/yado-unified-core-v1.json ]; then files+=("canonical/yado-unified-core-v1.json"); fi
+          if [ -f canonical/yado-unified-experience-registry-v1.json ]; then files+=("canonical/yado-unified-experience-registry-v1.json"); fi
+          if [ -f "receipts/yado-unified-core-consolidation-gate-v1-run-${GITHUB_RUN_ID}.json" ]; then files+=("receipts/yado-unified-core-consolidation-gate-v1-run-${GITHUB_RUN_ID}.json"); fi
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist unified YADO core consolidation [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce consolidation verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_unified_core_consolidation_gate_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_UNIFIED_CORE_RECEIPT")
+          r=json.loads(p.read_text())
+          if r.get("status")!="PASS_UNIFIED_YADO_CORE_V1_CONSOLIDATION":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
