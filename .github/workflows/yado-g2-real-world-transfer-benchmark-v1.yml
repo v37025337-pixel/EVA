@@ -1,0 +1,60 @@
+name: YADO G2 Real World Transfer Benchmark V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/g2-real-world-transfer-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-real-world-transfer
+  cancel-in-progress: true
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Run real-world transfer benchmark
+        id: benchmark
+        continue-on-error: true
+        run: python runtime/yado_g2_real_world_transfer_benchmark_v1.py
+      - name: Upload benchmark evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-real-world-transfer-benchmark-v1
+          path: |
+            runtime/yado_g2_real_world_transfer_benchmark_v1_receipt.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist benchmark evidence
+        if: always()
+        run: |
+          mkdir -p receipts architecture
+          if [ -f runtime/yado_g2_real_world_transfer_benchmark_v1_receipt.json ]; then
+            cp runtime/yado_g2_real_world_transfer_benchmark_v1_receipt.json "receipts/yado-g2-real-world-transfer-benchmark-v1-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO G2 Real Transfer Benchmark"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json)
+          if [ -f "receipts/yado-g2-real-world-transfer-benchmark-v1-run-${GITHUB_RUN_ID}.json" ]; then files+=("receipts/yado-g2-real-world-transfer-benchmark-v1-run-${GITHUB_RUN_ID}.json"); fi
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist G2 real-world transfer benchmark [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Preserve semantic WITHHOLD as evidence
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_g2_real_world_transfer_benchmark_v1_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_G2_REAL_TRANSFER_RECEIPT")
+          r=json.loads(p.read_text())
+          print(r["status"])
+          # WITHHOLD is a valid benchmark result and must remain persisted.
+          PY
