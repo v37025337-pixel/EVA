@@ -1,0 +1,220 @@
+{
+  "ablation": {
+    "correlation_removed_from_penguins": true,
+    "group_removed_from_tips": true
+  },
+  "candidate_digest": "f215b36c48bf0319f009dbe1516e0d8d917ad6a2c2f539680c3cdd46d2ed4b45",
+  "candidate_source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b",
+  "canonical_mutation": false,
+  "checks": {
+    "all_dataset_checks": true,
+    "candidate_has_no_network": true,
+    "canonical_head_immutable": true,
+    "causal_feature_ablation": true,
+    "source_unchanged": true,
+    "two_fresh_public_datasets_loaded": true
+  },
+  "datasets": {
+    "PENGUINS": {
+      "rows": 344,
+      "sha256": "e07636bd8af74260099ea2f8678e2eabbf35def579940cc76f67061ee16c06c1",
+      "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv"
+    },
+    "TIPS": {
+      "rows": 244,
+      "sha256": "e54cc4d2ce1bff65d32ca60b3e4b802e06bde1d7e7caf6f796f6bf7370e863b0",
+      "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv"
+    }
+  },
+  "fresh_results": [
+    {
+      "checks": {
+        "all_hypotheses_supported": true,
+        "categorical_schema": true,
+        "numeric_schema": true,
+        "reference_corr_match": true,
+        "reference_group_match": true,
+        "row_count": true,
+        "strongest_pair": true
+      },
+      "corr": 0.8712017673060114,
+      "corr_reference": 0.8712017673060114,
+      "dataset": "PENGUINS",
+      "group_means": {
+        "Adelie": {
+          "count": 151,
+          "mean": 3700.662251655629
+        },
+        "Chinstrap": {
+          "count": 68,
+          "mean": 3733.0882352941176
+        },
+        "Gentoo": {
+          "count": 123,
+          "mean": 5076.016260162602
+        }
+      },
+      "hypotheses": [
+        {
+          "observed": 0.8712017673060114,
+          "supported": true,
+          "threshold": 0.8,
+          "type": "CORRELATION_ABS_AT_LEAST"
+        },
+        {
+          "group_means": {
+            "Adelie": {
+              "count": 151,
+              "mean": 3700.662251655629
+            },
+            "Chinstrap": {
+              "count": 68,
+              "mean": 3733.0882352941176
+            },
+            "Gentoo": {
+              "count": 123,
+              "mean": 5076.016260162602
+            }
+          },
+          "supported": true,
+          "type": "GROUP_MEAN_ORDER"
+        },
+        {
+          "fit": {
+            "intercept": -5780.831358077063,
+            "n": 342,
+            "r2": 0.7589925193571176,
+            "slope": 49.68556640610009
+          },
+          "supported": true,
+          "threshold": 0.7,
+          "type": "LINEAR_R2_AT_LEAST"
+        }
+      ],
+      "row_count": 344,
+      "schema": {
+        "categorical": [
+          "species",
+          "island",
+          "sex"
+        ],
+        "columns": [
+          "species",
+          "island",
+          "bill_length_mm",
+          "bill_depth_mm",
+          "flipper_length_mm",
+          "body_mass_g",
+          "sex"
+        ],
+        "numeric": [
+          "bill_length_mm",
+          "bill_depth_mm",
+          "flipper_length_mm",
+          "body_mass_g"
+        ]
+      },
+      "strongest": {
+        "correlation": 0.8712017673060114,
+        "pair": [
+          "flipper_length_mm",
+          "body_mass_g"
+        ]
+      }
+    },
+    {
+      "checks": {
+        "all_hypotheses_supported": true,
+        "categorical_schema": true,
+        "numeric_schema": true,
+        "reference_corr_match": true,
+        "reference_group_match": true,
+        "row_count": true,
+        "strongest_pair": true
+      },
+      "corr": 0.6757341092113646,
+      "corr_reference": 0.6757341092113646,
+      "dataset": "TIPS",
+      "group_means": {
+        "Dinner": {
+          "count": 176,
+          "mean": 20.79715909090909
+        },
+        "Lunch": {
+          "count": 68,
+          "mean": 17.168676470588235
+        }
+      },
+      "hypotheses": [
+        {
+          "observed": 0.6757341092113646,
+          "supported": true,
+          "threshold": 0.6,
+          "type": "CORRELATION_ABS_AT_LEAST"
+        },
+        {
+          "group_means": {
+            "Dinner": {
+              "count": 176,
+              "mean": 20.79715909090909
+            },
+            "Lunch": {
+              "count": 68,
+              "mean": 17.168676470588235
+            }
+          },
+          "supported": true,
+          "type": "GROUP_MEAN_ORDER"
+        },
+        {
+          "fit": {
+            "intercept": 0.9202696135546735,
+            "n": 244,
+            "r2": 0.45661658635167635,
+            "slope": 0.10502451738435338
+          },
+          "supported": true,
+          "threshold": 0.4,
+          "type": "LINEAR_R2_AT_LEAST"
+        }
+      ],
+      "row_count": 244,
+      "schema": {
+        "categorical": [
+          "sex",
+          "smoker",
+          "day",
+          "time"
+        ],
+        "columns": [
+          "total_bill",
+          "tip",
+          "sex",
+          "smoker",
+          "day",
+          "time",
+          "size"
+        ],
+        "numeric": [
+          "total_bill",
+          "tip",
+          "size"
+        ]
+      },
+      "strongest": {
+        "correlation": 0.6757341092113646,
+        "pair": [
+          "total_bill",
+          "tip"
+        ]
+      }
+    }
+  ],
+  "g3_genesis_performed": false,
+  "next_required_capability": "REAL_SCIENCE_DATA_TRANSFER_CANONICAL_INTEGRATION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "31c5197a44aa4621719bf2c532443a8407b12d820262f145bfdab0389ef6b859",
+  "schema": "yado.g2.science_data_native_fresh_admission.v1",
+  "semantic_boundary": "BOUNDED TABULAR DESCRIPTIVE STATISTICS, PEARSON CORRELATION, SIMPLE LINEAR FIT, GROUP MEANS, AND THREE EXPLICIT HYPOTHESIS FORMS. NOT CAUSAL INFERENCE OR GENERAL SCIENTIFIC REASONING.",
+  "status": "PASS_SCIENCE_DATA_NATIVE_FRESH_ADMISSION_V1"
+}

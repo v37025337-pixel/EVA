@@ -56,7 +56,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "3f04cca76cb66a481dfa04b6a08d6aa9ed5406f67b3a1a2d079a484200e14b6d",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 104,
+  "event_count": 105,
   "events": [
     {
       "canonical_mutation": false,
@@ -1758,14 +1758,30 @@
       "source_digest": "629ab495dfc9827cc0d4328da70d0dc82ee39d27e6e2de989501526a8627868e",
       "source_path": "receipts/yado-science-data-native-self-evolution-v1-run-33419131498.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_SCIENCE_DATA_TRANSFER_FRESH_ADMISSION_V1",
+      "effect": "FRESH_PENGUINS_TIPS_TRANSFER; PASS=True; NEXT=REAL_SCIENCE_DATA_TRANSFER_CANONICAL_INTEGRATION_V1",
+      "event_hash": "19eee8526da605260f58eca342d7908ae8ec19f3588edd02474d39650c4f9173",
+      "event_id": "E0105_G2_SCIENCE_DATA_NATIVE_FRESH_ADMISSION",
+      "event_type": "SCIENCE_DATA_REASONER_FRESH_PUBLIC_TRANSFER",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 104,
+      "parent_event_hash": "795e5fe1d608aa73aaa9f34c7c0d6200f51951e7d1d5a820d77deaef9bdb71dc",
+      "promotion_applied": false,
+      "run_id": "33419266920",
+      "source_digest": "31c5197a44aa4621719bf2c532443a8407b12d820262f145bfdab0389ef6b859",
+      "source_path": "receipts/yado-science-data-native-fresh-admission-v1-run-33419266920.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "ebde35db64d536644adb2c80bebd037b9cad4f9e081fd75d41216d4fbf457945",
+  "ledger_digest": "a50ce7296f190e2c5f58e4ec26bca01f2dba2fff32759487ca109b99260d68e2",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "REAL_SCIENCE_DATA_TRANSFER_FRESH_ADMISSION_V1"
+    "REAL_SCIENCE_DATA_TRANSFER_CANONICAL_INTEGRATION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1794,5 +1810,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "795e5fe1d608aa73aaa9f34c7c0d6200f51951e7d1d5a820d77deaef9bdb71dc"
+  "tail_event_hash": "19eee8526da605260f58eca342d7908ae8ec19f3588edd02474d39650c4f9173"
 }
