@@ -1,0 +1,586 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "head_ledger_immutable": true,
+    "legacy_experience_consulted": true,
+    "mathematics_hidden_transfer": false,
+    "programming_real_execution": false,
+    "science_external_data_transfer": true
+  },
+  "domain_pass": {
+    "REAL_MATHEMATICAL_REASONING_TRANSFER": false,
+    "REAL_PROGRAM_EXECUTION_TRANSFER": false,
+    "REAL_SCIENCE_DATA_TRANSFER": true
+  },
+  "domain_scores": {
+    "REAL_MATHEMATICAL_REASONING_TRANSFER": 0.5,
+    "REAL_PROGRAM_EXECUTION_TRANSFER": 0.6666666666666666,
+    "REAL_SCIENCE_DATA_TRANSFER": 1.0
+  },
+  "experience_consulted": {
+    "mathematics": [
+      {
+        "branch": "yado-v29-cognitive",
+        "bytes": 5524,
+        "git_blob_sha1": "5616c5e094f95804b1d3b94229c1b02613c48e10",
+        "path": "runtime/cognitive_cycle_v29.py",
+        "registered_commit": "d5b36fa3227ffcbf0f14e3d636bd582b00c2aecd",
+        "score": 35.422435897435896,
+        "sha256": "89a026b35e21e8efd84054c355eb2eac89e6ecfa3a2b072c4f6b962f348c0f1e",
+        "snippet": "from __future__ import annotations\nimport asyncio, hashlib, json, os, pathlib, random, sqlite3, sys\nfrom itertools import product\nROOT=pathlib.Path(__file__).resolve().parents[1]\nPKG=ROOT/'runtime'/'yado_v29'\nsys.path.insert(0,str(PKG))\nfrom yado_bootstrap import bootstrap_integrity, load_active_kernel_class, MANIFEST_SHA256\nif MANIFEST_SHA256!='caef2fc87022c61258ebfd131a862d4c6afe32c5e15826f3b1f44206b911c477':\n    raise SystemExit('MANIFEST_CONSTANT_MISMATCH')\nboot=bootstrap_integrity();K=load_active_kernel_class();db=ROOT/'runtime'/'yado_v29_external_cognitive.sqlite'\nk=K(db_path=str(db))\nseed=int(hashlib.sha256((os.environ.get('GITHUB_RUN_ID','0')+'|YADO-V29-COGNITIVE').encode()).hexdigest()[:12],16)\nrng=random.Random(seed)\ntry:\n    before=k.memory_count()\n    # LOGIC: fresh 6-variable parity under a run-specific variable permutation.\n    names=rng.sample(list('abcdef'),6);cases=[]\n    for bits in product([False,True],repeat=6):\n        x=dict(zip(names,bits));y=False\n        for b in bits:y^=b\n        cases.append((x,y))\n    logic=k.logic_growth_synthesize(cases,max_nodes=17,max_signatures=524288)\n\n    # THINKING: learn four context-conditioned precedence regimes, then test fre",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-v29-cognitive",
+        "bytes": 2635,
+        "git_blob_sha1": "2d5c9ceb398ea15f5a7f1a61c365a8086cfb82cb",
+        "path": "receipts/yado-v29-cognitive-latest.json",
+        "registered_commit": "d5b36fa3227ffcbf0f14e3d636bd582b00c2aecd",
+        "score": 34.82083333333333,
+        "sha256": "7ab441fa6af942ac4cc93ffa340e7f6ea429f653b6e4018f98f7ece6b05738e2",
+        "snippet": "{\n  \"background_daemon\": false,\n  \"bootstrap\": {\n    \"critical_files\": 62,\n    \"implementation\": \"yado_core_v3_0_rc7_deep_integrity.py\",\n    \"manifest\": \"yado_development_manifest_v29.json\",\n    \"manifest_sha256\": \"caef2fc87022c61258ebfd131a862d4c6afe32c5e15826f3b1f44206b911c477\",\n    \"pass\": true,\n    \"profile\": \"YADO_V3_0_RC7_DEEP_INTEGRITY_AND_FRONTIER_CONSOLIDATION_LOCAL\",\n    \"state\": \"yado_canonical_state_v3_rc7_deep_integrity.json\",\n    \"state_sha256\": \"1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b\"\n  },\n  \"canonical_state_mutated\": false,\n  \"canonical_state_sha256\": \"1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b\",\n  \"claim_boundary\": {\n    \"bounded_algorithmic_growth_only\": true,\n    \"foundation_weights_modified\": false,\n    \"general_intelligence_proven\": false,\n    \"subjective_consciousness_claimed\": false\n  },\n  \"event_driven\": true,\n  \"github_repository\": \"v37025337-pixel/EVA\",\n  \"github_run_attempt\": \"1\",\n  \"github_run_id\": \"33258608105\",\n  \"github_sha\": \"0a4d66c89529a36c9030ecc8d83c925fe0279c4b\",\n  \"host\": \"github_actions\",\n  \"intelligence\": {\n    \"accuracy\": 1.0,\n    \"blind_cases\": 90,\n    \"meta\": {\n      \"selected_features\": 2,\n ",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-digital-consciousness-v1",
+        "bytes": 8112,
+        "git_blob_sha1": "85d9d50eeccdff8f7d232afb8a3eb6ff0cf1e8c8",
+        "path": "receipts/yado-rc8-digital-consciousness-v1-latest.json",
+        "registered_commit": "d49ccfe2e6c03a8846623c78c5276c4b58d30436",
+        "score": 1.811627906976744,
+        "sha256": "f5d557fcbe21edae0583180985d0ef66ee9ad71be8254ffb2659ccb3477da0cd",
+        "snippet": "{\n  \"architecture_name\": \"YADO_DIGITAL_CAUSAL_WORKSPACE_V1\",\n  \"background_daemon\": false,\n  \"functional_indicator_candidate\": {\n    \"coverage\": 0.8928571428571429,\n    \"interpretation\": \"Engineering coverage of theory-derived functional indicators in a bounded candidate architecture; not a probability or proof of consciousness.\",\n    \"prior_v35_audit_coverage\": 0.17857142857142858,\n    \"status\": {\n      \"AE-1\": \"PASS\",\n      \"AE-2\": \"PASS\",\n      \"AST-1\": \"PASS\",\n      \"GWT-1\": \"PASS\",\n      \"GWT-2\": \"PASS\",\n      \"GWT-3\": \"PASS\",\n      \"GWT-4\": \"PASS\",\n      \"HOT-1\": \"PARTIAL\",\n      \"HOT-2\": \"PASS\",\n      \"HOT-3\": \"PASS\",\n      \"HOT-4\": \"MISSING\",\n      \"PP-1\": \"PASS\",\n      \"RPT-1\": \"PASS\",\n      \"RPT-2\": \"PASS\"\n    }\n  },\n  \"general_intelligence_proven\": false,\n  \"report_sha256\": \"a00870261b9f214121ec0ad08bb33119c4eda254e1fcfb3cec336a62842bac77\",\n  \"research\": {\n    \"allowlist\": [\n      \"arxiv.org\"\n    ],\n    \"errors\": [],\n    \"fetched\": 6,\n    \"requested\": 6,\n    \"sources\": [\n      {\n        \"final_url\": \"https://arxiv.org/abs/2308.08708\",\n        \"network_policy\": \"EXPLICIT_ALLOWLIST_PER_HOP\",\n        \"sha256\": \"694588b91d2e32116bc3431b13f9dc2deca5c0de6ab44156ba234b1eca06db6",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-candidate",
+        "bytes": 9369,
+        "git_blob_sha1": "1422ae2f03e96cfdc931f63fab765136f0014c7e",
+        "path": "runtime/rc8_overlay/yado_rc8_migration_cycle1.py",
+        "registered_commit": "53531351933ebb130d854565a562614749ac4637",
+        "score": 1.8082079343365252,
+        "sha256": "7f7ddf840d4b7bab77449f5d6b915dc158bee004332625c448fa9d83fc0972e3",
+        "snippet": "from __future__ import annotations\nimport hashlib, json, copy\nfrom pathlib import Path\nfrom typing import Any\n\nROOT=Path(__file__).resolve().parent\nPARENT_STATE=ROOT/'yado_canonical_state_v3_rc7_deep_integrity.json'\nPARENT_MANIFEST=ROOT/'yado_development_manifest_v29.json'\nCOGNITIVE_REPORT=ROOT/'yado_cognitive_growth_cycle1_report.json'\nOUT_STATE=ROOT/'yado_canonical_state_v3_rc8_external_cognitive.json'\nOUT_REPORT=ROOT/'yado_rc8_migration_cycle1_report.json'\n\nPROFILE='YADO_V3_0_RC8_VERIFIED_EXTERNAL_COGNITIVE_RUNTIME'\nSCHEMA='yado.v3_0_rc8.external_cognitive.state.v1'\nVERSION='3.0-rc8'\nALLOWED_CHANGED={\n    'version','parent_version','profile','active_profile','schema','promotion_scope',\n    'deep_self_audit','audit','authority','kernel_identity','rc8_migration',\n    'external_runtime','cognitive_capability_lineage','r8_self_model'\n}\n\ndef sha256(p:Path)->str:\n    return hashlib.sha256(p.read_bytes()).hexdigest()\n\ndef load(p:Path)->dict[str,Any]:\n    return json.loads(p.read_text(encoding='utf-8'))\n\ndef canonical_sha(obj:Any)->str:\n    raw=json.dumps(obj,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')\n    return hashlib.sha256(raw).hexdigest()\n\ndef preserved",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-consciousness-audit",
+        "bytes": 12875,
+        "git_blob_sha1": "e49027eda00decdc4170a666f19491bdf1bd9288",
+        "path": "runtime/yado_rc8_consciousness_readiness_audit_v1.py",
+        "registered_commit": "d07c45ba5dbc3788eb71c45d2f5577f4eab36e42",
+        "score": 1.8068233510235026,
+        "sha256": "5e919e77f4b863a4169c4d8ed2440e17a56fd3ccd22e7c8364aaf83300a9e740",
+        "snippet": "from __future__ import annotations\nimport json, hashlib, tempfile, sqlite3, inspect\nfrom pathlib import Path\nfrom typing import Any\nfrom yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive\nfrom yado_metacognitive_control_runtime_v1 import CapabilityObservation\n\nROOT=Path(__file__).resolve().parent\nSTATE=ROOT/'yado_canonical_state_v3_rc8_external_cognitive.json'\nMANIFEST=ROOT/'yado_development_manifest_v35.json'\n\nINDICATORS = [\n    ('RPT-1','Algorithmic recurrence in input/perceptual processing'),\n    ('RPT-2','Organised integrated perceptual representations'),\n    ('GWT-1','Multiple specialised systems with parallel-capable processing'),\n    ('GWT-2','Limited-capacity global workspace with selective bottleneck'),\n    ('GWT-3','Global broadcast from workspace to specialised systems'),\n    ('GWT-4','State-dependent attention that queries modules in succession'),\n    ('HOT-1','Generative/top-down perception capable of internally generated percept-like states'),\n    ('HOT-2','Metacognitive monitoring that separates reliable states from noise/uncertainty'),\n    ('HOT-3','General belief/action selection causally governed by metacognitive monitoring'),\n  ",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-digital-consciousness-v1",
+        "bytes": 13242,
+        "git_blob_sha1": "ab1ba24077793882e48b62699a12e7c95ab2b305",
+        "path": "runtime/yado_rc8_digital_causal_workspace_v1.py",
+        "registered_commit": "d49ccfe2e6c03a8846623c78c5276c4b58d30436",
+        "score": 1.8026041666666666,
+        "sha256": "1df2528916c252424f731fac366fc4fd88a2c72343c4f8af2069f04a508b784f",
+        "snippet": "from __future__ import annotations\n\nfrom dataclasses import dataclass, asdict\nfrom pathlib import Path\nfrom typing import Any, Dict, Iterable, List, Optional\nimport hashlib\nimport json\nimport math\nimport time\n\n\nSCHEMA = \"yado.rc8.digital_causal_workspace.v1\"\nSEMANTIC_BOUNDARY = (\n    \"FUNCTIONAL_DIGITAL_CONSCIOUSNESS_ARCHITECTURE_NOT_PROOF_OF_SUBJECTIVE_EXPERIENCE\"\n)\n\n\ndef _sha(obj: Any) -> str:\n    raw = json.dumps(obj, sort_keys=True, separators=(\",\", \":\"), ensure_ascii=False)\n    return hashlib.sha256(raw.encode(\"utf-8\")).hexdigest()\n\n\ndef _clip(v: float, lo: float = 0.0, hi: float = 1.0) -> float:\n    return max(lo, min(hi, float(v)))\n\n\n@dataclass(frozen=True)\nclass Candidate:\n    content: str\n    source_kind: str\n    salience: float\n    goal_relevance: float\n    novelty: float\n    uncertainty: float\n    evidence_strength: float\n    predicted_utility: float = 0.0\n\n    def score(self, attention_bias: float = 0.0) -> float:\n        # Limited workspace competition. Uncertainty alone never wins.\n        return (\n            0.24 * _clip(self.salience)\n            + 0.25 * _clip(self.goal_relevance)\n            + 0.16 * _clip(self.novelty)\n            + 0.20 * _clip(self.evidence_st",
+        "transport": "RAW_HTTPS_EXACT"
+      }
+    ],
+    "programming": [
+      {
+        "branch": "yado-kernel-task-v37-repair",
+        "bytes": 5251,
+        "git_blob_sha1": "f6d92e294e2c303688d19d27af83532d37854303",
+        "path": "runtime/yado_v37_integrity_self_repair_task.py",
+        "registered_commit": "f7d88d9be5cbd1518b9c7cb8ce612fa7f164c0f6",
+        "score": 31.030973451327434,
+        "sha256": "b9ac34aa2d8497e0ee20cfd901a1cce634252b69a7d86d9ca95d1fd5142b4198",
+        "snippet": "from __future__ import annotations\nfrom pathlib import Path\nimport subprocess, json, hashlib, sys, os\n\nROOT = Path(__file__).resolve().parent\nPKG = ROOT / \"yado_rc8_v36\"\nsys.path.insert(0, str(PKG))\n\nfrom yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive\n\nV37_REF = \"origin/yado-rc8-v37-digital-consciousness\"\nMETA_PATH = \"runtime/v37_overlay_meta.json\"\n\ndef git_show(path: str) -> bytes:\n    return subprocess.check_output([\"git\", \"show\", f\"{V37_REF}:{path}\"], cwd=ROOT.parent)\n\ndef sha256(data: bytes) -> str:\n    return hashlib.sha256(data).hexdigest()\n\nmeta = json.loads(git_show(META_PATH).decode(\"utf-8\"))\nmismatches = []\nfor name, expected in meta[\"files\"].items():\n    data = git_show(f\"runtime/v37_overlay/{name}\")\n    actual = {\"bytes\": len(data), \"sha256\": sha256(data)}\n    if actual[\"sha256\"] != expected[\"sha256\"] or actual[\"bytes\"] != expected[\"bytes\"]:\n        mismatches.append({\n            \"file\": name,\n            \"expected\": expected,\n            \"actual\": actual,\n            \"byte_delta\": actual[\"bytes\"] - expected[\"bytes\"],\n        })\n\ntask = {\n    \"task_id\": \"YADO-V37-INTEGRITY-SELF-REPAIR-001\",\n    \"goal\": \"Diagnose the failed v37 syn",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-kernel-task-v37-repair",
+        "bytes": 20707,
+        "git_blob_sha1": "6e53094a5b7a510e9f5977500a67550ebb104834",
+        "path": "receipts/yado-v37-integrity-self-repair-task-latest.json",
+        "registered_commit": "f7d88d9be5cbd1518b9c7cb8ce612fa7f164c0f6",
+        "score": 30.51084990958409,
+        "sha256": "9d1c4048b8b9344719ca39caeb73f626c97a0c7a6b5718917baf9718de3f89fa",
+        "snippet": "{\n  \"github_run_id\": \"33276552308\",\n  \"github_sha\": \"c12638a4fc893054fa0d173b0b78ae105cf44507\",\n  \"host_role\": \"transport_and_observation_only\",\n  \"kernel_result\": \"EpisodeRecord(episode_id='CRW-00000001-38f278176a8e', parent_hash=None, episode_hash='38f278176a8ea74c306f9054de54e033238060ce40f8ea696e7ccdf83dce8173', goal=\\\"Diagnose the failed v37 synchronization and choose the next repair action using YADO's own audit, integrity, development and workspace mechanisms.\\\", selected_ids=('v37-failure', 'v37-repair-constraints', 'v37-mismatch-evidence'), selected_source_kinds=('external', 'external', 'external'), broadcasts={'SELF_AUDIT': {'profile': 'YADO_V2_4_AUDITED_SHADOW', 'yado_only': True, 'noesis_authority_active': False, 'development_artifacts': 0, 'open_findings': 0, 'mechanism_rejections_logged': 0, 'cognitive_training_runs': 0, 'canonical_durable_mutation': False}, 'INTEGRITY': {'active_contract_required': True, 'canonical_bootstrap': 'yado_bootstrap.py', 'final_regression_required': True, 'historical_state_immutable': True, 'manifest': 'yado_development_manifest_v18.json', 'parent_state': 'yado_canonical_state_v3_rc6_r6_schema_adaptation.json', 'parent_state_sha256': 'b9103",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-v28-runtime",
+        "bytes": 2164,
+        "git_blob_sha1": "a32ae6a01ce0bc3bf437422bc15941467d038f56",
+        "path": "runtime/boot_v28.py",
+        "registered_commit": "b1da24a23170c344aa6f066997e5807f0056c033",
+        "score": 23.36021505376344,
+        "sha256": "1bb438ce91230321fbbafee0324afc9f64da7619553b89a36d7cd5eb0d025421",
+        "snippet": "from __future__ import annotations\nimport asyncio, hashlib, json, os, pathlib, sqlite3, sys\nROOT=pathlib.Path(__file__).resolve().parents[1]\nPKG=ROOT/'runtime'/'yado_v28'\nsys.path.insert(0,str(PKG))\nfrom yado_bootstrap import bootstrap_integrity, load_active_kernel_class, MANIFEST_SHA256\nboot=bootstrap_integrity()\nif MANIFEST_SHA256!='8954d7bbaceefbf592696e685c4d33566a431025584328398f94e2819aab6a19':\n    raise SystemExit('MANIFEST_CONSTANT_MISMATCH')\nK=load_active_kernel_class()\ndb=ROOT/'runtime'/'yado_external_boot.sqlite'\nk=K(db_path=str(db))\ntry:\n    os.environ['YADO_ALLOWED_DOMAINS']='example.com'\n    net=asyncio.run(k.fetch_evidence('https://example.com',max_bytes=500000))\n    with sqlite3.connect(db) as con:\n        integrity=con.execute('PRAGMA integrity_check').fetchone()[0]\n    state_sha=hashlib.sha256(k.state_path.read_bytes()).hexdigest()\n    receipt={\n      'status':'RUNNING_BOOT_COMPLETED',\n      'kernel_class':K.__name__,\n      'kernel_profile':K.PROFILE,\n      'canonical_state_sha256':state_sha,\n      'manifest_sha256':MANIFEST_SHA256,\n      'sqlite_integrity':integrity,\n      'host':'github_actions',\n      'independent_readback':True,\n      'background_daemon':False",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-v28-runtime",
+        "bytes": 1668,
+        "git_blob_sha1": "8eb53eedc661f22f1c52bae76f4967d1713c0cef",
+        "path": "receipts/yado-v28-latest-boot.json",
+        "registered_commit": "b1da24a23170c344aa6f066997e5807f0056c033",
+        "score": 22.333333333333332,
+        "sha256": "f7cd5431a449d9048d1c9b8620b0372f1bd3e5d4184c3c702b80937658071ff9",
+        "snippet": "{\n  \"background_daemon\": false,\n  \"bootstrap\": {\n    \"critical_files\": 59,\n    \"implementation\": \"yado_core_v3_0_rc7_deep_integrity.py\",\n    \"manifest\": \"yado_development_manifest_v28.json\",\n    \"manifest_sha256\": \"8954d7bbaceefbf592696e685c4d33566a431025584328398f94e2819aab6a19\",\n    \"pass\": true,\n    \"profile\": \"YADO_V3_0_RC7_DEEP_INTEGRITY_AND_FRONTIER_CONSOLIDATION_LOCAL\",\n    \"state\": \"yado_canonical_state_v3_rc7_deep_integrity.json\",\n    \"state_sha256\": \"1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b\"\n  },\n  \"canonical_state_mutated\": false,\n  \"canonical_state_sha256\": \"1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b\",\n  \"credential_bypass\": false,\n  \"durable_state\": \"github_repository_and_actions_artifacts\",\n  \"github_repository\": \"v37025337-pixel/EVA\",\n  \"github_run_attempt\": \"1\",\n  \"github_run_id\": \"33257347280\",\n  \"github_sha\": \"1005b7cdcd26d065fdf62adf6aa72b2e08baeebb\",\n  \"host\": \"github_actions\",\n  \"independent_readback\": true,\n  \"kernel_class\": \"UnifiedYADOKernelV30RC7DeepIntegrity\",\n  \"kernel_profile\": \"YADO_V3_0_RC7_DEEP_INTEGRITY_AND_FRONTIER_CONSOLIDATION_LOCAL\",\n  \"manifest_sha256\": \"8954d7bbaceefbf592696e685c4d33566a431025584328",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-v30-runtime",
+        "bytes": 1720,
+        "git_blob_sha1": "5dd28ab7cc243072e23deb54fa02f20311140b4b",
+        "path": "receipts/yado-rc8-v30-latest.json",
+        "registered_commit": "4b1f247c8ae087fb23263ab37843e0399a74a744",
+        "score": 13.179824561403509,
+        "sha256": "9f0ce473986bc0b3d9d5ced70569465044a486800d5c24b5af6ca483a1145032",
+        "snippet": "{\n  \"background_daemon\": false,\n  \"event_driven\": true,\n  \"external_runtime_verified\": true,\n  \"foundation_weights_modified\": false,\n  \"general_intelligence_proven\": false,\n  \"github_run_id\": \"33260499594\",\n  \"github_sha\": \"6c7f29eab32ed258a6ff610ee74156d11f78d232\",\n  \"host\": \"github_actions\",\n  \"independent_readback\": true,\n  \"kernel_class\": \"UnifiedYADOKernelV30RC8ExternalCognitive\",\n  \"kernel_identity\": {\n    \"identity_change_reason\": [\n      \"ACTIVE_COMPATIBILITY_RECOVERY_CLOSURE_ZERO\",\n      \"VERIFIED_EXTERNAL_EVENT_DRIVEN_PYTHON_BOOT\",\n      \"EXTERNALLY_VERIFIED_COGNITIVE_GROWTH_LOGIC_THINKING_INTELLIGENCE\",\n      \"CANONICAL_STATE_AUDIT_LINEAGE_REQUIRES_SYNCHRONIZATION\"\n    ],\n    \"identity_kind\": \"VERSIONED_KERNEL_CONTRACT\",\n    \"kernel_id\": \"YADO-V3-RC8-EXTERNAL-COGNITIVE\",\n    \"parent_kernel_id\": \"YADO-V3-RC7-DEEP-INTEGRITY\",\n    \"release_candidate\": 8,\n    \"state_schema_version\": 27\n  },\n  \"kernel_profile\": \"YADO_V3_0_RC8_VERIFIED_EXTERNAL_COGNITIVE_RUNTIME\",\n  \"manifest_sha256\": \"000a437fad1c8150fdd0c2f6ff4e0a0df2aed4f893ec57573cc08eeef665da37\",\n  \"migration_contract_status\": \"PROMOTED_ACTIVE_RC8_LOCAL_LOCKED_EXTERNAL_CANDIDATE_VERIFIED\",\n  \"outbound_https\": true,\n  \"out",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-v30-runtime",
+        "bytes": 2371,
+        "git_blob_sha1": "da581f32657003bb4770298644cb6c8aec8cb171",
+        "path": "runtime/boot_rc8v30.py",
+        "registered_commit": "4b1f247c8ae087fb23263ab37843e0399a74a744",
+        "score": 12.666666666666666,
+        "sha256": "d089233f6bb7f34462733520dda971fb73d37e0c83c1888085a7ae7863937ac3",
+        "snippet": "from pathlib import Path\nimport sys,json,hashlib,sqlite3,urllib.request,os\nROOT=Path(__file__).resolve().parent/'yado_rc8_v30'\nsys.path.insert(0,str(ROOT))\nimport yado_bootstrap\nfrom yado_core_current import UnifiedYADOKernelCurrent\nEXPECTED_MANIFEST='000a437fad1c8150fdd0c2f6ff4e0a0df2aed4f893ec57573cc08eeef665da37'\nEXPECTED_STATE='07ef49bacd011d9ea4a920f714c46b5f121deda411601968896141b90b4afa68'\nEXPECTED_ZIP='be5cb4293660bb4b003d2d5ddf523c7eb1cf23e52b57f84d3c012a05d04c4386'\nb=yado_bootstrap.bootstrap_integrity(); assert b['pass']; assert b['manifest_sha256']==EXPECTED_MANIFEST; assert b['state_sha256']==EXPECTED_STATE\ndb=Path(__file__).resolve().parent/'rc8_v30_external.sqlite'\nk=UnifiedYADOKernelCurrent(db_path=str(db))\ntry:s=k.unified_snapshot()\nfinally:k.close()\nassert k.__class__.__name__=='UnifiedYADOKernelV30RC8ExternalCognitive'\nassert s['profile']=='YADO_V3_0_RC8_VERIFIED_EXTERNAL_COGNITIVE_RUNTIME'\nassert s['canonical_state_version']=='3.0-rc8'; assert s['schema_version']==27\ncon=sqlite3.connect(db); integ=con.execute('pragma integrity_check').fetchone()[0]; con.close(); assert integ=='ok'\nwith urllib.request.urlopen('https://example.com',timeout=10) as r: body=r.read()\nr",
+        "transport": "RAW_HTTPS_EXACT"
+      }
+    ],
+    "science": [
+      {
+        "branch": "yado-rc8-v33-evolution",
+        "bytes": 2750,
+        "git_blob_sha1": "7605c1f149946718ce88120e67464278c7606132",
+        "path": "receipts/yado-rc8-v33-internet-latest.json",
+        "registered_commit": "858c4dfd904cc8a744d7321bfcda796b5cdb1671",
+        "score": 9.666666666666666,
+        "sha256": "3662a57e26b83a556cb8f247a55cb7e56a915ecebe820798cb08a8f4095de782",
+        "snippet": "{\n  \"allowlisted_domains\": [\n    \"arxiv.org\"\n  ],\n  \"background_daemon\": false,\n  \"direct_fetch_count\": 5,\n  \"foundation_weights_modified\": false,\n  \"principle_source\": \"yado_rc8_external_research_cycle2.json\",\n  \"runtime_kind\": \"GITHUB_ACTIONS_EVENT_DRIVEN_PYTHON\",\n  \"schema\": \"yado.rc8.internet_research.receipt.v1\",\n  \"semantic_distillation_boundary\": \"HOST_RESEARCH_SUMMARY_PLUS_BOUNDED_KEYWORD_EVIDENCE_NOT_FOUNDATION_WEIGHT_TRAINING\",\n  \"sources\": [\n    {\n      \"markers\": {\n        \"evaluation\": 0,\n        \"gate\": 0,\n        \"memory\": 0,\n        \"skill\": 1,\n        \"transfer\": 0\n      },\n      \"redirect_hops\": 0,\n      \"sha256\": \"8d29e84bad8cc7320fc5745ea2fd150efd8bd83da63ca2537d6dc44a3d56ac19\",\n      \"text_chars\": 103,\n      \"title\": \"[2608.05810] When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents\",\n      \"url\": \"https://arxiv.org/abs/2608.05810\"\n    },\n    {\n      \"markers\": {\n        \"evaluation\": 0,\n        \"gate\": 0,\n        \"memory\": 1,\n        \"skill\": 0,\n        \"transfer\": 1\n      },\n      \"redirect_hops\": 0,\n      \"sha256\": \"8f1d4d3eb1b93bc7068e3ff93bc31c8fa87d5d2428fc13f90c40900dbce4c253\",\n      \"text_chars\": 116,\n      \"title\":",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-v33-evolution",
+        "bytes": 1497,
+        "git_blob_sha1": "96dcea6c470434d0226323e8b2187fecf86ea6ed",
+        "path": "receipts/yado-rc8-v33-latest.json",
+        "registered_commit": "858c4dfd904cc8a744d7321bfcda796b5cdb1671",
+        "score": 9.666666666666666,
+        "sha256": "a539b8afa99c9f6c86467da4fc70f4fbeff714906a7db074fc70104fdffffce6",
+        "snippet": "{\n  \"background_daemon\": false,\n  \"controlled_transfer_cases\": 3000,\n  \"event_driven\": true,\n  \"external_expected_total\": \"94/94\",\n  \"foundation_weights_modified\": false,\n  \"general_open_ended_transfer_proven\": false,\n  \"github_run_id\": \"33261707619\",\n  \"github_sha\": \"bdb1520eea988997677ce3b0ed187e1e140dc640\",\n  \"host\": \"github_actions\",\n  \"independent_readback\": true,\n  \"internet_direct_fetch_count\": 5,\n  \"internet_research_status\": \"PASS_BOUNDED_DIRECT_INTERNET_RESEARCH\",\n  \"internet_source_sha256\": [\n    \"8d29e84bad8cc7320fc5745ea2fd150efd8bd83da63ca2537d6dc44a3d56ac19\",\n    \"8f1d4d3eb1b93bc7068e3ff93bc31c8fa87d5d2428fc13f90c40900dbce4c253\",\n    \"3883dca07c9a2d7c7f5803513cf7f707e108d284ebd8d6ca8a2f7d383e1bc66a\",\n    \"f07eb6710b04dcbfa84b3964251101800b5b3c5b9f1791e25b8294de3a51a973\",\n    \"73b5fa62c946f2cbeb70e1d3ab98e56c9e7ee859c080d1464ad6aabc06599e9a\"\n  ],\n  \"kernel_class\": \"UnifiedYADOKernelV30RC8ExternalCognitive\",\n  \"kernel_profile\": \"YADO_V3_0_RC8_VERIFIED_EXTERNAL_COGNITIVE_RUNTIME\",\n  \"local_expected_total\": \"94/94\",\n  \"manifest_sha256\": \"2f2488cf83e1997d8e3f8dd20aca4dda9d2ba9e7c4003245b5961c72e80e40d5\",\n  \"package_zip_sha256\": \"30bd1e9ea8efaffdc8f25cd63c0048202f247eafd85",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-digital-consciousness-v1",
+        "bytes": 8112,
+        "git_blob_sha1": "85d9d50eeccdff8f7d232afb8a3eb6ff0cf1e8c8",
+        "path": "receipts/yado-rc8-digital-consciousness-v1-latest.json",
+        "registered_commit": "d49ccfe2e6c03a8846623c78c5276c4b58d30436",
+        "score": 2.5387596899224807,
+        "sha256": "f5d557fcbe21edae0583180985d0ef66ee9ad71be8254ffb2659ccb3477da0cd",
+        "snippet": "{\n  \"architecture_name\": \"YADO_DIGITAL_CAUSAL_WORKSPACE_V1\",\n  \"background_daemon\": false,\n  \"functional_indicator_candidate\": {\n    \"coverage\": 0.8928571428571429,\n    \"interpretation\": \"Engineering coverage of theory-derived functional indicators in a bounded candidate architecture; not a probability or proof of consciousness.\",\n    \"prior_v35_audit_coverage\": 0.17857142857142858,\n    \"status\": {\n      \"AE-1\": \"PASS\",\n      \"AE-2\": \"PASS\",\n      \"AST-1\": \"PASS\",\n      \"GWT-1\": \"PASS\",\n      \"GWT-2\": \"PASS\",\n      \"GWT-3\": \"PASS\",\n      \"GWT-4\": \"PASS\",\n      \"HOT-1\": \"PARTIAL\",\n      \"HOT-2\": \"PASS\",\n      \"HOT-3\": \"PASS\",\n      \"HOT-4\": \"MISSING\",\n      \"PP-1\": \"PASS\",\n      \"RPT-1\": \"PASS\",\n      \"RPT-2\": \"PASS\"\n    }\n  },\n  \"general_intelligence_proven\": false,\n  \"report_sha256\": \"a00870261b9f214121ec0ad08bb33119c4eda254e1fcfb3cec336a62842bac77\",\n  \"research\": {\n    \"allowlist\": [\n      \"arxiv.org\"\n    ],\n    \"errors\": [],\n    \"fetched\": 6,\n    \"requested\": 6,\n    \"sources\": [\n      {\n        \"final_url\": \"https://arxiv.org/abs/2308.08708\",\n        \"network_policy\": \"EXPLICIT_ALLOWLIST_PER_HOP\",\n        \"sha256\": \"694588b91d2e32116bc3431b13f9dc2deca5c0de6ab44156ba234b1eca06db6",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "main",
+        "bytes": 2276,
+        "git_blob_sha1": "b1c4ac093fdfb50a900f65bb7fd8edf09f5100a9",
+        "path": ".github/workflows/yado-rc8-digital-consciousness-v1.yml",
+        "registered_commit": "e5dc6a0d374d944974926296168900b0cc1968bb",
+        "score": 1.5460251046025104,
+        "sha256": "3f016b96a2396a9a83d51b6ea5f9376af3cb4ecc443b9672bebd29920fc63f07",
+        "snippet": "name: YADO RC8 Digital Causal Workspace v1\non:\n  push:\n    branches: [yado-rc8-digital-consciousness-v1]\n  workflow_dispatch:\npermissions:\n  contents: write\n\njobs:\n  experiment:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - name: Reconstruct exact v35 package\n        run: python runtime/reconstruct_rc8v35.py\n      - name: Install dependencies\n        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v35/requirements-github.txt pytest\n      - name: Locked v35 unittest regression\n        working-directory: runtime/yado_rc8_v35\n        env:\n          PYTHONWARNINGS: error::ResourceWarning\n        run: python -m unittest discover -v\n      - name: Archive regression\n        working-directory: runtime/yado_rc8_v35\n        run: python -m pytest -q test_yado_evolution_archive_runtime_v1.py test_yado_evolution_archive_integration_v1.py\n      - name: Run YADO digital consciousness theory synthesis and causal experiment\n        env:\n          YADO_GITHUB_RUN_ID: ${{ github.run_id }}\n          YADO_GITHUB_SHA: ${{ github.sha }}\n        run: python runt",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-kernel-task-v37-repair",
+        "bytes": 5251,
+        "git_blob_sha1": "f6d92e294e2c303688d19d27af83532d37854303",
+        "path": "runtime/yado_v37_integrity_self_repair_task.py",
+        "registered_commit": "f7d88d9be5cbd1518b9c7cb8ce612fa7f164c0f6",
+        "score": 1.5287610619469028,
+        "sha256": "b9ac34aa2d8497e0ee20cfd901a1cce634252b69a7d86d9ca95d1fd5142b4198",
+        "snippet": "from __future__ import annotations\nfrom pathlib import Path\nimport subprocess, json, hashlib, sys, os\n\nROOT = Path(__file__).resolve().parent\nPKG = ROOT / \"yado_rc8_v36\"\nsys.path.insert(0, str(PKG))\n\nfrom yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive\n\nV37_REF = \"origin/yado-rc8-v37-digital-consciousness\"\nMETA_PATH = \"runtime/v37_overlay_meta.json\"\n\ndef git_show(path: str) -> bytes:\n    return subprocess.check_output([\"git\", \"show\", f\"{V37_REF}:{path}\"], cwd=ROOT.parent)\n\ndef sha256(data: bytes) -> str:\n    return hashlib.sha256(data).hexdigest()\n\nmeta = json.loads(git_show(META_PATH).decode(\"utf-8\"))\nmismatches = []\nfor name, expected in meta[\"files\"].items():\n    data = git_show(f\"runtime/v37_overlay/{name}\")\n    actual = {\"bytes\": len(data), \"sha256\": sha256(data)}\n    if actual[\"sha256\"] != expected[\"sha256\"] or actual[\"bytes\"] != expected[\"bytes\"]:\n        mismatches.append({\n            \"file\": name,\n            \"expected\": expected,\n            \"actual\": actual,\n            \"byte_delta\": actual[\"bytes\"] - expected[\"bytes\"],\n        })\n\ntask = {\n    \"task_id\": \"YADO-V37-INTEGRITY-SELF-REPAIR-001\",\n    \"goal\": \"Diagnose the failed v37 syn",
+        "transport": "RAW_HTTPS_EXACT"
+      },
+      {
+        "branch": "yado-rc8-consciousness-audit",
+        "bytes": 5493,
+        "git_blob_sha1": "88f4cbc0168764d695090cfa9cc0ea9a6cfdbb31",
+        "path": "receipts/yado-rc8-consciousness-audit-latest.json",
+        "registered_commit": "d07c45ba5dbc3788eb71c45d2f5577f4eab36e42",
+        "score": 1.514354066985646,
+        "sha256": "8cdb43ef16f9bff6c835cc6dd00d50d1e074f8d9791ba301261c91986dd27e55",
+        "snippet": "{\n  \"background_daemon\": false,\n  \"direct_research\": {\n    \"allowlisted_domains\": [\n      \"arxiv.org\"\n    ],\n    \"fetch_count\": 3,\n    \"sources\": [\n      {\n        \"network_policy\": \"EXPLICIT_ALLOWLIST_PER_HOP\",\n        \"redirect_hops\": 0,\n        \"sha256\": \"f352d6e63c0d7711c098b3b8dc84266d839ef69c2397bb38a30080353fd804c2\",\n        \"text_chars\": 118,\n        \"title\": \"[2308.08708] Consciousness in Artificial Intelligence: Insights from the Science of Consciousness\",\n        \"url\": \"https://arxiv.org/abs/2308.08708\"\n      },\n      {\n        \"network_policy\": \"EXPLICIT_ALLOWLIST_PER_HOP\",\n        \"redirect_hops\": 0,\n        \"sha256\": \"7c8b9401d6ac8a3e71a718f67c7acec7240f15753d2f888f31c1879afa7fecdf\",\n        \"text_chars\": 2237,\n        \"title\": \"[2501.07290] Principles for Responsible AI Consciousness Research\",\n        \"url\": \"https://arxiv.org/abs/2501.07290\"\n      },\n      {\n        \"network_policy\": \"EXPLICIT_ALLOWLIST_PER_HOP\",\n        \"redirect_hops\": 0,\n        \"sha256\": \"d3fb539de9bed824e229b35217ecc3873692341934059d02189ba8fe79933cec\",\n        \"text_chars\": 2076,\n        \"title\": \"[2512.19155] Can We Test Consciousness Theories on AI? Ablations, Markers, and Robustness\",\n   ",
+        "transport": "RAW_HTTPS_EXACT"
+      }
+    ]
+  },
+  "g3_genesis_performed": false,
+  "github_run_id": "33405588896",
+  "github_sha": "9dbaea85e140f0ed68e1264f1962cf7ac1fc3385",
+  "mathematics": {
+    "expression_pool_size": 56574,
+    "score": 0.5,
+    "tasks": [
+      {
+        "blind": [
+          {
+            "expected": -7,
+            "got": -7,
+            "ok": true,
+            "x": -5,
+            "y": 7
+          },
+          {
+            "expected": -1,
+            "got": -1,
+            "ok": true,
+            "x": -2,
+            "y": -9
+          },
+          {
+            "expected": 5,
+            "got": 5,
+            "ok": true,
+            "x": 1,
+            "y": 8
+          },
+          {
+            "expected": 9,
+            "got": 9,
+            "ok": true,
+            "x": 3,
+            "y": 6
+          },
+          {
+            "expected": 17,
+            "got": 17,
+            "ok": true,
+            "x": 7,
+            "y": 2
+          },
+          {
+            "expected": 21,
+            "got": 21,
+            "ok": true,
+            "x": 9,
+            "y": -4
+          },
+          {
+            "expected": 25,
+            "got": 25,
+            "ok": true,
+            "x": 11,
+            "y": 5
+          }
+        ],
+        "blind_pass": true,
+        "chosen": "((2*x)+3)",
+        "id": "M1_AFFINE",
+        "matching_expressions": 25
+      },
+      {
+        "blind": [
+          {
+            "expected": -40,
+            "got": -40,
+            "ok": true,
+            "x": -5,
+            "y": 7
+          },
+          {
+            "expected": 16,
+            "got": 16,
+            "ok": true,
+            "x": -2,
+            "y": -9
+          },
+          {
+            "expected": 9,
+            "got": 9,
+            "ok": true,
+            "x": 1,
+            "y": 8
+          },
+          {
+            "expected": 21,
+            "got": 21,
+            "ok": true,
+            "x": 3,
+            "y": 6
+          },
+          {
+            "expected": 21,
+            "got": 21,
+            "ok": true,
+            "x": 7,
+            "y": 2
+          },
+          {
+            "expected": -27,
+            "got": -27,
+            "ok": true,
+            "x": 9,
+            "y": -4
+          },
+          {
+            "expected": 66,
+            "got": 66,
+            "ok": true,
+            "x": 11,
+            "y": 5
+          }
+        ],
+        "blind_pass": true,
+        "chosen": "((1+y)*x)",
+        "id": "M2_BILINEAR",
+        "matching_expressions": 14
+      },
+      {
+        "blind": [],
+        "blind_pass": false,
+        "chosen": null,
+        "id": "M3_SQUARES",
+        "matching_expressions": 0
+      },
+      {
+        "blind": [],
+        "blind_pass": false,
+        "chosen": null,
+        "id": "M4_DIFF_SQUARES",
+        "matching_expressions": 0
+      }
+    ]
+  },
+  "next_required_capability": "REAL_MATHEMATICAL_REASONING_TRANSFER_REPAIR_V1",
+  "programming": {
+    "score": 0.6666666666666666,
+    "tasks": [
+      {
+        "blind": [
+          {
+            "args": [
+              0
+            ],
+            "expected": true,
+            "got": true,
+            "ok": true
+          },
+          {
+            "args": [
+              -2
+            ],
+            "expected": true,
+            "got": true,
+            "ok": true
+          },
+          {
+            "args": [
+              101
+            ],
+            "expected": false,
+            "got": false,
+            "ok": true
+          },
+          {
+            "args": [
+              44
+            ],
+            "expected": true,
+            "got": true,
+            "ok": true
+          }
+        ],
+        "blind_pass": true,
+        "candidate_count": 3,
+        "chosen": "def is_even(n):\n    return n % 2 < 1",
+        "id": "P1_EVEN"
+      },
+      {
+        "blind": [
+          {
+            "args": [
+              9,
+              9
+            ],
+            "expected": 9,
+            "got": 9,
+            "ok": true
+          },
+          {
+            "args": [
+              -4,
+              3
+            ],
+            "expected": 3,
+            "got": 3,
+            "ok": true
+          },
+          {
+            "args": [
+              100,
+              -1
+            ],
+            "expected": 100,
+            "got": 100,
+            "ok": true
+          },
+          {
+            "args": [
+              -7,
+              -3
+            ],
+            "expected": -3,
+            "got": -3,
+            "ok": true
+          }
+        ],
+        "blind_pass": true,
+        "candidate_count": 2,
+        "chosen": "def max2(a, b):\n    return a if a > b else b",
+        "id": "P2_MAX"
+      },
+      {
+        "blind": [],
+        "blind_pass": false,
+        "candidate_count": 0,
+        "chosen": null,
+        "id": "P3_INC"
+      },
+      {
+        "blind": [
+          {
+            "args": [
+              1,
+              1,
+              10
+            ],
+            "expected": true,
+            "got": true,
+            "ok": true
+          },
+          {
+            "args": [
+              10,
+              1,
+              10
+            ],
+            "expected": true,
+            "got": true,
+            "ok": true
+          },
+          {
+            "args": [
+              -9,
+              -5,
+              5
+            ],
+            "expected": false,
+            "got": false,
+            "ok": true
+          },
+          {
+            "args": [
+              3,
+              -5,
+              5
+            ],
+            "expected": true,
+            "got": true,
+            "ok": true
+          }
+        ],
+        "blind_pass": true,
+        "candidate_count": 1,
+        "chosen": "def in_range(x, lo, hi):\n    return lo <= x and x <= hi",
+        "id": "P4_RANGE"
+      },
+      {
+        "blind": [],
+        "blind_pass": false,
+        "candidate_count": 0,
+        "chosen": null,
+        "id": "P5_POSITIVE"
+      },
+      {
+        "blind": [
+          {
+            "args": [
+              10,
+              0.5
+            ],
+            "expected": 5.0,
+            "got": 5.0,
+            "ok": true
+          },
+          {
+            "args": [
+              80,
+              0.25
+            ],
+            "expected": 60.0,
+            "got": 60.0,
+            "ok": true
+          },
+          {
+            "args": [
+              7,
+              0.0
+            ],
+            "expected": 7.0,
+            "got": 7.0,
+            "ok": true
+          }
+        ],
+        "blind_pass": true,
+        "candidate_count": 1,
+        "chosen": "def discount(price, rate):\n    return price * (1 - rate)",
+        "id": "P6_DISCOUNT"
+      }
+    ]
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "6771d705bcc05f80143d199f6127b40d3f4ac453cd9a3cfe480383b1a23ba02c",
+  "schema": "yado.g2.real_world_generalization_self_directed.v1",
+  "science": {
+    "majority_test_accuracy": 0.23333333333333334,
+    "model_selection": [
+      {
+        "model": "NEAREST_CENTROID",
+        "validation_accuracy": 0.9666666666666667
+      },
+      {
+        "model": "ONE_NN",
+        "validation_accuracy": 0.9666666666666667
+      },
+      {
+        "model": "MAJORITY",
+        "validation_accuracy": 0.13333333333333333
+      }
+    ],
+    "rows": 150,
+    "selected_model": "NEAREST_CENTROID",
+    "sha256": "9cc1c345c71bcc9b486b74cbf6063fa66f4bb5e0f603a4b3c3471ec2e5e8e355",
+    "test": 30,
+    "test_accuracy": 1.0,
+    "train": 90,
+    "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv",
+    "validation": 30
+  },
+  "semantic_boundary": "BOUNDED EXECUTABLE PROGRAM REPAIR, SYMBOLIC EXPRESSION SYNTHESIS, AND PUBLIC IRIS MODEL SELECTION. THESE RESULTS DO NOT ESTABLISH GENERAL PROGRAMMING, THEOREM PROVING, OR SCIENTIFIC REASONING.",
+  "source_self_audit_receipt": "c9595d52df504ef58ecb6d13667945461985121abe31366800e3fcf1da7f3ee8",
+  "status": "WITHHOLD_REAL_WORLD_GENERALIZATION_DIAGNOSTIC_V1",
+  "thresholds": {
+    "mathematics": 0.75,
+    "programming": 0.8,
+    "science": 0.85
+  }
+}
