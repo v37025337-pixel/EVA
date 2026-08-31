@@ -1,0 +1,39 @@
+{
+  "candidate_digest": "84edceefd45effd41dceb3378218adbc2efe8ad572c8031e56c86626105cac87",
+  "canonical_mutation": false,
+  "checks": {
+    "candidate_shadow_authorized": true,
+    "canonical_head_ledger_coherent": true,
+    "fresh_admission_pass": true,
+    "g3_not_created": true,
+    "runtime_control_plane_ready": false
+  },
+  "dependency_analysis": {
+    "runtime_candidate_experience": true,
+    "runtime_candidate_manifest": true,
+    "runtime_experience_canonical": false,
+    "runtime_manifest_canonical": false,
+    "self_audit_binding_finding": {
+      "area": "IDENTITY_AND_LINEAGE",
+      "blocking": true,
+      "code": "RUNTIME_CONTROL_PLANE_BINDING",
+      "evidence": {
+        "canonical_core_active": true,
+        "canonical_experience_active": true,
+        "experience_scope": "CANDIDATE",
+        "manifest_scope": "CANDIDATE"
+      },
+      "recommendation": "Runtime should read canonical unified-core manifest and canonical experience registry after consolidation.",
+      "severity": "HIGH",
+      "status": "FAIL"
+    }
+  },
+  "fresh_admission_receipt": "121b8795ad0321366eb5174ddf769a3de10b1e47d28727f45515acb7d5d810d4",
+  "g3_genesis_performed": false,
+  "next_required_capability": "RUNTIME_CONTROL_PLANE_BINDING_REPAIR_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "34fbe27ebbd37bf89f6950500331367086b1e6dbe03636946848e6b54d9032b1",
+  "schema": "yado.g2.raw_task_representation_canonical_admission_gate.v1",
+  "semantic_boundary": "FAIL-CLOSED CANONICAL ADMISSION. A RAW-TEXT CANDIDATE THAT PASSES FRESH TESTS IS NOT INTEGRATED WHILE THE UNIFIED RUNTIME CONTROL PLANE IS BOUND TO CANDIDATE RATHER THAN CANONICAL CONFIGURATION.",
+  "status": "WITHHOLD_G2_RAW_TASK_REPRESENTATION_CANONICAL_ADMISSION_GATE_V1"
+}

@@ -2,7 +2,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "2f6d9a91e236d4ffd17b8b5fb20f03c1f1f0aab3a1b932b8440f42bf65ff1f2c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 65,
+  "event_count": 66,
   "events": [
     {
       "canonical_mutation": false,
@@ -1054,14 +1054,30 @@
       "source_digest": "121b8795ad0321366eb5174ddf769a3de10b1e47d28727f45515acb7d5d810d4",
       "source_path": "receipts/yado-raw-task-representation-fresh-admission-v1-run-33391307653.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "G2_RAW_TASK_REPRESENTATION_CANONICAL_ADMISSION_GATE_V1",
+      "effect": "CANONICAL_ADMISSION_BLOCKED_BY_RUNTIME_CONTROL_PLANE_BINDING",
+      "event_hash": "6d7b27d45bfed9de39f4e5a23e4929eafe8dffeb6b2061a20cfd39ebfdf8f9b1",
+      "event_id": "E0066_G2_RAW_REPRESENTATION_CANONICAL_ADMISSION",
+      "event_type": "KERNEL_NATIVE_CANONICAL_ADMISSION_GATE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 65,
+      "parent_event_hash": "7eb9538be901389c02596108a460fdf599d13709c4b799f8ea783830d049c593",
+      "promotion_applied": false,
+      "run_id": "33391439609",
+      "source_digest": "34fbe27ebbd37bf89f6950500331367086b1e6dbe03636946848e6b54d9032b1",
+      "source_path": "receipts/yado-raw-task-representation-canonical-admission-gate-v1-run-33391439609.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "564f76ed8118d49e3ed88a06aad20cd7e578466b3491fa2df86007c12d1c9a63",
+  "ledger_digest": "8e310712ed4540465697fe2d1c7bb9ded6515b6a8010a3cdddc02bc841c6bdf0",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "G2_RAW_TASK_REPRESENTATION_CANONICAL_ADMISSION_GATE_V1"
+    "RUNTIME_CONTROL_PLANE_BINDING_REPAIR_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -1090,5 +1106,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "7eb9538be901389c02596108a460fdf599d13709c4b799f8ea783830d049c593"
+  "tail_event_hash": "6d7b27d45bfed9de39f4e5a23e4929eafe8dffeb6b2061a20cfd39ebfdf8f9b1"
 }
