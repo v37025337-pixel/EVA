@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "d719c1cab818be1ff453d68aef01d6e2632fa107e2bb2f9954fc0dad87411bc2",
+  "current_head_digest": "e066cba6b61c999f900fc141db63be52116e4ed27879188fac4a45928316ac19",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 184,
+  "event_count": 185,
   "events": [
     {
       "canonical_mutation": false,
@@ -3061,14 +3061,34 @@
       "source_digest": "91f4737494e9e927ae7c8e7308f97ebd68781813e36712b2dc912422f81eab64",
       "source_path": "receipts/yado-g2-algorithm-provenance-registry-v1-run-33546690885.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V4",
+      "effect": "MODE=CREATE_NOT_SEARCH; GENERATOR=RULE_PROGRAM; PARENT_BLIND=0.804348; CHILD_BLIND=0.804348; RETAIN=1.000000; REPAIR=0.000000; GENESIS_ERROR=ValueError:no supported bounded mechanism family fits the training evidence; NEXT=KERNEL_EVOLUTIONARY_SUCCESSOR_RULE_PROGRAM_GENESIS_V2",
+      "event_hash": "a81464ee76c3a696298c8e64a6abc778f668651b3f5e7da7ac1f6ee8315cf6aa",
+      "event_id": "E0185_G2_EVOLUTIONARY_SUCCESSOR_GENESIS_V3",
+      "event_type": "G2_EVOLUTIONARY_RULE_PROGRAM_SUCCESSOR_GENESIS",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 184,
+      "new_head_digest": "e066cba6b61c999f900fc141db63be52116e4ed27879188fac4a45928316ac19",
+      "parent_event_hash": "cf90e184d365453eb928e4b1441621506bc9dce7f1e8cf7c6796e8a2525371d7",
+      "previous_head_digest": "d719c1cab818be1ff453d68aef01d6e2632fa107e2bb2f9954fc0dad87411bc2",
+      "promotion_applied": false,
+      "run_id": "33554809293",
+      "source_digest": "98e1fe925fadb825b29e028d64ab4361adb184f034fccbdbdeb11281950d2ae0",
+      "source_path": "receipts/yado-kernel-evolutionary-successor-genesis-v3-run-33554809293.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "eb83ae0bf31e23307b4cd40035c08a09b5d4ae71b7abd7f081298bb5c6d5a6cb",
+  "ledger_digest": "c3e29778699d09846be5f8e39f6122367995e5d6d8aca59cb6d9e8895c75454d",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V4"
+    "KERNEL_EVOLUTIONARY_SUCCESSOR_RULE_PROGRAM_GENESIS_V2"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -3097,5 +3117,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "cf90e184d365453eb928e4b1441621506bc9dce7f1e8cf7c6796e8a2525371d7"
+  "tail_event_hash": "a81464ee76c3a696298c8e64a6abc778f668651b3f5e7da7ac1f6ee8315cf6aa"
 }

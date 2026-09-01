@@ -1,0 +1,72 @@
+{
+  "boundedness": {
+    "allowed_ops": [
+      "CONTAINS",
+      "EQ",
+      "EXISTS",
+      "FALSY",
+      "TEXT_HAS_TOKEN",
+      "TRUTHY"
+    ],
+    "eval_exec_used": false,
+    "max_rules": 12,
+    "network_used_by_rule_executor": false
+  },
+  "candidate_digest": "310ff38f93fd197d8e694c7eba0e548736232e29003d2aa6dc07c7fdb068c7e8",
+  "canonical_active": false,
+  "development": {
+    "corrector_dev_holdout": 0.0,
+    "dev_holdout_count": 45,
+    "dev_parent_errors": 2,
+    "gate_dev_holdout": 0.0,
+    "supported": false,
+    "train_count": 207,
+    "train_parent_errors": 9
+  },
+  "evolution_operation": {
+    "evidence": {
+      "mean_task_score": 0.0,
+      "weak_tasks": [
+        "completion",
+        "fresh_blind",
+        "validation"
+      ]
+    },
+    "operation": "REACTION_NORM",
+    "variant_id": "EXHAUSTIVE_SEARCH_LIMITS"
+  },
+  "frozen_history": {
+    "corpus_digest": "41cc05d3d2429f5b3a3740dd5ed65c9294aac825bca75fcbb7cdcc860312e28b",
+    "true_blind_used_for_admission_only": true,
+    "true_blind_used_for_creation": false
+  },
+  "host_task_specific_rules_written": false,
+  "kernel_generated_rule_programs": false,
+  "metrics": {
+    "fresh_blind_parent": 0.8043478260869565,
+    "fresh_blind_successor": 0.8043478260869565,
+    "parent_correct_retention": 1.0,
+    "parent_error_repair_rate": 0.0,
+    "true_blind_parent_error_count": 9
+  },
+  "new_mechanism": {
+    "error_gate": null,
+    "executor": "BoundedRuleSandbox.execute",
+    "generator": "MechanismSelector.synthesize_candidates -> RuleProgramSynthesizer",
+    "genesis_error": "ValueError:no supported bounded mechanism family fits the training evidence",
+    "op": "EVOLUTIONARY_RULE_PROGRAM_RESIDUAL_SUCCESSOR",
+    "residual_corrector": null
+  },
+  "parent": {
+    "algorithm": {
+      "family": "CART_AXIS",
+      "max_depth": 7
+    },
+    "fresh_blind": 0.8043478260869565,
+    "model_digest": "c27d52e05f4554b4b4655e1f96c7e066a52ceecbbc71f214fc7ab43ad5aaebf1"
+  },
+  "principle": "CREATE_SUCCESSOR_FROM_PARENT_DEFICIT_NOT_SEARCH_EXHAUSTIVE_MODEL_SPACE",
+  "promotion_applied": false,
+  "schema": "yado.g2.evolutionary_rule_program_successor.v3",
+  "state": "WITHHOLD"
+}
