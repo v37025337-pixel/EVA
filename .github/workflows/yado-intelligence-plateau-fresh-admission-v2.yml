@@ -1,0 +1,41 @@
+name: YADO Intelligence Plateau Fresh Admission V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: [architecture/yado-intelligence-plateau-fresh-admission-v2-request.json]
+permissions:
+  contents: write
+jobs:
+  admit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Admit
+        id: admit
+        continue-on-error: true
+        run: python runtime/yado_intelligence_plateau_fresh_admission_v2.py
+      - name: Persist
+        if: always()
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_intelligence_plateau_fresh_admission_v2_receipt.json receipts/yado-intelligence-plateau-fresh-admission-v2-run-${GITHUB_RUN_ID}.json || true
+          git config user.name 'YADO Intelligence Plateau Admission V2'
+          git config user.email 'actions@users.noreply.github.com'
+          git add architecture/evolution-ledger.json receipts/yado-intelligence-plateau-fresh-admission-v2-run-${GITHUB_RUN_ID}.json || true
+          if ! git diff --cached --quiet; then git commit -m 'Persist YADO intelligence plateau fresh admission V2 [skip ci]' && git push origin HEAD:yado-architecture-shadow-search; fi
+      - name: Enforce
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('runtime/yado_intelligence_plateau_fresh_admission_v2_receipt.json')
+          if not p.exists(): raise SystemExit('MISSING_RECEIPT')
+          r=json.loads(p.read_text())
+          if r.get('status')!='PASS_INTELLIGENCE_PLATEAU_FRESH_ADMISSION_V2': raise SystemExit('WITHHOLD:'+str(r.get('status')))
+          print(r['status'])
+          PY
