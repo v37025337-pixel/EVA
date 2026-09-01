@@ -1,0 +1,105 @@
+{
+  "candidate_digest": "9178aff98ae8fef76c9d333808cf780502c774c8a6bc9b97eb30dfb41aa69b93",
+  "candidate_source_sha256": "63c3fb48700f8103ceaff6fdd79690695b271ec7c15b976037add713fda89f3f",
+  "canonical_mutation": false,
+  "causal_gain": 0.0,
+  "checks": {
+    "architecture_immutable": true,
+    "causal_induction_gain": false,
+    "fresh_min_one": true,
+    "head_immutable": true,
+    "multi_function_rejected": true,
+    "prior_counterexample_repaired": false,
+    "selected_induced_branch": true,
+    "total_budget_not_increased": true,
+    "unsafe_rejected": true
+  },
+  "fresh_validation": {
+    "families": {
+      "AFFINE_EXPRESSION_FRESH": 1.0,
+      "INDUCED_CONDITIONAL_A": 1.0,
+      "INDUCED_CONDITIONAL_B": 1.0,
+      "TWO_EDIT_REGRESSION": 1.0
+    },
+    "min_family": 1.0,
+    "score": 1.0
+  },
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 2,
+    "ranking": [
+      {
+        "score": 0.49449999999999994,
+        "token": "opaque_f8cc58726eeae7aef8"
+      },
+      {
+        "score": 0.475,
+        "token": "opaque_3fe15826d330c8a836"
+      }
+    ],
+    "selected_score": 0.49449999999999994,
+    "selected_token": "opaque_f8cc58726eeae7aef8"
+  },
+  "next_required_capability": "CODE_PLATEAU_SELF_EVOLUTION_V6",
+  "promotion_applied": false,
+  "receipt_sha256": "17972ada69ecf51ed24e423e37029a7c2727367d7083e36b2de34ce8dc1dbb7b",
+  "schema": "yado.g2.code_plateau_self_evolution.v5",
+  "selected_strategy": "INDUCED_BRANCH_V7",
+  "semantic_boundary": "FIXED-BUDGET SINGLE-FUNCTION STRUCTURAL REPAIR THAT INDUCES BRANCH EXPRESSIONS FROM SUBSET EVIDENCE (IDENTITY, ABS, CONSTANT, SCALE, OFFSET, INTEGER AFFINE, MIN/MAX) BEFORE CONDITIONAL COMPOSITION.",
+  "status": "WITHHOLD_CODE_PLATEAU_SELF_EVOLUTION_V5",
+  "validation": {
+    "ENUMERATED_BRANCH_V6": {
+      "complexity": 0.4,
+      "details": {
+        "arithmetic": {
+          "base_budget": 6000,
+          "edit_depth": null,
+          "repair_mode": "PORTFOLIO_STRUCTURAL",
+          "source": "def f(x, y):\n    return (x - y) * 5\n",
+          "tried": 53
+        },
+        "conditional": {
+          "reason": "NO_REPAIR_WITHIN_PORTFOLIO_BUDGET",
+          "repair_mode": "PORTFOLIO_STRUCTURAL",
+          "source": null,
+          "tried": 72
+        }
+      },
+      "families": {
+        "ARITHMETIC_FACTOR": 1.0,
+        "PRIOR_CONDITIONAL_COUNTEREXAMPLE": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.25,
+      "risk": 0.05,
+      "score": 0.5,
+      "token": "opaque_3fe15826d330c8a836"
+    },
+    "INDUCED_BRANCH_V7": {
+      "complexity": 0.43,
+      "details": {
+        "arithmetic": {
+          "edit_depth": null,
+          "repair_mode": "INDUCED_BRANCH",
+          "source": "def f(x, y):\n    return (x - y) * 5\n",
+          "tried": 1
+        },
+        "conditional": {
+          "reason": "NO_REPAIR_WITHIN_INDUCED_BRANCH_BUDGET",
+          "repair_mode": "INDUCED_BRANCH",
+          "source": null,
+          "tried": 0
+        }
+      },
+      "families": {
+        "ARITHMETIC_FACTOR": 1.0,
+        "PRIOR_CONDITIONAL_COUNTEREXAMPLE": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.95,
+      "risk": 0.05,
+      "score": 0.5,
+      "token": "opaque_f8cc58726eeae7aef8"
+    }
+  }
+}
