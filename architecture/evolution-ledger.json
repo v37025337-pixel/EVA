@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "11d3b0b035b8b71c59f3371dd6a3cd52f9c07335ef687a0f261bac327f77e92f",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 174,
+  "event_count": 175,
   "events": [
     {
       "canonical_mutation": false,
@@ -2888,14 +2888,30 @@
       "source_digest": "65c6a7d4767a692590f64e4d220d9f0ee38cbbf696771bd2321f9a25cc6f889e",
       "source_path": "receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v7-run-33503939491.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V8",
+      "effect": "STATUS=PLATEAU_ROUND; STREAK=3; SCORES={\"CODE\":1.0,\"INTELLIGENCE\":1.0,\"LOGIC\":1.0,\"THINKING\":1.0}; NEXT=LTI_CODE_ARCHITECTURAL_CEILING_EMPIRICAL_PLATEAU_CONFIRMATION_V1",
+      "event_hash": "8c79c1fe628a3940ff00407a97a4012e395b309557d7ed049a2cd7ab3b4fd672",
+      "event_id": "E0175_G2_LTI_CODE_PLATEAU_PROBE_V8",
+      "event_type": "FIXED_ARCHITECTURE_LTI_CODE_PLATEAU_PROBE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 174,
+      "parent_event_hash": "605ae301f580e180a365088bcb86824d78e113ec6e7c9438b7f9545bb03ef7ad",
+      "promotion_applied": false,
+      "run_id": "33504134561",
+      "source_digest": "b50b918f7ea07e8d2f9339ea5cc95b2d32c72cc2b650abf388ee510c6c3443d3",
+      "source_path": "receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v8-run-33504134561.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "7e9b28c89c8945c59b6218ec27f1e4980da7b75362e9a0b999527e5294949338",
+  "ledger_digest": "e1654db58155cf1b18080f142a20a01fc9d7c2cf662cb7f7b62f4046394bc9de",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V8"
+    "LTI_CODE_ARCHITECTURAL_CEILING_EMPIRICAL_PLATEAU_CONFIRMATION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -2924,5 +2940,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "605ae301f580e180a365088bcb86824d78e113ec6e7c9438b7f9545bb03ef7ad"
+  "tail_event_hash": "8c79c1fe628a3940ff00407a97a4012e395b309557d7ed049a2cd7ab3b4fd672"
 }
