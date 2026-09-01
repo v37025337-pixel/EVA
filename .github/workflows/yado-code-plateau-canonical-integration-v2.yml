@@ -1,0 +1,47 @@
+name: YADO Code Plateau Canonical Integration V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: [architecture/yado-code-plateau-canonical-integration-v2-request.json]
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime package
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Integrate
+        id: integrate
+        continue-on-error: true
+        run: python runtime/yado_code_plateau_canonical_integration_v2.py
+      - name: Persist
+        if: always()
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_code_plateau_canonical_integration_v2_receipt.json receipts/yado-code-plateau-canonical-integration-v2-run-${GITHUB_RUN_ID}.json || true
+          git config user.name 'YADO Code Plateau Integration V2'
+          git config user.email 'actions@users.noreply.github.com'
+          git add runtime/yado_ambiguity_aware_program_repair_v11.py runtime/yado_unified_core_v1.py canonical/yado-unified-core-v1.json canonical/yado-main-head-g2.json architecture/yado-g2-lti-ceiling-state-v1.json architecture/evolution-ledger.json receipts/yado-code-plateau-canonical-integration-v2-run-${GITHUB_RUN_ID}.json || true
+          if ! git diff --cached --quiet; then git commit -m 'Persist YADO code plateau canonical integration V2 [skip ci]' && git push origin HEAD:yado-architecture-shadow-search; fi
+      - name: Enforce
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('runtime/yado_code_plateau_canonical_integration_v2_receipt.json')
+          if not p.exists(): raise SystemExit('MISSING_RECEIPT')
+          r=json.loads(p.read_text())
+          if r.get('status')!='PASS_CODE_PLATEAU_CANONICAL_INTEGRATION_V2':
+              raise SystemExit('WITHHOLD:'+str(r.get('status')))
+          print(r['status'])
+          PY
