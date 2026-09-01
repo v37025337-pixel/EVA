@@ -1,0 +1,41 @@
+{
+  "functions": {
+    "test_yado_cognitive_growth_runtime_v1:test_centroid_filters_noise": {
+      "module": "test_yado_cognitive_growth_runtime_v1",
+      "name": "test_centroid_filters_noise",
+      "path": "runtime/yado_rc8_v36/test_yado_cognitive_growth_runtime_v1.py",
+      "sha256": "613c7b0bb1cffb13bf62fa9cfaee24e931c79a0d771e45b152b9028c2f5d2476",
+      "source": "def test_centroid_filters_noise(self):\n        fit=[];val=[]\n        for i in range(40):\n            label='LEFT' if i%2==0 else 'RIGHT'; sx=-2.0 if label=='LEFT' else 2.0\n            fit.append(({'signal':sx+(i%5)*.02,'noise':float((i*17)%13)-6.0},label))\n        for i in range(20):\n            label='LEFT' if i%2==0 else 'RIGHT'; sx=-2.1 if label=='LEFT' else 2.1\n            val.append(({'signal':sx,'noise':float((i*23)%17)-8.0},label))\n        m,meta=select_centroid_features(fit,val)\n        self.assertEqual(centroid_accuracy(m,val),1.0)\n        self.assertGreaterEqual(meta['selected_features'],1)"
+    },
+    "yado_cognitive_growth_runtime_v1:centroid_accuracy": {
+      "module": "yado_cognitive_growth_runtime_v1",
+      "name": "centroid_accuracy",
+      "path": "runtime/yado_rc8_v36/yado_cognitive_growth_runtime_v1.py",
+      "sha256": "7e7de7eed6f3e608db548d9df6ae918513264b036513e4e1a290d58be9222c1f",
+      "source": "def centroid_accuracy(model,cases):\n    if not model or not cases: return 0.0\n    return sum(centroid_predict(model,x)==y for x,y in cases)/len(cases)"
+    },
+    "yado_cognitive_growth_runtime_v1:centroid_predict": {
+      "module": "yado_cognitive_growth_runtime_v1",
+      "name": "centroid_predict",
+      "path": "runtime/yado_rc8_v36/yado_cognitive_growth_runtime_v1.py",
+      "sha256": "7e7de7eed6f3e608db548d9df6ae918513264b036513e4e1a290d58be9222c1f",
+      "source": "def centroid_predict(model, x: Mapping[str,Any]):\n    if not model: return None\n    scored=[]\n    for label_s,center in model['centroids'].items():\n        d=0.0\n        for key in model['features']:\n            scale=float(model['scales'].get(key,1.0))\n            d += ((float(x.get(key,0.0))-float(center[key]))/scale)**2\n        scored.append((d,label_s))\n    label_s=min(scored)[1]\n    return model['label_values'][label_s]"
+    },
+    "yado_cognitive_growth_runtime_v1:fit_centroid_strategy": {
+      "module": "yado_cognitive_growth_runtime_v1",
+      "name": "fit_centroid_strategy",
+      "path": "runtime/yado_rc8_v36/yado_cognitive_growth_runtime_v1.py",
+      "sha256": "7e7de7eed6f3e608db548d9df6ae918513264b036513e4e1a290d58be9222c1f",
+      "source": "def fit_centroid_strategy(cases, max_features: int | None = None):\n    if not cases:\n        return None\n    keys = _numeric_keys(cases)\n    labels = sorted({y for _, y in cases}, key=str)\n    # Generic Fisher-style feature relevance: between-class spread / within-class spread.\n    feature_scores=[]\n    for key in keys:\n        all_vals=[float(x.get(key,0.0)) for x,_ in cases]\n        global_mean=sum(all_vals)/len(all_vals)\n        between=0.0; within=0.0\n        for label in labels:\n            vals=[float(x.get(key,0.0)) for x,y in cases if y==label]\n            if not vals: continue\n            mean=sum(vals)/len(vals)\n            between += len(vals)*(mean-global_mean)**2\n            within += sum((v-mean)**2 for v in vals)\n        score=between/(within+1e-12)\n        feature_scores.append((score,key))\n    ranked=[k for _,k in sorted(feature_scores,key=lambda z:(-z[0],z[1]))]\n    if max_features is not None:\n        ranked=ranked[:max(1,int(max_features))]\n    centroids={}\n    scales={}\n    for key in ranked:\n        vals=[float(x.get(key,0.0)) for x,_ in cases]\n        mean=sum(vals)/len(vals); var=sum((v-mean)**2 for v in vals)/max(1,len(vals)-1)\n        scales[key]=max(var**0.5,1e-6)\n    for label in labels:\n        rows=[x for x,y in cases if y==label]\n        centroids[str(label)]={key:sum(float(x.get(key,0.0)) for x in rows)/len(rows) for key in ranked}\n    return {'kind':'CENTROID_STRATEGY','features':ranked,'centroids':centroids,'scales':scales,'label_values':{str(x):x for x in labels}}"
+    },
+    "yado_cognitive_growth_runtime_v1:select_centroid_features": {
+      "module": "yado_cognitive_growth_runtime_v1",
+      "name": "select_centroid_features",
+      "path": "runtime/yado_rc8_v36/yado_cognitive_growth_runtime_v1.py",
+      "sha256": "7e7de7eed6f3e608db548d9df6ae918513264b036513e4e1a290d58be9222c1f",
+      "source": "def select_centroid_features(fit_cases, validation_cases):\n    keys=_numeric_keys(fit_cases)\n    trials=[]\n    for n in range(1,len(keys)+1):\n        m=fit_centroid_strategy(fit_cases,n)\n        a=centroid_accuracy(m,validation_cases)\n        trials.append((a,-n,n,m))\n    _,_,n,m=max(trials,key=lambda z:z[:2])\n    return m,{'selected_features':n,'validation':max(t[0] for t in trials),'trials':[{'features':t[2],'accuracy':t[0]} for t in trials]}"
+    }
+  },
+  "schema": "yado.g2.centroid_constructor_source_probe.v1",
+  "status": "PASS"
+}
