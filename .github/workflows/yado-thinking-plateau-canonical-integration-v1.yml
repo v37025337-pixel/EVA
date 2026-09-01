@@ -1,0 +1,47 @@
+name: YADO Thinking Plateau Canonical Integration V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: [architecture/yado-thinking-plateau-canonical-integration-v1-request.json]
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime package
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Integrate
+        id: integrate
+        continue-on-error: true
+        run: python runtime/yado_thinking_plateau_canonical_integration_v1.py
+      - name: Persist
+        if: always()
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_thinking_plateau_canonical_integration_v1_receipt.json receipts/yado-thinking-plateau-canonical-integration-v1-run-${GITHUB_RUN_ID}.json || true
+          git config user.name 'YADO Thinking Plateau Integration'
+          git config user.email 'actions@users.noreply.github.com'
+          git add runtime/yado_work_budget_adaptive_contingent_planner_v2.py runtime/yado_unified_core_v1.py canonical/yado-unified-core-v1.json canonical/yado-main-head-g2.json architecture/yado-g2-lti-ceiling-state-v1.json architecture/evolution-ledger.json receipts/yado-thinking-plateau-canonical-integration-v1-run-${GITHUB_RUN_ID}.json || true
+          if ! git diff --cached --quiet; then git commit -m 'Persist YADO thinking plateau canonical integration V1 [skip ci]' && git push origin HEAD:yado-architecture-shadow-search; fi
+      - name: Enforce
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('runtime/yado_thinking_plateau_canonical_integration_v1_receipt.json')
+          if not p.exists(): raise SystemExit('MISSING_RECEIPT')
+          r=json.loads(p.read_text())
+          if r.get('status')!='PASS_THINKING_PLATEAU_CANONICAL_INTEGRATION_V1':
+              raise SystemExit('WITHHOLD:'+str(r.get('status')))
+          print(r['status'])
+          PY
