@@ -1,0 +1,91 @@
+{
+  "classes": {
+    "UnifiedYADOKernelV28MetaGrammar": {
+      "module": "yado_core_v2_8_meta_grammar",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_8_meta_grammar.py",
+      "sha256": "cc6ebc6c907c47d591688af23654200d83554c9a154b8850e51fc77e1bb9f53f",
+      "source": "class UnifiedYADOKernelV28MetaGrammar(UnifiedYADOKernelV27Selective):\n    \"\"\"V2.8 shadow runtime with bounded post-synthesis family induction.\n\n    It removes the previous AFFINE_CONTIGUOUS_SLICE_MAP family from the active\n    mechanism-genesis path. A generic low-level integer coordinate algebra is\n    still host supplied; successful programs are compressed into learned family\n    signatures and reused before falling back to full low-level search.\n    \"\"\"\n\n    SCHEMA_VERSION = 10\n    PROFILE = \"YADO_V2_8_META_GRAMMAR_SHADOW\"\n\n    def __init__(self, db_path: str = \"yado_v28_meta_grammar_shadow.db\"):\n        super().__init__(db_path=db_path)\n        self.meta_grammar_library = build_development_library()\n\n    def _bootstrap_domain_evidence(self) -> None:\n        super()._bootstrap_domain_evidence()\n        report = ROOT / \"yado_meta_grammar_genesis_cycle1_report.json\"\n        rid = \"internal:yado:meta-grammar-genesis\"\n        if report.exists() and self.get_resource(rid, include_text=False) is None:\n            self.add_resource(\n                rid,\n                \"Bounded meta-grammar genesis: low-level coordinate synthesis, post-synthesis family compression, and library reuse.\",\n                metadata={\n                    \"provider\": \"internal_developmental_registry\",\n                    \"status\": \"ACTIVE_VERIFIED\",\n                    \"authority\": False,\n                    \"source_path\": str(report),\n                    \"source_sha256\": hashlib.sha256(report.read_bytes()).hexdigest(),\n                },\n                tags=[\"meta_grammar\", \"library_learning\", \"mechanism_genesis\", \"developmental_evidence\"],\n            )\n\n    def _execute_genesis(self, payload: Mapping[str, Any], ablated: bool) -> Dict[str, Any]:\n        train = self._decode_cases(payload[\"train\"])\n        blind = self._decode_cases(payload[\"blind\"])\n        live_input = payload[\"live_input\"]\n        expected_live = payload[\"expected_live\"]\n\n        # Prior V2.7 meta-schema is the causal ablation baseline.\n        prior = FailureDrivenSchemaInducer()\n        prior_best, prior_generated = prior.search(blind)\n        baseline = 0.0 if prior_best is None else float(prior_best.exact)\n\n        if ablated:\n            live_output = None\n            if prior_best is not None:\n                try:\n                    live_output = prior.execute(prior_best.schema, live_input)\n                except Exception:\n                    live_output = None\n            return {\n                \"mechanism\": \"V27_AFFINE_SLICE_META_SCHEMA\",\n                \"baseline\": baseline,\n                \"candidate\": baseline,\n                \"ablation\": baseline,\n                \"restore\": baseline,\n                \"live_output\": live_output,\n                \"expected_live\": expected_live,\n                \"output_correct\": live_output == expected_live,\n                \"details\": {\n                    \"prior_generated_candidates\": prior_generated,\n                    \"host_supplied_affine_slice_meta_schema\": True,\n                },\n            }\n\n        synth = LowLevelCoordinateSynthesizer()\n        lib_best, lib_generated, family_id = search_with_library(self.meta_grammar_library, train)\n        used_library = bool(lib_best is not None and lib_best.exact == 1.0)\n        full_generated = 0\n        if used_library:\n            best = lib_best\n            search_mode = \"LEARNED_FAMILY_INSTANTIATION\"\n        else:\n            best, full_generated = synth.search(train)\n            search_mode = \"LOW_LEVEL_COORDINATE_SEARCH\"\n            if best is not None and best.exact == 1.0:\n                family_id = self.meta_grammar_library.observe(best.program, \"runtime_new_family\")\n\n        if best is None:\n            return {\n                \"mechanism\": \"META_GRAMMAR_GENESIS\",\n                \"baseline\": baseline,\n                \"candidate\": 0.0,\n                \"ablation\": baseline,\n                \"restore\": 0.0,\n                \"live_output\": None,\n                \"expected_live\": expected_live,\n                \"output_correct\": False,\n                \"details\": {\n                    \"search_mode\": search_mode,\n                    \"library_candidates\": lib_generated,\n                    \"full_candidates\": full_generated,\n                    \"derived_program\": None,\n                },\n            }\n\n        frozen = CoordinateProgram(**asdict(best.program))\n        cand = float(synth.score(frozen, blind).exact)\n        restore = float(synth.score(frozen, blind).exact)\n        try:\n            live_output = synth.execute(frozen, live_input)\n        except Exception:\n            live_output = None\n\n        return {\n            \"mechanism\": \"META_GRAMMAR_GENESIS\",\n            \"baseline\": baseline,\n            \"candidate\": cand,\n            \"ablation\": baseline,\n            \"restore\": restore,\n            \"live_output\": live_output,\n            \"expected_live\": expected_live,\n            \"output_correct\": live_output == expected_live,\n            \"details\": {\n                \"search_mode\": search_mode,\n                \"selected_family_id\": family_id,\n                \"library_candidates\": lib_generated,\n                \"full_candidates\": full_generated,\n                \"derived_program\": asdict(frozen),\n                \"program_digest\": frozen.digest,\n                \"host_supplied_affine_slice_meta_schema\": False,\n                \"host_supplied_named_family_list\": False,\n                \"host_supplied_low_level_coordinate_algebra\": True,\n                \"family_created_or_reused_after_synthesis\": True,\n                \"task_specific_operator_supplied\": False,\n            },\n        }"
+    },
+    "UnifiedYADOKernelV30RC6MetaGrammar": {
+      "module": "yado_core_v3_0_rc6_meta_grammar",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py",
+      "sha256": "42de89ef8d82a17801ea5a9d34b131bc6a518a9479bed3f1775bf3fca6110865",
+      "source": "class UnifiedYADOKernelV30RC6MetaGrammar(UnifiedYADOKernelV30RC5AlgorithmGenesis):\n    PROFILE='YADO_V3_0_RC6_BOUNDED_SELF_EXPANDING_META_GRAMMAR_LOCAL'\n    SCHEMA_VERSION=19\n    def __init__(self,db_path='yado_v30_rc6_meta_grammar.db',state_path=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))\n    def meta_grammar_extension_registry(self):return list(self.canonical_state.get('meta_grammar_extension_registry') or [])\n    def _operator(self,predicate_kind):\n        for op in self.meta_grammar_extension_registry():\n            if op.get('program_template',{}).get('op')=='IF_PREDICATE' and predicate_kind in op.get('predicate_program_types',[]):return op\n        raise RuntimeError(f'no durable meta-grammar operator for {predicate_kind}')\n    def synthesize_logic_with_extended_meta_grammar(self,fit,val,revealed,blind):\n        self._operator('BOOL_TABLE');return mg.synth_logic_predicate(fit,val,revealed,blind,self.canonical_state['organ_evolution_algorithm_bank']['LOGIC'])\n    def synthesize_thinking_with_extended_meta_grammar(self,fit,val,revealed,blind):\n        self._operator('LINEAR_THRESHOLD');return mg.synth_thinking_predicate(fit,val,revealed,blind,self.canonical_state['organ_evolution_algorithm_bank']['THINKING'])\n    def synthesize_intelligence_with_extended_meta_grammar(self,fit,val,revealed,blind):\n        self._operator('LINEAR_THRESHOLD');return mg.synth_intel_predicate(fit,val,revealed,blind,self.canonical_state['organ_evolution_algorithm_bank']['INTELLIGENCE'])\n    def meta_grammar_snapshot(self):\n        return {'enabled':bool(self.canonical_state.get('meta_grammar_self_extension_enabled')),'operators':[x.get('meta_grammar_operator_id') for x in self.meta_grammar_extension_registry()],'policy':self.canonical_state.get('meta_grammar_extension_policy')}\n    def unified_snapshot(self):\n        s=super().unified_snapshot();s.update({'profile':self.PROFILE,'meta_grammar_extension':self.meta_grammar_snapshot()});return s"
+    }
+  },
+  "functions": [],
+  "modules": [
+    {
+      "module": "test_yado_provenance_reduction_cycle1",
+      "path": "runtime/yado_rc8_v36/test_yado_provenance_reduction_cycle1.py",
+      "sha256": "21c3d18bcd39f398e3ef848ccf6f0091a23e02fd6d00e0fc89455a71c5601d51"
+    },
+    {
+      "module": "test_yado_provenance_reduction_cycle2",
+      "path": "runtime/yado_rc8_v36/test_yado_provenance_reduction_cycle2.py",
+      "sha256": "29cedb0b5fc307822860c7ebbe5629289c374cddb68514764fa928c0aaf4fcaa"
+    },
+    {
+      "module": "test_yado_provenance_reduction_cycle3",
+      "path": "runtime/yado_rc8_v36/test_yado_provenance_reduction_cycle3.py",
+      "sha256": "f3de8dbe6b5875bbf928cd3d8414c7b032ced60c93214068f5a70cdfcbd212d4"
+    },
+    {
+      "module": "test_yado_provenance_reduction_cycle4",
+      "path": "runtime/yado_rc8_v36/test_yado_provenance_reduction_cycle4.py",
+      "sha256": "fbaaf47701746747fa36fb32bd7dbf609d42e2ae9632eeb400daa978ce6f9aea"
+    },
+    {
+      "module": "test_yado_provenance_reduction_cycle5",
+      "path": "runtime/yado_rc8_v36/test_yado_provenance_reduction_cycle5.py",
+      "sha256": "3717ba02839140f568ca8ed35b50c6c1fb37d6ab15460523e76782e0ca273428"
+    },
+    {
+      "module": "test_yado_provenance_reduction_cycle6",
+      "path": "runtime/yado_rc8_v36/test_yado_provenance_reduction_cycle6.py",
+      "sha256": "e5be0c6b163f847a91b44e159ded00fd4c25302c7d5fe724c046633a5781c46e"
+    },
+    {
+      "module": "test_yado_provenance_reduction_cycle7",
+      "path": "runtime/yado_rc8_v36/test_yado_provenance_reduction_cycle7.py",
+      "sha256": "ac493145c527b18cf5ccbbfb9e79f4935e499055a30223c25d8cb7812ddcaa39"
+    },
+    {
+      "module": "test_yado_provenance_reduction_cycle8",
+      "path": "runtime/yado_rc8_v36/test_yado_provenance_reduction_cycle8.py",
+      "sha256": "29d6100d4edf0e9bdccc19fa54a87df5214a28fac34dd2cb25fb5de6b8a1829e"
+    },
+    {
+      "module": "yado_core_v2_8_meta_grammar",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_8_meta_grammar.py",
+      "sha256": "cc6ebc6c907c47d591688af23654200d83554c9a154b8850e51fc77e1bb9f53f"
+    },
+    {
+      "module": "yado_core_v2_9_trace_crystallization",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_9_trace_crystallization.py",
+      "sha256": "94919a1ee45c04e8cbb02016341bc9e65d5bb7e76e37260378b1277a03daf718"
+    },
+    {
+      "module": "yado_core_v3_0_rc6_meta_grammar",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py",
+      "sha256": "42de89ef8d82a17801ea5a9d34b131bc6a518a9479bed3f1775bf3fca6110865"
+    },
+    {
+      "module": "yado_core_v3_0_rc6_r1_real_external",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_r1_real_external.py",
+      "sha256": "14f50396ed06a466a421e7208423c38b50313b407869f195ed313bea3794457d"
+    },
+    {
+      "module": "yado_meta_grammar_genesis_cycle1",
+      "path": "runtime/yado_rc8_v36/yado_meta_grammar_genesis_cycle1.py",
+      "sha256": "10169a90489e048c642db1a4a23b48068b2e2a0d36f5245d913e2b766af9ed81"
+    },
+    {
+      "module": "yado_meta_grammar_runtime_native_v1",
+      "path": "runtime/yado_rc8_v36/yado_meta_grammar_runtime_native_v1.py",
+      "sha256": "3ec6f306cbe05858cea834fa25200a1ab4fbd9b467019fd3f4d1256cd9788200"
+    }
+  ],
+  "schema": "yado.g2.meta_grammar_extension_source_probe.v1",
+  "status": "PASS"
+}
