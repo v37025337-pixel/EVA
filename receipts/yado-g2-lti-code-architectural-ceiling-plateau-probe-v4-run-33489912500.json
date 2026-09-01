@@ -1,0 +1,138 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "canonical_mutation": false,
+  "checks": {
+    "architecture_immutable": true,
+    "canonical_head_immutable": true,
+    "code_v3_active": true,
+    "external_experience_available": true,
+    "four_planes_probed": true,
+    "g3_not_started": true
+  },
+  "contract_snapshot": {
+    "CODE": {
+      "COMPONENT_ID": "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3",
+      "FUNCTION_SCOPE": "EXACTLY_ONE_FUNCTION",
+      "MAX_CANDIDATES": 20000,
+      "MAX_EDIT_DEPTH": 2,
+      "SAFE_STRUCTURAL_WRAPPERS": [
+        "abs",
+        "min",
+        "max"
+      ]
+    },
+    "INTELLIGENCE": {
+      "MAX_FIELD_CELLS": 262144,
+      "MAX_TRIGGER_CANDIDATES": 4096,
+      "MAX_TRIGGER_WIDTH": 2
+    },
+    "LOGIC": {
+      "MAX_BOOLEAN_CELLS": 262144,
+      "MAX_POLYNOMIAL_ROWS": 256,
+      "MAX_POLYNOMIAL_TERMS": 20
+    },
+    "THINKING": {
+      "MAX_PLAN_DEPTH": 8,
+      "MAX_STAGES": 8
+    }
+  },
+  "deficit_severity": {
+    "CODE": 0.5,
+    "INTELLIGENCE": 0.0,
+    "LOGIC": 0.0,
+    "THINKING": 0.15000000000000013
+  },
+  "external_experience_digest": "1ee43e3bc7fcc79027c51be41e4c47565a38fb124bfc52ac65cb12b54feea98b",
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 0.5016999999999999,
+        "token": "opaque_6c283eba0c59356887"
+      },
+      {
+        "score": 0.14200000000000013,
+        "token": "opaque_bf76fcf1b7a6197cc0"
+      },
+      {
+        "score": -0.0016000000000000007,
+        "token": "opaque_1afdc703cee09025e8"
+      },
+      {
+        "score": -0.004000000000000002,
+        "token": "opaque_bc4af163530b851220"
+      }
+    ],
+    "selected_score": 0.5016999999999999,
+    "selected_token": "opaque_6c283eba0c59356887"
+  },
+  "new_deficit_found": true,
+  "next_required_capability": "CODE_PLATEAU_SELF_EVOLUTION_V2",
+  "plane_scores": {
+    "CODE": 0.5,
+    "INTELLIGENCE": 1.0,
+    "LOGIC": 1.0,
+    "THINKING": 0.8499999999999999
+  },
+  "plateau_streak": 0,
+  "probe_status": "FRONTIER_FOUND",
+  "probes": {
+    "CODE": {
+      "CONDITIONAL_EXPRESSION_INSERTION": {
+        "detail": "NO_REPAIR_WITHIN_EDIT_BUDGET",
+        "score": 0.0
+      },
+      "NEW_EXPRESSION_SHAPE_MULT_WRAP": {
+        "detail": "NO_REPAIR_WITHIN_EDIT_BUDGET",
+        "score": 0.0
+      },
+      "THREE_EDIT_PLUS_ONE": {
+        "bound": 2,
+        "detail": 2,
+        "probe_value": 3,
+        "score": 1.0
+      },
+      "TWO_EDIT_REGRESSION": {
+        "detail": 2,
+        "score": 1.0
+      }
+    },
+    "INTELLIGENCE": {
+      "PAIRWISE_TOPOLOGY_FRESH": {
+        "score": 1.0
+      },
+      "WIDTH26_FRESH": {
+        "score": 1.0
+      }
+    },
+    "LOGIC": {
+      "DEGREE4_FRESH": {
+        "score": 1.0
+      },
+      "WIDTH26_FRESH": {
+        "score": 1.0
+      }
+    },
+    "THINKING": {
+      "DEPENDENCY_DEPTH_PLUS_ONE_V4": {
+        "bound": 8,
+        "probe_value": 9,
+        "score": 0.8099999999999999,
+        "sequence_len": 7
+      },
+      "STAGE_WIDTH_PLUS_ONE_V4": {
+        "bound": 8,
+        "probe_value": 9,
+        "score": 0.8899999999999999,
+        "sequence_len": 8
+      }
+    }
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "d9fc7c869a465004634716690e535c28d9d771f3ec3ac74da4cb16d99576c76b",
+  "schema": "yado.g2.lti_code_architectural_ceiling_plateau_probe.v4",
+  "self_selected_plane": "CODE",
+  "semantic_boundary": "FOUR-PLANE FIXED-G2 FRONTIER SEARCH AFTER CODE V3 AND EXTERNAL EXPERIENCE. CODE PROBES ARE ONE STEP BEYOND DECLARED EDIT/STRUCTURE SCOPE; NO CANONICAL MUTATION OCCURS.",
+  "status": "PASS_LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V4"
+}

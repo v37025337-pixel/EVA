@@ -190,7 +190,7 @@
   },
   "fixed_architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "next_required_capability": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V4",
+  "next_required_capability": "CODE_PLATEAU_SELF_EVOLUTION_V2",
   "planes": {
     "INTELLIGENCE": {
       "families": {
@@ -224,16 +224,15 @@
     "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
     "contract_snapshot": {
       "CODE": {
-        "COMPONENT_ID": "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2",
-        "MAX_EDIT_DEPTH": 1,
-        "MUTATION_FAMILIES": [
-          "binop",
-          "compare",
-          "boolop",
-          "constant"
-        ],
-        "SEMANTIC_SCOPE": "ONE_SAFE_PYTHON_FUNCTION",
-        "STRUCTURAL_INSERTION": false
+        "COMPONENT_ID": "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3",
+        "FUNCTION_SCOPE": "EXACTLY_ONE_FUNCTION",
+        "MAX_CANDIDATES": 20000,
+        "MAX_EDIT_DEPTH": 2,
+        "SAFE_STRUCTURAL_WRAPPERS": [
+          "abs",
+          "min",
+          "max"
+        ]
       },
       "INTELLIGENCE": {
         "MAX_FIELD_CELLS": 262144,
@@ -256,28 +255,29 @@
       "LOGIC": 0.0,
       "THINKING": 0.15000000000000013
     },
+    "external_experience_digest": "1ee43e3bc7fcc79027c51be41e4c47565a38fb124bfc52ac65cb12b54feea98b",
     "neutral_selection": {
       "candidate_count": 4,
       "ranking": [
         {
-          "score": 0.5015999999999999,
-          "token": "opaque_1226a638cda3d8efb8"
+          "score": 0.5016999999999999,
+          "token": "opaque_6c283eba0c59356887"
         },
         {
           "score": 0.14200000000000013,
-          "token": "opaque_e41279d85d0b43972a"
+          "token": "opaque_bf76fcf1b7a6197cc0"
         },
         {
           "score": -0.0016000000000000007,
-          "token": "opaque_90fd42e053093f6cd6"
+          "token": "opaque_1afdc703cee09025e8"
         },
         {
           "score": -0.004000000000000002,
-          "token": "opaque_c7a48b878b04765c56"
+          "token": "opaque_bc4af163530b851220"
         }
       ],
-      "selected_score": 0.5015999999999999,
-      "selected_token": "opaque_1226a638cda3d8efb8"
+      "selected_score": 0.5016999999999999,
+      "selected_token": "opaque_6c283eba0c59356887"
     },
     "plane_scores": {
       "CODE": 0.5,
@@ -285,54 +285,55 @@
       "LOGIC": 1.0,
       "THINKING": 0.8499999999999999
     },
-    "probe_version": 3,
+    "probe_version": 4,
     "probes": {
       "CODE": {
-        "SINGLE_CONSTANT_REPAIR": {
-          "score": 1.0
-        },
-        "SINGLE_OPERATOR_REPAIR": {
-          "score": 1.0
-        },
-        "STRUCTURAL_GUARD_INSERTION": {
-          "reason": "REQUIRES_NEW_CONTROL_OR_EXPRESSION_STRUCTURE",
+        "CONDITIONAL_EXPRESSION_INSERTION": {
+          "detail": "NO_REPAIR_WITHIN_EDIT_BUDGET",
           "score": 0.0
         },
-        "TWO_EDIT_REPAIR": {
-          "reason": "REQUIRES_COMPOSITION_OF_AT_LEAST_TWO_AST_EDITS",
+        "NEW_EXPRESSION_SHAPE_MULT_WRAP": {
+          "detail": "NO_REPAIR_WITHIN_EDIT_BUDGET",
           "score": 0.0
+        },
+        "THREE_EDIT_PLUS_ONE": {
+          "bound": 2,
+          "detail": 2,
+          "probe_value": 3,
+          "score": 1.0
+        },
+        "TWO_EDIT_REGRESSION": {
+          "detail": 2,
+          "score": 1.0
         }
       },
       "INTELLIGENCE": {
-        "PAIRWISE_COMPOSITION": {
+        "PAIRWISE_TOPOLOGY_FRESH": {
           "score": 1.0
         },
-        "WIDTH23_TRANSFER": {
+        "WIDTH26_FRESH": {
           "score": 1.0
         }
       },
       "LOGIC": {
-        "DEGREE4_STRUCTURAL_TRANSFER": {
+        "DEGREE4_FRESH": {
           "score": 1.0
         },
-        "TERM_BUDGET_FAIL_CLOSED": {
-          "score": 1.0
-        },
-        "WIDTH24_STRUCTURAL_TRANSFER": {
+        "WIDTH26_FRESH": {
           "score": 1.0
         }
       },
       "THINKING": {
-        "DEPENDENCY_DEPTH_PLUS_ONE": {
+        "DEPENDENCY_DEPTH_PLUS_ONE_V4": {
           "bound": 8,
           "probe_value": 9,
-          "score": 0.7999999999999999,
+          "score": 0.8099999999999999,
           "sequence_len": 7
         },
-        "STAGE_WIDTH_PLUS_ONE": {
+        "STAGE_WIDTH_PLUS_ONE_V4": {
           "bound": 8,
           "probe_value": 9,
-          "score": 0.8999999999999999,
+          "score": 0.8899999999999999,
           "sequence_len": 8
         }
       }
@@ -347,9 +348,9 @@
     "LOGIC",
     "THINKING"
   ],
-  "round": 9,
+  "round": 10,
   "schema": "yado.g2.lti_architectural_ceiling_state.v1",
   "self_selected_weakest_plane": "CODE",
-  "state_digest": "76a66d02d6320d3c3f285ad456d9ac4d725f4687891c75ecb57294ea61a625be",
-  "status": "PLATEAU_SEARCH"
+  "state_digest": "7ba03bf6f6cf4b8655e28276e8e1a0ef6b5ae73f1f77a4ba2a2dea26dedb8c80",
+  "status": "EVOLVING_TO_CEILING"
 }
