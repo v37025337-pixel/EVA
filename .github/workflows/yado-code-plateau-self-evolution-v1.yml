@@ -1,0 +1,42 @@
+name: YADO Code Plateau Self Evolution V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: [architecture/yado-code-plateau-self-evolution-v1-request.json]
+permissions:
+  contents: write
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Evolve
+        id: evolve
+        continue-on-error: true
+        run: python runtime/yado_code_plateau_self_evolution_v1.py
+      - name: Persist
+        if: always()
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_code_plateau_self_evolution_v1_receipt.json receipts/yado-code-plateau-self-evolution-v1-run-${GITHUB_RUN_ID}.json || true
+          git config user.name 'YADO Code Plateau Evolution'
+          git config user.email 'actions@users.noreply.github.com'
+          git add candidates/g2-self-evolution/bounded_compositional_program_repair_v3.py candidates/g2-self-evolution/bounded_compositional_program_repair_v3.json architecture/evolution-ledger.json architecture/yado-g2-lti-ceiling-state-v1.json receipts/yado-code-plateau-self-evolution-v1-run-${GITHUB_RUN_ID}.json || true
+          if ! git diff --cached --quiet; then git commit -m 'Persist YADO code plateau self-evolution V1 [skip ci]' && git push origin HEAD:yado-architecture-shadow-search; fi
+      - name: Enforce
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('runtime/yado_code_plateau_self_evolution_v1_receipt.json')
+          if not p.exists(): raise SystemExit('MISSING_RECEIPT')
+          r=json.loads(p.read_text())
+          if r.get('status')!='PASS_CODE_PLATEAU_SELF_EVOLUTION_V1':
+              raise SystemExit('WITHHOLD:'+str(r.get('status')))
+          print(r['status'])
+          PY
