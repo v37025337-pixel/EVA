@@ -1,7 +1,7 @@
 from pathlib import Path
 import ast,json,hashlib
 ROOT=Path(__file__).resolve().parent; PKG=ROOT/'yado_rc8_v36'
-want_classes={'MechanismSelector'}
+want_classes={'MechanismSelector','RuleProgramSynthesizer','RuleProgram','Rule','Predicate'}
 want_funcs={'synthesize_candidates','evaluate','execute','run','predict'}
 found={}
 for p in sorted(PKG.glob('*.py')):
