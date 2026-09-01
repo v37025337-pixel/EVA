@@ -1,0 +1,80 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "baseline_holdout": {
+    "MIXED_WIDTH_FRESH": 1.0,
+    "PAIRWISE_FRESH": 1.0,
+    "WIDTH24_DISTRIBUTION_SHIFT": 0.6071428571428571
+  },
+  "candidate_digest": "f17ecb87fb852e36ed1c446f24f12326ea5c795b4898502965f9f06b35a81cc0",
+  "candidate_source_sha256": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
+  "canonical_active": false,
+  "causal_gain": 0.13095238095238093,
+  "component_id": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+  "compute_contract": {
+    "max_alignment_cells": 131072,
+    "max_field_cells": 262144,
+    "max_outputs": 8,
+    "max_trigger_candidates": 4096,
+    "max_trigger_width": 2,
+    "max_triggers_per_output": 32
+  },
+  "fresh_validation": {
+    "families": {
+      "MIXED_WIDTH_FRESH": 1.0,
+      "PAIRWISE_FRESH": 1.0,
+      "WIDTH24_DISTRIBUTION_SHIFT": 1.0
+    },
+    "min_family": 1.0,
+    "score": 1.0
+  },
+  "neutral_selection": {
+    "candidate_count": 2,
+    "ranking": [
+      {
+        "score": 1.005,
+        "token": "opaque_ab955b756205dabdf3"
+      },
+      {
+        "score": 0.8641111111111113,
+        "token": "opaque_2b35669dfde0cbb445"
+      }
+    ],
+    "selected_score": 1.005,
+    "selected_token": "opaque_ab955b756205dabdf3"
+  },
+  "parent_head_digest": "d45888626892dee85deab21b873c0fef5d8644aa5aeddd7313aa48af747df8c6",
+  "promotion_applied": false,
+  "repair_of_receipt": "87b4a2a47ccb15bb40039cb4657c6ef554048c2e22d4a582acdefab4e38d3ac4",
+  "schema": "yado.g2.coverage_pruned_compositional_schema_router_candidate.v3",
+  "selected_strategy": "V3_POSITIVE_COVER_PRUNING",
+  "semantic_boundary": "BUDGET-ADAPTIVE WIDTH<=2 TRIGGER ROUTER WITH POSITIVE-COVER PRUNING: WIDER RULES ARE RETAINED ONLY WHEN THEY EXPLAIN POSITIVES NOT ALREADY COVERED BY SIMPLER RULES.",
+  "state": "AUTHORIZED_FOR_SHADOW_ADMISSION",
+  "validation": {
+    "V2_ALL_HIGH_PRECISION": {
+      "complexity": 0.1,
+      "families": {
+        "FAILED_WIDTH22_COUNTEREXAMPLE": 0.6208333333333333,
+        "MIXED_WIDTH_DISJUNCTION": 1.0,
+        "PAIRWISE_REGRESSION": 1.0
+      },
+      "min_family": 0.6208333333333333,
+      "novelty": 0.1,
+      "risk": 0.03,
+      "score": 0.8736111111111112,
+      "token": "opaque_2b35669dfde0cbb445"
+    },
+    "V3_POSITIVE_COVER_PRUNING": {
+      "complexity": 0.18,
+      "families": {
+        "FAILED_WIDTH22_COUNTEREXAMPLE": 1.0,
+        "MIXED_WIDTH_DISJUNCTION": 1.0,
+        "PAIRWISE_REGRESSION": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.8,
+      "risk": 0.04,
+      "score": 1.0,
+      "token": "opaque_ab955b756205dabdf3"
+    }
+  }
+}
