@@ -19,6 +19,7 @@
     "runtime/yado_raw_task_representation_learner_v1.py",
     "runtime/yado_raw_task_representation_runtime_v1.py",
     "runtime/yado_semantic_expression_synthesizer_v1.py",
+    "runtime/yado_unified_context_kernel_v1.py",
     "runtime/yado_unified_core_deep_self_audit_v1.py"
   ],
   "audit_invariant": {
@@ -36,7 +37,7 @@
     "candidate_digest": "f57b45a68f0f752c5b4424826a8830b8a67fdcd90e1f4a9bac56cb47170a4982",
     "component_id": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
     "fresh_admission_receipt_sha256": "be56a42c3e69f29e880c7d2e570f619b73de1ebdfc3e9e6757a4d9c51c1819e5",
-    "fresh_score": 1.0,
+    "fresh_score": 1,
     "gate_run_id": "33437453214",
     "max_stream_contexts": 1024,
     "memory_ablation_score": 0.25,
@@ -120,13 +121,13 @@
     "candidate_digest": "10e457bde0473a3eb744d5715237509bdae15a86bdd13daf372faf130934e2fa",
     "causal": {
       "alignment": true,
-      "collapsed_multi_score": 0.0,
+      "collapsed_multi_score": 0,
       "composition": true,
       "unaligned_score": 0.03125
     },
     "component_id": "ALG-G2-BOUNDED-COMPOSITIONAL-SCHEMA-ROUTER-V1",
     "fresh_admission_receipt_sha256": "e2011d5ecac2baaa9aae5dd2b440bf5fa0dbcebe354587626836164949705b10",
-    "fresh_score": 1.0,
+    "fresh_score": 1,
     "gate_run_id": "33465932261",
     "information_boundary": "ZERO_SHOT_OR_UNINFORMATIVE_ALIGNMENT_IS_NOT_IDENTIFIABLE_WITHOUT_SIDE_INFORMATION",
     "mode": "ACTIVE_FIXED_ARCHITECTURE_COMPOSITIONAL_SCHEMA_ROUTING",
@@ -144,12 +145,12 @@
     "candidate_digest": "f98f0a15a2ee52719f2c8c6b013446768951320471cd09834653d6e84feea9df",
     "causal": {
       "causal": true,
-      "coordinator_score": 1.0,
-      "raw_runtime_set_dispatch_ablation_score": 0.0
+      "coordinator_score": 1,
+      "raw_runtime_set_dispatch_ablation_score": 0
     },
     "component_id": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
     "fresh_admission_receipt_sha256": "dd20a19a80e844a41ca19777b0b44184138cbaa076fc79bd2893937d4968d2cc",
-    "fresh_score": 1.0,
+    "fresh_score": 1,
     "g2_runtime_sha256": "79eba84158de120f026e164b4914bec0fd00358bfe8a56e81b0497e924b7e762",
     "gate_run_id": "33466562740",
     "max_capabilities": 4,
@@ -165,7 +166,7 @@
       "v2_score": 0.8333333333333334,
       "v3_keeps_true_signal": true,
       "v3_prunes_spurious_pair": true,
-      "v3_score": 1.0
+      "v3_score": 1
     },
     "causal_readmission_receipt_sha256": "3c131163a25868a6ef05a898f2923115f574ec5100e82b7406cd0c2857c06c0f",
     "component_id": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
@@ -178,7 +179,7 @@
       "max_triggers_per_output": 32
     },
     "functional_fresh_receipt_sha256": "2500b1c5ca6459c5fd6f28acf2a107b5ede13199892051b5c04942b72b551874",
-    "functional_fresh_score": 1.0,
+    "functional_fresh_score": 1,
     "gate_run_id": "33477772368",
     "mode": "ACTIVE_FIXED_ARCHITECTURE_COVERAGE_PRUNED_BUDGET_ADAPTIVE_ROUTING",
     "repair_of_receipt": "87b4a2a47ccb15bb40039cb4657c6ef554048c2e22d4a582acdefab4e38d3ac4",
@@ -192,7 +193,10 @@
     "RECEIPTS_AND_COUNTEREXAMPLES_ARE_PERSISTENT_EXPERIENCE",
     "CANONICAL_G2_CAPABILITIES_REMAIN_PRIMARY_RUNTIME",
     "SHADOW_CAPABILITIES_STAY_SHADOW_UNTIL_ADMISSION",
-    "G3_GENESIS_BLOCKED_DURING_CONSOLIDATION"
+    "G3_GENESIS_BLOCKED_DURING_CONSOLIDATION",
+    "EXACTLY_ONE_ACTIVE_CONTEXT_KERNEL",
+    "ALL_NON_ACTIVE_YADO_BRANCHES_ARE_MEMORY_HISTORY_ONLY",
+    "CURRENT_STATE_AND_HISTORY_MUST_NOT_FORM_SPLIT_BRAIN"
   ],
   "legacy_experience_provenance": {
     "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
@@ -201,7 +205,7 @@
     "host_summary_class": "HOST_CURATED_REGISTRY_SUMMARY",
     "legacy_branch_coverage": 13,
     "rederived_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE",
-    "registered_path_coverage": 1.0,
+    "registered_path_coverage": 1,
     "semantic_equivalence_claimed": false
   },
   "legacy_experience_retrieval": {
@@ -219,15 +223,15 @@
     "candidate_digest": "3fbc845da054cf8f7e85559256173f230fe0e8a67ebe47a5a3fa647781049917",
     "causal": {
       "baseline_parity": 0.5,
-      "baseline_polynomial": 0.0,
-      "new_parity": 1.0,
-      "new_polynomial": 1.0,
+      "baseline_polynomial": 0,
+      "new_parity": 1,
+      "new_polynomial": 1,
       "polynomial": true,
       "symmetric_boolean": true
     },
     "component_id": "ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1",
     "fresh_admission_receipt_sha256": "e516ed017dfca38af49414b50d93d0c68063360cae8159143c71d2b49ea531ad",
-    "fresh_score": 1.0,
+    "fresh_score": 1,
     "gate_run_id": "33442720000",
     "mode": "ACTIVE_FIXED_ARCHITECTURE_COMPOSITIONAL_LOGIC",
     "selected_features": {
@@ -242,8 +246,8 @@
     "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
     "candidate_digest": "7005723a7b15e1c9425902e199f6a467ea722f9d41ed684d9c3c16531fdeef26",
     "causal": {
-      "old_d4_score": 0.0,
-      "old_width20_score": 0.0,
+      "old_d4_score": 0,
+      "old_width20_score": 0,
       "poly_v2": true,
       "width_v2": true
     },
@@ -254,7 +258,7 @@
       "max_polynomial_terms": 20
     },
     "fresh_admission_receipt_sha256": "2a52ee891bae11dd96756faae9e2a168e636742ba4f59352232809dc4f164cf2",
-    "fresh_score": 1.0,
+    "fresh_score": 1,
     "gate_run_id": "33476639634",
     "mode": "ACTIVE_FIXED_ARCHITECTURE_WORK_BUDGET_ADAPTIVE_LOGIC",
     "source_sha256": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
@@ -264,7 +268,7 @@
     "candidate_digest": "a47a32ac13a65cbf0062a439cd238f313be7c30d1faac9c83162a80e51423f19",
     "component_id": "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
     "fresh_admission_receipt_sha256": "b769e60eed94a611db24737de404bb92e736c736a5097dc34e24ce8d4e74f27d",
-    "fresh_score": 1.0,
+    "fresh_score": 1,
     "gate_run_id": "33416690004",
     "mode": "ACTIVE_BOUNDED_SEMANTIC_EXPRESSION_SYNTHESIS",
     "source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7"
@@ -463,7 +467,7 @@
       "structural_search_budget": 18000
     },
     "fresh_admission_receipt_sha256": "5514f9395df899639dc9abd007905d8f30ec6b552969b0b2fed16f8bae392166",
-    "fresh_score": 1.0,
+    "fresh_score": 1,
     "gate_run_id": "33502626708",
     "mode": "ACTIVE_AMBIGUITY_AWARE_BOUNDED_SINGLE_FUNCTION_REPAIR",
     "self_repair_binding": "ACTIVE_SELF_AUDIT_AND_REPAIR_PLANE",
@@ -539,7 +543,7 @@
     },
     "component_id": "ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1",
     "fresh_admission_receipt_sha256": "6bde35fc82fb8722d443c46e53908dc1ef975ca6307acc4d779c9e1a4c5edfea",
-    "fresh_score": 1.0,
+    "fresh_score": 1,
     "gate_run_id": "33441946853",
     "mode": "ACTIVE_FIXED_ARCHITECTURE_ADAPTIVE_CONTINGENT_PLANNING",
     "selected_features": {
@@ -549,5 +553,12 @@
     },
     "selected_strategy": "ADAPTIVE_CONTINGENT",
     "source_sha256": "3250bff5b6131f29520b74b721d68fc66114137b4e799a32370cb25da049da77"
+  },
+  "context_kernel": {
+    "kernel_id": "YADO_UNIFIED_CONTEXT_KERNEL_V1",
+    "manifest": "canonical/yado-unified-context-kernel-v1.json",
+    "runtime": "runtime/yado_unified_context_kernel_v1.py",
+    "mode": "SINGLE_CANONICAL_CONTEXT",
+    "historical_branch_role": "MEMORY_HISTORY_ONLY"
   }
 }
