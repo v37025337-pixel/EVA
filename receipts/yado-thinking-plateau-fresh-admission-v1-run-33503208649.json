@@ -1,0 +1,94 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "candidate_digest": "f3a3eadbc89a8c396485daf05e0b4cb9903759dde73ce4697101b4bd1907edb3",
+  "candidate_source_sha256": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5",
+  "canonical_mutation": false,
+  "causal": {
+    "new_confidence": 0.9999999999999998,
+    "old_confidence": 0.7299999999999999,
+    "width_ablation": true
+  },
+  "checks": {
+    "architecture_immutable": true,
+    "candidate_source_exact": true,
+    "canonical_head_immutable": true,
+    "causal_width_ablation": true,
+    "fresh_all_green": true,
+    "fresh_score_one": true,
+    "search_budget_bound": true
+  },
+  "details": {
+    "COST_DEPENDENCY_FRESH": {
+      "confidence": 1.0,
+      "reason": "TARGET_REACHABLE",
+      "sequence": [
+        "p0",
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    "DEPENDENCY11_FRESH": {
+      "confidence": 0.9999999999999998,
+      "reason": "BEST_REACHABLE",
+      "sequence": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7",
+        "d8",
+        "d9",
+        "d10",
+        "d11"
+      ]
+    },
+    "OVERSIZE_WITHHOLD_FRESH": {
+      "action": "WITHHOLD",
+      "reason": "STAGE_RECORD_WORK_BUDGET"
+    },
+    "SIGNED_RECOVERY_FRESH": {
+      "confidence": 0.95,
+      "reason": "TARGET_REACHABLE",
+      "sequence": [
+        "b",
+        "c"
+      ]
+    },
+    "WIDTH11_FRESH": {
+      "confidence": 0.9999999999999998,
+      "reason": "BEST_REACHABLE",
+      "sequence": [
+        "w0",
+        "w1",
+        "w10",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7",
+        "w8",
+        "w9"
+      ]
+    }
+  },
+  "fresh_families": {
+    "COST_DEPENDENCY_FRESH": 1.0,
+    "DEPENDENCY11_FRESH": 1.0,
+    "OVERSIZE_WITHHOLD_FRESH": 1.0,
+    "SIGNED_RECOVERY_FRESH": 1.0,
+    "WIDTH11_FRESH": 1.0
+  },
+  "fresh_score": 1.0,
+  "g3_genesis_performed": false,
+  "next_required_capability": "THINKING_PLATEAU_CANONICAL_INTEGRATION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "6ffe241904a45f7f034afbc58c38667e591bcc8652b748b65f1c4e2daf226b89",
+  "schema": "yado.g2.thinking_plateau_fresh_admission.v1",
+  "semantic_boundary": "INDEPENDENT FRESH ADMISSION OF WORK-BUDGET ADAPTIVE CONTINGENT PLANNING BEYOND THE OLD 8/8 GEOMETRY, WITH COST/DEPENDENCY/SIGNED-UPDATE REGRESSIONS AND FAIL-CLOSED OVERSIZE.",
+  "status": "PASS_THINKING_PLATEAU_FRESH_ADMISSION_V1"
+}
