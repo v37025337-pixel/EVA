@@ -1,0 +1,110 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "candidate_digest": "74426392a400f94d87a3540b243123647e2142da5fcd2f0a209df9ff8b1d16e9",
+  "candidate_source_sha256": "4f70afde515d1a0a2d4a5629f4a90ba0dc1aacc065a5f3761d7f4e812e2ad16d",
+  "canonical_active": false,
+  "causal_gain": 0.0,
+  "component_id": "ALG-G2-BUDGET-PORTFOLIO-STRUCTURAL-PROGRAM-REPAIR-V6",
+  "compute_contract": {
+    "base_search_budget": 6000,
+    "max_candidates": 24000,
+    "max_edit_depth": 2,
+    "structural_search_budget": 18000
+  },
+  "experience_digest": "1ee43e3bc7fcc79027c51be41e4c47565a38fb124bfc52ac65cb12b54feea98b",
+  "fresh_validation": {
+    "families": {
+      "ARITHMETIC_FACTOR_VALID": 1.0,
+      "CONDITIONAL_FRESH_A": 0.0,
+      "CONDITIONAL_FRESH_B": 1.0
+    },
+    "min_family": 0.0,
+    "score": 0.6666666666666666
+  },
+  "neutral_selection": {
+    "candidate_count": 2,
+    "ranking": [
+      {
+        "score": 0.4951,
+        "token": "opaque_cda1093c25b39b035d"
+      },
+      {
+        "score": 0.476,
+        "token": "opaque_1ea90ccfaf7f45d63f"
+      }
+    ],
+    "selected_score": 0.4951,
+    "selected_token": "opaque_cda1093c25b39b035d"
+  },
+  "parent_head_digest": "cd3b965131a69aced88149ed76af0c567e445635fdfab7eba5570a1b92a15a03",
+  "prior_bad_oracle": {
+    "detected": true,
+    "ratios": [
+      "-15",
+      "5",
+      "-1"
+    ]
+  },
+  "promotion_applied": false,
+  "schema": "yado.g2.budget_portfolio_structural_program_repair_candidate.v6",
+  "selected_strategy": "V6_PORTFOLIO_BUDGET",
+  "semantic_boundary": "SAME TOTAL SEARCH BUDGET AS V5, BUT EXPLICIT PORTFOLIO ALLOCATION BETWEEN BASE AST REPAIR AND EVIDENCE-GUIDED STRUCTURAL SYNTHESIS. NO BUDGET INCREASE.",
+  "state": "WITHHOLD",
+  "validation": {
+    "V5_GREEDY_BASE_BUDGET": {
+      "complexity": 0.38,
+      "details": {
+        "conditional": {
+          "reason": "NO_REPAIR_WITHIN_GUIDED_STRUCTURAL_BUDGET",
+          "repair_mode": "GUIDED_STRUCTURAL",
+          "source": null,
+          "tried": 754
+        },
+        "regression": {
+          "candidate_count": 1,
+          "edit_depth": 2,
+          "repair_mode": "BASE_COMPOSITIONAL",
+          "source": "def f(x, y):\n    return x + y + 3\n",
+          "tried": 815
+        }
+      },
+      "families": {
+        "PRIOR_VALID_CONDITIONAL": 0.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.25,
+      "risk": 0.05,
+      "score": 0.5,
+      "token": "opaque_1ea90ccfaf7f45d63f"
+    },
+    "V6_PORTFOLIO_BUDGET": {
+      "complexity": 0.4,
+      "details": {
+        "conditional": {
+          "reason": "NO_REPAIR_WITHIN_PORTFOLIO_BUDGET",
+          "repair_mode": "PORTFOLIO_STRUCTURAL",
+          "source": null,
+          "tried": 72
+        },
+        "regression": {
+          "base_budget": 6000,
+          "candidate_count": 1,
+          "edit_depth": 2,
+          "repair_mode": "BASE_PORTFOLIO",
+          "source": "def f(x, y):\n    return x + y + 3\n",
+          "tried": 815
+        }
+      },
+      "families": {
+        "PRIOR_VALID_CONDITIONAL": 0.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.92,
+      "risk": 0.05,
+      "score": 0.5,
+      "token": "opaque_cda1093c25b39b035d"
+    }
+  }
+}

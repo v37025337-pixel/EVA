@@ -1,0 +1,115 @@
+{
+  "candidate_digest": "74426392a400f94d87a3540b243123647e2142da5fcd2f0a209df9ff8b1d16e9",
+  "candidate_source_sha256": "4f70afde515d1a0a2d4a5629f4a90ba0dc1aacc065a5f3761d7f4e812e2ad16d",
+  "canonical_mutation": false,
+  "causal_gain": 0.0,
+  "checks": {
+    "architecture_immutable": true,
+    "bad_prior_arithmetic_oracle_detected": true,
+    "causal_budget_allocation_gain": false,
+    "fresh_min_one": false,
+    "head_immutable": true,
+    "multi_function_rejected": true,
+    "prior_valid_conditional_repaired": false,
+    "selected_budget_portfolio": true,
+    "total_budget_not_increased": true,
+    "unsafe_rejected": true
+  },
+  "fresh_validation": {
+    "families": {
+      "ARITHMETIC_FACTOR_VALID": 1.0,
+      "CONDITIONAL_FRESH_A": 0.0,
+      "CONDITIONAL_FRESH_B": 1.0
+    },
+    "min_family": 0.0,
+    "score": 0.6666666666666666
+  },
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 2,
+    "ranking": [
+      {
+        "score": 0.4951,
+        "token": "opaque_cda1093c25b39b035d"
+      },
+      {
+        "score": 0.476,
+        "token": "opaque_1ea90ccfaf7f45d63f"
+      }
+    ],
+    "selected_score": 0.4951,
+    "selected_token": "opaque_cda1093c25b39b035d"
+  },
+  "next_required_capability": "CODE_PLATEAU_SELF_EVOLUTION_V5",
+  "prior_bad_oracle": {
+    "detected": true,
+    "ratios": [
+      "-15",
+      "5",
+      "-1"
+    ]
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "0a24f41aeef317d0a391cad5029e5e4d8c5e5dcc13048d4ed057a59520a79c3c",
+  "schema": "yado.g2.code_plateau_self_evolution.v4",
+  "selected_strategy": "V6_PORTFOLIO_BUDGET",
+  "semantic_boundary": "SAME TOTAL SEARCH BUDGET AS V5, BUT EXPLICIT PORTFOLIO ALLOCATION BETWEEN BASE AST REPAIR AND EVIDENCE-GUIDED STRUCTURAL SYNTHESIS. NO BUDGET INCREASE.",
+  "status": "WITHHOLD_CODE_PLATEAU_SELF_EVOLUTION_V4",
+  "validation": {
+    "V5_GREEDY_BASE_BUDGET": {
+      "complexity": 0.38,
+      "details": {
+        "conditional": {
+          "reason": "NO_REPAIR_WITHIN_GUIDED_STRUCTURAL_BUDGET",
+          "repair_mode": "GUIDED_STRUCTURAL",
+          "source": null,
+          "tried": 754
+        },
+        "regression": {
+          "candidate_count": 1,
+          "edit_depth": 2,
+          "repair_mode": "BASE_COMPOSITIONAL",
+          "source": "def f(x, y):\n    return x + y + 3\n",
+          "tried": 815
+        }
+      },
+      "families": {
+        "PRIOR_VALID_CONDITIONAL": 0.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.25,
+      "risk": 0.05,
+      "score": 0.5,
+      "token": "opaque_1ea90ccfaf7f45d63f"
+    },
+    "V6_PORTFOLIO_BUDGET": {
+      "complexity": 0.4,
+      "details": {
+        "conditional": {
+          "reason": "NO_REPAIR_WITHIN_PORTFOLIO_BUDGET",
+          "repair_mode": "PORTFOLIO_STRUCTURAL",
+          "source": null,
+          "tried": 72
+        },
+        "regression": {
+          "base_budget": 6000,
+          "candidate_count": 1,
+          "edit_depth": 2,
+          "repair_mode": "BASE_PORTFOLIO",
+          "source": "def f(x, y):\n    return x + y + 3\n",
+          "tried": 815
+        }
+      },
+      "families": {
+        "PRIOR_VALID_CONDITIONAL": 0.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.92,
+      "risk": 0.05,
+      "score": 0.5,
+      "token": "opaque_cda1093c25b39b035d"
+    }
+  }
+}

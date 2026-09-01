@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "cd3b965131a69aced88149ed76af0c567e445635fdfab7eba5570a1b92a15a03",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 160,
+  "event_count": 161,
   "events": [
     {
       "canonical_mutation": false,
@@ -2658,14 +2658,30 @@
       "source_digest": "7bcd8174cb37b3c2e672dd5f51c3f68a0b57ae89d62c27f1d8a44e77c9b1f6ad",
       "source_path": "receipts/yado-code-plateau-self-evolution-v3-run-33490345516.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V4",
+      "effect": "SELECTED=V6_PORTFOLIO_BUDGET; FRESH=0.666667; BUDGET_GAIN=0.000000; BAD_ORACLE=True; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V5",
+      "event_hash": "6413c1e87aea1e7130296c1474d94f0f72c2e705c7f81edabddd9054c2a61167",
+      "event_id": "E0161_G2_CODE_PLATEAU_SELF_EVOLUTION_V4",
+      "event_type": "FIXED_BUDGET_PORTFOLIO_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 160,
+      "parent_event_hash": "cfd9be6926bead920b6e67a12a88ca58557a64d408ada1fab131e4a6e89d97aa",
+      "promotion_applied": false,
+      "run_id": "33490582631",
+      "source_digest": "0a24f41aeef317d0a391cad5029e5e4d8c5e5dcc13048d4ed057a59520a79c3c",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v4-run-33490582631.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "41ee80908f896a8ddae27464232054a5a97e53c941068d69b6911e4d291fd10d",
+  "ledger_digest": "1621f50802070fa12b6bd574f19993f15e31a2503b7ebbc428fd89c79cda4504",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "CODE_PLATEAU_SELF_EVOLUTION_V4"
+    "CODE_PLATEAU_SELF_EVOLUTION_V5"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -2694,5 +2710,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "cfd9be6926bead920b6e67a12a88ca58557a64d408ada1fab131e4a6e89d97aa"
+  "tail_event_hash": "6413c1e87aea1e7130296c1474d94f0f72c2e705c7f81edabddd9054c2a61167"
 }
