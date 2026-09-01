@@ -1,0 +1,51 @@
+{
+  "architecture_mutation": false,
+  "artifact_digest": "38a504f3f71ecba777c690beb9a1634be43104396bfe9d8b80c9890a22307245",
+  "assistant_candidate_algorithm_written": false,
+  "baseline": 0.8043478260869565,
+  "candidate_digest": "fc04981012daffe7f580d9c29594eb6da2aed22d15a07e17f9d1f8cab4974c5c",
+  "candidate_state": "WITHHOLD",
+  "canonical_mutation": false,
+  "checks": {
+    "architecture_immutable": true,
+    "blind_not_used_for_stage_selection": true,
+    "bounded_total_seconds": true,
+    "core_immutable": true,
+    "g3_not_started": true,
+    "head_immutable": true,
+    "kernel_selected_reaction_norm": true
+  },
+  "fresh_blind": 0.0,
+  "g3_genesis_performed": false,
+  "kernel_operation": {
+    "evidence": {
+      "mean_task_score": 0.0,
+      "weak_tasks": [
+        "completion",
+        "fresh_blind",
+        "validation"
+      ]
+    },
+    "operation": "REACTION_NORM",
+    "variant_id": "V2"
+  },
+  "next_required_capability": "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V4",
+  "schema": "yado.g2.kernel_self_expand_architecture_selector_constructor.v3",
+  "selected_stage": null,
+  "stage_errors": [
+    {
+      "error": "TIMEOUT:70s",
+      "stage": "RN24"
+    },
+    {
+      "error": "TIMEOUT:90s",
+      "stage": "RN40"
+    },
+    {
+      "error": "TIMEOUT:110s",
+      "stage": "RN64"
+    }
+  ],
+  "status": "PASS_KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V3",
+  "validation": 0.0
+}
