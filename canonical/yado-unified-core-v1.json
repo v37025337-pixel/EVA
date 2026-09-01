@@ -1,7 +1,6 @@
 {
   "active_runtime_sources": [
     "runtime/yado_ambiguity_aware_program_repair_v11.py",
-    "runtime/yado_bounded_adaptive_contingent_planner_v1.py",
     "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_capability_set_coordinator_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
@@ -20,7 +19,8 @@
     "runtime/yado_raw_task_representation_runtime_v1.py",
     "runtime/yado_semantic_expression_synthesizer_v1.py",
     "runtime/yado_unified_context_kernel_v1.py",
-    "runtime/yado_unified_core_deep_self_audit_v1.py"
+    "runtime/yado_unified_core_deep_self_audit_v1.py",
+    "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "audit_invariant": {
     "candidate_digest": "9510d1d083318a5a53de2ef33860ef6960b36c357fb61ee92ab640196b152fce",
@@ -32,6 +32,13 @@
   "canonical_mutation": false,
   "consolidation_applied": true,
   "consolidation_gate_run_id": "33371375385",
+  "context_kernel": {
+    "historical_branch_role": "MEMORY_HISTORY_ONLY",
+    "kernel_id": "YADO_UNIFIED_CONTEXT_KERNEL_V1",
+    "manifest": "canonical/yado-unified-context-kernel-v1.json",
+    "mode": "SINGLE_CANONICAL_CONTEXT",
+    "runtime": "runtime/yado_unified_context_kernel_v1.py"
+  },
   "contextual_stream_adapter": {
     "base_score": 0.25,
     "candidate_digest": "f57b45a68f0f752c5b4424826a8830b8a67fdcd90e1f4a9bac56cb47170a4982",
@@ -46,7 +53,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "499e0d1a2e747f578cef52537c9b09e1e78a51f22fb2af0a1eed72f139a23496",
+  "core_digest": "78d39db3688f75390abf3e5feb188d9a2cbc74bf2a930e743ee9ae9588716981",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -100,7 +107,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V5",
+  "current_frontier": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V6",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -334,11 +341,12 @@
       "active_components": [
         "ALG-BUDGETED-STAGE-POLICY-V1",
         "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
-        "ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1"
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
       ],
       "plane_id": "THINKING_AND_PLANNING",
       "responsibilities": [
         "ambiguity_aware_program_repair",
+        "beam_pruned_contingent_search",
         "bounded_compositional_program_repair",
         "bounded_contingent_planning",
         "bounded_long_horizon_search",
@@ -351,8 +359,11 @@
         "quota_aware_staging",
         "recursive_partitioned_patch_synthesis",
         "safe_structural_expression_repair",
+        "search_node_work_budget",
         "signed_evidence_update",
-        "two_edit_ast_search"
+        "stage_record_work_budget",
+        "two_edit_ast_search",
+        "work_budget_adaptive_planning"
       ]
     },
     {
@@ -482,7 +493,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "732e78f5377ee04d50e761d18927f66bb0b14657f344eefd957f21f9dc622790",
+  "runtime_sha256": "9e5886851472a601f3c9b698df895a249f0bcb7126c8e3d338854541bd9cde9c",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
@@ -531,6 +542,12 @@
       "historical_evidence_retained": true,
       "reason": "CODE_PLATEAU_COUNTEREXAMPLES_REQUIRED_STRUCTURAL_SYNTHESIS_RECURSIVE_PARTITION_SUPPORT_RANKING_AND_AMBIGUITY_WITHHOLD",
       "superseded_by": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+    },
+    {
+      "component_id": "ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1",
+      "historical_evidence_retained": true,
+      "reason": "THINKING_PLATEAU_REPLACED_FIXED_8_STAGE_8_DEPTH_GEOMETRY_WITH_EXPLICIT_WORK_BUDGETS",
+      "superseded_by": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
     }
   ],
   "thinking_ceiling": {
@@ -552,13 +569,25 @@
       "signed_observation": true
     },
     "selected_strategy": "ADAPTIVE_CONTINGENT",
-    "source_sha256": "3250bff5b6131f29520b74b721d68fc66114137b4e799a32370cb25da049da77"
+    "source_sha256": "3250bff5b6131f29520b74b721d68fc66114137b4e799a32370cb25da049da77",
+    "status": "SUPERSEDED_BY_THINKING_PLATEAU_V2"
   },
-  "context_kernel": {
-    "kernel_id": "YADO_UNIFIED_CONTEXT_KERNEL_V1",
-    "manifest": "canonical/yado-unified-context-kernel-v1.json",
-    "runtime": "runtime/yado_unified_context_kernel_v1.py",
-    "mode": "SINGLE_CANONICAL_CONTEXT",
-    "historical_branch_role": "MEMORY_HISTORY_ONLY"
+  "thinking_plateau_v2": {
+    "candidate_digest": "f3a3eadbc89a8c396485daf05e0b4cb9903759dde73ce4697101b4bd1907edb3",
+    "causal_width_ablation": true,
+    "component_id": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+    "compute_contract": {
+      "beam_width": 256,
+      "max_plan_steps": 32,
+      "max_search_nodes": 24000,
+      "max_stage_records": 64,
+      "old_v1_theoretical_worst_case_nodes_8_stages": 109600
+    },
+    "fresh_admission_receipt_sha256": "6ffe241904a45f7f034afbc58c38667e591bcc8652b748b65f1c4e2daf226b89",
+    "fresh_score": 1.0,
+    "gate_run_id": "33503355010",
+    "mode": "ACTIVE_WORK_BUDGET_ADAPTIVE_CONTINGENT_PLANNING",
+    "source_sha256": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5",
+    "supersedes": "ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1"
   }
 }

@@ -17,7 +17,7 @@ from yado_legacy_experience_retriever_v2 import LegacyExperienceRetrieverV1
 from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesizerV1
 from yado_ambiguity_aware_program_repair_v11 import AmbiguityAwareProgramRepairV11
 from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReasonerV1
-from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingentPlannerV1, ContingentStage
+from yado_work_budget_adaptive_contingent_planner_v2 import WorkBudgetAdaptiveContingentPlannerV2, ContingentStage
 from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
 from yado_coverage_pruned_compositional_schema_router_v3 import CoveragePrunedCompositionalSchemaRouterV3
 from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
@@ -49,7 +49,7 @@ class UnifiedYADOCoreV1:
         self.semantic_expression_synthesizer=SemanticExpressionSynthesizerV1
         self.bounded_program_repair=AmbiguityAwareProgramRepairV11
         self.scientific_data_reasoner=BoundedScientificDataReasonerV1
-        self.adaptive_contingent_planner=BoundedAdaptiveContingentPlannerV1
+        self.adaptive_contingent_planner=WorkBudgetAdaptiveContingentPlannerV2
         self.compositional_logic=BudgetAdaptiveCompositionalLogicV2
         self.compositional_schema_router=CoveragePrunedCompositionalSchemaRouterV3
         self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
