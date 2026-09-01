@@ -1,0 +1,31 @@
+name: YADO G2 Freeze Architecture Neutral Evidence V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-freeze-architecture-neutral-evidence-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Freeze verified historical evidence
+        run: python runtime/yado_g2_freeze_architecture_neutral_evidence_v1.py
+      - name: Persist frozen corpus
+        run: |
+          mkdir -p receipts resources
+          cp runtime/yado_g2_freeze_architecture_neutral_evidence_v1_receipt.json "receipts/yado-g2-freeze-architecture-neutral-evidence-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Evidence Memory"
+          git config user.email "actions@users.noreply.github.com"
+          git add resources/yado-architecture-neutral-evidence-corpus-frozen-v1.json "receipts/yado-g2-freeze-architecture-neutral-evidence-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Freeze verified G2 architecture evidence as history [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
