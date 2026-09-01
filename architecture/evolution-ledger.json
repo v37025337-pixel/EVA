@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "11d3b0b035b8b71c59f3371dd6a3cd52f9c07335ef687a0f261bac327f77e92f",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 180,
+  "event_count": 181,
   "events": [
     {
       "canonical_mutation": false,
@@ -2988,14 +2988,31 @@
       "source_digest": "f26f4c1340b6e09c87dba5bc80ab0197cf5f8e88555aa43f6f6b973e93a6b134",
       "source_path": "receipts/yado-kernel-self-expand-architecture-selector-constructor-v1-run-33537141449.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V2",
+      "effect": "CANDIDATE=WITHHOLD; VAL=0.000000; BLIND=0.000000; BASE=0.804348; ERROR=TIMEOUT:300s; NEXT=KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V3",
+      "event_hash": "00f53b10d8bd0c149bf4ae86483d7488e0dc47694ba0b4a5dd2cd0f02a75f425",
+      "event_id": "E0181_G2_KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V2",
+      "event_type": "KERNEL_NATIVE_EXTENDED_META_GRAMMAR_SELF_CONSTRUCTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 180,
+      "parent_event_hash": "5bf2dd1e43d13facce28329f1cc3a14f4f06f193a80e073586a240bb350300e1",
+      "promotion_applied": false,
+      "run_id": "33538562733",
+      "source_digest": "88bda4154663f53aba45b659765093976d627466160c804947c9c3baf7c7a6c2",
+      "source_path": "receipts/yado-kernel-self-expand-architecture-selector-constructor-v2-run-33538562733.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "4d9004db85555982c2cf95a0676ab0b26ae830d170503de5404df27a6c6b06c0",
+  "ledger_digest": "4516a88cb325fd9fa7e42ac86ddba47bfbfdd42bba3514ed65631894b661d17a",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V2"
+    "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V3"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -3024,5 +3041,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "5bf2dd1e43d13facce28329f1cc3a14f4f06f193a80e073586a240bb350300e1"
+  "tail_event_hash": "00f53b10d8bd0c149bf4ae86483d7488e0dc47694ba0b4a5dd2cd0f02a75f425"
 }
