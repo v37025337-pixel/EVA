@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "d45888626892dee85deab21b873c0fef5d8644aa5aeddd7313aa48af747df8c6",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 150,
+  "event_count": 151,
   "events": [
     {
       "canonical_mutation": false,
@@ -2492,14 +2492,30 @@
       "source_digest": "2500b1c5ca6459c5fd6f28acf2a107b5ede13199892051b5c04942b72b551874",
       "source_path": "receipts/yado-intelligence-plateau-fresh-admission-v2-run-33477399296.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V3",
+      "effect": "CLASS=CAUSAL_EVIDENCE_GAP; V2=0.833333; V3=1.000000; GAP=0.166667; NEXT=INTELLIGENCE_PLATEAU_CANONICAL_INTEGRATION_V1",
+      "event_hash": "79f52891443c0cf1a8ef7f21ede0883e4f374df0abcbd7e306bd42e9547b593d",
+      "event_id": "E0151_G2_INTELLIGENCE_PLATEAU_CAUSAL_READMISSION",
+      "event_type": "CAUSAL_EVIDENCE_READMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 150,
+      "parent_event_hash": "7fe338c1ac6a20e48aa5bda5110ccefbd5e8a13a0c4b511a5bf6c9700ce8085b",
+      "promotion_applied": false,
+      "run_id": "33477648759",
+      "source_digest": "3c131163a25868a6ef05a898f2923115f574ec5100e82b7406cd0c2857c06c0f",
+      "source_path": "receipts/yado-intelligence-plateau-causal-readmission-v1-run-33477648759.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "c4728208e818b7fda847b346823c964efda856748c4a1f897e68d78eb0aceea9",
+  "ledger_digest": "2c95a392cda898b98b4b7abbd8e6b15fc5103c8cf2d351acbdae9dceb806b727",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V3"
+    "INTELLIGENCE_PLATEAU_CANONICAL_INTEGRATION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -2528,5 +2544,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "7fe338c1ac6a20e48aa5bda5110ccefbd5e8a13a0c4b511a5bf6c9700ce8085b"
+  "tail_event_hash": "79f52891443c0cf1a8ef7f21ede0883e4f374df0abcbd7e306bd42e9547b593d"
 }
