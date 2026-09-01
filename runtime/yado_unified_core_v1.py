@@ -60,6 +60,8 @@ class UnifiedYADOCoreV1:
 
     def audit(self)->dict[str,Any]:
         branches=self.experience.get('branches',[])
+        open_deficits=self.ledger.get('open_deficits',[])
+        ledger_frontier=open_deficits[0] if len(open_deficits)==1 else None
         active=[x for x in branches if x.get('mode')=='ACTIVE_LINEAGE']
         legacy=[x for x in branches if x.get('mode')=='EXPERIENCE_ONLY']
         active_components=set()
@@ -76,7 +78,7 @@ class UnifiedYADOCoreV1:
             'ledger_head_digest_matches':self.ledger.get('current_head_digest')==self.head.get('canonical_head_digest'),
             'g2_architecture_canonical':self.architecture.get('canonical_active') is True and self.architecture.get('promotion_applied') is True,
             'experience_registry_bound':self.manifest.get('experience_registry')=='canonical/yado-unified-experience-registry-v1.json',
-            'developmental_frontier_coherent':bool(self.manifest.get('current_frontier')) and self.manifest.get('current_frontier')==self.head.get('current_frontier') and isinstance(self.ledger.get('open_deficits'),list) and len(self.ledger.get('open_deficits'))>=1,
+            'developmental_frontier_coherent':bool(ledger_frontier) and self.manifest.get('current_frontier')==ledger_frontier and self.head.get('current_frontier')==ledger_frontier,
             'g3_blocked':self.manifest.get('g3_genesis_performed') is False and self.experience.get('policy',{}).get('g3_genesis_blocked') is True,
             'context_adapter_binding_coherent':(('ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1' in active_components)==(self.shadow_context.get('canonical_active') is True)),
             'required_active_families_present':all(x in active_components for x in [
@@ -96,8 +98,11 @@ class UnifiedYADOCoreV1:
             'legacy_experience_count':len(legacy),
             'checks':checks,
             'pass':all(checks.values()),
-            'current_frontier':self.manifest.get('current_frontier'),
-            'open_deficits':copy.deepcopy(self.ledger.get('open_deficits',[])),
+            'current_frontier':ledger_frontier,
+            'frontier_source':'architecture/evolution-ledger.json:open_deficits',
+            'manifest_frontier_snapshot':self.manifest.get('current_frontier'),
+            'head_frontier_snapshot':self.head.get('current_frontier'),
+            'open_deficits':copy.deepcopy(open_deficits),
         }
 
     def experience_search(self,tags:Iterable[str],limit:int=8)->list[dict[str,Any]]:
@@ -126,10 +131,13 @@ class UnifiedYADOCoreV1:
         return rows[:max(1,int(limit))]
 
     def developmental_frontier(self)->dict[str,Any]:
+        open_deficits=copy.deepcopy(self.ledger.get('open_deficits',[]))
         return {
             'generation':self.head.get('generation_id'),
-            'open_deficits':copy.deepcopy(self.ledger.get('open_deficits',[])),
-            'manifest_frontier':self.manifest.get('current_frontier'),
+            'current_frontier':open_deficits[0] if len(open_deficits)==1 else None,
+            'frontier_source':'architecture/evolution-ledger.json:open_deficits',
+            'open_deficits':open_deficits,
+            'manifest_frontier_snapshot':self.manifest.get('current_frontier'),
             'recommended_experience':self.experience_search(
                 ['representation','grounding','workspace','attention','thinking','self_audit'],limit=6
             ),
