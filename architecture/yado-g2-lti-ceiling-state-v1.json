@@ -105,7 +105,7 @@
   },
   "fixed_architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "next_required_capability": "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V1",
+  "next_required_capability": "LOGIC_PLATEAU_SELF_EVOLUTION_V1",
   "planes": {
     "INTELLIGENCE": {
       "families": {
@@ -135,15 +135,112 @@
       "score": 1.0
     }
   },
+  "plateau_probe": {
+    "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+    "contract_snapshot": {
+      "INTELLIGENCE": {
+        "MAX_FIELDS": 16,
+        "MAX_OUTPUTS": 8,
+        "MAX_TRIGGERS_PER_OUTPUT": 8
+      },
+      "LOGIC": {
+        "MAX_BOOLEAN_FIELDS": 12,
+        "MAX_POLYNOMIAL_DEGREE": 3,
+        "MAX_POLYNOMIAL_TERMS": 10
+      },
+      "THINKING": {
+        "MAX_PLAN_DEPTH": 8,
+        "MAX_STAGES": 8
+      }
+    },
+    "deficit_severity": {
+      "INTELLIGENCE": 0.48046875,
+      "LOGIC": 1.0,
+      "THINKING": 0.15000000000000013
+    },
+    "neutral_selection": {
+      "candidate_count": 3,
+      "ranking": [
+        {
+          "score": 0.9963000000000001,
+          "token": "opaque_3b618f225a3cd9a33a"
+        },
+        {
+          "score": 0.47886874999999995,
+          "token": "opaque_5137518b1bb76cbdcf"
+        },
+        {
+          "score": 0.1432000000000001,
+          "token": "opaque_60a66489d5b17133ce"
+        }
+      ],
+      "selected_score": 0.9963000000000001,
+      "selected_token": "opaque_3b618f225a3cd9a33a"
+    },
+    "plane_scores": {
+      "INTELLIGENCE": 0.51953125,
+      "LOGIC": 0.0,
+      "THINKING": 0.8499999999999999
+    },
+    "probe_version": 1,
+    "probes": {
+      "INTELLIGENCE": {
+        "FIELD_WIDTH_PLUS_ONE": {
+          "bound": 16,
+          "probe_value": 17,
+          "reason": "RELEVANT_FIELD_SORTS_AFTER_CURRENT_FIELD_BOUND",
+          "score": 0.4765625
+        },
+        "TRIGGER_INTERACTION_ORDER_PLUS_ONE": {
+          "current_order": 1,
+          "probe_order": 2,
+          "reason": "PAIRWISE_CAPABILITY_TRIGGER",
+          "score": 0.5625
+        }
+      },
+      "LOGIC": {
+        "BOOLEAN_WIDTH_PLUS_ONE": {
+          "bound": 12,
+          "probe_value": 13,
+          "reason": "ValueError",
+          "score": 0.0
+        },
+        "POLYNOMIAL_DEGREE_PLUS_ONE": {
+          "bound": 3,
+          "probe_value": 4,
+          "reason": "WITHHOLD",
+          "score": 0.0
+        }
+      },
+      "THINKING": {
+        "DEPENDENCY_DEPTH_PLUS_ONE": {
+          "bound": 8,
+          "probe_value": 9,
+          "reason": "BEST_REACHABLE",
+          "score": 0.7999999999999999,
+          "sequence_len": 7
+        },
+        "STAGE_WIDTH_PLUS_ONE": {
+          "bound": 8,
+          "probe_value": 9,
+          "reason": "BEST_REACHABLE",
+          "score": 0.8999999999999999,
+          "sequence_len": 8
+        }
+      }
+    },
+    "selected_plane": "LOGIC",
+    "status": "FRONTIER_FOUND"
+  },
   "plateau_streak": 0,
   "ranking": [
     "INTELLIGENCE",
     "LOGIC",
     "THINKING"
   ],
-  "round": 6,
+  "round": 7,
   "schema": "yado.g2.lti_architectural_ceiling_state.v1",
-  "self_selected_weakest_plane": "INTELLIGENCE",
-  "state_digest": "6d81e1bee6cc21e7c5be7a8d3cfa8b3cc40076da0fc8aaf701183630946dd6be",
-  "status": "ALL_FAMILIES_AT_THRESHOLD"
+  "self_selected_weakest_plane": "LOGIC",
+  "state_digest": "8fc596ec91e2db575b8aeb957d5799c180b6e4a2f2cbd5ebf1d7bec3ffba48d1",
+  "status": "EVOLVING_TO_CEILING"
 }

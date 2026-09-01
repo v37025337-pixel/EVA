@@ -1,0 +1,114 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "canonical_mutation": false,
+  "checks": {
+    "architecture_immutable": true,
+    "baseline_all_green": true,
+    "canonical_head_immutable": true,
+    "contract_snapshot_nonempty": true,
+    "g3_not_started": true,
+    "three_planes_probed": true
+  },
+  "contract_snapshot": {
+    "INTELLIGENCE": {
+      "MAX_FIELDS": 16,
+      "MAX_OUTPUTS": 8,
+      "MAX_TRIGGERS_PER_OUTPUT": 8
+    },
+    "LOGIC": {
+      "MAX_BOOLEAN_FIELDS": 12,
+      "MAX_POLYNOMIAL_DEGREE": 3,
+      "MAX_POLYNOMIAL_TERMS": 10
+    },
+    "THINKING": {
+      "MAX_PLAN_DEPTH": 8,
+      "MAX_STAGES": 8
+    }
+  },
+  "deficit_severity": {
+    "INTELLIGENCE": 0.48046875,
+    "LOGIC": 1.0,
+    "THINKING": 0.15000000000000013
+  },
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 3,
+    "ranking": [
+      {
+        "score": 0.9963000000000001,
+        "token": "opaque_3b618f225a3cd9a33a"
+      },
+      {
+        "score": 0.47886874999999995,
+        "token": "opaque_5137518b1bb76cbdcf"
+      },
+      {
+        "score": 0.1432000000000001,
+        "token": "opaque_60a66489d5b17133ce"
+      }
+    ],
+    "selected_score": 0.9963000000000001,
+    "selected_token": "opaque_3b618f225a3cd9a33a"
+  },
+  "new_deficit_found": true,
+  "next_required_capability": "LOGIC_PLATEAU_SELF_EVOLUTION_V1",
+  "plane_scores": {
+    "INTELLIGENCE": 0.51953125,
+    "LOGIC": 0.0,
+    "THINKING": 0.8499999999999999
+  },
+  "plateau_streak": 0,
+  "probe_status": "FRONTIER_FOUND",
+  "probes": {
+    "INTELLIGENCE": {
+      "FIELD_WIDTH_PLUS_ONE": {
+        "bound": 16,
+        "probe_value": 17,
+        "reason": "RELEVANT_FIELD_SORTS_AFTER_CURRENT_FIELD_BOUND",
+        "score": 0.4765625
+      },
+      "TRIGGER_INTERACTION_ORDER_PLUS_ONE": {
+        "current_order": 1,
+        "probe_order": 2,
+        "reason": "PAIRWISE_CAPABILITY_TRIGGER",
+        "score": 0.5625
+      }
+    },
+    "LOGIC": {
+      "BOOLEAN_WIDTH_PLUS_ONE": {
+        "bound": 12,
+        "probe_value": 13,
+        "reason": "ValueError",
+        "score": 0.0
+      },
+      "POLYNOMIAL_DEGREE_PLUS_ONE": {
+        "bound": 3,
+        "probe_value": 4,
+        "reason": "WITHHOLD",
+        "score": 0.0
+      }
+    },
+    "THINKING": {
+      "DEPENDENCY_DEPTH_PLUS_ONE": {
+        "bound": 8,
+        "probe_value": 9,
+        "reason": "BEST_REACHABLE",
+        "score": 0.7999999999999999,
+        "sequence_len": 7
+      },
+      "STAGE_WIDTH_PLUS_ONE": {
+        "bound": 8,
+        "probe_value": 9,
+        "reason": "BEST_REACHABLE",
+        "score": 0.8999999999999999,
+        "sequence_len": 8
+      }
+    }
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "88d6a8410e90fb4be26d15d2d0d99e071f597ded79fc497bb94b699d0314425b",
+  "schema": "yado.g2.lti_architectural_ceiling_plateau_probe.v1",
+  "self_selected_plane": "LOGIC",
+  "semantic_boundary": "CONTRACT-DERIVED FRONTIER SEARCH. PROBES ARE GENERATED FROM ACTIVE MAX_* BOUNDS AND ONE-ORDER-BEYOND INTERACTION; NO LIMIT IS CHANGED BY THIS PROBE. A FOUND DEFICIT REOPENS SAME-G2 SELF-EVOLUTION, NOT G3.",
+  "status": "PASS_LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V1"
+}
