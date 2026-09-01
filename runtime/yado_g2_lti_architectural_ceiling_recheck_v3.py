@@ -14,7 +14,7 @@ from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingen
 from yado_bounded_capability_router_v1 import BoundedCapabilityRouterLearnerV1
 from yado_neutral_evidence_profile_selector_v1 import NeutralEvidenceProfileSelectorV1,EvidenceCandidate
 
-HEAD=REPO/'canonical'/'yado-main-head-g2.json';ARCH=REPO/'canonical'/'yado-g2-architecture-v1.json'
+HEAD=REPO/'canonical'/'yado-main-head-g2.json';ARCH=REPO/'canonical'/'yado-g2-architecture-v1.json';CORE=REPO/'canonical'/'yado-unified-core-v1.json'
 LEDGER=REPO/'architecture'/'evolution-ledger.json';STATE=REPO/'architecture'/'yado-g2-lti-ceiling-state-v1.json'
 OUT=ROOT/'yado_g2_lti_architectural_ceiling_recheck_v3_receipt.json'
 CAP_CONJ='ALG-CONJUNCTIVE-RULE-INDUCER-V1';CAP_REL='ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1';CAP_BUD='ALG-BUDGETED-STAGE-POLICY-V1';CAP_RES='RESOURCE-PORTFOLIO-V1'
@@ -23,8 +23,15 @@ def h(o):return hashlib.sha256(canon(o).encode()).hexdigest()
 def fsha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def load(p):return json.loads(p.read_text(encoding='utf-8'))
 def avg(xs):return sum(xs)/max(1,len(xs))
-head=load(HEAD);ledger=load(LEDGER);state=load(STATE);validate_ledger_v2(ledger)
-if ledger.get('open_deficits')!=['LTI_ARCHITECTURAL_CEILING_RECHECK_V3']:raise RuntimeError('UNEXPECTED_FRONTIER')
+head=load(HEAD);core=load(CORE);ledger=load(LEDGER);state=load(STATE);validate_ledger_v2(ledger)
+allowed=[['LTI_ARCHITECTURAL_CEILING_RECHECK_V3'],['INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1']]
+if ledger.get('open_deficits') not in allowed:raise RuntimeError('UNEXPECTED_FRONTIER')
+if ledger.get('open_deficits')==['INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1']:
+    prev=REPO/'receipts'/'yado-g2-lti-architectural-ceiling-recheck-v3-run-33442875154.json'
+    if not prev.exists():raise RuntimeError('V3_GATE_REPAIR_RETRY_WITHOUT_PRIOR_WITHHOLD')
+    pr=load(prev)
+    if pr.get('status')!='WITHHOLD_LTI_ARCHITECTURAL_CEILING_RECHECK_V3' or pr.get('planes',{}).get('LOGIC',{}).get('score')!=1.0 or pr.get('planes',{}).get('THINKING',{}).get('score')!=1.0:
+        raise RuntimeError('V3_GATE_REPAIR_PRIOR_EVIDENCE_MISMATCH')
 if ledger.get('current_head_digest')!=head.get('canonical_head_digest'):raise RuntimeError('HEAD_LEDGER_MISMATCH')
 arch_sha=fsha(ARCH);head_sha=fsha(HEAD)
 if state.get('fixed_architecture_sha256')!=arch_sha:raise RuntimeError('ARCHITECTURE_DRIFT')
@@ -109,9 +116,11 @@ planes={'LOGIC':{'score':logic_score,'families':lf},'THINKING':{'score':thinking
 ranking=sorted(planes,key=lambda p:(planes[p]['score'],p));weakest=ranking[0];threshold=float(state['ceiling_definition']['success_threshold_per_family'])
 failed={p:[k for k,v in planes[p]['families'].items() if v<threshold] for p in planes}
 all_at_target=all(not failed[p] for p in failed)
+active=set()
+for p in core.get('planes',[]): active.update(p.get('active_components',[]))
 checks={'architecture_fixed':fsha(ARCH)==arch_sha,'canonical_head_immutable':fsha(HEAD)==head_sha and ledger.get('current_head_digest')==head.get('canonical_head_digest'),
- 'logic_component_present':state.get('planes',{}).get('LOGIC',{}).get('canonical_component')=='ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1',
- 'thinking_component_present':state.get('planes',{}).get('THINKING',{}).get('canonical_component')=='ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1','g3_not_started':head.get('g3_genesis_performed') is False}
+ 'logic_component_present':'ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1' in active,
+ 'thinking_component_present':'ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1' in active,'g3_not_started':head.get('g3_genesis_performed') is False}
 passed=all(checks.values())
 next_cap='LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V1' if all_at_target else f'{weakest}_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1'
 state['round']=3;state['planes']=planes;state['ranking']=ranking;state['failed_families']=failed;state['self_selected_weakest_plane']=weakest
