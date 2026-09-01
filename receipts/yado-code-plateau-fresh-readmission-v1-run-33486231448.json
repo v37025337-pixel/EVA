@@ -1,0 +1,77 @@
+{
+  "candidate_digest": "7a8af4d89c5749394238f6b019b4b0081b7ae07286bbce7faea708593f978b64",
+  "candidate_source_sha256": "d00d6ea219f92fc43dfd4870076cfdf5bea351bbe5d99d86cc1e5e34233bc136",
+  "canonical_mutation": false,
+  "causal_gap": 1.0,
+  "checks": {
+    "architecture_immutable": true,
+    "candidate_source_unchanged": true,
+    "fresh_all_green": true,
+    "fresh_score_one": true,
+    "head_immutable": true,
+    "predecessor_ablation_gap": true,
+    "prior_withhold_classified_as_bad_oracle": true,
+    "source_safe": true
+  },
+  "classification": "PRIOR_FRESH_ORACLE_OUTSIDE_DECLARED_TWO_EDIT_TARGET_CLASS",
+  "details": {
+    "EXACT_TWO_CONSTANT_EDITS": {
+      "candidate_count": 1,
+      "edit_depth": 2,
+      "source": "def g(x):\n    return x * 3 - 2\n",
+      "tried": 1353
+    },
+    "EXACT_TWO_EDIT_BINARY": {
+      "candidate_count": 1,
+      "edit_depth": 2,
+      "source": "def g(x, y):\n    return x + y + 3\n",
+      "tried": 815
+    },
+    "ONE_EDIT_REGRESSION": {
+      "candidate_count": 1,
+      "edit_depth": 1,
+      "source": "def g(x, y):\n    return x + y\n",
+      "tried": 22
+    },
+    "STRUCTURAL_ABS": {
+      "candidate_count": 1,
+      "edit_depth": 1,
+      "source": "def g(x):\n    return abs(x)\n",
+      "tried": 19
+    },
+    "STRUCTURAL_MAX_FLOOR": {
+      "candidate_count": 1,
+      "edit_depth": 1,
+      "source": "def g(x):\n    return max(x, 0)\n",
+      "tried": 17
+    },
+    "STRUCTURAL_MIN_CAP": {
+      "candidate_count": 1,
+      "edit_depth": 1,
+      "source": "def g(x):\n    return min(x, 5)\n",
+      "tried": 19
+    }
+  },
+  "fresh_families": {
+    "EXACT_TWO_CONSTANT_EDITS": 1.0,
+    "EXACT_TWO_EDIT_BINARY": 1.0,
+    "ONE_EDIT_REGRESSION": 1.0,
+    "STRUCTURAL_ABS": 1.0,
+    "STRUCTURAL_MAX_FLOOR": 1.0,
+    "STRUCTURAL_MIN_CAP": 1.0
+  },
+  "fresh_score": 1.0,
+  "g3_genesis_performed": false,
+  "next_required_capability": "CODE_PLATEAU_CANONICAL_INTEGRATION_V1",
+  "predecessor_ablation": {
+    "EXACT_TWO_CONSTANT_EDITS": 0.0,
+    "EXACT_TWO_EDIT_BINARY": 0.0,
+    "STRUCTURAL_MAX_FLOOR": 0.0
+  },
+  "prior_withhold_receipt": "9c82399eb766739e8b375d1546432dee9da3bf5c338149229344ce09ef86a1f5",
+  "promotion_applied": false,
+  "receipt_sha256": "016a1aaef043d0858399d9af65a384c111d1f7adba19c946fae7cfa9a572cf2b",
+  "schema": "yado.g2.code_plateau_fresh_readmission.v1",
+  "semantic_boundary": "READMISSION OF THE UNCHANGED V3 CODE-REPAIR CANDIDATE USING FRESH TASKS KNOWN TO LIE WITHIN ITS DECLARED <=2-EDIT PLUS SAFE-STRUCTURAL-WRAPPER CLASS.",
+  "status": "PASS_CODE_PLATEAU_FRESH_READMISSION_V1"
+}
