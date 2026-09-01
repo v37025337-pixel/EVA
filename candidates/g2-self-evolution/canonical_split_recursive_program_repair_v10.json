@@ -1,0 +1,102 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "candidate_digest": "c87e9c905694e1f27aff89a71373462d094349fd625e306174d44a2b66377288",
+  "candidate_source_sha256": "e78cc673cd08e6a67573933625a919841111e2f033961a70202eed80c6fb6f41",
+  "canonical_active": false,
+  "causal_gain": 0.19999999999999996,
+  "component_id": "ALG-G2-CANONICAL-SPLIT-RECURSIVE-PROGRAM-REPAIR-V10",
+  "compute_contract": {
+    "base_search_budget": 6000,
+    "max_candidates": 24000,
+    "max_conditional_depth": 2,
+    "max_search_nodes": 4000,
+    "max_split_tests": 640,
+    "structural_search_budget": 18000
+  },
+  "experience_digest": "1ee43e3bc7fcc79027c51be41e4c47565a38fb124bfc52ac65cb12b54feea98b",
+  "fresh_validation": {
+    "families": {
+      "AFFINE_REGRESSION": 1.0,
+      "OBSERVED_BOUNDARY_GAP_A": 1.0,
+      "OBSERVED_BOUNDARY_GAP_B": 0.8,
+      "TWO_EDIT_REGRESSION": 1.0
+    },
+    "min_family": 0.8,
+    "score": 0.95
+  },
+  "neutral_selection": {
+    "candidate_count": 2,
+    "ranking": [
+      {
+        "score": 0.9938,
+        "token": "opaque_e16231db6be9173fa0"
+      },
+      {
+        "score": 0.8705,
+        "token": "opaque_86f4adb5466b296bc3"
+      }
+    ],
+    "selected_score": 0.9938,
+    "selected_token": "opaque_e16231db6be9173fa0"
+  },
+  "parent_head_digest": "cd3b965131a69aced88149ed76af0c567e445635fdfab7eba5570a1b92a15a03",
+  "promotion_applied": false,
+  "schema": "yado.g2.canonical_split_recursive_program_repair_candidate.v10",
+  "selected_strategy": "OBSERVED_BOUNDARY_V10",
+  "semantic_boundary": "FIXED-BUDGET SUPPORT-RANKED RECURSIVE REPAIR WITH NUMERIC SPLITS CANONICALIZED TO OBSERVED BOUNDARIES, AVOIDING UNJUSTIFIED THRESHOLDS INSIDE UNSEEN GAPS.",
+  "state": "WITHHOLD",
+  "validation": {
+    "GAP_SPLITS_V9": {
+      "complexity": 0.49,
+      "details": {
+        "failed_b": {
+          "conditional_depth": 2,
+          "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+          "search_nodes": 20,
+          "source": "def f(x):\n    return (x * 2 if x < -1 else x) if x < 0 else x if x <= 2 else x * 3 + 1\n"
+        },
+        "regression": {
+          "conditional_depth": 2,
+          "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+          "search_nodes": 14,
+          "source": "def f(x):\n    return (abs(x) if x < -2 else x * 2) if x < 0 else x * 2 if x <= 1 else x * 4 + 1\n"
+        }
+      },
+      "families": {
+        "FAILED_GAP_BOUNDARY_B": 0.8,
+        "SUPPORT_RANKING_REGRESSION": 1.0
+      },
+      "min_family": 0.8,
+      "novelty": 0.25,
+      "risk": 0.05,
+      "score": 0.9,
+      "token": "opaque_86f4adb5466b296bc3"
+    },
+    "OBSERVED_BOUNDARY_V10": {
+      "complexity": 0.5,
+      "details": {
+        "failed_b": {
+          "conditional_depth": 2,
+          "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+          "search_nodes": 40,
+          "source": "def f(x):\n    return x * 2 if x <= -3 else x if x <= 2 else x * 3 + 1\n"
+        },
+        "regression": {
+          "conditional_depth": 2,
+          "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+          "search_nodes": 42,
+          "source": "def f(x):\n    return abs(x) if x <= -3 else x * 2 if x <= 1 else x * 4 + 1\n"
+        }
+      },
+      "families": {
+        "FAILED_GAP_BOUNDARY_B": 1.0,
+        "SUPPORT_RANKING_REGRESSION": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.96,
+      "risk": 0.04,
+      "score": 1.0,
+      "token": "opaque_e16231db6be9173fa0"
+    }
+  }
+}
