@@ -70,10 +70,10 @@ contracts['INTELLIGENCE']={'MAX_FIELD_CELLS':R.MAX_FIELD_CELLS,'MAX_TRIGGER_WIDT
 train=[];test=[];fields=[f'j{i:02d}' for i in range(31)]+['yy_signal']
 for k in range(600):
     x={f:bool(((k+43)>>(j%8))&1) for j,f in enumerate(fields)};x['yy_signal']=bool((k//7)%2)
-    train.append({'input':x,'expected':(CAP_REL,) if x['zz_signal'] else (CAP_CONJ,)})
+    train.append({'input':x,'expected':(CAP_REL,) if x['yy_signal'] else (CAP_CONJ,)})
 for k in range(300):
-    x={f:bool(((k+173)>>(j%7))&1) for j,f in enumerate(fields)};x['zz_signal']=bool((k//9)%2)
-    test.append({'input':x,'expected':(CAP_REL,) if x['zz_signal'] else (CAP_CONJ,)})
+    x={f:bool(((k+173)>>(j%7))&1) for j,f in enumerate(fields)};x['yy_signal']=bool((k//9)%2)
+    test.append({'input':x,'expected':(CAP_REL,) if x['yy_signal'] else (CAP_CONJ,)})
 rm=R.fit(train,CAP_CONJ)
 iw=sum(R.route(rm,z['input'])==z['expected'] for z in test)/len(test)
 pairs=[]
