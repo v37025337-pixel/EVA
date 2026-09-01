@@ -1,0 +1,65 @@
+name: YADO G2 LTI Architectural Ceiling Recheck V4
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-lti-architectural-ceiling-recheck-v4-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-lti-architectural-ceiling-recheck-v4
+  cancel-in-progress: true
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Run coevolution LTI recheck V4
+        id: recheck
+        continue-on-error: true
+        run: python runtime/yado_g2_lti_architectural_ceiling_recheck_v4.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-lti-architectural-ceiling-recheck-v4
+          path: |
+            runtime/yado_g2_lti_architectural_ceiling_recheck_v4_receipt.json
+            architecture/yado-g2-lti-ceiling-state-v1.json
+            architecture/evolution-ledger.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Persist evidence
+        if: always()
+        run: |
+          mkdir -p receipts
+          if [ -f runtime/yado_g2_lti_architectural_ceiling_recheck_v4_receipt.json ]; then
+            cp runtime/yado_g2_lti_architectural_ceiling_recheck_v4_receipt.json "receipts/yado-g2-lti-architectural-ceiling-recheck-v4-run-${GITHUB_RUN_ID}.json"
+          fi
+          git config user.name "YADO LTI Coevolution Recheck"
+          git config user.email "actions@users.noreply.github.com"
+          files=(architecture/evolution-ledger.json architecture/yado-g2-lti-ceiling-state-v1.json)
+          if [ -f "receipts/yado-g2-lti-architectural-ceiling-recheck-v4-run-${GITHUB_RUN_ID}.json" ]; then files+=("receipts/yado-g2-lti-architectural-ceiling-recheck-v4-run-${GITHUB_RUN_ID}.json"); fi
+          git add "${files[@]}"
+          if git diff --cached --quiet; then echo unchanged; else
+            git commit -m "Persist YADO G2 LTI coevolution recheck V4 [skip ci]"
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
+      - name: Enforce verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_g2_lti_architectural_ceiling_recheck_v4_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_LTI_RECHECK_V4_RECEIPT")
+          r=json.loads(p.read_text())
+          if r.get("status")!="PASS_LTI_ARCHITECTURAL_CEILING_RECHECK_V4":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+          print(r["status"])
+          PY
