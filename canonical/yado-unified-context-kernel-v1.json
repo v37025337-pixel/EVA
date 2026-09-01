@@ -1,48 +1,25 @@
 {
-  "schema": "yado.unified_context_kernel.v1",
-  "kernel_id": "YADO_UNIFIED_CONTEXT_KERNEL_V1",
-  "status": "CANONICAL_ACTIVE",
-  "generation": "G2_CANDIDATE_TRCG_V1",
-  "purpose": "ONE_ACTIVE_CONTEXTUAL_KERNEL_WITH_ALL_NON_ACTIVE_YADO_BRANCHES_AS_READ_ONLY_MEMORY_AND_HISTORY",
   "active_context": {
-    "context_id": "YADO_MAIN_CONTEXT",
     "active_core": "canonical/yado-unified-core-v1.json",
     "active_head": "canonical/yado-main-head-g2.json",
     "active_lineage_ledger": "architecture/evolution-ledger.json",
+    "context_id": "YADO_MAIN_CONTEXT",
     "contextual_stream_adapter": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+    "frontier_source": "architecture/evolution-ledger.json:open_deficits",
     "runtime": "runtime/yado_unified_context_kernel_v1.py"
-  },
-  "memory_planes": {
-    "causal_developmental_history": {
-      "source": "architecture/evolution-ledger.json",
-      "role": "ORDERED_CAUSAL_HISTORY_OF_GENERATIONS_FAILURES_WITHHOLDS_REPAIRS_ADMISSIONS_AND_FRONTIERS",
-      "mutation": "APPEND_ONLY_THROUGH_VERIFIED_DEVELOPMENTAL_EVENTS"
-    },
-    "historical_branch_memory": {
-      "source": "canonical/yado-unified-experience-registry-v1.json",
-      "role": "ALL_NON_ACTIVE_BRANCHES_ARE_READ_ONLY_HISTORICAL_EXPERIENCE",
-      "mutation": "READ_ONLY"
-    },
-    "evidence_memory": {
-      "source": "receipts/",
-      "role": "VERIFIABLE_OUTCOME_AND_CAUSAL_EVIDENCE",
-      "mutation": "APPEND_ONLY_BY_VERIFIED_WORKFLOWS"
-    },
-    "counterexample_memory": {
-      "source": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
-      "role": "FAIL_WITHHOLD_COUNTEREXAMPLE_EXPERIENCE",
-      "mutation": "BOUND_TO_LEDGER_AND_RECEIPTS"
-    }
   },
   "branch_policy": {
     "active_branch": "yado-architecture-shadow-search",
     "active_lineage_count": 1,
+    "all_non_active_branches_closed_into_generation": "G2_CANDIDATE_TRCG_V1",
+    "historical_branch_count": 13,
+    "legacy_auto_execution": false,
+    "legacy_code_direct_activation": false,
+    "legacy_code_reuse_requires_fresh_admission": true,
     "non_active_branch_role": "MEMORY_HISTORY_ONLY",
     "physical_branches_preserved": true,
     "physical_merge_or_deletion_required": false,
-    "legacy_auto_execution": false,
-    "legacy_code_direct_activation": false,
-    "legacy_code_reuse_requires_fresh_admission": true
+    "remote_branch_count": 14
   },
   "context_cycle": [
     "OBSERVE_CURRENT_STATE",
@@ -55,6 +32,7 @@
     "APPEND_CAUSAL_EVENT",
     "UPDATE_SINGLE_ACTIVE_CONTEXT"
   ],
+  "generation": "G2_CANDIDATE_TRCG_V1",
   "invariants": [
     "EXACTLY_ONE_ACTIVE_CONTEXT_KERNEL",
     "EXACTLY_ONE_ACTIVE_DEVELOPMENTAL_HEAD",
@@ -66,5 +44,31 @@
     "RECEIPTS_ARE_EVIDENCE_NOT_ACTIVE_IDENTITY",
     "GENERATION_SUCCESSORS_INHERIT_HISTORY_NOT_MULTIPLE_ACTIVE_CONTEXTS"
   ],
-  "semantic_boundary": "SINGLE CONTEXTUAL SOFTWARE KERNEL WITH CAUSAL MEMORY. THIS DOES NOT ESTABLISH SUBJECTIVE CONSCIOUSNESS OR AGI."
+  "kernel_id": "YADO_UNIFIED_CONTEXT_KERNEL_V1",
+  "memory_planes": {
+    "causal_developmental_history": {
+      "mutation": "APPEND_ONLY_THROUGH_VERIFIED_DEVELOPMENTAL_EVENTS",
+      "role": "ORDERED_CAUSAL_HISTORY_OF_GENERATIONS_FAILURES_WITHHOLDS_REPAIRS_ADMISSIONS_AND_FRONTIERS",
+      "source": "architecture/evolution-ledger.json"
+    },
+    "counterexample_memory": {
+      "mutation": "BOUND_TO_LEDGER_AND_RECEIPTS",
+      "role": "FAIL_WITHHOLD_COUNTEREXAMPLE_EXPERIENCE",
+      "source": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1"
+    },
+    "evidence_memory": {
+      "mutation": "APPEND_ONLY_BY_VERIFIED_WORKFLOWS",
+      "role": "VERIFIABLE_OUTCOME_AND_CAUSAL_EVIDENCE",
+      "source": "receipts/"
+    },
+    "historical_branch_memory": {
+      "mutation": "READ_ONLY",
+      "role": "ALL_NON_ACTIVE_BRANCHES_ARE_READ_ONLY_HISTORICAL_EXPERIENCE",
+      "source": "canonical/yado-unified-experience-registry-v1.json"
+    }
+  },
+  "purpose": "ONE_ACTIVE_CONTEXTUAL_KERNEL_WITH_ALL_NON_ACTIVE_YADO_BRANCHES_AS_READ_ONLY_MEMORY_AND_HISTORY",
+  "schema": "yado.unified_context_kernel.v1",
+  "semantic_boundary": "SINGLE CONTEXTUAL SOFTWARE KERNEL WITH CAUSAL MEMORY. THIS DOES NOT ESTABLISH SUBJECTIVE CONSCIOUSNESS OR AGI.",
+  "status": "CANONICAL_ACTIVE"
 }
