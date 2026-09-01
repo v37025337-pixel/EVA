@@ -87,19 +87,41 @@ if not linear_bank:
     raise RuntimeError('NO_LINEAR_SCORE_SEARCH_IN_NATIVE_BANK')
 log('operation_done',operation=operation.get('operation'),full_bank=len(full_bank),shadow_bank=len(linear_bank))
 
-def split(c):
-    z=int(hashlib.sha256((c['key']+'|EVOLUTIONARY_SUCCESSOR_V2').encode()).hexdigest()[:8],16)%100
-    return 'FIT' if z<60 else ('VALIDATION' if z<82 else 'DEV_HOLDOUT')
-parts={'FIT':[],'VALIDATION':[],'DEV_HOLDOUT':[]}
-for c in nonblind: parts[split(c)].append(c)
-
+# Stratify only on permitted non-blind parent outcome so rare parent failures survive every developmental split.
+errors=[c for c in nonblind if parent_pred(c['x'])!=c['y']]
+correct=[c for c in nonblind if parent_pred(c['x'])==c['y']]
+def stable(xs,salt):
+    return sorted(xs,key=lambda c:hashlib.sha256((c['key']+'|'+salt).encode()).hexdigest())
+errors=stable(errors,'EVOLUTIONARY_SUCCESSOR_V2_ERROR_STRATA')
+correct=stable(correct,'EVOLUTIONARY_SUCCESSOR_V2_CORRECT_STRATA')
+if len(errors)<6:
+    raise RuntimeError('INSUFFICIENT_TOTAL_PARENT_ERRORS:'+str(len(errors)))
+e_fit=max(2,(len(errors)+1)//2)
+remaining=len(errors)-e_fit
+e_val=max(2,remaining//2)
+e_hold=len(errors)-e_fit-e_val
+if e_hold<2:
+    e_val=max(2,e_val-(2-e_hold));e_hold=len(errors)-e_fit-e_val
+if min(e_fit,e_val,e_hold)<2:
+    raise RuntimeError('CANNOT_STRATIFY_PARENT_ERRORS:'+str(len(errors)))
+def split_correct(xs):
+    n=len(xs);a=int(n*.60);b=int(n*.82)
+    return xs[:a],xs[a:b],xs[b:]
+c_fit,c_val,c_hold=split_correct(correct)
+parts={
+ 'FIT':errors[:e_fit]+c_fit,
+ 'VALIDATION':errors[e_fit:e_fit+e_val]+c_val,
+ 'DEV_HOLDOUT':errors[e_fit+e_val:]+c_hold,
+}
+for name in parts:
+    parts[name]=stable(parts[name],'EVOLUTIONARY_SUCCESSOR_V2_'+name)
 def gate_rows(rows):
     return [(c['x'],'PARENT_ERROR' if parent_pred(c['x'])!=c['y'] else 'PARENT_OK') for c in rows]
 gate_fit,gate_val,gate_hold=map(gate_rows,[parts['FIT'],parts['VALIDATION'],parts['DEV_HOLDOUT']])
 gate_revealed=gate_fit+gate_val
 residual={name:[c for c in rows if parent_pred(c['x'])!=c['y']] for name,rows in parts.items()}
 if min(len(residual['FIT']),len(residual['VALIDATION']),len(residual['DEV_HOLDOUT']))<2:
-    raise RuntimeError('INSUFFICIENT_RESIDUAL_EVIDENCE:'+json.dumps({k:len(v) for k,v in residual.items()}))
+    raise RuntimeError('INSUFFICIENT_RESIDUAL_EVIDENCE_AFTER_STRATIFICATION:'+json.dumps({k:len(v) for k,v in residual.items()}))
 corr_fit=[(c['x'],c['y']) for c in residual['FIT']]
 corr_val=[(c['x'],c['y']) for c in residual['VALIDATION']]
 corr_hold=[(c['x'],c['y']) for c in residual['DEV_HOLDOUT']]
