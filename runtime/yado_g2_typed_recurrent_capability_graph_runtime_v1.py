@@ -6,6 +6,7 @@ import copy,hashlib,json
 from yado_budgeted_stage_policy_v1 import BudgetedStagePolicyV1,SearchStage
 from yado_core_v2_1 import BoundedRuleSandbox
 from yado_neutral_evidence_profile_selector_v1 import NeutralEvidenceProfileSelectorV1,EvidenceCandidate
+from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
 
 CAP_CONJ='ALG-CONJUNCTIVE-RULE-INDUCER-V1'
 CAP_REL='ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1'
@@ -94,6 +95,9 @@ class G2TypedRecurrentCapabilityGraphRuntimeV1:
           'selected_capability':selected,'result':result,
         },ablated_memory)
         return {'selected_capability':selected,'result':result}
+
+    def run_capability_set(self,selected_capabilities,capability_tasks):
+        return BoundedCapabilitySetCoordinatorV1.run(self,selected_capabilities,capability_tasks)
 
     def select_architecture_candidate(self,candidates):
         xs=[EvidenceCandidate(

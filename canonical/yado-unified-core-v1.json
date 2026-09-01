@@ -2,6 +2,7 @@
   "active_runtime_sources": [
     "runtime/yado_bounded_adaptive_contingent_planner_v1.py",
     "runtime/yado_bounded_capability_router_v1.py",
+    "runtime/yado_bounded_capability_set_coordinator_v1.py",
     "runtime/yado_bounded_compositional_logic_v1.py",
     "runtime/yado_bounded_compositional_schema_router_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
@@ -44,7 +45,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "2715297fe0327920640718592980ab88696be0df2654ac8e5afef23a32389bd2",
+  "core_digest": "b40d81585427ecee28a407d6b220f838b514047263371dc343ec52699f7df6ff",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -98,7 +99,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "LTI_ARCHITECTURAL_CEILING_RECHECK_V4",
+  "current_frontier": "LTI_ARCHITECTURAL_CEILING_RECHECK_V5",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -136,6 +137,24 @@
     },
     "selected_strategy": "COMPOSER_PLUS_ALIGNER",
     "source_sha256": "5a54b64462a4d252696f197953018b0d6f55c3d287eb6648f14ca3d8a4f4658b"
+  },
+  "intelligence_multi_dispatch": {
+    "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+    "candidate_digest": "f98f0a15a2ee52719f2c8c6b013446768951320471cd09834653d6e84feea9df",
+    "causal": {
+      "causal": true,
+      "coordinator_score": 1.0,
+      "raw_runtime_set_dispatch_ablation_score": 0.0
+    },
+    "component_id": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
+    "fresh_admission_receipt_sha256": "dd20a19a80e844a41ca19777b0b44184138cbaa076fc79bd2893937d4968d2cc",
+    "fresh_score": 1.0,
+    "g2_runtime_sha256": "79eba84158de120f026e164b4914bec0fd00358bfe8a56e81b0497e924b7e762",
+    "gate_run_id": "33466562740",
+    "max_capabilities": 4,
+    "max_dependency_edges": 8,
+    "mode": "ACTIVE_FIXED_ARCHITECTURE_MULTI_CAPABILITY_RUNTIME_COORDINATION",
+    "source_sha256": "35f607273fbb282282fcca84554db62086880754fbb19ea8e385730e5a9ef630"
   },
   "invariants": [
     "EXACTLY_ONE_ACTIVE_DEVELOPMENTAL_HEAD",
@@ -273,6 +292,7 @@
     {
       "active_components": [
         "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+        "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
         "ALG-G2-BOUNDED-COMPOSITIONAL-SCHEMA-ROUTER-V1",
         "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
       ],
@@ -281,7 +301,10 @@
         "ambiguity_aware_withhold",
         "architecture_candidate_selection",
         "bounded_multi_capability_composition",
+        "bounded_multi_capability_runtime_execution",
         "capability_routing",
+        "capability_set_fail_closed_execution",
+        "dependency_aware_capability_coordination",
         "evidence_weighted_selection",
         "paired_schema_alignment"
       ]
@@ -368,7 +391,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "3e42990d41c085c6121efc17983c0627dc8b982259fe192890195fe091e91ad6",
+  "runtime_sha256": "b2888e64e728e7e90059ae2c956a4ef824eb3b31b2ebc42825ca0820aeb65068",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {

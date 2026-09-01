@@ -20,6 +20,7 @@ from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReason
 from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingentPlannerV1, ContingentStage
 from yado_bounded_compositional_logic_v1 import BoundedCompositionalLogicV1
 from yado_bounded_compositional_schema_router_v1 import BoundedCompositionalSchemaRouterV1
+from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -51,6 +52,7 @@ class UnifiedYADOCoreV1:
         self.adaptive_contingent_planner=BoundedAdaptiveContingentPlannerV1
         self.compositional_logic=BoundedCompositionalLogicV1
         self.compositional_schema_router=BoundedCompositionalSchemaRouterV1
+        self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -152,6 +154,9 @@ class UnifiedYADOCoreV1:
             bool(x.get("available",True)),float(x.get("latency",1.0)),bool(x.get("attempted",False)),
             tuple(str(z) for z in x.get("requires",()))
         )
+
+    def execute_capability_set(self,runtime,selected_capabilities,capability_tasks):
+        return self.capability_set_coordinator.run(runtime,selected_capabilities,capability_tasks)
 
     def fit_compositional_capability_router(self,cases:list[dict[str,Any]],fallback_output:str)->dict[str,Any]:
         return self.compositional_schema_router.fit(cases,fallback_output)
