@@ -1,0 +1,226 @@
+{
+  "canonical_mutation": false,
+  "experience_digest": "1ee43e3bc7fcc79027c51be41e4c47565a38fb124bfc52ac65cb12b54feea98b",
+  "hypotheses": [
+    {
+      "action": "EXPERIENCE_ONLY",
+      "candidate_target": [
+        "RESOURCE_AND_EVIDENCE",
+        "INTELLIGENCE_AND_META_SELECTION"
+      ],
+      "derived_from": [
+        "EXT-001",
+        "EXT-002",
+        "EXT-003"
+      ],
+      "gap": "Current resource routing lacks a generic ordered-backend health contract with side-effect-free live probes.",
+      "hypothesis_id": "H-EXT-001",
+      "name": "HEALTH_PROBED_ADAPTER_ROUTER"
+    },
+    {
+      "action": "EXPERIENCE_ONLY",
+      "candidate_target": [
+        "SELF_AUDIT_AND_REPAIR",
+        "CODE"
+      ],
+      "derived_from": [
+        "EXT-004"
+      ],
+      "gap": "Current repair has fresh/ablation gates; it can tighten reproduction and minimization before hypothesis generation.",
+      "hypothesis_id": "H-EXT-002",
+      "name": "RED_CAPABLE_SELF_REPAIR_LOOP"
+    },
+    {
+      "action": "EXPERIENCE_ONLY",
+      "candidate_target": [
+        "CODE",
+        "SELF_AUDIT_AND_REPAIR"
+      ],
+      "derived_from": [
+        "EXT-005"
+      ],
+      "gap": "Current gates emphasize behavior and causality; an independent spec-fidelity axis can catch solving the wrong requirement.",
+      "hypothesis_id": "H-EXT-003",
+      "name": "TWO_AXIS_SELF_CODE_REVIEW"
+    },
+    {
+      "action": "EXPERIENCE_ONLY",
+      "candidate_target": [
+        "SELF_AUDIT_AND_REPAIR",
+        "WORKSPACE_AND_INTEGRATION"
+      ],
+      "derived_from": [
+        "EXT-006"
+      ],
+      "gap": "Current self-audit does not explicitly score interface depth, locality, deletion-test value or real multi-adapter seams.",
+      "hypothesis_id": "H-EXT-004",
+      "name": "DEEP_MODULE_SELF_ARCHITECTURE_AUDIT"
+    },
+    {
+      "action": "EXPERIENCE_ONLY",
+      "candidate_target": [
+        "MEMORY_AND_EXPERIENCE",
+        "RESOURCE_AND_EVIDENCE"
+      ],
+      "derived_from": [
+        "EXT-007",
+        "EXT-008"
+      ],
+      "gap": "Receipt provenance can be generalized to external-learning claims and lossy context transitions.",
+      "hypothesis_id": "H-EXT-005",
+      "name": "PRIMARY_SOURCE_PROVENANCE_POLICY"
+    }
+  ],
+  "integration_applied": false,
+  "observations": [
+    {
+      "evidence_complete": true,
+      "observation_id": "EXT-001",
+      "principle": "Prefer ordered interchangeable adapters, but declare one active only after a real lightweight health probe.",
+      "signals": {
+        "ORDERED candidate list": true,
+        "active_backend": true,
+        "really execute a lightweight command": true
+      },
+      "source": "agent_reach/channels/base.py",
+      "source_repo": "Agent-Reach",
+      "target_planes": [
+        "RESOURCE_AND_EVIDENCE",
+        "INTELLIGENCE_AND_META_SELECTION"
+      ]
+    },
+    {
+      "evidence_complete": true,
+      "observation_id": "EXT-002",
+      "principle": "A diagnostic observer should avoid state-changing probes and distinguish disk/config evidence from live usability.",
+      "signals": {
+        "--version": true,
+        "live daemon connection proves": true,
+        "side effect": true
+      },
+      "source": "agent_reach/backends/opencli.py",
+      "source_repo": "Agent-Reach",
+      "target_planes": [
+        "SELF_AUDIT_AND_REPAIR",
+        "RESOURCE_AND_EVIDENCE"
+      ]
+    },
+    {
+      "evidence_complete": true,
+      "observation_id": "EXT-003",
+      "principle": "External reading needs bounded responses, URL normalization and explicit detection of misleading challenge pages.",
+      "signals": {
+        "_MAX_RESPONSE_BYTES": true,
+        "_is_antibot_page": true,
+        "normalize_public_http_url": true
+      },
+      "source": "agent_reach/channels/web.py",
+      "source_repo": "Agent-Reach",
+      "target_planes": [
+        "RESOURCE_AND_EVIDENCE"
+      ]
+    },
+    {
+      "evidence_complete": true,
+      "observation_id": "EXT-004",
+      "principle": "Self-repair should begin with a tight red-capable signal, minimize the failing case, test ranked falsifiable hypotheses, then lock the repair with regression evidence.",
+      "signals": {
+        "3\u20135 ranked hypotheses": true,
+        "Build a feedback loop": true,
+        "Change one variable at a time": true,
+        "Reproduce + minimise": true,
+        "regression test": true
+      },
+      "source": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "source_repo": "skills",
+      "target_planes": [
+        "SELF_AUDIT_AND_REPAIR",
+        "CODE"
+      ]
+    },
+    {
+      "evidence_complete": true,
+      "observation_id": "EXT-005",
+      "principle": "Code evolution should review implementation quality and goal/spec fidelity as independent axes so one cannot mask the other.",
+      "signals": {
+        "Do **not** merge or rerank findings": true,
+        "Spec": true,
+        "Standards": true,
+        "two axes": true
+      },
+      "source": "skills/engineering/code-review/SKILL.md",
+      "source_repo": "skills",
+      "target_planes": [
+        "CODE",
+        "SELF_AUDIT_AND_REPAIR"
+      ]
+    },
+    {
+      "evidence_complete": true,
+      "observation_id": "EXT-006",
+      "principle": "Architecture improvement should seek deep modules with small interfaces, real seams only where variation exists, and test through the same interface callers use.",
+      "signals": {
+        "The deletion test": true,
+        "The interface is the test surface": true,
+        "Two adapters means a real one": true,
+        "deep modules": true
+      },
+      "source": "skills/engineering/codebase-design/SKILL.md",
+      "source_repo": "skills",
+      "target_planes": [
+        "SELF_AUDIT_AND_REPAIR",
+        "WORKSPACE_AND_INTEGRATION"
+      ]
+    },
+    {
+      "evidence_complete": true,
+      "observation_id": "EXT-007",
+      "principle": "External learning should prefer primary sources and preserve claim-to-source provenance.",
+      "signals": {
+        "Follow every claim back to the source that owns it": true,
+        "citing each claim": true,
+        "primary sources": true
+      },
+      "source": "skills/engineering/research/SKILL.md",
+      "source_repo": "skills",
+      "target_planes": [
+        "RESOURCE_AND_EVIDENCE",
+        "MEMORY_AND_EXPERIENCE"
+      ]
+    },
+    {
+      "evidence_complete": true,
+      "observation_id": "EXT-008",
+      "principle": "Context transitions are lossy; preserve primary-state continuity when the next phase depends on the reasoning that produced the current state.",
+      "signals": {
+        "/compact": true,
+        "Continue": true,
+        "Primary and secondary sources": true,
+        "lossiness": true
+      },
+      "source": "skills/engineering/ask-matt/PHASE-BOUNDARIES.md",
+      "source_repo": "skills",
+      "target_planes": [
+        "MEMORY_AND_EXPERIENCE",
+        "WORKSPACE_AND_INTEGRATION"
+      ]
+    }
+  ],
+  "schema": "yado.external_agent_systems_learning.v1",
+  "semantic_boundary": "EXTERNAL PRIMARY-SOURCE STUDY ONLY. PRINCIPLES ARE STORED AS EXPERIENCE/HYPOTHESES; NO THIRD-PARTY CODE OR BEHAVIOR IS PROMOTED INTO CANONICAL YADO BY THIS RUN.",
+  "sources": [
+    {
+      "commit": "da5044d26fc6adddb6554d5679c94ac22e76e428",
+      "license": "MIT",
+      "repo": "Panniantong/Agent-Reach",
+      "role": "internet-capability-layer-and-health-routing"
+    },
+    {
+      "commit": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
+      "license": "MIT",
+      "repo": "mattpocock/skills",
+      "role": "repeatable-engineering-skill-protocols"
+    }
+  ],
+  "status": "LEARNED_EXTERNAL_EXPERIENCE"
+}
