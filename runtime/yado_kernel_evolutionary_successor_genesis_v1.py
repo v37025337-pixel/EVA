@@ -9,8 +9,8 @@ sys.path[:0]=[str(ROOT),str(PKG)]
 
 from yado_evolution_ledger_v2 import validate_ledger_v2,event_hash
 from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
-from yado_core_v3_0_rc4_meta_autoevolution import tree_predict
-from yado_core_v3_0_rc5_algorithm_genesis import predict_intel_component
+from yado_organ_runtime_native_v1 import tree_predict
+from yado_algorithm_component_runtime_native_v1 import predict_intel_component
 from yado_unified_context_kernel_v1 import UnifiedContextKernel
 import yado_architecture_neutral_meta_synthesizer_v2 as neutral
 
