@@ -1,0 +1,140 @@
+{
+  "baseline": {
+    "families": {
+      "CYCLE_WITHHOLD": 0.0,
+      "DEPENDENCY_ORDERING": 0.0,
+      "MISSING_TASK_WITHHOLD": 0.0,
+      "MULTI_EXECUTION": 0.0,
+      "SUBTASK_FAILURE_WITHHOLD": 0.0
+    },
+    "min_family": 0.0,
+    "score": 0.0
+  },
+  "candidate_digest": "f98f0a15a2ee52719f2c8c6b013446768951320471cd09834653d6e84feea9df",
+  "candidate_source_sha256": "35f607273fbb282282fcca84554db62086880754fbb19ea8e385730e5a9ef630",
+  "canonical_mutation": false,
+  "causal_drop": 1.0,
+  "checks": {
+    "architecture_immutable": true,
+    "causal_drop": true,
+    "fresh_all_families": true,
+    "fresh_score_one": true,
+    "head_immutable": true,
+    "improves_baseline": true,
+    "intelligence_self_selected": true,
+    "runtime_dispatch_is_only_v4_failure": true,
+    "selected_full_coordinator": true
+  },
+  "fresh_runtime_validation": {
+    "REAL_CYCLE_WITHHOLD": 1.0,
+    "REAL_DEPENDENCY_ORDER": 1.0,
+    "REAL_MISSING_TASK_WITHHOLD": 1.0,
+    "REAL_MULTI_RUNTIME_EXECUTION": 1.0,
+    "REAL_SUBTASK_FAILURE_WITHHOLD": 1.0
+  },
+  "fresh_score": 1.0,
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 0.9955999999999999,
+        "token": "opaque_eb01d28922621e1e83"
+      },
+      {
+        "score": 0.395,
+        "token": "opaque_823ae5ba07d176ef69"
+      },
+      {
+        "score": 0.1935,
+        "token": "opaque_966a740d3684c4149f"
+      },
+      {
+        "score": -0.007000000000000002,
+        "token": "opaque_50dd06e5535a83e327"
+      }
+    ],
+    "selected_score": 0.9955999999999999,
+    "selected_token": "opaque_eb01d28922621e1e83"
+  },
+  "next_required_capability": "INTELLIGENCE_MULTI_DISPATCH_FRESH_ADMISSION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "32d9467e517e969b3da1847a9689c8823074ba6d057425793d237a04d3e5d530",
+  "schema": "yado.g2.intelligence_architectural_ceiling_self_evolution.v2",
+  "selected_metrics": {
+    "families": {
+      "CYCLE_WITHHOLD": 1.0,
+      "DEPENDENCY_ORDERING": 1.0,
+      "MISSING_TASK_WITHHOLD": 1.0,
+      "MULTI_EXECUTION": 1.0,
+      "SUBTASK_FAILURE_WITHHOLD": 1.0
+    },
+    "min_family": 1.0,
+    "score": 1.0
+  },
+  "selected_strategy": "FAIL_CLOSED_DEPENDENCY_AWARE",
+  "semantic_boundary": "BOUNDED EXECUTION COORDINATOR FOR A SMALL CAPABILITY SET OVER THE EXISTING G2 RUNTIME. DETERMINISTIC DEPENDENCY ORDER, MISSING-TASK/CYCLE/SUBTASK-FAILURE WITHHOLD. NO GRAPH TOPOLOGY CHANGE.",
+  "status": "PASS_INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2",
+  "validation": {
+    "DEPENDENCY_AWARE": {
+      "complexity": 0.27,
+      "families": {
+        "CYCLE_WITHHOLD": 0.0,
+        "DEPENDENCY_ORDERING": 1.0,
+        "MISSING_TASK_WITHHOLD": 0.0,
+        "MULTI_EXECUTION": 1.0,
+        "SUBTASK_FAILURE_WITHHOLD": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.7,
+      "risk": 0.05,
+      "score": 0.4,
+      "token": "opaque_823ae5ba07d176ef69"
+    },
+    "FAIL_CLOSED_DEPENDENCY_AWARE": {
+      "complexity": 0.34,
+      "families": {
+        "CYCLE_WITHHOLD": 1.0,
+        "DEPENDENCY_ORDERING": 1.0,
+        "MISSING_TASK_WITHHOLD": 1.0,
+        "MULTI_EXECUTION": 1.0,
+        "SUBTASK_FAILURE_WITHHOLD": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.92,
+      "risk": 0.06,
+      "score": 1.0,
+      "token": "opaque_eb01d28922621e1e83"
+    },
+    "SEQUENTIAL_SET": {
+      "complexity": 0.2,
+      "families": {
+        "CYCLE_WITHHOLD": 0.0,
+        "DEPENDENCY_ORDERING": 0.0,
+        "MISSING_TASK_WITHHOLD": 0.0,
+        "MULTI_EXECUTION": 1.0,
+        "SUBTASK_FAILURE_WITHHOLD": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.45,
+      "risk": 0.04,
+      "score": 0.2,
+      "token": "opaque_966a740d3684c4149f"
+    },
+    "SINGLE_ONLY": {
+      "complexity": 0.1,
+      "families": {
+        "CYCLE_WITHHOLD": 0.0,
+        "DEPENDENCY_ORDERING": 0.0,
+        "MISSING_TASK_WITHHOLD": 0.0,
+        "MULTI_EXECUTION": 0.0,
+        "SUBTASK_FAILURE_WITHHOLD": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.1,
+      "risk": 0.02,
+      "score": 0.0,
+      "token": "opaque_50dd06e5535a83e327"
+    }
+  }
+}
