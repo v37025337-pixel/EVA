@@ -15,7 +15,7 @@ from yado_g2_contextual_stream_capability_adapter_v1 import ContextualStreamCapa
 from yado_raw_task_representation_runtime_v1 import RawTaskRepresentationRuntimeV1
 from yado_legacy_experience_retriever_v2 import LegacyExperienceRetrieverV1
 from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesizerV1
-from yado_bounded_compositional_program_repair_v3 import BoundedCompositionalProgramRepairV3
+from yado_ambiguity_aware_program_repair_v11 import AmbiguityAwareProgramRepairV11
 from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReasonerV1
 from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingentPlannerV1, ContingentStage
 from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
@@ -47,7 +47,7 @@ class UnifiedYADOCoreV1:
         self.raw_representation=RawTaskRepresentationRuntimeV1.from_path(self.repo/'canonical/yado-raw-task-representation-v1.json')
         self.legacy_experience_retriever=LegacyExperienceRetrieverV1(self.repo,self.experience)
         self.semantic_expression_synthesizer=SemanticExpressionSynthesizerV1
-        self.bounded_program_repair=BoundedCompositionalProgramRepairV3
+        self.bounded_program_repair=AmbiguityAwareProgramRepairV11
         self.scientific_data_reasoner=BoundedScientificDataReasonerV1
         self.adaptive_contingent_planner=BoundedAdaptiveContingentPlannerV1
         self.compositional_logic=BudgetAdaptiveCompositionalLogicV2

@@ -19,9 +19,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "cd3b965131a69aced88149ed76af0c567e445635fdfab7eba5570a1b92a15a03",
+  "current_head_digest": "12f0e79f4bb21021cdc7161b15f5a02eb3429b1def4cf25482ff9948a244825a",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 167,
+  "event_count": 168,
   "events": [
     {
       "canonical_mutation": false,
@@ -2770,14 +2770,33 @@
       "source_digest": "5514f9395df899639dc9abd007905d8f30ec6b552969b0b2fed16f8bae392166",
       "source_path": "receipts/yado-code-plateau-fresh-admission-v9-run-33491923703.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "CODE_PLATEAU_CANONICAL_INTEGRATION_V2",
+      "effect": "PROGRAM_REPAIR_V3_SUPERSEDED_BY_AMBIGUITY_AWARE_V11",
+      "event_hash": "fbc62bc1a9bef4b80fb8cdcf39fa4ef3667005265755a42689ace31c92af9a27",
+      "event_id": "E0168_G2_CODE_PLATEAU_CANONICAL_INTEGRATION_V2",
+      "event_type": "FIXED_ARCHITECTURE_CODE_REPAIR_IMPLEMENTATION_REPLACEMENT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 167,
+      "new_head_digest": "12f0e79f4bb21021cdc7161b15f5a02eb3429b1def4cf25482ff9948a244825a",
+      "parent_event_hash": "66f5f232fd5223c7ada4618d91e2a2ae8aca9a2fd9c7bef1d56b943a35c7dea0",
+      "previous_head_digest": "cd3b965131a69aced88149ed76af0c567e445635fdfab7eba5570a1b92a15a03",
+      "promotion_applied": false,
+      "run_id": "33502626708",
+      "source_digest": "2a0fa3e42404dcadc8829c0b1d6ceda1efb571850046191995b4a6839c25f13c",
+      "source_path": "receipts/yado-code-plateau-canonical-integration-v2-run-33502626708.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "396319d5c7926591a0560a54abd7eb445a98b37aa670d78b902ef4b6c257f3a6",
+  "ledger_digest": "b97208633d30ed45b9bffb934d6f8eb6d930651bb967af92caca3705577c4916",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "CODE_PLATEAU_CANONICAL_INTEGRATION_V2"
+    "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V5"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -2806,5 +2825,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "66f5f232fd5223c7ada4618d91e2a2ae8aca9a2fd9c7bef1d56b943a35c7dea0"
+  "tail_event_hash": "fbc62bc1a9bef4b80fb8cdcf39fa4ef3667005265755a42689ace31c92af9a27"
 }
