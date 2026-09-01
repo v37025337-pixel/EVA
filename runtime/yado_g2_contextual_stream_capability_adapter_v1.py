@@ -117,7 +117,7 @@ class ContextualStreamCapabilityAdapterV1:
         try:
             out=self.runtime.run(shadow)
         except (KeyError,ValueError,TypeError) as exc:
-            out={'selected_capability':selected,'result':'EXECUTION_MISMATCH:'+type(exc).__name__}
+            raise RuntimeError('EXECUTION_MISMATCH:'+type(exc).__name__+':'+str(exc)) from exc
         if not ablated_context and not self._ambiguous(task.get('descriptor',{})):
             # Explicitly routed episodes teach the bounded stream context map.
             self._map_put(task.get('stream_id',''),selected)

@@ -367,12 +367,9 @@ summary={
 verdict='WITHHOLD_FURTHER_GENERATION_ADVANCE' if summary['blocking_findings'] else 'PASS_WITH_LIMITATIONS'
 next_step=priority[0]['code'] if priority else core.developmental_frontier().get('manifest_frontier')
 
-# Close the self-audit -> developmental-control loop without discarding the backlog.
+# Audit is observational: it may propose priorities but must not rewrite the developmental frontier.
 audit_blockers=[p['code'] for p in priority if p.get('blocking')]
-ledger['audit_blockers']=audit_blockers
-ledger['audit_priority']=copy.deepcopy(priority)
-if next_step:
-    ledger['open_deficits']=[next_step]
+observed_open_deficits=copy.deepcopy(ledger.get('open_deficits',[]))
 
 receipt={
  'schema':'yado.unified_core.deep_self_audit.receipt.v1',
@@ -390,7 +387,7 @@ receipt={
  'findings':findings,
  'self_selected_priority':priority,
  'self_selected_next_step':next_step,
- 'audit_frontier_binding':{'open_deficit':next_step,'blocking_backlog':audit_blockers},
+ 'audit_frontier_binding':{'observed_open_deficits':observed_open_deficits,'proposed_next_step':next_step,'blocking_backlog':audit_blockers,'frontier_mutated_by_audit':False},
  'canonical_mutation':False,
  'repair_applied':False,
  'g3_genesis_performed':False,
@@ -399,7 +396,7 @@ receipt={
 receipt['receipt_sha256']=h(receipt)
 OUT.write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
 
-# Append audit result only; do not change head/frontier/deficits before independent comparison.
+# Append audit evidence only; head/frontier/deficits remain unchanged.
 run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
 e={
  'index':len(ledger['events']),
