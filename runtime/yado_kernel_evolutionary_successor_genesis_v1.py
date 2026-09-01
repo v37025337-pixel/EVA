@@ -9,6 +9,8 @@ sys.path[:0]=[str(ROOT),str(PKG)]
 
 from yado_evolution_ledger_v2 import validate_ledger_v2,event_hash
 from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
+from yado_core_v3_0_rc4_meta_autoevolution import tree_predict
+from yado_core_v3_0_rc5_algorithm_genesis import predict_intel_component
 from yado_unified_context_kernel_v1 import UnifiedContextKernel
 import yado_architecture_neutral_meta_synthesizer_v2 as neutral
 
@@ -50,8 +52,7 @@ parent_digest=h({'algorithm':parent_result.get('selected_algorithm'),'model':par
 
 k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(ROOT/'yado_evolutionary_successor_v1.sqlite'))
 try:
-    tree_predict=k.meta_evolve_intelligence.__globals__['tree_predict']
-    predict_component=k.synthesize_intelligence_algorithm_component.__globals__['predict_intel_component']
+    predict_component=predict_intel_component
     constructors=k.algorithm_constructor_registry()
     grammar_registry=k.meta_grammar_extension_registry()
     records=[
