@@ -3,6 +3,7 @@
     "runtime/yado_bounded_adaptive_contingent_planner_v1.py",
     "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_compositional_logic_v1.py",
+    "runtime/yado_bounded_compositional_schema_router_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
     "runtime/yado_bounded_program_repair_v2.py",
     "runtime/yado_bounded_scientific_data_reasoner_v1.py",
@@ -43,7 +44,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "3b51c66295113d4b04352a28834fc101702c57c8ebb8fe2902aa76b154c22a93",
+  "core_digest": "2715297fe0327920640718592980ab88696be0df2654ac8e5afef23a32389bd2",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -97,7 +98,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "LTI_ARCHITECTURAL_CEILING_RECHECK_V3",
+  "current_frontier": "LTI_ARCHITECTURAL_CEILING_RECHECK_V4",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -113,6 +114,29 @@
   "experience_registry_digest": "63ee5601c1931fad629f723fb6516886b22e40da65ecef7a462041b39426c1ef",
   "g3_genesis_performed": false,
   "generation": "G2_CANDIDATE_TRCG_V1",
+  "intelligence_ceiling": {
+    "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+    "candidate_digest": "10e457bde0473a3eb744d5715237509bdae15a86bdd13daf372faf130934e2fa",
+    "causal": {
+      "alignment": true,
+      "collapsed_multi_score": 0.0,
+      "composition": true,
+      "unaligned_score": 0.03125
+    },
+    "component_id": "ALG-G2-BOUNDED-COMPOSITIONAL-SCHEMA-ROUTER-V1",
+    "fresh_admission_receipt_sha256": "e2011d5ecac2baaa9aae5dd2b440bf5fa0dbcebe354587626836164949705b10",
+    "fresh_score": 1.0,
+    "gate_run_id": "33465932261",
+    "information_boundary": "ZERO_SHOT_OR_UNINFORMATIVE_ALIGNMENT_IS_NOT_IDENTIFIABLE_WITHOUT_SIDE_INFORMATION",
+    "mode": "ACTIVE_FIXED_ARCHITECTURE_COMPOSITIONAL_SCHEMA_ROUTING",
+    "selected_features": {
+      "ambiguity_withhold": true,
+      "multi_capability_composition": true,
+      "paired_schema_alignment": true
+    },
+    "selected_strategy": "COMPOSER_PLUS_ALIGNER",
+    "source_sha256": "5a54b64462a4d252696f197953018b0d6f55c3d287eb6648f14ca3d8a4f4658b"
+  },
   "invariants": [
     "EXACTLY_ONE_ACTIVE_DEVELOPMENTAL_HEAD",
     "LEGACY_BRANCHES_NEVER_AUTO_EXECUTE",
@@ -249,13 +273,17 @@
     {
       "active_components": [
         "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+        "ALG-G2-BOUNDED-COMPOSITIONAL-SCHEMA-ROUTER-V1",
         "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
       ],
       "plane_id": "INTELLIGENCE_AND_META_SELECTION",
       "responsibilities": [
+        "ambiguity_aware_withhold",
+        "architecture_candidate_selection",
+        "bounded_multi_capability_composition",
         "capability_routing",
         "evidence_weighted_selection",
-        "architecture_candidate_selection"
+        "paired_schema_alignment"
       ]
     },
     {
@@ -340,7 +368,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "6a0ffc92aee2471c90505450b202c590a6ff37aa1468f33f6d1cc9451d6572e9",
+  "runtime_sha256": "3e42990d41c085c6121efc17983c0627dc8b982259fe192890195fe091e91ad6",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {

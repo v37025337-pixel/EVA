@@ -19,6 +19,7 @@ from yado_bounded_program_repair_v2 import BoundedProgramRepairV1
 from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReasonerV1
 from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingentPlannerV1, ContingentStage
 from yado_bounded_compositional_logic_v1 import BoundedCompositionalLogicV1
+from yado_bounded_compositional_schema_router_v1 import BoundedCompositionalSchemaRouterV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -49,6 +50,7 @@ class UnifiedYADOCoreV1:
         self.scientific_data_reasoner=BoundedScientificDataReasonerV1
         self.adaptive_contingent_planner=BoundedAdaptiveContingentPlannerV1
         self.compositional_logic=BoundedCompositionalLogicV1
+        self.compositional_schema_router=BoundedCompositionalSchemaRouterV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -150,6 +152,18 @@ class UnifiedYADOCoreV1:
             bool(x.get("available",True)),float(x.get("latency",1.0)),bool(x.get("attempted",False)),
             tuple(str(z) for z in x.get("requires",()))
         )
+
+    def fit_compositional_capability_router(self,cases:list[dict[str,Any]],fallback_output:str)->dict[str,Any]:
+        return self.compositional_schema_router.fit(cases,fallback_output)
+
+    def route_capability_set(self,model:dict[str,Any],descriptor:dict[str,Any]):
+        return self.compositional_schema_router.route(model,descriptor)
+
+    def fit_capability_schema_alignment(self,reference_rows:list[dict[str,Any]],alias_rows:list[dict[str,Any]])->dict[str,Any]:
+        return self.compositional_schema_router.fit_schema_alignment(reference_rows,alias_rows)
+
+    def route_aligned_capability_set(self,model:dict[str,Any],alignment:dict[str,Any],descriptor:dict[str,Any]):
+        return self.compositional_schema_router.route_aligned(model,alignment,descriptor)
 
     def learn_symmetric_logic(self,rows:list[dict[str,Any]])->dict[str,Any]:
         return self.compositional_logic.learn_symmetric_boolean(rows)
