@@ -2,7 +2,7 @@ from pathlib import Path
 import ast,json,hashlib
 ROOT=Path(__file__).resolve().parent
 PKG=ROOT/'yado_rc8_v36'
-targets=['best_intel_leaf','fit_tree','fit_bool_tree','tree_acc','fit_intel']
+targets=['best_intel_leaf','fit_tree','fit_bool_tree','tree_acc','fit_intel','fit_linear','linear_acc']
 found={}
 for p in sorted(PKG.glob('*.py')):
     txt=p.read_text(encoding='utf-8')
