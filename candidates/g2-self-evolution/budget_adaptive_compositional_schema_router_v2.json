@@ -1,0 +1,116 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "baseline": {
+    "families": {
+      "FIELD_WIDTH_20_FRESH": 0.5,
+      "PAIRWISE_TRIGGER_FRESH": 0.5625
+    },
+    "min_family": 0.5,
+    "score": 0.53125
+  },
+  "candidate_digest": "144bcbd8e3af5e7b163d695832866559585d7ff5165a733cdb0deae1d19b2439",
+  "candidate_source_sha256": "12b4c8395f1a2a70d001e0242692dc92e21826ec86b0297aff2a011a029dde14",
+  "canonical_active": false,
+  "causal_gain": 0.46875,
+  "component_id": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-SCHEMA-ROUTER-V2",
+  "compute_contract": {
+    "max_alignment_cells": 131072,
+    "max_field_cells": 262144,
+    "max_outputs": 8,
+    "max_trigger_candidates": 4096,
+    "max_trigger_width": 2,
+    "max_triggers_per_output": 32
+  },
+  "fail_closed": {
+    "ambiguous_alignment": true,
+    "field_work_budget": true,
+    "trigger_candidate_budget": true
+  },
+  "fresh_validation": {
+    "families": {
+      "FIELD_WIDTH_20_FRESH": 1.0,
+      "PAIRWISE_TRIGGER_FRESH": 1.0
+    },
+    "min_family": 1.0,
+    "score": 1.0
+  },
+  "neutral_selection": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 0.9986,
+        "token": "opaque_90a32c9c508474ec81"
+      },
+      {
+        "score": 0.78025,
+        "token": "opaque_a4b3a012bd69d10ef8"
+      },
+      {
+        "score": 0.7471,
+        "token": "opaque_c3fc2fbd68641da37e"
+      },
+      {
+        "score": 0.52425,
+        "token": "opaque_b3859c1debb544e83b"
+      }
+    ],
+    "selected_score": 0.9986,
+    "selected_token": "opaque_90a32c9c508474ec81"
+  },
+  "parent_head_digest": "d45888626892dee85deab21b873c0fef5d8644aa5aeddd7313aa48af747df8c6",
+  "promotion_applied": false,
+  "schema": "yado.g2.budget_adaptive_compositional_schema_router_candidate.v2",
+  "selected_strategy": "WORK_BUDGET_FIELDS_PLUS_PAIR_TRIGGERS",
+  "semantic_boundary": "REPLACES FIXED FIRST-N FIELD ROUTING WITH TOTAL-WORK BUDGET AND ADDS BOUNDED WIDTH-2 TRIGGER COMPOSITION. PAIRED ALIGNMENT USES A TOTAL ALIGNMENT BUDGET. NOT UNBOUNDED FEATURE SEARCH.",
+  "state": "AUTHORIZED_FOR_SHADOW_ADMISSION",
+  "validation": {
+    "BASE_V1": {
+      "complexity": 0.1,
+      "families": {
+        "FIELD_WIDTH_17": 0.5,
+        "PAIRWISE_TRIGGER": 0.5625
+      },
+      "min_family": 0.5,
+      "novelty": 0.1,
+      "risk": 0.02,
+      "score": 0.53125,
+      "token": "opaque_b3859c1debb544e83b"
+    },
+    "PAIR_TRIGGERS": {
+      "complexity": 0.23,
+      "families": {
+        "FIELD_WIDTH_17": 0.5,
+        "PAIRWISE_TRIGGER": 1.0
+      },
+      "min_family": 0.5,
+      "novelty": 0.62,
+      "risk": 0.04,
+      "score": 0.75,
+      "token": "opaque_c3fc2fbd68641da37e"
+    },
+    "WORK_BUDGET_FIELDS": {
+      "complexity": 0.2,
+      "families": {
+        "FIELD_WIDTH_17": 1.0,
+        "PAIRWISE_TRIGGER": 0.5625
+      },
+      "min_family": 0.5625,
+      "novelty": 0.55,
+      "risk": 0.03,
+      "score": 0.78125,
+      "token": "opaque_a4b3a012bd69d10ef8"
+    },
+    "WORK_BUDGET_FIELDS_PLUS_PAIR_TRIGGERS": {
+      "complexity": 0.33,
+      "families": {
+        "FIELD_WIDTH_17": 1.0,
+        "PAIRWISE_TRIGGER": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.92,
+      "risk": 0.05,
+      "score": 1.0,
+      "token": "opaque_90a32c9c508474ec81"
+    }
+  }
+}
