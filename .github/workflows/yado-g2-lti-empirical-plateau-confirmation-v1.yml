@@ -1,0 +1,42 @@
+name: YADO G2 Empirical Plateau Confirmation V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: [architecture/yado-g2-lti-empirical-plateau-confirmation-v1-request.json]
+permissions:
+  contents: write
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Confirm
+        id: confirm
+        continue-on-error: true
+        run: python runtime/yado_g2_lti_empirical_plateau_confirmation_v1.py
+      - name: Persist
+        if: always()
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_lti_empirical_plateau_confirmation_v1_receipt.json receipts/yado-g2-lti-empirical-plateau-confirmation-v1-run-${GITHUB_RUN_ID}.json || true
+          git config user.name 'YADO G2 Empirical Plateau Confirmation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add architecture/yado-g2-lti-empirical-ceiling-confirmation-v1.json architecture/yado-g2-lti-ceiling-state-v1.json architecture/evolution-ledger.json receipts/yado-g2-lti-empirical-plateau-confirmation-v1-run-${GITHUB_RUN_ID}.json || true
+          if ! git diff --cached --quiet; then git commit -m 'Persist YADO G2 empirical plateau confirmation V1 [skip ci]' && git push origin HEAD:yado-architecture-shadow-search; fi
+      - name: Enforce
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('runtime/yado_g2_lti_empirical_plateau_confirmation_v1_receipt.json')
+          if not p.exists(): raise SystemExit('MISSING_RECEIPT')
+          r=json.loads(p.read_text())
+          if r.get('status')!='PASS_LTI_CODE_ARCHITECTURAL_CEILING_EMPIRICAL_PLATEAU_CONFIRMATION_V1':
+              raise SystemExit('WITHHOLD:'+str(r.get('status')))
+          print(r['status'])
+          PY
