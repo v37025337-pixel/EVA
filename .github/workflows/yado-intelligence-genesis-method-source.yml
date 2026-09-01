@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
       - name: Inspect native intelligence genesis methods
         working-directory: runtime/yado_rc8_v36
         run: |
