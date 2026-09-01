@@ -1,0 +1,50 @@
+name: YADO External Agent Systems Learning V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: [architecture/yado-external-agent-systems-learning-v1-request.json]
+permissions:
+  contents: write
+jobs:
+  learn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch pinned external primary sources
+        run: |
+          mkdir -p _external_learning
+          git clone --filter=blob:none https://github.com/Panniantong/Agent-Reach.git _external_learning/Agent-Reach
+          git -C _external_learning/Agent-Reach checkout da5044d26fc6adddb6554d5679c94ac22e76e428
+          git clone --filter=blob:none https://github.com/mattpocock/skills.git _external_learning/skills
+          git -C _external_learning/skills checkout 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76
+      - name: Learn from external systems
+        id: learn
+        continue-on-error: true
+        run: python runtime/yado_external_agent_systems_learning_v1.py
+      - name: Persist experience
+        if: always()
+        run: |
+          mkdir -p receipts experience
+          cp runtime/yado_external_agent_systems_learning_v1_receipt.json receipts/yado-external-agent-systems-learning-v1-run-${GITHUB_RUN_ID}.json || true
+          git config user.name 'YADO External Learning'
+          git config user.email 'actions@users.noreply.github.com'
+          git add experience/yado-external-agent-systems-learning-v1.json architecture/evolution-ledger.json receipts/yado-external-agent-systems-learning-v1-run-${GITHUB_RUN_ID}.json || true
+          if ! git diff --cached --quiet; then git commit -m 'Persist YADO external agent systems learning V1 [skip ci]' && git push origin HEAD:yado-architecture-shadow-search; fi
+      - name: Enforce
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('runtime/yado_external_agent_systems_learning_v1_receipt.json')
+          if not p.exists(): raise SystemExit('MISSING_RECEIPT')
+          r=json.loads(p.read_text())
+          if r.get('status')!='PASS_EXTERNAL_AGENT_SYSTEMS_LEARNING_V1':
+              raise SystemExit('WITHHOLD:'+str(r.get('status')))
+          print(r['status'])
+          PY
