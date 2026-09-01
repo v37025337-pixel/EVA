@@ -1,0 +1,30 @@
+{
+  "functions": {
+    "best_intel_leaf": {
+      "module": "yado_algorithm_component_runtime_native_v1",
+      "path": "runtime/yado_rc8_v36/yado_algorithm_component_runtime_native_v1.py",
+      "sha256": "c5db603448814581b6b866db2b3849acc85eec395c9e4e90611f2034025953fa",
+      "source": "def best_intel_leaf(cases,algs):\n    ranked=[]\n    for spec in algs:\n        family=spec.get('family'); depth=int(spec.get('max_depth',99))\n        if family=='CART_AXIS':\n            model=fit_tree(cases,int(spec.get('max_depth',4))); score=tree_acc(model,cases)\n        elif family=='LINEAR_SCORE_SEARCH':\n            model=fit_linear(cases); score=linear_acc(model,cases) if model else 0.0\n        else:continue\n        ranked.append((score,-depth,family=='CART_AXIS',dict(spec),model))\n    if not ranked:return None,{'score':0.0}\n    score,_,_,spec,model=max(ranked,key=lambda z:(z[0],z[1],z[2]))\n    return {'op':'LEAF','algorithm':spec,'model':model},{'score':score}"
+    },
+    "fit_bool_tree": {
+      "module": "yado_evolution_runtime_native_v1",
+      "path": "runtime/yado_rc8_v36/yado_evolution_runtime_native_v1.py",
+      "sha256": "85ab69e5cd72f44120472680fece93e1301cb1ddc7c0af6105c75032c8933c10",
+      "source": "def fit_bool_tree(cases,max_depth=4):\n    return fit_tree([(x,bool(y)) for x,y in cases],max_depth=max_depth)"
+    },
+    "fit_tree": {
+      "module": "yado_organ_runtime_native_v1",
+      "path": "runtime/yado_rc8_v36/yado_organ_runtime_native_v1.py",
+      "sha256": "19b98bb2d3fbc10ef712da729068734728ee8f06a9becd12acbc935eb59b0ace",
+      "source": "def fit_tree(cases,max_depth=4):\n    data=[(dict(x),y) for x,y in cases]\n    def build(rows,depth):\n        ys=[y for _,y in rows]\n        if not rows:return {'label':False}\n        if len(set(map(str,ys)))==1:return {'label':ys[0]}\n        if depth>=max_depth:return {'label':_majority(ys)}\n        keys=sorted({k for x,_ in rows for k in x});parent=_gini(ys);best=None\n        for key in keys:\n            vals=[]\n            for x,_ in rows:\n                raw=x.get(key,0)\n                vals.append(float(bool(raw)) if isinstance(raw,bool) else float(raw if raw is not None else 0.0))\n            thresholds=_thresholds(vals)\n            if not thresholds and set(vals)<=set([0.0,1.0]):thresholds=[0.5]\n            for threshold in thresholds:\n                left=[r for r,v in zip(rows,vals) if v<=threshold];right=[r for r,v in zip(rows,vals) if v>threshold]\n                if not left or not right:continue\n                impurity=(len(left)*_gini([y for _,y in left])+len(right)*_gini([y for _,y in right]))/len(rows)\n                candidate=(parent-impurity,-len(left)*len(right),key,-threshold,left,right,threshold)\n                if best is None or candidate[:4]>best[:4]:best=candidate\n        if best is None:return {'label':_majority(ys)}\n        _,_,key,_,left,right,threshold=best\n        return {'feature':key,'threshold':threshold,'left':build(left,depth+1),'right':build(right,depth+1)}\n    return build(data,0)"
+    },
+    "tree_acc": {
+      "module": "yado_organ_runtime_native_v1",
+      "path": "runtime/yado_rc8_v36/yado_organ_runtime_native_v1.py",
+      "sha256": "19b98bb2d3fbc10ef712da729068734728ee8f06a9becd12acbc935eb59b0ace",
+      "source": "def tree_acc(tree,cases)->float:\n    if not cases:return 0.0\n    return sum(tree_predict(tree,x)==y for x,y in cases)/len(cases)"
+    }
+  },
+  "schema": "yado.g2.successor_complexity_source_probe.v1",
+  "status": "PASS"
+}
