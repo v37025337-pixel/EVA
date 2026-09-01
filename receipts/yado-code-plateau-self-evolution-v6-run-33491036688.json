@@ -1,0 +1,105 @@
+{
+  "candidate_digest": "d4ceb523b1a87ffbd9f5adc5e05af2cc39c7717feb274d2769a8421720ff2497",
+  "candidate_source_sha256": "351429eb2de01cfd9600eb962952839ce568d90e75ed50178da9615afe2f3a38",
+  "canonical_mutation": false,
+  "causal_gain": 1.0,
+  "checks": {
+    "architecture_immutable": true,
+    "bounded_conditional_depth": true,
+    "causal_nested_gain": true,
+    "fresh_min_one": false,
+    "head_immutable": true,
+    "multi_function_rejected": true,
+    "nested_counterexample_repaired": true,
+    "selected_recursive_partition": true,
+    "total_budget_not_increased": true,
+    "unsafe_rejected": true
+  },
+  "fresh_validation": {
+    "families": {
+      "AFFINE_REGRESSION": 1.0,
+      "NESTED_THREE_REGIME_A": 1.0,
+      "NESTED_THREE_REGIME_B": 0.8,
+      "TWO_EDIT_REGRESSION": 1.0
+    },
+    "min_family": 0.8,
+    "score": 0.95
+  },
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 2,
+    "ranking": [
+      {
+        "score": 0.9903000000000001,
+        "token": "opaque_4868a5665911ea4ee5"
+      },
+      {
+        "score": 0.4735,
+        "token": "opaque_42009b085e89b22728"
+      }
+    ],
+    "selected_score": 0.9903000000000001,
+    "selected_token": "opaque_4868a5665911ea4ee5"
+  },
+  "next_required_capability": "CODE_PLATEAU_SELF_EVOLUTION_V7",
+  "promotion_applied": false,
+  "receipt_sha256": "3b664ad5a6cfa5b9ab312c75c15dfa6d05754664537f591ec0873ea2e8f0e828",
+  "schema": "yado.g2.code_plateau_self_evolution.v6",
+  "selected_strategy": "RECURSIVE_DEPTH2_V8",
+  "semantic_boundary": "FIXED-BUDGET SINGLE-FUNCTION STRUCTURAL REPAIR WITH RECURSIVE EVIDENCE PARTITIONING UP TO CONDITIONAL DEPTH 2. BRANCH MODELS ARE INDUCED FROM SUBSET EVIDENCE; NO MODULE/MULTI-FUNCTION REWRITE.",
+  "status": "WITHHOLD_CODE_PLATEAU_SELF_EVOLUTION_V6",
+  "validation": {
+    "RECURSIVE_DEPTH2_V8": {
+      "complexity": 0.47,
+      "details": {
+        "nested": {
+          "conditional_depth": 2,
+          "repair_mode": "RECURSIVE_PARTITION",
+          "search_nodes": 26,
+          "source": "def f(x):\n    return x * -2 if x < 0 else x if x <= 3 else x * 4\n"
+        },
+        "single": {
+          "conditional_depth": 2,
+          "repair_mode": "RECURSIVE_PARTITION",
+          "search_nodes": 12,
+          "source": "def f(x):\n    return abs(x) if x < 0 else x if x <= 1 else x * 5\n"
+        }
+      },
+      "families": {
+        "NESTED_COUNTEREXAMPLE": 1.0,
+        "SINGLE_CONDITIONAL_REGRESSION": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.96,
+      "risk": 0.06,
+      "score": 1.0,
+      "token": "opaque_4868a5665911ea4ee5"
+    },
+    "SINGLE_SPLIT_V7": {
+      "complexity": 0.43,
+      "details": {
+        "nested": {
+          "reason": "NO_REPAIR_WITHIN_INDUCED_BRANCH_BUDGET",
+          "repair_mode": "INDUCED_BRANCH",
+          "source": null,
+          "tried": 0
+        },
+        "single": {
+          "edit_depth": null,
+          "repair_mode": "INDUCED_BRANCH",
+          "source": "def f(x):\n    return abs(x) if x <= 1 else x * 5\n",
+          "tried": 1
+        }
+      },
+      "families": {
+        "NESTED_COUNTEREXAMPLE": 0.0,
+        "SINGLE_CONDITIONAL_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.25,
+      "risk": 0.05,
+      "score": 0.5,
+      "token": "opaque_42009b085e89b22728"
+    }
+  }
+}
