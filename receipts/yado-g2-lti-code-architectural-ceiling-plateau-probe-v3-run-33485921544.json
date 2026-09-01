@@ -1,0 +1,137 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "canonical_mutation": false,
+  "checks": {
+    "architecture_immutable": true,
+    "canonical_head_immutable": true,
+    "four_planes_probed": true,
+    "g3_not_started": true,
+    "intelligence_v3_active": true,
+    "logic_v2_active": true
+  },
+  "contract_snapshot": {
+    "CODE": {
+      "COMPONENT_ID": "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2",
+      "MAX_EDIT_DEPTH": 1,
+      "MUTATION_FAMILIES": [
+        "binop",
+        "compare",
+        "boolop",
+        "constant"
+      ],
+      "SEMANTIC_SCOPE": "ONE_SAFE_PYTHON_FUNCTION",
+      "STRUCTURAL_INSERTION": false
+    },
+    "INTELLIGENCE": {
+      "MAX_FIELD_CELLS": 262144,
+      "MAX_TRIGGER_CANDIDATES": 4096,
+      "MAX_TRIGGER_WIDTH": 2
+    },
+    "LOGIC": {
+      "MAX_BOOLEAN_CELLS": 262144,
+      "MAX_POLYNOMIAL_ROWS": 256,
+      "MAX_POLYNOMIAL_TERMS": 20
+    },
+    "THINKING": {
+      "MAX_PLAN_DEPTH": 8,
+      "MAX_STAGES": 8
+    }
+  },
+  "deficit_severity": {
+    "CODE": 0.5,
+    "INTELLIGENCE": 0.0,
+    "LOGIC": 0.0,
+    "THINKING": 0.15000000000000013
+  },
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 0.5015999999999999,
+        "token": "opaque_1226a638cda3d8efb8"
+      },
+      {
+        "score": 0.14200000000000013,
+        "token": "opaque_e41279d85d0b43972a"
+      },
+      {
+        "score": -0.0016000000000000007,
+        "token": "opaque_90fd42e053093f6cd6"
+      },
+      {
+        "score": -0.004000000000000002,
+        "token": "opaque_c7a48b878b04765c56"
+      }
+    ],
+    "selected_score": 0.5015999999999999,
+    "selected_token": "opaque_1226a638cda3d8efb8"
+  },
+  "new_deficit_found": true,
+  "next_required_capability": "CODE_PLATEAU_SELF_EVOLUTION_V1",
+  "plane_scores": {
+    "CODE": 0.5,
+    "INTELLIGENCE": 1.0,
+    "LOGIC": 1.0,
+    "THINKING": 0.8499999999999999
+  },
+  "plateau_streak": 0,
+  "probe_status": "FRONTIER_FOUND",
+  "probes": {
+    "CODE": {
+      "SINGLE_CONSTANT_REPAIR": {
+        "score": 1.0
+      },
+      "SINGLE_OPERATOR_REPAIR": {
+        "score": 1.0
+      },
+      "STRUCTURAL_GUARD_INSERTION": {
+        "reason": "REQUIRES_NEW_CONTROL_OR_EXPRESSION_STRUCTURE",
+        "score": 0.0
+      },
+      "TWO_EDIT_REPAIR": {
+        "reason": "REQUIRES_COMPOSITION_OF_AT_LEAST_TWO_AST_EDITS",
+        "score": 0.0
+      }
+    },
+    "INTELLIGENCE": {
+      "PAIRWISE_COMPOSITION": {
+        "score": 1.0
+      },
+      "WIDTH23_TRANSFER": {
+        "score": 1.0
+      }
+    },
+    "LOGIC": {
+      "DEGREE4_STRUCTURAL_TRANSFER": {
+        "score": 1.0
+      },
+      "TERM_BUDGET_FAIL_CLOSED": {
+        "score": 1.0
+      },
+      "WIDTH24_STRUCTURAL_TRANSFER": {
+        "score": 1.0
+      }
+    },
+    "THINKING": {
+      "DEPENDENCY_DEPTH_PLUS_ONE": {
+        "bound": 8,
+        "probe_value": 9,
+        "score": 0.7999999999999999,
+        "sequence_len": 7
+      },
+      "STAGE_WIDTH_PLUS_ONE": {
+        "bound": 8,
+        "probe_value": 9,
+        "score": 0.8999999999999999,
+        "sequence_len": 8
+      }
+    }
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "9dccfb4fa42d86d859ce8763c40380b5e1bc615bd1d484e9ba5f66195e08d63c",
+  "schema": "yado.g2.lti_code_architectural_ceiling_plateau_probe.v3",
+  "self_selected_plane": "CODE",
+  "semantic_boundary": "EXTENDS THE FIXED-ARCHITECTURE PLATEAU SEARCH TO CODE SELF-MAINTENANCE. CODE MEANS BOUNDED SOURCE REPAIR/EVOLUTION CAPABILITY, NOT UNRESTRICTED SELF-MODIFICATION.",
+  "status": "PASS_LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V3"
+}
