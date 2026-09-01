@@ -146,7 +146,7 @@ state['next_required_capability']=next_cap;state['state_digest']=h({k:v for k,v 
 STATE.write_text(json.dumps(state,indent=2,sort_keys=True)+'\n')
 
 run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
-receipt={'schema':'yado.g2.lti_code_architectural_ceiling_plateau_probe.v6',
+receipt={'schema':'yado.g2.lti_code_architectural_ceiling_plateau_probe.v7',
  'status':'PASS_LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V7' if passed else 'WITHHOLD_LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V7',
  'probe_status':probe_status,'probes':probes,'plane_scores':plane_scores,'best_candidate_gain_upper_bound':best_gain,
  'max_gain_upper_bound':max_gain,'self_selected_plane':selected,'plateau_streak':streak,'checks':checks,
@@ -159,7 +159,7 @@ e={'index':len(ledger['events']),'event_id':f"E{len(ledger['events'])+1:04d}_G2_
  'event_type':'FIXED_ARCHITECTURE_LTI_CODE_PLATEAU_PROBE','status':'PASS_SHADOW' if passed else 'WITHHOLD','generation':ledger['current_head'],
  'deficit':'LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V7',
  'effect':f"STATUS={probe_status}; STREAK={streak}; SCORES={canon(plane_scores)}; NEXT={next_cap}",
- 'source_path':f'receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v6-run-{run_id}.json','source_digest':receipt['receipt_sha256'],
+ 'source_path':f'receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v7-run-{run_id}.json','source_digest':receipt['receipt_sha256'],
  'run_id':run_id,'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':False,'promotion_applied':False}
 e['event_hash']=event_hash(e);ledger['events'].append(e);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=e['event_hash']
 ledger['open_deficits']=[next_cap];ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
