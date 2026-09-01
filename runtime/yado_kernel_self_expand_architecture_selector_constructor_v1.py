@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-import copy,hashlib,json,os,sys
+import copy,hashlib,json,os,sys,multiprocessing as mp,queue as queue_mod
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
@@ -40,27 +40,76 @@ arch_sha=fsha(ARCH);head_sha=fsha(HEAD);core_sha=fsha(CORE)
 fit=list(neutral.fit);validation=list(neutral.validation);revealed=list(neutral.revealed);blind=list(neutral.blind)
 baseline=max(float(prev.get('fresh_blind',0.0)),float((neutral.receipt.get('kernel_result') or {}).get('fresh_blind',0.0)))
 
-db=ROOT/'kernel_self_expand_architecture_selector_constructor_v1.sqlite'
-k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(db))
-available={
- 'synthesize_intelligence_algorithm_component':hasattr(k,'synthesize_intelligence_algorithm_component'),
- 'synthesize_intelligence_with_extended_meta_grammar':hasattr(k,'synthesize_intelligence_with_extended_meta_grammar'),
-}
+GENERATOR_TIMEOUT_SECONDS=int(os.getenv('YADO_GENERATOR_TIMEOUT_SECONDS','120'))
+
+def _generator_worker(method_name,db_path,fit_data,validation_data,revealed_data,blind_data,outq):
+    k=None
+    try:
+        k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(db_path))
+        fn=getattr(k,method_name)
+        result=fn(fit_data,validation_data,revealed_data,blind_data)
+        outq.put({'ok':True,'result':result})
+    except BaseException as exc:
+        outq.put({'ok':False,'error':type(exc).__name__+':'+str(exc)[:900]})
+    finally:
+        if k is not None:
+            try:k.close()
+            except Exception:pass
+
+def _run_bounded_generator(label,method_name):
+    ctx=mp.get_context('fork')
+    outq=ctx.Queue(maxsize=1)
+    db=ROOT/f'kernel_self_expand_architecture_selector_constructor_v1_{label.lower()}.sqlite'
+    proc=ctx.Process(
+        target=_generator_worker,
+        args=(method_name,db,fit,validation,revealed,blind,outq),
+        name=f'yado-{label.lower()}',
+    )
+    print(json.dumps({'event':'GENERATOR_START','label':label,'method':method_name,'timeout_seconds':GENERATOR_TIMEOUT_SECONDS},sort_keys=True),flush=True)
+    proc.start()
+    proc.join(GENERATOR_TIMEOUT_SECONDS)
+    if proc.is_alive():
+        proc.terminate()
+        proc.join(10)
+        if proc.is_alive():
+            proc.kill();proc.join(5)
+        print(json.dumps({'event':'GENERATOR_TIMEOUT','label':label,'timeout_seconds':GENERATOR_TIMEOUT_SECONDS},sort_keys=True),flush=True)
+        return None,f'TIMEOUT:{GENERATOR_TIMEOUT_SECONDS}s'
+    try:
+        msg=outq.get(timeout=5)
+    except queue_mod.Empty:
+        err=f'NO_RESULT:exitcode={proc.exitcode}'
+        print(json.dumps({'event':'GENERATOR_NO_RESULT','label':label,'exitcode':proc.exitcode},sort_keys=True),flush=True)
+        return None,err
+    if not msg.get('ok'):
+        err=str(msg.get('error') or 'UNKNOWN_GENERATOR_ERROR')
+        print(json.dumps({'event':'GENERATOR_ERROR','label':label,'error':err},sort_keys=True),flush=True)
+        return None,err
+    result=msg.get('result')
+    print(json.dumps({'event':'GENERATOR_DONE','label':label,'validation':sc(result,'validation'),'fresh_blind':sc(result,'fresh_blind')},sort_keys=True),flush=True)
+    return result,None
+
+probe_db=ROOT/'kernel_self_expand_architecture_selector_constructor_v1_probe.sqlite'
+probe=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(probe_db))
+try:
+    available={
+     'synthesize_intelligence_algorithm_component':hasattr(probe,'synthesize_intelligence_algorithm_component'),
+     'synthesize_intelligence_with_extended_meta_grammar':hasattr(probe,'synthesize_intelligence_with_extended_meta_grammar'),
+    }
+finally:
+    probe.close()
+
 results={}
 errors={}
-try:
-    if available['synthesize_intelligence_algorithm_component']:
-        try:
-            results['RC5_ALGORITHM_GENESIS']=k.synthesize_intelligence_algorithm_component(fit,validation,revealed,blind)
-        except Exception as exc:
-            errors['RC5_ALGORITHM_GENESIS']=type(exc).__name__+':'+str(exc)[:900]
-    if available['synthesize_intelligence_with_extended_meta_grammar']:
-        try:
-            results['RC6_EXTENDED_META_GRAMMAR']=k.synthesize_intelligence_with_extended_meta_grammar(fit,validation,revealed,blind)
-        except Exception as exc:
-            errors['RC6_EXTENDED_META_GRAMMAR']=type(exc).__name__+':'+str(exc)[:900]
-finally:
-    k.close()
+for label,method_name in (
+    ('RC5_ALGORITHM_GENESIS','synthesize_intelligence_algorithm_component'),
+    ('RC6_EXTENDED_META_GRAMMAR','synthesize_intelligence_with_extended_meta_grammar'),
+):
+    if not available[method_name]:
+        continue
+    result,error=_run_bounded_generator(label,method_name)
+    if result is not None:results[label]=result
+    if error is not None:errors[label]=error
 
 # Follow YADO's own existing binder selection convention: choose by validation only.
 selected_origin=None;selected=None
