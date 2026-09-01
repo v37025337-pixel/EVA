@@ -19,7 +19,7 @@ from yado_bounded_program_repair_v2 import BoundedProgramRepairV1
 from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReasonerV1
 from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingentPlannerV1, ContingentStage
 from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
-from yado_bounded_compositional_schema_router_v1 import BoundedCompositionalSchemaRouterV1
+from yado_coverage_pruned_compositional_schema_router_v3 import CoveragePrunedCompositionalSchemaRouterV3
 from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
 
 def canon(o:Any)->str:
@@ -51,7 +51,7 @@ class UnifiedYADOCoreV1:
         self.scientific_data_reasoner=BoundedScientificDataReasonerV1
         self.adaptive_contingent_planner=BoundedAdaptiveContingentPlannerV1
         self.compositional_logic=BudgetAdaptiveCompositionalLogicV2
-        self.compositional_schema_router=BoundedCompositionalSchemaRouterV1
+        self.compositional_schema_router=CoveragePrunedCompositionalSchemaRouterV3
         self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
         validate_ledger_v2(self.ledger)
 

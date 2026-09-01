@@ -3,7 +3,6 @@
     "runtime/yado_bounded_adaptive_contingent_planner_v1.py",
     "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_capability_set_coordinator_v1.py",
-    "runtime/yado_bounded_compositional_schema_router_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
     "runtime/yado_bounded_program_repair_v2.py",
     "runtime/yado_bounded_scientific_data_reasoner_v1.py",
@@ -11,6 +10,7 @@
     "runtime/yado_budgeted_stage_policy_v1.py",
     "runtime/yado_conjunctive_rule_inducer_v1.py",
     "runtime/yado_core_audit_invariant_self_evolution_v1.py",
+    "runtime/yado_coverage_pruned_compositional_schema_router_v3.py",
     "runtime/yado_evolution_ledger_v2.py",
     "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
     "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
@@ -45,7 +45,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "2a9978a701d96d6a91cc32d5f94c2a88325b20fc3aa7efbe4df0207b847c2ce8",
+  "core_digest": "6924f826ab60ac6b549c694cc1b9a56b265fadd17fb7a6762a8c2dd4d719dc63",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -99,7 +99,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V2",
+  "current_frontier": "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V3",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -136,7 +136,8 @@
       "paired_schema_alignment": true
     },
     "selected_strategy": "COMPOSER_PLUS_ALIGNER",
-    "source_sha256": "5a54b64462a4d252696f197953018b0d6f55c3d287eb6648f14ca3d8a4f4658b"
+    "source_sha256": "5a54b64462a4d252696f197953018b0d6f55c3d287eb6648f14ca3d8a4f4658b",
+    "status": "SUPERSEDED_BY_INTELLIGENCE_PLATEAU_V3"
   },
   "intelligence_multi_dispatch": {
     "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
@@ -155,6 +156,34 @@
     "max_dependency_edges": 8,
     "mode": "ACTIVE_FIXED_ARCHITECTURE_MULTI_CAPABILITY_RUNTIME_COORDINATION",
     "source_sha256": "35f607273fbb282282fcca84554db62086880754fbb19ea8e385730e5a9ef630"
+  },
+  "intelligence_plateau_v3": {
+    "candidate_digest": "f17ecb87fb852e36ed1c446f24f12326ea5c795b4898502965f9f06b35a81cc0",
+    "causal_differentiator": {
+      "gap": 0.16666666666666663,
+      "v2_keeps_spurious_pair": true,
+      "v2_score": 0.8333333333333334,
+      "v3_keeps_true_signal": true,
+      "v3_prunes_spurious_pair": true,
+      "v3_score": 1.0
+    },
+    "causal_readmission_receipt_sha256": "3c131163a25868a6ef05a898f2923115f574ec5100e82b7406cd0c2857c06c0f",
+    "component_id": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+    "compute_contract": {
+      "max_alignment_cells": 131072,
+      "max_field_cells": 262144,
+      "max_outputs": 8,
+      "max_trigger_candidates": 4096,
+      "max_trigger_width": 2,
+      "max_triggers_per_output": 32
+    },
+    "functional_fresh_receipt_sha256": "2500b1c5ca6459c5fd6f28acf2a107b5ede13199892051b5c04942b72b551874",
+    "functional_fresh_score": 1.0,
+    "gate_run_id": "33477772368",
+    "mode": "ACTIVE_FIXED_ARCHITECTURE_COVERAGE_PRUNED_BUDGET_ADAPTIVE_ROUTING",
+    "repair_of_receipt": "87b4a2a47ccb15bb40039cb4657c6ef554048c2e22d4a582acdefab4e38d3ac4",
+    "source_sha256": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
+    "supersedes": "ALG-G2-BOUNDED-COMPOSITIONAL-SCHEMA-ROUTER-V1"
   },
   "invariants": [
     "EXACTLY_ONE_ACTIVE_DEVELOPMENTAL_HEAD",
@@ -319,7 +348,7 @@
       "active_components": [
         "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
         "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
-        "ALG-G2-BOUNDED-COMPOSITIONAL-SCHEMA-ROUTER-V1",
+        "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
         "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
       ],
       "plane_id": "INTELLIGENCE_AND_META_SELECTION",
@@ -328,11 +357,15 @@
         "architecture_candidate_selection",
         "bounded_multi_capability_composition",
         "bounded_multi_capability_runtime_execution",
+        "bounded_pairwise_trigger_composition",
         "capability_routing",
         "capability_set_fail_closed_execution",
         "dependency_aware_capability_coordination",
+        "distribution_shift_spurious_trigger_suppression",
         "evidence_weighted_selection",
-        "paired_schema_alignment"
+        "paired_schema_alignment",
+        "positive_cover_trigger_pruning",
+        "work_budget_adaptive_capability_routing"
       ]
     },
     {
@@ -417,7 +450,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "a1c0e344572109b65d4a723df3be9d90b688fd4af0c3004f0c255ecafcefe278",
+  "runtime_sha256": "ca046cb4d7da712f301ba84438154e570a02c6ae84f7c7a0d96ff4ac449c64b5",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
@@ -441,6 +474,19 @@
       "historical_evidence_retained": true,
       "reason": "PLATEAU_CONTRACT_FRONTIER_REPLACED_FIXED_DIMENSION_CAPS_WITH_TOTAL_WORK_BUDGETS",
       "superseded_by": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+    },
+    {
+      "component_id": "ALG-G2-BOUNDED-COMPOSITIONAL-SCHEMA-ROUTER-V1",
+      "historical_evidence_retained": true,
+      "reason": "PLATEAU_FRONTIER_REQUIRED_WORK_BUDGET_FIELDS_PAIRWISE_COMPOSITION_AND_COVERAGE_PRUNING",
+      "superseded_by": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+    },
+    {
+      "component_id": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-SCHEMA-ROUTER-V2",
+      "historical_evidence_retained": true,
+      "reason": "SHADOW_STEPPING_STONE_REPAIRED_AFTER_WIDTH22_DISTRIBUTION_SHIFT_COUNTEREXAMPLE",
+      "superseded_by": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+      "was_canonical": false
     }
   ],
   "thinking_ceiling": {
