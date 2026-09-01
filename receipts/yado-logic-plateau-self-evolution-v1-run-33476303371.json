@@ -1,0 +1,134 @@
+{
+  "baseline": {
+    "families": {
+      "BOOLEAN_WIDTH_13": 0.0,
+      "BOOLEAN_WIDTH_14_FRESH": 0.0,
+      "POLYNOMIAL_D4_A": 0.0,
+      "POLYNOMIAL_D4_B_FRESH": 0.0
+    },
+    "min_family": 0.0,
+    "score": 0.0
+  },
+  "candidate_digest": "7005723a7b15e1c9425902e199f6a467ea722f9d41ed684d9c3c16531fdeef26",
+  "candidate_source_sha256": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
+  "canonical_mutation": false,
+  "causal_gain": 1.0,
+  "checks": {
+    "architecture_immutable": true,
+    "boolean_budget_fail_closed": true,
+    "causal_gain_large": true,
+    "fresh_min_one": true,
+    "head_immutable": true,
+    "logic_self_selected": true,
+    "polynomial_term_budget_fail_closed": true,
+    "selected_both_budget_axes": true
+  },
+  "compute_contract": {
+    "max_boolean_cells": 262144,
+    "max_polynomial_rows": 256,
+    "max_polynomial_terms": 20
+  },
+  "fail_closed": {
+    "boolean_work_budget": true,
+    "polynomial_term_budget": true
+  },
+  "fresh_validation": {
+    "families": {
+      "BOOLEAN_WIDTH_13": 1.0,
+      "BOOLEAN_WIDTH_14_FRESH": 1.0,
+      "POLYNOMIAL_D4_A": 1.0,
+      "POLYNOMIAL_D4_B_FRESH": 1.0
+    },
+    "min_family": 1.0,
+    "score": 1.0
+  },
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 0.9990000000000001,
+        "token": "opaque_798afd4483c26741cb"
+      },
+      {
+        "score": 0.499,
+        "token": "opaque_8f8a6ab7caeb739c16"
+      },
+      {
+        "score": 0.499,
+        "token": "opaque_d0374a869886e279fb"
+      },
+      {
+        "score": -0.007000000000000002,
+        "token": "opaque_a925d6924fd41c2e4a"
+      }
+    ],
+    "selected_score": 0.9990000000000001,
+    "selected_token": "opaque_798afd4483c26741cb"
+  },
+  "next_required_capability": "LOGIC_PLATEAU_FRESH_ADMISSION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "6d3fff2f37786fbbd53a6eb673b3ae0739b6320b6890b970d6353370ebbe9c2b",
+  "schema": "yado.g2.logic_plateau_self_evolution.v1",
+  "selected_strategy": "WORK_BUDGET_BOTH",
+  "semantic_boundary": "REPLACES SMALL FIXED LOGIC DIMENSION CAPS WITH FIXED TOTAL-WORK BUDGETS. SUPPORTS SYMMETRIC BOOLEAN WIDTH WITHIN CELL BUDGET AND EXACT POLYNOMIAL MODELS WITHIN TERM/ROW BUDGET. NOT GENERAL THEOREM PROVING.",
+  "status": "PASS_LOGIC_PLATEAU_SELF_EVOLUTION_V1",
+  "validation": {
+    "BASE_V1": {
+      "complexity": 0.1,
+      "families": {
+        "BOOLEAN_WIDTH_13": 0.0,
+        "BOOLEAN_WIDTH_14_FRESH": 0.0,
+        "POLYNOMIAL_D4_A": 0.0,
+        "POLYNOMIAL_D4_B_FRESH": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.1,
+      "risk": 0.02,
+      "score": 0.0,
+      "token": "opaque_a925d6924fd41c2e4a"
+    },
+    "TERM_BUDGET_POLY": {
+      "complexity": 0.23,
+      "families": {
+        "BOOLEAN_WIDTH_13": 0.0,
+        "BOOLEAN_WIDTH_14_FRESH": 0.0,
+        "POLYNOMIAL_D4_A": 1.0,
+        "POLYNOMIAL_D4_B_FRESH": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.6,
+      "risk": 0.03,
+      "score": 0.5,
+      "token": "opaque_8f8a6ab7caeb739c16"
+    },
+    "WORK_BUDGET_BOOLEAN": {
+      "complexity": 0.2,
+      "families": {
+        "BOOLEAN_WIDTH_13": 1.0,
+        "BOOLEAN_WIDTH_14_FRESH": 1.0,
+        "POLYNOMIAL_D4_A": 0.0,
+        "POLYNOMIAL_D4_B_FRESH": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.55,
+      "risk": 0.03,
+      "score": 0.5,
+      "token": "opaque_d0374a869886e279fb"
+    },
+    "WORK_BUDGET_BOTH": {
+      "complexity": 0.31,
+      "families": {
+        "BOOLEAN_WIDTH_13": 1.0,
+        "BOOLEAN_WIDTH_14_FRESH": 1.0,
+        "POLYNOMIAL_D4_A": 1.0,
+        "POLYNOMIAL_D4_B_FRESH": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.9,
+      "risk": 0.05,
+      "score": 1.0,
+      "token": "opaque_798afd4483c26741cb"
+    }
+  }
+}

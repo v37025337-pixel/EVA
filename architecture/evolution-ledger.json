@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "019d19749768e0c80be8a764cc33ad92618570662a0ad9fab024c48a5153832f",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 142,
+  "event_count": 143,
   "events": [
     {
       "canonical_mutation": false,
@@ -2361,14 +2361,30 @@
       "source_digest": "88d6a8410e90fb4be26d15d2d0d99e071f597ded79fc497bb94b699d0314425b",
       "source_path": "receipts/yado-g2-lti-architectural-ceiling-plateau-probe-v1-run-33476163633.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LOGIC_PLATEAU_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=WORK_BUDGET_BOTH; FRESH=1.000000; BASE=0.000000; GAIN=1.000000; NEXT=LOGIC_PLATEAU_FRESH_ADMISSION_V1",
+      "event_hash": "1d9ff6b67fd8545088f3d5a37bf79e043788ee0039862ee64972ffdfc3849bf9",
+      "event_id": "E0143_G2_LOGIC_PLATEAU_SELF_EVOLUTION_V1",
+      "event_type": "FIXED_ARCHITECTURE_LOGIC_PLATEAU_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 142,
+      "parent_event_hash": "7be2c6bfd70b79f4ee9c6806817de8f149b0e70febe2720b9ade9c1b1afbf65a",
+      "promotion_applied": false,
+      "run_id": "33476303371",
+      "source_digest": "6d3fff2f37786fbbd53a6eb673b3ae0739b6320b6890b970d6353370ebbe9c2b",
+      "source_path": "receipts/yado-logic-plateau-self-evolution-v1-run-33476303371.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "aebec6c434e3edd6f5e86f041414ffd2a44338d3dfd189c186e17e42e87c68e7",
+  "ledger_digest": "08ac84c0f5a7b7a7b5d220efd91de75980b574f58d2c215ad07127ba3b1e459c",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "LOGIC_PLATEAU_SELF_EVOLUTION_V1"
+    "LOGIC_PLATEAU_FRESH_ADMISSION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -2397,5 +2413,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "7be2c6bfd70b79f4ee9c6806817de8f149b0e70febe2720b9ade9c1b1afbf65a"
+  "tail_event_hash": "1d9ff6b67fd8545088f3d5a37bf79e043788ee0039862ee64972ffdfc3849bf9"
 }
