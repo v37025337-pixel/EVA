@@ -1,0 +1,44 @@
+name: YADO Unified Context Kernel V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - yado-architecture-shadow-search
+    paths:
+      - 'canonical/yado-unified-context-kernel-v1.json'
+      - 'canonical/yado-unified-core-v1.json'
+      - 'canonical/yado-main-head-g2.json'
+      - 'canonical/yado-unified-experience-registry-v1.json'
+      - 'architecture/evolution-ledger.json'
+      - 'runtime/yado_unified_context_kernel_v1.py'
+      - '.github/workflows/yado-unified-context-kernel-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate single contextual kernel
+        run: |
+          python runtime/yado_unified_context_kernel_v1.py | tee unified-context-snapshot.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path("unified-context-snapshot.json").read_text())
+          assert s["single_context_invariant"] is True
+          assert s["active_lineage_count"] == 1
+          assert s["historical_branch_memory_count"] >= 1
+          print("PASS_YADO_UNIFIED_CONTEXT_KERNEL_V1")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-unified-context-kernel-v1
+          path: unified-context-snapshot.json
+          retention-days: 30
