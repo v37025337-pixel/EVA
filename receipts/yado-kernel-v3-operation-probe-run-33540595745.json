@@ -1,0 +1,54 @@
+{
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "host_selected_operation": false,
+  "kernel_operation": {
+    "evidence": {
+      "mean_task_score": 0.0,
+      "weak_tasks": [
+        "completion",
+        "fresh_blind",
+        "validation"
+      ]
+    },
+    "operation": "REACTION_NORM",
+    "variant_id": "V2"
+  },
+  "kernel_snapshot": {
+    "constructor_count": 2,
+    "meta_evolution": {
+      "algorithm_counts": {
+        "INTELLIGENCE": 8,
+        "LOGIC": 8,
+        "THINKING": 12
+      },
+      "enabled": true,
+      "profile": "YADO_V3_0_RC8_VERIFIED_EXTERNAL_COGNITIVE_RUNTIME",
+      "selection_policy": {
+        "algorithm_selection": "REVEALED_VALIDATION_ONLY",
+        "durable_scope": "LOCAL_PROJECT_ARTIFACT",
+        "fresh_blind_used_for_selection": false,
+        "rollback_required": true,
+        "shadow_first": true,
+        "trigger": "EVOLUTION_ALGORITHM_UNDERPERFORMS_ON_REVEALED_VALIDATION",
+        "unrestricted_self_code_rewrite": false
+      }
+    },
+    "meta_grammar": {
+      "enabled": true,
+      "operators": [
+        "MG_1d259d9fa9ea"
+      ],
+      "policy": {
+        "durable_scope": "LOCAL_PROJECT_ARTIFACT",
+        "fresh_blind_used_for_selection": false,
+        "rollback_required": true,
+        "selection": "REVEALED_TRAIN_VALIDATION_ONLY",
+        "shadow_first": true,
+        "trigger": "RC5_CONSTRUCTOR_LANGUAGE_VALIDATION_BELOW_1",
+        "unrestricted_self_code_rewrite": false
+      }
+    }
+  },
+  "schema": "yado.g2.v3_operation_probe.v1"
+}
