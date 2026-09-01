@@ -1,0 +1,108 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "candidate_digest": "7a8af4d89c5749394238f6b019b4b0081b7ae07286bbce7faea708593f978b64",
+  "candidate_source_sha256": "d00d6ea219f92fc43dfd4870076cfdf5bea351bbe5d99d86cc1e5e34233bc136",
+  "canonical_active": false,
+  "component_id": "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3",
+  "compute_contract": {
+    "max_candidates": 20000,
+    "max_edit_depth": 2,
+    "max_structural_constants": 12
+  },
+  "fresh_validation": {
+    "families": {
+      "SINGLE_EDIT_REGRESSION": 1.0,
+      "STRUCTURAL_ABS_FRESH": 1.0,
+      "TWO_EDIT_BINARY_FRESH": 0.0
+    },
+    "min_family": 0.0,
+    "score": 0.6666666666666666
+  },
+  "neutral_selection": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 0.995,
+        "token": "opaque_f7d6c606ec7900e1c1"
+      },
+      {
+        "score": 0.4955,
+        "token": "opaque_1f48274caf67455b30"
+      },
+      {
+        "score": 0.24409999999999998,
+        "token": "opaque_22a1f0495d7b3dded9"
+      },
+      {
+        "score": -0.007000000000000002,
+        "token": "opaque_d07a9e00a10fbbf790"
+      }
+    ],
+    "selected_score": 0.995,
+    "selected_token": "opaque_f7d6c606ec7900e1c1"
+  },
+  "parent_head_digest": "5e63b34853fe7ebbb565d4cd5e4a75809aebfed454266b7cc42ba469be2ee89d",
+  "promotion_applied": false,
+  "schema": "yado.g2.bounded_compositional_program_repair_candidate.v3",
+  "selected_strategy": "DEPTH2_PLUS_STRUCTURAL",
+  "semantic_boundary": "BOUNDED SAFE SINGLE-FUNCTION PROGRAM REPAIR WITH UP TO TWO COMPOSED AST EDITS AND SAFE RETURN-EXPRESSION WRAPPERS. NOT GENERAL SELF-MODIFYING CODE EXECUTION.",
+  "state": "WITHHOLD",
+  "validation": {
+    "BASE_ONE_EDIT": {
+      "complexity": 0.1,
+      "families": {
+        "STRUCTURAL_CLAMP_FRESH": 0.0,
+        "STRUCTURAL_GUARD_COUNTEREXAMPLE": 0.0,
+        "TWO_EDIT_COUNTEREXAMPLE": 0.0,
+        "TWO_EDIT_FRESH": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.1,
+      "risk": 0.02,
+      "score": 0.0,
+      "token": "opaque_d07a9e00a10fbbf790"
+    },
+    "DEPTH2_ONLY": {
+      "complexity": 0.22,
+      "families": {
+        "STRUCTURAL_CLAMP_FRESH": 0.0,
+        "STRUCTURAL_GUARD_COUNTEREXAMPLE": 0.0,
+        "TWO_EDIT_COUNTEREXAMPLE": 1.0,
+        "TWO_EDIT_FRESH": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.55,
+      "risk": 0.04,
+      "score": 0.5,
+      "token": "opaque_1f48274caf67455b30"
+    },
+    "DEPTH2_PLUS_STRUCTURAL": {
+      "complexity": 0.34,
+      "families": {
+        "STRUCTURAL_CLAMP_FRESH": 1.0,
+        "STRUCTURAL_GUARD_COUNTEREXAMPLE": 1.0,
+        "TWO_EDIT_COUNTEREXAMPLE": 1.0,
+        "TWO_EDIT_FRESH": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.9,
+      "risk": 0.06,
+      "score": 1.0,
+      "token": "opaque_f7d6c606ec7900e1c1"
+    },
+    "STRUCTURAL_ONLY": {
+      "complexity": 0.24,
+      "families": {
+        "STRUCTURAL_CLAMP_FRESH": 0.0,
+        "STRUCTURAL_GUARD_COUNTEREXAMPLE": 1.0,
+        "TWO_EDIT_COUNTEREXAMPLE": 0.0,
+        "TWO_EDIT_FRESH": 0.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.62,
+      "risk": 0.05,
+      "score": 0.25,
+      "token": "opaque_22a1f0495d7b3dded9"
+    }
+  }
+}
