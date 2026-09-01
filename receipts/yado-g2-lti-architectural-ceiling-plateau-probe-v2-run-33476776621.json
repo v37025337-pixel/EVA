@@ -1,0 +1,109 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "canonical_mutation": false,
+  "checks": {
+    "architecture_immutable": true,
+    "canonical_head_immutable": true,
+    "g3_not_started": true,
+    "logic_v2_active_in_head": true,
+    "three_planes_probed": true
+  },
+  "contract_snapshot": {
+    "INTELLIGENCE": {
+      "MAX_FIELDS": 16,
+      "MAX_OUTPUTS": 8,
+      "MAX_TRIGGERS_PER_OUTPUT": 8
+    },
+    "LOGIC": {
+      "MAX_BOOLEAN_CELLS": 262144,
+      "MAX_POLYNOMIAL_ROWS": 256,
+      "MAX_POLYNOMIAL_TERMS": 20
+    },
+    "THINKING": {
+      "MAX_PLAN_DEPTH": 8,
+      "MAX_STAGES": 8
+    }
+  },
+  "deficit_severity": {
+    "INTELLIGENCE": 0.46875,
+    "LOGIC": 0.0,
+    "THINKING": 0.15000000000000013
+  },
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 3,
+    "ranking": [
+      {
+        "score": 0.46714999999999995,
+        "token": "opaque_76198b0d649ecbc614"
+      },
+      {
+        "score": 0.14200000000000013,
+        "token": "opaque_e48d4188b935f2c78c"
+      },
+      {
+        "score": -0.004000000000000002,
+        "token": "opaque_7162d5511a5e134cec"
+      }
+    ],
+    "selected_score": 0.46714999999999995,
+    "selected_token": "opaque_76198b0d649ecbc614"
+  },
+  "new_deficit_found": true,
+  "next_required_capability": "INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V1",
+  "plane_scores": {
+    "INTELLIGENCE": 0.53125,
+    "LOGIC": 1.0,
+    "THINKING": 0.8499999999999999
+  },
+  "plateau_streak": 0,
+  "probe_status": "FRONTIER_FOUND",
+  "probes": {
+    "INTELLIGENCE": {
+      "FIELD_WIDTH_PLUS_ONE": {
+        "bound": 16,
+        "probe_value": 17,
+        "score": 0.5
+      },
+      "TRIGGER_INTERACTION_ORDER_PLUS_ONE": {
+        "current_order": 1,
+        "probe_order": 2,
+        "score": 0.5625
+      }
+    },
+    "LOGIC": {
+      "TERM_BUDGET_FAIL_CLOSED": {
+        "reason": "POLYNOMIAL_TERM_BUDGET",
+        "score": 1.0
+      },
+      "WITHIN_BUDGET_DEGREE4_TRANSFER": {
+        "reason": "STRUCTURAL_TRANSFER_INSIDE_POLYNOMIAL_TERM_BUDGET",
+        "score": 1.0
+      },
+      "WITHIN_BUDGET_WIDTH24_TRANSFER": {
+        "reason": "STRUCTURAL_TRANSFER_INSIDE_BOOLEAN_WORK_BUDGET",
+        "score": 1.0
+      }
+    },
+    "THINKING": {
+      "DEPENDENCY_DEPTH_PLUS_ONE": {
+        "bound": 8,
+        "probe_value": 9,
+        "score": 0.7999999999999999,
+        "sequence_len": 7
+      },
+      "STAGE_WIDTH_PLUS_ONE": {
+        "bound": 8,
+        "probe_value": 9,
+        "score": 0.8999999999999999,
+        "sequence_len": 8
+      }
+    }
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "5f6f4bb853696498dbb15b7eca132894f92eb86d60f859b83e1667405025d919",
+  "schema": "yado.g2.lti_architectural_ceiling_plateau_probe.v2",
+  "self_selected_plane": "INTELLIGENCE",
+  "semantic_boundary": "SECOND CONTRACT-DERIVED PLATEAU SEARCH AFTER LOGIC V2. RESOURCE-BUDGET WITHHOLD IS SCORED AS CORRECT; ONLY FAILURES INSIDE CURRENT COMPUTE CONTRACT REOPEN SELF-EVOLUTION.",
+  "status": "PASS_LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V2"
+}
