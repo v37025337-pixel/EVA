@@ -3,8 +3,8 @@
     "runtime/yado_bounded_adaptive_contingent_planner_v1.py",
     "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_capability_set_coordinator_v1.py",
+    "runtime/yado_bounded_compositional_program_repair_v3.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
-    "runtime/yado_bounded_program_repair_v2.py",
     "runtime/yado_bounded_scientific_data_reasoner_v1.py",
     "runtime/yado_budget_adaptive_compositional_logic_v2.py",
     "runtime/yado_budgeted_stage_policy_v1.py",
@@ -45,7 +45,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "6924f826ab60ac6b549c694cc1b9a56b265fadd17fb7a6762a8c2dd4d719dc63",
+  "core_digest": "b3fa4ee74e8dddb1ee4e162da4f1fff67272746687b6a5bbc8e8b0a1a088264a",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -99,7 +99,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V3",
+  "current_frontier": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V4",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -330,10 +330,11 @@
       "active_components": [
         "ALG-BUDGETED-STAGE-POLICY-V1",
         "ALG-G2-BOUNDED-ADAPTIVE-CONTINGENT-PLANNER-V1",
-        "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2"
+        "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3"
       ],
       "plane_id": "THINKING_AND_PLANNING",
       "responsibilities": [
+        "bounded_compositional_program_repair",
         "bounded_contingent_planning",
         "bounded_long_horizon_search",
         "bounded_program_repair_and_execution",
@@ -341,7 +342,9 @@
         "cost_aware_planning",
         "prerequisite_aware_planning",
         "quota_aware_staging",
-        "signed_evidence_update"
+        "safe_structural_expression_repair",
+        "signed_evidence_update",
+        "two_edit_ast_search"
       ]
     },
     {
@@ -399,6 +402,7 @@
     },
     {
       "active_components": [
+        "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3",
         "ALG-G2-DEEP-SELF-AUDIT-V1",
         "architecture/evolution-ledger.json"
       ],
@@ -408,10 +412,14 @@
       ],
       "plane_id": "SELF_AUDIT_AND_REPAIR",
       "responsibilities": [
+        "bounded_self_code_candidate_repair",
         "coherence_checks",
         "fail_closed_repair_policy",
-        "split_brain_prevention",
-        "rollback_preservation"
+        "multi_edit_patch_synthesis",
+        "repair_candidate_fail_closed_search_budget",
+        "rollback_preservation",
+        "safe_structural_patch_synthesis",
+        "split_brain_prevention"
       ]
     },
     {
@@ -434,13 +442,26 @@
     }
   ],
   "program_execution": {
-    "candidate_digest": "d9aaa718fdc7097beb71d64aac3971ef75131c80277dc6c77f10af73d098ba51",
-    "component_id": "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2",
-    "fresh_admission_receipt_sha256": "a10f74b0c924b6101d0705304b78a2803a5f013c19bbcc8588b3002ad2d89f93",
+    "candidate_digest": "7a8af4d89c5749394238f6b019b4b0081b7ae07286bbce7faea708593f978b64",
+    "causal_gap": 1.0,
+    "component_id": "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3",
+    "compute_contract": {
+      "max_candidates": 20000,
+      "max_edit_depth": 2,
+      "max_structural_constants": 12
+    },
+    "fresh_admission_receipt_sha256": "016a1aaef043d0858399d9af65a384c111d1f7adba19c946fae7cfa9a572cf2b",
     "fresh_score": 1.0,
-    "gate_run_id": "33417831032",
-    "mode": "ACTIVE_BOUNDED_SINGLE_FUNCTION_REPAIR",
-    "source_sha256": "7407c0ee2a3996d7b3eb34e8db12d85ee4a76d2d561cd53fe36ba4cef3eb545c"
+    "gate_run_id": "33486484127",
+    "mode": "ACTIVE_BOUNDED_COMPOSITIONAL_SINGLE_FUNCTION_REPAIR",
+    "predecessor_ablation": {
+      "EXACT_TWO_CONSTANT_EDITS": 0.0,
+      "EXACT_TWO_EDIT_BINARY": 0.0,
+      "STRUCTURAL_MAX_FLOOR": 0.0
+    },
+    "self_repair_binding": "ACTIVE_SELF_AUDIT_AND_REPAIR_PLANE",
+    "source_sha256": "d00d6ea219f92fc43dfd4870076cfdf5bea351bbe5d99d86cc1e5e34233bc136",
+    "supersedes": "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2"
   },
   "promotion_applied": false,
   "purpose": "ONE_ACTIVE_KERNEL_WITH_LEGACY_BRANCHES_AS_READ_ONLY_DEVELOPMENTAL_EXPERIENCE",
@@ -450,7 +471,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "ca046cb4d7da712f301ba84438154e570a02c6ae84f7c7a0d96ff4ac449c64b5",
+  "runtime_sha256": "efb0e32734f4f14d7526e42f73de4d53d9c4b594d008a645dce010a103f69f19",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
@@ -487,6 +508,12 @@
       "reason": "SHADOW_STEPPING_STONE_REPAIRED_AFTER_WIDTH22_DISTRIBUTION_SHIFT_COUNTEREXAMPLE",
       "superseded_by": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
       "was_canonical": false
+    },
+    {
+      "component_id": "ALG-G2-BOUNDED-PROGRAM-REPAIR-V2",
+      "historical_evidence_retained": true,
+      "reason": "CODE_PLATEAU_REQUIRED_COMPOSED_AST_EDITS_AND_SAFE_STRUCTURAL_REPAIR",
+      "superseded_by": "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3"
     }
   ],
   "thinking_ceiling": {
