@@ -1,0 +1,176 @@
+{
+  "architecture_mutation": false,
+  "called_helpers": [
+    "_gid",
+    "_intel_acc",
+    "_linear_candidates",
+    "_predicate",
+    "best_intel_leaf",
+    "max"
+  ],
+  "canonical_mutation": false,
+  "g3_genesis_performed": false,
+  "helper_sources": {
+    "_gid": "def _gid(program):\n    raw=json.dumps(program,sort_keys=True,separators=(',',':')).encode()\n    return 'G_'+hashlib.sha256(raw).hexdigest()[:12]\n",
+    "_intel_acc": "def _intel_acc(model,cases):\n    return sum(predict_intel_component(model,x)==y for x,y in cases)/len(cases) if cases else 0.0\n",
+    "_linear_candidates": "def _linear_candidates(cases):\n    keys=sorted({k for x,*_ in cases for k in (x if isinstance(x,dict) else {})})\n    for a,b in itertools.combinations(keys,2):\n        vals=[(float(x.get(a,0)),float(x.get(b,0))) for x,*_ in cases]\n        for wa,wb in itertools.product((-1.0,1.0),repeat=2):\n            scores=sorted(set(wa*u+wb*v for u,v in vals))\n            for lo,hi in zip(scores,scores[1:]):\n                yield {'kind':'LINEAR_THRESHOLD','signals':[a,b],'weights':[wa,wb],'threshold':(lo+hi)/2}\n",
+    "_predicate": "def _predicate(program,features):\n    if program['kind']=='BOOL_TABLE':\n        a,b=program['signals']; key=f\"{int(bool(features.get(a,False)))}{int(bool(features.get(b,False)))}\"\n        return bool(program['table'][key])\n    return sum(w*float(features.get(k,0)) for w,k in zip(program['weights'],program['signals']))>program['threshold']\n",
+    "best_intel_leaf": "def best_intel_leaf(cases,algs):\n    ranked=[]\n    for spec in algs:\n        family=spec.get('family'); depth=int(spec.get('max_depth',99))\n        if family=='CART_AXIS':\n            model=fit_tree(cases,int(spec.get('max_depth',4))); score=tree_acc(model,cases)\n        elif family=='LINEAR_SCORE_SEARCH':\n            model=fit_linear(cases); score=linear_acc(model,cases) if model else 0.0\n        else:continue\n        ranked.append((score,-depth,family=='CART_AXIS',dict(spec),model))\n    if not ranked:return None,{'score':0.0}\n    score,_,_,spec,model=max(ranked,key=lambda z:(z[0],z[1],z[2]))\n    return {'op':'LEAF','algorithm':spec,'model':model},{'score':score}\n"
+  },
+  "kernel_methods": [
+    {
+      "name": "_bootstrap_logic_program",
+      "signature": "(self) -> 'None'",
+      "source": "    def _bootstrap_logic_program(self) -> None:\n        # Re-synthesize the previously validated external-evidence admission\n        # program from its revealed training corpus. No hand-coded status table\n        # is used by the runtime executor.\n        self.logic_program = RuleProgramSynthesizer.synthesize(\n            target_capability=\"external_evidence_admission\",\n            target_organ=\"LOGIC\",\n            examples=ADMISSION_TRAIN,\n            min_support=2,\n        )\n        model = {\n            \"program_id\": self.logic_program.program_id,\n            \"source_digest\": self.logic_program.source_digest,\n            \"rules\": [\n                {\n                    \"predicates\": [asdict(p) for p in r.predicates],\n                    \"output\": r.output,\n                    \"support\": r.support,\n                    \"confidence\": r.confidence,\n                }\n                for r in self.logic_program.rules\n            ],\n            \"default_output\": self.logic_program.default_output,\n        }\n        # The training file is the evidence source for this executable model.\n        self._register_model(\n            \"LOGIC_EXTERNAL_EVIDENCE_ADMISSION\",\n            \"LOGIC\",\n            \"external_evidence_admission\",\n            model,\n            ROOT / \"yado_notion_training_development.py\",\n        )\n"
+    },
+    {
+      "name": "autoevolution_gate",
+      "signature": "(self, candidates: 'Sequence[Mapping[str, Any]]') -> 'Dict[str, Any]'",
+      "source": "    def autoevolution_gate(self,candidates:Sequence[Mapping[str,Any]])->Dict[str,Any]:\n        # Central controller knows only validation invariants, not organ-specific model semantics.\n        passed=all(c.get('verdict')=='SHADOW_SUPPORTED' and float(c.get('blind',0))==1.0 and float(c.get('restore',0))==1.0 and float(c.get('blind',0))>float(c.get('ablation',1)) for c in candidates)\n        return {'passed':passed,'candidate_count':len(candidates),'required':['blind=1','restore=1','blind>ablation','organ verdict supported']}\n"
+    },
+    {
+      "name": "build_evolution_archive",
+      "signature": "(self, records)",
+      "source": "    def build_evolution_archive(self, records):\n        variants=[]\n        for row in records:\n            variants.append(EvolutionVariant(\n                variant_id=str(row['variant_id']),\n                parent_id=None if row.get('parent_id') is None else str(row.get('parent_id')),\n                lineage_id=str(row['lineage_id']),\n                artifact_digest=str(row['artifact_digest']),\n                task_scores=dict(row.get('task_scores') or {}),\n                constraints=dict(row.get('constraints') or {}),\n                traits=dict(row.get('traits') or {}),\n                failure_tags=tuple(row.get('failure_tags') or ()),\n                status=str(row.get('status','EVALUATED')),\n                metadata=dict(row.get('metadata') or {}),\n            ))\n        return EvolutionArchiveRuntime(variants)\n"
+    },
+    {
+      "name": "durable_commit_evolution_bundle",
+      "signature": "(self, bundle: 'Mapping[str, Mapping[str, Any]]', gate: 'Mapping[str, Any]') -> 'dict[str, Any]'",
+      "source": "    def durable_commit_evolution_bundle(self,bundle:Mapping[str,Mapping[str,Any]],gate:Mapping[str,Any])->dict[str,Any]:\n        try: current=self.state_path.resolve(); target=DEFAULT_STATE.resolve()\n        except Exception: current=self.state_path; target=DEFAULT_STATE\n        if current!=target:\n            return {'committed':False,'reason':'HISTORICAL_OR_NONACTIVE_STATE_IMMUTABLE_IN_R7','state_path':str(current),'active_state_path':str(target)}\n        return super().durable_commit_evolution_bundle(bundle,gate)\n"
+    },
+    {
+      "name": "evaluate_evolution_skill",
+      "signature": "(self, candidate, **gate_kwargs)",
+      "source": "    def evaluate_evolution_skill(self, candidate, **gate_kwargs):\n        c = candidate if isinstance(candidate, SkillCandidate) else SkillCandidate(**candidate)\n        return SkillAdmissionGate(**gate_kwargs).evaluate(c)\n"
+    },
+    {
+      "name": "evolution_event_count",
+      "signature": "(self, organ: 'str | None' = None) -> 'int'",
+      "source": "    def evolution_event_count(self,organ:str|None=None)->int:\n        with self.db_lock:\n            if organ:\n                return int(self.conn.execute('SELECT COUNT(*) FROM organ_evolution_events WHERE organ=?',(organ.upper(),)).fetchone()[0])\n            return int(self.conn.execute('SELECT COUNT(*) FROM organ_evolution_events').fetchone()[0])\n"
+    },
+    {
+      "name": "intelligence_evolved_strategy",
+      "signature": "(self, features: 'Mapping[str, float]') -> 'str'",
+      "source": "    def intelligence_evolved_strategy(self,features:Mapping[str,float])->str:\n        b=self._bank('INTELLIGENCE')\n        if not b:return super().intelligence_evolved_strategy(features)\n        e=_choose(b,features.keys());return tree_predict(e['model'],features)\n"
+    },
+    {
+      "name": "logic_evolved_decision",
+      "signature": "(self, features: 'Mapping[str, bool]') -> 'str'",
+      "source": "    def logic_evolved_decision(self,features:Mapping[str,bool])->str:\n        b=self._bank('LOGIC')\n        if not b:return super().logic_evolved_decision(features)\n        e=_choose(b,features.keys());return 'ALLOW' if eval_bool(e['model'],features) else 'WITHHOLD'\n"
+    },
+    {
+      "name": "logic_growth_synthesize",
+      "signature": "(self, cases, max_nodes: 'int' = 15, max_signatures: 'int' = 524288)",
+      "source": "    def logic_growth_synthesize(self,cases,max_nodes:int=15,max_signatures:int=524288):\n        model,meta=synthesize_logic_bitset(cases,max_nodes=max_nodes,max_signatures=max_signatures)\n        acc=logic_accuracy(model,cases)\n        if acc<1.0:\n            exact,exact_meta=synthesize_logic_exact_table(cases,max_vars=10)\n            if exact is not None:\n                model,meta,acc=exact,dict(exact_meta,fallback_from=meta),logic_accuracy(exact,cases)\n        return {'model':model,'meta':meta,'accuracy':acc}\n"
+    },
+    {
+      "name": "meta_evolution_snapshot",
+      "signature": "(self)",
+      "source": "    def meta_evolution_snapshot(self):\n        b=self.organ_evolution_algorithm_bank()\n        return {'profile':self.PROFILE,'enabled':bool(self.canonical_state.get('evolution_of_evolution_enabled')),\n                'algorithm_counts':{k:len(v) for k,v in b.items()},'selection_policy':self.canonical_state.get('evolution_of_evolution_policy')}\n"
+    },
+    {
+      "name": "meta_evolve_intelligence",
+      "signature": "(self, fit, validation, revealed_train, blind)",
+      "source": "    def meta_evolve_intelligence(self,fit,validation,revealed_train,blind):\n        candidates=[]\n        for a in self._algs('INTELLIGENCE'):\n            fam=a['family']\n            if fam=='CART_AXIS':model=fit_tree(fit,int(a['max_depth']));val=tree_acc(model,validation)\n            elif fam=='LINEAR_SCORE_SEARCH':\n                model=fit_linear(fit);val=0.0 if model is None else linear_acc(model,validation)\n            else:continue\n            candidates.append({'algorithm':a,'model':model,'validation':val})\n        if not candidates:raise RuntimeError('no INTELLIGENCE meta algorithms')\n        sel=max(candidates,key=lambda z:(z['validation'],z['algorithm']['family']=='CART_AXIS',-(z['algorithm'].get('max_depth') or 99)))\n        a=sel['algorithm']\n        if a['family']=='CART_AXIS':model=fit_tree(revealed_train,int(a['max_depth']));fresh=tree_acc(model,blind)\n        else:model=fit_linear(revealed_train);fresh=0.0 if model is None else linear_acc(model,blind)\n        return {'organ':'INTELLIGENCE','selected_algorithm':a,'validation':sel['validation'],'model':model,'fresh_blind':fresh}\n"
+    },
+    {
+      "name": "meta_evolve_logic",
+      "signature": "(self, fit, validation, revealed_train, blind)",
+      "source": "    def meta_evolve_logic(self,fit,validation,revealed_train,blind):\n        candidates=[]\n        for a in self._algs('LOGIC'):\n            fam=a['family']\n            if fam=='ENUM_BOOLEAN':\n                model,meta=bounded_enum(fit,int(a.get('max_depth',3)),float(a.get('timeout_s',1.5)))\n                val=0.0 if model is None else score_bool(model,validation)\n            elif fam=='BOOL_DECISION_TREE':\n                model=fit_bool_tree(fit,int(a['max_depth']));meta={};val=acc_logic_model(fam,model,validation)\n            else:continue\n            candidates.append({'algorithm':a,'model':model,'validation':val,'meta':meta})\n        if not candidates:raise RuntimeError('no LOGIC meta algorithms')\n        sel=max(candidates,key=lambda z:(z['validation'],z['algorithm']['family']=='ENUM_BOOLEAN',-(z['algorithm'].get('max_depth') or 99)))\n        a=sel['algorithm'];fam=a['family']\n        if fam=='ENUM_BOOLEAN':model,_=bounded_enum(revealed_train,int(a.get('max_depth',3)),float(a.get('refit_timeout_s',4.0)))\n        else:model=fit_bool_tree(revealed_train,int(a['max_depth']))\n        fresh=0.0 if model is None else acc_logic_model(fam,model,blind)\n        return {'organ':'LOGIC','selected_algorithm':a,'validation':sel['validation'],'model':model,'fresh_blind':fresh}\n"
+    },
+    {
+      "name": "meta_evolve_thinking",
+      "signature": "(self, fit_traces, validation_blind, revealed_traces, blind)",
+      "source": "    def meta_evolve_thinking(self,fit_traces,validation_blind,revealed_traces,blind):\n        candidates=[]\n        roles=sorted({r for t in fit_traces for r in t})\n        for a in self._algs('THINKING'):\n            fam=a['family'];threshold=float(a.get('threshold',.5))\n            if fam=='GLOBAL_PRECEDENCE':model=learn_edges(fit_traces,threshold,int(a.get('min_support',2)))\n            elif fam=='CONTEXTUAL_PRECEDENCE':\n                for marker in roles:\n                    p=[t for t in fit_traces if marker in t];q=[t for t in fit_traces if marker not in t]\n                    if len(p)<2 or len(q)<2:continue\n                    m={'kind':'CONTEXTUAL_PRECEDENCE','marker':marker,'present_edges':learn_edges(p,threshold,2),'absent_edges':learn_edges(q,threshold,2)}\n                    candidates.append({'algorithm':dict(a,marker=marker),'model':m,'validation':plan_acc(m,validation_blind)})\n                continue\n            else:continue\n            candidates.append({'algorithm':a,'model':model,'validation':plan_acc(model,validation_blind)})\n        if not candidates:raise RuntimeError('no THINKING meta algorithms')\n        sel=max(candidates,key=lambda z:(z['validation'],z['algorithm']['family']=='GLOBAL_PRECEDENCE',-len(json.dumps(z['model'],sort_keys=True))))\n        a=sel['algorithm'];th=float(a.get('threshold',.5))\n        if a['family']=='GLOBAL_PRECEDENCE':model=learn_edges(revealed_traces,th,int(a.get('min_support',2)))\n        else:\n            marker=a['marker'];p=[t for t in revealed_traces if marker in t];q=[t for t in revealed_traces if marker not in t]\n            model={'kind':'CONTEXTUAL_PRECEDENCE','marker':marker,'present_edges':learn_edges(p,th,2),'absent_edges':learn_edges(q,th,2)}\n        return {'organ':'THINKING','selected_algorithm':a,'validation':sel['validation'],'model':model,'fresh_blind':plan_acc(model,blind)}\n"
+    },
+    {
+      "name": "meta_grammar_extension_registry",
+      "signature": "(self)",
+      "source": "    def meta_grammar_extension_registry(self):return list(self.canonical_state.get('meta_grammar_extension_registry') or [])\n"
+    },
+    {
+      "name": "meta_grammar_snapshot",
+      "signature": "(self)",
+      "source": "    def meta_grammar_snapshot(self):\n        return {'enabled':bool(self.canonical_state.get('meta_grammar_self_extension_enabled')),'operators':[x.get('meta_grammar_operator_id') for x in self.meta_grammar_extension_registry()],'policy':self.canonical_state.get('meta_grammar_extension_policy')}\n"
+    },
+    {
+      "name": "organ_autoevolution_models",
+      "signature": "(self) -> 'Dict[str, Any]'",
+      "source": "    def organ_autoevolution_models(self)->Dict[str,Any]:\n        return dict(self.canonical_state.get('organ_autoevolution_registry') or {})\n"
+    },
+    {
+      "name": "organ_evolution_algorithm_bank",
+      "signature": "(self)",
+      "source": "    def organ_evolution_algorithm_bank(self):\n        return dict(self.canonical_state.get('organ_evolution_algorithm_bank') or {})\n"
+    },
+    {
+      "name": "propose_evolution_operation",
+      "signature": "(self, records, target_variant_id: 'str', target_task: 'str')",
+      "source": "    def propose_evolution_operation(self, records, target_variant_id:str, target_task:str):\n        return self.build_evolution_archive(records).propose_operation(target_variant_id,target_task)\n"
+    },
+    {
+      "name": "select_evolution_parent",
+      "signature": "(self, records, target_task: 'str', trait_preferences=None)",
+      "source": "    def select_evolution_parent(self, records, target_task:str, trait_preferences=None):\n        return self.build_evolution_archive(records).select_parent(target_task,trait_preferences)\n"
+    },
+    {
+      "name": "select_evolution_skills",
+      "signature": "(self, candidates, max_skills: 'int' = 8, **gate_kwargs)",
+      "source": "    def select_evolution_skills(self, candidates, max_skills:int=8, **gate_kwargs):\n        xs=[c if isinstance(c, SkillCandidate) else SkillCandidate(**c) for c in candidates]\n        return SkillAdmissionGate(**gate_kwargs).select_subset(xs,max_skills=max_skills)\n"
+    },
+    {
+      "name": "shadow_evolve_intelligence",
+      "signature": "(self, train: 'Sequence[Tuple[Mapping[str, float], str]]', blind: 'Sequence[Tuple[Mapping[str, float], str]]', capability='learned_strategy') -> 'Dict[str, Any]'",
+      "source": "    def shadow_evolve_intelligence(self,train:Sequence[Tuple[Mapping[str,float],str]],blind:Sequence[Tuple[Mapping[str,float],str]],capability='learned_strategy')->Dict[str,Any]:\n        min_n=int(self.canonical_state.get('organ_autoevolution_policy',{}).get('minimum_evidence',{}).get('INTELLIGENCE',16))\n        if len(train)<min_n:return {'verdict':'INSUFFICIENT_EVIDENCE','organ':'INTELLIGENCE'}\n        selected=6;tree=None\n        for d in range(1,7):\n            t=fit_tree(train,d)\n            if tree_acc(t,train)==1.0:selected=d;tree=t;break\n        if tree is None:tree=fit_tree(train,6)\n        tr=tree_acc(tree,train);bl=tree_acc(tree,blind)\n        base=sum(self.intelligence_strategy(x)==y for x,y in blind)/max(1,len(blind));restore=bl\n        verdict='SHADOW_SUPPORTED' if tr==1 and bl==1 and bl>base else 'WITHHOLD'\n        cid=self._store_candidate('INTELLIGENCE',capability,tree,tr,bl,base,restore,verdict)\n        return {'organ':'INTELLIGENCE','candidate_id':cid,'model':tree,'selected_depth':selected,'train':tr,'blind':bl,'ablation':base,'restore':restore,'verdict':verdict}\n"
+    },
+    {
+      "name": "shadow_evolve_logic",
+      "signature": "(self, train: 'Sequence[Tuple[Mapping[str, bool], bool]]', blind: 'Sequence[Tuple[Mapping[str, bool], bool]]', capability='learned_logic') -> 'Dict[str, Any]'",
+      "source": "    def shadow_evolve_logic(self,train:Sequence[Tuple[Mapping[str,bool],bool]],blind:Sequence[Tuple[Mapping[str,bool],bool]],capability='learned_logic')->Dict[str,Any]:\n        min_n=int(self.canonical_state.get('organ_autoevolution_policy',{}).get('minimum_evidence',{}).get('LOGIC',8))\n        if len(train)<min_n:return {'verdict':'INSUFFICIENT_EVIDENCE','organ':'LOGIC'}\n        model,meta=synthesize_logic(train,3);tr=score_bool(model,train);bl=score_bool(model,blind)\n        maj=sum(y for _,y in train)>=len(train)/2;abl=sum(bool(y)==bool(maj) for _,y in blind)/max(1,len(blind));restore=bl\n        verdict='SHADOW_SUPPORTED' if tr==1 and bl==1 and restore==1 and bl>abl else 'WITHHOLD'\n        cid=self._store_candidate('LOGIC',capability,model,tr,bl,abl,restore,verdict)\n        return {'organ':'LOGIC','candidate_id':cid,'model':model,'search':meta,'train':tr,'blind':bl,'ablation':abl,'restore':restore,'verdict':verdict}\n"
+    },
+    {
+      "name": "shadow_evolve_thinking",
+      "signature": "(self, successful_traces: 'Sequence[Sequence[str]]', blind: 'Sequence[Tuple[Sequence[Mapping[str, str]], Sequence[str]]]', capability='learned_planning') -> 'Dict[str, Any]'",
+      "source": "    def shadow_evolve_thinking(self,successful_traces:Sequence[Sequence[str]],blind:Sequence[Tuple[Sequence[Mapping[str,str]],Sequence[str]]],capability='learned_planning')->Dict[str,Any]:\n        min_n=int(self.canonical_state.get('organ_autoevolution_policy',{}).get('minimum_evidence',{}).get('THINKING',4))\n        if len(successful_traces)<min_n:return {'verdict':'INSUFFICIENT_EVIDENCE','organ':'THINKING'}\n        # threshold is selected only from revealed traces by maximum retained causal constraints.\n        choices=[]\n        for th in (.5,.6,.67,.75,.8,1.0):\n            ed=learn_edges(successful_traces,th); choices.append((len(ed),th,ed))\n        _,th,edges=max(choices,key=lambda z:(z[0],z[1]))\n        def acc(ed):\n            ok=0\n            for actions,expected in blind:\n                ids=plan_with_edges(actions,ed); rb={str(a['id']):str(a['role']) for a in actions};ok += [rb[i] for i in ids]==list(expected)\n            return ok/max(1,len(blind))\n        bl=acc(edges); base=acc(self.models['THINKING_PRECEDENCE_GRAPH']);restore=bl\n        verdict='SHADOW_SUPPORTED' if bl==1 and bl>base else 'WITHHOLD'\n        cid=self._store_candidate('THINKING',capability,edges,1.0,bl,base,restore,verdict)\n        return {'organ':'THINKING','candidate_id':cid,'model':edges,'selected_threshold':th,'train':1.0,'blind':bl,'ablation':base,'restore':restore,'verdict':verdict}\n"
+    },
+    {
+      "name": "synthesize_intelligence_algorithm_component",
+      "signature": "(self, fit, validation, revealed, blind)",
+      "source": "    def synthesize_intelligence_algorithm_component(self,fit,validation,revealed,blind):\n        cons=self._constructor('INPUT',1);var=signal_vars(cons['program_template'])[0]\n        keys=sorted(k for k in fit[0][0] if len({float(r[0].get(k,0.0)) for r in fit})>1)\n        cand=[]\n        for key in keys:\n            sk=fill_template(cons['program_template'],{var:key});p=[r for r in fit if float(r[0].get(key,0.0))>.5];q=[r for r in fit if float(r[0].get(key,0.0))<=.5]\n            if not p or not q:continue\n            a,_=best_intel_leaf(p,self._algs('INTELLIGENCE'));b,_=best_intel_leaf(q,self._algs('INTELLIGENCE'))\n            m={'op':'IF_SIGNAL','signal':sk['signal'],'then':a,'else':b};v=sum(predict_intel_component(m,x)==y for x,y in validation)/len(validation);cand.append((v,-len(cj(m)),key,m))\n        v,_,key,_=max(cand,key=lambda z:(z[0],z[1],z[2]));p=[r for r in revealed if float(r[0].get(key,0.0))>.5];q=[r for r in revealed if float(r[0].get(key,0.0))<=.5]\n        a,_=best_intel_leaf(p,self._algs('INTELLIGENCE'));b,_=best_intel_leaf(q,self._algs('INTELLIGENCE'));m={'op':'IF_SIGNAL','signal':{'source':'INPUT','key':key,'threshold':.5},'then':a,'else':b};fresh=sum(predict_intel_component(m,x)==y for x,y in blind)/len(blind)\n        return {'constructor_id':cons['constructor_id'],'binding':{var:key},'validation':v,'model':m,'fresh_blind':fresh}\n"
+    },
+    {
+      "name": "synthesize_intelligence_with_extended_meta_grammar",
+      "signature": "(self, fit, val, revealed, blind)",
+      "source": "    def synthesize_intelligence_with_extended_meta_grammar(self,fit,val,revealed,blind):\n        self._operator('LINEAR_THRESHOLD');return mg.synth_intel_predicate(fit,val,revealed,blind,self.canonical_state['organ_evolution_algorithm_bank']['INTELLIGENCE'])\n"
+    },
+    {
+      "name": "synthesize_logic_algorithm_component",
+      "signature": "(self, fit, validation, revealed, blind)",
+      "source": "    def synthesize_logic_algorithm_component(self,fit,validation,revealed,blind):\n        cons=self._constructor('INPUT',1);var=signal_vars(cons['program_template'])[0]\n        keys=sorted(k for k in fit[0][0] if len({bool(r[0].get(k,False)) for r in fit})>1)\n        cand=[]\n        for key in keys:\n            sk=fill_template(cons['program_template'],{var:key})\n            p=[r for r in fit if bool(r[0].get(key,False))];q=[r for r in fit if not bool(r[0].get(key,False))]\n            if not p or not q:continue\n            a,_=best_logic_leaf(p,self._algs('LOGIC'));b,_=best_logic_leaf(q,self._algs('LOGIC'))\n            m={'op':'IF_SIGNAL','signal':sk['signal'],'then':a,'else':b}\n            v=sum(predict_logic_component(m,x)==y for x,y in validation)/len(validation)\n            cand.append((v,-len(cj(m)),key,m))\n        v,_,key,_=max(cand,key=lambda z:(z[0],z[1],z[2]))\n        # refit selected constructor on all revealed evidence\n        p=[r for r in revealed if bool(r[0].get(key,False))];q=[r for r in revealed if not bool(r[0].get(key,False))]\n        a,_=best_logic_leaf(p,self._algs('LOGIC'));b,_=best_logic_leaf(q,self._algs('LOGIC'))\n        m={'op':'IF_SIGNAL','signal':{'source':'INPUT','key':key,'threshold':.5},'then':a,'else':b}\n        fresh=sum(predict_logic_component(m,x)==y for x,y in blind)/len(blind)\n        return {'constructor_id':cons['constructor_id'],'binding':{var:key},'validation':v,'model':m,'fresh_blind':fresh}\n"
+    },
+    {
+      "name": "synthesize_logic_with_extended_meta_grammar",
+      "signature": "(self, fit, val, revealed, blind)",
+      "source": "    def synthesize_logic_with_extended_meta_grammar(self,fit,val,revealed,blind):\n        self._operator('BOOL_TABLE');return mg.synth_logic_predicate(fit,val,revealed,blind,self.canonical_state['organ_evolution_algorithm_bank']['LOGIC'])\n"
+    },
+    {
+      "name": "synthesize_thinking_algorithm_component",
+      "signature": "(self, fit, validation, revealed, blind)",
+      "source": "    def synthesize_thinking_algorithm_component(self,fit,validation,revealed,blind):\n        cons=self._constructor('EPISODE_CONTEXT',2);vars=signal_vars(cons['program_template']);keys=sorted(k for k in fit[0][0] if len({float(e[0].get(k,0.0)) for e in fit})>1)\n        cand=[]\n        for assignment in itertools.permutations(keys,len(vars)):\n            bindings=dict(zip(vars,assignment));sk=fill_template(cons['program_template'],bindings);m=fit_thinking_skeleton(sk,fit,self._algs('THINKING'))\n            if m is None:continue\n            v=thinking_component_acc(m,validation);cand.append((v,-len(cj(m)),assignment,m))\n        v,_,assignment,_=max(cand,key=lambda z:(z[0],z[1],z[2]));bindings=dict(zip(vars,assignment));sk=fill_template(cons['program_template'],bindings);m=fit_thinking_skeleton(sk,revealed,self._algs('THINKING'));fresh=thinking_component_acc(m,blind)\n        return {'constructor_id':cons['constructor_id'],'binding':bindings,'validation':v,'model':m,'fresh_blind':fresh}\n"
+    },
+    {
+      "name": "synthesize_thinking_with_extended_meta_grammar",
+      "signature": "(self, fit, val, revealed, blind)",
+      "source": "    def synthesize_thinking_with_extended_meta_grammar(self,fit,val,revealed,blind):\n        self._operator('LINEAR_THRESHOLD');return mg.synth_thinking_predicate(fit,val,revealed,blind,self.canonical_state['organ_evolution_algorithm_bank']['THINKING'])\n"
+    },
+    {
+      "name": "thinking_evolved_plan",
+      "signature": "(self, actions: 'Sequence[Mapping[str, str]]') -> 'list[str]'",
+      "source": "    def thinking_evolved_plan(self,actions:Sequence[Mapping[str,str]])->list[str]:\n        b=self._bank('THINKING')\n        if not b:return super().thinking_evolved_plan(actions)\n        roles=[str(a['role']) for a in actions];e=_choose(b,roles);return plan_with_edges(actions,e['model'])\n"
+    }
+  ],
+  "mg_module": "yado_meta_grammar_runtime_native_v1",
+  "schema": "yado.g2.v4.meta_grammar_source_probe.v1",
+  "status": "PASS_READ_ONLY_SOURCE_PROBE",
+  "synth_intel_predicate_source": "def synth_intel_predicate(fit,val,revealed,blind,algs):\n    candidates=[]\n    for p in _linear_candidates(fit):\n        left=[r for r in fit if _predicate(p,r[0])]; right=[r for r in fit if not _predicate(p,r[0])]\n        if not left or not right:continue\n        lmodel,_=best_intel_leaf(left,algs); rmodel,_=best_intel_leaf(right,algs)\n        model={'op':'IF_PREDICATE','predicate_program':p,'then':lmodel,'else':rmodel}\n        candidates.append((_intel_acc(model,val),p))\n    if not candidates:return {'status':'WITHHOLD'}\n    validation,p=max(candidates,key=lambda z:z[0])\n    left=[r for r in revealed if _predicate(p,r[0])]; right=[r for r in revealed if not _predicate(p,r[0])]\n    lmodel,_=best_intel_leaf(left,algs); rmodel,_=best_intel_leaf(right,algs)\n    model={'op':'IF_PREDICATE','predicate_program':p,'then':lmodel,'else':rmodel}\n    return {'status':'SUPPORTED','grammar_extension_id':_gid(p),'predicate_program':p,'model':model,\n            'validation':validation,'fresh_blind':_intel_acc(model,blind)}\n"
+}
