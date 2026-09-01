@@ -1,0 +1,38 @@
+{
+  "classes": {
+    "BoundedRuleSandbox": {
+      "module": "yado_core_v2_1",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_1.py",
+      "sha256": "4847c3dcf837f8f58234626a64be09e98401ea79aac8981dd2f2306ae8a50c10",
+      "source": "class BoundedRuleSandbox:\n    \"\"\"Pure-data executor. No eval/exec, filesystem, subprocess, imports, or network.\"\"\"\n\n    ALLOWED_OPS = {\"EQ\", \"EXISTS\", \"TRUTHY\", \"FALSY\", \"CONTAINS\", \"TEXT_HAS_TOKEN\"}\n    MAX_RULES = 12\n    MAX_PREDICATES_PER_RULE = 4\n    MAX_TEXT_LENGTH = 16_000\n\n    @staticmethod\n    def _tokenize(text: str) -> List[str]:\n        return re.findall(r\"[^\\W_]+\", text.lower(), flags=re.UNICODE)\n\n    @classmethod\n    def _match(cls, predicate: RulePredicate, payload: Mapping[str, Any]) -> bool:\n        if predicate.op not in cls.ALLOWED_OPS:\n            raise ValueError(f\"unsupported predicate op: {predicate.op}\")\n        if predicate.op == \"EXISTS\":\n            return predicate.field in payload\n        value = payload.get(predicate.field)\n        if predicate.op == \"EQ\":\n            return value == predicate.value\n        if predicate.op == \"TRUTHY\":\n            return bool(value)\n        if predicate.op == \"FALSY\":\n            return not bool(value)\n        if predicate.op == \"CONTAINS\":\n            try:\n                return predicate.value in value\n            except TypeError:\n                return False\n        if predicate.op == \"TEXT_HAS_TOKEN\":\n            if not isinstance(value, str) or len(value) > cls.MAX_TEXT_LENGTH:\n                return False\n            return str(predicate.value).lower() in cls._tokenize(value)\n        return False\n\n    @classmethod\n    def validate(cls, program: RuleProgram) -> None:\n        if len(program.rules) > cls.MAX_RULES:\n            raise ValueError(\"program exceeds MAX_RULES\")\n        for rule in program.rules:\n            if not rule.predicates or len(rule.predicates) > cls.MAX_PREDICATES_PER_RULE:\n                raise ValueError(\"invalid predicate count\")\n            for predicate in rule.predicates:\n                if predicate.op not in cls.ALLOWED_OPS:\n                    raise ValueError(f\"unsupported predicate op: {predicate.op}\")\n\n    @classmethod\n    def execute(cls, program: RuleProgram, payload: Mapping[str, Any], ablated: bool = False) -> Any:\n        cls.validate(program)\n        if ablated:\n            return program.default_output\n        for rule in program.rules:\n            if all(cls._match(predicate, payload) for predicate in rule.predicates):\n                return rule.output\n        return program.default_output"
+    },
+    "RulePredicate": {
+      "module": "yado_core_v2_1",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_1.py",
+      "sha256": "4847c3dcf837f8f58234626a64be09e98401ea79aac8981dd2f2306ae8a50c10",
+      "source": "class RulePredicate:\n    op: str\n    field: str\n    value: Any"
+    },
+    "RuleProgram": {
+      "module": "yado_core_v2_1",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_1.py",
+      "sha256": "4847c3dcf837f8f58234626a64be09e98401ea79aac8981dd2f2306ae8a50c10",
+      "source": "class RuleProgram:\n    program_id: str\n    target_capability: str\n    target_organ: str\n    rules: List[RuleSpec]\n    default_output: Any\n    source_digest: str\n    training_count: int\n    status: str = \"SHADOW\"\n    created_at: str = field(default_factory=lambda: utc_now().isoformat())\n\n    def digest(self) -> str:\n        payload = {\n            \"program_id\": self.program_id,\n            \"target_capability\": self.target_capability,\n            \"target_organ\": self.target_organ,\n            \"rules\": [\n                {\n                    \"predicates\": [asdict(p) for p in rule.predicates],\n                    \"output\": rule.output,\n                    \"support\": rule.support,\n                    \"confidence\": rule.confidence,\n                }\n                for rule in self.rules\n            ],\n            \"default_output\": self.default_output,\n            \"source_digest\": self.source_digest,\n            \"training_count\": self.training_count,\n        }\n        return hashlib.sha256(canonical_json(payload).encode(\"utf-8\")).hexdigest()"
+    },
+    "RuleSpec": {
+      "module": "yado_core_v2_1",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_1.py",
+      "sha256": "4847c3dcf837f8f58234626a64be09e98401ea79aac8981dd2f2306ae8a50c10",
+      "source": "class RuleSpec:\n    predicates: List[RulePredicate]\n    output: Any\n    support: int\n    confidence: float"
+    }
+  },
+  "function_refs": [
+    {
+      "module": "yado_core_v2_2",
+      "name": "_mechanism_kind",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_2.py",
+      "source": "def _mechanism_kind(program: Mechanism) -> str:\n    if isinstance(program, RuleProgram):\n        return \"RULE_PROGRAM\"\n    return program.kind"
+    }
+  ],
+  "schema": "yado.g2.rule_program_executor_source_probe.v1",
+  "status": "PASS"
+}
