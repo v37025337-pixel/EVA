@@ -18,7 +18,7 @@ from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesize
 from yado_bounded_program_repair_v2 import BoundedProgramRepairV1
 from yado_bounded_scientific_data_reasoner_v1 import BoundedScientificDataReasonerV1
 from yado_bounded_adaptive_contingent_planner_v1 import BoundedAdaptiveContingentPlannerV1, ContingentStage
-from yado_bounded_compositional_logic_v1 import BoundedCompositionalLogicV1
+from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
 from yado_bounded_compositional_schema_router_v1 import BoundedCompositionalSchemaRouterV1
 from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
 
@@ -50,7 +50,7 @@ class UnifiedYADOCoreV1:
         self.bounded_program_repair=BoundedProgramRepairV1
         self.scientific_data_reasoner=BoundedScientificDataReasonerV1
         self.adaptive_contingent_planner=BoundedAdaptiveContingentPlannerV1
-        self.compositional_logic=BoundedCompositionalLogicV1
+        self.compositional_logic=BudgetAdaptiveCompositionalLogicV2
         self.compositional_schema_router=BoundedCompositionalSchemaRouterV1
         self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
         validate_ledger_v2(self.ledger)
@@ -176,7 +176,7 @@ class UnifiedYADOCoreV1:
     def predict_symmetric_logic(self,model:dict[str,Any],x:dict[str,Any])->Any:
         return self.compositional_logic.predict_symmetric_boolean(model,x)
 
-    def fit_polynomial_logic(self,rows:list[dict[str,Any]],max_degree:int=3)->dict[str,Any]:
+    def fit_polynomial_logic(self,rows:list[dict[str,Any]],max_degree:int=8)->dict[str,Any]:
         return self.compositional_logic.fit_polynomial(rows,max_degree=max_degree)
 
     def predict_polynomial_logic(self,model:dict[str,Any],x:float,y:float)->Any:

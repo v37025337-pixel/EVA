@@ -3,11 +3,11 @@
     "runtime/yado_bounded_adaptive_contingent_planner_v1.py",
     "runtime/yado_bounded_capability_router_v1.py",
     "runtime/yado_bounded_capability_set_coordinator_v1.py",
-    "runtime/yado_bounded_compositional_logic_v1.py",
     "runtime/yado_bounded_compositional_schema_router_v1.py",
     "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
     "runtime/yado_bounded_program_repair_v2.py",
     "runtime/yado_bounded_scientific_data_reasoner_v1.py",
+    "runtime/yado_budget_adaptive_compositional_logic_v2.py",
     "runtime/yado_budgeted_stage_policy_v1.py",
     "runtime/yado_conjunctive_rule_inducer_v1.py",
     "runtime/yado_core_audit_invariant_self_evolution_v1.py",
@@ -45,7 +45,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "b40d81585427ecee28a407d6b220f838b514047263371dc343ec52699f7df6ff",
+  "core_digest": "2a9978a701d96d6a91cc32d5f94c2a88325b20fc3aa7efbe4df0207b847c2ce8",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -99,7 +99,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "LTI_ARCHITECTURAL_CEILING_RECHECK_V5",
+  "current_frontier": "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V2",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -206,7 +206,30 @@
       "symmetric_boolean": true
     },
     "selected_strategy": "COMPOSITIONAL_LOGIC_D3",
-    "source_sha256": "932a45f2848f251a62cb4848a8f32bfcf47841f9d484747d91aaa468858611f3"
+    "source_sha256": "932a45f2848f251a62cb4848a8f32bfcf47841f9d484747d91aaa468858611f3",
+    "status": "SUPERSEDED_BY_LOGIC_PLATEAU_V2"
+  },
+  "logic_plateau_v2": {
+    "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+    "candidate_digest": "7005723a7b15e1c9425902e199f6a467ea722f9d41ed684d9c3c16531fdeef26",
+    "causal": {
+      "old_d4_score": 0.0,
+      "old_width20_score": 0.0,
+      "poly_v2": true,
+      "width_v2": true
+    },
+    "component_id": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+    "compute_contract": {
+      "max_boolean_cells": 262144,
+      "max_polynomial_rows": 256,
+      "max_polynomial_terms": 20
+    },
+    "fresh_admission_receipt_sha256": "2a52ee891bae11dd96756faae9e2a168e636742ba4f59352232809dc4f164cf2",
+    "fresh_score": 1.0,
+    "gate_run_id": "33476639634",
+    "mode": "ACTIVE_FIXED_ARCHITECTURE_WORK_BUDGET_ADAPTIVE_LOGIC",
+    "source_sha256": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
+    "supersedes": "ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1"
   },
   "mathematical_reasoning": {
     "candidate_digest": "a47a32ac13a65cbf0062a439cd238f313be7c30d1faac9c83162a80e51423f19",
@@ -258,7 +281,7 @@
       "active_components": [
         "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
         "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
-        "ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1",
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
         "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1"
       ],
       "plane_id": "LOGIC",
@@ -266,9 +289,12 @@
         "bounded_conjunction",
         "bounded_semantic_expression_synthesis",
         "bounded_symmetric_boolean_induction",
+        "compute_budget_fail_closed_logic",
         "exact_low_degree_polynomial_induction",
         "fresh_rule_induction",
-        "relation_policy"
+        "relation_policy",
+        "term_budget_exact_polynomial_induction",
+        "work_budget_adaptive_symmetric_logic"
       ]
     },
     {
@@ -391,7 +417,7 @@
     "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
   },
-  "runtime_sha256": "b2888e64e728e7e90059ae2c956a4ef824eb3b31b2ebc42825ca0820aeb65068",
+  "runtime_sha256": "a1c0e344572109b65d4a723df3be9d90b688fd4af0c3004f0c255ecafcefe278",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
@@ -409,6 +435,14 @@
   "semantic_boundary": "UNIFIED SOFTWARE COGNITIVE KERNEL CANDIDATE. LEGACY CONSCIOUSNESS EXPERIMENTS ARE HISTORICAL FUNCTIONAL EVIDENCE ONLY; THIS IS NOT A CLAIM OF SUBJECTIVE CONSCIOUSNESS OR AGI.",
   "shadow_runtime_sources": [],
   "source_generation_head_digest": "e512e796a91f616234286fb0e7a42058a578829798201e46051e8953bdfde25c",
+  "superseded_components": [
+    {
+      "component_id": "ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1",
+      "historical_evidence_retained": true,
+      "reason": "PLATEAU_CONTRACT_FRONTIER_REPLACED_FIXED_DIMENSION_CAPS_WITH_TOTAL_WORK_BUDGETS",
+      "superseded_by": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+    }
+  ],
   "thinking_ceiling": {
     "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
     "candidate_digest": "70a20d5cf002e68fa6849fa5774ce438c010e8463a3bc93edc50c9046c108deb",
