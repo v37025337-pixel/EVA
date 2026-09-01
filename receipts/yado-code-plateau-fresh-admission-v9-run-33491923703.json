@@ -1,0 +1,101 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "candidate_digest": "8e05c5a110cdf1bbcda78ecacbda0fea42338f50c6e08eb670d51709e15c3f97",
+  "candidate_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+  "canonical_mutation": false,
+  "causal": {
+    "ambiguity_ablation": true,
+    "v10_committed": true,
+    "v11_reason": "AMBIGUOUS_UNSEEN_THRESHOLD"
+  },
+  "checks": {
+    "architecture_immutable": true,
+    "candidate_source_exact": true,
+    "canonical_head_immutable": true,
+    "causal_ambiguity_ablation": true,
+    "fresh_all_green": true,
+    "fresh_score_one": true,
+    "multi_function_rejected": true,
+    "source_no_network_imports": true,
+    "unsafe_program_rejected": true
+  },
+  "details": {
+    "AFFINE_NO_FALSE_WITHHOLD": {
+      "ambiguity_checked": true,
+      "conditional_depth": 2,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "search_nodes": 1,
+      "source": "def f(x):\n    return x * 3 + 2\n"
+    },
+    "AMBIGUOUS_GAP_WITHHOLD_A": {
+      "ambiguity": {
+        "alternative_threshold": 2,
+        "ambiguous": true,
+        "arg": "x",
+        "outputs": [
+          7,
+          2
+        ],
+        "probe_value": 2,
+        "threshold": 1
+      },
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "source": null
+    },
+    "AMBIGUOUS_GAP_WITHHOLD_B": {
+      "ambiguity": {
+        "alternative_threshold": 1,
+        "ambiguous": true,
+        "arg": "x",
+        "outputs": [
+          0,
+          2
+        ],
+        "probe_value": 1,
+        "threshold": 0
+      },
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "source": null
+    },
+    "RESOLVED_GAP_COMMIT_A": {
+      "ambiguity_checked": true,
+      "conditional_depth": 2,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "search_nodes": 49,
+      "source": "def f(x):\n    return x * 2 if x <= -4 else x if x <= 3 else x * 3 + 1\n"
+    },
+    "RESOLVED_NESTED_COMMIT": {
+      "ambiguity_checked": true,
+      "conditional_depth": 2,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "search_nodes": 100,
+      "source": "def f(x):\n    return x * -2 if x <= -3 else x * 2 if x <= 1 else x * 4 + 1\n"
+    },
+    "TWO_EDIT_NO_FALSE_WITHHOLD": {
+      "ambiguity_checked": true,
+      "candidate_count": 1,
+      "edit_depth": 2,
+      "repair_mode": "BASE_PORTFOLIO",
+      "source": "def f(x, y):\n    return x + y + 3\n",
+      "tried": 815
+    }
+  },
+  "fresh_families": {
+    "AFFINE_NO_FALSE_WITHHOLD": 1.0,
+    "AMBIGUOUS_GAP_WITHHOLD_A": 1.0,
+    "AMBIGUOUS_GAP_WITHHOLD_B": 1.0,
+    "RESOLVED_GAP_COMMIT_A": 1.0,
+    "RESOLVED_NESTED_COMMIT": 1.0,
+    "TWO_EDIT_NO_FALSE_WITHHOLD": 1.0
+  },
+  "fresh_score": 1.0,
+  "g3_genesis_performed": false,
+  "next_required_capability": "CODE_PLATEAU_CANONICAL_INTEGRATION_V2",
+  "promotion_applied": false,
+  "receipt_sha256": "5514f9395df899639dc9abd007905d8f30ec6b552969b0b2fed16f8bae392166",
+  "schema": "yado.g2.code_plateau_fresh_admission.v9",
+  "semantic_boundary": "INDEPENDENT FRESH ADMISSION OF AMBIGUITY-AWARE CODE REPAIR. AMBIGUOUS TRAIN-EQUIVALENT THRESHOLDS MUST WITHHOLD; ADDED BOUNDARY EVIDENCE MUST RESTORE EXECUTABLE REPAIR.",
+  "status": "PASS_CODE_PLATEAU_FRESH_ADMISSION_V9"
+}
