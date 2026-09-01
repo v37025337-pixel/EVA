@@ -21,7 +21,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "019d19749768e0c80be8a764cc33ad92618570662a0ad9fab024c48a5153832f",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 140,
+  "event_count": 141,
   "events": [
     {
       "canonical_mutation": false,
@@ -2329,14 +2329,30 @@
       "source_digest": "7cc9df0cf90c708cad53e9e4938d53914174ef2d60fcf453f8c7af9eac13f1a1",
       "source_path": "receipts/yado-intelligence-multi-dispatch-canonical-integration-v1-run-33466562740.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_ARCHITECTURAL_CEILING_RECHECK_V5",
+      "effect": "ALL_TARGET=True; LOGIC=1.000000; THINKING=1.000000; INTELLIGENCE=1.000000; NEXT=LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V1",
+      "event_hash": "04f56063eee06240a7e18651243cbe2c13c05d601a271b2a7d6881c7a01cbbeb",
+      "event_id": "E0141_G2_LTI_CEILING_RECHECK_V5",
+      "event_type": "FIXED_ARCHITECTURE_FULL_LTI_CEILING_RECHECK",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 140,
+      "parent_event_hash": "293c200fd572821f02edfb87786cede4c879dd32afd8ca16c98286d2c4628d76",
+      "promotion_applied": false,
+      "run_id": "33466663993",
+      "source_digest": "41c1eef5335e3fef36aee32419ee955ad468654e2ad27ce67cd75829bb940947",
+      "source_path": "receipts/yado-g2-lti-architectural-ceiling-recheck-v5-run-33466663993.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "4019a36981eb81d2c7ae7bddfa57a0e75c216461f327d50ebc441735dce44ceb",
+  "ledger_digest": "73def2940e1035a1b533d2680823aa27b4f8b6da85994be701a70c4e93c365fc",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "LTI_ARCHITECTURAL_CEILING_RECHECK_V5"
+    "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -2365,5 +2381,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "293c200fd572821f02edfb87786cede4c879dd32afd8ca16c98286d2c4628d76"
+  "tail_event_hash": "04f56063eee06240a7e18651243cbe2c13c05d601a271b2a7d6881c7a01cbbeb"
 }
