@@ -1,0 +1,1403 @@
+{
+  "algorithm_bank": {
+    "INTELLIGENCE": [
+      {
+        "family": "CART_AXIS",
+        "max_depth": 1
+      },
+      {
+        "family": "CART_AXIS",
+        "max_depth": 2
+      },
+      {
+        "family": "CART_AXIS",
+        "max_depth": 3
+      },
+      {
+        "family": "CART_AXIS",
+        "max_depth": 4
+      },
+      {
+        "family": "CART_AXIS",
+        "max_depth": 5
+      },
+      {
+        "family": "CART_AXIS",
+        "max_depth": 6
+      },
+      {
+        "family": "CART_AXIS",
+        "max_depth": 7
+      },
+      {
+        "family": "LINEAR_SCORE_SEARCH",
+        "weight_basis": [
+          -1,
+          0,
+          1
+        ]
+      }
+    ],
+    "LOGIC": [
+      {
+        "family": "ENUM_BOOLEAN",
+        "max_depth": 3,
+        "refit_timeout_s": 4.0,
+        "semantic_dedup": true,
+        "timeout_s": 1.5
+      },
+      {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 2
+      },
+      {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 3
+      },
+      {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 4
+      },
+      {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 5
+      },
+      {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 6
+      },
+      {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 7
+      },
+      {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 8
+      }
+    ],
+    "THINKING": [
+      {
+        "family": "GLOBAL_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.5
+      },
+      {
+        "family": "GLOBAL_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.6
+      },
+      {
+        "family": "GLOBAL_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.67
+      },
+      {
+        "family": "GLOBAL_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.75
+      },
+      {
+        "family": "GLOBAL_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.8
+      },
+      {
+        "family": "GLOBAL_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 1.0
+      },
+      {
+        "family": "CONTEXTUAL_PRECEDENCE",
+        "min_support": 2,
+        "partition": "ROLE_PRESENCE",
+        "threshold": 0.5
+      },
+      {
+        "family": "CONTEXTUAL_PRECEDENCE",
+        "min_support": 2,
+        "partition": "ROLE_PRESENCE",
+        "threshold": 0.6
+      },
+      {
+        "family": "CONTEXTUAL_PRECEDENCE",
+        "min_support": 2,
+        "partition": "ROLE_PRESENCE",
+        "threshold": 0.67
+      },
+      {
+        "family": "CONTEXTUAL_PRECEDENCE",
+        "min_support": 2,
+        "partition": "ROLE_PRESENCE",
+        "threshold": 0.75
+      },
+      {
+        "family": "CONTEXTUAL_PRECEDENCE",
+        "min_support": 2,
+        "partition": "ROLE_PRESENCE",
+        "threshold": 0.8
+      },
+      {
+        "family": "CONTEXTUAL_PRECEDENCE",
+        "min_support": 2,
+        "partition": "ROLE_PRESENCE",
+        "threshold": 1.0
+      }
+    ]
+  },
+  "algorithm_bank_counts": {
+    "INTELLIGENCE": 8,
+    "LOGIC": 8,
+    "THINKING": 12
+  },
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "checks": {
+    "constructor_registry_nonempty": true,
+    "extended_meta_method_present": true,
+    "frontier_match": true,
+    "g3_not_started": true,
+    "head_is_g2": true,
+    "head_ledger_digest_match": true,
+    "intelligence_bank_nonempty": true,
+    "ledger_valid": true,
+    "meta_evolution_enabled": true,
+    "meta_grammar_enabled": true,
+    "meta_grammar_module_present": true,
+    "package_reconstruction_metadata_present": true
+  },
+  "constructor_registry": [
+    {
+      "constraints": [
+        {
+          "a": "$SIGNAL_0",
+          "b": "$SIGNAL_1",
+          "type": "NOT_EQUAL"
+        }
+      ],
+      "constructor_id": "C_65cc0f771747",
+      "observed_sources": [
+        "THINKING"
+      ],
+      "program_template": {
+        "else": {
+          "else": {
+            "op": "LEAF"
+          },
+          "op": "IF_SIGNAL",
+          "signal": {
+            "key": "$SIGNAL_0",
+            "source": "EPISODE_CONTEXT",
+            "threshold": 0.5
+          },
+          "then": {
+            "op": "LEAF"
+          }
+        },
+        "op": "IF_SIGNAL",
+        "signal": {
+          "key": "$SIGNAL_1",
+          "source": "EPISODE_CONTEXT",
+          "threshold": 0.5
+        },
+        "then": {
+          "op": "LEAF"
+        }
+      },
+      "support_count": 2
+    },
+    {
+      "constraints": [],
+      "constructor_id": "C_fac3b284e56b",
+      "observed_sources": [
+        "INTELLIGENCE",
+        "LOGIC"
+      ],
+      "program_template": {
+        "else": {
+          "op": "LEAF"
+        },
+        "op": "IF_SIGNAL",
+        "signal": {
+          "key": "$SIGNAL_0",
+          "source": "INPUT",
+          "threshold": 0.5
+        },
+        "then": {
+          "op": "LEAF"
+        }
+      },
+      "support_count": 4
+    }
+  ],
+  "current_frontier": "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V4",
+  "current_generation": "G2_CANDIDATE_TRCG_V1",
+  "generation_transition": false,
+  "meta_evolution_snapshot": {
+    "algorithm_counts": {
+      "INTELLIGENCE": 8,
+      "LOGIC": 8,
+      "THINKING": 12
+    },
+    "enabled": true,
+    "profile": "YADO_V3_0_RC8_VERIFIED_EXTERNAL_COGNITIVE_RUNTIME",
+    "selection_policy": {
+      "algorithm_selection": "REVEALED_VALIDATION_ONLY",
+      "durable_scope": "LOCAL_PROJECT_ARTIFACT",
+      "fresh_blind_used_for_selection": false,
+      "rollback_required": true,
+      "shadow_first": true,
+      "trigger": "EVOLUTION_ALGORITHM_UNDERPERFORMS_ON_REVEALED_VALIDATION",
+      "unrestricted_self_code_rewrite": false
+    }
+  },
+  "meta_grammar_extension_registry": [
+    {
+      "derived_from": [
+        {
+          "grammar_extension_id": "G_667036ab06dc",
+          "organ": "LOGIC",
+          "predicate_kind": "BOOL_TABLE",
+          "round": "cycle1"
+        },
+        {
+          "grammar_extension_id": "G_00df267b2e62",
+          "organ": "THINKING",
+          "predicate_kind": "LINEAR_THRESHOLD",
+          "round": "cycle1"
+        },
+        {
+          "grammar_extension_id": "G_00df267b2e62",
+          "organ": "INTELLIGENCE",
+          "predicate_kind": "LINEAR_THRESHOLD",
+          "round": "cycle1"
+        },
+        {
+          "grammar_extension_id": "G_667036ab06dc",
+          "organ": "LOGIC",
+          "predicate_kind": "BOOL_TABLE",
+          "round": "cycle2"
+        },
+        {
+          "grammar_extension_id": "G_00df267b2e62",
+          "organ": "THINKING",
+          "predicate_kind": "LINEAR_THRESHOLD",
+          "round": "cycle2"
+        },
+        {
+          "grammar_extension_id": "G_00df267b2e62",
+          "organ": "INTELLIGENCE",
+          "predicate_kind": "LINEAR_THRESHOLD",
+          "round": "cycle2"
+        }
+      ],
+      "meta_grammar_operator_id": "MG_1d259d9fa9ea",
+      "observed_organs": [
+        "INTELLIGENCE",
+        "LOGIC",
+        "THINKING"
+      ],
+      "predicate_program_types": [
+        "BOOL_TABLE",
+        "LINEAR_THRESHOLD"
+      ],
+      "program_template": {
+        "else": {
+          "op": "LEAF"
+        },
+        "op": "IF_PREDICATE",
+        "predicate_program": "$PREDICATE_PROGRAM",
+        "then": {
+          "op": "LEAF"
+        }
+      },
+      "selection_contract": "REVEALED_TRAIN_VALIDATION_ONLY",
+      "semantic": "ROUTE_EXISTING_EVOLUTION_ALGORITHMS_BY_EVIDENCE_INVENTED_PREDICATE",
+      "support_count": 6
+    }
+  ],
+  "meta_grammar_module_sha256": "3ec6f306cbe05858cea834fa25200a1ab4fbd9b467019fd3f4d1256cd9788200",
+  "meta_grammar_snapshot": {
+    "enabled": true,
+    "operators": [
+      "MG_1d259d9fa9ea"
+    ],
+    "policy": {
+      "durable_scope": "LOCAL_PROJECT_ARTIFACT",
+      "fresh_blind_used_for_selection": false,
+      "rollback_required": true,
+      "selection": "REVEALED_TRAIN_VALIDATION_ONLY",
+      "shadow_first": true,
+      "trigger": "RC5_CONSTRUCTOR_LANGUAGE_VALIDATION_BELOW_1",
+      "unrestricted_self_code_rewrite": false
+    }
+  },
+  "method_owners": {
+    "durable_commit_evolution_bundle": {
+      "owner_class": "UnifiedYADOKernelV30RC7DeepIntegrity",
+      "owner_module": "yado_core_v3_0_rc7_deep_integrity",
+      "signature": "(self, bundle: 'Mapping[str, Mapping[str, Any]]', gate: 'Mapping[str, Any]') -> 'dict[str, Any]'",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py"
+    },
+    "meta_evolve_intelligence": {
+      "owner_class": "UnifiedYADOKernelV30RC4MetaAutoEvolution",
+      "owner_module": "yado_core_v3_0_rc4_meta_autoevolution",
+      "signature": "(self, fit, validation, revealed_train, blind)",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc4_meta_autoevolution.py"
+    },
+    "meta_grammar_extension_registry": {
+      "owner_class": "UnifiedYADOKernelV30RC6MetaGrammar",
+      "owner_module": "yado_core_v3_0_rc6_meta_grammar",
+      "signature": "(self)",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py"
+    },
+    "meta_grammar_snapshot": {
+      "owner_class": "UnifiedYADOKernelV30RC6MetaGrammar",
+      "owner_module": "yado_core_v3_0_rc6_meta_grammar",
+      "signature": "(self)",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py"
+    },
+    "propose_evolution_operation": {
+      "owner_class": "UnifiedYADOKernelV30RC7DeepIntegrity",
+      "owner_module": "yado_core_v3_0_rc7_deep_integrity",
+      "signature": "(self, records, target_variant_id: 'str', target_task: 'str')",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py"
+    },
+    "synthesize_intelligence_algorithm_component": {
+      "owner_class": "UnifiedYADOKernelV30RC5AlgorithmGenesis",
+      "owner_module": "yado_core_v3_0_rc5_algorithm_genesis",
+      "signature": "(self, fit, validation, revealed, blind)",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc5_algorithm_genesis.py"
+    },
+    "synthesize_intelligence_with_extended_meta_grammar": {
+      "owner_class": "UnifiedYADOKernelV30RC6MetaGrammar",
+      "owner_module": "yado_core_v3_0_rc6_meta_grammar",
+      "signature": "(self, fit, val, revealed, blind)",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py"
+    }
+  },
+  "mro": [
+    {
+      "class": "UnifiedYADOKernelV30RC8ExternalCognitive",
+      "module": "yado_core_v3_0_rc8_external_cognitive",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC7DeepIntegrity",
+      "module": "yado_core_v3_0_rc7_deep_integrity",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC6R6SchemaAdaptation",
+      "module": "yado_core_v3_0_rc6_r6_schema_adaptation",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_r6_schema_adaptation.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC6R5OpenResources",
+      "module": "yado_core_v3_0_rc6_r5_open_resources",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_r5_open_resources.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC6R4RealExternal",
+      "module": "yado_core_v3_0_rc6_r4_real_external",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_r4_real_external.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC6R3RealExternal",
+      "module": "yado_core_v3_0_rc6_r3_real_external",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_r3_real_external.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC6R2NativeExternal",
+      "module": "yado_external_bridge_native_v1",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_external_bridge_native_v1.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC6R1RealExternal",
+      "module": "yado_core_v3_0_rc6_r1_real_external",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_r1_real_external.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC6MetaGrammar",
+      "module": "yado_core_v3_0_rc6_meta_grammar",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC5AlgorithmGenesis",
+      "module": "yado_core_v3_0_rc5_algorithm_genesis",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc5_algorithm_genesis.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC4MetaAutoEvolution",
+      "module": "yado_core_v3_0_rc4_meta_autoevolution",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc4_meta_autoevolution.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC3Trained",
+      "module": "yado_core_v3_0_rc3_trained",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc3_trained.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC3AutoEvolution",
+      "module": "yado_core_v3_0_rc3_autoevolution",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc3_autoevolution.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30RC2",
+      "module": "yado_core_v3_0_rc2",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_rc2.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV30Candidate",
+      "module": "yado_core_v3_0_candidate",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v3_0_candidate.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV29TraceCrystallization",
+      "module": "yado_core_v2_9_trace_crystallization",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2_9_trace_crystallization.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV28MetaGrammar",
+      "module": "yado_core_v2_8_meta_grammar",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2_8_meta_grammar.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV27Selective",
+      "module": "yado_core_v2_7_selective",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2_7_selective.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV26CrossDomain",
+      "module": "yado_core_v2_6_cross_domain",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2_6_cross_domain.py"
+    },
+    {
+      "class": "UnifiedYADOKernelV25",
+      "module": "yado_core_v2_5_unified",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2_5_unified.py"
+    },
+    {
+      "class": "UnifiedCognitiveSystemV24Audited",
+      "module": "yado_core_v2_4_audited",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2_4_audited.py"
+    },
+    {
+      "class": "UnifiedCognitiveSystemV22",
+      "module": "yado_core_v2_2",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2_2.py"
+    },
+    {
+      "class": "UnifiedCognitiveSystemV21",
+      "module": "yado_core_v2_1",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2_1.py"
+    },
+    {
+      "class": "UnifiedCognitiveSystem",
+      "module": "yado_core_v2",
+      "source_file": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_core_v2.py"
+    }
+  ],
+  "package_meta": {
+    "expected_archive": 11,
+    "expected_total": 120,
+    "expected_unittest": 109,
+    "manifest_sha256": "4850cc8718a698d9ab86364d5010f1e5543aff1168d96b45f8a410daedc7b9dd",
+    "package_name": "yado_rc8_v36_causal_reflective_workspace_verified_candidate.zip",
+    "package_sha256": "89a13e85d934a288a392b2859a109d557be01ef0eba0afb22cbdd7e1a2b53f55",
+    "package_size": 1065400,
+    "parts": [
+      "rc8v36.part000.b64",
+      "rc8v36.part001.b64",
+      "rc8v36.part002.b64",
+      "rc8v36.part003.b64",
+      "rc8v36.part004.b64",
+      "rc8v36.part005.b64",
+      "rc8v36.part006.b64",
+      "rc8v36.part007.b64",
+      "rc8v36.part008.b64",
+      "rc8v36.part009.b64",
+      "rc8v36.part010.b64",
+      "rc8v36.part011.b64",
+      "rc8v36.part012.b64",
+      "rc8v36.part013.b64",
+      "rc8v36.part014.b64",
+      "rc8v36.part015.b64",
+      "rc8v36.part016.b64",
+      "rc8v36.part017.b64",
+      "rc8v36.part018.b64",
+      "rc8v36.part019.b64",
+      "rc8v36.part020.b64",
+      "rc8v36.part021.b64",
+      "rc8v36.part022.b64"
+    ],
+    "schema": "yado.rc8.v36.external.package.v1",
+    "state_sha256": "7ecfd384d48bfd5c39312fa4c54a8feb49f4473b171902c8190a6b276beda9d1"
+  },
+  "reconstructed_python_file_count": 109,
+  "relevant_ledger_events": [
+    {
+      "canonical_mutation": false,
+      "deficit": "COGNITIVE_COMPONENT_GENERATION",
+      "effect": "SHADOW_COGNITIVE_COMPONENT_BUNDLE_AVAILABLE",
+      "event_id": "E0002_ALGORITHM_GENESIS_COMPONENTS",
+      "event_type": "EXPERIMENT_RESULT",
+      "generation": "G0_RC8_V36",
+      "generation_transition": null,
+      "index": 1,
+      "promotion_applied": false,
+      "source_digest": "12da8aea91991887e506ed12d54d848c43048fd98aeff9690f1a04e7d2a13bac",
+      "source_path": "receipts/yado-rc8-algorithm-genesis-uplift-v3-latest.json",
+      "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "SAFE_SUCCESSOR_EXECUTION",
+      "effect": "SAFE_EPHEMERAL_SUCCESSOR_RUNTIME_AVAILABLE",
+      "event_id": "E0003_SUCCESSOR_RUNTIME_ADAPTER",
+      "event_type": "EXPERIMENT_RESULT",
+      "generation": "G0_RC8_V36",
+      "generation_transition": null,
+      "index": 2,
+      "promotion_applied": false,
+      "source_digest": "48d14a97570a30130b901d84dc0933d86b35bc28b37cf8617c93a9c939ffb240",
+      "source_path": "receipts/yado-safe-rc8-successor-runtime-adapter-v1-latest.json",
+      "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "UNBOUNDED_EVOLUTION_SEARCH",
+      "effect": "FOUR_OVERBUDGET_EXPERIMENTS_CANCELLED; FUTURE_SEARCH_MUST_BE_BOUNDED",
+      "event_id": "E0011_EXPERIMENT_COMPUTE_BUDGET_GATE",
+      "event_type": "CONTROL_PLANE_RESULT",
+      "generation": "G0_RC8_V36",
+      "generation_transition": null,
+      "index": 10,
+      "promotion_applied": false,
+      "source_digest": "db564c1c46bc7001b91cc38f651d7ef8176e015f7ab0111be0da63338c3a89bd",
+      "source_path": "receipts/yado-experiment-compute-budget-gate-v1-latest.json",
+      "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "effect": "ACCESS_CONTROL_REPAIR_WITHHELD",
+      "event_id": "E0026_G1_ACCESS_CONTROL_RESOURCE_ASSISTED_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "generation_transition": null,
+      "index": 25,
+      "promotion_applied": false,
+      "source_digest": "e22ace6e4d8f9df83ebcf3d17f0afbdcfaae190deeb73b04910c4127a8135258",
+      "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-latest.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "effect": "ACCESS_CONTROL_REPAIR_WITHHELD",
+      "event_id": "E0027_G1_ACCESS_CONTROL_RESOURCE_ASSISTED_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "generation_transition": null,
+      "index": 26,
+      "promotion_applied": false,
+      "source_digest": "db2e34da4930aa741fe3da9196726cdfd4fc44189d14d149c57b58ded802a1ad",
+      "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348387051.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "effect": "ACCESS_CONTROL_REPAIR_WITHHELD",
+      "event_id": "E0028_G1_ACCESS_CONTROL_RESOURCE_ASSISTED_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "generation_transition": null,
+      "index": 27,
+      "promotion_applied": false,
+      "source_digest": "7fb0dc79911eb1c7e3fd3d328884d38051172290738f59b525ff865ddcf3e7cc",
+      "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348462474.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "effect": "ACCESS_CONTROL_REPAIR_WITHHELD",
+      "event_id": "E0029_G1_ACCESS_CONTROL_RESOURCE_ASSISTED_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "generation_transition": null,
+      "index": 28,
+      "promotion_applied": false,
+      "source_digest": "27fe54e2e8fa53f3cc38ae2d13e9058979d00fd897fc94f3ae8d75dac375b483",
+      "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348539631.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "effect": "ACCESS_CONTROL_REPAIR_WITHHELD",
+      "event_id": "E0030_G1_ACCESS_CONTROL_RESOURCE_ASSISTED_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "generation_transition": null,
+      "index": 29,
+      "promotion_applied": false,
+      "source_digest": "b7020455545b57af3a835c28cddea87aa0ad4b54072c095ffea80547df639da5",
+      "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348605126.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "ACCESS_CONTROL_HIGHER_EXPRESSIVENESS_COUNTEREXAMPLE",
+      "effect": "BOUNDED_DNF_RELATION_POLICY_INDUCER_RESOLVED_HISTORICAL_ACCESS_COUNTEREXAMPLE_AND_TRANSFERRED",
+      "event_id": "E0031_G1_ACCESS_CONTROL_RESOURCE_ASSISTED_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "generation_transition": null,
+      "index": 30,
+      "promotion_applied": false,
+      "source_digest": "efdeddc624a3d0f9a9a602bfb81a12bc273cb1b70fbbcd7c7a160960646986c5",
+      "source_path": "receipts/yado-g1-external-resource-assisted-access-control-repair-v1-run-33348693351.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "BUDGET_AWARE_SEARCH_AND_STAGED_ESCALATION",
+      "effect": "BUDGETED_STAGE_POLICY_RESOLVED_COST_QUOTA_AND_ESCALATION_SEARCH_GAP",
+      "event_id": "E0035_G1_BUDGET_AWARE_SEARCH_REPAIR",
+      "event_type": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+      "generation": "G1_CANDIDATE_S2",
+      "generation_transition": null,
+      "index": 34,
+      "promotion_applied": false,
+      "source_digest": "f418093892793f3a844ba75c43c4074f10617ed14a69b7985cffa3624336c60d",
+      "source_path": "receipts/yado-g1-budget-aware-search-repair-v1-run-33355759875.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "G2_FULL_FRESH_REGRESSION_AND_PROMOTION_GATE_V1",
+      "effect": "CURRENT_HEAD_TRANSITION_G1_TO_G2_TYPED_RECURRENT_ARCHITECTURE",
+      "event_id": "E0044_G2_PROMOTION",
+      "event_type": "GENERATION_HEAD_TRANSITION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 43,
+      "promotion_applied": true,
+      "source_digest": "eda2cb35e9f30d53cad40f4213157e843e4afbd3c00701fef523debe8288b511",
+      "source_path": "receipts/yado-g2-full-fresh-regression-and-promotion-gate-v1-run-33357100322.json",
+      "status": "PROMOTED"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_CONTENT_RETRIEVAL",
+      "effect": "KERNEL_GENERATED_READ_ONLY_LEGACY_EXPERIENCE_RETRIEVER",
+      "event_id": "E0074_G2_LEGACY_EXPERIENCE_RETRIEVAL_SELF_EVOLUTION",
+      "event_type": "KERNEL_NATIVE_CODE_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 73,
+      "promotion_applied": false,
+      "source_digest": "2c8dac1ff594687bde79f04f6f65a105e14fcbcbd1ae7a91e7c11a7519db2eea",
+      "source_path": "receipts/yado-legacy-experience-retrieval-self-evolution-v1-run-33395356490.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_RETRIEVAL_EVOLUTION_REPAIR_V1",
+      "effect": "SEARCH_RANKING_EVOLVED_FROM_FRESH_ADMISSION_COUNTEREXAMPLE",
+      "event_id": "E0076_G2_LEGACY_EXPERIENCE_SEARCH_EVOLUTION_V2",
+      "event_type": "KERNEL_NATIVE_CODE_EVOLUTION_FROM_COUNTEREXAMPLE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 75,
+      "promotion_applied": false,
+      "source_digest": "f48edd918983a880696458493ae3c72be9d43d86490815f380ab455ef83c1a3d",
+      "source_path": "receipts/yado-legacy-experience-search-self-evolution-v2-run-33395951315.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_SEARCH_EVOLUTION_REPAIR_V3",
+      "effect": "STALE_FRONTIER_AUDIT_INVARIANT_EVOLVED",
+      "event_id": "E0079_G2_CORE_AUDIT_INVARIANT_SELF_EVOLUTION",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 78,
+      "promotion_applied": false,
+      "source_digest": "3ec8cc13306b36563fcc3f0749a91bfc316a65bdf82c2128decae355efb897f3",
+      "source_path": "receipts/yado-core-audit-invariant-self-evolution-v1-run-33396775177.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_CONTENT_RETRIEVAL",
+      "effect": "SELF_AUDIT_EVOLVED_TO_VERIFY_CANONICAL_RETRIEVER_BY_BINDING_AND_LIVE_PROBE",
+      "event_id": "E0084_G2_LEGACY_RETRIEVAL_AUDIT_SELF_EVOLUTION_V3",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 83,
+      "promotion_applied": false,
+      "source_digest": "65aeed70c4b3b51efb22b513d4168d388114d83f64353db0631f137a9c2d3ea4",
+      "source_path": "receipts/yado-legacy-retrieval-audit-self-evolution-v3-run-33404442510.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_MATHEMATICAL_REASONING_TRANSFER_REPAIR_V1",
+      "effect": "SEMANTIC_EXPRESSION_SYNTHESIS; OLD=0.5; REPAIRED=1.0; FRESH=1.0",
+      "event_id": "E0089_G2_MATHEMATICAL_REASONING_SELF_EVOLUTION",
+      "event_type": "KERNEL_NATIVE_CODE_EVOLUTION_FROM_REAL_COUNTEREXAMPLE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 88,
+      "promotion_applied": false,
+      "source_digest": "ed6ad93dc762ae599723cda8686cb211ac35304d55aa15ab054c94c47ded72fa",
+      "source_path": "receipts/yado-mathematical-reasoning-self-evolution-v1-run-33405906477.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_WORLD_GENERALIZATION_SCOPE",
+      "effect": "NATIVE_ONLY_GENERALIZATION_V2; SCORES={'REAL_UNSTRUCTURED_INPUT_TRANSFER': 1.0, 'REAL_MATHEMATICAL_REASONING_TRANSFER': 1.0, 'REAL_PROGRAM_EXECUTION_TRANSFER': 0.0, 'REAL_SCIENCE_DATA_TRANSFER': 0.0}; HOST_SCAFFOLD=True; NEXT=REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V1",
+      "event_id": "E0094_G2_REAL_WORLD_GENERALIZATION_V2",
+      "event_type": "KERNEL_REAL_WORLD_NATIVE_CAPABILITY_DIAGNOSTIC",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 93,
+      "promotion_applied": false,
+      "source_digest": "674594407bbb06075690aaebe40c3ae8491941fa3310203e8d7aec0067a0f397",
+      "source_path": "receipts/yado-real-world-generalization-self-directed-v2-run-33417121418.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V1",
+      "effect": "BOUNDED_PROGRAM_REPAIR_CANDIDATE; SCORE=0.6666666666666666; NEXT=REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V2",
+      "event_id": "E0095_G2_PROGRAM_EXECUTION_NATIVE_SELF_EVOLUTION",
+      "event_type": "KERNEL_SELF_EVOLVED_PROGRAM_REPAIR_CANDIDATE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 94,
+      "promotion_applied": false,
+      "source_digest": "d356dff411eb20a06faac3f90f033e2a3c5bee05a8bc5935c04cdfbdc43f8b33",
+      "source_path": "receipts/yado-program-execution-native-self-evolution-v1-run-33417354072.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_PROGRAM_EXECUTION_TRANSFER_NATIVE_EVOLUTION_V2",
+      "effect": "EXECUTION_NAMESPACE_COUNTEREXAMPLES_REPAIRED; SCORE=0.8333333333333334; NEXT=REAL_PROGRAM_EXECUTION_TRANSFER_FRESH_ADMISSION_V1",
+      "event_id": "E0096_G2_PROGRAM_EXECUTION_NATIVE_SELF_EVOLUTION_V2",
+      "event_type": "KERNEL_COUNTEREXAMPLE_REPAIR_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 95,
+      "promotion_applied": false,
+      "source_digest": "71c01fe812f6b31692ef3f10ae9b1fca32a6a822613236a265649861fb030cc6",
+      "source_path": "receipts/yado-program-execution-native-self-evolution-v2-run-33417532652.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_WORLD_GENERALIZATION_SCOPE",
+      "effect": "AUDIT_STALE_EVIDENCE_REPAIR; NEXT=REAL_WORLD_EVIDENCE_AUDIT_FRESH_ADMISSION_V1",
+      "event_id": "E0100_G2_REAL_WORLD_EVIDENCE_AUDIT_SELF_EVOLUTION",
+      "event_type": "KERNEL_SELF_AUDIT_EVIDENCE_SELECTOR_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 99,
+      "promotion_applied": false,
+      "source_digest": "f6cc8b24c61e72977750d3084bcc0801a58c5d7150e6ba0f8111227c847a4603",
+      "source_path": "receipts/yado-real-world-evidence-audit-self-evolution-v1-run-33418317999.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1",
+      "effect": "BOUNDED_SCIENCE_DATA_REASONER; NEXT=REAL_SCIENCE_DATA_TRANSFER_FRESH_ADMISSION_V1",
+      "event_id": "E0104_G2_SCIENCE_DATA_NATIVE_SELF_EVOLUTION",
+      "event_type": "KERNEL_SELF_EVOLVED_SCIENCE_DATA_REASONER",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 103,
+      "promotion_applied": false,
+      "source_digest": "629ab495dfc9827cc0d4328da70d0dc82ee39d27e6e2de989501526a8627868e",
+      "source_path": "receipts/yado-science-data-native-self-evolution-v1-run-33419131498.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1",
+      "effect": "SCIENCE_CANONICAL_EVIDENCE_SUPERSEDES_PRE_SCIENCE_DIAGNOSTIC; NEXT=SCIENCE_EVIDENCE_AUDIT_FRESH_ADMISSION_V1",
+      "event_id": "E0108_G2_SCIENCE_EVIDENCE_AUDIT_SELF_EVOLUTION",
+      "event_type": "KERNEL_SELF_AUDIT_SCIENCE_EVIDENCE_SELECTOR_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 107,
+      "promotion_applied": false,
+      "source_digest": "808680497c9488e37903a0afe202dc133cb65712e5b6754c9dd6516e403bbaec",
+      "source_path": "receipts/yado-science-evidence-audit-self-evolution-v1-run-33436652034.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+      "effect": "AUDIT_V6_PROVENANCE_RECOGNITION; NEXT=LEGACY_PROVENANCE_AUDIT_FRESH_ADMISSION_V1",
+      "event_id": "E0119_G2_LEGACY_PROVENANCE_AUDIT_SELF_EVOLUTION",
+      "event_type": "KERNEL_SELF_AUDIT_PROVENANCE_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 118,
+      "promotion_applied": false,
+      "source_digest": "76d35a345a0edde5bc59e76e4af56ee931f6a32849e00c01cacbcd5f0c3cc5f8",
+      "source_path": "receipts/yado-legacy-provenance-audit-self-evolution-v1-run-33438415510.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LOGIC_THINKING_INTELLIGENCE_ARCHITECTURAL_CEILING_V1",
+      "effect": "WEAKEST=THINKING; LOGIC=0.613281; THINKING=0.250000; INTELLIGENCE=0.683000; NEXT=THINKING_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+      "event_id": "E0122_G2_LTI_ARCHITECTURAL_CEILING_DIAGNOSTIC",
+      "event_type": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_DIAGNOSTIC",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 121,
+      "promotion_applied": false,
+      "source_digest": "e58531ad12618ac1eaa1d2013ee35a53862fee84a7fc51f722e15c77519d793e",
+      "source_path": "receipts/yado-g2-lti-architectural-ceiling-diagnostic-v1-run-33441194354.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "THINKING_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=ADAPTIVE_CONTINGENT; FRESH=1.000000; BASE=0.200000; NEXT=THINKING_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1",
+      "event_id": "E0123_G2_THINKING_CEILING_SELF_EVOLUTION",
+      "event_type": "FIXED_ARCHITECTURE_THINKING_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 122,
+      "promotion_applied": false,
+      "source_digest": "48b6b75a45db0a2789528fb269fd604442b766b3d80981edd144224bd91038d9",
+      "source_path": "receipts/yado-thinking-architectural-ceiling-self-evolution-v1-run-33441395876.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "THINKING_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1",
+      "effect": "FRESH=0.800000; SIGNED=True; DEPENDENCY=True; DEPTH=True; NEXT=THINKING_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2",
+      "event_id": "E0124_G2_THINKING_CEILING_FRESH_ADMISSION",
+      "event_type": "THINKING_CAPABILITY_FRESH_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 123,
+      "promotion_applied": false,
+      "source_digest": "a93a01bb34fe5cf7e668c5a418db3b111bf3285f81fc6697621bfb96aa13b81f",
+      "source_path": "receipts/yado-thinking-architectural-ceiling-fresh-admission-v1-run-33441644452.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_ARCHITECTURAL_CEILING_RECHECK_V2",
+      "effect": "WEAKEST=LOGIC; LOGIC=0.580078; THINKING=1.000000; INTELLIGENCE=0.589583; NEXT=LOGIC_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+      "event_id": "E0127_G2_LTI_CEILING_RECHECK_V2",
+      "event_type": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 126,
+      "promotion_applied": false,
+      "source_digest": "b0deb358cf5c165d803989cfd5d6aaa911b45f979f50ad8ee02854a37299a9a6",
+      "source_path": "receipts/yado-g2-lti-architectural-ceiling-recheck-v2-run-33442179466.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LOGIC_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=COMPOSITIONAL_LOGIC_D3; FRESH=1.000000; BASE=0.477214; NEXT=LOGIC_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1",
+      "event_id": "E0128_G2_LOGIC_CEILING_SELF_EVOLUTION",
+      "event_type": "FIXED_ARCHITECTURE_LOGIC_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 127,
+      "promotion_applied": false,
+      "source_digest": "495fe7401c054829b037101359c26631167d9cb3546c5ebf3f836337c25492f6",
+      "source_path": "receipts/yado-logic-architectural-ceiling-self-evolution-v1-run-33442406637.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_ARCHITECTURAL_CEILING_RECHECK_V3",
+      "effect": "WEAKEST=INTELLIGENCE; LOGIC=1.000000; THINKING=1.000000; INTELLIGENCE=0.587500; NEXT=INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+      "event_id": "E0131_G2_LTI_CEILING_RECHECK_V3",
+      "event_type": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 130,
+      "promotion_applied": false,
+      "source_digest": "9583da69b2af9354293764a8b23ee75350edd3d5a958debad44f109c31710a92",
+      "source_path": "receipts/yado-g2-lti-architectural-ceiling-recheck-v3-run-33442875154.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_ARCHITECTURAL_CEILING_RECHECK_V3",
+      "effect": "WEAKEST=INTELLIGENCE; LOGIC=1.000000; THINKING=1.000000; INTELLIGENCE=0.587500; NEXT=INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+      "event_id": "E0132_G2_LTI_CEILING_RECHECK_V3",
+      "event_type": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 131,
+      "promotion_applied": false,
+      "source_digest": "8294a292c9cecc94fa2c31f865fa29f0161b68029aabcec5e26f3c75ed50c8fc",
+      "source_path": "receipts/yado-g2-lti-architectural-ceiling-recheck-v3-run-33465428878.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=COMPOSER_PLUS_ALIGNER; FRESH=1.000000; BASE=0.759286; NEXT=INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2",
+      "event_id": "E0133_G2_INTELLIGENCE_CEILING_SELF_EVOLUTION",
+      "event_type": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 132,
+      "promotion_applied": false,
+      "source_digest": "5e079c741c26839cbfe442c28fad4a24d9f02d8363fd46c14a6c1e2352916648",
+      "source_path": "receipts/yado-intelligence-architectural-ceiling-self-evolution-v1-run-33465637351.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=COMPOSER_PLUS_ALIGNER; FRESH=1.000000; BASE=0.570714; NEXT=INTELLIGENCE_ARCHITECTURAL_CEILING_FRESH_ADMISSION_V1",
+      "event_id": "E0134_G2_INTELLIGENCE_CEILING_SELF_EVOLUTION",
+      "event_type": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 133,
+      "promotion_applied": false,
+      "source_digest": "4ca4b88fd3c0202cb32c160e9548b4f15e5f44607c00a4e458dadddddc4119da",
+      "source_path": "receipts/yado-intelligence-architectural-ceiling-self-evolution-v1-run-33465714948.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_ARCHITECTURAL_CEILING_RECHECK_V4",
+      "effect": "WEAKEST=INTELLIGENCE; LOGIC=1.000000; THINKING=1.000000; INTELLIGENCE=0.800000; NEXT=INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2",
+      "event_id": "E0137_G2_LTI_CEILING_RECHECK_V4",
+      "event_type": "FIXED_ARCHITECTURE_COEVOLUTION_CEILING_RECHECK",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 136,
+      "promotion_applied": false,
+      "source_digest": "ddaed5aaca2a45822f85d7c4fbd72e8926dddeeaaa346a197f58665f3dab4503",
+      "source_path": "receipts/yado-g2-lti-architectural-ceiling-recheck-v4-run-33466079342.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2",
+      "effect": "SELECTED=FAIL_CLOSED_DEPENDENCY_AWARE; FRESH=1.000000; BASE=0.000000; NEXT=INTELLIGENCE_MULTI_DISPATCH_FRESH_ADMISSION_V1",
+      "event_id": "E0138_G2_INTELLIGENCE_CEILING_SELF_EVOLUTION_V2",
+      "event_type": "FIXED_ARCHITECTURE_INTELLIGENCE_RUNTIME_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 137,
+      "promotion_applied": false,
+      "source_digest": "32d9467e517e969b3da1847a9689c8823074ba6d057425793d237a04d3e5d530",
+      "source_path": "receipts/yado-intelligence-architectural-ceiling-self-evolution-v2-run-33466312354.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V1",
+      "effect": "PROBE=FRONTIER_FOUND; SELECTED=LOGIC; SCORE=0.000000; STREAK=0; NEXT=LOGIC_PLATEAU_SELF_EVOLUTION_V1",
+      "event_id": "E0142_G2_LTI_PLATEAU_PROBE_V1",
+      "event_type": "FIXED_ARCHITECTURE_CONTRACT_DERIVED_PLATEAU_PROBE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 141,
+      "promotion_applied": false,
+      "source_digest": "88d6a8410e90fb4be26d15d2d0d99e071f597ded79fc497bb94b699d0314425b",
+      "source_path": "receipts/yado-g2-lti-architectural-ceiling-plateau-probe-v1-run-33476163633.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LOGIC_PLATEAU_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=WORK_BUDGET_BOTH; FRESH=1.000000; BASE=0.000000; GAIN=1.000000; NEXT=LOGIC_PLATEAU_FRESH_ADMISSION_V1",
+      "event_id": "E0143_G2_LOGIC_PLATEAU_SELF_EVOLUTION_V1",
+      "event_type": "FIXED_ARCHITECTURE_LOGIC_PLATEAU_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 142,
+      "promotion_applied": false,
+      "source_digest": "6d3fff2f37786fbbd53a6eb673b3ae0739b6320b6890b970d6353370ebbe9c2b",
+      "source_path": "receipts/yado-logic-plateau-self-evolution-v1-run-33476303371.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V2",
+      "effect": "PROBE=FRONTIER_FOUND; SELECTED=INTELLIGENCE; SCORE=0.531250; STREAK=0; NEXT=INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V1",
+      "event_id": "E0146_G2_LTI_PLATEAU_PROBE_V2",
+      "event_type": "FIXED_ARCHITECTURE_CONTRACT_DERIVED_PLATEAU_PROBE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 145,
+      "promotion_applied": false,
+      "source_digest": "5f6f4bb853696498dbb15b7eca132894f92eb86d60f859b83e1667405025d919",
+      "source_path": "receipts/yado-g2-lti-architectural-ceiling-plateau-probe-v2-run-33476776621.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=WORK_BUDGET_FIELDS_PLUS_PAIR_TRIGGERS; FRESH=1.000000; BASE=0.531250; GAIN=0.468750; NEXT=INTELLIGENCE_PLATEAU_FRESH_ADMISSION_V1",
+      "event_id": "E0147_G2_INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V1",
+      "event_type": "FIXED_ARCHITECTURE_INTELLIGENCE_PLATEAU_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 146,
+      "promotion_applied": false,
+      "source_digest": "07df07a02d1bdd344e2eaf62cedf5da5c2851608460fda77a755e7776cea26db",
+      "source_path": "receipts/yado-intelligence-plateau-self-evolution-v1-run-33476919645.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_PLATEAU_FRESH_ADMISSION_V1",
+      "effect": "FRESH=0.936806; FIELD=False; PAIR=True; ALIGN=True; NEXT=INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V2",
+      "event_id": "E0148_G2_INTELLIGENCE_PLATEAU_FRESH_ADMISSION_V1",
+      "event_type": "INTELLIGENCE_PLATEAU_FRESH_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 147,
+      "promotion_applied": false,
+      "source_digest": "87b4a2a47ccb15bb40039cb4657c6ef554048c2e22d4a582acdefab4e38d3ac4",
+      "source_path": "receipts/yado-intelligence-plateau-fresh-admission-v1-run-33477068724.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V2",
+      "effect": "COUNTEREXAMPLE_REPAIRED=True; SELECTED=V3_POSITIVE_COVER_PRUNING; FRESH=1.000000; GAIN=0.130952; NEXT=INTELLIGENCE_PLATEAU_FRESH_ADMISSION_V2",
+      "event_id": "E0149_G2_INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V2",
+      "event_type": "COUNTEREXAMPLE_DRIVEN_INTELLIGENCE_PLATEAU_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 148,
+      "promotion_applied": false,
+      "source_digest": "a504281bbdf50a3dca07c064e405ccb923d75c7c0896cca93a9cd6a056616f3c",
+      "source_path": "receipts/yado-intelligence-plateau-self-evolution-v2-run-33477275646.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_PLATEAU_FRESH_ADMISSION_V2",
+      "effect": "FRESH=1.000000; PRUNING_CAUSAL=False; OLD=1.000000; NEW=1.000000; NEXT=INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V3",
+      "event_id": "E0150_G2_INTELLIGENCE_PLATEAU_FRESH_ADMISSION_V2",
+      "event_type": "COUNTEREXAMPLE_REPAIR_FRESH_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 149,
+      "promotion_applied": false,
+      "source_digest": "2500b1c5ca6459c5fd6f28acf2a107b5ede13199892051b5c04942b72b551874",
+      "source_path": "receipts/yado-intelligence-plateau-fresh-admission-v2-run-33477399296.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "INTELLIGENCE_PLATEAU_SELF_EVOLUTION_V3",
+      "effect": "CLASS=CAUSAL_EVIDENCE_GAP; V2=0.833333; V3=1.000000; GAP=0.166667; NEXT=INTELLIGENCE_PLATEAU_CANONICAL_INTEGRATION_V1",
+      "event_id": "E0151_G2_INTELLIGENCE_PLATEAU_CAUSAL_READMISSION",
+      "event_type": "CAUSAL_EVIDENCE_READMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 150,
+      "promotion_applied": false,
+      "source_digest": "3c131163a25868a6ef05a898f2923115f574ec5100e82b7406cd0c2857c06c0f",
+      "source_path": "receipts/yado-intelligence-plateau-causal-readmission-v1-run-33477648759.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V3",
+      "effect": "SELECTED=CODE; SCORES={\"CODE\":0.5,\"INTELLIGENCE\":1.0,\"LOGIC\":1.0,\"THINKING\":0.8499999999999999}; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V1",
+      "event_id": "E0153_G2_LTI_CODE_PLATEAU_PROBE_V3",
+      "event_type": "FIXED_ARCHITECTURE_LTI_CODE_PLATEAU_PROBE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 152,
+      "promotion_applied": false,
+      "source_digest": "9dccfb4fa42d86d859ce8763c40380b5e1bc615bd1d484e9ba5f66195e08d63c",
+      "source_path": "receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v3-run-33485921544.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=DEPTH2_PLUS_STRUCTURAL; FRESH=0.666667; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V2",
+      "event_id": "E0154_G2_CODE_PLATEAU_SELF_EVOLUTION_V1",
+      "event_type": "FIXED_ARCHITECTURE_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 153,
+      "promotion_applied": false,
+      "source_digest": "9c82399eb766739e8b375d1546432dee9da3bf5c338149229344ce09ef86a1f5",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v1-run-33486090280.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V2",
+      "effect": "CLASS=BAD_PRIOR_ORACLE; FRESH=1.000000; CAUSAL_GAP=1.000000; NEXT=CODE_PLATEAU_CANONICAL_INTEGRATION_V1",
+      "event_id": "E0155_G2_CODE_PLATEAU_FRESH_READMISSION_V1",
+      "event_type": "CODE_REPAIR_FRESH_READMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 154,
+      "promotion_applied": false,
+      "source_digest": "016a1aaef043d0858399d9af65a384c111d1f7adba19c946fae7cfa9a572cf2b",
+      "source_path": "receipts/yado-code-plateau-fresh-readmission-v1-run-33486231448.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V4",
+      "effect": "SELECTED=CODE; SCORES={\"CODE\":0.5,\"INTELLIGENCE\":1.0,\"LOGIC\":1.0,\"THINKING\":0.8499999999999999}; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V2",
+      "event_id": "E0158_G2_LTI_CODE_PLATEAU_PROBE_V4",
+      "event_type": "FIXED_ARCHITECTURE_LTI_CODE_PLATEAU_PROBE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 157,
+      "promotion_applied": false,
+      "source_digest": "d9fc7c869a465004634716690e535c28d9d771f3ec3ac74da4cb16d99576c76b",
+      "source_path": "receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v4-run-33489912500.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V2",
+      "effect": "SELECTED=BOUNDED_STRUCTURAL_GRAMMAR; FRESH=0.666667; CAUSAL_GAIN=1.000000; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V3",
+      "event_id": "E0159_G2_CODE_PLATEAU_SELF_EVOLUTION_V2",
+      "event_type": "COUNTEREXAMPLE_DRIVEN_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 158,
+      "promotion_applied": false,
+      "source_digest": "2bad41ff0a5d7e1f46697036c933197b53b87fe8fd8c50c072b3bd5b80f357cd",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v2-run-33490131807.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V3",
+      "effect": "SELECTED=EVIDENCE_GUIDED_V5; FRESH=0.333333; SEARCH_GAIN=1.000000; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V4",
+      "event_id": "E0160_G2_CODE_PLATEAU_SELF_EVOLUTION_V3",
+      "event_type": "SEARCH_ORDER_COUNTEREXAMPLE_DRIVEN_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 159,
+      "promotion_applied": false,
+      "source_digest": "7bcd8174cb37b3c2e672dd5f51c3f68a0b57ae89d62c27f1d8a44e77c9b1f6ad",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v3-run-33490345516.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V4",
+      "effect": "SELECTED=V6_PORTFOLIO_BUDGET; FRESH=0.666667; BUDGET_GAIN=0.000000; BAD_ORACLE=True; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V5",
+      "event_id": "E0161_G2_CODE_PLATEAU_SELF_EVOLUTION_V4",
+      "event_type": "FIXED_BUDGET_PORTFOLIO_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 160,
+      "promotion_applied": false,
+      "source_digest": "0a24f41aeef317d0a391cad5029e5e4d8c5e5dcc13048d4ed057a59520a79c3c",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v4-run-33490582631.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V5",
+      "effect": "SELECTED=INDUCED_BRANCH_V7; FRESH=1.000000; INDUCTION_GAIN=0.000000; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V6",
+      "event_id": "E0162_G2_CODE_PLATEAU_SELF_EVOLUTION_V5",
+      "event_type": "EVIDENCE_INDUCED_BRANCH_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 161,
+      "promotion_applied": false,
+      "source_digest": "17972ada69ecf51ed24e423e37029a7c2727367d7083e36b2de34ce8dc1dbb7b",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v5-run-33490832111.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V6",
+      "effect": "SELECTED=RECURSIVE_DEPTH2_V8; FRESH=0.950000; NESTED_GAIN=1.000000; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V7",
+      "event_id": "E0163_G2_CODE_PLATEAU_SELF_EVOLUTION_V6",
+      "event_type": "RECURSIVE_PARTITION_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 162,
+      "promotion_applied": false,
+      "source_digest": "3b664ad5a6cfa5b9ab312c75c15dfa6d05754664537f591ec0873ea2e8f0e828",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v6-run-33491036688.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V7",
+      "effect": "SELECTED=SUPPORT_RANKED_V9; FRESH=0.950000; SUPPORT_GAIN=0.200000; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V8",
+      "event_id": "E0164_G2_CODE_PLATEAU_SELF_EVOLUTION_V7",
+      "event_type": "SUPPORT_RANKED_RECURSIVE_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 163,
+      "promotion_applied": false,
+      "source_digest": "5aa495f85574e124531c82eda9716988c53550279cc75a8207141f796951f354",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v7-run-33491295651.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V8",
+      "effect": "SELECTED=OBSERVED_BOUNDARY_V10; FRESH=0.950000; BOUNDARY_GAIN=0.200000; NEXT=CODE_PLATEAU_SELF_EVOLUTION_V9",
+      "event_id": "E0165_G2_CODE_PLATEAU_SELF_EVOLUTION_V8",
+      "event_type": "CANONICAL_SPLIT_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 164,
+      "promotion_applied": false,
+      "source_digest": "d324b88d3e1706dc8ee6fa73842dc68771f0a2e1ef9c3d85143cc4372a1642cd",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v8-run-33491526539.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "CODE_PLATEAU_SELF_EVOLUTION_V9",
+      "effect": "SELECTED=AMBIGUITY_AWARE_V11; FRESH=1.000000; AMBIGUITY_GAIN=1.000000; NEXT=CODE_PLATEAU_FRESH_ADMISSION_V9",
+      "event_id": "E0166_G2_CODE_PLATEAU_SELF_EVOLUTION_V9",
+      "event_type": "AMBIGUITY_AWARE_CODE_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 165,
+      "promotion_applied": false,
+      "source_digest": "61cb88eb3c4fef8cd1e91cdbeb776d6514df7c2be5e61e8a1856c5ad911670a5",
+      "source_path": "receipts/yado-code-plateau-self-evolution-v9-run-33491776850.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V5",
+      "effect": "SELECTED=THINKING; SCORES={\"CODE\":1.0,\"INTELLIGENCE\":1.0,\"LOGIC\":1.0,\"THINKING\":0.94}; NEXT=THINKING_PLATEAU_SELF_EVOLUTION_V1",
+      "event_id": "E0169_G2_LTI_CODE_PLATEAU_PROBE_V5",
+      "event_type": "FIXED_ARCHITECTURE_LTI_CODE_PLATEAU_PROBE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 168,
+      "promotion_applied": false,
+      "source_digest": "4d31319bb896a821106ddef04d307b742de4c831a2f71905a3ec49eff1afbf8d",
+      "source_path": "receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v5-run-33502810867.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "THINKING_PLATEAU_SELF_EVOLUTION_V1",
+      "effect": "SELECTED=WORK_BUDGET_BEAM; FRESH=1.000000; GAIN=0.030000; NEXT=THINKING_PLATEAU_FRESH_ADMISSION_V1",
+      "event_id": "E0170_G2_THINKING_PLATEAU_SELF_EVOLUTION_V1",
+      "event_type": "WORK_BUDGET_THINKING_SELF_EVOLUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": null,
+      "index": 169,
+      "promotion_applied": false,
+      "source_digest": "2275fc63d62706829eecfb0e660050e32be8b8b98fdf4d073a7a96e473d47768",
+      "source_path": "receipts/yado-thinking-plateau-self-evolution-v1-run-33503039144.json",
+      "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SELF_REPAIR_FROM_SELF_ASSESSMENT_V1",
+      "effect": "CANDIDATE=WITHHOLD; KIND=RULE_PROGRAM; VAL=0.246575; BLIND=0.195652; BASE=0.804348; NEXT=KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V1",
+      "event_id": "E0179_G2_KERNEL_SELF_REPAIR_FROM_SELF_ASSESSMENT_V1",
+      "event_type": "KERNEL_NATIVE_MECHANISM_SELF_CONSTRUCTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 178,
+      "promotion_applied": false,
+      "source_digest": "573b2bb98bd45b879c8e6de77071f990b63b9f6a41a4344577c4ee0a4a60a5fb",
+      "source_path": "receipts/yado-kernel-self-repair-from-self-assessment-v1-run-33508125975.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V1",
+      "effect": "ORIGIN=RC5_ALGORITHM_GENESIS; CANDIDATE=WITHHOLD; VAL=0.917808; BLIND=0.804348; BASE=0.804348; NEXT=KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V2",
+      "event_id": "E0180_G2_KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V1",
+      "event_type": "KERNEL_NATIVE_ALGORITHM_GENESIS_SELF_CONSTRUCTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 179,
+      "promotion_applied": false,
+      "source_digest": "f26f4c1340b6e09c87dba5bc80ab0197cf5f8e88555aa43f6f6b973e93a6b134",
+      "source_path": "receipts/yado-kernel-self-expand-architecture-selector-constructor-v1-run-33537141449.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V2",
+      "effect": "CANDIDATE=WITHHOLD; VAL=0.000000; BLIND=0.000000; BASE=0.804348; ERROR=TIMEOUT:300s; NEXT=KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V3",
+      "event_id": "E0181_G2_KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V2",
+      "event_type": "KERNEL_NATIVE_EXTENDED_META_GRAMMAR_SELF_CONSTRUCTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 180,
+      "promotion_applied": false,
+      "source_digest": "88bda4154663f53aba45b659765093976d627466160c804947c9c3baf7c7a6c2",
+      "source_path": "receipts/yado-kernel-self-expand-architecture-selector-constructor-v2-run-33538562733.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V3",
+      "effect": "OP=REACTION_NORM; STAGE=None; CANDIDATE=WITHHOLD; VAL=0.000000; BLIND=0.000000; BASE=0.804348; NEXT=KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V4",
+      "event_id": "E0182_G2_KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V3",
+      "event_type": "KERNEL_NATIVE_REACTION_NORM_META_GRAMMAR_SELF_CONSTRUCTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 181,
+      "promotion_applied": false,
+      "source_digest": "5c099735e0cdd39bfbd634a83e359bbffb4c2b3f5e6af9b353621aacc60696d4",
+      "source_path": "receipts/yado-kernel-self-expand-architecture-selector-constructor-v3-run-33540937211.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "G2_CONTROL_PLANE_SPLIT_BRAIN_AND_BRANCH_HISTORY_CLOSURE",
+      "effect": "FRONTIER_SOURCE=LEDGER; ACTIVE_BRANCH=yado-architecture-shadow-search; HISTORY_BRANCHES=13; NEXT=KERNEL_SELF_EXPAND_ARCHITECTURE_SELECTOR_CONSTRUCTOR_V4",
+      "event_id": "E0183_G2_INTEGRITY_AND_BRANCH_HISTORY_CLOSURE_REPAIR_V1",
+      "event_type": "G2_CONTROL_PLANE_INTEGRITY_AND_BRANCH_HISTORY_CLOSURE_REPAIR",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 182,
+      "promotion_applied": false,
+      "source_digest": "d2af668de0d0dd8ddb0faa2a780ddb73e8d33ab97349cfe5e9d344536f4d2db5",
+      "source_path": "receipts/yado-g2-integrity-branch-closure-repair-v1-run-33544656735.json",
+      "status": "PASS"
+    }
+  ],
+  "schema": "yado.g2.algorithmic_transition_lineage_audit.v1",
+  "semantic_boundary": "THIS AUDIT VERIFIES EXECUTABLE PROVENANCE/INHERITANCE/REGISTRY/LEDGER CONTINUITY. IT DOES NOT PROVE THAT HISTORICAL MARKETING LABELS RC5/RC6/RC7 MAP ONE-TO-ONE TO A FORMAL GENERATION PROMOTION UNLESS A RECEIPT/EVENT EXISTS.",
+  "status": "PASS_READ_ONLY_ALGORITHMIC_TRANSITION_AUDIT"
+}
