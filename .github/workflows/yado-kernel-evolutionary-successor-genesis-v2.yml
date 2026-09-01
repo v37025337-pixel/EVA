@@ -1,0 +1,40 @@
+name: YADO G2 Evolutionary Successor Genesis V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-evolutionary-successor-genesis-v2-request.json"
+permissions:
+  contents: write
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Create evolutionary successor V2 from frozen G2 history
+        run: python runtime/yado_kernel_evolutionary_successor_genesis_v2.py
+      - name: Persist successor V2 evidence and coherent frontier
+        run: |
+          mkdir -p receipts candidates/kernel-self-generated
+          cp runtime/yado_kernel_evolutionary_successor_genesis_v2_receipt.json "receipts/yado-kernel-evolutionary-successor-genesis-v2-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Evolutionary Successor V2"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-evolutionary-successor-genesis-v2.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json candidates/kernel-self-generated/evolutionary-residual-successor-v2.json "receipts/yado-kernel-evolutionary-successor-genesis-v2-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 evolutionary successor genesis V2 [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce successor V2 receipt
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_evolutionary_successor_genesis_v2_receipt.json"))
+          assert r["status"]=="PASS_EVOLUTIONARY_SUCCESSOR_GENESIS_V2",r
+          assert all(r["checks"].values()),r
+          print(r["candidate_state"],r["metrics"],r["next_required_capability"])
+          PY
