@@ -1,0 +1,42 @@
+name: YADO G2 LTI CODE Plateau Probe V6
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: [architecture/yado-g2-lti-code-architectural-ceiling-plateau-probe-v6-request.json]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe
+        id: probe
+        continue-on-error: true
+        run: python runtime/yado_g2_lti_code_architectural_ceiling_plateau_probe_v6.py
+      - name: Persist
+        if: always()
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_lti_code_architectural_ceiling_plateau_probe_v6_receipt.json receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v6-run-${GITHUB_RUN_ID}.json || true
+          git config user.name 'YADO LTI CODE Plateau Probe V6'
+          git config user.email 'actions@users.noreply.github.com'
+          git add architecture/evolution-ledger.json architecture/yado-g2-lti-ceiling-state-v1.json receipts/yado-g2-lti-code-architectural-ceiling-plateau-probe-v6-run-${GITHUB_RUN_ID}.json || true
+          if ! git diff --cached --quiet; then git commit -m 'Persist YADO G2 LTI CODE plateau probe V6 [skip ci]' && git push origin HEAD:yado-architecture-shadow-search; fi
+      - name: Enforce
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('runtime/yado_g2_lti_code_architectural_ceiling_plateau_probe_v6_receipt.json')
+          if not p.exists(): raise SystemExit('MISSING_RECEIPT')
+          r=json.loads(p.read_text())
+          if r.get('status')!='PASS_LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V6':
+              raise SystemExit('WITHHOLD:'+str(r.get('status')))
+          print(r['status'])
+          PY
