@@ -31,7 +31,14 @@ def load(p):return json.loads(p.read_text(encoding='utf-8'))
 
 head=load(HEAD);ledger=load(LEDGER);recheck=load(RECHECK);state=load(STATE)
 validate_ledger_v2(ledger)
-if ledger.get('open_deficits')!=['INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1']:raise RuntimeError('UNEXPECTED_FRONTIER')
+allowed=[['INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1'],['INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2']]
+if ledger.get('open_deficits') not in allowed:raise RuntimeError('UNEXPECTED_FRONTIER')
+if ledger.get('open_deficits')==['INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V2']:
+    prev=REPO/'receipts'/'yado-intelligence-architectural-ceiling-self-evolution-v1-run-33465637351.json'
+    if not prev.exists():raise RuntimeError('INTELLIGENCE_METRIC_REPAIR_WITHOUT_PRIOR_WITHHOLD')
+    pr=load(prev)
+    if pr.get('status')!='WITHHOLD_INTELLIGENCE_ARCHITECTURAL_CEILING_SELF_EVOLUTION_V1' or pr.get('candidate_source_sha256')!='5a54b64462a4d252696f197953018b0d6f55c3d287eb6648f14ca3d8a4f4658b':
+        raise RuntimeError('INTELLIGENCE_METRIC_REPAIR_SOURCE_MISMATCH')
 if recheck.get('self_selected_weakest_plane')!='INTELLIGENCE':raise RuntimeError('INTELLIGENCE_NOT_SELF_SELECTED')
 if ledger.get('current_head_digest')!=head.get('canonical_head_digest'):raise RuntimeError('HEAD_LEDGER_MISMATCH')
 arch_sha=fsha(ARCH);head_sha=fsha(HEAD)
@@ -201,12 +208,13 @@ def score_strategy(compose_enabled,align_enabled):
     fam={}
     # Single-output compatibility: require singleton set when only one capability is needed.
     single_cases=[z for z in fresh if len(z['expected'])==1]
+    multi_cases=[z for z in fresh if len(z['expected'])>=2]
     if compose_enabled:
         fam['SINGLE_ROUTING_COMPAT']=sum(route_composer(composer,z['input'])==z['expected'] for z in single_cases)/len(single_cases)
-        fam['MULTI_CAPABILITY_COMPOSITION']=sum(route_composer(composer,z['input'])==z['expected'] for z in fresh)/len(fresh)
+        fam['MULTI_CAPABILITY_COMPOSITION']=sum(route_composer(composer,z['input'])==z['expected'] for z in multi_cases)/len(multi_cases)
     else:
         fam['SINGLE_ROUTING_COMPAT']=sum((base_router.execute(z['input']),)==z['expected'] for z in single_cases)/len(single_cases)
-        fam['MULTI_CAPABILITY_COMPOSITION']=sum((base_router.execute(z['input']),)==z['expected'] for z in fresh)/len(fresh)
+        fam['MULTI_CAPABILITY_COMPOSITION']=sum((base_router.execute(z['input']),)==z['expected'] for z in multi_cases)/len(multi_cases)
     if align_enabled and alignment is not None:
         if compose_enabled:
             fam['PAIRED_SCHEMA_ALIGNMENT_TRANSFER']=sum(route_composer(composer,remap(alignment,z['input']))==z['expected'] for z in alias_fresh)/len(alias_fresh)
