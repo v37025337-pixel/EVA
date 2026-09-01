@@ -280,7 +280,7 @@
   },
   "fixed_architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "next_required_capability": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V5",
+  "next_required_capability": "THINKING_PLATEAU_SELF_EVOLUTION_V1",
   "planes": {
     "INTELLIGENCE": {
       "families": {
@@ -314,15 +314,11 @@
     "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
     "contract_snapshot": {
       "CODE": {
-        "COMPONENT_ID": "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3",
-        "FUNCTION_SCOPE": "EXACTLY_ONE_FUNCTION",
-        "MAX_CANDIDATES": 20000,
+        "COMPONENT_ID": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+        "MAX_CANDIDATES": 24000,
+        "MAX_CONDITIONAL_DEPTH": 2,
         "MAX_EDIT_DEPTH": 2,
-        "SAFE_STRUCTURAL_WRAPPERS": [
-          "abs",
-          "min",
-          "max"
-        ]
+        "SEMANTIC_SCOPE": "ONE_SAFE_PYTHON_FUNCTION_WITH_AMBIGUITY_WITHHOLD"
       },
       "INTELLIGENCE": {
         "MAX_FIELD_CELLS": 262144,
@@ -340,96 +336,89 @@
       }
     },
     "deficit_severity": {
-      "CODE": 0.5,
+      "CODE": 0.0,
       "INTELLIGENCE": 0.0,
       "LOGIC": 0.0,
-      "THINKING": 0.15000000000000013
+      "THINKING": 0.06000000000000005
     },
-    "external_experience_digest": "1ee43e3bc7fcc79027c51be41e4c47565a38fb124bfc52ac65cb12b54feea98b",
     "neutral_selection": {
       "candidate_count": 4,
       "ranking": [
         {
-          "score": 0.5016999999999999,
-          "token": "opaque_6c283eba0c59356887"
+          "score": 0.05260000000000005,
+          "token": "opaque_3616fd7df0137d0f1f"
         },
         {
-          "score": 0.14200000000000013,
-          "token": "opaque_bf76fcf1b7a6197cc0"
+          "score": 0.0016999999999999932,
+          "token": "opaque_b96f7f1b7dd7e8d576"
         },
         {
           "score": -0.0016000000000000007,
-          "token": "opaque_1afdc703cee09025e8"
+          "token": "opaque_8eb6ff7726c5f9a883"
         },
         {
           "score": -0.004000000000000002,
-          "token": "opaque_bc4af163530b851220"
+          "token": "opaque_741ee9b639bcc7b4c3"
         }
       ],
-      "selected_score": 0.5016999999999999,
-      "selected_token": "opaque_6c283eba0c59356887"
+      "selected_score": 0.05260000000000005,
+      "selected_token": "opaque_3616fd7df0137d0f1f"
     },
     "plane_scores": {
-      "CODE": 0.5,
+      "CODE": 1.0,
       "INTELLIGENCE": 1.0,
       "LOGIC": 1.0,
-      "THINKING": 0.8499999999999999
+      "THINKING": 0.94
     },
-    "probe_version": 4,
+    "probe_version": 5,
     "probes": {
       "CODE": {
-        "CONDITIONAL_EXPRESSION_INSERTION": {
-          "detail": "NO_REPAIR_WITHIN_EDIT_BUDGET",
-          "score": 0.0
-        },
-        "NEW_EXPRESSION_SHAPE_MULT_WRAP": {
-          "detail": "NO_REPAIR_WITHIN_EDIT_BUDGET",
-          "score": 0.0
-        },
-        "THREE_EDIT_PLUS_ONE": {
-          "bound": 2,
-          "detail": 2,
-          "probe_value": 3,
+        "AMBIGUOUS_WITHHOLD_FRESH_V5": {
           "score": 1.0
         },
-        "TWO_EDIT_REGRESSION": {
-          "detail": 2,
+        "NESTED_DEPTH2_FRESH_V5": {
+          "score": 1.0
+        },
+        "RESOLVED_COMMIT_FRESH_V5": {
+          "score": 1.0
+        },
+        "TWO_EDIT_REGRESSION_V5": {
           "score": 1.0
         }
       },
       "INTELLIGENCE": {
-        "PAIRWISE_TOPOLOGY_FRESH": {
+        "PAIRWISE_COMPOSITION_FRESH_V5": {
           "score": 1.0
         },
-        "WIDTH26_FRESH": {
+        "WIDTH28_FRESH": {
           "score": 1.0
         }
       },
       "LOGIC": {
-        "DEGREE4_FRESH": {
+        "DEGREE4_FRESH_V5": {
           "score": 1.0
         },
-        "WIDTH26_FRESH": {
+        "WIDTH28_FRESH": {
           "score": 1.0
         }
       },
       "THINKING": {
-        "DEPENDENCY_DEPTH_PLUS_ONE_V4": {
+        "DEPENDENCY_DEPTH_PLUS_ONE_V5": {
           "bound": 8,
           "probe_value": 9,
-          "score": 0.8099999999999999,
+          "score": 0.9,
           "sequence_len": 7
         },
-        "STAGE_WIDTH_PLUS_ONE_V4": {
+        "STAGE_WIDTH_PLUS_ONE_V5": {
           "bound": 8,
           "probe_value": 9,
-          "score": 0.8899999999999999,
+          "score": 0.98,
           "sequence_len": 8
         }
       }
     },
     "scope": "LOGIC_THINKING_INTELLIGENCE_CODE",
-    "selected_plane": "CODE",
+    "selected_plane": "THINKING",
     "status": "FRONTIER_FOUND"
   },
   "plateau_streak": 0,
@@ -438,9 +427,9 @@
     "LOGIC",
     "THINKING"
   ],
-  "round": 10,
+  "round": 11,
   "schema": "yado.g2.lti_architectural_ceiling_state.v1",
-  "self_selected_weakest_plane": "CODE",
-  "state_digest": "3eaba50261eb063dbf6d1bfdf19c91076d4a85ae05191f8a0671b394599ca1c7",
-  "status": "PLATEAU_SEARCH"
+  "self_selected_weakest_plane": "THINKING",
+  "state_digest": "f5005c59b2d76048fd587a7d98ac6b159bb6cda8403b9c4f4476ed8b231d4b6e",
+  "status": "EVOLVING_TO_CEILING"
 }
