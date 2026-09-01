@@ -1,0 +1,117 @@
+{
+  "baseline_counterexamples": {
+    "CONDITIONAL_EXPRESSION": 0.0,
+    "MULT_WRAP": 0.0
+  },
+  "candidate_digest": "cc324ebcd65f108c35db5bc9974a8540e90e7cf132b62f0a763d5c4c3b3e0514",
+  "candidate_source_sha256": "6c7c6827e8dd8005ac23b2ff115194aba59cbd7a1bb91ce12c3e32244584e7f5",
+  "canonical_mutation": false,
+  "causal_gain": 1.0,
+  "checks": {
+    "architecture_immutable": true,
+    "causal_gain_large": true,
+    "code_self_selected": true,
+    "external_repair_learning_present": true,
+    "fresh_min_one": false,
+    "head_immutable": true,
+    "multi_function_rejected": true,
+    "probe_counterexamples_repaired": true,
+    "selected_structural_grammar": true,
+    "two_edit_regression_preserved": true,
+    "unsafe_rejected": true
+  },
+  "fresh_validation": {
+    "families": {
+      "ARITHMETIC_WRAP_FRESH": 1.0,
+      "CONDITIONAL_FRESH": 0.0,
+      "TWO_EDIT_FRESH": 1.0
+    },
+    "min_family": 0.0,
+    "score": 0.6666666666666666
+  },
+  "g3_genesis_performed": false,
+  "neutral_selection": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 0.9952,
+        "token": "opaque_659694ad45db7b73c1"
+      },
+      {
+        "score": 0.6641666666666667,
+        "token": "opaque_c448960ae9703f8624"
+      },
+      {
+        "score": 0.3277333333333333,
+        "token": "opaque_6808ced9ac3b169b5e"
+      },
+      {
+        "score": 0.3263333333333333,
+        "token": "opaque_87341a5a2970ce104c"
+      }
+    ],
+    "selected_score": 0.9952,
+    "selected_token": "opaque_659694ad45db7b73c1"
+  },
+  "next_required_capability": "CODE_PLATEAU_SELF_EVOLUTION_V3",
+  "promotion_applied": false,
+  "receipt_sha256": "2bad41ff0a5d7e1f46697036c933197b53b87fe8fd8c50c072b3bd5b80f357cd",
+  "schema": "yado.g2.code_plateau_self_evolution.v2",
+  "selected_strategy": "BOUNDED_STRUCTURAL_GRAMMAR",
+  "semantic_boundary": "BOUNDED SINGLE-FUNCTION REPAIR THAT ADDS SAFE RETURN-EXPRESSION STRUCTURAL SYNTHESIS (ARITHMETIC WRAPPERS AND CONDITIONAL EXPRESSIONS) ON TOP OF V3. NO LOOPS, IMPORTS, ATTRIBUTES, MULTI-FUNCTION OR MODULE REWRITES.",
+  "status": "WITHHOLD_CODE_PLATEAU_SELF_EVOLUTION_V2",
+  "validation": {
+    "ARITHMETIC_WRAPPER": {
+      "complexity": 0.2,
+      "families": {
+        "CONDITIONAL_EXPRESSION": 0.0,
+        "MULT_WRAP": 1.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.5,
+      "risk": 0.03,
+      "score": 0.6666666666666666,
+      "token": "opaque_c448960ae9703f8624"
+    },
+    "BASE_V3": {
+      "complexity": 0.1,
+      "families": {
+        "CONDITIONAL_EXPRESSION": 0.0,
+        "MULT_WRAP": 0.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.1,
+      "risk": 0.02,
+      "score": 0.3333333333333333,
+      "token": "opaque_87341a5a2970ce104c"
+    },
+    "BOUNDED_STRUCTURAL_GRAMMAR": {
+      "complexity": 0.36,
+      "families": {
+        "CONDITIONAL_EXPRESSION": 1.0,
+        "MULT_WRAP": 1.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.94,
+      "risk": 0.06,
+      "score": 1.0,
+      "token": "opaque_659694ad45db7b73c1"
+    },
+    "CONDITIONAL_ONLY": {
+      "complexity": 0.27,
+      "families": {
+        "CONDITIONAL_EXPRESSION": 0.0,
+        "MULT_WRAP": 0.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.68,
+      "risk": 0.05,
+      "score": 0.3333333333333333,
+      "token": "opaque_6808ced9ac3b169b5e"
+    }
+  }
+}

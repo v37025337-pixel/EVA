@@ -1,0 +1,115 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "baseline_counterexamples": {
+    "CONDITIONAL_EXPRESSION": 0.0,
+    "MULT_WRAP": 0.0
+  },
+  "candidate_digest": "cc324ebcd65f108c35db5bc9974a8540e90e7cf132b62f0a763d5c4c3b3e0514",
+  "candidate_source_sha256": "6c7c6827e8dd8005ac23b2ff115194aba59cbd7a1bb91ce12c3e32244584e7f5",
+  "canonical_active": false,
+  "causal_gain": 1.0,
+  "component_id": "ALG-G2-BOUNDED-STRUCTURAL-PROGRAM-REPAIR-V4",
+  "compute_contract": {
+    "function_scope": "EXACTLY_ONE_FUNCTION",
+    "max_candidates": 24000,
+    "max_edit_depth": 2,
+    "max_structural_candidates": 12000,
+    "structural_modes": [
+      "arithmetic_wrapper",
+      "conditional_expression"
+    ]
+  },
+  "experience_digest": "1ee43e3bc7fcc79027c51be41e4c47565a38fb124bfc52ac65cb12b54feea98b",
+  "fresh_validation": {
+    "families": {
+      "ARITHMETIC_WRAP_FRESH": 1.0,
+      "CONDITIONAL_FRESH": 0.0,
+      "TWO_EDIT_FRESH": 1.0
+    },
+    "min_family": 0.0,
+    "score": 0.6666666666666666
+  },
+  "neutral_selection": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 0.9952,
+        "token": "opaque_659694ad45db7b73c1"
+      },
+      {
+        "score": 0.6641666666666667,
+        "token": "opaque_c448960ae9703f8624"
+      },
+      {
+        "score": 0.3277333333333333,
+        "token": "opaque_6808ced9ac3b169b5e"
+      },
+      {
+        "score": 0.3263333333333333,
+        "token": "opaque_87341a5a2970ce104c"
+      }
+    ],
+    "selected_score": 0.9952,
+    "selected_token": "opaque_659694ad45db7b73c1"
+  },
+  "parent_head_digest": "cd3b965131a69aced88149ed76af0c567e445635fdfab7eba5570a1b92a15a03",
+  "promotion_applied": false,
+  "schema": "yado.g2.bounded_structural_program_repair_candidate.v4",
+  "selected_strategy": "BOUNDED_STRUCTURAL_GRAMMAR",
+  "semantic_boundary": "BOUNDED SINGLE-FUNCTION REPAIR THAT ADDS SAFE RETURN-EXPRESSION STRUCTURAL SYNTHESIS (ARITHMETIC WRAPPERS AND CONDITIONAL EXPRESSIONS) ON TOP OF V3. NO LOOPS, IMPORTS, ATTRIBUTES, MULTI-FUNCTION OR MODULE REWRITES.",
+  "state": "WITHHOLD",
+  "validation": {
+    "ARITHMETIC_WRAPPER": {
+      "complexity": 0.2,
+      "families": {
+        "CONDITIONAL_EXPRESSION": 0.0,
+        "MULT_WRAP": 1.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.5,
+      "risk": 0.03,
+      "score": 0.6666666666666666,
+      "token": "opaque_c448960ae9703f8624"
+    },
+    "BASE_V3": {
+      "complexity": 0.1,
+      "families": {
+        "CONDITIONAL_EXPRESSION": 0.0,
+        "MULT_WRAP": 0.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.1,
+      "risk": 0.02,
+      "score": 0.3333333333333333,
+      "token": "opaque_87341a5a2970ce104c"
+    },
+    "BOUNDED_STRUCTURAL_GRAMMAR": {
+      "complexity": 0.36,
+      "families": {
+        "CONDITIONAL_EXPRESSION": 1.0,
+        "MULT_WRAP": 1.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.94,
+      "risk": 0.06,
+      "score": 1.0,
+      "token": "opaque_659694ad45db7b73c1"
+    },
+    "CONDITIONAL_ONLY": {
+      "complexity": 0.27,
+      "families": {
+        "CONDITIONAL_EXPRESSION": 0.0,
+        "MULT_WRAP": 0.0,
+        "TWO_EDIT_REGRESSION": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.68,
+      "risk": 0.05,
+      "score": 0.3333333333333333,
+      "token": "opaque_6808ced9ac3b169b5e"
+    }
+  }
+}
