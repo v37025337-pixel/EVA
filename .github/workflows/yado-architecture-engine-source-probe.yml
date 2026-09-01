@@ -43,3 +43,14 @@ jobs:
                           try: print(inspect.getsource(o)[:12000])
                           except Exception as e: print("SOURCE_ERR",repr(e))
           PY
+          python - <<'PY'
+          import inspect
+          from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
+          keys=('synth','evol','construct','grammar','repair','frontier','architect','hypoth','self_')
+          print("\n===== RC8 MATCHING METHODS =====")
+          for n,o in inspect.getmembers(UnifiedYADOKernelV30RC8ExternalCognitive, predicate=inspect.isfunction):
+              if any(k in n.lower() for k in keys):
+                  print("\n--- METHOD",n,inspect.signature(o),"---")
+                  try: print(inspect.getsource(o)[:12000])
+                  except Exception as e: print("SOURCE_ERR",repr(e))
+          PY
