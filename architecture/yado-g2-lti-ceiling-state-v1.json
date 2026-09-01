@@ -300,7 +300,7 @@
   },
   "fixed_architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "next_required_capability": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V6",
+  "next_required_capability": "LTI_CODE_ARCHITECTURAL_CEILING_PLATEAU_PROBE_V7",
   "planes": {
     "INTELLIGENCE": {
       "families": {
@@ -332,124 +332,92 @@
   },
   "plateau_probe": {
     "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
-    "contract_snapshot": {
-      "CODE": {
-        "COMPONENT_ID": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
-        "MAX_CANDIDATES": 24000,
-        "MAX_CONDITIONAL_DEPTH": 2,
-        "MAX_EDIT_DEPTH": 2,
-        "SEMANTIC_SCOPE": "ONE_SAFE_PYTHON_FUNCTION_WITH_AMBIGUITY_WITHHOLD"
-      },
-      "INTELLIGENCE": {
-        "MAX_FIELD_CELLS": 262144,
-        "MAX_TRIGGER_CANDIDATES": 4096,
-        "MAX_TRIGGER_WIDTH": 2
-      },
-      "LOGIC": {
-        "MAX_BOOLEAN_CELLS": 262144,
-        "MAX_POLYNOMIAL_ROWS": 256,
-        "MAX_POLYNOMIAL_TERMS": 20
-      },
-      "THINKING": {
-        "MAX_PLAN_DEPTH": 8,
-        "MAX_STAGES": 8
-      }
-    },
-    "deficit_severity": {
+    "best_candidate_gain_upper_bound": {
       "CODE": 0.0,
       "INTELLIGENCE": 0.0,
       "LOGIC": 0.0,
-      "THINKING": 0.06000000000000005
+      "THINKING": 0.0
     },
+    "max_gain_upper_bound": 0.0,
     "neutral_selection": {
       "candidate_count": 4,
       "ranking": [
         {
-          "score": 0.05260000000000005,
-          "token": "opaque_3616fd7df0137d0f1f"
-        },
-        {
           "score": 0.0016999999999999932,
-          "token": "opaque_b96f7f1b7dd7e8d576"
+          "token": "opaque_a4a3d51bab2fddc19b"
         },
         {
           "score": -0.0016000000000000007,
-          "token": "opaque_8eb6ff7726c5f9a883"
+          "token": "opaque_3ccb92d9e9b6262cb1"
+        },
+        {
+          "score": -0.0029000000000000033,
+          "token": "opaque_10ab184f4be53373f1"
         },
         {
           "score": -0.004000000000000002,
-          "token": "opaque_741ee9b639bcc7b4c3"
+          "token": "opaque_346123c12f4aad5f67"
         }
       ],
-      "selected_score": 0.05260000000000005,
-      "selected_token": "opaque_3616fd7df0137d0f1f"
+      "selected_score": 0.0016999999999999932,
+      "selected_token": "opaque_a4a3d51bab2fddc19b"
     },
     "plane_scores": {
       "CODE": 1.0,
       "INTELLIGENCE": 1.0,
       "LOGIC": 1.0,
-      "THINKING": 0.94
+      "THINKING": 1.0
     },
-    "probe_version": 5,
+    "probe_version": 6,
     "probes": {
       "CODE": {
-        "AMBIGUOUS_WITHHOLD_FRESH_V5": {
+        "AFFINE_REPAIR_V6": {
           "score": 1.0
         },
-        "NESTED_DEPTH2_FRESH_V5": {
+        "AMBIGUOUS_WITHHOLD_V6": {
           "score": 1.0
         },
-        "RESOLVED_COMMIT_FRESH_V5": {
-          "score": 1.0
-        },
-        "TWO_EDIT_REGRESSION_V5": {
+        "RESOLVED_COMMIT_V6": {
           "score": 1.0
         }
       },
       "INTELLIGENCE": {
-        "PAIRWISE_COMPOSITION_FRESH_V5": {
+        "PAIRWISE_FRESH_V6": {
           "score": 1.0
         },
-        "WIDTH28_FRESH": {
+        "WIDTH30_FRESH": {
           "score": 1.0
         }
       },
       "LOGIC": {
-        "DEGREE4_FRESH_V5": {
+        "DEGREE4_SHIFT_FRESH": {
           "score": 1.0
         },
-        "WIDTH28_FRESH": {
+        "WIDTH30_FRESH": {
           "score": 1.0
         }
       },
       "THINKING": {
-        "DEPENDENCY_DEPTH_PLUS_ONE_V5": {
-          "bound": 8,
-          "probe_value": 9,
-          "score": 0.9,
-          "sequence_len": 7
+        "DEPENDENCY12_FRESH": {
+          "score": 1.0
         },
-        "STAGE_WIDTH_PLUS_ONE_V5": {
-          "bound": 8,
-          "probe_value": 9,
-          "score": 0.98,
-          "sequence_len": 8
+        "WIDTH12_FRESH": {
+          "score": 1.0
         }
       }
     },
-    "scope": "LOGIC_THINKING_INTELLIGENCE_CODE",
-    "selected_plane": "THINKING",
-    "status": "FRONTIER_FOUND"
+    "selected_plane": "CODE",
+    "status": "PLATEAU_ROUND"
   },
-  "plateau_streak": 0,
+  "plateau_streak": 1,
   "ranking": [
     "INTELLIGENCE",
     "LOGIC",
     "THINKING"
   ],
-  "round": 11,
+  "round": 12,
   "schema": "yado.g2.lti_architectural_ceiling_state.v1",
-  "self_selected_weakest_plane": "THINKING",
-  "state_digest": "989b363ca1d052827d47fb156b35b6a95b243d38cb2e9979148bd82a5eb45661",
+  "self_selected_weakest_plane": "CODE",
+  "state_digest": "d9267a251bf5fc811b9c6e3a3dd95e09753e227d5bd6f55f937a9caffeeda796",
   "status": "PLATEAU_SEARCH"
 }
