@@ -34,7 +34,10 @@ jobs:
           s=json.loads(Path("unified-context-snapshot.json").read_text())
           assert s["single_context_invariant"] is True
           assert s["active_lineage_count"] == 1
-          assert s["historical_branch_memory_count"] >= 1
+          assert s["historical_branch_memory_count"] == 13
+          assert len(s["open_deficits"]) == 1
+          assert s["current_frontier"] == s["open_deficits"][0]
+          assert s["frontier_source"] == "architecture/evolution-ledger.json:open_deficits"
           print("PASS_YADO_UNIFIED_CONTEXT_KERNEL_V1")
           PY
       - uses: actions/upload-artifact@v4

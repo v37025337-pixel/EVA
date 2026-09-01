@@ -1,11 +1,6 @@
 name: YADO G1 S2 Promotion Decision Gate V1
 on:
-  push:
-    branches: [yado-architecture-shadow-search]
-    paths:
-      - "runtime/yado_evolution_ledger_v2.py"
-      - "runtime/yado_g1_s2_promotion_decision_gate_v1.py"
-      - ".github/workflows/yado-g1-s2-promotion-decision-gate-v1.yml"
+  workflow_dispatch:
 permissions:
   contents: write
 concurrency:
