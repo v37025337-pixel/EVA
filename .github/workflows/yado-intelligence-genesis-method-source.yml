@@ -1,0 +1,35 @@
+name: YADO Intelligence Genesis Method Source
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: [".github/workflows/yado-intelligence-genesis-method-source.yml"]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python runtime/reconstruct_rc8v36.py
+      - name: Inspect native intelligence genesis methods
+        working-directory: runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import inspect,json
+          from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
+          names=[
+            'synthesize_intelligence_algorithm_component',
+            'synthesize_intelligence_with_extended_meta_grammar',
+          ]
+          out={}
+          for n in names:
+              o=getattr(UnifiedYADOKernelV30RC8ExternalCognitive,n,None)
+              if o is None:
+                  out[n]={'exists':False};continue
+              try:src=inspect.getsource(o)
+              except Exception as e:src='SOURCE_ERROR:'+repr(e)
+              out[n]={'exists':True,'signature':str(inspect.signature(o)),'source':src}
+          print(json.dumps(out,indent=2,sort_keys=True))
+          PY
