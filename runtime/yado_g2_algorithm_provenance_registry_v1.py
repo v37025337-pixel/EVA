@@ -56,7 +56,6 @@ mechanism_specs=[
  ('RC6_EXTENDED_META_GRAMMAR','synthesize_intelligence_with_extended_meta_grammar','META_GRAMMAR','PREDICATE_PROGRAM_ROUTING_OVER_EVOLUTION_ALGORITHMS'),
  ('RC7_EVOLUTION_OPERATION_CONTROL','propose_evolution_operation','EVOLUTION_CONTROL','REACTION_NORM_CROSS_LINEAGE_CLONAL_OPERATION_SELECTION'),
  ('RC7_DURABLE_COMMIT_GUARD','durable_commit_evolution_bundle','DURABLE_COMMIT_CONTROL','ACTIVE_STATE_ONLY_DURABLE_EVOLUTION_COMMIT'),
- ('RC8_EXTERNAL_COGNITIVE_ASSESSMENT','assess_external_runtime_candidate','EXTERNAL_COGNITIVE_CONTROL','EXTERNAL_RUNTIME_CANDIDATE_ASSESSMENT'),
 ]
 mechanisms=[]
 for mid,meth,role,semantic in mechanism_specs:
@@ -64,12 +63,25 @@ for mid,meth,role,semantic in mechanism_specs:
     rec.update({'mechanism_id':mid,'role':role,'semantic':semantic})
     mechanisms.append(rec)
 
+rc8_path=Path(inspect.getsourcefile(UnifiedYADOKernelV30RC8ExternalCognitive)).resolve()
+mechanisms.append({
+ 'mechanism_id':'RC8_EXTERNAL_COGNITIVE_RUNTIME_LAYER',
+ 'method':None,
+ 'owner_class':'UnifiedYADOKernelV30RC8ExternalCognitive',
+ 'owner_module':UnifiedYADOKernelV30RC8ExternalCognitive.__module__,
+ 'source_path':str(rc8_path.relative_to(REPO.resolve())) if REPO.resolve() in rc8_path.parents else str(rc8_path),
+ 'source_sha256':file_sha(rc8_path),
+ 'signature':str(inspect.signature(UnifiedYADOKernelV30RC8ExternalCognitive)),
+ 'role':'EXTERNAL_COGNITIVE_RUNTIME_LAYER',
+ 'semantic':'TOP_LEVEL_RC8_RUNTIME_BOUNDARY_THAT_INHERITS_RC7_RC6_RC5_RC4_CAPABILITIES',
+})
+
 transition_order=[
  'RC4_META_EVOLUTION',
  'RC5_ALGORITHM_CONSTRUCTOR',
  'RC6_EXTENDED_META_GRAMMAR',
  'RC7_EVOLUTION_OPERATION_CONTROL',
- 'RC8_EXTERNAL_COGNITIVE_ASSESSMENT',
+ 'RC8_EXTERNAL_COGNITIVE_RUNTIME_LAYER',
  'G2_ACTIVE_GENERATION'
 ]
 by_id={m['mechanism_id']:m for m in mechanisms}
@@ -205,7 +217,7 @@ checks={
  'rc5_owner_correct':by_id['RC5_ALGORITHM_CONSTRUCTOR']['owner_class']=='UnifiedYADOKernelV30RC5AlgorithmGenesis',
  'rc6_owner_correct':by_id['RC6_EXTENDED_META_GRAMMAR']['owner_class']=='UnifiedYADOKernelV30RC6MetaGrammar',
  'rc7_owner_correct':by_id['RC7_EVOLUTION_OPERATION_CONTROL']['owner_class']=='UnifiedYADOKernelV30RC7DeepIntegrity',
- 'rc8_owner_correct':by_id['RC8_EXTERNAL_COGNITIVE_ASSESSMENT']['owner_class']=='UnifiedYADOKernelV30RC8ExternalCognitive',
+ 'rc8_owner_correct':by_id['RC8_EXTERNAL_COGNITIVE_RUNTIME_LAYER']['owner_class']=='UnifiedYADOKernelV30RC8ExternalCognitive',
  'rc_intermediate_promotions_not_inferred':all(t['formal_promotion_event_present'] is False for t in transitions[:-1]),
  'formal_g2_promotion_present':transitions[-1]['formal_promotion_event_present'] is True,
  'head_ledger_digest_match':ledger['current_head_digest']==head['canonical_head_digest'],
