@@ -1,0 +1,113 @@
+{
+  "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
+  "candidate_digest": "8e05c5a110cdf1bbcda78ecacbda0fea42338f50c6e08eb670d51709e15c3f97",
+  "candidate_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+  "canonical_active": false,
+  "causal_gain": 1.0,
+  "component_id": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+  "compute_contract": {
+    "base_search_budget": 6000,
+    "max_candidates": 24000,
+    "max_conditional_depth": 2,
+    "max_search_nodes": 4000,
+    "max_split_tests": 640,
+    "structural_search_budget": 18000
+  },
+  "experience_digest": "1ee43e3bc7fcc79027c51be41e4c47565a38fb124bfc52ac65cb12b54feea98b",
+  "fresh_validation": {
+    "families": {
+      "AFFINE_NO_FALSE_WITHHOLD": 1.0,
+      "AMBIGUOUS_GAP_FRESH": 1.0,
+      "RESOLVED_GAP_FRESH": 1.0,
+      "TWO_EDIT_NO_FALSE_WITHHOLD": 1.0
+    },
+    "min_family": 1.0,
+    "score": 1.0
+  },
+  "neutral_selection": {
+    "candidate_count": 2,
+    "ranking": [
+      {
+        "score": 0.9924,
+        "token": "opaque_3231ec1f8c84715143"
+      },
+      {
+        "score": 0.46099999999999997,
+        "token": "opaque_0a4cd86424be7e2559"
+      }
+    ],
+    "selected_score": 0.9924,
+    "selected_token": "opaque_3231ec1f8c84715143"
+  },
+  "parent_head_digest": "cd3b965131a69aced88149ed76af0c567e445635fdfab7eba5570a1b92a15a03",
+  "promotion_applied": false,
+  "schema": "yado.g2.ambiguity_aware_program_repair_candidate.v11",
+  "selected_strategy": "AMBIGUITY_AWARE_V11",
+  "semantic_boundary": "FIXED-BUDGET PROGRAM REPAIR THAT WITHHOLDS WHEN TRAINING-EQUIVALENT THRESHOLD VARIANTS DISAGREE ON UNOBSERVED INTEGER GAP VALUES; COMMITS AGAIN WHEN ADDED EVIDENCE REMOVES THE AMBIGUITY.",
+  "state": "AUTHORIZED_FOR_SHADOW_ADMISSION",
+  "validation": {
+    "AMBIGUITY_AWARE_V11": {
+      "complexity": 0.54,
+      "details": {
+        "ambiguous": {
+          "ambiguity": {
+            "alternative_threshold": 3,
+            "ambiguous": true,
+            "arg": "x",
+            "outputs": [
+              10,
+              3
+            ],
+            "probe_value": 3,
+            "threshold": 2
+          },
+          "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+          "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+          "source": null
+        },
+        "resolved": {
+          "ambiguity_checked": true,
+          "conditional_depth": 2,
+          "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+          "search_nodes": 17,
+          "source": "def f(x):\n    return abs(x) if x <= -5 else abs(x) if x <= 4 else x * 3 + 1\n"
+        }
+      },
+      "families": {
+        "AMBIGUOUS_GAP_WITHHOLD": 1.0,
+        "RESOLVED_GAP_COMMIT": 1.0
+      },
+      "min_family": 1.0,
+      "novelty": 0.98,
+      "risk": 0.04,
+      "score": 1.0,
+      "token": "opaque_3231ec1f8c84715143"
+    },
+    "COMMIT_FIRST_V10": {
+      "complexity": 0.5,
+      "details": {
+        "ambiguous": {
+          "conditional_depth": 2,
+          "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+          "search_nodes": 11,
+          "source": "def f(x):\n    return abs(x) if x <= -5 else abs(x) if x <= 2 else x * 3 + 1\n"
+        },
+        "resolved": {
+          "conditional_depth": 2,
+          "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+          "search_nodes": 17,
+          "source": "def f(x):\n    return abs(x) if x <= -5 else abs(x) if x <= 4 else x * 3 + 1\n"
+        }
+      },
+      "families": {
+        "AMBIGUOUS_GAP_WITHHOLD": 0.0,
+        "RESOLVED_GAP_COMMIT": 1.0
+      },
+      "min_family": 0.0,
+      "novelty": 0.2,
+      "risk": 0.08,
+      "score": 0.5,
+      "token": "opaque_0a4cd86424be7e2559"
+    }
+  }
+}
