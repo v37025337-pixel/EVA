@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "f460f36843c6250fb5a217b581f48b4c22237387e287697fd36c6ddb7d3bb2e5",
+  "current_head_digest": "ee242b0cea47d10f6920bd74aa3c946d9ba54779a5d57108448d6c76059084b2",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 232,
+  "event_count": 234,
   "events": [
     {
       "canonical_mutation": false,
@@ -3979,14 +3979,52 @@
       "source_digest": "d365d176a2d21276996cc8f538e829a29bd5026078a056ca3fec4a8bcab03e67",
       "source_path": "receipts/yado-current-frontier-execution-failure-history-v1-run-33664450398.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",
+      "effect": "RUN=33664450398; FRESH_V3_CONSUMED=True; SUBSTANTIVE_ADMISSION_REACHED_POST_WRITE=True; POST_GUARD=WITHHOLD; MISSING_PLANE_BINDING=True; MISSING_RUNTIME_MANIFEST_BINDING=True; CANONICAL_ROLLBACK=True; ADMISSION_RECEIPT_PERSISTED=False; NEXT=KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",
+      "event_hash": "ae017ffc9f0779924e315dc323bfc0db1e25ffaeb68e9fd04bbd0dab533e0161",
+      "event_id": "E0233_G2_CANONICAL_ADMISSION_FAILURE_DETAIL_33664450398",
+      "event_type": "G2_CANONICAL_ADMISSION_FAILURE_DETAIL_RECONCILIATION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 232,
+      "parent_event_hash": "bdfa943f725825fb3cc78140e6b614a258cba066b8e866e189e4abb78b82a4ae",
+      "promotion_applied": false,
+      "run_id": "33664450398",
+      "source_digest": "d365d176a2d21276996cc8f538e829a29bd5026078a056ca3fec4a8bcab03e67",
+      "source_path": "receipts/yado-current-frontier-execution-failure-history-v1-run-33664450398.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": true,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",
+      "effect": "STATE=CANONICAL_ADMITTED; SELECTED=ADMIT_COMPOSITE_REPAIRED_SUCCESSOR_V1; CURRENT_EXPLICIT=0.500000; REPAIRED_EXPLICIT=1.000000; CURRENT_AMBIG=0.500000; REPAIRED_AMBIG=1.000000; LOCAL_DROP=0.750000; CANONICAL=True; G3=False; NEXT=KERNEL_G2_COMPOSITE_CANONICAL_POST_ADMISSION_AUDIT_V1",
+      "event_hash": "948811d195c75fb7c821696a04dde436b6f3737eb31df898b54dc0a9bb90d066",
+      "event_id": "E0234_G2_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",
+      "event_type": "G2_COMPOSITE_REPAIRED_CANONICAL_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 233,
+      "new_head_digest": "ee242b0cea47d10f6920bd74aa3c946d9ba54779a5d57108448d6c76059084b2",
+      "parent_event_hash": "ae017ffc9f0779924e315dc323bfc0db1e25ffaeb68e9fd04bbd0dab533e0161",
+      "previous_head_digest": "f460f36843c6250fb5a217b581f48b4c22237387e287697fd36c6ddb7d3bb2e5",
+      "promotion_applied": false,
+      "run_id": "33664703437",
+      "source_digest": "c439c09b04c66902a2a0c24698966539950573d69d27746e4597ac242ac3fd73",
+      "source_path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-canonical-admission-v1-run-33664703437.json",
+      "status": "PASS_CANONICAL"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "01930d18aff60e771a41aec0acfe66f215a95e2f24784e42509bfff10d7dff84",
+  "ledger_digest": "21d82127760e8016b75169809f9cce21384d65072397101920ed7bb05734101a",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1"
+    "KERNEL_G2_COMPOSITE_CANONICAL_POST_ADMISSION_AUDIT_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -4020,5 +4058,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "bdfa943f725825fb3cc78140e6b614a258cba066b8e866e189e4abb78b82a4ae"
+  "tail_event_hash": "948811d195c75fb7c821696a04dde436b6f3737eb31df898b54dc0a9bb90d066"
 }

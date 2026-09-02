@@ -1,0 +1,143 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "9257dd1367100a55890963d95cb85c2ea29ad80f04171f8fe240819868d0b8af",
+  "canonical_component": {
+    "architecture_family": "TYPED_RECURRENT_CAPABILITY_GRAPH",
+    "architecture_mutation": false,
+    "canonical_component_digest": "eefffdd17fe190cfb16055bf8a01eaf50e91ff8e7bc7b99619360e32303453bd",
+    "component": {
+      "canonical_active": false,
+      "component_digest": "2fae46c82faf13600c9974e6a819f5662a511db40d425301ef5a1980c50254dd",
+      "component_id": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+      "context_selector": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+      "execution_substrate": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
+      "parent_router_reinterpretation": false,
+      "parent_runtime_modified": false,
+      "schema": "yado.g2.composite_transfer_repair_adapter.v1",
+      "selection_count_per_task": 1
+    },
+    "component_id": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+    "evolution_operation": "CLONAL",
+    "formal_generation": "G2_CANDIDATE_TRCG_V1",
+    "fresh_admission_dataset_digest": "f03be7466cb656d718ac0988d95d6101f1c6593c0bec6a3fab67cead43a5af5e",
+    "fresh_admission_metrics": {
+      "budget_accuracy": 1.0,
+      "budget_violations": 0,
+      "current_ambiguous": 0.5,
+      "current_explicit": 0.5,
+      "local_context_causal_drop": 0.75,
+      "neuro_symbolic_accuracy": 1.0,
+      "neuro_symbolic_gain": 0.5,
+      "repaired_ablation": 0.25,
+      "repaired_ambiguous": 1.0,
+      "repaired_explicit": 1.0,
+      "resource_accuracy": 1.0,
+      "rollback_accuracy": 1.0
+    },
+    "repair_candidate_digest": "f85ed64ed5d89446221622cffddc7391f90f8ee0b78b666c3b794b7ec57853ee",
+    "runtime_sha256": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
+    "runtime_source": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
+    "schema": "yado.g2.composite_executable_successor.canonical.v1",
+    "selected_families": [
+      "OPEN_ENDED_EVOLUTION",
+      "LOCAL_SELF_ORGANIZING",
+      "NEURO_SYMBOLIC"
+    ],
+    "semantic_boundary": "CANONICAL G2 EXECUTION ADAPTER FOR SINGLE-SELECTION FORCED-CAPABILITY EXECUTION OVER THE EXISTING TYPED RECURRENT CAPABILITY GRAPH. THIS IS NOT G3 AND DOES NOT CHANGE THE FORMAL ARCHITECTURE FAMILY.",
+    "stability_candidate_digest": "9e0afab60934b3be38e61c8489b4c927dc33f8a6e7f2425fd2993a4438af6266",
+    "status": "CANONICAL_ACTIVE"
+  },
+  "canonical_mechanism_mutation": true,
+  "checks": {
+    "architecture_family_unchanged": true,
+    "budget_violations_zero": true,
+    "fresh_budget": true,
+    "fresh_local_causal_drop": true,
+    "fresh_neuro_gain": true,
+    "fresh_neuro_symbolic": true,
+    "fresh_repaired_ambiguous": true,
+    "fresh_repaired_explicit": true,
+    "fresh_resource": true,
+    "g3_not_started": true,
+    "kernel_admits_repaired_successor": true,
+    "repair_digest_fixed_before_admission": true,
+    "rollback_parent": true,
+    "stability_digest_fixed_before_admission": true
+  },
+  "fresh_dataset_digest": "f03be7466cb656d718ac0988d95d6101f1c6593c0bec6a3fab67cead43a5af5e",
+  "fresh_metrics": {
+    "budget_accuracy": 1.0,
+    "budget_violations": 0,
+    "current_ambiguous": 0.5,
+    "current_explicit": 0.5,
+    "local_context_causal_drop": 0.75,
+    "neuro_symbolic_accuracy": 1.0,
+    "neuro_symbolic_gain": 0.5,
+    "repaired_ablation": 0.25,
+    "repaired_ambiguous": 1.0,
+    "repaired_explicit": 1.0,
+    "resource_accuracy": 1.0,
+    "rollback_accuracy": 1.0
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "kernel_selection": {
+    "candidate_count": 2,
+    "gate_digest": "68b4b5439c66ba6d2e3863fa677f97a664d4fa1f8b3eb29be8c3507bb34f6553",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "40fc57a44e819100fd163e56888d410a8a55c0c4f21b44b8ffce476d9ab38406",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CURRENT_CANONICAL_DOUBLE_ROUTE_V1",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "67e10499ab8d98e7b82db91b7a2489f8d44bb43bf37a15a7b635b2aa29b9e2e8",
+        "failed_critics": [],
+        "fit_gain": 0.5,
+        "heldout_gain": 0.5,
+        "skill_id": "ADMIT_COMPOSITE_REPAIRED_SUCCESSOR_V1",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_COMPOSITE_REPAIRED_SUCCESSOR_V1"
+    ],
+    "status": "SELECTED"
+  },
+  "repair_candidate_digest": "f85ed64ed5d89446221622cffddc7391f90f8ee0b78b666c3b794b7ec57853ee",
+  "schema": "yado.g2.architecture_composite_executable_successor_canonical_admission.v1",
+  "selected_skill_id": "ADMIT_COMPOSITE_REPAIRED_SUCCESSOR_V1",
+  "stability_candidate_digest": "9e0afab60934b3be38e61c8489b4c927dc33f8a6e7f2425fd2993a4438af6266",
+  "state": "CANONICAL_ADMITTED"
+}
