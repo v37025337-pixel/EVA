@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "b8b5469f31bb9bc9cc3cef239ca95d9f163c8f0ae3aa41c880705ebf28e0fb0c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 214,
+  "event_count": 215,
   "events": [
     {
       "canonical_mutation": false,
@@ -3635,10 +3635,27 @@
       "source_digest": "5428085089cd3a6ab64a06dbd3c03d5ab3e99093decb98b880f546d00e037664",
       "source_path": "receipts/yado-kernel-native-selector-canonical-binding-v4-run-33653155391.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V5",
+      "effect": "RUN=33656089758; WORKFLOW=YADO_G2_HIGH_SCALE_REPAIR_V5; OUTCOME=UNEXPECTED_WORKFLOW_FAILURE; ADMISSION_EVIDENCE=False; NEXT=KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V5",
+      "event_hash": "bb1d974a7afdff559c442954e86a8537219a5c7490ee0e22456ec4e3ecf00037",
+      "event_id": "E0215_G2_EXECUTION_FAILURE_33656089758",
+      "event_type": "G2_EXECUTION_FAILURE_EXPERIENCE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 214,
+      "parent_event_hash": "a35352694598ce8ef6e59e4601af9a5c505ec953ac3a10047ad09d8ab8f7adb9",
+      "promotion_applied": false,
+      "run_id": "33656089758",
+      "source_digest": "e0b3907fe9ab86f73db74e5d0be4ddefbbb53ea530493b9ddb5a43c1e61e24c3",
+      "source_path": "receipts/yado-current-frontier-execution-failure-history-v1-run-33656089758.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "43e25fc1967c8a784fa18af5d274f309c0a9822c23043024f563d910e5e08d84",
+  "ledger_digest": "38c7a75501ad39b6508081a0d96d66a6dbf708125a1d479e8fa110835749220f",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -3676,5 +3693,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "a35352694598ce8ef6e59e4601af9a5c505ec953ac3a10047ad09d8ab8f7adb9"
+  "tail_event_hash": "bb1d974a7afdff559c442954e86a8537219a5c7490ee0e22456ec4e3ecf00037"
 }
