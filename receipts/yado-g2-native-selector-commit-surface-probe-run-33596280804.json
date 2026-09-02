@@ -1,0 +1,97 @@
+{
+  "hits": [
+    {
+      "module": "yado_core_v3_0_rc3_autoevolution",
+      "name": "durable_commit_evolution_bundle",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc3_autoevolution.py",
+      "sha256": "19bde96e966e75c505a43086caed5e44dd9be455bf2c30b95c769e116faaebb8",
+      "source": "def durable_commit_evolution_bundle(self,bundle:Mapping[str,Mapping[str,Any]],gate:Mapping[str,Any])->Dict[str,Any]:\n        if not self.canonical_state.get('canonical_durable_mutation'):return {'committed':False,'reason':'DURABLE_MUTATION_DISABLED'}\n        if not gate.get('passed'):return {'committed':False,'reason':'VALIDATION_GATE_FAILED'}\n        allowed={'LOGIC','THINKING','INTELLIGENCE'}\n        if set(bundle)!=allowed:return {'committed':False,'reason':'BUNDLE_MUST_COVER_THREE_ORGANS'}\n        before=self.state_path.read_bytes();before_sha=hashlib.sha256(before).hexdigest();st=json.loads(before)\n        registry={}\n        for organ,c in bundle.items():\n            registry[organ]={'model_type':{'LOGIC':'BOOLEAN_PROGRAM','THINKING':'PRECEDENCE_GRAPH','INTELLIGENCE':'STRATEGY_TREE'}[organ], 'model':c['model'],'evidence':{'blind':c['blind'],'ablation':c['ablation'],'restore':c['restore']}}\n        st['organ_autoevolution_registry']=registry;st['organ_autoevolution_enabled']=True\n        self._atomic_write_json(self.state_path,st);self.reload_canonical_state();after_sha=hashlib.sha256(self.state_path.read_bytes()).hexdigest()\n        return {'committed':True,'before_sha256':before_sha,'after_sha256':after_sha}"
+    },
+    {
+      "module": "test_yado_skill_admission_integration_v1",
+      "name": "test_kernel_exposes_precommit_gate",
+      "path": "runtime/yado_rc8_v36/test_yado_skill_admission_integration_v1.py",
+      "sha256": "0b48deb19de75f2fcae83e9a08566753f08f64394faa15df636f0efe1318a5b4",
+      "source": "def test_kernel_exposes_precommit_gate(self):\n        k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=':memory:')\n        try:\n            cap=k.unified_snapshot()['skill_admission']\n            self.assertEqual(cap['status'],'ACTIVE_BOUNDED_PRECOMMIT_SKILL_GATE_V1')\n            good=dict(skill_id='good',artifact_digest='dg',structural_valid=True,semantic_consistency=.99,fit_baseline=.4,fit_candidate=.8,heldout_baseline=.5,heldout_candidate=.7)\n            bad=dict(skill_id='bad',artifact_digest='db',structural_valid=True,semantic_consistency=.99,fit_baseline=.4,fit_candidate=.9,heldout_baseline=.8,heldout_candidate=.3)\n            out=k.select_evolution_skills([good,bad])\n            self.assertEqual(out['selected_skill_ids'],['good'])\n        finally:k.close()"
+    },
+    {
+      "module": "test_yado_evolution_archive_integration_v1",
+      "name": "test_kernel_archive_does_not_mutate_canonical_state",
+      "path": "runtime/yado_rc8_v36/test_yado_evolution_archive_integration_v1.py",
+      "sha256": "f776d8b3be1185a4791423047616def6bead094caf169b99db361f2043d9ed5a",
+      "source": "def test_kernel_archive_does_not_mutate_canonical_state(tmp_path):\n    state=Path(__file__).parent/'yado_canonical_state_v3_rc7_deep_integrity.json'\n    import hashlib\n    before=hashlib.sha256(state.read_bytes()).hexdigest()\n    k=UnifiedYADOKernelV30RC7DeepIntegrity(db_path=str(tmp_path/'ea2.sqlite'))\n    try:\n        k.select_evolution_parent(rows(),'provenance_reduction')\n    finally:\n        k.close()\n    after=hashlib.sha256(state.read_bytes()).hexdigest()\n    assert before==after=='1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b'"
+    },
+    {
+      "module": "test_yado_rc7_deep_integrity",
+      "name": "test_historical_state_commit_guard",
+      "path": "runtime/yado_rc8_v36/test_yado_rc7_deep_integrity.py",
+      "sha256": "bdbf326ec8834400558d71f531d65973c4ac53dc7bff1cb1808d7fec5e54370f",
+      "source": "def test_historical_state_commit_guard(self):\n        fd,p=tempfile.mkstemp(suffix='.json',dir=str(ROOT));os.close(fd)\n        try:\n            Path(p).write_bytes(DEFAULT_STATE.read_bytes()); k=UnifiedYADOKernelV30RC7DeepIntegrity(db_path=':memory:',state_path=p)\n            try:r=k.durable_commit_evolution_bundle({}, {'passed':True});self.assertFalse(r['committed']);self.assertEqual(r['reason'],'HISTORICAL_OR_NONACTIVE_STATE_IMMUTABLE_IN_R7')\n            finally:k.close()\n        finally:Path(p).unlink(missing_ok=True)"
+    },
+    {
+      "module": "yado_core_v2",
+      "name": "register_capability",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def register_capability(self, name: str, score: float, evidence: Sequence[str]) -> CapabilityState:\n        score = float(np.clip(score, 0.0, 1.0))\n        state = CapabilityState(name=name, score=score, evidence=list(evidence), updated_at=utc_now().isoformat())\n        self.capabilities[name] = state\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"INSERT OR REPLACE INTO capabilities(name, score, evidence, updated_at) VALUES(?,?,?,?)\",\n                (name, score, canonical_json(state.evidence), state.updated_at),\n            )\n            self.system.conn.commit()\n        return state"
+    },
+    {
+      "module": "yado_core_v2",
+      "name": "register_point",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def register_point(self, token: str, permissions: Optional[Sequence[str]] = None) -> Dict[str, Any]:\n        token_hash = hashlib.sha256(token.encode(\"utf-8\")).hexdigest()\n        with self.db_lock:\n            row = self.conn.execute(\"SELECT expires_at FROM registration_tokens WHERE token_hash=?\", (token_hash,)).fetchone()\n            if row is None:\n                return {\"status\": \"error\", \"message\": \"invalid token\"}\n            if time.time() > float(row[\"expires_at\"]):\n                self.conn.execute(\"DELETE FROM registration_tokens WHERE token_hash=?\", (token_hash,))\n                self.conn.commit()\n                return {\"status\": \"error\", \"message\": \"token expired\"}\n            key_id = secrets.token_urlsafe(16)\n            secret = secrets.token_urlsafe(32)\n            encrypted = self._cipher.encrypt(secret.encode(\"utf-8\"))\n            perms = list(permissions or [\"read\"])\n            self.conn.execute(\n                \"INSERT INTO access_keys(key_id, encrypted_secret, permissions, created_at) VALUES(?,?,?,?)\",\n                (key_id, encrypted, canonical_json(perms), utc_now().isoformat()),\n            )\n            self.conn.execute(\"DELETE FROM registration_tokens WHERE token_hash=?\", (token_hash,))\n            self.conn.commit()\n        return {\"status\": \"success\", \"key_id\": key_id, \"key_secret\": secret, \"permissions\": perms}"
+    },
+    {
+      "module": "yado_core_v2_4_audited",
+      "name": "register_artifact",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_4_audited.py",
+      "sha256": "fb36d5b6642f88322249dd444d2af5d77f03b832ce0a1e401262e41a5db8fb02",
+      "source": "def register_artifact(self, path: str | Path, role: str, status: str, metadata: Mapping[str, Any] | None = None) -> str:\n        p = Path(path)\n        digest = self._sha256(p)\n        artifact_id = \"A-\" + digest[:16]\n        with self.db_lock:\n            self.conn.execute(\n                \"\"\"INSERT OR REPLACE INTO development_artifacts\n                   (artifact_id,path,sha256,role,status,metadata_json,registered_at)\n                   VALUES(?,?,?,?,?,?,?)\"\"\",\n                (artifact_id, str(p), digest, role, status, canonical_json(dict(metadata or {})), utc_now().isoformat()),\n            )\n            self.conn.commit()\n        return artifact_id"
+    },
+    {
+      "module": "yado_core_v2_5_unified",
+      "name": "_register_model",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_5_unified.py",
+      "sha256": "e28a4a76e29003f8a5d0ff513c2b7aa239abaf14266eb6c147dda55f29182b7c",
+      "source": "def _register_model(\n        self,\n        name: str,\n        organ: str,\n        capability: str,\n        model: Any,\n        source_path: Path,\n        status: str = \"SHADOW_SUPPORTED\",\n    ) -> None:\n        digest = self._file_sha(source_path)\n        self.models[name] = model\n        with self.db_lock:\n            self.conn.execute(\n                \"\"\"INSERT OR REPLACE INTO unified_models\n                   (model_name,organ,capability,model_json,source_path,source_sha256,status,loaded_at)\n                   VALUES(?,?,?,?,?,?,?,?)\"\"\",\n                (\n                    name,\n                    organ,\n                    capability,\n                    canonical_json(model),\n                    str(source_path),\n                    digest,\n                    status,\n                    utc_now().isoformat(),\n                ),\n            )\n            self.conn.commit()"
+    },
+    {
+      "module": "yado_core_v3_0_rc3_trained",
+      "name": "organ_skill_banks",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc3_trained.py",
+      "sha256": "7ef3549b99b26f9317a03ada3f4db684f3f52bc8a64f03a7a167330dc683cb7f",
+      "source": "def organ_skill_banks(self):return dict(self.canonical_state.get('organ_skill_banks') or {})"
+    },
+    {
+      "module": "yado_core_v3_0_rc7_deep_integrity",
+      "name": "durable_commit_evolution_bundle",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py",
+      "sha256": "5c4fab434de2dc377302f2d033de8a79b9d8edc2a286e6179e7921237b67057e",
+      "source": "def durable_commit_evolution_bundle(self,bundle:Mapping[str,Mapping[str,Any]],gate:Mapping[str,Any])->dict[str,Any]:\n        try: current=self.state_path.resolve(); target=DEFAULT_STATE.resolve()\n        except Exception: current=self.state_path; target=DEFAULT_STATE\n        if current!=target:\n            return {'committed':False,'reason':'HISTORICAL_OR_NONACTIVE_STATE_IMMUTABLE_IN_R7','state_path':str(current),'active_state_path':str(target)}\n        return super().durable_commit_evolution_bundle(bundle,gate)"
+    },
+    {
+      "module": "yado_core_v3_0_rc8_external_cognitive",
+      "name": "evaluate_evolution_skill",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py",
+      "sha256": "449695d1b9ca4a5ba61ed1ca89683611202fb6029638779baedf531b803ff784",
+      "source": "def evaluate_evolution_skill(self, candidate, **gate_kwargs):\n        c = candidate if isinstance(candidate, SkillCandidate) else SkillCandidate(**candidate)\n        return SkillAdmissionGate(**gate_kwargs).evaluate(c)"
+    },
+    {
+      "module": "yado_core_v3_0_rc8_external_cognitive",
+      "name": "select_evolution_skills",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py",
+      "sha256": "449695d1b9ca4a5ba61ed1ca89683611202fb6029638779baedf531b803ff784",
+      "source": "def select_evolution_skills(self, candidates, max_skills:int=8, **gate_kwargs):\n        xs=[c if isinstance(c, SkillCandidate) else SkillCandidate(**c) for c in candidates]\n        return SkillAdmissionGate(**gate_kwargs).select_subset(xs,max_skills=max_skills)"
+    },
+    {
+      "module": "yado_core_v3_0_rc8_external_cognitive",
+      "name": "skill_admission_capability",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py",
+      "sha256": "449695d1b9ca4a5ba61ed1ca89683611202fb6029638779baedf531b803ff784",
+      "source": "def skill_admission_capability(self):\n        return {\n            'status':'ACTIVE_BOUNDED_PRECOMMIT_SKILL_GATE_V1',\n            'provenance':dict(SKILL_ADMISSION_PROVENANCE),\n            'changes_foundation_weights':False,\n            'executes_third_party_code':False,\n        }"
+    }
+  ],
+  "schema": "yado.g2.native_selector_commit_surface_probe.v1",
+  "status": "PASS"
+}
