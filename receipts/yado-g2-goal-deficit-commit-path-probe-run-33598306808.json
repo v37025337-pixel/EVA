@@ -1,0 +1,614 @@
+{
+  "hits": [
+    {
+      "kind": "ClassDef",
+      "module": "yado_core_v2",
+      "name": "GoalState",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "class GoalState:\n    goal_id: str\n    objective: str\n    required_capabilities: Dict[str, float]\n    success_criteria: Dict[str, Any]\n    status: str = \"OPEN\"\n    created_at: str = field(default_factory=lambda: utc_now().isoformat())"
+    },
+    {
+      "kind": "ClassDef",
+      "module": "yado_core_v2",
+      "name": "DeficitState",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "class DeficitState:\n    deficit_id: str\n    goal_id: str\n    kind: str\n    target: str\n    observed: float\n    required: float\n    evidence: List[str]\n    status: str = \"OPEN\"\n    created_at: str = field(default_factory=lambda: utc_now().isoformat())"
+    },
+    {
+      "kind": "ClassDef",
+      "module": "yado_core_v2",
+      "name": "UnifiedCognitiveSystem",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "class UnifiedCognitiveSystem:\n    SCHEMA_VERSION = 2\n\n    def __init__(self, db_path: str = \"cognitive_system_v2.db\", embedder: Optional[Embedder] = None):\n        self.db_path = db_path\n        self.db_lock = threading.RLock()\n        self.conn = sqlite3.connect(db_path, check_same_thread=False)\n        self.conn.row_factory = sqlite3.Row\n        with self.db_lock:\n            self.conn.execute(\"PRAGMA journal_mode=WAL\")\n            self.conn.execute(\"PRAGMA foreign_keys=ON\")\n        self._init_schema()\n\n        self.embedder = embedder or build_embedder()\n        self.graph = nx.Graph()\n        self.resource_ids: List[str] = []\n        self.data_points = np.empty((0, self.embedder.dimension), dtype=np.float32)\n        self.nn_index: Optional[NearestNeighbors] = None\n        self.start_time = utc_now()\n\n        self._cipher = self._build_cipher()\n        self._load_resources_from_db()\n        self.executive = CausalExecutive(self)\n        logger.info(\"YADO-CORE v2 initialized with embedder=%s\", self.embedder.name)\n\n    def close(self) -> None:\n        with self.db_lock:\n            self.conn.close()\n\n    def _init_schema(self) -> None:\n        with self.db_lock:\n            self.conn.executescript(\n                \"\"\"\n                CREATE TABLE IF NOT EXISTS resources (\n                    id TEXT PRIMARY KEY,\n                    compressed_data TEXT NOT NULL,\n                    vector BLOB NOT NULL,\n                    vector_dim INTEGER NOT NULL,\n                    embedder TEXT NOT NULL,\n                    metadata TEXT NOT NULL,\n                    tags TEXT NOT NULL,\n                    created_at TEXT NOT NULL,\n                    updated_at TEXT NOT NULL\n                );\n                CREATE TABLE IF NOT EXISTS capabilities (\n                    name TEXT PRIMARY KEY,\n                    score REAL NOT NULL,\n                    evidence TEXT NOT NULL,\n                    updated_at TEXT NOT NULL\n                );\n                CREATE TABLE IF NOT EXISTS goals (\n                    goal_id TEXT PRIMARY KEY,\n                    objective TEXT NOT NULL,\n                    required_capabilities TEXT NOT NULL,\n                    success_criteria TEXT NOT NULL,\n                    status TEXT NOT NULL,\n                    created_at TEXT NOT NULL\n                );\n                CREATE TABLE IF NOT EXISTS deficits (\n                    deficit_id TEXT PRIMARY KEY,\n                    goal_id TEXT NOT NULL,\n                    kind TEXT NOT NULL,\n                    target TEXT NOT NULL,\n                    observed REAL NOT NULL,\n                    required REAL NOT NULL,\n                    evidence TEXT NOT NULL,\n                    status TEXT NOT NULL,\n                    created_at TEXT NOT NULL\n                );\n                CREATE TABLE IF NOT EXISTS experiments (\n                    experiment_id TEXT PRIMARY KEY,\n                    candidate_id TEXT NOT NULL,\n                    receipt_json TEXT NOT NULL,\n                    created_at TEXT NOT NULL\n                );\n                CREATE TABLE IF NOT EXISTS registration_tokens (\n                    token_hash TEXT PRIMARY KEY,\n                    expires_at REAL NOT NULL\n                );\n                CREATE TABLE IF NOT EXISTS access_keys (\n                    key_id TEXT PRIMARY KEY,\n                    encrypted_secret BLOB NOT NULL,\n                    permissions TEXT NOT NULL,\n                    created_at TEXT NOT NULL\n                );\n                \"\"\"\n            )\n            self.conn.commit()\n\n    def _build_cipher(self) -> Fernet:\n        master = os.getenv(\"YADO_MASTER_KEY\")\n        if not master:\n            # Development-safe bootstrap: process-specific unless caller persists it.\n            master = secrets.token_urlsafe(48)\n            logger.warning(\"YADO_MASTER_KEY is unset; registered access keys will not survive process restart\")\n        digest = hashlib.sha256(master.encode(\"utf-8\")).digest()\n        return Fernet(base64.urlsafe_b64encode(digest))\n\n    @staticmethod\n    def text_to_binary(text: str) -> str:\n        return \"\".join(f\"{byte:08b}\" for byte in text.encode(\"utf-8\"))\n\n    @staticmethod\n    def binary_to_text(binary_str: str) -> str:\n        if len(binary_str) % 8 != 0:\n            raise ValueError(\"binary string length must be divisible by 8\")\n        raw = bytes(int(binary_str[i : i + 8], 2) for i in range(0, len(binary_str), 8))\n        return raw.decode(\"utf-8\")\n\n    @staticmethod\n    def _vector_to_blob(vector: np.ndarray) -> bytes:\n        return np.asarray(vector, dtype=np.float32).tobytes()\n\n    @staticmethod\n    def _blob_to_vector(blob: bytes, dim: int) -> np.ndarray:\n        vector = np.frombuffer(blob, dtype=np.float32).copy()\n        if vector.shape[0] != dim:\n            raise ValueError(f\"stored vector dim mismatch: expected {dim}, got {vector.shape[0]}\")\n        return vector\n\n    def _load_resources_from_db(self) -> None:\n        rows = self.conn.execute(\"SELECT * FROM resources ORDER BY created_at, id\").fetchall()\n        ids: List[str] = []\n        vectors: List[np.ndarray] = []\n        for row in rows:\n            if row[\"embedder\"] != self.embedder.name or int(row[\"vector_dim\"]) != self.embedder.dimension:\n                # Recompute from reversible stored text if the embedding backend changed.\n                payload = json.loads(row[\"compressed_data\"])\n                ok, text = AbsoluteCodeSystem.decompress_text(payload)\n                if not ok:\n                    logger.error(\"Skipping resource %s: cannot decode stored text\", row[\"id\"])\n                    continue\n                vector = self.embedder.encode(text)\n                with self.db_lock:\n                    self.conn.execute(\n                        \"UPDATE resources SET vector=?, vector_dim=?, embedder=?, updated_at=? WHERE id=?\",\n                        (self._vector_to_blob(vector), self.embedder.dimension, self.embedder.name, utc_now().isoformat(), row[\"id\"]),\n                    )\n                    self.conn.commit()\n            else:\n                vector = self._blob_to_vector(row[\"vector\"], int(row[\"vector_dim\"]))\n            metadata = json.loads(row[\"metadata\"])\n            tags = json.loads(row[\"tags\"])\n            self.graph.add_node(row[\"id\"], metadata=metadata, tags=tags)\n            ids.append(row[\"id\"])\n            vectors.append(vector)\n        self.resource_ids = ids\n        self.data_points = np.vstack(vectors).astype(np.float32) if vectors else np.empty((0, self.embedder.dimension), dtype=np.float32)\n        self._rebuild_index()\n        self._rebuild_semantic_edges()\n\n    def _rebuild_index(self) -> None:\n        if len(self.data_points) == 0:\n            self.nn_index = None\n            return\n        self.nn_index = NearestNeighbors(metric=\"cosine\", algorithm=\"brute\")\n        self.nn_index.fit(self.data_points)\n\n    def _rebuild_semantic_edges(self, threshold: float = 0.55) -> None:\n        self.graph.remove_edges_from(list(self.graph.edges))\n        if len(self.data_points) < 2:\n            return\n        sims = cosine_similarity(self.data_points)\n        for i in range(len(self.resource_ids)):\n            for j in range(i + 1, len(self.resource_ids)):\n                score = float(sims[i, j])\n                if score >= threshold:\n                    self.graph.add_edge(\n                        self.resource_ids[i], self.resource_ids[j],\n                        weight=score, relation=\"semantic_similarity\", tags=[\"auto\"],\n                    )\n\n    def add_resource(\n        self,\n        resource_id: str,\n        resource_text: str,\n        metadata: Optional[Mapping[str, Any]] = None,\n        tags: Optional[Sequence[str]] = None,\n        seed: Optional[str] = None,\n    ) -> Dict[str, Any]:\n        if not resource_id or not resource_id.strip():\n            raise ValueError(\"resource_id is required\")\n        metadata = dict(metadata or {})\n        tags = list(dict.fromkeys(tags or []))\n        compressed = AbsoluteCodeSystem.compress_text(resource_text, seed=seed)\n        vector = self.embedder.encode(resource_text)\n        now = utc_now().isoformat()\n        with self.db_lock:\n            existing = self.conn.execute(\"SELECT created_at FROM resources WHERE id=?\", (resource_id,)).fetchone()\n            created_at = existing[\"created_at\"] if existing else now\n            self.conn.execute(\n                \"\"\"\n                INSERT OR REPLACE INTO resources\n                (id, compressed_data, vector, vector_dim, embedder, metadata, tags, created_at, updated_at)\n                VALUES(?,?,?,?,?,?,?,?,?)\n                \"\"\",\n                (\n                    resource_id, canonical_json(compressed), self._vector_to_blob(vector), self.embedder.dimension,\n                    self.embedder.name, canonical_json(metadata), canonical_json(tags), created_at, now,\n                ),\n            )\n            self.conn.commit()\n        self._reload_single_resource(resource_id, vector, metadata, tags)\n        return {\"status\": \"success\", \"resource_id\": resource_id, \"sha256\": compressed[\"raw_sha256\"]}\n\n    def _reload_single_resource(self, resource_id: str, vector: np.ndarray, metadata: Mapping[str, Any], tags: Sequence[str]) -> None:\n        self.graph.add_node(resource_id, metadata=dict(metadata), tags=list(tags))\n        if resource_id in self.resource_ids:\n            idx = self.resource_ids.index(resource_id)\n            self.data_points[idx] = vector\n        else:\n            self.resource_ids.append(resource_id)\n            if len(self.data_points) == 0:\n                self.data_points = np.asarray([vector], dtype=np.float32)\n            else:\n                self.data_points = np.vstack([self.data_points, vector]).astype(np.float32)\n        self._rebuild_index()\n        self._rebuild_semantic_edges()\n\n    def get_resource(self, resource_id: str, include_text: bool = True) -> Optional[Dict[str, Any]]:\n        row = self.conn.execute(\"SELECT * FROM resources WHERE id=?\", (resource_id,)).fetchone()\n        if row is None:\n            return None\n        result = {\n            \"id\": row[\"id\"],\n            \"metadata\": json.loads(row[\"metadata\"]),\n            \"tags\": json.loads(row[\"tags\"]),\n            \"embedder\": row[\"embedder\"],\n            \"created_at\": row[\"created_at\"],\n            \"updated_at\": row[\"updated_at\"],\n        }\n        if include_text:\n            ok, text = AbsoluteCodeSystem.decompress_text(json.loads(row[\"compressed_data\"]))\n            result[\"text\"] = text if ok else None\n            result[\"integrity_ok\"] = ok\n        return result\n\n    def find_concept_neighbors(self, query: Union[str, np.ndarray], k: int = 5) -> List[Dict[str, Any]]:\n        if self.nn_index is None or not self.resource_ids:\n            return []\n        if isinstance(query, str):\n            vector = self.embedder.encode(query)\n        else:\n            vector = np.asarray(query, dtype=np.float32)\n            if vector.shape != (self.embedder.dimension,):\n                raise ValueError(f\"query vector must have shape ({self.embedder.dimension},)\")\n        distances, indices = self.nn_index.kneighbors(vector.reshape(1, -1), n_neighbors=min(k, len(self.resource_ids)))\n        results: List[Dict[str, Any]] = []\n        for distance, idx in zip(distances[0], indices[0]):\n            resource_id = self.resource_ids[int(idx)]\n            node = self.graph.nodes[resource_id]\n            results.append(\n                {\n                    \"resource_id\": resource_id,\n                    \"similarity\": float(1.0 - distance),\n                    \"metadata\": dict(node.get(\"metadata\", {})),\n                    \"tags\": list(node.get(\"tags\", [])),\n                }\n            )\n        return results\n\n    def personalize_recommendations(self, user_query: str, user_history: Optional[Sequence[str]] = None) -> List[Dict[str, Any]]:\n        results = self.find_concept_neighbors(user_query, k=3)\n        if user_history:\n            weights = np.linspace(0.5, 1.0, len(user_history), dtype=np.float32)\n            weighted = [self.embedder.encode(text) * weight for text, weight in zip(user_history, weights)]\n            history_vector = np.mean(weighted, axis=0)\n            history_vector /= max(float(np.linalg.norm(history_vector)), 1e-12)\n            by_vector = self.find_concept_neighbors(history_vector, k=2)\n            seen = {item[\"resource_id\"] for item in results}\n            results.extend(item for item in by_vector if item[\"resource_id\"] not in seen)\n        return results\n\n    def find_sparse_topics(self, min_count: int = 2, since_year: int = 2021) -> List[Dict[str, Any]]:\n        counts: Dict[Tuple[str, int], int] = {}\n        for _, node in self.graph.nodes(data=True):\n            year = int(node.get(\"metadata\", {}).get(\"year\", 0) or 0)\n            for tag in node.get(\"tags\", []):\n                counts[(tag, year)] = counts.get((tag, year), 0) + 1\n        return [\n            {\"tag\": tag, \"year\": year, \"count\": count}\n            for (tag, year), count in sorted(counts.items())\n            if year >= since_year and count < min_count\n        ]\n\n    def knowledge_metrics(self) -> Dict[str, Any]:\n        return {\n            \"resources\": len(self.resource_ids),\n            \"semantic_edges\": self.graph.number_of_edges(),\n            \"embedder\": self.embedder.name,\n            \"vector_dimension\": self.embedder.dimension,\n        }\n\n    # -----------------------------------------------------------------------\n    # Secure evidence acquisition (replaces public-proxy harvesting)\n    # -----------------------------------------------------------------------\n    @staticmethod\n    def _host_is_public(hostname: str) -> bool:\n        try:\n            infos = socket.getaddrinfo(hostname, None)\n        except socket.gaierror:\n            return False\n        for info in infos:\n            ip = ipaddress.ip_address(info[4][0])\n            if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved or ip.is_multicast:\n                return False\n        return True\n\n    async def fetch_evidence(self, url: str, max_bytes: int = 2_000_000) -> Dict[str, Any]:\n        parsed = urlparse(url)\n        if parsed.scheme != \"https\" or not parsed.hostname:\n            raise ValueError(\"only https URLs are allowed\")\n        allowed_domains = {d.strip().lower() for d in os.getenv(\"YADO_ALLOWED_DOMAINS\", \"\").split(\",\") if d.strip()}\n        if allowed_domains and parsed.hostname.lower() not in allowed_domains:\n            raise ValueError(\"domain is not allowlisted\")\n        if not self._host_is_public(parsed.hostname):\n            raise ValueError(\"URL resolves to a non-public network address\")\n\n        timeout = aiohttp.ClientTimeout(total=15)\n        headers = {\"User-Agent\": \"YADO-Core/2.0 evidence-fetcher\"}\n        async with aiohttp.ClientSession(timeout=timeout, headers=headers) as session:\n            async with session.get(url, allow_redirects=True) as response:\n                response.raise_for_status()\n                body = await response.content.read(max_bytes + 1)\n                if len(body) > max_bytes:\n                    raise ValueError(\"response too large\")\n                content_type = response.headers.get(\"content-type\", \"\")\n                if \"text/html\" not in content_type and \"text/plain\" not in content_type:\n                    raise ValueError(f\"unsupported content type: {content_type}\")\n                text = body.decode(response.charset or \"utf-8\", errors=\"replace\")\n        if \"html\" in content_type:\n            soup = BeautifulSoup(text, \"html.parser\")\n            title = soup.title.get_text(\" \", strip=True) if soup.title else \"\"\n            clean_text = \" \".join(soup.stripped_strings)\n        else:\n            title = \"\"\n            clean_text = text\n        return {\n            \"url\": url,\n            \"title\": title,\n            \"text\": clean_text,\n            \"sha256\": hashlib.sha256(body).hexdigest(),\n            \"fetched_at\": utc_now().isoformat(),\n        }\n\n    # -----------------------------------------------------------------------\n    # HMAC registration/authentication\n    # -----------------------------------------------------------------------\n    def generate_registration_token(self, expires_seconds: int = 3600) -> Tuple[str, datetime]:\n        token = secrets.token_urlsafe(32)\n        expires_at = time.time() + expires_seconds\n        token_hash = hashlib.sha256(token.encode(\"utf-8\")).hexdigest()\n        with self.db_lock:\n            self.conn.execute(\n                \"INSERT OR REPLACE INTO registration_tokens(token_hash, expires_at) VALUES(?,?)\",\n                (token_hash, expires_at),\n            )\n            self.conn.commit()\n        return token, datetime.fromtimestamp(expires_at, tz=UTC)\n\n    def register_point(self, token: str, permissions: Optional[Sequence[str]] = None) -> Dict[str, Any]:\n        token_hash = hashlib.sha256(token.encode(\"utf-8\")).hexdigest()\n        with self.db_lock:\n            row = self.conn.execute(\"SELECT expires_at FROM registration_tokens WHERE token_hash=?\", (token_hash,)).fetchone()\n            if row is None:\n                return {\"status\": \"error\", \"message\": \"invalid token\"}\n            if time.time() > float(row[\"expires_at\"]):\n                self.conn.execute(\"DELETE FROM registration_tokens WHERE token_hash=?\", (token_hash,))\n                self.conn.commit()\n                return {\"status\": \"error\", \"message\": \"token expired\"}\n            key_id = secrets.token_urlsafe(16)\n            secret = secrets.token_urlsafe(32)\n            encrypted = self._cipher.encrypt(secret.encode(\"utf-8\"))\n            perms = list(permissions or [\"read\"])\n            self.conn.execute(\n                \"INSERT INTO access_keys(key_id, encrypted_secret, permissions, created_at) VALUES(?,?,?,?)\",\n                (key_id, encrypted, canonical_json(perms), utc_now().isoformat()),\n            )\n            self.conn.execute(\"DELETE FROM registration_tokens WHERE token_hash=?\", (token_hash,))\n            self.conn.commit()\n        return {\"status\": \"success\", \"key_id\": key_id, \"key_secret\": secret, \"permissions\": perms}\n\n    def verify_signature(self, key_id: str, signature: str, timestamp: str, method: str, path: str, body: bytes) -> Dict[str, Any]:\n        row = self.conn.execute(\"SELECT encrypted_secret, permissions FROM access_keys WHERE key_id=?\", (key_id,)).fetchone()\n        if row is None:\n            raise ValueError(\"invalid key id\")\n        try:\n            request_time = datetime.fromisoformat(timestamp.replace(\"Z\", \"+00:00\"))\n            if request_time.tzinfo is None:\n                request_time = request_time.replace(tzinfo=UTC)\n        except ValueError as exc:\n            raise ValueError(\"invalid timestamp\") from exc\n        if abs((utc_now() - request_time.astimezone(UTC)).total_seconds()) > 300:\n            raise ValueError(\"request expired\")\n        secret = self._cipher.decrypt(row[\"encrypted_secret\"])\n        message = method.upper().encode() + b\"\\n\" + path.encode() + b\"\\n\" + timestamp.encode() + b\"\\n\" + body\n        expected = hmac.new(secret, message, hashlib.sha256).hexdigest()\n        if not hmac.compare_digest(signature, expected):\n            raise ValueError(\"invalid signature\")\n        return {\"key_id\": key_id, \"permissions\": json.loads(row[\"permissions\"])}"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def __init__(self, data_size: int, seed: Optional[str] = None):\n        self.data_size = max(0, int(data_size))\n        self.seed = seed or secrets.token_hex(16)\n        self.dimensions = max(8, min(64, int(np.log2(self.data_size + 1) * 4) if self.data_size else 8))\n        self.bits_per_point = max(4, min(16, int(np.log2(self.data_size + 1) * 2) if self.data_size else 4))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def __init__(self, dimension: int = 384):\n        self.dimension = dimension\n        self.name = f\"hashing-{dimension}\"\n        self.vectorizer = HashingVectorizer(\n            n_features=dimension,\n            alternate_sign=False,\n            norm=\"l2\",\n            ngram_range=(1, 2),\n            analyzer=\"word\",\n        )"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def __init__(self, model_name: str = \"sentence-transformers/all-MiniLM-L6-v2\"):\n        try:\n            from sentence_transformers import SentenceTransformer\n        except ImportError as exc:\n            raise RuntimeError(\"sentence-transformers is not installed\") from exc\n        self._model = SentenceTransformer(model_name)\n        self.name = model_name\n        probe = self.encode(\"dimension probe\")\n        self.dimension = int(probe.shape[0])"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def __init__(self, system: \"UnifiedCognitiveSystem\"):\n        self.system = system\n        self.capabilities: Dict[str, CapabilityState] = {}\n        self.goals: Dict[str, GoalState] = {}\n        self.deficits: Dict[str, DeficitState] = {}\n        self.candidates: Dict[str, CandidateChange] = {}\n        self.receipts: Dict[str, ExperimentReceipt] = {}\n        self._restore_state()\n        self._register_builtin_capabilities()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "_restore_state",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def _restore_state(self) -> None:\n        with self.system.db_lock:\n            rows = self.system.conn.execute(\"SELECT name, score, evidence, updated_at FROM capabilities\").fetchall()\n            for row in rows:\n                self.capabilities[row[\"name\"]] = CapabilityState(\n                    name=row[\"name\"], score=float(row[\"score\"]), evidence=json.loads(row[\"evidence\"]), updated_at=row[\"updated_at\"]\n                )\n            rows = self.system.conn.execute(\"SELECT * FROM goals\").fetchall()\n            for row in rows:\n                self.goals[row[\"goal_id\"]] = GoalState(\n                    goal_id=row[\"goal_id\"], objective=row[\"objective\"],\n                    required_capabilities=json.loads(row[\"required_capabilities\"]),\n                    success_criteria=json.loads(row[\"success_criteria\"]), status=row[\"status\"], created_at=row[\"created_at\"]\n                )"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "register_capability",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def register_capability(self, name: str, score: float, evidence: Sequence[str]) -> CapabilityState:\n        score = float(np.clip(score, 0.0, 1.0))\n        state = CapabilityState(name=name, score=score, evidence=list(evidence), updated_at=utc_now().isoformat())\n        self.capabilities[name] = state\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"INSERT OR REPLACE INTO capabilities(name, score, evidence, updated_at) VALUES(?,?,?,?)\",\n                (name, score, canonical_json(state.evidence), state.updated_at),\n            )\n            self.system.conn.commit()\n        return state"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "create_goal",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def create_goal(\n        self,\n        objective: str,\n        required_capabilities: Mapping[str, float],\n        success_criteria: Optional[Mapping[str, Any]] = None,\n    ) -> GoalState:\n        goal = GoalState(\n            goal_id=f\"G-{uuid.uuid4().hex[:12]}\",\n            objective=objective,\n            required_capabilities={k: float(v) for k, v in required_capabilities.items()},\n            success_criteria=dict(success_criteria or {}),\n        )\n        self.goals[goal.goal_id] = goal\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"INSERT INTO goals(goal_id, objective, required_capabilities, success_criteria, status, created_at) VALUES(?,?,?,?,?,?)\",\n                (goal.goal_id, goal.objective, canonical_json(goal.required_capabilities), canonical_json(goal.success_criteria), goal.status, goal.created_at),\n            )\n            self.system.conn.commit()\n        return goal"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "detect_deficits",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def detect_deficits(self, goal_id: str) -> List[DeficitState]:\n        goal = self.goals[goal_id]\n        found: List[DeficitState] = []\n        for capability, required in goal.required_capabilities.items():\n            current = self.capabilities.get(capability)\n            observed = current.score if current else 0.0\n            if observed + 1e-12 >= required:\n                continue\n            deficit = DeficitState(\n                deficit_id=f\"D-{uuid.uuid4().hex[:12]}\",\n                goal_id=goal_id,\n                kind=\"CAPABILITY_MISSING\" if current is None else \"CAPABILITY_INSUFFICIENT\",\n                target=capability,\n                observed=observed,\n                required=required,\n                evidence=(current.evidence[:] if current else [\"capability:not_registered\"]),\n            )\n            self.deficits[deficit.deficit_id] = deficit\n            found.append(deficit)\n            with self.system.db_lock:\n                self.system.conn.execute(\n                    \"INSERT INTO deficits(deficit_id, goal_id, kind, target, observed, required, evidence, status, created_at) VALUES(?,?,?,?,?,?,?,?,?)\",\n                    (\n                        deficit.deficit_id, deficit.goal_id, deficit.kind, deficit.target, deficit.observed,\n                        deficit.required, canonical_json(deficit.evidence), deficit.status, deficit.created_at,\n                    ),\n                )\n                self.system.conn.commit()\n        if not found:\n            goal.status = \"READY_FOR_GOAL_TEST\"\n            with self.system.db_lock:\n                self.system.conn.execute(\"UPDATE goals SET status=? WHERE goal_id=?\", (goal.status, goal.goal_id))\n                self.system.conn.commit()\n        return found"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def __init__(self, db_path: str = \"cognitive_system_v2.db\", embedder: Optional[Embedder] = None):\n        self.db_path = db_path\n        self.db_lock = threading.RLock()\n        self.conn = sqlite3.connect(db_path, check_same_thread=False)\n        self.conn.row_factory = sqlite3.Row\n        with self.db_lock:\n            self.conn.execute(\"PRAGMA journal_mode=WAL\")\n            self.conn.execute(\"PRAGMA foreign_keys=ON\")\n        self._init_schema()\n\n        self.embedder = embedder or build_embedder()\n        self.graph = nx.Graph()\n        self.resource_ids: List[str] = []\n        self.data_points = np.empty((0, self.embedder.dimension), dtype=np.float32)\n        self.nn_index: Optional[NearestNeighbors] = None\n        self.start_time = utc_now()\n\n        self._cipher = self._build_cipher()\n        self._load_resources_from_db()\n        self.executive = CausalExecutive(self)\n        logger.info(\"YADO-CORE v2 initialized with embedder=%s\", self.embedder.name)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2",
+      "name": "create_goal",
+      "path": "runtime/yado_rc8_v36/yado_core_v2.py",
+      "sha256": "177dbf4a068e49e8951f4285722915171453cfa2d3b99c3c46137db905f3d7a7",
+      "source": "def create_goal(payload: GoalIn, identity: Dict[str, Any] = Depends(require_signed_request)) -> Dict[str, Any]:\n        require_permission(identity, \"write\")\n        return asdict(core.executive.create_goal(payload.objective, payload.required_capabilities, payload.success_criteria))"
+    },
+    {
+      "kind": "ClassDef",
+      "module": "yado_core_v2_1",
+      "name": "DevelopmentalExecutive",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_1.py",
+      "sha256": "4847c3dcf837f8f58234626a64be09e98401ea79aac8981dd2f2306ae8a50c10",
+      "source": "class DevelopmentalExecutive(CausalExecutive):\n    DEFAULT_ORGANS = (\n        (\"ORG-PERCEPTION\", \"PERCEPTION\"),\n        (\"ORG-MEMORY\", \"MEMORY\"),\n        (\"ORG-LOGIC\", \"LOGIC\"),\n        (\"ORG-THINKING\", \"THINKING\"),\n        (\"ORG-INTELLIGENCE\", \"INTELLIGENCE\"),\n        (\"ORG-SELF-MODEL\", \"SELF_MODEL\"),\n        (\"ORG-WORKSPACE\", \"CONSCIOUS_WORKSPACE\"),\n        (\"ORG-GOALS\", \"MOTIVE_GOALS\"),\n        (\"ORG-EXECUTIVE\", \"GENERATIVE_EXECUTIVE\"),\n        (\"ORG-LEARNING\", \"LEARNING\"),\n    )\n\n    def __init__(self, system: \"UnifiedCognitiveSystemV21\"):\n        self.organs: Dict[str, OrganState] = {}\n        self.programs: Dict[str, RuleProgram] = {}\n        self.active_program_by_capability: Dict[str, str] = {}\n        super().__init__(system)\n        self._restore_development_state()\n        self._ensure_organs()\n\n    def _ensure_organs(self) -> None:\n        for organ_id, name in self.DEFAULT_ORGANS:\n            if name in self.organs:\n                continue\n            state = OrganState(organ_id=organ_id, name=name, state_label=\"S0\", revision=0)\n            self.organs[name] = state\n            self._persist_organ(state)\n\n    def _persist_organ(self, organ: OrganState) -> None:\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"\"\"\n                INSERT OR REPLACE INTO organs(organ_id, name, state_label, revision, mechanisms, updated_at)\n                VALUES(?,?,?,?,?,?)\n                \"\"\",\n                (\n                    organ.organ_id,\n                    organ.name,\n                    organ.state_label,\n                    organ.revision,\n                    canonical_json(organ.mechanisms),\n                    organ.updated_at,\n                ),\n            )\n            self.system.conn.commit()\n\n    def _restore_development_state(self) -> None:\n        with self.system.db_lock:\n            rows = self.system.conn.execute(\"SELECT * FROM organs\").fetchall()\n            for row in rows:\n                state = OrganState(\n                    organ_id=row[\"organ_id\"],\n                    name=row[\"name\"],\n                    state_label=row[\"state_label\"],\n                    revision=int(row[\"revision\"]),\n                    mechanisms=json.loads(row[\"mechanisms\"]),\n                    updated_at=row[\"updated_at\"],\n                )\n                self.organs[state.name] = state\n\n            rows = self.system.conn.execute(\"SELECT * FROM mechanisms WHERE status='COMMITTED'\").fetchall()\n            for row in rows:\n                program = self._program_from_json(json.loads(row[\"program_json\"]))\n                program.status = row[\"status\"]\n                self.programs[program.program_id] = program\n                self.active_program_by_capability[program.target_capability] = program.program_id\n\n    @staticmethod\n    def _program_from_json(data: Mapping[str, Any]) -> RuleProgram:\n        rules = []\n        for raw_rule in data[\"rules\"]:\n            predicates = [RulePredicate(**p) for p in raw_rule[\"predicates\"]]\n            rules.append(\n                RuleSpec(\n                    predicates=predicates,\n                    output=raw_rule[\"output\"],\n                    support=int(raw_rule[\"support\"]),\n                    confidence=float(raw_rule[\"confidence\"]),\n                )\n            )\n        return RuleProgram(\n            program_id=data[\"program_id\"],\n            target_capability=data[\"target_capability\"],\n            target_organ=data[\"target_organ\"],\n            rules=rules,\n            default_output=data[\"default_output\"],\n            source_digest=data[\"source_digest\"],\n            training_count=int(data.get(\"training_count\", 0)),\n            status=data.get(\"status\", \"SHADOW\"),\n            created_at=data.get(\"created_at\", utc_now().isoformat()),\n        )\n\n    def synthesize_program(\n        self,\n        deficit_id: str,\n        target_organ: str,\n        training_examples: Sequence[Mapping[str, Any]],\n        min_support: int = 2,\n    ) -> RuleProgram:\n        if deficit_id not in self.deficits:\n            raise KeyError(\"unknown deficit\")\n        if target_organ not in self.organs:\n            raise KeyError(\"unknown target organ\")\n        deficit = self.deficits[deficit_id]\n        program = RuleProgramSynthesizer.synthesize(\n            target_capability=deficit.target,\n            target_organ=target_organ,\n            examples=training_examples,\n            min_support=min_support,\n        )\n        self.programs[program.program_id] = program\n        self._persist_program(program)\n        return program\n\n    def _persist_program(self, program: RuleProgram) -> None:\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"\"\"\n                INSERT OR REPLACE INTO mechanisms\n                (program_id, target_capability, target_organ, program_json, program_digest, status, created_at)\n                VALUES(?,?,?,?,?,?,?)\n                \"\"\",\n                (\n                    program.program_id,\n                    program.target_capability,\n                    program.target_organ,\n                    canonical_json(asdict(program)),\n                    program.digest(),\n                    program.status,\n                    program.created_at,\n                ),\n            )\n            self.system.conn.commit()\n\n    @staticmethod\n    def _score(program: RuleProgram, cases: Sequence[Mapping[str, Any]], ablated: bool = False) -> float:\n        if not cases:\n            raise ValueError(\"evaluation cases must not be empty\")\n        correct = 0\n        for case in cases:\n            payload = case.get(\"input\")\n            if not isinstance(payload, Mapping) or \"expected\" not in case:\n                raise ValueError(\"each evaluation case must contain mapping input and expected\")\n            predicted = BoundedRuleSandbox.execute(program, payload, ablated=ablated)\n            if canonical_json(predicted) == canonical_json(case[\"expected\"]):\n                correct += 1\n        return correct / len(cases)\n\n    def evaluate_program(\n        self,\n        program_id: str,\n        blind_cases: Sequence[Mapping[str, Any]],\n        min_score: Optional[float] = None,\n        min_ablation_drop: float = 0.20,\n    ) -> DevelopmentReceipt:\n        if program_id not in self.programs:\n            raise KeyError(\"unknown program\")\n        program = self.programs[program_id]\n        matching_deficits = [d for d in self.deficits.values() if d.target == program.target_capability and d.status == \"OPEN\"]\n        if not matching_deficits:\n            raise ValueError(\"no open deficit for target capability\")\n        deficit = max(matching_deficits, key=lambda d: d.required - d.observed)\n        required_score = float(deficit.required if min_score is None else min_score)\n\n        candidate_score = self._score(program, blind_cases, ablated=False)\n        ablation_score = self._score(program, blind_cases, ablated=True)\n        restore_score = self._score(program, blind_cases, ablated=False)\n        ablation_drop = candidate_score - ablation_score\n\n        pass_score = candidate_score >= required_score\n        pass_causal = ablation_drop >= min_ablation_drop\n        pass_restore = abs(restore_score - candidate_score) <= 1e-12\n        committed = pass_score and pass_causal and pass_restore\n\n        if committed:\n            verdict = \"COMMIT\"\n            reason = \"blind target passed; ablation removed the gain; restore reproduced the gain\"\n            program.status = \"COMMITTED\"\n            deficit.status = \"RESOLVED\"\n            self.active_program_by_capability[program.target_capability] = program.program_id\n            organ = self.organs[program.target_organ]\n            if program.program_id not in organ.mechanisms:\n                organ.mechanisms.append(program.program_id)\n            organ.revision += 1\n            organ.state_label = f\"S{organ.revision}\"\n            organ.updated_at = utc_now().isoformat()\n            self._persist_organ(organ)\n            self.register_capability(\n                program.target_capability,\n                candidate_score,\n                [\n                    f\"program:{program.program_id}\",\n                    f\"program_digest:{program.digest()}\",\n                    f\"blind_score:{candidate_score:.6f}\",\n                    f\"ablation_drop:{ablation_drop:.6f}\",\n                    f\"organ:{program.target_organ}:{organ.state_label}\",\n                ],\n            )\n        else:\n            verdict = \"ROLLBACK\"\n            reasons = []\n            if not pass_score:\n                reasons.append(\"blind_target_not_reached\")\n            if not pass_causal:\n                reasons.append(\"ablation_not_causal\")\n            if not pass_restore:\n                reasons.append(\"restore_not_reproducible\")\n            reason = \",\".join(reasons)\n            program.status = \"ROLLED_BACK\"\n\n        self._persist_program(program)\n        receipt = DevelopmentReceipt(\n            experiment_id=f\"DEV-{uuid.uuid4().hex[:12]}\",\n            program_id=program.program_id,\n            target_capability=program.target_capability,\n            target_organ=program.target_organ,\n            train_cases=program.training_count,\n            blind_cases=len(blind_cases),\n            candidate_score=candidate_score,\n            ablation_score=ablation_score,\n            restore_score=restore_score,\n            min_score=required_score,\n            min_ablation_drop=min_ablation_drop,\n            verdict=verdict,\n            state_committed=committed,\n            reason=reason,\n            program_digest=program.digest(),\n        )\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"INSERT INTO developmental_experiments(experiment_id, program_id, receipt_json, created_at) VALUES(?,?,?,?)\",\n                (receipt.experiment_id, program.program_id, canonical_json(asdict(receipt)), receipt.created_at),\n            )\n            self.system.conn.commit()\n        return receipt\n\n    def execute_capability(self, capability: str, payload: Mapping[str, Any]) -> Any:\n        program_id = self.active_program_by_capability.get(capability)\n        if not program_id:\n            raise KeyError(f\"no committed executable mechanism for capability: {capability}\")\n        program = self.programs[program_id]\n        if program.status != \"COMMITTED\":\n            raise RuntimeError(\"active mechanism is not committed\")\n        return BoundedRuleSandbox.execute(program, payload)\n\n    def developmental_snapshot(self) -> Dict[str, Any]:\n        return {\n            \"organs\": {name: asdict(state) for name, state in sorted(self.organs.items())},\n            \"active_programs\": dict(sorted(self.active_program_by_capability.items())),\n            \"capabilities\": {name: asdict(state) for name, state in sorted(self.capabilities.items())},\n        }"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_1.py",
+      "sha256": "4847c3dcf837f8f58234626a64be09e98401ea79aac8981dd2f2306ae8a50c10",
+      "source": "def __init__(self, system: \"UnifiedCognitiveSystemV21\"):\n        self.organs: Dict[str, OrganState] = {}\n        self.programs: Dict[str, RuleProgram] = {}\n        self.active_program_by_capability: Dict[str, str] = {}\n        super().__init__(system)\n        self._restore_development_state()\n        self._ensure_organs()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_1",
+      "name": "_restore_development_state",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_1.py",
+      "sha256": "4847c3dcf837f8f58234626a64be09e98401ea79aac8981dd2f2306ae8a50c10",
+      "source": "def _restore_development_state(self) -> None:\n        with self.system.db_lock:\n            rows = self.system.conn.execute(\"SELECT * FROM organs\").fetchall()\n            for row in rows:\n                state = OrganState(\n                    organ_id=row[\"organ_id\"],\n                    name=row[\"name\"],\n                    state_label=row[\"state_label\"],\n                    revision=int(row[\"revision\"]),\n                    mechanisms=json.loads(row[\"mechanisms\"]),\n                    updated_at=row[\"updated_at\"],\n                )\n                self.organs[state.name] = state\n\n            rows = self.system.conn.execute(\"SELECT * FROM mechanisms WHERE status='COMMITTED'\").fetchall()\n            for row in rows:\n                program = self._program_from_json(json.loads(row[\"program_json\"]))\n                program.status = row[\"status\"]\n                self.programs[program.program_id] = program\n                self.active_program_by_capability[program.target_capability] = program.program_id"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_1.py",
+      "sha256": "4847c3dcf837f8f58234626a64be09e98401ea79aac8981dd2f2306ae8a50c10",
+      "source": "def __init__(self, db_path: str = \"cognitive_system_v2_1.db\", embedder=None):\n        super().__init__(db_path=db_path, embedder=embedder)\n        # Replace v2 metric-only executive with the v2.1 executable developmental executive.\n        self.executive = DevelopmentalExecutive(self)"
+    },
+    {
+      "kind": "ClassDef",
+      "module": "yado_core_v2_2",
+      "name": "DevelopmentalExecutiveV22",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_2.py",
+      "sha256": "882832923ace2c0e137cd24c89fe8fa605a2c0061a2d7bf311e5deeb7377cffd",
+      "source": "class DevelopmentalExecutiveV22(DevelopmentalExecutive):\n    def __init__(self, system: \"UnifiedCognitiveSystemV22\"):\n        self.selection_receipts: Dict[str, MechanismSelectionReceipt] = {}\n        super().__init__(system)\n\n    # Override v2.1 restoration because v2.2 persists polymorphic mechanisms.\n    def _restore_development_state(self) -> None:\n        with self.system.db_lock:\n            rows = self.system.conn.execute(\"SELECT * FROM organs\").fetchall()\n            for row in rows:\n                state = OrganState(\n                    organ_id=row[\"organ_id\"],\n                    name=row[\"name\"],\n                    state_label=row[\"state_label\"],\n                    revision=int(row[\"revision\"]),\n                    mechanisms=json.loads(row[\"mechanisms\"]),\n                    updated_at=row[\"updated_at\"],\n                )\n                self.organs[state.name] = state\n\n            rows = self.system.conn.execute(\"SELECT * FROM mechanisms WHERE status='COMMITTED'\").fetchall()\n            # Load non-pipelines first so pipeline references resolve deterministically.\n            decoded = [(row, json.loads(row[\"program_json\"])) for row in rows]\n            decoded.sort(key=lambda item: 1 if item[1].get(\"kind\") == \"PIPELINE\" else 0)\n            for row, data in decoded:\n                program = self._mechanism_from_json(data)\n                program.status = row[\"status\"]\n                self.programs[program.program_id] = program\n                self.active_program_by_capability[program.target_capability] = program.program_id\n\n            rows = self.system.conn.execute(\"SELECT receipt_json FROM mechanism_selections\").fetchall()\n            for row in rows:\n                raw = json.loads(row[\"receipt_json\"])\n                raw[\"candidates\"] = [SelectionCandidate(**c) for c in raw[\"candidates\"]]\n                receipt = MechanismSelectionReceipt(**raw)\n                self.selection_receipts[receipt.selection_id] = receipt\n\n    @staticmethod\n    def _mechanism_from_json(data: Mapping[str, Any]) -> Mechanism:\n        kind = data.get(\"kind\", \"RULE_PROGRAM\")\n        if kind == \"RULE_PROGRAM\":\n            # v2.1 compatibility: rule programs had no explicit kind.\n            rules = []\n            for raw_rule in data[\"rules\"]:\n                predicates = [RulePredicate(**p) for p in raw_rule[\"predicates\"]]\n                rules.append(RuleSpec(predicates, raw_rule[\"output\"], int(raw_rule[\"support\"]), float(raw_rule[\"confidence\"])))\n            return RuleProgram(\n                program_id=data[\"program_id\"],\n                target_capability=data[\"target_capability\"],\n                target_organ=data[\"target_organ\"],\n                rules=rules,\n                default_output=data[\"default_output\"],\n                source_digest=data[\"source_digest\"],\n                training_count=int(data.get(\"training_count\", 0)),\n                status=data.get(\"status\", \"SHADOW\"),\n                created_at=data.get(\"created_at\", utc_now().isoformat()),\n            )\n        if kind == \"FIELD_MAPPER\":\n            return FieldMapperProgram(\n                program_id=data[\"program_id\"], target_capability=data[\"target_capability\"], target_organ=data[\"target_organ\"],\n                operations=[FieldMapOp(**op) for op in data[\"operations\"]], source_digest=data[\"source_digest\"],\n                training_count=int(data.get(\"training_count\", 0)), status=data.get(\"status\", \"SHADOW\"),\n                created_at=data.get(\"created_at\", utc_now().isoformat()),\n            )\n        if kind == \"SEQUENCE_PLANNER\":\n            rules = []\n            for raw in data[\"rules\"]:\n                predicate = RulePredicate(**raw[\"predicate\"]) if raw.get(\"predicate\") else None\n                rules.append(PlannerRule(raw[\"action\"], float(raw[\"order\"]), predicate, int(raw[\"support\"]), float(raw[\"confidence\"])))\n            return SequencePlannerProgram(\n                program_id=data[\"program_id\"], target_capability=data[\"target_capability\"], target_organ=data[\"target_organ\"],\n                rules=rules, source_digest=data[\"source_digest\"], training_count=int(data.get(\"training_count\", 0)),\n                status=data.get(\"status\", \"SHADOW\"), created_at=data.get(\"created_at\", utc_now().isoformat()),\n            )\n        if kind == \"PIPELINE\":\n            return PipelineProgram(\n                program_id=data[\"program_id\"], target_capability=data[\"target_capability\"], target_organ=data[\"target_organ\"],\n                stage_program_ids=list(data[\"stage_program_ids\"]), source_digest=data[\"source_digest\"],\n                training_count=int(data.get(\"training_count\", 0)), status=data.get(\"status\", \"SHADOW\"),\n                created_at=data.get(\"created_at\", utc_now().isoformat()),\n            )\n        raise ValueError(f\"unknown mechanism kind: {kind}\")\n\n    def _persist_program(self, program: Mechanism) -> None:\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"\"\"\n                INSERT OR REPLACE INTO mechanisms\n                (program_id, target_capability, target_organ, program_json, program_digest, status, created_at)\n                VALUES(?,?,?,?,?,?,?)\n                \"\"\",\n                (\n                    program.program_id,\n                    program.target_capability,\n                    program.target_organ,\n                    canonical_json(_mechanism_payload(program)),\n                    _mechanism_digest(program),\n                    program.status,\n                    program.created_at,\n                ),\n            )\n            self.system.conn.commit()\n\n    def _execute_mechanism(\n        self,\n        program: Mechanism,\n        payload: Mapping[str, Any],\n        ablated: bool = False,\n        ablate_stage: Optional[str] = None,\n    ) -> Any:\n        if isinstance(program, RuleProgram):\n            return BoundedRuleSandbox.execute(program, payload, ablated=ablated)\n        if isinstance(program, FieldMapperProgram):\n            return FieldMapperSandbox.execute(program, payload, ablated=ablated)\n        if isinstance(program, SequencePlannerProgram):\n            return SequencePlannerSandbox.execute(program, payload, ablated=ablated)\n        if isinstance(program, PipelineProgram):\n            current: Any = dict(payload)\n            for stage_id in program.stage_program_ids:\n                if not isinstance(current, Mapping):\n                    raise ValueError(\"pipeline stage input must be a mapping\")\n                if ablated and ablate_stage is None:\n                    return dict(payload)\n                if stage_id == ablate_stage:\n                    # Stage ablation = identity at this seam.\n                    continue\n                stage = self.programs.get(stage_id)\n                if stage is None or stage.status != \"COMMITTED\":\n                    raise RuntimeError(f\"pipeline stage is unavailable or uncommitted: {stage_id}\")\n                current = self._execute_mechanism(stage, current)\n            return current\n        raise TypeError(\"unsupported mechanism\")\n\n    def _score_mechanism(\n        self,\n        program: Mechanism,\n        cases: Sequence[Mapping[str, Any]],\n        ablated: bool = False,\n        ablate_stage: Optional[str] = None,\n    ) -> float:\n        if not cases:\n            raise ValueError(\"evaluation cases must not be empty\")\n        correct = 0\n        for case in cases:\n            payload = case.get(\"input\")\n            if not isinstance(payload, Mapping) or \"expected\" not in case:\n                raise ValueError(\"each evaluation case must contain mapping input and expected\")\n            predicted = self._execute_mechanism(program, payload, ablated=ablated, ablate_stage=ablate_stage)\n            if canonical_json(predicted) == canonical_json(case[\"expected\"]):\n                correct += 1\n        return correct / len(cases)\n\n    def synthesize_best_mechanism(\n        self,\n        deficit_id: str,\n        target_organ: str,\n        training_examples: Sequence[Mapping[str, Any]],\n        min_support: int = 2,\n    ) -> Tuple[Mechanism, MechanismSelectionReceipt]:\n        if deficit_id not in self.deficits:\n            raise KeyError(\"unknown deficit\")\n        if target_organ not in self.organs:\n            raise KeyError(\"unknown target organ\")\n        deficit = self.deficits[deficit_id]\n        candidates = MechanismSelector.synthesize_candidates(\n            deficit.target, target_organ, training_examples, min_support=min_support\n        )\n\n        scored: List[Tuple[float, int, int, str, Mechanism]] = []\n        receipt_candidates: List[SelectionCandidate] = []\n        for program in candidates:\n            score = self._score_mechanism(program, training_examples)\n            kind = _mechanism_kind(program)\n            complexity = MechanismSelector.complexity(program)\n            tiebreak = MechanismSelector.KIND_TIEBREAK.get(kind, 99)\n            scored.append((-score, tiebreak, complexity, program.program_id, program))\n            receipt_candidates.append(SelectionCandidate(program.program_id, kind, score, complexity))\n\n        scored.sort(key=lambda item: item[:4])\n        selected = scored[0][4]\n        for candidate in receipt_candidates:\n            if candidate.program_id == selected.program_id:\n                candidate.selected = True\n                candidate.reason = \"best training fit, then contract-specific structural family, then minimum bounded complexity\"\n            else:\n                candidate.reason = \"not selected by bounded selector\"\n\n        self.programs[selected.program_id] = selected\n        self._persist_program(selected)\n        source_digest = hashlib.sha256(canonical_json(list(training_examples)).encode(\"utf-8\")).hexdigest()\n        receipt = MechanismSelectionReceipt(\n            selection_id=f\"SEL-{uuid.uuid4().hex[:12]}\",\n            deficit_id=deficit_id,\n            target_capability=deficit.target,\n            target_organ=target_organ,\n            candidates=receipt_candidates,\n            selected_program_id=selected.program_id,\n            selected_kind=_mechanism_kind(selected),\n            source_digest=source_digest,\n        )\n        self.selection_receipts[receipt.selection_id] = receipt\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"INSERT INTO mechanism_selections(selection_id, deficit_id, receipt_json, created_at) VALUES(?,?,?,?)\",\n                (receipt.selection_id, deficit_id, canonical_json(asdict(receipt)), receipt.created_at),\n            )\n            self.system.conn.commit()\n        return selected, receipt\n\n    def discover_pipeline(\n        self,\n        deficit_id: str,\n        target_organ: str,\n        training_examples: Sequence[Mapping[str, Any]],\n        max_stages: int = 2,\n    ) -> PipelineProgram:\n        \"\"\"Search compositions of already committed mechanisms; no capability-name routing.\"\"\"\n        if max_stages != 2:\n            raise ValueError(\"v2.2 bounds pipeline discovery to exactly two stages\")\n        if deficit_id not in self.deficits:\n            raise KeyError(\"unknown deficit\")\n        if target_organ not in self.organs:\n            raise KeyError(\"unknown target organ\")\n        deficit = self.deficits[deficit_id]\n        active_ids = sorted(set(self.active_program_by_capability.values()))\n        if len(active_ids) < 2:\n            raise ValueError(\"at least two committed mechanisms are required for pipeline discovery\")\n\n        viable: List[Tuple[int, str, List[str]]] = []\n        for stage_ids in itertools.permutations(active_ids, 2):\n            probe = PipelineProgram(\n                program_id=\"PROBE\",\n                target_capability=deficit.target,\n                target_organ=target_organ,\n                stage_program_ids=list(stage_ids),\n                source_digest=\"probe\",\n                training_count=len(training_examples),\n            )\n            try:\n                score = self._score_mechanism(probe, training_examples)\n            except (ValueError, RuntimeError, TypeError):\n                continue\n            if score == 1.0:\n                # Deterministic tie break by stage IDs.\n                viable.append((len(stage_ids), canonical_json(stage_ids), list(stage_ids)))\n        if not viable:\n            raise ValueError(\"no committed mechanism composition exactly fits the training evidence\")\n        viable.sort()\n        stage_ids = viable[0][2]\n        program = PipelineProgram(\n            program_id=f\"PIPE-{uuid.uuid4().hex[:12]}\",\n            target_capability=deficit.target,\n            target_organ=target_organ,\n            stage_program_ids=stage_ids,\n            source_digest=hashlib.sha256(canonical_json(list(training_examples)).encode(\"utf-8\")).hexdigest(),\n            training_count=len(training_examples),\n        )\n        self.programs[program.program_id] = program\n        self._persist_program(program)\n        return program\n\n    def evaluate_mechanism(\n        self,\n        program_id: str,\n        blind_cases: Sequence[Mapping[str, Any]],\n        min_score: Optional[float] = None,\n        min_ablation_drop: float = 0.20,\n    ) -> MechanismDevelopmentReceipt:\n        if program_id not in self.programs:\n            raise KeyError(\"unknown program\")\n        program = self.programs[program_id]\n        matching_deficits = [d for d in self.deficits.values() if d.target == program.target_capability and d.status == \"OPEN\"]\n        if not matching_deficits:\n            raise ValueError(\"no open deficit for target capability\")\n        deficit = max(matching_deficits, key=lambda d: d.required - d.observed)\n        required_score = float(deficit.required if min_score is None else min_score)\n\n        candidate_score = self._score_mechanism(program, blind_cases)\n        restore_score = self._score_mechanism(program, blind_cases)\n        stage_ablation_scores: Dict[str, float] = {}\n        if isinstance(program, PipelineProgram):\n            for stage_id in program.stage_program_ids:\n                stage_ablation_scores[stage_id] = self._score_mechanism(program, blind_cases, ablate_stage=stage_id)\n            ablation_score = max(stage_ablation_scores.values()) if stage_ablation_scores else candidate_score\n            pass_causal = bool(stage_ablation_scores) and all(\n                candidate_score - score >= min_ablation_drop for score in stage_ablation_scores.values()\n            )\n        else:\n            ablation_score = self._score_mechanism(program, blind_cases, ablated=True)\n            pass_causal = candidate_score - ablation_score >= min_ablation_drop\n\n        pass_score = candidate_score >= required_score\n        pass_restore = abs(restore_score - candidate_score) <= 1e-12\n        committed = pass_score and pass_causal and pass_restore\n\n        if committed:\n            verdict = \"COMMIT\"\n            reason = \"blind target passed; causal ablation passed; restore reproduced the gain\"\n            program.status = \"COMMITTED\"\n            deficit.status = \"RESOLVED\"\n            self.active_program_by_capability[program.target_capability] = program.program_id\n            organ = self.organs[program.target_organ]\n            if program.program_id not in organ.mechanisms:\n                organ.mechanisms.append(program.program_id)\n            organ.revision += 1\n            organ.state_label = f\"S{organ.revision}\"\n            organ.updated_at = utc_now().isoformat()\n            self._persist_organ(organ)\n            evidence = [\n                f\"mechanism:{program.program_id}\",\n                f\"kind:{_mechanism_kind(program)}\",\n                f\"program_digest:{_mechanism_digest(program)}\",\n                f\"blind_score:{candidate_score:.6f}\",\n                f\"organ:{program.target_organ}:{organ.state_label}\",\n            ]\n            if stage_ablation_scores:\n                evidence.extend(f\"stage_ablation:{sid}:{score:.6f}\" for sid, score in sorted(stage_ablation_scores.items()))\n            else:\n                evidence.append(f\"ablation_drop:{candidate_score - ablation_score:.6f}\")\n            self.register_capability(program.target_capability, candidate_score, evidence)\n        else:\n            verdict = \"ROLLBACK\"\n            reasons = []\n            if not pass_score:\n                reasons.append(\"blind_target_not_reached\")\n            if not pass_causal:\n                reasons.append(\"ablation_not_causal\")\n            if not pass_restore:\n                reasons.append(\"restore_not_reproducible\")\n            reason = \",\".join(reasons)\n            program.status = \"ROLLED_BACK\"\n\n        self._persist_program(program)\n        receipt = MechanismDevelopmentReceipt(\n            experiment_id=f\"DEV22-{uuid.uuid4().hex[:12]}\",\n            program_id=program.program_id,\n            mechanism_kind=_mechanism_kind(program),\n            target_capability=program.target_capability,\n            target_organ=program.target_organ,\n            train_cases=program.training_count,\n            blind_cases=len(blind_cases),\n            candidate_score=candidate_score,\n            ablation_score=ablation_score,\n            restore_score=restore_score,\n            min_score=required_score,\n            min_ablation_drop=min_ablation_drop,\n            verdict=verdict,\n            state_committed=committed,\n            reason=reason,\n            program_digest=_mechanism_digest(program),\n            stage_ablation_scores=stage_ablation_scores,\n        )\n        with self.system.db_lock:\n            self.system.conn.execute(\n                \"INSERT INTO developmental_experiments(experiment_id, program_id, receipt_json, created_at) VALUES(?,?,?,?)\",\n                (receipt.experiment_id, program.program_id, canonical_json(asdict(receipt)), receipt.created_at),\n            )\n            self.system.conn.commit()\n        return receipt\n\n    # v2.1 public name remains usable, now delegates to polymorphic evaluator.\n    def evaluate_program(self, program_id: str, blind_cases: Sequence[Mapping[str, Any]], min_score: Optional[float] = None,\n                         min_ablation_drop: float = 0.20) -> MechanismDevelopmentReceipt:\n        return self.evaluate_mechanism(program_id, blind_cases, min_score, min_ablation_drop)\n\n    def execute_capability(self, capability: str, payload: Mapping[str, Any]) -> Any:\n        program_id = self.active_program_by_capability.get(capability)\n        if not program_id:\n            raise KeyError(f\"no committed executable mechanism for capability: {capability}\")\n        program = self.programs[program_id]\n        if program.status != \"COMMITTED\":\n            raise RuntimeError(\"active mechanism is not committed\")\n        return self._execute_mechanism(program, payload)\n\n    def developmental_snapshot(self) -> Dict[str, Any]:\n        base = super().developmental_snapshot()\n        base[\"mechanism_kinds\"] = {\n            capability: _mechanism_kind(self.programs[program_id])\n            for capability, program_id in sorted(self.active_program_by_capability.items())\n        }\n        base[\"selections\"] = {sid: asdict(r) for sid, r in sorted(self.selection_receipts.items())}\n        return base"
+    },
+    {
+      "kind": "ClassDef",
+      "module": "yado_core_v2_2",
+      "name": "UnifiedCognitiveSystemV22",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_2.py",
+      "sha256": "882832923ace2c0e137cd24c89fe8fa605a2c0061a2d7bf311e5deeb7377cffd",
+      "source": "class UnifiedCognitiveSystemV22(UnifiedCognitiveSystemV21):\n    SCHEMA_VERSION = 4\n\n    def _init_schema(self) -> None:\n        super()._init_schema()\n        with self.db_lock:\n            self.conn.executescript(\n                \"\"\"\n                CREATE TABLE IF NOT EXISTS mechanism_selections (\n                    selection_id TEXT PRIMARY KEY,\n                    deficit_id TEXT NOT NULL,\n                    receipt_json TEXT NOT NULL,\n                    created_at TEXT NOT NULL\n                );\n                \"\"\"\n            )\n            self.conn.commit()\n\n    def __init__(self, db_path: str = \"cognitive_system_v2_2.db\", embedder=None):\n        # Skip the v2.1 constructor's temporary DevelopmentalExecutive: on restart it\n        # cannot decode v2.2 polymorphic mechanisms. The v2 base only restores common\n        # state, then we install the v2.2 executive once. Dynamic _init_schema still\n        # creates all v2.1/v2.2 tables before executive restoration.\n        UnifiedCognitiveSystem.__init__(self, db_path=db_path, embedder=embedder)\n        self.executive = DevelopmentalExecutiveV22(self)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_2.py",
+      "sha256": "882832923ace2c0e137cd24c89fe8fa605a2c0061a2d7bf311e5deeb7377cffd",
+      "source": "def __init__(self, system: \"UnifiedCognitiveSystemV22\"):\n        self.selection_receipts: Dict[str, MechanismSelectionReceipt] = {}\n        super().__init__(system)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_2",
+      "name": "_restore_development_state",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_2.py",
+      "sha256": "882832923ace2c0e137cd24c89fe8fa605a2c0061a2d7bf311e5deeb7377cffd",
+      "source": "def _restore_development_state(self) -> None:\n        with self.system.db_lock:\n            rows = self.system.conn.execute(\"SELECT * FROM organs\").fetchall()\n            for row in rows:\n                state = OrganState(\n                    organ_id=row[\"organ_id\"],\n                    name=row[\"name\"],\n                    state_label=row[\"state_label\"],\n                    revision=int(row[\"revision\"]),\n                    mechanisms=json.loads(row[\"mechanisms\"]),\n                    updated_at=row[\"updated_at\"],\n                )\n                self.organs[state.name] = state\n\n            rows = self.system.conn.execute(\"SELECT * FROM mechanisms WHERE status='COMMITTED'\").fetchall()\n            # Load non-pipelines first so pipeline references resolve deterministically.\n            decoded = [(row, json.loads(row[\"program_json\"])) for row in rows]\n            decoded.sort(key=lambda item: 1 if item[1].get(\"kind\") == \"PIPELINE\" else 0)\n            for row, data in decoded:\n                program = self._mechanism_from_json(data)\n                program.status = row[\"status\"]\n                self.programs[program.program_id] = program\n                self.active_program_by_capability[program.target_capability] = program.program_id\n\n            rows = self.system.conn.execute(\"SELECT receipt_json FROM mechanism_selections\").fetchall()\n            for row in rows:\n                raw = json.loads(row[\"receipt_json\"])\n                raw[\"candidates\"] = [SelectionCandidate(**c) for c in raw[\"candidates\"]]\n                receipt = MechanismSelectionReceipt(**raw)\n                self.selection_receipts[receipt.selection_id] = receipt"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_2.py",
+      "sha256": "882832923ace2c0e137cd24c89fe8fa605a2c0061a2d7bf311e5deeb7377cffd",
+      "source": "def __init__(self, db_path: str = \"cognitive_system_v2_2.db\", embedder=None):\n        # Skip the v2.1 constructor's temporary DevelopmentalExecutive: on restart it\n        # cannot decode v2.2 polymorphic mechanisms. The v2 base only restores common\n        # state, then we install the v2.2 executive once. Dynamic _init_schema still\n        # creates all v2.1/v2.2 tables before executive restoration.\n        UnifiedCognitiveSystem.__init__(self, db_path=db_path, embedder=embedder)\n        self.executive = DevelopmentalExecutiveV22(self)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_5_unified",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_5_unified.py",
+      "sha256": "e28a4a76e29003f8a5d0ff513c2b7aa239abaf14266eb6c147dda55f29182b7c",
+      "source": "def __init__(self, db_path: str = \"yado_v25_unified_shadow.db\"):\n        # Keep the test/development runtime restart-stable without depending on\n        # external secrets. This key protects only this local shadow DB.\n        os.environ.setdefault(\"YADO_MASTER_KEY\", \"yado-v25-unified-local-shadow-key\")\n        super().__init__(db_path=db_path, embedder=HashingEmbedder(128))\n        self.models: Dict[str, Any] = {}\n        self.logic_program: Optional[RuleProgram] = None\n        self._load_verified_developmental_models()\n        self._bootstrap_logic_program()\n        self._bootstrap_external_evidence()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_6_cross_domain",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_6_cross_domain.py",
+      "sha256": "d83fc74d5a009405b58785de0cfac74211f41e1e6d994925e9f4dc9d12a76650",
+      "source": "def __init__(self, db_path: str = \"yado_v26_cross_domain_shadow.db\"):\n        super().__init__(db_path=db_path)\n        self._bootstrap_domain_evidence()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_8_meta_grammar",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_8_meta_grammar.py",
+      "sha256": "cc6ebc6c907c47d591688af23654200d83554c9a154b8850e51fc77e1bb9f53f",
+      "source": "def __init__(self, db_path: str = \"yado_v28_meta_grammar_shadow.db\"):\n        super().__init__(db_path=db_path)\n        self.meta_grammar_library = build_development_library()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v2_9_trace_crystallization",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v2_9_trace_crystallization.py",
+      "sha256": "94919a1ee45c04e8cbb02016341bc9e65d5bb7e76e37260378b1277a03daf718",
+      "source": "def __init__(self, db_path: str='yado_v29_trace_crystallization_shadow.db'):\n        super().__init__(db_path=db_path)\n        report=ROOT/'yado_trace_crystallization_cycle3_report.json'\n        self.transition_skill_library = load_skill_library_from_report(str(report)) if report.exists() else None"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_candidate",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_candidate.py",
+      "sha256": "c9b7874ac6bddefd27a760a4af9abadbd5f2773a0b82a39561c844a6d6b03c7b",
+      "source": "def __init__(self,db_path='yado_v30_candidate.db',state_path:str|None=None):\n        super().__init__(db_path=db_path); self.state_path=Path(state_path) if state_path else DEFAULT_STATE\n        self.canonical_state=self._load_state()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc2.py",
+      "sha256": "39b72587b1285581203613318809464d721d32009d4a1c25508e9486f3b54354",
+      "source": "def __init__(self,db_path='yado_v30_rc2.db',state_path:str|None=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc3_autoevolution",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc3_autoevolution.py",
+      "sha256": "19bde96e966e75c505a43086caed5e44dd9be455bf2c30b95c769e116faaebb8",
+      "source": "def __init__(self,db_path='yado_v30_rc3.db',state_path:str|None=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc3_trained",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc3_trained.py",
+      "sha256": "7ef3549b99b26f9317a03ada3f4db684f3f52bc8a64f03a7a167330dc683cb7f",
+      "source": "def __init__(self,db_path='yado_v30_rc3_trained.db',state_path:str|None=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_TRAINED_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc4_meta_autoevolution",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc4_meta_autoevolution.py",
+      "sha256": "8b617a0bf9b3d04c772af655c3bf1a24986923f8230a37f978a5b316f1e9d6c6",
+      "source": "def __init__(self,db_path='yado_v30_rc4_meta.db',state_path:str|None=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc5_algorithm_genesis",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc5_algorithm_genesis.py",
+      "sha256": "dd0b9b5be541e9f5ef666d1a7a95a2d657ba6e848f3fbef990b1b338e2896ca1",
+      "source": "def __init__(self,db_path='yado_v30_rc5_alggen.db',state_path:str|None=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc6_meta_grammar",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py",
+      "sha256": "42de89ef8d82a17801ea5a9d34b131bc6a518a9479bed3f1775bf3fca6110865",
+      "source": "def __init__(self,db_path='yado_v30_rc6_meta_grammar.db',state_path=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc6_r1_real_external",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_r1_real_external.py",
+      "sha256": "14f50396ed06a466a421e7208423c38b50313b407869f195ed313bea3794457d",
+      "source": "def __init__(self, db_path='yado_v30_rc6_r1_real_external.db', state_path=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc6_r3_real_external",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_r3_real_external.py",
+      "sha256": "5ec5e549bd33ae62c0dc49e80aee5565887eddd43f0048b1a0491c1f97e64121",
+      "source": "def __init__(self, db_path='yado_v30_rc6_r3_real_external.db', state_path=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc6_r4_real_external",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_r4_real_external.py",
+      "sha256": "7bc5c18cfdbe029b79a6c8e9f50f120b6fb4f97dc2ff444cb85d39e3bad0f4c0",
+      "source": "def __init__(self, db_path='yado_v30_rc6_r4_real_external.db', state_path=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc6_r5_open_resources",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_r5_open_resources.py",
+      "sha256": "36dd8f0b1d83edc54a285bad267f3a8455d3d880e4f1e147c81d4cc972f05b4b",
+      "source": "def __init__(self,db_path='yado_v30_rc6_r5_open_resources.db',state_path=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc6_r6_schema_adaptation",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc6_r6_schema_adaptation.py",
+      "sha256": "97d569367ab84c201dcaec26dabde0513bcdee9c4f845d5fdcabca094c365573",
+      "source": "def __init__(self,db_path='yado_v30_rc6_r6_schema_adaptation.db',state_path=None):\n        super().__init__(db_path=db_path,state_path=state_path or str(DEFAULT_STATE))\n        self._openapi_runtime=OpenAPIContractRuntime(self.canonical_state.get('openapi_contract_learning') or {})"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc7_deep_integrity",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py",
+      "sha256": "5c4fab434de2dc377302f2d033de8a79b9d8edc2a286e6179e7921237b67057e",
+      "source": "def __init__(self,db_path='yado_v30_rc7_deep_integrity.db',state_path=None):\n        p=Path(state_path) if state_path else DEFAULT_STATE\n        raw=json.loads(p.read_text(encoding='utf-8'))\n        expected={\n          'version':'3.0-rc7',\n          'profile':self.PROFILE,\n          'active_profile':self.PROFILE,\n          'schema':'yado.v3_0_rc7.deep_integrity.state.v1',\n          'parent_version':'3.0-rc6-r6',\n        }\n        bad={k:{'expected':v,'actual':raw.get(k)} for k,v in expected.items() if raw.get(k)!=v}\n        if bad: raise RuntimeError(f'R7_STATE_METADATA_INTEGRITY_FAILURE:{bad}')\n        super().__init__(db_path=db_path,state_path=str(p))\n        self._frontier=ValidatedFrontierPortfolio(self.canonical_state.get('validated_frontier_portfolio') or {})\n        self._host_router=HostCapabilityRelationRouter(self.canonical_state.get('host_capability_model') or {})"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_core_v3_0_rc8_external_cognitive",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py",
+      "sha256": "449695d1b9ca4a5ba61ed1ca89683611202fb6029638779baedf531b803ff784",
+      "source": "def __init__(self,db_path='yado_v30_rc8_external_cognitive.db',state_path=None):\n        p=Path(state_path) if state_path else DEFAULT_STATE\n        raw=json.loads(p.read_text(encoding='utf-8'))\n        expected={\n            'version':self.VERSION,\n            'parent_version':'3.0-rc7',\n            'profile':self.PROFILE,\n            'active_profile':self.PROFILE,\n            'schema':self.STATE_SCHEMA,\n        }\n        bad={k:{'expected':v,'actual':raw.get(k)} for k,v in expected.items() if raw.get(k)!=v}\n        if bad: raise RuntimeError(f'R8_STATE_METADATA_INTEGRITY_FAILURE:{bad}')\n\n        mig=raw.get('rc8_migration') or {}\n        if mig.get('schema')!='yado.rc8.migration.v1':\n            raise RuntimeError('R8_MIGRATION_CONTRACT_MISSING')\n        if not PARENT_STATE.exists() or self._sha(PARENT_STATE)!=mig.get('parent_state_sha256'):\n            raise RuntimeError('R8_PARENT_STATE_HASH_MISMATCH')\n        if not PARENT_MANIFEST.exists() or self._sha(PARENT_MANIFEST)!=mig.get('parent_manifest_sha256'):\n            raise RuntimeError('R8_PARENT_MANIFEST_HASH_MISMATCH')\n        parent=json.loads(PARENT_STATE.read_text(encoding='utf-8'))\n        allowed=set(mig.get('allowed_changed_keys') or [])\n        parent_preserved={k:v for k,v in parent.items() if k not in allowed}\n        if self._canonical_sha(parent_preserved)!=mig.get('preserved_payload_sha256'):\n            raise RuntimeError('R8_PRESERVED_PARENT_PAYLOAD_HASH_MISMATCH')\n        child_preserved={k:v for k,v in raw.items() if k not in allowed}\n        if child_preserved!=parent_preserved:\n            raise RuntimeError('R8_PRESERVED_PAYLOAD_CHANGED')\n\n        ext=raw.get('external_runtime') or {}\n        if not (ext.get('verified') and ext.get('python_execution') and ext.get('event_driven') and ext.get('independent_readback')):\n            raise RuntimeError('R8_EXTERNAL_RUNTIME_CONTRACT_NOT_VERIFIED')\n        if ext.get('background_daemon') is not False:\n            raise RuntimeError('R8_BACKGROUND_DAEMON_CLAIM_INVALID')\n\n        coherence_errors=validate_state_self_model(raw)\n        if coherence_errors:\n            raise RuntimeError(f'R8_SELF_MODEL_COHERENCE_FAILURE:{coherence_errors}')\n\n        # Bypass RC7 metadata guard but preserve the entire lower kernel lineage.\n        UnifiedYADOKernelV30RC6R6SchemaAdaptation.__init__(self,db_path=db_path,state_path=str(p))\n        self._frontier=ValidatedFrontierPortfolio(self.canonical_state.get('validated_frontier_portfolio') or {})\n        self._host_router=HostCapabilityRelationRouter(self.canonical_state.get('host_capability_model') or {})\n        self._digital_workspace=CausalReflectiveWorkspace(capacity=4)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_digital_consciousness_runtime_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_digital_consciousness_runtime_v1.py",
+      "sha256": "c1f81e10bd753c1d512090dce5a6977887c219299bb3b439df359174e3aebcbb",
+      "source": "def __init__(self, capacity: int = 4, diversity_penalty: float = 0.16):\n        if capacity < 1 or capacity > 16:\n            raise ValueError(\"CAPACITY_OUT_OF_BOUNDS\")\n        self.capacity = int(capacity)\n        self.diversity_penalty = float(diversity_penalty)\n        self.attention = AttentionSchemaState()\n        self.predictor = PredictionState()\n        self.episodes: list[EpisodeRecord] = []\n        self._last_focus_kind: str | None = None"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_evolution_archive_runtime_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_evolution_archive_runtime_v1.py",
+      "sha256": "60d455651981ab16c136e35d36696de1b19e6d3a7a0681e4e378f3cba53ea0b2",
+      "source": "def __init__(self, variants: Iterable[EvolutionVariant]=()):\n        self._variants: Dict[str,EvolutionVariant]={}\n        for v in variants:\n            self.add(v)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_external_bridge_native_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_external_bridge_native_v1.py",
+      "sha256": "21af024a762c6849db29832a0ef8949eb6546da4300250731620e1f408dae106",
+      "source": "def __init__(self, db_path='yado_v30_rc6_r2_real_external.db', state_path=None):\n        super().__init__(db_path=db_path, state_path=state_path or str(DEFAULT_STATE))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_frontier_portfolio_runtime",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_frontier_portfolio_runtime.py",
+      "sha256": "3088b165683639c09217b8f5a26b785f3039a76e002b5bc5681e546777a35def",
+      "source": "def __init__(self,registry:dict|None=None):\n        self.registry=dict(registry or {})\n        self.general=FrontierPortfolioV4()       # slice/stateful/factored/guarded/coupled/FSM/latent/belief\n        self.prob=FrontierPortfolioV5()          # belief + bounded 2-hypothesis probabilistic\n        self.active=FrontierPortfolioV6()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_host_capability_runtime",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_host_capability_runtime.py",
+      "sha256": "257a6339e97efd0be0760a534bbbb8a894fe648998baf26b4e75581108a92daa",
+      "source": "def __init__(self, model:Mapping[str,Any]):\n        self.model=dict(model or {})\n        self.n=int(self.model.get('ngram_n',4))\n        self.top_min=float(self.model.get('top_min',1.1))\n        self.margin_min=float(self.model.get('margin_min',1.1))\n        self.profiles=dict(self.model.get('profiles') or {})"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_job_condition_runtime",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_job_condition_runtime.py",
+      "sha256": "ebc5b552b8bf4322c8ec6855ea5e40a0c78d1dd349382ce56daf7c97cf22b7e7",
+      "source": "def __init__(self,operators:Sequence[str]):self.operators=set(map(str,operators))"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_meta_grammar_genesis_cycle1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_meta_grammar_genesis_cycle1.py",
+      "sha256": "10169a90489e048c642db1a4a23b48068b2e2a0d36f5245d913e2b766af9ed81",
+      "source": "def __init__(self, complexity_penalty: float = 0.0015):\n        self.complexity_penalty = float(complexity_penalty)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_meta_grammar_genesis_cycle1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_meta_grammar_genesis_cycle1.py",
+      "sha256": "10169a90489e048c642db1a4a23b48068b2e2a0d36f5245d913e2b766af9ed81",
+      "source": "def __init__(self):\n        self.entries: Dict[str, Dict[str, Any]] = {}"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_metacognitive_control_runtime_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_metacognitive_control_runtime_v1.py",
+      "sha256": "171ffeda67261fd2afa3c0edfcd79c07efff4687b0ee9a13fbea7d4e03cc6912",
+      "source": "def __init__(self, prior_success:float=1.0, prior_failure:float=1.0):\n        self.prior_success=float(prior_success); self.prior_failure=float(prior_failure)\n        self._bins=defaultdict(lambda:[0,0])"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_metacognitive_control_runtime_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_metacognitive_control_runtime_v1.py",
+      "sha256": "171ffeda67261fd2afa3c0edfcd79c07efff4687b0ee9a13fbea7d4e03cc6912",
+      "source": "def __init__(self, execute_threshold:float=0.66, evidence_threshold:float=0.45, disagreement_threshold:float=0.20):\n        self.execute_threshold=float(execute_threshold)\n        self.evidence_threshold=float(evidence_threshold)\n        self.disagreement_threshold=float(disagreement_threshold)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_metacognitive_control_runtime_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_metacognitive_control_runtime_v1.py",
+      "sha256": "171ffeda67261fd2afa3c0edfcd79c07efff4687b0ee9a13fbea7d4e03cc6912",
+      "source": "def __init__(self,execute_threshold:float=0.58,evidence_threshold:float=0.45):\n        self.execute_threshold=execute_threshold; self.evidence_threshold=evidence_threshold"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_open_access_resource_runtime",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_open_access_resource_runtime.py",
+      "sha256": "3c5fbc81325a0759ed8d5f0d0d1ad974d66c30463428bb4c04f594ef08c5ac05",
+      "source": "def __init__(self,profiles:Mapping[str,Mapping[str,object]]):\n        self.profiles=dict(profiles)\n        self.docs={k:str(v.get('summary','')) for k,v in self.profiles.items()}\n        self.dt={k:tokenize(v) for k,v in self.docs.items()}\n        self.df=Counter()\n        for ts in self.dt.values():\n            for t in set(ts):self.df[t]+=1"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_openapi_adapter_runtime",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_openapi_adapter_runtime.py",
+      "sha256": "527687d69fdedd480f625f1721331f50be90b2d4defdea2276f0016dfaa57ecb",
+      "source": "def __init__(self, state_section:dict):\n        self.state=state_section or {}\n        self.tree=self.state.get('policy_tree') or {'label':'SEEK_MORE_EVIDENCE'}\n        self.contracts=self.state.get('contract_registry') or {}"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_phase_a_shadow",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_phase_a_shadow.py",
+      "sha256": "0e45cedafa1de726afeff6e46173cad885ce5865bcf04ac59db0558e7c25a5e8",
+      "source": "def __init__(self, max_depth: int = 3, complexity_penalty: float = 0.01):\n        if max_depth < 1 or max_depth > 5:\n            raise ValueError(\"max_depth must be in [1,5]\")\n        self.max_depth = max_depth\n        self.complexity_penalty = float(complexity_penalty)\n        self.primitives: Dict[str, Primitive] = {p.name: p for p in self.DEFAULT_PRIMITIVES}\n        self.derived_macros: Dict[str, Candidate] = {}"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_primitive_genesis_cycle1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_primitive_genesis_cycle1.py",
+      "sha256": "9402e435951e3f7019f7b3cf37fe5c94f58233c816238d0bad8e101fe4cd8623",
+      "source": "def __init__(self, complexity_penalty: float = 0.002):\n        self.complexity_penalty = complexity_penalty"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_rc8_consciousness_direct_research_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_rc8_consciousness_direct_research_v1.py",
+      "sha256": "21055b70746de8f6a8fdd77e860d675c2d2ba2b97f32eca3227f8c408ad54337",
+      "source": "def __init__(self):super().__init__();self.x=[]"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_semantic_selective_v27",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_semantic_selective_v27.py",
+      "sha256": "a83883201b23fd807815a6f446b50fd2badc2e022da3bc467bee33da52bebf6e",
+      "source": "def __init__(self, extra_docs: Sequence[Sequence[str]], deep_evidence: Mapping[str, str], config: SelectiveConfig | None = None):\n        self.config = config or SelectiveConfig()\n        supported = list(BASE + T1 + T2 + T3)\n        merged: Dict[str, str] = {str(r): str(d) for r, d in supported}\n        for r, d in ACCUMULATED_NOVEL_DOCS:\n            merged.setdefault(str(r), str(d))\n        for r, d in extra_docs:\n            merged[str(r)] = str(d)\n\n        self.supported = supported\n        self.supported_set = {r for r, _ in supported}\n        self.all_docs = list(merged.items())\n        self.raw_desc = dict(self.all_docs)\n        self.deep_evidence = {str(k): str(v) for k, v in deep_evidence.items()}\n        self.camel = False\n        self.desc = {r: tokenize(d, self.camel) for r, d in self.all_docs}\n        self.grams = {r: grams_from_tokens(self.desc[r]) for r, _ in self.all_docs}\n        self.pos = defaultdict(float)\n        self.neg = defaultdict(float)\n        for q, tgt in TRAIN:\n            qs = set(tokenize(q, self.camel))\n            td = set(self.desc[tgt])\n            for x in qs:\n                for d in td:\n                    self.pos[(x, d)] += 1.0\n                for r in self.supported_set:\n                    if r == tgt:\n                        continue\n                    for d in set(self.desc[r]):\n                        self.neg[(x, d)] += 1.0 / (len(self.supported_set) - 1)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_skill_admission_runtime_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_skill_admission_runtime_v1.py",
+      "sha256": "190f992e1a130dc5d0291570553d56f8a54e745f70cb4661e1b6c96ccf524264",
+      "source": "def __init__(\n        self,\n        *,\n        min_semantic_consistency: float = 0.90,\n        min_fit_gain: float = 0.01,\n        max_heldout_drop: float = 0.0,\n        min_heldout_gain: float = 0.0,\n    ):\n        self.min_semantic_consistency = float(min_semantic_consistency)\n        self.min_fit_gain = float(min_fit_gain)\n        self.max_heldout_drop = float(max_heldout_drop)\n        self.min_heldout_gain = float(min_heldout_gain)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle1.py",
+      "sha256": "40afbc22455268945eeeeb0f8a5e16c7f27c57ed1f07c89057cd25ba6ef54bfa",
+      "source": "def __init__(self, complexity_penalty: float = 0.001):\n        self.complexity_penalty = complexity_penalty"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle1.py",
+      "sha256": "40afbc22455268945eeeeb0f8a5e16c7f27c57ed1f07c89057cd25ba6ef54bfa",
+      "source": "def __init__(self):\n        self.slice = SliceInducer()\n        self.stateful = FailureDerivedStatefulRegisterInducer()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle10",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle10.py",
+      "sha256": "388b5d0049468946b1a5d8494d188007a95cf893b36f19ac9ec2f0339d5bf462",
+      "source": "def __init__(self, complexity_penalty: float = 0.001):\n        self.complexity_penalty = complexity_penalty"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle10",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle10.py",
+      "sha256": "388b5d0049468946b1a5d8494d188007a95cf893b36f19ac9ec2f0339d5bf462",
+      "source": "def __init__(self):\n        self.old = FrontierPortfolioV4()\n        self.prob = FailureDerivedProbabilisticBeliefInducer()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle12",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle12.py",
+      "sha256": "712343cd3422f7e38e08a093877f4f112144136f5c133e8aa41d5da8da030823",
+      "source": "def __init__(self,complexity_penalty=.001): self.complexity_penalty=complexity_penalty"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle12",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle12.py",
+      "sha256": "712343cd3422f7e38e08a093877f4f112144136f5c133e8aa41d5da8da030823",
+      "source": "def __init__(self): self.old=FrontierPortfolioV5();self.active=ActiveInformationGainInducer()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle2.py",
+      "sha256": "5a63e625c6a1986775f73e022bbc1a0a8f219729ba6799024716b16e61ecb891",
+      "source": "def __init__(self, complexity_penalty: float = 0.001):\n        self.complexity_penalty = complexity_penalty\n        self.exprs = FailureDerivedStatefulRegisterInducer._expressions()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle2.py",
+      "sha256": "5a63e625c6a1986775f73e022bbc1a0a8f219729ba6799024716b16e61ecb891",
+      "source": "def __init__(self, complexity_penalty: float = 0.001):\n        self.complexity_penalty = complexity_penalty\n        self.exprs = FailureDerivedStatefulRegisterInducer._expressions()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle2",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle2.py",
+      "sha256": "5a63e625c6a1986775f73e022bbc1a0a8f219729ba6799024716b16e61ecb891",
+      "source": "def __init__(self):\n        self.slice=SliceInducer()\n        self.scalar=FailureDerivedStatefulRegisterInducer()\n        self.factored=FailureDerivedFactoredRegisterInducer()\n        self.guarded=FailureDerivedGuardedRegisterInducer()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle4",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle4.py",
+      "sha256": "9cdc9543d67abfba2525d72541416cfa76b606d63a9e751985f6715acd1214b0",
+      "source": "def __init__(self, complexity_penalty: float = 0.001):\n        self.complexity_penalty = complexity_penalty"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle4",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle4.py",
+      "sha256": "9cdc9543d67abfba2525d72541416cfa76b606d63a9e751985f6715acd1214b0",
+      "source": "def __init__(self, complexity_penalty: float = 0.001):\n        self.complexity_penalty = complexity_penalty"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle4",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle4.py",
+      "sha256": "9cdc9543d67abfba2525d72541416cfa76b606d63a9e751985f6715acd1214b0",
+      "source": "def __init__(self):\n        self.old = FrontierPortfolioInducer()\n        self.coupled = FailureDerivedCoupledRegisterInducer()\n        self.fsm = FailureDerivedFiniteTransitionInducer()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle6",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle6.py",
+      "sha256": "8731cee5778a1ec263ba0e2c3486539376a9e8b68518b534b014e9fbe3bca389",
+      "source": "def __init__(self, max_states: int = 4, complexity_penalty: float = 0.001):\n        self.max_states = max_states\n        self.complexity_penalty = complexity_penalty"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle6",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle6.py",
+      "sha256": "8731cee5778a1ec263ba0e2c3486539376a9e8b68518b534b014e9fbe3bca389",
+      "source": "def __init__(self):\n        self.old = FrontierPortfolioV2()\n        self.latent = FailureDerivedLatentMealyInducer(max_states=4)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle8",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle8.py",
+      "sha256": "bf1eff3f75d95deea951967d93055f9ae41febb96dcccbe610054cdda1f04d76",
+      "source": "def __init__(self, complexity_penalty: float = 0.001):\n        self.complexity_penalty = complexity_penalty"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_stateful_frontier_repair_cycle8",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_stateful_frontier_repair_cycle8.py",
+      "sha256": "bf1eff3f75d95deea951967d93055f9ae41febb96dcccbe610054cdda1f04d76",
+      "source": "def __init__(self):\n        self.old = FrontierPortfolioV3()\n        self.belief = FailureDerivedBeliefSetInducer()"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_transfer_evaluation_runtime_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_transfer_evaluation_runtime_v1.py",
+      "sha256": "1cc8562d5c2ca4d9cc1e222bc0b01e12d897b0334e574fb994b845be399a4078",
+      "source": "def __init__(self, *, min_reusable_gain:float=.05, min_heldout_gain:float=.02, max_unrelated_drop:float=.02, max_negative_transfer_rate:float=.10, max_forgetting:float=.03):\n        self.min_reusable_gain=float(min_reusable_gain);self.min_heldout_gain=float(min_heldout_gain);self.max_unrelated_drop=float(max_unrelated_drop);self.max_negative_transfer_rate=float(max_negative_transfer_rate);self.max_forgetting=float(max_forgetting)"
+    },
+    {
+      "kind": "FunctionDef",
+      "module": "yado_transfer_memory_runtime_v1",
+      "name": "__init__",
+      "path": "runtime/yado_rc8_v36/yado_transfer_memory_runtime_v1.py",
+      "sha256": "8505da0d055cf3948c9b9f9881ce32cf459e25a8921e8ea6453c5e40ebd39772",
+      "source": "def __init__(self, *, min_support:int=3, min_domains:int=2, min_mean_score:float=.75, max_failure_rate:float=.20):\n        self.min_support=max(1,int(min_support)); self.min_domains=max(1,int(min_domains)); self.min_mean_score=float(min_mean_score); self.max_failure_rate=float(max_failure_rate)"
+    }
+  ],
+  "schema": "yado.g2.rc8_goal_deficit_commit_path_probe.v1",
+  "status": "PASS"
+}
