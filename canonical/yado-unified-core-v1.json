@@ -25,7 +25,7 @@
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "e79c94ab3d892999144d5891f6c3631648c14e7c4874a5b914d73bb0d79de1a2",
+  "algorithm_provenance_registry_digest": "1761e771cf3159b6e208bbf6c55c9b08e74d15f174ba9b263e8dd9b6a16845c1",
   "architecture_composite_successor_design_v1": {
     "architecture_mutation": false,
     "candidate_digest": "a8d0c8dd637abb539f247c24a6a9b3cfe624458f14761711c5a8c90d401a9fb9",
@@ -196,7 +196,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "89248d0aa60af66be57f2835617faa3b08cdc21fa0e89c7c4a627ea1a58a4a26",
+  "core_digest": "5b444f4cad7d24c5e9187472363ec6cb0d7a1ec93c4040324f6e9078daf7323c",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -250,7 +250,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_AUDIT_V1",
+  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V1",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -730,6 +730,26 @@
     },
     "selected_skill_id": "ADMIT_RAW_V2",
     "status": "CANONICAL_ACTIVE"
+  },
+  "raw_representation_v2_post_admission_audit_v1": {
+    "canary_accuracy": 0.875,
+    "checks": {
+      "core_raw_binding_v2": true,
+      "g3_not_started": true,
+      "head_active_v2_only": true,
+      "plane_active_v2_only": true,
+      "restart_unified_canary": false,
+      "rollback_v1_constructible": true,
+      "runtime_manifest_digest_bound": true,
+      "runtime_source_hash_bound": true,
+      "unified_runtime_hash_bound": true,
+      "v1_superseded_with_history": true,
+      "v2_canonical_active": true,
+      "v2_component_digest_exact": true,
+      "v2_model_digest_exact": true
+    },
+    "rollback_v1_accuracy": 1.0,
+    "status": "WITHHOLD"
   },
   "raw_task_representation": {
     "admission_run_id": "33669852876",
