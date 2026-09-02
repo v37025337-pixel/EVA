@@ -53,7 +53,7 @@ for size in (1,2,3,4,5):
         x,y,counts=neutral._vector(combo,data['rows'])
         expected_route=high_label if float(x['source_count'])+1e-12>=threshold else low_label
         key='|'.join(combo)
-        rows.append((hashlib.sha256((key+'|COMMIT_SUBSTRATE_BLIND').encode()).hexdigest(),{'input':dict(x),'expected':expected_route}))
+        rows.append((hashlib.sha256((key+'|COMMIT_SUBSTRATE_BLIND').encode()).hexdigest(),{'input':{'source_count':float(x['source_count'])},'expected':expected_route}))
     rows.sort(key=lambda z:z[0])
     hold=min(10,len(rows)-2)
     blind.extend(v for _,v in rows[:hold])
@@ -63,7 +63,7 @@ for size in (1,2,3,4,5):
 fresh6=[]
 for combo in combinations(ids,6):
     x,y,counts=neutral._vector(combo,data['rows'])
-    fresh6.append({'input':dict(x),'expected':high_label})
+    fresh6.append({'input':{'source_count':float(x['source_count'])},'expected':high_label})
 if len(train)!=1535 or len(blind)!=50 or len(fresh6)!=924:
     raise RuntimeError('CASE_COUNTS_INVALID:'+json.dumps({'train':len(train),'blind':len(blind),'fresh6':len(fresh6)}))
 
