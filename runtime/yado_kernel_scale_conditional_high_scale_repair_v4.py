@@ -52,14 +52,15 @@ def make_cases(size):
         out.append({'key':'|'.join(combo),'x':x,'y':y,'size':size})
     return out
 
-spaces={s:make_cases(s) for s in (4,5,6,7,8,9,10,11)}
-counts=[len(spaces[s]) for s in (4,5,6,7,8,9,10,11)]
-if counts!=[495,792,924,792,495,220,66,12]:raise RuntimeError('SPACE_COUNTS_INVALID:'+json.dumps(counts))
+spaces={s:make_cases(s) for s in (4,5,6,7,8,9,10)}
+counts=[len(spaces[s]) for s in (4,5,6,7,8,9,10)]
+if counts!=[495,792,924,792,495,220,66]:raise RuntimeError('SPACE_COUNTS_INVALID:'+json.dumps(counts))
 history=sum((spaces[s] for s in (4,5,6,7,8,9,10)),[])
-fresh11=spaces[11]
-log('spaces_ready',history=len(history),fresh11=len(fresh11))
+fresh11_case_count=sum(1 for _ in combinations(ids,11))
+if fresh11_case_count!=12:raise RuntimeError('FRESH11_COUNT_INVALID')
+log('spaces_ready',history=len(history),fresh11_reserved=fresh11_case_count,fresh11_labels_materialized=False)
 
-pairs=list(combinations(ids,2)); triples=list(combinations(ids,3)); quads=list(combinations(ids,4))
+pairs=list(combinations(ids,2)); triples=list(combinations(ids,3))
 def rep(c,order):
     z=dict(c['x']);present=set(c['key'].split('|'))
     if order>=1:
@@ -68,8 +69,6 @@ def rep(c,order):
         for a,b in pairs:z['srcpair::'+a+'&&'+b]=1.0 if a in present and b in present else 0.0
     if order>=3:
         for a,b,d in triples:z['srctri::'+a+'&&'+b+'&&'+d]=1.0 if a in present and b in present and d in present else 0.0
-    if order>=4:
-        for a,b,d,e in quads:z['srcquad::'+a+'&&'+b+'&&'+d+'&&'+e]=1.0 if a in present and b in present and d in present and e in present else 0.0
     return z
 
 old_model=high2['selected_model']
@@ -109,14 +108,16 @@ if not hold:raise RuntimeError('EMPTY_HOLDOUT')
 base_train=acc(train,old_high);base_hold=acc(hold,old_high)
 
 skills=[];specs={};metrics={}
-for order,name in ((2,'PAIR_KNN_REFRESH_V4'),(3,'TRIPLE_KNN_REFRESH_V4'),(4,'QUAD_KNN_REFRESH_V4')):
-    # inner split within history-only training
-    inner=sorted(train,key=lambda c:h(c['key']+f'|V4_INNER_{order}'))
+high_train=[c for c in train if c['size']>=8]
+if len(high_train)<100:raise RuntimeError('HIGH_SCALE_TRAIN_TOO_SMALL')
+for order,name in ((2,'HIGH_ONLY_PAIR_KNN_V4'),(3,'HIGH_ONLY_TRIPLE_KNN_V4')):
+    # Search is trained only on spent high-scale history. The proven parent is preserved for sizes <=9.
+    inner=sorted(high_train,key=lambda c:h(c['key']+f'|V4_HIGH_INNER_{order}'))
     cut=max(1,int(len(inner)*.80));fit=inner[:cut];val=inner[cut:]
     f=[(rep(c,order),c['y']) for c in fit];v=[(rep(c,order),c['y']) for c in val]
     _,km=select_knn_k(f,v,(1,3,5,7,9,11,15,21,31))
-    model=fit_knn_strategy([(rep(c,order),c['y']) for c in train],km['selected_k'])
-    pred=lambda c,m=model,o=order:knn_predict(m,rep(c,o))
+    model=fit_knn_strategy([(rep(c,order),c['y']) for c in high_train],km['selected_k'])
+    pred=lambda c,m=model,o=order: old_high(c) if c['size']<=9 else knn_predict(m,rep(c,o))
     tr=acc(train,pred);ho=acc(hold,pred)
     per={};reg=True
     for s in (4,5,6,7,8,9,10):
@@ -127,10 +128,10 @@ for order,name in ((2,'PAIR_KNN_REFRESH_V4'),(3,'TRIPLE_KNN_REFRESH_V4'),(4,'QUA
     skills.append({'skill_id':name,'artifact_digest':h(model),'structural_valid':True,'semantic_consistency':1.0,
       'fit_baseline':base_train,'fit_candidate':tr,'heldout_baseline':base_hold,'heldout_candidate':ho,
       'regression_pass':reg,'state_integrity':True,'rollback_available':True,
-      'metadata':{'family':'KNN_INTERACTION_ORDER','order':order,'selected_k':km['selected_k'],'per_size':per}})
-    specs[name]={'order':order,'selected_k':km['selected_k']}
+      'metadata':{'family':'SCALE_CONDITIONAL_KNN','activation':'SIZE>=10','order':order,'selected_k':km['selected_k'],'per_size':per}})
+    specs[name]={'order':order,'selected_k':km['selected_k'],'activation_min_size':10}
     metrics[name]={'train':tr,'holdout':ho,'regression_pass':reg,'per_size':per,'inner':km}
-    log('candidate_done',skill=name,holdout=ho,regression=reg,k=km['selected_k'])
+    log('candidate_done',skill=name,holdout=ho,regression=reg,k=km['selected_k'],activation_min_size=10)
 
 k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(ROOT/'yado_high_scale_v4_skill_select.sqlite'))
 try:
@@ -143,13 +144,17 @@ log('kernel_selection',selection=selection,selected=selected_id,base_hold=base_h
 
 final_model=None
 if spec:
-    final_model=fit_knn_strategy([(rep(c,spec['order']),c['y']) for c in history],spec['selected_k'])
+    refit_history=[c for c in history if c['size']>=8]
+    final_model=fit_knn_strategy([(rep(c,spec['order']),c['y']) for c in refit_history],spec['selected_k'])
 def candidate_high(c):
     if not spec:return old_high(c)
+    if c['size']<=9:return old_high(c)
     return knn_predict(final_model,rep(c,spec['order']))
 
 history_old=acc(history,old_high);history_new=acc(history,candidate_high)
-# Fresh11 is opened only after kernel selection and full-history refit.
+# Only now, after kernel selection and refit, materialize the reserved size11 labels.
+fresh11=make_cases(11)
+log('fresh11_opened_after_selection',count=len(fresh11),selected=selected_id)
 fresh11_old=acc(fresh11,old_high);fresh11_new=acc(fresh11,candidate_high)
 checks={
  'source_sha_exact_match':expected==actual,
@@ -167,12 +172,13 @@ state='SHADOW_SUPPORTED' if supported else 'WITHHOLD'
 next_cap='KERNEL_NATIVE_SELECTOR_CANONICAL_BINDING_V4' if supported else 'KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V5'
 candidate={
  'schema':'yado.g2.scale_conditional_high_scale_repair.v4','state':state,
- 'principle':'SPENT_SIZE10_BECOMES_HISTORY; KERNEL_SELECTS_BOUNDED_INTERACTION_ORDER; SIZE11_REMAINS_BLIND_UNTIL_SELECTION',
+ 'principle':'SPENT_SIZE10_BECOMES_HISTORY; SCALE_CONDITIONAL_PARENT_IS_PRESERVED_FOR_SIZES_LE9; KERNEL_SELECTS_HIGH_SCALE_PAIR_OR_TRIPLE_REFRESH; SIZE11_LABELS_MATERIALIZE_ONLY_AFTER_SELECTION',
  'parent_choice':parent,'evolution_operation':operation,'selection':selection,
  'selected_skill_id':selected_id,'selected_spec':spec,'selected_model':final_model,
  'development_metrics':metrics,
  'metrics':{'history_old_high':history_old,'history_candidate':history_new,'fresh11_old_high':fresh11_old,'fresh11_candidate':fresh11_new,'fresh11_gain':fresh11_new-fresh11_old},
- 'fresh_transfer':{'size':11,'count':len(fresh11),'used_for_selection':False,'used_for_refit':False},
+ 'fresh_transfer':{'size':11,'count':len(fresh11),'used_for_selection':False,'used_for_refit':False,'labels_materialized_after_selection':True},
+ 'previous_v4_execution_failure':{'run_id':'33641428393','pair_holdout':0.9788079470198675,'triple_holdout':0.9788079470198675,'quad_outcome':'GLOBAL_WATCHDOG_BEFORE_COMPLETION','admission_evidence':False},
  'v3_failure_in_history':{'state':v3.get('state'),'native_constructor_outcome':v3.get('native_constructor_outcome'),'fresh10_score':v3.get('metrics',{}).get('fresh10_candidate')},
  'checks':checks,'canonical_active':False,'promotion_applied':False,'canonical_mechanism_mutation':False,'g3_genesis_performed':False
 }
