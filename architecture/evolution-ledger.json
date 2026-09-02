@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "f460f36843c6250fb5a217b581f48b4c22237387e287697fd36c6ddb7d3bb2e5",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 231,
+  "event_count": 232,
   "events": [
     {
       "canonical_mutation": false,
@@ -3962,10 +3962,27 @@
       "source_digest": "f1c2793a97a59eb4aca5fae3087da38bcedd9074fb60d99081f9493db8222178",
       "source_path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-stability-v1-run-33664108645.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",
+      "effect": "RUN=33664450398; WORKFLOW=YADO_G2_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1; OUTCOME=UNEXPECTED_WORKFLOW_FAILURE; ADMISSION_EVIDENCE=False; NEXT=KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",
+      "event_hash": "bdfa943f725825fb3cc78140e6b614a258cba066b8e866e189e4abb78b82a4ae",
+      "event_id": "E0232_G2_EXECUTION_FAILURE_33664450398",
+      "event_type": "G2_EXECUTION_FAILURE_EXPERIENCE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 231,
+      "parent_event_hash": "b51fe9a7ebdfe0d3410f11a5d8db04367196bccd05cca029e69070a1dfbfd825",
+      "promotion_applied": false,
+      "run_id": "33664450398",
+      "source_digest": "d365d176a2d21276996cc8f538e829a29bd5026078a056ca3fec4a8bcab03e67",
+      "source_path": "receipts/yado-current-frontier-execution-failure-history-v1-run-33664450398.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "18884bc2dc6a8b48ce73ee1413c7955e6189c614d2cce73e31b53eb231976dc2",
+  "ledger_digest": "01930d18aff60e771a41aec0acfe66f215a95e2f24784e42509bfff10d7dff84",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -4003,5 +4020,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "b51fe9a7ebdfe0d3410f11a5d8db04367196bccd05cca029e69070a1dfbfd825"
+  "tail_event_hash": "bdfa943f725825fb3cc78140e6b614a258cba066b8e866e189e4abb78b82a4ae"
 }
