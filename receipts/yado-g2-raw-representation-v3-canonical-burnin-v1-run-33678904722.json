@@ -1,0 +1,67 @@
+{
+  "architecture_mutation": false,
+  "canonical_mechanism_mutation": false,
+  "canonical_mutation": true,
+  "checks": {
+    "architecture_family_unchanged": true,
+    "g3_not_started": true,
+    "min_direct_accuracy": true,
+    "min_perturbation_accuracy": true,
+    "min_sequential_accuracy": true,
+    "reload_equivalence_exact": true,
+    "rollback_v2_accuracy": true,
+    "three_rounds_pass": true,
+    "v3_still_canonical": true
+  },
+  "g3_genesis_performed": false,
+  "min_metrics": {
+    "direct_accuracy": 0.9875,
+    "ops_per_second": 582.8517152975624,
+    "perturbation_accuracy": 0.925,
+    "reload_equivalence": 1.0,
+    "sequential_accuracy": 0.925
+  },
+  "new_head_digest": "10876455c8ae6e123eb5e99c0a6f9432afd233829cf636bf737ff7f8a05d3c68",
+  "next_required_capability": "KERNEL_G2_POST_RAW_V3_ARCHITECTURAL_CEILING_REASSESSMENT_V2",
+  "previous_head_digest": "7e5d336e27be8fd2bb13cafaa61a1b28d13744bbbc5bd5a9606e85c33e38c7f7",
+  "receipt_sha256": "b52bcfebe115c308b9a1b3f976a223871ffdc1e8332c3e9ed1be663e698d5ad2",
+  "rollback_v2_accuracy": 1.0,
+  "rounds": [
+    {
+      "metrics": {
+        "direct_accuracy": 0.9875,
+        "ops_per_second": 598.4841523565964,
+        "perturbation_accuracy": 0.925,
+        "reload_equivalence": 1.0,
+        "sequential_accuracy": 0.925
+      },
+      "round": 1,
+      "status": "PASS"
+    },
+    {
+      "metrics": {
+        "direct_accuracy": 0.9875,
+        "ops_per_second": 599.1561375113995,
+        "perturbation_accuracy": 0.9375,
+        "reload_equivalence": 1.0,
+        "sequential_accuracy": 0.9372222222222222
+      },
+      "round": 2,
+      "status": "PASS"
+    },
+    {
+      "metrics": {
+        "direct_accuracy": 0.9875,
+        "ops_per_second": 582.8517152975624,
+        "perturbation_accuracy": 0.95,
+        "reload_equivalence": 1.0,
+        "sequential_accuracy": 0.9377777777777778
+      },
+      "round": 3,
+      "status": "PASS"
+    }
+  ],
+  "schema": "yado.g2.raw_representation_v3_canonical_burnin.receipt.v1",
+  "semantic_boundary": "THREE-ROUND CANONICAL BURN-IN OF ACTIVE RAW REPRESENTATION V3 UNDER RELOAD, SEMANTICALLY NEUTRAL TEXT PERTURBATIONS, AND LONG REPEATED ROUTING. NO RETRAINING OR ADMISSION CLAIM.",
+  "status": "PASS_G2_RAW_REPRESENTATION_V3_CANONICAL_BURNIN_V1"
+}
