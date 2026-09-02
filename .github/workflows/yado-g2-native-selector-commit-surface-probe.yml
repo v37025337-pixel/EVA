@@ -1,0 +1,28 @@
+name: YADO G2 Native Selector Commit Surface Probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-native-selector-commit-surface-probe-request.json"
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python runtime/yado_g2_native_selector_commit_surface_probe.py
+      - run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_native_selector_commit_surface_probe_receipt.json "receipts/yado-g2-native-selector-commit-surface-probe-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Selector Commit Probe"
+          git config user.email "actions@users.noreply.github.com"
+          git add "receipts/yado-g2-native-selector-commit-surface-probe-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist selector commit surface probe [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
