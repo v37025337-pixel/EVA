@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "33f817638711256a5810139b16b9dd76e1a3d519f8a5f16a47f65dd44e599380",
+  "current_head_digest": "0b0f0856fdcd8d22780592b1c5450bafb8d2fbee70a1ec6e5f5845232de82894",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 221,
+  "event_count": 223,
   "events": [
     {
       "canonical_mutation": false,
@@ -3760,14 +3760,52 @@
       "source_digest": "5f2cc7f60e94abe47b836947d715961a05c2e2ef012eb3964edc622441faac65",
       "source_path": "receipts/yado-kernel-native-selector-canonical-binding-v5-run-33658828108.json",
       "status": "PASS_CANONICAL"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_NATIVE_SELECTOR_CANONICAL_BINDING_V5",
+      "effect": "RUN=33658709857; ERROR=ModuleNotFoundError:yado_cognitive_growth_runtime_v1; FAILURE_STAGE=IMPORT_BEFORE_PROBE_MATERIALIZATION; FRESH_ROUTE_PROBES_MATERIALIZED=False; ADMISSION_EVIDENCE=False; NEXT=KERNEL_NEUTRAL_ARCHITECTURE_SELECTION_WITH_SELF_GENERATED_SELECTOR_V1",
+      "event_hash": "8eb099a44f112193e9d1046bd906dbf116f76873222d6e1dd79759d428c1ba3d",
+      "event_id": "E0222_G2_V5_BINDING_FAILURE_DETAIL_33658709857",
+      "event_type": "G2_EXECUTION_FAILURE_DETAIL_RECONCILIATION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 221,
+      "parent_event_hash": "6daba17f146a15d8922700878658a4190b50599bdd3243c4d68cda5b98a8eb6b",
+      "promotion_applied": false,
+      "run_id": "33658709857",
+      "source_digest": "67baa862a995acbc2afc5f413a11ba630e48af37fffcd2e27ae89dd75d0b0ba6",
+      "source_path": "receipts/yado-current-frontier-execution-failure-history-v1-run-33658709857.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_NEUTRAL_ARCHITECTURE_SELECTION_WITH_SELF_GENERATED_SELECTOR_V1",
+      "effect": "SELECTED_FAMILY=OPEN_ENDED_EVOLUTION; LOO_SUPPORT=0.750000; DOUBLE_ABLATION_SUPPORT=0.666667; ARCHITECTURE_MUTATION=False; NEXT=KERNEL_NEUTRAL_ARCHITECTURE_SELECTION_ROBUSTNESS_REPAIR_V1",
+      "event_hash": "6759a6d9dfc37f8733f40422f127d98014dbfadabf7ef0163f70fecf6c1e293e",
+      "event_id": "E0223_G2_NEUTRAL_ARCHITECTURE_SELECTION_V1",
+      "event_type": "G2_CANONICAL_SELECTOR_ARCHITECTURE_DIRECTION_APPLICATION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 222,
+      "new_head_digest": "0b0f0856fdcd8d22780592b1c5450bafb8d2fbee70a1ec6e5f5845232de82894",
+      "parent_event_hash": "8eb099a44f112193e9d1046bd906dbf116f76873222d6e1dd79759d428c1ba3d",
+      "previous_head_digest": "33f817638711256a5810139b16b9dd76e1a3d519f8a5f16a47f65dd44e599380",
+      "promotion_applied": false,
+      "run_id": "33659241858",
+      "source_digest": "d4ebeb37a9eda7de8e75c53e8e32797677bc1f06bf54a45093bc2bfbb32e372e",
+      "source_path": "receipts/yado-kernel-neutral-architecture-selection-with-self-generated-selector-v1-run-33659241858.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "169f8d66eb0ce1b5bc5ea24e86b93a44784a042c780458fb5231730130f6eb06",
+  "ledger_digest": "1d52cbf8eb080a82169f0c86cae30f19f6c114ac1e2ba3de467e763f251309d8",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_NEUTRAL_ARCHITECTURE_SELECTION_WITH_SELF_GENERATED_SELECTOR_V1"
+    "KERNEL_NEUTRAL_ARCHITECTURE_SELECTION_ROBUSTNESS_REPAIR_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -3801,5 +3839,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "6daba17f146a15d8922700878658a4190b50599bdd3243c4d68cda5b98a8eb6b"
+  "tail_event_hash": "6759a6d9dfc37f8733f40422f127d98014dbfadabf7ef0163f70fecf6c1e293e"
 }
