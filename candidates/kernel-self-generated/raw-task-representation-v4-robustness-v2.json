@@ -1,0 +1,147 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "973444a994300c959e2971c24cd6f4fe4a44842a169e254550c100a9851fdbd4",
+  "candidate_metrics": {
+    "CORE_ALWAYS": {
+      "direct_base": 0.9875,
+      "fit_spent": 0.9715909090909091,
+      "holdout_spent": 0.96875
+    },
+    "EDGE_WRAPPER_CORE": {
+      "direct_base": 0.9875,
+      "fit_spent": 0.9715909090909091,
+      "holdout_spent": 0.96875
+    },
+    "MULTIVIEW_EDGE_TIE_CORE": {
+      "direct_base": 0.9875,
+      "fit_spent": 0.9431818181818182,
+      "holdout_spent": 0.9791666666666666
+    },
+    "MULTIVIEW_TIE_CORE": {
+      "direct_base": 0.9875,
+      "fit_spent": 0.9715909090909091,
+      "holdout_spent": 0.96875
+    },
+    "PARENT_V3": {
+      "direct_base": 0.9875,
+      "fit_spent": 0.9261363636363636,
+      "holdout_spent": 0.9583333333333334
+    }
+  },
+  "canonical_active": false,
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "base_regression": true,
+    "class_specific_rules_absent": true,
+    "fresh_not_used_for_selection": true,
+    "fresh_plain_accuracy": true,
+    "fresh_wrapped_accuracy": true,
+    "fresh_wrapped_gain_over_parent": true,
+    "g3_not_started": true,
+    "kernel_operation_clonal": true,
+    "kernel_parent_v3": true,
+    "kernel_selected_edge_robust_candidate": true,
+    "parent_v3_not_retrained": true,
+    "spent_fit_gain": true,
+    "spent_holdout_gain": true
+  },
+  "class_specific_rules": false,
+  "component": {
+    "canonical_active": false,
+    "class_specific_rules": false,
+    "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+    "generic_wrapper_invariance": true,
+    "mode": "MULTIVIEW_EDGE_TIE_CORE",
+    "parent_component_digest": "553bd43c4f210cad074aac3a3bd6c8c636f236c4006deb8c1d30b7ee481d914d",
+    "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V3",
+    "parent_model_retrained": false,
+    "schema": "yado.g2.raw_task_representation_robustness_v4.component.v1"
+  },
+  "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+  "fresh_dataset_digest": "da31a6c2f31c37e363b36c947ad78d40b09b5dbc225d4f292a718d90296dcf37",
+  "fresh_metrics": {
+    "base_regression": 1.0,
+    "fresh_plain_accuracy": 1.0,
+    "fresh_wrapped_accuracy": 1.0,
+    "parent_fresh_wrapped": 0.8125
+  },
+  "g3_genesis_performed": false,
+  "generic_wrapper_invariance_only": true,
+  "kernel_operation": {
+    "operation": "CLONAL",
+    "target_task": "raw_representation_robustness_self_evolution_v2",
+    "variant_id": "RAW_V3_CANONICAL_PARENT"
+  },
+  "kernel_parent": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "8abfac058b86eed9a58c1fe74ff2cdcc7d2e626af6b4c263561ea46770bc1e1f",
+    "lineage_id": "G2_RAW_ROBUSTNESS_V2_LINEAGE",
+    "mean_score": 0.9573232323232324,
+    "target_score": 0.0,
+    "trait_score": 0,
+    "utility": 0.2393308080808081,
+    "variant_id": "RAW_V3_CANONICAL_PARENT"
+  },
+  "kernel_selection": {
+    "candidate_count": 5,
+    "gate_digest": "2a4a158e7b23e743da701c83f5d23e5892c117a309772c9f37cc5f95db9c052f",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "8d70bd800fd8eeeacaf0b1d3aeb51345b2708120c4471a6fdba9f631efba1fa8",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V4B_PARENT_V3",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "da4a8b4c6db7a44dc2ef414c90c50e9741326fafcfd6fd011abffa5b7c134b11",
+        "failed_critics": [],
+        "fit_gain": 0.017045454545454586,
+        "heldout_gain": 0.02083333333333326,
+        "skill_id": "RAW_V4B_MULTIVIEW_EDGE_TIE_CORE",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "RAW_V4B_MULTIVIEW_EDGE_TIE_CORE"
+    ],
+    "status": "SELECTED"
+  },
+  "parent_component_digest": "553bd43c4f210cad074aac3a3bd6c8c636f236c4006deb8c1d30b7ee481d914d",
+  "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V3",
+  "parent_model_retrained": false,
+  "runtime_sha256": "e1e223a153b223f601be042756aab192f3d0e3111b8d2c3c4946e4257fd91211",
+  "runtime_source": "runtime/yado_raw_task_representation_robustness_v4.py",
+  "schema": "yado.g2.raw_task_representation_v4_robustness.candidate.v2",
+  "selected_mode": "MULTIVIEW_EDGE_TIE_CORE",
+  "state": "SHADOW_V4_ROBUSTNESS_SUPPORTED"
+}
