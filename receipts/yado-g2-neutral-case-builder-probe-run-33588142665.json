@@ -1,0 +1,13 @@
+{
+  "found": [
+    {
+      "kind": "FunctionDef",
+      "name": "build_dataset",
+      "path": "runtime/yado_architecture_neutral_meta_synthesizer_v2.py",
+      "sha256": "4e0e39fb1e5223b1b24998ea8f6f0d3e48f35fd7a8fa0e7277e7e1f6d001e8d5",
+      "source": "def build_dataset(force=False):\n    global _DATASET_CACHE\n    if _DATASET_CACHE is not None and not force:\n        return _DATASET_CACHE\n    rows={};errors=[]\n    for sid,url in SOURCES:\n        try:\n            raw,final=research.fetch(url)\n            text=research.clean_html(raw).lower()\n            rows[sid]={'id':sid,'url':url,'final_url':final,'sha256':hashlib.sha256(raw).hexdigest(),'text':text}\n        except Exception as exc:\n            errors.append({'id':sid,'error':type(exc).__name__+':'+str(exc)[:300]})\n    if len(rows)<10:\n        raise RuntimeError('INSUFFICIENT_EXTERNAL_CORPUS')\n    cases=[];ids=sorted(rows)\n    for size in (1,2,3):\n        for combo in combinations(ids,size):\n            x,y,counts=_vector(combo,rows)\n            key='|'.join(combo)\n            bucket=int(hashlib.sha256(key.encode()).hexdigest()[:8],16)%100\n            cases.append({'key':key,'x':x,'y':y,'counts':counts,'bucket':bucket})\n    data={\n      'rows':rows,'errors':errors,'cases':cases,\n      'blind':[(c['x'],c['y']) for c in cases if c['bucket']<18],\n      'validation':[(c['x'],c['y']) for c in cases if 18<=c['bucket']<38],\n      'fit':[(c['x'],c['y']) for c in cases if 38<=c['bucket']<68],\n      'revealed':[(c['x'],c['y']) for c in cases if c['bucket']>=18],\n    }\n    _DATASET_CACHE=data\n    return data"
+    }
+  ],
+  "schema": "yado.g2.neutral_case_builder_probe.v1",
+  "status": "PASS"
+}
