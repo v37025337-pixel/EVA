@@ -19,6 +19,8 @@ jobs:
         with: { python-version: '3.12' }
       - run: python runtime/reconstruct_rc8v36.py
       - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Enforce canonical integrity before self-audit
+        run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Run kernel-native deep self-audit
         run: python runtime/yado_unified_core_deep_self_audit_v1.py
       - name: Upload self-audit evidence
@@ -38,3 +40,13 @@ jobs:
           git add architecture/evolution-ledger.json "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}.json"
           git commit -m "Persist unified-core deep self-audit [skip ci]"
           git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce semantic self-audit verdict
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_unified_core_deep_self_audit_v1_receipt.json"))
+          assert r["overall_verdict"]=="PASS_WITH_LIMITATIONS",r
+          assert r["status"]=="PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1",r
+          assert r["summary"]["blocking_findings"]==0,r
+          print(r["overall_verdict"],r["summary"])
+          PY
