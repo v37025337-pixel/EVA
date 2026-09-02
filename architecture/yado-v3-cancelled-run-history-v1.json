@@ -1,0 +1,44 @@
+{
+  "artifact_digest": "d3d26877235f397b69208e556d90a99d3c03aacb3517edbe53dcf3b228e6c895",
+  "frontier": "KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "runs": [
+    {
+      "admission_evidence": false,
+      "diagnostic": "FIRST_V3_ATTEMPT_CANCELLED; NO_RECEIPT_PERSISTED",
+      "fresh10_opened": false,
+      "outcome": "CANCELLED_BEFORE_EVIDENCE_PERSISTENCE",
+      "run_id": "33607506029",
+      "workflow": "YADO G2 High Scale Repair V3"
+    },
+    {
+      "admission_evidence": false,
+      "diagnostic": {
+        "native_rc5_returned": false,
+        "native_rc5_runtime_before_cancel_seconds": 1152,
+        "pair_knn_holdout": 0.967654986522911,
+        "triple_knn_holdout": 0.9582210242587601
+      },
+      "fresh10_opened": false,
+      "outcome": "RESOURCE_TIMEOUT_25_MINUTES",
+      "run_id": "33610098317",
+      "workflow": "YADO G2 High Scale Repair V3"
+    },
+    {
+      "admission_evidence": false,
+      "diagnostic": {
+        "native_rc5_returned": false,
+        "native_rc5_runtime_before_cancel_seconds_gt": 3060,
+        "selection_protocol_changed": false
+      },
+      "fresh10_opened": false,
+      "outcome": "RESOURCE_TIMEOUT_60_MINUTES",
+      "run_id": "33622894988",
+      "workflow": "YADO G2 High Scale Repair V3"
+    }
+  ],
+  "schema": "yado.g2.v3_cancelled_execution_history.v1",
+  "semantic_rule": "CANCELLED_OR_TIMEOUT_RUNS_ARE_NEGATIVE_RESOURCE_EXPERIENCE_ONLY_AND_NEVER_CAPABILITY_ADMISSION_EVIDENCE",
+  "source_class": "VERIFIED_GITHUB_ACTIONS_EXECUTION_HISTORY_IMPORT"
+}

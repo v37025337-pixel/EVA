@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "dec4fa600ed149ca92b903af6fd9c35731579f97fe279d7cbbbd43a89bb0c894",
+  "current_head_digest": "89eba5e00ab97beb32372aa6d75459283c284ed36a6362f75cb6b2a27dd5bd9c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 202,
+  "event_count": 206,
   "events": [
     {
       "canonical_mutation": false,
@@ -3417,10 +3417,80 @@
       "source_digest": "34aa0986a92cf2f1c9d6cb8226270bfa35310f0360d05d7c0763227700edfd53",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33630555760.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+      "effect": "RUN=33607506029; OUTCOME=CANCELLED_BEFORE_EVIDENCE_PERSISTENCE; ADMISSION_EVIDENCE=False; FRESH10_OPENED=False; NEXT=KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+      "event_hash": "f6c5d53bdfb7de6cd83cdd1a6414f4602354ede9eca7d8ef28ea0a7b0ee130bc",
+      "event_id": "E0203_G2_V3_RESOURCE_FAILURE_33607506029",
+      "event_type": "G2_EXECUTION_RESOURCE_FAILURE_EXPERIENCE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 202,
+      "parent_event_hash": "34f49283c2fd3e961498c01bd09e6d4623eaaf36d190d63b981d6ae6b2fb86b5",
+      "promotion_applied": false,
+      "run_id": "33607506029",
+      "source_digest": "d3d26877235f397b69208e556d90a99d3c03aacb3517edbe53dcf3b228e6c895",
+      "source_path": "architecture/yado-v3-cancelled-run-history-v1.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+      "effect": "RUN=33610098317; OUTCOME=RESOURCE_TIMEOUT_25_MINUTES; ADMISSION_EVIDENCE=False; FRESH10_OPENED=False; NEXT=KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+      "event_hash": "acbfbe1fdc138d0498694de69ce26ea3a9f8fb7fc98ec27582f3db99d88ecdf0",
+      "event_id": "E0204_G2_V3_RESOURCE_FAILURE_33610098317",
+      "event_type": "G2_EXECUTION_RESOURCE_FAILURE_EXPERIENCE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 203,
+      "parent_event_hash": "f6c5d53bdfb7de6cd83cdd1a6414f4602354ede9eca7d8ef28ea0a7b0ee130bc",
+      "promotion_applied": false,
+      "run_id": "33610098317",
+      "source_digest": "d3d26877235f397b69208e556d90a99d3c03aacb3517edbe53dcf3b228e6c895",
+      "source_path": "architecture/yado-v3-cancelled-run-history-v1.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+      "effect": "RUN=33622894988; OUTCOME=RESOURCE_TIMEOUT_60_MINUTES; ADMISSION_EVIDENCE=False; FRESH10_OPENED=False; NEXT=KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+      "event_hash": "9ca457c11a0c9c3f31b706692384af496c4e4311ebd03e433f7d305f46173718",
+      "event_id": "E0205_G2_V3_RESOURCE_FAILURE_33622894988",
+      "event_type": "G2_EXECUTION_RESOURCE_FAILURE_EXPERIENCE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 204,
+      "parent_event_hash": "acbfbe1fdc138d0498694de69ce26ea3a9f8fb7fc98ec27582f3db99d88ecdf0",
+      "promotion_applied": false,
+      "run_id": "33622894988",
+      "source_digest": "d3d26877235f397b69208e556d90a99d3c03aacb3517edbe53dcf3b228e6c895",
+      "source_path": "architecture/yado-v3-cancelled-run-history-v1.json",
+      "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": true,
+      "deficit": "G2_CANONICAL_INTEGRITY_REPAIR_V2",
+      "effect": "RUNTIME_REBOUND=True; PROVENANCE_SYNCED=True; ACTIVE_CAPABILITIES_EXPLICIT=True; V3_CANCELLED_RUNS_IMPORTED=3; GUARD=FAIL_CLOSED; NEXT=KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+      "event_hash": "6059e239e937ed65a82c34943aeb59d5ac7411984b8a1c23c5c36b1de47567cd",
+      "event_id": "E0206_G2_CANONICAL_INTEGRITY_REPAIR_V2",
+      "event_type": "G2_CANONICAL_CONTROL_PLANE_INTEGRITY_REPAIR",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 205,
+      "new_head_digest": "89eba5e00ab97beb32372aa6d75459283c284ed36a6362f75cb6b2a27dd5bd9c",
+      "parent_event_hash": "9ca457c11a0c9c3f31b706692384af496c4e4311ebd03e433f7d305f46173718",
+      "previous_head_digest": "dec4fa600ed149ca92b903af6fd9c35731579f97fe279d7cbbbd43a89bb0c894",
+      "promotion_applied": false,
+      "run_id": "33632895284",
+      "source_digest": "56cb0783b5f9d87f4567b37813aee9c2c8133ab65d12b588212699e89096aba9",
+      "source_path": "receipts/yado-g2-canonical-integrity-repair-v2-run-33632895284.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "a9ec2a8b61629387cd40cdec1e105d48c5c9eebe01c9299b9fa269ce4735f2cb",
+  "ledger_digest": "0841c6d5721cc9881958354c516e649d7dda32839ce3b71601c9187c5fcc303b",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -3434,7 +3504,12 @@
     "G1_S2_FULL_CROSS_DOMAIN_REGRESSION_AND_CAUSAL_GATE",
     "G1_S2_PROMOTION_DECISION_GATE",
     "NATIVE_ALGORITHM_BANK_ADMISSION_AND_META_SELECTION",
-    "UNBOUNDED_EVOLUTION_SEARCH"
+    "UNBOUNDED_EVOLUTION_SEARCH",
+    "UNIFIED_RUNTIME_HASH_BINDING",
+    "CANONICAL_MUTATION_PRECOMMIT_GUARD",
+    "ALGORITHM_PROVENANCE_FRONTIER_FRESHNESS",
+    "HEAD_ACTIVE_CAPABILITY_SEMANTICS",
+    "V3_CANCELLED_RUN_CAUSAL_HISTORY_IMPORT"
   ],
   "schema": "yado.causal_evolution_ledger.v2",
   "shadow_resolved_deficits": [
@@ -3453,5 +3528,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "34f49283c2fd3e961498c01bd09e6d4623eaaf36d190d63b981d6ae6b2fb86b5"
+  "tail_event_hash": "6059e239e937ed65a82c34943aeb59d5ac7411984b8a1c23c5c36b1de47567cd"
 }
