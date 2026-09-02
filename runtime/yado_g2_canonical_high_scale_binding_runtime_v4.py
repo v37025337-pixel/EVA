@@ -74,6 +74,12 @@ class CanonicalHighScaleBindingRuntimeV4:
             return knn_predict(self.v4_model,self._augment(case['key'],case['x'],3))
         raise RuntimeError('UNKNOWN_ROUTE:'+str(route))
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self,*args):
+        return False
+
     def snapshot(self):
         return {
           'schema':'yado.g2.canonical_high_scale_binding_runtime.v4',
