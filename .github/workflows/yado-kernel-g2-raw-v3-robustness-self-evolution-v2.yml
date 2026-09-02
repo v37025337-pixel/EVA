@@ -1,0 +1,73 @@
+name: YADO G2 Raw V3 Robustness Self Evolution V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-g2-raw-v3-robustness-self-evolution-v2-request.json"
+permissions:
+  contents: write
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Enforce canonical integrity before robustness V2
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile robustness V2
+        run: python -m py_compile runtime/yado_raw_task_representation_robustness_v4.py runtime/yado_kernel_g2_raw_representation_v3_robustness_self_evolution_v2.py runtime/yado_current_frontier_execution_failure_history_v1.py
+      - name: Let G2 evolve edge-wrapper robustness
+        run: timeout --signal=TERM --kill-after=30s 1200s python runtime/yado_kernel_g2_raw_representation_v3_robustness_self_evolution_v2.py
+      - name: Persist unexpected robustness V2 failure as causal history
+        if: failure()
+        env:
+          YADO_FAILURE_WORKFLOW: YADO_G2_RAW_V3_ROBUSTNESS_SELF_EVOLUTION_V2
+        run: |
+          git reset --hard HEAD
+          git clean -fd
+          python runtime/yado_current_frontier_execution_failure_history_v1.py
+          mkdir -p receipts
+          cp runtime/yado_current_frontier_execution_failure_history_v1_receipt.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Failure Memory"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Record raw V3 robustness V2 failure as causal history [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Persist robustness V2 evidence
+        if: success()
+        run: |
+          mkdir -p receipts candidates/kernel-self-generated resources
+          cp runtime/yado_kernel_g2_raw_representation_v3_robustness_self_evolution_v2_receipt.json "receipts/yado-g2-raw-v3-robustness-self-evolution-v2-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Raw V4 Robustness V2"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-g2-raw-representation-v3-robustness-self-evolution-v2.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json candidates/kernel-self-generated/raw-task-representation-v4-robustness-v2.json resources/yado-raw-task-representation-v4-robustness-fresh-holdout-v2.json "receipts/yado-g2-raw-v3-robustness-self-evolution-v2-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 raw V3 robustness self-evolution V2 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Enforce canonical integrity after robustness V2
+        if: success()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Enforce robustness V2 receipt
+        if: success()
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_g2_raw_representation_v3_robustness_self_evolution_v2_receipt.json"))
+          assert r["status"]=="PASS_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V2",r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["candidate_state"],r["selected_mode"],r["fresh_metrics"],r["next_required_capability"])
+          PY
