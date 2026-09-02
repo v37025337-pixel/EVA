@@ -48,7 +48,7 @@ parent_result=base['kernel_result']; parent_model=parent_result['model']
 parent_digest=h({'algorithm':parent_result.get('selected_algorithm'),'model':parent_model})
 def parent_pred(x): return tree_predict(parent_model,x)
 
-# Let current G2 evolutionary control determine the operation from the full failure lineage.
+# Let current G2 evolutionary control choose both the parent and the bounded operation.
 k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(ROOT/'yado_centroid_successor_operation.sqlite'))
 try:
     records=[
@@ -68,11 +68,16 @@ try:
        'constraints':{'regression_pass':True,'state_integrity':True,'rollback_available':True},
        'traits':{'executable':1.0,'bounded':1.0},'failure_tags':['representation_expressivity_limit','no_continuous_predicate'],'status':'EVALUATED'},
     ]
-    operation=k.propose_evolution_operation(records,'RULE_PROGRAM_DESCENDANT','fresh_blind')
+    parent_choice=k.select_evolution_parent(records,'fresh_blind')
+    if parent_choice.get('action')!='SELECT_PARENT':
+        raise RuntimeError('KERNEL_PARENT_SELECTION_FAILED:'+json.dumps(parent_choice,sort_keys=True))
+    operation=k.propose_evolution_operation(records,parent_choice['variant_id'],'fresh_blind')
 finally:k.close()
-if operation.get('operation')!='REACTION_NORM':
-    raise RuntimeError('KERNEL_DID_NOT_SELECT_REACTION_NORM:'+json.dumps(operation,sort_keys=True))
-log('operation_done',operation=operation)
+if parent_choice.get('variant_id')!='EXECUTABLE_PARENT':
+    raise RuntimeError('KERNEL_SELECTED_UNSUPPORTED_PARENT_FOR_THIS_BOUNDED_MUTATOR:'+json.dumps(parent_choice,sort_keys=True))
+if operation.get('operation')!='CLONAL':
+    raise RuntimeError('KERNEL_DID_NOT_SELECT_CLONAL:'+json.dumps(operation,sort_keys=True))
+log('operation_done',parent_choice=parent_choice,operation=operation)
 
 # Deterministic developmental split; blind is untouched.
 errors=sorted([c for c in nonblind if parent_pred(c['x'])!=c['y']],key=lambda c:h(c['key']+'|CENTROID_ERR'))
@@ -128,7 +133,8 @@ next_cap='KERNEL_EVOLUTIONARY_SUCCESSOR_FRESH_ADMISSION_V1' if supported else 'K
 
 candidate={
  'schema':'yado.g2.evolutionary_centroid_successor.v1','state':state,
- 'principle':'DESCENDANT_CREATES_CONTINUOUS_FEATURE_MECHANISM_AFTER_RULE_PROGRAM_EXPRESSIVITY_LIMIT',
+ 'principle':'KERNEL_SELECTED_CLONAL_DESCENDANT_MUTATES_ONLY_RESIDUAL_CONTINUOUS_FEATURE_MECHANISM',
+ 'parent_choice':parent_choice,
  'evolution_operation':operation,
  'parent':{'model_digest':parent_digest,'fresh_blind':parent_blind},
  'new_mechanism':{
@@ -162,7 +168,8 @@ previous_head_digest=head['canonical_head_digest']
 core['current_frontier']=next_cap;core['frontier_source']='architecture/evolution-ledger.json:open_deficits';core['core_digest']=cdig(core,'core_digest');write(CORE,core)
 head['current_frontier']=next_cap;head['frontier_source']='architecture/evolution-ledger.json:open_deficits';head['unified_core']['core_digest']=core['core_digest'];head['canonical_head_digest']=cdig(head,'canonical_head_digest');write(HEAD,head)
 
-checks={'kernel_selected_reaction_norm':operation.get('operation')=='REACTION_NORM',
+checks={'kernel_selected_clonal':operation.get('operation')=='CLONAL',
+ 'kernel_selected_parent':parent_choice.get('variant_id')=='EXECUTABLE_PARENT',
  'frozen_history_valid':cdig(corpus,'corpus_digest')==corpus['corpus_digest'],
  'blind_not_used_for_creation':True,'native_centroid_source_bound':True,
  'no_canonical_mechanism_mutation':True,'g3_not_started':head.get('g3_genesis_performed') is False}
@@ -175,7 +182,7 @@ run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
 e={'index':len(ledger['events']),'event_id':f"E{len(ledger['events'])+1:04d}_G2_EVOLUTIONARY_SUCCESSOR_CENTROID_GENESIS_V1",
  'event_type':'G2_EVOLUTIONARY_CONTINUOUS_CENTROID_SUCCESSOR_GENESIS','status':'PASS_SHADOW' if supported else 'WITHHOLD',
  'generation':ledger['current_head'],'deficit':expected_frontier,
- 'effect':f"MODE=CREATE_NOT_SEARCH; GENERATOR=CENTROID; PARENT_BLIND={parent_blind:.6f}; CHILD_BLIND={child_blind:.6f}; GAIN={gain:.6f}; RETAIN={retention:.6f}; REPAIR={repair:.6f}; NEXT={next_cap}",
+ 'effect':f"MODE=KERNEL_SELECTED_CLONAL; GENERATOR=CENTROID; PARENT={parent_choice.get('variant_id')}; PARENT_BLIND={parent_blind:.6f}; CHILD_BLIND={child_blind:.6f}; GAIN={gain:.6f}; RETAIN={retention:.6f}; REPAIR={repair:.6f}; NEXT={next_cap}",
  'source_path':f'receipts/yado-kernel-evolutionary-successor-centroid-genesis-v1-run-{run_id}.json','source_digest':receipt['receipt_sha256'],
  'run_id':run_id,'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':True,'canonical_mechanism_mutation':False,
  'promotion_applied':False,'generation_transition':False,'previous_head_digest':previous_head_digest,'new_head_digest':head['canonical_head_digest']}
