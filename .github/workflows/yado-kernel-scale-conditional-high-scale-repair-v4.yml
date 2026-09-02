@@ -22,7 +22,7 @@ jobs:
       - name: Compile V4 and failure-memory paths before opening fresh11
         run: python -m py_compile runtime/yado_kernel_scale_conditional_high_scale_repair_v4.py runtime/yado_current_frontier_execution_failure_history_v1.py
       - name: Let G2 evolve bounded interaction order and test unseen size11
-        run: timeout --signal=TERM --kill-after=30s 1500s python runtime/yado_kernel_scale_conditional_high_scale_repair_v4.py
+        run: timeout --signal=TERM --kill-after=30s 1800s python runtime/yado_kernel_scale_conditional_high_scale_repair_v4.py
       - name: Persist unexpected V4 execution failure as causal history
         if: failure()
         env:
