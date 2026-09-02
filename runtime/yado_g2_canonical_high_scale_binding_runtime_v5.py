@@ -1,10 +1,12 @@
 from __future__ import annotations
 from pathlib import Path
 from itertools import combinations
-import hashlib,json
+import hashlib,json,sys
 
 RUNTIME=Path(__file__).resolve().parent
 REPO=RUNTIME.parent
+PKG=RUNTIME/'yado_rc8_v36'
+if str(PKG) not in sys.path:sys.path.insert(0,str(PKG))
 from yado_cognitive_growth_runtime_v1 import knn_predict
 
 def _load(path:Path):return json.loads(path.read_text(encoding='utf-8'))
