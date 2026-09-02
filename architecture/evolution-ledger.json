@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "dec4fa600ed149ca92b903af6fd9c35731579f97fe279d7cbbbd43a89bb0c894",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 201,
+  "event_count": 202,
   "events": [
     {
       "canonical_mutation": false,
@@ -3401,10 +3401,26 @@
       "source_digest": "5f65b7d687818b9cc019f8c86c47325be246468ac6345044e7c117ee6bd0688b",
       "source_path": "receipts/yado-kernel-native-selector-canonical-binding-v2-run-33606972832.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=WITHHOLD_FURTHER_GENERATION_ADVANCE; FINDINGS=20; BLOCKING=1",
+      "event_hash": "34f49283c2fd3e961498c01bd09e6d4623eaaf36d190d63b981d6ae6b2fb86b5",
+      "event_id": "E0202_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 201,
+      "parent_event_hash": "61e209e3b8a1dad595366df97585b148f617444a730901f4410ccd734475f08a",
+      "promotion_applied": false,
+      "run_id": "33630555760",
+      "source_digest": "34aa0986a92cf2f1c9d6cb8226270bfa35310f0360d05d7c0763227700edfd53",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33630555760.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "0d82981740a68747db3c38b75032bfbde58a874461c151c9178062c11fa006ed",
+  "ledger_digest": "a9ec2a8b61629387cd40cdec1e105d48c5c9eebe01c9299b9fa269ce4735f2cb",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -3437,5 +3453,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "61e209e3b8a1dad595366df97585b148f617444a730901f4410ccd734475f08a"
+  "tail_event_hash": "34f49283c2fd3e961498c01bd09e6d4623eaaf36d190d63b981d6ae6b2fb86b5"
 }
