@@ -72,8 +72,17 @@ try:
   {'variant_id':'LOCAL_KNN_CHILD_V1','parent_id':'CALIBRATED_CHILD_V2','lineage_id':'G2_SELECTOR_LINEAGE','artifact_digest':knn['candidate_digest'],'task_scores':{'fresh_blind':float(knn['metrics']['fresh_blind_successor'])},'constraints':{'regression_pass':True,'state_integrity':True,'rollback_available':True},'traits':{'bounded':1.0},'failure_tags':['zero_gain'],'status':'EVALUATED'}]
  parent_choice=k.select_evolution_parent(records,'fresh_blind'); op=k.propose_evolution_operation(records,parent_choice['variant_id'],'fresh_blind')
 finally:k.close()
-if parent_choice.get('variant_id')!='CALIBRATED_CHILD_V2':raise RuntimeError('KERNEL_PARENT_NOT_CALIBRATED:'+json.dumps(parent_choice))
+if parent_choice.get('variant_id') not in {'CALIBRATED_CHILD_V2','LOCAL_KNN_CHILD_V1'}:
+ raise RuntimeError('KERNEL_PARENT_UNSUPPORTED_BY_REPRESENTATION_ADAPTER:'+json.dumps(parent_choice))
 if op.get('operation')!='CLONAL':raise RuntimeError('KERNEL_OP_NOT_CLONAL:'+json.dumps(op))
+
+def chosen_parent_pred_raw(x):
+ if parent_choice.get('variant_id')=='CALIBRATED_CHILD_V2':
+  return parent_pred_raw(x)
+ sm=knn.get('selected_model') or {}
+ if not sm:return parent_pred_raw(x)
+ return knn_predict(sm['corrector'],x) if knn_predict(sm['gate'],x)=='BASE_ERROR' else parent_pred_raw(x)
+
 log('control_selected',parent_choice=parent_choice,operation=op)
 
 # Stratified outer holdout from non-blind only.
@@ -100,7 +109,7 @@ log('splits',dev_train=len(dev_train),outer=len(outer),inner_fit=len(inner_fit),
 
 fit=[(augment(c),c['y']) for c in inner_fit];ival=[(augment(c),c['y']) for c in inner_val]
 full=[(augment(c),c['y']) for c in dev_train]
-baseline_train=acc(dev_train,parent_pred_raw);baseline_outer=acc(outer,parent_pred_raw)
+baseline_train=acc(dev_train,chosen_parent_pred_raw);baseline_outer=acc(outer,chosen_parent_pred_raw)
 skills=[];models={};metrics={}
 
 # Native centroid candidate.
@@ -143,7 +152,7 @@ ids=list(selection.get('selected_skill_ids') or []);selected_id=ids[0] if ids el
 log('kernel_selection',selection=selection,selected_id=selected_id,metrics=metrics,rule_error=rule_error,baseline_outer=baseline_outer)
 
 def selected_pred(c):
- if selected is None:return parent_pred_raw(c['x'])
+ if selected is None:return chosen_parent_pred_raw(c['x'])
  x=augment(c)
  if selected['family']=='CENTROID':return centroid_predict(selected['model'],x)
  if selected['family']=='KNN':return knn_predict(selected['model'],x)
@@ -155,13 +164,13 @@ def selected_pred(c):
   return BoundedRuleSandbox.execute(rp,x)
  return None
 
-parent_blind=acc(blind,parent_pred_raw);child_blind=sum(selected_pred(c)==c['y'] for c in blind)/len(blind)
+parent_blind=acc(blind,chosen_parent_pred_raw);child_blind=sum(selected_pred(c)==c['y'] for c in blind)/len(blind)
 gain=child_blind-parent_blind
 supported=bool(selected_id is not None and child_blind>=.90 and gain>0)
 state='SHADOW_SUPPORTED' if supported else 'WITHHOLD'
 next_cap='KERNEL_EVOLUTIONARY_SUCCESSOR_FRESH_ADMISSION_V1' if supported else 'KERNEL_EVOLUTIONARY_SOURCE_PRESENCE_REPRESENTATION_V2'
 candidate={'schema':'yado.g2.evolutionary_source_presence_representation.v1','state':state,'principle':'CLONAL_REPRESENTATION_EXPANSION_FROM_GENERIC_SOURCE_ID_PRESENCE',
- 'parent_choice':parent_choice,'evolution_operation':op,'representation':{'base_features_preserved':True,'source_presence_features':source_ids,'mapping_to_targets_host_supplied':False},
+ 'parent_choice':parent_choice,'evolution_operation':op,'inherited_parent_behavior':parent_choice.get('variant_id'),'representation':{'base_features_preserved':True,'source_presence_features':source_ids,'mapping_to_targets_host_supplied':False},
  'selection':selection,'selected_skill_id':selected_id,'selected_model':selected,'development_metrics':metrics,'rule_error':rule_error,
  'metrics':{'outer_baseline':baseline_outer,'fresh_blind_parent':parent_blind,'fresh_blind_successor':child_blind,'gain':gain},
  'frozen_history':{'blind_used_for_generation':False,'blind_used_for_selection':False,'blind_used_for_admission_only':True,'corpus_digest':corpus['corpus_digest']},
@@ -172,11 +181,11 @@ artifact['artifact_digest']=h(artifact);write(ART,artifact)
 
 previous=head['canonical_head_digest'];core['current_frontier']=next_cap;core['frontier_source']='architecture/evolution-ledger.json:open_deficits';core['core_digest']=cdig(core,'core_digest');write(CORE,core)
 head['current_frontier']=next_cap;head['frontier_source']='architecture/evolution-ledger.json:open_deficits';head['unified_core']['core_digest']=core['core_digest'];head['canonical_head_digest']=cdig(head,'canonical_head_digest');write(HEAD,head)
-checks={'kernel_selected_calibrated_parent':parent_choice.get('variant_id')=='CALIBRATED_CHILD_V2','kernel_selected_clonal':op.get('operation')=='CLONAL','blind_not_used_for_generation':True,'blind_not_used_for_selection':True,'no_target_mapping_supplied':True,'no_canonical_mechanism_mutation':True,'g3_not_started':head.get('g3_genesis_performed') is False}
+checks={'kernel_selected_supported_parent':parent_choice.get('variant_id') in {'CALIBRATED_CHILD_V2','LOCAL_KNN_CHILD_V1'},'kernel_selected_clonal':op.get('operation')=='CLONAL','blind_not_used_for_generation':True,'blind_not_used_for_selection':True,'no_target_mapping_supplied':True,'no_canonical_mechanism_mutation':True,'g3_not_started':head.get('g3_genesis_performed') is False}
 receipt={**artifact,'schema':'yado.g2.kernel_evolutionary_source_presence_representation.receipt.v1','previous_head_digest':previous,'new_head_digest':head['canonical_head_digest'],'checks':checks};receipt['receipt_sha256']=h(receipt);write(OUT,receipt)
 ledger['current_head_digest']=head['canonical_head_digest'];ledger['open_deficits']=[next_cap];run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
 e={'index':len(ledger['events']),'event_id':f"E{len(ledger['events'])+1:04d}_G2_SOURCE_PRESENCE_REPRESENTATION_V1",'event_type':'G2_EVOLUTIONARY_CLONAL_REPRESENTATION_EXPANSION','status':'PASS_SHADOW' if supported else 'WITHHOLD','generation':ledger['current_head'],'deficit':front,
-'effect':f"MODE=CLONAL_REPRESENTATION; SELECTED={selected_id}; OUTER_BASE={baseline_outer:.6f}; PARENT_BLIND={parent_blind:.6f}; CHILD_BLIND={child_blind:.6f}; GAIN={gain:.6f}; NEXT={next_cap}",'source_path':f'receipts/yado-kernel-evolutionary-source-presence-representation-v1-run-{run_id}.json','source_digest':receipt['receipt_sha256'],'run_id':run_id,'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':True,'canonical_mechanism_mutation':False,'promotion_applied':False,'generation_transition':False,'previous_head_digest':previous,'new_head_digest':head['canonical_head_digest']}
+'effect':f"MODE=CLONAL_REPRESENTATION; PARENT={parent_choice.get('variant_id')}; SELECTED={selected_id}; OUTER_BASE={baseline_outer:.6f}; PARENT_BLIND={parent_blind:.6f}; CHILD_BLIND={child_blind:.6f}; GAIN={gain:.6f}; NEXT={next_cap}",'source_path':f'receipts/yado-kernel-evolutionary-source-presence-representation-v1-run-{run_id}.json','source_digest':receipt['receipt_sha256'],'run_id':run_id,'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':True,'canonical_mechanism_mutation':False,'promotion_applied':False,'generation_transition':False,'previous_head_digest':previous,'new_head_digest':head['canonical_head_digest']}
 e['event_hash']=event_hash(e);ledger['events'].append(e);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=e['event_hash'];ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'});validate_ledger_v2(ledger);write(LEDGER,ledger)
 ctx=UnifiedContextKernel().snapshot()
 if ctx['current_frontier']!=next_cap:raise RuntimeError('POST_WRITE_CONTEXT_INCONSISTENT')
