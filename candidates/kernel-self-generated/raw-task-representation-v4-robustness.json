@@ -1,0 +1,143 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "efbea0db35746131bfd24289c4ce725ef6aef53e16313bddeedf598402b32ab4",
+  "candidate_metrics": {
+    "CORE_ALWAYS": {
+      "direct_base": 0.9875,
+      "fit_spent_perturbations": 0.975,
+      "holdout_spent_round3": 0.9625
+    },
+    "CORE_IF_WRAPPER": {
+      "direct_base": 0.9875,
+      "fit_spent_perturbations": 0.975,
+      "holdout_spent_round3": 0.9625
+    },
+    "MULTIVIEW_TIE_CORE": {
+      "direct_base": 0.9875,
+      "fit_spent_perturbations": 0.98125,
+      "holdout_spent_round3": 0.9625
+    },
+    "PARENT_V3": {
+      "direct_base": 0.9875,
+      "fit_spent_perturbations": 0.93125,
+      "holdout_spent_round3": 0.95
+    }
+  },
+  "canonical_active": false,
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "base_regression": true,
+    "class_specific_rules_absent": true,
+    "fresh_not_used_for_selection": true,
+    "fresh_plain_accuracy": true,
+    "fresh_wrapped_accuracy": false,
+    "fresh_wrapped_gain_over_parent": false,
+    "g3_not_started": true,
+    "kernel_operation_clonal": true,
+    "kernel_parent_v3": true,
+    "kernel_selected_robustness_candidate": true,
+    "parent_v3_not_retrained": true,
+    "selected_spent_fit_gain": true,
+    "selected_spent_holdout_gain": true
+  },
+  "class_specific_rules": false,
+  "component": {
+    "canonical_active": false,
+    "class_specific_rules": false,
+    "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+    "generic_wrapper_invariance": true,
+    "mode": "MULTIVIEW_TIE_CORE",
+    "parent_component_digest": "553bd43c4f210cad074aac3a3bd6c8c636f236c4006deb8c1d30b7ee481d914d",
+    "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V3",
+    "parent_model_retrained": false,
+    "schema": "yado.g2.raw_task_representation_robustness_v4.component.v1"
+  },
+  "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+  "fresh_dataset_digest": "502dfb9c939141587e8a872d4d8fa180771b00c14ba30311dbd8be52ad076590",
+  "fresh_metrics": {
+    "base_regression": 1.0,
+    "fresh_plain_accuracy": 0.96875,
+    "fresh_wrapped_accuracy": 0.9375,
+    "parent_fresh_wrapped": 0.9375
+  },
+  "g3_genesis_performed": false,
+  "generic_wrapper_invariance_only": true,
+  "kernel_operation": {
+    "operation": "CLONAL",
+    "target_task": "raw_representation_robustness_self_evolution",
+    "variant_id": "RAW_V3_CANONICAL_PARENT"
+  },
+  "kernel_parent": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "663ef005e4be27e861ec75d31285c869006463bae8af69ed89789f3f08a5a100",
+    "lineage_id": "G2_RAW_ROBUSTNESS_LINEAGE",
+    "mean_score": 0.9562499999999999,
+    "target_score": 0.0,
+    "trait_score": 0,
+    "utility": 0.23906249999999998,
+    "variant_id": "RAW_V3_CANONICAL_PARENT"
+  },
+  "kernel_selection": {
+    "candidate_count": 4,
+    "gate_digest": "e915ee69326a6f1ce0c06c0e7249049a8e19a84a2d976e16ceaafc0b3d31c1ae",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "a351a680828d246f67e268754958dd74e2415b8ef7b9aacea07686ba952faed8",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V4_PARENT_V3",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "80205a61c306aa28e1deef271cdca7b9dcc58cc1c88d99f642125470238ba6b2",
+        "failed_critics": [],
+        "fit_gain": 0.04999999999999993,
+        "heldout_gain": 0.012500000000000067,
+        "skill_id": "RAW_V4_MULTIVIEW_TIE_CORE",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "RAW_V4_MULTIVIEW_TIE_CORE"
+    ],
+    "status": "SELECTED"
+  },
+  "parent_component_digest": "553bd43c4f210cad074aac3a3bd6c8c636f236c4006deb8c1d30b7ee481d914d",
+  "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V3",
+  "parent_model_retrained": false,
+  "runtime_sha256": "c19929813e969d7a3f2dfd055e0747ebfb09905fac01b89aed404a7e0d57f921",
+  "runtime_source": "runtime/yado_raw_task_representation_robustness_v4.py",
+  "schema": "yado.g2.raw_task_representation_v4_robustness.candidate.v1",
+  "selected_mode": "MULTIVIEW_TIE_CORE",
+  "semantic_boundary": "GENERIC WRAPPER-INVARIANCE LAYER OVER CANONICAL V3; NO CLASS-SPECIFIC SEMANTIC RULES AND NO V3 RETRAINING.",
+  "state": "WITHHOLD"
+}
