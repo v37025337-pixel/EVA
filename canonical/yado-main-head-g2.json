@@ -25,9 +25,9 @@
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
   ],
   "algorithm_provenance_registry": {
-    "current_execution_label": "G2_RAW_REPRESENTATION_V2_REPAIR_V2_PENDING",
+    "current_execution_label": "G2_RAW_REPRESENTATION_STRUCTURAL_V3_SHADOW_SUPPORTED",
     "registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-    "registry_digest": "0aa1e3375bf82b520932e036255c2334bf9eac56cd834edaa57e1b78e1e0af8c",
+    "registry_digest": "e9cb683ea5aa046d371ca6e462e092837f9091c297d83d6a69e4c7e402b01b69",
     "registry_id": "YADO_G2_ALGORITHM_PROVENANCE_REGISTRY_V1"
   },
   "architecture_composite_successor_design_v1": {
@@ -136,7 +136,7 @@
   },
   "candidate_architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
   "candidate_digest": "b292c7ed0bd9e060a2ce736a33ac30e92403ca8d57c94a8f2d354538f584eaa0",
-  "canonical_head_digest": "f4b28f5721e1a36c999974522f14a615d848af8e7cdcf0cfde930e92f0159aeb",
+  "canonical_head_digest": "7be5af117d792e10964bd444b4a5d60d1f6638704446072469f384891ef52c4b",
   "capability_scores": {
     "integrity": 1,
     "intelligence": 1,
@@ -175,7 +175,7 @@
     ],
     "status": "CANONICAL_ACTIVE"
   },
-  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V2",
+  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V3_CANONICAL_ADMISSION_V1",
   "extended_capability_scores": {
     "capability_routing": 1,
     "end_to_end_runtime": 1,
@@ -322,6 +322,21 @@
     "selected_family": null,
     "state": "WITHHOLD"
   },
+  "raw_representation_v2_post_admission_repair_v2": {
+    "candidate_digest": "42e8762202434018f949ee0fd48af72db94a56f49dfc7b14d4198ddb77591894",
+    "metrics": {
+      "audit_canary_reproduction": 1.0,
+      "base_regression_accuracy": 1.0,
+      "fresh_accuracy": 0.9791666666666666,
+      "parent_fresh_accuracy": 0.875,
+      "perturbation_accuracy": 0.9375,
+      "trap_accuracy": 0.9166666666666666,
+      "v3_prior_fresh_reproduction": 1.0
+    },
+    "selected_mode": "PIVOT_CLAUSE",
+    "selected_pivot": "local",
+    "state": "SHADOW_STRUCTURAL_V3_SUPPORTED"
+  },
   "raw_task_representation_v2": {
     "admission_metrics": {
       "base_regression_accuracy": 1.0,
@@ -361,7 +376,7 @@
     "single_active_context": true
   },
   "unified_core": {
-    "algorithm_provenance_registry_digest": "0aa1e3375bf82b520932e036255c2334bf9eac56cd834edaa57e1b78e1e0af8c",
+    "algorithm_provenance_registry_digest": "e9cb683ea5aa046d371ca6e462e092837f9091c297d83d6a69e4c7e402b01b69",
     "audit_invariant": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
     "bounded_program_repair_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
     "canonical_write_guard_source_sha256": "a200096ea63d74426a12e1ebe4fa1e5c6e3facee29215eb355ff6106fa321e9d",
@@ -370,7 +385,7 @@
     "contextual_stream_adapter_source_sha256": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52",
     "control_plane_binding": "CANONICAL",
     "control_plane_binding_gate_run_id": "33391800337",
-    "core_digest": "7cbf41714625340f105b20af2db7ab98b1ceb29e04198d327670b8c8d4b29821",
+    "core_digest": "90d1354973b6b2247b86ee7abaa751f757cd8d131911e93191a1cfa31706b139",
     "core_id": "UNIFIED_YADO_CORE_V1",
     "counterexample_lineage_memory_binding": "architecture/evolution-ledger.json+receipts/",
     "deep_self_audit_source_sha256": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
