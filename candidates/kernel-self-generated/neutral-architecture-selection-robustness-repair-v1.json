@@ -1,0 +1,151 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "cdd58a42a233f6ce66bcda535f373ed248fc92116eaa2431ba80df89e17b3938",
+  "candidate_representations": [
+    {
+      "artifact_digest": "46bb39a2c1d836d09e787d8b7d16c7dbbb6080c9038c1dde85e36dab804b1c9d",
+      "fit_baseline": 0.7692307692307693,
+      "fit_candidate": 0.7692307692307693,
+      "heldout_baseline": 0.6666666666666666,
+      "heldout_candidate": 0.6666666666666666,
+      "metadata": {
+        "families": [
+          "OPEN_ENDED_EVOLUTION"
+        ],
+        "fit_coverage": 0.7692307692307693,
+        "heldout_coverage": 0.6666666666666666,
+        "support_counts": {
+          "LOCAL_SELF_ORGANIZING": 24,
+          "NEURO_SYMBOLIC": 1,
+          "OPEN_ENDED_EVOLUTION": 54
+        }
+      },
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 1.0,
+      "skill_id": "SINGLE_FAMILY_ARCHITECTURE_V1",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "07787b1879fd92f9dc83f903eb608dc05b546a69c6647384beb88b8bf36e2f88",
+      "fit_baseline": 0.7692307692307693,
+      "fit_candidate": 1.0,
+      "heldout_baseline": 0.6666666666666666,
+      "heldout_candidate": 0.9848484848484849,
+      "metadata": {
+        "families": [
+          "OPEN_ENDED_EVOLUTION",
+          "LOCAL_SELF_ORGANIZING"
+        ],
+        "fit_coverage": 1.0,
+        "heldout_coverage": 0.9848484848484849,
+        "support_counts": {
+          "LOCAL_SELF_ORGANIZING": 24,
+          "NEURO_SYMBOLIC": 1,
+          "OPEN_ENDED_EVOLUTION": 54
+        }
+      },
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 1.0,
+      "skill_id": "TOP2_COMPOSITE_ARCHITECTURE_V1",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "bf4e355f7b3bd5d1a913984445f01b512d0cd73bdba8a630e81d9bb8d17bdf5c",
+      "fit_baseline": 0.7692307692307693,
+      "fit_candidate": 1.0,
+      "heldout_baseline": 0.6666666666666666,
+      "heldout_candidate": 1.0,
+      "metadata": {
+        "families": [
+          "OPEN_ENDED_EVOLUTION",
+          "LOCAL_SELF_ORGANIZING",
+          "NEURO_SYMBOLIC"
+        ],
+        "fit_coverage": 1.0,
+        "heldout_coverage": 1.0,
+        "support_counts": {
+          "LOCAL_SELF_ORGANIZING": 24,
+          "NEURO_SYMBOLIC": 1,
+          "OPEN_ENDED_EVOLUTION": 54
+        }
+      },
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 1.0,
+      "skill_id": "TOP3_COMPOSITE_ARCHITECTURE_V1",
+      "state_integrity": true,
+      "structural_valid": true
+    }
+  ],
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "architecture_not_mutated": true,
+    "double_ablation_coverage_at_least_0_95": true,
+    "fit_coverage_at_least_0_95": true,
+    "g3_not_started": true,
+    "kernel_selected_representation": true,
+    "no_new_architecture_training": true,
+    "selected_contains_primary_family": true,
+    "source_withhold_due_robustness_only": true
+  },
+  "double_ablation_coverage": 1.0,
+  "fit_coverage": 1.0,
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "kernel_selection": {
+    "candidate_count": 3,
+    "gate_digest": "034dcf9ac29293a76ec57831f619a7c3a0c06c83b9ebeba2763a1ed7a8b68795",
+    "rejected": [],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "3a3868e2a10412d224f56546cb0778480488fee535d1851850a2ccc390d04aed",
+        "failed_critics": [],
+        "fit_gain": 0.23076923076923073,
+        "heldout_gain": 0.33333333333333337,
+        "skill_id": "TOP3_COMPOSITE_ARCHITECTURE_V1",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "TOP3_COMPOSITE_ARCHITECTURE_V1"
+    ],
+    "status": "SELECTED"
+  },
+  "origin_selection_candidate_digest": "75bbe66d763d2ddee452ce2a68850e4794bed2c29ba8fb2cabbea22685bc4dd8",
+  "primary_family": "OPEN_ENDED_EVOLUTION",
+  "ranked_families": [
+    "OPEN_ENDED_EVOLUTION",
+    "LOCAL_SELF_ORGANIZING",
+    "NEURO_SYMBOLIC"
+  ],
+  "schema": "yado.g2.neutral_architecture_selection_robustness_repair.v1",
+  "selected_families": [
+    "OPEN_ENDED_EVOLUTION",
+    "LOCAL_SELF_ORGANIZING",
+    "NEURO_SYMBOLIC"
+  ],
+  "selected_representation": "TOP3_COMPOSITE_ARCHITECTURE_V1",
+  "semantic_boundary": "ROBUSTNESS REPAIR CHANGES THE ARCHITECTURE DIRECTION REPRESENTATION FROM SINGLE FAMILY TO A KERNEL-SELECTED COMPOSITE IF NEEDED; NO EXECUTABLE ARCHITECTURE MUTATION YET.",
+  "state": "SHADOW_SUPPORTED",
+  "support_counts": {
+    "LOCAL_SELF_ORGANIZING": 24,
+    "NEURO_SYMBOLIC": 1,
+    "OPEN_ENDED_EVOLUTION": 54
+  }
+}

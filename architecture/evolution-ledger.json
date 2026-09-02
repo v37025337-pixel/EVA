@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "0b0f0856fdcd8d22780592b1c5450bafb8d2fbee70a1ec6e5f5845232de82894",
+  "current_head_digest": "9d8176a0db293a664e5859f71a4106f4621295b38d15e3b394b7708876f487f2",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 223,
+  "event_count": 224,
   "events": [
     {
       "canonical_mutation": false,
@@ -3798,14 +3798,35 @@
       "source_digest": "d4ebeb37a9eda7de8e75c53e8e32797677bc1f06bf54a45093bc2bfbb32e372e",
       "source_path": "receipts/yado-kernel-neutral-architecture-selection-with-self-generated-selector-v1-run-33659241858.json",
       "status": "WITHHOLD"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_NEUTRAL_ARCHITECTURE_SELECTION_ROBUSTNESS_REPAIR_V1",
+      "effect": "REPRESENTATION=TOP3_COMPOSITE_ARCHITECTURE_V1; FAMILIES=OPEN_ENDED_EVOLUTION+LOCAL_SELF_ORGANIZING+NEURO_SYMBOLIC; FIT=1.000000; DOUBLE_ABLATION=1.000000; ARCHITECTURE_MUTATION=False; NEXT=KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_DESIGN_V1",
+      "event_hash": "e297a5f55c26fd892bb175dac650f7db7fc520a9ec9779f238c9c0c54aff8a83",
+      "event_id": "E0224_G2_ARCHITECTURE_SELECTION_ROBUSTNESS_REPAIR_V1",
+      "event_type": "G2_KERNEL_SELECTED_ARCHITECTURE_DIRECTION_COMPOSITION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 223,
+      "new_head_digest": "9d8176a0db293a664e5859f71a4106f4621295b38d15e3b394b7708876f487f2",
+      "parent_event_hash": "6759a6d9dfc37f8733f40422f127d98014dbfadabf7ef0163f70fecf6c1e293e",
+      "previous_head_digest": "0b0f0856fdcd8d22780592b1c5450bafb8d2fbee70a1ec6e5f5845232de82894",
+      "promotion_applied": false,
+      "run_id": "33659490483",
+      "source_digest": "741ee4165146c4c0bd756f1a0dedc9f40094809393d9bc89d2ef07abab90665f",
+      "source_path": "receipts/yado-kernel-neutral-architecture-selection-robustness-repair-v1-run-33659490483.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "1d52cbf8eb080a82169f0c86cae30f19f6c114ac1e2ba3de467e763f251309d8",
+  "ledger_digest": "d73fc328d041aec3db4198d29afec474c18ba0326b8175f008440c3bcedae20d",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_NEUTRAL_ARCHITECTURE_SELECTION_ROBUSTNESS_REPAIR_V1"
+    "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_DESIGN_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -3839,5 +3860,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "6759a6d9dfc37f8733f40422f127d98014dbfadabf7ef0163f70fecf6c1e293e"
+  "tail_event_hash": "e297a5f55c26fd892bb175dac650f7db7fc520a9ec9779f238c9c0c54aff8a83"
 }
