@@ -26,7 +26,8 @@ class CanonicalHighScaleBindingRuntimeV5:
         if self.v4.get('state')!='SHADOW_SUPPORTED' or self.v4.get('selected_skill_id')!='HIGH_ONLY_TRIPLE_KNN_V4':
             raise RuntimeError('V4_SELECTION_DRIFT')
         self.activation_min_size=int(self.v4['selected_spec']['activation_min_size'])
-        self.route_strategy=str(self.binding['route_semantics']['selected_strategy'])
+        rs=self.binding['route_semantics']
+        self.route_strategy=str(rs.get('selected_strategy') or rs.get('strategy'))
         self.normalization_denominator=float(self.binding['route_semantics'].get('normalization_denominator',3.0))
         self.parent_model=self.parent['selected_model'];self.v4_model=self.v4['selected_model']
         self.source_ids=sorted(str(x['id']) for x in self.corpus['source_digests'])
