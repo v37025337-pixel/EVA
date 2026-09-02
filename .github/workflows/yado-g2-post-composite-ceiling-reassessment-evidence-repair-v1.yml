@@ -1,0 +1,73 @@
+name: YADO G2 Ceiling Reassessment Evidence Repair V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-post-composite-ceiling-reassessment-evidence-repair-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Enforce canonical integrity before evidence repair
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile evidence repair
+        run: python -m py_compile runtime/yado_g2_post_composite_ceiling_reassessment_evidence_repair_v1.py runtime/yado_current_frontier_execution_failure_history_v1.py
+      - name: Correct ceiling evidence and let G2 reselect residual
+        run: timeout --signal=TERM --kill-after=30s 900s python runtime/yado_g2_post_composite_ceiling_reassessment_evidence_repair_v1.py
+      - name: Persist unexpected repair failure as causal history
+        if: failure()
+        env:
+          YADO_FAILURE_WORKFLOW: YADO_G2_CEILING_REASSESSMENT_EVIDENCE_REPAIR_V1
+        run: |
+          git reset --hard HEAD
+          git clean -fd
+          python runtime/yado_current_frontier_execution_failure_history_v1.py
+          mkdir -p receipts
+          cp runtime/yado_current_frontier_execution_failure_history_v1_receipt.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Failure Memory"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Record ceiling evidence-repair aborted execution as causal history [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Persist evidence repair
+        if: success()
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_post_composite_ceiling_reassessment_evidence_repair_v1_receipt.json "receipts/yado-g2-post-composite-ceiling-reassessment-evidence-repair-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Ceiling Evidence Repair"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json "receipts/yado-g2-post-composite-ceiling-reassessment-evidence-repair-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 ceiling reassessment evidence repair V1 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Enforce canonical integrity after evidence repair
+        if: success()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Enforce evidence-repair receipt
+        if: success()
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_g2_post_composite_ceiling_reassessment_evidence_repair_v1_receipt.json"))
+          assert r["status"]=="PASS_G2_POST_COMPOSITE_CEILING_REASSESSMENT_EVIDENCE_REPAIR_V1",r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["corrected_scores"],r["kernel_selected_residual"],r["kernel_selected_gap"],r["kernel_evolution_operation"],r["next_required_capability"])
+          PY
