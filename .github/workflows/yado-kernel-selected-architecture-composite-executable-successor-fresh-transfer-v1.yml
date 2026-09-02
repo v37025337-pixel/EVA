@@ -1,0 +1,73 @@
+name: YADO G2 Composite Successor Fresh Transfer V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-selected-architecture-composite-executable-successor-fresh-transfer-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Enforce canonical integrity before fresh transfer
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile fresh-transfer paths
+        run: python -m py_compile runtime/yado_g2_composite_clonal_successor_prototype_v1.py runtime/yado_kernel_selected_architecture_composite_executable_successor_fresh_transfer_v1.py runtime/yado_current_frontier_execution_failure_history_v1.py
+      - name: Execute fixed prototype on fresh schemas and streams
+        run: timeout --signal=TERM --kill-after=30s 1500s python runtime/yado_kernel_selected_architecture_composite_executable_successor_fresh_transfer_v1.py
+      - name: Persist unexpected fresh-transfer failure as causal history
+        if: failure()
+        env:
+          YADO_FAILURE_WORKFLOW: YADO_G2_COMPOSITE_EXECUTABLE_SUCCESSOR_FRESH_TRANSFER_V1
+        run: |
+          git reset --hard HEAD
+          git clean -fd
+          python runtime/yado_current_frontier_execution_failure_history_v1.py
+          mkdir -p receipts
+          cp runtime/yado_current_frontier_execution_failure_history_v1_receipt.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Failure Memory"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Record composite fresh-transfer aborted execution as causal history [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Persist fresh-transfer evidence
+        if: success()
+        run: |
+          mkdir -p receipts candidates/kernel-self-generated resources
+          cp runtime/yado_kernel_selected_architecture_composite_executable_successor_fresh_transfer_v1_receipt.json "receipts/yado-kernel-selected-architecture-composite-executable-successor-fresh-transfer-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Composite Fresh Transfer"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-selected-architecture-composite-executable-successor-fresh-transfer-v1.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json candidates/kernel-self-generated/architecture-composite-executable-successor-fresh-transfer-v1.json resources/yado-composite-successor-fresh-transfer-v1.json "receipts/yado-kernel-selected-architecture-composite-executable-successor-fresh-transfer-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 composite successor fresh transfer V1 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Enforce canonical integrity after fresh-transfer persistence
+        if: success()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Enforce fresh-transfer receipt
+        if: success()
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_selected_architecture_composite_executable_successor_fresh_transfer_v1_receipt.json"))
+          assert r["status"] in {"PASS_COMPOSITE_EXECUTABLE_SUCCESSOR_FRESH_TRANSFER_V1","WITHHOLD_COMPOSITE_EXECUTABLE_SUCCESSOR_FRESH_TRANSFER_V1"},r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["candidate_state"],r["metrics"],r["evolution_control"],r["next_required_capability"])
+          PY
