@@ -42,20 +42,30 @@ actual={sid:r['sha256'] for sid,r in data['rows'].items()}
 if expected!=actual:raise RuntimeError('SOURCE_DIGEST_DRIFT')
 ids=sorted(data['rows'])
 
-# Derive training examples from the kernel-selected reaction norm, not host-authored rules.
+# Derive examples from the kernel-selected reaction norm, not host-authored rules.
+# Hold out exactly 10 cases per observed scale (1..5), so causal blind contains
+# both routing outputs and cannot be passed by a single default branch.
 train=[]
+blind=[]
 for size in (1,2,3,4,5):
+    rows=[]
     for combo in combinations(ids,size):
         x,y,counts=neutral._vector(combo,data['rows'])
         expected_route=high_label if float(x['source_count'])+1e-12>=threshold else low_label
-        train.append({'input':dict(x),'expected':expected_route})
+        key='|'.join(combo)
+        rows.append((hashlib.sha256((key+'|COMMIT_SUBSTRATE_BLIND').encode()).hexdigest(),{'input':dict(x),'expected':expected_route}))
+    rows.sort(key=lambda z:z[0])
+    hold=min(10,len(rows)-2)
+    blind.extend(v for _,v in rows[:hold])
+    train.extend(v for _,v in rows[hold:])
 
-# Blind route cases come only from previously unseen size-6 combinations.
-blind=[]
+# Size-6 remains a separate full post-commit transfer test, not causal selection evidence.
+fresh6=[]
 for combo in combinations(ids,6):
     x,y,counts=neutral._vector(combo,data['rows'])
-    blind.append({'input':dict(x),'expected':high_label})
-if len(train)!=1585 or len(blind)!=924:raise RuntimeError('CASE_COUNTS_INVALID')
+    fresh6.append({'input':dict(x),'expected':high_label})
+if len(train)!=1535 or len(blind)!=50 or len(fresh6)!=924:
+    raise RuntimeError('CASE_COUNTS_INVALID:'+json.dumps({'train':len(train),'blind':len(blind),'fresh6':len(fresh6)}))
 
 if DB.exists():DB.unlink()
 k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(DB))
@@ -81,6 +91,10 @@ try:
     high_probe=k.executive.execute_capability('SCALE_CONDITIONAL_SELECTOR_ROUTE_V1',{'source_count':2.0})
     if low_probe!=low_label or boundary_probe!=high_label or high_probe!=high_label:
         raise RuntimeError('POST_COMMIT_ROUTE_PROBE_FAILED:'+json.dumps({'low':low_probe,'boundary':boundary_probe,'high':high_probe}))
+    fresh6_correct=sum(k.executive.execute_capability('SCALE_CONDITIONAL_SELECTOR_ROUTE_V1',row['input'])==row['expected'] for row in fresh6)
+    fresh6_score=fresh6_correct/len(fresh6)
+    if abs(fresh6_score-1.0)>1e-12:
+        raise RuntimeError('POST_COMMIT_FRESH6_TRANSFER_FAILED:'+str(fresh6_score))
     k.conn.execute('PRAGMA wal_checkpoint(FULL)')
     k.conn.commit()
     selection_obj=asdict(selection)
@@ -117,6 +131,7 @@ checks={
  'kernel_synthesized_mechanism':True,
  'native_evaluate_mechanism_committed':True,
  'blind_score_one':abs(float(development_obj['candidate_score'])-1.0)<1e-12,
+ 'fresh6_post_commit_transfer_one':abs(float(fresh6_score)-1.0)<1e-12,
  'causal_ablation_passed':float(development_obj['candidate_score'])-float(development_obj['ablation_score'])>=0.20,
  'restore_exact':abs(float(development_obj['candidate_score'])-float(development_obj['restore_score']))<1e-12,
  'restart_restored_active_program':restored.get('SCALE_CONDITIONAL_SELECTOR_ROUTE_V1')==program_id,
@@ -135,7 +150,7 @@ candidate={
  'target_organ':'GENERATIVE_EXECUTIVE',
  'source_reaction_norm_candidate_digest':src['candidate_digest'],
  'kernel_selected_threshold':threshold,
- 'training_case_count':len(train),'blind_case_count':len(blind),
+ 'training_case_count':len(train),'blind_case_count':len(blind),'fresh6_post_commit_case_count':len(fresh6),'fresh6_post_commit_score':fresh6_score,
  'selection':selection_obj,'development':development_obj,
  'program_id':program_id,'program_digest':program_digest,
  'persistent_registry_path':'runtime/yado_g2_native_selector_commit_registry_v1.sqlite',
