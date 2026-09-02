@@ -1,0 +1,90 @@
+{
+  "blind_case_count": 50,
+  "candidate_digest": "abfcca06c5784fb08dbf1b2a4c6a28b8dd3587ab43a99dd5e04e7ea847b1c557",
+  "canonical_active": false,
+  "capability": "SCALE_CONDITIONAL_SELECTOR_ROUTE_V1",
+  "checks": {
+    "blind_score_one": true,
+    "causal_ablation_passed": true,
+    "fresh6_post_commit_transfer_one": true,
+    "g3_not_started": true,
+    "host_rule_program_written": false,
+    "kernel_deficit_detected": true,
+    "kernel_goal_created": true,
+    "kernel_synthesized_mechanism": true,
+    "native_evaluate_mechanism_committed": true,
+    "restart_execution_correct": true,
+    "restart_restored_active_program": true,
+    "restore_exact": true,
+    "source_sha_exact_match": true
+  },
+  "development": {
+    "ablation_score": 0.4,
+    "blind_cases": 50,
+    "candidate_score": 1.0,
+    "created_at": "2026-09-02T06:24:48.854433+00:00",
+    "experiment_id": "DEV22-887f3e6caa27",
+    "mechanism_kind": "RULE_PROGRAM",
+    "min_ablation_drop": 0.2,
+    "min_score": 1.0,
+    "program_digest": "2161571cc8eb08878b0171f834a76cb7acea51fedc3762915395a82be701bf17",
+    "program_id": "P-431e1dc40eef",
+    "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+    "restore_score": 1.0,
+    "stage_ablation_scores": {},
+    "state_committed": true,
+    "target_capability": "SCALE_CONDITIONAL_SELECTOR_ROUTE_V1",
+    "target_organ": "GENERATIVE_EXECUTIVE",
+    "train_cases": 1535,
+    "verdict": "COMMIT"
+  },
+  "fresh6_post_commit_case_count": 924,
+  "fresh6_post_commit_score": 1.0,
+  "g3_genesis_performed": false,
+  "kernel_selected_threshold": 1.3333333333333333,
+  "persistent_registry_path": "runtime/yado_g2_native_selector_commit_registry_v1.sqlite",
+  "persistent_registry_sha256": "b79f4b35c138b086f89c8d7ed4f96cd04aaa80bf61c5484d3f4f1fe376e6f351",
+  "program_digest": "2161571cc8eb08878b0171f834a76cb7acea51fedc3762915395a82be701bf17",
+  "program_id": "P-431e1dc40eef",
+  "promotion_applied": false,
+  "restart_active_programs": {
+    "SCALE_CONDITIONAL_SELECTOR_ROUTE_V1": "P-431e1dc40eef"
+  },
+  "restart_programs": {
+    "P-431e1dc40eef": {
+      "status": "COMMITTED",
+      "target_capability": "SCALE_CONDITIONAL_SELECTOR_ROUTE_V1",
+      "target_organ": "GENERATIVE_EXECUTIVE"
+    }
+  },
+  "route_probes": {
+    "boundary_before_restart": "FRESH_FOUR_PAIR_KNN_V1",
+    "high": "FRESH_FOUR_PAIR_KNN_V1",
+    "low": "OLD_STABLE_PARENT"
+  },
+  "schema": "yado.g2.native_selector_commit_substrate.v1",
+  "selection": {
+    "candidates": [
+      {
+        "complexity": 7,
+        "kind": "RULE_PROGRAM",
+        "program_id": "P-431e1dc40eef",
+        "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+        "selected": true,
+        "training_score": 1.0
+      }
+    ],
+    "created_at": "2026-09-02T06:24:48.851185+00:00",
+    "deficit_id": "D-ef074da32a65",
+    "selected_kind": "RULE_PROGRAM",
+    "selected_program_id": "P-431e1dc40eef",
+    "selection_id": "SEL-a5d51f962071",
+    "source_digest": "7ef9b4251412662270ad1f81cdf43eb05aed3a39fd69decb687dc451664e208c",
+    "target_capability": "SCALE_CONDITIONAL_SELECTOR_ROUTE_V1",
+    "target_organ": "GENERATIVE_EXECUTIVE"
+  },
+  "source_reaction_norm_candidate_digest": "837e29e26a1ad1adceaac856d18b0b49cd5b3795038ba192929e53960e12898a",
+  "state": "WITHHOLD",
+  "target_organ": "GENERATIVE_EXECUTIVE",
+  "training_case_count": 1535
+}

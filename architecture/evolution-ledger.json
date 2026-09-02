@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "a2bff0eb224a9bfeabe3b4f2420d860cc3cccb1568482b044aea8bc44c59689d",
+  "current_head_digest": "8a96a5ae381d7ad2cf0183aa7df066ff1c30d7b89ad775f8c6aee3baef92abae",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 196,
+  "event_count": 197,
   "events": [
     {
       "canonical_mutation": false,
@@ -3301,14 +3301,34 @@
       "source_digest": "3c902ae5f65c1e8d5171f65790ffc6e3c0bc3cce5029ae03a721f3f0a8b98eaf",
       "source_path": "receipts/yado-kernel-native-selector-commit-substrate-deficit-v1-run-33596366329.json",
       "status": "WITHHOLD"
+    },
+    {
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_NATIVE_SELECTOR_COMMIT_SUBSTRATE_GENESIS_V1",
+      "effect": "NATIVE_EXECUTIVE=DevelopmentalExecutiveV22; PROGRAM=P-431e1dc40eef; BLIND=1.000000; ABLATION=0.400000; RESTORE=1.000000; RESTART=True; NEXT=KERNEL_NATIVE_SELECTOR_COMMIT_SUBSTRATE_GENESIS_V2",
+      "event_hash": "3d0b24a9aece76f02d88df58dabdb15c449bd8f927b9fa7e935e0e8cd244497d",
+      "event_id": "E0197_G2_NATIVE_SELECTOR_COMMIT_SUBSTRATE_GENESIS_V1",
+      "event_type": "G2_NATIVE_EXECUTIVE_COMMIT_SUBSTRATE_GENESIS",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 196,
+      "new_head_digest": "8a96a5ae381d7ad2cf0183aa7df066ff1c30d7b89ad775f8c6aee3baef92abae",
+      "parent_event_hash": "63b807bc2e4cf753f05449c249df288c1bb87308867b2ba2a36d095e688db958",
+      "previous_head_digest": "a2bff0eb224a9bfeabe3b4f2420d860cc3cccb1568482b044aea8bc44c59689d",
+      "promotion_applied": false,
+      "run_id": "33598685491",
+      "source_digest": "addba29755571de05ac309be657c7d30fa3415f89696e0fc07d9491218e42381",
+      "source_path": "receipts/yado-kernel-native-selector-commit-substrate-genesis-v1-run-33598685491.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "e03c0e19909b0744812f843a1679b40e74dc24f2133ffbde800035de0712a86d",
+  "ledger_digest": "4a225faecc4448ad0c7746ac680702e53c8ac5779205aba09ef745352715e9ee",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_NATIVE_SELECTOR_COMMIT_SUBSTRATE_GENESIS_V1"
+    "KERNEL_NATIVE_SELECTOR_COMMIT_SUBSTRATE_GENESIS_V2"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -3337,5 +3357,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "63b807bc2e4cf753f05449c249df288c1bb87308867b2ba2a36d095e688db958"
+  "tail_event_hash": "3d0b24a9aece76f02d88df58dabdb15c449bd8f927b9fa7e935e0e8cd244497d"
 }
