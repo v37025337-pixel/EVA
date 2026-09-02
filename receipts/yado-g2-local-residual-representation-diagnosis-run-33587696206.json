@@ -1,0 +1,172 @@
+{
+  "blind_inspected": false,
+  "diagnosis": [
+    "LABELS_HAVE_SAME_LABEL_SUCCESS_SUPPORT",
+    "SPARSE_RESIDUAL_REGIME"
+  ],
+  "exact_collision_groups": [],
+  "geometry_summary": {
+    "mean_nearest_correct_distance": 0.18947152736835046,
+    "mean_nearest_same_label_distance": 0.21235814867392167,
+    "same_label_neighbor_available": 6
+  },
+  "kernel_operation": {
+    "operation": "CLONAL",
+    "target_task": "fresh_blind",
+    "variant_id": "CALIBRATED_CHILD_V2"
+  },
+  "kernel_parent": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "9e1a8c464caed5c6eabbc72184242bcd3c3dd94304d0f06007bc1765b345aa92",
+    "lineage_id": "G2_SELECTOR_LINEAGE",
+    "mean_score": 0.6900161030595813,
+    "target_score": 0.8478260869565217,
+    "trait_score": 0,
+    "utility": 0.7659822866344604,
+    "variant_id": "CALIBRATED_CHILD_V2"
+  },
+  "label_support": {
+    "ACTIVE_INFERENCE": {
+      "correct": 23,
+      "nonblind_total": 23,
+      "residual": 0
+    },
+    "CLASSICAL_COGNITIVE": {
+      "correct": 11,
+      "nonblind_total": 12,
+      "residual": 1
+    },
+    "GLOBAL_WORKSPACE": {
+      "correct": 6,
+      "nonblind_total": 8,
+      "residual": 2
+    },
+    "HYPERGRAPH_REFLECTIVE": {
+      "correct": 41,
+      "nonblind_total": 41,
+      "residual": 0
+    },
+    "LOCAL_SELF_ORGANIZING": {
+      "correct": 55,
+      "nonblind_total": 57,
+      "residual": 2
+    },
+    "META_NCA": {
+      "correct": 10,
+      "nonblind_total": 10,
+      "residual": 0
+    },
+    "MULTI_AGENT_LOCAL_GLOBAL": {
+      "correct": 0,
+      "nonblind_total": 1,
+      "residual": 1
+    },
+    "NEURO_SYMBOLIC": {
+      "correct": 10,
+      "nonblind_total": 11,
+      "residual": 1
+    },
+    "OPEN_ENDED_EVOLUTION": {
+      "correct": 60,
+      "nonblind_total": 60,
+      "residual": 0
+    },
+    "WORLD_MODEL": {
+      "correct": 29,
+      "nonblind_total": 29,
+      "residual": 0
+    }
+  },
+  "nonblind_count": 252,
+  "numeric_feature_count": 12,
+  "numeric_features": [
+    "evidence_active_inference",
+    "evidence_classical_cognitive",
+    "evidence_entropy_proxy",
+    "evidence_global_workspace",
+    "evidence_hypergraph_reflective",
+    "evidence_local_self_organizing",
+    "evidence_meta_nca",
+    "evidence_multi_agent_local_global",
+    "evidence_neuro_symbolic",
+    "evidence_open_ended_evolution",
+    "evidence_world_model",
+    "source_count"
+  ],
+  "residual_count": 7,
+  "residual_geometry": [
+    {
+      "case_key": "LOCAL_GLOBAL_MULTI_AGENT_COORDINATION_2021|UNIFIED_CONSCIOUS_ARCHITECTURE_2022",
+      "entropy": 0.4,
+      "expected": "MULTI_AGENT_LOCAL_GLOBAL",
+      "nearest_correct_distance": 0.38193735928380573,
+      "nearest_correct_label": "GLOBAL_WORKSPACE",
+      "nearest_correct_same_label_distance": null,
+      "parent_pred": "GLOBAL_WORKSPACE",
+      "source_count": 0.6666666666666666
+    },
+    {
+      "case_key": "COGARCH_REVIEW_40Y|GLOBAL_WORKSPACE_AGENTS_2026|LOCAL_GLOBAL_MULTI_AGENT_COORDINATION_2021",
+      "entropy": 0.6,
+      "expected": "CLASSICAL_COGNITIVE",
+      "nearest_correct_distance": 0.12874246369880196,
+      "nearest_correct_label": "CLASSICAL_COGNITIVE",
+      "nearest_correct_same_label_distance": 0.12874246369880196,
+      "parent_pred": "GLOBAL_WORKSPACE",
+      "source_count": 1.0
+    },
+    {
+      "case_key": "COGARCH_REVIEW_40Y|META_NCA_2026|NEURAL_CELLULAR_AUTOMATA_2025",
+      "entropy": 0.6,
+      "expected": "LOCAL_SELF_ORGANIZING",
+      "nearest_correct_distance": 0.11934749164333552,
+      "nearest_correct_label": "META_NCA",
+      "nearest_correct_same_label_distance": 0.21792870477804108,
+      "parent_pred": "META_NCA",
+      "source_count": 1.0
+    },
+    {
+      "case_key": "GLOBAL_WORKSPACE_AGENTS_2026|LOCAL_GLOBAL_MULTI_AGENT_COORDINATION_2021|NEUROSYMBOLIC_COGNITIVE_AI_2024",
+      "entropy": 0.6,
+      "expected": "NEURO_SYMBOLIC",
+      "nearest_correct_distance": 0.1307357122829322,
+      "nearest_correct_label": "NEURO_SYMBOLIC",
+      "nearest_correct_same_label_distance": 0.1307357122829322,
+      "parent_pred": "GLOBAL_WORKSPACE",
+      "source_count": 1.0
+    },
+    {
+      "case_key": "GLOBAL_WORKSPACE_AGENTS_2026|META_NCA_2026|NEURAL_CELLULAR_AUTOMATA_2025",
+      "entropy": 0.7,
+      "expected": "LOCAL_SELF_ORGANIZING",
+      "nearest_correct_distance": 0.17875517948897499,
+      "nearest_correct_label": "META_NCA",
+      "nearest_correct_same_label_distance": 0.1841008048783994,
+      "parent_pred": "META_NCA",
+      "source_count": 1.0
+    },
+    {
+      "case_key": "GLOBAL_WORKSPACE_AGENTS_2026|META_NCA_2026|UNIFIED_CONSCIOUS_ARCHITECTURE_2022",
+      "entropy": 0.7,
+      "expected": "GLOBAL_WORKSPACE",
+      "nearest_correct_distance": 0.18273224540750463,
+      "nearest_correct_label": "CLASSICAL_COGNITIVE",
+      "nearest_correct_same_label_distance": 0.309649602726201,
+      "parent_pred": "META_NCA",
+      "source_count": 1.0
+    },
+    {
+      "case_key": "GLOBAL_WORKSPACE_AGENTS_2026|NEUROSYMBOLIC_COGNITIVE_AI_2024|UNIFIED_CONSCIOUS_ARCHITECTURE_2022",
+      "entropy": 0.5,
+      "expected": "GLOBAL_WORKSPACE",
+      "nearest_correct_distance": 0.20405023977309816,
+      "nearest_correct_label": "NEURO_SYMBOLIC",
+      "nearest_correct_same_label_distance": 0.30299160367915434,
+      "parent_pred": "NEURO_SYMBOLIC",
+      "source_count": 1.0
+    }
+  ],
+  "residuals_in_exact_collision_groups": 0,
+  "schema": "yado.g2.local_residual_representation_diagnosis.v1",
+  "status": "PASS"
+}
