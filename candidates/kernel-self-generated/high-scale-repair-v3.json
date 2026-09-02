@@ -1,0 +1,291 @@
+{
+  "candidate_digest": "cac29e7cbe56b80be65e4ea05a5da68274f0d0551d50b4e8784d86a1441d9539",
+  "canonical_active": false,
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "fresh10_above_gate": false,
+    "fresh10_beats_old_high_branch": false,
+    "fresh10_count_66": true,
+    "fresh10_not_used_for_selection_or_refit": true,
+    "g3_not_started": true,
+    "history_no_regression": true,
+    "history_sizes_4_to_9_only_for_selection": true,
+    "kernel_selected_candidate": false,
+    "source_sha_exact_match": true
+  },
+  "development_metrics": {
+    "NATIVE_RC5_INTELLIGENCE_CONSTRUCTOR": {
+      "admission_eligible": false,
+      "resource_outcome": {
+        "budget_seconds": 600,
+        "exitcode": -15,
+        "returned": false,
+        "status": "RESOURCE_TIMEOUT"
+      }
+    },
+    "PAIR_KNN_REFRESH": {
+      "holdout": 0.967654986522911,
+      "inner": {
+        "selected_k": 21,
+        "trials": [
+          {
+            "accuracy": 0.88,
+            "k": 1
+          },
+          {
+            "accuracy": 0.9272727272727272,
+            "k": 3
+          },
+          {
+            "accuracy": 0.9381818181818182,
+            "k": 5
+          },
+          {
+            "accuracy": 0.9490909090909091,
+            "k": 7
+          },
+          {
+            "accuracy": 0.9272727272727272,
+            "k": 9
+          },
+          {
+            "accuracy": 0.9418181818181818,
+            "k": 11
+          },
+          {
+            "accuracy": 0.9563636363636364,
+            "k": 15
+          },
+          {
+            "accuracy": 0.96,
+            "k": 21
+          }
+        ],
+        "validation": 0.96
+      },
+      "per_size": {
+        "4": {
+          "baseline": 0.98989898989899,
+          "candidate": 0.9393939393939394,
+          "count": 99,
+          "gain": -0.0505050505050505
+        },
+        "5": {
+          "baseline": 1.0,
+          "candidate": 0.9874213836477987,
+          "count": 159,
+          "gain": -0.012578616352201255
+        },
+        "6": {
+          "baseline": 0.9891891891891892,
+          "candidate": 0.9675675675675676,
+          "count": 185,
+          "gain": -0.021621621621621623
+        },
+        "7": {
+          "baseline": 0.9936305732484076,
+          "candidate": 0.9872611464968153,
+          "count": 157,
+          "gain": -0.006369426751592355
+        },
+        "8": {
+          "baseline": 0.9795918367346939,
+          "candidate": 0.9693877551020408,
+          "count": 98,
+          "gain": -0.010204081632653073
+        },
+        "9": {
+          "baseline": 0.8636363636363636,
+          "candidate": 0.8863636363636364,
+          "count": 44,
+          "gain": 0.022727272727272707
+        }
+      },
+      "regression_pass": false,
+      "train": 0.9610215053763441
+    },
+    "TRIPLE_KNN_REFRESH": {
+      "holdout": 0.9582210242587601,
+      "inner": {
+        "selected_k": 15,
+        "trials": [
+          {
+            "accuracy": 0.88,
+            "k": 1
+          },
+          {
+            "accuracy": 0.9272727272727272,
+            "k": 3
+          },
+          {
+            "accuracy": 0.9381818181818182,
+            "k": 5
+          },
+          {
+            "accuracy": 0.9454545454545454,
+            "k": 7
+          },
+          {
+            "accuracy": 0.9236363636363636,
+            "k": 9
+          },
+          {
+            "accuracy": 0.9381818181818182,
+            "k": 11
+          },
+          {
+            "accuracy": 0.9490909090909091,
+            "k": 15
+          },
+          {
+            "accuracy": 0.9490909090909091,
+            "k": 21
+          }
+        ],
+        "validation": 0.9490909090909091
+      },
+      "per_size": {
+        "4": {
+          "baseline": 0.98989898989899,
+          "candidate": 0.9292929292929293,
+          "count": 99,
+          "gain": -0.06060606060606066
+        },
+        "5": {
+          "baseline": 1.0,
+          "candidate": 0.9622641509433962,
+          "count": 159,
+          "gain": -0.037735849056603765
+        },
+        "6": {
+          "baseline": 0.9891891891891892,
+          "candidate": 0.9621621621621622,
+          "count": 185,
+          "gain": -0.027027027027026973
+        },
+        "7": {
+          "baseline": 0.9936305732484076,
+          "candidate": 0.9872611464968153,
+          "count": 157,
+          "gain": -0.006369426751592355
+        },
+        "8": {
+          "baseline": 0.9795918367346939,
+          "candidate": 0.9693877551020408,
+          "count": 98,
+          "gain": -0.010204081632653073
+        },
+        "9": {
+          "baseline": 0.8636363636363636,
+          "candidate": 0.8636363636363636,
+          "count": 44,
+          "gain": 0.0
+        }
+      },
+      "regression_pass": false,
+      "train": 0.960013440860215
+    }
+  },
+  "evolution_operation": {
+    "operation": "CLONAL",
+    "target_task": "size9",
+    "variant_id": "HIGH_SCALE_REPAIR_V2"
+  },
+  "fresh_transfer": {
+    "count": 66,
+    "size": 10,
+    "used_for_refit": false,
+    "used_for_selection": false
+  },
+  "g3_genesis_performed": false,
+  "low_branch_unchanged": true,
+  "metrics": {
+    "fresh10_candidate": 0.8181818181818182,
+    "fresh10_gain": 0.0,
+    "fresh10_old_high": 0.8181818181818182,
+    "history_candidate": 0.9800968262506724,
+    "history_old_high": 0.9800968262506724
+  },
+  "native_constructor_outcome": {
+    "budget_seconds": 600,
+    "exitcode": -15,
+    "returned": false,
+    "status": "RESOURCE_TIMEOUT"
+  },
+  "parent_choice": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "670b9483d9d7349d559f1bc1d6c2dc34042f74ab1ba2fa1bac71bc8f6fe2e827",
+    "lineage_id": "G2_HIGH_SCALE_LINEAGE",
+    "mean_score": 0.9341972841972842,
+    "target_score": 0.8590909090909091,
+    "trait_score": 0,
+    "utility": 0.8349129574129573,
+    "variant_id": "HIGH_SCALE_REPAIR_V2"
+  },
+  "principle": "PRESERVE_NATIVE_SELECTOR_AND_LOW_BRANCH; LET_G2_CHOOSE_BETWEEN_REFRESHED_KNN_AND_NATIVE_RC5_CONSTRUCTOR",
+  "promotion_applied": false,
+  "schema": "yado.g2.scale_conditional_high_scale_repair.v3",
+  "selected_model": null,
+  "selected_skill_id": null,
+  "selected_spec": null,
+  "selection": {
+    "candidate_count": 2,
+    "gate_digest": "d770a7077ca6c62322d5f69de15c12777aec72a9efc2e454d2006402e171036e",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "6266bd58135b968d0f7533425e4c9bdf16b7349981bca639eb594e9f5afcfd6a",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": -0.01814516129032251,
+        "heldout_gain": -0.016172506738544534,
+        "skill_id": "PAIR_KNN_REFRESH",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "7088dbe65dec1210be71fcac4efbe3fe40ba39114b6fca7941da97727f373075",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": -0.019153225806451624,
+        "heldout_gain": -0.025606469002695476,
+        "skill_id": "TRIPLE_KNN_REFRESH",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "selector_unchanged": true,
+  "state": "WITHHOLD"
+}
