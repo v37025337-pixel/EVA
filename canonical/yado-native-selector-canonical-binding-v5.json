@@ -1,0 +1,56 @@
+{
+  "admission": {
+    "boundary_score": 1.0,
+    "broken_v4_route_score": 0.5,
+    "checks": {
+      "all_bound_artifact_digests_exact": true,
+      "broken_v4_high_route_fails": true,
+      "candidate_beats_broken_route": true,
+      "candidate_boundary_9_10_exact": true,
+      "candidate_cardinality_reconstruction_exact": true,
+      "candidate_extrapolation_13_to_18_exact": true,
+      "candidate_high_route_exact": true,
+      "candidate_route_score_exact": true,
+      "fresh_probe_cardinality_range_1_to_18": true,
+      "fresh_probe_count_144": true,
+      "fresh_probes_not_used_for_v5_selection": true,
+      "g3_not_started": true,
+      "spent_history_evidence_clean": true,
+      "v5_candidate_digest_fixed_before_fresh_probes": true
+    },
+    "extrapolation_score": 1.0,
+    "fresh_route_probe_count": 144,
+    "fresh_route_probe_digest": "125deb7bcc0879f37b189e0e104aa4c45f19b7fd8d46c8b14c587c4dec2545aa",
+    "fresh_route_score": 1.0
+  },
+  "artifact_sha256": {
+    "candidates/kernel-self-generated/high-scale-repair-v2.json": "94821b50c3afe6109f610a5c3172bc7ba5b9387ab872f422021cb8d4885f4cc6",
+    "candidates/kernel-self-generated/high-scale-repair-v4.json": "63335951d8e16a21fced9a662722db8047e6789e2065fcd9ad83069ca9c41cf1",
+    "candidates/kernel-self-generated/high-scale-repair-v5.json": "b6111997d23d27ce1ff2fe85398e10af97045555ec6308e20558aa8e9007de78",
+    "resources/yado-architecture-neutral-evidence-corpus-frozen-v1.json": "6edccf55461229c0290f0e78464ca8b3bd126c5943c2c548ab0a630037232dbb",
+    "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py": "5326926722c740829dd6fce96aed95dacca274f0ee8d6103c8d79cd22a5069ea"
+  },
+  "binding_digest": "8f8d9240ef296a0de5afd458e41cc43be651030151a7ba1b1c7bcee3065275ad",
+  "binding_runtime": "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py",
+  "branch_artifacts": {
+    "corpus": "resources/yado-architecture-neutral-evidence-corpus-frozen-v1.json",
+    "high_scale_v4": "candidates/kernel-self-generated/high-scale-repair-v4.json",
+    "parent_v2": "candidates/kernel-self-generated/high-scale-repair-v2.json",
+    "route_repair_v5": "candidates/kernel-self-generated/high-scale-repair-v5.json"
+  },
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "route_semantics": {
+    "activation_min_size": 10,
+    "normalization_denominator": 3.0,
+    "strategy": "INVERT_NORMALIZED_SOURCE_COUNT"
+  },
+  "schema": "yado.g2.native_selector_canonical_binding.v5",
+  "semantic_boundary": {
+    "binding_adapter_only": true,
+    "fresh_probe_role": "ROUTE_SEMANTICS_ADMISSION_ONLY",
+    "new_learning_during_binding": false,
+    "new_selection_during_binding": false,
+    "selected_route_from_v5_kernel_event": "E0219_G2_HIGH_SCALE_REPAIR_V5"
+  },
+  "status": "CANONICAL_ACTIVE"
+}
