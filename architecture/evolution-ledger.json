@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "dd142d71901379389ce8a8fbe9c5a992043230001226e6c5d89459b507898391",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 209,
+  "event_count": 210,
   "events": [
     {
       "canonical_mutation": false,
@@ -3542,10 +3542,27 @@
       "source_digest": "9234abe35fe181176def89e1f076635c4bc79ba6207b8251ecab32ae00a12f03",
       "source_path": "receipts/yado-g2-frontier-provenance-sync-v1-run-33641289428.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V4",
+      "effect": "RUN=33641428393; WORKFLOW=YADO_G2_HIGH_SCALE_REPAIR_V4; OUTCOME=UNEXPECTED_WORKFLOW_FAILURE; ADMISSION_EVIDENCE=False; NEXT=KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V4",
+      "event_hash": "36f07698a70cb27cf9e72df2e3cc790483e1741625433048a04c82fec6652b23",
+      "event_id": "E0210_G2_EXECUTION_FAILURE_33641428393",
+      "event_type": "G2_EXECUTION_FAILURE_EXPERIENCE",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 209,
+      "parent_event_hash": "16e555187d3b3e40e51df576e2508d90bc72a52e993f9f36a36778204daf7349",
+      "promotion_applied": false,
+      "run_id": "33641428393",
+      "source_digest": "a0aa1f21802ec94ef6d5ac812d6872eeb89768794f70c50a9f5f06baa07d2fb5",
+      "source_path": "receipts/yado-current-frontier-execution-failure-history-v1-run-33641428393.json",
+      "status": "WITHHOLD"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "d2da64c14e902cf174ef8a97da9fc91fdfb13ebba38b62a6f0c010a2a69ba058",
+  "ledger_digest": "a6d542cfd2cbbc1f814e723623dc9ac5ef3d1bebe8bd2b2cec30b0fb69aecdcb",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -3583,5 +3600,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "16e555187d3b3e40e51df576e2508d90bc72a52e993f9f36a36778204daf7349"
+  "tail_event_hash": "36f07698a70cb27cf9e72df2e3cc790483e1741625433048a04c82fec6652b23"
 }
