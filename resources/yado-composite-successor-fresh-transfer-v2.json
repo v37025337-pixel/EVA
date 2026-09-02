@@ -1,0 +1,59 @@
+{
+  "blind_seed": 90222001,
+  "dataset_digest": "475da086299c0c917c981f175f942ee9bd6566e423c2ad61c9e13e5da8df2630",
+  "evaluation_counts": {
+    "ambiguous": 520,
+    "budget": 260,
+    "context_ablation": 360,
+    "explicit": 520,
+    "neuro_symbolic": 440,
+    "resource": 180,
+    "rollback": 140
+  },
+  "fresh_schema": {
+    "relation_fields": [
+      "claimant_id",
+      "registered_owner_id",
+      "cluster_id",
+      "asset_cluster_id",
+      "verification_tier",
+      "trusted",
+      "relation_v2_nonce"
+    ],
+    "scalar_fields": [
+      "integrity_attestation",
+      "novel_signal_present",
+      "rollback_contract_ready",
+      "scalar_v2_nonce"
+    ]
+  },
+  "metrics": {
+    "ablated_context_accuracy": 0.25,
+    "ambiguous_capability_accuracy": 1.0,
+    "ambiguous_result_accuracy": 1.0,
+    "budget_accuracy": 1.0,
+    "budget_violations": 0,
+    "explicit_accuracy": 1.0,
+    "local_context_causal_drop": 0.75,
+    "naive_symbolic_accuracy": 0.5,
+    "neuro_symbolic_accuracy": 1.0,
+    "neuro_symbolic_gain": 0.5,
+    "resource_accuracy": 1.0,
+    "rollback_accuracy": 1.0
+  },
+  "prototype_candidate_digest": "70d35ec33ed758e02003a43a1f6fae18fce9bc405a372a12f6c52412fc856acc",
+  "repair_candidate_digest_fixed_before_generation": "f85ed64ed5d89446221622cffddc7391f90f8ee0b78b666c3b794b7ec57853ee",
+  "schema": "yado.g2.composite_successor_fresh_transfer.dataset.v2",
+  "status": "SPENT_AFTER_SINGLE_FRESH_TRANSFER_V2",
+  "train_seeds": {
+    "relation": [
+      2609022222,
+      2609022223
+    ],
+    "router": [
+      2609022202,
+      2609022203
+    ],
+    "scalar": 2609022212
+  }
+}
