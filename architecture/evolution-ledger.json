@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "8374f1cf611204646918c4cd73e6cd74f2d9853996dcc77929e12f7f74afafa8",
+  "current_head_digest": "afd70c2a7a7bd8b4ac542fa6fa06da9c6792f0b25a3cefb47e3dde7b19853966",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 228,
+  "event_count": 229,
   "events": [
     {
       "canonical_mutation": false,
@@ -3899,14 +3899,35 @@
       "source_digest": "8afa6a5d26c4b4f22fbf15d9512331ddaef74fee9a22bcefa40ccf91e53a93dd",
       "source_path": "receipts/yado-composite-successor-transfer-diagnosis-v1-run-33661115720.json",
       "status": "PASS"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_TRANSFER_REPAIR_V1",
+      "effect": "SELECTED=FORCED_SINGLE_CAPABILITY_EXECUTION_V1; CURRENT_FIT=0.500000; REPAIR_FIT=1.000000; CURRENT_HOLD=0.500000; REPAIR_HOLD=1.000000; LOCAL_DROP=0.750000; ARCHITECTURE_MUTATION=False; NEXT=KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_FRESH_TRANSFER_V2",
+      "event_hash": "492c3eeb6c0d66096a83d5bef52aacbabc31c36e697f7b84a02144a422e43820",
+      "event_id": "E0229_G2_COMPOSITE_EXECUTABLE_SUCCESSOR_TRANSFER_REPAIR_V1",
+      "event_type": "G2_KERNEL_SELECTED_TRANSFER_INTERFACE_REPAIR",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 228,
+      "new_head_digest": "afd70c2a7a7bd8b4ac542fa6fa06da9c6792f0b25a3cefb47e3dde7b19853966",
+      "parent_event_hash": "4838f4bb729dbe42b98299102264677df07a94e0d9f82ccaf9b7ca0b9e12f238",
+      "previous_head_digest": "8374f1cf611204646918c4cd73e6cd74f2d9853996dcc77929e12f7f74afafa8",
+      "promotion_applied": false,
+      "run_id": "33663617120",
+      "source_digest": "fe0345d1f4c2f20673c85f8f2c5abca0624938fdb902b8cbed821e03abaf8a6c",
+      "source_path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-transfer-repair-v1-run-33663617120.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "596798e6f0052fc5f36d6ae7f4f9d187569e345b465d0ae4f3bbc041857bc852",
+  "ledger_digest": "4d937a794f860418e627ffb452bd80716116dc2a590fc841339642005a094d86",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_TRANSFER_REPAIR_V1"
+    "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_FRESH_TRANSFER_V2"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -3940,5 +3961,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "4838f4bb729dbe42b98299102264677df07a94e0d9f82ccaf9b7ca0b9e12f238"
+  "tail_event_hash": "492c3eeb6c0d66096a83d5bef52aacbabc31c36e697f7b84a02144a422e43820"
 }

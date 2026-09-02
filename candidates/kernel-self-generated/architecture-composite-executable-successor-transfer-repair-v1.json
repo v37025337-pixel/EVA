@@ -1,0 +1,150 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "f85ed64ed5d89446221622cffddc7391f90f8ee0b78b666c3b794b7ec57853ee",
+  "candidate_mechanisms": [
+    {
+      "artifact_digest": "70d35ec33ed758e02003a43a1f6fae18fce9bc405a372a12f6c52412fc856acc",
+      "fit_baseline": 0.5,
+      "fit_candidate": 0.5,
+      "heldout_baseline": 0.5,
+      "heldout_candidate": 0.5,
+      "metadata": {
+        "metrics": {
+          "ablation": 0.25,
+          "ambiguous": 0.5,
+          "direct_payload": 0.5,
+          "explicit": 0.5
+        }
+      },
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 1.0,
+      "skill_id": "CURRENT_DOUBLE_ROUTE_EXECUTION_V1",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
+      "fit_baseline": 0.5,
+      "fit_candidate": 1.0,
+      "heldout_baseline": 0.5,
+      "heldout_candidate": 1.0,
+      "metadata": {
+        "metrics": {
+          "ablation": 0.25,
+          "ambiguous": 1.0,
+          "direct_payload": 1.0,
+          "explicit": 1.0
+        },
+        "substrate": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1"
+      },
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 1.0,
+      "skill_id": "FORCED_SINGLE_CAPABILITY_EXECUTION_V1",
+      "state_integrity": true,
+      "structural_valid": true
+    }
+  ],
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "architecture_not_mutated": true,
+    "diagnosis_interface_only": true,
+    "direct_organs_proven_healthy": true,
+    "g3_not_started": true,
+    "kernel_selected_forced_execution": true,
+    "parent_runtime_not_modified": true,
+    "repair_ambiguous_accuracy": true,
+    "repair_beats_current_fit": true,
+    "repair_beats_current_holdout": true,
+    "repair_direct_payload_accuracy": true,
+    "repair_explicit_accuracy": true,
+    "repair_local_context_causal_drop": true
+  },
+  "current_metrics": {
+    "ablation": 0.25,
+    "ambiguous": 0.5,
+    "direct_payload": 0.5,
+    "explicit": 0.5
+  },
+  "diagnosis_receipt_sha256": "8afa6a5d26c4b4f22fbf15d9512331ddaef74fee9a22bcefa40ccf91e53a93dd",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "kernel_selection": {
+    "candidate_count": 2,
+    "gate_digest": "6eb986a34b1e37cebb5fb9baef8cbaef96fa0f65b5640720864bd9a55e1a996c",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "6eddb40b1f7fc7d046973b11eb2dcd932ee40316bdd35ebf89647c75786574ad",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CURRENT_DOUBLE_ROUTE_EXECUTION_V1",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "81a4b29971776afee462541990b6122a61497c6ca95ab4c2129d826095da4041",
+        "failed_critics": [],
+        "fit_gain": 0.5,
+        "heldout_gain": 0.5,
+        "skill_id": "FORCED_SINGLE_CAPABILITY_EXECUTION_V1",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "FORCED_SINGLE_CAPABILITY_EXECUTION_V1"
+    ],
+    "status": "SELECTED"
+  },
+  "prototype_candidate_digest": "70d35ec33ed758e02003a43a1f6fae18fce9bc405a372a12f6c52412fc856acc",
+  "repair_local_context_causal_drop": 0.75,
+  "repair_metrics": {
+    "ablation": 0.25,
+    "ambiguous": 1.0,
+    "direct_payload": 1.0,
+    "explicit": 1.0
+  },
+  "schema": "yado.g2.architecture_composite_executable_successor_transfer_repair.v1",
+  "selected_component": {
+    "canonical_active": false,
+    "component_digest": "2fae46c82faf13600c9974e6a819f5662a511db40d425301ef5a1980c50254dd",
+    "component_id": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+    "context_selector": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+    "execution_substrate": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
+    "parent_router_reinterpretation": false,
+    "parent_runtime_modified": false,
+    "schema": "yado.g2.composite_transfer_repair_adapter.v1",
+    "selection_count_per_task": 1
+  },
+  "selected_skill_id": "FORCED_SINGLE_CAPABILITY_EXECUTION_V1",
+  "semantic_boundary": "KERNEL SELECTS BETWEEN CURRENT DOUBLE-ROUTE EXECUTION AND EXISTING FORCED-CAPABILITY EXECUTION USING SPENT TRANSFER EVIDENCE. THE REPAIR REMOVES REPRESENTATION REINTERPRETATION WITHOUT CHANGING THE CANONICAL PARENT ARCHITECTURE.",
+  "state": "SHADOW_REPAIR_SUPPORTED"
+}
