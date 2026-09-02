@@ -203,6 +203,24 @@ head['current_frontier']=next_cap;head['frontier_source']='architecture/evolutio
 
 ledger['current_head_digest']=head['canonical_head_digest'];ledger['open_deficits']=[next_cap]
 run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
+
+# Reconcile the previous generic V5 failure with its exact technical cause without rewriting history.
+if not any(e.get('event_type')=='G2_EXECUTION_FAILURE_DETAIL_RECONCILIATION' and str(e.get('run_id'))=='33656089758' for e in ledger['events']):
+    prior=next((e for e in ledger['events'] if str(e.get('run_id'))=='33656089758'),None)
+    if prior is not None:
+        idx=len(ledger['events'])
+        de={
+          'index':idx,'event_id':f"E{idx+1:04d}_G2_V5_FAILURE_DETAIL_33656089758",
+          'event_type':'G2_EXECUTION_FAILURE_DETAIL_RECONCILIATION','status':'WITHHOLD',
+          'generation':ledger['current_head'],'deficit':'KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V5',
+          'effect':'RUN=33656089758; CANDIDATES_COMPLETE=True; KEY_ROUTE=PASS; INVERT_ROUTE=PASS; KERNEL_SELECTED=INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5; ERROR=KeyError:selected_strategy; FRESH_ROUTE_PROBES_MATERIALIZED=False; NEXT='+next_cap,
+          'source_path':prior.get('source_path'),'source_digest':prior.get('source_digest'),'run_id':'33656089758',
+          'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':False,'promotion_applied':False,'generation_transition':False
+        }
+        de['event_hash']=event_hash(de);ledger['events'].append(de);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=de['event_hash']
+        ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
+        validate_ledger_v2(ledger)
+
 receipt={**artifact,'schema':'yado.g2.kernel_scale_conditional_high_scale_repair.receipt.v5',
  'previous_head_digest':prev,'new_head_digest':head['canonical_head_digest'],'checks':checks,'provenance_registry_digest':prov['registry_digest']}
 receipt['receipt_sha256']=h(receipt);write(OUT,receipt)
