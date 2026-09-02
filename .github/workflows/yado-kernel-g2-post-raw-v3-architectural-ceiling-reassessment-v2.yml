@@ -1,0 +1,73 @@
+name: YADO G2 Post Raw V3 Architectural Ceiling Reassessment V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-g2-post-raw-v3-architectural-ceiling-reassessment-v2-request.json"
+permissions:
+  contents: write
+jobs:
+  reassess:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Enforce canonical integrity before reassessment V2
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile reassessment V2
+        run: python -m py_compile runtime/yado_kernel_g2_post_raw_v3_architectural_ceiling_reassessment_v2.py runtime/yado_current_frontier_execution_failure_history_v1.py
+      - name: Let G2 reassess post-raw-V3 ceiling
+        run: timeout --signal=TERM --kill-after=30s 1200s python runtime/yado_kernel_g2_post_raw_v3_architectural_ceiling_reassessment_v2.py
+      - name: Persist unexpected reassessment failure as causal history
+        if: failure()
+        env:
+          YADO_FAILURE_WORKFLOW: YADO_G2_POST_RAW_V3_ARCHITECTURAL_CEILING_REASSESSMENT_V2
+        run: |
+          git reset --hard HEAD
+          git clean -fd
+          python runtime/yado_current_frontier_execution_failure_history_v1.py
+          mkdir -p receipts
+          cp runtime/yado_current_frontier_execution_failure_history_v1_receipt.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Failure Memory"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Record post-raw-V3 reassessment failure as causal history [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Persist reassessment V2 evidence
+        if: success()
+        run: |
+          mkdir -p receipts resources
+          cp runtime/yado_kernel_g2_post_raw_v3_architectural_ceiling_reassessment_v2_receipt.json "receipts/yado-g2-post-raw-v3-architectural-ceiling-reassessment-v2-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Post Raw V3 Reassessment"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-g2-post-raw-v3-architectural-ceiling-reassessment-v2.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json resources/yado-g2-post-raw-v3-ceiling-boundary-v2.json "receipts/yado-g2-post-raw-v3-architectural-ceiling-reassessment-v2-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 post-raw-V3 ceiling reassessment V2 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Enforce canonical integrity after reassessment V2
+        if: success()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Enforce reassessment V2 receipt
+        if: success()
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_g2_post_raw_v3_architectural_ceiling_reassessment_v2_receipt.json"))
+          assert r["status"]=="PASS_G2_POST_RAW_V3_ARCHITECTURAL_CEILING_REASSESSMENT_V2",r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["verdict"],r["scores"],r["kernel_selected_residual"],r["kernel_selected_gap"],r["kernel_evolution_operation"],r["next_required_capability"])
+          PY
