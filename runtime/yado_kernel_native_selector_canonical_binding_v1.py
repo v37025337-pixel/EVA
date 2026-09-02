@@ -67,7 +67,7 @@ binding={
    'native_owner':'DevelopmentalExecutiveV22',
  },
  'binding_runtime':'runtime/yado_g2_canonical_scale_conditional_runtime_v1.py',
- 'branches':dict(scale['branches']),
+ 'branches':{'low':scale['branches']['low_scale'],'high':scale['branches']['high_scale']},
  'branch_artifacts':{
    'base':'receipts/yado-architecture-neutral-meta-synth-v2-latest.json',
    'calibrated':'candidates/kernel-self-generated/evolutionary-centroid-calibrated-successor-v2.json',
@@ -104,7 +104,7 @@ if [len(spaces[s]) for s in range(1,8)]!=expected_counts:raise RuntimeError('SPA
 def score(rows,runtime):
  return sum(runtime.predict(c)==c['y'] for c in rows)/len(rows)
 def route_score(rows,runtime):
- th=float(scale['selected_threshold']);low=scale['branches']['low'];high=scale['branches']['high']
+ th=float(scale['selected_threshold']);low=scale['branches']['low_scale'];high=scale['branches']['high_scale']
  good=0
  for c in rows:
   expected_route=high if float(c['x']['source_count'])+1e-12>=th else low
