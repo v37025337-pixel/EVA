@@ -1,0 +1,164 @@
+{
+  "architecture_mutation": false,
+  "binding_candidate": {
+    "artifact_sha256": {
+      "candidates/kernel-self-generated/high-scale-repair-v2.json": "94821b50c3afe6109f610a5c3172bc7ba5b9387ab872f422021cb8d4885f4cc6",
+      "candidates/kernel-self-generated/high-scale-repair-v4.json": "63335951d8e16a21fced9a662722db8047e6789e2065fcd9ad83069ca9c41cf1",
+      "resources/yado-architecture-neutral-evidence-corpus-frozen-v1.json": "6edccf55461229c0290f0e78464ca8b3bd126c5943c2c548ab0a630037232dbb",
+      "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py": "287342cabcb42617831cce10b5cbf6514d570f246a4dfce4df27adc39020328e"
+    },
+    "binding_digest": "5c66e6731ec39fb0632a11778a704e2d0fcc536e9d40b7d241c5996bdb19d9a3",
+    "branch_artifacts": {
+      "corpus": "resources/yado-architecture-neutral-evidence-corpus-frozen-v1.json",
+      "high_scale_v4": "candidates/kernel-self-generated/high-scale-repair-v4.json",
+      "parent_v2": "candidates/kernel-self-generated/high-scale-repair-v2.json"
+    },
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "route_semantics": {
+      "activation_min_size": 10,
+      "normalization_denominator": 3.0,
+      "strategy": "INVERT_NORMALIZED_SOURCE_COUNT"
+    },
+    "schema": "yado.g2.high_scale_semantic_route_candidate.v5"
+  },
+  "candidate_digest": "b0e70c9aa77578b31c8e2d87430b4bbe8a613f699485d53ca7131333c35d7201",
+  "canonical_active": false,
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "adapter_route_semantics_equivalent": true,
+    "fresh_route_probes_not_materialized": true,
+    "g3_not_started": true,
+    "kernel_selected_route_repair": true,
+    "predictive_total_no_regression": true,
+    "selected_route_exact_on_all_spent_cases": true,
+    "size11_shadow_score_reproduced": true,
+    "size12_spent_history_not_regressed": true,
+    "source_sha_exact_match": true,
+    "spent_history_sizes_1_to_12_only": true
+  },
+  "fresh_route_probe_status": "RESERVED_FOR_CANONICAL_BINDING_V5_NOT_MATERIALIZED",
+  "g3_genesis_performed": false,
+  "metrics": {
+    "broken_route_fit": 1.0,
+    "broken_route_high_holdout": 0.0,
+    "candidate_predictive_total": 0.9753357753357753,
+    "parent_predictive_total": 0.9719169719169719,
+    "per_size": {
+      "1": {
+        "candidate": 0.6666666666666666,
+        "parent": 0.6666666666666666,
+        "route": 1.0
+      },
+      "10": {
+        "candidate": 1.0,
+        "parent": 0.8181818181818182,
+        "route": 1.0
+      },
+      "11": {
+        "candidate": 1.0,
+        "parent": 0.8333333333333334,
+        "route": 1.0
+      },
+      "12": {
+        "candidate": 1.0,
+        "parent": 1.0,
+        "route": 1.0
+      },
+      "2": {
+        "candidate": 0.7727272727272727,
+        "parent": 0.7727272727272727,
+        "route": 1.0
+      },
+      "3": {
+        "candidate": 0.9636363636363636,
+        "parent": 0.9636363636363636,
+        "route": 1.0
+      },
+      "4": {
+        "candidate": 0.9919191919191919,
+        "parent": 0.9919191919191919,
+        "route": 1.0
+      },
+      "5": {
+        "candidate": 1.0,
+        "parent": 1.0,
+        "route": 1.0
+      },
+      "6": {
+        "candidate": 0.9978354978354979,
+        "parent": 0.9978354978354979,
+        "route": 1.0
+      },
+      "7": {
+        "candidate": 0.9848484848484849,
+        "parent": 0.9848484848484849,
+        "route": 1.0
+      },
+      "8": {
+        "candidate": 0.9494949494949495,
+        "parent": 0.9494949494949495,
+        "route": 1.0
+      },
+      "9": {
+        "candidate": 0.8590909090909091,
+        "parent": 0.8590909090909091,
+        "route": 1.0
+      }
+    },
+    "selected_route_all_history": 1.0
+  },
+  "previous_v5_execution_failure": {
+    "completed_kernel_selection": "INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5",
+    "error": "KeyError:selected_strategy",
+    "fresh_route_probes_materialized": false,
+    "run_id": "33656089758"
+  },
+  "principle": "REPAIR_CARDINALITY_TO_NORMALIZED_FEATURE_SEMANTICS_FROM_SPENT_BINDING_FAILURE_WITHOUT_RETRAINING_V4_MODEL",
+  "schema": "yado.g2.scale_conditional_high_scale_repair.v5",
+  "selected_skill_id": "INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5",
+  "selected_spec": {
+    "activation_min_size": 10,
+    "normalization_denominator": 3.0,
+    "strategy": "INVERT_NORMALIZED_SOURCE_COUNT"
+  },
+  "selection": {
+    "candidate_count": 2,
+    "gate_digest": "a3ac3faa40f4fc0769df9283cb1f26b0073aaca40d9c2b5a8985ba43f3ed14ec",
+    "rejected": [],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "d8d54cbbcd2920c6fe07eadf6f5f111007f1c06f08e94645b4487b4f5dd9b07e",
+        "failed_critics": [],
+        "fit_gain": 0.0,
+        "heldout_gain": 1.0,
+        "skill_id": "INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5"
+    ],
+    "status": "SELECTED"
+  },
+  "source_binding_v4_failure": {
+    "failed_checks": {
+      "fresh12_route_high": false,
+      "routes_exact_sizes_1_to_11": false,
+      "size11_shadow_result_reproduced": false
+    },
+    "run_id": "33653155391"
+  },
+  "state": "SHADOW_SUPPORTED"
+}
