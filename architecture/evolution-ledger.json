@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "a084fb6809187c658a5ff05c3c58932ed97f188fe9ec9bacaac81e4b93d3864c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 249,
+  "event_count": 250,
   "events": [
     {
       "canonical_mutation": false,
@@ -4326,10 +4326,27 @@
       "source_digest": "5c4aef656dea3c4ba946fc6a52b8f61ce8bd8eab32c92ee02a18b8e96f9a9f2d",
       "source_path": "receipts/yado-g2-post-raw-v3-architectural-ceiling-reassessment-v2-run-33679221366.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V1",
+      "effect": "ERRORS=15; CONFUSIONS={\"ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1->ALG-CONJUNCTIVE-RULE-INDUCER-V1\": 3, \"ALG-BUDGETED-STAGE-POLICY-V1->ALG-CONJUNCTIVE-RULE-INDUCER-V1\": 8, \"RESOURCE-PORTFOLIO-V1->ALG-BUDGETED-STAGE-POLICY-V1\": 1, \"RESOURCE-PORTFOLIO-V1->ALG-CONJUNCTIVE-RULE-INDUCER-V1\": 3}; NEXT=KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V1",
+      "event_hash": "3182d9e3179e138cbc5cee033328658ad61d63e1202bfad83b10043ce9e33c9e",
+      "event_id": "E0250_G2_RAW_V3_ROBUSTNESS_DIAGNOSIS_V1",
+      "event_type": "G2_RAW_REPRESENTATION_ROBUSTNESS_DIAGNOSIS",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 249,
+      "parent_event_hash": "fc0adbff1de3073180549f194f3a27dd69eb6d017e2ca190bb301bd87b95b857",
+      "promotion_applied": false,
+      "run_id": "33679412507",
+      "source_digest": "af800bfca722565ae1f6fa156f3d0c38fe62e530d9ef8562a0b625f9c014e6d8",
+      "source_path": "receipts/yado-g2-raw-representation-v3-robustness-diagnosis-v1-run-33679412507.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "05a6f26ca7cad290403e7de922d53b3c670b2bb29c6b25e02e1fe62ca839128c",
+  "ledger_digest": "6eff7d54092cb8dc09fa077515996eceb8e3592645ae42d0e03711d1d4c6969b",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -4367,5 +4384,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "fc0adbff1de3073180549f194f3a27dd69eb6d017e2ca190bb301bd87b95b857"
+  "tail_event_hash": "3182d9e3179e138cbc5cee033328658ad61d63e1202bfad83b10043ce9e33c9e"
 }

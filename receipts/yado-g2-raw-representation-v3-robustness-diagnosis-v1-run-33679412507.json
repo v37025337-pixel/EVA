@@ -1,0 +1,194 @@
+{
+  "architecture_mutation": false,
+  "burnin_receipt_sha256": "b52bcfebe115c308b9a1b3f976a223871ffdc1e8332c3e9ed1be663e698d5ad2",
+  "canonical_mutation": false,
+  "diagnosis": {
+    "confusions": {
+      "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1->ALG-CONJUNCTIVE-RULE-INDUCER-V1": 3,
+      "ALG-BUDGETED-STAGE-POLICY-V1->ALG-CONJUNCTIVE-RULE-INDUCER-V1": 8,
+      "RESOURCE-PORTFOLIO-V1->ALG-BUDGETED-STAGE-POLICY-V1": 1,
+      "RESOURCE-PORTFOLIO-V1->ALG-CONJUNCTIVE-RULE-INDUCER-V1": 3
+    },
+    "contains_budget": 0,
+    "contains_external": 3,
+    "contains_owner_or_ownership": 3,
+    "contains_selected_pivot_local": 0,
+    "error_expected_counts": {
+      "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1": 3,
+      "ALG-BUDGETED-STAGE-POLICY-V1": 8,
+      "RESOURCE-PORTFOLIO-V1": 4
+    },
+    "error_got_counts": {
+      "ALG-BUDGETED-STAGE-POLICY-V1": 1,
+      "ALG-CONJUNCTIVE-RULE-INDUCER-V1": 14
+    },
+    "error_source_counts": {
+      "STRUCT": 11,
+      "V2_AUDIT": 4
+    },
+    "total_base_cases": 80,
+    "total_errors": 15
+  },
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V1",
+  "g3_genesis_performed": false,
+  "next_required_capability": "KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V1",
+  "receipt_sha256": "af800bfca722565ae1f6fa156f3d0c38fe62e530d9ef8562a0b625f9c014e6d8",
+  "rounds": {
+    "1": {
+      "accuracy": 0.925,
+      "error_count": 6,
+      "errors": [
+        {
+          "base_text": "This task concerns principal relations, not whether every independent gate is true.",
+          "expected": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 19,
+          "perturbed_text": "Case metadata 2: This task concerns principal relations, not whether every independent gate is true. [trace 1019]",
+          "round": 1,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "Ownership is already settled; select an affordable sequence of audit checks.",
+          "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 26,
+          "perturbed_text": "Case metadata 9: Ownership is already settled; select an affordable sequence of audit checks. [trace 1026]",
+          "round": 1,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "External reports are available, but deeper checks must fit the remaining allowance.",
+          "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 29,
+          "perturbed_text": "Case metadata 12: External reports are available, but deeper checks must fit the remaining allowance. [trace 1029]",
+          "round": 1,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "This is bounded search planning, not outside information retrieval.",
+          "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 35,
+          "perturbed_text": "Case metadata 1: This is bounded search planning, not outside information retrieval. [trace 1035]",
+          "round": 1,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "Schedule deeper checks according to expected gain and remaining resources.",
+          "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 70,
+          "perturbed_text": "Case metadata 2: Schedule deeper checks according to expected gain and remaining resources. [trace 1070]",
+          "round": 1,
+          "source": "V2_AUDIT"
+        },
+        {
+          "base_text": "Do not schedule another sensor experiment; fetch the absent specification from a public technical reference.",
+          "expected": "RESOURCE-PORTFOLIO-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 75,
+          "perturbed_text": "Case metadata 7: Do not schedule another sensor experiment; fetch the absent specification from a public technical reference. [trace 1075]",
+          "round": 1,
+          "source": "V2_AUDIT"
+        }
+      ]
+    },
+    "2": {
+      "accuracy": 0.9375,
+      "error_count": 5,
+      "errors": [
+        {
+          "base_text": "This task concerns principal relations, not whether every independent gate is true.",
+          "expected": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 19,
+          "perturbed_text": "Administrative note. this task concerns principal relations, not whether every independent gate is true. End note.",
+          "round": 2,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "Ownership is already settled; select an affordable sequence of audit checks.",
+          "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 26,
+          "perturbed_text": "Administrative note. OWNERSHIP IS ALREADY SETTLED; SELECT AN AFFORDABLE SEQUENCE OF AUDIT CHECKS. End note.",
+          "round": 2,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "External reports are available, but deeper checks must fit the remaining allowance.",
+          "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 29,
+          "perturbed_text": "Administrative note. external reports are available, but deeper checks must fit the remaining allowance. End note.",
+          "round": 2,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "All voter identity relations are known, but the missing legal rule must come from an outside source.",
+          "expected": "RESOURCE-PORTFOLIO-V1",
+          "got": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "index": 38,
+          "perturbed_text": "Administrative note. ALL VOTER IDENTITY RELATIONS ARE KNOWN, BUT THE MISSING LEGAL RULE MUST COME FROM AN OUTSIDE SOURCE. End note.",
+          "round": 2,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "Do not schedule another sensor experiment; fetch the absent specification from a public technical reference.",
+          "expected": "RESOURCE-PORTFOLIO-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 75,
+          "perturbed_text": "Administrative note. do not schedule another sensor experiment; fetch the absent specification from a public technical reference. End note.",
+          "round": 2,
+          "source": "V2_AUDIT"
+        }
+      ]
+    },
+    "3": {
+      "accuracy": 0.95,
+      "error_count": 4,
+      "errors": [
+        {
+          "base_text": "This task concerns principal relations, not whether every independent gate is true.",
+          "expected": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 19,
+          "perturbed_text": "Review item 19. This  task  concerns  principal  relations  ,  not  whether  every  independent  gate  is  true. [normal priority]",
+          "round": 3,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "Ownership is already settled; select an affordable sequence of audit checks.",
+          "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 26,
+          "perturbed_text": "Review item 3. Ownership  is  already  settled  ;  select  an  affordable  sequence  of  audit  checks. [normal priority]",
+          "round": 3,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "External reports are available, but deeper checks must fit the remaining allowance.",
+          "expected": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 29,
+          "perturbed_text": "Review item 6. External  reports  are  available  ,  but  deeper  checks  must  fit  the  remaining  allowance. [normal priority]",
+          "round": 3,
+          "source": "STRUCT"
+        },
+        {
+          "base_text": "Do not schedule another sensor experiment; fetch the absent specification from a public technical reference.",
+          "expected": "RESOURCE-PORTFOLIO-V1",
+          "got": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "index": 75,
+          "perturbed_text": "Review item 6. Do  not  schedule  another  sensor  experiment  ;  fetch  the  absent  specification  from  a  public  technical  reference. [normal priority]",
+          "round": 3,
+          "source": "V2_AUDIT"
+        }
+      ]
+    }
+  },
+  "schema": "yado.g2.raw_representation_v3_robustness_diagnosis.receipt.v1",
+  "status": "PASS_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_DIAGNOSIS_V1",
+  "uses_spent_burnin_data_only": true
+}
