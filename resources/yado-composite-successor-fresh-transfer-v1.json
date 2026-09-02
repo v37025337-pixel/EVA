@@ -1,0 +1,59 @@
+{
+  "blind_seed": 90217001,
+  "dataset_digest": "843a26a42185f6f9ca29b13fb7f64aedb1fd86ed5117ddd887086754d16792f0",
+  "design_digest": "04c3b25f76f1ae5356f7abff4a77e27098c0a44c602dffe8d14f8cda0366f497",
+  "evaluation_counts": {
+    "ambiguous": 480,
+    "budget": 240,
+    "explicit": 480,
+    "local_ablation": 320,
+    "neuro_symbolic": 400,
+    "resource": 160,
+    "rollback": 120
+  },
+  "fresh_schema": {
+    "relation_fields": [
+      "principal_token",
+      "custodian_token",
+      "cohort_token",
+      "asset_cohort_token",
+      "access_tier",
+      "attested",
+      "fresh_relation_nonce"
+    ],
+    "scalar_fields": [
+      "attested_integrity",
+      "novel_evidence",
+      "revert_path_ready",
+      "fresh_scalar_nonce"
+    ]
+  },
+  "metrics": {
+    "ablated_local_context_accuracy": 0.25,
+    "ambiguous_capability_accuracy": 1.0,
+    "ambiguous_result_accuracy": 0.5,
+    "budget_accuracy": 0.0,
+    "budget_violations": 0,
+    "explicit_accuracy": 0.5,
+    "local_context_causal_drop": 0.75,
+    "naive_symbolic_accuracy": 0.5,
+    "neuro_symbolic_accuracy": 0.5,
+    "neuro_symbolic_gain": 0.0,
+    "resource_accuracy": 1.0,
+    "rollback_accuracy": 1.0
+  },
+  "prototype_candidate_digest_fixed_before_generation": "70d35ec33ed758e02003a43a1f6fae18fce9bc405a372a12f6c52412fc856acc",
+  "schema": "yado.g2.composite_successor_fresh_transfer.dataset.v1",
+  "status": "SPENT_AFTER_SINGLE_FRESH_TRANSFER",
+  "train_seeds": {
+    "relation": [
+      2609021722,
+      2609021723
+    ],
+    "router": [
+      2609021702,
+      2609021703
+    ],
+    "scalar": 2609021712
+  }
+}
