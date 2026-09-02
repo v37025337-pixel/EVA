@@ -1,0 +1,99 @@
+{
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "diagnosis": {
+    "budget_mismatches": [],
+    "budget_runtime_accuracy": 1.0,
+    "budget_serialization_equivalence": 1.0,
+    "relation_blind_accuracy": 1.0,
+    "relation_program": {
+      "clauses": [
+        {
+          "atoms": [
+            {
+              "field": "custodian_token",
+              "op": "FIELD_EQ",
+              "other_field": "principal_token"
+            }
+          ],
+          "confidence": 1.0,
+          "output": "GRANT",
+          "support": 450
+        }
+      ],
+      "default_output": "REJECT",
+      "digest": "73e5f4cf8554b90a2f82851fe26fe2ccb0dd7db80e617139d76e06223d5e1ad9",
+      "program_id": "DNFR-9d25c11075ac",
+      "source_digest": "7212a9d1db2b50ad9b55c208c5e5a8847fa7dfb304af6a88782fcbdcdc30cc0b",
+      "status": "SHADOW",
+      "target_capability": "DREL",
+      "target_organ": "LOGIC",
+      "training_count": 900
+    },
+    "relation_train_accuracy": 1.0,
+    "relation_validation_accuracy": 1.0,
+    "router_train_accuracy": 1.0,
+    "router_validation_accuracy": 1.0,
+    "scalar_blind_accuracy": 1.0,
+    "scalar_program": {
+      "default_output": "DEPLOY",
+      "digest": "b5715b1164cf53613c18710a8b9269ee9e757caa010e10477e0adba6cd130bbd",
+      "program_id": "CJ-0f756be2446c",
+      "rules": [
+        {
+          "confidence": 1.0,
+          "output": "DEFER",
+          "predicates": [
+            {
+              "field": "attested_integrity",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "support": 140
+        },
+        {
+          "confidence": 1.0,
+          "output": "DEFER",
+          "predicates": [
+            {
+              "field": "novel_evidence",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "support": 140
+        },
+        {
+          "confidence": 1.0,
+          "output": "DEFER",
+          "predicates": [
+            {
+              "field": "revert_path_ready",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "support": 140
+        }
+      ],
+      "source_digest": "1cb43d327108ffa5164ee39a9d605a5d24ea1768cd9312eed9ab2cd9fd6b2b03",
+      "status": "SHADOW",
+      "target_capability": "D",
+      "target_organ": "LOGIC",
+      "training_count": 840
+    },
+    "scalar_train_accuracy": 1.0
+  },
+  "frontier": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_TRANSFER_REPAIR_V1",
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "next_required_capability": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_TRANSFER_REPAIR_V1",
+  "receipt_sha256": "8afa6a5d26c4b4f22fbf15d9512331ddaef74fee9a22bcefa40ccf91e53a93dd",
+  "root_candidates": [
+    "FRESH_TRANSFER_HARNESS_EXPECTATION"
+  ],
+  "schema": "yado.g2.composite_successor_transfer_diagnosis.receipt.v1",
+  "source_fresh_transfer_digest": "843a26a42185f6f9ca29b13fb7f64aedb1fd86ed5117ddd887086754d16792f0",
+  "status": "PASS_TRANSFER_DIAGNOSIS_V1"
+}
