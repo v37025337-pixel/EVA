@@ -1,0 +1,41 @@
+name: YADO G2 Native Selector Commit Verdict Repair V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-native-selector-commit-substrate-verdict-repair-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Verify persisted native commit and repair verdict polarity
+        run: python runtime/yado_kernel_native_selector_commit_substrate_verdict_repair_v1.py
+      - name: Persist verdict repair evidence
+        run: |
+          mkdir -p receipts candidates/kernel-self-generated
+          cp runtime/yado_kernel_native_selector_commit_substrate_verdict_repair_v1_receipt.json "receipts/yado-kernel-native-selector-commit-substrate-verdict-repair-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Verdict Repair"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-native-selector-commit-substrate-verdict-repair-v1.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json candidates/kernel-self-generated/native-selector-commit-substrate-v1-corrected.json "receipts/yado-kernel-native-selector-commit-substrate-verdict-repair-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Repair G2 native selector commit verdict polarity [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce corrected verdict
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_native_selector_commit_substrate_verdict_repair_v1_receipt.json"))
+          assert r["status"]=="PASS_CONTROL_PLANE_VERDICT_REPAIR_NATIVE_SUBSTRATE_SUPPORTED",r
+          assert all(r["evidence_checks"].values()),r
+          assert all(r["cross_run_checks"].values()),r
+          print(r["candidate_state"],r["program_id"],r["next_required_capability"])
+          PY
