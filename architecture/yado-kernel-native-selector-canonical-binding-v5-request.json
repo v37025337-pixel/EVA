@@ -1,0 +1,31 @@
+{
+  "schema": "yado.g2.native_selector_canonical_binding.request.v5",
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "frontier": "KERNEL_NATIVE_SELECTOR_CANONICAL_BINDING_V5",
+  "candidate": "candidates/kernel-self-generated/high-scale-repair-v5.json",
+  "selected_skill_id": "INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5",
+  "binding_mode": "FROZEN_V5_ROUTE_REPAIR_PLUS_FROZEN_V4_HIGH_MODEL_NO_NEW_LEARNING_NO_NEW_SELECTION",
+  "spent_predictive_history": "sizes 1-12 exhaustive",
+  "fresh_admission": {
+    "type": "INDEPENDENT_ROUTE_SEMANTICS_PROBES",
+    "probe_count": 144,
+    "cardinality_range": "1-18",
+    "boundary_cardinality": [9,10],
+    "extrapolation_cardinality": "13-18",
+    "normalized_source_count_jitter": "deterministic +/-0.04",
+    "used_for_v5_selection": false
+  },
+  "canonical_admit_only_if": [
+    "candidate route score == 1.0",
+    "boundary 9/10 route score == 1.0",
+    "extrapolation 13-18 route score == 1.0",
+    "cardinality reconstruction score == 1.0",
+    "candidate beats broken V4 route by > 0.40",
+    "all artifact digests exact",
+    "spent history evidence remains clean",
+    "post-write canonical guard passes"
+  ],
+  "g3_genesis_blocked": true,
+  "source_v5_run": 33657947798,
+  "attempt": 1
+}
