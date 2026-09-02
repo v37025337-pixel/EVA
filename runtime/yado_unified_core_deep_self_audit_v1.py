@@ -228,7 +228,8 @@ add('LEGACY_EXPERIENCE_SUMMARY_PROVENANCE','MEMORY_AND_EXPERIENCE','INFO' if pro
     False)
 
 # ---------- capability/evidence scope ----------
-head_caps=set(head.get('inherited_capabilities',[])+head.get('new_capabilities',[]))
+explicit_active=head.get('active_capabilities')
+head_caps=set(explicit_active if isinstance(explicit_active,list) and explicit_active else head.get('inherited_capabilities',[])+head.get('new_capabilities',[]))
 manifest_active=set()
 for plane in ccore.get('planes',[]):
     manifest_active.update(plane.get('active_components',[]))
@@ -281,7 +282,8 @@ add('RAW_TASK_REPRESENTATION_GAP','REPRESENTATION_AND_GROUNDING','CRITICAL' if r
 # Current native-only transfer evidence supersedes stale pre-integration capability claims.
 native_pass=native_v2.get('domain_pass',{}) if isinstance(native_v2,dict) else {}
 math_bound=ccore.get('mathematical_reasoning',{}).get('mode')=='ACTIVE_BOUNDED_SEMANTIC_EXPRESSION_SYNTHESIS'
-program_bound=ccore.get('program_execution',{}).get('mode')=='ACTIVE_BOUNDED_SINGLE_FUNCTION_REPAIR'
+program_cfg=ccore.get('program_execution',{}) if isinstance(ccore.get('program_execution',{}),dict) else {}
+program_bound=(program_cfg.get('component_id')=='ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11' and program_cfg.get('mode') in {'ACTIVE_AMBIGUITY_AWARE_BOUNDED_SINGLE_FUNCTION_REPAIR','ACTIVE_BOUNDED_SINGLE_FUNCTION_REPAIR'})
 raw_proven=native_pass.get('REAL_UNSTRUCTURED_INPUT_TRANSFER') is True
 math_proven=(native_pass.get('REAL_MATHEMATICAL_REASONING_TRANSFER') is True and math_bound)
 program_proven=(program_bound and float(ccore.get('program_execution',{}).get('fresh_score',0.0))>=1.0)
@@ -373,7 +375,7 @@ observed_open_deficits=copy.deepcopy(ledger.get('open_deficits',[]))
 
 receipt={
  'schema':'yado.unified_core.deep_self_audit.receipt.v1',
- 'status':'PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1',
+ 'status':('WITHHOLD_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1' if summary['blocking_findings'] else 'PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1'),
  'audit_actor':{
    'core_id':core.CORE_ID,
    'generation':head.get('generation_id'),
@@ -402,10 +404,10 @@ e={
  'index':len(ledger['events']),
  'event_id':f"E{len(ledger['events'])+1:04d}_UNIFIED_CORE_DEEP_SELF_AUDIT",
  'event_type':'KERNEL_NATIVE_SELF_AUDIT',
- 'status':'PASS',
+ 'status':('WITHHOLD' if summary['blocking_findings'] else 'PASS'),
  'generation':ledger['current_head'],
  'deficit':'FULL_UNIFIED_CORE_SELF_AUDIT_V1',
- 'effect':f"SELF_AUDIT_COMPLETE; VERDICT={verdict}; FINDINGS={len(findings)}; BLOCKING={summary['blocking_findings']}",
+ 'effect':f"SELF_AUDIT_COMPLETE; VERDICT={verdict}; FINDINGS={len(findings)}; BLOCKING={summary['blocking_findings']}; NEXT={(ledger.get('open_deficits') or ['UNKNOWN'])[0]}",
  'source_path':f'receipts/yado-unified-core-deep-self-audit-v1-run-{run_id}.json',
  'source_digest':receipt['receipt_sha256'],'run_id':run_id,
  'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':False,'promotion_applied':False,
