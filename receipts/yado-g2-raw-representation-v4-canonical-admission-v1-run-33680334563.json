@@ -1,0 +1,92 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "973444a994300c959e2971c24cd6f4fe4a44842a169e254550c100a9851fdbd4",
+  "canonical_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
+  "canonical_mechanism_mutation": true,
+  "checks": {
+    "architecture_family_unchanged": true,
+    "base_regression": true,
+    "candidate_fixed_before_fresh": true,
+    "fresh_plain_accuracy": true,
+    "fresh_wrapped_accuracy": true,
+    "fresh_wrapped_gain": true,
+    "g3_not_started": true,
+    "kernel_selects_v4": true,
+    "previous_v4_fresh_reproduction": true,
+    "v3_rollback_available": true
+  },
+  "fresh_dataset_digest": "91e054c88580d4bc8dcb0c91eebbff9d666829ecf5363e8e12b6d05fb1dfff81",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "kernel_selection": {
+    "candidate_count": 2,
+    "gate_digest": "7486750c1b9fd877316aa46304318aca4924ddf33fe286d9f3731ce9d77155e9",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "62248843a78ba98a1b7a2bea08509f3fc6d116a9567d01758679ccf6d7c24761",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_RAW_V3",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "6e391750e484a1a0ef234ea9e04da31ddf217c43b134a258a3ea1b44e95f4a4e",
+        "failed_critics": [],
+        "fit_gain": 0.1875,
+        "heldout_gain": 0.125,
+        "skill_id": "ADMIT_ROBUST_RAW_V4",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_ROBUST_RAW_V4"
+    ],
+    "status": "SELECTED"
+  },
+  "metrics": {
+    "base_regression_accuracy": 1.0,
+    "parent_fresh_plain": 0.96875,
+    "parent_fresh_wrapped": 0.84375,
+    "previous_v4_fresh_reproduction": 1.0,
+    "v4_fresh_plain": 0.96875,
+    "v4_fresh_wrapped": 0.96875
+  },
+  "new_head_digest": "6b25936c5a20e4e03f9749fcd26e0ecd836688e9f0b450f2505536825385cb23",
+  "next_required_capability": "KERNEL_G2_RAW_REPRESENTATION_V4_POST_ADMISSION_AUDIT_V1",
+  "previous_head_digest": "401d2e010bda71bc559a9ee019be2319c3d94dc391f7ce886245c0471bb31b9a",
+  "receipt_sha256": "e0c4c35094d038723384a624a942c35524a51f206f7a10f654f1c7174364c5f3",
+  "schema": "yado.g2.raw_representation_v4_canonical_admission.receipt.v1",
+  "selected_mode": "MULTIVIEW_EDGE_TIE_CORE",
+  "selected_skill_id": "ADMIT_ROBUST_RAW_V4",
+  "semantic_boundary": "INDEPENDENT FRESH CANONICAL ADMISSION OF GENERIC WRAPPER-INVARIANT RAW ROUTING V4 OVER V3. SAME-G2 COMPONENT REPLACEMENT; V3 REMAINS ROLLBACK.",
+  "status": "PASS_G2_RAW_REPRESENTATION_V4_CANONICAL_ADMISSION_V1"
+}
