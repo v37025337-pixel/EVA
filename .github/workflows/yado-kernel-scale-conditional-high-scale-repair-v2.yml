@@ -1,0 +1,40 @@
+name: YADO G2 High Scale Repair V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-scale-conditional-high-scale-repair-v2-request.json"
+permissions:
+  contents: write
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Repair only high-scale branch and test unseen size8
+        run: python runtime/yado_kernel_scale_conditional_high_scale_repair_v2.py
+      - name: Persist high-scale repair evidence
+        run: |
+          mkdir -p receipts candidates/kernel-self-generated resources
+          cp runtime/yado_kernel_scale_conditional_high_scale_repair_v2_receipt.json "receipts/yado-kernel-scale-conditional-high-scale-repair-v2-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 High Scale Repair"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-scale-conditional-high-scale-repair-v2.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json candidates/kernel-self-generated/high-scale-repair-v2.json resources/yado-eight-source-transfer-history-v1.json "receipts/yado-kernel-scale-conditional-high-scale-repair-v2-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 high-scale branch repair V2 [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce high-scale repair receipt
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_scale_conditional_high_scale_repair_v2_receipt.json"))
+          assert r["status"] in {"PASS_HIGH_SCALE_REPAIR_V2","WITHHOLD_HIGH_SCALE_REPAIR_V2"},r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["candidate_state"],r["selected_skill_id"],r["metrics"],r["next_required_capability"])
+          PY
