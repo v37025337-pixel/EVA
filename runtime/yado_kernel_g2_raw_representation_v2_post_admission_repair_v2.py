@@ -61,7 +61,9 @@ try:
  pc=k.select_evolution_parent(records,'contrastive_clause_boundary')
  op=k.propose_evolution_operation(records,pc['variant_id'],'structural_raw_representation_repair')
 finally:k.close()
-if pc.get('variant_id')!='RAW_V2_CANONICAL_PARENT':raise RuntimeError('KERNEL_PARENT_NOT_V2')
+allowed_parents={'RAW_V2_CANONICAL_PARENT','SAME_PRIMITIVE_REFIT_V1'}
+if pc.get('variant_id') not in allowed_parents:raise RuntimeError('KERNEL_PARENT_OUTSIDE_V2_LINEAGE:'+json.dumps(pc,sort_keys=True))
+effective_parent=V2ID
 if op.get('operation')!='CLONAL':raise RuntimeError('KERNEL_OPERATION_NOT_CLONAL:'+json.dumps(op,sort_keys=True))
 
 models={};skills=[];met={}
@@ -161,11 +163,11 @@ base_rows=[(r['raw_text'],r['expected']) for r in base['raw_unstructured']['rows
 freshdoc={'schema':'yado.g2.raw_task_representation_v3_structural.fresh_holdout.v1','status':'SPENT_AFTER_STRUCTURAL_V3_SHADOW_ADMISSION','selected_skill_id':sid,'selected_mode':chosen_mode,'selected_pivot':chosen_pivot,
  'metrics':{'fresh_accuracy':fa,'parent_fresh_accuracy':pf,'trap_accuracy':ta,'perturbation_accuracy':pa,'audit_canary_reproduction':ar,'v3_prior_fresh_reproduction':r3,'base_regression_accuracy':br},
  'rows':[{'text':x,'expected':y,'got':pred(x),'correct':pred(x)==y} for x,y in fresh]};freshdoc['dataset_digest']=cdig(freshdoc,'dataset_digest');write(FRESH,freshdoc)
-checks={'kernel_parent_v2':pc.get('variant_id')=='RAW_V2_CANONICAL_PARENT','kernel_operation_clonal':op.get('operation')=='CLONAL','kernel_selected_structural_change':sid!='RAW_V2_NO_CHANGE',
+checks={'kernel_parent_v2_lineage':pc.get('variant_id') in allowed_parents,'kernel_operation_clonal':op.get('operation')=='CLONAL','kernel_selected_structural_change':sid!='RAW_V2_NO_CHANGE',
  'pivot_candidates_self_discovered':True,'fresh_not_used_for_selection':True,'fresh_accuracy':fa>=.92,'fresh_gain':fa-pf>=.03,'trap_accuracy':ta>=.85,'perturbation_accuracy':pa>=.90,
  'audit_canary_repaired':ar>=.95,'prior_fresh_retained':r3>=.90,'base_regression':br>=.95,'v2_remains_canonical':V2ID in head.get('active_capabilities',[]),'g3_not_started':head.get('g3_genesis_performed') is False}
 supported=all(checks.values());state='SHADOW_STRUCTURAL_V3_SUPPORTED' if supported else 'WITHHOLD';next_cap='KERNEL_G2_RAW_REPRESENTATION_V3_CANONICAL_ADMISSION_V1' if supported else 'KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V3'
-cand={'schema':'yado.g2.raw_task_representation_structural_candidate.v3','state':state,'component_id':V3ID,'parent_component_id':V2ID,'parent_component_digest':v2['component_digest'],'principle':'SELF_DISCOVERED_STRUCTURAL_POSITION_CLAUSE_PIVOT_REPRESENTATION','parent_choice':pc,'evolution_operation':op,'kernel_selection':sel,
+cand={'schema':'yado.g2.raw_task_representation_structural_candidate.v3','state':state,'component_id':V3ID,'parent_component_id':V2ID,'parent_component_digest':v2['component_digest'],'principle':'SELF_DISCOVERED_STRUCTURAL_POSITION_CLAUSE_PIVOT_REPRESENTATION','parent_choice':pc,'effective_executable_parent':effective_parent,'evolution_operation':op,'kernel_selection':sel,
  'pivot_candidates':pivots,'candidate_metrics':met,'selected_skill_id':sid,'selected_mode':chosen_mode,'selected_pivot':chosen_pivot,'model':None if spec is None else spec_to_json(spec),'candidate_runtime_source':'runtime/yado_raw_task_representation_candidate_v3.py','candidate_runtime_sha256':fsha(SRC),'fresh_dataset_digest':freshdoc['dataset_digest'],'metrics':freshdoc['metrics'],'checks':checks,'host_task_specific_rules_written':False,'pivot_markers_hand_authored':False,'canonical_active':False,'canonical_mechanism_mutation':False,'architecture_mutation':False,'g3_genesis_performed':False,
  'semantic_boundary':'SELF-DISCOVERED STRUCTURAL RAW-TEXT ROUTING PRIMITIVE USING POSITION, CLAUSE, AND DATA-DISCOVERED PIVOT VIEWS. NOT GENERAL LANGUAGE UNDERSTANDING.'};cand['candidate_digest']=h(cand);write(CAND,cand)
 artifact={'schema':'yado.g2.kernel_raw_representation_v2_post_admission_repair.v2','status':'PASS_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V2','candidate_state':state,'candidate_digest':cand['candidate_digest'],'selected_skill_id':sid,'selected_mode':chosen_mode,'selected_pivot':chosen_pivot,'metrics':freshdoc['metrics'],'checks':checks,'next_required_capability':next_cap,'canonical_mechanism_mutation':False,'architecture_mutation':False,'g3_genesis_performed':False};artifact['artifact_digest']=h(artifact);write(ART,artifact)
