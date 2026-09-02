@@ -1,0 +1,48 @@
+name: YADO G2 Raw V3 Robustness Diagnosis V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-raw-v3-robustness-diagnosis-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Enforce canonical integrity before diagnosis
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile robustness diagnosis
+        run: python -m py_compile runtime/yado_g2_raw_representation_v3_robustness_diagnosis_v1.py
+      - name: Diagnose spent V3 burnin errors
+        run: timeout --signal=TERM --kill-after=30s 900s python runtime/yado_g2_raw_representation_v3_robustness_diagnosis_v1.py
+      - name: Persist diagnosis evidence
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_raw_representation_v3_robustness_diagnosis_v1_receipt.json "receipts/yado-g2-raw-representation-v3-robustness-diagnosis-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Raw V3 Robustness Diagnosis"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json "receipts/yado-g2-raw-representation-v3-robustness-diagnosis-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 raw V3 robustness diagnosis V1 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Enforce diagnosis receipt
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_g2_raw_representation_v3_robustness_diagnosis_v1_receipt.json"))
+          assert r["status"]=="PASS_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_DIAGNOSIS_V1",r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["diagnosis"])
+          PY
