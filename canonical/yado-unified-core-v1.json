@@ -25,7 +25,7 @@
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "b5152d76413ccb8049eed2367245b99cde007aef2166c64d9d6841e9d6f18e4f",
+  "algorithm_provenance_registry_digest": "454d9491d4150cce9ab9a550416ae2e2bc2dd6cbe4df9cda1018a27d96a19736",
   "architecture_composite_successor_design_v1": {
     "architecture_mutation": false,
     "candidate_digest": "a8d0c8dd637abb539f247c24a6a9b3cfe624458f14761711c5a8c90d401a9fb9",
@@ -196,7 +196,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "4d218aaf146ff18ceaf6771a70e61329cc833e41bf7db8780bfbe619d483c815",
+  "core_digest": "54c25bcfa91b7a8b9c9880dfe0a0ce61667bcef9292ab51fc88735692ce2adeb",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -250,7 +250,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V3_POST_ADMISSION_AUDIT_V1",
+  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V3_CANONICAL_BURNIN_V1",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -794,6 +794,29 @@
     },
     "selected_skill_id": "ADMIT_STRUCTURAL_RAW_V3",
     "status": "CANONICAL_ACTIVE"
+  },
+  "raw_representation_v3_post_admission_audit_v1": {
+    "checks": {
+      "core_raw_binding_v3": true,
+      "g3_not_started": true,
+      "head_active_v3_only": true,
+      "plane_active_v3_only": true,
+      "rollback_v2_constructible": true,
+      "runtime_manifest_digest_bound": true,
+      "runtime_source_hash_bound": true,
+      "structural_holdout_restart_reproduction": true,
+      "unified_runtime_hash_bound": true,
+      "v2_failure_canary_repaired": true,
+      "v2_superseded_with_history": true,
+      "v3_canonical_active": true,
+      "v3_component_digest_exact": true,
+      "v3_mode_pivot_exact": true,
+      "v3_model_digest_exact": true
+    },
+    "rollback_v2_accuracy": 1.0,
+    "status": "PASS",
+    "structural_holdout_restart_accuracy": 0.9791666666666666,
+    "v2_failure_canary_reproduction": 1.0
   },
   "raw_task_representation": {
     "admission_run_id": "33677483225",
