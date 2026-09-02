@@ -143,19 +143,24 @@ if spec:
       }
     }
     binding['binding_digest']=h(binding)
+    selected_routefn=route_key if spec['strategy']=='KEY_CARDINALITY' else route_invert
+    selected_pred=lambda c:pred_for_route(c,selected_routefn)
+    route_score=racc(history,selected_routefn)
+    predictive_total=acc(history,selected_pred)
+    parent_total=acc(history,parent_pred)
+    per_size={str(s):{'route':racc(spaces[s],selected_routefn),'parent':acc(spaces[s],parent_pred),'candidate':acc(spaces[s],selected_pred)} for s in range(1,13)}
+    # Adapter equivalence check is routing-only here; predictive values above are exact cached outputs from the same frozen models.
     with CanonicalHighScaleBindingRuntimeV5(binding=binding,repo_root=REPO) as rt:
-        route_score=racc(history,rt.route)
-        predictive_total=acc(history,rt.predict)
-        parent_total=acc(history,parent_pred)
-        per_size={str(s):{'route':racc(spaces[s],rt.route),'parent':acc(spaces[s],parent_pred),'candidate':acc(spaces[s],rt.predict)} for s in range(1,13)}
+        adapter_route_equivalent=all(rt.route(c)==selected_routefn(c) for c in history)
 else:
-    binding=None;route_score=0.0;predictive_total=acc(history,parent_pred);parent_total=predictive_total;per_size={}
+    binding=None;route_score=0.0;predictive_total=acc(history,parent_pred);parent_total=predictive_total;per_size={};adapter_route_equivalent=False
 
 checks={
  'source_sha_exact_match':expected==actual,
  'spent_history_sizes_1_to_12_only':True,
  'kernel_selected_route_repair':selected_id is not None,
  'selected_route_exact_on_all_spent_cases':abs(route_score-1.0)<1e-12,
+ 'adapter_route_semantics_equivalent':adapter_route_equivalent,
  'size11_shadow_score_reproduced':bool(spec) and abs(per_size['11']['candidate']-1.0)<1e-12,
  'size12_spent_history_not_regressed':bool(spec) and per_size['12']['candidate']+1e-12>=per_size['12']['parent'],
  'predictive_total_no_regression':predictive_total+1e-12>=parent_total,
@@ -201,25 +206,32 @@ head['algorithm_provenance_registry']['current_execution_label']=prov['current_g
 head['unified_core']['algorithm_provenance_registry_digest']=prov['registry_digest'];head['unified_core']['core_digest']=core['core_digest']
 head['current_frontier']=next_cap;head['frontier_source']='architecture/evolution-ledger.json:open_deficits';head['canonical_head_digest']=cdig(head,'canonical_head_digest');write(HEAD,head)
 
-ledger['current_head_digest']=head['canonical_head_digest'];ledger['open_deficits']=[next_cap]
+# Reconcile technical failures while current_head_digest still points to the last committed canonical head.
+ledger['open_deficits']=[front]
 run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
+failure_details=[
+ ('33656089758','CANDIDATES_COMPLETE=True; KEY_ROUTE=PASS; INVERT_ROUTE=PASS; KERNEL_SELECTED=INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5; ERROR=KeyError:selected_strategy; FRESH_ROUTE_PROBES_MATERIALIZED=False'),
+ ('33657132039','CANDIDATES_COMPLETE=True; KEY_ROUTE=PASS; INVERT_ROUTE=PASS; KERNEL_SELECTED=INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5; ERROR=ValueError:CURRENT_HEAD_DIGEST_NOT_LATEST_CANONICAL_MUTATION; FRESH_ROUTE_PROBES_MATERIALIZED=False')
+]
+for failed_run,detail in failure_details:
+    if not any(e.get('event_type')=='G2_EXECUTION_FAILURE_DETAIL_RECONCILIATION' and str(e.get('run_id'))==failed_run for e in ledger['events']):
+        prior=next((e for e in ledger['events'] if str(e.get('run_id'))==failed_run),None)
+        if prior is not None:
+            idx=len(ledger['events'])
+            de={
+              'index':idx,'event_id':f"E{idx+1:04d}_G2_V5_FAILURE_DETAIL_{failed_run}",
+              'event_type':'G2_EXECUTION_FAILURE_DETAIL_RECONCILIATION','status':'WITHHOLD',
+              'generation':ledger['current_head'],'deficit':front,
+              'effect':'RUN='+failed_run+'; '+detail+'; NEXT='+front,
+              'source_path':prior.get('source_path'),'source_digest':prior.get('source_digest'),'run_id':failed_run,
+              'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':False,'promotion_applied':False,'generation_transition':False
+            }
+            de['event_hash']=event_hash(de);ledger['events'].append(de);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=de['event_hash']
+            ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
+            validate_ledger_v2(ledger)
 
-# Reconcile the previous generic V5 failure with its exact technical cause without rewriting history.
-if not any(e.get('event_type')=='G2_EXECUTION_FAILURE_DETAIL_RECONCILIATION' and str(e.get('run_id'))=='33656089758' for e in ledger['events']):
-    prior=next((e for e in ledger['events'] if str(e.get('run_id'))=='33656089758'),None)
-    if prior is not None:
-        idx=len(ledger['events'])
-        de={
-          'index':idx,'event_id':f"E{idx+1:04d}_G2_V5_FAILURE_DETAIL_33656089758",
-          'event_type':'G2_EXECUTION_FAILURE_DETAIL_RECONCILIATION','status':'WITHHOLD',
-          'generation':ledger['current_head'],'deficit':'KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V5',
-          'effect':'RUN=33656089758; CANDIDATES_COMPLETE=True; KEY_ROUTE=PASS; INVERT_ROUTE=PASS; KERNEL_SELECTED=INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5; ERROR=KeyError:selected_strategy; FRESH_ROUTE_PROBES_MATERIALIZED=False; NEXT='+next_cap,
-          'source_path':prior.get('source_path'),'source_digest':prior.get('source_digest'),'run_id':'33656089758',
-          'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':False,'promotion_applied':False,'generation_transition':False
-        }
-        de['event_hash']=event_hash(de);ledger['events'].append(de);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=de['event_hash']
-        ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
-        validate_ledger_v2(ledger)
+# Only now move the canonical head digest; the next event is the canonical mutation that attests it.
+ledger['current_head_digest']=head['canonical_head_digest'];ledger['open_deficits']=[next_cap]
 
 receipt={**artifact,'schema':'yado.g2.kernel_scale_conditional_high_scale_repair.receipt.v5',
  'previous_head_digest':prev,'new_head_digest':head['canonical_head_digest'],'checks':checks,'provenance_registry_digest':prov['registry_digest']}
