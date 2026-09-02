@@ -4,6 +4,7 @@ ROOT=Path(__file__).resolve().parent; PKG=ROOT/'yado_rc8_v36'
 sys.path[:0]=[str(ROOT),str(PKG)]
 from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
 hits=[]
+explicit_classes={'SkillCandidate'}
 for p in sorted(PKG.glob('*.py')):
     txt=p.read_text(encoding='utf-8')
     try:t=ast.parse(txt)
@@ -11,9 +12,9 @@ for p in sorted(PKG.glob('*.py')):
     for n in ast.walk(t):
         if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)):
             name=getattr(n,'name','')
-            blob=(name+' '+(ast.get_source_segment(txt,n) or '')[:12000]).lower()
-            if any(k in blob for k in ('calibrat','confidence','margin','abstain','threshold select','distance ratio')):
-                seg=ast.get_source_segment(txt,n) or ''
+            seg=ast.get_source_segment(txt,n) or ''
+            blob=(name+' '+seg[:12000]).lower()
+            if (isinstance(n,ast.ClassDef) and name in explicit_classes) or any(k in blob for k in ('calibrat','confidence','margin','abstain','threshold select','distance ratio')):
                 if len(seg)<=18000:
                     hits.append({'kind':type(n).__name__,'name':name,'module':p.stem,'path':str(p.relative_to(ROOT.parent)),
                                  'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'source':seg})
