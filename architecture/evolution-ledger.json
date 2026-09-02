@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "10876455c8ae6e123eb5e99c0a6f9432afd233829cf636bf737ff7f8a05d3c68",
+  "current_head_digest": "a084fb6809187c658a5ff05c3c58932ed97f188fe9ec9bacaac81e4b93d3864c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 248,
+  "event_count": 249,
   "events": [
     {
       "canonical_mutation": false,
@@ -4305,14 +4305,35 @@
       "source_digest": "b52bcfebe115c308b9a1b3f976a223871ffdc1e8332c3e9ed1be663e698d5ad2",
       "source_path": "receipts/yado-g2-raw-representation-v3-canonical-burnin-v1-run-33678904722.json",
       "status": "PASS_CANONICAL"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_G2_POST_RAW_V3_ARCHITECTURAL_CEILING_REASSESSMENT_V2",
+      "effect": "VERDICT=CEILING_NOT_REACHED_RAW_REPRESENTATION_ROBUSTNESS_RESIDUAL; SELECTED=RAW_TASK_REPRESENTATION_SEQUENTIAL_STABILITY; SCORE=0.925000; GAP=0.075000; RAW_BOUNDARY=1.000000; RAW_PERT=0.925000; RAW_SEQ=0.925000; OP=CLONAL; G3=False; NEXT=KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V1",
+      "event_hash": "fc0adbff1de3073180549f194f3a27dd69eb6d017e2ca190bb301bd87b95b857",
+      "event_id": "E0249_G2_POST_RAW_V3_ARCHITECTURAL_CEILING_REASSESSMENT_V2",
+      "event_type": "G2_POST_RAW_V3_ARCHITECTURAL_CEILING_REASSESSMENT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 248,
+      "new_head_digest": "a084fb6809187c658a5ff05c3c58932ed97f188fe9ec9bacaac81e4b93d3864c",
+      "parent_event_hash": "bffd0ea8f006659439726ef4a993bfb6e50dda2fef976675f4af4e97a2f1fefb",
+      "previous_head_digest": "10876455c8ae6e123eb5e99c0a6f9432afd233829cf636bf737ff7f8a05d3c68",
+      "promotion_applied": false,
+      "run_id": "33679221366",
+      "source_digest": "5c4aef656dea3c4ba946fc6a52b8f61ce8bd8eab32c92ee02a18b8e96f9a9f2d",
+      "source_path": "receipts/yado-g2-post-raw-v3-architectural-ceiling-reassessment-v2-run-33679221366.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "34ca19305cd4f5c9a1e0b4c676a980bf0c95172137690620dafce2ed241b4f30",
+  "ledger_digest": "05a6f26ca7cad290403e7de922d53b3c670b2bb29c6b25e02e1fe62ca839128c",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_G2_POST_RAW_V3_ARCHITECTURAL_CEILING_REASSESSMENT_V2"
+    "KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -4346,5 +4367,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "bffd0ea8f006659439726ef4a993bfb6e50dda2fef976675f4af4e97a2f1fefb"
+  "tail_event_hash": "fc0adbff1de3073180549f194f3a27dd69eb6d017e2ca190bb301bd87b95b857"
 }
