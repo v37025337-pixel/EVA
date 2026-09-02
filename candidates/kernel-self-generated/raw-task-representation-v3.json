@@ -1,0 +1,210 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "97b40ccd040e6ac3424b270aa1b3a263ebb337824f70baad5832eb42cd80ea5e",
+  "candidate_runtime_sha256": "bedd36c6a42dcd9ce3788f6887fa9a95dce34f60f9f51471f0e7acc254460673",
+  "candidate_runtime_source": "runtime/yado_raw_task_representation_candidate_v2.py",
+  "canonical_active": false,
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "audit_canary_repaired": false,
+    "base_regression": true,
+    "fresh_accuracy": false,
+    "fresh_gain": false,
+    "fresh_not_used_for_selection": true,
+    "g3_not_started": true,
+    "kernel_operation_clonal": true,
+    "kernel_parent_v2": true,
+    "kernel_selected_change": false,
+    "perturbation_accuracy": false,
+    "prior_fresh_retained": true,
+    "trap_accuracy": false,
+    "v2_remains_canonical": true
+  },
+  "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V3",
+  "development": {
+    "development_count": 32,
+    "family_metrics": {
+      "RAW_V3_HASHED_CHAR45_PERCEPTRON": {
+        "development": 0.875,
+        "family": "HASHED_CHAR45_PERCEPTRON",
+        "train": 1.0
+      },
+      "RAW_V3_HASHED_HYBRID_PERCEPTRON": {
+        "development": 0.84375,
+        "family": "HASHED_HYBRID_PERCEPTRON",
+        "train": 1.0
+      },
+      "RAW_V3_HASHED_WORD_BIGRAM_PERCEPTRON": {
+        "development": 0.78125,
+        "family": "HASHED_WORD_BIGRAM_PERCEPTRON",
+        "train": 1.0
+      },
+      "RAW_V3_TFIDF_HYBRID_CENTROID": {
+        "development": 0.90625,
+        "family": "TFIDF_HYBRID_CENTROID",
+        "train": 1.0
+      }
+    },
+    "permitted_rows": 148,
+    "train_count": 116
+  },
+  "evolution_operation": {
+    "operation": "CLONAL",
+    "target_task": "raw_representation_post_admission_repair",
+    "variant_id": "RAW_V2_CANONICAL_PARENT"
+  },
+  "fresh_dataset_digest": "11b0252746e4db4e5872ea0886ba277f41d83dc99876ed306e54cbd06e275fa1",
+  "g3_genesis_performed": false,
+  "kernel_selection": {
+    "candidate_count": 5,
+    "gate_digest": "fc20d9c8ecfbe7d5693146e1cdd961482bfc189d9d9ba74e48e7534b1b7e2f5e",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "7c6de73def70d092d99159ad009d83f4685fc07249eb024fb07cc1a9ffe006bd",
+        "failed_critics": [
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": 0.0431034482758621,
+        "heldout_gain": -0.0625,
+        "skill_id": "RAW_V3_HASHED_CHAR45_PERCEPTRON",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "08793706002edab61f3bc2fb1e88be4db9f2c921f9b645c219357b8d47b4d1ff",
+        "failed_critics": [
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": 0.0431034482758621,
+        "heldout_gain": -0.09375,
+        "skill_id": "RAW_V3_HASHED_HYBRID_PERCEPTRON",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "8c7aa4cf781aaff301a4f4c8552c4c60fe20b9c3dc5958300ee53c0ae79aecb4",
+        "failed_critics": [
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": 0.0431034482758621,
+        "heldout_gain": -0.15625,
+        "skill_id": "RAW_V3_HASHED_WORD_BIGRAM_PERCEPTRON",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "9c827b2c58898bd50a250321c1a5af20e132e97b926e685af95bea915b256df5",
+        "failed_critics": [
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": 0.0431034482758621,
+        "heldout_gain": -0.03125,
+        "skill_id": "RAW_V3_TFIDF_HYBRID_CENTROID",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "afc3d10c7c5f13de71caa87ff210dc5747fbba222208a7d33ba9a4ebde04bc1f",
+        "failed_critics": [],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V2_NO_CHANGE",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "RAW_V2_NO_CHANGE"
+    ],
+    "status": "SELECTED"
+  },
+  "learner_family": null,
+  "metrics": {
+    "audit_canary_reproduction": 0.875,
+    "base_regression_accuracy": 1.0,
+    "fresh_accuracy": 0.8958333333333334,
+    "parent_fresh_accuracy": 0.8958333333333334,
+    "perturbation_accuracy": 0.8958333333333334,
+    "prior_fresh_reproduction": 0.9375,
+    "trap_accuracy": 0.75
+  },
+  "model": null,
+  "parent_choice": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "be3448cd04742b0afdfaad5c1e276ac612b88cb9c6339b9e783825e08da52828",
+    "lineage_id": "G2_RAW_REP_LINEAGE",
+    "mean_score": 0.90625,
+    "target_score": 0.0,
+    "trait_score": 0,
+    "utility": 0.2265625,
+    "variant_id": "RAW_V2_CANONICAL_PARENT"
+  },
+  "parent_component_digest": "01eab2d16bddf936bd83e9f9d0b0050f9111747a9e961b345a0d42918ab9619e",
+  "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V2",
+  "principle": "KERNEL_SELECTED_CLONAL_REPAIR_FROM_PERSISTED_COUNTEREXAMPLE_HISTORY",
+  "schema": "yado.g2.raw_task_representation_candidate.v3",
+  "selected_skill_id": "RAW_V2_NO_CHANGE",
+  "semantic_boundary": "BOUNDED RAW-TEXT CAPABILITY ROUTING V3 SHADOW REPAIR FROM PERSISTED COUNTEREXAMPLES; NOT GENERAL LANGUAGE UNDERSTANDING.",
+  "state": "WITHHOLD"
+}
