@@ -1,7 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 from itertools import combinations
-import copy,hashlib,json,os,sys
+import copy,hashlib,json,os,sys,multiprocessing as mp,traceback
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;PKG=ROOT/'yado_rc8_v36'
 sys.path[:0]=[str(ROOT),str(PKG)]
 
@@ -30,6 +30,22 @@ def write(p,o):p.write_text(json.dumps(o,indent=2,sort_keys=True,default=str)+'\
 def cdig(o,field):
     x=copy.deepcopy(o);x.pop(field,None);return h(x)
 def log(stage,**kw):print(json.dumps({'stage':stage,**kw},sort_keys=True,default=str),flush=True)
+
+NATIVE_BUDGET_SECONDS=600
+
+def _native_constructor_worker(send_conn,db_path,native_fit,native_val,native_revealed,native_blind):
+    k=None
+    try:
+        k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=db_path)
+        result=k.synthesize_intelligence_algorithm_component(native_fit,native_val,native_revealed,native_blind)
+        send_conn.send({'ok':True,'result':result})
+    except BaseException as exc:
+        send_conn.send({'ok':False,'error':type(exc).__name__+':'+str(exc),'traceback':traceback.format_exc()[-4000:]})
+    finally:
+        try:
+            if k is not None:k.close()
+        finally:
+            send_conn.close()
 
 head,core,ledger,corpus,high2,bind2=map(load,[HEAD,CORE,LEDGER,CORPUS,HIGH2,BIND2])
 validate_ledger_v2(ledger)
@@ -154,34 +170,55 @@ for order,name in ((2,'PAIR_KNN_REFRESH'),(3,'TRIPLE_KNN_REFRESH')):
  metrics[sid]={'train':tr,'holdout':ho,'inner':km,'per_size':per,'regression_pass':reg}
  log('candidate_done',skill=sid,holdout=ho,regression=reg)
 
-# Native RC5 constructor: kernel chooses signal and branch leaf algorithms.
+# Native RC5 constructor: kernel chooses signal and branch leaf algorithms, but execution is resource-bounded.
 native_fit=[(rep(c,2),c['y']) for c in fit]
 native_val=[(rep(c,2),c['y']) for c in val]
 native_revealed=[(rep(c,2),c['y']) for c in dev]
 native_blind=[(rep(c,2),c['y']) for c in hold]
-k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(ROOT/'yado_high_scale_v3_native_constructor.sqlite'))
-try:
- native=k.synthesize_intelligence_algorithm_component(native_fit,native_val,native_revealed,native_blind)
-finally:k.close()
-native_model=native['model']
-native_pred=lambda c:predict_intel_component(native_model,rep(c,2))
-tr=acc(train,native_pred);ho=acc(hold,native_pred)
-per={};reg=True
-for s in (4,5,6,7,8,9):
- rows=[c for c in hold if c['size']==s]
- if rows:
-  b=acc(rows,old_high);vscore=acc(rows,native_pred)
-  per[str(s)]={'baseline':b,'candidate':vscore,'gain':vscore-b,'count':len(rows)}
-  if vscore+1e-12<b:reg=False
-sid='NATIVE_RC5_INTELLIGENCE_CONSTRUCTOR'
-skills.append({'skill_id':sid,'artifact_digest':h(native_model),'structural_valid':True,'semantic_consistency':1.0,
- 'fit_baseline':base_train,'fit_candidate':tr,'heldout_baseline':base_hold,'heldout_candidate':ho,
- 'regression_pass':reg,'state_integrity':True,'rollback_available':True,
- 'metadata':{'family':'NATIVE_RC5_CONSTRUCTOR','constructor_id':native['constructor_id'],'binding':native['binding'],
-             'native_validation':native['validation'],'native_blind':native['fresh_blind'],'per_size':per}})
-specs[sid]={'family':'NATIVE_RC5_CONSTRUCTOR','model':native_model,'constructor_id':native['constructor_id'],'binding':native['binding']}
-metrics[sid]={'train':tr,'holdout':ho,'native':native,'per_size':per,'regression_pass':reg}
-log('candidate_done',skill=sid,holdout=ho,regression=reg,binding=native['binding'])
+ctx_mp=mp.get_context('fork')
+recv_conn,send_conn=ctx_mp.Pipe(duplex=False)
+proc=ctx_mp.Process(target=_native_constructor_worker,args=(send_conn,str(ROOT/'yado_high_scale_v3_native_constructor.sqlite'),native_fit,native_val,native_revealed,native_blind))
+proc.start();send_conn.close();proc.join(NATIVE_BUDGET_SECONDS)
+native_msg=None
+if proc.is_alive():
+ proc.terminate();proc.join(10)
+ if proc.is_alive():proc.kill();proc.join(5)
+ native_outcome={'status':'RESOURCE_TIMEOUT','budget_seconds':NATIVE_BUDGET_SECONDS,'returned':False,'exitcode':proc.exitcode}
+else:
+ if recv_conn.poll(2):
+  native_msg=recv_conn.recv()
+ else:
+  native_msg={'ok':False,'error':'NO_CHILD_RESULT','traceback':''}
+ if native_msg.get('ok'):
+  native_outcome={'status':'RETURNED','budget_seconds':NATIVE_BUDGET_SECONDS,'returned':True,'exitcode':proc.exitcode}
+ else:
+  native_outcome={'status':'EXECUTION_ERROR','budget_seconds':NATIVE_BUDGET_SECONDS,'returned':False,'exitcode':proc.exitcode,'error':native_msg.get('error'),'traceback':native_msg.get('traceback')}
+recv_conn.close()
+
+if native_outcome['status']=='RETURNED':
+ native=native_msg['result']
+ native_model=native['model']
+ native_pred=lambda c:predict_intel_component(native_model,rep(c,2))
+ tr=acc(train,native_pred);ho=acc(hold,native_pred)
+ per={};reg=True
+ for s in (4,5,6,7,8,9):
+  rows=[c for c in hold if c['size']==s]
+  if rows:
+   b=acc(rows,old_high);vscore=acc(rows,native_pred)
+   per[str(s)]={'baseline':b,'candidate':vscore,'gain':vscore-b,'count':len(rows)}
+   if vscore+1e-12<b:reg=False
+ sid='NATIVE_RC5_INTELLIGENCE_CONSTRUCTOR'
+ skills.append({'skill_id':sid,'artifact_digest':h(native_model),'structural_valid':True,'semantic_consistency':1.0,
+  'fit_baseline':base_train,'fit_candidate':tr,'heldout_baseline':base_hold,'heldout_candidate':ho,
+  'regression_pass':reg,'state_integrity':True,'rollback_available':True,
+  'metadata':{'family':'NATIVE_RC5_CONSTRUCTOR','constructor_id':native['constructor_id'],'binding':native['binding'],
+              'native_validation':native['validation'],'native_blind':native['fresh_blind'],'per_size':per}})
+ specs[sid]={'family':'NATIVE_RC5_CONSTRUCTOR','model':native_model,'constructor_id':native['constructor_id'],'binding':native['binding']}
+ metrics[sid]={'train':tr,'holdout':ho,'native':native,'per_size':per,'regression_pass':reg,'resource_outcome':native_outcome}
+ log('candidate_done',skill=sid,holdout=ho,regression=reg,binding=native['binding'],resource=native_outcome)
+else:
+ metrics['NATIVE_RC5_INTELLIGENCE_CONSTRUCTOR']={'resource_outcome':native_outcome,'admission_eligible':False}
+ log('candidate_unavailable',skill='NATIVE_RC5_INTELLIGENCE_CONSTRUCTOR',resource=native_outcome)
 
 k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(ROOT/'yado_high_scale_v3_skill_select.sqlite'))
 try:
@@ -225,6 +262,7 @@ candidate={
  'principle':'PRESERVE_NATIVE_SELECTOR_AND_LOW_BRANCH; LET_G2_CHOOSE_BETWEEN_REFRESHED_KNN_AND_NATIVE_RC5_CONSTRUCTOR',
  'parent_choice':parent,'evolution_operation':op,'selection':selection,
  'selected_skill_id':selected_id,'selected_spec':({k:v for k,v in (spec or {}).items() if k!='dev_model'} if spec else None),
+ 'native_constructor_outcome':native_outcome,
  'selected_model':final_model,'development_metrics':metrics,
  'metrics':{'history_old_high':history_old,'history_candidate':history_new,'fresh10_old_high':fresh10_old,'fresh10_candidate':fresh10_new,'fresh10_gain':fresh10_new-fresh10_old},
  'fresh_transfer':{'size':10,'count':len(fresh10),'used_for_selection':False,'used_for_refit':False},
@@ -240,6 +278,7 @@ write(HIST10,hist10)
 artifact={'schema':'yado.g2.kernel_scale_conditional_high_scale_repair.v3',
  'status':'PASS_HIGH_SCALE_REPAIR_V3' if supported else 'WITHHOLD_HIGH_SCALE_REPAIR_V3',
  'candidate_state':state,'candidate_digest':candidate['candidate_digest'],'selected_skill_id':selected_id,
+ 'native_constructor_outcome':native_outcome,
  'metrics':candidate['metrics'],'next_required_capability':next_cap,
  'canonical_mechanism_mutation':False,'architecture_mutation':False,'g3_genesis_performed':False}
 artifact['artifact_digest']=h(artifact);write(ART,artifact)
@@ -253,7 +292,7 @@ ledger['current_head_digest']=head['canonical_head_digest'];ledger['open_deficit
 e={'index':len(ledger['events']),'event_id':f"E{len(ledger['events'])+1:04d}_G2_HIGH_SCALE_REPAIR_V3",
  'event_type':'G2_HIGH_SCALE_NATIVE_CONSTRUCTOR_COMPETITIVE_REPAIR','status':'PASS_SHADOW' if supported else 'WITHHOLD',
  'generation':ledger['current_head'],'deficit':front,
- 'effect':f"SELECTED={selected_id}; HISTORY_OLD={history_old:.6f}; HISTORY_NEW={history_new:.6f}; FRESH10_OLD={fresh10_old:.6f}; FRESH10_NEW={fresh10_new:.6f}; NEXT={next_cap}",
+ 'effect':f"SELECTED={selected_id}; NATIVE={native_outcome['status']}; HISTORY_OLD={history_old:.6f}; HISTORY_NEW={history_new:.6f}; FRESH10_OLD={fresh10_old:.6f}; FRESH10_NEW={fresh10_new:.6f}; NEXT={next_cap}",
  'source_path':f'receipts/yado-kernel-scale-conditional-high-scale-repair-v3-run-{run_id}.json','source_digest':receipt['receipt_sha256'],'run_id':run_id,
  'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':True,'canonical_mechanism_mutation':False,'promotion_applied':False,'generation_transition':False,
  'previous_head_digest':prev,'new_head_digest':head['canonical_head_digest']}
