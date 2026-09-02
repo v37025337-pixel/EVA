@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "ee242b0cea47d10f6920bd74aa3c946d9ba54779a5d57108448d6c76059084b2",
+  "current_head_digest": "0351366545f31b8c405f954eba5c6649679e614956139c83d28d63b8c8af1185",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 234,
+  "event_count": 236,
   "events": [
     {
       "canonical_mutation": false,
@@ -4017,14 +4017,54 @@
       "source_digest": "c439c09b04c66902a2a0c24698966539950573d69d27746e4597ac242ac3fd73",
       "source_path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-canonical-admission-v1-run-33664703437.json",
       "status": "PASS_CANONICAL"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": false,
+      "deficit": "KERNEL_G2_COMPOSITE_CANONICAL_POST_ADMISSION_AUDIT_V1",
+      "effect": "AUDIT=PASS; GUARD=True; CANARY_EXPLICIT=1.000000; CANARY_AMBIG=1.000000; CAUSAL_DROP=0.750000; G3=False; NEXT=KERNEL_G2_COMPOSITE_CANONICAL_BURNIN_V1",
+      "event_hash": "580847b3f2be7b523c0cd75f1675e47859b82cd1d5e060c01a0fa903d397593b",
+      "event_id": "E0235_G2_COMPOSITE_CANONICAL_POST_ADMISSION_AUDIT_V1",
+      "event_type": "G2_COMPOSITE_CANONICAL_POST_ADMISSION_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 234,
+      "parent_event_hash": "948811d195c75fb7c821696a04dde436b6f3737eb31df898b54dc0a9bb90d066",
+      "promotion_applied": false,
+      "run_id": "33664957316",
+      "source_digest": "8d74cf03d9066c0a08fd976633a309ea04b85267dd75d222cd62a10c2d517931",
+      "source_path": "receipts/yado-g2-composite-canonical-post-admission-audit-v1-run-33664957316.json",
+      "status": "PASS"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "G2_FRONTIER_SYNC_AFTER_COMPOSITE_AUDIT",
+      "effect": "FRONTIER=KERNEL_G2_COMPOSITE_CANONICAL_BURNIN_V1; NEXT=KERNEL_G2_COMPOSITE_CANONICAL_BURNIN_V1",
+      "event_hash": "6b1298b043b1b1c607d1ca6dff692f1ea4e7cac72b7479e366da1036a72ef8a1",
+      "event_id": "E0236_G2_COMPOSITE_POST_AUDIT_FRONTIER_SYNC_V1",
+      "event_type": "G2_FRONTIER_CANONICAL_SYNC",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 235,
+      "new_head_digest": "0351366545f31b8c405f954eba5c6649679e614956139c83d28d63b8c8af1185",
+      "parent_event_hash": "580847b3f2be7b523c0cd75f1675e47859b82cd1d5e060c01a0fa903d397593b",
+      "previous_head_digest": "ee242b0cea47d10f6920bd74aa3c946d9ba54779a5d57108448d6c76059084b2",
+      "promotion_applied": false,
+      "run_id": "33664957316",
+      "source_digest": "8d74cf03d9066c0a08fd976633a309ea04b85267dd75d222cd62a10c2d517931",
+      "source_path": "receipts/yado-g2-composite-canonical-post-admission-audit-v1-run-33664957316.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "21d82127760e8016b75169809f9cce21384d65072397101920ed7bb05734101a",
+  "ledger_digest": "d3752988592d38d547c50d5feee21d5e5b5a03038f1d314943d99cba3460cbb2",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_G2_COMPOSITE_CANONICAL_POST_ADMISSION_AUDIT_V1"
+    "KERNEL_G2_COMPOSITE_CANONICAL_BURNIN_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -4058,5 +4098,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "948811d195c75fb7c821696a04dde436b6f3737eb31df898b54dc0a9bb90d066"
+  "tail_event_hash": "6b1298b043b1b1c607d1ca6dff692f1ea4e7cac72b7479e366da1036a72ef8a1"
 }
