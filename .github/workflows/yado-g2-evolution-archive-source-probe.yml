@@ -1,0 +1,28 @@
+name: YADO G2 Evolution Archive Source Probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-evolution-archive-source-probe-request.json"
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python runtime/yado_g2_evolution_archive_source_probe.py
+      - run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_evolution_archive_source_probe_receipt.json "receipts/yado-g2-evolution-archive-source-probe-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Archive Probe"
+          git config user.email "actions@users.noreply.github.com"
+          git add "receipts/yado-g2-evolution-archive-source-probe-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist evolution archive source probe [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
