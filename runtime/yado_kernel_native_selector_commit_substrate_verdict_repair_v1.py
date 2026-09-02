@@ -1,5 +1,5 @@
 from pathlib import Path
-import copy,hashlib,json,os,sys
+import copy,hashlib,json,os,sys,shutil
 ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;PKG=ROOT/'yado_rc8_v36'
 sys.path[:0]=[str(ROOT),str(PKG)]
 from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
@@ -46,15 +46,21 @@ evidence_checks={
 }
 if not all(evidence_checks.values()):raise RuntimeError('SUBSTANTIVE_EVIDENCE_NOT_ALL_PASS:'+json.dumps(evidence_checks,sort_keys=True))
 
-# Stronger cross-run restart proof from the binary registry committed by the previous run.
-k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(DB))
+# Stronger cross-run restart proof from a byte-copy of the committed binary registry.
+# SQLite may update bookkeeping bytes on open, so never open the tracked canonical artifact directly.
+VERIFY_DB=ROOT/'yado_g2_native_selector_commit_registry_verify_tmp.sqlite'
+VERIFY_DB.unlink(missing_ok=True)
+shutil.copy2(DB,VERIFY_DB)
+k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(VERIFY_DB))
 try:
     active=dict(k.executive.active_program_by_capability)
     pid=active.get('SCALE_CONDITIONAL_SELECTOR_ROUTE_V1')
     low=k.executive.execute_capability('SCALE_CONDITIONAL_SELECTOR_ROUTE_V1',{'source_count':1.0})
     boundary=k.executive.execute_capability('SCALE_CONDITIONAL_SELECTOR_ROUTE_V1',{'source_count':4/3})
     high=k.executive.execute_capability('SCALE_CONDITIONAL_SELECTOR_ROUTE_V1',{'source_count':2.0})
-finally:k.close()
+finally:
+    k.close()
+    VERIFY_DB.unlink(missing_ok=True)
 
 cross_run_checks={
  'cross_run_program_restored':pid==bad['program_id'],
