@@ -29,8 +29,12 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json architecture/evolution-ledger.json architecture/yado-v3-cancelled-run-history-v1.json architecture/yado-g2-canonical-integrity-repair-v2.json "receipts/yado-g2-canonical-integrity-repair-v2-run-${GITHUB_RUN_ID}.json"
           git commit -m "Repair G2 canonical integrity and preserve V3 failures as history [skip ci]"
-          git pull --rebase origin yado-architecture-shadow-search
-          git push origin HEAD:yado-architecture-shadow-search
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
       - name: Enforce canonical guard after persistence
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Enforce repair receipt
