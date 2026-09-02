@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "61c6d775132e487b6c4831e43e9669d43f55db9c6fee96da57ab5981a38dfdc9",
+  "current_head_digest": "93be1156f27d562d5034f55ebb7d553a6fd72c1c46b688b3a9048193e04e0121",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 225,
+  "event_count": 226,
   "events": [
     {
       "canonical_mutation": false,
@@ -3840,14 +3840,35 @@
       "source_digest": "e7337c44d39c02239f213c1c400be066fa344de7fde308c122f8b3fa644ef72d",
       "source_path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-design-v1-run-33659844984.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_PROTOTYPE_V1",
+      "effect": "STATE=SHADOW_EXECUTABLE_SUPPORTED; EXPLICIT=1.000000; AMBIG=1.000000; LOCAL_DROP=0.750000; NEURO=1.000000; NEURO_GAIN=0.500000; ROLLBACK=1.000000; ARCHITECTURE_MUTATION=False; NEXT=KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_FRESH_TRANSFER_V1",
+      "event_hash": "795f4c88b56c188f46cc6e84ba595e1c7b61d83f0f192df8a38041d3cf0cda35",
+      "event_id": "E0226_G2_COMPOSITE_EXECUTABLE_SUCCESSOR_PROTOTYPE_V1",
+      "event_type": "G2_COMPOSITE_CLONAL_SHADOW_EXECUTION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 225,
+      "new_head_digest": "93be1156f27d562d5034f55ebb7d553a6fd72c1c46b688b3a9048193e04e0121",
+      "parent_event_hash": "2428a4deb67f5acef43be6adc69bdea1aec51cdb4998da255ce7006a2ce655cf",
+      "previous_head_digest": "61c6d775132e487b6c4831e43e9669d43f55db9c6fee96da57ab5981a38dfdc9",
+      "promotion_applied": false,
+      "run_id": "33660334192",
+      "source_digest": "19463ed740bb2e75a8c1d8cb2d47a67e53c845f88e8452e8f8de9e0d98b23915",
+      "source_path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-prototype-v1-run-33660334192.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "983fc3c0b96c30b7d9455627776d9b99f3b914661919d45993f0b9140bf575ed",
+  "ledger_digest": "c4ef6cb4bb2264108be4653b0640a1574b298534d23b0957a6e5d64e87ac2119",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_PROTOTYPE_V1"
+    "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_FRESH_TRANSFER_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -3881,5 +3902,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "2428a4deb67f5acef43be6adc69bdea1aec51cdb4998da255ce7006a2ce655cf"
+  "tail_event_hash": "795f4c88b56c188f46cc6e84ba595e1c7b61d83f0f192df8a38041d3cf0cda35"
 }
