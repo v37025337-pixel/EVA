@@ -1,0 +1,279 @@
+{
+  "candidate_digest": "cbeb26f09bf92327bd13db0255d9d14f1c214f7586a0ff719ee993d7bb605916",
+  "canonical_active": false,
+  "development_metrics": {
+    "SOURCE_PRESENCE_CENTROID": {
+      "meta": {
+        "selected_features": 16,
+        "trials": [
+          {
+            "accuracy": 0.3333333333333333,
+            "features": 1
+          },
+          {
+            "accuracy": 0.38095238095238093,
+            "features": 2
+          },
+          {
+            "accuracy": 0.5238095238095238,
+            "features": 3
+          },
+          {
+            "accuracy": 0.5476190476190477,
+            "features": 4
+          },
+          {
+            "accuracy": 0.7142857142857143,
+            "features": 5
+          },
+          {
+            "accuracy": 0.7142857142857143,
+            "features": 6
+          },
+          {
+            "accuracy": 0.7857142857142857,
+            "features": 7
+          },
+          {
+            "accuracy": 0.7857142857142857,
+            "features": 8
+          },
+          {
+            "accuracy": 0.8333333333333334,
+            "features": 9
+          },
+          {
+            "accuracy": 0.8571428571428571,
+            "features": 10
+          },
+          {
+            "accuracy": 0.8571428571428571,
+            "features": 11
+          },
+          {
+            "accuracy": 0.8333333333333334,
+            "features": 12
+          },
+          {
+            "accuracy": 0.9047619047619048,
+            "features": 13
+          },
+          {
+            "accuracy": 0.9523809523809523,
+            "features": 14
+          },
+          {
+            "accuracy": 0.9523809523809523,
+            "features": 15
+          },
+          {
+            "accuracy": 0.9761904761904762,
+            "features": 16
+          },
+          {
+            "accuracy": 0.9761904761904762,
+            "features": 17
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "features": 18
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "features": 19
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "features": 20
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "features": 21
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "features": 22
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "features": 23
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "features": 24
+          }
+        ],
+        "validation": 0.9761904761904762
+      },
+      "outer": 0.98,
+      "train": 0.9554455445544554
+    },
+    "SOURCE_PRESENCE_KNN": {
+      "meta": {
+        "selected_k": 3,
+        "trials": [
+          {
+            "accuracy": 0.8571428571428571,
+            "k": 1
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "k": 3
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "k": 5
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "k": 7
+          },
+          {
+            "accuracy": 0.9285714285714286,
+            "k": 9
+          }
+        ],
+        "validation": 0.9285714285714286
+      },
+      "outer": 0.96,
+      "train": 0.9752475247524752
+    },
+    "SOURCE_PRESENCE_RULE_PROGRAM": {
+      "outer": 0.26,
+      "rules": 12,
+      "train": 0.35148514851485146
+    }
+  },
+  "evolution_operation": {
+    "operation": "CLONAL",
+    "target_task": "fresh_blind",
+    "variant_id": "LOCAL_KNN_CHILD_V1"
+  },
+  "frozen_history": {
+    "blind_used_for_admission_only": true,
+    "blind_used_for_generation": false,
+    "blind_used_for_selection": false,
+    "corpus_digest": "41cc05d3d2429f5b3a3740dd5ed65c9294aac825bca75fcbb7cdcc860312e28b"
+  },
+  "host_task_specific_rules_written": false,
+  "inherited_parent_behavior": "LOCAL_KNN_CHILD_V1",
+  "metrics": {
+    "fresh_blind_parent": 0.8478260869565217,
+    "fresh_blind_successor": 0.8478260869565217,
+    "gain": 0.0,
+    "outer_baseline": 0.98
+  },
+  "parent_choice": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "5d6dd2b9a44c325c9464a0de1131c5de1208f69fb7f04e4cdb303600f65edcc8",
+    "lineage_id": "G2_SELECTOR_LINEAGE",
+    "mean_score": 0.8478260869565217,
+    "target_score": 0.8478260869565217,
+    "trait_score": 0,
+    "utility": 0.8054347826086956,
+    "variant_id": "LOCAL_KNN_CHILD_V1"
+  },
+  "principle": "CLONAL_REPRESENTATION_EXPANSION_FROM_GENERIC_SOURCE_ID_PRESENCE",
+  "promotion_applied": false,
+  "representation": {
+    "base_features_preserved": true,
+    "mapping_to_targets_host_supplied": false,
+    "source_presence_features": [
+      "COGARCH_REVIEW_40Y",
+      "GLOBAL_WORKSPACE_AGENTS_2026",
+      "WORLD_MODELS_COGNITIVE_AGENTS_2025",
+      "ACTIVE_INFERENCE_DEEP_2022",
+      "NEUROSYMBOLIC_COGNITIVE_AI_2024",
+      "OPENCOG_HYPERON_2023",
+      "OPEN_ENDED_LENIA_2024",
+      "NEURAL_CELLULAR_AUTOMATA_2025",
+      "META_NCA_2026",
+      "LOCAL_RULES_EMERGENCE_2026",
+      "UNIFIED_CONSCIOUS_ARCHITECTURE_2022",
+      "LOCAL_GLOBAL_MULTI_AGENT_COORDINATION_2021"
+    ]
+  },
+  "rule_error": null,
+  "schema": "yado.g2.evolutionary_source_presence_representation.v1",
+  "selected_model": null,
+  "selected_skill_id": null,
+  "selection": {
+    "candidate_count": 3,
+    "gate_digest": "462a980fffec89b4351097265dd3bd29c2faee0a33046a5a6744138cada19bad",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "df48c34591bb68490c79f9a06e9ff65f9955807bcaff139b4378f64a30e7d001",
+        "failed_critics": [
+          "fit_marginal_gain"
+        ],
+        "fit_gain": -0.014851485148514865,
+        "heldout_gain": 0.0,
+        "skill_id": "SOURCE_PRESENCE_CENTROID",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "aa0d3315812e74248b1905b0ad67fde7307610b0d1f458e03446c73f9694b446",
+        "failed_critics": [
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": 0.004950495049504955,
+        "heldout_gain": -0.020000000000000018,
+        "skill_id": "SOURCE_PRESENCE_KNN",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "b358a417318ce259927b360230c3017448212818f824ebc5d6989695c2e04b34",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": -0.6188118811881188,
+        "heldout_gain": -0.72,
+        "skill_id": "SOURCE_PRESENCE_RULE_PROGRAM",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "state": "WITHHOLD"
+}
