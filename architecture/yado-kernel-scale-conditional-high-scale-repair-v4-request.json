@@ -9,9 +9,8 @@
     "select_evolution_skills"
   ],
   "candidate_families": [
-    "PAIR_KNN_REFRESH_V4",
-    "TRIPLE_KNN_REFRESH_V4",
-    "QUAD_KNN_REFRESH_V4"
+    "HIGH_ONLY_PAIR_KNN_V4",
+    "HIGH_ONLY_TRIPLE_KNN_V4"
   ],
   "fresh_transfer": "all C(12,11)=12 unseen size11 cases",
   "fresh_used_for_selection": false,
@@ -20,5 +19,8 @@
   "g3_genesis_blocked": true,
   "source_v3_run": 33633119992,
   "provenance_sync_run": 33641289428,
-  "attempt": 1
+  "attempt": 2,
+  "previous_failed_run": 33641428393,
+  "retry_reason": "PAIR_AND_TRIPLE_COMPLETED; QUAD_EXCEEDED_GLOBAL_WATCHDOG; REPAIR_TO_SCALE_CONDITIONAL_PAIR_TRIPLE_ONLY; FRESH11_LABELS_DELAYED_UNTIL_POST_SELECTION",
+  "fresh_materialization": "AFTER_KERNEL_SELECTION_AND_REFIT"
 }
