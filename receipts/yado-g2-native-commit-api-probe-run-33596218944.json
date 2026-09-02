@@ -1,0 +1,41 @@
+{
+  "hits": [
+    {
+      "module": "yado_core_v3_0_rc3_autoevolution",
+      "name": "durable_commit_evolution_bundle",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc3_autoevolution.py",
+      "sha256": "19bde96e966e75c505a43086caed5e44dd9be455bf2c30b95c769e116faaebb8",
+      "source": "def durable_commit_evolution_bundle(self,bundle:Mapping[str,Mapping[str,Any]],gate:Mapping[str,Any])->Dict[str,Any]:\n        if not self.canonical_state.get('canonical_durable_mutation'):return {'committed':False,'reason':'DURABLE_MUTATION_DISABLED'}\n        if not gate.get('passed'):return {'committed':False,'reason':'VALIDATION_GATE_FAILED'}\n        allowed={'LOGIC','THINKING','INTELLIGENCE'}\n        if set(bundle)!=allowed:return {'committed':False,'reason':'BUNDLE_MUST_COVER_THREE_ORGANS'}\n        before=self.state_path.read_bytes();before_sha=hashlib.sha256(before).hexdigest();st=json.loads(before)\n        registry={}\n        for organ,c in bundle.items():\n            registry[organ]={'model_type':{'LOGIC':'BOOLEAN_PROGRAM','THINKING':'PRECEDENCE_GRAPH','INTELLIGENCE':'STRATEGY_TREE'}[organ], 'model':c['model'],'evidence':{'blind':c['blind'],'ablation':c['ablation'],'restore':c['restore']}}\n        st['organ_autoevolution_registry']=registry;st['organ_autoevolution_enabled']=True\n        self._atomic_write_json(self.state_path,st);self.reload_canonical_state();after_sha=hashlib.sha256(self.state_path.read_bytes()).hexdigest()\n        return {'committed':True,'before_sha256':before_sha,'after_sha256':after_sha}"
+    },
+    {
+      "module": "yado_core_v3_0_rc7_deep_integrity",
+      "name": "propose_evolution_operation",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py",
+      "sha256": "5c4fab434de2dc377302f2d033de8a79b9d8edc2a286e6179e7921237b67057e",
+      "source": "def propose_evolution_operation(self, records, target_variant_id:str, target_task:str):\n        return self.build_evolution_archive(records).propose_operation(target_variant_id,target_task)"
+    },
+    {
+      "module": "yado_core_v3_0_rc7_deep_integrity",
+      "name": "durable_commit_evolution_bundle",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py",
+      "sha256": "5c4fab434de2dc377302f2d033de8a79b9d8edc2a286e6179e7921237b67057e",
+      "source": "def durable_commit_evolution_bundle(self,bundle:Mapping[str,Mapping[str,Any]],gate:Mapping[str,Any])->dict[str,Any]:\n        try: current=self.state_path.resolve(); target=DEFAULT_STATE.resolve()\n        except Exception: current=self.state_path; target=DEFAULT_STATE\n        if current!=target:\n            return {'committed':False,'reason':'HISTORICAL_OR_NONACTIVE_STATE_IMMUTABLE_IN_R7','state_path':str(current),'active_state_path':str(target)}\n        return super().durable_commit_evolution_bundle(bundle,gate)"
+    },
+    {
+      "module": "yado_core_v3_0_rc8_external_cognitive",
+      "name": "evaluate_evolution_skill",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py",
+      "sha256": "449695d1b9ca4a5ba61ed1ca89683611202fb6029638779baedf531b803ff784",
+      "source": "def evaluate_evolution_skill(self, candidate, **gate_kwargs):\n        c = candidate if isinstance(candidate, SkillCandidate) else SkillCandidate(**candidate)\n        return SkillAdmissionGate(**gate_kwargs).evaluate(c)"
+    },
+    {
+      "module": "yado_core_v3_0_rc8_external_cognitive",
+      "name": "select_evolution_skills",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py",
+      "sha256": "449695d1b9ca4a5ba61ed1ca89683611202fb6029638779baedf531b803ff784",
+      "source": "def select_evolution_skills(self, candidates, max_skills:int=8, **gate_kwargs):\n        xs=[c if isinstance(c, SkillCandidate) else SkillCandidate(**c) for c in candidates]\n        return SkillAdmissionGate(**gate_kwargs).select_subset(xs,max_skills=max_skills)"
+    }
+  ],
+  "schema": "yado.g2.native_commit_api_probe.v1",
+  "status": "PASS"
+}
