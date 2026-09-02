@@ -12,7 +12,7 @@ sys.path.insert(0,str(PKG))
 from yado_evolution_ledger_v2 import validate_ledger_v2
 from yado_g2_typed_recurrent_capability_graph_runtime_v1 import G2TypedRecurrentCapabilityGraphRuntimeV1
 from yado_g2_contextual_stream_capability_adapter_v1 import ContextualStreamCapabilityAdapterV1
-from yado_raw_task_representation_runtime_v1 import RawTaskRepresentationRuntimeV1
+from yado_raw_task_representation_candidate_v2 import RawTaskRepresentationRuntimeV2
 from yado_legacy_experience_retriever_v2 import LegacyExperienceRetrieverV1
 from yado_semantic_expression_synthesizer_v1 import SemanticExpressionSynthesizerV1
 from yado_ambiguity_aware_program_repair_v11 import AmbiguityAwareProgramRepairV11
@@ -44,7 +44,7 @@ class UnifiedYADOCoreV1:
         self.manifest=self._load('canonical/yado-unified-core-v1.json')
         self.experience=self._load('canonical/yado-unified-experience-registry-v1.json')
         self.shadow_context=self._load('candidates/g2-development/contextual-stream-capability-adapter-v1.json')
-        self.raw_representation=RawTaskRepresentationRuntimeV1.from_path(self.repo/'canonical/yado-raw-task-representation-v1.json')
+        self.raw_representation=RawTaskRepresentationRuntimeV2(self._load('canonical/yado-raw-task-representation-v2.json'))
         self.legacy_experience_retriever=LegacyExperienceRetrieverV1(self.repo,self.experience)
         self.semantic_expression_synthesizer=SemanticExpressionSynthesizerV1
         self.bounded_program_repair=AmbiguityAwareProgramRepairV11

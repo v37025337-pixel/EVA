@@ -18,15 +18,14 @@
     "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
     "runtime/yado_legacy_experience_retriever_v2.py",
     "runtime/yado_neutral_evidence_profile_selector_v1.py",
-    "runtime/yado_raw_task_representation_learner_v1.py",
-    "runtime/yado_raw_task_representation_runtime_v1.py",
+    "runtime/yado_raw_task_representation_candidate_v2.py",
     "runtime/yado_semantic_expression_synthesizer_v1.py",
     "runtime/yado_unified_context_kernel_v1.py",
     "runtime/yado_unified_core_deep_self_audit_v1.py",
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "22885450b62e635cef4415426433e3b34c0f8e29020b6e03cca6258ad13e1cc5",
+  "algorithm_provenance_registry_digest": "e79c94ab3d892999144d5891f6c3631648c14e7c4874a5b914d73bb0d79de1a2",
   "architecture_composite_successor_design_v1": {
     "architecture_mutation": false,
     "candidate_digest": "a8d0c8dd637abb539f247c24a6a9b3cfe624458f14761711c5a8c90d401a9fb9",
@@ -197,7 +196,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "487a5ffeec6f2ed99b9b0eb2c138519e9a3c6a277d2d5e2abdb8537f8270bce0",
+  "core_digest": "89248d0aa60af66be57f2835617faa3b08cdc21fa0e89c7c4a627ea1a58a4a26",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -251,7 +250,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V2_CANONICAL_ADMISSION_V1",
+  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_AUDIT_V1",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
@@ -644,14 +643,14 @@
     },
     {
       "active_components": [
-        "ALG-G2-RAW-TASK-REPRESENTATION-V1"
+        "ALG-G2-RAW-TASK-REPRESENTATION-V2"
       ],
       "experience_sources": [
         "yado-v29-cognitive",
         "yado-rc8-consciousness-ab",
         "yado-rc8-digital-consciousness-v1"
       ],
-      "frontier": "REAL_WORLD_TRANSFER_RECHECK",
+      "frontier": "POST_COMPOSITE_RAW_REPRESENTATION_V2",
       "plane_id": "REPRESENTATION_AND_GROUNDING",
       "responsibilities": [
         "raw_task_to_internal_representation",
@@ -717,15 +716,31 @@
     "selected_family": "HASHED_CHAR45_PERCEPTRON",
     "state": "SHADOW_V2_SUPPORTED"
   },
+  "raw_representation_v2_canonical_admission_v1": {
+    "candidate_digest": "0581c3341eb045137ccaab0eda31e4bfb839fbdc381195d3795e9bea831697ae",
+    "canonical_mechanism_mutation": true,
+    "metrics": {
+      "base_regression_accuracy": 1.0,
+      "parent_fresh_v3": 0.7291666666666666,
+      "parent_trap_v3": 0.5833333333333334,
+      "previous_fresh_reproduction": 0.9375,
+      "v2_fresh_v3": 0.9375,
+      "v2_perturbation_v3": 0.9375,
+      "v2_trap_v3": 0.8333333333333334
+    },
+    "selected_skill_id": "ADMIT_RAW_V2",
+    "status": "CANONICAL_ACTIVE"
+  },
   "raw_task_representation": {
-    "admission_run_id": "33392211618",
-    "component_digest": "3d7ab8c5b30f5650e8a18f562f13ca5e696d6ae36c25ab6cd8d41fb21ba7b36c",
-    "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
-    "model_digest": "6cdc2912b5fa3c87a338c6e55e07151a050d2f20e6b4947937a62006bfc25bbd"
+    "admission_run_id": "33669852876",
+    "component_digest": "01eab2d16bddf936bd83e9f9d0b0050f9111747a9e961b345a0d42918ab9619e",
+    "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V2",
+    "model_digest": "9fb2ff779b8dd7c6372a36d6d35d56a7697f2b01091e77032507d8d390ba2751",
+    "supersedes": "ALG-G2-RAW-TASK-REPRESENTATION-V1"
   },
   "runtime_integrity_manifest": {
     "algorithm": "SHA256",
-    "manifest_digest": "5d42eb3edddd4a372132370dde8dbda0799d08c1f52ad1c6dbcdf3c7751230c4",
+    "manifest_digest": "8743680721fb3e25e10873d2c625cec6bde9e370bb8207b483b7a2891863b90b",
     "sources": {
       "runtime/yado_ambiguity_aware_program_repair_v11.py": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
       "runtime/yado_bounded_capability_router_v1.py": "442d53602f7a35aecc0ab7cfd9c7c5036cf7c5d00b4946d37f6fb08c93125206",
@@ -745,15 +760,14 @@
       "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py": "79eba84158de120f026e164b4914bec0fd00358bfe8a56e81b0497e924b7e762",
       "runtime/yado_legacy_experience_retriever_v2.py": "a1d55c139543a1d96ffa72439824f417f8a528975cee2b68792b760c82c1d804",
       "runtime/yado_neutral_evidence_profile_selector_v1.py": "46c394d428e70d5b69336578df2069587c9097cc264246bd0ae4d17d1cf600fb",
-      "runtime/yado_raw_task_representation_learner_v1.py": "22aa3eef8e29dc4bbc913ea48fc2c3480e82de5bace34dc44be8906f03a07daa",
-      "runtime/yado_raw_task_representation_runtime_v1.py": "9affc0a7540e64df06b4d2b4b4259ea1e5bdf57133192ef83a0f8ea6980e4531",
+      "runtime/yado_raw_task_representation_candidate_v2.py": "bedd36c6a42dcd9ce3788f6887fa9a95dce34f60f9f51471f0e7acc254460673",
       "runtime/yado_semantic_expression_synthesizer_v1.py": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
       "runtime/yado_unified_context_kernel_v1.py": "9e157a08ba0dde6e55f4edb6c074e9a829c9455d5debbac948b222d69854657a",
       "runtime/yado_unified_core_deep_self_audit_v1.py": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
       "runtime/yado_work_budget_adaptive_contingent_planner_v2.py": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
     }
   },
-  "runtime_sha256": "4331aed6ccdeb3eab709f5755a5220b72ca4a1b54da14a0ee9a79495b472c665",
+  "runtime_sha256": "55b54a2b71ca452c8a039f877fb3a0e72c76edbb213920bc72a96e94aa83e9f1",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
@@ -808,6 +822,12 @@
       "historical_evidence_retained": true,
       "reason": "THINKING_PLATEAU_REPLACED_FIXED_8_STAGE_8_DEPTH_GEOMETRY_WITH_EXPLICIT_WORK_BUDGETS",
       "superseded_by": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    },
+    {
+      "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V1",
+      "historical_evidence_retained": true,
+      "reason": "POST_COMPOSITE_CROSS_DOMAIN_RAW_BOUNDARY_EXPOSED_V1_LEXICAL_DISTRACTOR_LIMIT; V2 PASSED INDEPENDENT FRESH ADMISSION",
+      "superseded_by": "ALG-G2-RAW-TASK-REPRESENTATION-V2"
     }
   ],
   "thinking_ceiling": {

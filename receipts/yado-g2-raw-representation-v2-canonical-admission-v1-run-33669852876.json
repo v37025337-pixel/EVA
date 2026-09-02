@@ -1,0 +1,92 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "0581c3341eb045137ccaab0eda31e4bfb839fbdc381195d3795e9bea831697ae",
+  "canonical_component_digest": "01eab2d16bddf936bd83e9f9d0b0050f9111747a9e961b345a0d42918ab9619e",
+  "canonical_mechanism_mutation": true,
+  "checks": {
+    "architecture_family_unchanged": true,
+    "base_regression": true,
+    "candidate_fixed_before_fresh_v3": true,
+    "fresh_v3_accuracy": true,
+    "fresh_v3_gain": true,
+    "fresh_v3_perturbation": true,
+    "fresh_v3_traps": true,
+    "g3_not_started": true,
+    "kernel_selects_v2": true,
+    "previous_fresh_reproduction": true,
+    "rollback_parent_available": true
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "kernel_selection": {
+    "candidate_count": 2,
+    "gate_digest": "cdeb5fa7307abe9556d16997d0d04779177001001fc157b75c3a811f5b45a0a3",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "f6ed7c8a3215b4ffb1e87069e98fc1f62ed0babc0deb22d5924988f4610b0179",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_RAW_V1",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "74cb13a180e108737ad45e9a73a5815c410b8d957572fd67123bfb7caea87549",
+        "failed_critics": [],
+        "fit_gain": 0.16666666666666663,
+        "heldout_gain": 0.20833333333333337,
+        "skill_id": "ADMIT_RAW_V2",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_RAW_V2"
+    ],
+    "status": "SELECTED"
+  },
+  "metrics": {
+    "base_regression_accuracy": 1.0,
+    "parent_fresh_v3": 0.7291666666666666,
+    "parent_trap_v3": 0.5833333333333334,
+    "previous_fresh_reproduction": 0.9375,
+    "v2_fresh_v3": 0.9375,
+    "v2_perturbation_v3": 0.9375,
+    "v2_trap_v3": 0.8333333333333334
+  },
+  "new_head_digest": "cbbe9e399aabfeb11f20da2fb9da60c5527e4b0a40d05fdd886514bbe5b3fd67",
+  "next_required_capability": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_AUDIT_V1",
+  "previous_head_digest": "bd8bec1fbca852d65b2ce074bbecba4fa874dcfa59995b4084d8509ef18ebef5",
+  "receipt_sha256": "35e20e95178a492aedbb28ae066a84ff34ca2fb3e6482364bbb7d961a1d23da7",
+  "schema": "yado.g2.raw_representation_v2_canonical_admission.receipt.v1",
+  "selected_skill_id": "ADMIT_RAW_V2",
+  "semantic_boundary": "INDEPENDENT FRESH CANONICAL ADMISSION OF RAW-TEXT ROUTING V2. THIS IS A SAME-G2 REPRESENTATION COMPONENT REPLACEMENT, NOT GENERAL LANGUAGE UNDERSTANDING OR G3.",
+  "status": "PASS_G2_RAW_REPRESENTATION_V2_CANONICAL_ADMISSION_V1"
+}
