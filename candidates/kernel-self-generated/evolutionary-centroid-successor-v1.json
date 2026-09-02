@@ -1,0 +1,114 @@
+{
+  "candidate_digest": "016cbe8a791b6c1089f016d0047283109b16cf48cd28598752904d98b35fe384",
+  "canonical_active": false,
+  "development": {
+    "corrector_dev_holdout": 1.0,
+    "corrector_selected_features": 2,
+    "corrector_validation": 0.6666666666666666,
+    "gate_dev_holdout": 0.9047619047619048,
+    "gate_selected_features": 2,
+    "gate_validation": 0.9523809523809523,
+    "supported": true
+  },
+  "evolution_operation": {
+    "operation": "CLONAL",
+    "target_task": "fresh_blind",
+    "variant_id": "EXECUTABLE_PARENT"
+  },
+  "frozen_history": {
+    "blind_used_for_admission_only": true,
+    "blind_used_for_creation": false,
+    "corpus_digest": "41cc05d3d2429f5b3a3740dd5ed65c9294aac825bca75fcbb7cdcc860312e28b"
+  },
+  "host_task_specific_rules_written": false,
+  "kernel_runtime_native_model_generation": true,
+  "metrics": {
+    "fresh_blind_parent": 0.8043478260869565,
+    "fresh_blind_successor": 0.717391304347826,
+    "gain": -0.08695652173913049,
+    "parent_correct_retention": 0.8648648648648649,
+    "parent_error_repair_rate": 0.1111111111111111,
+    "true_blind_parent_error_count": 9
+  },
+  "new_mechanism": {
+    "continuous_feature_support": true,
+    "error_gate": {
+      "centroids": {
+        "PARENT_ERROR": {
+          "evidence_global_workspace": 0.343801481065632,
+          "evidence_multi_agent_local_global": 0.12333449758532998
+        },
+        "PARENT_OK": {
+          "evidence_global_workspace": 0.06298370737646923,
+          "evidence_multi_agent_local_global": 0.03841266304659463
+        }
+      },
+      "features": [
+        "evidence_global_workspace",
+        "evidence_multi_agent_local_global"
+      ],
+      "kind": "CENTROID_STRATEGY",
+      "label_values": {
+        "PARENT_ERROR": "PARENT_ERROR",
+        "PARENT_OK": "PARENT_OK"
+      },
+      "scales": {
+        "evidence_global_workspace": 0.11831511887764966,
+        "evidence_multi_agent_local_global": 0.04362083795951522
+      }
+    },
+    "exhaustive_weight_search": false,
+    "generator": "select_centroid_features/fit_centroid_strategy",
+    "generator_source": "runtime/yado_rc8_v36/yado_cognitive_growth_runtime_v1.py",
+    "generator_source_sha256": "7e7de7eed6f3e608db548d9df6ae918513264b036513e4e1a290d58be9222c1f",
+    "op": "EVOLUTIONARY_CENTROID_RESIDUAL_SUCCESSOR",
+    "residual_corrector": {
+      "centroids": {
+        "GLOBAL_WORKSPACE": {
+          "evidence_multi_agent_local_global": 0.10620958403977272,
+          "evidence_open_ended_evolution": 0.06366715953980105
+        },
+        "LOCAL_SELF_ORGANIZING": {
+          "evidence_multi_agent_local_global": 0.08683473389355742,
+          "evidence_open_ended_evolution": 0.0611577964519141
+        },
+        "MULTI_AGENT_LOCAL_GLOBAL": {
+          "evidence_multi_agent_local_global": 0.3333333333333333,
+          "evidence_open_ended_evolution": 0.16666666666666666
+        }
+      },
+      "features": [
+        "evidence_multi_agent_local_global",
+        "evidence_open_ended_evolution"
+      ],
+      "kind": "CENTROID_STRATEGY",
+      "label_values": {
+        "GLOBAL_WORKSPACE": "GLOBAL_WORKSPACE",
+        "LOCAL_SELF_ORGANIZING": "LOCAL_SELF_ORGANIZING",
+        "MULTI_AGENT_LOCAL_GLOBAL": "MULTI_AGENT_LOCAL_GLOBAL"
+      },
+      "scales": {
+        "evidence_multi_agent_local_global": 0.07628288793378209,
+        "evidence_open_ended_evolution": 0.03594003213658505
+      }
+    }
+  },
+  "parent": {
+    "fresh_blind": 0.8043478260869565,
+    "model_digest": "c27d52e05f4554b4b4655e1f96c7e066a52ceecbbc71f214fc7ab43ad5aaebf1"
+  },
+  "parent_choice": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "097c575d5c492ce0c485c44c564f136016070e7e22110d32d9159e22c334e796",
+    "lineage_id": "G2_SELECTOR_LINEAGE",
+    "mean_score": 0.9073853484216796,
+    "target_score": 0.8043478260869565,
+    "trait_score": 0,
+    "utility": 0.7898898153662894,
+    "variant_id": "EXECUTABLE_PARENT"
+  },
+  "principle": "KERNEL_SELECTED_CLONAL_DESCENDANT_MUTATES_ONLY_RESIDUAL_CONTINUOUS_FEATURE_MECHANISM",
+  "promotion_applied": false,
+  "schema": "yado.g2.evolutionary_centroid_successor.v1",
+  "state": "WITHHOLD"
+}
