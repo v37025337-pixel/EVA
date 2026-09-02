@@ -1,0 +1,74 @@
+name: YADO G2 Native Selector Canonical Binding V4
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-native-selector-canonical-binding-v4-request.json"
+permissions:
+  contents: write
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Enforce canonical integrity before V4 binding
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V4 binding paths before fresh12
+        run: python -m py_compile runtime/yado_g2_canonical_high_scale_binding_runtime_v4.py runtime/yado_kernel_native_selector_canonical_binding_v4.py runtime/yado_current_frontier_execution_failure_history_v1.py
+      - name: Validate frozen V4 binding on spent history and unseen size12
+        run: timeout --signal=TERM --kill-after=30s 2100s python runtime/yado_kernel_native_selector_canonical_binding_v4.py
+      - name: Persist unexpected V4 binding failure as causal history
+        if: failure()
+        env:
+          YADO_FAILURE_WORKFLOW: YADO_G2_NATIVE_SELECTOR_CANONICAL_BINDING_V4
+        run: |
+          git reset --hard HEAD
+          git clean -fd
+          python runtime/yado_current_frontier_execution_failure_history_v1.py
+          mkdir -p receipts
+          cp runtime/yado_current_frontier_execution_failure_history_v1_receipt.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Failure Memory"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Record V4 binding aborted execution as causal history [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Persist V4 binding evidence
+        if: success()
+        run: |
+          mkdir -p receipts candidates/kernel-self-generated resources canonical
+          cp runtime/yado_kernel_native_selector_canonical_binding_v4_receipt.json "receipts/yado-kernel-native-selector-canonical-binding-v4-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Canonical Binding V4"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-native-selector-canonical-binding-v4.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json candidates/kernel-self-generated/native-selector-canonical-binding-v4.json resources/yado-twelve-source-transfer-history-v1.json "receipts/yado-kernel-native-selector-canonical-binding-v4-run-${GITHUB_RUN_ID}.json"
+          if [ -f canonical/yado-native-selector-canonical-binding-v4.json ]; then git add canonical/yado-native-selector-canonical-binding-v4.json; fi
+          git commit -m "Evaluate G2 native selector canonical binding V4 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Enforce canonical integrity after persistence
+        if: success()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Enforce V4 binding receipt
+        if: success()
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_native_selector_canonical_binding_v4_receipt.json"))
+          assert r["status"] in {"PASS_NATIVE_SELECTOR_CANONICAL_BINDING_V4","WITHHOLD_NATIVE_SELECTOR_CANONICAL_BINDING_V4"},r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["candidate_state"],r["history_old_total"],r["history_new_total"],r["fresh12_old"],r["fresh12_new"],r["next_required_capability"])
+          PY
