@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "89eba5e00ab97beb32372aa6d75459283c284ed36a6362f75cb6b2a27dd5bd9c",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 206,
+  "event_count": 207,
   "events": [
     {
       "canonical_mutation": false,
@@ -3487,10 +3487,26 @@
       "source_digest": "56cb0783b5f9d87f4567b37813aee9c2c8133ab65d12b588212699e89096aba9",
       "source_path": "receipts/yado-g2-canonical-integrity-repair-v2-run-33632895284.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0; NEXT=KERNEL_SCALE_CONDITIONAL_SUCCESSOR_HIGH_SCALE_REPAIR_V3",
+      "event_hash": "63a3c9b9dd5d9bdb70befa8e434bcda4edcd01d42cde00e1521a1048731ce6e6",
+      "event_id": "E0207_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 206,
+      "parent_event_hash": "6059e239e937ed65a82c34943aeb59d5ac7411984b8a1c23c5c36b1de47567cd",
+      "promotion_applied": false,
+      "run_id": "33632991487",
+      "source_digest": "67385e389636a412845ac25f3175b154e21d1506567b9cb02d1d9ebab32bd940",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33632991487.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "0841c6d5721cc9881958354c516e649d7dda32839ce3b71601c9187c5fcc303b",
+  "ledger_digest": "c93f3de2bf73ff197dafd1b4c0860ce042e25e2323e3d046870096fc27cc3dab",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -3528,5 +3544,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "6059e239e937ed65a82c34943aeb59d5ac7411984b8a1c23c5c36b1de47567cd"
+  "tail_event_hash": "63a3c9b9dd5d9bdb70befa8e434bcda4edcd01d42cde00e1521a1048731ce6e6"
 }
