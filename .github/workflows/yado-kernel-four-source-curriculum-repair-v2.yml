@@ -1,0 +1,40 @@
+name: YADO G2 Four Source Repair Five Source Transfer V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-four-source-curriculum-repair-v2-request.json"
+permissions:
+  contents: write
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Repair on four-source history and test unseen five-source transfer
+        run: python runtime/yado_kernel_four_source_curriculum_repair_v2.py
+      - name: Persist V2 repair and five-source transfer
+        run: |
+          mkdir -p receipts candidates/kernel-self-generated resources
+          cp runtime/yado_kernel_four_source_curriculum_repair_v2_receipt.json "receipts/yado-kernel-four-source-curriculum-repair-v2-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Curriculum Repair"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-four-source-curriculum-repair-v2.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json candidates/kernel-self-generated/four-source-repair-five-source-transfer-v2.json resources/yado-five-source-transfer-history-v1.json "receipts/yado-kernel-four-source-curriculum-repair-v2-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 four-source repair and five-source transfer V2 [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce V2 repair receipt
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_four_source_curriculum_repair_v2_receipt.json"))
+          assert r["status"]=="PASS_FOUR_SOURCE_CURRICULUM_REPAIR_V2",r
+          assert all(r["checks"].values()),r
+          print(r["candidate_state"],r["selected_skill_id"],r["metrics"],r["next_required_capability"])
+          PY
