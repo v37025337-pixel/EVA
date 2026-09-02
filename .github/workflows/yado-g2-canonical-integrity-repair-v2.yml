@@ -1,0 +1,45 @@
+name: YADO G2 Canonical Integrity Repair V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-canonical-integrity-repair-v2-request.json"
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct verified RC8v36 base
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Repair canonical integrity and import execution failures as history
+        run: python runtime/yado_g2_canonical_integrity_repair_v2.py
+      - name: Persist repaired canonical state
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_canonical_integrity_repair_v2_receipt.json "receipts/yado-g2-canonical-integrity-repair-v2-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Canonical Integrity Repair"
+          git config user.email "actions@users.noreply.github.com"
+          git add canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json architecture/evolution-ledger.json architecture/yado-v3-cancelled-run-history-v1.json architecture/yado-g2-canonical-integrity-repair-v2.json "receipts/yado-g2-canonical-integrity-repair-v2-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Repair G2 canonical integrity and preserve V3 failures as history [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce canonical guard after persistence
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Enforce repair receipt
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_g2_canonical_integrity_repair_v2_receipt.json"))
+          assert r["status"]=="PASS_G2_CANONICAL_INTEGRITY_REPAIR_V2",r
+          assert all(r["checks"].values()),r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["frontier"],r["runtime_sha256"],r["checks"])
+          PY
