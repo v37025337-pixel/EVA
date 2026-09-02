@@ -23,7 +23,7 @@ STABILITY=REPO/'candidates/kernel-self-generated/architecture-composite-executab
 ART=REPO/'architecture/yado-kernel-selected-architecture-composite-executable-successor-canonical-admission-v1.json'
 CAND=REPO/'candidates/kernel-self-generated/architecture-composite-executable-successor-canonical-admission-v1.json'
 CANON=REPO/'canonical/yado-g2-composite-executable-successor-v1.json'
-DATA=REPO/'resources/yado-composite-successor-canonical-admission-fresh-v1.json'
+DATA=REPO/'resources/yado-composite-successor-canonical-admission-fresh-v2.json'
 OUT=ROOT/'yado_kernel_selected_architecture_composite_executable_successor_canonical_admission_v1_receipt.json'
 GUARD=ROOT/'yado_canonical_invariant_guard_v1.py';REPAIR_SRC=ROOT/'yado_g2_composite_transfer_repair_adapter_v1.py'
 
@@ -45,7 +45,7 @@ if repair.get('state')!='SHADOW_REPAIR_SUPPORTED' or repair.get('selected_skill_
 if stability.get('state')!='STABILITY_SUPPORTED':raise RuntimeError('STABILITY_NOT_SUPPORTED')
 if head.get('g3_genesis_performed') is not False:raise RuntimeError('G3_ALREADY_STARTED')
 fixed_repair=repair['candidate_digest'];fixed_stability=stability['candidate_digest'];route_keys=sorted(portfolio.get('routes_for_current_open_deficits',{}))
-seed=2609023101;blind_seed=90231001
+seed=2609024101;blind_seed=90241001
 
 def desc(cap,amb=False,noise=0):
  d={'budget_limited':False,'quota_limited':False,'external_evidence_needed':False,'relation_needed':False,'disjunction_needed':False,'context_ambiguous':amb,'admission_noise':noise}
@@ -162,7 +162,7 @@ checks={'repair_digest_fixed_before_admission':fixed_repair==repair['candidate_d
 admit=all(checks.values());state='CANONICAL_ADMITTED' if admit else 'WITHHOLD'
 next_cap='KERNEL_G2_COMPOSITE_CANONICAL_POST_ADMISSION_AUDIT_V1' if admit else 'KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V2'
 
-dataset={'schema':'yado.g2.composite_successor_canonical_admission_fresh.v1','status':'SPENT_AFTER_SINGLE_CANONICAL_ADMISSION','repair_digest_fixed':fixed_repair,'stability_digest_fixed':fixed_stability,
+dataset={'schema':'yado.g2.composite_successor_canonical_admission_fresh.v2','status':'SPENT_AFTER_SINGLE_CANONICAL_ADMISSION','repair_digest_fixed':fixed_repair,'stability_digest_fixed':fixed_stability,
  'seed':seed,'blind_seed':blind_seed,'metrics':metrics};dataset['dataset_digest']=cdig(dataset,'dataset_digest');write(DATA,dataset)
 
 canonical_component=None
@@ -191,6 +191,16 @@ prov['current_g2_binding'].update({'current_execution_label':'G2_COMPOSITE_REPAI
 prov['registry_digest']=cdig(prov,'registry_digest');write(PROV,prov)
 if admit:
  core['active_runtime_sources']=sorted(set(core.get('active_runtime_sources',[])+['runtime/yado_g2_composite_transfer_repair_adapter_v1.py']))
+ # Bind the admitted component into the same canonical plane manifest used by the fail-closed guard.
+ plane=next((p for p in core.get('planes',[]) if p.get('plane_id')=='INTELLIGENCE_AND_META_SELECTION'),None)
+ if plane is None:raise RuntimeError('INTELLIGENCE_PLANE_MISSING')
+ plane['active_components']=sorted(set(plane.get('active_components',[])+[COMP]))
+ plane['responsibilities']=sorted(set(plane.get('responsibilities',[])+['single_selection_forced_capability_execution','prevent_selected_capability_reinterpretation']))
+ rim=core.get('runtime_integrity_manifest')
+ if not isinstance(rim,dict) or not isinstance(rim.get('sources'),dict):raise RuntimeError('RUNTIME_INTEGRITY_MANIFEST_MISSING')
+ rim['sources']['runtime/yado_g2_composite_transfer_repair_adapter_v1.py']=fsha(REPAIR_SRC)
+ rim['sources']={k:rim['sources'][k] for k in sorted(rim['sources'])}
+ rim['manifest_digest']=h(rim['sources'])
  core['composite_executable_successor_v1']={'status':'CANONICAL_ACTIVE','component_id':COMP,'canonical_component_digest':canonical_component['canonical_component_digest'],'runtime_sha256':fsha(REPAIR_SRC),
   'selected_families':canonical_component['selected_families'],'evolution_operation':'CLONAL','fresh_admission_metrics':metrics,'architecture_mutation':False}
  core['canonical_mechanism_mutation']=True
@@ -198,9 +208,21 @@ if admit:
  head['new_capabilities']=sorted(set(head.get('new_capabilities',[])+[COMP]))
  head['composite_executable_successor_v1']={'status':'CANONICAL_ACTIVE','component_id':COMP,'canonical_component_digest':canonical_component['canonical_component_digest'],'selected_families':canonical_component['selected_families'],'evolution_operation':'CLONAL','fresh_admission_metrics':metrics,'architecture_mutation':False}
 core['algorithm_provenance_registry_digest']=prov['registry_digest'];core['current_frontier']=next_cap;core['frontier_source']='architecture/evolution-ledger.json:open_deficits';core['core_digest']=cdig(core,'core_digest');write(CORE,core)
-head['algorithm_provenance_registry']['registry_digest']=prov['registry_digest'];head['algorithm_provenance_registry']['current_execution_label']=prov['current_g2_binding']['current_execution_label'];head['unified_core']['algorithm_provenance_registry_digest']=prov['registry_digest'];head['unified_core']['core_digest']=core['core_digest'];head['current_frontier']=next_cap;head['frontier_source']='architecture/evolution-ledger.json:open_deficits';head['canonical_head_digest']=cdig(head,'canonical_head_digest');write(HEAD,head)
+head['algorithm_provenance_registry']['registry_digest']=prov['registry_digest'];head['algorithm_provenance_registry']['current_execution_label']=prov['current_g2_binding']['current_execution_label'];head['unified_core']['algorithm_provenance_registry_digest']=prov['registry_digest'];head['unified_core']['core_digest']=core['core_digest']
+if admit:head['unified_core']['runtime_integrity_manifest_digest']=core['runtime_integrity_manifest']['manifest_digest']
+head['current_frontier']=next_cap;head['frontier_source']='architecture/evolution-ledger.json:open_deficits';head['canonical_head_digest']=cdig(head,'canonical_head_digest');write(HEAD,head)
 ledger['current_head_digest']=head['canonical_head_digest'];ledger['open_deficits']=[next_cap]
 run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
+# Preserve the exact reason the prior V3 admission attempt rolled back without rewriting history.
+if not any(e.get('event_type')=='G2_CANONICAL_ADMISSION_FAILURE_DETAIL_RECONCILIATION' and str(e.get('run_id'))=='33664450398' for e in ledger['events']):
+ prior=next((e for e in ledger['events'] if str(e.get('run_id'))=='33664450398'),None)
+ if prior is not None:
+  de={'index':len(ledger['events']),'event_id':f"E{len(ledger['events'])+1:04d}_G2_CANONICAL_ADMISSION_FAILURE_DETAIL_33664450398",
+      'event_type':'G2_CANONICAL_ADMISSION_FAILURE_DETAIL_RECONCILIATION','status':'WITHHOLD','generation':ledger['current_head'],'deficit':front,
+      'effect':'RUN=33664450398; FRESH_V3_CONSUMED=True; SUBSTANTIVE_ADMISSION_REACHED_POST_WRITE=True; POST_GUARD=WITHHOLD; MISSING_PLANE_BINDING=True; MISSING_RUNTIME_MANIFEST_BINDING=True; CANONICAL_ROLLBACK=True; ADMISSION_RECEIPT_PERSISTED=False; NEXT='+front,
+      'source_path':prior.get('source_path'),'source_digest':prior.get('source_digest'),'run_id':'33664450398','parent_event_hash':ledger['tail_event_hash'],
+      'canonical_mutation':False,'promotion_applied':False,'generation_transition':False}
+  de['event_hash']=event_hash(de);ledger['events'].append(de);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=de['event_hash']
 receipt={**artifact,'schema':'yado.g2.kernel_selected_architecture_composite_executable_successor_canonical_admission.receipt.v1','previous_head_digest':prev,'new_head_digest':head['canonical_head_digest'],'checks':checks,'provenance_registry_digest':prov['registry_digest']}
 receipt['receipt_sha256']=h(receipt);write(OUT,receipt)
 e={'index':len(ledger['events']),'event_id':f"E{len(ledger['events'])+1:04d}_G2_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",'event_type':'G2_COMPOSITE_REPAIRED_CANONICAL_ADMISSION',
