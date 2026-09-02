@@ -12,8 +12,25 @@ def _segments(text):
 def bracketless(text):
     return re.sub(r"\[[^\]]{0,160}\]"," ",str(text)).strip()
 
+def edge_delimiterless(text):
+    t=str(text).strip()
+    # Generic edge metadata removal only: short balanced delimiter blocks at the beginning/end.
+    patterns=[
+      (r"^\([^\)]{0,80}\)\s*",""),
+      (r"^\{[^\}]{0,80}\}\s*",""),
+      (r"^<[^>]{0,80}>\s*",""),
+      (r"\s*<[^>]{0,80}>$",""),
+      (r"\s*\{[^\}]{0,80}\}$",""),
+      (r"\s*\([^\)]{0,80}\)$",""),
+    ]
+    prev=None
+    while prev!=t:
+        prev=t
+        for pat,repl in patterns:t=re.sub(pat,repl,t).strip()
+    return bracketless(t)
+
 def core_view(text):
-    t=bracketless(text)
+    t=edge_delimiterless(text)
     seg=_segments(t)
     if len(seg)>=2 and len(_tokens(seg[0]))<=4:
         seg=seg[1:]
@@ -33,6 +50,13 @@ def wrapper_signal(text):
     seg=_segments(t)
     return len(seg)>=2 and (len(_tokens(seg[0]))<=4 or len(_tokens(seg[-1]))<=4)
 
+def wrapper_signal_v2(text):
+    t=str(text).strip()
+    if wrapper_signal(t):return True
+    if re.match(r"^(\([^\)]{0,80}\)|\{[^\}]{0,80}\}|<[^>]{0,80}>)\s*",t):return True
+    if re.search(r"\s*(<[^>]{0,80}>|\{[^\}]{0,80}\}|\([^\)]{0,80}\))$",t):return True
+    return False
+
 class RobustRawTaskRepresentationRuntimeV4:
     COMPONENT_ID="ALG-G2-RAW-TASK-REPRESENTATION-V4"
     def __init__(self,v3_artifact,mode):
@@ -48,6 +72,17 @@ class RobustRawTaskRepresentationRuntimeV4:
             counts={p:preds.count(p) for p in set(preds)}
             best=max(counts.values())
             winners=sorted([p for p,n in counts.items() if n==best])
+            if len(winners)==1:return winners[0]
+            cp=self.parent.predict_capability(core_view(text))
+            if cp in winners:return cp
+            return winners[0]
+        if self.mode=="EDGE_WRAPPER_CORE":
+            return self.parent.predict_capability(core_view(text) if wrapper_signal_v2(text) else text)
+        if self.mode=="MULTIVIEW_EDGE_TIE_CORE":
+            views=[str(text),bracketless(text),edge_delimiterless(text),core_view(text),longest_view(edge_delimiterless(text))]
+            preds=[self.parent.predict_capability(v) for v in views]
+            counts={p:preds.count(p) for p in set(preds)}
+            best=max(counts.values());winners=sorted([p for p,n in counts.items() if n==best])
             if len(winners)==1:return winners[0]
             cp=self.parent.predict_capability(core_view(text))
             if cp in winners:return cp
@@ -79,4 +114,4 @@ def component(mode,parent_digest):
       "canonical_active":False,
     }
 
-__all__=["RobustRawTaskRepresentationRuntimeV4","core_view","bracketless","longest_view","wrapper_signal","component"]
+__all__=["RobustRawTaskRepresentationRuntimeV4","core_view","bracketless","edge_delimiterless","longest_view","wrapper_signal","wrapper_signal_v2","component"]
