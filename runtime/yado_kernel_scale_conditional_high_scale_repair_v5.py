@@ -73,8 +73,15 @@ def rep(c,order):
     return z
 
 parent_model=high2['selected_model'];v4_model=v4['selected_model'];activation=int(v4['selected_spec']['activation_min_size'])
-def parent_pred(c):return knn_predict(parent_model,rep(c,2))
-def v4_high_pred(c):return knn_predict(v4_model,rep(c,3))
+_parent_cache={};_v4_cache={}
+def parent_pred(c):
+    k=c['key']
+    if k not in _parent_cache:_parent_cache[k]=knn_predict(parent_model,rep(c,2))
+    return _parent_cache[k]
+def v4_high_pred(c):
+    k=c['key']
+    if k not in _v4_cache:_v4_cache[k]=knn_predict(v4_model,rep(c,3))
+    return _v4_cache[k]
 def expected_route(c):return 'V4_HIGH' if c['size']>=activation else 'V2_PARENT'
 def broken_v4_route(c):return 'V4_HIGH' if float(c['x']['source_count'])>=activation else 'V2_PARENT'
 
@@ -162,6 +169,7 @@ candidate={
  'schema':'yado.g2.scale_conditional_high_scale_repair.v5','state':state,
  'principle':'REPAIR_CARDINALITY_TO_NORMALIZED_FEATURE_SEMANTICS_FROM_SPENT_BINDING_FAILURE_WITHOUT_RETRAINING_V4_MODEL',
  'source_binding_v4_failure':{'run_id':'33653155391','failed_checks':{k:v for k,v in bind4.get('checks',{}).items() if not v}},
+ 'previous_v5_execution_failure':{'run_id':'33656089758','completed_kernel_selection':'INVERT_NORMALIZED_SOURCE_COUNT_ROUTE_V5','error':'KeyError:selected_strategy','fresh_route_probes_materialized':False},
  'selection':selection,'selected_skill_id':selected_id,'selected_spec':spec,'binding_candidate':binding,
  'metrics':{'broken_route_fit':baseline_fit,'broken_route_high_holdout':baseline_hold,'selected_route_all_history':route_score,
             'parent_predictive_total':parent_total,'candidate_predictive_total':predictive_total,'per_size':per_size},
