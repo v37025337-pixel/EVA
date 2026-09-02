@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "1a387830a206acaafec2fc2fc462e9a3c019f1757b98e1fb625f981c81aacf80",
+  "current_head_digest": "f460f36843c6250fb5a217b581f48b4c22237387e287697fd36c6ddb7d3bb2e5",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 230,
+  "event_count": 231,
   "events": [
     {
       "canonical_mutation": false,
@@ -3941,14 +3941,35 @@
       "source_digest": "d99830a95558503b32a688b841f7d3718dc10c6cbb0d0d213c805ad8a6278d5c",
       "source_path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-fresh-transfer-v2-run-33663852746.json",
       "status": "PASS_SHADOW"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": true,
+      "deficit": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_STABILITY_V1",
+      "effect": "STATE=STABILITY_SUPPORTED; EPOCHS=4; MIN_EXPLICIT=1.000000; MIN_AMBIG=1.000000; MIN_DROP=0.750000; MIN_LRU=1.000000; MIN_ROLLBACK=1.000000; NEXT=KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",
+      "event_hash": "b51fe9a7ebdfe0d3410f11a5d8db04367196bccd05cca029e69070a1dfbfd825",
+      "event_id": "E0231_G2_COMPOSITE_EXECUTABLE_SUCCESSOR_STABILITY_V1",
+      "event_type": "G2_COMPOSITE_REPAIRED_STABILITY",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 230,
+      "new_head_digest": "f460f36843c6250fb5a217b581f48b4c22237387e287697fd36c6ddb7d3bb2e5",
+      "parent_event_hash": "5e72c07d33ac015b0fdd571ed6d5a99b6b0b51caad4c8dc168beb1541225901e",
+      "previous_head_digest": "1a387830a206acaafec2fc2fc462e9a3c019f1757b98e1fb625f981c81aacf80",
+      "promotion_applied": false,
+      "run_id": "33664108645",
+      "source_digest": "f1c2793a97a59eb4aca5fae3087da38bcedd9074fb60d99081f9493db8222178",
+      "source_path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-stability-v1-run-33664108645.json",
+      "status": "PASS_SHADOW"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "7459e4c3067f29baa66545740d72794953b8f3ee1c64dca1719de0d25f037945",
+  "ledger_digest": "18884bc2dc6a8b48ce73ee1413c7955e6189c614d2cce73e31b53eb231976dc2",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
-    "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_STABILITY_V1"
+    "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1"
   ],
   "resolved_deficits": [
     "BRANCH_PROLIFERATION",
@@ -3982,5 +4003,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "5e72c07d33ac015b0fdd571ed6d5a99b6b0b51caad4c8dc168beb1541225901e"
+  "tail_event_hash": "b51fe9a7ebdfe0d3410f11a5d8db04367196bccd05cca029e69070a1dfbfd825"
 }

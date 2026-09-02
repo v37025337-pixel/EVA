@@ -1,0 +1,122 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "9e0afab60934b3be38e61c8489b4c927dc33f8a6e7f2425fd2993a4438af6266",
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "architecture_not_mutated": true,
+    "budget_violations_zero": true,
+    "four_epochs_pass": true,
+    "fresh_v2_digest_fixed": true,
+    "g3_not_started": true,
+    "min_ambiguous_accuracy": true,
+    "min_budget_accuracy": true,
+    "min_explicit_accuracy": true,
+    "min_local_causal_drop": true,
+    "min_lru_recent_accuracy": true,
+    "min_resource_accuracy": true,
+    "min_rollback_accuracy": true,
+    "native_evolution_retains_stable_candidate": true,
+    "repair_digest_fixed": true
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "metrics": {
+        "ablated_context_accuracy": 0.25,
+        "ambiguous_accuracy": 1.0,
+        "budget_accuracy": 1.0,
+        "budget_violations": 0,
+        "explicit_accuracy": 1.0,
+        "local_context_causal_drop": 0.75,
+        "lru_recent_accuracy": 1.0,
+        "resource_accuracy": 1.0,
+        "rollback_accuracy": 1.0
+      },
+      "seed": 2609031009,
+      "status": "PASS"
+    },
+    {
+      "epoch": 2,
+      "metrics": {
+        "ablated_context_accuracy": 0.25,
+        "ambiguous_accuracy": 1.0,
+        "budget_accuracy": 1.0,
+        "budget_violations": 0,
+        "explicit_accuracy": 1.0,
+        "local_context_causal_drop": 0.75,
+        "lru_recent_accuracy": 1.0,
+        "resource_accuracy": 1.0,
+        "rollback_accuracy": 1.0
+      },
+      "seed": 2609032018,
+      "status": "PASS"
+    },
+    {
+      "epoch": 3,
+      "metrics": {
+        "ablated_context_accuracy": 0.25,
+        "ambiguous_accuracy": 1.0,
+        "budget_accuracy": 1.0,
+        "budget_violations": 0,
+        "explicit_accuracy": 1.0,
+        "local_context_causal_drop": 0.75,
+        "lru_recent_accuracy": 1.0,
+        "resource_accuracy": 1.0,
+        "rollback_accuracy": 1.0
+      },
+      "seed": 2609033027,
+      "status": "PASS"
+    },
+    {
+      "epoch": 4,
+      "metrics": {
+        "ablated_context_accuracy": 0.25,
+        "ambiguous_accuracy": 1.0,
+        "budget_accuracy": 1.0,
+        "budget_violations": 0,
+        "explicit_accuracy": 1.0,
+        "local_context_causal_drop": 0.75,
+        "lru_recent_accuracy": 1.0,
+        "resource_accuracy": 1.0,
+        "rollback_accuracy": 1.0
+      },
+      "seed": 2609034036,
+      "status": "PASS"
+    }
+  ],
+  "evolution_control": {
+    "operation": {
+      "operation": "CLONAL",
+      "target_task": "stability_retention",
+      "variant_id": "G2_REPAIRED_STABLE_V1"
+    },
+    "parent": {
+      "action": "SELECT_PARENT",
+      "archive_digest": "fd3cc54d73ecaad4271d46eab55a92bc2139348bfaef06564317187a8f0b5e50",
+      "lineage_id": "YADO_MAIN_LINEAGE",
+      "mean_score": 0.875,
+      "target_score": 0.0,
+      "trait_score": 0,
+      "utility": 0.21875,
+      "variant_id": "G2_REPAIRED_STABLE_V1"
+    }
+  },
+  "fresh_v2_candidate_digest": "5263ba28e3c5db352cfc09b2844b7de49d10790582139c3ce7fb4a63a22e298e",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "min_metrics": {
+    "ablated_context_accuracy": 0.25,
+    "ambiguous_accuracy": 1.0,
+    "budget_accuracy": 1.0,
+    "budget_violations": 0,
+    "explicit_accuracy": 1.0,
+    "local_context_causal_drop": 0.75,
+    "lru_recent_accuracy": 1.0,
+    "resource_accuracy": 1.0,
+    "rollback_accuracy": 1.0
+  },
+  "repair_candidate_digest": "f85ed64ed5d89446221622cffddc7391f90f8ee0b78b666c3b794b7ec57853ee",
+  "schema": "yado.g2.architecture_composite_executable_successor_stability.v1",
+  "semantic_boundary": "FOUR-EPOCH STABILITY TEST OF THE FIXED REPAIRED SHADOW COMPOSITE SUCCESSOR, INCLUDING CONTEXT CAUSAL ABLATION, LRU CAPACITY STRESS, BUDGET SAFETY, RESOURCE ROUTING, AND ROLLBACK. NO CANONICAL ARCHITECTURE ADMISSION YET.",
+  "state": "STABILITY_SUPPORTED"
+}

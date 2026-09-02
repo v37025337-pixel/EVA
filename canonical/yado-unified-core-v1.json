@@ -25,7 +25,7 @@
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "bf7765dcc72c4c525c89ad49789c15564e73883ead1913da1041e1aa7a92d2dc",
+  "algorithm_provenance_registry_digest": "6a5745796101ab41b49fae1c2d3005fba1ed2301b7e8937495be4ff532d318d4",
   "architecture_composite_successor_design_v1": {
     "architecture_mutation": false,
     "candidate_digest": "a8d0c8dd637abb539f247c24a6a9b3cfe624458f14761711c5a8c90d401a9fb9",
@@ -104,6 +104,24 @@
     "runtime_sha256": "1e7b5cd1d3320cfb69302bf1f10c8db63ea4a4664bef10e811ee40e98beb9fc2",
     "status": "SHADOW_EXECUTABLE_SUPPORTED"
   },
+  "architecture_composite_successor_stability_v1": {
+    "architecture_mutation": false,
+    "candidate_digest": "9e0afab60934b3be38e61c8489b4c927dc33f8a6e7f2425fd2993a4438af6266",
+    "fresh_v2_candidate_digest": "5263ba28e3c5db352cfc09b2844b7de49d10790582139c3ce7fb4a63a22e298e",
+    "min_metrics": {
+      "ablated_context_accuracy": 0.25,
+      "ambiguous_accuracy": 1.0,
+      "budget_accuracy": 1.0,
+      "budget_violations": 0,
+      "explicit_accuracy": 1.0,
+      "local_context_causal_drop": 0.75,
+      "lru_recent_accuracy": 1.0,
+      "resource_accuracy": 1.0,
+      "rollback_accuracy": 1.0
+    },
+    "repair_candidate_digest": "f85ed64ed5d89446221622cffddc7391f90f8ee0b78b666c3b794b7ec57853ee",
+    "status": "STABILITY_SUPPORTED"
+  },
   "architecture_composite_successor_transfer_repair_v1": {
     "architecture_mutation": false,
     "candidate_digest": "f85ed64ed5d89446221622cffddc7391f90f8ee0b78b666c3b794b7ec57853ee",
@@ -151,7 +169,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "8625f448c732e9789281d724b9274dd5da02c8e3a016d3a4f59b409c87b9a4f6",
+  "core_digest": "e73e6ba7978d9d5c65b1a2d955e7c73363bb8130930398daac74c4fde4f0cd4c",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -205,7 +223,7 @@
     ],
     "withhold_event_count_at_binding": 20
   },
-  "current_frontier": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_STABILITY_V1",
+  "current_frontier": "KERNEL_SELECTED_ARCHITECTURE_COMPOSITE_EXECUTABLE_SUCCESSOR_CANONICAL_ADMISSION_V1",
   "deep_self_audit": {
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
