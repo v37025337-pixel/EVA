@@ -1,0 +1,325 @@
+{
+  "candidate_digest": "f54ec98fb52421f632e47c6b6db3b2a213c6853726f39c8880d2af9a59ff1523",
+  "candidate_metrics": {
+    "CENTROID_MARGIN_11876768ed": {
+      "repair": 0.6666666666666666,
+      "retention": 0.9824561403508771,
+      "threshold": 5.722206726277,
+      "train": 0.9739583333333334,
+      "validation": 0.9666666666666667
+    },
+    "CENTROID_MARGIN_2b8a6b2d54": {
+      "repair": 0.6666666666666666,
+      "retention": 0.9824561403508771,
+      "threshold": 3.320312465528,
+      "train": 0.9635416666666666,
+      "validation": 0.9666666666666667
+    },
+    "CENTROID_MARGIN_357c0fa3d4": {
+      "repair": 0.6666666666666666,
+      "retention": 0.9649122807017544,
+      "threshold": 2.101637718792,
+      "train": 0.9427083333333334,
+      "validation": 0.95
+    },
+    "CENTROID_MARGIN_475c5b935d": {
+      "repair": 0.6666666666666666,
+      "retention": 0.9298245614035088,
+      "threshold": 0.065249106418,
+      "train": 0.921875,
+      "validation": 0.9166666666666666
+    },
+    "CENTROID_MARGIN_5673256d8e": {
+      "repair": 0.6666666666666666,
+      "retention": 0.9649122807017544,
+      "threshold": 0.866633130233,
+      "train": 0.9322916666666666,
+      "validation": 0.95
+    },
+    "CENTROID_MARGIN_7da9208308": {
+      "repair": 0.6666666666666666,
+      "retention": 0.9649122807017544,
+      "threshold": 0.889583333725,
+      "train": 0.9375,
+      "validation": 0.95
+    },
+    "CENTROID_MARGIN_b18e583d1a": {
+      "repair": 0.3333333333333333,
+      "retention": 1.0,
+      "threshold": 9.647341046949,
+      "train": 0.9739583333333334,
+      "validation": 0.9666666666666667
+    },
+    "CENTROID_MARGIN_b56570feeb": {
+      "repair": 0.6666666666666666,
+      "retention": 0.9824561403508771,
+      "threshold": 2.682741404453,
+      "train": 0.9479166666666666,
+      "validation": 0.9666666666666667
+    },
+    "CENTROID_MARGIN_c185b2c329": {
+      "repair": 0.3333333333333333,
+      "retention": 1.0,
+      "threshold": 13.059164053848,
+      "train": 0.96875,
+      "validation": 0.9666666666666667
+    },
+    "CENTROID_MARGIN_ceed6b24cb": {
+      "repair": 0.6666666666666666,
+      "retention": 0.9824561403508771,
+      "threshold": 4.529606536599,
+      "train": 0.96875,
+      "validation": 0.9666666666666667
+    },
+    "CENTROID_MARGIN_eadbcb872f": {
+      "repair": 0.0,
+      "retention": 1.0,
+      "threshold": 26.583477893296,
+      "train": 0.9583333333333334,
+      "validation": 0.95
+    },
+    "CENTROID_MARGIN_f8870bbeaf": {
+      "repair": 0.0,
+      "retention": 1.0,
+      "threshold": 16.296567002106,
+      "train": 0.9635416666666666,
+      "validation": 0.95
+    }
+  },
+  "canonical_active": false,
+  "evolution_operation": {
+    "operation": "CLONAL",
+    "target_task": "fresh_blind",
+    "variant_id": "EXECUTABLE_PARENT"
+  },
+  "frozen_history": {
+    "blind_used_for_admission_only": true,
+    "blind_used_for_candidate_generation": false,
+    "blind_used_for_selection": false,
+    "corpus_digest": "41cc05d3d2429f5b3a3740dd5ed65c9294aac825bca75fcbb7cdcc860312e28b"
+  },
+  "generator": {
+    "calibration_adapter": "GENERIC_NEAREST_CENTROID_DISTANCE_MARGIN",
+    "centroid": "select_centroid_features",
+    "corrector_model": {
+      "centroids": {
+        "GLOBAL_WORKSPACE": {
+          "evidence_meta_nca": 0.0
+        },
+        "LOCAL_SELF_ORGANIZING": {
+          "evidence_meta_nca": 0.2222222222222222
+        },
+        "MULTI_AGENT_LOCAL_GLOBAL": {
+          "evidence_meta_nca": 0.0
+        }
+      },
+      "features": [
+        "evidence_meta_nca"
+      ],
+      "kind": "CENTROID_STRATEGY",
+      "label_values": {
+        "GLOBAL_WORKSPACE": "GLOBAL_WORKSPACE",
+        "LOCAL_SELF_ORGANIZING": "LOCAL_SELF_ORGANIZING",
+        "MULTI_AGENT_LOCAL_GLOBAL": "MULTI_AGENT_LOCAL_GLOBAL"
+      },
+      "scales": {
+        "evidence_meta_nca": 0.09072184232530289
+      }
+    },
+    "gate_model": {
+      "centroids": {
+        "PARENT_ERROR": {
+          "evidence_global_workspace": 0.3915192890035657,
+          "evidence_multi_agent_local_global": 0.1402614273683456
+        },
+        "PARENT_OK": {
+          "evidence_global_workspace": 0.0684846198191704,
+          "evidence_multi_agent_local_global": 0.037855476918018154
+        }
+      },
+      "features": [
+        "evidence_global_workspace",
+        "evidence_multi_agent_local_global"
+      ],
+      "kind": "CENTROID_STRATEGY",
+      "label_values": {
+        "PARENT_ERROR": "PARENT_ERROR",
+        "PARENT_OK": "PARENT_OK"
+      },
+      "scales": {
+        "evidence_global_workspace": 0.12178285193397737,
+        "evidence_multi_agent_local_global": 0.04759881723383524
+      }
+    },
+    "threshold_candidates_from": "NONBLIND_TRAIN_ONLY",
+    "threshold_selected_by": "UnifiedYADOKernelV30RC8ExternalCognitive.select_evolution_skills"
+  },
+  "host_generic_margin_adapter_supplied": true,
+  "host_task_specific_rules_written": false,
+  "kernel_selected_calibration": true,
+  "metrics": {
+    "fresh_blind_parent": 0.8043478260869565,
+    "fresh_blind_successor": 0.8478260869565217,
+    "gain": 0.04347826086956519,
+    "parent_correct_retention": 1.0,
+    "parent_error_repair_rate": 0.2222222222222222
+  },
+  "parent_choice": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "962288a16d875cf00c4a6b20b05fe8a94cc2112f86c3adc786b5409c7920289d",
+    "lineage_id": "G2_SELECTOR_LINEAGE",
+    "mean_score": 0.6014492753623188,
+    "target_score": 0.8043478260869565,
+    "trait_score": 0,
+    "utility": 0.7134057971014492,
+    "variant_id": "EXECUTABLE_PARENT"
+  },
+  "principle": "KERNEL_SELECTED_CLONAL_WITH_KERNEL_SELECTED_MARGIN_CALIBRATION",
+  "promotion_applied": false,
+  "schema": "yado.g2.evolutionary_centroid_calibrated_successor.v2",
+  "selected_threshold": 5.722206726277,
+  "selection": {
+    "candidate_count": 12,
+    "gate_digest": "028bbe5c3eed0dc8f4b3e55321165f7ff1e26def6845c74e79e0d1260cda095d",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "f2022d217d75fdd220b904596b3c05d4070310d4dffdcceb5ca66789446cdf76",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "regression"
+        ],
+        "fit_gain": -0.015625,
+        "heldout_gain": 0.0,
+        "skill_id": "CENTROID_MARGIN_357c0fa3d4",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": false,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "026e2621692f0faa073330890d78fcc581c93296a61ab8d80c1c0c15c62ad2ab",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "heldout_harmlessness",
+          "regression"
+        ],
+        "fit_gain": -0.03645833333333337,
+        "heldout_gain": -0.033333333333333326,
+        "skill_id": "CENTROID_MARGIN_475c5b935d",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "1343e20cede59e01be4cdd08a04efd8236bceeb245cc87c15db30d65a795cab4",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "regression"
+        ],
+        "fit_gain": -0.02604166666666674,
+        "heldout_gain": 0.0,
+        "skill_id": "CENTROID_MARGIN_5673256d8e",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "498b9e3d4d4bfa7f4f74de1eb47f78713e14726fa027b41c71b135a78ef5ed6f",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "regression"
+        ],
+        "fit_gain": -0.02083333333333337,
+        "heldout_gain": 0.0,
+        "skill_id": "CENTROID_MARGIN_7da9208308",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "7f6a5de4aa7a3ad77a2b2b150fb5ea56e118950c8803b3025694d85f65df2412",
+        "failed_critics": [
+          "fit_marginal_gain"
+        ],
+        "fit_gain": -0.01041666666666674,
+        "heldout_gain": 0.01666666666666672,
+        "skill_id": "CENTROID_MARGIN_b56570feeb",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "cbf6c25b5cac4197d069e3c50fe631041e65c9597b64ce3f81a2b6dca8e58077",
+        "failed_critics": [],
+        "fit_gain": 0.015625,
+        "heldout_gain": 0.01666666666666672,
+        "skill_id": "CENTROID_MARGIN_11876768ed",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "CENTROID_MARGIN_11876768ed"
+    ],
+    "status": "SELECTED"
+  },
+  "state": "WITHHOLD"
+}
