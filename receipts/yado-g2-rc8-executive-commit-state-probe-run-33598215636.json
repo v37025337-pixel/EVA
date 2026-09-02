@@ -1,0 +1,161 @@
+{
+  "active_program_by_capability": {},
+  "db_path": "/home/runner/work/EVA/EVA/runtime/yado_rc8_exec_state_probe.sqlite",
+  "deficits": {},
+  "executive_type": "yado_core_v2_2.DevelopmentalExecutiveV22",
+  "methods": [
+    {
+      "name": "_execute_mechanism",
+      "signature": "(program: 'Mechanism', payload: 'Mapping[str, Any]', ablated: 'bool' = False, ablate_stage: 'Optional[str]' = None) -> 'Any'"
+    },
+    {
+      "name": "_mechanism_from_json",
+      "signature": "(data: 'Mapping[str, Any]') -> 'Mechanism'"
+    },
+    {
+      "name": "_persist_organ",
+      "signature": "(organ: 'OrganState') -> 'None'"
+    },
+    {
+      "name": "_persist_program",
+      "signature": "(program: 'Mechanism') -> 'None'"
+    },
+    {
+      "name": "_program_from_json",
+      "signature": "(data: 'Mapping[str, Any]') -> 'RuleProgram'"
+    },
+    {
+      "name": "_register_builtin_capabilities",
+      "signature": "() -> 'None'"
+    },
+    {
+      "name": "_restore_development_state",
+      "signature": "() -> 'None'"
+    },
+    {
+      "name": "_restore_state",
+      "signature": "() -> 'None'"
+    },
+    {
+      "name": "_score_mechanism",
+      "signature": "(program: 'Mechanism', cases: 'Sequence[Mapping[str, Any]]', ablated: 'bool' = False, ablate_stage: 'Optional[str]' = None) -> 'float'"
+    },
+    {
+      "name": "detect_deficits",
+      "signature": "(goal_id: 'str') -> 'List[DeficitState]'"
+    },
+    {
+      "name": "evaluate_candidate",
+      "signature": "(candidate_id: 'str', baseline_score: 'float', candidate_score: 'float', ablation_score: 'float', min_gain: 'float' = 0.05, min_ablation_drop: 'float' = 0.03) -> 'ExperimentReceipt'"
+    },
+    {
+      "name": "evaluate_mechanism",
+      "signature": "(program_id: 'str', blind_cases: 'Sequence[Mapping[str, Any]]', min_score: 'Optional[float]' = None, min_ablation_drop: 'float' = 0.2) -> 'MechanismDevelopmentReceipt'"
+    },
+    {
+      "name": "evaluate_program",
+      "signature": "(program_id: 'str', blind_cases: 'Sequence[Mapping[str, Any]]', min_score: 'Optional[float]' = None, min_ablation_drop: 'float' = 0.2) -> 'MechanismDevelopmentReceipt'"
+    },
+    {
+      "name": "execute_capability",
+      "signature": "(capability: 'str', payload: 'Mapping[str, Any]') -> 'Any'"
+    },
+    {
+      "name": "register_capability",
+      "signature": "(name: 'str', score: 'float', evidence: 'Sequence[str]') -> 'CapabilityState'"
+    },
+    {
+      "name": "synthesize_best_mechanism",
+      "signature": "(deficit_id: 'str', target_organ: 'str', training_examples: 'Sequence[Mapping[str, Any]]', min_support: 'int' = 2) -> 'Tuple[Mechanism, MechanismSelectionReceipt]'"
+    },
+    {
+      "name": "synthesize_program",
+      "signature": "(deficit_id: 'str', target_organ: 'str', training_examples: 'Sequence[Mapping[str, Any]]', min_support: 'int' = 2) -> 'RuleProgram'"
+    }
+  ],
+  "organs": {
+    "CONSCIOUS_WORKSPACE": {
+      "mechanisms": [],
+      "name": "CONSCIOUS_WORKSPACE",
+      "organ_id": "ORG-WORKSPACE",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.209953+00:00"
+    },
+    "GENERATIVE_EXECUTIVE": {
+      "mechanisms": [],
+      "name": "GENERATIVE_EXECUTIVE",
+      "organ_id": "ORG-EXECUTIVE",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.210933+00:00"
+    },
+    "INTELLIGENCE": {
+      "mechanisms": [],
+      "name": "INTELLIGENCE",
+      "organ_id": "ORG-INTELLIGENCE",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.209035+00:00"
+    },
+    "LEARNING": {
+      "mechanisms": [],
+      "name": "LEARNING",
+      "organ_id": "ORG-LEARNING",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.211378+00:00"
+    },
+    "LOGIC": {
+      "mechanisms": [],
+      "name": "LOGIC",
+      "organ_id": "ORG-LOGIC",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.208031+00:00"
+    },
+    "MEMORY": {
+      "mechanisms": [],
+      "name": "MEMORY",
+      "organ_id": "ORG-MEMORY",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.207475+00:00"
+    },
+    "MOTIVE_GOALS": {
+      "mechanisms": [],
+      "name": "MOTIVE_GOALS",
+      "organ_id": "ORG-GOALS",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.210402+00:00"
+    },
+    "PERCEPTION": {
+      "mechanisms": [],
+      "name": "PERCEPTION",
+      "organ_id": "ORG-PERCEPTION",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.207003+00:00"
+    },
+    "SELF_MODEL": {
+      "mechanisms": [],
+      "name": "SELF_MODEL",
+      "organ_id": "ORG-SELF-MODEL",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.209510+00:00"
+    },
+    "THINKING": {
+      "mechanisms": [],
+      "name": "THINKING",
+      "organ_id": "ORG-THINKING",
+      "revision": 0,
+      "state_label": "S0",
+      "updated_at": "2026-09-02T06:18:12.208557+00:00"
+    }
+  },
+  "programs": {},
+  "schema": "yado.g2.rc8_executive_commit_state_probe.v1",
+  "state_path": "/home/runner/work/EVA/EVA/runtime/yado_rc8_v36/yado_canonical_state_v3_rc8_external_cognitive.json"
+}
