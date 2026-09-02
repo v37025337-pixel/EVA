@@ -1,0 +1,44 @@
+name: YADO G2 Native Selector Canonical Binding V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-native-selector-canonical-binding-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Validate binding and unseen size-7 transfer
+        run: python runtime/yado_kernel_native_selector_canonical_binding_v1.py
+      - name: Persist canonical binding evidence
+        run: |
+          mkdir -p receipts candidates/kernel-self-generated resources canonical
+          cp runtime/yado_kernel_native_selector_canonical_binding_v1_receipt.json "receipts/yado-kernel-native-selector-canonical-binding-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Canonical Binding"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-native-selector-canonical-binding-v1.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json candidates/kernel-self-generated/native-selector-canonical-binding-v1.json resources/yado-seven-source-transfer-history-v1.json "receipts/yado-kernel-native-selector-canonical-binding-v1-run-${GITHUB_RUN_ID}.json"
+          if [ -f canonical/yado-native-selector-canonical-binding-v1.json ]; then git add canonical/yado-native-selector-canonical-binding-v1.json; fi
+          git commit -m "Bind native selector substrate into canonical G2 runtime [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce canonical binding receipt
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_kernel_native_selector_canonical_binding_v1_receipt.json"))
+          assert r["status"]=="PASS_NATIVE_SELECTOR_CANONICAL_BINDING_V1",r
+          assert r["candidate_state"]=="CANONICAL_ADMITTED",r
+          assert all(r["checks"].values()),r
+          assert r["canonical_mechanism_mutation"] is True,r
+          assert r["g3_genesis_performed"] is False,r
+          print(r["candidate_state"],r["fresh7_score"],r["next_required_capability"])
+          PY
