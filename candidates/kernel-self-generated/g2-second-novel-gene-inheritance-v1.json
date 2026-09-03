@@ -1,0 +1,234 @@
+{
+  "ablations": [
+    {
+      "field": "state_mode",
+      "h1_accuracy": 0.6666666666666666,
+      "h2_accuracy": 0.6666666666666666,
+      "program_digest": "29a898732ddf0762c5da0900ae6cad805c185a86d13075a97e563af1cb80187d",
+      "value": "COUNT"
+    },
+    {
+      "field": "state_mode",
+      "h1_accuracy": 0.6666666666666666,
+      "h2_accuracy": 0.6666666666666666,
+      "program_digest": "70fbfff46c6e093e1a3a8bc343285c476af56e7aec9305a9dfacae863ad9c035",
+      "value": "SET"
+    },
+    {
+      "field": "close_policy",
+      "h1_accuracy": 0.6666666666666666,
+      "h2_accuracy": 0.6666666666666666,
+      "program_digest": "237aec9dc05acef22cfcf2e98606c9558638f35252862b0a93b187f8ed979460",
+      "value": "ANY"
+    },
+    {
+      "field": "close_policy",
+      "h1_accuracy": 0.8333333333333334,
+      "h2_accuracy": 0.8333333333333334,
+      "program_digest": "a66fb32f5970107e8fa1101af6c053c3f4de5ec102094cbc533e1d86435c7ab0",
+      "value": "REMOVE_KEY"
+    },
+    {
+      "field": "underflow_policy",
+      "h1_accuracy": 0.8333333333333334,
+      "h2_accuracy": 0.8333333333333334,
+      "program_digest": "d2b0c3375478cb931246595e093a3274372f6a13f991e5acbafca3558040023d",
+      "value": "IGNORE"
+    },
+    {
+      "field": "mismatch_policy",
+      "h1_accuracy": 0.6666666666666666,
+      "h2_accuracy": 0.6666666666666666,
+      "program_digest": "74229fdc5904fc60ee6a5490c9ae82cbdf79f947a9167cea8e1e0b3a2bf2d50b",
+      "value": "IGNORE"
+    },
+    {
+      "field": "final_policy",
+      "h1_accuracy": 0.8333333333333334,
+      "h2_accuracy": 0.8333333333333334,
+      "program_digest": "2be2637854bbe79fb75aff5ae46dfd831d9afccac01c63104e3c80f0927848e5",
+      "value": "VALID_ONLY"
+    }
+  ],
+  "architecture_mutation": false,
+  "canonical_head_digest_before": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+  "canonical_mutation": false,
+  "checks": {
+    "count_and_set_baselines_fail": true,
+    "formal_generation_unchanged": true,
+    "fresh_depth_exceeds_invention_transfer": true,
+    "fresh_domains_new": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "gene_survives_additional_shadow_generation": true,
+    "h1_exact_gene_digest_inherited": true,
+    "h1_fresh_exact": true,
+    "h2_exact_gene_digest_inherited": true,
+    "h2_fresh_exact": true,
+    "h2_parent_is_h1": true,
+    "no_operator_resynthesis_call": true,
+    "source_gene_not_canonical_active": true,
+    "source_gene_shadow_only": true,
+    "source_second_blind_pass": true,
+    "structural_ablation_causes_drop": true
+  },
+  "fitness": {
+    "baselines": {
+      "COUNT": {
+        "h1": 0.6666666666666666,
+        "h2": 0.6666666666666666
+      },
+      "SET": {
+        "h1": 0.6666666666666666,
+        "h2": 0.6666666666666666
+      }
+    },
+    "best_structural_ablation_accuracy": 0.8333333333333334,
+    "h1_fresh_accuracy": 1.0,
+    "h2_fresh_accuracy": 1.0
+  },
+  "fresh_cases": {
+    "h1_case_count": 36,
+    "h1_depth_range": [
+      19,
+      29
+    ],
+    "h1_domains": [
+      "BRACKETFLOW",
+      "LEASEFLOW",
+      "RESOURCECHAIN",
+      "SCOPECHAIN",
+      "SESSIONFLOW"
+    ],
+    "h2_case_count": 36,
+    "h2_depth_range": [
+      31,
+      41
+    ],
+    "h2_domains": [
+      "CALLTREE",
+      "EVENTSTACK",
+      "LOCKTREE",
+      "NESTFLOW",
+      "OWNERSHIP2",
+      "TRANSACTION2"
+    ]
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "inheritance_lineage": [
+    {
+      "genome_digest": "71c30fd8dc1cffcec1449114fdd39df959e0abbfbc6821f5d3d80799b366ec06",
+      "inheritance_mode": "EXACT_SHADOW_GENE_COPY",
+      "inherited_gene": {
+        "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+        "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+        "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+        "gene_scope": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "heritage": [
+          "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+          "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+          "GENE-LOGIC-BOOLEAN-DNF-V1",
+          "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+        ],
+        "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+        "novel_gene": true,
+        "operator_program": {
+          "close_code": "R",
+          "close_policy": "MATCH_KEY",
+          "final_policy": "EMPTY_AND_VALID",
+          "mismatch_policy": "REJECT",
+          "novel_gene": true,
+          "open_code": "Q",
+          "output": "BOOLEAN",
+          "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+          "schema": "yado.g2.generic_event_state_program.v1",
+          "search_space_size": 144,
+          "state_mode": "STACK",
+          "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "train_accuracy": 1.0,
+          "underflow_policy": "REJECT"
+        },
+        "promotion_state": "SHADOW_ONLY",
+        "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+        "trigger": {
+          "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+          "no_progress_ticks": 20,
+          "source": "TEMPORAL_STALL_SIGNAL",
+          "tick_id": 21
+        }
+      },
+      "inherited_gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+      "inherited_gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+      "lineage_parent_genome_digest": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.shadow_inherited_event_state_gene_genome.v1",
+      "shadow_generation": "H1"
+    },
+    {
+      "genome_digest": "af27c00509690fe68dc24629d72e31d1d75b46669841912dadb53aa0d5396015",
+      "inheritance_mode": "EXACT_SHADOW_GENE_COPY",
+      "inherited_gene": {
+        "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+        "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+        "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+        "gene_scope": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "heritage": [
+          "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+          "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+          "GENE-LOGIC-BOOLEAN-DNF-V1",
+          "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+        ],
+        "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+        "novel_gene": true,
+        "operator_program": {
+          "close_code": "R",
+          "close_policy": "MATCH_KEY",
+          "final_policy": "EMPTY_AND_VALID",
+          "mismatch_policy": "REJECT",
+          "novel_gene": true,
+          "open_code": "Q",
+          "output": "BOOLEAN",
+          "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+          "schema": "yado.g2.generic_event_state_program.v1",
+          "search_space_size": 144,
+          "state_mode": "STACK",
+          "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "train_accuracy": 1.0,
+          "underflow_policy": "REJECT"
+        },
+        "promotion_state": "SHADOW_ONLY",
+        "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+        "trigger": {
+          "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+          "no_progress_ticks": 20,
+          "source": "TEMPORAL_STALL_SIGNAL",
+          "tick_id": 21
+        }
+      },
+      "inherited_gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+      "inherited_gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+      "lineage_parent_genome_digest": "71c30fd8dc1cffcec1449114fdd39df959e0abbfbc6821f5d3d80799b366ec06",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.shadow_inherited_event_state_gene_genome.v1",
+      "shadow_generation": "H2"
+    }
+  ],
+  "receipt_sha256": "8bc66a1506905827b1fee6c8853bc45faf316beff91c944316fe187d2d6a91ce",
+  "schema": "yado.g2.second_novel_gene_inheritance.v1",
+  "semantic_boundary": "BOUNDED SHADOW INHERITANCE TEST FOR THE SECOND, EVENT-STATE SELF-SYNTHESIZED GENE. THE EXACT GENE IS COPIED THROUGH H1 AND H2 WITHOUT RE-SYNTHESIS AND MUST RETAIN FRESH CAUSAL PERFORMANCE. THIS DOES NOT PROMOTE THE GENE OR PROVE OPEN-ENDED SELF-EVOLUTION.",
+  "source_gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+  "source_gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+  "source_second_blind_receipt_sha256": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c",
+  "status": "PASS_SHADOW_G2_SECOND_NOVEL_GENE_INHERITANCE_V1"
+}
