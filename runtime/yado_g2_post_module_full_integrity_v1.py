@@ -97,6 +97,12 @@ edge(API,API_EXEC,'PLAN_TO_READONLY_EXECUTION','approved read-only contract plan
 edge(API_EXEC,SELECT,'NETWORK_EVIDENCE_SELECTION','bounded read-only network evidence can feed meta-selection')
 edge(SEM,LOGIC2,'SEMANTIC_TO_LOGIC','synthesized semantic result can be classified by Logic V2')
 edge(REPAIR,FAB,'REPAIR_EXECUTION','repaired program capability coexists with canonical execution fabric')
+edge(EXP,GENOME,'EVOLUTION_EXPERIENCE','verified experience is available to the evolution controller')
+edge(COUNTER,GENOME,'EVOLUTION_COUNTEREXAMPLES','counterexample lineage is available to the evolution controller')
+edge(GENOME,LOGIC2,'EVOLUTION_TARGET','logic is a bounded evolution target')
+edge(GENOME,THINK2,'EVOLUTION_TARGET','thinking is a bounded evolution target')
+edge(GENOME,INTEL3,'EVOLUTION_TARGET','intelligence is a bounded evolution target')
+edge(GENOME,REPAIR,'EVOLUTION_TARGET','program repair is a bounded evolution target')
 edge(INTEL3,COORD,'META_COORDINATION','Intelligence V3 selects/composes capability sets for coordinator')
 
 # Static source-to-source imports for active sources.
