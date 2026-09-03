@@ -158,7 +158,7 @@ for _ in range(8):
       {'input':{'task_family':'LOGIC','mode':'LOCAL'},'expected':[LOGIC_V2]},
       {'input':{'task_family':'PLAN','mode':'LOCAL'},'expected':[THINK_V2]},
     ])
-intel_model=CoveragePrunedCompositionalSchemaRouterV3.fit(intel_cases,LOGIC_V2)
+intel_model=CoveragePrunedCompositionalSchemaRouterV3.fit(intel_cases,'NOOP_FALLBACK')
 
 cap_tasks={
  LOGIC_V2:{
