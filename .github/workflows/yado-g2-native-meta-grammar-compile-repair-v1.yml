@@ -27,8 +27,25 @@ jobs:
       - name: Compile native meta-grammar repair experiment
         run: python -m py_compile runtime/yado_g2_native_meta_grammar_compile_repair_v1.py
       - name: Let YADO synthesize a compile-repair selector with its native meta-grammar
+        id: native_repair
+        continue-on-error: true
         run: python runtime/yado_g2_native_meta_grammar_compile_repair_v1.py
+      - name: Persist YADO-generated candidate and WITHHOLD evidence
+        if: always()
+        run: |
+          git config user.name "YADO Native Meta Grammar Repair"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-native-meta-grammar-compile-repair-v1.json ]; then
+            git add candidates/kernel-self-generated/g2-native-meta-grammar-compile-repair-v1.json
+          fi
+          if [ -f candidates/g2-self-evolution/yado_g2_autonomous_self_rewrite_v1_native_meta_repaired_candidate.py ]; then
+            git add candidates/g2-self-evolution/yado_g2_autonomous_self_rewrite_v1_native_meta_repaired_candidate.py
+          fi
+          git diff --cached --quiet || git commit -m "Persist YADO native meta-grammar compile-repair evidence [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
       - name: Require strict native meta-grammar PASS
+        if: always()
         run: |
           python - <<'PY'
           import json
