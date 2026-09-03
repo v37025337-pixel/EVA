@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from fractions import Fraction
 from itertools import combinations,product
+from collections import defaultdict
 import ast,copy,hashlib,json
 
 from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
@@ -72,6 +73,64 @@ class LatencyAwarePlannerGeneV1(WorkBudgetAdaptiveContingentPlannerV2):
 class TripleTriggerRouterGeneV1(CoveragePrunedCompositionalSchemaRouterV3):
     GENE_ID='GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1'
     MAX_TRIGGER_WIDTH=3
+
+    @classmethod
+    def fit(cls,cases,fallback_output,max_trigger_width=None):
+        if not cases:raise ValueError('EMPTY_CASES')
+        fields=sorted(set().union(*(set(z['input']) for z in cases)))
+        if len(cases)*max(1,len(fields))>cls.MAX_FIELD_CELLS:
+            return {'kind':'WITHHOLD','reason':'FIELD_WORK_BUDGET','fields':[],'outputs':[],'fallback_output':fallback_output,'triggers':{}}
+        outputs=sorted(set().union(*(cls._outputs(z['expected']) for z in cases)))
+        if fallback_output not in outputs:outputs=[fallback_output]+outputs
+        outputs=sorted(set(outputs))
+        if len(outputs)>cls.MAX_OUTPUTS:
+            return {'kind':'WITHHOLD','reason':'OUTPUT_BUDGET','fields':fields,'outputs':[],'fallback_output':fallback_output,'triggers':{}}
+        atoms=[]
+        for f in fields:
+            vals=[]
+            for z in cases:
+                v=z['input'].get(f)
+                if isinstance(v,(bool,str,int,float)) and v not in vals:vals.append(v)
+            if 1<len(vals)<=8:
+                for v in vals:atoms.append((f,v))
+        width=min(cls.MAX_TRIGGER_WIDTH,int(max_trigger_width or cls.MAX_TRIGGER_WIDTH))
+        combos=[]
+        for w in range(1,width+1):
+            for combo in combinations(atoms,w):
+                if len({a[0] for a in combo})==w:combos.append(combo)
+                if len(combos)>cls.MAX_TRIGGER_CANDIDATES:
+                    return {'kind':'WITHHOLD','reason':'TRIGGER_CANDIDATE_BUDGET','fields':fields,'outputs':outputs,'fallback_output':fallback_output,'triggers':{}}
+        candidates=defaultdict(list)
+        for combo in combos:
+            covered={i for i,z in enumerate(cases) if all(a[0] in z['input'] and z['input'][a[0]]==a[1] for a in combo)}
+            if len(covered)<cls.MIN_TRIGGER_SUPPORT:continue
+            for out in outputs:
+                if out==fallback_output:continue
+                positives={i for i,z in enumerate(cases) if out in cls._outputs(z['expected'])}
+                precision=len(covered & positives)/len(covered)
+                if precision>=cls.MIN_TRIGGER_PRECISION:
+                    candidates[out].append({
+                      'atoms':[{'field':a[0],'value':a[1]} for a in combo],
+                      'support':len(covered),'precision':precision,'covered_positive':covered & positives
+                    })
+        clean={}
+        for out in outputs:
+            if out==fallback_output:continue
+            positives={i for i,z in enumerate(cases) if out in cls._outputs(z['expected'])}
+            uncovered=set(positives);chosen=[]
+            xs=sorted(candidates.get(out,[]),key=lambda r:(len(r['atoms']),-r['precision'],-r['support'],str(r['atoms'])))
+            for r in xs:
+                gain=len(r['covered_positive'] & uncovered)
+                if gain<=0:continue
+                chosen.append({'atoms':r['atoms'],'support':r['support'],'precision':r['precision'],'positive_gain':gain})
+                uncovered-=r['covered_positive']
+                if not uncovered or len(chosen)>=cls.MAX_TRIGGERS_PER_OUTPUT:break
+            clean[out]=chosen
+        return {
+          'kind':'COVERAGE_PRUNED_COMPOSITIONAL_TRIGGER_ROUTER_GENE_V1',
+          'fields':fields,'outputs':outputs,'fallback_output':fallback_output,'triggers':clean,
+          'candidate_count':len(combos),'max_trigger_width':width
+        }
 
 class PolynomialReturnRepairGeneV1:
     GENE_ID='GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1'
@@ -220,7 +279,7 @@ class YADOEvolutionaryGenomeV1:
             genes['THINKING']=self._gene(LatencyAwarePlannerGeneV1.GENE_ID,{'latency_tiebreak':True},[self.parent['chromosomes']['THINKING']['gene_id']],False,deficits['THINKING']['signature'])
         else:genes['THINKING']=copy.deepcopy(self.parent['chromosomes']['THINKING'])
         if deficits['INTELLIGENCE']['deficit']:
-            genes['INTELLIGENCE']=self._gene(TripleTriggerRouterGeneV1.GENE_ID,{'max_trigger_width':3},[self.parent['chromosomes']['INTELLIGENCE']['gene_id']],False,deficits['INTELLIGENCE']['signature'])
+            genes['INTELLIGENCE']=self._gene(TripleTriggerRouterGeneV1.GENE_ID,{'max_trigger_width':3,'candidate_generator':'GENERAL_COMBINATIONS_UP_TO_WIDTH'},[self.parent['chromosomes']['INTELLIGENCE']['gene_id']],True,deficits['INTELLIGENCE']['signature'])
         else:genes['INTELLIGENCE']=copy.deepcopy(self.parent['chromosomes']['INTELLIGENCE'])
         if deficits['CODE']['deficit']:
             genes['CODE']=self._gene(PolynomialReturnRepairGeneV1.GENE_ID,{'max_degree':3},[
