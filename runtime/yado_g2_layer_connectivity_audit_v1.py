@@ -131,6 +131,18 @@ checks['self_audit_layer_live']=audit.get('pass') is True
 checks['repair_layer_available']=hasattr(core,'repair_program')
 checks['self_audit_does_not_auto_mutate']=True
 
+# Temporal continuity must be embedded in the canonical execution fabric.
+checks['temporal_kernel_embedded_in_fabric']=hasattr(fabric,'temporal_snapshot') and hasattr(fabric,'temporal_causal_chain')
+if checks['temporal_kernel_embedded_in_fabric']:
+    ts=fabric.temporal_snapshot()
+    ms=fabric.memory_snapshot()
+    checks['temporal_ticks_advanced_across_layers']=ts.get('tick_id',0)>0 and ts.get('open_tick_count')==0
+    checks['temporal_transitions_enter_recurrent_memory']=ms.get('temporal_transition_count',0)>0
+else:
+    checks['temporal_ticks_advanced_across_layers']=False
+    checks['temporal_transitions_enter_recurrent_memory']=False
+    findings.append({'id':'TEMPORAL_KERNEL_NOT_EMBEDDED','severity':'HIGH'})
+
 blocking=[x for x in findings if x['severity']=='HIGH']
 status='PASS_G2_LAYER_CONNECTIVITY_AUDIT_V1' if not findings else ('WITHHOLD_G2_LAYER_CONNECTIVITY_AUDIT_V1' if blocking else 'PASS_WITH_LIMITATIONS_G2_LAYER_CONNECTIVITY_AUDIT_V1')
 report={
