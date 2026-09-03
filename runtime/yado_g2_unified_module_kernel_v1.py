@@ -6,9 +6,11 @@ ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
 
 from yado_unified_core_v1 import UnifiedYADOCoreV1
-from yado_g2_integrated_execution_fabric_v1 import (
-    G2IntegratedExecutionFabricV1,CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3
+from yado_g2_unified_execution_fabric_v1 import (
+    G2UnifiedExecutionFabricV1,CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3,CAP_API_V1
 )
+from yado_g2_typed_recurrent_capability_graph_runtime_v1 import G2TypedRecurrentCapabilityGraphRuntimeV1
+from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_contextual_stream_capability_adapter_v1 import (
     ContextualStreamCapabilityAdapterV1,CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES
 )
@@ -33,6 +35,8 @@ CAP_SELECTOR='ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1'
 CAP_COUNTERMEM='COUNTEREXAMPLE_LINEAGE_MEMORY_V1'
 CAP_HS_RUNTIME='RUNTIME-G2-HIGH-SCALE-BINDING-V5'
 CAP_BASE_RUNTIME='RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1'
+CAP_FABRIC='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1'
+CAP_API=CAP_API_V1
 
 MODULE_REGISTRY={
  CAP_ROUTER:('EXECUTOR','runtime/yado_bounded_capability_router_v1.py'),
@@ -58,6 +62,8 @@ MODULE_REGISTRY={
  CAP_RES:('RESOURCE_STATE','resources/yado-unified-external-resource-portfolio-v1.json'),
  CAP_HS_RUNTIME:('RUNTIME','runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py'),
  CAP_BASE_RUNTIME:('RUNTIME','runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py'),
+ CAP_FABRIC:('RUNTIME','runtime/yado_g2_unified_execution_fabric_v1.py'),
+ CAP_API:('EXECUTOR','runtime/yado_g2_openapi_contract_capability_v1.py'),
 }
 
 DIRECT_FABRIC={CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES,CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3}
@@ -68,14 +74,15 @@ class _ForcedRouter:
 
 class UnifiedYADOModuleKernelV1:
     KERNEL_ID='UNIFIED_YADO_MODULE_KERNEL_V1'
-    ASSEMBLY_RUNTIME='RUNTIME-G2-INTEGRATED-EXECUTION-FABRIC-V1'
+    ASSEMBLY_RUNTIME=CAP_FABRIC
 
     def __init__(self,router_program,scalar_program,relation_program,repo_root:Path|str|None=None):
         self.repo=Path(repo_root) if repo_root else REPO
         self.core=UnifiedYADOCoreV1(self.repo)
-        self.fabric=G2IntegratedExecutionFabricV1(
+        self.base_runtime=G2TypedRecurrentCapabilityGraphRuntimeV1(
             self.core.architecture,router_program,scalar_program,relation_program,self.core.portfolio
         )
+        self.fabric=G2UnifiedExecutionFabricV1(self.base_runtime)
         self.context=ContextualStreamCapabilityAdapterV1(self.fabric,'BOUNDED_STREAM_CONTEXT_MAP')
         self.composite=G2CompositeTransferRepairAdapterV1(self.fabric)
         self.high_scale=CanonicalHighScaleBindingRuntimeV5(repo_root=self.repo)
@@ -93,11 +100,26 @@ class UnifiedYADOModuleKernelV1:
           'stream_id':str(stream_id),'result':copy.deepcopy(result)
         },False)
 
+    def _normalize_fabric_task(self,module_id,task):
+        t=copy.deepcopy(task)
+        if module_id==CAP_LOGIC_V2:
+            if 'operation' not in t:
+                if 'model' not in t and 'train_rows' in t:
+                    t['model']=self.core.learn_symmetric_logic(t['train_rows'])
+                t['operation']='predict_symmetric'
+        elif module_id==CAP_THINK_V2:
+            t.setdefault('operation','plan')
+        elif module_id==CAP_INTEL_V3:
+            if 'model' not in t and 'train_cases' in t:
+                t['model']=self.core.fit_compositional_capability_router(t['train_cases'],t.get('fallback_output',CAP_LOGIC_V2))
+            t.setdefault('operation','route')
+        return t
+
     def _force_fabric(self,module_id,task):
         old=self.fabric.router
         try:
             self.fabric.router=_ForcedRouter(module_id)
-            return self.fabric.run(copy.deepcopy(task))
+            return self.fabric.run(self._normalize_fabric_task(module_id,task))
         finally:
             self.fabric.router=old
 
@@ -118,7 +140,8 @@ class UnifiedYADOModuleKernelV1:
                 out={'result':self.core.execute_program_task(task['source'],task['function_name'],tuple(task.get('args',())))}
             else:raise ValueError('UNKNOWN_REPAIR_ACTION:'+str(action))
         elif mid==CAP_COORD:
-            out=BoundedCapabilitySetCoordinatorV1.run(self.fabric,task['selected_capabilities'],task['capability_tasks'])
+            normalized={cap:self._normalize_fabric_task(cap,t) for cap,t in task['capability_tasks'].items()}
+            out=self.fabric.run_capability_set(task['selected_capabilities'],normalized)
         elif mid==CAP_SCI:
             action=task.get('action','analyze')
             if action=='analyze':out=self.core.analyze_science_data(task['rows'],enable=tuple(task.get('enable',('summary','correlation','group','linear'))))
@@ -163,6 +186,14 @@ class UnifiedYADOModuleKernelV1:
             out=self.high_scale.snapshot()
         elif mid==CAP_BASE_RUNTIME:
             out=self.fabric.memory_snapshot()
+        elif mid==CAP_FABRIC:
+            out={'component_id':CAP_FABRIC,'memory':self.fabric.memory_snapshot(),'canonical_active':CAP_FABRIC in self.active}
+        elif mid==CAP_API:
+            api=G2OpenAPIContractCapabilityV1(task.get('state_section',{}))
+            action=task.get('action','compile_plan')
+            if action=='compile_plan':out=api.compile_plan(str(task['contract_id']))
+            elif action=='classify':out=api.classify(str(task['contract_id']))
+            else:raise ValueError('UNKNOWN_API_ACTION:'+str(action))
         else:
             raise KeyError('NO_EXECUTION_PATH:'+mid)
 
@@ -177,14 +208,14 @@ class UnifiedYADOModuleKernelV1:
           'generation':self.core.head.get('generation_id'),
           'frontier':self.core.head.get('current_frontier'),
           'assembly_runtime':self.ASSEMBLY_RUNTIME,
-          'assembly_runtime_canonical_active':False,
+          'assembly_runtime_canonical_active':self.ASSEMBLY_RUNTIME in active,
           'active_module_count':len(active),
           'registered_module_count':len(registered),
           'missing_active_modules':sorted(active-registered),
           'extra_registry_modules':sorted(registered-active),
           'registry':reg,
           'memory':self.fabric.memory_snapshot(),
-          'semantic_boundary':'SHADOW UNIFIED MODULE ASSEMBLY OVER CURRENT CANONICAL G2 MODULES. DOES NOT PROMOTE THE ASSEMBLY RUNTIME OR CLAIM G3.'
+          'semantic_boundary':'SHADOW MODULE-ASSEMBLY AUDIT OVER THE CANONICAL G2 UNIFIED EXECUTION FABRIC. THE ASSEMBLY KERNEL ITSELF IS NOT A NEW GENERATION OR CONSCIOUSNESS CLAIM.'
         }
 
 __all__=['UnifiedYADOModuleKernelV1','MODULE_REGISTRY']
