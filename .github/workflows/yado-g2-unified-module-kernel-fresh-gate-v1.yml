@@ -30,7 +30,11 @@ jobs:
           git config user.name "YADO G2 Module Kernel Gate"
           git config user.email "actions@users.noreply.github.com"
           git add candidates/kernel-self-generated/g2-unified-module-kernel-v1.json
-          git commit -m "Persist unified G2 module kernel fresh evidence [skip ci]"
+          if ! git diff --cached --quiet; then
+            git commit -m "Persist unified G2 module kernel fresh evidence [skip ci]"
+          else
+            echo "Fresh module evidence is identical to the already persisted PASS artifact."
+          fi
           git reset --hard HEAD
           git clean -fd runtime/yado_rc8_v36
           git pull --rebase origin yado-architecture-shadow-search
