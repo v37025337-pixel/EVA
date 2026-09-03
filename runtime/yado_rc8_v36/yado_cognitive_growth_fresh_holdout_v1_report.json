@@ -1,0 +1,103 @@
+{
+  "fresh_used_for_selection": false,
+  "intelligence": {
+    "baseline_mean": 0.9583333333333334,
+    "batches": [
+      {
+        "baseline": 0.9583333333333334,
+        "baseline_family": "TREE",
+        "baseline_param": 3,
+        "batch": 0,
+        "candidate": 1.0,
+        "selected_features": 2
+      },
+      {
+        "baseline": 0.9305555555555556,
+        "baseline_family": "TREE",
+        "baseline_param": 3,
+        "batch": 1,
+        "candidate": 0.9861111111111112,
+        "selected_features": 2
+      },
+      {
+        "baseline": 0.9861111111111112,
+        "baseline_family": "TREE",
+        "baseline_param": 3,
+        "batch": 2,
+        "candidate": 1.0,
+        "selected_features": 2
+      }
+    ],
+    "candidate_mean": 0.9953703703703703,
+    "pass": true
+  },
+  "logic": {
+    "baseline": {
+      "accuracy": null,
+      "elapsed_s": 8.0,
+      "status": "TIMEOUT_8S"
+    },
+    "candidate": {
+      "accuracy": 1.0,
+      "elapsed_s": 2.7204800150002484,
+      "meta": {
+        "backend": "BITSET",
+        "exact": 1.0,
+        "nodes": 11,
+        "signatures": 434593
+      },
+      "status": "COMPLETED"
+    },
+    "cases": 64,
+    "expression": [
+      "XOR",
+      [
+        "XOR",
+        [
+          "VAR",
+          "a"
+        ],
+        [
+          "VAR",
+          "b"
+        ]
+      ],
+      [
+        "XOR",
+        [
+          "XOR",
+          [
+            "VAR",
+            "c"
+          ],
+          [
+            "VAR",
+            "d"
+          ]
+        ],
+        [
+          "XOR",
+          [
+            "VAR",
+            "e"
+          ],
+          [
+            "VAR",
+            "f"
+          ]
+        ]
+      ]
+    ],
+    "pass": true
+  },
+  "pass": true,
+  "schema": "yado.cognitive_growth.fresh_holdout.v1",
+  "seed": 8808291441,
+  "thinking": {
+    "baseline": 0.2708333333333333,
+    "blind_cases": 48,
+    "candidate": 1.0,
+    "pass": true,
+    "train_cases": 112
+  }
+}

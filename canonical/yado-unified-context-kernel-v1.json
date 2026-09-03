@@ -13,10 +13,13 @@
     "active_lineage_count": 1,
     "all_non_active_branches_closed_into_generation": "G2_CANDIDATE_TRCG_V1",
     "historical_branch_count": 13,
+    "historical_experience_applied_to_g2_context": true,
     "legacy_auto_execution": false,
     "legacy_code_direct_activation": false,
     "legacy_code_reuse_requires_fresh_admission": true,
+    "legacy_control_plane_quarantined": true,
     "non_active_branch_role": "MEMORY_HISTORY_ONLY",
+    "physical_branch_ref_convergence_required": true,
     "physical_branches_preserved": true,
     "physical_merge_or_deletion_required": false,
     "remote_branch_count": 14
@@ -62,7 +65,9 @@
       "source": "receipts/"
     },
     "historical_branch_memory": {
+      "applied_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
       "mutation": "READ_ONLY",
+      "quarantine_manifest": "quarantine/yado-g2-quarantine-manifest-v1.json",
       "role": "ALL_NON_ACTIVE_BRANCHES_ARE_READ_ONLY_HISTORICAL_EXPERIENCE",
       "source": "canonical/yado-unified-experience-registry-v1.json"
     }

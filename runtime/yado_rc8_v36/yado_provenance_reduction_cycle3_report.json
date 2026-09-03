@@ -1,0 +1,36 @@
+{
+  "baseline_active_recovery_dependencies": 6,
+  "candidate_active_recovery_dependencies": 5,
+  "canonical_state_mutated": false,
+  "claim_boundary": {
+    "active_dependency_reduced_by_one": true,
+    "all_compatibility_recovery_removed": false,
+    "lost_original_recovered": false
+  },
+  "equivalence": {
+    "all_boolean_functions": 256,
+    "receipt_sha256": "42ed9f75daf6bf131a58d44535d0aaaeae1e683fa173b5877ce2a3a6c0f390eb",
+    "status": "PASS",
+    "truth_table_evaluations": 26712
+  },
+  "finding": "F-R7-PROV-015",
+  "frontier": "REMOVE_COMPATIBILITY_RECOVERY_DEPENDENCE",
+  "patched_consumer": "yado_core_v2_6_cross_domain.py",
+  "patched_consumer_sha256": "d83fc74d5a009405b58785de0cfac74211f41e1e6d994925e9f4dc9d12a76650",
+  "promotion": {
+    "active_recovery_dependencies_after": 5,
+    "canonical_state_mutated": false,
+    "canonical_state_sha256": "1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b"
+  },
+  "regression": {
+    "boolean_recovery_ablation": "PASS",
+    "candidate_cumulative": "23/23 PASS",
+    "compileall": true,
+    "resourcewarning_as_error": true
+  },
+  "removed_active_dependency": "yado_cognitive_training_cycle1",
+  "replacement": "yado_boolean_runtime_native_v1.py",
+  "replacement_sha256": "0cfda5df9abd476cac7c86f71768a53b988ea69d2f2a3cb0b042ca7f9176fbb8",
+  "schema": "yado.provenance_reduction.cycle3.v1",
+  "status": "PASS_BOUNDED_ACTIVE_PROVENANCE_DEPENDENCY_REDUCTION_CYCLE3"
+}

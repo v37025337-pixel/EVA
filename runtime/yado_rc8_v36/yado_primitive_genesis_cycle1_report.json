@@ -1,0 +1,145 @@
+{
+  "schema": "yado.primitive_genesis.cycle1.v1",
+  "self_audit_selected_deficit": "PHASE_A_PRIMITIVE_SUBSTRATE_DEPENDENCE",
+  "prior_state": {
+    "phase_a_status": "SUBSTRATE_SUPPORTED_REAL_CFG_PENDING",
+    "host_supplied_primitive_substrate": true,
+    "actual_18_cfg_counterexamples_available": false
+  },
+  "resource_selection": {
+    "query": "derive new operator schema from examples and repeated failures when the current primitive DSL is not expressive; constrain search from evidence, freeze before blind, rank robust candidates, avoid task-specific operator injection",
+    "ranking": [
+      {
+        "repo": "microsoft/prose",
+        "score": 0.31158045977011495
+      },
+      {
+        "repo": "egraphs-good/egg",
+        "score": 0.08557471264367816
+      },
+      {
+        "repo": "emina/rosette",
+        "score": 0.07899425287356321
+      }
+    ],
+    "selected": "microsoft/prose",
+    "selection_is_lexical_structural": true,
+    "resource_is_authority": false
+  },
+  "learned_method": {
+    "trigger": "detect expressiveness deficit when fixed DSL cannot fit revealed examples",
+    "search": "derive candidate schema parameters from IO witness structure rather than inject task operator",
+    "ranking": "prefer exact fit then lower schema complexity",
+    "validation": "freeze selected schema before fresh blind; causal ablation to old substrate; restore",
+    "source": "microsoft/prose",
+    "source_tutorial_sha": "0b467252e8593a92d75cd7ecb42b3f60eb5ec269"
+  },
+  "tasks": [
+    {
+      "task": "overlapping_width3",
+      "before": {
+        "candidate_programs": 819,
+        "best_stages": [
+          "VALUES"
+        ],
+        "train_exact": 0.0,
+        "best_digest": "1ae8ceb48176b0ef84eaded60ced71c247196e1093e5c0d3da7ff8c72b4be0fc"
+      },
+      "expressiveness_deficit": true,
+      "generated_candidates": 1,
+      "selected_schema": {
+        "family": "AFFINE_CONTIGUOUS_SLICE_MAP",
+        "width": 3,
+        "stride": 1,
+        "offset": 0,
+        "reverse_each": false,
+        "origin": "FAILURE_DERIVED_SCHEMA"
+      },
+      "selected_digest": "8bd4542c30a8a6d569dd643df8441880d3ca1e834ecf25deea0670895363886b",
+      "train_exact": 1.0,
+      "blind_exact": 1.0,
+      "ablation_old_substrate_blind_exact": 0.0,
+      "restore_exact": 1.0,
+      "verdict": "SHADOW_SUPPORTED"
+    },
+    {
+      "task": "nonoverlap_width2",
+      "before": {
+        "candidate_programs": 819,
+        "best_stages": [
+          "VALUES"
+        ],
+        "train_exact": 0.0,
+        "best_digest": "1ae8ceb48176b0ef84eaded60ced71c247196e1093e5c0d3da7ff8c72b4be0fc"
+      },
+      "expressiveness_deficit": true,
+      "generated_candidates": 1,
+      "selected_schema": {
+        "family": "AFFINE_CONTIGUOUS_SLICE_MAP",
+        "width": 2,
+        "stride": 2,
+        "offset": 0,
+        "reverse_each": false,
+        "origin": "FAILURE_DERIVED_SCHEMA"
+      },
+      "selected_digest": "2a766af0ef328b2f3fa5a49877e7328cbed7afb7c846f574ed211bf9bcd77ea0",
+      "train_exact": 1.0,
+      "blind_exact": 1.0,
+      "ablation_old_substrate_blind_exact": 0.0,
+      "restore_exact": 1.0,
+      "verdict": "SHADOW_SUPPORTED"
+    },
+    {
+      "task": "offset_width2_stride1",
+      "before": {
+        "candidate_programs": 819,
+        "best_stages": [
+          "VALUES"
+        ],
+        "train_exact": 0.0,
+        "best_digest": "1ae8ceb48176b0ef84eaded60ced71c247196e1093e5c0d3da7ff8c72b4be0fc"
+      },
+      "expressiveness_deficit": true,
+      "generated_candidates": 1,
+      "selected_schema": {
+        "family": "AFFINE_CONTIGUOUS_SLICE_MAP",
+        "width": 2,
+        "stride": 1,
+        "offset": 1,
+        "reverse_each": false,
+        "origin": "FAILURE_DERIVED_SCHEMA"
+      },
+      "selected_digest": "52806378f46889dfa3259427e96dbe552e2767f3f6d3c0292d80a44cdf6aba5b",
+      "train_exact": 1.0,
+      "blind_exact": 1.0,
+      "ablation_old_substrate_blind_exact": 0.0,
+      "restore_exact": 1.0,
+      "verdict": "SHADOW_SUPPORTED"
+    }
+  ],
+  "summary": {
+    "tasks": 3,
+    "old_fixed_substrate_failed_all_train": true,
+    "derived_schema_supported_all_tasks": true,
+    "host_task_specific_operator_supplied": false,
+    "host_supplied_meta_schema": true,
+    "derived_operator_schema": true,
+    "host_supplied_primitive_substrate_removed": false,
+    "primitive_dependency_reduced": true,
+    "canonical_durable_mutation": false
+  },
+  "verdict": "SHADOW_SUPPORTED_BOUNDED_PRIMITIVE_GENESIS",
+  "claim_boundary": {
+    "real_18_cfg_counterexamples_replayed": false,
+    "general_operator_invention_proven": false,
+    "bounded_new_operator_schema_induction_proven": true,
+    "zero_host_substrate_claimed": false
+  },
+  "next_frontier": "infer additional relation families from structurally different failures, then test on recovered real CFG counterexamples",
+  "regression": {
+    "phase_a_plus_genesis_tests": "6/6 PASS",
+    "nova_core_v2_5_tests": "24/24 PASS",
+    "nova_core_profile": "safe/default regression; one existing unit test intentionally exercises unrestricted mode",
+    "canonical_durable_head_modified": false
+  }
+}

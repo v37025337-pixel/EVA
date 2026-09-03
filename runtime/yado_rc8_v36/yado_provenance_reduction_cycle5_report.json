@@ -1,0 +1,59 @@
+{
+  "ablation": {
+    "candidate_nonlocked_regression": "28/28 PASS",
+    "old_module_absent_from_active_root": true
+  },
+  "baseline_active_recovery_dependencies": 4,
+  "candidate_active_recovery_dependencies": 3,
+  "canonical_state_sha256": "1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b",
+  "claim_boundary": {
+    "active_dependency_reduced_by_one": true,
+    "all_compatibility_recovery_removed": false,
+    "canonical_state_mutated": false,
+    "external_code_copied_verbatim": false,
+    "lost_original_recovered": false
+  },
+  "equivalence": {
+    "dataset_comparisons": 492,
+    "receipt": "yado_provenance_reduction_cycle5_equivalence.json",
+    "receipt_sha256": "9676aa12dd1e627a3f3d59afc042101deddd102820ac46eee17bce3005fa5257",
+    "status": "PASS_EQUIVALENCE_PLUS_FAIL_CLOSED_REPAIR"
+  },
+  "evolution_archive": {
+    "operation": "CLONAL",
+    "selected_parent": "v23",
+    "target_task": "provenance_reduction"
+  },
+  "finding": "F-R7-PROV-015",
+  "fresh_failure_repair": {
+    "crash_case": "yado_provenance_cycle5_thinking_crash_case.json",
+    "crash_case_sha256": "175b27ddb0f0d4dc560814ea49b2133e1d895d4dc86ce69f01b0a332603eed66",
+    "new_behavior": {
+      "reason": "REVEALED_PARTITION_COLLAPSE",
+      "status": "WITHHOLD"
+    },
+    "old_behavior": "TypeError"
+  },
+  "frontier": "ARCHIVE_DRIVEN_SELF_EVOLUTION_AND_INTERNET_DEPLOYMENT",
+  "locked_regression": "PENDING",
+  "patched_consumer": "yado_core_v3_0_rc6_meta_grammar.py",
+  "patched_consumer_sha256": "42de89ef8d82a17801ea5a9d34b131bc6a518a9479bed3f1775bf3fca6110865",
+  "remaining_active_recovery_dependencies": [
+    "yado_algorithm_component_genesis_cycle1",
+    "yado_evolution_of_evolution_cycle1",
+    "yado_organ_autoevolution_cycle1"
+  ],
+  "removed_active_dependency": "yado_meta_grammar_extension_genesis_cycle1",
+  "replacement": "yado_meta_grammar_runtime_native_v1.py",
+  "replacement_sha256": "e029fc2f7a5a1ffea03b3583a1470fbdffcdf0bded22fe19aa6251498b210a57",
+  "schema": "yado.provenance_reduction.cycle5.v1",
+  "status": "PASS_PROMOTION_READY",
+  "validation": {
+    "archive_tests": "11/11 PASS",
+    "compileall": true,
+    "locked_boot": "PASS",
+    "locked_regression": "42/42 PASS",
+    "resourcewarning_as_error": true,
+    "unittest": "31/31 PASS"
+  }
+}

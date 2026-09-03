@@ -1,0 +1,527 @@
+{
+  "schema": "yado.resource_intelligence.cycle8.v1",
+  "source": "github:Furthir/awesome-useful-projects",
+  "developmental_training_cases": 61,
+  "supported_resources": 33,
+  "fresh_unseen_resources": 8,
+  "candidate_configs_generated": 24,
+  "selected": {
+    "camel_split": false,
+    "gate_k": 1,
+    "semantic_weight": 1.0,
+    "train_top1": 1.0,
+    "train_mrr": 1.0,
+    "fitness": 1.199,
+    "frozen_before_fresh_blind": true,
+    "frozen_digest": "6890d5fbf9c49ea730481c511367d7aa674aa0590db25ac118af802ab0125747"
+  },
+  "fresh_unseen_blind": {
+    "top1": 1.0,
+    "mrr": 1.0,
+    "detail": [
+      {
+        "query": "host games for streaming to moonlight",
+        "expected": "LizardByte/Sunshine",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "LizardByte/Sunshine",
+            "score": 0.47619
+          },
+          {
+            "repo": "AntiMicroX/antimicrox",
+            "score": 0.035088
+          },
+          {
+            "repo": "nextcloud/server",
+            "score": 0.03125
+          }
+        ]
+      },
+      {
+        "query": "use browser as a second monitor screen",
+        "expected": "pavlobu/deskreen",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "pavlobu/deskreen",
+            "score": 0.423913
+          },
+          {
+            "repo": "GyulyVGC/sniffnet",
+            "score": 0.198171
+          },
+          {
+            "repo": "H-M-H/Weylus",
+            "score": 0.177083
+          }
+        ]
+      },
+      {
+        "query": "share files between different devices",
+        "expected": "Jacalz/rymdport",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "Jacalz/rymdport",
+            "score": 0.409302
+          },
+          {
+            "repo": "qarmin/czkawka",
+            "score": 0.15
+          },
+          {
+            "repo": "gdzx/audiosource",
+            "score": 0.04386
+          }
+        ]
+      },
+      {
+        "query": "upscale images using ai across platforms",
+        "expected": "upscayl/upscayl",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "upscayl/upscayl",
+            "score": 0.235135
+          },
+          {
+            "repo": "peazip/PeaZip",
+            "score": 0.020833
+          },
+          {
+            "repo": "pbatard/rufus",
+            "score": 0.02
+          }
+        ]
+      },
+      {
+        "query": "turn tablet into touch screen graphics tablet",
+        "expected": "H-M-H/Weylus",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "H-M-H/Weylus",
+            "score": 0.52381
+          },
+          {
+            "repo": "pavlobu/deskreen",
+            "score": 0.346774
+          },
+          {
+            "repo": "charmbracelet/freeze",
+            "score": 0.039216
+          }
+        ]
+      },
+      {
+        "query": "map keyboard and mouse controls to a gamepad",
+        "expected": "AntiMicroX/antimicrox",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "AntiMicroX/antimicrox",
+            "score": 0.916667
+          },
+          {
+            "repo": "Slackadays/Clipboard",
+            "score": 0.05102
+          },
+          {
+            "repo": "LizardByte/Sunshine",
+            "score": 0.032258
+          }
+        ]
+      },
+      {
+        "query": "customize my shell prompt",
+        "expected": "starship/starship",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "starship/starship",
+            "score": 0.55
+          },
+          {
+            "repo": "fastfetch-cli/fastfetch",
+            "score": 0.05
+          },
+          {
+            "repo": "lissy93/awesome-privacy",
+            "score": 0.031915
+          }
+        ]
+      },
+      {
+        "query": "transcode video files",
+        "expected": "HandBrake/HandBrake",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "HandBrake/HandBrake",
+            "score": 0.416667
+          },
+          {
+            "repo": "qarmin/czkawka",
+            "score": 0.210145
+          },
+          {
+            "repo": "peazip/PeaZip",
+            "score": 0.028571
+          }
+        ]
+      }
+    ]
+  },
+  "ablation_token_only": {
+    "top1": 0.75,
+    "mrr": 0.875,
+    "detail": [
+      {
+        "query": "host games for streaming to moonlight",
+        "expected": "LizardByte/Sunshine",
+        "rank": 1,
+        "top3": [
+          {
+            "repo": "LizardByte/Sunshine",
+            "score": 0.5
+          },
+          {
+            "repo": "wolfree",
+            "score": 0.0
+          },
+          {
+            "repo": "wdhdev/free-for-life",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "use browser as a second monitor screen",
+        "expected": "pavlobu/deskreen",
+        "rank": 1,
+        "top3": [
+          {
+            "repo": "pavlobu/deskreen",
+            "score": 0.5
+          },
+          {
+            "repo": "H-M-H/Weylus",
+            "score": 0.25
+          },
+          {
+            "repo": "GyulyVGC/sniffnet",
+            "score": 0.25
+          }
+        ]
+      },
+      {
+        "query": "share files between different devices",
+        "expected": "Jacalz/rymdport",
+        "rank": 1,
+        "top3": [
+          {
+            "repo": "Jacalz/rymdport",
+            "score": 0.4
+          },
+          {
+            "repo": "qarmin/czkawka",
+            "score": 0.2
+          },
+          {
+            "repo": "wolfree",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "upscale images using ai across platforms",
+        "expected": "upscayl/upscayl",
+        "rank": 1,
+        "top3": [
+          {
+            "repo": "upscayl/upscayl",
+            "score": 0.2
+          },
+          {
+            "repo": "wolfree",
+            "score": 0.0
+          },
+          {
+            "repo": "wdhdev/free-for-life",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "turn tablet into touch screen graphics tablet",
+        "expected": "H-M-H/Weylus",
+        "rank": 2,
+        "top3": [
+          {
+            "repo": "pavlobu/deskreen",
+            "score": 0.5
+          },
+          {
+            "repo": "H-M-H/Weylus",
+            "score": 0.5
+          },
+          {
+            "repo": "wolfree",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "map keyboard and mouse controls to a gamepad",
+        "expected": "AntiMicroX/antimicrox",
+        "rank": 1,
+        "top3": [
+          {
+            "repo": "AntiMicroX/antimicrox",
+            "score": 1.0
+          },
+          {
+            "repo": "wolfree",
+            "score": 0.0
+          },
+          {
+            "repo": "wdhdev/free-for-life",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "customize my shell prompt",
+        "expected": "starship/starship",
+        "rank": 1,
+        "top3": [
+          {
+            "repo": "starship/starship",
+            "score": 0.5
+          },
+          {
+            "repo": "wolfree",
+            "score": 0.0
+          },
+          {
+            "repo": "wdhdev/free-for-life",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "transcode video files",
+        "expected": "HandBrake/HandBrake",
+        "rank": 2,
+        "top3": [
+          {
+            "repo": "qarmin/czkawka",
+            "score": 0.333333
+          },
+          {
+            "repo": "HandBrake/HandBrake",
+            "score": 0.333333
+          },
+          {
+            "repo": "wolfree",
+            "score": 0.0
+          }
+        ]
+      }
+    ]
+  },
+  "restore": {
+    "top1": 1.0,
+    "mrr": 1.0,
+    "detail": [
+      {
+        "query": "host games for streaming to moonlight",
+        "expected": "LizardByte/Sunshine",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "LizardByte/Sunshine",
+            "score": 0.47619
+          },
+          {
+            "repo": "AntiMicroX/antimicrox",
+            "score": 0.035088
+          },
+          {
+            "repo": "nextcloud/server",
+            "score": 0.03125
+          }
+        ]
+      },
+      {
+        "query": "use browser as a second monitor screen",
+        "expected": "pavlobu/deskreen",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "pavlobu/deskreen",
+            "score": 0.423913
+          },
+          {
+            "repo": "GyulyVGC/sniffnet",
+            "score": 0.198171
+          },
+          {
+            "repo": "H-M-H/Weylus",
+            "score": 0.177083
+          }
+        ]
+      },
+      {
+        "query": "share files between different devices",
+        "expected": "Jacalz/rymdport",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "Jacalz/rymdport",
+            "score": 0.409302
+          },
+          {
+            "repo": "qarmin/czkawka",
+            "score": 0.15
+          },
+          {
+            "repo": "gdzx/audiosource",
+            "score": 0.04386
+          }
+        ]
+      },
+      {
+        "query": "upscale images using ai across platforms",
+        "expected": "upscayl/upscayl",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "upscayl/upscayl",
+            "score": 0.235135
+          },
+          {
+            "repo": "peazip/PeaZip",
+            "score": 0.020833
+          },
+          {
+            "repo": "pbatard/rufus",
+            "score": 0.02
+          }
+        ]
+      },
+      {
+        "query": "turn tablet into touch screen graphics tablet",
+        "expected": "H-M-H/Weylus",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "H-M-H/Weylus",
+            "score": 0.52381
+          },
+          {
+            "repo": "pavlobu/deskreen",
+            "score": 0.346774
+          },
+          {
+            "repo": "charmbracelet/freeze",
+            "score": 0.039216
+          }
+        ]
+      },
+      {
+        "query": "map keyboard and mouse controls to a gamepad",
+        "expected": "AntiMicroX/antimicrox",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "AntiMicroX/antimicrox",
+            "score": 0.916667
+          },
+          {
+            "repo": "Slackadays/Clipboard",
+            "score": 0.05102
+          },
+          {
+            "repo": "LizardByte/Sunshine",
+            "score": 0.032258
+          }
+        ]
+      },
+      {
+        "query": "customize my shell prompt",
+        "expected": "starship/starship",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "starship/starship",
+            "score": 0.55
+          },
+          {
+            "repo": "fastfetch-cli/fastfetch",
+            "score": 0.05
+          },
+          {
+            "repo": "lissy93/awesome-privacy",
+            "score": 0.031915
+          }
+        ]
+      },
+      {
+        "query": "transcode video files",
+        "expected": "HandBrake/HandBrake",
+        "rank": 1,
+        "semantic_gate": false,
+        "top3": [
+          {
+            "repo": "HandBrake/HandBrake",
+            "score": 0.416667
+          },
+          {
+            "repo": "qarmin/czkawka",
+            "score": 0.210145
+          },
+          {
+            "repo": "peazip/PeaZip",
+            "score": 0.028571
+          }
+        ]
+      }
+    ]
+  },
+  "verdict": "SHADOW_SUPPORTED_BOUNDED",
+  "provenance": {
+    "task_specific_repo_rule_supplied": false,
+    "candidate_config_generated_by_search": true,
+    "fresh_blind_used_for_selection": false,
+    "semantic_translation_learned_from_revealed_corrections": true,
+    "support_boundary_active": true,
+    "representation_candidates": [
+      "RAW_TOKENIZE",
+      "CAMEL_SPLIT_TOKENIZE"
+    ],
+    "canonical_durable_head_modified": false,
+    "shadow_only": true
+  },
+  "claim_boundary": {
+    "full_catalog_general_semantics_proven": false,
+    "bounded_resource_selection_improved": true,
+    "subjective_intelligence_or_consciousness_claimed": false
+  }
+}

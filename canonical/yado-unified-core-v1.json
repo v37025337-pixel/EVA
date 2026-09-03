@@ -26,7 +26,13 @@
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "84d9da3bf9f990ac99fca8405f30940bcfea5f19d04c2df21d72104dfba77899",
+  "algorithm_provenance_registry_digest": "29f6de97e7ccdd535273bf364cd0b0d3755cd58a6a5e3e84573434b618115ad7",
+  "applied_experience_binding": {
+    "application_scope": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+    "artifact": "canonical/yado-g2-applied-experience-binding-v1.json",
+    "binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
+    "selection_actor": "UnifiedYADOCoreV1.experience_search"
+  },
   "architecture_composite_successor_design_v1": {
     "architecture_mutation": false,
     "candidate_digest": "a8d0c8dd637abb539f247c24a6a9b3cfe624458f14761711c5a8c90d401a9fb9",
@@ -197,7 +203,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "9c2374032bbb7ee2edb61ecc6ecaf5520926540139e0517b77619311800db608",
+  "core_digest": "81ac5318a7962a681914b95bdc7b94454e7271e98b790fde6ab918ca3f08fae5",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -264,7 +270,7 @@
     "source_sha256": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5"
   },
   "experience_registry": "canonical/yado-unified-experience-registry-v1.json",
-  "experience_registry_digest": "22784e0e8c8dff0a4f8422aa84fde37dd5a0482e465a49612c0bae0a92bd6942",
+  "experience_registry_digest": "a098a850d724439f5bd428c59f13e6567330541e53a872b5c00b687db187126c",
   "frontier_source": "architecture/evolution-ledger.json:open_deficits",
   "g3_genesis_performed": false,
   "generation": "G2_CANDIDATE_TRCG_V1",
@@ -353,7 +359,10 @@
     "RC_LAYER_INHERITANCE_IS_NOT_A_GENERATION_PROMOTION",
     "CANONICAL_HIGH_SCALE_V5_ROUTE_MUST_INVERT_NORMALIZED_SOURCE_COUNT_WITH_DECLARED_DENOMINATOR",
     "CANONICAL_HIGH_SCALE_V5_BINDING_MUST_MATCH_FROZEN_V4_MODEL_AND_V5_ROUTE_REPAIR",
-    "FRESH_ROUTE_PROBES_MUST_NOT_PARTICIPATE_IN_V5_SELECTION"
+    "FRESH_ROUTE_PROBES_MUST_NOT_PARTICIPATE_IN_V5_SELECTION",
+    "LEGACY_CONTROL_PLANE_IS_QUARANTINED_OUTSIDE_GITHUB_WORKFLOWS",
+    "HISTORICAL_EXPERIENCE_MAY_GUIDE_G2_BUT_LEGACY_MECHANISMS_REQUIRE_FRESH_ADMISSION",
+    "ALL_OPERATIONAL_BRANCH_REFS_MUST_CONVERGE_TO_SINGLE_G2_TREE_AFTER_CLOSURE"
   ],
   "legacy_branch_count": 13,
   "legacy_experience_provenance": {
@@ -475,6 +484,14 @@
         "canonical/yado-main-head-g2.json",
         "architecture/evolution-ledger.json"
       ],
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
+      "experience_sources": [
+        "yado-kernel-task-v37-repair",
+        "yado-rc8-digital-consciousness-v1",
+        "yado-rc8-v36-digital-consciousness",
+        "yado-rc8-v37-digital-consciousness"
+      ],
       "plane_id": "IDENTITY_AND_LINEAGE",
       "responsibilities": [
         "single_head",
@@ -491,8 +508,16 @@
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
       ],
       "branch_closure_mode": "READ_ONLY_HISTORY_INTO_G2",
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
       "experience_components": [
         "canonical/yado-unified-experience-registry-v1.json"
+      ],
+      "experience_sources": [
+        "yado-v29-cognitive",
+        "yado-kernel-task-v37-repair",
+        "yado-rc8-digital-consciousness-v1",
+        "yado-rc8-v36-digital-consciousness"
       ],
       "historical_branch_count": 13,
       "legacy_experience_retrieval": "ACTIVE_READ_ONLY_EXACT",
@@ -515,6 +540,12 @@
         "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
         "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1"
       ],
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
+      "experience_sources": [
+        "yado-v29-cognitive",
+        "yado-kernel-task-v37-repair"
+      ],
       "plane_id": "LOGIC",
       "responsibilities": [
         "bounded_conjunction",
@@ -533,6 +564,12 @@
         "ALG-BUDGETED-STAGE-POLICY-V1",
         "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
         "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      ],
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
+      "experience_sources": [
+        "yado-v29-cognitive",
+        "yado-kernel-task-v37-repair"
       ],
       "plane_id": "THINKING_AND_PLANNING",
       "responsibilities": [
@@ -568,6 +605,14 @@
         "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
         "RUNTIME-G2-HIGH-SCALE-BINDING-V5"
       ],
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
+      "experience_sources": [
+        "yado-rc8-v33-evolution",
+        "yado-v29-cognitive",
+        "yado-kernel-task-v37-repair",
+        "yado-rc8-consciousness-ab"
+      ],
       "plane_id": "INTELLIGENCE_AND_META_SELECTION",
       "responsibilities": [
         "ambiguity_aware_withhold",
@@ -591,9 +636,13 @@
       "active_components": [
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
       ],
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
       "experience_sources": [
         "yado-rc8-consciousness-ab",
-        "yado-rc8-digital-consciousness-v1"
+        "yado-rc8-consciousness-audit",
+        "yado-rc8-digital-consciousness-v1",
+        "yado-rc8-v37-digital-consciousness"
       ],
       "note": "Legacy workspace/consciousness mechanisms are experience only, not active consciousness claims.",
       "plane_id": "WORKSPACE_AND_INTEGRATION",
@@ -607,6 +656,13 @@
       "active_components": [
         "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1",
         "RESOURCE-PORTFOLIO-V1"
+      ],
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
+      "experience_sources": [
+        "yado-rc8-v35-training",
+        "yado-rc8-v33-evolution",
+        "yado-v29-cognitive"
       ],
       "plane_id": "RESOURCE_AND_EVIDENCE",
       "responsibilities": [
@@ -622,9 +678,12 @@
         "ALG-G2-DEEP-SELF-AUDIT-V1",
         "architecture/evolution-ledger.json"
       ],
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
       "experience_sources": [
+        "yado-kernel-task-v37-repair",
         "yado-rc8-v37-digital-consciousness",
-        "yado-kernel-task-v37-repair"
+        "yado-v28-runtime"
       ],
       "plane_id": "SELF_AUDIT_AND_REPAIR",
       "responsibilities": [
@@ -646,10 +705,10 @@
       "active_components": [
         "ALG-G2-RAW-TASK-REPRESENTATION-V4"
       ],
+      "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
+      "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
       "experience_sources": [
-        "yado-v29-cognitive",
-        "yado-rc8-consciousness-ab",
-        "yado-rc8-digital-consciousness-v1"
+        "main"
       ],
       "frontier": "POST_COMPOSITE_ROBUST_RAW_REPRESENTATION_V4",
       "plane_id": "REPRESENTATION_AND_GROUNDING",
@@ -744,6 +803,12 @@
   },
   "promotion_applied": false,
   "purpose": "ONE_ACTIVE_KERNEL_WITH_LEGACY_BRANCHES_AS_READ_ONLY_DEVELOPMENTAL_EXPERIENCE",
+  "quarantine": {
+    "legacy_runtime_execution_forbidden": true,
+    "legacy_workflow_count": 8,
+    "manifest": "quarantine/yado-g2-quarantine-manifest-v1.json",
+    "manifest_digest": "2e88d2804e1c210718ba4ccbbec1aa9c361020ed3c10e83306fbbbfb6bbfa759"
+  },
   "raw_representation_post_composite_self_evolution_v1": {
     "candidate_digest": "0581c3341eb045137ccaab0eda31e4bfb839fbdc381195d3795e9bea831697ae",
     "canonical_active": false,

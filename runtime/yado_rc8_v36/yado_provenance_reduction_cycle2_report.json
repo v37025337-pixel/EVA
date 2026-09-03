@@ -1,0 +1,35 @@
+{
+  "baseline_active_recovery_dependencies": 7,
+  "candidate_active_recovery_dependencies": 6,
+  "canonical_state_mutated": false,
+  "claim_boundary": {
+    "active_dependency_reduced_by_one": true,
+    "all_compatibility_recovery_removed": false,
+    "lost_original_recovered": false
+  },
+  "equivalence": {
+    "canonical_identity": true,
+    "cases": 220,
+    "receipt": "yado_provenance_reduction_cycle2_equivalence.json",
+    "receipt_sha256": "6dce245e47414edcb3ade8e9b499d094bbed0c7608a793eb51d5f571d51780df",
+    "status": "PASS"
+  },
+  "finding": "F-R7-PROV-015",
+  "frontier": "REMOVE_COMPATIBILITY_RECOVERY_DEPENDENCE",
+  "patched_consumer_sha256": "a83883201b23fd807815a6f446b50fd2badc2e022da3bc467bee33da52bebf6e",
+  "promotion": {
+    "active_recovery_dependencies_after": 6,
+    "canonical_state_mutated": false,
+    "canonical_state_sha256": "1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b"
+  },
+  "regression": {
+    "candidate_cumulative": "19/19 PASS",
+    "compileall": true,
+    "resourcewarning_as_error": true,
+    "semantic_shim_ablation": "PASS"
+  },
+  "removed_active_dependency": "yado_semantic_boundary_repair_probe",
+  "replacement": "DIRECT_DURABLE_SOURCE_DERIVATION_IN_yado_semantic_selective_v27",
+  "schema": "yado.provenance_reduction.cycle2.v1",
+  "status": "PASS_BOUNDED_ACTIVE_PROVENANCE_DEPENDENCY_REDUCTION_CYCLE2"
+}

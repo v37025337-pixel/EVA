@@ -1,0 +1,64 @@
+{
+  "external_deployment_verified": false,
+  "providers": {
+    "github": {
+      "contradictions": [],
+      "eligible": false,
+      "missing": [
+        "authorized_write_channel"
+      ],
+      "verdict": "BLOCKED_AUTHORIZED_WRITE_CHANNEL"
+    },
+    "supabase_existing_edge": {
+      "contradictions": [],
+      "eligible": false,
+      "missing": [
+        "python_execution"
+      ],
+      "verdict": "BLOCKED_PYTHON_RUNTIME"
+    },
+    "supabase_strict_artifact_runner": {
+      "contradictions": [],
+      "eligible": false,
+      "missing": [
+        "python_execution"
+      ],
+      "verdict": "BLOCKED_PYTHON_RUNTIME"
+    },
+    "vercel": {
+      "contradictions": [
+        "DEPLOYMENT_CREATED_WITHOUT_READBACK",
+        "READY_RECEIPT_PROJECT_NOT_VISIBLE"
+      ],
+      "eligible": false,
+      "missing": [
+        "durable_state",
+        "independent_readback"
+      ],
+      "verdict": "CONTRADICTORY_UNVERIFIED"
+    }
+  },
+  "route": {
+    "accepted": false,
+    "action": "SEEK_MORE_EVIDENCE",
+    "margin": 0.003768631517832549,
+    "margin_min": 0.02,
+    "top3": [
+      {
+        "label": "CONDITIONAL_WORK_BROWSER",
+        "score": 0.11238386233825538
+      },
+      {
+        "label": "USE_BOUNDED_CODE_EXECUTION",
+        "score": 0.10861523082042283
+      },
+      {
+        "label": "USE_CONNECTOR_IF_AVAILABLE",
+        "score": 0.1028074657841872
+      }
+    ],
+    "top_candidate": "CONDITIONAL_WORK_BROWSER",
+    "top_min": 0.1,
+    "top_score": 0.11238386233825538
+  }
+}

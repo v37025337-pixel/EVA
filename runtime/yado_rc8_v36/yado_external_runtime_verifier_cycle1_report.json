@@ -1,0 +1,47 @@
+{
+  "boot_identity_fields": [
+    "status",
+    "kernel_class",
+    "kernel_profile",
+    "canonical_state_sha256",
+    "manifest_sha256",
+    "sqlite_integrity"
+  ],
+  "canonical_state_mutated": false,
+  "claim_boundary": {
+    "credential_or_permission_bypass": false,
+    "host_materialized_generic_runtime": true,
+    "provider_selected_by_host": false
+  },
+  "compileall": true,
+  "current_evidence": {
+    "github": "BLOCKED_AUTHORIZED_WRITE_CHANNEL",
+    "supabase_existing_runners": "BLOCKED_PYTHON_RUNTIME",
+    "vercel": "CONTRADICTORY_UNVERIFIED"
+  },
+  "external_deployment_verified": false,
+  "fresh_holdout": {
+    "cases": 2000,
+    "naive_false_accepts": 504,
+    "new_gate_false_accepts": 0,
+    "new_gate_mismatch": 0,
+    "oracle_eligible": 30,
+    "status": "PASS"
+  },
+  "full_regression": "60/60 PASS",
+  "hard_requirements": [
+    "authorized_write_channel",
+    "python_execution",
+    "durable_state",
+    "scheduled_or_event_invocation",
+    "outbound_https",
+    "independent_readback"
+  ],
+  "mechanism": "yado_external_runtime_contract_v1.py",
+  "resourcewarning_as_error": true,
+  "router_action": "USE_BOUNDED_CODE_EXECUTION",
+  "router_margin": 0.05726953951215091,
+  "router_score": 0.1937077423774426,
+  "schema": "yado.external_runtime_verifier.v1",
+  "status": "PASS_BOUNDED_EXTERNAL_RUNTIME_VERIFIER"
+}

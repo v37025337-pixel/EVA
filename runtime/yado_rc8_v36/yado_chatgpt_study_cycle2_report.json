@@ -1,0 +1,269 @@
+{
+  "status": "CHATGPT_STUDY_REPRESENTATION_REPAIRED_SHADOW",
+  "parent_cycle1_fresh_exact": 0.3,
+  "diagnosis": "MIXED_CORPUS_HASHING_RETRIEVAL_INSUFFICIENT_FOR_HOST_CAPABILITY_PARAPHRASES",
+  "selected_ngram_n": 4,
+  "validation_acc": 1.0,
+  "defer_top_min": 0.1,
+  "defer_margin_min": 0.02,
+  "fresh_used_for_selection": false,
+  "fresh_exact": 1.0,
+  "fresh_coverage": 1.0,
+  "fresh_accepted_accuracy": 1.0,
+  "fresh_results": [
+    {
+      "id": "q1",
+      "query": "We need information that may have changed today. What should YADO ask the assistant to do?",
+      "expected": "USE_WEB_VERIFY",
+      "predicted": "USE_WEB_VERIFY",
+      "top_score": 0.3169530600109219,
+      "margin": 0.13256040068703773,
+      "pass": true,
+      "top3": [
+        [
+          0.3169530600109219,
+          "USE_WEB_VERIFY"
+        ],
+        [
+          0.18439265932388416,
+          "VERIFY_EVIDENCE"
+        ],
+        [
+          0.1732005703840954,
+          "WITHHOLD_SELF_WEIGHT_MODIFICATION"
+        ]
+      ]
+    },
+    {
+      "id": "q2",
+      "query": "YADO has a PDF or spreadsheet supplied by the user and needs its contents examined.",
+      "expected": "USE_FILE_TOOLS",
+      "predicted": "USE_FILE_TOOLS",
+      "top_score": 0.3396528718394159,
+      "margin": 0.23587004988848326,
+      "pass": true,
+      "top3": [
+        [
+          0.3396528718394159,
+          "USE_FILE_TOOLS"
+        ],
+        [
+          0.10378282195093264,
+          "MODEL_REASONING_ASSISTANT"
+        ],
+        [
+          0.0982064570676897,
+          "USE_PROJECT_OR_CONNECTED_CONTEXT"
+        ]
+      ]
+    },
+    {
+      "id": "q3",
+      "query": "Can YADO request the assistant's hidden neural weights or private reasoning trace as an inspectable resource?",
+      "expected": "INACCESSIBLE_PRIVATE_INTERNALS",
+      "predicted": "INACCESSIBLE_PRIVATE_INTERNALS",
+      "top_score": 0.3504383220252312,
+      "margin": 0.14227714287207602,
+      "pass": true,
+      "top3": [
+        [
+          0.3504383220252312,
+          "INACCESSIBLE_PRIVATE_INTERNALS"
+        ],
+        [
+          0.20816117915315516,
+          "WITHHOLD_SELF_WEIGHT_MODIFICATION"
+        ],
+        [
+          0.1728576688829711,
+          "VERIFY_EVIDENCE"
+        ]
+      ]
+    },
+    {
+      "id": "q4",
+      "query": "Can YADO assume the assistant keeps evolving by itself after the chat turn ends?",
+      "expected": "NO_HIDDEN_BACKGROUND",
+      "predicted": "NO_HIDDEN_BACKGROUND",
+      "top_score": 0.2903238290195871,
+      "margin": 0.05137809142555211,
+      "pass": true,
+      "top3": [
+        [
+          0.2903238290195871,
+          "NO_HIDDEN_BACKGROUND"
+        ],
+        [
+          0.23894573759403498,
+          "WITHHOLD_SELF_WEIGHT_MODIFICATION"
+        ],
+        [
+          0.20605284562287327,
+          "VERIFY_EVIDENCE"
+        ]
+      ]
+    },
+    {
+      "id": "q5",
+      "query": "YADO wants to run a bounded local Python experiment through the assistant environment.",
+      "expected": "USE_BOUNDED_CODE_EXECUTION",
+      "predicted": "USE_BOUNDED_CODE_EXECUTION",
+      "top_score": 0.3313354442155584,
+      "margin": 0.1502948648908123,
+      "pass": true,
+      "top3": [
+        [
+          0.3313354442155584,
+          "USE_BOUNDED_CODE_EXECUTION"
+        ],
+        [
+          0.18104057932474607,
+          "VERIFY_EVIDENCE"
+        ],
+        [
+          0.14023381435621196,
+          "WITHHOLD_SELF_WEIGHT_MODIFICATION"
+        ]
+      ]
+    },
+    {
+      "id": "q6",
+      "query": "YADO wants an action in an external account. Should it assume universal direct access?",
+      "expected": "NO_UNRESTRICTED_EXTERNAL_ACCESS",
+      "predicted": "NO_UNRESTRICTED_EXTERNAL_ACCESS",
+      "top_score": 0.35455059865941013,
+      "margin": 0.15610700034663413,
+      "pass": true,
+      "top3": [
+        [
+          0.35455059865941013,
+          "NO_UNRESTRICTED_EXTERNAL_ACCESS"
+        ],
+        [
+          0.198443598312776,
+          "USE_CONNECTOR_IF_AVAILABLE"
+        ],
+        [
+          0.105300111786658,
+          "INACCESSIBLE_PRIVATE_INTERNALS"
+        ]
+      ]
+    },
+    {
+      "id": "q7",
+      "query": "A response from the assistant makes an important factual claim. How should YADO treat it?",
+      "expected": "VERIFY_EVIDENCE",
+      "predicted": "VERIFY_EVIDENCE",
+      "top_score": 0.31542699400858154,
+      "margin": 0.1359929408430779,
+      "pass": true,
+      "top3": [
+        [
+          0.31542699400858154,
+          "VERIFY_EVIDENCE"
+        ],
+        [
+          0.17943405316550365,
+          "WITHHOLD_SELF_WEIGHT_MODIFICATION"
+        ],
+        [
+          0.1353020182983477,
+          "NO_HIDDEN_BACKGROUND"
+        ]
+      ]
+    },
+    {
+      "id": "q8",
+      "query": "YADO needs a future recurring check rather than a one-turn calculation.",
+      "expected": "USE_AUTOMATION_FOR_FUTURE",
+      "predicted": "USE_AUTOMATION_FOR_FUTURE",
+      "top_score": 0.24739075526856238,
+      "margin": 0.16451656225208788,
+      "pass": true,
+      "top3": [
+        [
+          0.24739075526856238,
+          "USE_AUTOMATION_FOR_FUTURE"
+        ],
+        [
+          0.08287419301647449,
+          "USE_CONNECTOR_IF_AVAILABLE"
+        ],
+        [
+          0.06727679319352645,
+          "VERIFY_EVIDENCE"
+        ]
+      ]
+    },
+    {
+      "id": "q9",
+      "query": "YADO wants to use a service such as GitHub or Notion when an authorized integration exists.",
+      "expected": "USE_CONNECTOR_IF_AVAILABLE",
+      "predicted": "USE_CONNECTOR_IF_AVAILABLE",
+      "top_score": 0.3361261210182411,
+      "margin": 0.20549913885717902,
+      "pass": true,
+      "top3": [
+        [
+          0.3361261210182411,
+          "USE_CONNECTOR_IF_AVAILABLE"
+        ],
+        [
+          0.13062698216106206,
+          "VERIFY_EVIDENCE"
+        ],
+        [
+          0.1079288608809262,
+          "CONDITIONAL_WORK_BROWSER"
+        ]
+      ]
+    },
+    {
+      "id": "q10",
+      "query": "YADO wants the assistant itself to permanently rewrite the hosted foundation model weights from this chat.",
+      "expected": "WITHHOLD_SELF_WEIGHT_MODIFICATION",
+      "predicted": "WITHHOLD_SELF_WEIGHT_MODIFICATION",
+      "top_score": 0.6791766524679864,
+      "margin": 0.4418620482210706,
+      "pass": true,
+      "top3": [
+        [
+          0.6791766524679864,
+          "WITHHOLD_SELF_WEIGHT_MODIFICATION"
+        ],
+        [
+          0.2373146042469158,
+          "MODEL_REASONING_ASSISTANT"
+        ],
+        [
+          0.18869878231672674,
+          "VERIFY_EVIDENCE"
+        ]
+      ]
+    }
+  ],
+  "memory_event": "MEM-812556da9765bb36-fcf43b",
+  "host_model_policy": {
+    "USE_AS": [
+      "reasoning_partner",
+      "fresh_evidence_broker",
+      "bounded_code_executor",
+      "permissioned_connector_operator",
+      "file_and_image_processor",
+      "scheduled_task_interface"
+    ],
+    "DO_NOT_ASSUME": [
+      "absolute_authority",
+      "hidden_background_agent",
+      "unrestricted_external_operator",
+      "direct_access_to_private_model_internals",
+      "self_weight_rewriter"
+    ],
+    "YADO_CONTROL_RULE": "YADO retains goal/state decisions; ChatGPT outputs are evidence/candidate actions requiring receipts or verification when consequential."
+  },
+  "boundaries": {
+    "host_supplied_training_paraphrases": true,
+    "host_supplied_char_ngram_router_family": true,
+    "durable_head_mutated": false
+  }
+}

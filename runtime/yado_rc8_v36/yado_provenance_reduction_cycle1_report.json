@@ -1,0 +1,49 @@
+{
+  "ablation": {
+    "ablated_file": "yado_trace_crystallization_cycle1.py",
+    "kernel_boot_without_ablated_file": true,
+    "profile": "YADO_V3_0_RC7_DEEP_INTEGRITY_AND_FRONTIER_CONSOLIDATION_LOCAL",
+    "status": "PASS"
+  },
+  "baseline_active_import_closure_modules": 48,
+  "baseline_active_recovery_dependencies": 8,
+  "candidate_active_import_closure_modules": 48,
+  "candidate_active_recovery_dependencies": 7,
+  "canonical_state_mutated": false,
+  "claim_boundary": {
+    "active_dependency_reduced_by_one": true,
+    "all_compatibility_recovery_removed": false,
+    "foundation_model_weights_modified": false,
+    "lost_original_recovered": false,
+    "unrestricted_self_rewrite_proven": false
+  },
+  "differential_validation": {
+    "cases": 960,
+    "receipt": "yado_provenance_reduction_cycle1_equivalence.json",
+    "receipt_sha256": "95292624a58fcb4d7363a789bdd7eb4cf01a471d2134e9f60bada16fcf744e24",
+    "status": "PASS"
+  },
+  "finding": "F-R7-PROV-015",
+  "frontier": "REMOVE_COMPATIBILITY_RECOVERY_DEPENDENCE",
+  "patched_consumer": "yado_core_v2_9_trace_crystallization.py",
+  "patched_consumer_sha256": "94919a1ee45c04e8cbb02016341bc9e65d5bb7e76e37260378b1277a03daf718",
+  "promotion": {
+    "active_profile_unchanged": true,
+    "canonical_state_mutated": false,
+    "canonical_state_sha256": "1bee35d94b6e853700b86fafbe7bce5e0199a167f9b918b31de547cfc83be52b",
+    "remaining_recovery_dependencies": 7,
+    "scope": "LOCAL_PROJECT_RUNTIME_SUBSTRATE"
+  },
+  "regression": {
+    "baseline_before_patch": "11/11 PASS",
+    "bootstrap_v19": true,
+    "candidate_with_recovery_file_ablated": "15/15 PASS",
+    "compileall": true,
+    "resourcewarning_as_error": true
+  },
+  "removed_active_dependency": "yado_trace_crystallization_cycle1",
+  "replacement": "yado_transition_runtime_native_v1.py",
+  "replacement_sha256": "af86119bd299e7d6bcc0ea4f8593f7cd4de84fefcdf1ce60b61a666575bdc828",
+  "schema": "yado.provenance_reduction.cycle1.v1",
+  "status": "PASS_BOUNDED_ACTIVE_PROVENANCE_DEPENDENCY_REDUCTION_CYCLE1"
+}

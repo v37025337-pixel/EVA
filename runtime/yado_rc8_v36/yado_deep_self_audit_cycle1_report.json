@@ -1,0 +1,591 @@
+{
+  "audited_profile": "YADO_V3_0_RC6_R6_BOUNDED_SCHEMA_ADAPTATION_LOCAL",
+  "audited_state_sha256": "b910356f172069e97437802955decee262608fab4330b675148b167acfe523b3",
+  "baseline_regression": {
+    "compileall": true,
+    "yado": "47/47 PASS"
+  },
+  "claim_boundary": {
+    "audit_is_host_executed_against_real_local_artifacts": true,
+    "general_self_improvement_proven": false,
+    "kernel_weights_modified": false,
+    "third_party_code_executed": false
+  },
+  "critical_count": 2,
+  "findings": [
+    {
+      "component": "control_plane",
+      "evidence": {
+        "expected_profile": "YADO_V3_0_RC6_R6_BOUNDED_SCHEMA_ADAPTATION_LOCAL",
+        "expected_state_sha256": "b910356f172069e97437802955decee262608fab4330b675148b167acfe523b3",
+        "head_profile": "YADO_V3_0_RC6_R3_REAL_EXTERNAL_TRIGGER_GENERALIZATION_LOCAL",
+        "head_state_sha256": "cd14fbc5aa45ae877b326a72032df3d8f15f12c5552e84adee4c459c2bd8bf03"
+      },
+      "id": "F-R7-CTRL-001",
+      "severity": "CRITICAL",
+      "status": "OPEN",
+      "title": "Active head descriptor is behind the latest proven R6 lineage"
+    },
+    {
+      "component": "control_plane",
+      "evidence": {
+        "current_alias": {
+          "ACTIVE_STATE": "yado_canonical_state_v3_rc6_r3_real_external.json",
+          "ACTIVE_STATE_SHA256": "cd14fbc5aa45ae877b326a72032df3d8f15f12c5552e84adee4c459c2bd8bf03",
+          "class": "UnifiedYADOKernelV30RC6R3RealExternal",
+          "module": "yado_core_v3_0_rc6_r3_real_external",
+          "sha256": "1b6b77fcd313b7a56f483c2289f20b22a151b6834971819b46695c37181fd992"
+        },
+        "expected_state_sha256": "b910356f172069e97437802955decee262608fab4330b675148b167acfe523b3"
+      },
+      "id": "F-R7-CTRL-002",
+      "severity": "CRITICAL",
+      "status": "OPEN",
+      "title": "yado_core_current.py points to a stale active lineage"
+    },
+    {
+      "component": "state_lineage",
+      "evidence": {
+        "active_profile": "YADO_V3_0_RC6_R6_BOUNDED_SCHEMA_ADAPTATION_LOCAL",
+        "expected_profile": "YADO_V3_0_RC6_R6_BOUNDED_SCHEMA_ADAPTATION_LOCAL",
+        "profile": "YADO_V3_0_RC6_R5_OPEN_RESOURCE_ECOSYSTEM_LOCAL",
+        "schema": "yado.v3_0_rc6_r5.open_resource_ecosystem.state.v1",
+        "version": "3.0-rc6-r5"
+      },
+      "id": "F-R7-STATE-003",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "R6 durable state carries stale R5 top-level metadata"
+    },
+    {
+      "component": "artifact_integrity",
+      "evidence": {
+        "mismatches": [
+          {
+            "actual": "de5048a74f2716f20a16896f6ae28f18ae333eaae4665999826781ae06b1a066",
+            "expected": "1392416a38ed140689439c109552a5fbd64f6c0b38ef7eeaced71549acb7dd4e",
+            "file": "yado_active_developmental_head.json"
+          },
+          {
+            "actual": "1b6b77fcd313b7a56f483c2289f20b22a151b6834971819b46695c37181fd992",
+            "expected": "4c0c6d6f0c6d718f5acfec69bb5585c08aa448885e26b13cdf71ce525f975e03",
+            "file": "yado_core_current.py"
+          }
+        ]
+      },
+      "id": "F-R7-MANIFEST-004",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Current workspace no longer matches development manifest V17"
+    },
+    {
+      "component": "testing",
+      "evidence": {
+        "checks_latest_manifest": false,
+        "test": "test_yado_active_head.py"
+      },
+      "id": "F-R7-TEST-005",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Active-head test is circular: it checks current.py against head JSON but not against latest proven manifest/state lineage"
+    },
+    {
+      "component": "artifact_integrity",
+      "evidence": {
+        "alias": {
+          "core_current_sha256": "4c0c6d6f0c6d718f5acfec69bb5585c08aa448885e26b13cdf71ce525f975e03",
+          "head_sha256": "1392416a38ed140689439c109552a5fbd64f6c0b38ef7eeaced71549acb7dd4e"
+        },
+        "bundle": "yado_rc6_r6_active_bundle.zip",
+        "bundle_ok": true
+      },
+      "id": "F-R7-BUNDLE-006",
+      "severity": "INFO",
+      "status": "PASS",
+      "title": "R6 recovery bundle itself remains intact"
+    },
+    {
+      "component": "boot",
+      "evidence": {
+        "closure_count": 38
+      },
+      "id": "F-R7-BOOT-007",
+      "severity": "INFO",
+      "status": "PASS",
+      "title": "Active R6 local import closure is present"
+    },
+    {
+      "component": "network_boundary",
+      "evidence": {
+        "allow_redirects": true,
+        "file": "yado_core_v2.py",
+        "initial_public_host_check": true
+      },
+      "id": "F-R7-SEC-008",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Direct evidence fetch validates the initial host but follows redirects without a per-hop public-network check"
+    },
+    {
+      "component": "network_boundary",
+      "evidence": {
+        "file": "yado_core_v2.py",
+        "policy": "allow any public HTTPS host when allowlist empty"
+      },
+      "id": "F-R7-SEC-009",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "Empty YADO_ALLOWED_DOMAINS means direct evidence fetch is not default-deny"
+    },
+    {
+      "component": "durable_mutation",
+      "evidence": {
+        "file": "yado_core_v3_0_rc3_autoevolution.py"
+      },
+      "id": "F-R7-STATE-010",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Durable evolution commit can write whichever state_path the kernel instance was constructed with; historical-state immutability is not enforced"
+    },
+    {
+      "component": "model_supply_chain",
+      "evidence": {
+        "critical_reports": [
+          "yado_cognitive_training_cycle1_report.json",
+          "yado_thinking_training_cycle2_report.json",
+          "yado_resource_intelligence_cycle8_report.json",
+          "yado_primitive_genesis_cycle1_report.json"
+        ]
+      },
+      "id": "F-R7-SUPPLY-011",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Boot constructs active models from mutable report files before a content-addressed dependency lock is enforced"
+    },
+    {
+      "component": "development_integration",
+      "evidence": {
+        "count": 13,
+        "strong_shadow_reports": [
+          "yado_stateful_frontier_repair_cycle1_report.json",
+          "yado_stateful_frontier_repair_cycle2_report.json",
+          "yado_stateful_frontier_repair_cycle3_report.json",
+          "yado_stateful_frontier_repair_cycle4_report.json",
+          "yado_stateful_frontier_repair_cycle5_report.json",
+          "yado_stateful_frontier_repair_cycle6_report.json",
+          "yado_stateful_frontier_repair_cycle7_report.json",
+          "yado_stateful_frontier_repair_cycle8_report.json",
+          "yado_stateful_frontier_repair_cycle9_report.json",
+          "yado_stateful_frontier_repair_cycle10_report.json",
+          "yado_stateful_frontier_repair_cycle11_report.json",
+          "yado_stateful_frontier_repair_cycle12_report.json",
+          "yado_stateful_frontier_repair_cycle13_report.json"
+        ]
+      },
+      "id": "F-R7-INTEG-012",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "Multiple validated stateful/belief/active-information-gain capabilities remain detached shadow overlays"
+    },
+    {
+      "component": "host_model",
+      "evidence": {
+        "fresh_coverage": 1.0,
+        "fresh_exact": 1.0,
+        "report": "yado_chatgpt_study_cycle2_report.json"
+      },
+      "id": "F-R7-HOST-013",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "Validated ChatGPT capability-relation model is not durable in the active state"
+    },
+    {
+      "component": "host_model",
+      "evidence": {
+        "selected_ngram_n": 4,
+        "thresholds": [
+          0.1,
+          0.02
+        ]
+      },
+      "id": "F-R7-HOST-014",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "ChatGPT study report omits learned text profiles, so the router cannot be reconstructed from the report alone"
+    },
+    {
+      "component": "provenance",
+      "evidence": {
+        "compatibility_recovery_not_original": true
+      },
+      "id": "F-R7-PROV-015",
+      "severity": "MEDIUM",
+      "status": "MONITOR",
+      "title": "Compatibility-recovery modules remain reconstructed interfaces, not recovered originals"
+    },
+    {
+      "component": "claim_boundary",
+      "evidence": {
+        "unrestricted_external_execution": false,
+        "zero_host_substrate": false
+      },
+      "id": "F-R7-BOUND-016",
+      "severity": "INFO",
+      "status": "BOUNDARY",
+      "title": "Zero-host-substrate self-invention and unrestricted autonomous external execution are not established"
+    },
+    {
+      "component": "development_integration",
+      "evidence": {
+        "observed_in_rc7_integration": true,
+        "prefix_sum_before_fix": {
+          "generated_candidates": 0,
+          "verdict": "NO_SCHEMA"
+        },
+        "repair": "STRUCTURAL_TASK_SHAPE_ROUTER_TO_GENERAL_PROB_ACTIVE_BRANCHES",
+        "root_cause": "FrontierPortfolioV5.search bypasses self.old for non-belief tasks"
+      },
+      "id": "F-R7-INTEG-017",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "title": "Naively using the latest cumulative frontier portfolio drops fallback to older non-belief stateful families"
+    }
+  ],
+  "high_count": 7,
+  "improvement_plan": [
+    {
+      "action": "UNIFY_BOOT_AND_STATE_LINEAGE",
+      "addresses": [
+        "F-R7-CTRL-001",
+        "F-R7-CTRL-002",
+        "F-R7-STATE-003",
+        "F-R7-MANIFEST-004",
+        "F-R7-TEST-005"
+      ],
+      "priority": 1
+    },
+    {
+      "action": "ADD_PREIMPORT_DEPENDENCY_LOCK",
+      "addresses": [
+        "F-R7-SUPPLY-011"
+      ],
+      "priority": 2
+    },
+    {
+      "action": "HARDEN_DIRECT_EVIDENCE_FETCH",
+      "addresses": [
+        "F-R7-SEC-008",
+        "F-R7-SEC-009"
+      ],
+      "priority": 3
+    },
+    {
+      "action": "PROTECT_HISTORICAL_STATE_FROM_MUTATION",
+      "addresses": [
+        "F-R7-STATE-010"
+      ],
+      "priority": 4
+    },
+    {
+      "action": "CONSOLIDATE_VALIDATED_FRONTIER_PORTFOLIO_INSTANCE_LOCALLY",
+      "addresses": [
+        "F-R7-INTEG-012"
+      ],
+      "priority": 5
+    },
+    {
+      "action": "DURABILIZE_HOST_CAPABILITY_MODEL",
+      "addresses": [
+        "F-R7-HOST-013",
+        "F-R7-HOST-014"
+      ],
+      "priority": 6
+    },
+    {
+      "action": "STRUCTURAL_FRONTIER_ROUTER",
+      "addresses": [
+        "F-R7-INTEG-017"
+      ],
+      "priority": 7
+    }
+  ],
+  "open_findings_count": 13,
+  "priority_order": [
+    "F-R7-INTEG-017",
+    "F-R7-CTRL-001",
+    "F-R7-CTRL-002",
+    "F-R7-MANIFEST-004",
+    "F-R7-SEC-008",
+    "F-R7-STATE-003",
+    "F-R7-STATE-010",
+    "F-R7-SUPPLY-011",
+    "F-R7-TEST-005",
+    "F-R7-HOST-013",
+    "F-R7-HOST-014",
+    "F-R7-INTEG-012",
+    "F-R7-SEC-009"
+  ],
+  "schema": "yado.deep_self_audit.cycle1.v1",
+  "shadow_evidence": [
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle1_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "7f9eee88527ddf6327375da36c568afc9aadd48e90bc8689573b9181bf46fdeb",
+      "status": "SHADOW_SUPPORTED_ACTIVE_STATEFUL_ROUTING_REPAIR"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle2_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "1ea83325d9d9c7405350109d1384a8fd79b33deb79be197594f9f0970e8110ad",
+      "status": "SHADOW_SUPPORTED_STATE_REPRESENTATION_EXPANSION"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle3_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "219afb4526f2f9c6ec32014932632ba7d3136a1e3b1c50cf983de36a5622a14e",
+      "status": "FRESH_TRANSFER_SUPPORTED"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle4_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "0a3dfa10396766271626386251ff8f54adfca7c7068d7116c78ae5bb966a4cc9",
+      "status": "SHADOW_SUPPORTED_COUPLED_STATE_AND_FINITE_MODE_EXPANSION"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle5_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "fe93454a5ca2fa292826ccedbedad016a9dee165d23206d12cf2ca033127ed3a",
+      "status": "FRESH_TRANSFER_SUPPORTED"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle6_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "8700169c69dd86626f0935008f4f140fb3445216a5314987d098998c68629954",
+      "status": "SHADOW_SUPPORTED_LATENT_STATE_INFERENCE"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle7_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "556308ee7dcca856137a8adbff036f98a199d5794342620c4e56f72eb982a802",
+      "status": "FRESH_LATENT_TOPOLOGY_TRANSFER_SUPPORTED"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle8_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "0d88b2d82fc81d5fb50f61941759b1b5337e701c3ebc77b47e217d0d93b3d10b",
+      "status": "SHADOW_SUPPORTED_BELIEF_SET_REASONING"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle9_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "9ea4bbe984ca721c0bdbc171b7b64a0b0bebaa56ccf49a30aad6ce4564bd66d9",
+      "status": "FRESH_BELIEF_PERSISTENT_AMBIGUITY_TRANSFER_SUPPORTED"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        },
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle10_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "97789716c5d1009407df25fc3ea17a1b408df2d33f3db7bea5863cb138b331a4",
+      "status": "SHADOW_SUPPORTED_BOUNDED_PROBABILISTIC_BELIEF"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle11_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "2bce0a8bc821d5e8c895547a0519dbb6649138bc6d10a0cea1a380306d8b36ca",
+      "status": "FRESH_PROBABILISTIC_BELIEF_SYMBOLIC_TRANSFER_SUPPORTED"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle12_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "6e1bf30288949787b8fb54c28b90b5a7ac82c372de44912c444e2f212aff47ca",
+      "status": "SHADOW_SUPPORTED_ACTIVE_INFORMATION_GAIN"
+    },
+    {
+      "checks": [
+        {
+          "ablation": 0.0,
+          "blind": 1.0,
+          "learning_closed": true,
+          "restore": 1.0
+        }
+      ],
+      "file": "yado_stateful_frontier_repair_cycle13_report.json",
+      "fresh_used_for_selection": false,
+      "sha256": "fd4283dc17cb739e7ee0d057e095177dba37b102bd4f1cb0c26922b5e23f60ca",
+      "status": "FRESH_ACTIVE_INFORMATION_GAIN_TRANSFER_SUPPORTED"
+    }
+  ],
+  "status": "DEEP_AUDIT_COMPLETE_IMPROVEMENT_REQUIRED",
+  "surface": {
+    "active_import_closure_files": 38,
+    "shadow_frontier_reports": 13,
+    "strong_shadow_reports": 13
+  }
+}

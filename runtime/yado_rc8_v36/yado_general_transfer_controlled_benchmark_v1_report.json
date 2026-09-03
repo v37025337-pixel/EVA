@@ -1,0 +1,94 @@
+{
+  "ablation_naive_trajectory_memory": {
+    "evidence_digest": "1ca194187886b932af422845f61fe073720cde0e45a93afc13ab367c5a639aab",
+    "failed_gates": [
+      "heldout_gain",
+      "negative_transfer",
+      "reusable_gain"
+    ],
+    "gates": {
+      "coverage": true,
+      "forgetting": true,
+      "heldout_gain": false,
+      "negative_transfer": false,
+      "reusable_gain": false,
+      "unrelated_harmlessness": true
+    },
+    "general_open_ended_transfer_proven": false,
+    "metrics": {
+      "case_count": 3000,
+      "heldout_cases": 1000,
+      "heldout_gain": 0.04767050507507111,
+      "mean_forgetting": 0.0,
+      "negative_transfer_rate": 0.351,
+      "reusable_cases": 1000,
+      "reusable_gain": 0.05138661869185292,
+      "unrelated_cases": 1000,
+      "unrelated_gain": 0.0
+    },
+    "pass": false,
+    "status": "WITHHOLD_TRANSFER_CLAIM"
+  },
+  "ablation_no_skill_gate": {
+    "evidence_digest": "f72ac53deba48e14e0ebd7f62729bff807e858269b3d92a6dd0d8945c686478e",
+    "failed_gates": [
+      "negative_transfer",
+      "unrelated_harmlessness"
+    ],
+    "gates": {
+      "coverage": true,
+      "forgetting": true,
+      "heldout_gain": true,
+      "negative_transfer": false,
+      "reusable_gain": true,
+      "unrelated_harmlessness": false
+    },
+    "general_open_ended_transfer_proven": false,
+    "metrics": {
+      "case_count": 3000,
+      "heldout_cases": 1000,
+      "heldout_gain": 0.16108408843713642,
+      "mean_forgetting": 0.0,
+      "negative_transfer_rate": 0.3333333333333333,
+      "reusable_cases": 1000,
+      "reusable_gain": 0.1576361375462539,
+      "unrelated_cases": 1000,
+      "unrelated_gain": -0.15050568182659246
+    },
+    "pass": false,
+    "status": "WITHHOLD_TRANSFER_CLAIM"
+  },
+  "cases": 3000,
+  "causal_gate_contribution": true,
+  "causal_memory_contribution": true,
+  "full_system": {
+    "evidence_digest": "feca3f3cd394c6a2fd81e8ac3f780f958e8525542ecfd16007d08b6a25617e9f",
+    "failed_gates": [],
+    "gates": {
+      "coverage": true,
+      "forgetting": true,
+      "heldout_gain": true,
+      "negative_transfer": true,
+      "reusable_gain": true,
+      "unrelated_harmlessness": true
+    },
+    "general_open_ended_transfer_proven": false,
+    "metrics": {
+      "case_count": 3000,
+      "heldout_cases": 1000,
+      "heldout_gain": 0.16108408843713642,
+      "mean_forgetting": 0.0,
+      "negative_transfer_rate": 0.0,
+      "reusable_cases": 1000,
+      "reusable_gain": 0.1576361375462539,
+      "unrelated_cases": 1000,
+      "unrelated_gain": 0.0
+    },
+    "pass": true,
+    "status": "PASS_BOUNDED_CONTROLLED_TRANSFER"
+  },
+  "general_open_ended_transfer_proven": false,
+  "pass": true,
+  "schema": "yado.general_transfer.controlled_benchmark.v1",
+  "seed": 202608293
+}

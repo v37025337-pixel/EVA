@@ -1,0 +1,204 @@
+{
+  "schema": "yado.cognitive_training.cycle1.v1",
+  "audit_basis": "yado.full_self_audit.v1",
+  "runs": [
+    {
+      "organ": "LOGIC",
+      "capability": "bounded_boolean_rule_induction",
+      "baseline": 0.5,
+      "candidate": 1.0,
+      "blind": 1.0,
+      "ablation": 0.5,
+      "restore": 1.0,
+      "verdict": "SHADOW_SUPPORTED",
+      "details": {
+        "tasks": [
+          {
+            "task": "xor_with_conjunction",
+            "shallow_train": 0.8333333333333334,
+            "shallow_blind": 0.5,
+            "candidate_train": 1.0,
+            "candidate_blind": 1.0,
+            "selected_expression": [
+              "XOR",
+              [
+                "AND",
+                [
+                  "VAR",
+                  "q"
+                ],
+                [
+                  "VAR",
+                  "r"
+                ]
+              ],
+              [
+                "VAR",
+                "p"
+              ]
+            ],
+            "complexity": 5,
+            "blind_assignments": [
+              5,
+              6
+            ]
+          },
+          {
+            "task": "conditional_mux",
+            "shallow_train": 0.8333333333333334,
+            "shallow_blind": 0.5,
+            "candidate_train": 1.0,
+            "candidate_blind": 1.0,
+            "selected_expression": [
+              "AND",
+              [
+                "IMP",
+                [
+                  "VAR",
+                  "p"
+                ],
+                [
+                  "VAR",
+                  "r"
+                ]
+              ],
+              [
+                "OR",
+                [
+                  "VAR",
+                  "p"
+                ],
+                [
+                  "VAR",
+                  "q"
+                ]
+              ]
+            ],
+            "complexity": 7,
+            "blind_assignments": [
+              3,
+              7
+            ]
+          }
+        ],
+        "shallow_candidates": 33,
+        "expanded_candidates": 2808,
+        "host_boolean_meta_ops": [
+          "NOT",
+          "AND",
+          "OR",
+          "XOR",
+          "IMP"
+        ],
+        "task_specific_formula_supplied_to_search": false
+      },
+      "run_id": "TRAIN-8afbd12c12ef"
+    },
+    {
+      "organ": "THINKING",
+      "capability": "role_precedence_planning_transfer",
+      "baseline": 0.0,
+      "candidate": 0.75,
+      "blind": 0.75,
+      "ablation": 0.0,
+      "restore": 0.75,
+      "verdict": "SHADOW_WITHHOLD",
+      "details": {
+        "train_cases": 7,
+        "blind_cases": 4,
+        "learned_role_scores": {
+          "OBSERVE": 0.0,
+          "HYPOTHESIZE": 0.2708333333333333,
+          "TEST": 0.5416666666666666,
+          "VERIFY": 0.7916666666666666,
+          "COMMIT": 1.0,
+          "DIAGNOSE": 0.14583333333333331,
+          "LEARN": 0.6666666666666666
+        },
+        "blind_action_ids_unseen_in_training": true,
+        "task_specific_blind_order_supplied_to_planner": false
+      },
+      "run_id": "TRAIN-876893bd4590"
+    },
+    {
+      "organ": "INTELLIGENCE",
+      "capability": "evidence_gated_strategy_induction",
+      "baseline": 0.5,
+      "candidate": 0.975,
+      "blind": 0.975,
+      "ablation": 0.5,
+      "restore": 0.975,
+      "verdict": "SHADOW_SUPPORTED",
+      "details": {
+        "train_episodes": 160,
+        "fresh_blind_episodes": 40,
+        "selected_tree_depth": 5,
+        "tree": {
+          "feature": "integration_gap",
+          "threshold": 0.5,
+          "left": {
+            "feature": "evidence_complete",
+            "threshold": 0.5,
+            "left": {
+              "label": "SEEK_EVIDENCE"
+            },
+            "right": {
+              "feature": "expressiveness_gap",
+              "threshold": 0.5,
+              "left": {
+                "feature": "blind",
+                "threshold": 0.9099999999999999,
+                "left": {
+                  "label": "WITHHOLD"
+                },
+                "right": {
+                  "feature": "restore",
+                  "threshold": 0.9,
+                  "left": {
+                    "label": "WITHHOLD"
+                  },
+                  "right": {
+                    "label": "ACCEPT_BOUNDED"
+                  }
+                }
+              },
+              "right": {
+                "label": "EXPAND_REPRESENTATION"
+              }
+            }
+          },
+          "right": {
+            "label": "UNIFY_ARCHITECTURE"
+          }
+        },
+        "candidate_depths": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fresh_blind_used_for_selection": false,
+        "host_feature_schema_supplied": true,
+        "host_task_specific_final_policy_supplied": false
+      },
+      "run_id": "TRAIN-52850c964831"
+    }
+  ],
+  "summary": {
+    "logic_blind": 1.0,
+    "thinking_blind": 0.75,
+    "intelligence_blind": 0.975,
+    "all_three_supported": false,
+    "canonical_durable_mutation": false,
+    "training_registry_count": 3
+  },
+  "verdict": "SHADOW_PARTIAL",
+  "claim_boundary": {
+    "bounded_training_only": true,
+    "general_intelligence_proven": false,
+    "general_logic_proven": false,
+    "general_planning_proven": false,
+    "subjective_consciousness_claimed": false
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "schema": "yado.thinking_training.cycle2.v1",
+  "run": {
+    "run_id": "TRAIN-5a0f65e3dcdd",
+    "organ": "THINKING",
+    "capability": "pairwise_precedence_planning_transfer",
+    "baseline": 0.75,
+    "candidate": 1.0,
+    "blind": 1.0,
+    "ablation": 0.0,
+    "restore": 1.0,
+    "verdict": "SHADOW_SUPPORTED",
+    "details": {
+      "representation_before": "mean_role_position",
+      "representation_after": "pairwise_precedence_graph",
+      "revealed_cycle1_score": 0.75,
+      "training_cases": 11,
+      "fresh_blind_cases": 5,
+      "selected_threshold": 0.5,
+      "learned_edges": [
+        {
+          "before": "DIAGNOSE",
+          "after": "COMMIT",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "before": "DIAGNOSE",
+          "after": "HYPOTHESIZE",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "before": "DIAGNOSE",
+          "after": "LEARN",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "before": "DIAGNOSE",
+          "after": "TEST",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "before": "DIAGNOSE",
+          "after": "VERIFY",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "before": "HYPOTHESIZE",
+          "after": "COMMIT",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "before": "HYPOTHESIZE",
+          "after": "LEARN",
+          "confidence": 1.0,
+          "support": 1
+        },
+        {
+          "before": "HYPOTHESIZE",
+          "after": "TEST",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "before": "HYPOTHESIZE",
+          "after": "VERIFY",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "before": "LEARN",
+          "after": "COMMIT",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "before": "OBSERVE",
+          "after": "COMMIT",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "before": "OBSERVE",
+          "after": "DIAGNOSE",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "before": "OBSERVE",
+          "after": "HYPOTHESIZE",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "before": "OBSERVE",
+          "after": "LEARN",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "before": "OBSERVE",
+          "after": "TEST",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "before": "OBSERVE",
+          "after": "VERIFY",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "before": "TEST",
+          "after": "COMMIT",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "before": "TEST",
+          "after": "LEARN",
+          "confidence": 1.0,
+          "support": 1
+        },
+        {
+          "before": "TEST",
+          "after": "VERIFY",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "before": "VERIFY",
+          "after": "COMMIT",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "before": "VERIFY",
+          "after": "LEARN",
+          "confidence": 1.0,
+          "support": 2
+        }
+      ],
+      "fresh_ids_unseen": true,
+      "fresh_blind_used_for_selection": false
+    }
+  },
+  "claim_boundary": {
+    "bounded_planning_transfer": true,
+    "general_planning_proven": false,
+    "canonical_mutation": false
+  }
+}

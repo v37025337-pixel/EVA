@@ -1,0 +1,155 @@
+{
+  "candidate_core_sha256": "5c4fab434de2dc377302f2d033de8a79b9d8edc2a286e6179e7921237b67057e",
+  "candidate_runtime": "yado_cognitive_growth_runtime_v1.py",
+  "candidate_runtime_sha256": "7e7de7eed6f3e608db548d9df6ae918513264b036513e4e1a290d58be9222c1f",
+  "claim_boundary": {
+    "background_daemon": false,
+    "bounded_algorithmic_capability_growth_only": true,
+    "external_event_runtime_previously_verified": true,
+    "foundation_model_weights_modified": false,
+    "general_intelligence_proven": false,
+    "general_logic_proven": false,
+    "general_thinking_proven": false,
+    "subjective_consciousness_claimed": false
+  },
+  "created_at": "2026-08-29T14:42:35.492128+00:00",
+  "fresh_holdout": {
+    "fresh_used_for_selection": false,
+    "intelligence": {
+      "baseline_mean": 0.9583333333333334,
+      "batches": [
+        {
+          "baseline": 0.9583333333333334,
+          "baseline_family": "TREE",
+          "baseline_param": 3,
+          "batch": 0,
+          "candidate": 1.0,
+          "selected_features": 2
+        },
+        {
+          "baseline": 0.9305555555555556,
+          "baseline_family": "TREE",
+          "baseline_param": 3,
+          "batch": 1,
+          "candidate": 0.9861111111111112,
+          "selected_features": 2
+        },
+        {
+          "baseline": 0.9861111111111112,
+          "baseline_family": "TREE",
+          "baseline_param": 3,
+          "batch": 2,
+          "candidate": 1.0,
+          "selected_features": 2
+        }
+      ],
+      "candidate_mean": 0.9953703703703703,
+      "pass": true
+    },
+    "logic": {
+      "baseline": {
+        "accuracy": null,
+        "elapsed_s": 8.0,
+        "status": "TIMEOUT_8S"
+      },
+      "candidate": {
+        "accuracy": 1.0,
+        "elapsed_s": 2.7204800150002484,
+        "meta": {
+          "backend": "BITSET",
+          "exact": 1.0,
+          "nodes": 11,
+          "signatures": 434593
+        },
+        "status": "COMPLETED"
+      },
+      "cases": 64,
+      "expression": [
+        "XOR",
+        [
+          "XOR",
+          [
+            "VAR",
+            "a"
+          ],
+          [
+            "VAR",
+            "b"
+          ]
+        ],
+        [
+          "XOR",
+          [
+            "XOR",
+            [
+              "VAR",
+              "c"
+            ],
+            [
+              "VAR",
+              "d"
+            ]
+          ],
+          [
+            "XOR",
+            [
+              "VAR",
+              "e"
+            ],
+            [
+              "VAR",
+              "f"
+            ]
+          ]
+        ]
+      ],
+      "pass": true
+    },
+    "pass": true,
+    "report": "yado_cognitive_growth_fresh_holdout_v1_report.json",
+    "report_sha256": "d4025d84496610a2c0a6fcd8c0934522082ec774de52838f20d219a1b908e86e",
+    "seed": 8808291441,
+    "thinking": {
+      "baseline": 0.2708333333333333,
+      "blind_cases": 48,
+      "candidate": 1.0,
+      "pass": true,
+      "train_cases": 112
+    }
+  },
+  "new_capabilities": {
+    "INTELLIGENCE": {
+      "feature_selection_validation_driven": true,
+      "name": "VALIDATION_SELECTED_CENTROID_STRATEGY_INDUCTION",
+      "old_path_preserved": true
+    },
+    "LOGIC": {
+      "complete_truth_table_failsafe_only": true,
+      "incomplete_table_rejected_by_exact_fallback": true,
+      "name": "BITSET_SEMANTIC_BOOLEAN_SYNTHESIS_WITH_EXACT_TABLE_FAILSAFE",
+      "old_path_preserved": true
+    },
+    "THINKING": {
+      "context_keys_bounded": true,
+      "name": "MULTICONTEXT_PRECEDENCE_PLANNING",
+      "old_path_preserved": true
+    }
+  },
+  "parent_manifest": "YADO-RC7-MANIFEST-v28",
+  "parent_manifest_sha256": "8954d7bbaceefbf592696e685c4d33566a431025584328398f94e2819aab6a19",
+  "promotion_gate": {
+    "archive_pytest": "11/11 PASS",
+    "compileall": true,
+    "full_regression": "67/67 PASS",
+    "locked_boot_pending_final_hash": true,
+    "resourcewarning_as_error": true,
+    "unittest": "56/56 PASS"
+  },
+  "rollback": {
+    "canonical_state_mutated": false,
+    "v28_bootstrap_integrity_pass": true,
+    "v28_manifest_sha256": "8954d7bbaceefbf592696e685c4d33566a431025584328398f94e2819aab6a19"
+  },
+  "schema": "yado.cognitive_growth.cycle1.v1",
+  "status": "PASS_BOUNDED_LOGIC_THINKING_INTELLIGENCE_GROWTH"
+}
