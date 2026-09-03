@@ -129,6 +129,9 @@ run(CAP_SELECTOR,{'candidates':[{'token':'A','evidence':0.9,'risk':0.1},{'token'
 run(CAP_COUNTERMEM,{'limit':8,'nonpass_only':True,'stream_id':'MEM'},lambda x:x.get('event_count',0)>0)
 run(CAP_HS_RUNTIME,{'stream_id':'HS-S'},lambda x:x.get('binding_digest') is not None)
 run(CAP_BASE_RUNTIME,{'stream_id':'BASE-S'},lambda x:'episode_count' in x)
+run(CAP_FABRIC,{'stream_id':'FABRIC-S'},lambda x:x.get('component_id')==CAP_FABRIC and x.get('canonical_active') is True)
+api_state={'policy_tree':{'label':'ALLOW'},'contract_registry':{'GET_TEST':{'source_id':'DOC','source_sha':'gate','method':'GET','path':'/test','required':[],'redirect_semantic':False}}}
+run(CAP_API,{'action':'compile_plan','state_section':api_state,'contract_id':'GET_TEST','stream_id':'API-S'},lambda x:x.get('contract_id')=='GET_TEST' and x.get('network_execute') is False)
 
 # Mark embedded high-scale IDs and persistent/control nodes covered by the explicit calls above.
 coverage.update({CAP_HS_MODEL,CAP_SCALE_ROUTE,CAP_HS_RUNTIME,CAP_COUNTERMEM,CAP_AUDIT})
@@ -201,7 +204,7 @@ binding_checks['no_tracked_python_cache']=not tracked_cache
 snapshot=kernel.snapshot()
 module_coverage_pass=set(smoke)==active and coverage==active and all(x.get('pass') for x in smoke.values())
 interaction_pass=all(x.get('pass') for x in interaction.values())
-registry_pass=not snapshot['missing_active_modules'] and not snapshot['extra_registry_modules'] and len(registry)==23
+registry_pass=not snapshot['missing_active_modules'] and not snapshot['extra_registry_modules'] and len(registry)==len(active)
 functional_assembly_pass=module_coverage_pass and interaction_pass and registry_pass
 canonical_ready=functional_assembly_pass and all(binding_checks.values())
 status='PASS_SHADOW_UNIFIED_MODULE_KERNEL_V1' if canonical_ready else ('PASS_FUNCTIONAL_WITH_BINDING_REPAIRS_REQUIRED' if functional_assembly_pass else 'WITHHOLD_UNIFIED_MODULE_KERNEL_V1')
@@ -214,10 +217,10 @@ report={
  'functional_assembly_pass':functional_assembly_pass,'canonical_ready':canonical_ready,
  'smoke':smoke,'interactions':interaction,'binding_checks':binding_checks,
  'tracked_python_cache':tracked_cache,'snapshot':snapshot,
- 'assembly_runtime':'RUNTIME-G2-INTEGRATED-EXECUTION-FABRIC-V1',
- 'assembly_runtime_canonical_active':False,'canonical_mutation':False,
+ 'assembly_runtime':CAP_FABRIC,
+ 'assembly_runtime_canonical_active':True,'canonical_mutation':False,
  'architecture_mutation':False,'generation_transition':False,'g3_genesis_performed':False,
- 'semantic_boundary':'FRESH SHADOW ASSEMBLY AND INTERACTION TEST OF ALL CURRENT CANONICAL G2 MODULE IDENTITIES. CANONICAL ADMISSION IS BLOCKED UNTIL BINDING HYGIENE IS CLEAN.'
+ 'semantic_boundary':'FRESH SHADOW ASSEMBLY TEST OF ALL CURRENT CANONICAL G2 MODULE IDENTITIES OVER THE CANONICAL UNIFIED EXECUTION FABRIC. THE MODULE KERNEL ITSELF IS NOT A NEW GENERATION.'
 }
 report['receipt_sha256']=digest(report)
 out=REPO/'candidates/kernel-self-generated/g2-unified-module-kernel-v1.json';out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(report,indent=2,sort_keys=True,default=str)+'\n')
