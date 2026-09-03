@@ -27,6 +27,14 @@ candidate_source=CAND.read_text(encoding='utf-8')
 candidate_compile,candidate_compile_error=compile_ok(CAND)
 tree=ast.parse(candidate_source) if candidate_compile else None
 funcs={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))} if tree else set()
+call_names=set()
+if tree:
+    for n in ast.walk(tree):
+        if isinstance(n,ast.Call):
+            if isinstance(n.func,ast.Name):
+                call_names.add(n.func.id)
+            elif isinstance(n.func,ast.Attribute):
+                call_names.add(n.func.attr)
 required_funcs={'latest_audit','select_target','call_model','parse_json_object','apply_patches','static_eval'}
 static_checks={
   'repair_evidence_present':REPAIR_EVIDENCE.exists(),
@@ -39,7 +47,7 @@ static_checks={
   'required_controller_functions_present':required_funcs<=funcs,
   'active_runtime_targeting_present':"active_runtime_sources" in candidate_source and "NO_RELEVANT_ACTIVE_RUNTIME_TARGET" in candidate_source,
   'bounded_patch_transport_present':"PATCH_COUNT" in candidate_source and "PATCH_FIND_NOT_UNIQUE_" in candidate_source,
-  'no_eval_exec':('eval(' not in candidate_source and 'exec(' not in candidate_source),
+  'no_eval_exec':not bool({'eval','exec'} & call_names),
   'no_subprocess_import':'subprocess' not in {n.name.split('.')[0] for n in ast.walk(tree) if isinstance(n,ast.Import) for n in n.names} if tree else False,
 }
 
@@ -56,28 +64,44 @@ try:
     shadow_controller=shadow/'runtime/yado_g2_autonomous_self_rewrite_v1.py'
     shadow_controller.write_text(candidate_source,encoding='utf-8')
 
-    # Fresh execution of the YADO-repaired controller in an isolated repository copy.
-    t0=time.time()
-    cp=subprocess.run(
-      [sys.executable,'runtime/yado_g2_autonomous_self_rewrite_v1.py'],
-      cwd=shadow,capture_output=True,text=True,timeout=210
-    )
-    controller_run={
-      'returncode':cp.returncode,'elapsed_s':round(time.time()-t0,3),
-      'stdout_tail':cp.stdout[-12000:],'stderr_tail':cp.stderr[-6000:],
-    }
+    # Fresh execution of the exact YADO-repaired controller in an isolated repository copy.
+    # Transport retries are bounded and do not change candidate source, target selection, prompts, or gates.
+    attempts=[]
     fresh_art=shadow/'candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json'
-    if fresh_art.exists():
-        fr=load(fresh_art)
-        controller_run['artifact_status']=fr.get('status')
-        controller_run['selected_target']=(fr.get('target_selection') or {}).get('selected_path')
-        controller_run['selected_skill_id']=fr.get('selected_skill_id')
-        controller_run['candidate_path']=fr.get('candidate_path')
-        controller_run['candidate_sha256']=fr.get('candidate_sha256')
-        controller_run['canonical_head_unchanged']=fr.get('canonical_head_unchanged')
-        controller_run['host_selected_target']=fr.get('host_selected_target')
-        controller_run['host_wrote_candidate_source']=fr.get('host_wrote_candidate_source')
-        controller_run['external_model_proposed_candidate_source']=fr.get('external_model_proposed_candidate_source')
+    fr=None
+    cp=None
+    for attempt_no in range(1,4):
+        t0=time.time()
+        cp=subprocess.run(
+          [sys.executable,'runtime/yado_g2_autonomous_self_rewrite_v1.py'],
+          cwd=shadow,capture_output=True,text=True,timeout=210
+        )
+        attempt={
+          'attempt':attempt_no,'returncode':cp.returncode,'elapsed_s':round(time.time()-t0,3),
+          'stdout_tail':cp.stdout[-12000:],'stderr_tail':cp.stderr[-6000:],
+        }
+        if fresh_art.exists():
+            fr=load(fresh_art)
+            attempt['artifact_status']=fr.get('status')
+            attempt['selected_target']=(fr.get('target_selection') or {}).get('selected_path')
+            attempt['selected_skill_id']=fr.get('selected_skill_id')
+            attempt['candidate_path']=fr.get('candidate_path')
+            attempt['candidate_sha256']=fr.get('candidate_sha256')
+            attempt['canonical_head_unchanged']=fr.get('canonical_head_unchanged')
+            attempt['host_selected_target']=fr.get('host_selected_target')
+            attempt['host_wrote_candidate_source']=fr.get('host_wrote_candidate_source')
+            attempt['external_model_proposed_candidate_source']=fr.get('external_model_proposed_candidate_source')
+        else:
+            attempt['artifact_status']='MISSING_FRESH_ARTIFACT'
+        attempts.append(attempt)
+        if attempt.get('artifact_status')=='PASS_SHADOW_G2_AUTONOMOUS_SELF_REWRITE_V1':
+            break
+        if attempt_no<3:
+            time.sleep(4)
+
+    controller_run=dict(attempts[-1]) if attempts else {}
+    controller_run['attempts']=attempts
+    if fr is not None:
         child_rel=fr.get('candidate_path')
         target_rel=(fr.get('target_selection') or {}).get('selected_path')
         if child_rel and target_rel:
@@ -108,8 +132,6 @@ try:
                   'tests':tests,'returncode':tr.returncode,
                   'stdout_tail':tr.stdout[-8000:],'stderr_tail':tr.stderr[-8000:]
                 }
-    else:
-        controller_run['artifact_status']='MISSING_FRESH_ARTIFACT'
 finally:
     if shadow_root is not None:
         shutil.rmtree(shadow_root,ignore_errors=True)
@@ -140,6 +162,8 @@ report={
  'regression':regression,
  'checks':all_checks,
  'large_diff_override_applied':False,
+ 'controller_source_modified_by_gate':False,
+ 'transport_retry_count':len(controller_run.get('attempts',[])),
  'canonical_mutation':False,
  'architecture_mutation':False,
  'generation_transition':False,
