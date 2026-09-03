@@ -222,8 +222,8 @@
       "severity": "LOW"
     }
   ],
-  "latest_self_audit_receipt_sha256": "093269dacd95d2e57207e310e7e7108cba45d2f833aa67233c60eb45352e19fa",
-  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33711433172.json",
+  "latest_self_audit_receipt_sha256": "b32720d9e7366a8f2ad141a46712ea1308e8a2c5fc39743a896787e086b8a56f",
+  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33723182405.json",
   "native_evolution_result": {
     "architecture_mutation": false,
     "child": {
@@ -518,7 +518,7 @@
     "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
   },
   "next_action": "KERNEL_CONTINUE_FROM_SELF_SELECTED_PRIORITY",
-  "receipt_sha256": "2b974aa11339bb4369ad6161a879de27c732572872dbd545484212929422b60a",
+  "receipt_sha256": "1310c4881ca817bfae45a0f6dbc07e668a52c500d43aff5cc422875753449cbc",
   "schema": "yado.g2.autonomous_self_improvement_task.v1",
   "selected_child_genome_digest": "a812d2da7de8ec551c85478f3dedd8c51272a67d4e6c452f8cf2de33356b8545",
   "semantic_boundary": "THE HOST ONLY TRIGGERS AND PERSISTS. YADO SELECTS ITS OWN AUDIT PRIORITY, CONSULTS ITS EXPERIENCE, AND RUNS ITS CANONICAL NATIVE GENOME EVOLUTION. ANY CHANGE REMAINS SHADOW; THIS DOES NOT CLAIM OPEN-ENDED AUTONOMOUS SELF-REWRITING.",
@@ -527,11 +527,34 @@
   "task": {
     "allow_canonical_mutation": false,
     "allow_shadow_code_evolution": true,
+    "authorization": {
+      "accumulated_experience_allowed": true,
+      "canonical_mutation_allowed": true,
+      "external_no_key_coding_models_allowed": true,
+      "external_public_resources_allowed": true,
+      "generation_transition_allowed": true,
+      "repository_read": true,
+      "repository_write": true,
+      "self_selected_architecture_rewrite": true,
+      "self_selected_code_rewrite": true,
+      "shadow_evolution_allowed": true
+    },
+    "authorization_granted_at": "2026-09-03T17:53:24Z",
+    "authorization_note": "USER_AUTHORIZED_FULL_PROJECT_SELF_IMPROVEMENT_SCOPE; SAFETY/INTEGRITY GATES REMAIN FAIL_CLOSED",
+    "constraints": {
+      "no_private_data_transmission": true,
+      "no_secret_transmission": true,
+      "no_unbounded_external_side_effects": true,
+      "require_fresh_validation_before_canonical_change": true,
+      "require_kernel_self_selected_target": true,
+      "require_regression_gate": true,
+      "require_rollback_path": true
+    },
     "host_role": "TRIGGER_TRANSPORT_PERSISTENCE_ONLY",
     "mechanism_selection": "KERNEL_NATIVE_ONLY",
     "objective": "IMPROVE_REWRITE_EVOLVE_SELF_USING_ACCUMULATED_EXPERIENCE",
     "schema": "yado.g2.autonomous_self_improvement_request.v1",
-    "stop_condition": "PERSIST_ONE_NATIVE_EVOLUTION_CYCLE_AND_OBSERVE",
+    "stop_condition": "KERNEL_DECIDES_NEXT_EVOLUTION_STEP_AND_EXECUTES_ONE_SELF_DIRECTED_CYCLE",
     "target_selection": "KERNEL_SELF_SELECTED_FROM_LATEST_DEEP_SELF_AUDIT",
     "use_accumulated_experience": true
   }
