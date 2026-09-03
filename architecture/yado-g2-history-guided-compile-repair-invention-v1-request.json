@@ -1,0 +1,21 @@
+{
+  "schema": "yado.g2.history_guided_compile_repair_invention.request.v1",
+  "objective": "USE_ACCUMULATED_FAILURE_AND_REPOSITORY_HISTORY_TO_INVENT_A_GENERIC_COMPILE_REPAIR_MECHANISM",
+  "external_model_allowed": false,
+  "ready_patch_allowed": false,
+  "target_line_number_supplied": false,
+  "expected_target_source_supplied": false,
+  "generic_primitives": [
+    "SCAN_HISTORY",
+    "FILTER_COMPILING",
+    "DIFF_HUNKS",
+    "SEARCH_HUNK_SUBSETS",
+    "COMPILE_ORACLE",
+    "RANK_MINIMAL_REPAIR"
+  ],
+  "require_train": true,
+  "require_fresh": true,
+  "require_baseline_drop": true,
+  "after_pass": "INSTALL_SHADOW_REPAIRED_CONTROLLER_AND_RESUME_SELF_REWRITE",
+  "host_role": "TRIGGER_AND_GENERIC_META_LANGUAGE_ONLY"
+}
