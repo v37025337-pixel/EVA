@@ -1,0 +1,192 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "a2b25703fb4efafc805f36b82c6560b0ed0ce6bda329fd7cc12979529dcfd063",
+  "candidate_metrics": {
+    "CONSENSUS_CORE": {
+      "direct_spent": 0.9861111111111112,
+      "fit_spent_sequence": 0.9618055555555556,
+      "hold_spent_sequence": 0.9583333333333334
+    },
+    "CORE_GUARDED": {
+      "direct_spent": 0.9861111111111112,
+      "fit_spent_sequence": 0.9826388888888888,
+      "hold_spent_sequence": 0.9791666666666666
+    },
+    "DUAL_MAJORITY": {
+      "direct_spent": 0.9861111111111112,
+      "fit_spent_sequence": 0.9618055555555556,
+      "hold_spent_sequence": 0.9583333333333334
+    },
+    "PARENT_V4": {
+      "direct_spent": 0.9861111111111112,
+      "fit_spent_sequence": 0.9618055555555556,
+      "hold_spent_sequence": 0.9583333333333334
+    },
+    "V4_PLUS_CORE_VOTE": {
+      "direct_spent": 0.9861111111111112,
+      "fit_spent_sequence": 0.9861111111111112,
+      "hold_spent_sequence": 0.9791666666666666
+    }
+  },
+  "canonical_active": false,
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "base_regression": true,
+    "class_specific_rules_absent": true,
+    "fresh_direct_accuracy": true,
+    "fresh_not_used_for_selection": true,
+    "fresh_sequential_accuracy": true,
+    "fresh_sequential_gain_over_parent": true,
+    "fresh_wrapped_accuracy": true,
+    "g3_not_started": true,
+    "kernel_operation_clonal": true,
+    "kernel_parent_v4": true,
+    "kernel_selected_candidate": true,
+    "parent_v4_not_retrained": true
+  },
+  "class_specific_rules": false,
+  "component": {
+    "canonical_active": false,
+    "class_specific_rules": false,
+    "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V5",
+    "generic_sequence_wrapper_robustness": true,
+    "mode": "V4_PLUS_CORE_VOTE",
+    "parent_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
+    "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+    "parent_model_retrained": false,
+    "schema": "yado.g2.raw_task_representation_robustness_v5.component.v1"
+  },
+  "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V5",
+  "fresh_dataset_digest": "2bb1552799d1df4dcc0b182c499b8d7d47c2279710209bc2f1ef4cc89931a2f8",
+  "fresh_metrics": {
+    "base_regression": 1.0,
+    "fresh_direct_accuracy": 0.9861111111111112,
+    "fresh_sequential_accuracy": 0.993125,
+    "fresh_wrapped_accuracy": 0.9861111111111112,
+    "parent_fresh_sequential": 0.939375,
+    "parent_fresh_wrapped": 0.9444444444444444
+  },
+  "g3_genesis_performed": false,
+  "generic_sequence_wrapper_robustness_only": true,
+  "kernel_operation": {
+    "operation": "CLONAL",
+    "target_task": "raw_v4_sequential_robustness_self_evolution_v1",
+    "variant_id": "RAW_V4_CANONICAL_PARENT"
+  },
+  "kernel_parent": {
+    "action": "SELECT_PARENT",
+    "archive_digest": "17687aba2bde9088aee34054dce2c04249bd4d3a1ed77314a1bb9e225ea70c1a",
+    "lineage_id": "G2_RAW_V4_SEQUENCE_ROBUSTNESS",
+    "mean_score": 0.96875,
+    "target_score": 0.0,
+    "trait_score": 0,
+    "utility": 0.2421875,
+    "variant_id": "RAW_V4_CANONICAL_PARENT"
+  },
+  "kernel_selection": {
+    "candidate_count": 5,
+    "gate_digest": "f3133c23990bc006a7faca31e5756cf8b3a5cda0c4fe527e715509d79a087ac7",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "8e84d35f21d95438aba37d9ef39d586cb78492bb8b799e61820d63a1c940dbf3",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5_CONSENSUS_CORE",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "eb6fe0b8820f5ed9f11ce8ca039e3e5ee62c8978cf45a582089083c9efc6f2ef",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5_DUAL_MAJORITY",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "9bb136800f017c62e46ab9de1424488cbaf455f5d93968e827445cf985c0426b",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5_PARENT_V4",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "ab882581e2db4f2e0d491f355561481244754d19808dddd078c5c0753a373901",
+        "failed_critics": [],
+        "fit_gain": 0.02430555555555558,
+        "heldout_gain": 0.02083333333333326,
+        "skill_id": "RAW_V5_V4_PLUS_CORE_VOTE",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "RAW_V5_V4_PLUS_CORE_VOTE"
+    ],
+    "status": "SELECTED"
+  },
+  "parent_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
+  "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+  "parent_model_retrained": false,
+  "runtime_sha256": "ba3db411f276df2a6bde3432c6fe9c87d2e48afdfe4750eaddbaa3127cc21a16",
+  "runtime_source": "runtime/yado_raw_task_representation_robustness_v5.py",
+  "schema": "yado.g2.raw_task_representation_v5_sequential_robustness.candidate.v1",
+  "selected_mode": "V4_PLUS_CORE_VOTE",
+  "state": "SHADOW_V5_SEQUENTIAL_ROBUSTNESS_SUPPORTED"
+}
