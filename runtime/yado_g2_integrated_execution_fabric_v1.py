@@ -7,7 +7,7 @@ from yado_work_budget_adaptive_contingent_planner_v2 import WorkBudgetAdaptiveCo
 from yado_coverage_pruned_compositional_schema_router_v3 import CoveragePrunedCompositionalSchemaRouterV3
 
 CAP_LOGIC_V2=BudgetAdaptiveCompositionalLogicV2.COMPONENT_ID
-CAP_THINK_V2=WorkBudgetAdaptiveContingPlannerV2.COMPONENT_ID if False else WorkBudgetAdaptiveContingentPlannerV2.COMPONENT_ID
+CAP_THINK_V2=WorkBudgetAdaptiveContingentPlannerV2.COMPONENT_ID
 CAP_INTEL_V3=CoveragePrunedCompositionalSchemaRouterV3.COMPONENT_ID
 
 def canon(o):return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
