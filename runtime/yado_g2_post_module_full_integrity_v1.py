@@ -54,7 +54,7 @@ def edge(a,b,kind,reason):
     if a in active and b in active:
         edges.append({'from':a,'to':b,'kind':kind,'reason':reason})
 
-FAB='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2'
+FAB='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3'
 BASE='RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1'
 ROUTER='ALG-BOUNDED-CAPABILITY-ROUTER-V1'
 RAW='ALG-G2-RAW-TASK-REPRESENTATION-V4'
@@ -166,12 +166,14 @@ checks={
  'active_runtime_sources_exist':not missing_sources,
  'active_runtime_compile':not compile_errors and not parse_errors,
  'active_patch_registry_verified':patches.get('status')=='CANONICAL_ACTIVE' and patches.get('all_active_patch_bindings_verified') is True and not patch_fail,
- 'execution_fabric_canonical':core.get('execution_fabric_v2',{}).get('status')=='CANONICAL_ACTIVE' and FAB in active,
+ 'execution_fabric_canonical':core.get('execution_fabric_v3',{}).get('status')=='CANONICAL_ACTIVE' and FAB in active,
  'memory_readmission_current':core.get('contextual_stream_adapter',{}).get('latest_fresh_readmission_run_id')=='33720696775' and core.get('contextual_stream_adapter',{}).get('source_sha256')==sha(REPO/'runtime/yado_g2_contextual_stream_capability_adapter_v1.py'),
  'python_cache_clean':not pycache,
  'openapi_canonical_plan_only':core.get('openapi_contract_capability_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('openapi_contract_capability_v1',{}).get('network_execute') is False and API in active,
  'openapi_readonly_executor_canonical':core.get('openapi_readonly_executor_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('openapi_readonly_executor_v1',{}).get('read_only_only') is True and API_EXEC in active,
  'evolutionary_genome_controller_canonical':core.get('evolutionary_genome_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('evolutionary_genome_v1',{}).get('automatic_canonical_promotion') is False and GENOME in active,
+ 'cognitive_temporal_kernel_embedded':core.get('cognitive_temporal_kernel_v1',{}).get('status')=='CANONICAL_EMBEDDED' and core.get('cognitive_temporal_kernel_v1',{}).get('separate_active_capability') is False,
+ 'temporal_fabric_v3_canonical':core.get('execution_fabric_v3',{}).get('temporal_kernel')=='RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1',
  'module_assembly_pass':assembly.get('status')=='PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1' and assembly.get('active_module_count')==len(active) and assembly.get('covered_module_count')==len(active) and assembly.get('functional_assembly_pass') is True and assembly.get('canonical_ready') is True,
  'frontier_preserved':head.get('current_frontier')=='KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1' and ledger.get('open_deficits')==['KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1'],
  'g3_not_started':head.get('g3_genesis_performed') is False and core.get('g3_genesis_performed') is False,
@@ -237,7 +239,7 @@ report={
    'network_execute':core.get('openapi_contract_capability_v1',{}).get('network_execute'),
    'mode':'CONTRACT_CLASSIFICATION_AND_PLAN_ONLY'
  },
- 'execution_fabric':core.get('execution_fabric_v1'),
+ 'execution_fabric':core.get('execution_fabric_v3'),
  'memory_context':core.get('contextual_stream_adapter'),
  'module_assembly_receipt_sha256':assembly.get('receipt_sha256'),
  'canonical_mutation':False,
