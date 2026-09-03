@@ -23,9 +23,17 @@ def load(p): return json.loads(Path(p).read_text(encoding='utf-8'))
 
 def latest_audit():
     xs=list((REPO/'receipts').glob('yado-unified-core-deep-self-audit-v1-run-*.json'))
-    if not xs: raise RuntimeError('NO_DEEP_SELF_AUDIT')
+    if not xs:
+        raise RuntimeError('NO_DEEP_SELF_AUDIT')
     def run_id(p):
-        m=re.search(r'run-(\d+)\.json
+        m=re.search(r'run-(\\d+)\\.json$',p.name)
+        return int(m.group(1)) if m else -1
+    xs.sort(key=run_id)
+    d=load(xs[-1])
+    if d.get('status')!='PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1':
+        raise RuntimeError('LATEST_DEEP_SELF_AUDIT_NOT_PASS')
+    return xs[-1],d
+
 def imports_of(src):
     tree=ast.parse(src)
     roots=set()
