@@ -1,0 +1,149 @@
+{
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "capability_set": {
+    "order": [
+      "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+      "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    ],
+    "reason": "CAPABILITY_SET_EXECUTED",
+    "results": {
+      "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2": {
+        "meta": {
+          "logic_mode": "symmetric_boolean",
+          "model_kind": "SYMMETRIC_COUNT_MAP_V2"
+        },
+        "result": "ODD",
+        "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      },
+      "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3": {
+        "meta": {
+          "intelligence_mode": "route",
+          "model_kind": "COVERAGE_PRUNED_COMPOSITIONAL_TRIGGER_ROUTER_V3"
+        },
+        "result": [
+          "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        ],
+        "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+      },
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2": {
+        "meta": {
+          "expected_confidence": 1.0,
+          "feasible": true,
+          "feedback_consumed": false,
+          "reason": "TARGET_REACHABLE",
+          "sequence": [
+            "OBSERVE",
+            "DEEP"
+          ]
+        },
+        "result": "OBSERVE",
+        "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      }
+    },
+    "status": "PASS"
+  },
+  "checks": {
+    "architecture_family_unchanged": true,
+    "intelligence_v3_dispatch": true,
+    "logic_v2_dispatch": true,
+    "memory_ablation_removes_feedback": true,
+    "memory_feedback_consumed": true,
+    "memory_feedback_recorded": true,
+    "thinking_v2_dispatch": true,
+    "three_capability_coordinator": true
+  },
+  "component": {
+    "architecture_digest": "775411012143bcf2c405269cfb29e6794747b3b45a5e140d27efc3ed20de087f",
+    "architecture_mutation": false,
+    "bounded_feedback_records": 128,
+    "canonical_active": false,
+    "component_digest": "852243f8581f2350e2de31b382d744faed647d5056fc0cd3605581c4c35013d8",
+    "component_id": "RUNTIME-G2-INTEGRATED-EXECUTION-FABRIC-V1",
+    "direct_dispatch": [
+      "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+      "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+    ],
+    "extends": "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1",
+    "schema": "yado.g2.integrated_execution_fabric.v1",
+    "semantic_feedback_memory": true
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "intelligence": {
+    "meta": {
+      "intelligence_mode": "route",
+      "model_kind": "COVERAGE_PRUNED_COMPOSITIONAL_TRIGGER_ROUTER_V3"
+    },
+    "result": [
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    ],
+    "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+  },
+  "logic": {
+    "meta": {
+      "logic_mode": "symmetric_boolean",
+      "model_kind": "SYMMETRIC_COUNT_MAP_V2"
+    },
+    "result": "ODD",
+    "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+  },
+  "memory_snapshot": {
+    "episode_count": 9,
+    "last_episode_digest": "bd1d1f7a308335eaa3f3718d8a5e87a7206bb2aa66d2348e770588c1b678461b",
+    "last_feedback_digest": "cc062f6c215785732a2a41f22c10547168176fa00db29a6b858368ad916fdb73",
+    "semantic_feedback_count": 1,
+    "stream_attempts": {
+      "FRESH-P": [
+        "OBSERVE"
+      ]
+    }
+  },
+  "receipt_sha256": "7e8f4586561b4503cf1b358d0682652a0ec35ed181d88f2c3496c8686fb3e981",
+  "schema": "yado.g2.integrated_execution_fabric.fresh_gate.v1",
+  "semantic_boundary": "SHADOW FRESH GATE FOR G2 EXECUTION CONNECTIVITY AND CAUSAL MEMORY FEEDBACK; NOT AGI OR CONSCIOUSNESS.",
+  "status": "PASS_SHADOW_G2_INTEGRATED_EXECUTION_FABRIC_V1",
+  "thinking_after_feedback": {
+    "meta": {
+      "expected_confidence": 0.75,
+      "feasible": true,
+      "feedback_consumed": true,
+      "observed_gain": -0.15,
+      "reason": "BEST_REACHABLE",
+      "sequence": [
+        "DEEP"
+      ]
+    },
+    "result": "DEEP",
+    "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+  },
+  "thinking_before_feedback": {
+    "meta": {
+      "expected_confidence": 1.0,
+      "feasible": true,
+      "feedback_consumed": false,
+      "reason": "TARGET_REACHABLE",
+      "sequence": [
+        "OBSERVE",
+        "DEEP"
+      ]
+    },
+    "result": "OBSERVE",
+    "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+  },
+  "thinking_memory_ablated": {
+    "meta": {
+      "expected_confidence": 0.8999999999999999,
+      "feasible": true,
+      "feedback_consumed": false,
+      "reason": "TARGET_REACHABLE",
+      "sequence": [
+        "DEEP"
+      ]
+    },
+    "result": "DEEP",
+    "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+  }
+}
