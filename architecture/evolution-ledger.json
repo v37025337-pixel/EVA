@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 273,
+  "event_count": 274,
   "events": [
     {
       "canonical_mutation": false,
@@ -4786,10 +4786,26 @@
       "source_digest": "50eb596f7d45bba9f7164fd025c657f2a493b9c96cf2ffbebe46fa8ee39099a4",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33753366454.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0; NEXT=KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+      "event_hash": "fadbab806b080de2fa2056a4840e30a32a504f1cd9669ba4dadc2225e336dced",
+      "event_id": "E0274_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 273,
+      "parent_event_hash": "0dd82d8b9add541bf8fcbddc66c79c4688b93eae424d89c74aa4168b9f783412",
+      "promotion_applied": false,
+      "run_id": "33786600819",
+      "source_digest": "10cee5d0afcfc84238da147710f93935b5c62cb57d1b589f9115db0389d86825",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33786600819.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "51394cfcd3e40864e26f5e29412549054788483d9ed2bcba448409ce645e2b18",
+  "ledger_digest": "9138f43b3842f6896e60b70b63696cf0ccddbf8f8bc6822231fcf0b2977b21db",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -4827,5 +4843,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "0dd82d8b9add541bf8fcbddc66c79c4688b93eae424d89c74aa4168b9f783412"
+  "tail_event_hash": "fadbab806b080de2fa2056a4840e30a32a504f1cd9669ba4dadc2225e336dced"
 }
