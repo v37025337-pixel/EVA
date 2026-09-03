@@ -25,6 +25,7 @@ from yado_g2_unified_execution_fabric_v1 import G2UnifiedExecutionFabricV1
 from yado_g2_unified_execution_fabric_v2 import G2UnifiedExecutionFabricV2
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
+from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -60,6 +61,7 @@ class UnifiedYADOCoreV1:
         self.execution_fabric_cls=G2UnifiedExecutionFabricV2
         self.openapi_contract_capability_cls=G2OpenAPIContractCapabilityV1
         self.openapi_readonly_executor_cls=G2OpenAPIReadOnlyExecutorV1
+        self.evolutionary_genome_cls=YADOEvolutionaryGenomeV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -262,6 +264,25 @@ class UnifiedYADOCoreV1:
               'stream_id':stream_id,
             }
         )
+
+    def evolutionary_parent_genome(self)->dict[str,Any]:
+        component_sources={
+          'LOGIC':'runtime/yado_budget_adaptive_compositional_logic_v2.py',
+          'THINKING':'runtime/yado_work_budget_adaptive_contingent_planner_v2.py',
+          'INTELLIGENCE':'runtime/yado_coverage_pruned_compositional_schema_router_v3.py',
+          'CODE':'runtime/yado_ambiguity_aware_program_repair_v11.py',
+        }
+        component_digests={k:hashlib.sha256((self.repo/v).read_bytes()).hexdigest() for k,v in component_sources.items()}
+        experience=self.experience_search(['logic','thinking','intelligence','repair','counterexample'],limit=8)
+        parent=self.evolutionary_genome_cls.parent_genome(
+            self.head['canonical_head_digest'],component_digests,experience_digest=digest(experience)
+        )
+        return {'parent':parent,'experience':experience}
+
+    def evolve_cognitive_code_genome(self)->dict[str,Any]:
+        state=self.evolutionary_parent_genome()
+        controller=self.evolutionary_genome_cls(state['parent'],experience_sources=state['experience'])
+        return controller.evolve_once()
 
     def snapshot(self)->dict[str,Any]:
         audit=self.audit()

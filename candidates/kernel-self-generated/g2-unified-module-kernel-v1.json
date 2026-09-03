@@ -1,10 +1,11 @@
 {
-  "active_module_count": 25,
+  "active_module_count": 26,
   "architecture_mutation": false,
   "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
   "assembly_runtime_canonical_active": true,
   "binding_checks": {
     "api_network_execution_disabled": true,
+    "canonical_evolutionary_genome_active": true,
     "canonical_openapi_active": true,
     "canonical_openapi_readonly_executor_active": true,
     "canonical_unified_fabric_active": true,
@@ -14,7 +15,7 @@
   },
   "canonical_mutation": false,
   "canonical_ready": true,
-  "covered_module_count": 25,
+  "covered_module_count": 26,
   "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
   "functional_assembly_pass": true,
   "g3_genesis_performed": false,
@@ -107,8 +108,8 @@
       "repair_mode": "BASE_PORTFOLIO"
     },
     "representation_to_execution_to_memory": {
-      "after": 33,
-      "before": 32,
+      "after": 34,
+      "before": 33,
       "pass": true,
       "result": {
         "parent_result": {
@@ -182,7 +183,7 @@
     }
   },
   "module_coverage_pass": true,
-  "receipt_sha256": "9d472fa6398285ff44333371adb0958fe9a51792a444cd5fa9011d47c85f493a",
+  "receipt_sha256": "2f790a63cadecdfbe4b72b6e5c200b89a5399b8a3178d5c0d8a4fe173734bc5a",
   "registry_pass": true,
   "schema": "yado.g2.unified_module_kernel.fresh_gate.v1",
   "semantic_boundary": "FRESH SHADOW ASSEMBLY TEST OF ALL CURRENT CANONICAL G2 MODULE IDENTITIES OVER THE CANONICAL UNIFIED EXECUTION FABRIC. THE MODULE KERNEL ITSELF IS NOT A NEW GENERATION.",
@@ -740,6 +741,35 @@
       },
       "pass": true
     },
+    "CTRL-G2-EVOLUTIONARY-GENOME-V1": {
+      "output": {
+        "architecture_mutation": false,
+        "automatic_canonical_promotion": false,
+        "canonical_active": false,
+        "chromosomes": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "component_digest": "da9f9f8834b7729448a907f002e0e55a362e371aa83231dc3790139159968b95",
+        "component_id": "CTRL-G2-EVOLUTIONARY-GENOME-V1",
+        "fresh_gate_required_for_promotion": true,
+        "novel_gene_synthesis": true,
+        "operations": [
+          "OBSERVE_DEFICIT",
+          "MUTATE",
+          "RECOMBINE",
+          "EXPRESS",
+          "FITNESS",
+          "SELECT"
+        ],
+        "rollback_parent_preserved": true,
+        "schema": "yado.g2.evolutionary_genome.controller.v1",
+        "semantic_boundary": "BOUNDED SAME-G2 EVOLUTIONARY SUBSTRATE. CHILD GENOMES ARE SHADOW UNTIL SEPARATE CANONICAL ADMISSION."
+      },
+      "pass": true
+    },
     "RESOURCE-PORTFOLIO-V1": {
       "output": {
         "parent_result": {
@@ -789,7 +819,7 @@
     }
   },
   "snapshot": {
-    "active_module_count": 25,
+    "active_module_count": 26,
     "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
     "assembly_runtime_canonical_active": true,
     "extra_registry_modules": [],
@@ -797,15 +827,15 @@
     "generation": "G2_CANDIDATE_TRCG_V1",
     "kernel_id": "UNIFIED_YADO_MODULE_KERNEL_V1",
     "memory": {
-      "episode_count": 44,
+      "episode_count": 45,
       "external_evidence_count": 0,
       "fabric_episode_count": 8,
-      "last_episode_digest": "93f88fc7ec9587a8d33ad02fed7af353b2724356b8555e05fbfb32192e557970",
+      "last_episode_digest": "f6a3db71ea74674273bc4bd12cd7dd0ce9798071c137fde78eb97ded28cbda60",
       "stage_outcome_count": 0,
       "stream_attempts": {}
     },
     "missing_active_modules": [],
-    "registered_module_count": 25,
+    "registered_module_count": 26,
     "registry": {
       "ALG-BOUNDED-CAPABILITY-ROUTER-V1": {
         "canonical_active": true,
@@ -911,6 +941,11 @@
         "canonical_active": true,
         "kind": "PERSISTENT_STATE",
         "source": "architecture/evolution-ledger.json"
+      },
+      "CTRL-G2-EVOLUTIONARY-GENOME-V1": {
+        "canonical_active": true,
+        "kind": "EVOLUTION_CONTROL",
+        "source": "runtime/yado_evolutionary_genome_v1.py"
       },
       "RESOURCE-PORTFOLIO-V1": {
         "canonical_active": true,
