@@ -75,6 +75,12 @@ def evt_cases(rng,domain,depths):
         out.append({'events':valid,'expected':True,'domain':domain})
         out.append({'events':cross,'expected':False,'domain':domain})
         out.append({'events':tuple(list(valid)[:-1]),'expected':False,'domain':domain})
+        out.append({'events':tuple([(CLOSE,keys[0])]+list(valid)),'expected':False,'domain':domain})
+        wrong=f'{domain}_WRONG_{rng.randrange(10**12):012d}'
+        ev=list(valid);ev[len(keys)]=(CLOSE,wrong)
+        out.append({'events':tuple(ev),'expected':False,'domain':domain})
+        k=f'{domain}_REP_{rng.randrange(10**12):012d}'
+        out.append({'events':tuple([(OPEN,k)]*d+[(CLOSE,k)]*d),'expected':True,'domain':domain})
     return out
 
 def weighted_truth(edges,start):
