@@ -102,6 +102,7 @@ class UnifiedYADOModuleKernelV1:
 
     def _normalize_fabric_task(self,module_id,task):
         t=copy.deepcopy(task)
+        t.setdefault('descriptor',{})
         if module_id==CAP_LOGIC_V2:
             if 'operation' not in t:
                 if 'model' not in t and 'train_rows' in t:
