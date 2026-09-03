@@ -35,7 +35,9 @@ class YADOAdaptiveEvolutionControllerV1:
             GenericRelationalMetaLanguageV1.COMPONENT_ID,
             GenericEventStateMetaLanguageV1.COMPONENT_ID,
         ):
-            # Delegate known contracts to the existing portfolio controller.
+            expected_contract=YADOAutonomousGenePortfolioControllerV1._contract_for_component(comp)
+            if task_group.get('input_contract')!=expected_contract:
+                return None
             item={'schema':'tmp','selected_genes':[{'gene':gene}]}
             return YADOAutonomousGenePortfolioControllerV1.evaluate_portfolio(item,task_group)['best_score']
         if comp==GenericWeightedStateMetaLanguageV1.COMPONENT_ID and task_group.get('input_contract')==YADOAdaptiveEvolutionControllerV1.WEIGHTED_CONTRACT:
