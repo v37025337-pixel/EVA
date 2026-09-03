@@ -1,0 +1,39 @@
+name: YADO Active Workflow Exec Audit V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-active-workflow-exec-audit-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Compile audit
+        run: python -m py_compile runtime/yado_active_workflow_exec_audit_v1.py
+      - name: Audit active workflow executable inputs
+        run: python runtime/yado_active_workflow_exec_audit_v1.py
+      - name: Persist report
+        run: |
+          git config user.name "YADO Active Workflow Audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add audits/yado-active-workflow-exec-audit-v1.json
+          git commit -m "Persist active workflow exec audit V1 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-active-workflow-exec-audit-v1-${{ github.run_id }}
+          path: audits/yado-active-workflow-exec-audit-v1.json
