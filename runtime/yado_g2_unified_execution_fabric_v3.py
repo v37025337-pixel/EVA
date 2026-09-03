@@ -155,6 +155,20 @@ class G2UnifiedExecutionFabricV3(G2UnifiedExecutionFabricV2):
     def temporal_entity_age(self,entity_id):
         return self.clock.entity_age(entity_id)
 
+    def temporal_evolution_signal(self,stream_id):
+        state=self.clock.stream_state(stream_id)
+        required=bool(state.get('mechanism_change_required'))
+        out={
+          'schema':'yado.g2.temporal_evolution_signal.v1',
+          'stream_id':state['stream_id'],
+          'last_tick':state.get('last_tick'),
+          'no_progress_ticks':state.get('no_progress_ticks',0),
+          'mechanism_change_required':required,
+          'recommended_action':'EVOLVE_MECHANISM' if required else 'CONTINUE_CURRENT_MECHANISM',
+        }
+        out['signal_digest']=_digest_v3(out)
+        return out
+
     def export_temporal_state(self):
         return self.clock.export_state()
 
@@ -184,6 +198,7 @@ class G2UnifiedExecutionFabricV3(G2UnifiedExecutionFabricV2):
              'entity_age':True,
              'no_progress_detection':True,
              'stall_signal_to_memory':True,
+             'stall_signal_to_evolution_controller':True,
           },
           'network_execution':parent.get('network_execution'),
           'canonical_active':False,'architecture_mutation':False,
