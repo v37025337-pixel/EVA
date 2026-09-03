@@ -1,0 +1,61 @@
+name: YADO G2 MultiGeneration Evolutionary Lineage V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-multigeneration-evolutionary-lineage-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  lineage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before shadow lineage
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile multi-generation lineage
+        run: python -m py_compile runtime/yado_evolutionary_multigeneration_lineage_v1.py
+      - name: Run S1 to S3 cumulative shadow evolution
+        run: python runtime/yado_evolutionary_multigeneration_lineage_v1.py
+      - name: Require cumulative lineage PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/g2-evolutionary-multigeneration-lineage-v1.json"))
+          assert r["status"]=="PASS_SHADOW_G2_MULTIGENERATION_EVOLUTION_V1",r
+          assert r["shadow_generation_count"]==3,r
+          assert r["automatic_canonical_promotion"] is False,r
+          assert r["canonical_mutation"] is False,r
+          assert r["generation_transition"] is False,r
+          for row in r["lineage"][1:]:
+              e=row["event"]
+              assert e["selection"]=="CHILD",e
+              assert e["fitness_gain"]>0,e
+              assert e["cumulative_regression_pass"] is True,e
+              assert min(e["child_fitness"].values())==1.0,e
+          print(r["status"],r["final_shadow_genome_digest"])
+          PY
+      - name: Canonical guard after shadow lineage
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist shadow lineage evidence
+        run: |
+          git config user.name "YADO G2 MultiGeneration Lineage"
+          git config user.email "actions@users.noreply.github.com"
+          git add candidates/kernel-self-generated/g2-evolutionary-multigeneration-lineage-v1.json
+          git diff --cached --quiet || git commit -m "Persist cumulative S1-S3 shadow evolutionary lineage [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-multigeneration-evolutionary-lineage-v1-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-evolutionary-multigeneration-lineage-v1.json
