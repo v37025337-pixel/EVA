@@ -10,8 +10,9 @@
   "threshold_relaxation_allowed": false,
   "canonical_mutation": false,
   "host_role": "EVALUATION_TRANSPORT_ONLY",
-  "retry": 1,
-  "previous_run_id": 33797908875,
-  "retry_reason": "TRANSIENT_EXTERNAL_CANDIDATE_TOOL_UNAVAILABLE: llm7 timeout; kilo HTTP 429. Re-run exact unchanged YADO-repaired controller and unchanged strict gates.",
-  "host_solution_hint": null
+  "retry": 2,
+  "previous_run_id": 33798380057,
+  "retry_reason": "EVALUATION_INFRASTRUCTURE_ONLY: fix false-positive eval/exec string scan using AST calls; allow max 3 bounded transport retries of the exact unchanged YADO-generated controller. No candidate/source/target/prompt/gate threshold changes.",
+  "host_solution_hint": null,
+  "max_exact_controller_transport_attempts": 3
 }
