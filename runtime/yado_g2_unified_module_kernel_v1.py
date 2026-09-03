@@ -17,6 +17,7 @@ from yado_g2_contextual_stream_capability_adapter_v1 import (
 from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
 from yado_neutral_evidence_profile_selector_v1 import NeutralEvidenceProfileSelectorV1,EvidenceCandidate
 from yado_g2_canonical_high_scale_binding_runtime_v5 import CanonicalHighScaleBindingRuntimeV5
+from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
 
 CAP_ROUTER='ALG-BOUNDED-CAPABILITY-ROUTER-V1'
 CAP_REPAIR='ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11'
@@ -36,6 +37,7 @@ CAP_BASE_RUNTIME='RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1'
 CAP_FABRIC='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2'
 CAP_API=CAP_API_V1
 CAP_API_EXEC='ALG-G2-OPENAPI-READONLY-EXECUTOR-V1'
+CAP_GENOME='CTRL-G2-EVOLUTIONARY-GENOME-V1'
 
 MODULE_REGISTRY={
  CAP_ROUTER:('EXECUTOR','runtime/yado_bounded_capability_router_v1.py'),
@@ -63,6 +65,7 @@ MODULE_REGISTRY={
  CAP_FABRIC:('RUNTIME','runtime/yado_g2_unified_execution_fabric_v2.py'),
  CAP_API:('EXECUTOR','runtime/yado_g2_openapi_contract_capability_v1.py'),
  CAP_API_EXEC:('NETWORK_READONLY_EXECUTOR','runtime/yado_g2_openapi_readonly_executor_v1.py'),
+ CAP_GENOME:('EVOLUTION_CONTROL','runtime/yado_evolutionary_genome_v1.py'),
 }
 
 DIRECT_FABRIC={CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES,CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3}
@@ -199,6 +202,15 @@ class UnifiedYADOModuleKernelV1:
                 ex=G2OpenAPIReadOnlyExecutorV1(task['allowed_hosts'],max_bytes=int(task.get('max_bytes',1024*1024)),timeout=float(task.get('timeout',10)))
                 out=ex.execute(task['plan'],task['base_url'],query=task.get('query'),headers=task.get('headers'))
             else:raise ValueError('UNKNOWN_API_EXEC_ACTION:'+str(action))
+        elif mid==CAP_GENOME:
+            action=task.get('action','component')
+            if action=='component':
+                out=YADOEvolutionaryGenomeV1.component()
+            elif action=='evolve_once':
+                if not hasattr(self.core,'evolve_cognitive_code_genome'):
+                    raise RuntimeError('EVOLUTIONARY_GENOME_NOT_BOUND_TO_CORE')
+                out=self.core.evolve_cognitive_code_genome()
+            else:raise ValueError('UNKNOWN_GENOME_ACTION:'+str(action))
         else:
             raise KeyError('NO_EXECUTION_PATH:'+mid)
 
