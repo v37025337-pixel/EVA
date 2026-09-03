@@ -1,0 +1,49 @@
+{
+  "aggregate": {
+    "composite": {
+      "ablated": 0.25,
+      "ambiguous": 1.0,
+      "causal_drop": 0.75,
+      "explicit": 1.0
+    },
+    "direct_context_fabric": {
+      "ablated": 0.25,
+      "ambiguous": 1.0,
+      "causal_drop": 0.75,
+      "explicit": 1.0
+    }
+  },
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "checks": {
+    "direct_ablation_no_hidden_gain": true,
+    "direct_ambiguous_no_regression": true,
+    "direct_causal_drop_no_regression": true,
+    "direct_explicit_no_regression": true,
+    "paired_ablated_follow_exact_1": true,
+    "paired_ablated_prime_exact_1": true,
+    "paired_ambiguous_exact_1": true,
+    "paired_prime_exact_1": true
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "paired": {
+    "ambiguous_exact": 1.0,
+    "count": 480,
+    "prime_exact": 1.0
+  },
+  "paired_ablated": {
+    "ambiguous_exact": 1.0,
+    "count": 160,
+    "prime_exact": 1.0
+  },
+  "receipt_sha256": "bac5b7b2e389ff49ab0142cd9e5626087bb711cddf9f61b3255fffd73f1ac21b",
+  "removal_authorized": true,
+  "schema": "yado.g2.composite_adapter_fresh_ablation.v2",
+  "semantic_boundary": "PAIRED FRESH BEHAVIORAL EQUIVALENCE TEST. REMOVAL IS AUTHORIZED ONLY IF DIRECT CONTEXT+UNIFIED FABRIC MATCHES COMPOSITE EXACTLY ON PAIRED OUTPUTS AND DOES NOT REDUCE MEMORY CAUSALITY.",
+  "status": "PASS_COMPOSITE_ADAPTER_REDUNDANT_PAIRED_FRESH_V2",
+  "v1_context": {
+    "reason": "ABSOLUTE_AMBIGUOUS_THRESHOLD_MISMATCHED_REDUNDANCY_QUESTION",
+    "status": "WITHHOLD_KEEP_COMPOSITE_ADAPTER"
+  }
+}
