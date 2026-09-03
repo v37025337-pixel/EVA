@@ -21,6 +21,7 @@
     "restore_continues_global_tick": true,
     "restore_preserves_entity_age": true,
     "restore_preserves_stream_predecessor": true,
+    "stall_signal_recommends_evolution": true,
     "stall_signal_written_to_recurrent_memory": true,
     "temporal_state_digest_bound": true,
     "temporal_transitions_in_recurrent_memory": true,
@@ -56,9 +57,9 @@
       "cause": null,
       "episode_tick": 1,
       "mechanism_change_required": false,
-      "next_state_digest": "63afbb7adfe248e3a7a3259e1eb05abb9f25886e8705cd19a7673643c5d33aca",
+      "next_state_digest": "2ce5786dce66368c779f6a610b098cd96905d783c13fe5704949d646744a2854",
       "no_progress_ticks": 0,
-      "observed_result_digest": "63afbb7adfe248e3a7a3259e1eb05abb9f25886e8705cd19a7673643c5d33aca",
+      "observed_result_digest": "2ce5786dce66368c779f6a610b098cd96905d783c13fe5704949d646744a2854",
       "parent_tick": null,
       "predecessor_tick": null,
       "prediction": {
@@ -74,10 +75,19 @@
       },
       "status": "CLOSED",
       "stream_id": "TIME-API",
-      "tick_digest": "6c649d7c77d89b3b1aa49a69337bd8d8c376281f5b2f92222610e167ad922793",
+      "tick_digest": "aa6ba2799ff65ba1d602d14e23c8108eb830eb353f95958437de84ecbbd152d9",
       "tick_id": 13,
-      "wall_time_finished": "2026-09-03T12:00:49.024267+00:00",
-      "wall_time_started": "2026-09-03T12:00:48.773587+00:00"
+      "wall_time_finished": "2026-09-03T12:02:50.673807+00:00",
+      "wall_time_started": "2026-09-03T12:02:50.388067+00:00"
+    },
+    "evolution_signal": {
+      "last_tick": 34,
+      "mechanism_change_required": true,
+      "no_progress_ticks": 20,
+      "recommended_action": "EVOLVE_MECHANISM",
+      "schema": "yado.g2.temporal_evolution_signal.v1",
+      "signal_digest": "481708d90d8540d233cff1bc663fc54182c6042c9756ec0abd3597bad693f96f",
+      "stream_id": "STALL-1"
     },
     "goal_age": {
       "after_idle": {
@@ -154,10 +164,10 @@
         },
         "status": "CLOSED",
         "stream_id": "TIME-I",
-        "tick_digest": "f21b56b2052a0830634c8f68364b71e0987a7bdafee2ee8ffb7c2e1120ff7bc6",
+        "tick_digest": "7f184eb5f4d758e1f32ed18849d386e29911c0726d6ef2d95a7ab6bf23901ceb",
         "tick_id": 11,
-        "wall_time_finished": "2026-09-03T12:00:48.773382+00:00",
-        "wall_time_started": "2026-09-03T12:00:48.772991+00:00"
+        "wall_time_finished": "2026-09-03T12:02:50.387864+00:00",
+        "wall_time_started": "2026-09-03T12:02:50.387505+00:00"
       },
       {
         "action": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
@@ -187,10 +197,10 @@
         },
         "status": "CLOSED",
         "stream_id": "TIME-I",
-        "tick_digest": "c78b7b209623554ac382caed2c56e3a3f3378a1056716ca76fbda97231d891aa",
+        "tick_digest": "efb19909c50c2a72d1c6e47924ac796d2304130bd3ee6717ae904994d72ffe9d",
         "tick_id": 12,
-        "wall_time_finished": "2026-09-03T12:00:48.773184+00:00",
-        "wall_time_started": "2026-09-03T12:00:48.773075+00:00"
+        "wall_time_finished": "2026-09-03T12:02:50.387668+00:00",
+        "wall_time_started": "2026-09-03T12:02:50.387594+00:00"
       }
     ],
     "restore": {
@@ -200,7 +210,7 @@
         "no_progress_ticks": 0,
         "parent_tick": null,
         "predecessor_tick": 7,
-        "tick_digest": "ac6a4c2b4cebd87254154b7cde2d72445e78518a9957870502131660d93a631d",
+        "tick_digest": "1868d7322060c674f0cc852db692310b5e01e657f5779e3d66455c2fbdb1c609",
         "tick_id": 36
       },
       "goal_age": {
@@ -268,10 +278,10 @@
         },
         "status": "CLOSED",
         "stream_id": "TIME-T",
-        "tick_digest": "c411e7088d9610bb46ca2eb8d828d93f5bf82aae3eb3b21d2cbfd6df673f15e5",
+        "tick_digest": "e80f23bcfd2d9865897a608ec8ad2fa2cae8e9702d8b66b719055068d352b149",
         "tick_id": 8,
-        "wall_time_finished": "2026-09-03T12:00:48.771629+00:00",
-        "wall_time_started": "2026-09-03T12:00:48.771443+00:00"
+        "wall_time_finished": "2026-09-03T12:02:50.386106+00:00",
+        "wall_time_started": "2026-09-03T12:02:50.385914+00:00"
       },
       {
         "action": "OBSERVE_STAGE_OUTCOME",
@@ -301,10 +311,10 @@
         },
         "status": "CLOSED",
         "stream_id": "TIME-T",
-        "tick_digest": "67a5e4ff580c41e6b7d53f6e583ffbcacea63f3f359b01f91154665390b9df36",
+        "tick_digest": "b2bb4f70c393c13269cb4220735b37c92e069cefbc8cf4339a0cc9b04e9e74f3",
         "tick_id": 9,
-        "wall_time_finished": "2026-09-03T12:00:48.771829+00:00",
-        "wall_time_started": "2026-09-03T12:00:48.771745+00:00"
+        "wall_time_finished": "2026-09-03T12:02:50.386338+00:00",
+        "wall_time_started": "2026-09-03T12:02:50.386253+00:00"
       },
       {
         "action": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
@@ -352,10 +362,10 @@
         },
         "status": "CLOSED",
         "stream_id": "TIME-T",
-        "tick_digest": "5926326d5893f20b8ff2a16538c8a34e0a5fe61d079123921a22509951c5cddf",
+        "tick_digest": "568f41875a347fb4a04e86c29ad0dbb62f934aded74fa40c53b0bea1f05508c2",
         "tick_id": 10,
-        "wall_time_finished": "2026-09-03T12:00:48.772099+00:00",
-        "wall_time_started": "2026-09-03T12:00:48.771924+00:00"
+        "wall_time_finished": "2026-09-03T12:02:50.386604+00:00",
+        "wall_time_started": "2026-09-03T12:02:50.386432+00:00"
       }
     ],
     "time_a_chain": [
@@ -388,10 +398,10 @@
         },
         "status": "CLOSED",
         "stream_id": "TIME-A",
-        "tick_digest": "742ed3aa55ea0bd67dc1074c5598d8b20a8a7db72ca0efafdda157a58dc5f674",
+        "tick_digest": "f6d31d84568db66f53fa39fb2cda09bc677b931666a2374dda2eda7b392c29dc",
         "tick_id": 1,
-        "wall_time_finished": "2026-09-03T12:00:48.770193+00:00",
-        "wall_time_started": "2026-09-03T12:00:48.770068+00:00"
+        "wall_time_finished": "2026-09-03T12:02:50.384626+00:00",
+        "wall_time_started": "2026-09-03T12:02:50.384518+00:00"
       },
       {
         "action": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
@@ -422,10 +432,10 @@
         },
         "status": "CLOSED",
         "stream_id": "TIME-A",
-        "tick_digest": "c329b4203a318f18cf1239463806a1c55a039d62945d2df6811673cc02fcabb0",
+        "tick_digest": "fa97bf8cc6dd5d504f1feee913a15d6d17a51a4593fa37a3a4dab3749492ce88",
         "tick_id": 2,
-        "wall_time_finished": "2026-09-03T12:00:48.770395+00:00",
-        "wall_time_started": "2026-09-03T12:00:48.770311+00:00"
+        "wall_time_finished": "2026-09-03T12:02:50.384835+00:00",
+        "wall_time_started": "2026-09-03T12:02:50.384743+00:00"
       }
     ]
   },
@@ -433,7 +443,7 @@
     "architecture_family": "TYPED_RECURRENT_CAPABILITY_GRAPH",
     "architecture_mutation": false,
     "canonical_active": false,
-    "component_digest": "6cee1fd668967144524cd946d29ab82ff2f0745f39ab8836502dabc9bb419579",
+    "component_digest": "8606aa94b1380b90d1d1a0230687efe2661a53d782979289234839a7d5c1fc24",
     "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
     "dispatches": [
       "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
@@ -467,6 +477,7 @@
       "no_progress_detection": true,
       "recurrent_temporal_transition_memory": true,
       "stage_outcome_ticks": true,
+      "stall_signal_to_evolution_controller": true,
       "stall_signal_to_memory": true
     },
     "temporal_kernel": {
@@ -499,7 +510,7 @@
     "episode_count": 70,
     "external_evidence_count": 1,
     "fabric_episode_count": 33,
-    "last_episode_digest": "24194b4b1a6e6b6f65d668a6425d5dcdf4448f3c5d7edf5beb499c324ffe090d",
+    "last_episode_digest": "c4b0a188b45557d06613031626649060bc237d145c65726c679186744420a90f",
     "stage_outcome_count": 1,
     "stream_attempts": {
       "TIME-T": [
@@ -509,7 +520,7 @@
     "temporal": {
       "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
       "entity_count": 22,
-      "last_tick_digest": "9d2bdd36a29232b5b5bfd58ed8531e9dcc59975e62daec82fae6f0b6528f20a6",
+      "last_tick_digest": "f9a0664bf8693d8c13b22d42473b10a05028daa6146ab3ee7f72e89400944c17",
       "open_tick_count": 0,
       "record_count": 34,
       "stream_count": 9,
@@ -518,7 +529,7 @@
     "temporal_stall_signal_count": 1,
     "temporal_transition_count": 34
   },
-  "receipt_sha256": "bd0dda04303194ca0a11429421ed480b444a868d8964d72523925735cd16194a",
+  "receipt_sha256": "55b32a04cd308aed28eacf4bb7635ae7bc39e94096e74cc8a566cf779b2be9ad",
   "schema": "yado.g2.cognitive_temporal_kernel.fresh_gate.v1",
   "semantic_boundary": "FRESH SHADOW TEST OF LOGICAL COGNITIVE TIME. TICKS ESTABLISH ORDER/CAUSAL CONTINUITY BUT DO NOT BY THEMSELVES CLAIM CONSCIOUSNESS OR GENERAL INTELLIGENCE.",
   "status": "PASS_SHADOW_G2_COGNITIVE_TEMPORAL_KERNEL_V1"
