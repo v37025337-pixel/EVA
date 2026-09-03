@@ -1,0 +1,58 @@
+name: YADO G2 Autonomous Gene Portfolio Selection V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-autonomous-gene-portfolio-selection-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  autonomous-portfolio-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before autonomous portfolio test
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile autonomous portfolio runtimes
+        run: python -m py_compile runtime/yado_g2_autonomous_gene_portfolio_controller_v1.py runtime/yado_g2_autonomous_gene_portfolio_selection_v1.py
+      - name: Run autonomous gene portfolio selection gate
+        run: python runtime/yado_g2_autonomous_gene_portfolio_selection_v1.py
+      - name: Require strict autonomous portfolio PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/g2-autonomous-gene-portfolio-selection-v1.json"))
+          assert r["status"]=="PASS_SHADOW_G2_AUTONOMOUS_GENE_PORTFOLIO_SELECTION_V1",r
+          assert r["checks"]["controller_has_no_explicit_gene_ids"] is True,r
+          assert r["checks"]["controller_makes_no_synthesis_calls"] is True,r
+          assert r["checks"]["selection_tasks_exact"] is True,r
+          assert r["checks"]["portfolio_level_removal_causes_drop"] is True,r
+          assert r["checks"]["followup_tasks_exact_without_resynthesis"] is True,r
+          assert r["canonical_mutation"] is False,r
+          assert r["generation_transition"] is False,r
+          print(r["status"],r["selected_gene_ids"])
+          PY
+      - name: Canonical guard after autonomous portfolio test
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist autonomous portfolio evidence
+        run: |
+          git config user.name "YADO G2 Autonomous Portfolio Gate"
+          git config user.email "actions@users.noreply.github.com"
+          git add candidates/kernel-self-generated/g2-autonomous-gene-portfolio-selection-v1.json
+          git diff --cached --quiet || git commit -m "Persist autonomous gene portfolio evidence [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-autonomous-gene-portfolio-selection-v1-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-autonomous-gene-portfolio-selection-v1.json
