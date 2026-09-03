@@ -97,6 +97,33 @@ class PolynomialReturnRepairGeneV1:
         return out
 
     @classmethod
+    def _fit_univariate(cls,examples):
+        pts=[(Fraction(args[0]),Fraction(expected)) for args,expected in examples]
+        for degree in range(cls.MAX_DEGREE+1):
+            n=degree+1
+            uniq=[]
+            for x,y in pts:
+                if all(x!=a for a,_ in uniq):uniq.append((x,y))
+            if len(uniq)<n:continue
+            A=[]
+            for x,y in uniq[:n]:
+                A.append([x**p for p in range(n)]+[y])
+            for col in range(n):
+                pivot=next((i for i in range(col,n) if A[i][col]!=0),None)
+                if pivot is None:break
+                A[col],A[pivot]=A[pivot],A[col]
+                q=A[col][col];A[col]=[v/q for v in A[col]]
+                for i in range(n):
+                    if i==col:continue
+                    q=A[i][col]
+                    if q!=0:A[i]=[a-q*b for a,b in zip(A[i],A[col])]
+            else:
+                coeff=[A[i][-1] for i in range(n)]
+                if all(sum(coeff[p]*(x**p) for p in range(n))==y for x,y in pts):
+                    return {'kind':'EXACT_UNIVARIATE_POLYNOMIAL_GENE_V1','degree':degree,'coeff':coeff,'basis':[(p,0) for p in range(n)]}
+        return {'kind':'WITHHOLD','reason':'NO_UNIVARIATE_POLYNOMIAL_WITHIN_GENE_BUDGET'}
+
+    @classmethod
     def synthesize(cls,source,function_name,examples):
         tree=ast.parse(source)
         fname=cls.PARENT.BASE._validate(tree)
@@ -104,8 +131,7 @@ class PolynomialReturnRepairGeneV1:
         func=next(n for n in tree.body if isinstance(n,ast.FunctionDef))
         if len(func.args.args)!=1:return {'source':None,'reason':'UNIVARIATE_ONLY'}
         arg=func.args.args[0].arg
-        rows=[{'x':args[0],'y':0,'expected':expected} for args,expected in examples]
-        model=BudgetAdaptiveCompositionalLogicV2.fit_polynomial(rows,max_degree=cls.MAX_DEGREE)
+        model=cls._fit_univariate(examples)
         if model.get('kind')=='WITHHOLD':return {'source':None,'reason':model.get('reason'),'operator_gene':cls.GENE_ID}
         returns=[n for n in ast.walk(func) if isinstance(n,ast.Return) and n.value is not None]
         if len(returns)!=1:return {'source':None,'reason':'SINGLE_RETURN_REQUIRED','operator_gene':cls.GENE_ID}
