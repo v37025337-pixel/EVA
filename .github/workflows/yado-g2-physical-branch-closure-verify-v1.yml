@@ -33,6 +33,8 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-unified-experience-registry-v1.json canonical/yado-algorithm-provenance-registry-v1.json canonical/yado-unified-context-kernel-v1.json architecture/evolution-ledger.json quarantine/yado-g2-quarantine-manifest-v1.json "receipts/yado-g2-physical-branch-closure-verify-v1-run-${GITHUB_RUN_ID}.json"
           git commit -m "Verify physical YADO branch closure into G2 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
       - uses: actions/upload-artifact@v4
