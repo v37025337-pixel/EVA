@@ -53,7 +53,7 @@ def edge(a,b,kind,reason):
     if a in active and b in active:
         edges.append({'from':a,'to':b,'kind':kind,'reason':reason})
 
-FAB='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1'
+FAB='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2'
 BASE='RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1'
 ROUTER='ALG-BOUNDED-CAPABILITY-ROUTER-V1'
 RAW='ALG-G2-RAW-TASK-REPRESENTATION-V4'
@@ -159,7 +159,7 @@ checks={
  'active_runtime_sources_exist':not missing_sources,
  'active_runtime_compile':not compile_errors and not parse_errors,
  'active_patch_registry_verified':patches.get('status')=='CANONICAL_ACTIVE' and patches.get('all_active_patch_bindings_verified') is True and not patch_fail,
- 'execution_fabric_canonical':core.get('execution_fabric_v1',{}).get('status')=='CANONICAL_ACTIVE' and FAB in active,
+ 'execution_fabric_canonical':core.get('execution_fabric_v2',{}).get('status')=='CANONICAL_ACTIVE' and FAB in active,
  'memory_readmission_current':core.get('contextual_stream_adapter',{}).get('latest_fresh_readmission_run_id')=='33720696775' and core.get('contextual_stream_adapter',{}).get('source_sha256')==sha(REPO/'runtime/yado_g2_contextual_stream_capability_adapter_v1.py'),
  'python_cache_clean':not pycache,
  'openapi_canonical_plan_only':core.get('openapi_contract_capability_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('openapi_contract_capability_v1',{}).get('network_execute') is False and API in active,
