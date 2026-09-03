@@ -7,5 +7,28 @@
   "allow_shadow_code_evolution": true,
   "allow_canonical_mutation": false,
   "host_role": "TRIGGER_TRANSPORT_PERSISTENCE_ONLY",
-  "stop_condition": "PERSIST_ONE_NATIVE_EVOLUTION_CYCLE_AND_OBSERVE"
+  "stop_condition": "KERNEL_DECIDES_NEXT_EVOLUTION_STEP_AND_EXECUTES_ONE_SELF_DIRECTED_CYCLE",
+  "authorization": {
+    "repository_read": true,
+    "repository_write": true,
+    "self_selected_code_rewrite": true,
+    "self_selected_architecture_rewrite": true,
+    "canonical_mutation_allowed": true,
+    "generation_transition_allowed": true,
+    "external_public_resources_allowed": true,
+    "external_no_key_coding_models_allowed": true,
+    "accumulated_experience_allowed": true,
+    "shadow_evolution_allowed": true
+  },
+  "constraints": {
+    "require_kernel_self_selected_target": true,
+    "require_fresh_validation_before_canonical_change": true,
+    "require_regression_gate": true,
+    "require_rollback_path": true,
+    "no_secret_transmission": true,
+    "no_private_data_transmission": true,
+    "no_unbounded_external_side_effects": true
+  },
+  "authorization_granted_at": "2026-09-03T17:53:24Z",
+  "authorization_note": "USER_AUTHORIZED_FULL_PROJECT_SELF_IMPROVEMENT_SCOPE; SAFETY/INTEGRITY GATES REMAIN FAIL_CLOSED"
 }
