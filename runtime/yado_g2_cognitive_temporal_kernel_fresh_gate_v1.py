@@ -176,7 +176,10 @@ checks['stall_signal_written_to_recurrent_memory']=snap['temporal_stall_signal_c
     e.get('kind')=='TEMPORAL_STALL_SIGNAL' and e.get('stream_id')=='STALL-1' and e.get('mechanism_change_required') is True
     for e in fabric.base.episodes
 )
+evo_signal=fabric.temporal_evolution_signal('STALL-1')
+checks['stall_signal_recommends_evolution']=evo_signal.get('recommended_action')=='EVOLVE_MECHANISM' and evo_signal.get('mechanism_change_required') is True
 evidence['stall_state']=stall_state
+evidence['evolution_signal']=evo_signal
 
 # 7) Progress resets no-progress counter.
 progressed=fabric.execute_capability(CAP_LOGIC_V2,{
