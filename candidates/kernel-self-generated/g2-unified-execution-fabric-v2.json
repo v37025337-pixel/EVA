@@ -1,0 +1,123 @@
+{
+  "ablated_memory_after": {
+    "episode_count": 0,
+    "external_evidence_count": 0,
+    "fabric_episode_count": 0,
+    "last_episode_digest": null,
+    "stage_outcome_count": 0,
+    "stream_attempts": {}
+  },
+  "ablated_memory_before": {
+    "episode_count": 0,
+    "external_evidence_count": 0,
+    "fabric_episode_count": 0,
+    "last_episode_digest": null,
+    "stage_outcome_count": 0,
+    "stream_attempts": {}
+  },
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "checks": {
+    "component_declares_readonly_network": true,
+    "direct_api_dispatch": true,
+    "external_evidence_recorded": true,
+    "fabric_episode_recorded": true,
+    "intelligence_api_evidence_recorded": true,
+    "intelligence_api_execution_200": true,
+    "intelligence_routes_api_executor": true,
+    "memory_ablation_prevents_evidence_write": true,
+    "memory_metadata_only": true
+  },
+  "component": {
+    "architecture_family": "TYPED_RECURRENT_CAPABILITY_GRAPH",
+    "architecture_mutation": false,
+    "bounded_capability_ordering": true,
+    "canonical_active": false,
+    "component_digest": "e149b6f1b4118ea16e333fb9e4ece5939d3fff6634b99111319de2b57d24ea76",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
+    "dispatches": [
+      "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+      "ALG-BUDGETED-STAGE-POLICY-V1",
+      "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+      "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+      "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+      "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+      "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+      "RESOURCE-PORTFOLIO-V1"
+    ],
+    "external_evidence_memory": "BOUNDED_METADATA_ONLY",
+    "memory_feedback": "STAGE_OUTCOME_TO_AUTO_FEEDBACK_PLAN",
+    "network_execution": {
+      "credentials_allowed": false,
+      "enabled": true,
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "read_only_only": true,
+      "redirects_followed": false
+    },
+    "parent_component": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+    "schema": "yado.g2.unified_execution_fabric.v2"
+  },
+  "direct_live": {
+    "body_sha256": "606b8e826a61579e4c73d0eb6ec50cd01b94b549e8f67a7cffe9219d0e3d1b0b",
+    "capability_id": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+    "content_type": "application/json",
+    "contract_id": "GET_REPO",
+    "credentials_used": false,
+    "execution_digest": "3577df5747979af3d4994534ef452ca9f7aefa1783ddc502219f99187dbbf44e",
+    "host": "api.github.com",
+    "method": "GET",
+    "network_executed": true,
+    "read_only_enforced": true,
+    "redirects_followed": false,
+    "resolved_ips": [
+      "140.82.114.5"
+    ],
+    "response_bytes": 5296,
+    "schema": "yado.g2.openapi_readonly_execution.v1",
+    "status": 200,
+    "url": "https://api.github.com/repos/v37025337-pixel/EVA"
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "intelligence_result": {
+    "order": [
+      "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1"
+    ],
+    "selected": [
+      "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1"
+    ],
+    "status": "PASS"
+  },
+  "memory_after": {
+    "episode_count": 2,
+    "external_evidence_count": 1,
+    "fabric_episode_count": 1,
+    "last_episode_digest": "9eda4cd0bce57b2730621fbbb4f8b9e1ca7d2ebae5f224cbd2d733c652f41c7c",
+    "stage_outcome_count": 0,
+    "stream_attempts": {}
+  },
+  "memory_before": {
+    "episode_count": 0,
+    "external_evidence_count": 0,
+    "fabric_episode_count": 0,
+    "last_episode_digest": null,
+    "stage_outcome_count": 0,
+    "stream_attempts": {}
+  },
+  "memory_final": {
+    "episode_count": 5,
+    "external_evidence_count": 2,
+    "fabric_episode_count": 3,
+    "last_episode_digest": "ac97282ec9a2782e682cb3f71579cb86ab4ce816483d5637cab9dc85da8a9975",
+    "stage_outcome_count": 0,
+    "stream_attempts": {}
+  },
+  "receipt_sha256": "7202bfd633954cba958c3c82cc4e792a0c258290ac3bced61e2f8dd165031097",
+  "schema": "yado.g2.unified_execution_fabric.v2.fresh_gate",
+  "semantic_boundary": "FRESH LIVE SHADOW GATE FOR UNIFIED FABRIC V2. API READ-ONLY NETWORK EXECUTION MUST BE DISPATCHABLE BY INTELLIGENCE AND WRITE BOUNDED METADATA-ONLY EXTERNAL EVIDENCE TO RECURRENT MEMORY.",
+  "status": "PASS_SHADOW_G2_UNIFIED_EXECUTION_FABRIC_V2"
+}
