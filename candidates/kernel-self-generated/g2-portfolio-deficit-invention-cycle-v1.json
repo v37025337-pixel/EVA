@@ -1,0 +1,895 @@
+{
+  "ablations": [
+    {
+      "field": "direction",
+      "holdout_accuracy": 0.0,
+      "transfer_accuracy": 0.0,
+      "value": "REVERSE"
+    },
+    {
+      "field": "combine",
+      "holdout_accuracy": 0.0,
+      "transfer_accuracy": 0.0,
+      "value": "EDGE_ONLY"
+    },
+    {
+      "field": "combine",
+      "holdout_accuracy": 0.0,
+      "transfer_accuracy": 0.0,
+      "value": "MAX"
+    },
+    {
+      "field": "aggregate",
+      "holdout_accuracy": 0.0,
+      "transfer_accuracy": 0.0,
+      "value": "MAX"
+    },
+    {
+      "field": "iteration",
+      "holdout_accuracy": 0.0,
+      "transfer_accuracy": 0.0,
+      "value": "ONCE"
+    },
+    {
+      "field": "iteration",
+      "holdout_accuracy": 0.0,
+      "transfer_accuracy": 0.0,
+      "value": "TWICE"
+    },
+    {
+      "field": "iteration",
+      "holdout_accuracy": 0.0,
+      "transfer_accuracy": 0.0,
+      "value": "THRICE"
+    }
+  ],
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion_false": true,
+    "cross_domain_weighted_transfer_exact": true,
+    "existing_portfolio_has_two_genes": true,
+    "existing_portfolio_insufficient_for_new_contract": true,
+    "expanded_portfolio_has_three_genes": true,
+    "formal_generation_unchanged": true,
+    "fresh_weighted_holdout_exact": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "h1_exact_three_gene_inheritance": true,
+    "h2_exact_three_gene_inheritance": true,
+    "h2_retains_all_three_task_families": true,
+    "new_gene_not_parent_gene": true,
+    "new_gene_not_preexisting_portfolio": true,
+    "new_gene_removal_breaks_only_new_family": true,
+    "new_gene_self_synthesized_after_stall": true,
+    "reuse_attempt_preceded_invention": true,
+    "structural_ablation_causes_drop": true,
+    "temporal_requests_mechanism_change": true,
+    "temporal_stall_reached_20": true
+  },
+  "controller": {
+    "automatic_canonical_promotion": false,
+    "component_digest": "ad3bed36f34a0ae4dc5242fdddc3c545c0d8fa6b2a4fdca94bd5c7da2a3b5d46",
+    "component_id": "CTRL-G2-ADAPTIVE-EVOLUTION-V1",
+    "control_flow": [
+      "DISCOVER_AND_BUILD_EXISTING_PORTFOLIO",
+      "ATTEMPT_REUSE",
+      "DETECT_INSUFFICICIENCY",
+      "REQUIRE_TEMPORAL_STALL",
+      "INVENT_BOUNDED_GENERIC_OPERATOR",
+      "FRESH_CAUSAL_GATE",
+      "EXPAND_SHADOW_PORTFOLIO",
+      "INHERIT"
+    ],
+    "gene_id_specific_rules": false,
+    "schema": "yado.g2.adaptive_evolution_controller.v1",
+    "semantic_boundary": "BOUNDED SHADOW ADAPTIVE CONTROLLER. IT MUST ATTEMPT REUSE FIRST; ONLY A FAILED PORTFOLIO PLUS TEMPORAL STALL MAY OPEN A GENERIC WEIGHTED-STATE INVENTION PATH. IT CANNOT CANONICALLY PROMOTE."
+  },
+  "controller_events": [
+    {
+      "event": "EXISTING_PORTFOLIO_BUILT",
+      "selected_gene_count": 2,
+      "selected_gene_digests": [
+        "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+        "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f"
+      ]
+    },
+    {
+      "best_score": 0.0,
+      "compatible_gene_count": 0,
+      "event": "REUSE_ATTEMPT",
+      "task_id": "NEW_WEIGHTED_DEFICIT",
+      "verdict": "PORTFOLIO_INSUFFICIENT"
+    },
+    {
+      "event": "NOVEL_GENE_INVENTED",
+      "gene_digest": "85f7c71aa8527585c5e1c38a50fb2cd2786577aa1fd2849cc77f41dadfdee6aa",
+      "gene_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98"
+    },
+    {
+      "added_gene_digest": "85f7c71aa8527585c5e1c38a50fb2cd2786577aa1fd2849cc77f41dadfdee6aa",
+      "event": "PORTFOLIO_EXPANDED",
+      "selected_gene_count": 3
+    }
+  ],
+  "extended_portfolio": {
+    "automatic_canonical_promotion": false,
+    "controller_id": "CTRL-G2-ADAPTIVE-EVOLUTION-V1",
+    "portfolio_digest": "62425e8f97e08510167b66d862d659cb6929e9d3af2ece2b7c241dada26056aa",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.adaptive_shadow_gene_portfolio.v1",
+    "score_matrix": {
+      "REUSE_EVT": [
+        {
+          "best_ablation_accuracy": 0.8333333333333334,
+          "causal_gap": 0.16666666666666663,
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "score": 1.0,
+          "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json"
+        }
+      ],
+      "REUSE_REL": [
+        {
+          "best_ablation_accuracy": 0.0,
+          "causal_gap": 1.0,
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "score": 1.0,
+          "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json"
+        }
+      ]
+    },
+    "selected_by_task": {
+      "REUSE_EVT": {
+        "best_ablation_accuracy": 0.8333333333333334,
+        "causal_gap": 0.16666666666666663,
+        "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+        "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+        "score": 1.0,
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json"
+      },
+      "REUSE_REL": {
+        "best_ablation_accuracy": 0.0,
+        "causal_gap": 1.0,
+        "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+        "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+        "score": 1.0,
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json"
+      }
+    },
+    "selected_gene_count": 3,
+    "selected_genes": [
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "merge": "UNION",
+            "novel_gene": true,
+            "output": "STATE",
+            "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+            "search_space_size": 72,
+            "seed": "START",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_operator_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "REUSE_REL"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b"
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "85f7c71aa8527585c5e1c38a50fb2cd2786577aa1fd2849cc77f41dadfdee6aa",
+          "gene_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-WEIGHTED-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "aggregate": "MIN",
+            "combine": "PLUS",
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "novel_gene": true,
+            "output": "WEIGHTED_STATE_MAP",
+            "program_digest": "b78cd1969fcc5e98e4902cb5799ea1e8dbdb2ee9b456a021a7468d181419b66c",
+            "schema": "yado.g2.generic_weighted_state_program.v1",
+            "search_space_size": 48,
+            "seed": "START_ZERO",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_weighted_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_WEIGHTED_STATE_RELAXATION",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "NEW_WEIGHTED_DEFICIT"
+        ],
+        "source_path": "CURRENT_ADAPTIVE_CYCLE",
+        "source_receipt": null
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "close_code": "R",
+            "close_policy": "MATCH_KEY",
+            "final_policy": "EMPTY_AND_VALID",
+            "mismatch_policy": "REJECT",
+            "novel_gene": true,
+            "open_code": "Q",
+            "output": "BOOLEAN",
+            "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+            "schema": "yado.g2.generic_event_state_program.v1",
+            "search_space_size": 144,
+            "state_mode": "STACK",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+            "train_accuracy": 1.0,
+            "underflow_policy": "REJECT"
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "REUSE_EVT"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c"
+      }
+    ],
+    "selection_policy": "REUSE_FIRST_THEN_TEMPORAL_STALL_INVENTION_THEN_FRESH_CAUSAL_GATE"
+  },
+  "followup_eval": {
+    "FOLLOW_EVT": {
+      "best_score": 1.0,
+      "rows": [
+        {
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "score": 1.0
+        }
+      ]
+    },
+    "FOLLOW_REL": {
+      "best_score": 1.0,
+      "rows": [
+        {
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "score": 1.0
+        }
+      ]
+    },
+    "FOLLOW_WEIGHTED": {
+      "best_score": 1.0,
+      "rows": [
+        {
+          "gene_digest": "85f7c71aa8527585c5e1c38a50fb2cd2786577aa1fd2849cc77f41dadfdee6aa",
+          "gene_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+          "score": 1.0
+        }
+      ]
+    }
+  },
+  "fresh_fitness": {
+    "best_structural_ablation_accuracy": 0.0,
+    "cross_domain_transfer_accuracy": 1.0,
+    "holdout_accuracy": 1.0
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "h1": {
+    "automatic_canonical_promotion": false,
+    "controller_id": "CTRL-G2-ADAPTIVE-EVOLUTION-V1",
+    "lineage_parent_portfolio_digest": "62425e8f97e08510167b66d862d659cb6929e9d3af2ece2b7c241dada26056aa",
+    "portfolio_digest": "638ca14e5a5ba8136a46a747e085cff77ac5813dd1a3bab14f3ea5e7dcce75db",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.adaptive_shadow_gene_portfolio.v1",
+    "selected_gene_count": 3,
+    "selected_genes": [
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "merge": "UNION",
+            "novel_gene": true,
+            "output": "STATE",
+            "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+            "search_space_size": 72,
+            "seed": "START",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_operator_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "REUSE_REL"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b"
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "85f7c71aa8527585c5e1c38a50fb2cd2786577aa1fd2849cc77f41dadfdee6aa",
+          "gene_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-WEIGHTED-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "aggregate": "MIN",
+            "combine": "PLUS",
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "novel_gene": true,
+            "output": "WEIGHTED_STATE_MAP",
+            "program_digest": "b78cd1969fcc5e98e4902cb5799ea1e8dbdb2ee9b456a021a7468d181419b66c",
+            "schema": "yado.g2.generic_weighted_state_program.v1",
+            "search_space_size": 48,
+            "seed": "START_ZERO",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_weighted_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_WEIGHTED_STATE_RELAXATION",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "NEW_WEIGHTED_DEFICIT"
+        ],
+        "source_path": "CURRENT_ADAPTIVE_CYCLE",
+        "source_receipt": null
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "close_code": "R",
+            "close_policy": "MATCH_KEY",
+            "final_policy": "EMPTY_AND_VALID",
+            "mismatch_policy": "REJECT",
+            "novel_gene": true,
+            "open_code": "Q",
+            "output": "BOOLEAN",
+            "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+            "schema": "yado.g2.generic_event_state_program.v1",
+            "search_space_size": 144,
+            "state_mode": "STACK",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+            "train_accuracy": 1.0,
+            "underflow_policy": "REJECT"
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "REUSE_EVT"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c"
+      }
+    ],
+    "selection_policy": "REUSE_FIRST_THEN_TEMPORAL_STALL_INVENTION_THEN_FRESH_CAUSAL_GATE",
+    "shadow_generation": "H1"
+  },
+  "h2": {
+    "automatic_canonical_promotion": false,
+    "controller_id": "CTRL-G2-ADAPTIVE-EVOLUTION-V1",
+    "lineage_parent_portfolio_digest": "638ca14e5a5ba8136a46a747e085cff77ac5813dd1a3bab14f3ea5e7dcce75db",
+    "portfolio_digest": "305645a5b1e22bd292055a4a6c79a7a59002da01869d8cfe8f4125f7b4d10af7",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.adaptive_shadow_gene_portfolio.v1",
+    "selected_gene_count": 3,
+    "selected_genes": [
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "merge": "UNION",
+            "novel_gene": true,
+            "output": "STATE",
+            "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+            "search_space_size": 72,
+            "seed": "START",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_operator_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "REUSE_REL"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b"
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "85f7c71aa8527585c5e1c38a50fb2cd2786577aa1fd2849cc77f41dadfdee6aa",
+          "gene_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-WEIGHTED-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "aggregate": "MIN",
+            "combine": "PLUS",
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "novel_gene": true,
+            "output": "WEIGHTED_STATE_MAP",
+            "program_digest": "b78cd1969fcc5e98e4902cb5799ea1e8dbdb2ee9b456a021a7468d181419b66c",
+            "schema": "yado.g2.generic_weighted_state_program.v1",
+            "search_space_size": 48,
+            "seed": "START_ZERO",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_weighted_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_WEIGHTED_STATE_RELAXATION",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "NEW_WEIGHTED_DEFICIT"
+        ],
+        "source_path": "CURRENT_ADAPTIVE_CYCLE",
+        "source_receipt": null
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "close_code": "R",
+            "close_policy": "MATCH_KEY",
+            "final_policy": "EMPTY_AND_VALID",
+            "mismatch_policy": "REJECT",
+            "novel_gene": true,
+            "open_code": "Q",
+            "output": "BOOLEAN",
+            "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+            "schema": "yado.g2.generic_event_state_program.v1",
+            "search_space_size": 144,
+            "state_mode": "STACK",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+            "train_accuracy": 1.0,
+            "underflow_policy": "REJECT"
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "REUSE_EVT"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c"
+      }
+    ],
+    "selection_policy": "REUSE_FIRST_THEN_TEMPORAL_STALL_INVENTION_THEN_FRESH_CAUSAL_GATE",
+    "shadow_generation": "H2"
+  },
+  "invented": {
+    "gene": {
+      "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+      "gene_digest": "85f7c71aa8527585c5e1c38a50fb2cd2786577aa1fd2849cc77f41dadfdee6aa",
+      "gene_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+      "gene_scope": [
+        "LOGIC",
+        "THINKING",
+        "INTELLIGENCE",
+        "CODE"
+      ],
+      "heritage": [
+        "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+        "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+        "GENE-LOGIC-BOOLEAN-DNF-V1",
+        "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+      ],
+      "meta_language_component": "LANG-G2-GENERIC-WEIGHTED-STATE-META-V1",
+      "novel_gene": true,
+      "operator_program": {
+        "aggregate": "MIN",
+        "combine": "PLUS",
+        "direction": "FORWARD",
+        "iteration": "UNTIL_STABLE",
+        "novel_gene": true,
+        "output": "WEIGHTED_STATE_MAP",
+        "program_digest": "b78cd1969fcc5e98e4902cb5799ea1e8dbdb2ee9b456a021a7468d181419b66c",
+        "schema": "yado.g2.generic_weighted_state_program.v1",
+        "search_space_size": 48,
+        "seed": "START_ZERO",
+        "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+        "train_accuracy": 1.0
+      },
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.self_synthesized_weighted_state_gene.v1",
+      "trigger": {
+        "deficit_id": "BLIND_WEIGHTED_STATE_RELAXATION",
+        "no_progress_ticks": 20,
+        "source": "TEMPORAL_STALL_SIGNAL",
+        "tick_id": 21
+      }
+    },
+    "status": "SELF_SYNTHESIZED_SHADOW_GENE"
+  },
+  "new_gene_removal": {
+    "event_followup_score": 1.0,
+    "relational_followup_score": 1.0,
+    "weighted_followup_score": 0.0
+  },
+  "preexisting_portfolio": {
+    "automatic_canonical_promotion": false,
+    "controller_id": "CTRL-G2-AUTONOMOUS-GENE-PORTFOLIO-V1",
+    "portfolio_digest": "53bc399530130e6a0139ef9e738ccdfac4eccf9795567e817093e3efb3645cbc",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.autonomous_shadow_gene_portfolio.v1",
+    "score_matrix": {
+      "REUSE_EVT": [
+        {
+          "best_ablation_accuracy": 0.8333333333333334,
+          "causal_gap": 0.16666666666666663,
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "score": 1.0,
+          "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json"
+        }
+      ],
+      "REUSE_REL": [
+        {
+          "best_ablation_accuracy": 0.0,
+          "causal_gap": 1.0,
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "score": 1.0,
+          "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json"
+        }
+      ]
+    },
+    "selected_by_task": {
+      "REUSE_EVT": {
+        "best_ablation_accuracy": 0.8333333333333334,
+        "causal_gap": 0.16666666666666663,
+        "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+        "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+        "score": 1.0,
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json"
+      },
+      "REUSE_REL": {
+        "best_ablation_accuracy": 0.0,
+        "causal_gap": 1.0,
+        "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+        "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+        "score": 1.0,
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json"
+      }
+    },
+    "selected_gene_count": 2,
+    "selected_genes": [
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "merge": "UNION",
+            "novel_gene": true,
+            "output": "STATE",
+            "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+            "search_space_size": 72,
+            "seed": "START",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_operator_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "REUSE_REL"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b"
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "close_code": "R",
+            "close_policy": "MATCH_KEY",
+            "final_policy": "EMPTY_AND_VALID",
+            "mismatch_policy": "REJECT",
+            "novel_gene": true,
+            "open_code": "Q",
+            "output": "BOOLEAN",
+            "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+            "schema": "yado.g2.generic_event_state_program.v1",
+            "search_space_size": 144,
+            "state_mode": "STACK",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+            "train_accuracy": 1.0,
+            "underflow_policy": "REJECT"
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "REUSE_EVT"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c"
+      }
+    ],
+    "selection_policy": "FRESH_EXACT_AND_CAUSAL_ABLATION"
+  },
+  "receipt_sha256": "d3cd66cd64bc3eb0e21f8b633383d94c66c836c40503e3371b4ad54ce0c94d04",
+  "reuse_attempt": {
+    "best_score": 0.0,
+    "compatible_gene_count": 0,
+    "event": "REUSE_ATTEMPT",
+    "rows": [],
+    "task_id": "NEW_WEIGHTED_DEFICIT",
+    "verdict": "PORTFOLIO_INSUFFICIENT"
+  },
+  "schema": "yado.g2.portfolio_deficit_invention_cycle.v1",
+  "semantic_boundary": "BOUNDED SHADOW ADAPTIVE CYCLE: REUSE OF THE EXISTING TWO-GENE PORTFOLIO IS ATTEMPTED FIRST; A FAILED NEW CONTRACT PLUS TEMPORAL STALL OPENS A GENERIC WEIGHTED-STATE INVENTION PATH; THE FRESH-CAUSAL WINNER IS ADDED AS A THIRD SHADOW GENE AND INHERITED THROUGH H1/H2. THIS DOES NOT PROVE OPEN-ENDED SELF-EVOLUTION.",
+  "status": "PASS_SHADOW_G2_PORTFOLIO_DEFICIT_INVENTION_CYCLE_V1",
+  "temporal_stall": {
+    "error_count": 21,
+    "stall_signal": {
+      "cause_tick_digest": "7c61dbe6f8a36664faa13b972243bfa6c89126e415c5b251c0ab67d3187fdbee",
+      "deficit_id": "BLIND_WEIGHTED_STATE_RELAXATION",
+      "episode_digest": "b5371d1744e7692dd6d5496ab35c62280572f3531f84dae6f982467d38df8d29",
+      "kind": "TEMPORAL_STALL_SIGNAL",
+      "mechanism_change_required": true,
+      "no_progress_ticks": 20,
+      "sequence": 22,
+      "stream_id": "ADAPTIVE-PORTFOLIO-DEFICIT",
+      "tick_id": 21
+    },
+    "stream_state": {
+      "episode_tick": 21,
+      "last_progress_digest": "dfec57fef344cdf3cd1cb17ad2c13924d872ac425cdb69afd9723cd7eb0d4f2f",
+      "last_result_digest": "bdb5996e4e53676427dd9986eab1d6f58609654ad7adfcac2bd0bde1fb98b79d",
+      "last_state_digest": "f10a336104beb9021f163554928041a76fef65f0edc78cde4cd75af01f60a2b5",
+      "last_tick": 21,
+      "mechanism_change_required": true,
+      "no_progress_ticks": 20,
+      "stream_id": "ADAPTIVE-PORTFOLIO-DEFICIT"
+    }
+  }
+}
