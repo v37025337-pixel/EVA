@@ -1,0 +1,933 @@
+{
+  "active_module_count": 25,
+  "architecture_mutation": false,
+  "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+  "assembly_runtime_canonical_active": true,
+  "binding_checks": {
+    "api_network_execution_disabled": true,
+    "canonical_openapi_active": true,
+    "canonical_unified_fabric_active": true,
+    "context_memory_source_hash_exact": true,
+    "high_scale_binding_instantiated": true,
+    "no_tracked_python_cache": true
+  },
+  "canonical_mutation": false,
+  "canonical_ready": true,
+  "covered_module_count": 25,
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "functional_assembly_pass": true,
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "generation_transition": false,
+  "interactions": {
+    "api_plan_to_meta_selection": {
+      "api_plan": {
+        "action": "ALLOW",
+        "capability_id": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+        "contract_digest": "aa2b2403ef2656c57f7693963300264fad412cf228a890ce1d1e69ea873acfc4",
+        "contract_id": "GET_TEST",
+        "credential_gate": false,
+        "evidence_gate": false,
+        "execution_boundary": "CONTRACT_CLASSIFICATION_AND_PLAN_ONLY",
+        "method": "GET",
+        "network_execute": false,
+        "path": "/test",
+        "primary_verification_required": false,
+        "read_only_candidate": true,
+        "required_slots": {
+          "body": [],
+          "header": [],
+          "path": [],
+          "query": []
+        },
+        "source_id": "DOC",
+        "source_sha": "gate"
+      },
+      "pass": true,
+      "selection": {
+        "candidate_count": 2,
+        "ranking": [
+          {
+            "score": 1.0,
+            "token": "USE_READ_ONLY_PLAN"
+          },
+          {
+            "score": 0.2,
+            "token": "WITHHOLD"
+          }
+        ],
+        "selected_score": 1.0,
+        "selected_token": "USE_READ_ONLY_PLAN"
+      }
+    },
+    "experience_to_meta_selection": {
+      "matches": 2,
+      "pass": true,
+      "selection": {
+        "candidate_count": 2,
+        "ranking": [
+          {
+            "score": 4.0,
+            "token": "yado-v29-cognitive"
+          },
+          {
+            "score": 1.0,
+            "token": "yado-kernel-task-v37-repair"
+          }
+        ],
+        "selected_score": 4.0,
+        "selected_token": "yado-v29-cognitive"
+      }
+    },
+    "high_scale_to_meta_selection": {
+      "high_scale": {
+        "prediction": "LOCAL_SELF_ORGANIZING",
+        "route": "V4_HIGH"
+      },
+      "pass": true,
+      "selection": {
+        "candidate_count": 2,
+        "ranking": [
+          {
+            "score": 1.0,
+            "token": "LOCAL_SELF_ORGANIZING"
+          },
+          {
+            "score": 0.1,
+            "token": "WITHHOLD"
+          }
+        ],
+        "selected_score": 1.0,
+        "selected_token": "LOCAL_SELF_ORGANIZING"
+      }
+    },
+    "repair_to_execution": {
+      "pass": true,
+      "repair_mode": "BASE_PORTFOLIO"
+    },
+    "representation_to_execution_to_memory": {
+      "after": 33,
+      "before": 32,
+      "pass": true,
+      "result": {
+        "parent_result": {
+          "result": "B",
+          "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+        },
+        "result": "B",
+        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+      },
+      "selected": "ALG-BUDGETED-STAGE-POLICY-V1"
+    },
+    "science_to_selection_to_thinking": {
+      "pass": true,
+      "science": {
+        "fit": {
+          "intercept": 1.0,
+          "n": 20,
+          "r2": 1.0,
+          "slope": 2.0
+        },
+        "supported": true,
+        "threshold": 0.98,
+        "type": "LINEAR_R2_AT_LEAST"
+      },
+      "selection": {
+        "candidate_count": 2,
+        "ranking": [
+          {
+            "score": 0.9875,
+            "token": "DEEP_PLAN"
+          },
+          {
+            "score": 0.4,
+            "token": "HOLD"
+          }
+        ],
+        "selected_score": 0.9875,
+        "selected_token": "DEEP_PLAN"
+      },
+      "thinking": {
+        "meta": {
+          "memory_feedback_used": false,
+          "operation": "plan"
+        },
+        "result": {
+          "action": "OBSERVE",
+          "expected_confidence": 1.0,
+          "feasible": true,
+          "reason": "TARGET_REACHABLE",
+          "sequence": [
+            "OBSERVE",
+            "DEEP"
+          ],
+          "total_cost": 4.0
+        },
+        "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      }
+    },
+    "semantic_to_logic_to_memory": {
+      "logic": {
+        "meta": {
+          "operation": "predict_symmetric"
+        },
+        "result": "ACCEPT",
+        "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      },
+      "pass": true,
+      "prediction": {
+        "result": 12
+      }
+    }
+  },
+  "module_coverage_pass": true,
+  "receipt_sha256": "a69a933248e771a79f2c48f712452536c0d187307cd3f03f06165e4f7bb221b9",
+  "registry_pass": true,
+  "schema": "yado.g2.unified_module_kernel.fresh_gate.v1",
+  "semantic_boundary": "FRESH SHADOW ASSEMBLY TEST OF ALL CURRENT CANONICAL G2 MODULE IDENTITIES OVER THE CANONICAL UNIFIED EXECUTION FABRIC. THE MODULE KERNEL ITSELF IS NOT A NEW GENERATION.",
+  "smoke": {
+    "ALG-BOUNDED-CAPABILITY-ROUTER-V1": {
+      "output": {
+        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+      },
+      "pass": true
+    },
+    "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1": {
+      "output": {
+        "parent_result": {
+          "result": "ALLOW",
+          "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+        },
+        "result": "ALLOW",
+        "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+      },
+      "pass": true
+    },
+    "ALG-BUDGETED-STAGE-POLICY-V1": {
+      "output": {
+        "parent_result": {
+          "result": "S2",
+          "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+        },
+        "result": "S2",
+        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+      },
+      "pass": true
+    },
+    "ALG-CONJUNCTIVE-RULE-INDUCER-V1": {
+      "output": {
+        "parent_result": {
+          "result": "PASS",
+          "selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+        },
+        "result": "PASS",
+        "selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+      },
+      "pass": true
+    },
+    "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11": {
+      "output": {
+        "result": 9
+      },
+      "pass": true
+    },
+    "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1": {
+      "output": {
+        "order": [
+          "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+          "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        ],
+        "reason": "UNIFIED_FABRIC_CAPABILITY_SET_EXECUTED",
+        "results": {
+          "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2": {
+            "meta": {
+              "operation": "predict_symmetric"
+            },
+            "result": "ODD",
+            "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+          },
+          "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3": {
+            "meta": {
+              "operation": "route"
+            },
+            "result": [
+              "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+            ],
+            "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+          },
+          "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2": {
+            "meta": {
+              "memory_feedback_used": false,
+              "operation": "plan"
+            },
+            "result": {
+              "action": "OBSERVE",
+              "expected_confidence": 1.0,
+              "feasible": true,
+              "reason": "TARGET_REACHABLE",
+              "sequence": [
+                "OBSERVE",
+                "DEEP"
+              ],
+              "total_cost": 4.0
+            },
+            "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+          }
+        },
+        "status": "PASS"
+      },
+      "pass": true
+    },
+    "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1": {
+      "output": {
+        "observed": 1.0,
+        "supported": true,
+        "threshold": 0.95,
+        "type": "CORRELATION_ABS_AT_LEAST"
+      },
+      "pass": true
+    },
+    "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2": {
+      "output": {
+        "meta": {
+          "operation": "predict_symmetric"
+        },
+        "result": "ODD",
+        "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      },
+      "pass": true
+    },
+    "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1": {
+      "output": {
+        "context_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+        "execution_strategy": "BOUNDED_CAPABILITY_SET_FORCED_SINGLE_CAPABILITY",
+        "parent_result": {
+          "parent_result": {
+            "result": "ALLOW",
+            "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+          },
+          "result": "ALLOW",
+          "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+        },
+        "repair_adapter": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+        "result": "ALLOW",
+        "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+      },
+      "pass": true
+    },
+    "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1": {
+      "output": {
+        "context_selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "context_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+        "parent_result": {
+          "result": "C2",
+          "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+        },
+        "result": "C2",
+        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+      },
+      "pass": true
+    },
+    "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3": {
+      "output": {
+        "meta": {
+          "operation": "route"
+        },
+        "result": [
+          "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        ],
+        "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+      },
+      "pass": true
+    },
+    "ALG-G2-DEEP-SELF-AUDIT-V1": {
+      "output": {
+        "control_runtime": "runtime/yado_unified_core_deep_self_audit_v1.py",
+        "core_audit": {
+          "branch_count": 14,
+          "checks": {
+            "all_other_branches_experience_only": true,
+            "branch_inventory_complete": true,
+            "context_adapter_binding_coherent": true,
+            "core_id": true,
+            "developmental_frontier_coherent": true,
+            "experience_registry_bound": true,
+            "g2_architecture_canonical": true,
+            "g3_blocked": true,
+            "generation_is_g2": true,
+            "ledger_head_digest_matches": true,
+            "ledger_head_matches_generation": true,
+            "legacy_auto_execution_forbidden": true,
+            "one_active_experience_lineage": true,
+            "required_active_families_present": true
+          },
+          "core_id": "UNIFIED_YADO_CORE_V1",
+          "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+          "frontier_source": "architecture/evolution-ledger.json:open_deficits",
+          "generation": "G2_CANDIDATE_TRCG_V1",
+          "head_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+          "legacy_experience_count": 13,
+          "manifest_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+          "open_deficits": [
+            "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1"
+          ],
+          "pass": true
+        }
+      },
+      "pass": true
+    },
+    "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4": {
+      "output": {
+        "prediction": "LOCAL_SELF_ORGANIZING",
+        "route": "V4_HIGH"
+      },
+      "pass": true
+    },
+    "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1": {
+      "output": {
+        "matches": [
+          {
+            "branch": "yado-v29-cognitive",
+            "claim_boundary": null,
+            "evidence": [
+              "runtime/cognitive_cycle_v29.py",
+              "receipts/yado-v29-cognitive-latest.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+              "semantic_validation_by_rederivation": false,
+              "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+            },
+            "lessons": [
+              "BOUNDED_LOGIC_SYNTHESIS_CAN_GENERALIZE_ON_FRESH_PARITY",
+              "CONTEXT_CONDITIONED_THINKING_PRECEDENCE_CAN_TRANSFER_TO_FRESH_ACTION_IDS",
+              "FEATURE_SELECTED_INTELLIGENCE_STRATEGY_INDUCTION",
+              "LEARNING_EVENT_MUST_CLOSE_LOOP_IN_PERSISTENT_MEMORY"
+            ],
+            "rederived_evidence": {
+              "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+              "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+              "observation_count": 14,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+            },
+            "role": "COGNITIVE_GROWTH_EXPERIENCE",
+            "score": 4,
+            "tags": [
+              "logic",
+              "thinking",
+              "intelligence",
+              "memory",
+              "internet",
+              "closed_loop"
+            ]
+          },
+          {
+            "branch": "yado-kernel-task-v37-repair",
+            "claim_boundary": null,
+            "evidence": [
+              "runtime/yado_v37_integrity_self_repair_task.py",
+              "receipts/yado-v37-integrity-self-repair-task-latest.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+              "semantic_validation_by_rederivation": false,
+              "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+            },
+            "lessons": [
+              "DO_NOT_WEAKEN_CONTENT_ADDRESSED_INTEGRITY_TO_MAKE_A_CANDIDATE_PASS",
+              "PRESERVE_LAST_VERIFIED_LINEAGE_UNTIL_REPAIR_PASSES_FRESH_REGRESSION",
+              "PREFER_SMALLEST_EVIDENCE_BACKED_REPAIR",
+              "DIAGNOSIS_AND_REPAIR_SELECTION_CAN_BE_SEPARATE_FROM_REPAIR_APPLICATION"
+            ],
+            "rederived_evidence": {
+              "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+              "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+              "observation_count": 29,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+            },
+            "role": "FAIL_CLOSED_SELF_REPAIR_EXPERIENCE",
+            "score": 1,
+            "tags": [
+              "self_repair",
+              "integrity",
+              "rollback",
+              "diagnosis",
+              "fail_closed"
+            ]
+          }
+        ]
+      },
+      "pass": true
+    },
+    "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1": {
+      "output": {
+        "action": "ALLOW",
+        "capability_id": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+        "contract_digest": "aa2b2403ef2656c57f7693963300264fad412cf228a890ce1d1e69ea873acfc4",
+        "contract_id": "GET_TEST",
+        "credential_gate": false,
+        "evidence_gate": false,
+        "execution_boundary": "CONTRACT_CLASSIFICATION_AND_PLAN_ONLY",
+        "method": "GET",
+        "network_execute": false,
+        "path": "/test",
+        "primary_verification_required": false,
+        "read_only_candidate": true,
+        "required_slots": {
+          "body": [],
+          "header": [],
+          "path": [],
+          "query": []
+        },
+        "source_id": "DOC",
+        "source_sha": "gate"
+      },
+      "pass": true
+    },
+    "ALG-G2-RAW-TASK-REPRESENTATION-V4": {
+      "output": {
+        "capability": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "raw_text": "Analyze this bounded task and choose the appropriate reasoning resource.",
+        "robustness_mode": "MULTIVIEW_EDGE_TIE_CORE",
+        "routing_descriptor": {
+          "budget_limited": true,
+          "disjunction_needed": false,
+          "external_evidence_needed": false,
+          "quota_limited": false,
+          "relation_needed": false
+        }
+      },
+      "pass": true
+    },
+    "ALG-G2-SCALE-ROUTE-SEMANTICS-V5": {
+      "output": {
+        "cardinality": 10,
+        "route": "V4_HIGH"
+      },
+      "pass": true
+    },
+    "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1": {
+      "output": {
+        "expression": [
+          "+",
+          "x",
+          "y"
+        ],
+        "ops": 1,
+        "states": [
+          9,
+          57
+        ]
+      },
+      "pass": true
+    },
+    "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2": {
+      "output": {
+        "meta": {
+          "memory_feedback_used": false,
+          "operation": "plan"
+        },
+        "result": {
+          "action": "OBSERVE",
+          "expected_confidence": 1.0,
+          "feasible": true,
+          "reason": "TARGET_REACHABLE",
+          "sequence": [
+            "OBSERVE",
+            "DEEP"
+          ],
+          "total_cost": 4.0
+        },
+        "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      },
+      "pass": true
+    },
+    "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1": {
+      "output": {
+        "candidate_count": 2,
+        "ranking": [
+          {
+            "score": 0.875,
+            "token": "A"
+          },
+          {
+            "score": 0.5,
+            "token": "B"
+          }
+        ],
+        "selected_score": 0.875,
+        "selected_token": "A"
+      },
+      "pass": true
+    },
+    "COUNTEREXAMPLE_LINEAGE_MEMORY_V1": {
+      "output": {
+        "event_count": 176,
+        "events": [
+          {
+            "architecture_mutation": false,
+            "canonical_mechanism_mutation": false,
+            "canonical_mutation": true,
+            "deficit": "KERNEL_G2_RAW_REPRESENTATION_POST_COMPOSITE_SELF_EVOLUTION_V1",
+            "effect": "OP=CLONAL; SELECTED=HASHED_CHAR45_PERCEPTRON; PARENT_FRESH=0.770833; V2_FRESH=0.937500; TRAP=0.916667; PERT=0.937500; BASE_REG=1.000000; NEXT=KERNEL_G2_RAW_REPRESENTATION_V2_CANONICAL_ADMISSION_V1",
+            "event_hash": "2e9b72df1afa2a8d71255c15b8c900f4430ff8af49587862e3fe76da43c1b8f9",
+            "event_id": "E0240_G2_RAW_REPRESENTATION_POST_COMPOSITE_SELF_EVOLUTION_V1",
+            "event_type": "G2_RAW_REPRESENTATION_SELF_EVOLUTION",
+            "generation": "G2_CANDIDATE_TRCG_V1",
+            "generation_transition": false,
+            "index": 239,
+            "new_head_digest": "bd8bec1fbca852d65b2ce074bbecba4fa874dcfa59995b4084d8509ef18ebef5",
+            "parent_event_hash": "abc1925efca6385fc014c47223c6b2e17b690f97fca540785a35c026ad8d8d1c",
+            "previous_head_digest": "1c61e3e64af34ff008f0b74060d4dcfc1aa2424878335535abed17c02e48a60f",
+            "promotion_applied": false,
+            "run_id": "33669474277",
+            "source_digest": "7e6d361f7bfdefb0b9fd0c91dd5dabdbb157dde86d0a5c34f19ba642b739e646",
+            "source_path": "receipts/yado-g2-raw-representation-post-composite-self-evolution-v1-run-33669474277.json",
+            "status": "PASS_SHADOW"
+          },
+          {
+            "architecture_mutation": false,
+            "canonical_mechanism_mutation": false,
+            "canonical_mutation": true,
+            "deficit": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_AUDIT_V1",
+            "effect": "AUDIT=WITHHOLD; CANARY=0.875000; ROLLBACK_V1=1.000000; NEXT=KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V1",
+            "event_hash": "9bf7adf6b19ef24c791ca9d6cd11303bea040ad19dfe34fa12fe6191f306bc3d",
+            "event_id": "E0242_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_AUDIT_V1",
+            "event_type": "G2_RAW_REPRESENTATION_POST_ADMISSION_AUDIT",
+            "generation": "G2_CANDIDATE_TRCG_V1",
+            "generation_transition": false,
+            "index": 241,
+            "new_head_digest": "e88f1aff3901b1705ddb407458788ac94fd16a0b967b75cad9d5f3e52962bc45",
+            "parent_event_hash": "43b6841de78234002ad439e062ee6922de8fee2ed1565dde268271302491432a",
+            "previous_head_digest": "cbbe9e399aabfeb11f20da2fb9da60c5527e4b0a40d05fdd886514bbe5b3fd67",
+            "promotion_applied": false,
+            "run_id": "33670110185",
+            "source_digest": "97ed5fc5d9baa437ce450ce502e7c1a46f2e0a6243f8a544a4fd683920c09909",
+            "source_path": "receipts/yado-g2-raw-representation-v2-post-admission-audit-v1-run-33670110185.json",
+            "status": "WITHHOLD"
+          },
+          {
+            "architecture_mutation": false,
+            "canonical_mechanism_mutation": false,
+            "canonical_mutation": true,
+            "deficit": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V1",
+            "effect": "OP=CLONAL; SELECTED=None; PARENT_FRESH=0.895833; V3_FRESH=0.895833; TRAP=0.750000; PERT=0.895833; AUDIT_REPRO=0.875000; NEXT=KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V2",
+            "event_hash": "2aa094ea713d85e26ca1c8307952c4c138446c945b56d337280a378b57f73c9a",
+            "event_id": "E0243_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V1",
+            "event_type": "G2_RAW_REPRESENTATION_COUNTEREXAMPLE_REPAIR",
+            "generation": "G2_CANDIDATE_TRCG_V1",
+            "generation_transition": false,
+            "index": 242,
+            "new_head_digest": "f4b28f5721e1a36c999974522f14a615d848af8e7cdcf0cfde930e92f0159aeb",
+            "parent_event_hash": "9bf7adf6b19ef24c791ca9d6cd11303bea040ad19dfe34fa12fe6191f306bc3d",
+            "previous_head_digest": "e88f1aff3901b1705ddb407458788ac94fd16a0b967b75cad9d5f3e52962bc45",
+            "promotion_applied": false,
+            "run_id": "33670393238",
+            "source_digest": "0a8105e94edd6cb6f5d26d5dfc64e689469511ca753bbff3ac41bbc72ec95121",
+            "source_path": "receipts/yado-g2-raw-representation-v2-post-admission-repair-v1-run-33670393238.json",
+            "status": "WITHHOLD"
+          },
+          {
+            "canonical_mutation": false,
+            "deficit": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V2",
+            "effect": "RUN=33670729894; WORKFLOW=YADO_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V2; OUTCOME=UNEXPECTED_WORKFLOW_FAILURE; ADMISSION_EVIDENCE=False; NEXT=KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V2",
+            "event_hash": "6e6e5a888142f084d4f90ffb976fdd417e89710873da28b4e5eb9e9d72ccf2f4",
+            "event_id": "E0244_G2_EXECUTION_FAILURE_33670729894",
+            "event_type": "G2_EXECUTION_FAILURE_EXPERIENCE",
+            "generation": "G2_CANDIDATE_TRCG_V1",
+            "generation_transition": false,
+            "index": 243,
+            "parent_event_hash": "2aa094ea713d85e26ca1c8307952c4c138446c945b56d337280a378b57f73c9a",
+            "promotion_applied": false,
+            "run_id": "33670729894",
+            "source_digest": "05566befff8e9420c5678a9bfcbad33e2d4810a6fde77a5d8aadc5e70ac6361d",
+            "source_path": "receipts/yado-current-frontier-execution-failure-history-v1-run-33670729894.json",
+            "status": "WITHHOLD"
+          },
+          {
+            "architecture_mutation": false,
+            "canonical_mechanism_mutation": false,
+            "canonical_mutation": true,
+            "deficit": "KERNEL_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V2",
+            "effect": "OP=CLONAL; SELECTED=RAW_V3_PIVOT_25bf8e1a23; MODE=PIVOT_CLAUSE; PIVOT=local; PARENT_FRESH=0.875000; CHILD_FRESH=0.979167; TRAP=0.916667; PERT=0.937500; AUDIT_REPRO=1.000000; NEXT=KERNEL_G2_RAW_REPRESENTATION_V3_CANONICAL_ADMISSION_V1",
+            "event_hash": "8893157d535d275c7aac85ec83568a735bda943be13065ea60e8dc22291da955",
+            "event_id": "E0245_G2_RAW_REPRESENTATION_V2_POST_ADMISSION_REPAIR_V2",
+            "event_type": "G2_RAW_REPRESENTATION_STRUCTURAL_PRIMITIVE_GENESIS",
+            "generation": "G2_CANDIDATE_TRCG_V1",
+            "generation_transition": false,
+            "index": 244,
+            "new_head_digest": "7be5af117d792e10964bd444b4a5d60d1f6638704446072469f384891ef52c4b",
+            "parent_event_hash": "6e6e5a888142f084d4f90ffb976fdd417e89710873da28b4e5eb9e9d72ccf2f4",
+            "previous_head_digest": "f4b28f5721e1a36c999974522f14a615d848af8e7cdcf0cfde930e92f0159aeb",
+            "promotion_applied": false,
+            "run_id": "33670875764",
+            "source_digest": "107f5670e262dba374ca45ae93ea186f3c2bb9fae966907ef8f57dfe964a0126",
+            "source_path": "receipts/yado-g2-raw-representation-v2-post-admission-repair-v2-run-33670875764.json",
+            "status": "PASS_SHADOW"
+          },
+          {
+            "architecture_mutation": false,
+            "canonical_mechanism_mutation": false,
+            "canonical_mutation": true,
+            "deficit": "KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V1",
+            "effect": "OP=CLONAL; SELECTED=MULTIVIEW_TIE_CORE; PARENT_FIT=0.931250; PARENT_HOLD=0.950000; V4_FRESH=0.937500; PARENT_FRESH=0.937500; BASE_REG=1.000000; NEXT=KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V2",
+            "event_hash": "98b30b2acd9bdc33487bef4b2a3ad569830ba393632abbc62c0c57873afadb6e",
+            "event_id": "E0251_G2_RAW_V3_ROBUSTNESS_SELF_EVOLUTION_V1",
+            "event_type": "G2_RAW_REPRESENTATION_ROBUSTNESS_SELF_EVOLUTION",
+            "generation": "G2_CANDIDATE_TRCG_V1",
+            "generation_transition": false,
+            "index": 250,
+            "new_head_digest": "c5ab4d7c6d454134cbfdb6ea75bea8f8ba4ca7466c87de10e0b4b8483f10061d",
+            "parent_event_hash": "3182d9e3179e138cbc5cee033328658ad61d63e1202bfad83b10043ce9e33c9e",
+            "previous_head_digest": "a084fb6809187c658a5ff05c3c58932ed97f188fe9ec9bacaac81e4b93d3864c",
+            "promotion_applied": false,
+            "run_id": "33679719207",
+            "source_digest": "21e08d6a56dda99b34641e4763fa841e85937a5e57d2786ac695ac239d696dfc",
+            "source_path": "receipts/yado-g2-raw-v3-robustness-self-evolution-v1-run-33679719207.json",
+            "status": "WITHHOLD"
+          },
+          {
+            "architecture_mutation": false,
+            "canonical_mechanism_mutation": false,
+            "canonical_mutation": true,
+            "deficit": "KERNEL_G2_RAW_REPRESENTATION_V3_ROBUSTNESS_SELF_EVOLUTION_V2",
+            "effect": "OP=CLONAL; SELECTED=MULTIVIEW_EDGE_TIE_CORE; PARENT_FIT=0.926136; PARENT_HOLD=0.958333; V4_FRESH=1.000000; PARENT_FRESH=0.812500; BASE_REG=1.000000; NEXT=KERNEL_G2_RAW_REPRESENTATION_V4_CANONICAL_ADMISSION_V1",
+            "event_hash": "4514d75262213022dc0b317f1b4a508e0ae27c20775b3f2d6b9182e8f37ef5d0",
+            "event_id": "E0252_G2_RAW_V3_ROBUSTNESS_SELF_EVOLUTION_V2",
+            "event_type": "G2_RAW_REPRESENTATION_EDGE_WRAPPER_ROBUSTNESS_EVOLUTION",
+            "generation": "G2_CANDIDATE_TRCG_V1",
+            "generation_transition": false,
+            "index": 251,
+            "new_head_digest": "401d2e010bda71bc559a9ee019be2319c3d94dc391f7ce886245c0471bb31b9a",
+            "parent_event_hash": "98b30b2acd9bdc33487bef4b2a3ad569830ba393632abbc62c0c57873afadb6e",
+            "previous_head_digest": "c5ab4d7c6d454134cbfdb6ea75bea8f8ba4ca7466c87de10e0b4b8483f10061d",
+            "promotion_applied": false,
+            "run_id": "33680007532",
+            "source_digest": "081802f63350294b976297cdbc3e4f273229381877dacaaf186026283ba53b61",
+            "source_path": "receipts/yado-g2-raw-v3-robustness-self-evolution-v2-run-33680007532.json",
+            "status": "PASS_SHADOW"
+          },
+          {
+            "architecture_mutation": false,
+            "canonical_mechanism_mutation": false,
+            "canonical_mutation": true,
+            "deficit": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V1",
+            "effect": "OP=CLONAL; SELECTED=V4_PLUS_CORE_VOTE; PARENT_HOLD=0.958333; FRESH_SEQ=0.993125; PARENT_FRESH_SEQ=0.939375; FRESH_WRAP=0.986111; BASE_REG=1.000000; NEXT=KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+            "event_hash": "167e9b8e246446bc3195ab3339de472243ffd881e56ca68e966e136413d0ff43",
+            "event_id": "E0257_G2_RAW_V4_ROBUSTNESS_SELF_EVOLUTION_V1",
+            "event_type": "G2_RAW_V4_SEQUENTIAL_ROBUSTNESS_SELF_EVOLUTION",
+            "generation": "G2_CANDIDATE_TRCG_V1",
+            "generation_transition": false,
+            "index": 256,
+            "new_head_digest": "6c1c290142740da5f812e0421fdddb4029c30d264a72ca4ddc9c4c4961a2d5c2",
+            "parent_event_hash": "34c3d4265db950fb8780f47a483c4487ca04ee72428b0fc97fc01c434413217a",
+            "previous_head_digest": "134f53bf994d16d84cf6a04e41a48e95a7dc401e8eb9eb30f9af452cc835c1b6",
+            "promotion_applied": false,
+            "run_id": "33710850759",
+            "source_digest": "f13a78b458fe94dd1618786d4a59c2741f4a960a18f89e5465c4d3cececa59d8",
+            "source_path": "receipts/yado-g2-raw-v4-robustness-self-evolution-v1-run-33710850759.json",
+            "status": "PASS_SHADOW"
+          }
+        ]
+      },
+      "pass": true
+    },
+    "RESOURCE-PORTFOLIO-V1": {
+      "output": {
+        "parent_result": {
+          "result": "LOCAL_COMPUTE_BUDGET_GATE",
+          "selected_capability": "RESOURCE-PORTFOLIO-V1"
+        },
+        "result": "LOCAL_COMPUTE_BUDGET_GATE",
+        "selected_capability": "RESOURCE-PORTFOLIO-V1"
+      },
+      "pass": true
+    },
+    "RUNTIME-G2-HIGH-SCALE-BINDING-V5": {
+      "output": {
+        "activation_min_size": 10,
+        "binding_digest": "8f8d9240ef296a0de5afd458e41cc43be651030151a7ba1b1c7bcee3065275ad",
+        "route_strategy": "INVERT_NORMALIZED_SOURCE_COUNT",
+        "schema": "yado.g2.canonical_high_scale_binding_runtime.v5",
+        "v4_candidate_digest": "cba80e5e0b7860c779901a9b01f65a0f9d1f4125fb4c2569596501b425256138"
+      },
+      "pass": true
+    },
+    "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1": {
+      "output": {
+        "episode_count": 27,
+        "fabric_episode_count": 6,
+        "last_episode_digest": "5937ddf2b8703b1308cfa02a9fdc50b61e75cb19032a1b2765eb17a1c2fa4b97",
+        "stage_outcome_count": 0,
+        "stream_attempts": {}
+      },
+      "pass": true
+    },
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1": {
+      "output": {
+        "canonical_active": true,
+        "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+        "memory": {
+          "episode_count": 30,
+          "fabric_episode_count": 6,
+          "last_episode_digest": "b1f3edff14cb2f8ce4716714cc426c04c5d1c602ff4bb72d83b3b97b31802e48",
+          "stage_outcome_count": 0,
+          "stream_attempts": {}
+        }
+      },
+      "pass": true
+    }
+  },
+  "snapshot": {
+    "active_module_count": 25,
+    "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+    "assembly_runtime_canonical_active": true,
+    "extra_registry_modules": [],
+    "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "kernel_id": "UNIFIED_YADO_MODULE_KERNEL_V1",
+    "memory": {
+      "episode_count": 44,
+      "fabric_episode_count": 8,
+      "last_episode_digest": "93f88fc7ec9587a8d33ad02fed7af353b2724356b8555e05fbfb32192e557970",
+      "stage_outcome_count": 0,
+      "stream_attempts": {}
+    },
+    "missing_active_modules": [],
+    "registered_module_count": 25,
+    "registry": {
+      "ALG-BOUNDED-CAPABILITY-ROUTER-V1": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_bounded_capability_router_v1.py"
+      },
+      "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py"
+      },
+      "ALG-BUDGETED-STAGE-POLICY-V1": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_budgeted_stage_policy_v1.py"
+      },
+      "ALG-CONJUNCTIVE-RULE-INDUCER-V1": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_conjunctive_rule_inducer_v1.py"
+      },
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_ambiguity_aware_program_repair_v11.py"
+      },
+      "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1": {
+        "canonical_active": true,
+        "kind": "COORDINATOR",
+        "source": "runtime/yado_bounded_capability_set_coordinator_v1.py"
+      },
+      "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_bounded_scientific_data_reasoner_v1.py"
+      },
+      "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_budget_adaptive_compositional_logic_v2.py"
+      },
+      "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1": {
+        "canonical_active": true,
+        "kind": "COMPATIBILITY_ADAPTER",
+        "source": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py"
+      },
+      "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1": {
+        "canonical_active": true,
+        "kind": "MEMORY_ADAPTER",
+        "source": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py"
+      },
+      "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_coverage_pruned_compositional_schema_router_v3.py"
+      },
+      "ALG-G2-DEEP-SELF-AUDIT-V1": {
+        "canonical_active": true,
+        "kind": "CONTROL",
+        "source": "runtime/yado_unified_core_deep_self_audit_v1.py"
+      },
+      "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4": {
+        "canonical_active": true,
+        "kind": "EMBEDDED_EXECUTOR",
+        "source": "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py"
+      },
+      "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1": {
+        "canonical_active": true,
+        "kind": "MEMORY_RETRIEVER",
+        "source": "runtime/yado_legacy_experience_retriever_v2.py"
+      },
+      "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_g2_openapi_contract_capability_v1.py"
+      },
+      "ALG-G2-RAW-TASK-REPRESENTATION-V4": {
+        "canonical_active": true,
+        "kind": "REPRESENTATION",
+        "source": "runtime/yado_raw_task_representation_robustness_v4.py"
+      },
+      "ALG-G2-SCALE-ROUTE-SEMANTICS-V5": {
+        "canonical_active": true,
+        "kind": "EMBEDDED_ROUTER",
+        "source": "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py"
+      },
+      "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_semantic_expression_synthesizer_v1.py"
+      },
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2": {
+        "canonical_active": true,
+        "kind": "EXECUTOR",
+        "source": "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
+      },
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1": {
+        "canonical_active": true,
+        "kind": "META_SELECTOR",
+        "source": "runtime/yado_neutral_evidence_profile_selector_v1.py"
+      },
+      "COUNTEREXAMPLE_LINEAGE_MEMORY_V1": {
+        "canonical_active": true,
+        "kind": "PERSISTENT_STATE",
+        "source": "architecture/evolution-ledger.json"
+      },
+      "RESOURCE-PORTFOLIO-V1": {
+        "canonical_active": true,
+        "kind": "RESOURCE_STATE",
+        "source": "resources/yado-unified-external-resource-portfolio-v1.json"
+      },
+      "RUNTIME-G2-HIGH-SCALE-BINDING-V5": {
+        "canonical_active": true,
+        "kind": "RUNTIME",
+        "source": "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py"
+      },
+      "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1": {
+        "canonical_active": true,
+        "kind": "RUNTIME",
+        "source": "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py"
+      },
+      "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1": {
+        "canonical_active": true,
+        "kind": "RUNTIME",
+        "source": "runtime/yado_g2_unified_execution_fabric_v1.py"
+      }
+    },
+    "schema": "yado.g2.unified_module_kernel.snapshot.v1",
+    "semantic_boundary": "SHADOW MODULE-ASSEMBLY AUDIT OVER THE CANONICAL G2 UNIFIED EXECUTION FABRIC. THE ASSEMBLY KERNEL ITSELF IS NOT A NEW GENERATION OR CONSCIOUSNESS CLAIM."
+  },
+  "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1",
+  "tracked_python_cache": []
+}
