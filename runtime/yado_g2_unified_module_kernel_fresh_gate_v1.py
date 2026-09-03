@@ -114,6 +114,14 @@ run(CAP_AUDIT,{'stream_id':'AUDIT'},lambda x:x.get('core_audit',{}).get('pass') 
 corpus=kernel.high_scale.corpus['cases']
 low=next((x for x in corpus if kernel.high_scale.cardinality(x)<kernel.high_scale.activation_min_size),None)
 high=next((x for x in corpus if kernel.high_scale.cardinality(x)>=kernel.high_scale.activation_min_size),None)
+# The frozen selection corpus is not required to contain a current high-scale smoke case.
+# If absent, construct one from registered source IDs without using it for learning or model selection.
+if high is None and len(kernel.high_scale.source_ids)>=kernel.high_scale.activation_min_size:
+    high=json.loads(json.dumps(corpus[0]))
+    n=kernel.high_scale.activation_min_size
+    high['key']='|'.join(kernel.high_scale.source_ids[:n])
+    high['x']['source_count']=n/kernel.high_scale.normalization_denominator
+    high['synthetic_smoke_only']=True
 if high is not None:
     run(CAP_HS_MODEL,{'case':high,'stream_id':'HS-M'},lambda x:x.get('route')=='V4_HIGH' and x.get('prediction') is not None)
 else:smoke[CAP_HS_MODEL]={'pass':False,'error':'NO_HIGH_SCALE_CASE'};coverage.add(CAP_HS_MODEL)
