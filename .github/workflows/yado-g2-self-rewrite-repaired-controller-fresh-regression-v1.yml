@@ -1,0 +1,61 @@
+name: YADO G2 Self Rewrite Repaired Controller Fresh Regression V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-self-rewrite-repaired-controller-fresh-regression-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-self-rewrite-repaired-controller-fresh-regression-v1
+  cancel-in-progress: true
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before fresh regression
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile fresh regression gate
+        run: python -m py_compile runtime/yado_g2_self_rewrite_repaired_controller_fresh_regression_gate_v1.py
+      - name: Run exact YADO-generated repaired controller through fresh regression
+        id: gate
+        continue-on-error: true
+        run: python runtime/yado_g2_self_rewrite_repaired_controller_fresh_regression_gate_v1.py
+      - name: Canonical guard after fresh regression
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist fresh regression evidence
+        if: always()
+        run: |
+          git config user.name "YADO Self Rewrite Fresh Regression Gate"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json ]; then
+            git add candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json
+          fi
+          git diff --cached --quiet || git commit -m "Persist repaired self-rewrite fresh regression evidence [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce semantic PASS_SHADOW
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json")
+          assert p.exists(),"FRESH_REGRESSION_RECEIPT_MISSING"
+          r=json.loads(p.read_text())
+          assert r["status"]=="PASS_SHADOW_G2_SELF_REWRITE_REPAIRED_CONTROLLER_FRESH_REGRESSION_V1",r
+          assert r["checks"]["controller_self_rewrite_pass"] is True,r
+          assert r["checks"]["child_candidate_exists_and_compiles"] is True,r
+          assert r["checks"]["selected_regression_suite_pass"] is True,r
+          assert r["canonical_mutation"] is False,r
+          print(r["status"],r["source_repair_gene_id"])
+          PY
