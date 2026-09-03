@@ -1,0 +1,59 @@
+name: YADO G2 Second Blind Novel Mechanism Invention V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-second-blind-novel-mechanism-invention-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  second-blind-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before second blind shadow test
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile second blind invention runtimes
+        run: python -m py_compile runtime/yado_generic_event_state_meta_language_v1.py runtime/yado_evolutionary_genome_v3.py runtime/yado_g2_second_blind_novel_mechanism_invention_v1.py
+      - name: Run second blind novel mechanism invention gate
+        run: python runtime/yado_g2_second_blind_novel_mechanism_invention_v1.py
+      - name: Require strict second blind PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json"))
+          assert r["status"]=="PASS_SHADOW_G2_SECOND_BLIND_NOVEL_MECHANISM_INVENTION_V1",r
+          assert r["fitness"]["holdout_accuracy"]==1.0,r
+          assert r["fitness"]["cross_domain_transfer_accuracy"]==1.0,r
+          assert r["fitness"]["best_structural_ablation_accuracy"]<1.0,r
+          assert r["checks"]["temporal_stall_reached_20"] is True,r
+          assert r["checks"]["new_gene_distinct_from_previous_novel_gene"] is True,r
+          assert r["checks"]["new_meta_language_distinct_from_relational"] is True,r
+          assert r["canonical_mutation"] is False,r
+          assert r["generation_transition"] is False,r
+          print(r["status"],r["invented"]["gene"]["gene_id"])
+          PY
+      - name: Canonical guard after second blind shadow test
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist second blind invention evidence
+        run: |
+          git config user.name "YADO G2 Second Blind Mechanism Gate"
+          git config user.email "actions@users.noreply.github.com"
+          git add candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json
+          git diff --cached --quiet || git commit -m "Persist second blind novel mechanism evidence [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-second-blind-novel-mechanism-invention-v1-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json
