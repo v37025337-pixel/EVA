@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-import copy,hashlib,json,os,random,sys
+import ast,copy,hashlib,json,os,random,sys
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
