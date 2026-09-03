@@ -1,0 +1,65 @@
+name: YADO G2 Post Raw V4 Architectural Ceiling Reassessment V3
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-g2-post-raw-v4-architectural-ceiling-reassessment-v3-request.json"
+permissions:
+  contents: write
+jobs:
+  reassess:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Enforce canonical integrity before reassessment V3
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile reassessment V3
+        run: python -m py_compile runtime/yado_kernel_g2_post_raw_v4_architectural_ceiling_reassessment_v3.py runtime/yado_current_frontier_execution_failure_history_v1.py
+      - name: Let G2 reassess post-raw-V4 ceiling
+        run: timeout --signal=TERM --kill-after=30s 1200s python runtime/yado_kernel_g2_post_raw_v4_architectural_ceiling_reassessment_v3.py
+      - name: Persist unexpected reassessment failure as causal history
+        if: failure()
+        env:
+          YADO_FAILURE_WORKFLOW: YADO_G2_POST_RAW_V4_ARCHITECTURAL_CEILING_REASSESSMENT_V3
+        run: |
+          git reset --hard HEAD
+          git clean -fd
+          python runtime/yado_current_frontier_execution_failure_history_v1.py
+          mkdir -p receipts
+          cp runtime/yado_current_frontier_execution_failure_history_v1_receipt.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Failure Memory"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json "receipts/yado-current-frontier-execution-failure-history-v1-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Record post-raw-V4 reassessment failure as causal history [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Persist reassessment V3 evidence
+        if: success()
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_kernel_g2_post_raw_v4_architectural_ceiling_reassessment_v3_receipt.json "receipts/yado-g2-post-raw-v4-architectural-ceiling-reassessment-v3-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Post Raw V4 Reassessment"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/evolution-ledger.json architecture/yado-kernel-g2-post-raw-v4-architectural-ceiling-reassessment-v3.json canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json "receipts/yado-g2-post-raw-v4-architectural-ceiling-reassessment-v3-run-${GITHUB_RUN_ID}.json"
+          git commit -m "Persist G2 post-raw-V4 ceiling reassessment V3 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: yado-g2-post-raw-v4-architectural-ceiling-reassessment-v3-${{ github.run_id }}
+          path: runtime/yado_kernel_g2_post_raw_v4_architectural_ceiling_reassessment_v3_receipt.json
