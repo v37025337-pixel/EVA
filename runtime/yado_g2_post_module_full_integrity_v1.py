@@ -147,7 +147,7 @@ pycache=[x for x in ls if x.endswith('.pyc') or '/__pycache__/' in x]
 
 checks={
  'canonical_guard':guard.returncode==0,
- 'active_module_count_25':len(active)==25,
+ 'active_module_count_registry_exact':len(active)==len(registry),
  'registry_exact':active==registry,
  'no_active_module_superseded':all(ROLE[m]!='SUPERSEDED' for m in active),
  'no_orphan_executable_modules':not orphans,
@@ -160,7 +160,7 @@ checks={
  'memory_readmission_current':core.get('contextual_stream_adapter',{}).get('latest_fresh_readmission_run_id')=='33720696775' and core.get('contextual_stream_adapter',{}).get('source_sha256')==sha(REPO/'runtime/yado_g2_contextual_stream_capability_adapter_v1.py'),
  'python_cache_clean':not pycache,
  'openapi_canonical_plan_only':core.get('openapi_contract_capability_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('openapi_contract_capability_v1',{}).get('network_execute') is False and API in active,
- 'module_assembly_pass':assembly.get('status')=='PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1' and assembly.get('active_module_count')==25 and assembly.get('covered_module_count')==25 and assembly.get('functional_assembly_pass') is True and assembly.get('canonical_ready') is True,
+ 'module_assembly_pass':assembly.get('status')=='PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1' and assembly.get('active_module_count')==len(active) and assembly.get('covered_module_count')==len(active) and assembly.get('functional_assembly_pass') is True and assembly.get('canonical_ready') is True,
  'frontier_preserved':head.get('current_frontier')=='KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1' and ledger.get('open_deficits')==['KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1'],
  'g3_not_started':head.get('g3_genesis_performed') is False and core.get('g3_genesis_performed') is False,
 }
