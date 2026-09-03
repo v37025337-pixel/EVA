@@ -1,0 +1,304 @@
+{
+  "active_module_count": 25,
+  "compatibility_modules": [
+    "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+    "ALG-BUDGETED-STAGE-POLICY-V1",
+    "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+    "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+    "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+    "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
+  ],
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "graph_digest": "b060209c81fce30c5da6cc3416e6c8d30a361a9bf599170d61fb10362d8d95e2",
+  "inactive_superseded_policy": "SUPERSEDED MODULES ARE NOT ACTIVE BY PRESENCE; KEEP AS HISTORY/QUARANTINE UNLESS FRESHLY RE-ADMITTED.",
+  "orphans": [],
+  "quarantine_candidates_require_fresh_ablation": [
+    "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1"
+  ],
+  "removal_authorized": false,
+  "retain_compatibility": [
+    "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+    "ALG-BUDGETED-STAGE-POLICY-V1",
+    "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+    "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+    "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
+  ],
+  "role_counts": {
+    "COMPATIBILITY": 6,
+    "CONTROL": 1,
+    "PRIMARY": 15,
+    "STATE": 3
+  },
+  "roles": {
+    "ALG-BOUNDED-CAPABILITY-ROUTER-V1": "PRIMARY",
+    "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1": "COMPATIBILITY",
+    "ALG-BUDGETED-STAGE-POLICY-V1": "COMPATIBILITY",
+    "ALG-CONJUNCTIVE-RULE-INDUCER-V1": "COMPATIBILITY",
+    "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11": "PRIMARY",
+    "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1": "PRIMARY",
+    "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1": "PRIMARY",
+    "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2": "PRIMARY",
+    "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1": "COMPATIBILITY",
+    "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1": "COMPATIBILITY",
+    "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3": "PRIMARY",
+    "ALG-G2-DEEP-SELF-AUDIT-V1": "CONTROL",
+    "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4": "PRIMARY",
+    "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1": "STATE",
+    "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1": "PRIMARY",
+    "ALG-G2-RAW-TASK-REPRESENTATION-V4": "PRIMARY",
+    "ALG-G2-SCALE-ROUTE-SEMANTICS-V5": "PRIMARY",
+    "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1": "PRIMARY",
+    "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2": "PRIMARY",
+    "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1": "PRIMARY",
+    "COUNTEREXAMPLE_LINEAGE_MEMORY_V1": "STATE",
+    "RESOURCE-PORTFOLIO-V1": "STATE",
+    "RUNTIME-G2-HIGH-SCALE-BINDING-V5": "PRIMARY",
+    "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1": "COMPATIBILITY",
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1": "PRIMARY"
+  },
+  "schema": "yado.g2.module_dependency_graph.v1",
+  "semantic_boundary": "DEPENDENCY/ROLE GRAPH OF CURRENT ACTIVE G2. CLASSIFICATION DOES NOT BY ITSELF AUTHORIZE DELETION.",
+  "semantic_edge_count": 26,
+  "semantic_edges": [
+    {
+      "from": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+      "kind": "ROUTING",
+      "reason": "raw representation yields capability/routing descriptor",
+      "to": "ALG-BOUNDED-CAPABILITY-ROUTER-V1"
+    },
+    {
+      "from": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+      "kind": "ROUTING",
+      "reason": "router selects capability for unified execution fabric",
+      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "RUNTIME",
+      "reason": "unified fabric delegates legacy execution and recurrent memory to base runtime",
+      "to": "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "DISPATCH",
+      "reason": "canonical unified fabric can dispatch this module",
+      "to": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "DISPATCH",
+      "reason": "canonical unified fabric can dispatch this module",
+      "to": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "DISPATCH",
+      "reason": "canonical unified fabric can dispatch this module",
+      "to": "ALG-BUDGETED-STAGE-POLICY-V1"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "DISPATCH",
+      "reason": "canonical unified fabric can dispatch this module",
+      "to": "RESOURCE-PORTFOLIO-V1"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "DISPATCH",
+      "reason": "canonical unified fabric can dispatch this module",
+      "to": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "DISPATCH",
+      "reason": "canonical unified fabric can dispatch this module",
+      "to": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "DISPATCH",
+      "reason": "canonical unified fabric can dispatch this module",
+      "to": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "DISPATCH",
+      "reason": "canonical unified fabric can dispatch this module",
+      "to": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1"
+    },
+    {
+      "from": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
+      "kind": "COORDINATION",
+      "reason": "capability sets execute through unified fabric",
+      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
+    },
+    {
+      "from": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+      "kind": "MEMORY_CONTEXT",
+      "reason": "bounded stream-context memory wraps current runtime/fabric",
+      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
+    },
+    {
+      "from": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+      "kind": "COMPATIBILITY",
+      "reason": "composite repair uses contextual capability selection",
+      "to": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1"
+    },
+    {
+      "from": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+      "kind": "COMPATIBILITY",
+      "reason": "composite repair uses bounded capability coordination",
+      "to": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "MEMORY_FEEDBACK",
+      "reason": "stage outcome episodes can be consumed by Thinking V2",
+      "to": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    },
+    {
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+      "kind": "CAUSAL_HISTORY",
+      "reason": "runtime outcomes coexist with persistent ledger/receipt counterexample memory",
+      "to": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1"
+    },
+    {
+      "from": "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1",
+      "kind": "EVIDENCE_SELECTION",
+      "reason": "scientific evidence can feed meta-selection",
+      "to": "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
+    },
+    {
+      "from": "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
+      "kind": "EXPERIENCE_SELECTION",
+      "reason": "registered historical experience can feed meta-selection",
+      "to": "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
+    },
+    {
+      "from": "RUNTIME-G2-HIGH-SCALE-BINDING-V5",
+      "kind": "EMBEDDED_MODEL",
+      "reason": "high-scale binding embeds V4 high-scale model",
+      "to": "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4"
+    },
+    {
+      "from": "RUNTIME-G2-HIGH-SCALE-BINDING-V5",
+      "kind": "EMBEDDED_ROUTE",
+      "reason": "high-scale binding embeds V5 route semantics",
+      "to": "ALG-G2-SCALE-ROUTE-SEMANTICS-V5"
+    },
+    {
+      "from": "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4",
+      "kind": "EVIDENCE_SELECTION",
+      "reason": "high-scale prediction can feed meta-selection",
+      "to": "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
+    },
+    {
+      "from": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+      "kind": "PLAN_SELECTION",
+      "reason": "bounded API plan can feed meta-selection",
+      "to": "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
+    },
+    {
+      "from": "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
+      "kind": "SEMANTIC_TO_LOGIC",
+      "reason": "synthesized semantic result can be classified by Logic V2",
+      "to": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+    },
+    {
+      "from": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+      "kind": "REPAIR_EXECUTION",
+      "reason": "repaired program capability coexists with canonical execution fabric",
+      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
+    },
+    {
+      "from": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+      "kind": "META_COORDINATION",
+      "reason": "Intelligence V3 selects/composes capability sets for coordinator",
+      "to": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1"
+    }
+  ],
+  "static_import_edge_count": 16,
+  "static_import_edges": [
+    {
+      "from_source": "runtime/yado_canonical_invariant_guard_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_evolution_ledger_v2.py"
+    },
+    {
+      "from_source": "runtime/yado_core_audit_invariant_self_evolution_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_evolution_ledger_v2.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_bounded_capability_set_coordinator_v1.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_openapi_contract_capability_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_rc8_v36/yado_openapi_adapter_runtime.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_bounded_capability_set_coordinator_v1.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_budgeted_stage_policy_v1.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_neutral_evidence_profile_selector_v1.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_unified_execution_fabric_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_bounded_capability_set_coordinator_v1.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_unified_execution_fabric_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_budget_adaptive_compositional_logic_v2.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_unified_execution_fabric_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_coverage_pruned_compositional_schema_router_v3.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_unified_execution_fabric_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_g2_openapi_contract_capability_v1.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_unified_execution_fabric_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
+    },
+    {
+      "from_source": "runtime/yado_raw_task_representation_robustness_v4.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_raw_task_representation_candidate_v3.py"
+    },
+    {
+      "from_source": "runtime/yado_unified_context_kernel_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_evolution_ledger_v2.py"
+    },
+    {
+      "from_source": "runtime/yado_unified_core_deep_self_audit_v1.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_evolution_ledger_v2.py"
+    }
+  ]
+}
