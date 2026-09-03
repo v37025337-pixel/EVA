@@ -3,57 +3,28 @@
   "canonical_mutation": false,
   "checks": {
     "all_nine_planes_present": true,
-    "api_executor_dispatchable_by_unified_fabric": false,
-    "api_outcome_auto_enters_workspace_memory": false,
+    "api_executor_dispatchable_by_unified_fabric": true,
+    "api_outcome_auto_enters_workspace_memory": true,
+    "core_api_fabric_bridge_present": true,
     "intelligence_to_execution_fabric": true,
     "logic_to_workspace_memory": true,
     "memory_to_thinking_feedback": true,
     "repair_layer_available": true,
     "representation_emits_routing_descriptor": true,
     "resource_api_live_read": true,
-    "resource_plane_metadata_noncontradictory": false,
+    "resource_plane_metadata_noncontradictory": true,
     "self_audit_does_not_auto_mutate": true,
     "self_audit_layer_live": true
   },
-  "finding_count": 3,
-  "findings": [
-    {
-      "evidence": {
-        "after": 6,
-        "before": 6,
-        "network_status": 200
-      },
-      "id": "API_TO_WORKSPACE_MEMORY_GAP",
-      "severity": "HIGH"
-    },
-    {
-      "error": "ValueError('UNKNOWN_FABRIC_CAPABILITY:ALG-G2-OPENAPI-READONLY-EXECUTOR-V1')",
-      "id": "API_EXECUTOR_OUTSIDE_UNIFIED_FABRIC",
-      "severity": "HIGH"
-    },
-    {
-      "evidence": [
-        "bounded_external_resource_routing",
-        "bounded_openapi_contract_planning",
-        "bounded_real_readonly_openapi_execution",
-        "bounded_tabular_scientific_reasoning",
-        "costed_resource_use",
-        "credentialless_network_evidence",
-        "evidence_source_selection",
-        "explicit_host_allowlist",
-        "network_execution_disabled"
-      ],
-      "id": "RESOURCE_LAYER_METADATA_SPLIT_BRAIN",
-      "severity": "MEDIUM"
-    }
-  ],
+  "finding_count": 0,
+  "findings": [],
   "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
   "g3_genesis_performed": false,
   "generation": "G2_CANDIDATE_TRCG_V1",
   "generation_transition": false,
-  "high_findings": 2,
-  "report_digest": "e061f5fce46e243eb1488ddf33fbc6727c3ca96ab2dcdebcff81682cfd143632",
+  "high_findings": 0,
+  "report_digest": "87abfec70b79b3e4bb2b23a073fd6d48a6efdb48a32c31a01413f7f1158a28c9",
   "schema": "yado.g2.layer_connectivity.audit.v1",
   "semantic_boundary": "FRESH CROSS-LAYER CONNECTIVITY AUDIT OF CURRENT CANONICAL G2. REAL NETWORK READ USED ONLY FOR PUBLIC CREDENTIALLESS GET.",
-  "status": "WITHHOLD_G2_LAYER_CONNECTIVITY_AUDIT_V1"
+  "status": "PASS_G2_LAYER_CONNECTIVITY_AUDIT_V1"
 }

@@ -24,16 +24,16 @@
     "RESOURCE-PORTFOLIO-V1",
     "RUNTIME-G2-HIGH-SCALE-BINDING-V5",
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1",
-    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2"
   ],
   "active_patch_registry": {
     "registry_digest": "e9311a0069632a27143d1fea29148afb72c316d533fc8d702209f0f9486c3aa2",
     "status": "CANONICAL_ACTIVE"
   },
   "algorithm_provenance_registry": {
-    "current_execution_label": "G2_UNIFIED_EXECUTION_FABRIC_READONLY_API_ACTIVE_V1",
+    "current_execution_label": "G2_UNIFIED_EXECUTION_FABRIC_V2_LAYER_CONNECTED",
     "registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-    "registry_digest": "882dc750767a953ed1521f60d6eaf082b2693381a3a8b40c87c29533bc2ea904",
+    "registry_digest": "c7fc04e40a5d6cd3a6134caf119a77f9b22d1fca1da1419463e962cee337ed9d",
     "registry_id": "YADO_G2_ALGORITHM_PROVENANCE_REGISTRY_V1"
   },
   "applied_experience_binding": {
@@ -149,7 +149,7 @@
   },
   "candidate_architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
   "candidate_digest": "b292c7ed0bd9e060a2ce736a33ac30e92403ca8d57c94a8f2d354538f584eaa0",
-  "canonical_head_digest": "79b24c0d29becd681293b48eedf4beb1821cec8a38b4e13899624e58ab994570",
+  "canonical_head_digest": "3d19c2478e6a826f1221cd7be66328969d271ee23f9c4610e42d84de6dcea8ca",
   "capability_scores": {
     "integrity": 1,
     "intelligence": 1,
@@ -205,6 +205,7 @@
   },
   "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
   "execution_fabric_v1": {
+    "canonical_active": false,
     "canonical_component_digest": "90af29830876386ce69438d53eab067e6f398df71252d04406190fedeb3c2403",
     "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
     "fresh_checks": {
@@ -216,6 +217,15 @@
       "memory_feedback_consumed_automatically": true,
       "thinking_v2_dispatched": true
     },
+    "status": "SUPERSEDED_BY_V2",
+    "superseded_by": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2"
+  },
+  "execution_fabric_v2": {
+    "canonical_component_digest": "a6944e5ef4d8bc396e1fd8b18284aa230a57c66f88deb10d3c0fa49ab381cc3a",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
+    "external_evidence_memory": "BOUNDED_METADATA_ONLY",
+    "fresh_gate_receipt_sha256": "7202bfd633954cba958c3c82cc4e792a0c258290ac3bced61e2f8dd165031097",
+    "network_execution_readonly": true,
     "status": "CANONICAL_ACTIVE"
   },
   "extended_capability_scores": {
@@ -299,7 +309,8 @@
     "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
     "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1",
-    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2"
   ],
   "openapi_contract_capability_v1": {
     "canonical_component_digest": "cc7051cd785a5dd277bdcc32bd6a9ff3395d0dfa8d007708589e0baf6e6954b3",
@@ -610,7 +621,7 @@
     "single_active_context": true
   },
   "unified_core": {
-    "algorithm_provenance_registry_digest": "882dc750767a953ed1521f60d6eaf082b2693381a3a8b40c87c29533bc2ea904",
+    "algorithm_provenance_registry_digest": "c7fc04e40a5d6cd3a6134caf119a77f9b22d1fca1da1419463e962cee337ed9d",
     "audit_invariant": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
     "bounded_program_repair_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
     "canonical_write_guard_source_sha256": "a200096ea63d74426a12e1ebe4fa1e5c6e3facee29215eb355ff6106fa321e9d",
@@ -619,7 +630,7 @@
     "contextual_stream_adapter_source_sha256": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52",
     "control_plane_binding": "CANONICAL",
     "control_plane_binding_gate_run_id": "33391800337",
-    "core_digest": "96c791cb744b331111265e8a833cc269031e8daffcca3bb709dc3b206f248d0a",
+    "core_digest": "06c6b484e0e1e8caf317db582953071a96f17eda47adb45fc193a2240f1e5ad6",
     "core_id": "UNIFIED_YADO_CORE_V1",
     "counterexample_lineage_memory_binding": "architecture/evolution-ledger.json+receipts/",
     "deep_self_audit_source_sha256": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
@@ -634,8 +645,8 @@
     "logic_active_component": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
     "logic_ceiling_source_sha256": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
     "raw_task_representation_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
-    "runtime_integrity_manifest_digest": "fe916a9a258de14a2ce8b578acbbc4ab782335fead1d41086e762ca6c4881cce",
-    "runtime_sha256": "a5fd0783c536e7ef9308d17e3fbc0c63875ef538b36acd3732e0b34e5e9a68f2",
+    "runtime_integrity_manifest_digest": "65f6a3e9f0605df6563c87c487d4900930bd709968523d7569e577f88e1e01b0",
+    "runtime_sha256": "56d8920302b0730277537a3d75c27c58ed37eef38fdb9756c9f9f544fdd547a2",
     "scientific_data_reasoner_source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b",
     "semantic_expression_synthesizer_source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
     "single_active_lineage": true,

@@ -23,6 +23,7 @@
     "runtime/yado_g2_openapi_readonly_executor_v1.py",
     "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
     "runtime/yado_g2_unified_execution_fabric_v1.py",
+    "runtime/yado_g2_unified_execution_fabric_v2.py",
     "runtime/yado_legacy_experience_retriever_v2.py",
     "runtime/yado_neutral_evidence_profile_selector_v1.py",
     "runtime/yado_raw_task_representation_candidate_v3.py",
@@ -34,7 +35,7 @@
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "882dc750767a953ed1521f60d6eaf082b2693381a3a8b40c87c29533bc2ea904",
+  "algorithm_provenance_registry_digest": "c7fc04e40a5d6cd3a6134caf119a77f9b22d1fca1da1419463e962cee337ed9d",
   "applied_experience_binding": {
     "application_scope": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
     "artifact": "canonical/yado-g2-applied-experience-binding-v1.json",
@@ -244,7 +245,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "96c791cb744b331111265e8a833cc269031e8daffcca3bb709dc3b206f248d0a",
+  "core_digest": "06c6b484e0e1e8caf317db582953071a96f17eda47adb45fc193a2240f1e5ad6",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -312,6 +313,7 @@
   },
   "execution_fabric_v1": {
     "architecture_mutation": false,
+    "canonical_active": false,
     "canonical_component_digest": "90af29830876386ce69438d53eab067e6f398df71252d04406190fedeb3c2403",
     "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
     "fresh_checks": {
@@ -324,6 +326,17 @@
       "thinking_v2_dispatched": true
     },
     "runtime_sha256": "626e227da01a87158ce54842ca88393a01832384460dd1485b190aa58550e7b7",
+    "status": "SUPERSEDED_BY_V2",
+    "superseded_by": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2"
+  },
+  "execution_fabric_v2": {
+    "architecture_mutation": false,
+    "canonical_component_digest": "a6944e5ef4d8bc396e1fd8b18284aa230a57c66f88deb10d3c0fa49ab381cc3a",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
+    "external_evidence_memory": "BOUNDED_METADATA_ONLY",
+    "fresh_gate_receipt_sha256": "7202bfd633954cba958c3c82cc4e792a0c258290ac3bced61e2f8dd165031097",
+    "network_execution_readonly": true,
+    "runtime_sha256": "828fd9ee89bfd21eac35da6d0986b8469117e004ab33c6091c74ec567ad6b7d3",
     "status": "CANONICAL_ACTIVE"
   },
   "experience_registry": "canonical/yado-unified-experience-registry-v1.json",
@@ -615,6 +628,7 @@
       "responsibilities": [
         "automatic_planning_feedback_source",
         "bounded_context_conditioned_stream_routing",
+        "bounded_external_evidence_metadata_memory",
         "bounded_stream_context",
         "counterexample_memory",
         "episodic_memory",
@@ -726,7 +740,7 @@
     {
       "active_components": [
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1",
-        "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
+        "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2"
       ],
       "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
       "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
@@ -740,6 +754,8 @@
       "plane_id": "WORKSPACE_AND_INTEGRATION",
       "responsibilities": [
         "causal_integration",
+        "external_evidence_to_recurrent_workspace",
+        "intelligence_to_readonly_api_dispatch",
         "outcome_feedback_to_memory",
         "typed_recurrent_dispatch",
         "unified_logic_thinking_intelligence_dispatch",
@@ -762,15 +778,17 @@
       ],
       "plane_id": "RESOURCE_AND_EVIDENCE",
       "responsibilities": [
+        "api_outcome_to_workspace_memory",
         "bounded_external_resource_routing",
         "bounded_openapi_contract_planning",
         "bounded_real_readonly_openapi_execution",
         "bounded_tabular_scientific_reasoning",
+        "contract_planner_network_execution_disabled",
         "costed_resource_use",
         "credentialless_network_evidence",
         "evidence_source_selection",
         "explicit_host_allowlist",
-        "network_execution_disabled"
+        "readonly_executor_network_execution_enabled"
       ]
     },
     {
@@ -1232,7 +1250,7 @@
   },
   "runtime_integrity_manifest": {
     "algorithm": "SHA256",
-    "manifest_digest": "fe916a9a258de14a2ce8b578acbbc4ab782335fead1d41086e762ca6c4881cce",
+    "manifest_digest": "65f6a3e9f0605df6563c87c487d4900930bd709968523d7569e577f88e1e01b0",
     "sources": {
       "runtime/yado_ambiguity_aware_program_repair_v11.py": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
       "runtime/yado_bounded_capability_router_v1.py": "442d53602f7a35aecc0ab7cfd9c7c5036cf7c5d00b4946d37f6fb08c93125206",
@@ -1252,6 +1270,7 @@
       "runtime/yado_g2_openapi_readonly_executor_v1.py": "9d7bc5289377a790e81263eeef27a4d0960312825b8c1184d6bdde303acc355e",
       "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py": "79eba84158de120f026e164b4914bec0fd00358bfe8a56e81b0497e924b7e762",
       "runtime/yado_g2_unified_execution_fabric_v1.py": "626e227da01a87158ce54842ca88393a01832384460dd1485b190aa58550e7b7",
+      "runtime/yado_g2_unified_execution_fabric_v2.py": "828fd9ee89bfd21eac35da6d0986b8469117e004ab33c6091c74ec567ad6b7d3",
       "runtime/yado_legacy_experience_retriever_v2.py": "a1d55c139543a1d96ffa72439824f417f8a528975cee2b68792b760c82c1d804",
       "runtime/yado_neutral_evidence_profile_selector_v1.py": "46c394d428e70d5b69336578df2069587c9097cc264246bd0ae4d17d1cf600fb",
       "runtime/yado_raw_task_representation_candidate_v3.py": "58ea02e73c9eb0e502eb3c16d39d73ca08b9cbe32485cf70e72dd89682aacfd7",
@@ -1263,7 +1282,7 @@
       "runtime/yado_work_budget_adaptive_contingent_planner_v2.py": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
     }
   },
-  "runtime_sha256": "a5fd0783c536e7ef9308d17e3fbc0c63875ef538b36acd3732e0b34e5e9a68f2",
+  "runtime_sha256": "56d8920302b0730277537a3d75c27c58ed37eef38fdb9756c9f9f544fdd547a2",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
