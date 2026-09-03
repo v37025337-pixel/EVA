@@ -6,7 +6,8 @@ ROOT=Path(__file__).resolve().parent;REPO=ROOT.parent;PKG=ROOT/'yado_rc8_v36'
 sys.path[:0]=[str(ROOT),str(PKG)]
 
 from yado_unified_core_v1 import UnifiedYADOCoreV1
-from yado_g2_unified_module_kernel_fresh_gate_v1 import router,scalar,relation
+from yado_bounded_capability_router_v1 import BoundedCapabilityRouterLearnerV1
+from yado_conjunctive_rule_inducer_v1 import ConjunctiveRuleInducerV1
 from yado_g2_unified_execution_fabric_v1 import CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 
@@ -17,6 +18,30 @@ def canon(o):return json.dumps(o,sort_keys=True,separators=(',',':'),default=str
 def digest(o):return hashlib.sha256(canon(o).encode()).hexdigest()
 
 core=UnifiedYADOCoreV1(REPO)
+CAP_CONJ='ALG-CONJUNCTIVE-RULE-INDUCER-V1'
+CAP_REL='ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1'
+CAP_BUD='ALG-BUDGETED-STAGE-POLICY-V1'
+CAP_RES='RESOURCE-PORTFOLIO-V1'
+def _desc(cap):
+    d={'budget_limited':False,'quota_limited':False,'external_evidence_needed':False,'relation_needed':False,'disjunction_needed':False}
+    if cap==CAP_BUD:d['budget_limited']=True
+    elif cap==CAP_RES:d['external_evidence_needed']=True
+    elif cap==CAP_REL:d['relation_needed']=True
+    return d
+route_cases=[]
+for i in range(32):
+    for cap in [CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES]:
+        route_cases.append({'input':_desc(cap)|{'nonce':i%3},'expected':cap})
+router=BoundedCapabilityRouterLearnerV1.synthesize(route_cases,route_cases,CAP_CONJ,min_support=4)
+scalar_rows=[]
+for a in [False,True]:
+  for b in [False,True]:
+    for c0 in [False,True]:
+      for _ in range(4):scalar_rows.append({'input':{'condition_a':a,'condition_b':b,'condition_c':c0},'expected':'PASS' if a and b and c0 else 'HOLD'})
+scalar=ConjunctiveRuleInducerV1.synthesize('LAYER_AUDIT_SCALAR','LOGIC',scalar_rows,min_support=2,max_rules=12)
+class _Rel:
+    def execute(self,x):return 'ALLOW' if x.get('allow') else 'DENY'
+relation=_Rel()
 fabric=core.instantiate_execution_fabric(router,scalar,relation,api_state={})
 checks={}
 findings=[]
