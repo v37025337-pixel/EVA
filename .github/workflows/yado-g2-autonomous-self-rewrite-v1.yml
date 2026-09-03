@@ -27,12 +27,34 @@ jobs:
       - name: Compile rewrite controller
         run: python -m py_compile runtime/yado_g2_autonomous_self_rewrite_v1.py
       - name: Run kernel-priority-conditioned self rewrite
+        id: rewrite_cycle
+        continue-on-error: true
         run: python runtime/yado_g2_autonomous_self_rewrite_v1.py
+      - name: Canonical guard after autonomous rewrite
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist shadow rewrite evidence including WITHHOLD history
+        if: always()
+        run: |
+          git config user.name "YADO Autonomous Self Rewrite"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json ]; then
+            git add candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json
+          fi
+          if compgen -G "candidates/g2-self-evolution/*_autonomous_candidate_v1.py" > /dev/null; then
+            git add candidates/g2-self-evolution/*_autonomous_candidate_v1.py
+          fi
+          git diff --cached --quiet || git commit -m "Persist autonomous self-rewrite evidence [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
       - name: Require strict shadow rewrite PASS
+        if: always()
         run: |
           python - <<'PY'
-          import json
-          r=json.load(open("candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json"))
+          import json, pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json")
+          assert p.exists(),"SELF_REWRITE_EVIDENCE_MISSING"
+          r=json.load(open(p))
           assert r["status"]=="PASS_SHADOW_G2_AUTONOMOUS_SELF_REWRITE_V1",r
           assert r["host_selected_target"] is False,r
           assert r["host_wrote_candidate_source"] is False,r
@@ -41,14 +63,3 @@ jobs:
           assert r["canonical_head_unchanged"] is True,r
           print(r["status"],r["target_selection"]["selected_path"],r["selected_skill_id"])
           PY
-      - name: Canonical guard after autonomous rewrite
-        run: python runtime/yado_canonical_invariant_guard_v1.py
-      - name: Persist shadow rewrite evidence
-        run: |
-          git config user.name "YADO Autonomous Self Rewrite"
-          git config user.email "actions@users.noreply.github.com"
-          git add candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json
-          git add candidates/g2-self-evolution/*_autonomous_candidate_v1.py
-          git diff --cached --quiet || git commit -m "Persist autonomous shadow self-rewrite candidate [skip ci]"
-          git pull --rebase origin yado-architecture-shadow-search
-          git push origin HEAD:yado-architecture-shadow-search
