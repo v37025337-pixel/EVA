@@ -1,0 +1,869 @@
+{
+  "active_runtime_files_scanned": 25,
+  "active_runtime_risk_calls": [
+    {
+      "call": "subprocess.run",
+      "line": 14,
+      "path": "runtime/yado_legacy_experience_retriever_v2.py"
+    },
+    {
+      "call": "subprocess.run",
+      "line": 123,
+      "path": "runtime/yado_unified_core_deep_self_audit_v1.py"
+    }
+  ],
+  "dependency_vulnerability_count": 10,
+  "findings": [
+    {
+      "code": "LARGE_WRITE_ENABLED_WORKFLOW_SURFACE",
+      "details": [
+        "yado-code-plateau-self-evolution-v1.yml",
+        "yado-mathematical-reasoning-canonical-integration-v1.yml",
+        "yado-g2-raw-representation-v4-post-admission-audit-v1.yml",
+        "yado-raw-task-representation-canonical-integration-v1.yml",
+        "yado-logic-plateau-fresh-admission-v1.yml",
+        "yado-kernel-evolutionary-successor-centroid-genesis-v1.yml",
+        "yado-v29-cognitive.yml",
+        "yado-g2-lti-code-architectural-ceiling-plateau-probe-v6.yml",
+        "yado-real-world-generalization-native-v2.yml",
+        "yado-g2-centroid-constructor-source-probe.yml",
+        "yado-runtime-control-plane-binding-canonical-gate-v1.yml",
+        "yado-thinking-architectural-ceiling-self-evolution-v1.yml",
+        "yado-safe-rc8-successor-lineage-builder-v1.yml",
+        "yado-rc8-consciousness-audit.yml",
+        "yado-g2-raw-representation-v3-canonical-burnin-v1.yml",
+        "yado-g2-raw-representation-v2-post-admission-audit-v1.yml",
+        "yado-kernel-g2-raw-representation-v2-post-admission-repair-v1.yml",
+        "yado-context-adapter-dependency-fresh-admission-v1.yml",
+        "yado-g2-raw-representation-v4-canonical-burnin-v1.yml",
+        "yado-g2-self-directed-development-cycle-v1.yml",
+        "yado-intelligence-architectural-ceiling-self-evolution-v1.yml",
+        "yado-g2-integrity-branch-closure-repair-v1.yml",
+        "yado-runtime-control-plane-binding-self-repair-v1.yml",
+        "yado-g2-neutral-case-builder-probe.yml",
+        "yado-program-execution-native-canonical-integration-v1.yml",
+        "yado-g0-meta-selection-admission-decision-v1.yml",
+        "yado-real-world-evidence-audit-self-evolution-v1.yml",
+        "yado-code-plateau-fresh-readmission-v1.yml",
+        "yado-science-data-native-fresh-admission-v1.yml",
+        "yado-kernel-g2-raw-representation-post-composite-self-evolution-v1.yml",
+        "yado-kernel-g2-raw-representation-v2-post-admission-repair-v2.yml",
+        "yado-intelligence-architectural-ceiling-fresh-admission-v1.yml",
+        "yado-kernel-scale-conditional-high-scale-repair-v4.yml",
+        "yado-kernel-g2-raw-v3-robustness-self-evolution-v2.yml",
+        "yado-kernel-scale-conditional-high-scale-repair-v3.yml",
+        "yado-live-shadow-meta-selection-developmental-v1.yml",
+        "yado-kernel-self-expand-architecture-selector-constructor-v2.yml",
+        "yado-g2-real-world-transfer-benchmark-v1.yml",
+        "yado-g2-composite-canonical-burnin-v1.yml",
+        "yado-experiment-compute-budget-gate-v1.yml",
+        "yado-code-plateau-fresh-admission-v9.yml",
+        "yado-causal-evolution-ledger-append-v2.yml",
+        "yado-g2-evolution-archive-source-probe.yml",
+        "yado-conjunctive-rule-inducer-extended-transfer-v1.yml",
+        "yado-shadow-algorithm-bank-admission-v1.yml",
+        "yado-kernel-self-repair-from-self-assessment-v1.yml",
+        "yado-g0-conjunctive-algorithm-readmission-v2.yml",
+        "yado-kernel-evolutionary-successor-genesis-v2.yml",
+        "yado-g2-rule-program-executor-source-probe.yml",
+        "yado-intelligence-plateau-canonical-integration-v1.yml",
+        "yado-kernel-v4-meta-grammar-source-probe.yml",
+        "yado-g2-frontier-provenance-sync-v1.yml",
+        "yado-code-plateau-self-evolution-v4.yml",
+        "yado-legacy-experience-retrieval-canonical-integration-v1.yml",
+        "yado-g2-algorithmic-transition-lineage-audit-v1.yml",
+        "yado-real-world-generalization-self-directed-v1.yml",
+        "yado-kernel-selected-architecture-composite-executable-successor-fresh-transfer-v1.yml",
+        "yado-kernel-evolutionary-successor-local-knn-v1.yml",
+        "yado-g2-lti-architectural-ceiling-recheck-v2.yml",
+        "yado-run-inherited-shadow-capability-inside-g1-candidate-v1.yml",
+        "yado-g2-native-commit-api-probe.yml",
+        "yado-g1-budget-aware-search-repair-v1.yml",
+        "yado-science-evidence-audit-fresh-admission-v1.yml",
+        "yado-kernel-selected-architecture-composite-executable-successor-canonical-admission-v1.yml",
+        "yado-kernel-four-source-curriculum-repair-v2.yml",
+        "yado-kernel-g2-raw-v4-robustness-self-evolution-v1.yml",
+        "yado-g2-centroid-v2-gate-repair-probe.yml",
+        "yado-full-kernel-audit-v1.yml",
+        "yado-kernel-native-selector-commit-substrate-genesis-v1.yml",
+        "yado-g1-external-resource-assisted-access-control-repair-v1.yml",
+        "yado-unified-core-ledger-reconciliation-v1.yml",
+        "yado-code-plateau-canonical-integration-v2.yml",
+        "yado-g2-canonical-raw-transfer-recheck-v1.yml",
+        "yado-legacy-experience-retrieval-fresh-admission-v1.yml",
+        "yado-evaluate-shadow-capability-for-g1-inheritance-v1.yml",
+        "yado-g2-applied-workload-suite-v1.yml",
+        "yado-kernel-self-expand-architecture-selector-constructor-v3.yml",
+        "yado-raw-task-representation-fresh-admission-v1.yml",
+        "yado-g2-full-fresh-regression-and-promotion-gate-v1.yml",
+        "yado-code-plateau-self-evolution-v7.yml",
+        "yado-g1-multiround-development-training-v1.yml",
+        "yado-code-plateau-self-evolution-v9.yml",
+        "yado-intelligence-architectural-ceiling-self-evolution-v2.yml",
+        "yado-logic-filter-order-v1.yml",
+        "yado-developmental-head-control-plane-v1.yml",
+        "yado-science-data-native-canonical-integration-v1.yml",
+        "yado-kernel-native-selector-commit-substrate-verdict-repair-v1.yml",
+        "yado-kernel-native-selector-canonical-binding-v2.yml",
+        "yado-unified-core-consolidation-gate-v1.yml",
+        "yado-conjunctive-rule-inducer-v1.yml",
+        "yado-g1-s2-full-cross-domain-regression-causal-gate-v2.yml",
+        "yado-logic-plateau-self-evolution-v1.yml",
+        "yado-rc8-cognitive-uplift-v1.yml",
+        "yado-rc8-algorithm-genesis-uplift-v3.yml",
+        "yado-intelligence-multi-dispatch-canonical-integration-v1.yml",
+        "yado-fresh-meta-selection-conjunctive-vs-existing-v1.yml",
+        "yado-live-g0-autonomous-metacognitive-v1.yml",
+        "yado-g2-bounded-threshold-constructor-source-probe.yml",
+        "yado-rc8-v36-digital-consciousness.yml",
+        "yado-kernel-five-source-parent-admission-reassessment-v1.yml",
+        "yado-kernel-selected-architecture-composite-executable-successor-prototype-v1.yml",
+        "yado-kernel-v4-search-shape-probe.yml",
+        "yado-kernel-fresh-four-source-curriculum-v1.yml",
+        "yado-g1-s2-counterexample-genesis-v1.yml",
+        "yado-legacy-experience-retrieval-fresh-admission-v2.yml",
+        "yado-thinking-plateau-canonical-integration-v1.yml",
+        "yado-g2-post-workload-capability-audit-v1.yml",
+        "yado-g2-raw-representation-v3-post-admission-audit-v1.yml",
+        "yado-g2-rc8-mechanism-commit-inheritance-probe.yml",
+        "yado-g0-conjunctive-algorithm-admission-decision-v1.yml",
+        "yado-g2-local-residual-representation-diagnosis.yml",
+        "yado-legacy-provenance-audit-fresh-admission-v1.yml",
+        "yado-real-developmental-lineage-v1.yml",
+        "yado-causal-evolution-ledger-v1.yml",
+        "yado-intelligence-plateau-self-evolution-v1.yml",
+        "yado-intelligence-plateau-fresh-admission-v2.yml",
+        "yado-g2-rc8-executive-commit-state-probe.yml",
+        "yado-kernel-evolutionary-source-presence-representation-v1.yml",
+        "yado-kernel-g2-raw-representation-v3-canonical-admission-v1.yml",
+        "yado-g2-lti-architectural-ceiling-recheck-v5.yml"
+      ],
+      "message": "251 workflows request contents: write.",
+      "severity": "HIGH"
+    },
+    {
+      "code": "KNOWN_DEPENDENCY_VULNERABILITIES",
+      "details": [
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "46.0.6"
+          ],
+          "id": "PYSEC-2026-35",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "46.0.7"
+          ],
+          "id": "PYSEC-2026-36",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "46.0.7"
+          ],
+          "id": "PYSEC-2026-36",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "46.0.6"
+          ],
+          "id": "PYSEC-2026-35",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "46.0.5"
+          ],
+          "id": "PYSEC-2026-2141",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "49.0.0"
+          ],
+          "id": "PYSEC-2026-3554",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "50.0.0"
+          ],
+          "id": "PYSEC-2026-3552",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "49.0.0"
+          ],
+          "id": "PYSEC-2026-3553",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "49.0.0"
+          ],
+          "id": "PYSEC-2026-3554",
+          "version": "45.0.7"
+        },
+        {
+          "dependency": "cryptography",
+          "fix_versions": [
+            "48.0.1"
+          ],
+          "id": "GHSA-537c-gmf6-5ccf",
+          "version": "45.0.7"
+        }
+      ],
+      "message": "10 known dependency vulnerability records found.",
+      "severity": "HIGH"
+    },
+    {
+      "code": "ACTIONS_NOT_PINNED_TO_COMMIT",
+      "details": [
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-code-plateau-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-code-plateau-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-mathematical-reasoning-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-mathematical-reasoning-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-mathematical-reasoning-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-raw-representation-v4-post-admission-audit-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-raw-representation-v4-post-admission-audit-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-raw-task-representation-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-raw-task-representation-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-raw-task-representation-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-logic-plateau-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-logic-plateau-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-logic-plateau-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-evolutionary-successor-centroid-genesis-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-evolutionary-successor-centroid-genesis-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-v29-cognitive.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-v29-cognitive.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-v29-cognitive.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-lti-code-architectural-ceiling-plateau-probe-v6.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-lti-code-architectural-ceiling-plateau-probe-v6.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-real-world-generalization-native-v2.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-real-world-generalization-native-v2.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-real-world-generalization-native-v2.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-centroid-constructor-source-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-centroid-constructor-source-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-architecture-engine-source-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-architecture-engine-source-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-runtime-control-plane-binding-canonical-gate-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-runtime-control-plane-binding-canonical-gate-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-runtime-control-plane-binding-canonical-gate-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-thinking-architectural-ceiling-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-thinking-architectural-ceiling-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-thinking-architectural-ceiling-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-safe-rc8-successor-lineage-builder-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-safe-rc8-successor-lineage-builder-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-safe-rc8-successor-lineage-builder-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-rc8-consciousness-audit.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-rc8-consciousness-audit.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-rc8-consciousness-audit.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-raw-representation-v3-canonical-burnin-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-raw-representation-v3-canonical-burnin-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-raw-representation-v2-post-admission-audit-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-raw-representation-v2-post-admission-audit-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-g2-raw-representation-v2-post-admission-repair-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-g2-raw-representation-v2-post-admission-repair-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-context-adapter-dependency-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-context-adapter-dependency-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-context-adapter-dependency-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-raw-representation-v4-canonical-burnin-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-raw-representation-v4-canonical-burnin-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-self-directed-development-cycle-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-self-directed-development-cycle-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-g2-self-directed-development-cycle-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-intelligence-architectural-ceiling-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-intelligence-architectural-ceiling-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-intelligence-architectural-ceiling-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-integrity-branch-closure-repair-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-integrity-branch-closure-repair-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-runtime-control-plane-binding-self-repair-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-runtime-control-plane-binding-self-repair-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-runtime-control-plane-binding-self-repair-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-neutral-case-builder-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-neutral-case-builder-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-program-execution-native-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-program-execution-native-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-program-execution-native-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g0-meta-selection-admission-decision-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g0-meta-selection-admission-decision-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-g0-meta-selection-admission-decision-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-real-world-evidence-audit-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-real-world-evidence-audit-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-real-world-evidence-audit-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-code-plateau-fresh-readmission-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-code-plateau-fresh-readmission-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-science-data-native-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-science-data-native-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-science-data-native-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-g2-raw-representation-post-composite-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-g2-raw-representation-post-composite-self-evolution-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-g2-raw-representation-v2-post-admission-repair-v2.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-g2-raw-representation-v2-post-admission-repair-v2.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-intelligence-architectural-ceiling-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-intelligence-architectural-ceiling-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-intelligence-architectural-ceiling-fresh-admission-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-scale-conditional-high-scale-repair-v4.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-scale-conditional-high-scale-repair-v4.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-g2-raw-v3-robustness-self-evolution-v2.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-g2-raw-v3-robustness-self-evolution-v2.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-unified-evolution-architecture-contract-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-unified-evolution-architecture-contract-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-scale-conditional-high-scale-repair-v3.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-scale-conditional-high-scale-repair-v3.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-live-shadow-meta-selection-developmental-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-live-shadow-meta-selection-developmental-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-live-shadow-meta-selection-developmental-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-self-expand-architecture-selector-constructor-v2.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-self-expand-architecture-selector-constructor-v2.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-algorithm-genesis-contract-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-algorithm-genesis-contract-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-real-world-transfer-benchmark-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-real-world-transfer-benchmark-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-g2-real-world-transfer-benchmark-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-composite-canonical-burnin-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-composite-canonical-burnin-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-field-mapper-sandbox-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-field-mapper-sandbox-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-experiment-compute-budget-gate-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-experiment-compute-budget-gate-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-experiment-compute-budget-gate-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-intelligence-genesis-method-source.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-intelligence-genesis-method-source.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-code-plateau-fresh-admission-v9.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-code-plateau-fresh-admission-v9.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-causal-evolution-ledger-append-v2.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-causal-evolution-ledger-append-v2.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-causal-evolution-ledger-append-v2.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-evolution-archive-source-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-evolution-archive-source-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-conjunctive-rule-inducer-extended-transfer-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-conjunctive-rule-inducer-extended-transfer-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-conjunctive-rule-inducer-extended-transfer-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-shadow-algorithm-bank-admission-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-shadow-algorithm-bank-admission-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-shadow-algorithm-bank-admission-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-self-repair-from-self-assessment-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-self-repair-from-self-assessment-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g0-conjunctive-algorithm-readmission-v2.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g0-conjunctive-algorithm-readmission-v2.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-g0-conjunctive-algorithm-readmission-v2.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-evolutionary-successor-genesis-v2.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-evolutionary-successor-genesis-v2.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-bounded-rule-sandbox-contract-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-bounded-rule-sandbox-contract-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-rule-program-executor-source-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-rule-program-executor-source-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-intelligence-plateau-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-intelligence-plateau-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-kernel-v4-meta-grammar-source-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-kernel-v4-meta-grammar-source-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-latest-repair-mechanism-source.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-latest-repair-mechanism-source.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-g2-frontier-provenance-sync-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-g2-frontier-provenance-sync-v1.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-code-plateau-self-evolution-v4.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-code-plateau-self-evolution-v4.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-audited-mechanism-filter-capability-probe.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-audited-mechanism-filter-capability-probe.yml"
+        },
+        {
+          "uses": "actions/checkout@v4",
+          "workflow": "yado-legacy-experience-retrieval-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "workflow": "yado-legacy-experience-retrieval-canonical-integration-v1.yml"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "workflow": "yado-legacy-experience-retrieval-canonical-integration-v1.yml"
+        }
+      ],
+      "message": "722 action references use tags/branches rather than immutable commit SHAs.",
+      "severity": "MEDIUM"
+    },
+    {
+      "code": "ACTIVE_RUNTIME_SUBPROCESS_USAGE",
+      "details": [
+        {
+          "call": "subprocess.run",
+          "line": 14,
+          "path": "runtime/yado_legacy_experience_retriever_v2.py"
+        },
+        {
+          "call": "subprocess.run",
+          "line": 123,
+          "path": "runtime/yado_unified_core_deep_self_audit_v1.py"
+        }
+      ],
+      "message": "Active runtime uses subprocess; review remains bounded by call sites.",
+      "severity": "INFO"
+    }
+  ],
+  "generic_credential_hits": 0,
+  "high_confidence_secret_hits": 0,
+  "schema": "yado.security_audit.v1",
+  "status": "FAIL_AUDIT",
+  "tracked_files_scanned": 1327,
+  "workflow_files_scanned": 295,
+  "workflow_summary": {
+    "contents_write": 251,
+    "pull_request_target": 0,
+    "secret_ref_workflows": 0,
+    "third_party_actions": 0,
+    "unpinned_actions": 722
+  }
+}
