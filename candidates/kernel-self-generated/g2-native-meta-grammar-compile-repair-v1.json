@@ -1,0 +1,198 @@
+{
+  "ablation": {
+    "whole_ancestor_exact_fresh": 0.0
+  },
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "checks": {
+    "bounded_target_change": false,
+    "canonical_unchanged": true,
+    "compiling_ancestor_discovered": true,
+    "fresh_exact": true,
+    "host_did_not_supply_target_patch_or_line": true,
+    "invented_gene_created": true,
+    "kernel_model_selected_target_hunk": true,
+    "native_grammar_extension_created": true,
+    "native_meta_grammar_supported": true,
+    "no_external_model_or_ready_patch": true,
+    "preserves_current_function_surface": true,
+    "same_native_model_repairs_target": true,
+    "target_current_compile_broken": true,
+    "validation_exact": true,
+    "whole_ancestor_ablation_not_exact": true
+  },
+  "fresh_accuracy_recomputed": 1.0,
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "invented_gene": {
+    "gene_digest": "7c3e636e31924572c6cab1201af29d91f9414e0a19108578061c3a0488a907f3",
+    "gene_id": "GENE-SELF-SYNTHESIZED-NATIVE-META-COMPILE-G_e670ea0bd849",
+    "gene_scope": [
+      "CODE",
+      "SELF_AUDIT_AND_REPAIR"
+    ],
+    "grammar_extension_id": "G_e670ea0bd849",
+    "heritage": [
+      "RC6_META_GRAMMAR",
+      "G2"
+    ],
+    "model": {
+      "else": {
+        "algorithm": {
+          "family": "CART_AXIS",
+          "max_depth": 1
+        },
+        "model": {
+          "label": "REVERT"
+        },
+        "op": "LEAF"
+      },
+      "op": "IF_PREDICATE",
+      "predicate_program": {
+        "kind": "LINEAR_THRESHOLD",
+        "signals": [
+          "ancestor_lines",
+          "compile_if_reverted"
+        ],
+        "threshold": -0.55,
+        "weights": [
+          -1.0,
+          -1.0
+        ]
+      },
+      "then": {
+        "algorithm": {
+          "family": "CART_AXIS",
+          "max_depth": 1
+        },
+        "model": {
+          "label": "KEEP"
+        },
+        "op": "LEAF"
+      }
+    },
+    "native_constructor": "synthesize_intelligence_with_extended_meta_grammar",
+    "novel_gene": true,
+    "predicate_program": {
+      "kind": "LINEAR_THRESHOLD",
+      "signals": [
+        "ancestor_lines",
+        "compile_if_reverted"
+      ],
+      "threshold": -0.55,
+      "weights": [
+        -1.0,
+        -1.0
+      ]
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.self_synthesized_native_meta_compile_repair_gene.v1",
+    "trigger": {
+      "deficit": "SELF_REWRITE_CONTROLLER_COMPILE_FAILURE",
+      "prior_withholds": [
+        "SELF_SYNTHESIZED_COMPILE_REPAIR_V1",
+        "HISTORY_GUIDED_COMPILE_REPAIR_V1"
+      ]
+    }
+  },
+  "native_meta_result": {
+    "fresh_blind": 1.0,
+    "grammar_extension_id": "G_e670ea0bd849",
+    "model": {
+      "else": {
+        "algorithm": {
+          "family": "CART_AXIS",
+          "max_depth": 1
+        },
+        "model": {
+          "label": "REVERT"
+        },
+        "op": "LEAF"
+      },
+      "op": "IF_PREDICATE",
+      "predicate_program": {
+        "kind": "LINEAR_THRESHOLD",
+        "signals": [
+          "ancestor_lines",
+          "compile_if_reverted"
+        ],
+        "threshold": -0.55,
+        "weights": [
+          -1.0,
+          -1.0
+        ]
+      },
+      "then": {
+        "algorithm": {
+          "family": "CART_AXIS",
+          "max_depth": 1
+        },
+        "model": {
+          "label": "KEEP"
+        },
+        "op": "LEAF"
+      }
+    },
+    "predicate_program": {
+      "kind": "LINEAR_THRESHOLD",
+      "signals": [
+        "ancestor_lines",
+        "compile_if_reverted"
+      ],
+      "threshold": -0.55,
+      "weights": [
+        -1.0,
+        -1.0
+      ]
+    },
+    "status": "SUPPORTED",
+    "validation": 1.0
+  },
+  "receipt_sha256": "c8c530d56fa95a18c8c39b587cfd69ae81fe8c669b26ec97385b02e3ebafcd6a",
+  "schema": "yado.g2.native_meta_grammar_compile_repair.v1",
+  "semantic_boundary": "YADO USES ITS PRE-EXISTING NATIVE RC6 META-GRAMMAR SYNTHESIZER TO CREATE A NEW HUNK-REPAIR SELECTOR FROM GENERIC COMPILER/DIFF FEATURES, FREEZES IT BEFORE FRESH CASES, THEN APPLIES THE SAME GENERATED MODEL TO ITS BROKEN SELF-REWRITE CONTROLLER. NO EXTERNAL LLM, READY PATCH, TARGET LINE NUMBER, OR EXPECTED TARGET SOURCE IS PROVIDED.",
+  "status": "WITHHOLD_G2_NATIVE_META_GRAMMAR_COMPILE_REPAIR_V1",
+  "target": {
+    "ancestor_sha": "0a99b18fad5619b1a2fb85bd879dd1f430a83141",
+    "candidate_path": "candidates/g2-self-evolution/yado_g2_autonomous_self_rewrite_v1_native_meta_repaired_candidate.py",
+    "changed_lines": 275,
+    "compile_error_after": null,
+    "compile_error_before": {
+      "lineno": 281,
+      "msg": "unmatched ')'",
+      "offset": 8,
+      "text": ",p.name)"
+    },
+    "function_preservation": 1.0,
+    "history_compiling_count": 2,
+    "path": "runtime/yado_g2_autonomous_self_rewrite_v1.py",
+    "predictions": [
+      {
+        "features": {
+          "ancestor_lines": 0.2,
+          "compile_if_reverted": 1.0,
+          "distance_to_error": 0.1,
+          "error_overlap": 1.0,
+          "hunk_span": 1.0,
+          "inserted_lines": 1.0,
+          "is_delete": 0.0,
+          "is_insert": 0.0,
+          "is_replace": 1.0,
+          "line_delta_abs": 1.0
+        },
+        "hunk": {
+          "i1": 24,
+          "i2": 283,
+          "j1": 24,
+          "j2": 26,
+          "tag": "replace"
+        },
+        "hunk_index": 0,
+        "prediction": "REVERT"
+      }
+    ],
+    "selected_hunks": [
+      0
+    ]
+  }
+}
