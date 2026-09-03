@@ -23,6 +23,7 @@ from yado_coverage_pruned_compositional_schema_router_v3 import CoveragePrunedCo
 from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
 from yado_g2_unified_execution_fabric_v1 import G2UnifiedExecutionFabricV1
 from yado_g2_unified_execution_fabric_v2 import G2UnifiedExecutionFabricV2
+from yado_g2_unified_execution_fabric_v3 import G2UnifiedExecutionFabricV3
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
@@ -58,7 +59,7 @@ class UnifiedYADOCoreV1:
         self.compositional_logic=BudgetAdaptiveCompositionalLogicV2
         self.compositional_schema_router=CoveragePrunedCompositionalSchemaRouterV3
         self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
-        self.execution_fabric_cls=G2UnifiedExecutionFabricV2
+        self.execution_fabric_cls=G2UnifiedExecutionFabricV3
         self.openapi_contract_capability_cls=G2OpenAPIContractCapabilityV1
         self.openapi_readonly_executor_cls=G2OpenAPIReadOnlyExecutorV1
         self.evolutionary_genome_cls=YADOEvolutionaryGenomeV1
@@ -240,11 +241,11 @@ class UnifiedYADOCoreV1:
             return ContextualStreamCapabilityAdapterV1(runtime,'BOUNDED_STREAM_CONTEXT_MAP')
         return runtime
 
-    def instantiate_execution_fabric(self,router_program,scalar_program,relation_program,api_state=None):
+    def instantiate_execution_fabric(self,router_program,scalar_program,relation_program,api_state=None,temporal_state=None):
         base=G2TypedRecurrentCapabilityGraphRuntimeV1(
             self.architecture,router_program,scalar_program,relation_program,self.portfolio
         )
-        return self.execution_fabric_cls(base,api_state=api_state)
+        return self.execution_fabric_cls(base,api_state=api_state,temporal_state=temporal_state)
 
     def compile_openapi_contract_plan(self,state_section:dict[str,Any],contract_id:str)->dict[str,Any]:
         return self.openapi_contract_capability_cls(state_section).compile_plan(contract_id)
@@ -283,6 +284,26 @@ class UnifiedYADOCoreV1:
         state=self.evolutionary_parent_genome()
         controller=self.evolutionary_genome_cls(state['parent'],experience_sources=state['experience'])
         return controller.evolve_once()
+
+    def export_cognitive_temporal_state(self,execution_fabric)->dict[str,Any]:
+        if not hasattr(execution_fabric,'export_temporal_state'):
+            raise TypeError('TEMPORAL_EXECUTION_FABRIC_REQUIRED')
+        return execution_fabric.export_temporal_state()
+
+    def temporal_evolution_on_stall(self,execution_fabric,stream_id:str)->dict[str,Any]:
+        if not hasattr(execution_fabric,'temporal_evolution_signal'):
+            raise TypeError('TEMPORAL_EXECUTION_FABRIC_REQUIRED')
+        signal=execution_fabric.temporal_evolution_signal(stream_id)
+        if not signal.get('mechanism_change_required'):
+            return {'status':'CONTINUE_CURRENT_MECHANISM','temporal_signal':signal,'promotion_authorized':False}
+        evolution=self.evolve_cognitive_code_genome()
+        return {
+          'status':'SHADOW_EVOLUTION_TRIGGERED',
+          'temporal_signal':signal,
+          'evolution':evolution,
+          'promotion_authorized':False,
+          'semantic_boundary':'TEMPORAL STALL MAY TRIGGER SHADOW GENOME EVOLUTION BUT CANNOT PROMOTE THE CHILD.'
+        }
 
     def snapshot(self)->dict[str,Any]:
         audit=self.audit()

@@ -1,13 +1,14 @@
 {
   "active_module_count": 26,
   "architecture_mutation": false,
-  "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
+  "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
   "assembly_runtime_canonical_active": true,
   "binding_checks": {
     "api_network_execution_disabled": true,
     "canonical_evolutionary_genome_active": true,
     "canonical_openapi_active": true,
     "canonical_openapi_readonly_executor_active": true,
+    "canonical_temporal_kernel_embedded": true,
     "canonical_unified_fabric_active": true,
     "context_memory_source_hash_exact": true,
     "high_scale_binding_instantiated": true,
@@ -108,8 +109,8 @@
       "repair_mode": "BASE_PORTFOLIO"
     },
     "representation_to_execution_to_memory": {
-      "after": 34,
-      "before": 33,
+      "after": 47,
+      "before": 45,
       "pass": true,
       "result": {
         "parent_result": {
@@ -117,7 +118,16 @@
           "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
         },
         "result": "B",
-        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "991712abf3a7014fb4a8b54434daa7e1392f511a8b63b0c9012efa1268cb6e6c",
+          "tick_id": 13
+        }
       },
       "selected": "ALG-BUDGETED-STAGE-POLICY-V1"
     },
@@ -165,7 +175,16 @@
           ],
           "total_cost": 4.0
         },
-        "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+        "temporal": {
+          "episode_tick": 3,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 2,
+          "parent_tick": null,
+          "predecessor_tick": 10,
+          "tick_digest": "51b3abb8051c1eb22a270a80a271080e6489f9de6e717e2ae97fefc8729a0386",
+          "tick_id": 14
+        }
       }
     },
     "semantic_to_logic_to_memory": {
@@ -174,7 +193,16 @@
           "operation": "predict_symmetric"
         },
         "result": "ACCEPT",
-        "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+        "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "b7211e73692c004b58cdd249635b5d4e1335ebef3665b14204784a92f8e28248",
+          "tick_id": 15
+        }
       },
       "pass": true,
       "prediction": {
@@ -183,7 +211,7 @@
     }
   },
   "module_coverage_pass": true,
-  "receipt_sha256": "2f790a63cadecdfbe4b72b6e5c200b89a5399b8a3178d5c0d8a4fe173734bc5a",
+  "receipt_sha256": "e4c6b81d5c4bd3ad04cc323b4f50757113e00f3ee24b25016db35d2460fdadca",
   "registry_pass": true,
   "schema": "yado.g2.unified_module_kernel.fresh_gate.v1",
   "semantic_boundary": "FRESH SHADOW ASSEMBLY TEST OF ALL CURRENT CANONICAL G2 MODULE IDENTITIES OVER THE CANONICAL UNIFIED EXECUTION FABRIC. THE MODULE KERNEL ITSELF IS NOT A NEW GENERATION.",
@@ -201,7 +229,16 @@
           "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
         },
         "result": "ALLOW",
-        "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+        "selected_capability": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "768146b27ea124355e9d78ac4a9e9bcc3e8cf4f6c5c00994238e56e8b394ef4f",
+          "tick_id": 2
+        }
       },
       "pass": true
     },
@@ -212,7 +249,16 @@
           "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
         },
         "result": "S2",
-        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "6698de3c11f7c779ae65c5acb2c84525bff156962ea850447edfee8b2bac32b4",
+          "tick_id": 3
+        }
       },
       "pass": true
     },
@@ -223,7 +269,16 @@
           "selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
         },
         "result": "PASS",
-        "selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+        "selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "ec1bca89a0b225a4a46f08087c3aba91834b6329af4b295f30356359b2b53c38",
+          "tick_id": 1
+        }
       },
       "pass": true
     },
@@ -247,7 +302,16 @@
               "operation": "predict_symmetric"
             },
             "result": "ODD",
-            "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+            "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+            "temporal": {
+              "episode_tick": 2,
+              "mechanism_change_required": false,
+              "no_progress_ticks": 1,
+              "parent_tick": null,
+              "predecessor_tick": 5,
+              "tick_digest": "d361c9a985b7f6e6c8fddb229d5250925c33a77831c4924806d10f30d60c5513",
+              "tick_id": 8
+            }
           },
           "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3": {
             "meta": {
@@ -256,7 +320,16 @@
             "result": [
               "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
             ],
-            "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+            "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+            "temporal": {
+              "episode_tick": 2,
+              "mechanism_change_required": false,
+              "no_progress_ticks": 1,
+              "parent_tick": null,
+              "predecessor_tick": 7,
+              "tick_digest": "b5dc6624c2f08a1d11ece29edcee1cddeb4f19ddeabdfdc2abd4689ae9185284",
+              "tick_id": 9
+            }
           },
           "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2": {
             "meta": {
@@ -274,7 +347,16 @@
               ],
               "total_cost": 4.0
             },
-            "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+            "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+            "temporal": {
+              "episode_tick": 2,
+              "mechanism_change_required": false,
+              "no_progress_ticks": 1,
+              "parent_tick": null,
+              "predecessor_tick": 6,
+              "tick_digest": "375dc47651fbe15ab9087a4bdc4640fa64a7f148174922c6e575ff7cbf8975c0",
+              "tick_id": 10
+            }
           }
         },
         "status": "PASS"
@@ -296,7 +378,16 @@
           "operation": "predict_symmetric"
         },
         "result": "ODD",
-        "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+        "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "f209ce6f7288252fe014fb5ef5182e6b8078368dc7e651e13215edfa4db9c143",
+          "tick_id": 5
+        }
       },
       "pass": true
     },
@@ -309,7 +400,16 @@
           "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
         },
         "result": "C2",
-        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+        "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1",
+        "temporal": {
+          "episode_tick": 2,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 1,
+          "parent_tick": null,
+          "predecessor_tick": 11,
+          "tick_digest": "9e9afd8ad9d2eb05143ddf2783206569a45a6e5bc65526760c5bf4d2c856b515",
+          "tick_id": 12
+        }
       },
       "pass": true
     },
@@ -321,7 +421,16 @@
         "result": [
           "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
         ],
-        "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+        "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "06625dcc7a4e43c3a27ef6b4078f2f4454e230b28934853c8e891fcabaf1eb4e",
+          "tick_id": 7
+        }
       },
       "pass": true
     },
@@ -547,7 +656,16 @@
           ],
           "total_cost": 4.0
         },
-        "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "540040083a79683b1fa58fbc5e837b780d1d7c57ab3dbfb2452d24e33c35d319",
+          "tick_id": 6
+        }
       },
       "pass": true
     },
@@ -777,7 +895,16 @@
           "selected_capability": "RESOURCE-PORTFOLIO-V1"
         },
         "result": "LOCAL_COMPUTE_BUDGET_GATE",
-        "selected_capability": "RESOURCE-PORTFOLIO-V1"
+        "selected_capability": "RESOURCE-PORTFOLIO-V1",
+        "temporal": {
+          "episode_tick": 1,
+          "mechanism_change_required": false,
+          "no_progress_ticks": 0,
+          "parent_tick": null,
+          "predecessor_tick": null,
+          "tick_digest": "b80ee3710dcae034e3bafa6b7334588119a909bd7bb4d9abb1522031ba64f87c",
+          "tick_id": 4
+        }
       },
       "pass": true
     },
@@ -793,26 +920,48 @@
     },
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1": {
       "output": {
-        "episode_count": 26,
+        "episode_count": 38,
         "external_evidence_count": 0,
         "fabric_episode_count": 6,
-        "last_episode_digest": "ac197bca9d39822064dd3aaea465e77d07c7aa84ea2bdf24f007c4ce947fcd67",
+        "last_episode_digest": "1dac94a1d0d1d8738ed1ae81e31712377acc0d3dd1808ea6b8124244131459a1",
         "stage_outcome_count": 0,
-        "stream_attempts": {}
+        "stream_attempts": {},
+        "temporal": {
+          "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+          "entity_count": 15,
+          "last_tick_digest": "9e9afd8ad9d2eb05143ddf2783206569a45a6e5bc65526760c5bf4d2c856b515",
+          "open_tick_count": 0,
+          "record_count": 12,
+          "stream_count": 8,
+          "tick_id": 12
+        },
+        "temporal_stall_signal_count": 0,
+        "temporal_transition_count": 12
       },
       "pass": true
     },
-    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2": {
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3": {
       "output": {
         "canonical_active": true,
-        "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
+        "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
         "memory": {
-          "episode_count": 29,
+          "episode_count": 41,
           "external_evidence_count": 0,
           "fabric_episode_count": 6,
-          "last_episode_digest": "54ffe8a23f5db9a47c7e4d9a86fb52296f48f23999773c43f72ae7b391d64af5",
+          "last_episode_digest": "1ab8461788a4adde281c6f7ac0f4b807c8ee4b2463781269e33895a9ad81577b",
           "stage_outcome_count": 0,
-          "stream_attempts": {}
+          "stream_attempts": {},
+          "temporal": {
+            "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+            "entity_count": 15,
+            "last_tick_digest": "9e9afd8ad9d2eb05143ddf2783206569a45a6e5bc65526760c5bf4d2c856b515",
+            "open_tick_count": 0,
+            "record_count": 12,
+            "stream_count": 8,
+            "tick_id": 12
+          },
+          "temporal_stall_signal_count": 0,
+          "temporal_transition_count": 12
         }
       },
       "pass": true
@@ -820,19 +969,30 @@
   },
   "snapshot": {
     "active_module_count": 26,
-    "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
+    "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
     "assembly_runtime_canonical_active": true,
     "extra_registry_modules": [],
     "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
     "generation": "G2_CANDIDATE_TRCG_V1",
     "kernel_id": "UNIFIED_YADO_MODULE_KERNEL_V1",
     "memory": {
-      "episode_count": 45,
+      "episode_count": 60,
       "external_evidence_count": 0,
       "fabric_episode_count": 8,
-      "last_episode_digest": "f6a3db71ea74674273bc4bd12cd7dd0ce9798071c137fde78eb97ded28cbda60",
+      "last_episode_digest": "d57717f47f694f0c24d08b5faa6ffcb2b4fa159982adf2d46e93ece2fd163ee5",
       "stage_outcome_count": 0,
-      "stream_attempts": {}
+      "stream_attempts": {},
+      "temporal": {
+        "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+        "entity_count": 17,
+        "last_tick_digest": "b7211e73692c004b58cdd249635b5d4e1335ebef3665b14204784a92f8e28248",
+        "open_tick_count": 0,
+        "record_count": 15,
+        "stream_count": 10,
+        "tick_id": 15
+      },
+      "temporal_stall_signal_count": 0,
+      "temporal_transition_count": 15
     },
     "missing_active_modules": [],
     "registered_module_count": 26,
@@ -962,10 +1122,10 @@
         "kind": "RUNTIME",
         "source": "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py"
       },
-      "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2": {
+      "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3": {
         "canonical_active": true,
         "kind": "RUNTIME",
-        "source": "runtime/yado_g2_unified_execution_fabric_v2.py"
+        "source": "runtime/yado_g2_unified_execution_fabric_v3.py"
       }
     },
     "schema": "yado.g2.unified_module_kernel.snapshot.v1",
