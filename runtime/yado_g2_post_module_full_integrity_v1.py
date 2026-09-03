@@ -171,6 +171,7 @@ checks={
  'python_cache_clean':not pycache,
  'openapi_canonical_plan_only':core.get('openapi_contract_capability_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('openapi_contract_capability_v1',{}).get('network_execute') is False and API in active,
  'openapi_readonly_executor_canonical':core.get('openapi_readonly_executor_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('openapi_readonly_executor_v1',{}).get('read_only_only') is True and API_EXEC in active,
+ 'evolutionary_genome_controller_canonical':core.get('evolutionary_genome_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('evolutionary_genome_v1',{}).get('automatic_canonical_promotion') is False and GENOME in active,
  'module_assembly_pass':assembly.get('status')=='PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1' and assembly.get('active_module_count')==len(active) and assembly.get('covered_module_count')==len(active) and assembly.get('functional_assembly_pass') is True and assembly.get('canonical_ready') is True,
  'frontier_preserved':head.get('current_frontier')=='KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1' and ledger.get('open_deficits')==['KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1'],
  'g3_not_started':head.get('g3_genesis_performed') is False and core.get('g3_genesis_performed') is False,
