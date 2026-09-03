@@ -1,0 +1,241 @@
+{
+  "ablations": [
+    {
+      "field": "direction",
+      "h1_accuracy": 0.0,
+      "h2_accuracy": 0.0,
+      "program_digest": "80254165182f21b034fd3b4b58e820ffb855ebf7b126a2ffe622d112e4067e5a",
+      "value": "REVERSE"
+    },
+    {
+      "field": "merge",
+      "h1_accuracy": 0.0,
+      "h2_accuracy": 0.0,
+      "program_digest": "0069fba4c60c4f4e97b2593d817d14201969fcaf5cb96f1be94f94cee5ea9354",
+      "value": "REPLACE"
+    },
+    {
+      "field": "merge",
+      "h1_accuracy": 0.0,
+      "h2_accuracy": 0.0,
+      "program_digest": "563b640e80cf89684476c5037f0115f17dfdfdd3f15db146aa75d16ec179dd74",
+      "value": "INTERSECT"
+    },
+    {
+      "field": "iteration",
+      "h1_accuracy": 0.0,
+      "h2_accuracy": 0.0,
+      "program_digest": "cb664b5876fa00691b500af74b4b30becfdc840b35516feba0e37020140da542",
+      "value": "ONCE"
+    },
+    {
+      "field": "iteration",
+      "h1_accuracy": 0.0,
+      "h2_accuracy": 0.0,
+      "program_digest": "f177f5447e808cb701f3ef05af41ce192a3f2cebc4eeea937612de61fb708f6a",
+      "value": "TWICE"
+    },
+    {
+      "field": "iteration",
+      "h1_accuracy": 0.0,
+      "h2_accuracy": 0.0,
+      "program_digest": "cf7c67315013e9354212c7fc2e29b07b9cc548c479a8a97598b49fe2ab53fba9",
+      "value": "THRICE"
+    },
+    {
+      "field": "seed",
+      "h1_accuracy": 0.0,
+      "h2_accuracy": 0.0,
+      "program_digest": "1875d31aa6012d89425f191f32e67866489c3433672b561f7f9ec4121b21ec80",
+      "value": "RELATION_LEFT_DOMAIN"
+    },
+    {
+      "field": "seed",
+      "h1_accuracy": 0.0,
+      "h2_accuracy": 0.0,
+      "program_digest": "f36b62a3e7ae1b70acd5f93e5269857d74249df980ef26754a0e557150201d1e",
+      "value": "RELATION_RIGHT_DOMAIN"
+    }
+  ],
+  "architecture_mutation": false,
+  "canonical_head_digest_before": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+  "canonical_mutation": false,
+  "checks": {
+    "formal_generation_unchanged": true,
+    "fresh_depth_exceeds_original_holdout": true,
+    "fresh_domains_new": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "gene_survives_additional_shadow_generation": true,
+    "h1_exact_gene_digest_inherited": true,
+    "h1_fresh_exact": true,
+    "h2_exact_gene_digest_inherited": true,
+    "h2_fresh_exact": true,
+    "h2_parent_is_h1": true,
+    "no_operator_resynthesis_call": true,
+    "shallow_alternatives_fail": true,
+    "source_blind_pass": true,
+    "source_gene_not_canonical_active": true,
+    "source_gene_shadow_only": true,
+    "structural_ablation_causes_drop": true
+  },
+  "fitness": {
+    "best_structural_ablation_accuracy": 0.0,
+    "h1_fresh_accuracy": 1.0,
+    "h2_fresh_accuracy": 1.0,
+    "shallow_baselines": [
+      {
+        "h1_accuracy": 0.0,
+        "h2_accuracy": 0.0,
+        "iteration": "ONCE"
+      },
+      {
+        "h1_accuracy": 0.0,
+        "h2_accuracy": 0.0,
+        "iteration": "TWICE"
+      },
+      {
+        "h1_accuracy": 0.0,
+        "h2_accuracy": 0.0,
+        "iteration": "THRICE"
+      }
+    ]
+  },
+  "fresh_cases": {
+    "h1_case_count": 6,
+    "h1_domains": [
+      "SUPPLYCHAIN",
+      "OWNERSHIP",
+      "EVENTFLOW",
+      "ROUTING",
+      "DEPENDENCY2",
+      "CAUSAL2"
+    ],
+    "h1_node_range": [
+      13,
+      18
+    ],
+    "h2_case_count": 6,
+    "h2_domains": [
+      "PROVENANCE",
+      "GENEALOGY2",
+      "PIPELINE2",
+      "AUTHZFLOW",
+      "WORKGRAPH",
+      "STATEFLOW"
+    ],
+    "h2_node_range": [
+      19,
+      24
+    ]
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "inheritance_lineage": [
+    {
+      "genome_digest": "aeb7db54e8a94ec58d6cd064c7aaff9b9f613cfe20e77df2866c617ef9514cd1",
+      "inheritance_mode": "EXACT_SHADOW_GENE_COPY",
+      "inherited_gene": {
+        "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+        "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+        "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+        "gene_scope": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "heritage": [
+          "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+          "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+          "GENE-LOGIC-BOOLEAN-DNF-V1",
+          "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+        ],
+        "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+        "novel_gene": true,
+        "operator_program": {
+          "direction": "FORWARD",
+          "iteration": "UNTIL_STABLE",
+          "merge": "UNION",
+          "novel_gene": true,
+          "output": "STATE",
+          "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+          "search_space_size": 72,
+          "seed": "START",
+          "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "train_accuracy": 1.0
+        },
+        "promotion_state": "SHADOW_ONLY",
+        "schema": "yado.g2.self_synthesized_operator_gene.v1",
+        "trigger": {
+          "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+          "no_progress_ticks": 20,
+          "source": "TEMPORAL_STALL_SIGNAL",
+          "tick_id": 21
+        }
+      },
+      "inherited_gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+      "inherited_gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+      "lineage_parent_genome_digest": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.shadow_inherited_novel_gene_genome.v1",
+      "shadow_generation": "H1"
+    },
+    {
+      "genome_digest": "81e4c6a215af25003514ab31a79ff04ba832b7f37dd8aaa19501ad756a27154c",
+      "inheritance_mode": "EXACT_SHADOW_GENE_COPY",
+      "inherited_gene": {
+        "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+        "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+        "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+        "gene_scope": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "heritage": [
+          "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+          "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+          "GENE-LOGIC-BOOLEAN-DNF-V1",
+          "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+        ],
+        "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+        "novel_gene": true,
+        "operator_program": {
+          "direction": "FORWARD",
+          "iteration": "UNTIL_STABLE",
+          "merge": "UNION",
+          "novel_gene": true,
+          "output": "STATE",
+          "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+          "search_space_size": 72,
+          "seed": "START",
+          "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "train_accuracy": 1.0
+        },
+        "promotion_state": "SHADOW_ONLY",
+        "schema": "yado.g2.self_synthesized_operator_gene.v1",
+        "trigger": {
+          "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+          "no_progress_ticks": 20,
+          "source": "TEMPORAL_STALL_SIGNAL",
+          "tick_id": 21
+        }
+      },
+      "inherited_gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+      "inherited_gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+      "lineage_parent_genome_digest": "aeb7db54e8a94ec58d6cd064c7aaff9b9f613cfe20e77df2866c617ef9514cd1",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.shadow_inherited_novel_gene_genome.v1",
+      "shadow_generation": "H2"
+    }
+  ],
+  "receipt_sha256": "2e48c1e35e1322d5bee6f6ecc6280a729abb99b19a8e7c56187fc30e22e87a10",
+  "schema": "yado.g2.novel_gene_inheritance.v1",
+  "semantic_boundary": "BOUNDED SHADOW INHERITANCE TEST. A PREVIOUSLY SELF-SYNTHESIZED NOVEL GENE IS COPIED WITHOUT RE-SYNTHESIS THROUGH H1 AND H2 AND MUST RETAIN CAUSAL FRESH PERFORMANCE. THIS DOES NOT PROMOTE THE GENE OR PROVE OPEN-ENDED SELF-EVOLUTION.",
+  "source_blind_receipt_sha256": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b",
+  "source_gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+  "source_gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+  "status": "PASS_SHADOW_G2_NOVEL_GENE_INHERITANCE_V1"
+}
