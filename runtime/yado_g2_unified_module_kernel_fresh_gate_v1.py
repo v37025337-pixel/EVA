@@ -114,12 +114,6 @@ run(CAP_AUDIT,{'stream_id':'AUDIT'},lambda x:x.get('core_audit',{}).get('pass') 
 corpus=kernel.high_scale.corpus['cases']
 low=next((x for x in corpus if kernel.high_scale.cardinality(x)<kernel.high_scale.activation_min_size),None)
 high=next((x for x in corpus if kernel.high_scale.cardinality(x)>=kernel.high_scale.activation_min_size),None)
-if high is None and corpus:
-    # Canonical V5 was admitted on fresh synthetic route probes spanning cardinality 1..18.
-    # The frozen training/evidence corpus itself contains only cardinality 1..3, so construct
-    # a fresh high-route probe without changing the bound model or route semantics.
-    high=copy.deepcopy(corpus[0])
-    high['x']['source_count']=(kernel.high_scale.activation_min_size+2)/kernel.high_scale.normalization_denominator
 # The frozen selection corpus is not required to contain a current high-scale smoke case.
 # If absent, construct one from registered source IDs without using it for learning or model selection.
 if high is None and len(kernel.high_scale.source_ids)>=kernel.high_scale.activation_min_size:
