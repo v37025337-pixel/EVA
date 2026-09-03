@@ -1,0 +1,52 @@
+name: YADO G2 Self Rewrite Bootstrap Recovery V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-self-rewrite-bootstrap-recovery-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-self-rewrite-bootstrap-recovery-v1
+  cancel-in-progress: true
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before bootstrap recovery
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile bootstrap recovery
+        run: python -m py_compile runtime/yado_g2_autonomous_self_rewrite_bootstrap_recovery_v1.py
+      - name: Let YADO select a minimal controller compile repair
+        run: python runtime/yado_g2_autonomous_self_rewrite_bootstrap_recovery_v1.py
+      - name: Verify repaired controller compiles
+        run: python -m py_compile runtime/yado_g2_autonomous_self_rewrite_v1.py
+      - name: Canonical guard after bootstrap recovery
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist recovery and trigger controller
+        run: |
+          python - <<'PY'
+          import json,pathlib,os
+          p=pathlib.Path("architecture/yado-kernel-autonomous-self-rewrite-v1-request.json")
+          r=json.loads(p.read_text())
+          r["bootstrap_recovery_trigger"]=(r.get("bootstrap_recovery_trigger") or 0)+1
+          r["bootstrap_recovery_source_run"]=os.environ.get("GITHUB_RUN_ID")
+          r["host_solution_hint"]=None
+          r["target_path"]=None
+          p.write_text(json.dumps(r,indent=2,sort_keys=True)+"\n")
+          PY
+          git config user.name "YADO Bootstrap Recovery"
+          git config user.email "actions@users.noreply.github.com"
+          git add runtime/yado_g2_autonomous_self_rewrite_v1.py candidates/kernel-self-generated/g2-autonomous-self-rewrite-bootstrap-recovery-v1.json architecture/yado-kernel-autonomous-self-rewrite-v1-request.json
+          git commit -m "YADO bootstrap-recover self-rewrite controller and continue [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
