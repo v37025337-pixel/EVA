@@ -22,7 +22,7 @@ jobs:
       - name: Canonical guard
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Compile unified module kernel
-        run: python -m py_compile runtime/yado_g2_integrated_execution_fabric_v1.py runtime/yado_g2_unified_module_kernel_v1.py runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
+        run: python -m py_compile runtime/yado_g2_unified_execution_fabric_v1.py runtime/yado_g2_unified_module_kernel_v1.py runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
       - name: Run all-module fresh gate
         run: python runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
       - name: Persist shadow module assembly evidence
