@@ -219,10 +219,11 @@ ctx_actual=sha(REPO/'runtime/yado_g2_contextual_stream_capability_adapter_v1.py'
 binding_checks={
  'context_memory_source_hash_exact':bool(ctx_expected) and ctx_expected==ctx_actual,
  'high_scale_binding_instantiated':kernel.high_scale.snapshot().get('binding_digest') is not None,
- 'canonical_unified_fabric_active':CAP_FABRIC in active and core_manifest.get('execution_fabric_v2',{}).get('status')=='CANONICAL_ACTIVE',
+ 'canonical_unified_fabric_active':CAP_FABRIC in active and core_manifest.get('execution_fabric_v3',{}).get('status')=='CANONICAL_ACTIVE',
  'canonical_openapi_active':CAP_API in active and core_manifest.get('openapi_contract_capability_v1',core_manifest.get('openapi_capability_v1',{})).get('status','CANONICAL_ACTIVE')=='CANONICAL_ACTIVE',
  'canonical_openapi_readonly_executor_active':CAP_API_EXEC in active and core_manifest.get('openapi_readonly_executor_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('openapi_readonly_executor_v1',{}).get('read_only_only') is True,
  'canonical_evolutionary_genome_active':CAP_GENOME in active and core_manifest.get('evolutionary_genome_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('evolutionary_genome_v1',{}).get('automatic_canonical_promotion') is False,
+ 'canonical_temporal_kernel_embedded':core_manifest.get('cognitive_temporal_kernel_v1',{}).get('status')=='CANONICAL_EMBEDDED' and core_manifest.get('cognitive_temporal_kernel_v1',{}).get('separate_active_capability') is False,
  'api_network_execution_disabled':api_smoke.get('pass') is True,
 }
 pycache=subprocess_result=None
