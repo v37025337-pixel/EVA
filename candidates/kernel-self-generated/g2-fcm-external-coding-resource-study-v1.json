@@ -1,0 +1,374 @@
+{
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "catalog": {
+    "model_count": 193,
+    "no_key_provider_keys": [
+      "kilo",
+      "llm7"
+    ],
+    "provider_count": 22,
+    "providers": {
+      "cerebras": {
+        "model_count": 2,
+        "models_var": "cerebras",
+        "name": "Cerebras",
+        "no_key_needed": false,
+        "provider_key": "cerebras",
+        "quota": "Free \u00b7 generous dev tier",
+        "quotaCode": "free",
+        "url": "https://api.cerebras.ai/v1/chat/completions"
+      },
+      "cloudflare": {
+        "model_count": 17,
+        "models_var": "cloudflare",
+        "name": "Cloudflare AI",
+        "no_key_needed": false,
+        "provider_key": "cloudflare",
+        "quota": "Free \u00b7 10k neurons/day",
+        "quotaCode": "limited",
+        "url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1/chat/completions"
+      },
+      "codestral": {
+        "model_count": 1,
+        "models_var": "codestral",
+        "name": "Codestral",
+        "no_key_needed": false,
+        "provider_key": "codestral",
+        "quota": "Free \u00b7 30 req/min, 2000/day",
+        "quotaCode": "free",
+        "url": "https://api.mistral.ai/v1/chat/completions"
+      },
+      "googleai": {
+        "model_count": 10,
+        "models_var": "googleai",
+        "name": "Google AI",
+        "no_key_needed": false,
+        "provider_key": "googleai",
+        "quota": "Free \u00b7 Gemini quotas vary by model",
+        "quotaCode": "free",
+        "url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+      },
+      "groq": {
+        "model_count": 5,
+        "models_var": "groq",
+        "name": "Groq",
+        "no_key_needed": false,
+        "provider_key": "groq",
+        "quota": "Free \u00b7 ~30-50 RPM per model",
+        "quotaCode": "free",
+        "url": "https://api.groq.com/openai/v1/chat/completions"
+      },
+      "kilo": {
+        "model_count": 2,
+        "models_var": "kilo",
+        "name": "Kilo",
+        "no_key_needed": true,
+        "provider_key": "kilo",
+        "quota": "Free \u00b7 no key needed",
+        "quotaCode": "free",
+        "url": "https://api.kilo.ai/api/gateway/chat/completions"
+      },
+      "llm7": {
+        "model_count": 5,
+        "models_var": "llm7",
+        "name": "LLM7",
+        "no_key_needed": true,
+        "provider_key": "llm7",
+        "quota": "Free \u00b7 no key needed",
+        "quotaCode": "limited",
+        "url": "https://api.llm7.io/v1/chat/completions"
+      },
+      "mistral": {
+        "model_count": 6,
+        "models_var": "mistral",
+        "name": "Mistral LP",
+        "no_key_needed": false,
+        "provider_key": "mistral",
+        "quota": "Free Experiment plan",
+        "quotaCode": "free",
+        "url": "https://api.mistral.ai/v1/chat/completions"
+      },
+      "novita": {
+        "model_count": 0,
+        "models_var": "novita",
+        "name": "Novita AI",
+        "no_key_needed": false,
+        "provider_key": "novita",
+        "quota": "No zero-price models as of 2026-08-13",
+        "quotaCode": "limited",
+        "url": "https://api.novita.ai/openai/v1/chat/completions"
+      },
+      "nvidia": {
+        "model_count": 13,
+        "models_var": "nvidiaNim",
+        "name": "NVIDIA NIM",
+        "no_key_needed": false,
+        "provider_key": "nvidia",
+        "quota": "Free \u00b7 1000 req/month",
+        "quotaCode": "free",
+        "url": "https://integrate.api.nvidia.com/v1/chat/completions"
+      },
+      "ollama-cloud": {
+        "model_count": 17,
+        "models_var": "ollamaCloud",
+        "name": "Ollama Cloud",
+        "no_key_needed": false,
+        "provider_key": "ollama-cloud",
+        "quota": "Free plan \u00b7 session + weekly caps",
+        "quotaCode": "free",
+        "url": "https://ollama.com/v1/chat/completions"
+      },
+      "opencode-zen": {
+        "model_count": 5,
+        "models_var": "opencodeZen",
+        "name": "OpenCode Zen",
+        "no_key_needed": false,
+        "provider_key": "opencode-zen",
+        "quota": "Free \u00b7 Zen key required",
+        "quotaCode": "free",
+        "url": "https://opencode.ai/zen/v1/chat/completions",
+        "zen_only": true
+      },
+      "openrouter": {
+        "model_count": 14,
+        "models_var": "openrouter",
+        "name": "OpenRouter",
+        "no_key_needed": false,
+        "provider_key": "openrouter",
+        "quota": "50 free req/day \u00b7 1000 with $10 credit",
+        "quotaCode": "limited",
+        "url": "https://openrouter.ai/api/v1/chat/completions"
+      },
+      "ovhcloud": {
+        "model_count": 10,
+        "models_var": "ovhcloud",
+        "name": "OVHcloud AI",
+        "no_key_needed": false,
+        "provider_key": "ovhcloud",
+        "quota": "Free sandbox \u00b7 2 RPM no key \u00b7 400 RPM with key",
+        "quotaCode": "free",
+        "url": "https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions"
+      },
+      "pollinations": {
+        "model_count": 10,
+        "models_var": "pollinations",
+        "name": "Pollinations AI",
+        "no_key_needed": false,
+        "provider_key": "pollinations",
+        "quota": "Free \u00b7 daily Pollen grants \u00b7 key at enter.pollinations.ai",
+        "quotaCode": "free",
+        "url": "https://gen.pollinations.ai/v1/chat/completions"
+      },
+      "qwen": {
+        "model_count": 23,
+        "models_var": "qwen",
+        "name": "Alibaba DashScope",
+        "no_key_needed": false,
+        "provider_key": "qwen",
+        "quota": "1M tokens/model \u00b7 90 days (Singapore)",
+        "quotaCode": "limited",
+        "url": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions"
+      },
+      "requesty": {
+        "model_count": 12,
+        "models_var": "requesty",
+        "name": "Requesty",
+        "no_key_needed": false,
+        "provider_key": "requesty",
+        "quota": "Free \u00b7 200 req/day \u00b7 no card",
+        "quotaCode": "free",
+        "url": "https://router.requesty.ai/v1/chat/completions"
+      },
+      "routeway": {
+        "model_count": 10,
+        "models_var": "routeway",
+        "name": "Routeway",
+        "no_key_needed": false,
+        "provider_key": "routeway",
+        "quota": "Free :free models only",
+        "quotaCode": "free",
+        "url": "https://api.routeway.ai/v1/chat/completions"
+      },
+      "sambanova": {
+        "model_count": 6,
+        "models_var": "sambanova",
+        "name": "SambaNova",
+        "no_key_needed": false,
+        "provider_key": "sambanova",
+        "quota": "Small dev tier \u00b7 light use",
+        "quotaCode": "limited",
+        "url": "https://api.sambanova.ai/v1/chat/completions"
+      },
+      "scaleway": {
+        "model_count": 15,
+        "models_var": "scaleway",
+        "name": "Scaleway",
+        "no_key_needed": false,
+        "provider_key": "scaleway",
+        "quota": "1M free tokens",
+        "quotaCode": "limited",
+        "url": "https://api.scaleway.ai/v1/chat/completions"
+      },
+      "siliconflow": {
+        "model_count": 3,
+        "models_var": "siliconflow",
+        "name": "SiliconFlow",
+        "no_key_needed": false,
+        "provider_key": "siliconflow",
+        "quota": "Free \u00b7 3 models @ $0 \u00b7 1000 RPM",
+        "quotaCode": "free",
+        "url": "https://api.siliconflow.cn/v1/chat/completions"
+      },
+      "zai": {
+        "model_count": 7,
+        "models_var": "zai",
+        "name": "ZAI",
+        "no_key_needed": false,
+        "provider_key": "zai",
+        "quota": "Free \u00b7 Flash models only",
+        "quotaCode": "free",
+        "url": "https://api.z.ai/api/coding/paas/v4/chat/completions"
+      }
+    }
+  },
+  "checks": {
+    "canonical_mutation_false": true,
+    "model_catalog_parsed": true,
+    "no_key_candidates_discovered": true,
+    "no_user_secrets_used": true,
+    "provider_catalog_parsed": true,
+    "required_upstream_text_fetched": true,
+    "third_party_code_not_executed": true
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "integration_decision": "SHADOW_CODING_RESOURCE_CANDIDATE_AVAILABLE",
+  "live_no_key_probes": [
+    {
+      "declared_ctx": "180k",
+      "declared_swe_score": "78.0%",
+      "declared_tier": "S+",
+      "model_id": "minimax-m2.7",
+      "probe": {
+        "attempted": true,
+        "http_status": 200,
+        "latency_seconds": 3.0173,
+        "response_digest": "cd809064d90c4b7e75feb52c1f4927055dea83617bd0c90a1f7c09605c96f054",
+        "response_json": true,
+        "synthetic_coding_check_pass": true
+      },
+      "provider_key": "llm7",
+      "provider_name": "LLM7",
+      "selection_score": 1.0,
+      "url": "https://api.llm7.io/v1/chat/completions"
+    },
+    {
+      "declared_ctx": "256k",
+      "declared_swe_score": "-",
+      "declared_tier": "A+",
+      "model_id": "kilo-auto/free",
+      "probe": {
+        "attempted": true,
+        "http_status": 200,
+        "latency_seconds": 1.2912,
+        "response_digest": "ac7b8377a00c209da44fd25d93af726f32a45fa85090afe0fa006b648082ce6a",
+        "response_json": true,
+        "synthetic_coding_check_pass": true
+      },
+      "provider_key": "kilo",
+      "provider_name": "Kilo",
+      "selection_score": 0.9775,
+      "url": "https://api.kilo.ai/api/gateway/chat/completions"
+    }
+  ],
+  "package_audit": {
+    "name": "free-coding-models",
+    "runtime_dependencies": {
+      "@tabler/icons-react": "^3.44.0",
+      "@tanstack/react-table": "^8.21.3",
+      "@tanstack/react-virtual": "^3.14.2",
+      "chalk": "^5.6.2",
+      "kandown": "^0.52.0",
+      "socket.io": "^4.8.3",
+      "socket.io-client": "^4.8.3"
+    },
+    "runtime_dependency_count": 7,
+    "script_names": [
+      "build:favicons",
+      "build:web",
+      "check:drift",
+      "dev",
+      "dev:web",
+      "prepack",
+      "preview:web",
+      "start",
+      "test",
+      "test:extended-benchmarks",
+      "test:fcm",
+      "test:fcm:mock",
+      "test:models-dev",
+      "update:benchmarks"
+    ],
+    "security_policy_fetched": true,
+    "telemetry_disable_documented": true,
+    "version": "0.5.81"
+  },
+  "receipt_sha256": "82f64e2b81e05baf3a69e16d298b7ef0acb514009a25ecc7b0b26747a6904370",
+  "schema": "yado.g2.fcm_external_coding_resource_study.v1",
+  "selected_shadow_resource": {
+    "declared_ctx": "180k",
+    "declared_swe_score": "78.0%",
+    "declared_tier": "S+",
+    "model_id": "minimax-m2.7",
+    "probe": {
+      "attempted": true,
+      "http_status": 200,
+      "latency_seconds": 3.0173,
+      "response_digest": "cd809064d90c4b7e75feb52c1f4927055dea83617bd0c90a1f7c09605c96f054",
+      "response_json": true,
+      "synthetic_coding_check_pass": true
+    },
+    "provider_key": "llm7",
+    "provider_name": "LLM7",
+    "selection_score": 1.0,
+    "url": "https://api.llm7.io/v1/chat/completions"
+  },
+  "semantic_boundary": "READ-ONLY STUDY OF AN EXTERNAL OPEN-SOURCE CATALOG PLUS SYNTHETIC NO-KEY CONNECTIVITY PROBES. NO THIRD-PARTY PACKAGE IS INSTALLED OR EXECUTED, NO USER CODE OR SECRETS ARE SENT, AND ANY USABLE MODEL REMAINS A SHADOW RESOURCE CANDIDATE.",
+  "status": "PASS_SHADOW_G2_FCM_EXTERNAL_CODING_RESOURCE_STUDY_V1",
+  "upstream": {
+    "commit": {
+      "commit_message": "update Discord invite code in check-discord-link workflow (#175)",
+      "html_url": "https://github.com/vava-nessa/free-coding-models/commit/f611aaed0026b850323c070959147a82e289910c",
+      "sha": "f611aaed0026b850323c070959147a82e289910c"
+    },
+    "file_evidence": {
+      "README.md": {
+        "bytes": 64057,
+        "sha256": "8ad6ce99125ff66f0c21968b15753f5c2b130c88e6db344ea1e04abbd482c9bf",
+        "status": 200
+      },
+      "SECURITY.md": {
+        "bytes": 3473,
+        "sha256": "c87e03e0e26c13503378498b41b1be7b72a657804b0b51d739cc0e642f46011f",
+        "status": 200
+      },
+      "docs/development.md": {
+        "bytes": 3216,
+        "sha256": "346e0811d78d7245c9d1767286966993de7cf187353a92f0771ca545aabe325e",
+        "status": 200
+      },
+      "package.json": {
+        "bytes": 2948,
+        "sha256": "9c138c8a6435dd7bbd16d280a47c04a7af2998aa9c4a20b63adb0c9df623f67e",
+        "status": 200
+      },
+      "sources.js": {
+        "bytes": 46864,
+        "sha256": "40a8bef06c2ae2b5d926634e50e034c3bd26fbe6b42eff6836d12091ae9a6606",
+        "status": 200
+      }
+    },
+    "repository": "vava-nessa/free-coding-models"
+  }
+}
