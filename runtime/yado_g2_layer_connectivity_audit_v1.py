@@ -99,12 +99,17 @@ except Exception as e:
 api_state={'policy_tree':{'label':'ALLOW'},'contract_registry':{'GET_REPO':{'source_id':'LIVE','source_sha':'layer-audit','method':'GET','path':'/repos/v37025337-pixel/EVA','required':[],'redirect_semantic':False}}}
 plan=core.compile_openapi_contract_plan(api_state,'GET_REPO')
 api_before=fabric.memory_snapshot()['episode_count']
-live=core.execute_openapi_readonly_plan(plan,'https://api.github.com',['api.github.com'],max_bytes=256*1024,timeout=10)
+bridge=core.execute_openapi_readonly_via_fabric(
+    fabric,plan,'https://api.github.com',['api.github.com'],
+    max_bytes=256*1024,timeout=10,stream_id='LAYER-API-BRIDGE'
+)
+live=bridge.get('result',{})
 api_after=fabric.memory_snapshot()['episode_count']
+checks['core_api_fabric_bridge_present']=hasattr(core,'execute_openapi_readonly_via_fabric')
 checks['resource_api_live_read']=live.get('status')==200 and live.get('network_executed') is True
-checks['api_outcome_auto_enters_workspace_memory']=api_after>api_before
+checks['api_outcome_auto_enters_workspace_memory']=api_after>api_before and fabric.memory_snapshot().get('external_evidence_count',0)>=1
 if not checks['api_outcome_auto_enters_workspace_memory']:
-    findings.append({'id':'API_TO_WORKSPACE_MEMORY_GAP','severity':'HIGH','evidence':{'before':api_before,'after':api_after,'network_status':live.get('status')}})
+    findings.append({'id':'API_TO_WORKSPACE_MEMORY_GAP','severity':'HIGH','evidence':{'before':api_before,'after':api_after,'network_status':live.get('status'),'external_evidence_count':fabric.memory_snapshot().get('external_evidence_count')}})
 
 # Unified fabric dispatch of API executor.
 try:
