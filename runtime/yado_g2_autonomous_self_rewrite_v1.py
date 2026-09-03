@@ -13,6 +13,7 @@ from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8Externa
 TASK=REPO/'architecture/yado-kernel-autonomous-self-improvement-v1-request.json'
 FCM=REPO/'candidates/kernel-self-generated/g2-fcm-external-coding-resource-study-v1.json'
 OUT=REPO/'candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json'
+CORE=REPO/'canonical/yado-unified-core-v1.json'
 CAND_DIR=REPO/'candidates/g2-self-evolution'
 
 def canon(o): return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -45,23 +46,29 @@ def token_set(s):
 def select_target(priority):
     query=' '.join([str(priority.get('code','')),str(priority.get('area','')),str(priority.get('recommended_action',''))])
     toks=token_set(query)
+    manifest=load(CORE)
+    active=list(manifest.get('active_runtime_sources') or [])
     candidates=[]
-    for p in sorted(ROOT.glob('yado_*.py')):
+    for rel in active:
+        if not str(rel).startswith('runtime/') or not str(rel).endswith('.py'):
+            continue
+        p=REPO/rel
         name=p.name.lower()
         if any(x in name for x in ('self_audit','autonomous_self_improvement_task','autonomous_self_rewrite','canonical_invariant_guard','reconstruct')):
             continue
+        if not p.exists(): continue
         try: src=p.read_text(encoding='utf-8')
         except Exception: continue
         if len(src)>180000: continue
         low=src.lower()
         name_score=sum(8 for t in toks if t in name)
         body_score=sum(min(low.count(t),12) for t in toks)
-        area_bonus=12 if str(priority.get('area'))=='RESOURCE_AND_EVIDENCE' and any(x in name for x in ('resource','external','evidence')) else 0
+        area_bonus=12 if str(priority.get('area'))=='RESOURCE_AND_EVIDENCE' and any(x in name for x in ('resource','external','evidence','openapi','scientific')) else 0
         score=name_score+body_score+area_bonus
         if score>0:
             candidates.append({'path':str(p.relative_to(REPO)),'score':score,'sha256':fsha(p),'bytes':len(src.encode()),'source':src})
     candidates.sort(key=lambda x:(-x['score'],x['path']))
-    if not candidates: raise RuntimeError('NO_RELEVANT_RUNTIME_TARGET')
+    if not candidates: raise RuntimeError('NO_RELEVANT_ACTIVE_RUNTIME_TARGET')
     return candidates[0],[{k:v for k,v in x.items() if k!='source'} for x in candidates[:10]]
 
 def call_model(endpoint,model,prompt,timeout=55):
@@ -90,6 +97,21 @@ def parse_json_object(text):
         a=s.find('{'); b=s.rfind('}')
         if a>=0 and b>a: return json.loads(s[a:b+1])
         raise
+
+def apply_patches(parent_src,patches):
+    out=parent_src
+    if not isinstance(patches,list) or not (1<=len(patches)<=3):
+        raise ValueError('PATCH_COUNT')
+    for i,p in enumerate(patches):
+        if not isinstance(p,dict): raise ValueError('PATCH_OBJECT')
+        find=str(p.get('find') or '')
+        repl=str(p.get('replace') or '')
+        if not find or len(find)>5000 or len(repl)>9000:
+            raise ValueError('PATCH_SIZE')
+        if out.count(find)!=1:
+            raise ValueError('PATCH_FIND_NOT_UNIQUE_'+str(i))
+        out=out.replace(find,repl,1)
+    return out
 
 def static_eval(parent_src,new_src,target_path):
     checks={}
@@ -144,7 +166,7 @@ prompt=(
   'YADO selected its own next improvement priority. Propose a SHADOW rewrite of exactly one already-selected runtime file.\n'
   'Do not choose a different file. Do not add new import roots. Do not add eval, exec, subprocess, secrets, credentials, or external side effects beyond behavior already present. '
   'Preserve existing safety checks and existing successful behavior. The rewrite should directly improve the kernel-selected priority, not merely rename variables or comments. '
-  'Return JSON with exactly these keys: target_path, rationale, new_source.\n\n'
+  'Return JSON with exactly these keys: target_path, rationale, patches. patches must be a list of 1 to 3 objects, each with exact-string keys find and replace. Keep each patch focused and small; do not return the whole file unless the changed region itself is the whole file.\n\n'
   'KERNEL OBJECTIVE:\n'+json.dumps(objective,sort_keys=True,default=str)+'\n\n'
   'TARGET PATH:\n'+target_path+'\n\n'
   'PARENT SOURCE SHA256:\n'+target['sha256']+'\n\n'
@@ -158,12 +180,13 @@ for row in probes[:2]:
     if res.get('ok'):
         try:
             obj=parse_json_object(res.get('content',''))
-            new_src=str(obj.get('new_source') or '')
             same_target=(obj.get('target_path')==target_path)
+            patches=obj.get('patches')
+            new_src=apply_patches(parent_src,patches) if same_target else ''
             ev=static_eval(parent_src,new_src,target_path) if same_target and new_src else {'score':0.0,'checks':{'same_target':False}}
             ev.setdefault('checks',{})['same_target']=same_target
             if not same_target: ev['score']=0.0
-            entry.update({'parsed':True,'rationale':str(obj.get('rationale') or '')[:3000],'new_source':new_src,'evaluation':ev})
+            entry.update({'parsed':True,'rationale':str(obj.get('rationale') or '')[:3000],'patch_count':len(patches or []),'new_source':new_src,'evaluation':ev})
         except Exception as e:
             entry.update({'parsed':False,'parse_error':type(e).__name__+':'+str(e)[:500],'evaluation':{'score':0.0,'checks':{}}})
     else:
@@ -213,7 +236,7 @@ report={
  'external_resources_used':[{'provider_key':x['provider_key'],'model_id':x['model_id'],'url':x['url']} for x in probes[:2]],
  'proposals':[{
    'provider_key':p['provider_key'],'model_id':p['model_id'],'skill_id':p.get('skill_id'),
-   'response':p.get('response'),'parsed':p.get('parsed'),'rationale':p.get('rationale'),
+   'response':p.get('response'),'parsed':p.get('parsed'),'parse_error':p.get('parse_error'),'rationale':p.get('rationale'),'patch_count':p.get('patch_count'),
    'evaluation':p.get('evaluation'),
    'candidate_source_sha256':hashlib.sha256(p.get('new_source','').encode()).hexdigest() if p.get('new_source') else None
  } for p in proposals],
@@ -233,7 +256,7 @@ OUT.write_text(json.dumps(report,indent=2,sort_keys=True,default=str)+'\n',encod
 print(json.dumps({
  'status':status,'kernel_selected_next_step':report['kernel_selected_next_step'],
  'selected_target':target_path,'target_ranking':ranking[:5],
- 'proposal_scores':[{'provider':p['provider_key'],'score':p['evaluation'].get('score',0.0),'checks':p['evaluation'].get('checks',{})} for p in proposals],
+ 'proposal_scores':[{'provider':p['provider_key'],'score':p['evaluation'].get('score',0.0),'checks':p['evaluation'].get('checks',{}),'response':p.get('response'),'parse_error':p.get('parse_error')} for p in proposals],
  'selected_skill_id':report['selected_skill_id'],'candidate_path':report['candidate_path'],
  'candidate_sha256':report['candidate_sha256'],'canonical_head_unchanged':report['canonical_head_unchanged'],
  'receipt_sha256':report['receipt_sha256']},indent=2,sort_keys=True,default=str))
