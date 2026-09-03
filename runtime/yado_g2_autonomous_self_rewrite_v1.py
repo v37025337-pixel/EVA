@@ -26,7 +26,7 @@ def latest_audit():
     if not xs:
         raise RuntimeError('NO_DEEP_SELF_AUDIT')
     def run_id(p):
-        m=re.search(r'run-(\\d+)\\.json$',p.name)
+        m=re.search(r'run-(\d+)\.json$',p.name)
         return int(m.group(1)) if m else -1
     xs.sort(key=run_id)
     d=load(xs[-1])
