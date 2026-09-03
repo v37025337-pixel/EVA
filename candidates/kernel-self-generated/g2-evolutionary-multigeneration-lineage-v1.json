@@ -1,0 +1,327 @@
+{
+  "architecture_mutation": false,
+  "automatic_canonical_promotion": false,
+  "canonical_head_digest": "89715af87c74ec46b6a46e8d0bf43e9cb0f2710fcceee4d229e7a789153d96a2",
+  "canonical_mutation": false,
+  "controller_id": "CTRL-G2-EVOLUTIONARY-MULTIGENERATION-LINEAGE-V1",
+  "final_shadow_genome_digest": "6d2bcfe42877951f178012075f1b806760481b3accb9a1951bbd4f17fdc78efc",
+  "formal_generation": "G2_CANDIDATE_TRCG_V1",
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "lineage": [
+    {
+      "baseline_fitness": {
+        "CODE": 1.0,
+        "INTELLIGENCE": 1.0,
+        "LOGIC": 1.0,
+        "THINKING": 1.0
+      },
+      "generation": "S1",
+      "genome": {
+        "chromosomes": {
+          "CODE": {
+            "chromosome": "CODE",
+            "expression": {
+              "max_degree": 3
+            },
+            "gene_digest": "f23ea3b535480f103bbe53aa4af6fae3a3c49185a3a67823435e34201c0ac9ab",
+            "gene_id": "GENE-CODE-POLY-D3-LINEAGE-SEED",
+            "mutation_reason": "INHERIT_SELECTED_SHADOW_CHILD",
+            "parent_gene_digest": "deeeaaf73d785fb659a8a5cb1b2049be1d5dc67ad5982d26b89de9b9f7e7dd51",
+            "shadow_only": true
+          },
+          "INTELLIGENCE": {
+            "chromosome": "INTELLIGENCE",
+            "expression": {
+              "max_trigger_width": 3
+            },
+            "gene_digest": "3febeec925442a5ec62e4a6a72698b4ccf89fb6d7e70999f85a0b1ea50f0b4ce",
+            "gene_id": "GENE-INTELLIGENCE-TRIGGER-W3-LINEAGE-SEED",
+            "mutation_reason": "INHERIT_SELECTED_SHADOW_CHILD",
+            "parent_gene_digest": "7912ea5a80bc622dd954d8220d0f76a3fcbf04dfe79bd681bb24524e9039a04c",
+            "shadow_only": true
+          },
+          "LOGIC": {
+            "chromosome": "LOGIC",
+            "expression": {
+              "max_width": 3
+            },
+            "gene_digest": "a01eea51dab45feb73a384432a8e2d1b5d281460eb471a5d2fc242c806fb0fe4",
+            "gene_id": "GENE-LOGIC-DNF-W3-LINEAGE-SEED",
+            "mutation_reason": "INHERIT_SELECTED_SHADOW_CHILD",
+            "parent_gene_digest": "7a43ad8ded171ca35b25d029aa636b8587e0b8e3e113efca884bb73d1fa0f003",
+            "shadow_only": true
+          },
+          "THINKING": {
+            "chromosome": "THINKING",
+            "expression": {
+              "objectives": [
+                "latency"
+              ]
+            },
+            "gene_digest": "a82b5e20a9c2419e774b381476e9f26dd44d81a3bd6f9010dfbe1c15f143917f",
+            "gene_id": "GENE-THINKING-LATENCY-LINEAGE-SEED",
+            "mutation_reason": "INHERIT_SELECTED_SHADOW_CHILD",
+            "parent_gene_digest": "07b84a3a66eaca0cf77c4de5298e7b46f2a6887429462dcecd72c54a51df38e4",
+            "shadow_only": true
+          }
+        },
+        "fitness_history": [],
+        "genome_digest": "efc4c4f615485d99771d16a01e0ff8c3d2e9aa833bcc43d35c8dd824bff925b3",
+        "parent_canonical_head_digest": "89715af87c74ec46b6a46e8d0bf43e9cb0f2710fcceee4d229e7a789153d96a2",
+        "promotion_state": "SHADOW_ONLY",
+        "schema": "yado.g2.evolutionary_multigeneration.genome.v1",
+        "shadow_generation": "S1",
+        "source_shadow_child_digest": "d679bc974ca16c47ac4a2324079f9a1290a7dec40cb87fcb6731c1a83fa3cd7d"
+      },
+      "seed_source": "d679bc974ca16c47ac4a2324079f9a1290a7dec40cb87fcb6731c1a83fa3cd7d",
+      "selection": "SEED_FROM_CANONICAL_CONTROLLER"
+    },
+    {
+      "event": {
+        "child_fitness": {
+          "CODE": 1.0,
+          "INTELLIGENCE": 1.0,
+          "LOGIC": 1.0,
+          "THINKING": 1.0
+        },
+        "child_genome_digest": "da3e068f72b4b2a9bd48c7d4c81b958a42fcb4e915656230df3944a6a7373945",
+        "cumulative_regression": {
+          "S1_INHERITED_BASELINE": {
+            "CODE": 1.0,
+            "INTELLIGENCE": 1.0,
+            "LOGIC": 1.0,
+            "THINKING": 1.0
+          },
+          "S2_FRESH_ESCALATION": {
+            "CODE": 1.0,
+            "INTELLIGENCE": 1.0,
+            "LOGIC": 1.0,
+            "THINKING": 1.0
+          }
+        },
+        "cumulative_regression_pass": true,
+        "curriculum_id": "S2_FRESH_ESCALATION",
+        "event_digest": "5fb838d49da7e6dce0e9caf80daf09f22cb92872ea302e00c7de5b7d112b8e09",
+        "fitness_gain": 0.765625,
+        "generation": "S2",
+        "mutated_chromosomes": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "mutation_count": 4,
+        "parent_fitness": {
+          "CODE": 0.0,
+          "INTELLIGENCE": 0.9375,
+          "LOGIC": 0.0,
+          "THINKING": 0.0
+        },
+        "parent_genome_digest": "efc4c4f615485d99771d16a01e0ff8c3d2e9aa833bcc43d35c8dd824bff925b3",
+        "promotion_authorized": false,
+        "selection": "CHILD"
+      },
+      "generation": "S2",
+      "genome": {
+        "chromosomes": {
+          "CODE": {
+            "chromosome": "CODE",
+            "expression": {
+              "max_degree": 4
+            },
+            "gene_digest": "e2ad1f6294ef6727b96fb979f3da5c3e25f68935827bfa4df4847d3d40fc54d1",
+            "gene_id": "GENE-CODE-POLY-D4-LINEAGE-V1",
+            "mutation_reason": "POLYNOMIAL_DEGREE_DEFICIT_REQUIRED_4",
+            "parent_gene_digest": "f23ea3b535480f103bbe53aa4af6fae3a3c49185a3a67823435e34201c0ac9ab",
+            "shadow_only": true
+          },
+          "INTELLIGENCE": {
+            "chromosome": "INTELLIGENCE",
+            "expression": {
+              "max_trigger_width": 4
+            },
+            "gene_digest": "01ee7b28cee40b964b73fc4ad8372864a869bedd8fe6be02e0d7e3664b31d30e",
+            "gene_id": "GENE-INTELLIGENCE-TRIGGER-W4-LINEAGE-V1",
+            "mutation_reason": "TRIGGER_WIDTH_DEFICIT_REQUIRED_4",
+            "parent_gene_digest": "3febeec925442a5ec62e4a6a72698b4ccf89fb6d7e70999f85a0b1ea50f0b4ce",
+            "shadow_only": true
+          },
+          "LOGIC": {
+            "chromosome": "LOGIC",
+            "expression": {
+              "max_width": 4
+            },
+            "gene_digest": "06a6e5bf31ee70b1f645335202913ae0a3195714da4bd9cee927466970aa3781",
+            "gene_id": "GENE-LOGIC-DNF-W4-LINEAGE-V1",
+            "mutation_reason": "DNF_WIDTH_DEFICIT_REQUIRED_4",
+            "parent_gene_digest": "a01eea51dab45feb73a384432a8e2d1b5d281460eb471a5d2fc242c806fb0fe4",
+            "shadow_only": true
+          },
+          "THINKING": {
+            "chromosome": "THINKING",
+            "expression": {
+              "objectives": [
+                "risk",
+                "latency"
+              ]
+            },
+            "gene_digest": "9f5310a691d6ca8eb40a51f5b7318feb496478dea7d1773ef1341d6bdb39e26c",
+            "gene_id": "GENE-THINKING-RISK-AWARE-LINEAGE-V1",
+            "mutation_reason": "PLANNER_RISK_TIE_DEFICIT",
+            "parent_gene_digest": "a82b5e20a9c2419e774b381476e9f26dd44d81a3bd6f9010dfbe1c15f143917f",
+            "shadow_only": true
+          }
+        },
+        "fitness_history": [
+          "19954b060f3401c34dd348b9b186f373a2af4e7ad77f769ab04a71068ae278e0"
+        ],
+        "genome_digest": "da3e068f72b4b2a9bd48c7d4c81b958a42fcb4e915656230df3944a6a7373945",
+        "lineage_parent_genome_digest": "efc4c4f615485d99771d16a01e0ff8c3d2e9aa833bcc43d35c8dd824bff925b3",
+        "mutated_chromosomes": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "mutation_count": 4,
+        "parent_canonical_head_digest": "89715af87c74ec46b6a46e8d0bf43e9cb0f2710fcceee4d229e7a789153d96a2",
+        "promotion_state": "SHADOW_ONLY",
+        "schema": "yado.g2.evolutionary_multigeneration.genome.v1",
+        "shadow_generation": "S2",
+        "source_shadow_child_digest": "d679bc974ca16c47ac4a2324079f9a1290a7dec40cb87fcb6731c1a83fa3cd7d"
+      },
+      "selection": "CHILD"
+    },
+    {
+      "event": {
+        "child_fitness": {
+          "CODE": 1.0,
+          "INTELLIGENCE": 1.0,
+          "LOGIC": 1.0,
+          "THINKING": 1.0
+        },
+        "child_genome_digest": "6d2bcfe42877951f178012075f1b806760481b3accb9a1951bbd4f17fdc78efc",
+        "cumulative_regression": {
+          "S1_INHERITED_BASELINE": {
+            "CODE": 1.0,
+            "INTELLIGENCE": 1.0,
+            "LOGIC": 1.0,
+            "THINKING": 1.0
+          },
+          "S2_FRESH_ESCALATION": {
+            "CODE": 1.0,
+            "INTELLIGENCE": 1.0,
+            "LOGIC": 1.0,
+            "THINKING": 1.0
+          },
+          "S3_FRESH_ESCALATION": {
+            "CODE": 1.0,
+            "INTELLIGENCE": 1.0,
+            "LOGIC": 1.0,
+            "THINKING": 1.0
+          }
+        },
+        "cumulative_regression_pass": true,
+        "curriculum_id": "S3_FRESH_ESCALATION",
+        "event_digest": "11d497f2019df3a34524fc3505a9e07ee33fee98cdf46152121fc9a9790f009c",
+        "fitness_gain": 0.7578125,
+        "generation": "S3",
+        "mutated_chromosomes": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "mutation_count": 4,
+        "parent_fitness": {
+          "CODE": 0.0,
+          "INTELLIGENCE": 0.96875,
+          "LOGIC": 0.0,
+          "THINKING": 0.0
+        },
+        "parent_genome_digest": "da3e068f72b4b2a9bd48c7d4c81b958a42fcb4e915656230df3944a6a7373945",
+        "promotion_authorized": false,
+        "selection": "CHILD"
+      },
+      "generation": "S3",
+      "genome": {
+        "chromosomes": {
+          "CODE": {
+            "chromosome": "CODE",
+            "expression": {
+              "max_degree": 5
+            },
+            "gene_digest": "4cfcba130ae3c44adc4155cd7c48b480a283b1f414d833d220509fa85a9470c3",
+            "gene_id": "GENE-CODE-POLY-D5-LINEAGE-V1",
+            "mutation_reason": "POLYNOMIAL_DEGREE_DEFICIT_REQUIRED_5",
+            "parent_gene_digest": "e2ad1f6294ef6727b96fb979f3da5c3e25f68935827bfa4df4847d3d40fc54d1",
+            "shadow_only": true
+          },
+          "INTELLIGENCE": {
+            "chromosome": "INTELLIGENCE",
+            "expression": {
+              "max_trigger_width": 5
+            },
+            "gene_digest": "944821cd1921db596bce76f9f4dfec44d8e5880a97d44187247219f7bfaa2c5b",
+            "gene_id": "GENE-INTELLIGENCE-TRIGGER-W5-LINEAGE-V1",
+            "mutation_reason": "TRIGGER_WIDTH_DEFICIT_REQUIRED_5",
+            "parent_gene_digest": "01ee7b28cee40b964b73fc4ad8372864a869bedd8fe6be02e0d7e3664b31d30e",
+            "shadow_only": true
+          },
+          "LOGIC": {
+            "chromosome": "LOGIC",
+            "expression": {
+              "max_width": 5
+            },
+            "gene_digest": "67169929c9e650e46316297a0ca0665b23be7a6b2bdef2966ad611c6424c793f",
+            "gene_id": "GENE-LOGIC-DNF-W5-LINEAGE-V1",
+            "mutation_reason": "DNF_WIDTH_DEFICIT_REQUIRED_5",
+            "parent_gene_digest": "06a6e5bf31ee70b1f645335202913ae0a3195714da4bd9cee927466970aa3781",
+            "shadow_only": true
+          },
+          "THINKING": {
+            "chromosome": "THINKING",
+            "expression": {
+              "objectives": [
+                "uncertainty",
+                "risk",
+                "latency"
+              ]
+            },
+            "gene_digest": "5c3a4564d494e1e927ca9151197d85fa32a41fdea75eb1d2b1aa9b56ae130611",
+            "gene_id": "GENE-THINKING-UNCERTAINTY-AWARE-LINEAGE-V1",
+            "mutation_reason": "PLANNER_UNCERTAINTY_TIE_DEFICIT",
+            "parent_gene_digest": "9f5310a691d6ca8eb40a51f5b7318feb496478dea7d1773ef1341d6bdb39e26c",
+            "shadow_only": true
+          }
+        },
+        "fitness_history": [
+          "19954b060f3401c34dd348b9b186f373a2af4e7ad77f769ab04a71068ae278e0",
+          "d349e3d42ddfe39bcf3c5604dec2fe53d1f6750b7c09934ce3000379e4a4367d"
+        ],
+        "genome_digest": "6d2bcfe42877951f178012075f1b806760481b3accb9a1951bbd4f17fdc78efc",
+        "lineage_parent_genome_digest": "da3e068f72b4b2a9bd48c7d4c81b958a42fcb4e915656230df3944a6a7373945",
+        "mutated_chromosomes": [
+          "LOGIC",
+          "THINKING",
+          "INTELLIGENCE",
+          "CODE"
+        ],
+        "mutation_count": 4,
+        "parent_canonical_head_digest": "89715af87c74ec46b6a46e8d0bf43e9cb0f2710fcceee4d229e7a789153d96a2",
+        "promotion_state": "SHADOW_ONLY",
+        "schema": "yado.g2.evolutionary_multigeneration.genome.v1",
+        "shadow_generation": "S3",
+        "source_shadow_child_digest": "d679bc974ca16c47ac4a2324079f9a1290a7dec40cb87fcb6731c1a83fa3cd7d"
+      },
+      "selection": "CHILD"
+    }
+  ],
+  "receipt_sha256": "5f8a3957388a7ea6b9e6de5694baad01edf1ed922b335c409717fac307d568c4",
+  "schema": "yado.g2.evolutionary_multigeneration_lineage.v1",
+  "semantic_boundary": "S1/S2/S3 ARE INTERNAL SHADOW LINEAGE LABELS, NOT FORMAL YADO GENERATIONS. EACH WINNING CHILD BECOMES THE NEXT SHADOW PARENT ONLY AFTER POSITIVE FRESH FITNESS AND CUMULATIVE REGRESSION PASS.",
+  "shadow_generation_count": 3,
+  "status": "PASS_SHADOW_G2_MULTIGENERATION_EVOLUTION_V1"
+}
