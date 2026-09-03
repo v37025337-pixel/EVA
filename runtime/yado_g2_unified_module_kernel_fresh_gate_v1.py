@@ -146,9 +146,10 @@ run(CAP_FABRIC,{'stream_id':'FABRIC-S'},lambda x:x.get('component_id')==CAP_FABR
 api_state={'policy_tree':{'label':'ALLOW'},'contract_registry':{'GET_TEST':{'source_id':'DOC','source_sha':'gate','method':'GET','path':'/test','required':[],'redirect_semantic':False}}}
 run(CAP_API,{'action':'compile_plan','state_section':api_state,'contract_id':'GET_TEST','stream_id':'API-S'},lambda x:x.get('contract_id')=='GET_TEST' and x.get('network_execute') is False)
 run(CAP_API_EXEC,{'action':'component','stream_id':'API-EXEC-S'},lambda x:x.get('component_id')==CAP_API_EXEC and x.get('methods')==['GET','HEAD'] and x.get('credentials_allowed') is False)
+run(CAP_GENOME,{'action':'component','stream_id':'GENOME-S'},lambda x:x.get('component_id')==CAP_GENOME and x.get('automatic_canonical_promotion') is False and x.get('novel_gene_synthesis') is True)
 
 # Mark embedded high-scale IDs and persistent/control nodes covered by the explicit calls above.
-coverage.update({CAP_HS_MODEL,CAP_SCALE_ROUTE,CAP_HS_RUNTIME,CAP_COUNTERMEM,CAP_AUDIT,CAP_FABRIC,CAP_API,CAP_API_EXEC})
+coverage.update({CAP_HS_MODEL,CAP_SCALE_ROUTE,CAP_HS_RUNTIME,CAP_COUNTERMEM,CAP_AUDIT,CAP_FABRIC,CAP_API,CAP_API_EXEC,CAP_GENOME})
 
 # Interaction chain 1: raw representation -> its selected base executor -> shared memory.
 interaction={}
@@ -221,6 +222,7 @@ binding_checks={
  'canonical_unified_fabric_active':CAP_FABRIC in active and core_manifest.get('execution_fabric_v2',{}).get('status')=='CANONICAL_ACTIVE',
  'canonical_openapi_active':CAP_API in active and core_manifest.get('openapi_contract_capability_v1',core_manifest.get('openapi_capability_v1',{})).get('status','CANONICAL_ACTIVE')=='CANONICAL_ACTIVE',
  'canonical_openapi_readonly_executor_active':CAP_API_EXEC in active and core_manifest.get('openapi_readonly_executor_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('openapi_readonly_executor_v1',{}).get('read_only_only') is True,
+ 'canonical_evolutionary_genome_active':CAP_GENOME in active and core_manifest.get('evolutionary_genome_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('evolutionary_genome_v1',{}).get('automatic_canonical_promotion') is False,
  'api_network_execution_disabled':api_smoke.get('pass') is True,
 }
 pycache=subprocess_result=None
