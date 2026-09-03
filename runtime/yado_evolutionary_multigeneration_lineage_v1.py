@@ -246,6 +246,13 @@ class YADOEvolutionaryMultiGenerationLineageV1:
 
     @staticmethod
     def curriculum(index):
+        if index==1:
+            return {
+              'id':'S1_INHERITED_BASELINE',
+              'logic_width':3,'intelligence_width':3,'code_degree':3,
+              'thinking_required_objective':'latency',
+              'code_fn':lambda x:x**3+x+1,
+            }
         if index==2:
             return {
               'id':'S2_FRESH_ESCALATION',
@@ -282,7 +289,12 @@ class YADOEvolutionaryMultiGenerationLineageV1:
     def _thinking_score(cls,genome,curr):
         obj=list(genome['chromosomes']['THINKING']['expression'].get('objectives',[]))
         need=curr['thinking_required_objective']
-        if need=='risk':
+        if need=='latency':
+            stages=[
+              {'stage_id':'A_SLOW','cost':1,'expected_gain':.7,'latency':9,'risk':0,'uncertainty':0},
+              {'stage_id':'Z_FAST','cost':1,'expected_gain':.7,'latency':1,'risk':0,'uncertainty':0},
+            ];want='Z_FAST'
+        elif need=='risk':
             stages=[
               {'stage_id':'A_RISKY','cost':1,'expected_gain':.7,'latency':1,'risk':.9,'uncertainty':0},
               {'stage_id':'Z_SAFE','cost':1,'expected_gain':.7,'latency':1,'risk':.1,'uncertainty':0},
@@ -375,8 +387,11 @@ class YADOEvolutionaryMultiGenerationLineageV1:
 
     def run(self):
         seed,seed_evolution=self.seed()
-        lineage=[{'generation':'S1','genome':seed,'seed_source':seed_evolution['child']['genome_digest'],'selection':'SEED_FROM_CANONICAL_CONTROLLER'}]
-        parent=seed;prior=[]
+        base_curr=self.curriculum(1)
+        base_score=self.evaluate(seed,base_curr)
+        base_pass=all(v>=1.0 for v in base_score.values())
+        lineage=[{'generation':'S1','genome':seed,'seed_source':seed_evolution['child']['genome_digest'],'selection':'SEED_FROM_CANONICAL_CONTROLLER' if base_pass else 'WITHHOLD_SEED','baseline_fitness':base_score}]
+        parent=seed;prior=[base_curr] if base_pass else []
         for idx in (2,3):
             curr=self.curriculum(idx)
             pscore=self.evaluate(parent,curr)
@@ -400,7 +415,7 @@ class YADOEvolutionaryMultiGenerationLineageV1:
             lineage.append({'generation':'S'+str(idx),'genome':child,'event':event,'selection':selected})
             if selected!='CHILD':break
             parent=child;prior.append(curr)
-        success=len(lineage)==3 and all(x.get('selection') in {'SEED_FROM_CANONICAL_CONTROLLER','CHILD'} for x in lineage)
+        success=base_pass and len(lineage)==3 and all(x.get('selection') in {'SEED_FROM_CANONICAL_CONTROLLER','CHILD'} for x in lineage)
         report={
           'schema':'yado.g2.evolutionary_multigeneration_lineage.v1',
           'status':'PASS_SHADOW_G2_MULTIGENERATION_EVOLUTION_V1' if success else 'WITHHOLD_G2_MULTIGENERATION_EVOLUTION_V1',
