@@ -390,6 +390,7 @@ repair_plane['active_components']=list(dict.fromkeys(repair_plane.get('active_co
 repair_plane['responsibilities']=sorted(set(repair_plane.get('responsibilities',[])+['active_patch_source_evidence_binding']))
 
 core['contextual_stream_adapter']['source_sha256']=fsha(CTX_SRC)
+core['contextual_stream_adapter']['candidate_digest']=ctxcand['candidate_digest']
 core['contextual_stream_adapter']['latest_fresh_readmission_evidence_digest']=mem_evidence['evidence_digest']
 core['contextual_stream_adapter']['latest_fresh_readmission_run_id']=run_id
 core['contextual_stream_adapter']['fresh_score']=memory_score
