@@ -1,0 +1,41 @@
+name: YADO G2 Contour Code Patch API Integrity Audit V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-contour-code-patch-api-integrity-audit-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Pre-audit canonical guard
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile audit
+        run: python -m py_compile runtime/yado_g2_contour_code_patch_api_integrity_audit_v1.py
+      - name: Run contour code patch API audit
+        run: python runtime/yado_g2_contour_code_patch_api_integrity_audit_v1.py
+      - name: Persist audit report only
+        run: |
+          git config user.name "YADO G2 Contour Audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add audits/yado-g2-contour-code-patch-api-integrity-audit-v1.json
+          git commit -m "Persist G2 contour code patch API integrity audit V1 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-contour-code-patch-api-integrity-audit-v1-${{ github.run_id }}
+          path: audits/yado-g2-contour-code-patch-api-integrity-audit-v1.json
