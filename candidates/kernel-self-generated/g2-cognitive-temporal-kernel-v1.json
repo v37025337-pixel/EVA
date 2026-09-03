@@ -1,0 +1,525 @@
+{
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "checks": {
+    "api_action_temporally_bound": true,
+    "clock_has_no_open_ticks": true,
+    "different_stream_no_false_predecessor": true,
+    "entity_age_advances": true,
+    "entity_last_used_updates": true,
+    "episode_time_per_stream": true,
+    "global_ticks_monotonic": true,
+    "intelligence_nested_tick_parentage": true,
+    "intelligence_route_execute_pass": true,
+    "intelligence_subcall_predecessor": true,
+    "mechanism_change_required_at_threshold": true,
+    "no_progress_ticks_reach_20": true,
+    "observation_has_logical_tick": true,
+    "predecessor_same_stream": true,
+    "predictions_and_results_bound": true,
+    "progress_resets_no_progress": true,
+    "restore_continues_global_tick": true,
+    "restore_preserves_entity_age": true,
+    "restore_preserves_stream_predecessor": true,
+    "stall_signal_written_to_recurrent_memory": true,
+    "temporal_state_digest_bound": true,
+    "temporal_transitions_in_recurrent_memory": true,
+    "thinking_after_observation_is_later": true,
+    "thinking_memory_feedback_survives_temporal_layer": true,
+    "wall_time_not_causal_order_source": true,
+    "wall_time_recorded": true
+  },
+  "clock_component": {
+    "architecture_mutation": false,
+    "bounded_entities": 512,
+    "bounded_streams": 256,
+    "bounded_tick_records": 1024,
+    "canonical_active": false,
+    "causal_time": true,
+    "component_digest": "59d7c27f4ad526fc5cbd6fa12812484adaba1bd9436501b1bca6c0af2abba631",
+    "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+    "entity_age": true,
+    "episode_time": true,
+    "logical_tick": true,
+    "monotonic_tick": true,
+    "no_progress_ticks": true,
+    "predecessor_tick": true,
+    "schema": "yado.g2.cognitive_temporal_kernel.v1",
+    "semantic_boundary": "LOGICAL TEMPORAL CONTINUITY FOR COGNITIVE EXECUTION. WALL TIME IS EXTERNAL SYNCHRONIZATION METADATA; CAUSAL ORDER IS DEFINED BY MONOTONIC LOGICAL TICKS.",
+    "stall_threshold": 20,
+    "wall_time": true,
+    "wall_time_not_used_for_causal_ordering": true
+  },
+  "evidence": {
+    "api_tick": {
+      "action": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+      "cause": null,
+      "episode_tick": 1,
+      "mechanism_change_required": false,
+      "next_state_digest": "63afbb7adfe248e3a7a3259e1eb05abb9f25886e8705cd19a7673643c5d33aca",
+      "no_progress_ticks": 0,
+      "observed_result_digest": "63afbb7adfe248e3a7a3259e1eb05abb9f25886e8705cd19a7673643c5d33aca",
+      "parent_tick": null,
+      "predecessor_tick": null,
+      "prediction": {
+        "status": 200
+      },
+      "progress_digest": "c03295cbcc0470487d2bb7eab01541d471abc8a2c9d4a1fe2b78cc57f0d6caa1",
+      "schema": "yado.g2.cognitive_tick.v1",
+      "state_digest": "607ee6ed80f322e2aa941e894b1be31290f15bdb42df36aff2cdc2f9685f56a8",
+      "state_projection": {
+        "goal_id": "GOAL-API",
+        "selected_capability": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+        "stream_id": "TIME-API"
+      },
+      "status": "CLOSED",
+      "stream_id": "TIME-API",
+      "tick_digest": "6c649d7c77d89b3b1aa49a69337bd8d8c376281f5b2f92222610e167ad922793",
+      "tick_id": 13,
+      "wall_time_finished": "2026-09-03T12:00:49.024267+00:00",
+      "wall_time_started": "2026-09-03T12:00:48.773587+00:00"
+    },
+    "goal_age": {
+      "after_idle": {
+        "age_ticks": 5,
+        "entity_id": "GOAL-A",
+        "entity_type": "GOAL",
+        "idle_ticks": 4,
+        "tick_created": 1,
+        "tick_last_used": 2,
+        "use_count": 2
+      },
+      "after_reuse": {
+        "age_ticks": 6,
+        "entity_id": "GOAL-A",
+        "entity_type": "GOAL",
+        "idle_ticks": 0,
+        "tick_created": 1,
+        "tick_last_used": 7,
+        "use_count": 3
+      },
+      "initial": {
+        "age_ticks": 2,
+        "entity_id": "GOAL-A",
+        "entity_type": "GOAL",
+        "idle_ticks": 1,
+        "tick_created": 1,
+        "tick_last_used": 2,
+        "use_count": 2
+      }
+    },
+    "intelligence_chain": [
+      {
+        "action": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+        "cause": null,
+        "episode_tick": 1,
+        "mechanism_change_required": false,
+        "next_state_digest": "19687be6bef6d861f5055055fd2d61d156580989c52c69d33d73d2c328be6983",
+        "no_progress_ticks": 0,
+        "observed_result": {
+          "meta": {
+            "operation": "route_execute"
+          },
+          "result": {
+            "order": [
+              "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+            ],
+            "results": {
+              "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2": {
+                "meta": "<DEPTH_LIMIT>",
+                "result": "<DEPTH_LIMIT>",
+                "selected_capability": "<DEPTH_LIMIT>",
+                "temporal": "<DEPTH_LIMIT>"
+              }
+            },
+            "selected": [
+              "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+            ],
+            "status": "PASS"
+          },
+          "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+        },
+        "observed_result_digest": "19687be6bef6d861f5055055fd2d61d156580989c52c69d33d73d2c328be6983",
+        "parent_tick": null,
+        "predecessor_tick": null,
+        "prediction": null,
+        "progress_digest": "19687be6bef6d861f5055055fd2d61d156580989c52c69d33d73d2c328be6983",
+        "schema": "yado.g2.cognitive_tick.v1",
+        "state_digest": "df8f94ef3a78f77891bfd1dc741dc64ab7fbff95a6c6053b3a1c38d0e44867b0",
+        "state_projection": {
+          "goal_id": "GOAL-I",
+          "operation": "route_execute",
+          "selected_capability": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+          "stream_id": "TIME-I"
+        },
+        "status": "CLOSED",
+        "stream_id": "TIME-I",
+        "tick_digest": "f21b56b2052a0830634c8f68364b71e0987a7bdafee2ee8ffb7c2e1120ff7bc6",
+        "tick_id": 11,
+        "wall_time_finished": "2026-09-03T12:00:48.773382+00:00",
+        "wall_time_started": "2026-09-03T12:00:48.772991+00:00"
+      },
+      {
+        "action": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "cause": null,
+        "episode_tick": 2,
+        "mechanism_change_required": false,
+        "next_state_digest": "6bc2586cec66fa1f99ad394b177841cd4a92917eb3fae9271e07c3194420c2ee",
+        "no_progress_ticks": 0,
+        "observed_result": {
+          "meta": {
+            "operation": "predict_symmetric"
+          },
+          "result": "ODD",
+          "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+        },
+        "observed_result_digest": "6bc2586cec66fa1f99ad394b177841cd4a92917eb3fae9271e07c3194420c2ee",
+        "parent_tick": 11,
+        "predecessor_tick": 11,
+        "prediction": null,
+        "progress_digest": "6bc2586cec66fa1f99ad394b177841cd4a92917eb3fae9271e07c3194420c2ee",
+        "schema": "yado.g2.cognitive_tick.v1",
+        "state_digest": "d6f1d12929ffd67a62ab9c1ee49b9b9d7a2cc147960fdd73b41bb39a4df302b4",
+        "state_projection": {
+          "operation": "predict_symmetric",
+          "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "stream_id": "TIME-I"
+        },
+        "status": "CLOSED",
+        "stream_id": "TIME-I",
+        "tick_digest": "c78b7b209623554ac382caed2c56e3a3f3378a1056716ca76fbda97231d891aa",
+        "tick_id": 12,
+        "wall_time_finished": "2026-09-03T12:00:48.773184+00:00",
+        "wall_time_started": "2026-09-03T12:00:48.773075+00:00"
+      }
+    ],
+    "restore": {
+      "after": {
+        "episode_tick": 4,
+        "mechanism_change_required": false,
+        "no_progress_ticks": 0,
+        "parent_tick": null,
+        "predecessor_tick": 7,
+        "tick_digest": "ac6a4c2b4cebd87254154b7cde2d72445e78518a9957870502131660d93a631d",
+        "tick_id": 36
+      },
+      "goal_age": {
+        "age_ticks": 35,
+        "entity_id": "GOAL-A",
+        "entity_type": "GOAL",
+        "idle_ticks": 0,
+        "tick_created": 1,
+        "tick_last_used": 36,
+        "use_count": 4
+      },
+      "last_tick_before": 35
+    },
+    "stall_state": {
+      "episode_tick": 21,
+      "last_progress_digest": "ffc678564ed90ed367195f9d4066cf2c52dfa98659c3d1c0c05cb8027222fdfc",
+      "last_result_digest": "6bc2586cec66fa1f99ad394b177841cd4a92917eb3fae9271e07c3194420c2ee",
+      "last_state_digest": "9aaeaa033ac06e9ebaa4ff49e78a148232f5d1d18e0e419155b90eea35fef17b",
+      "last_tick": 34,
+      "mechanism_change_required": true,
+      "no_progress_ticks": 20,
+      "stream_id": "STALL-1"
+    },
+    "thinking_chain": [
+      {
+        "action": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+        "cause": null,
+        "episode_tick": 1,
+        "mechanism_change_required": false,
+        "next_state_digest": "12b1510be314febed23ff3860103c7a4985cebba1b573ab96546f44916aa4aef",
+        "no_progress_ticks": 0,
+        "observed_result": {
+          "meta": {
+            "memory_feedback_used": false,
+            "operation": "plan"
+          },
+          "result": {
+            "action": "OBS",
+            "expected_confidence": 1.0,
+            "feasible": true,
+            "reason": "TARGET_REACHABLE",
+            "sequence": [
+              "OBS",
+              "DEEP"
+            ],
+            "total_cost": 4.0
+          },
+          "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        },
+        "observed_result_digest": "12b1510be314febed23ff3860103c7a4985cebba1b573ab96546f44916aa4aef",
+        "parent_tick": null,
+        "predecessor_tick": null,
+        "prediction": null,
+        "progress_digest": "12b1510be314febed23ff3860103c7a4985cebba1b573ab96546f44916aa4aef",
+        "schema": "yado.g2.cognitive_tick.v1",
+        "state_digest": "a56710a5d3a4a1e39a5110f9d1f01eff76ade3b932d8e7fbc47b05ad75807fce",
+        "state_projection": {
+          "current_confidence": 0.2,
+          "goal_id": "GOAL-T",
+          "operation": "plan",
+          "remaining_budget": 5,
+          "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+          "stream_id": "TIME-T",
+          "target_confidence": 0.8
+        },
+        "status": "CLOSED",
+        "stream_id": "TIME-T",
+        "tick_digest": "c411e7088d9610bb46ca2eb8d828d93f5bf82aae3eb3b21d2cbfd6df673f15e5",
+        "tick_id": 8,
+        "wall_time_finished": "2026-09-03T12:00:48.771629+00:00",
+        "wall_time_started": "2026-09-03T12:00:48.771443+00:00"
+      },
+      {
+        "action": "OBSERVE_STAGE_OUTCOME",
+        "cause": "EXTERNAL_OR_INTERNAL_OBSERVATION",
+        "episode_tick": 2,
+        "mechanism_change_required": false,
+        "next_state_digest": "0491edf2b8800e866fe90419b0821dbaf49262ad94d627b472c476d82f5eb667",
+        "no_progress_ticks": 0,
+        "observed_result": {
+          "episode_digest": "dee1e88e6faafb37baba1f52c17daf52f91d2387ddf4806efe3619b08674e291",
+          "kind": "STAGE_OUTCOME",
+          "observed_gain": 0.25,
+          "sequence": 17,
+          "stage_id": "OBS",
+          "stream_id": "TIME-T"
+        },
+        "observed_result_digest": "0491edf2b8800e866fe90419b0821dbaf49262ad94d627b472c476d82f5eb667",
+        "parent_tick": null,
+        "predecessor_tick": 8,
+        "prediction": null,
+        "progress_digest": "8662d5d8ce3c3b1bc36d7323dd38073db3ce9066fb87f91cd076e2bd5354a94b",
+        "schema": "yado.g2.cognitive_tick.v1",
+        "state_digest": "8662d5d8ce3c3b1bc36d7323dd38073db3ce9066fb87f91cd076e2bd5354a94b",
+        "state_projection": {
+          "observed_gain": 0.25,
+          "stage_id": "OBS"
+        },
+        "status": "CLOSED",
+        "stream_id": "TIME-T",
+        "tick_digest": "67a5e4ff580c41e6b7d53f6e583ffbcacea63f3f359b01f91154665390b9df36",
+        "tick_id": 9,
+        "wall_time_finished": "2026-09-03T12:00:48.771829+00:00",
+        "wall_time_started": "2026-09-03T12:00:48.771745+00:00"
+      },
+      {
+        "action": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+        "cause": null,
+        "episode_tick": 3,
+        "mechanism_change_required": false,
+        "next_state_digest": "6ee7fb1d3db39b26f3484b3dfe8d9a969b8178c0a24ee4e2f9d6c10bcea324b3",
+        "no_progress_ticks": 0,
+        "observed_result": {
+          "meta": {
+            "feedback_episode_digest": "dee1e88e6faafb37baba1f52c17daf52f91d2387ddf4806efe3619b08674e291",
+            "memory_feedback_used": true,
+            "operation": "auto_feedback_plan"
+          },
+          "result": {
+            "action": "DEEP",
+            "expected_confidence": 1.0,
+            "feasible": true,
+            "reason": "TARGET_REACHABLE",
+            "sequence": [
+              "DEEP"
+            ],
+            "total_cost": 3.0
+          },
+          "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        },
+        "observed_result_digest": "6ee7fb1d3db39b26f3484b3dfe8d9a969b8178c0a24ee4e2f9d6c10bcea324b3",
+        "parent_tick": null,
+        "predecessor_tick": 9,
+        "prediction": null,
+        "progress_digest": "6ee7fb1d3db39b26f3484b3dfe8d9a969b8178c0a24ee4e2f9d6c10bcea324b3",
+        "schema": "yado.g2.cognitive_tick.v1",
+        "state_digest": "269f748c151566148153114252961b134f769c10c2ed19bd7ba863985bd3fe87",
+        "state_projection": {
+          "completed": [
+            "OBS"
+          ],
+          "current_confidence": 0.2,
+          "goal_id": "GOAL-T",
+          "operation": "auto_feedback_plan",
+          "remaining_budget": 5,
+          "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+          "stream_id": "TIME-T",
+          "target_confidence": 0.8
+        },
+        "status": "CLOSED",
+        "stream_id": "TIME-T",
+        "tick_digest": "5926326d5893f20b8ff2a16538c8a34e0a5fe61d079123921a22509951c5cddf",
+        "tick_id": 10,
+        "wall_time_finished": "2026-09-03T12:00:48.772099+00:00",
+        "wall_time_started": "2026-09-03T12:00:48.771924+00:00"
+      }
+    ],
+    "time_a_chain": [
+      {
+        "action": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "cause": null,
+        "episode_tick": 1,
+        "mechanism_change_required": false,
+        "next_state_digest": "6bc2586cec66fa1f99ad394b177841cd4a92917eb3fae9271e07c3194420c2ee",
+        "no_progress_ticks": 0,
+        "observed_result": {
+          "meta": {
+            "operation": "predict_symmetric"
+          },
+          "result": "ODD",
+          "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+        },
+        "observed_result_digest": "6bc2586cec66fa1f99ad394b177841cd4a92917eb3fae9271e07c3194420c2ee",
+        "parent_tick": null,
+        "predecessor_tick": null,
+        "prediction": "ODD",
+        "progress_digest": "0b51c05401f035492da8535e2cdb9689c4c6c8047ad95f06936111ef276798d7",
+        "schema": "yado.g2.cognitive_tick.v1",
+        "state_digest": "cdc21edfa717cfc801b89142fe1892ba1572350602d5e141b2228a85f5615391",
+        "state_projection": {
+          "goal_id": "GOAL-A",
+          "operation": "predict_symmetric",
+          "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "stream_id": "TIME-A"
+        },
+        "status": "CLOSED",
+        "stream_id": "TIME-A",
+        "tick_digest": "742ed3aa55ea0bd67dc1074c5598d8b20a8a7db72ca0efafdda157a58dc5f674",
+        "tick_id": 1,
+        "wall_time_finished": "2026-09-03T12:00:48.770193+00:00",
+        "wall_time_started": "2026-09-03T12:00:48.770068+00:00"
+      },
+      {
+        "action": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "cause": null,
+        "episode_tick": 2,
+        "mechanism_change_required": false,
+        "next_state_digest": "8ffdbb8ebcf3cc5fffbc2f2a8173eb698f08392c4b80f6ce9a9cc576c3e03b98",
+        "no_progress_ticks": 0,
+        "observed_result": {
+          "meta": {
+            "operation": "predict_symmetric"
+          },
+          "result": "EVEN",
+          "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+        },
+        "observed_result_digest": "8ffdbb8ebcf3cc5fffbc2f2a8173eb698f08392c4b80f6ce9a9cc576c3e03b98",
+        "parent_tick": null,
+        "predecessor_tick": 1,
+        "prediction": "EVEN",
+        "progress_digest": "a25ddb4d590838b2292482c115c13da50e74da24deff9f9fbc9b2adc9ddbe360",
+        "schema": "yado.g2.cognitive_tick.v1",
+        "state_digest": "cdc21edfa717cfc801b89142fe1892ba1572350602d5e141b2228a85f5615391",
+        "state_projection": {
+          "goal_id": "GOAL-A",
+          "operation": "predict_symmetric",
+          "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "stream_id": "TIME-A"
+        },
+        "status": "CLOSED",
+        "stream_id": "TIME-A",
+        "tick_digest": "c329b4203a318f18cf1239463806a1c55a039d62945d2df6811673cc02fcabb0",
+        "tick_id": 2,
+        "wall_time_finished": "2026-09-03T12:00:48.770395+00:00",
+        "wall_time_started": "2026-09-03T12:00:48.770311+00:00"
+      }
+    ]
+  },
+  "fabric_component": {
+    "architecture_family": "TYPED_RECURRENT_CAPABILITY_GRAPH",
+    "architecture_mutation": false,
+    "canonical_active": false,
+    "component_digest": "6cee1fd668967144524cd946d29ab82ff2f0745f39ab8836502dabc9bb419579",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+    "dispatches": [
+      "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+      "ALG-BUDGETED-STAGE-POLICY-V1",
+      "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+      "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+      "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+      "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+      "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+      "RESOURCE-PORTFOLIO-V1"
+    ],
+    "network_execution": {
+      "credentials_allowed": false,
+      "enabled": true,
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "read_only_only": true,
+      "redirects_followed": false
+    },
+    "parent_component": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
+    "schema": "yado.g2.unified_execution_fabric.v3",
+    "semantic_boundary": "SHADOW SUCCESSOR OF FABRIC V2 ADDING LOGICAL TEMPORAL CONTINUITY TO CAPABILITY EXECUTION WITHOUT CHANGING FORMAL G2 GENERATION.",
+    "temporal_integration": {
+      "all_capability_execution_ticks": true,
+      "causal_predecessor_chain": true,
+      "entity_age": true,
+      "episode_time_per_stream": true,
+      "no_progress_detection": true,
+      "recurrent_temporal_transition_memory": true,
+      "stage_outcome_ticks": true,
+      "stall_signal_to_memory": true
+    },
+    "temporal_kernel": {
+      "architecture_mutation": false,
+      "bounded_entities": 512,
+      "bounded_streams": 256,
+      "bounded_tick_records": 1024,
+      "canonical_active": false,
+      "causal_time": true,
+      "component_digest": "59d7c27f4ad526fc5cbd6fa12812484adaba1bd9436501b1bca6c0af2abba631",
+      "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+      "entity_age": true,
+      "episode_time": true,
+      "logical_tick": true,
+      "monotonic_tick": true,
+      "no_progress_ticks": true,
+      "predecessor_tick": true,
+      "schema": "yado.g2.cognitive_temporal_kernel.v1",
+      "semantic_boundary": "LOGICAL TEMPORAL CONTINUITY FOR COGNITIVE EXECUTION. WALL TIME IS EXTERNAL SYNCHRONIZATION METADATA; CAUSAL ORDER IS DEFINED BY MONOTONIC LOGICAL TICKS.",
+      "stall_threshold": 20,
+      "wall_time": true,
+      "wall_time_not_used_for_causal_ordering": true
+    }
+  },
+  "formal_generation": "G2_CANDIDATE_TRCG_V1",
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "memory_snapshot": {
+    "episode_count": 70,
+    "external_evidence_count": 1,
+    "fabric_episode_count": 33,
+    "last_episode_digest": "24194b4b1a6e6b6f65d668a6425d5dcdf4448f3c5d7edf5beb499c324ffe090d",
+    "stage_outcome_count": 1,
+    "stream_attempts": {
+      "TIME-T": [
+        "OBS"
+      ]
+    },
+    "temporal": {
+      "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+      "entity_count": 22,
+      "last_tick_digest": "9d2bdd36a29232b5b5bfd58ed8531e9dcc59975e62daec82fae6f0b6528f20a6",
+      "open_tick_count": 0,
+      "record_count": 34,
+      "stream_count": 9,
+      "tick_id": 34
+    },
+    "temporal_stall_signal_count": 1,
+    "temporal_transition_count": 34
+  },
+  "receipt_sha256": "bd0dda04303194ca0a11429421ed480b444a868d8964d72523925735cd16194a",
+  "schema": "yado.g2.cognitive_temporal_kernel.fresh_gate.v1",
+  "semantic_boundary": "FRESH SHADOW TEST OF LOGICAL COGNITIVE TIME. TICKS ESTABLISH ORDER/CAUSAL CONTINUITY BUT DO NOT BY THEMSELVES CLAIM CONSCIOUSNESS OR GENERAL INTELLIGENCE.",
+  "status": "PASS_SHADOW_G2_COGNITIVE_TEMPORAL_KERNEL_V1"
+}
