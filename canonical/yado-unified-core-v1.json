@@ -1,7 +1,7 @@
 {
   "active_patch_registry": {
     "artifact": "canonical/yado-g2-active-patch-registry-v1.json",
-    "registry_digest": "49a5a9ddefe2696e02effcb2eb399c1562027d46b2f34631f4982744ee987efb",
+    "registry_digest": "e9311a0069632a27143d1fea29148afb72c316d533fc8d702209f0f9486c3aa2",
     "status": "CANONICAL_ACTIVE"
   },
   "active_runtime_sources": [
@@ -18,7 +18,6 @@
     "runtime/yado_coverage_pruned_compositional_schema_router_v3.py",
     "runtime/yado_evolution_ledger_v2.py",
     "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py",
-    "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
     "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
     "runtime/yado_g2_openapi_contract_capability_v1.py",
     "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
@@ -34,7 +33,7 @@
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "5e589e3de92aaf78bca56f7d9918f41fbedf679e97c6354c548c4a51525d7ca8",
+  "algorithm_provenance_registry_digest": "f5021dc88733a6f65fb984c8f8f239701e8b91cc091778457e9e380fa59df082",
   "applied_experience_binding": {
     "application_scope": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
     "artifact": "canonical/yado-g2-applied-experience-binding-v1.json",
@@ -161,8 +160,18 @@
     "runtime": "runtime/yado_canonical_invariant_guard_v1.py",
     "source_sha256": "a200096ea63d74426a12e1ebe4fa1e5c6e3facee29215eb355ff6106fa321e9d"
   },
+  "compatibility_quarantine_v1": {
+    "component_id": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+    "quarantine_digest": "bb3c518d4094b74bd3b92a23636fe81133757726acc1a8083aa651b0cf3e3171",
+    "replacement": [
+      "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+      "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
+    ],
+    "status": "QUARANTINED_REDUNDANT"
+  },
   "composite_executable_successor_v1": {
     "architecture_mutation": false,
+    "canonical_active": false,
     "canonical_component_digest": "eefffdd17fe190cfb16055bf8a01eaf50e91ff8e7bc7b99619360e32303453bd",
     "component_id": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
     "evidence_chain": [
@@ -197,13 +206,16 @@
       "resource_accuracy": 1.0,
       "rollback_accuracy": 1.0
     },
+    "paired_fresh_ablation_receipt_sha256": "bac5b7b2e389ff49ab0142cd9e5626087bb711cddf9f61b3255fffd73f1ac21b",
+    "quarantine_artifact": "quarantine/compatibility-modules/yado-g2-composite-transfer-repair-adapter-v1.json",
+    "quarantine_digest": "bb3c518d4094b74bd3b92a23636fe81133757726acc1a8083aa651b0cf3e3171",
     "runtime_sha256": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
     "selected_families": [
       "OPEN_ENDED_EVOLUTION",
       "LOCAL_SELF_ORGANIZING",
       "NEURO_SYMBOLIC"
     ],
-    "status": "CANONICAL_ACTIVE"
+    "status": "QUARANTINED_REDUNDANT"
   },
   "consolidation_applied": true,
   "consolidation_gate_run_id": "33371375385",
@@ -231,7 +243,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "c25d635c436c592ec61feba9464cc1d9d8a37ca180483bdf317e8ba66d7169e3",
+  "core_digest": "ba668d5bfa05ef12ca66c5dd1e27e804f1104ee79ba9fdab63a96b09ffba3e2f",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -659,7 +671,6 @@
       "active_components": [
         "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
         "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
-        "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
         "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
         "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4",
         "ALG-G2-SCALE-ROUTE-SEMANTICS-V5",
@@ -1198,7 +1209,7 @@
   },
   "runtime_integrity_manifest": {
     "algorithm": "SHA256",
-    "manifest_digest": "dc639ae5c5b9f73518c3deee989eb2757743c76e3b9a9f2a6c0a8263db4fdf0f",
+    "manifest_digest": "3e201bd7432224ec397a4a602801979dfe14bbfd436eac134a6c3f1b599a360d",
     "sources": {
       "runtime/yado_ambiguity_aware_program_repair_v11.py": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
       "runtime/yado_bounded_capability_router_v1.py": "442d53602f7a35aecc0ab7cfd9c7c5036cf7c5d00b4946d37f6fb08c93125206",
@@ -1213,7 +1224,6 @@
       "runtime/yado_coverage_pruned_compositional_schema_router_v3.py": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
       "runtime/yado_evolution_ledger_v2.py": "1c681cfa9f730e2adb0a25e4f18dd649360add169ee325742c32dfb71dc4bfa0",
       "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py": "5326926722c740829dd6fce96aed95dacca274f0ee8d6103c8d79cd22a5069ea",
-      "runtime/yado_g2_composite_transfer_repair_adapter_v1.py": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
       "runtime/yado_g2_contextual_stream_capability_adapter_v1.py": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b",
       "runtime/yado_g2_openapi_contract_capability_v1.py": "3288d9483c64767d74309691546425b91c71eea93b37b14d83a7bb9f73d8f33b",
       "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py": "79eba84158de120f026e164b4914bec0fd00358bfe8a56e81b0497e924b7e762",

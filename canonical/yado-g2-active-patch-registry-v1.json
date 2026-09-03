@@ -21,33 +21,6 @@
       "status": "PASS"
     },
     {
-      "component_id": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
-      "evidence": [
-        {
-          "digest": "c439c09b04c66902a2a0c24698966539950573d69d27746e4597ac242ac3fd73",
-          "path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-canonical-admission-v1-run-33664703437.json",
-          "verified": true
-        },
-        {
-          "digest": "8d74cf03d9066c0a08fd976633a309ea04b85267dd75d222cd62a10c2d517931",
-          "path": "receipts/yado-g2-composite-canonical-post-admission-audit-v1-run-33664957316.json",
-          "verified": true
-        },
-        {
-          "digest": "9e19959d9a7eb32bf876ea70ea8c4b8096e5eccf206f6047d8947a83f65428ac",
-          "path": "receipts/yado-g2-composite-canonical-burnin-v1-run-33665203676.json",
-          "verified": true
-        }
-      ],
-      "evidence_ok": true,
-      "expected_source_sha256": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
-      "patch_id": "COMPOSITE_TRANSFER_REPAIR",
-      "source": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
-      "source_hash_ok": true,
-      "source_sha256": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
-      "status": "PASS"
-    },
-    {
       "component_id": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
       "evidence": [
         {
@@ -116,7 +89,36 @@
       "status": "PASS"
     }
   ],
-  "registry_digest": "49a5a9ddefe2696e02effcb2eb399c1562027d46b2f34631f4982744ee987efb",
+  "quarantined_patches": [
+    {
+      "ablation_receipt_sha256": "bac5b7b2e389ff49ab0142cd9e5626087bb711cddf9f61b3255fffd73f1ac21b",
+      "component_id": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
+      "patch_id": "COMPOSITE_TRANSFER_REPAIR",
+      "prior_evidence": [
+        {
+          "digest": "c439c09b04c66902a2a0c24698966539950573d69d27746e4597ac242ac3fd73",
+          "path": "receipts/yado-kernel-selected-architecture-composite-executable-successor-canonical-admission-v1-run-33664703437.json",
+          "verified": true
+        },
+        {
+          "digest": "8d74cf03d9066c0a08fd976633a309ea04b85267dd75d222cd62a10c2d517931",
+          "path": "receipts/yado-g2-composite-canonical-post-admission-audit-v1-run-33664957316.json",
+          "verified": true
+        },
+        {
+          "digest": "9e19959d9a7eb32bf876ea70ea8c4b8096e5eccf206f6047d8947a83f65428ac",
+          "path": "receipts/yado-g2-composite-canonical-burnin-v1-run-33665203676.json",
+          "verified": true
+        }
+      ],
+      "quarantine_artifact": "quarantine/compatibility-modules/yado-g2-composite-transfer-repair-adapter-v1.json",
+      "quarantine_digest": "bb3c518d4094b74bd3b92a23636fe81133757726acc1a8083aa651b0cf3e3171",
+      "source": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
+      "source_sha256": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
+      "status": "QUARANTINED_REDUNDANT"
+    }
+  ],
+  "registry_digest": "e9311a0069632a27143d1fea29148afb72c316d533fc8d702209f0f9486c3aa2",
   "schema": "yado.g2.active_patch_registry.v1",
   "semantic_boundary": "ACTIVE PATCH/REPAIR SOURCE AND EVIDENCE BINDINGS. HISTORICAL/SHADOW PATCHES ARE NOT ACTIVE BY PRESENCE ALONE.",
   "status": "CANONICAL_ACTIVE"

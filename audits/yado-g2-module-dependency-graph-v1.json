@@ -1,21 +1,18 @@
 {
-  "active_module_count": 25,
+  "active_module_count": 24,
   "compatibility_modules": [
     "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
     "ALG-BUDGETED-STAGE-POLICY-V1",
     "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
-    "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
     "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
   ],
   "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "graph_digest": "b060209c81fce30c5da6cc3416e6c8d30a361a9bf599170d61fb10362d8d95e2",
+  "graph_digest": "d9768eb1a0f36afe501635d7eaa46e1938494f6835a4f58ec75a3334d27d98e6",
   "inactive_superseded_policy": "SUPERSEDED MODULES ARE NOT ACTIVE BY PRESENCE; KEEP AS HISTORY/QUARANTINE UNLESS FRESHLY RE-ADMITTED.",
   "orphans": [],
-  "quarantine_candidates_require_fresh_ablation": [
-    "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1"
-  ],
+  "quarantine_candidates_require_fresh_ablation": [],
   "removal_authorized": false,
   "retain_compatibility": [
     "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
@@ -25,7 +22,7 @@
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
   ],
   "role_counts": {
-    "COMPATIBILITY": 6,
+    "COMPATIBILITY": 5,
     "CONTROL": 1,
     "PRIMARY": 15,
     "STATE": 3
@@ -39,7 +36,6 @@
     "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1": "PRIMARY",
     "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1": "PRIMARY",
     "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2": "PRIMARY",
-    "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1": "COMPATIBILITY",
     "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1": "COMPATIBILITY",
     "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3": "PRIMARY",
     "ALG-G2-DEEP-SELF-AUDIT-V1": "CONTROL",
@@ -59,7 +55,7 @@
   },
   "schema": "yado.g2.module_dependency_graph.v1",
   "semantic_boundary": "DEPENDENCY/ROLE GRAPH OF CURRENT ACTIVE G2. CLASSIFICATION DOES NOT BY ITSELF AUTHORIZE DELETION.",
-  "semantic_edge_count": 26,
+  "semantic_edge_count": 24,
   "semantic_edges": [
     {
       "from": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
@@ -140,18 +136,6 @@
       "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
     },
     {
-      "from": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
-      "kind": "COMPATIBILITY",
-      "reason": "composite repair uses contextual capability selection",
-      "to": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1"
-    },
-    {
-      "from": "ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1",
-      "kind": "COMPATIBILITY",
-      "reason": "composite repair uses bounded capability coordination",
-      "to": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1"
-    },
-    {
       "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
       "kind": "MEMORY_FEEDBACK",
       "reason": "stage outcome episodes can be consumed by Thinking V2",
@@ -218,7 +202,7 @@
       "to": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1"
     }
   ],
-  "static_import_edge_count": 16,
+  "static_import_edge_count": 14,
   "static_import_edges": [
     {
       "from_source": "runtime/yado_canonical_invariant_guard_v1.py",
@@ -229,16 +213,6 @@
       "from_source": "runtime/yado_core_audit_invariant_self_evolution_v1.py",
       "kind": "PYTHON_IMPORT",
       "to_source": "runtime/yado_evolution_ledger_v2.py"
-    },
-    {
-      "from_source": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
-      "kind": "PYTHON_IMPORT",
-      "to_source": "runtime/yado_bounded_capability_set_coordinator_v1.py"
-    },
-    {
-      "from_source": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
-      "kind": "PYTHON_IMPORT",
-      "to_source": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py"
     },
     {
       "from_source": "runtime/yado_g2_openapi_contract_capability_v1.py",
