@@ -350,6 +350,20 @@ methods='''    def instantiate_execution_fabric(self,router_program,scalar_progr
 if 'def instantiate_execution_fabric(' not in src:
     if method_anchor not in src:raise RuntimeError('UNIFIED_METHOD_ANCHOR_MISSING')
     src=src.replace(method_anchor,methods+method_anchor)
+
+old_exec="""    def execute_capability_set(self,runtime,selected_capabilities,capability_tasks):
+        return self.capability_set_coordinator.run(runtime,selected_capabilities,capability_tasks)
+"""
+new_exec="""    def execute_capability_set(self,runtime,selected_capabilities,capability_tasks):
+        if isinstance(runtime,G2UnifiedExecutionFabricV1):
+            return runtime.run_capability_set(selected_capabilities,capability_tasks)
+        fabric=self.execution_fabric_cls(runtime)
+        return fabric.run_capability_set(selected_capabilities,capability_tasks)
+"""
+if old_exec in src:
+    src=src.replace(old_exec,new_exec)
+elif new_exec not in src:
+    raise RuntimeError('UNIFIED_EXECUTE_CAPABILITY_SET_ANCHOR_MISSING')
 UNIFIED.write_text(src,encoding='utf-8')
 unified_sha=fsha(UNIFIED)
 
