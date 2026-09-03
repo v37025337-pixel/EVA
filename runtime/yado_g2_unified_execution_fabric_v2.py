@@ -1,7 +1,7 @@
 from __future__ import annotations
 import copy,hashlib,json
 
-from yado_g2_unified_execution_fabric_v1 import *
+from yado_g2_unified_execution_fabric_v1 import G2UnifiedExecutionFabricV1,CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3,CAP_API_V1
 from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 
 CAP_API_EXEC_V1='ALG-G2-OPENAPI-READONLY-EXECUTOR-V1'
