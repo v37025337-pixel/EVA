@@ -206,7 +206,7 @@ except Exception as e:interaction['high_scale_to_meta_selection']={'pass':False,
 
 # Interaction chain 7: bounded OpenAPI contract plan -> meta selection, with network execution still disabled.
 try:
-    api_plan=kernel.execute(CAP_API,{'action':'compile_plan','state_section':api_state,'contract_id':'GET_UNIT','stream_id':'CHAIN-API'})
+    api_plan=kernel.execute(CAP_API,{'action':'compile_plan','state_section':api_state,'contract_id':'GET_TEST','stream_id':'CHAIN-API'})
     api_sel=kernel.execute(CAP_SELECTOR,{'candidates':[
       {'token':'USE_READ_ONLY_PLAN','evidence':1.0 if api_plan.get('read_only_candidate') and api_plan.get('network_execute') is False else 0.0,'risk':0.0},
       {'token':'WITHHOLD','evidence':0.2,'risk':0.0}
