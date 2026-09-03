@@ -1,0 +1,58 @@
+name: YADO G2 Novel Gene Inheritance V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-novel-gene-inheritance-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  inheritance-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before inheritance test
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile novel gene inheritance runtime
+        run: python -m py_compile runtime/yado_g2_novel_gene_inheritance_v1.py
+      - name: Run novel gene inheritance gate
+        run: python runtime/yado_g2_novel_gene_inheritance_v1.py
+      - name: Require strict inheritance PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/g2-novel-gene-inheritance-v1.json"))
+          assert r["status"]=="PASS_SHADOW_G2_NOVEL_GENE_INHERITANCE_V1",r
+          assert r["fitness"]["h1_fresh_accuracy"]==1.0,r
+          assert r["fitness"]["h2_fresh_accuracy"]==1.0,r
+          assert r["fitness"]["best_structural_ablation_accuracy"]<1.0,r
+          assert r["checks"]["no_operator_resynthesis_call"] is True,r
+          assert r["checks"]["gene_survives_additional_shadow_generation"] is True,r
+          assert r["canonical_mutation"] is False,r
+          assert r["generation_transition"] is False,r
+          print(r["status"],r["source_gene_id"])
+          PY
+      - name: Canonical guard after inheritance test
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist inheritance evidence
+        run: |
+          git config user.name "YADO G2 Novel Gene Inheritance Gate"
+          git config user.email "actions@users.noreply.github.com"
+          git add candidates/kernel-self-generated/g2-novel-gene-inheritance-v1.json
+          git diff --cached --quiet || git commit -m "Persist novel gene inheritance evidence [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-novel-gene-inheritance-v1-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-novel-gene-inheritance-v1.json
