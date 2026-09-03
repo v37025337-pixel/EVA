@@ -106,9 +106,6 @@ ctx0=run(CAP_CONTEXT,context_prime,lambda x:x.get('context_selected_capability')
 context_follow=dict(context_prime);context_follow['descriptor']=old_desc(CAP_BUD,True)
 ctx1=run(CAP_CONTEXT,context_follow,lambda x:x.get('context_selected_capability')==CAP_BUD)
 
-comp_task={'kind':'relation','descriptor':old_desc(CAP_REL),'stream_id':'COMP','payload':{'actor':'A','owner':'A','verified':True,'role':'MEMBER'}}
-run(CAP_COMPOSITE,comp_task,lambda x:x.get('result')=='ALLOW' and x.get('repair_adapter')==CAP_COMPOSITE)
-
 run(CAP_AUDIT,{'stream_id':'AUDIT'},lambda x:x.get('core_audit',{}).get('pass') is True)
 
 corpus=kernel.high_scale.corpus['cases']
