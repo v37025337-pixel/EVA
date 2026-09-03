@@ -1,5 +1,5 @@
 {
-  "active_module_count": 24,
+  "active_module_count": 25,
   "compatibility_modules": [
     "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
     "ALG-BUDGETED-STAGE-POLICY-V1",
@@ -9,7 +9,7 @@
   ],
   "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "graph_digest": "d9768eb1a0f36afe501635d7eaa46e1938494f6835a4f58ec75a3334d27d98e6",
+  "graph_digest": "31bc4422480d1e7e1a3b06093b72296b3304e4a32c239cf768df45363abd6486",
   "inactive_superseded_policy": "SUPERSEDED MODULES ARE NOT ACTIVE BY PRESENCE; KEEP AS HISTORY/QUARANTINE UNLESS FRESHLY RE-ADMITTED.",
   "orphans": [],
   "quarantine_candidates_require_fresh_ablation": [],
@@ -24,7 +24,7 @@
   "role_counts": {
     "COMPATIBILITY": 5,
     "CONTROL": 1,
-    "PRIMARY": 15,
+    "PRIMARY": 16,
     "STATE": 3
   },
   "roles": {
@@ -42,6 +42,7 @@
     "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4": "PRIMARY",
     "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1": "STATE",
     "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1": "PRIMARY",
+    "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1": "PRIMARY",
     "ALG-G2-RAW-TASK-REPRESENTATION-V4": "PRIMARY",
     "ALG-G2-SCALE-ROUTE-SEMANTICS-V5": "PRIMARY",
     "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1": "PRIMARY",
@@ -55,7 +56,7 @@
   },
   "schema": "yado.g2.module_dependency_graph.v1",
   "semantic_boundary": "DEPENDENCY/ROLE GRAPH OF CURRENT ACTIVE G2. CLASSIFICATION DOES NOT BY ITSELF AUTHORIZE DELETION.",
-  "semantic_edge_count": 24,
+  "semantic_edge_count": 26,
   "semantic_edges": [
     {
       "from": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
@@ -181,6 +182,18 @@
       "from": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
       "kind": "PLAN_SELECTION",
       "reason": "bounded API plan can feed meta-selection",
+      "to": "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
+    },
+    {
+      "from": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+      "kind": "PLAN_TO_READONLY_EXECUTION",
+      "reason": "approved read-only contract plan gates bounded network execution",
+      "to": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1"
+    },
+    {
+      "from": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+      "kind": "NETWORK_EVIDENCE_SELECTION",
+      "reason": "bounded read-only network evidence can feed meta-selection",
       "to": "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
     },
     {

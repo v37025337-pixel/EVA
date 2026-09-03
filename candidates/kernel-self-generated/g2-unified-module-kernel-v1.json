@@ -1,11 +1,12 @@
 {
-  "active_module_count": 24,
+  "active_module_count": 25,
   "architecture_mutation": false,
   "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
   "assembly_runtime_canonical_active": true,
   "binding_checks": {
     "api_network_execution_disabled": true,
     "canonical_openapi_active": true,
+    "canonical_openapi_readonly_executor_active": true,
     "canonical_unified_fabric_active": true,
     "context_memory_source_hash_exact": true,
     "high_scale_binding_instantiated": true,
@@ -13,7 +14,7 @@
   },
   "canonical_mutation": false,
   "canonical_ready": true,
-  "covered_module_count": 24,
+  "covered_module_count": 25,
   "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
   "functional_assembly_pass": true,
   "g3_genesis_performed": false,
@@ -106,8 +107,8 @@
       "repair_mode": "BASE_PORTFOLIO"
     },
     "representation_to_execution_to_memory": {
-      "after": 32,
-      "before": 31,
+      "after": 33,
+      "before": 32,
       "pass": true,
       "result": {
         "parent_result": {
@@ -181,7 +182,7 @@
     }
   },
   "module_coverage_pass": true,
-  "receipt_sha256": "de36b2884dc7de63e01e0c0d4b556eb19b75e2e2c984c80bee0460a76d0688de",
+  "receipt_sha256": "0c761d60b117eee0f04e1fc1c6e8235651aab930ebf2a2eb709fec386e2e2141",
   "registry_pass": true,
   "schema": "yado.g2.unified_module_kernel.fresh_gate.v1",
   "semantic_boundary": "FRESH SHADOW ASSEMBLY TEST OF ALL CURRENT CANONICAL G2 MODULE IDENTITIES OVER THE CANONICAL UNIFIED EXECUTION FABRIC. THE MODULE KERNEL ITSELF IS NOT A NEW GENERATION.",
@@ -466,6 +467,28 @@
         },
         "source_id": "DOC",
         "source_sha": "gate"
+      },
+      "pass": true
+    },
+    "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1": {
+      "output": {
+        "architecture_mutation": false,
+        "canonical_active": false,
+        "component_digest": "9d003d282eb9aed6419707e7ec71baaad7c6ec9ee7df1750ed612b136a99f262",
+        "component_id": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+        "credentials_allowed": false,
+        "explicit_host_allowlist": true,
+        "https_only": true,
+        "max_response_bytes": 1048576,
+        "methods": [
+          "GET",
+          "HEAD"
+        ],
+        "public_ip_resolution_required": true,
+        "redirects_followed": false,
+        "schema": "yado.g2.openapi_readonly_executor.v1",
+        "semantic_boundary": "BOUNDED REAL NETWORK EXECUTION FOR PRE-APPROVED READ-ONLY OPENAPI CONTRACT PLANS ONLY.",
+        "timeout_seconds": 10.0
       },
       "pass": true
     },
@@ -764,7 +787,7 @@
     }
   },
   "snapshot": {
-    "active_module_count": 24,
+    "active_module_count": 25,
     "assembly_runtime": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
     "assembly_runtime_canonical_active": true,
     "extra_registry_modules": [],
@@ -772,14 +795,14 @@
     "generation": "G2_CANDIDATE_TRCG_V1",
     "kernel_id": "UNIFIED_YADO_MODULE_KERNEL_V1",
     "memory": {
-      "episode_count": 43,
+      "episode_count": 44,
       "fabric_episode_count": 8,
-      "last_episode_digest": "e110efa6fdacfb29e49da714f2a6d480bc5578131d7559f27f875aaa10b3b438",
+      "last_episode_digest": "93f88fc7ec9587a8d33ad02fed7af353b2724356b8555e05fbfb32192e557970",
       "stage_outcome_count": 0,
       "stream_attempts": {}
     },
     "missing_active_modules": [],
-    "registered_module_count": 24,
+    "registered_module_count": 25,
     "registry": {
       "ALG-BOUNDED-CAPABILITY-ROUTER-V1": {
         "canonical_active": true,
@@ -850,6 +873,11 @@
         "canonical_active": true,
         "kind": "EXECUTOR",
         "source": "runtime/yado_g2_openapi_contract_capability_v1.py"
+      },
+      "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1": {
+        "canonical_active": true,
+        "kind": "NETWORK_READONLY_EXECUTOR",
+        "source": "runtime/yado_g2_openapi_readonly_executor_v1.py"
       },
       "ALG-G2-RAW-TASK-REPRESENTATION-V4": {
         "canonical_active": true,

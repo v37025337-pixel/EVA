@@ -23,6 +23,7 @@ from yado_coverage_pruned_compositional_schema_router_v3 import CoveragePrunedCo
 from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
 from yado_g2_unified_execution_fabric_v1 import G2UnifiedExecutionFabricV1
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
+from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -57,6 +58,7 @@ class UnifiedYADOCoreV1:
         self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
         self.execution_fabric_cls=G2UnifiedExecutionFabricV1
         self.openapi_contract_capability_cls=G2OpenAPIContractCapabilityV1
+        self.openapi_readonly_executor_cls=G2OpenAPIReadOnlyExecutorV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -243,6 +245,10 @@ class UnifiedYADOCoreV1:
 
     def compile_openapi_contract_plan(self,state_section:dict[str,Any],contract_id:str)->dict[str,Any]:
         return self.openapi_contract_capability_cls(state_section).compile_plan(contract_id)
+
+    def execute_openapi_readonly_plan(self,plan:dict[str,Any],base_url:str,allowed_hosts:list[str],query=None,headers=None,max_bytes:int=1048576,timeout:float=10.0)->dict[str,Any]:
+        executor=self.openapi_readonly_executor_cls(allowed_hosts,max_bytes=max_bytes,timeout=timeout)
+        return executor.execute(plan,base_url,query=query,headers=headers)
 
     def snapshot(self)->dict[str,Any]:
         audit=self.audit()

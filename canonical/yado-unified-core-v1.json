@@ -20,6 +20,7 @@
     "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py",
     "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
     "runtime/yado_g2_openapi_contract_capability_v1.py",
+    "runtime/yado_g2_openapi_readonly_executor_v1.py",
     "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
     "runtime/yado_g2_unified_execution_fabric_v1.py",
     "runtime/yado_legacy_experience_retriever_v2.py",
@@ -33,7 +34,7 @@
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "f5021dc88733a6f65fb984c8f8f239701e8b91cc091778457e9e380fa59df082",
+  "algorithm_provenance_registry_digest": "882dc750767a953ed1521f60d6eaf082b2693381a3a8b40c87c29533bc2ea904",
   "applied_experience_binding": {
     "application_scope": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
     "artifact": "canonical/yado-g2-applied-experience-binding-v1.json",
@@ -243,7 +244,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "ba668d5bfa05ef12ca66c5dd1e27e804f1104ee79ba9fdab63a96b09ffba3e2f",
+  "core_digest": "96c791cb744b331111265e8a833cc269031e8daffcca3bb709dc3b206f248d0a",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -549,6 +550,24 @@
     "status": "CANONICAL_ACTIVE",
     "substrate_sha256": "527687d69fdedd480f625f1721331f50be90b2d4defdea2276f0016dfaa57ecb"
   },
+  "openapi_readonly_executor_v1": {
+    "canonical_component_digest": "0c3b4f13d0218423f3e3dc93b90e800dec603506f0f92aa02d73b2711e1b8e31",
+    "component_id": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+    "credentials_allowed": false,
+    "explicit_host_allowlist": true,
+    "fresh_gate_receipt_sha256": "fdac28f57f5521cbc1580c09da00bf42ab9bd8e0997420ba9292b1be013c7566",
+    "https_only": true,
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "network_execute": true,
+    "private_address_access": false,
+    "read_only_only": true,
+    "redirects_followed": false,
+    "runtime_sha256": "9d7bc5289377a790e81263eeef27a4d0960312825b8c1184d6bdde303acc355e",
+    "status": "CANONICAL_ACTIVE"
+  },
   "planes": [
     {
       "active_components": [
@@ -731,6 +750,7 @@
       "active_components": [
         "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1",
         "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+        "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
         "RESOURCE-PORTFOLIO-V1"
       ],
       "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
@@ -744,9 +764,12 @@
       "responsibilities": [
         "bounded_external_resource_routing",
         "bounded_openapi_contract_planning",
+        "bounded_real_readonly_openapi_execution",
         "bounded_tabular_scientific_reasoning",
         "costed_resource_use",
+        "credentialless_network_evidence",
         "evidence_source_selection",
+        "explicit_host_allowlist",
         "network_execution_disabled"
       ]
     },
@@ -1209,7 +1232,7 @@
   },
   "runtime_integrity_manifest": {
     "algorithm": "SHA256",
-    "manifest_digest": "3e201bd7432224ec397a4a602801979dfe14bbfd436eac134a6c3f1b599a360d",
+    "manifest_digest": "fe916a9a258de14a2ce8b578acbbc4ab782335fead1d41086e762ca6c4881cce",
     "sources": {
       "runtime/yado_ambiguity_aware_program_repair_v11.py": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
       "runtime/yado_bounded_capability_router_v1.py": "442d53602f7a35aecc0ab7cfd9c7c5036cf7c5d00b4946d37f6fb08c93125206",
@@ -1226,6 +1249,7 @@
       "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py": "5326926722c740829dd6fce96aed95dacca274f0ee8d6103c8d79cd22a5069ea",
       "runtime/yado_g2_contextual_stream_capability_adapter_v1.py": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b",
       "runtime/yado_g2_openapi_contract_capability_v1.py": "3288d9483c64767d74309691546425b91c71eea93b37b14d83a7bb9f73d8f33b",
+      "runtime/yado_g2_openapi_readonly_executor_v1.py": "9d7bc5289377a790e81263eeef27a4d0960312825b8c1184d6bdde303acc355e",
       "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py": "79eba84158de120f026e164b4914bec0fd00358bfe8a56e81b0497e924b7e762",
       "runtime/yado_g2_unified_execution_fabric_v1.py": "626e227da01a87158ce54842ca88393a01832384460dd1485b190aa58550e7b7",
       "runtime/yado_legacy_experience_retriever_v2.py": "a1d55c139543a1d96ffa72439824f417f8a528975cee2b68792b760c82c1d804",
@@ -1239,7 +1263,7 @@
       "runtime/yado_work_budget_adaptive_contingent_planner_v2.py": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
     }
   },
-  "runtime_sha256": "d87743baea4cc512ecc42c2232ca3527f8a92ed66c29ab8dc7a1965e5c559e0e",
+  "runtime_sha256": "a5fd0783c536e7ef9308d17e3fbc0c63875ef538b36acd3732e0b34e5e9a68f2",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
