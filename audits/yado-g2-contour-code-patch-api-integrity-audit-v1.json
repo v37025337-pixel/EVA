@@ -1,0 +1,221 @@
+{
+  "api": {
+    "active_api_capabilities": [],
+    "active_api_sources": [],
+    "openapi_adapter_present_in_reconstructed_rc8": true,
+    "openapi_network_execute_false": true,
+    "provenance_api_mechanisms": [],
+    "verdict": "SUBSTRATE_PRESENT_NOT_CANONICALLY_BOUND"
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "active_capabilities_placed": true,
+    "active_compile": true,
+    "active_patch_bindings": false,
+    "api_no_unintended_active_network_surface": true,
+    "automatic_semantic_feedback_loop": false,
+    "base_intelligence_to_logic": true,
+    "base_intelligence_to_thinking": true,
+    "canonical_guard": true,
+    "composite_transfer_repair_smoke": true,
+    "logic_thinking_to_memory": true,
+    "memory_to_intelligence_causal": true,
+    "new_active_components_recurrently_integrated": false,
+    "new_intelligence_individual": true,
+    "new_logic_individual": true,
+    "new_thinking_individual": true,
+    "no_tracked_python_cache": false,
+    "program_repair_smoke": true,
+    "required_contour_planes": true
+  },
+  "contour": {
+    "base_logic": {
+      "context_selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+      "context_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+      "result": "PASS",
+      "selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+    },
+    "base_thinking": {
+      "context_selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1",
+      "context_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+      "result": "STRONG",
+      "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+    },
+    "memory_ablation": {
+      "context_selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+      "context_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+      "result": "HOLD",
+      "selected_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+    },
+    "memory_followup": {
+      "context_selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1",
+      "context_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+      "result": "STRONG",
+      "selected_capability": "ALG-BUDGETED-STAGE-POLICY-V1"
+    },
+    "new_dispatch_probe": {
+      "error_type": "ValueError",
+      "failed_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+      "order": [
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      ],
+      "reason": "SUBTASK_EXECUTION_FAILED",
+      "results": {},
+      "status": "WITHHOLD"
+    },
+    "new_intelligence_individual": true,
+    "new_logic_individual": true,
+    "new_thinking_individual": true
+  },
+  "findings": [
+    {
+      "code": "HIGHER_CONTOUR_DISPATCH_GAP",
+      "details": {
+        "error_type": "ValueError",
+        "failed_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "order": [
+          "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        ],
+        "reason": "SUBTASK_EXECUTION_FAILED",
+        "results": {},
+        "status": "WITHHOLD"
+      },
+      "message": "Newer active logic/thinking components are canonical and individually executable, but the recurrent capability coordinator cannot dispatch them.",
+      "severity": "HIGH"
+    },
+    {
+      "code": "MEMORY_SEMANTIC_FEEDBACK_GAP",
+      "details": {
+        "memory": "episode buffer + bounded stream->capability map",
+        "planner_feedback": "caller must pass observed_gain explicitly"
+      },
+      "message": "Memory affects ambiguous capability routing, but no automatic result->thinking/logic/intelligence feedback loop is wired in UnifiedYADOCoreV1.",
+      "severity": "HIGH"
+    },
+    {
+      "code": "ACTIVE_PATCH_BINDING_GAP",
+      "details": [
+        {
+          "actual_sha": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
+          "expected_sha": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
+          "name": "COMPOSITE_TRANSFER_REPAIR",
+          "path": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
+          "receipt_bound": false,
+          "source_hash_ok": true
+        },
+        {
+          "actual_sha": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b",
+          "expected_sha": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52",
+          "name": "CONTEXT_MEMORY_ADAPTER",
+          "path": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
+          "receipt_bound": true,
+          "source_hash_ok": false
+        }
+      ],
+      "message": "One or more active patch/repair bindings fail source or receipt verification.",
+      "severity": "HIGH"
+    },
+    {
+      "code": "TRACKED_PYTHON_CACHE_GARBAGE",
+      "details": [
+        "runtime/__pycache__/yado_ambiguity_aware_program_repair_v11.cpython-312.pyc",
+        "runtime/__pycache__/yado_bounded_capability_set_coordinator_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_bounded_compositional_program_repair_v3.cpython-312.pyc",
+        "runtime/__pycache__/yado_bounded_scientific_data_reasoner_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_budget_adaptive_compositional_logic_v2.cpython-312.pyc",
+        "runtime/__pycache__/yado_budgeted_stage_policy_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_coverage_pruned_compositional_schema_router_v3.cpython-312.pyc",
+        "runtime/__pycache__/yado_evolution_ledger_v2.cpython-312.pyc",
+        "runtime/__pycache__/yado_g2_contextual_stream_capability_adapter_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_g2_single_lineage_closure_guard_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_g2_single_lineage_closure_quarantine_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_g2_typed_recurrent_capability_graph_runtime_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_legacy_experience_retriever_v2.cpython-312.pyc",
+        "runtime/__pycache__/yado_neutral_evidence_profile_selector_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_raw_task_representation_candidate_v3.cpython-312.pyc",
+        "runtime/__pycache__/yado_raw_task_representation_robustness_v4.cpython-312.pyc",
+        "runtime/__pycache__/yado_semantic_expression_synthesizer_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_unified_context_kernel_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_unified_core_deep_self_audit_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_unified_core_v1.cpython-312.pyc",
+        "runtime/__pycache__/yado_work_budget_adaptive_contingent_planner_v2.cpython-312.pyc",
+        "runtime/yado_rc8_v36/__pycache__/yado_core_v2.cpython-312.pyc",
+        "runtime/yado_rc8_v36/__pycache__/yado_core_v2_1.cpython-312.pyc"
+      ],
+      "message": "23 tracked Python cache files should be quarantined/removed.",
+      "severity": "MEDIUM"
+    },
+    {
+      "code": "API_LAYER_NOT_BOUND_TO_G2",
+      "details": {
+        "active_api_capabilities": [],
+        "active_api_sources": [],
+        "openapi_adapter_present_in_reconstructed_rc8": true,
+        "openapi_network_execute_false": true,
+        "provenance_api_mechanisms": [],
+        "verdict": "SUBSTRATE_PRESENT_NOT_CANONICALLY_BOUND"
+      },
+      "message": "OpenAPI substrate exists in reconstructed RC8, but no API/OpenAPI component is active in canonical G2.",
+      "severity": "MEDIUM"
+    }
+  ],
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "patches": [
+    {
+      "actual_sha": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+      "expected_sha": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+      "name": "PROGRAM_REPAIR_V11",
+      "path": "runtime/yado_ambiguity_aware_program_repair_v11.py",
+      "receipt_bound": true,
+      "source_hash_ok": true
+    },
+    {
+      "actual_sha": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
+      "expected_sha": "fd3c32085b7feb1e9e8de9f071193b76dcfa0bc81eea8ec87e02ef02d4e53b66",
+      "name": "COMPOSITE_TRANSFER_REPAIR",
+      "path": "runtime/yado_g2_composite_transfer_repair_adapter_v1.py",
+      "receipt_bound": false,
+      "source_hash_ok": true
+    },
+    {
+      "actual_sha": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b",
+      "expected_sha": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52",
+      "name": "CONTEXT_MEMORY_ADAPTER",
+      "path": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
+      "receipt_bound": true,
+      "source_hash_ok": false
+    },
+    {
+      "actual_sha": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
+      "expected_sha": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
+      "name": "LOGIC_V2",
+      "path": "runtime/yado_budget_adaptive_compositional_logic_v2.py",
+      "receipt_bound": true,
+      "source_hash_ok": true
+    },
+    {
+      "actual_sha": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5",
+      "expected_sha": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5",
+      "name": "THINKING_V2",
+      "path": "runtime/yado_work_budget_adaptive_contingent_planner_v2.py",
+      "receipt_bound": true,
+      "source_hash_ok": true
+    },
+    {
+      "actual_sha": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
+      "expected_sha": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
+      "name": "INTELLIGENCE_V3",
+      "path": "runtime/yado_coverage_pruned_compositional_schema_router_v3.py",
+      "receipt_bound": true,
+      "source_hash_ok": true
+    }
+  ],
+  "schema": "yado.g2.contour_code_patch_api_integrity_audit.v1",
+  "semantic_boundary": "SOFTWARE ARCHITECTURE AND RUNTIME CONNECTIVITY AUDIT; NOT A CLAIM OF AGI OR SUBJECTIVE CONSCIOUSNESS.",
+  "status": "WITHHOLD_ARCHITECTURE_INTEGRITY",
+  "tracked_python_cache_count": 23
+}
