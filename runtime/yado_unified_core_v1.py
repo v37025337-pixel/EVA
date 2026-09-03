@@ -21,6 +21,8 @@ from yado_work_budget_adaptive_contingent_planner_v2 import WorkBudgetAdaptiveCo
 from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
 from yado_coverage_pruned_compositional_schema_router_v3 import CoveragePrunedCompositionalSchemaRouterV3
 from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
+from yado_g2_unified_execution_fabric_v1 import G2UnifiedExecutionFabricV1
+from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -53,6 +55,8 @@ class UnifiedYADOCoreV1:
         self.compositional_logic=BudgetAdaptiveCompositionalLogicV2
         self.compositional_schema_router=CoveragePrunedCompositionalSchemaRouterV3
         self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
+        self.execution_fabric_cls=G2UnifiedExecutionFabricV1
+        self.openapi_contract_capability_cls=G2OpenAPIContractCapabilityV1
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -164,7 +168,10 @@ class UnifiedYADOCoreV1:
         )
 
     def execute_capability_set(self,runtime,selected_capabilities,capability_tasks):
-        return self.capability_set_coordinator.run(runtime,selected_capabilities,capability_tasks)
+        if isinstance(runtime,G2UnifiedExecutionFabricV1):
+            return runtime.run_capability_set(selected_capabilities,capability_tasks)
+        fabric=self.execution_fabric_cls(runtime)
+        return fabric.run_capability_set(selected_capabilities,capability_tasks)
 
     def fit_compositional_capability_router(self,cases:list[dict[str,Any]],fallback_output:str)->dict[str,Any]:
         return self.compositional_schema_router.fit(cases,fallback_output)
@@ -227,6 +234,15 @@ class UnifiedYADOCoreV1:
         if enable_shadow_context:
             return ContextualStreamCapabilityAdapterV1(runtime,'BOUNDED_STREAM_CONTEXT_MAP')
         return runtime
+
+    def instantiate_execution_fabric(self,router_program,scalar_program,relation_program,api_state=None):
+        base=G2TypedRecurrentCapabilityGraphRuntimeV1(
+            self.architecture,router_program,scalar_program,relation_program,self.portfolio
+        )
+        return self.execution_fabric_cls(base,api_state=api_state)
+
+    def compile_openapi_contract_plan(self,state_section:dict[str,Any],contract_id:str)->dict[str,Any]:
+        return self.openapi_contract_capability_cls(state_section).compile_plan(contract_id)
 
     def snapshot(self)->dict[str,Any]:
         audit=self.audit()

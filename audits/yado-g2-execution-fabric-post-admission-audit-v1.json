@@ -1,0 +1,99 @@
+{
+  "checks": {
+    "api_bound_to_resource_plane": true,
+    "api_contract_live_network_disabled": true,
+    "canonical_guard": true,
+    "context_candidate_rebound": true,
+    "context_source_rebound": true,
+    "fabric_and_api_active_caps": true,
+    "fabric_bound_to_workspace": true,
+    "frontier_preserved": true,
+    "g3_not_started": true,
+    "memory_feedback_live": true,
+    "no_tracked_python_cache": true,
+    "patch_registry_pass": true,
+    "unified_core_capability_set_uses_fabric": true
+  },
+  "details": {
+    "api_plan": {
+      "action": "ALLOW",
+      "capability_id": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+      "contract_digest": "caf70068ea51b7e0e2f3dc07c3e324ce16ba19511d02428abc37fc26cc646191",
+      "contract_id": "GET_Z",
+      "credential_gate": false,
+      "evidence_gate": false,
+      "execution_boundary": "CONTRACT_CLASSIFICATION_AND_PLAN_ONLY",
+      "method": "GET",
+      "network_execute": false,
+      "path": "/z",
+      "primary_verification_required": false,
+      "read_only_candidate": true,
+      "required_slots": {
+        "body": [],
+        "header": [],
+        "path": [],
+        "query": []
+      },
+      "source_id": "D",
+      "source_sha": "z"
+    },
+    "capability_set": {
+      "order": [
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      ],
+      "reason": "UNIFIED_FABRIC_CAPABILITY_SET_EXECUTED",
+      "results": {
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2": {
+          "meta": {
+            "operation": "predict_symmetric"
+          },
+          "result": "ODD",
+          "selected_capability": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+        },
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2": {
+          "meta": {
+            "memory_feedback_used": false,
+            "operation": "plan"
+          },
+          "result": {
+            "action": "S2",
+            "expected_confidence": 0.8,
+            "feasible": true,
+            "reason": "TARGET_REACHABLE",
+            "sequence": [
+              "S2"
+            ],
+            "total_cost": 3.0
+          },
+          "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+        }
+      },
+      "status": "PASS"
+    },
+    "memory_feedback": {
+      "meta": {
+        "feedback_episode_digest": "5126590cec65ec56abdd2fe0c3d5c6c0a94f0679d81c960546bfb62abcaaa7fb",
+        "memory_feedback_used": true,
+        "operation": "auto_feedback_plan"
+      },
+      "result": {
+        "action": "S2",
+        "expected_confidence": 1.0,
+        "feasible": true,
+        "reason": "TARGET_REACHABLE",
+        "sequence": [
+          "S2"
+        ],
+        "total_cost": 3.0
+      },
+      "selected_capability": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    },
+    "tracked_python_cache": []
+  },
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "g3_genesis_performed": false,
+  "schema": "yado.g2.execution_fabric_post_admission_audit.v1",
+  "semantic_boundary": "POST-ADMISSION SOFTWARE INTEGRITY AUDIT OF UNIFIED G2 EXECUTION FABRIC, MEMORY FEEDBACK, PATCH REGISTRY, AND BOUNDED OPENAPI CONTRACT PLANNING.",
+  "status": "PASS_G2_EXECUTION_FABRIC_POST_ADMISSION_AUDIT_V1"
+}

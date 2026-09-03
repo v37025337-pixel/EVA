@@ -14,6 +14,7 @@
     "ALG-G2-DEEP-SELF-AUDIT-V1",
     "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4",
     "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
+    "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
     "ALG-G2-RAW-TASK-REPRESENTATION-V4",
     "ALG-G2-SCALE-ROUTE-SEMANTICS-V5",
     "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
@@ -22,12 +23,17 @@
     "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
     "RESOURCE-PORTFOLIO-V1",
     "RUNTIME-G2-HIGH-SCALE-BINDING-V5",
-    "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
+    "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1",
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
   ],
+  "active_patch_registry": {
+    "registry_digest": "49a5a9ddefe2696e02effcb2eb399c1562027d46b2f34631f4982744ee987efb",
+    "status": "CANONICAL_ACTIVE"
+  },
   "algorithm_provenance_registry": {
-    "current_execution_label": "G2_SINGLE_LINEAGE_PHYSICALLY_CLOSED_WITH_APPLIED_EXPERIENCE",
+    "current_execution_label": "G2_UNIFIED_EXECUTION_FABRIC_MEMORY_API_BOUND_V1",
     "registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-    "registry_digest": "32b8c960a76c8a70f1f055ba6ae873e5ff5d38315ddc39cdacc3916e72db2aeb",
+    "registry_digest": "5e589e3de92aaf78bca56f7d9918f41fbedf679e97c6354c548c4a51525d7ca8",
     "registry_id": "YADO_G2_ALGORITHM_PROVENANCE_REGISTRY_V1"
   },
   "applied_experience_binding": {
@@ -143,7 +149,7 @@
   },
   "candidate_architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
   "candidate_digest": "b292c7ed0bd9e060a2ce736a33ac30e92403ca8d57c94a8f2d354538f584eaa0",
-  "canonical_head_digest": "9c804db40f6123bcdc93ab8c9dc161212e9cdde8443bdcfaed4e736fc21e89b4",
+  "canonical_head_digest": "ac55b8824273403fa751ab4e10569069efb122a4717a2516ff6dab212d606c34",
   "capability_scores": {
     "integrity": 1,
     "intelligence": 1,
@@ -182,7 +188,27 @@
     ],
     "status": "CANONICAL_ACTIVE"
   },
+  "context_memory_rebinding_v2": {
+    "causal_drop": 0.75,
+    "evidence_digest": "2a40a0b1a7203a696f8c350a637a90bd1ec82da3fe7325e216d079ab5d0e42e2",
+    "fresh_score": 1.0,
+    "source_sha256": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b"
+  },
   "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "execution_fabric_v1": {
+    "canonical_component_digest": "90af29830876386ce69438d53eab067e6f398df71252d04406190fedeb3c2403",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
+    "fresh_checks": {
+      "fabric_episode_memory_present": true,
+      "feedback_record_present": true,
+      "intelligence_route_execute_pass": true,
+      "legacy_capability_same_fabric": true,
+      "logic_v2_dispatched": true,
+      "memory_feedback_consumed_automatically": true,
+      "thinking_v2_dispatched": true
+    },
+    "status": "CANONICAL_ACTIVE"
+  },
   "extended_capability_scores": {
     "capability_routing": 1,
     "end_to_end_runtime": 1,
@@ -253,6 +279,7 @@
     "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
     "ALG-G2-DEEP-SELF-AUDIT-V1",
     "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
+    "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
     "ALG-G2-RAW-TASK-REPRESENTATION-V1",
     "ALG-G2-RAW-TASK-REPRESENTATION-V2",
     "ALG-G2-RAW-TASK-REPRESENTATION-V3",
@@ -261,8 +288,15 @@
     "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
     "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
     "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
-    "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
+    "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1",
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1"
   ],
+  "openapi_contract_capability_v1": {
+    "canonical_component_digest": "cc7051cd785a5dd277bdcc32bd6a9ff3395d0dfa8d007708589e0baf6e6954b3",
+    "component_id": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+    "network_execute": false,
+    "status": "CANONICAL_ACTIVE"
+  },
   "parent_artifact_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
   "parent_generation_id": "G1_CANDIDATE_S2",
   "post_composite_architectural_ceiling_reassessment_v1": {
@@ -557,7 +591,7 @@
     "single_active_context": true
   },
   "unified_core": {
-    "algorithm_provenance_registry_digest": "32b8c960a76c8a70f1f055ba6ae873e5ff5d38315ddc39cdacc3916e72db2aeb",
+    "algorithm_provenance_registry_digest": "5e589e3de92aaf78bca56f7d9918f41fbedf679e97c6354c548c4a51525d7ca8",
     "audit_invariant": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
     "bounded_program_repair_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
     "canonical_write_guard_source_sha256": "a200096ea63d74426a12e1ebe4fa1e5c6e3facee29215eb355ff6106fa321e9d",
@@ -566,7 +600,7 @@
     "contextual_stream_adapter_source_sha256": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52",
     "control_plane_binding": "CANONICAL",
     "control_plane_binding_gate_run_id": "33391800337",
-    "core_digest": "2e51f50d32937cce6053e9dd7fe06a3bc340d990d746e35cf2f474b9ca4b279b",
+    "core_digest": "c25d635c436c592ec61feba9464cc1d9d8a37ca180483bdf317e8ba66d7169e3",
     "core_id": "UNIFIED_YADO_CORE_V1",
     "counterexample_lineage_memory_binding": "architecture/evolution-ledger.json+receipts/",
     "deep_self_audit_source_sha256": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
@@ -581,8 +615,8 @@
     "logic_active_component": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
     "logic_ceiling_source_sha256": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
     "raw_task_representation_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
-    "runtime_integrity_manifest_digest": "23fe27b26c8d2c35a5451c88dd0fa080ae1c220203be743c5f201beff1aa2ef6",
-    "runtime_sha256": "3b2ea3938688546550d6c06a2294ca66cfadd53f71e387cec4f6473151598977",
+    "runtime_integrity_manifest_digest": "dc639ae5c5b9f73518c3deee989eb2757743c76e3b9a9f2a6c0a8263db4fdf0f",
+    "runtime_sha256": "d87743baea4cc512ecc42c2232ca3527f8a92ed66c29ab8dc7a1965e5c559e0e",
     "scientific_data_reasoner_source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b",
     "semantic_expression_synthesizer_source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
     "single_active_lineage": true,
