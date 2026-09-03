@@ -224,6 +224,12 @@ prov['current_g2_binding'].update({
 prov['registry_digest']=cdig(prov,'registry_digest')
 write(PROV,prov)
 
+# Rebind the newly mutated provenance digest into unified core, then recompute core digest.
+core['algorithm_provenance_registry_digest']=prov['registry_digest']
+core['experience_registry_digest']=exp['registry_digest']
+core['core_digest']=cdig(core,'core_digest')
+write(CORE,core)
+
 ctx['branch_policy']['legacy_control_plane_quarantined']=True
 ctx['branch_policy']['historical_experience_applied_to_g2_context']=True
 ctx['branch_policy']['physical_branch_ref_convergence_required']=True
