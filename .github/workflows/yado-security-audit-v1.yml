@@ -1,0 +1,47 @@
+name: YADO Security Audit V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-security-audit-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install audit tooling
+        run: python -m pip install --disable-pip-version-check pip-audit
+      - name: Audit active requirements
+        run: |
+          mkdir -p audits
+          pip-audit -r runtime/yado_rc8_v36/requirements-github.txt -f json > audits/yado-pip-audit-v1.json || true
+      - name: Compile security audit
+        run: python -m py_compile runtime/yado_security_audit_v1.py
+      - name: Run security audit
+        run: python runtime/yado_security_audit_v1.py
+      - name: Persist security reports
+        run: |
+          git config user.name "YADO Security Audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add audits/yado-security-audit-v1-report.json audits/yado-pip-audit-v1.json
+          git commit -m "Persist YADO security audit V1 [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin yado-architecture-shadow-search
+            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-security-audit-v1-${{ github.run_id }}
+          path: |
+            audits/yado-security-audit-v1-report.json
+            audits/yado-pip-audit-v1.json
