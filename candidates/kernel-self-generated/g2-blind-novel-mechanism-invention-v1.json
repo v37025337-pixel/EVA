@@ -1,0 +1,276 @@
+{
+  "ablations": [
+    {
+      "field": "direction",
+      "holdout_accuracy": 0.0,
+      "program_digest": "80254165182f21b034fd3b4b58e820ffb855ebf7b126a2ffe622d112e4067e5a",
+      "transfer_accuracy": 0.0,
+      "value": "REVERSE"
+    },
+    {
+      "field": "merge",
+      "holdout_accuracy": 0.0,
+      "program_digest": "0069fba4c60c4f4e97b2593d817d14201969fcaf5cb96f1be94f94cee5ea9354",
+      "transfer_accuracy": 0.0,
+      "value": "REPLACE"
+    },
+    {
+      "field": "merge",
+      "holdout_accuracy": 0.0,
+      "program_digest": "563b640e80cf89684476c5037f0115f17dfdfdd3f15db146aa75d16ec179dd74",
+      "transfer_accuracy": 0.0,
+      "value": "INTERSECT"
+    },
+    {
+      "field": "iteration",
+      "holdout_accuracy": 0.0,
+      "program_digest": "cb664b5876fa00691b500af74b4b30becfdc840b35516feba0e37020140da542",
+      "transfer_accuracy": 0.0,
+      "value": "ONCE"
+    },
+    {
+      "field": "iteration",
+      "holdout_accuracy": 0.0,
+      "program_digest": "f177f5447e808cb701f3ef05af41ce192a3f2cebc4eeea937612de61fb708f6a",
+      "transfer_accuracy": 0.0,
+      "value": "TWICE"
+    },
+    {
+      "field": "iteration",
+      "holdout_accuracy": 0.0,
+      "program_digest": "cf7c67315013e9354212c7fc2e29b07b9cc548c479a8a97598b49fe2ab53fba9",
+      "transfer_accuracy": 0.0,
+      "value": "THRICE"
+    },
+    {
+      "field": "seed",
+      "holdout_accuracy": 0.0,
+      "program_digest": "1875d31aa6012d89425f191f32e67866489c3433672b561f7f9ec4121b21ec80",
+      "transfer_accuracy": 0.0,
+      "value": "RELATION_LEFT_DOMAIN"
+    },
+    {
+      "field": "seed",
+      "holdout_accuracy": 0.0,
+      "program_digest": "f36b62a3e7ae1b70acd5f93e5269857d74249df980ef26754a0e557150201d1e",
+      "transfer_accuracy": 0.0,
+      "value": "RELATION_RIGHT_DOMAIN"
+    }
+  ],
+  "architecture_mutation": false,
+  "blind_deficit": {
+    "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+    "domain_specific_operator_name_given_to_synthesizer": false,
+    "holdout_case_count": 8,
+    "holdout_node_range": [
+      8,
+      12
+    ],
+    "training_case_count": 12,
+    "transfer_case_count": 6,
+    "transfer_domains": [
+      "PACKAGE",
+      "GENEALOGY",
+      "WORKFLOW",
+      "NETWORK",
+      "DEPENDENCY",
+      "CAUSAL"
+    ]
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_promotion_false": true,
+    "cross_domain_transfer_exact": true,
+    "current_parent_code_not_solution": true,
+    "formal_generation_unchanged": true,
+    "fresh_long_depth_holdout_exact": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "gene_remains_shadow": true,
+    "known_genome_gene_family_not_matching": true,
+    "logic_parent_repeated_failure": true,
+    "new_gene_not_active_capability": true,
+    "new_gene_not_parent_gene": true,
+    "shadow_v2_self_synthesizes_gene": true,
+    "shallow_iteration_fails_fresh": true,
+    "structural_ablation_causes_drop": true,
+    "temporal_requests_mechanism_change": true,
+    "temporal_stall_reached_20": true,
+    "train_exact": true
+  },
+  "controller_v2": {
+    "architecture_mutation": false,
+    "automatic_canonical_promotion": false,
+    "canonical_active": false,
+    "chromosomes": [
+      "LOGIC",
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE"
+    ],
+    "component_digest": "08383c566d869dd9a6be91cbbddb4eccb85472ec21bc4f96d8b92bf162022529",
+    "component_id": "CTRL-G2-EVOLUTIONARY-GENOME-V2",
+    "fresh_gate_required_for_promotion": true,
+    "meta_language": {
+      "arbitrary_python_generation": false,
+      "architecture_mutation": false,
+      "candidate_program_count": 72,
+      "canonical_active": false,
+      "component_digest": "8cb5a210801e93ec45b309f9edaf8e4baf0f8c395e8fd6d2091ff6ddf4bf94f0",
+      "component_id": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+      "full_task_operator_predeclared": false,
+      "max_stable_steps": 64,
+      "primitive_categories": [
+        "SEED",
+        "RELATIONAL_IMAGE",
+        "STATE_MERGE",
+        "BOUNDED_ITERATION"
+      ],
+      "schema": "yado.g2.generic_relational_state_meta_language.v1",
+      "semantic_boundary": "GENERIC BOUNDED PROGRAM SEARCH OVER RELATION/STATE PRIMITIVES. NO DOMAIN-SPECIFIC REACHABILITY/ANCESTRY/DEPENDENCY OPERATOR IS PREDECLARED."
+    },
+    "novel_operator_invention": true,
+    "operator_invention_requires_temporal_stall": true,
+    "parent_component": "CTRL-G2-EVOLUTIONARY-GENOME-V1",
+    "schema": "yado.g2.evolutionary_genome.controller.v2",
+    "semantic_boundary": "SHADOW SUCCESSOR OF GENOME V1. IT MAY INVENT A NEW EXECUTABLE GENE BY SEARCHING GENERIC META-LANGUAGE COMPOSITIONS AFTER A TEMPORAL STALL, BUT CANNOT PROMOTE IT."
+  },
+  "fitness": {
+    "best_structural_ablation_accuracy": 0.0,
+    "cross_domain_transfer_accuracy": 1.0,
+    "holdout_accuracy": 1.0,
+    "shallow_iteration_baselines": [
+      {
+        "holdout_accuracy": 0.0,
+        "iteration": "ONCE",
+        "transfer_accuracy": 0.0
+      },
+      {
+        "holdout_accuracy": 0.0,
+        "iteration": "TWICE",
+        "transfer_accuracy": 0.0
+      },
+      {
+        "holdout_accuracy": 0.0,
+        "iteration": "THRICE",
+        "transfer_accuracy": 0.0
+      }
+    ],
+    "train_accuracy": 1.0
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "invented": {
+    "gene": {
+      "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+      "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+      "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+      "gene_scope": [
+        "LOGIC",
+        "THINKING",
+        "INTELLIGENCE",
+        "CODE"
+      ],
+      "heritage": [
+        "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+        "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+        "GENE-LOGIC-BOOLEAN-DNF-V1",
+        "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+      ],
+      "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+      "novel_gene": true,
+      "operator_program": {
+        "direction": "FORWARD",
+        "iteration": "UNTIL_STABLE",
+        "merge": "UNION",
+        "novel_gene": true,
+        "output": "STATE",
+        "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+        "search_space_size": 72,
+        "seed": "START",
+        "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+        "train_accuracy": 1.0
+      },
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.self_synthesized_operator_gene.v1",
+      "trigger": {
+        "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+        "no_progress_ticks": 20,
+        "source": "TEMPORAL_STALL_SIGNAL",
+        "tick_id": 21
+      }
+    },
+    "status": "SELF_SYNTHESIZED_SHADOW_GENE"
+  },
+  "meta_language": {
+    "arbitrary_python_generation": false,
+    "architecture_mutation": false,
+    "candidate_program_count": 72,
+    "canonical_active": false,
+    "component_digest": "8cb5a210801e93ec45b309f9edaf8e4baf0f8c395e8fd6d2091ff6ddf4bf94f0",
+    "component_id": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+    "full_task_operator_predeclared": false,
+    "max_stable_steps": 64,
+    "primitive_categories": [
+      "SEED",
+      "RELATIONAL_IMAGE",
+      "STATE_MERGE",
+      "BOUNDED_ITERATION"
+    ],
+    "schema": "yado.g2.generic_relational_state_meta_language.v1",
+    "semantic_boundary": "GENERIC BOUNDED PROGRAM SEARCH OVER RELATION/STATE PRIMITIVES. NO DOMAIN-SPECIFIC REACHABILITY/ANCESTRY/DEPENDENCY OPERATOR IS PREDECLARED."
+  },
+  "parent_failure": {
+    "code_holdout_accuracy": 0.0,
+    "code_repair": {
+      "reason": "NO_REPAIR_WITHIN_SUPPORT_RANKED_BUDGET",
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "search_nodes": 1,
+      "source": null
+    },
+    "known_shadow_gene_ids": [
+      "GENE-LOGIC-BOOLEAN-DNF-V1",
+      "GENE-THINKING-LATENCY-AWARE-PLANNER-V1",
+      "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+      "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1"
+    ],
+    "logic_error_signature": "ValueError:UNKNOWN_LOGIC_V2_OPERATION:infer_variable_depth_relation_state",
+    "logic_failure_count": 21
+  },
+  "receipt_sha256": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b",
+  "schema": "yado.g2.blind_novel_mechanism_invention.v1",
+  "semantic_boundary": "BLIND SHADOW TEST OF NOVEL OPERATOR INVENTION. THE SYNTHESIZER RECEIVES IO EXAMPLES AND GENERIC RELATION/STATE PRIMITIVES, NOT A DOMAIN-SPECIFIC OPERATOR NAME. SUCCESS DOES NOT PROMOTE THE GENE OR PROVE OPEN-ENDED SELF-EVOLUTION.",
+  "status": "PASS_SHADOW_G2_BLIND_NOVEL_MECHANISM_INVENTION_V1",
+  "temporal_stall": {
+    "stall_signal": {
+      "cause_tick_digest": "aae32c362c614e8c5e4835028a9495fd0c1dcf46ff9e7cfde0a5655cba69f760",
+      "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+      "episode_digest": "1361cdd5832cf34e6bd020e67f8c155e2da2c8b09e9eaf6040166228e4adfbae",
+      "kind": "TEMPORAL_STALL_SIGNAL",
+      "mechanism_change_required": true,
+      "no_progress_ticks": 20,
+      "sequence": 22,
+      "stream_id": "BLIND-NOVEL-MECHANISM",
+      "tick_id": 21
+    },
+    "stream_state": {
+      "episode_tick": 21,
+      "last_progress_digest": "dd2c17f3000b44ab7e3a7561b5e5ad5f97249df16bf6fe6978ab5ccdc1bfcd99",
+      "last_result_digest": "80e801b9db849ed159f9a47b3bf9dfca93efc293105ff1aaaa5a3cfba2658847",
+      "last_state_digest": "dd69780a88a922765707713d154e06ad85a7109915d1fe432d5ba7ea762843a0",
+      "last_tick": 21,
+      "mechanism_change_required": true,
+      "no_progress_ticks": 20,
+      "stream_id": "BLIND-NOVEL-MECHANISM"
+    },
+    "temporal_snapshot": {
+      "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+      "entity_count": 2,
+      "last_tick_digest": "aae32c362c614e8c5e4835028a9495fd0c1dcf46ff9e7cfde0a5655cba69f760",
+      "open_tick_count": 0,
+      "record_count": 21,
+      "stream_count": 1,
+      "tick_id": 21
+    }
+  }
+}
