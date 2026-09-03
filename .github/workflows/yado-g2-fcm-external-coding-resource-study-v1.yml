@@ -1,0 +1,54 @@
+name: YADO G2 FCM External Coding Resource Study V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-fcm-external-coding-resource-study-v1-request.json"
+permissions:
+  contents: write
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Canonical guard before external resource study
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile FCM external study runtime
+        run: python -m py_compile runtime/yado_g2_fcm_external_coding_resource_study_v1.py
+      - name: Let G2 study FCM catalog and probe no-key candidates
+        run: python runtime/yado_g2_fcm_external_coding_resource_study_v1.py
+      - name: Require bounded study PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/g2-fcm-external-coding-resource-study-v1.json"))
+          assert r["status"]=="PASS_SHADOW_G2_FCM_EXTERNAL_CODING_RESOURCE_STUDY_V1",r
+          assert r["checks"]["third_party_code_not_executed"] is True,r
+          assert r["checks"]["no_user_secrets_used"] is True,r
+          assert r["catalog"]["provider_count"]>=10,r
+          assert r["catalog"]["model_count"]>=100,r
+          assert r["canonical_mutation"] is False,r
+          print(r["status"],r["catalog"]["provider_count"],r["catalog"]["model_count"],r["integration_decision"])
+          PY
+      - name: Canonical guard after external resource study
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist FCM study evidence
+        run: |
+          git config user.name "YADO G2 External Resource Study"
+          git config user.email "actions@users.noreply.github.com"
+          git add candidates/kernel-self-generated/g2-fcm-external-coding-resource-study-v1.json
+          git diff --cached --quiet || git commit -m "Persist FCM external coding resource study [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-fcm-external-coding-resource-study-v1-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-fcm-external-coding-resource-study-v1.json
