@@ -7,7 +7,7 @@ REPO=ROOT.parent
 
 from yado_unified_core_v1 import UnifiedYADOCoreV1
 from yado_g2_unified_execution_fabric_v1 import CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3,CAP_API_V1
-from yado_g2_unified_execution_fabric_v2 import G2UnifiedExecutionFabricV2
+from yado_g2_unified_execution_fabric_v3 import G2UnifiedExecutionFabricV3
 from yado_g2_typed_recurrent_capability_graph_runtime_v1 import G2TypedRecurrentCapabilityGraphRuntimeV1
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
@@ -34,7 +34,7 @@ CAP_SELECTOR='ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1'
 CAP_COUNTERMEM='COUNTEREXAMPLE_LINEAGE_MEMORY_V1'
 CAP_HS_RUNTIME='RUNTIME-G2-HIGH-SCALE-BINDING-V5'
 CAP_BASE_RUNTIME='RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1'
-CAP_FABRIC='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2'
+CAP_FABRIC='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3'
 CAP_API=CAP_API_V1
 CAP_API_EXEC='ALG-G2-OPENAPI-READONLY-EXECUTOR-V1'
 CAP_GENOME='CTRL-G2-EVOLUTIONARY-GENOME-V1'
@@ -62,7 +62,7 @@ MODULE_REGISTRY={
  CAP_RES:('RESOURCE_STATE','resources/yado-unified-external-resource-portfolio-v1.json'),
  CAP_HS_RUNTIME:('RUNTIME','runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py'),
  CAP_BASE_RUNTIME:('RUNTIME','runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py'),
- CAP_FABRIC:('RUNTIME','runtime/yado_g2_unified_execution_fabric_v2.py'),
+ CAP_FABRIC:('RUNTIME','runtime/yado_g2_unified_execution_fabric_v3.py'),
  CAP_API:('EXECUTOR','runtime/yado_g2_openapi_contract_capability_v1.py'),
  CAP_API_EXEC:('NETWORK_READONLY_EXECUTOR','runtime/yado_g2_openapi_readonly_executor_v1.py'),
  CAP_GENOME:('EVOLUTION_CONTROL','runtime/yado_evolutionary_genome_v1.py'),
@@ -84,7 +84,7 @@ class UnifiedYADOModuleKernelV1:
         self.base_runtime=G2TypedRecurrentCapabilityGraphRuntimeV1(
             self.core.architecture,router_program,scalar_program,relation_program,self.core.portfolio
         )
-        self.fabric=G2UnifiedExecutionFabricV2(self.base_runtime)
+        self.fabric=G2UnifiedExecutionFabricV3(self.base_runtime)
         self.context=ContextualStreamCapabilityAdapterV1(self.fabric,'BOUNDED_STREAM_CONTEXT_MAP')
         self.high_scale=CanonicalHighScaleBindingRuntimeV5(repo_root=self.repo)
         self.active=set(self.core.head.get('active_capabilities',[]))
