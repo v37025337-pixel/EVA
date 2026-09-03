@@ -14,7 +14,6 @@ from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_contextual_stream_capability_adapter_v1 import (
     ContextualStreamCapabilityAdapterV1,CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES
 )
-from yado_g2_composite_transfer_repair_adapter_v1 import G2CompositeTransferRepairAdapterV1
 from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoordinatorV1
 from yado_neutral_evidence_profile_selector_v1 import NeutralEvidenceProfileSelectorV1,EvidenceCandidate
 from yado_g2_canonical_high_scale_binding_runtime_v5 import CanonicalHighScaleBindingRuntimeV5
@@ -23,7 +22,6 @@ CAP_ROUTER='ALG-BOUNDED-CAPABILITY-ROUTER-V1'
 CAP_REPAIR='ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11'
 CAP_COORD='ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1'
 CAP_SCI='ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1'
-CAP_COMPOSITE='ALG-G2-COMPOSITE-TRANSFER-REPAIR-ADAPTER-V1'
 CAP_CONTEXT='ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1'
 CAP_AUDIT='ALG-G2-DEEP-SELF-AUDIT-V1'
 CAP_HS_MODEL='ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4'
@@ -47,7 +45,6 @@ MODULE_REGISTRY={
  CAP_COORD:('COORDINATOR','runtime/yado_bounded_capability_set_coordinator_v1.py'),
  CAP_SCI:('EXECUTOR','runtime/yado_bounded_scientific_data_reasoner_v1.py'),
  CAP_LOGIC_V2:('EXECUTOR','runtime/yado_budget_adaptive_compositional_logic_v2.py'),
- CAP_COMPOSITE:('COMPATIBILITY_ADAPTER','runtime/yado_g2_composite_transfer_repair_adapter_v1.py'),
  CAP_CONTEXT:('MEMORY_ADAPTER','runtime/yado_g2_contextual_stream_capability_adapter_v1.py'),
  CAP_INTEL_V3:('EXECUTOR','runtime/yado_coverage_pruned_compositional_schema_router_v3.py'),
  CAP_AUDIT:('CONTROL','runtime/yado_unified_core_deep_self_audit_v1.py'),
@@ -84,7 +81,6 @@ class UnifiedYADOModuleKernelV1:
         )
         self.fabric=G2UnifiedExecutionFabricV1(self.base_runtime)
         self.context=ContextualStreamCapabilityAdapterV1(self.fabric,'BOUNDED_STREAM_CONTEXT_MAP')
-        self.composite=G2CompositeTransferRepairAdapterV1(self.fabric)
         self.high_scale=CanonicalHighScaleBindingRuntimeV5(repo_root=self.repo)
         self.active=set(self.core.head.get('active_capabilities',[]))
 
@@ -148,8 +144,6 @@ class UnifiedYADOModuleKernelV1:
             if action=='analyze':out=self.core.analyze_science_data(task['rows'],enable=tuple(task.get('enable',('summary','correlation','group','linear'))))
             elif action=='hypothesis':out=self.core.test_scientific_hypothesis(task['rows'],task['spec'])
             else:raise ValueError('UNKNOWN_SCIENCE_ACTION:'+str(action))
-        elif mid==CAP_COMPOSITE:
-            return self.composite.run(task,ablated_context=bool(task.pop('ablated_context',False)))
         elif mid==CAP_CONTEXT:
             return self.context.run(task,ablated_context=bool(task.pop('ablated_context',False)))
         elif mid==CAP_AUDIT:
