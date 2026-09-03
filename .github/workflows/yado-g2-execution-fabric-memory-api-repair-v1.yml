@@ -1,0 +1,72 @@
+name: YADO G2 Execution Fabric Memory API Repair V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-execution-fabric-memory-api-repair-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-execution-fabric-memory-api-repair
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Pre-repair canonical guard
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile repair candidates and admission
+        run: |
+          python -m py_compile             runtime/yado_g2_openapi_contract_capability_v1.py             runtime/yado_g2_unified_execution_fabric_v1.py             runtime/yado_g2_execution_fabric_memory_api_repair_v1.py             runtime/yado_g2_execution_fabric_post_admission_audit_v1.py
+      - name: Fresh admission and same-G2 integration repair
+        run: python runtime/yado_g2_execution_fabric_memory_api_repair_v1.py
+      - name: Remove tracked Python cache garbage
+        run: |
+          git rm -r --cached --ignore-unmatch runtime/__pycache__ runtime/yado_rc8_v36/__pycache__
+      - name: Post-repair canonical guard
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Post-admission contour audit
+        run: python runtime/yado_g2_execution_fabric_post_admission_audit_v1.py
+      - name: Kernel-native post-repair self-audit
+        run: python runtime/yado_unified_core_deep_self_audit_v1.py
+      - name: Require kernel-native self-audit
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_unified_core_deep_self_audit_v1_receipt.json"))
+          assert r["overall_verdict"]=="PASS_WITH_LIMITATIONS",r
+          assert r["summary"]["blocking_findings"]==0,r
+          print(r["overall_verdict"],r["summary"])
+          PY
+      - name: Final canonical guard
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist repair and evidence
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_execution_fabric_memory_api_repair_v1_receipt.json "receipts/yado-g2-execution-fabric-memory-api-repair-v1-run-${GITHUB_RUN_ID}.json"
+          cp runtime/yado_unified_core_deep_self_audit_v1_receipt.json "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Execution Fabric Repair"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Integrate G2 execution fabric memory feedback patch registry and bounded API [skip ci]"
+          git reset --hard HEAD
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-execution-fabric-memory-api-repair-v1-${{ github.run_id }}
+          path: |
+            receipts/yado-g2-execution-fabric-memory-api-repair-v1-run-${{ github.run_id }}.json
+            audits/yado-g2-execution-fabric-post-admission-audit-v1.json
+            canonical/yado-g2-unified-execution-fabric-v1.json
+            canonical/yado-g2-openapi-contract-capability-v1.json
+            canonical/yado-g2-active-patch-registry-v1.json
