@@ -109,10 +109,12 @@ for mode in ('ONCE','TWICE','THRICE'):
     p={'seed':'START','direction':'FORWARD','merge':'UNION','iteration':mode,'output':'STATE'}
     shallow.append({'iteration':mode,'h1_accuracy':accuracy(p,h1_cases),'h2_accuracy':accuracy(p,h2_cases)})
 
-# Static harness check: inheritance test must not call the synthesis routine again.
-self_text=Path(__file__).read_text(encoding='utf-8')
-no_resynthesis_call='.synthesize(' not in self_text
-
+# Static harness check: inheritance test must not invoke any .synthesize(...) call.
+self_tree=ast.parse(Path(__file__).read_text(encoding='utf-8'))
+no_resynthesis_call=not any(
+    isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='synthesize'
+    for n in ast.walk(self_tree)
+)
 checks={
   'source_blind_pass':source.get('status')=='PASS_SHADOW_G2_BLIND_NOVEL_MECHANISM_INVENTION_V1',
   'source_gene_shadow_only':gene.get('promotion_state')=='SHADOW_ONLY',
