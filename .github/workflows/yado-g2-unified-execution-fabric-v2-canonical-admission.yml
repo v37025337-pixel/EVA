@@ -1,0 +1,90 @@
+name: YADO G2 Unified Execution Fabric V2 Canonical Admission
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-unified-execution-fabric-v2-canonical-admission-request.json"
+permissions:
+  contents: write
+jobs:
+  admit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Pre-admission canonical guard
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V2 admission and layer verification
+        run: python -m py_compile runtime/yado_g2_unified_execution_fabric_v2.py runtime/yado_g2_unified_execution_fabric_v2_canonical_admission.py runtime/yado_g2_layer_connectivity_audit_v1.py runtime/yado_g2_unified_module_kernel_v1.py runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py runtime/yado_g2_post_module_full_integrity_v1.py
+      - name: Apply same-G2 fabric V2 canonical admission
+        run: python runtime/yado_g2_unified_execution_fabric_v2_canonical_admission.py
+      - name: Re-run fresh layer connectivity audit
+        run: python runtime/yado_g2_layer_connectivity_audit_v1.py
+      - name: Require layer connectivity PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("audits/yado-g2-layer-connectivity-audit-v1.json"))
+          assert r["status"]=="PASS_G2_LAYER_CONNECTIVITY_AUDIT_V1",r
+          assert r["finding_count"]==0,r
+          assert r["high_findings"]==0,r
+          print(r["status"],r["checks"])
+          PY
+      - name: Re-run current 25-module assembly
+        run: python runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
+      - name: Require 25 module assembly PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/g2-unified-module-kernel-v1.json"))
+          assert r["status"]=="PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1",r
+          assert r["active_module_count"]==25 and r["covered_module_count"]==25,r
+          assert r["functional_assembly_pass"] is True and r["canonical_ready"] is True,r
+          print(r["status"],r["active_module_count"])
+          PY
+      - name: Run full integrity and dependency graph
+        run: python runtime/yado_g2_post_module_full_integrity_v1.py
+      - name: Kernel-native self-audit
+        run: python runtime/yado_unified_core_deep_self_audit_v1.py
+      - name: Require self-audit no blockers
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_unified_core_deep_self_audit_v1_receipt.json"))
+          assert r["overall_verdict"]=="PASS_WITH_LIMITATIONS",r
+          assert r["summary"]["blocking_findings"]==0,r
+          assert r["summary"]["critical_failures"]==0,r
+          assert r["summary"]["high_failures"]==0,r
+          print(r["overall_verdict"],r["summary"])
+          PY
+      - name: Final canonical guard
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist V2 admission and layer evidence
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_unified_execution_fabric_v2_canonical_admission_receipt.json "receipts/yado-g2-unified-execution-fabric-v2-canonical-admission-run-${GITHUB_RUN_ID}.json"
+          cp runtime/yado_unified_core_deep_self_audit_v1_receipt.json "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Fabric V2 Admission"
+          git config user.email "actions@users.noreply.github.com"
+          git add runtime/yado_unified_core_v1.py canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json canonical/yado-g2-unified-execution-fabric-v2.json architecture/evolution-ledger.json audits/yado-g2-layer-connectivity-audit-v1.json audits/yado-g2-post-module-full-integrity-v1.json audits/yado-g2-module-dependency-graph-v1.json candidates/kernel-self-generated/g2-unified-module-kernel-v1.json "receipts/yado-g2-unified-execution-fabric-v2-canonical-admission-run-${GITHUB_RUN_ID}.json" "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}.json"
+          git diff --cached --quiet || git commit -m "Admit unified execution fabric V2 and close layer gaps [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yado-g2-unified-execution-fabric-v2-admission-${{ github.run_id }}
+          path: |
+            runtime/yado_g2_unified_execution_fabric_v2_canonical_admission_receipt.json
+            canonical/yado-g2-unified-execution-fabric-v2.json
+            audits/yado-g2-layer-connectivity-audit-v1.json
+            audits/yado-g2-post-module-full-integrity-v1.json
+            audits/yado-g2-module-dependency-graph-v1.json
