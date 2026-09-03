@@ -70,6 +70,23 @@ if import_v2 not in src:
     src=src.replace(import_v1,import_v1+import_v2)
 src=src.replace('        self.execution_fabric_cls=G2UnifiedExecutionFabricV1\n','        self.execution_fabric_cls=G2UnifiedExecutionFabricV2\n')
 if 'self.execution_fabric_cls=G2UnifiedExecutionFabricV2' not in src:raise RuntimeError('UNIFIED_FABRIC_V2_BINDING_FAILED')
+bridge_anchor='    def snapshot(self)->dict[str,Any]:\n'
+bridge_method="""    def execute_openapi_readonly_via_fabric(self,execution_fabric,plan:dict[str,Any],base_url:str,allowed_hosts:list[str],query=None,headers=None,max_bytes:int=1048576,timeout:float=10.0,stream_id:str='OPENAPI')->dict[str,Any]:
+        if not hasattr(execution_fabric,'execute_capability'):
+            raise TypeError('EXECUTION_FABRIC_REQUIRED')
+        return execution_fabric.execute_capability(
+            'ALG-G2-OPENAPI-READONLY-EXECUTOR-V1',
+            {
+              'plan':plan,'base_url':base_url,'allowed_hosts':allowed_hosts,
+              'query':query,'headers':headers,'max_bytes':max_bytes,'timeout':timeout,
+              'stream_id':stream_id,
+            }
+        )
+
+"""
+if 'def execute_openapi_readonly_via_fabric(' not in src:
+    if bridge_anchor not in src:raise RuntimeError('UNIFIED_SNAPSHOT_ANCHOR_MISSING')
+    src=src.replace(bridge_anchor,bridge_method+bridge_anchor)
 UNIFIED.write_text(src,encoding='utf-8')
 unified_sha=fsha(UNIFIED)
 
