@@ -1,0 +1,32 @@
+{
+  "schema": "yado.g2.cognitive_temporal_kernel.canonical_admission.request.v1",
+  "formal_generation": "G2_CANDIDATE_TRCG_V1",
+  "parent_execution_fabric": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
+  "candidate_execution_fabric": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+  "embedded_temporal_kernel": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+  "fresh_evidence": "candidates/kernel-self-generated/g2-cognitive-temporal-kernel-v1.json",
+  "required_fresh_status": "PASS_SHADOW_G2_COGNITIVE_TEMPORAL_KERNEL_V1",
+  "expected_active_capabilities_after": 26,
+  "temporal_kernel_separate_active_capability": false,
+  "temporal_stall_threshold": 20,
+  "temporal_stall_can_trigger_shadow_evolution": true,
+  "automatic_canonical_promotion": false,
+  "temporal_state_persistence": "EXPLICIT_EXPORT_RESTORE_CHECKPOINT",
+  "required_post_checks": [
+    "MONOTONIC_TICKS",
+    "CAUSAL_PREDECESSOR",
+    "EPISODE_TIME",
+    "ENTITY_AGE",
+    "STALL_TO_EVOLUTION",
+    "CHECKPOINT_RESTORE",
+    "RECURRENT_TEMPORAL_MEMORY",
+    "26_OF_26_MODULE_ASSEMBLY",
+    "LAYER_CONNECTIVITY",
+    "FULL_INTEGRITY",
+    "SELF_AUDIT_NO_BLOCKERS"
+  ],
+  "expected_frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "architecture_mutation": false,
+  "generation_transition": false,
+  "g3_genesis": false
+}
