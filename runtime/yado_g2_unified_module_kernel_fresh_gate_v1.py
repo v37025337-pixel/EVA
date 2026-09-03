@@ -87,7 +87,7 @@ run(CAP_REL,{'kind':'relation','stream_id':'BASE-R','payload':{'actor':'A','owne
 run(CAP_BUD,{'kind':'budget','stream_id':'BASE-P','current_confidence':0.2,'target_confidence':0.7,'remaining_budget':5.0,'stages':[{'stage_id':'S1','cost':1,'expected_gain':0.2,'quota_remaining':1},{'stage_id':'S2','cost':3,'expected_gain':0.6,'quota_remaining':1}]},lambda x:x.get('result') in {'S1','S2','STOP','WITHHOLD'})
 run(CAP_RES,{'kind':'resource','stream_id':'BASE-E','route_key':route_key,'payload':{}},lambda x:x.get('result')==resource_expected)
 run(CAP_LOGIC_V2,logic_task,lambda x:x.get('result')=='ODD')
-run(CAP_THINK_V2,plan_task,lambda x:x.get('meta',{}).get('feasible') is True)
+run(CAP_THINK_V2,plan_task,lambda x:x.get('result',{}).get('feasible') is True)
 run(CAP_INTEL_V3,intel_task,lambda x:CAP_THINK_V2 in x.get('result',()))
 
 repair_task={'action':'repair','source':'def f(x):\n    return x + 1\n','function_name':'f','train_examples':[((0,),2),((1,),3),((2,),4),((3,),5)],'max_candidates':4000,'stream_id':'REPAIR'}
@@ -130,11 +130,19 @@ run(CAP_COUNTERMEM,{'limit':8,'nonpass_only':True,'stream_id':'MEM'},lambda x:x.
 run(CAP_HS_RUNTIME,{'stream_id':'HS-S'},lambda x:x.get('binding_digest') is not None)
 run(CAP_BASE_RUNTIME,{'stream_id':'BASE-S'},lambda x:'episode_count' in x)
 run(CAP_FABRIC,{'stream_id':'FABRIC-S'},lambda x:x.get('component_id')==CAP_FABRIC and x.get('canonical_active') is True)
+api_state={
+  'policy_tree':{'label':'ALLOW'},
+  'contract_registry':{
+    'GET_UNIT':{'source_id':'MODULE_GATE','source_sha':'unit','method':'GET','path':'/unit','required':[],'redirect_semantic':False}
+  }
+}
+api_smoke=run(CAP_API,{'action':'compile_plan','state_section':api_state,'contract_id':'GET_UNIT','stream_id':'API'},lambda x:x.get('capability_id')==CAP_API and x.get('network_execute') is False and x.get('read_only_candidate') is True)
+run(CAP_FABRIC,{'stream_id':'FABRIC-S'},lambda x:x.get('component_id')==CAP_FABRIC and x.get('canonical_active') is True)
 api_state={'policy_tree':{'label':'ALLOW'},'contract_registry':{'GET_TEST':{'source_id':'DOC','source_sha':'gate','method':'GET','path':'/test','required':[],'redirect_semantic':False}}}
 run(CAP_API,{'action':'compile_plan','state_section':api_state,'contract_id':'GET_TEST','stream_id':'API-S'},lambda x:x.get('contract_id')=='GET_TEST' and x.get('network_execute') is False)
 
 # Mark embedded high-scale IDs and persistent/control nodes covered by the explicit calls above.
-coverage.update({CAP_HS_MODEL,CAP_SCALE_ROUTE,CAP_HS_RUNTIME,CAP_COUNTERMEM,CAP_AUDIT})
+coverage.update({CAP_HS_MODEL,CAP_SCALE_ROUTE,CAP_HS_RUNTIME,CAP_COUNTERMEM,CAP_AUDIT,CAP_FABRIC,CAP_API})
 
 # Interaction chain 1: raw representation -> its selected base executor -> shared memory.
 interaction={}
@@ -155,7 +163,7 @@ try:
     sci=kernel.execute(CAP_SCI,{'action':'hypothesis','rows':science_rows,'spec':{'type':'LINEAR_R2_AT_LEAST','x':'x','y':'y','threshold':0.98},'stream_id':'CHAIN-SCI'})
     sel=kernel.execute(CAP_SELECTOR,{'candidates':[{'token':'DEEP_PLAN','evidence':1.0 if sci['supported'] else 0.1,'risk':0.05},{'token':'HOLD','evidence':0.4,'risk':0.0}],'stream_id':'CHAIN-SEL'})
     pl=kernel.execute(CAP_THINK_V2,plan_task)
-    interaction['science_to_selection_to_thinking']={'pass':sci['supported'] and sel['selected_token']=='DEEP_PLAN' and pl['meta']['feasible'],'science':sci,'selection':sel,'thinking':pl}
+    interaction['science_to_selection_to_thinking']={'pass':sci['supported'] and sel['selected_token']=='DEEP_PLAN' and pl.get('result',{}).get('feasible') is True,'science':sci,'selection':sel,'thinking':pl}
 except Exception as e:interaction['science_to_selection_to_thinking']={'pass':False,'error':repr(e)}
 
 # Interaction chain 3: semantic synthesis -> fresh prediction -> Logic V2 classification -> memory.
@@ -188,12 +196,25 @@ try:
     interaction['high_scale_to_meta_selection']={'pass':hs['route']=='V4_HIGH' and hsel['selected_token']==str(hs['prediction']),'high_scale':hs,'selection':hsel}
 except Exception as e:interaction['high_scale_to_meta_selection']={'pass':False,'error':repr(e)}
 
+# Interaction chain 7: bounded OpenAPI contract plan -> meta selection, with network execution still disabled.
+try:
+    api_plan=kernel.execute(CAP_API,{'action':'compile_plan','state_section':api_state,'contract_id':'GET_UNIT','stream_id':'CHAIN-API'})
+    api_sel=kernel.execute(CAP_SELECTOR,{'candidates':[
+      {'token':'USE_READ_ONLY_PLAN','evidence':1.0 if api_plan.get('read_only_candidate') and api_plan.get('network_execute') is False else 0.0,'risk':0.0},
+      {'token':'WITHHOLD','evidence':0.2,'risk':0.0}
+    ],'stream_id':'CHAIN-APISEL'})
+    interaction['api_plan_to_meta_selection']={'pass':api_plan.get('network_execute') is False and api_sel.get('selected_token')=='USE_READ_ONLY_PLAN','api_plan':api_plan,'selection':api_sel}
+except Exception as e:interaction['api_plan_to_meta_selection']={'pass':False,'error':repr(e)}
+
 # Binding hygiene checks.
 ctx_expected=core_manifest.get('contextual_stream_adapter',{}).get('source_sha256')
 ctx_actual=sha(REPO/'runtime/yado_g2_contextual_stream_capability_adapter_v1.py')
 binding_checks={
  'context_memory_source_hash_exact':bool(ctx_expected) and ctx_expected==ctx_actual,
  'high_scale_binding_instantiated':kernel.high_scale.snapshot().get('binding_digest') is not None,
+ 'canonical_unified_fabric_active':CAP_FABRIC in active and core_manifest.get('execution_fabric_v1',{}).get('status')=='CANONICAL_ACTIVE',
+ 'canonical_openapi_active':CAP_API in active and core_manifest.get('openapi_contract_capability_v1',core_manifest.get('openapi_capability_v1',{})).get('status','CANONICAL_ACTIVE')=='CANONICAL_ACTIVE',
+ 'api_network_execution_disabled':api_smoke.get('pass') is True,
 }
 pycache=subprocess_result=None
 import subprocess
@@ -207,7 +228,7 @@ interaction_pass=all(x.get('pass') for x in interaction.values())
 registry_pass=not snapshot['missing_active_modules'] and not snapshot['extra_registry_modules'] and len(registry)==len(active)
 functional_assembly_pass=module_coverage_pass and interaction_pass and registry_pass
 canonical_ready=functional_assembly_pass and all(binding_checks.values())
-status='PASS_SHADOW_UNIFIED_MODULE_KERNEL_V1' if canonical_ready else ('PASS_FUNCTIONAL_WITH_BINDING_REPAIRS_REQUIRED' if functional_assembly_pass else 'WITHHOLD_UNIFIED_MODULE_KERNEL_V1')
+status='PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1' if canonical_ready else ('PASS_FUNCTIONAL_WITH_BINDING_REPAIRS_REQUIRED' if functional_assembly_pass else 'WITHHOLD_UNIFIED_MODULE_KERNEL_V1')
 
 report={
  'schema':'yado.g2.unified_module_kernel.fresh_gate.v1','status':status,
