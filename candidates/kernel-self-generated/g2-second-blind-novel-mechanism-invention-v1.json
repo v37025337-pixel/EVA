@@ -1,0 +1,300 @@
+{
+  "ablations": [
+    {
+      "field": "state_mode",
+      "holdout_accuracy": 0.6666666666666666,
+      "program_digest": "29a898732ddf0762c5da0900ae6cad805c185a86d13075a97e563af1cb80187d",
+      "transfer_accuracy": 0.6666666666666666,
+      "value": "COUNT"
+    },
+    {
+      "field": "state_mode",
+      "holdout_accuracy": 0.6666666666666666,
+      "program_digest": "70fbfff46c6e093e1a3a8bc343285c476af56e7aec9305a9dfacae863ad9c035",
+      "transfer_accuracy": 0.6666666666666666,
+      "value": "SET"
+    },
+    {
+      "field": "close_policy",
+      "holdout_accuracy": 0.6666666666666666,
+      "program_digest": "237aec9dc05acef22cfcf2e98606c9558638f35252862b0a93b187f8ed979460",
+      "transfer_accuracy": 0.6666666666666666,
+      "value": "ANY"
+    },
+    {
+      "field": "close_policy",
+      "holdout_accuracy": 0.8333333333333334,
+      "program_digest": "a66fb32f5970107e8fa1101af6c053c3f4de5ec102094cbc533e1d86435c7ab0",
+      "transfer_accuracy": 0.8333333333333334,
+      "value": "REMOVE_KEY"
+    },
+    {
+      "field": "underflow_policy",
+      "holdout_accuracy": 0.8333333333333334,
+      "program_digest": "d2b0c3375478cb931246595e093a3274372f6a13f991e5acbafca3558040023d",
+      "transfer_accuracy": 0.8333333333333334,
+      "value": "IGNORE"
+    },
+    {
+      "field": "mismatch_policy",
+      "holdout_accuracy": 0.6666666666666666,
+      "program_digest": "74229fdc5904fc60ee6a5490c9ae82cbdf79f947a9167cea8e1e0b3a2bf2d50b",
+      "transfer_accuracy": 0.6666666666666666,
+      "value": "IGNORE"
+    },
+    {
+      "field": "final_policy",
+      "holdout_accuracy": 0.8333333333333334,
+      "program_digest": "2be2637854bbe79fb75aff5ae46dfd831d9afccac01c63104e3c80f0927848e5",
+      "transfer_accuracy": 0.8333333333333334,
+      "value": "VALID_ONLY"
+    }
+  ],
+  "architecture_mutation": false,
+  "blind_deficit": {
+    "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+    "domain_specific_operator_name_given_to_synthesizer": false,
+    "holdout_case_count": 24,
+    "holdout_depth_range": [
+      7,
+      13
+    ],
+    "training_case_count": 30,
+    "transfer_case_count": 36,
+    "transfer_domains": [
+      "CALLFLOW",
+      "LOCKFLOW",
+      "RESOURCEFLOW",
+      "SCOPEFLOW",
+      "TAGFLOW",
+      "TRANSACTION"
+    ]
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_promotion_false": true,
+    "count_and_set_baselines_fail": true,
+    "cross_domain_transfer_exact": true,
+    "formal_generation_unchanged": true,
+    "fresh_deeper_holdout_exact": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "gene_remains_shadow": true,
+    "known_genome_and_active_family_not_matching": true,
+    "logic_parent_repeated_failure": true,
+    "new_gene_distinct_from_previous_novel_gene": true,
+    "new_gene_not_active_capability": true,
+    "new_gene_not_parent_gene": true,
+    "new_meta_language_distinct_from_relational": true,
+    "previous_novel_gene_contract_incompatible": true,
+    "shadow_v3_self_synthesizes_gene": true,
+    "structural_ablation_causes_drop": true,
+    "temporal_requests_mechanism_change": true,
+    "temporal_stall_reached_20": true,
+    "train_exact": true
+  },
+  "controller_v3": {
+    "architecture_mutation": false,
+    "automatic_canonical_promotion": false,
+    "canonical_active": false,
+    "chromosomes": [
+      "LOGIC",
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE"
+    ],
+    "component_digest": "6b4dfa8193f8de45988294dfd86609625a20f4ff2fce027f413e12cf5f8f4a57",
+    "component_id": "CTRL-G2-EVOLUTIONARY-GENOME-V3",
+    "event_state_operator_invention": true,
+    "fresh_gate_required_for_promotion": true,
+    "meta_language": {
+      "bounded_search": true,
+      "close_policies": [
+        "ANY",
+        "MATCH_KEY",
+        "REMOVE_KEY"
+      ],
+      "component_digest": "c6cd32755acef00adb244b3a9bf01902c94a360a9f0921b23c9accea1292cdcc",
+      "component_id": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+      "domain_specific_operator_names": false,
+      "failure_policies": [
+        "REJECT",
+        "IGNORE"
+      ],
+      "final_policies": [
+        "EMPTY_AND_VALID",
+        "VALID_ONLY"
+      ],
+      "primitives": [
+        "EVENT_CODE",
+        "EVENT_KEY",
+        "COUNT_STATE",
+        "SET_STATE",
+        "SEQUENCE_STATE",
+        "OPEN_UPDATE",
+        "CLOSE_UPDATE",
+        "FINAL_PREDICATE"
+      ],
+      "schema": "yado.g2.generic_event_state_meta_language.v1",
+      "semantic_boundary": "GENERIC BOUNDED EVENT/STATE META-LANGUAGE. IT SEARCHES STATE UPDATE COMPOSITIONS FROM IO EXAMPLES; IT DOES NOT RECEIVE A NESTING/STACK/PUSHDOWN TASK LABEL.",
+      "state_modes": [
+        "COUNT",
+        "SET",
+        "STACK"
+      ]
+    },
+    "operator_invention_requires_temporal_stall": true,
+    "parent_component": "CTRL-G2-EVOLUTIONARY-GENOME-V2",
+    "schema": "yado.g2.evolutionary_genome.controller.v3",
+    "semantic_boundary": "SHADOW SUCCESSOR USED ONLY FOR A SECOND BLIND INVENTION TEST. IT SEARCHES GENERIC EVENT/STATE COMPOSITIONS AFTER A TEMPORAL STALL AND CANNOT PROMOTE ITS GENE."
+  },
+  "fitness": {
+    "baselines": {
+      "COUNT": {
+        "holdout": 0.6666666666666666,
+        "transfer": 0.6666666666666666
+      },
+      "SET": {
+        "holdout": 0.6666666666666666,
+        "transfer": 0.6666666666666666
+      }
+    },
+    "best_structural_ablation_accuracy": 0.8333333333333334,
+    "cross_domain_transfer_accuracy": 1.0,
+    "holdout_accuracy": 1.0,
+    "train_accuracy": 1.0
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "invented": {
+    "gene": {
+      "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+      "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+      "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+      "gene_scope": [
+        "LOGIC",
+        "THINKING",
+        "INTELLIGENCE",
+        "CODE"
+      ],
+      "heritage": [
+        "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+        "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+        "GENE-LOGIC-BOOLEAN-DNF-V1",
+        "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+      ],
+      "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+      "novel_gene": true,
+      "operator_program": {
+        "close_code": "R",
+        "close_policy": "MATCH_KEY",
+        "final_policy": "EMPTY_AND_VALID",
+        "mismatch_policy": "REJECT",
+        "novel_gene": true,
+        "open_code": "Q",
+        "output": "BOOLEAN",
+        "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+        "schema": "yado.g2.generic_event_state_program.v1",
+        "search_space_size": 144,
+        "state_mode": "STACK",
+        "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+        "train_accuracy": 1.0,
+        "underflow_policy": "REJECT"
+      },
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+      "trigger": {
+        "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+        "no_progress_ticks": 20,
+        "source": "TEMPORAL_STALL_SIGNAL",
+        "tick_id": 21
+      }
+    },
+    "status": "SELF_SYNTHESIZED_SHADOW_GENE"
+  },
+  "meta_language": {
+    "bounded_search": true,
+    "close_policies": [
+      "ANY",
+      "MATCH_KEY",
+      "REMOVE_KEY"
+    ],
+    "component_digest": "c6cd32755acef00adb244b3a9bf01902c94a360a9f0921b23c9accea1292cdcc",
+    "component_id": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+    "domain_specific_operator_names": false,
+    "failure_policies": [
+      "REJECT",
+      "IGNORE"
+    ],
+    "final_policies": [
+      "EMPTY_AND_VALID",
+      "VALID_ONLY"
+    ],
+    "primitives": [
+      "EVENT_CODE",
+      "EVENT_KEY",
+      "COUNT_STATE",
+      "SET_STATE",
+      "SEQUENCE_STATE",
+      "OPEN_UPDATE",
+      "CLOSE_UPDATE",
+      "FINAL_PREDICATE"
+    ],
+    "schema": "yado.g2.generic_event_state_meta_language.v1",
+    "semantic_boundary": "GENERIC BOUNDED EVENT/STATE META-LANGUAGE. IT SEARCHES STATE UPDATE COMPOSITIONS FROM IO EXAMPLES; IT DOES NOT RECEIVE A NESTING/STACK/PUSHDOWN TASK LABEL.",
+    "state_modes": [
+      "COUNT",
+      "SET",
+      "STACK"
+    ]
+  },
+  "parent_failure": {
+    "known_family_has_event_stack": false,
+    "known_shadow_gene_ids": [
+      "GENE-LOGIC-BOOLEAN-DNF-V1",
+      "GENE-THINKING-LATENCY-AWARE-PLANNER-V1",
+      "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+      "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1"
+    ],
+    "logic_error_signature": "ValueError:UNKNOWN_LOGIC_V2_OPERATION:infer_event_state_acceptance",
+    "logic_failure_count": 21,
+    "previous_novel_gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+    "previous_novel_gene_output_contract": "STATE"
+  },
+  "receipt_sha256": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c",
+  "schema": "yado.g2.second_blind_novel_mechanism_invention.v1",
+  "semantic_boundary": "SECOND BLIND SHADOW TEST ON A DIFFERENT DEFICIT FAMILY. SYNTHESIS RECEIVES IO EXAMPLES AND GENERIC EVENT/STATE PRIMITIVES, NOT A STACK/NESTING/PUSHDOWN OPERATOR NAME. SUCCESS DOES NOT PROMOTE THE GENE OR PROVE OPEN-ENDED SELF-EVOLUTION.",
+  "status": "PASS_SHADOW_G2_SECOND_BLIND_NOVEL_MECHANISM_INVENTION_V1",
+  "temporal_stall": {
+    "stall_signal": {
+      "cause_tick_digest": "ac274875d3a86522dc06bc870c3dff83ab18ed3e5159fdee4fec69aec4e96664",
+      "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+      "episode_digest": "3e1dce6d76f60d5513502eccf3ba3ed59bad77dcd91b9ba64be5821a57b73d91",
+      "kind": "TEMPORAL_STALL_SIGNAL",
+      "mechanism_change_required": true,
+      "no_progress_ticks": 20,
+      "sequence": 22,
+      "stream_id": "SECOND-BLIND-NOVEL-MECHANISM",
+      "tick_id": 21
+    },
+    "stream_state": {
+      "episode_tick": 21,
+      "last_progress_digest": "1019a52f96fe6d25c976d352c319ec0ebe086d2ae81fe1ce847411039064ab20",
+      "last_result_digest": "2dde959a34e1bdcb914723c3bbb1afed2c0b2666381f76f945766b83cc8b5176",
+      "last_state_digest": "3148809be402e2f2907b5eaceb9eeeb4ade72490d7d5b4092f826cb2b8ece424",
+      "last_tick": 21,
+      "mechanism_change_required": true,
+      "no_progress_ticks": 20,
+      "stream_id": "SECOND-BLIND-NOVEL-MECHANISM"
+    },
+    "temporal_snapshot": {
+      "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+      "entity_count": 2,
+      "last_tick_digest": "ac274875d3a86522dc06bc870c3dff83ab18ed3e5159fdee4fec69aec4e96664",
+      "open_tick_count": 0,
+      "record_count": 21,
+      "stream_count": 1,
+      "tick_id": 21
+    }
+  }
+}
