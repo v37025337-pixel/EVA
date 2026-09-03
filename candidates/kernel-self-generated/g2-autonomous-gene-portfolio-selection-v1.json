@@ -1,0 +1,486 @@
+{
+  "architecture_mutation": false,
+  "canonical_head_digest_before": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+  "canonical_mutation": false,
+  "checks": {
+    "at_least_two_novel_genes_discovered": true,
+    "automatic_canonical_promotion_false": true,
+    "controller_has_no_explicit_gene_ids": true,
+    "controller_makes_no_synthesis_calls": true,
+    "followup_tasks_exact_without_resynthesis": true,
+    "formal_generation_unchanged": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "h1_exact_portfolio_inheritance": true,
+    "h2_exact_portfolio_inheritance": true,
+    "portfolio_contains_two_or_more_selected_genes": true,
+    "portfolio_level_removal_causes_drop": true,
+    "selection_tasks_exact": true,
+    "two_task_winners_selected": true
+  },
+  "controller": {
+    "automatic_canonical_promotion": false,
+    "component_digest": "43fdcce6442a18eb1b4213188ad93efa98a152818c53f1a3072259d9010fcd06",
+    "component_id": "CTRL-G2-AUTONOMOUS-GENE-PORTFOLIO-V1",
+    "gene_discovery": "SCAN_SELF_GENERATED_EVIDENCE",
+    "gene_id_specific_rules": false,
+    "resynthesis_during_selection": false,
+    "schema": "yado.g2.autonomous_gene_portfolio_controller.v1",
+    "selection_basis": [
+      "FRESH_EXACT_FITNESS",
+      "STRUCTURAL_ABLATION_CAUSALITY"
+    ],
+    "semantic_boundary": "BOUNDED SHADOW PORTFOLIO CONTROLLER. IT DISCOVERS SELF-SYNTHESIZED GENES FROM EVIDENCE, SELECTS BY FRESH FITNESS AND CAUSAL ABLATION, AND BUILDS A SHADOW SUCCESSOR WITHOUT GENE-ID-SPECIFIC RULES OR RE-SYNTHESIS."
+  },
+  "discovered_gene_ids": [
+    "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+    "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3"
+  ],
+  "followup_eval": {
+    "FOLLOWUP_ALPHA": {
+      "best_score": 1.0,
+      "rows": [
+        {
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "score": 1.0
+        }
+      ]
+    },
+    "FOLLOWUP_BETA": {
+      "best_score": 1.0,
+      "rows": [
+        {
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "score": 1.0
+        }
+      ]
+    }
+  },
+  "followup_tasks": [
+    {
+      "case_count": 6,
+      "input_contract": "RELATION_START_TO_STATE",
+      "task_id": "FOLLOWUP_ALPHA"
+    },
+    {
+      "case_count": 24,
+      "input_contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+      "task_id": "FOLLOWUP_BETA"
+    }
+  ],
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "h1": {
+    "automatic_canonical_promotion": false,
+    "controller_id": "CTRL-G2-AUTONOMOUS-GENE-PORTFOLIO-V1",
+    "lineage_parent_portfolio_digest": "7f58be1fcfa68e19a98d67594054689f7d9543da8aa2833c09535df145e41bf0",
+    "portfolio_digest": "41e78b7777c255a212a215acba19ba1716dbbca872f6b3964312a0698ec002e9",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.autonomous_shadow_gene_portfolio.v1",
+    "selected_gene_count": 2,
+    "selected_genes": [
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "merge": "UNION",
+            "novel_gene": true,
+            "output": "STATE",
+            "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+            "search_space_size": 72,
+            "seed": "START",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_operator_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "FRESH_TASK_ALPHA"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b"
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "close_code": "R",
+            "close_policy": "MATCH_KEY",
+            "final_policy": "EMPTY_AND_VALID",
+            "mismatch_policy": "REJECT",
+            "novel_gene": true,
+            "open_code": "Q",
+            "output": "BOOLEAN",
+            "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+            "schema": "yado.g2.generic_event_state_program.v1",
+            "search_space_size": 144,
+            "state_mode": "STACK",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+            "train_accuracy": 1.0,
+            "underflow_policy": "REJECT"
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "FRESH_TASK_BETA"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c"
+      }
+    ],
+    "selection_policy": "FRESH_EXACT_AND_CAUSAL_ABLATION",
+    "shadow_generation": "H1"
+  },
+  "h2": {
+    "automatic_canonical_promotion": false,
+    "controller_id": "CTRL-G2-AUTONOMOUS-GENE-PORTFOLIO-V1",
+    "lineage_parent_portfolio_digest": "41e78b7777c255a212a215acba19ba1716dbbca872f6b3964312a0698ec002e9",
+    "portfolio_digest": "e9865cd4d837bdf45e6a29908f5ced8180a49d41470eb1247280c17cd01678e7",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.autonomous_shadow_gene_portfolio.v1",
+    "selected_gene_count": 2,
+    "selected_genes": [
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "merge": "UNION",
+            "novel_gene": true,
+            "output": "STATE",
+            "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+            "search_space_size": 72,
+            "seed": "START",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_operator_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "FRESH_TASK_ALPHA"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b"
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "close_code": "R",
+            "close_policy": "MATCH_KEY",
+            "final_policy": "EMPTY_AND_VALID",
+            "mismatch_policy": "REJECT",
+            "novel_gene": true,
+            "open_code": "Q",
+            "output": "BOOLEAN",
+            "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+            "schema": "yado.g2.generic_event_state_program.v1",
+            "search_space_size": 144,
+            "state_mode": "STACK",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+            "train_accuracy": 1.0,
+            "underflow_policy": "REJECT"
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "FRESH_TASK_BETA"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c"
+      }
+    ],
+    "selection_policy": "FRESH_EXACT_AND_CAUSAL_ABLATION",
+    "shadow_generation": "H2"
+  },
+  "portfolio": {
+    "automatic_canonical_promotion": false,
+    "controller_id": "CTRL-G2-AUTONOMOUS-GENE-PORTFOLIO-V1",
+    "portfolio_digest": "7f58be1fcfa68e19a98d67594054689f7d9543da8aa2833c09535df145e41bf0",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.autonomous_shadow_gene_portfolio.v1",
+    "score_matrix": {
+      "FRESH_TASK_ALPHA": [
+        {
+          "best_ablation_accuracy": 0.0,
+          "causal_gap": 1.0,
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "score": 1.0,
+          "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json"
+        }
+      ],
+      "FRESH_TASK_BETA": [
+        {
+          "best_ablation_accuracy": 0.8333333333333334,
+          "causal_gap": 0.16666666666666663,
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "score": 1.0,
+          "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json"
+        }
+      ]
+    },
+    "selected_by_task": {
+      "FRESH_TASK_ALPHA": {
+        "best_ablation_accuracy": 0.0,
+        "causal_gap": 1.0,
+        "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+        "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+        "score": 1.0,
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json"
+      },
+      "FRESH_TASK_BETA": {
+        "best_ablation_accuracy": 0.8333333333333334,
+        "causal_gap": 0.16666666666666663,
+        "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+        "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+        "score": 1.0,
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json"
+      }
+    },
+    "selected_gene_count": 2,
+    "selected_genes": [
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "direction": "FORWARD",
+            "iteration": "UNTIL_STABLE",
+            "merge": "UNION",
+            "novel_gene": true,
+            "output": "STATE",
+            "program_digest": "6eee65d8570426d6008183978082dc191de81b799dfd2132b42ba3689f2562f0",
+            "search_space_size": 72,
+            "seed": "START",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+            "train_accuracy": 1.0
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_operator_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_RELATIONAL_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "FRESH_TASK_ALPHA"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "abb34dc09530303bb9ad8369ba2870e51f064ba7c04851671abe83393ed3057b"
+      },
+      {
+        "gene": {
+          "execution_mode": "BOUNDED_META_LANGUAGE_INTERPRETER",
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "gene_scope": [
+            "LOGIC",
+            "THINKING",
+            "INTELLIGENCE",
+            "CODE"
+          ],
+          "heritage": [
+            "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+          ],
+          "meta_language_component": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+          "novel_gene": true,
+          "operator_program": {
+            "close_code": "R",
+            "close_policy": "MATCH_KEY",
+            "final_policy": "EMPTY_AND_VALID",
+            "mismatch_policy": "REJECT",
+            "novel_gene": true,
+            "open_code": "Q",
+            "output": "BOOLEAN",
+            "program_digest": "2f252f852fda7ce33696e620b460fe1af5a4df4aa2494e43e6ad1778b11f17d5",
+            "schema": "yado.g2.generic_event_state_program.v1",
+            "search_space_size": 144,
+            "state_mode": "STACK",
+            "synthesized_operator_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+            "train_accuracy": 1.0,
+            "underflow_policy": "REJECT"
+          },
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.self_synthesized_event_state_gene.v1",
+          "trigger": {
+            "deficit_id": "BLIND_VARIABLE_DEPTH_EVENT_STATE",
+            "no_progress_ticks": 20,
+            "source": "TEMPORAL_STALL_SIGNAL",
+            "tick_id": 21
+          }
+        },
+        "selected_for_tasks": [
+          "FRESH_TASK_BETA"
+        ],
+        "source_path": "candidates/kernel-self-generated/g2-second-blind-novel-mechanism-invention-v1.json",
+        "source_receipt": "6865dbae7ea01b7861166f46b34adb85955ffc652743a78050bb5eb30ecbc39c"
+      }
+    ],
+    "selection_policy": "FRESH_EXACT_AND_CAUSAL_ABLATION"
+  },
+  "receipt_sha256": "d7ce24d11ba0887256cb4c29a16f1cf22aa3826ccdccc7dcd2014a6cdfdcaf74",
+  "schema": "yado.g2.autonomous_gene_portfolio_selection.v1",
+  "selected_gene_ids": [
+    "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+    "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3"
+  ],
+  "selection_eval": {
+    "FRESH_TASK_ALPHA": {
+      "best_score": 1.0,
+      "rows": [
+        {
+          "gene_digest": "596972f50063e1b4ad1a90afaa2f747d7ba6bb16967f32092a658fb07505568c",
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "score": 1.0
+        }
+      ]
+    },
+    "FRESH_TASK_BETA": {
+      "best_score": 1.0,
+      "rows": [
+        {
+          "gene_digest": "b8c2e01154808fd224e3313bc74f12ad8d488166eed9d3fb89dedd8841d2f94f",
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "score": 1.0
+        }
+      ]
+    }
+  },
+  "selection_tasks": [
+    {
+      "case_count": 6,
+      "input_contract": "RELATION_START_TO_STATE",
+      "task_id": "FRESH_TASK_ALPHA"
+    },
+    {
+      "case_count": 24,
+      "input_contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+      "task_id": "FRESH_TASK_BETA"
+    }
+  ],
+  "semantic_boundary": "BOUNDED SHADOW TEST OF CONTROLLER-DRIVEN GENE DISCOVERY, FRESH FITNESS SELECTION, PORTFOLIO CONSTRUCTION, AND TWO-STEP INHERITANCE WITHOUT GENE-ID-SPECIFIC RULES OR RE-SYNTHESIS. THIS DOES NOT PROVE OPEN-ENDED AUTONOMY OR AUTHORIZE CANONICAL PROMOTION.",
+  "status": "PASS_SHADOW_G2_AUTONOMOUS_GENE_PORTFOLIO_SELECTION_V1",
+  "winner_removal_scores": {
+    "FRESH_TASK_ALPHA": 0.0,
+    "FRESH_TASK_BETA": 0.0
+  }
+}
