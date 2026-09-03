@@ -1,0 +1,19 @@
+{
+  "schema": "yado.g2.native_meta_grammar_compile_repair.request.v1",
+  "objective": "USE_YADO_NATIVE_META_GRAMMAR_TO_CREATE_A_COMPILE_REPAIR_MECHANISM_FROM_PRIOR_WITHHOLDS",
+  "generator": "YADO_RC6_NATIVE_META_GRAMMAR",
+  "external_model_allowed": false,
+  "ready_patch_allowed": false,
+  "target_line_number_supplied": false,
+  "expected_target_source_supplied": false,
+  "generic_observations": [
+    "DIFF_HUNK_SHAPE",
+    "COMPILER_ERROR_RELATION",
+    "COMPILE_ORACLE"
+  ],
+  "require_validation": true,
+  "require_fresh": true,
+  "require_ablation": true,
+  "after_pass": "INSTALL_SHADOW_REPAIRED_CONTROLLER_AND_RESUME_AUTONOMOUS_SELF_REWRITE",
+  "host_role": "TRIGGER_AND_GENERIC_OBSERVATION_ADAPTER_ONLY"
+}
