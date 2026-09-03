@@ -4,7 +4,9 @@ import copy,hashlib,json,os,subprocess,sys
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
+PKG=ROOT/'yado_rc8_v36'
 sys.path.insert(0,str(ROOT))
+sys.path.insert(0,str(PKG))
 
 from yado_evolution_ledger_v2 import validate_ledger_v2,event_hash
 from yado_g2_unified_execution_fabric_v2 import G2UnifiedExecutionFabricV2
