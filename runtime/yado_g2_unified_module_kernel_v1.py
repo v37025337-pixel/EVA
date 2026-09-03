@@ -218,4 +218,4 @@ class UnifiedYADOModuleKernelV1:
           'semantic_boundary':'SHADOW MODULE-ASSEMBLY AUDIT OVER THE CANONICAL G2 UNIFIED EXECUTION FABRIC. THE ASSEMBLY KERNEL ITSELF IS NOT A NEW GENERATION OR CONSCIOUSNESS CLAIM.'
         }
 
-__all__=['UnifiedYADOModuleKernelV1','MODULE_REGISTRY']
+__all__=['UnifiedYADOModuleKernelV1','MODULE_REGISTRY']+[k for k in globals() if k.startswith('CAP_')]
