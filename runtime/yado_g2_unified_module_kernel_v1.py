@@ -11,6 +11,7 @@ from yado_g2_unified_execution_fabric_v1 import (
 )
 from yado_g2_typed_recurrent_capability_graph_runtime_v1 import G2TypedRecurrentCapabilityGraphRuntimeV1
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
+from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 from yado_g2_contextual_stream_capability_adapter_v1 import (
     ContextualStreamCapabilityAdapterV1,CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES
 )
@@ -35,6 +36,7 @@ CAP_HS_RUNTIME='RUNTIME-G2-HIGH-SCALE-BINDING-V5'
 CAP_BASE_RUNTIME='RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1'
 CAP_FABRIC='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1'
 CAP_API=CAP_API_V1
+CAP_API_EXEC='ALG-G2-OPENAPI-READONLY-EXECUTOR-V1'
 
 MODULE_REGISTRY={
  CAP_ROUTER:('EXECUTOR','runtime/yado_bounded_capability_router_v1.py'),
@@ -61,6 +63,7 @@ MODULE_REGISTRY={
  CAP_BASE_RUNTIME:('RUNTIME','runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py'),
  CAP_FABRIC:('RUNTIME','runtime/yado_g2_unified_execution_fabric_v1.py'),
  CAP_API:('EXECUTOR','runtime/yado_g2_openapi_contract_capability_v1.py'),
+ CAP_API_EXEC:('NETWORK_READONLY_EXECUTOR','runtime/yado_g2_openapi_readonly_executor_v1.py'),
 }
 
 DIRECT_FABRIC={CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES,CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3}
@@ -189,6 +192,14 @@ class UnifiedYADOModuleKernelV1:
             if action=='compile_plan':out=api.compile_plan(str(task['contract_id']))
             elif action=='classify':out=api.classify(str(task['contract_id']))
             else:raise ValueError('UNKNOWN_API_ACTION:'+str(action))
+        elif mid==CAP_API_EXEC:
+            action=task.get('action','component')
+            if action=='component':
+                out=G2OpenAPIReadOnlyExecutorV1.component()
+            elif action=='execute':
+                ex=G2OpenAPIReadOnlyExecutorV1(task['allowed_hosts'],max_bytes=int(task.get('max_bytes',1024*1024)),timeout=float(task.get('timeout',10)))
+                out=ex.execute(task['plan'],task['base_url'],query=task.get('query'),headers=task.get('headers'))
+            else:raise ValueError('UNKNOWN_API_EXEC_ACTION:'+str(action))
         else:
             raise KeyError('NO_EXECUTION_PATH:'+mid)
 
