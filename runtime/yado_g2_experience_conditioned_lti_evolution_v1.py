@@ -108,7 +108,7 @@ def episode(seq,salt):
         hid=hashlib.sha256((str(salt)+'|'+str(j)+'|'+role).encode()).hexdigest()[:12]
         actions.append({'id':hid,'role':role})
     actions=sorted(actions,key=lambda a:a['id'])
-    return (actions,list(seq))
+    return ({'history_phase':'FRESH_CAUSAL_HOLDOUT'},actions,list(seq))
 
 tv_ep=[episode(x,'VAL'+str(i)) for i,x in enumerate(tv)]
 tb_ep=[episode(x,'BLIND'+str(i)) for i,x in enumerate(tb)]
