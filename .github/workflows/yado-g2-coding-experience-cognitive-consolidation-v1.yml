@@ -1,0 +1,87 @@
+name: YADO G2 Coding Experience Cognitive Consolidation V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-coding-experience-cognitive-consolidation-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-coding-experience-cognitive-consolidation-v1
+  cancel-in-progress: true
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Preserve checked-in G2 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before cognitive consolidation
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile cognitive consolidation runtime
+        run: python -m py_compile runtime/yado_g2_coding_experience_cognitive_consolidation_v1.py
+      - name: Run YADO cognitive consolidation
+        id: consolidate
+        continue-on-error: true
+        run: python runtime/yado_g2_coding_experience_cognitive_consolidation_v1.py
+      - name: Canonical guard after cognitive consolidation
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist cognitive consolidation evidence
+        if: always()
+        run: |
+          git config user.name "YADO Cognitive Consolidation V1"
+          git config user.email "actions@users.noreply.github.com"
+          git add experience/yado-coding-cognitive-consolidation-v1.json 2>/dev/null || true
+          git add candidates/kernel-self-generated/g2-coding-experience-cognitive-consolidation-v1.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO coding cognitive consolidation V1 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest cognitive consolidation verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-coding-experience-cognitive-consolidation-v1.json")
+          if not p.exists(): raise SystemExit("MISSING_COGNITIVE_CONSOLIDATION_EVIDENCE")
+          r=json.loads(p.read_text()); c=r["checks"]
+          assert c["prior_cognitive_portfolio_consumed"] is True,r
+          assert c["coding_pass_and_withhold_history_consumed"] is True,r
+          assert c["logic_native_learner_used"] is True,r
+          assert c["thinking_native_learner_used"] is True,r
+          assert c["intelligence_native_router_used"] is True,r
+          assert c["unknown_contrastive_training_applied"] is True,r
+          assert c["v2_negative_transfer_consumed"] is True,r
+          assert c["host_written_cognitive_rules"] is False,r
+          assert c["host_selected_winner"] is False,r
+          assert c["external_models_used"] is False,r
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_CODING_EXPERIENCE_COGNITIVE_CONSOLIDATION_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+r["status"]+":"+str(r["next_required_capability"]))
+          print(
+            r["status"],
+            "logic",r["logic_fresh"],r["logic_ablation"],
+            "thinking",r["thinking_fresh"],r["thinking_ablation"],
+            "intelligence",r["intelligence_fresh"],r["intelligence_ablation"],
+            "composite",r["composite_fresh"],
+            "unknown",r["unknown_fail_closed"],
+            r["cognitive_gene_id"],
+            r["next_required_capability"]
+          )
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-coding-cognitive-consolidation-v1-${{ github.run_id }}
+          path: |
+            experience/yado-coding-cognitive-consolidation-v1.json
+            candidates/kernel-self-generated/g2-coding-experience-cognitive-consolidation-v1.json
+          if-no-files-found: warn
