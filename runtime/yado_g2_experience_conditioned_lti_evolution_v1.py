@@ -186,7 +186,22 @@ checks={
  'rollback_parent_available':all(bool(g['heritage']) for g in genes.values()),
  'canonical_unchanged':core.head.get('canonical_head_digest')==head_before.get('canonical_head_digest'),
 }
-passed=all(checks.values())
+required_true=(
+ 'causal_ledger_consumed','experience_registry_consumed','self_generated_gene_portfolio_consumed',
+ 'canonical_genome_parent_consumed','chronological_holdout_not_used_for_selection',
+ 'native_logic_meta_evolution_executed','native_thinking_meta_evolution_executed',
+ 'native_intelligence_meta_evolution_executed','logic_fresh_beats_baseline',
+ 'thinking_fresh_beats_baseline','intelligence_fresh_beats_baseline',
+ 'three_new_shadow_gene_identities','rollback_parent_available','canonical_unchanged'
+)
+required_false=(
+ 'external_models_used','new_external_research_used','host_selected_algorithm_family',
+ 'host_written_organ_model','automatic_canonical_promotion'
+)
+passed=(
+ all(checks[k] is True for k in required_true)
+ and all(checks[k] is False for k in required_false)
+)
 status='PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_LTI_EVOLUTION_V1' if passed else 'WITHHOLD_G2_EXPERIENCE_CONDITIONED_LTI_EVOLUTION_V1'
 report={
  'schema':'yado.g2.experience_conditioned_lti_evolution.v1',
