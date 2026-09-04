@@ -1,0 +1,45 @@
+{
+  "schema": "yado.g2.coding_reasoning_workspace_v2.request.v1",
+  "objective": "EVOLVE_THINKING_FROM_LINEAR_CODING_SEQUENCE_TO_ITERATIVE_BRANCHING_PROGRAMMER_REASONING",
+  "instruction": "Consume the real G2 coding apprenticeship successes and failures as memory. Train THINKING on the programmer loop supplied by the user: read code, build a model, form a defect hypothesis, test it, implement a change, check consequences, revise the hypothesis after failure, and store the outcome. The host may provide curriculum states and strict evaluation only. YADO's native developmental executive must synthesize the actual state-conditioned mechanism. Do not use an external coding model or a ready host patch. Keep the resulting mechanism shadow-only.",
+  "parents": [
+    "candidates/kernel-self-generated/g2-coding-cognitive-layer-v1.json",
+    "experience/yado-coding-apprenticeship-v1.json",
+    "candidates/kernel-self-generated/g2-experience-conditioned-thinking-repair-v2.json"
+  ],
+  "curriculum": [
+    "READ_CODE",
+    "BUILD_MODEL",
+    "FORM_HYPOTHESIS",
+    "TEST_HYPOTHESIS",
+    "IMPLEMENT_CHANGE",
+    "CHECK_CONSEQUENCES",
+    "REVISE_HYPOTHESIS_ON_FAILURE",
+    "STORE_EXPERIENCE",
+    "ADVANCE"
+  ],
+  "success_conditions": [
+    "fresh coding tasks contain both success and failure",
+    "YADO synthesizes a native THINKING mechanism",
+    "fresh branching score >= 0.95",
+    "branching mechanism beats the old linear-loop baseline by >= 0.10",
+    "ablation causes >= 0.20 score drop",
+    "restore reproduces the fresh score",
+    "canonical G2 remains unchanged"
+  ],
+  "constraints": {
+    "third_party_code_execution": false,
+    "external_coding_model": false,
+    "ready_patch_from_host": false,
+    "host_written_rule_program": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "fresh_holdout": true,
+    "ablation": true,
+    "rollback": true
+  },
+  "host_role": "USER_CURRICULUM_TRANSPORT_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+  "stop_condition": "PASS_SHADOW_CODING_REASONING_WORKSPACE_OR_EXPLICIT_WITHHOLD_WITH_DEFICIT",
+  "trigger": 1,
+  "trigger_reason": "CONTINUE_AFTER_G2_CODING_APPRENTICESHIP_V1_THINKING_ZERO"
+}
