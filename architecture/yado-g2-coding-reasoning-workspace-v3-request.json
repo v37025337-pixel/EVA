@@ -1,0 +1,38 @@
+{
+  "schema": "yado.g2.coding_reasoning_workspace_v3.request.v1",
+  "objective": "LET_ACTIVE_G2_CONJUNCTIVE_INDUCTION_MUTATE_THINKING_FROM_ACCUMULATED_CODING_FAILURES_AND_SUCCESSES",
+  "instruction": "Consume V1 coding apprenticeship memory, V2 branching failure evidence, and the existing transferred THINKING lineage. Verify that ALG-CONJUNCTIVE-RULE-INDUCER-V1 is already an active canonical G2 capability. Use that active YADO mechanism to learn the programmer reasoning policy from examples, including state-conditioned retry after failed hypothesis or consequence checks. The host must not write reasoning rules or provide a ready patch. Evaluate on new executable sandbox coding tasks with fresh holdout, single-predicate and linear baselines, ablation and restore. Keep the resulting THINKING gene shadow-only.",
+  "parents": [
+    "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v2.json",
+    "experience/yado-coding-reasoning-workspace-v2.json",
+    "experience/yado-coding-apprenticeship-v1.json",
+    "candidates/kernel-self-generated/g2-coding-cognitive-layer-v1.json",
+    "candidates/kernel-self-generated/g2-experience-conditioned-thinking-repair-v2.json"
+  ],
+  "required_active_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+  "success_conditions": [
+    "active conjunctive capability is verified in canonical G2",
+    "new V3 coding holdout contains successes and failures",
+    "learned program contains multi-predicate state-conditioned rules",
+    "fresh reasoning score is exact",
+    "candidate beats the old single-predicate mechanism",
+    "candidate beats linear programmer-loop baseline by at least 0.10",
+    "ablation causes at least 0.20 drop",
+    "restore reproduces fresh score",
+    "new THINKING gene remains shadow and canonical G2 is unchanged"
+  ],
+  "constraints": {
+    "third_party_code_execution": false,
+    "external_coding_model": false,
+    "ready_patch_from_host": false,
+    "host_written_reasoning_rules": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "fresh_holdout": true,
+    "ablation": true,
+    "rollback": true
+  },
+  "host_role": "CURRICULUM_TRANSPORT_FRESH_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+  "trigger": 1,
+  "trigger_reason": "CONTINUE_AFTER_V2_DIAGNOSED_SINGLE_PREDICATE_REPRESENTATION_LIMIT"
+}
