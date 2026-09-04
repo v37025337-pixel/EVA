@@ -1,0 +1,185 @@
+{
+  "candidate_executed_only_in_isolated_copy": false,
+  "candidate_path": null,
+  "candidate_sha256": null,
+  "canonical_head_unchanged": true,
+  "canonical_mutation": false,
+  "external_models_are_tools": true,
+  "external_tools_used": [
+    {
+      "model_id": "minimax-m2.7",
+      "provider_key": "llm7",
+      "url": "https://api.llm7.io/v1/chat/completions"
+    },
+    {
+      "model_id": "kilo-auto/free",
+      "provider_key": "kilo",
+      "url": "https://api.kilo.ai/api/gateway/chat/completions"
+    }
+  ],
+  "host_selected_target": false,
+  "host_wrote_candidate_patch": false,
+  "kernel_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "7006013bd1e86c272c7769a55541024c941ed568df2c0666595b3f33a0361bf1",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": false,
+          "structural": false
+        },
+        "evidence_digest": "bf2d421f3805ce618dd3fa721464f5400843d0e94a7079f3460d552ce8b730e0",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "regression",
+          "semantic",
+          "state_integrity",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SELF_AUDIT_EVIDENCE_REPAIR_KILO_1",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": false,
+          "structural": false
+        },
+        "evidence_digest": "330b0620afc4c6691d16be52405a4c27d5aabf799caf2abab472311e1481d040",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "regression",
+          "semantic",
+          "state_integrity",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SELF_AUDIT_EVIDENCE_REPAIR_LLM7_0",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "latest_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json",
+  "problem_packet_digest": "4d3fa204e2eed07587419108fbf7fed16a64a224be77124cf073c5ddc54c605a",
+  "proposals": [
+    {
+      "candidate_source_sha256": null,
+      "diagnosis": null,
+      "evidence_used": null,
+      "model_id": "minimax-m2.7",
+      "parse_error": null,
+      "parsed": false,
+      "patch_count": null,
+      "provider_key": "llm7",
+      "rationale": null,
+      "semantic_probe": null,
+      "skill_id": "SELF_AUDIT_EVIDENCE_REPAIR_LLM7_0",
+      "static_evaluation": null,
+      "target_path": null,
+      "withhold": true
+    },
+    {
+      "candidate_source_sha256": null,
+      "diagnosis": "The kernel-native deep self-audit (source of receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json) is the producer of the repeated PARTIAL LIVE_RESOURCE_EVIDENCE_SCOPE verdict. The latest action evidence at candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json reports PASS_DIRECT_LIVE_RESOURCE_EVIDENCE_RECHECK with successful live fetch (commit f611aaed, HTTP 200 on README.md, package.json, sources.js), full semantic extraction (package_name=free-coding-models, version=0.5.81, provider_count=22, readme_title, repository_commit_identity, cross_file_provider_mentions=2, no_key_provider_keys=[kilo,llm7]), no prior_vs_live_conflicts, canonical_mutation=false, and conflict_resolution_pass=true. Despite this fresh direct evidence, the audit's live_resource_finding remains PARTIAL with the note 'comprehension/integration was not proven' and self_selected_next_step repeats LIVE_RESOURCE_EVIDENCE_SCOPE. The audit is not consulting the kernel-self-generated action-evidence artifact when scoring the LIVE_RESOURCE_EVIDENCE_SCOPE area, so the self-model update loop closes without ingesting the new comprehension/conflict-resolution evidence. The minimal, most direct repair is to teach yado_unified_core_deep_self_audit_v1.py to load and weigh candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json (and any sibling g2-autonomous-self-improvement-task receipts) as direct evidence for the LIVE_RESOURCE_EVIDENCE_SCOPE area, treating PASS_DIRECT_LIVE_RESOURCE_EVIDENCE_RECHECK with valid comprehension extraction and no canonical mutation as sufficient fresh evidence to upgrade the area from PARTIAL to PASS, and otherwise leaving the area open (fail-closed: only close the scope if the new evidence is valid). This keeps the canonical head unchanged, adds no new import roots, introduces no subprocess, and uses the existing receipt-loading pattern already present in the audit.",
+      "evidence_used": [
+        "latest_action_evidence.goal_action_result.status = PASS_DIRECT_LIVE_RESOURCE_EVIDENCE_RECHECK indicates fresh, valid direct evidence was produced",
+        "latest_action_evidence.goal_action_result.comprehension fields (package_identity_extracted, provider_catalog_extracted, readme_title_extracted, repository_commit_identity_extracted, cross_file_provider_mentions=2, no_key_provider_set_extracted) prove comprehension was successfully measured, contradicting the audit's 'comprehension/integration was not proven' note",
+        "latest_action_evidence.goal_action_result.canonical_mutation = false and prior_vs_live_conflicts = [] prove the new evidence is safe to consume",
+        "latest_audit.live_resource_finding = PARTIAL with self_selected_next_step = LIVE_RESOURCE_EVIDENCE_SCOPE shows the audit ignored the fresh action evidence and repeated the same priority",
+        "latest_audit.source = receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json identifies the consuming file as yado_unified_core_deep_self_audit_v1.py",
+        "task.evidence.direct_evidence_artifact = candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json is the exact receipt path the audit must learn to consult",
+        "task.success_conditions require isolated_fresh_self_audit_consumes_relevant_direct_evidence and LIVE_RESOURCE_EVIDENCE_SCOPE_is_only_closed_if_the_new_evidence_is_valid, matching the proposed fail-closed consume-and-validate repair in the audit file",
+        "runtime_inventory confirms runtime/yado_unified_core_deep_self_audit_v1.py exists (26997 bytes) and is the only file whose audit receipt appears in the evidence chain",
+        "task.constraints no_canonical_mutation, no_new_import_roots, no_new_subprocess, no_secrets are satisfiable with a localized evidence-lookup patch inside the audit"
+      ],
+      "model_id": "kilo-auto/free",
+      "parse_error": "RuntimeError:REPAIR_MODEL_CALL_FAILED",
+      "parsed": false,
+      "patch_count": null,
+      "provider_key": "kilo",
+      "rationale": null,
+      "semantic_probe": null,
+      "skill_id": "SELF_AUDIT_EVIDENCE_REPAIR_KILO_1",
+      "static_evaluation": null,
+      "target_path": "runtime/yado_unified_core_deep_self_audit_v1.py",
+      "withhold": false
+    }
+  ],
+  "receipt_sha256": "cab6a45d1603e9646555d1ef134bd3e8416f9f557e68038749aa1225cf2b60d5",
+  "schema": "yado.g2.action_evidence_self_audit_self_study_repair.v1",
+  "selected_skill_id": null,
+  "selected_target_path": null,
+  "semantic_boundary": "YADO WAS GIVEN THE PROBLEM AND SUCCESS/SAFETY CONDITIONS. EXTERNAL NO-KEY MODELS MAY DIAGNOSE AND PROPOSE PATCHES AS TOOLS; YADO NATIVE SKILL ADMISSION SELECTS OR WITHHOLDS. HOST DOES NOT SELECT TARGET OR WRITE THE PATCH. PASS IS SHADOW ONLY AND REQUIRES AN ISOLATED FRESH SELF-AUDIT PLUS REGRESSION.",
+  "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1",
+  "task": {
+    "authorization": {
+      "shadow_code_rewrite": true,
+      "use_accumulated_project_evidence": true,
+      "use_approved_external_no_key_coding_models_as_tools": true,
+      "use_existing_native_kernel_mechanisms": true
+    },
+    "constraints": {
+      "fail_closed": true,
+      "no_canonical_mutation": true,
+      "no_eval_exec": true,
+      "no_host_selected_target": true,
+      "no_host_solution_hint": true,
+      "no_host_written_patch": true,
+      "no_new_import_roots": true,
+      "no_new_subprocess": true,
+      "no_secrets": true
+    },
+    "evidence": {
+      "direct_evidence_artifact": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+      "direct_priority_runs": [
+        33832611701,
+        33832670571,
+        33832722100,
+        33833049256
+      ],
+      "latest_deep_self_audit_run_id": 33832918251
+    },
+    "goal": "Study the disconnect, choose a repair target and solution path, and produce a shadow repair that makes self-audit consume relevant fresh self-generated evidence without forcing a verdict.",
+    "host_role": "PROBLEM_CONTRACT_TRANSPORT_AND_ISOLATED_EVALUATION_ONLY",
+    "objective": "KERNEL_STUDY_AND_REPAIR_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING",
+    "problem": "Fresh direct evidence is produced for the kernel-selected LIVE_RESOURCE_EVIDENCE_SCOPE priority, but the next kernel-native deep self-audit ignores that fresh self-generated evidence and repeats the same PARTIAL priority.",
+    "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
+    "stop_condition": "PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+    "success_conditions": [
+      "kernel_or_its_approved_tools_diagnose_the_disconnect",
+      "target_is_not_host_selected",
+      "patch_is_not_host_written",
+      "candidate_compiles",
+      "isolated_fresh_self_audit_consumes_relevant_direct_evidence",
+      "LIVE_RESOURCE_EVIDENCE_SCOPE_is_only_closed_if_the_new_evidence_is_valid",
+      "runtime_compileall_passes",
+      "selected_regression_suite_passes",
+      "canonical_head_remains_unchanged",
+      "kernel_native_skill_admission_selects_the_candidate_or_withholds"
+    ],
+    "trigger": 1,
+    "trigger_reason": "START_KERNEL_SELF_STUDY_AND_SHADOW_REPAIR"
+  }
+}
