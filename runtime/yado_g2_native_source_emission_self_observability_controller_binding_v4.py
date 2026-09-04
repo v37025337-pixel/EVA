@@ -42,13 +42,19 @@ if not all(base.values()):raise RuntimeError('V3_POSITIVE_EVIDENCE_INCOMPLETE')
 fields=tuple(sorted(base))
 
 def truth(x):return 'PROVEN_NATIVE_SOURCE_EMISSION' if all(bool(x[k]) for k in fields) else 'SOURCE_EMISSION_NOT_ESTABLISHED'
+def observed(x):
+    # Mechanical compression of the evidence surface, not a host-authored decision rule.
+    y=dict(x)
+    y['evidence_true_count']=sum(1 for k in fields if bool(x[k]))
+    y['evidence_total_count']=len(fields)
+    return y
 
 rows=[]
 for rep in range(14):
-    x=dict(base);rows.append({'kind':'POS','variant':rep,'input':x,'expected':truth(x)})
+    x=dict(base);rows.append({'kind':'POS','variant':rep,'input':observed(x),'expected':truth(x)})
 for k in fields:
     for rep in range(6):
-        x=dict(base);x[k]=False;rows.append({'kind':'ABLATE_'+k,'variant':rep,'input':x,'expected':truth(x)})
+        x=dict(base);x[k]=False;rows.append({'kind':'ABLATE_'+k,'variant':rep,'input':observed(x),'expected':truth(x)})
 
 fit=[];blind=[]
 for row in rows:
@@ -76,13 +82,13 @@ try:
     dev=k.executive.evaluate_mechanism(program.program_id,blind,min_score=1.0,min_ablation_drop=.20)
     probes=[]
     for i in range(4):
-        x=dict(base)
+        raw=dict(base);x=observed(raw)
         y=k.executive.execute_capability('NATIVE_SOURCE_EMISSION_SELF_OBSERVATION_V4',x)
-        probes.append({'kind':'POS','output':y,'expected':truth(x),'pass':y==truth(x)})
+        probes.append({'kind':'POS','output':y,'expected':truth(raw),'pass':y==truth(raw)})
     for key in fields:
-        x=dict(base);x[key]=False
+        raw=dict(base);raw[key]=False;x=observed(raw)
         y=k.executive.execute_capability('NATIVE_SOURCE_EMISSION_SELF_OBSERVATION_V4',x)
-        probes.append({'kind':'ABLATE_'+key,'output':y,'expected':truth(x),'pass':y==truth(x)})
+        probes.append({'kind':'ABLATE_'+key,'output':y,'expected':truth(raw),'pass':y==truth(raw)})
 finally:
     try:k.close()
     except Exception:pass
@@ -93,7 +99,7 @@ rep={
  'selection':asdict(selection),'development':asdict(dev),
  'observed_source_emission_receipt':v3.get('receipt_sha256'),
  'observed_source_sha256':v3.get('selected_source_sha256'),
- 'evidence_fields':list(fields),'probe_results':probes,
+ 'evidence_fields':list(fields),'mechanical_aggregate_fields':['evidence_true_count','evidence_total_count'],'probe_results':probes,
  'semantic_boundary':'EXECUTABLE SELF-OBSERVATION OF A PROVEN NATIVE CODE-GENE SOURCE-EMISSION EVENT.'
 }
 rep['representation_digest']=digest(rep)
