@@ -70,64 +70,46 @@ def balance_binary(rows):
 lf,lv,lb=map(balance_binary,(lf,lv,lb))
 if min(len(lf),len(lv),len(lb))<8:raise RuntimeError('LOGIC_HISTORY_SPLIT_TOO_SMALL')
 
-# THINKING: learn stable control-transition ordering from early causal history.
-# Representation is mechanically derived from status + NEXT relation, so it can
-# recur in later history even when concrete event/deficit names are new.
+# THINKING: learn recurring control-transition sequences from accumulated history.
+# The role vocabulary is coarse and chronology-derived, so late holdout may contain
+# new concrete event/deficit names without creating an out-of-vocabulary failure.
 def next_relation(e):
     effect=str(e.get('effect') or '')
     m=re.search(r'NEXT=([A-Z0-9_\\-]+)',effect)
-    if not m:return 'NONE'
+    if not m:return 'STOP'
     nxt=m.group(1);cur=str(e.get('deficit') or '')
-    return 'SELF' if nxt==cur else 'OTHER'
-def control_role(e):
+    return 'RETRY' if nxt==cur else 'ADVANCE'
+def status_group(e):
     s=str(e.get('status') or '').upper()
-    if 'CANONICAL' in s:sg='CANONICAL'
-    elif 'SHADOW' in s:sg='SHADOW'
-    elif s.startswith('WITHHOLD'):sg='WITHHOLD'
-    elif s.startswith('FAIL'):sg='FAIL'
-    elif s.startswith('PASS') or s in ('VERIFIED','EXECUTE'):sg='PASS'
-    else:sg='OTHER'
-    return sg+'__NEXT_'+next_relation(e)
+    if 'CANONICAL' in s:return 'CANONICAL'
+    if 'SHADOW' in s:return 'SHADOW'
+    if s.startswith('WITHHOLD'):return 'WITHHOLD'
+    if s.startswith('FAIL'):return 'FAIL'
+    if s.startswith('PASS') or s in ('VERIFIED','EXECUTE'):return 'PASS'
+    return 'OTHER'
+def control_role(e):
+    return status_group(e)+'__'+next_relation(e)
 
-ne=len(events);ea=max(2,int(ne*.60));eb=max(ea+2,int(ne*.80))
+ne=len(events);ea=max(4,int(ne*.60));eb=max(ea+4,int(ne*.80))
 event_fit,event_val,event_blind=events[:ea],events[ea:eb],events[eb:]
 
-# Derive stable directed relations only from training history.
-pair_counts={}
-for a,b in zip(event_fit,event_fit[1:]):
-    ra,rb=control_role(a),control_role(b)
-    if ra==rb:continue
-    key=tuple(sorted((ra,rb)))
-    d=pair_counts.setdefault(key,{(key[0],key[1]):0,(key[1],key[0]):0})
-    d[(ra,rb)]=d.get((ra,rb),0)+1
-stable=set()
-for key,d in pair_counts.items():
-    ab=d.get((key[0],key[1]),0);ba=d.get((key[1],key[0]),0);tot=ab+ba
-    if tot<2:continue
-    if ab/tot>=.75:stable.add((key[0],key[1]))
-    elif ba/tot>=.75:stable.add((key[1],key[0]))
-if len(stable)<2:raise RuntimeError('THINKING_STABLE_RELATIONS_TOO_SMALL:'+str(len(stable)))
+def build_windows(segment,width=4):
+    roles=[control_role(e) for e in segment]
+    return [roles[i:i+width] for i in range(max(0,len(roles)-width+1))]
 
-tf=[]
-for a,b in zip(event_fit,event_fit[1:]):
-    pair=(control_role(a),control_role(b))
-    if pair in stable:tf.append(list(pair))
-def holdout_pairs(segment):
-    out=[]
-    for a,b in zip(segment,segment[1:]):
-        pair=(control_role(a),control_role(b))
-        if pair in stable:out.append(list(pair))
-    return out
-tv=holdout_pairs(event_val);tb=holdout_pairs(event_blind)
+tf=build_windows(event_fit);tv=build_windows(event_val);tb=build_windows(event_blind)
 windows=tf+tv+tb
-if min(len(tf),len(tv),len(tb))<4:raise RuntimeError('THINKING_HISTORY_SPLIT_TOO_SMALL:'+str([len(tf),len(tv),len(tb)]))
+if min(len(tf),len(tv),len(tb))<8:
+    raise RuntimeError('THINKING_HISTORY_SPLIT_TOO_SMALL:'+str([len(tf),len(tv),len(tb)]))
+
 def episode(seq,salt):
     actions=[]
     for j,role in enumerate(seq):
-        hid=hashlib.sha256((str(salt)+'|'+role).encode()).hexdigest()[:12]
+        hid=hashlib.sha256((str(salt)+'|'+str(j)+'|'+role).encode()).hexdigest()[:12]
         actions.append({'id':hid,'role':role})
     actions=sorted(actions,key=lambda a:a['id'])
     return (actions,list(seq))
+
 tv_ep=[episode(x,'VAL'+str(i)) for i,x in enumerate(tv)]
 tb_ep=[episode(x,'BLIND'+str(i)) for i,x in enumerate(tb)]
 
