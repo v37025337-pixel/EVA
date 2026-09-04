@@ -1,0 +1,366 @@
+{
+  "active_capability_count": 27,
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "cases": [
+    {
+      "expected": "ACCEPT",
+      "name": "logic_accept",
+      "organ": "LOGIC",
+      "pass": true,
+      "payload": {
+        "result_exact": true,
+        "state_known": true
+      },
+      "result": {
+        "decision": "ACCEPT",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "LOGIC",
+          "route_cardinality": "ONE",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "ACCEPT"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "CONTINUE",
+      "name": "logic_continue",
+      "organ": "LOGIC",
+      "pass": true,
+      "payload": {
+        "search_incomplete": true,
+        "state_known": true
+      },
+      "result": {
+        "decision": "CONTINUE",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "LOGIC",
+          "route_cardinality": "ONE",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "CONTINUE"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "WITHHOLD",
+      "name": "logic_conflict",
+      "organ": "LOGIC",
+      "pass": true,
+      "payload": {
+        "result_exact": true,
+        "search_incomplete": true,
+        "state_known": true
+      },
+      "result": {
+        "decision": "WITHHOLD",
+        "gate": "WITHHOLD",
+        "guard_features": {
+          "organ": "LOGIC",
+          "route_cardinality": "MULTI",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "ACCEPT",
+          "CONTINUE"
+        ],
+        "route_cardinality": "MULTI"
+      }
+    },
+    {
+      "expected": "WITHHOLD",
+      "name": "logic_unknown",
+      "organ": "LOGIC",
+      "pass": true,
+      "payload": {
+        "result_exact": true,
+        "state_known": false
+      },
+      "result": {
+        "decision": "WITHHOLD",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "LOGIC",
+          "route_cardinality": "ONE",
+          "state_known": false
+        },
+        "matched_outputs": [
+          "ACCEPT"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "REVISE",
+      "name": "thinking_revise",
+      "organ": "THINKING",
+      "pass": true,
+      "payload": {
+        "candidate_available": false,
+        "formal_spec_present": false,
+        "state_known": true
+      },
+      "result": {
+        "decision": "REVISE",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "THINKING",
+          "route_cardinality": "ONE",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "REVISE"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "TEST",
+      "name": "thinking_test",
+      "organ": "THINKING",
+      "pass": true,
+      "payload": {
+        "candidate_available": true,
+        "formal_spec_present": false,
+        "hypothesis_set_present": false,
+        "state_known": true
+      },
+      "result": {
+        "decision": "TEST",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "THINKING",
+          "route_cardinality": "ONE",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "TEST"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "WITHHOLD",
+      "name": "thinking_conflict",
+      "organ": "THINKING",
+      "pass": true,
+      "payload": {
+        "candidate_available": false,
+        "formal_spec_present": false,
+        "oracle_available": true,
+        "state_known": true
+      },
+      "result": {
+        "decision": "WITHHOLD",
+        "gate": "WITHHOLD",
+        "guard_features": {
+          "organ": "THINKING",
+          "route_cardinality": "MULTI",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "SEEK_EVIDENCE",
+          "REVISE"
+        ],
+        "route_cardinality": "MULTI"
+      }
+    },
+    {
+      "expected": "WITHHOLD",
+      "name": "thinking_unknown",
+      "organ": "THINKING",
+      "pass": true,
+      "payload": {
+        "candidate_available": false,
+        "formal_spec_present": false,
+        "state_known": false
+      },
+      "result": {
+        "decision": "WITHHOLD",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "THINKING",
+          "route_cardinality": "ONE",
+          "state_known": false
+        },
+        "matched_outputs": [
+          "REVISE"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "ORACLE_GUIDED_REPAIR",
+      "name": "intelligence_oracle",
+      "organ": "INTELLIGENCE",
+      "pass": true,
+      "payload": {
+        "formal_spec_present": true,
+        "real_source": false,
+        "state_known": true
+      },
+      "result": {
+        "decision": "ORACLE_GUIDED_REPAIR",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "INTELLIGENCE",
+          "route_cardinality": "ONE",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "ORACLE_GUIDED_REPAIR"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "HYPOTHESIS_REVISION",
+      "name": "intelligence_revision",
+      "organ": "INTELLIGENCE",
+      "pass": true,
+      "payload": {
+        "formal_spec_present": false,
+        "hypothesis_set_present": false,
+        "state_known": true
+      },
+      "result": {
+        "decision": "HYPOTHESIS_REVISION",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "INTELLIGENCE",
+          "route_cardinality": "ONE",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "HYPOTHESIS_REVISION"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "WITHHOLD",
+      "name": "intelligence_conflict",
+      "organ": "INTELLIGENCE",
+      "pass": true,
+      "payload": {
+        "formal_spec_present": true,
+        "hypothesis_set_present": true,
+        "real_source": false,
+        "state_known": true
+      },
+      "result": {
+        "decision": "WITHHOLD",
+        "gate": "WITHHOLD",
+        "guard_features": {
+          "organ": "INTELLIGENCE",
+          "route_cardinality": "MULTI",
+          "state_known": true
+        },
+        "matched_outputs": [
+          "ACTIVE_EVIDENCE_SEARCH",
+          "ORACLE_GUIDED_REPAIR"
+        ],
+        "route_cardinality": "MULTI"
+      }
+    },
+    {
+      "expected": "WITHHOLD",
+      "name": "intelligence_unknown",
+      "organ": "INTELLIGENCE",
+      "pass": true,
+      "payload": {
+        "formal_spec_present": true,
+        "real_source": false,
+        "state_known": false
+      },
+      "result": {
+        "decision": "WITHHOLD",
+        "gate": "PASS_THROUGH",
+        "guard_features": {
+          "organ": "INTELLIGENCE",
+          "route_cardinality": "ONE",
+          "state_known": false
+        },
+        "matched_outputs": [
+          "ORACLE_GUIDED_REPAIR"
+        ],
+        "route_cardinality": "ONE"
+      }
+    },
+    {
+      "expected": "WITHHOLD",
+      "name": "unknown_organ",
+      "organ": "NOVEL_ORGAN",
+      "pass": true,
+      "payload": {
+        "state_known": true
+      },
+      "result": {
+        "decision": "WITHHOLD",
+        "gate": "WITHHOLD",
+        "guard_features": {
+          "organ": "NOVEL_ORGAN",
+          "route_cardinality": "ZERO",
+          "state_known": true
+        },
+        "matched_outputs": [],
+        "route_cardinality": "ZERO"
+      }
+    }
+  ],
+  "checks": {
+    "active_capability_count_27": true,
+    "all_execution_cases_pass": true,
+    "canonical_artifact_active": true,
+    "cognitive_gene_exact": true,
+    "component_active_in_head": true,
+    "component_active_in_manifest": true,
+    "conflict_cases_fail_closed": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "guard_gene_exact": true,
+    "head_ledger_digest_match": true,
+    "rollback_intelligence_active": true,
+    "rollback_logic_active": true,
+    "rollback_thinking_active": true,
+    "runtime_hash_exact": true,
+    "snapshot_component_exact": true,
+    "unified_core_bound": true,
+    "unknown_cases_fail_closed": true
+  },
+  "component_id": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "report_digest": "a22b146dcabf967f98f301b53161a6d28c6b1bdf536c59258eaf2c2eceac71ff",
+  "schema": "yado.g2.cognitive_layer.post_admission.v1",
+  "semantic_boundary": "POST-ADMISSION EXECUTION AUDIT OF THE BOUNDED EXPERIENCE-CONDITIONED COGNITIVE CONTROL LAYER THROUGH THE CANONICAL UNIFIED CORE.",
+  "snapshot": {
+    "automatic_canonical_promotion": false,
+    "cognitive_gene_id": "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V3-c09e6c4c7c8abfa0",
+    "component_id": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
+    "fresh_gate_receipt_sha256": "a8948a24f98fbbc3405a13099239a78c24dbdc30c6428bfaa10f11a26a727e86",
+    "guard_gene_id": "GENE-G2-COGNITIVE-CONFLICT-ARBITER-V1-d1bffef06b4c5aae",
+    "organ_gene_ids": {
+      "INTELLIGENCE": "GENE-G2-CODING-EXPERIENCE-INTELLIGENCE-V2-2e8aff24dfeacd7a",
+      "LOGIC": "GENE-G2-CODING-EXPERIENCE-LOGIC-V2-481f40e6993138f6",
+      "THINKING": "GENE-G2-CODING-EXPERIENCE-THINKING-V2-1b8a2855f84c94c0"
+    },
+    "rollback_parent_capabilities": {
+      "INTELLIGENCE": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+      "LOGIC": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+      "THINKING": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    },
+    "schema": "yado.g2.experience_conditioned_cognitive_layer.snapshot.v3",
+    "semantic_boundary": "BOUNDED EXPERIENCE-CONDITIONED CONTROL LAYER WITH LEARNED FAIL-CLOSED CONFLICT ARBITRATION; NOT GENERAL INTELLIGENCE OR CONSCIOUSNESS.",
+    "status": "CANONICAL_ACTIVE"
+  },
+  "status": "PASS_G2_COGNITIVE_LAYER_POST_ADMISSION_V1"
+}
