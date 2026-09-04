@@ -1,0 +1,63 @@
+{
+  "admission_state": "SHADOW_ADMISSION_READY",
+  "balanced_ablation": 0.5,
+  "balanced_ablation_drop": 0.5,
+  "balanced_case_count": 48,
+  "balanced_fresh": 1.0,
+  "balanced_restore": 1.0,
+  "canonical_mutation": false,
+  "checks": {
+    "arbiter_v1_pass_consumed": true,
+    "automatic_canonical_promotion": false,
+    "balanced_ablation_material": true,
+    "balanced_fresh_exact": true,
+    "balanced_probe_exact": true,
+    "balanced_probe_material": true,
+    "balanced_restore_exact": true,
+    "canonical_unchanged": true,
+    "exhaustive_behavior_336_preserved": true,
+    "external_models_used": false,
+    "intelligence_336_family_exact": true,
+    "logic_336_family_exact": true,
+    "mechanism_changed_to_chase_metric": false,
+    "novel_perturbation_exact": true,
+    "stress_v2_withhold_consumed": true,
+    "thinking_336_family_exact": true
+  },
+  "class_counts": {
+    "PASS_THROUGH": 24,
+    "WITHHOLD": 24
+  },
+  "cognitive_gene_id": "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V3-c09e6c4c7c8abfa0",
+  "exhaustive_case_count": 336,
+  "exhaustive_composite": 1.0,
+  "guard_gene_id": "GENE-G2-COGNITIVE-CONFLICT-ARBITER-V1-d1bffef06b4c5aae",
+  "next_required_capability": "G2_COGNITIVE_LAYER_CANONICAL_ADMISSION_V1",
+  "perturbation_score": 1.0,
+  "promotion_applied": false,
+  "receipt_sha256": "a8948a24f98fbbc3405a13099239a78c24dbdc30c6428bfaa10f11a26a727e86",
+  "schema": "yado.g2.cognitive_conflict_arbitration_repair.v2",
+  "semantic_boundary": "V2 REPAIRS THE CAUSAL EVALUATION CONTRACT, NOT THE ALREADY-EXACT ARBITER. EXHAUSTIVE 336/336 BEHAVIOR IS RETAINED; A BALANCED FRESH BLIND PROBE MEASURES CAUSAL CONTRIBUTION WITHOUT MAJORITY WITHHOLD MASKING.",
+  "status": "PASS_EVIDENCE_REPAIR_G2_COGNITIVE_CONFLICT_ARBITRATION_V2",
+  "task": {
+    "constraints": {
+      "ablation_min_drop": 0.25,
+      "automatic_promotion": false,
+      "balanced_probe": true,
+      "canonical_mutation": false,
+      "fresh_exact": true,
+      "mechanism_change": false,
+      "preserve_336_of_336": true
+    },
+    "host_role": "BALANCED_CAUSAL_EVALUATION_ONLY",
+    "instruction": "Consume the exhaustive stress V2 WITHHOLD. Preserve the learned arbiter unchanged because all 336 bounded states were behaviorally exact. The only failed criterion was raw ablation sensitivity under a naturally WITHHOLD-dominated exhaustive state distribution. Add a fresh balanced blind causal probe with equal PASS_THROUGH and WITHHOLD targets, new organ tokens, new noise fields, and deterministic restore. Require fresh 1.0, ablation drop >=0.25, perturbation 1.0, and retain the prior 336/336 exhaustive behavior as mandatory evidence. Do not change the mechanism to chase the metric, do not lower the threshold, and do not mutate canonical state.",
+    "objective": "REPAIR_THE_CAUSAL_ABLATION_PROTOCOL_WITHOUT_CHANGING_AN_EXHAUSTIVELY_CORRECT_ARBITER",
+    "parents": [
+      "candidates/kernel-self-generated/g2-cognitive-conflict-arbitration-repair-v1.json",
+      "candidates/kernel-self-generated/g2-cognitive-consolidation-stress-admission-v2.json"
+    ],
+    "schema": "yado.g2.cognitive_conflict_arbitration_repair_v2.request.v1",
+    "trigger": 1,
+    "trigger_reason": "STRESS_V2_BEHAVIOR_1_0_BUT_RAW_ABLATION_CLASS_IMBALANCE"
+  }
+}
