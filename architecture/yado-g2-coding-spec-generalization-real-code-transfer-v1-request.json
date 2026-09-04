@@ -1,0 +1,18 @@
+{
+  "schema": "yado.g2.coding_spec_generalization_real_code_transfer_v1.request.v1",
+  "objective": "TRANSFER_SPEC_ORACLE_SELF_TEST_REPAIR_FROM_SYNTHETIC_FUNCTIONS_TO_CURRENT_REAL_YADO_SOURCE_FRAGMENTS",
+  "instruction": "Consume the passed self-generated test oracle gene. Mechanically scan current active YADO runtime source files for safe algebraic AST fragments within the already-proven semantic grammar. Do not hand-select a convenient fragment: present opaque fragment candidates to the active neutral evidence selector, with diversity/risk metadata, and let it select the transfer set. Normalize only variable names, preserving the real expression structure and provenance. Create each defect only by one mutation from the active bounded program-repair mutation grammar and only in a shadow wrapper. The unmutated original fragment is hidden from the patch path and may be used only by the harness to create a small formal spec and untouched final regression. YADO must synthesize an oracle from the spec, select new test inputs, compute expected values via that oracle, and repair the mutated shadow source with active program repair. Require at least six tasks from at least four distinct real source files, exact hidden oracle and repair regression, material ablation, deterministic restore, and unchanged canonical G2.",
+  "parent": "candidates/kernel-self-generated/g2-coding-self-generated-test-oracle-v1.json",
+  "constraints": {
+    "host_selected_source_fragment": false,
+    "host_selected_patch": false,
+    "external_coding_model": false,
+    "original_source_visible_to_patch_path": false,
+    "formal_spec_rows_used_directly_as_patch_tests": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false
+  },
+  "host_role": "MECHANICAL_AST_DISCOVERY_SHADOW_MUTATION_FORMAL_SPEC_AND_HIDDEN_REGRESSION_HARNESS_ONLY",
+  "trigger": 1,
+  "trigger_reason": "SELF_GENERATED_TEST_ORACLE_V1_PASSED_NEXT_DEFICIT_IS_REAL_SOURCE_TRANSFER"
+}
