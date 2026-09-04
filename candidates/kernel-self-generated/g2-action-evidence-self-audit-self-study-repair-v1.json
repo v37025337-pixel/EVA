@@ -35,7 +35,7 @@
           "state_integrity": false,
           "structural": false
         },
-        "evidence_digest": "94600ee2e7a0efed5ae2182256ff955f54e696e6b005e2b02e2bdee6a019dca9",
+        "evidence_digest": "95c23864f4438d9ec519d54309647d9ffad9f6701e310ee0805da75241367794",
         "failed_critics": [
           "fit_marginal_gain",
           "heldout_gain_floor",
@@ -82,7 +82,7 @@
     "status": "NO_ADMISSIBLE_SKILLS"
   },
   "latest_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json",
-  "problem_packet_digest": "2c174009112f59bd19f8a3974844db221a4bdf4f9b0f96ee7ebdac443318800b",
+  "problem_packet_digest": "99f0e6d8a61aacc24d75f4b3efe97775705ad1de5febc561ae79e67c485a27b6",
   "proposals": [
     {
       "candidate_source_sha256": null,
@@ -102,16 +102,10 @@
     },
     {
       "candidate_source_sha256": null,
-      "diagnosis": "The YADO-native evidence-binder gene (GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5) has been created and validated but not yet integrated into the shadow self-audit runtime. The target file implements the shadow action-evidence self-audit self-study repair mechanism (matching schema yado.g2.action_evidence_self_audit_self_study_repair.request.v1) and must load/bind the existing self-generated gene artifact rather than re-derive host rules.",
-      "evidence_used": [
-        "direct_priority_evidence: true",
-        "evidence_digest: 87932e01359943ebb9ad9725374d38ca6fe5ce0ee75a14b651fedef92e9117b9",
-        "self_generated_gene: candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
-        "schema: yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
-        "previous_self_study_receipt: candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json"
-      ],
+      "diagnosis": null,
+      "evidence_used": null,
       "model_id": "kilo-auto/free",
-      "parse_error": "RuntimeError:REPAIR_MODEL_CALL_FAILED",
+      "parse_error": null,
       "parsed": false,
       "patch_count": null,
       "provider_key": "kilo",
@@ -119,11 +113,11 @@
       "semantic_probe": null,
       "skill_id": "SELF_AUDIT_EVIDENCE_REPAIR_KILO_1",
       "static_evaluation": null,
-      "target_path": "runtime/yado_g2_action_evidence_self_audit_self_study_repair_v1.py",
-      "withhold": false
+      "target_path": null,
+      "withhold": true
     }
   ],
-  "receipt_sha256": "cc0d936219f426d6a94c3a2e5d98c0a40cfa8b136e0bfc325284fef1d8e93e98",
+  "receipt_sha256": "3feb877ff8c2967029495a05b92f50296c7bf8e061488ed4316450af8690ab9d",
   "schema": "yado.g2.action_evidence_self_audit_self_study_repair.v1",
   "selected_skill_id": null,
   "selected_target_path": null,
@@ -169,7 +163,10 @@
     },
     "goal": "Let YADO use its own gene as the decision mechanism and select a safe source-level integration candidate. External coding models, if used, are materialization tools only; they must bind the existing YADO gene rather than invent a new rule.",
     "host_role": "TASK_TRANSPORT_STRICT_EVALUATION_ONLY",
+    "host_solution_hint": null,
     "objective": "INTEGRATE_YADO_SELF_GENERATED_EVIDENCE_BINDER_GENE_INTO_SHADOW_SELF_AUDIT",
+    "previous_result": "WITHHOLD_REPAIR_MODEL_CALL_FAILED_AFTER_KERNEL_TOOL_SELECTED_TARGET",
+    "previous_run_id": 33842251880,
     "problem": "YADO has now created and fresh/blind/ablation-validated its own evidence-binding shadow gene, but the real deep self-audit does not yet consume that gene. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
     "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
     "stop_condition": "SELF_GENERATED_GENE_SHADOW_INTEGRATED_OR_EXPLICIT_WITHHOLD",
@@ -185,7 +182,8 @@
       "kernel_native_skill_admission_selects_candidate_or_explicitly_withholds",
       "canonical_head_remains_unchanged"
     ],
-    "trigger": 3,
-    "trigger_reason": "INTEGRATE_NATIVE_GENE_AFTER_RUN_33841818519_PASS"
+    "target_path": null,
+    "trigger": 4,
+    "trigger_reason": "RETRY_SAME_GENE_INTEGRATION_AFTER_REPAIR_TOOL_TRANSPORT_FAILURE"
   }
 }
