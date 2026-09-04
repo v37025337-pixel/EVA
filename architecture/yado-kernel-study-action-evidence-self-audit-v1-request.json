@@ -1,0 +1,47 @@
+{
+  "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
+  "objective": "KERNEL_STUDY_AND_REPAIR_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING",
+  "problem": "Fresh direct evidence is produced for the kernel-selected LIVE_RESOURCE_EVIDENCE_SCOPE priority, but the next kernel-native deep self-audit ignores that fresh self-generated evidence and repeats the same PARTIAL priority.",
+  "evidence": {
+    "latest_deep_self_audit_run_id": 33832918251,
+    "direct_priority_runs": [
+      33832611701,
+      33832670571,
+      33832722100,
+      33833049256
+    ],
+    "direct_evidence_artifact": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json"
+  },
+  "goal": "Study the disconnect, choose a repair target and solution path, and produce a shadow repair that makes self-audit consume relevant fresh self-generated evidence without forcing a verdict.",
+  "success_conditions": [
+    "kernel_or_its_approved_tools_diagnose_the_disconnect",
+    "target_is_not_host_selected",
+    "patch_is_not_host_written",
+    "candidate_compiles",
+    "isolated_fresh_self_audit_consumes_relevant_direct_evidence",
+    "LIVE_RESOURCE_EVIDENCE_SCOPE_is_only_closed_if_the_new_evidence_is_valid",
+    "runtime_compileall_passes",
+    "selected_regression_suite_passes",
+    "canonical_head_remains_unchanged",
+    "kernel_native_skill_admission_selects_the_candidate_or_withholds"
+  ],
+  "constraints": {
+    "no_host_solution_hint": true,
+    "no_host_selected_target": true,
+    "no_host_written_patch": true,
+    "no_new_import_roots": true,
+    "no_eval_exec": true,
+    "no_new_subprocess": true,
+    "no_secrets": true,
+    "no_canonical_mutation": true,
+    "fail_closed": true
+  },
+  "authorization": {
+    "use_accumulated_project_evidence": true,
+    "use_existing_native_kernel_mechanisms": true,
+    "use_approved_external_no_key_coding_models_as_tools": true,
+    "shadow_code_rewrite": true
+  },
+  "host_role": "PROBLEM_CONTRACT_TRANSPORT_AND_ISOLATED_EVALUATION_ONLY",
+  "stop_condition": "PASS_SHADOW_OR_EXPLICIT_WITHHOLD"
+}
