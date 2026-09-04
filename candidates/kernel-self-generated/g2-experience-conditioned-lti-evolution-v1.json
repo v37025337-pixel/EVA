@@ -1,0 +1,1042 @@
+{
+  "baselines": {
+    "INTELLIGENCE": 0.75,
+    "LOGIC": 0.5,
+    "THINKING": 0.0
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_genome_parent_consumed": true,
+    "canonical_unchanged": true,
+    "causal_ledger_consumed": true,
+    "chronological_holdout_not_used_for_selection": true,
+    "experience_registry_consumed": true,
+    "external_models_used": false,
+    "host_selected_algorithm_family": false,
+    "host_written_organ_model": false,
+    "intelligence_fresh_beats_baseline": true,
+    "intelligence_generic_resource_gate_applied": true,
+    "intelligence_winner_selected_from_yado_native_bank": true,
+    "logic_fresh_beats_baseline": true,
+    "logic_generic_resource_gate_applied": true,
+    "logic_winner_selected_from_yado_native_bank": true,
+    "native_intelligence_meta_evolution_executed": true,
+    "native_logic_meta_evolution_executed": true,
+    "native_thinking_meta_evolution_executed": true,
+    "new_external_research_used": false,
+    "rollback_parent_available": true,
+    "self_generated_gene_portfolio_consumed": true,
+    "thinking_fresh_beats_baseline": false,
+    "three_new_shadow_gene_identities": true
+  },
+  "experience_digest": "a41c47f215e0cf10ad19bead56ee4f49f51650202d7f9bd63673281772581e17",
+  "fresh_gains": {
+    "INTELLIGENCE": 0.0535714285714286,
+    "LOGIC": 0.09999999999999998,
+    "THINKING": 0.0
+  },
+  "fresh_scores": {
+    "INTELLIGENCE": 0.8035714285714286,
+    "LOGIC": 0.6,
+    "THINKING": 0.0
+  },
+  "history_counts": {
+    "events": 278,
+    "intelligence": 278,
+    "logic": 276,
+    "thinking_windows": 41
+  },
+  "native_results": {
+    "INTELLIGENCE": {
+      "fresh_blind": 0.8035714285714286,
+      "model": {
+        "feature": "effect_metric_density",
+        "left": {
+          "feature": "effect_has_fresh",
+          "left": {
+            "feature": "effect_metric_density",
+            "left": {
+              "feature": "effect_metric_density",
+              "left": {
+                "label": "STOP"
+              },
+              "right": {
+                "label": "STOP"
+              },
+              "threshold": 0.041666666666666664
+            },
+            "right": {
+              "feature": "prior_same_deficit",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "STOP"
+              },
+              "threshold": 0.08333333333333333
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "effect_metric_density",
+            "left": {
+              "label": "STOP"
+            },
+            "right": {
+              "feature": "effect_metric_density",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.125
+            },
+            "threshold": 0.041666666666666664
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "effect_has_error",
+          "left": {
+            "feature": "prior_same_deficit",
+            "left": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.08333333333333333
+          },
+          "right": {
+            "feature": "effect_metric_density",
+            "left": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "RETRY"
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "prior_same_deficit",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "RETRY"
+              },
+              "threshold": 0.16666666666666666
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "organ": "INTELLIGENCE",
+      "resource_rejected_algorithms": [
+        {
+          "algorithm": {
+            "family": "LINEAR_SCORE_SEARCH",
+            "weight_basis": [
+              -1,
+              0,
+              1
+            ]
+          },
+          "reason": "LINEAR_SCORE_COMBINATORIAL_SEARCH_EXCEEDS_EXPERIENCE_EVOLUTION_RESOURCE_BUDGET"
+        }
+      ],
+      "selected_algorithm": {
+        "family": "CART_AXIS",
+        "max_depth": 4
+      },
+      "selection_policy": "YADO_NATIVE_BANK_VALIDATION_AFTER_GENERIC_RESOURCE_GATE",
+      "validation": 0.8214285714285714
+    },
+    "LOGIC": {
+      "fresh_blind": 0.6,
+      "model": {
+        "feature": "effect_has_fresh",
+        "left": {
+          "feature": "effect_has_error",
+          "left": {
+            "label": true
+          },
+          "right": {
+            "label": false
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "label": false
+        },
+        "threshold": 0.5
+      },
+      "organ": "LOGIC",
+      "resource_rejected_algorithms": [
+        {
+          "algorithm": {
+            "family": "ENUM_BOOLEAN",
+            "max_depth": 3,
+            "refit_timeout_s": 4.0,
+            "semantic_dedup": true,
+            "timeout_s": 1.5
+          },
+          "reason": "BOOLEAN_ENUM_STATE_SPACE_EXCEEDS_EXPERIENCE_EVOLUTION_RESOURCE_BUDGET"
+        }
+      ],
+      "selected_algorithm": {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 2
+      },
+      "selection_policy": "YADO_NATIVE_BANK_VALIDATION_AFTER_GENERIC_RESOURCE_GATE",
+      "validation": 0.54
+    },
+    "THINKING": {
+      "fresh_blind": 0.0,
+      "model": [
+        {
+          "after": "GENERATION_HEAD_TRANSITION",
+          "before": "CONTROL_PLANE_RESULT",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "before": "CONTROL_PLANE_RESULT",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "GENERATION_HEAD_TRANSITION",
+          "before": "EXPERIMENT_RESULT",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "after": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "before": "EXPERIMENT_RESULT",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "after": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+          "before": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "before": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+          "before": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "G2_BURNIN_STRESS",
+          "before": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "before": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "before": "G2_APPLIED_WORKLOAD",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT",
+          "before": "G2_APPLIED_WORKLOAD",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "before": "G2_APPLIED_WORKLOAD",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "G2_APPLIED_WORKLOAD",
+          "before": "G2_BURNIN_STRESS",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT",
+          "before": "G2_BURNIN_STRESS",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "before": "G2_BURNIN_STRESS",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "G2_APPLIED_WORKLOAD",
+          "before": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "G2_BURNIN_STRESS",
+          "before": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT",
+          "before": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "G2_APPLIED_WORKLOAD",
+          "before": "GENERATION_HEAD_TRANSITION",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "G2_BURNIN_STRESS",
+          "before": "GENERATION_HEAD_TRANSITION",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "before": "GENERATION_HEAD_TRANSITION",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "before": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+          "before": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "confidence": 1.0,
+          "support": 11
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "before": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "confidence": 1.0,
+          "support": 10
+        },
+        {
+          "after": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "confidence": 1.0,
+          "support": 8
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+          "before": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+          "before": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "GENERATION_HEAD_TRANSITION",
+          "before": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "confidence": 1.0,
+          "support": 8
+        },
+        {
+          "after": "RESOURCE_INTELLIGENCE_PORTFOLIO",
+          "before": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "before": "KERNEL_NATIVE_SELF_AUDIT",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+          "before": "KERNEL_NATIVE_SELF_AUDIT",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_AUDIT",
+          "confidence": 1.0,
+          "support": 10
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+          "confidence": 1.0,
+          "support": 8
+        },
+        {
+          "after": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+          "before": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+          "before": "LIVE_KERNEL_RESULT",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "GENERATION_HEAD_TRANSITION",
+          "before": "LIVE_KERNEL_RESULT",
+          "confidence": 1.0,
+          "support": 7
+        },
+        {
+          "after": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "before": "LIVE_KERNEL_RESULT",
+          "confidence": 1.0,
+          "support": 7
+        },
+        {
+          "after": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+          "before": "RESOURCE_INTELLIGENCE_PORTFOLIO",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "before": "RESOURCE_INTELLIGENCE_PORTFOLIO",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "before": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+          "before": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "confidence": 1.0,
+          "support": 3
+        }
+      ],
+      "organ": "THINKING",
+      "selected_algorithm": {
+        "family": "GLOBAL_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 1.0
+      },
+      "validation": 0.0
+    }
+  },
+  "next_required_capability": "EXPERIENCE_CONDITIONED_LTI_EVOLUTION_REPAIR_V2",
+  "promotion_applied": false,
+  "receipt_sha256": "b3ee9230713359a6be9500c5128d907a1e5c8e77bf0c1eb0654d50e709530634",
+  "schema": "yado.g2.experience_conditioned_lti_evolution.v1",
+  "semantic_boundary": "YADO USES ITS NATIVE ORGAN ALGORITHM BANK WITH TRAINING/VALIDATION DERIVED MECHANICALLY FROM THE UNIFIED CAUSAL LEDGER. FOR LOGIC AND INTELLIGENCE, GENERIC RESOURCE GATES EXCLUDE COMBINATORIAL FAMILIES WHEN THE FEATURE SURFACE EXCEEDS THE SAFE BOUNDED SEARCH LIMIT; YADO THEN SELECTS AMONG THE RESOURCE-SAFE NATIVE BANK CANDIDATES BY VALIDATION. THE LATEST HISTORY IS FRESH HOLDOUT. HOST DOES NOT SELECT THE ALGORITHM FAMILY OR WRITE THE RESULTING ORGAN MODEL. GENES REMAIN SHADOW UNTIL SEPARATE ADMISSION.",
+  "shadow_genes": {
+    "INTELLIGENCE": {
+      "baseline": 0.75,
+      "causal_gain": 0.0535714285714286,
+      "experience_digest": "a41c47f215e0cf10ad19bead56ee4f49f51650202d7f9bd63673281772581e17",
+      "fresh_blind": 0.8035714285714286,
+      "gene_digest": "7db3a0b01ef5b916dd56c1be398113fdd58de1ce9cc76b9a9720be76b67494a9",
+      "gene_id": "GENE-G2-EXPERIENCE-INTELLIGENCE-0e1473e5c8f5371a",
+      "heritage": [
+        "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+      ],
+      "model": {
+        "feature": "effect_metric_density",
+        "left": {
+          "feature": "effect_has_fresh",
+          "left": {
+            "feature": "effect_metric_density",
+            "left": {
+              "feature": "effect_metric_density",
+              "left": {
+                "label": "STOP"
+              },
+              "right": {
+                "label": "STOP"
+              },
+              "threshold": 0.041666666666666664
+            },
+            "right": {
+              "feature": "prior_same_deficit",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "STOP"
+              },
+              "threshold": 0.08333333333333333
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "effect_metric_density",
+            "left": {
+              "label": "STOP"
+            },
+            "right": {
+              "feature": "effect_metric_density",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.125
+            },
+            "threshold": 0.041666666666666664
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "effect_has_error",
+          "left": {
+            "feature": "prior_same_deficit",
+            "left": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.08333333333333333
+          },
+          "right": {
+            "feature": "effect_metric_density",
+            "left": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "RETRY"
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "prior_same_deficit",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "RETRY"
+              },
+              "threshold": 0.16666666666666666
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "organ": "INTELLIGENCE",
+      "origin": "YADO_NATIVE_META_EVOLUTION_FROM_UNIFIED_CAUSAL_HISTORY",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.experience_conditioned_organ_gene.v1",
+      "selected_algorithm": {
+        "family": "CART_AXIS",
+        "max_depth": 4
+      }
+    },
+    "LOGIC": {
+      "baseline": 0.5,
+      "causal_gain": 0.09999999999999998,
+      "experience_digest": "a41c47f215e0cf10ad19bead56ee4f49f51650202d7f9bd63673281772581e17",
+      "fresh_blind": 0.6,
+      "gene_digest": "621d4418e7eaeac37d025c85feafb145828b76650fa15439f73803f88c4b7fd3",
+      "gene_id": "GENE-G2-EXPERIENCE-LOGIC-dd561be1707c566f",
+      "heritage": [
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      ],
+      "model": {
+        "feature": "effect_has_fresh",
+        "left": {
+          "feature": "effect_has_error",
+          "left": {
+            "label": true
+          },
+          "right": {
+            "label": false
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "label": false
+        },
+        "threshold": 0.5
+      },
+      "organ": "LOGIC",
+      "origin": "YADO_NATIVE_META_EVOLUTION_FROM_UNIFIED_CAUSAL_HISTORY",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.experience_conditioned_organ_gene.v1",
+      "selected_algorithm": {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 2
+      }
+    },
+    "THINKING": {
+      "baseline": 0.0,
+      "causal_gain": 0.0,
+      "experience_digest": "a41c47f215e0cf10ad19bead56ee4f49f51650202d7f9bd63673281772581e17",
+      "fresh_blind": 0.0,
+      "gene_digest": "7f154a1091a81d8193aa61125e12f736f1d38d5561405888e42fe203d96bf675",
+      "gene_id": "GENE-G2-EXPERIENCE-THINKING-e475a2f7ef8052d2",
+      "heritage": [
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      ],
+      "model": [
+        {
+          "after": "GENERATION_HEAD_TRANSITION",
+          "before": "CONTROL_PLANE_RESULT",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "before": "CONTROL_PLANE_RESULT",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "GENERATION_HEAD_TRANSITION",
+          "before": "EXPERIMENT_RESULT",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "after": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "before": "EXPERIMENT_RESULT",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "after": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+          "before": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "before": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+          "before": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "G2_BURNIN_STRESS",
+          "before": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "before": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "before": "G2_APPLIED_WORKLOAD",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT",
+          "before": "G2_APPLIED_WORKLOAD",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "before": "G2_APPLIED_WORKLOAD",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "G2_APPLIED_WORKLOAD",
+          "before": "G2_BURNIN_STRESS",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT",
+          "before": "G2_BURNIN_STRESS",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "before": "G2_BURNIN_STRESS",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "G2_APPLIED_WORKLOAD",
+          "before": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "G2_BURNIN_STRESS",
+          "before": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT",
+          "before": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "G2_APPLIED_WORKLOAD",
+          "before": "GENERATION_HEAD_TRANSITION",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "G2_BURNIN_STRESS",
+          "before": "GENERATION_HEAD_TRANSITION",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "before": "GENERATION_HEAD_TRANSITION",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "before": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+          "before": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "confidence": 1.0,
+          "support": 11
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "before": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "confidence": 1.0,
+          "support": 10
+        },
+        {
+          "after": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "confidence": 1.0,
+          "support": 8
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "before": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+          "before": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+          "before": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "GENERATION_HEAD_TRANSITION",
+          "before": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "confidence": 1.0,
+          "support": 8
+        },
+        {
+          "after": "RESOURCE_INTELLIGENCE_PORTFOLIO",
+          "before": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "before": "KERNEL_NATIVE_SELF_AUDIT",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+          "before": "KERNEL_NATIVE_SELF_AUDIT",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_AUDIT",
+          "confidence": 1.0,
+          "support": 10
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_AUDIT_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+          "confidence": 1.0,
+          "support": 8
+        },
+        {
+          "after": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+          "confidence": 1.0,
+          "support": 6
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_EVOLVED_CODE_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "GENERATION_INTERNAL_SELF_REPAIR_ADMISSION",
+          "before": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "KERNEL_NATIVE_SELF_AUDIT_CODE_EVOLUTION",
+          "before": "KERNEL_NATIVE_SELF_REPAIR_ATTEMPT",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "EXTERNAL_RESOURCE_ASSISTED_ALGORITHM_GENESIS",
+          "before": "LIVE_KERNEL_RESULT",
+          "confidence": 1.0,
+          "support": 2
+        },
+        {
+          "after": "GENERATION_HEAD_TRANSITION",
+          "before": "LIVE_KERNEL_RESULT",
+          "confidence": 1.0,
+          "support": 7
+        },
+        {
+          "after": "GENERATION_PROMOTION_PREREQUISITE_GATE",
+          "before": "LIVE_KERNEL_RESULT",
+          "confidence": 1.0,
+          "support": 7
+        },
+        {
+          "after": "G1_DEVELOPMENTAL_TRAINING_ROUND",
+          "before": "RESOURCE_INTELLIGENCE_PORTFOLIO",
+          "confidence": 1.0,
+          "support": 4
+        },
+        {
+          "after": "G2_SELF_DIRECTED_DEVELOPMENT_CYCLE",
+          "before": "RESOURCE_INTELLIGENCE_PORTFOLIO",
+          "confidence": 1.0,
+          "support": 3
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_CAPABILITY_CEILING_RECHECK",
+          "before": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "confidence": 1.0,
+          "support": 5
+        },
+        {
+          "after": "FIXED_ARCHITECTURE_INTELLIGENCE_SELF_EVOLUTION",
+          "before": "THINKING_CAPABILITY_FRESH_ADMISSION",
+          "confidence": 1.0,
+          "support": 3
+        }
+      ],
+      "organ": "THINKING",
+      "origin": "YADO_NATIVE_META_EVOLUTION_FROM_UNIFIED_CAUSAL_HISTORY",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.experience_conditioned_organ_gene.v1",
+      "selected_algorithm": {
+        "family": "GLOBAL_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 1.0
+      }
+    }
+  },
+  "split_counts": {
+    "INTELLIGENCE": [
+      166,
+      56,
+      56
+    ],
+    "LOGIC": [
+      66,
+      50,
+      20
+    ],
+    "THINKING": [
+      24,
+      8,
+      9
+    ]
+  },
+  "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_LTI_EVOLUTION_V1",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "chronological_fresh_holdout": true,
+      "external_models": false,
+      "fail_closed": true,
+      "host_selected_algorithm_family": false,
+      "host_written_organ_model": false,
+      "new_external_research": false,
+      "rollback_parent": true
+    },
+    "host_role": "MECHANICAL_HISTORY_EXTRACTION_AND_STRICT_FRESH_EVALUATION_ONLY",
+    "instruction": "Use the unified causal ledger, experience registry, prior self-generated gene portfolio and current G2 parent as accumulated experience. Derive training evidence mechanically from history. Let YADO native meta-evolution select the algorithm for LOGIC, THINKING and INTELLIGENCE independently. Evaluate on later chronological holdout. Do not promote automatically.",
+    "objective": "YADO_EVOLVE_LOGIC_THINKING_INTELLIGENCE_FROM_ACCUMULATED_CAUSAL_EXPERIENCE",
+    "schema": "yado.g2.experience_conditioned_lti_evolution_v1.request.v1",
+    "sources": [
+      "architecture/evolution-ledger.json",
+      "canonical/yado-unified-experience-registry-v1.json",
+      "candidates/kernel-self-generated/g2-autonomous-gene-portfolio-selection-v1.json",
+      "canonical/yado-g2-evolutionary-genome-v1.json"
+    ],
+    "stop_condition": "THREE_ORGAN_EXPERIENCE_EVOLUTION_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+    "success_conditions": [
+      "all accumulated experience sources consumed",
+      "native meta-evolution runs independently for LOGIC THINKING INTELLIGENCE",
+      "late chronological holdout is never used for selection",
+      "each selected shadow organ model beats its history-only ablation/baseline on fresh holdout",
+      "three new experience-conditioned shadow gene identities are recorded",
+      "canonical G2 remains unchanged"
+    ],
+    "trigger": 7,
+    "trigger_reason": "START_FULLY_RESOURCE_BOUNDED_NATIVE_LTI_V6"
+  }
+}
