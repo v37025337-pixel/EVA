@@ -1,0 +1,72 @@
+{
+  "schema": "yado.experience.v29.thinking_precedence_rederived.v1",
+  "source_branch": "yado-v29-cognitive",
+  "registered_commit": "d5b36fa3227ffcbf0f14e3d636bd582b00c2aecd",
+  "raw_source_path": "runtime/cognitive_cycle_v29.py",
+  "raw_source_sha256": "89a026b35e21e8efd84054c355eb2eac89e6ecfa3a2b072c4f6b962f348c0f1e",
+  "raw_receipt_path": "receipts/yado-v29-cognitive-latest.json",
+  "raw_receipt_sha256": "7ab441fa6af942ac4cc93ffa340e7f6ea429f653b6e4018f98f7ece6b05738e2",
+  "extraction_method": "AST_LITERAL_EXTRACTION_OF_V29_THINKING_CONTEXT_ORDER_TABLE",
+  "historical_thinking_accuracy": 1,
+  "context_keys": [
+    "urgent",
+    "uncertain"
+  ],
+  "role_vocabulary": [
+    "OBSERVE",
+    "MODEL",
+    "TEST",
+    "ACT"
+  ],
+  "episodes": [
+    {
+      "context": {
+        "urgent": false,
+        "uncertain": false
+      },
+      "expected": [
+        "OBSERVE",
+        "MODEL",
+        "TEST",
+        "ACT"
+      ]
+    },
+    {
+      "context": {
+        "urgent": true,
+        "uncertain": false
+      },
+      "expected": [
+        "MODEL",
+        "OBSERVE",
+        "TEST",
+        "ACT"
+      ]
+    },
+    {
+      "context": {
+        "urgent": false,
+        "uncertain": true
+      },
+      "expected": [
+        "OBSERVE",
+        "TEST",
+        "MODEL",
+        "ACT"
+      ]
+    },
+    {
+      "context": {
+        "urgent": true,
+        "uncertain": true
+      },
+      "expected": [
+        "TEST",
+        "MODEL",
+        "OBSERVE",
+        "ACT"
+      ]
+    }
+  ],
+  "semantic_boundary": "MECHANICALLY REDERIVED FROM REGISTERED YADO V29 SOURCE. THIS IS HISTORICAL EXPERIENCE ONLY; IT IS NOT ACTIVE RUNTIME AND REQUIRES FRESH G2 READMISSION."
+}
