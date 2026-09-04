@@ -1,0 +1,706 @@
+{
+  "candidate_controller": {
+    "candidate_digest": "291c22dd16ce0ab633fc07fbbe7907ee22b63bd0f2e65ff25a6b5c12148c97db",
+    "candidate_dimensions": [
+      "CODE",
+      "INTELLIGENCE",
+      "LOGIC",
+      "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+      "THINKING"
+    ],
+    "candidate_id": "CTRL-SHADOW-40395caeb4ef639b",
+    "development": {
+      "ablation_score": 0.0,
+      "blind_cases": 4,
+      "candidate_score": 1.0,
+      "created_at": "2026-09-04T12:59:18.652101+00:00",
+      "experiment_id": "DEV22-991bb3781eb4",
+      "mechanism_kind": "SEQUENCE_PLANNER",
+      "min_ablation_drop": 0.2,
+      "min_score": 1.0,
+      "program_digest": "cb17d9e033d2c7819864c5cb22aae26f11b60bf073d6d8b4b194d100f47d7ee5",
+      "program_id": "PL-11b41405903c",
+      "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+      "restore_score": 1.0,
+      "stage_ablation_scores": {},
+      "state_committed": true,
+      "target_capability": "EXTENDED_EVOLUTION_CONTROLLER_DIMENSION_SET_V1",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "train_cases": 8,
+      "verdict": "COMMIT"
+    },
+    "dimension_set_program_digest": "cb17d9e033d2c7819864c5cb22aae26f11b60bf073d6d8b4b194d100f47d7ee5",
+    "dimension_set_program_id": "PL-11b41405903c",
+    "dimension_set_program_type": "SequencePlannerProgram",
+    "fresh_outputs": [
+      {
+        "expected": [
+          "CODE",
+          "INTELLIGENCE",
+          "LOGIC",
+          "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+          "THINKING"
+        ],
+        "input": {
+          "parent_dimension_count": 4,
+          "selected_target_is_outside_current_space": true,
+          "selection_receipt_present": true,
+          "self_representation_pass": true,
+          "variant": 100
+        },
+        "output": [
+          "CODE",
+          "INTELLIGENCE",
+          "LOGIC",
+          "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+          "THINKING"
+        ],
+        "pass": true
+      },
+      {
+        "expected": [
+          "CODE",
+          "INTELLIGENCE",
+          "LOGIC",
+          "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+          "THINKING"
+        ],
+        "input": {
+          "parent_dimension_count": 4,
+          "selected_target_is_outside_current_space": true,
+          "selection_receipt_present": true,
+          "self_representation_pass": true,
+          "variant": 101
+        },
+        "output": [
+          "CODE",
+          "INTELLIGENCE",
+          "LOGIC",
+          "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+          "THINKING"
+        ],
+        "pass": true
+      },
+      {
+        "expected": [
+          "CODE",
+          "INTELLIGENCE",
+          "LOGIC",
+          "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+          "THINKING"
+        ],
+        "input": {
+          "parent_dimension_count": 4,
+          "selected_target_is_outside_current_space": true,
+          "selection_receipt_present": true,
+          "self_representation_pass": true,
+          "variant": 102
+        },
+        "output": [
+          "CODE",
+          "INTELLIGENCE",
+          "LOGIC",
+          "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+          "THINKING"
+        ],
+        "pass": true
+      }
+    ],
+    "mechanism_selection": {
+      "candidates": [
+        {
+          "complexity": 5,
+          "kind": "SEQUENCE_PLANNER",
+          "program_id": "PL-11b41405903c",
+          "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+          "selected": true,
+          "training_score": 1.0
+        }
+      ],
+      "created_at": "2026-09-04T12:59:18.649805+00:00",
+      "deficit_id": "D-a40cc6670acc",
+      "selected_kind": "SEQUENCE_PLANNER",
+      "selected_program_id": "PL-11b41405903c",
+      "selection_id": "SEL-035f3570ac79",
+      "source_digest": "e2537585aeb4051df7b9c7b3941c29a6a0e42713e9035e05eab7c4d7b53c8e85",
+      "target_capability": "EXTENDED_EVOLUTION_CONTROLLER_DIMENSION_SET_V1",
+      "target_organ": "GENERATIVE_EXECUTIVE"
+    },
+    "parent_controller_id": "CTRL-G2-EVOLUTIONARY-GENOME-V1",
+    "parent_dimensions": [
+      "CODE",
+      "INTELLIGENCE",
+      "LOGIC",
+      "THINKING"
+    ],
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.extended_evolution_controller.executable_shadow_candidate.v1",
+    "selection_receipt": {
+      "candidate_count": 7,
+      "gate_digest": "fa474b94788b48293e407277d788219cf338ddcec1629a4dc4498c97fae07672",
+      "rejected": [
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "bb8445beda940f4044924c89de6ee19af4d0550719a827ee4fb8fec6c217cd83",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-1fe05a219133",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "74a8a850c501f4913f74b45b504987ca97dad81a3ad8364756cf560a7c9dc016",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-35785d13ebe6",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "73b6c9284cf6995af049350176ed3ccc33bd4b17f274eb3e8aef3353b24960c2",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-9c70f8765327",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "9ecff6c830d7946544a45c20edd411ae8ecf4bf7fc606a7dcd409942ff0c168f",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-da509b9c3038",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "7981a426014f82de4f2373a56abec8d2a22cf4f33effafab7d16ac9028873245",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-ea6e8ecea64e",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "84d50164c3fa74f6d60834a76c7705e9b5aa39c32597cd0497b9fbe60c63ee4b",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-f7406c5a3f85",
+          "verdict": "REJECT_PRECOMMIT"
+        }
+      ],
+      "selected": [
+        {
+          "admitted": true,
+          "critics": {
+            "fit_marginal_gain": true,
+            "heldout_gain_floor": true,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": true,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "13b449af618058b28f0ae1855e232b90597cd10ce9df30c160e79edf1ff82fdd",
+          "failed_critics": [],
+          "fit_gain": 1.0,
+          "heldout_gain": 1.0,
+          "skill_id": "EXTDIM-5a6f588a3cd7",
+          "verdict": "ADMIT"
+        }
+      ],
+      "selected_count": 1,
+      "selected_skill_ids": [
+        "EXTDIM-5a6f588a3cd7"
+      ],
+      "status": "SELECTED"
+    },
+    "source_level_realization": false,
+    "yado_selected_new_dimension": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER"
+  },
+  "candidate_skill_rows": [
+    {
+      "artifact_digest": "f2e2a1ca307ed5b5b5ee6192df60edc7509ca05f4fb0c91f9678530d1f8deff4",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-f7406c5a3f85",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "30455c7584e255e1fe7dc9bffc035494a8eb683816b33f4f777e61773ce3d4e4",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-35785d13ebe6",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "08cd40881f0cda3c67ee14d93455d639551f1c8810d362739253511d72a9c39b",
+      "fit_baseline": 0.0,
+      "fit_candidate": 1.0,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 1.0,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 1.0,
+      "skill_id": "EXTDIM-5a6f588a3cd7",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "6612aa31ec5347da54c54b01c145f0051f79b2cf5e3f568206a99fb0d0e13b96",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-da509b9c3038",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "4b612e6ee7bae4616874f9ae022bfde40b3424845e9e51ca50ec2f83a3b757ba",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-1fe05a219133",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "457a86f70bca74d6689898344be855f9bec83d2e3d706044d4d8a2927a774ccd",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-ea6e8ecea64e",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "64e2c67f08850cca7972ae29e050ca536a84699c86d9961e56976148f5cfb5eb",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-9c70f8765327",
+      "state_integrity": true,
+      "structural_valid": true
+    }
+  ],
+  "canonical_mutation": false,
+  "checks": {
+    "candidate_visible_to_subsequent_evolution": true,
+    "canonical_unchanged": true,
+    "causal_ablation_drop": true,
+    "confirmed_self_representation_consumed": true,
+    "controller_source_mutation": false,
+    "controller_source_unchanged": true,
+    "extension_targets_from_yado_failure_history_only": true,
+    "external_coding_models_used": false,
+    "fresh_blind_exact": true,
+    "host_controller_patch_used": false,
+    "host_gene_schema_used": false,
+    "host_new_dimension_name_used": false,
+    "host_source_template_used": false,
+    "native_extended_controller_representation_created": true,
+    "new_dimension_selected_by_yado_not_host": true,
+    "new_external_research_used": false,
+    "restore_exact": true,
+    "rollback_parent_available": true,
+    "selected_target_previously_absent": true,
+    "structurally_broader_search_space": true,
+    "yado_native_target_selection_exactly_one": true
+  },
+  "controller_source_mutation": false,
+  "failure_history": [
+    {
+      "next_required_capability": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+      "path": "candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json",
+      "receipt_sha256": "0aebc2174192fac6a7936ea62c0ef7891ac3f19c29bfca06c909b3c6277a44da",
+      "status": "WITHHOLD_G2_EVOLUTION_CONTROLLER_SELF_STUDY_AND_REPAIR_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_EVOLUTIONARY_CONTROLLER_SELF_REPRESENTATION_AND_MUTATION_V2",
+      "path": "candidates/kernel-self-generated/g2-native-evolution-space-self-expansion-v1.json",
+      "receipt_sha256": "2a11a0b666944d41233b8f91047638702cdb856c8aad1e84cf89016a752fcf18",
+      "status": "WITHHOLD_G2_NATIVE_EVOLUTION_SPACE_SELF_EXPANSION_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2",
+      "path": "candidates/kernel-self-generated/g2-native-seedless-source-constructor-research-v1.json",
+      "receipt_sha256": "9fb5558d0146f42b48686e943c5c75f69d4d94106e863542d3bbe6dee93a206d",
+      "status": "WITHHOLD_G2_NATIVE_SEEDLESS_SOURCE_CONSTRUCTOR_RESEARCH_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+      "path": "candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json",
+      "receipt_sha256": "bd388f8bb84104e5626e325c6f879b3142ffd45bd38ae0a08d2634d1b89e35e6",
+      "status": "WITHHOLD_G2_NATIVE_SEMANTIC_SELF_MUTATION_EVOLUTION_CONTROLLER_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_SEEDLESS_SOURCE_CONSTRUCTOR_GENESIS_V1",
+      "path": "candidates/kernel-self-generated/g2-native-source-constructor-genesis-v1.json",
+      "receipt_sha256": "ea73b1f112c2baedaac5432bffb1b56439a227f867eedafc6a64da4906ab1555",
+      "status": "WITHHOLD_G2_NATIVE_SOURCE_CONSTRUCTOR_GENESIS_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
+      "path": "candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json",
+      "receipt_sha256": "e4700dba1f88b61d3c6288316c29c64f1f2796aff30d7bb82f4a8a48df089382",
+      "status": "WITHHOLD_G2_NATIVE_SOURCE_IR_EMITTER_BIRTH_V1"
+    },
+    {
+      "next_required_capability": "SELF_EVOLVING_META_LANGUAGE_V2",
+      "path": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
+      "receipt_sha256": "ed77ae79340974efb708b6007d49f7d6ad45628b21120345bf6592d5b3af764a",
+      "status": "WITHHOLD_G2_NATIVE_TASK_CONDITIONED_META_LANGUAGE_SELF_GENESIS_V2"
+    },
+    {
+      "next_required_capability": "NATIVE_TASK_CONDITIONED_META_LANGUAGE_SELF_GENESIS_V2",
+      "path": "candidates/kernel-self-generated/g2-self-evolving-meta-language-spontaneous-genesis-v1.json",
+      "receipt_sha256": "285f0a42a9211070d829701b0adefff20d63bbd1e90d8ceaa0a645cf0c26b89b",
+      "status": "WITHHOLD_G2_SELF_EVOLVING_META_LANGUAGE_SPONTANEOUS_GENESIS_V1"
+    }
+  ],
+  "next_required_capability": "NATIVE_SOURCE_REALIZATION_OF_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1",
+  "receipt_sha256": "01baf48cc142bdc37a65dc34b95cabd3b72636c0c0f7212f7c46cd929d34861f",
+  "schema": "yado.g2.self_representation_driven_extended_controller_candidate.v1",
+  "selected_target": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
+  "self_representation_probe": {
+    "binding_surface_function_count": 5,
+    "controller_function_reference_count": 0,
+    "failure_experience_retained": true,
+    "is_parent_dimension": false,
+    "observed_new_dimension_count": 0,
+    "variant_parity": true
+  },
+  "semantic_boundary": "YADO SELECTS THE NEW EVOLUTIONARY DIMENSION THROUGH ITS NATIVE SKILL GATE FROM ITS OWN WITHHOLD HISTORY, THEN ITS DEVELOPMENTAL EXECUTIVE CREATES AND COMMITS AN EXECUTABLE SHADOW DIMENSION-SET REPRESENTATION WITH FRESH/ABLATION/RESTORE. THIS IS A STRUCTURALLY BROADER EXECUTABLE CONTROLLER CANDIDATE REPRESENTATION, NOT YET A PYTHON-SOURCE REWRITE OF THE EVOLUTIONARY CONTROLLER.",
+  "status": "PASS_SHADOW_G2_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_CANDIDATE_V1",
+  "subsequent_native_evolution": {
+    "candidate_visible_in_child_experience": true,
+    "run_digest": "3cae2ee56de342edf196cdfcf745d9b5a4867df5afeffd7484feaf148a4c4144",
+    "selection": "CHILD"
+  },
+  "task": {
+    "constraints": {
+      "canonical_mutation": false,
+      "controller_source_mutation": false,
+      "external_coding_models": false,
+      "fail_closed": true,
+      "host_controller_patch": false,
+      "host_gene_schema": false,
+      "host_new_dimension_name": false,
+      "host_source_template": false,
+      "new_external_research": false,
+      "shadow_only": true
+    },
+    "controller_self_study": "experience/yado-evolution-controller-self-study-v1.json",
+    "host_role": "FAILURE_HISTORY_TRANSPORT_MECHANICAL_SCORING_AND_STRICT_EVALUATION_ONLY",
+    "instruction": "Choose the extension target through YADO native selection using your own failure history. Then use YADO native developmental synthesis to create the executable candidate representation and validate it fresh with ablation/restore. Do not mutate canonical or the controller source in this stage.",
+    "objective": "YADO_USE_ITS_EXECUTABLE_SELF_REPRESENTATION_TO_CREATE_AN_EXTENDED_EVOLUTION_CONTROLLER_SHADOW_CANDIDATE",
+    "pass_only_if": [
+      "the confirmed executable self-representation is consumed",
+      "candidate extension targets come only from YADO own unresolved failure history",
+      "YADO native skill gate selects exactly one previously absent target",
+      "YADO native developmental executive creates an executable extended-controller representation",
+      "fresh blind is exact",
+      "causal ablation drops materially and restore is exact",
+      "the candidate dimension set is structurally broader than the parent",
+      "the new dimension was selected by YADO and not named by host",
+      "the candidate representation is visible to subsequent native evolution as experience",
+      "controller source and canonical remain unchanged",
+      "rollback parent remains available"
+    ],
+    "schema": "yado.g2.self_representation_driven_extended_controller_candidate.request.v1",
+    "self_representation_artifact": "candidates/kernel-self-generated/g2-native-executable-evolution-controller-self-representation-v1.json",
+    "stop_condition": "EXTENDED_CONTROLLER_EXECUTABLE_SHADOW_CANDIDATE_PASS_OR_EXPLICIT_WITHHOLD",
+    "task": "Use your executable self-representation of the evolution-space boundary to decide which currently-outside capability should become the next evolutionary dimension, then create an executable shadow candidate of an extended evolutionary controller. The host must not name the new dimension or write a controller patch.",
+    "trigger": 2,
+    "trigger_reason": "START_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_CANDIDATE_V1",
+    "unresolved_controller_failure": "candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json"
+  },
+  "yado_target_selection": {
+    "candidate_count": 7,
+    "gate_digest": "fa474b94788b48293e407277d788219cf338ddcec1629a4dc4498c97fae07672",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "bb8445beda940f4044924c89de6ee19af4d0550719a827ee4fb8fec6c217cd83",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-1fe05a219133",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "74a8a850c501f4913f74b45b504987ca97dad81a3ad8364756cf560a7c9dc016",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-35785d13ebe6",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "73b6c9284cf6995af049350176ed3ccc33bd4b17f274eb3e8aef3353b24960c2",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-9c70f8765327",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "9ecff6c830d7946544a45c20edd411ae8ecf4bf7fc606a7dcd409942ff0c168f",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-da509b9c3038",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "7981a426014f82de4f2373a56abec8d2a22cf4f33effafab7d16ac9028873245",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-ea6e8ecea64e",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "84d50164c3fa74f6d60834a76c7705e9b5aa39c32597cd0497b9fbe60c63ee4b",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-f7406c5a3f85",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "13b449af618058b28f0ae1855e232b90597cd10ce9df30c160e79edf1ff82fdd",
+        "failed_critics": [],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "EXTDIM-5a6f588a3cd7",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "EXTDIM-5a6f588a3cd7"
+    ],
+    "status": "SELECTED"
+  }
+}
