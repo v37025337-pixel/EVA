@@ -1,0 +1,92 @@
+{
+  "admission_state": "WITHHOLD_STRESS_V2",
+  "canonical_mutation": false,
+  "case_count": 336,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "composite_exhaustive_exact": true,
+    "direct_guard_novel_organ_exact": true,
+    "exhaustive_boolean_state_space_used": true,
+    "exhaustive_case_count_material": true,
+    "external_models_used": false,
+    "host_selected_easy_subset": false,
+    "intelligence_exhaustive_exact": true,
+    "logic_exhaustive_exact": true,
+    "organ_ablation_material": false,
+    "repair_v1_consumed": true,
+    "thinking_exhaustive_exact": true
+  },
+  "composite_exhaustive": 1.0,
+  "guard_direct_score": 1.0,
+  "guard_gene_id": "GENE-G2-COGNITIVE-CONFLICT-ARBITER-V1-d1bffef06b4c5aae",
+  "intelligence_exhaustive": {
+    "ablation": 0.78125,
+    "ablation_drop": 0.21875,
+    "by_route_state": {
+      "MULTI": 1.0,
+      "ONE": 1.0,
+      "UNKNOWN": 1.0,
+      "ZERO": 1.0
+    },
+    "count": 64,
+    "failures": [],
+    "score": 1.0
+  },
+  "logic_exhaustive": {
+    "ablation": 0.75,
+    "ablation_drop": 0.25,
+    "by_route_state": {
+      "MULTI": 1.0,
+      "ONE": 1.0,
+      "UNKNOWN": 1.0,
+      "ZERO": 1.0
+    },
+    "count": 16,
+    "failures": [],
+    "score": 1.0
+  },
+  "min_ablation_drop": 0.09375,
+  "next_required_capability": "G2_COGNITIVE_CONFLICT_ARBITRATION_REPAIR_V2",
+  "parent_cognitive_gene_id": "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V3-c09e6c4c7c8abfa0",
+  "promotion_applied": false,
+  "receipt_sha256": "fe5e0a9a44cf730908e9f08b4f8ecd9248fc2ea955c6a666c69a90eaf1f269e4",
+  "schema": "yado.g2.cognitive_consolidation_stress_admission.v2",
+  "semantic_boundary": "EXHAUSTIVE BOOLEAN COMBINATION STRESS OVER EVERY BOOLEAN FIELD USED BY THE CURRENT BOUNDED ORGAN ROUTES, WITH AN UNSEEN IRRELEVANT PERTURBATION FOR EVERY STATE. THE EXPECTED DECISION USES ONLY THE GENERIC ARBITRATION INVARIANT: EXACTLY ONE KNOWN ROUTE MAY PASS; ZERO, MULTI OR UNKNOWN FAIL CLOSED. THIS IS A BOUNDED ADMISSION TEST, NOT GENERAL COGNITIVE PROOF.",
+  "status": "WITHHOLD_G2_COGNITIVE_CONSOLIDATION_STRESS_ADMISSION_V2",
+  "task": {
+    "constraints": {
+      "ablation_min_drop": 0.25,
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "easy_subset_selection": false,
+      "exact_composite": true,
+      "exact_each_organ": true,
+      "exhaustive_boolean_state_space": true,
+      "external_models": false
+    },
+    "host_role": "EXHAUSTIVE_STATE_ENUMERATION_AND_INDEPENDENT_GENERIC_ARBITRATION_ORACLE_ONLY",
+    "instruction": "Use the repaired cognitive layer V3 and its learned conflict arbiter. Enumerate the complete Boolean state space for every Boolean field actually referenced by the current LOGIC, THINKING and INTELLIGENCE routes. For every state also evaluate a version with a fresh irrelevant field. Independently derive the generic arbitration target: exactly one matched route in a known state may pass through; zero routes, multiple incompatible routes, or unknown state must WITHHOLD. Require exact behavior across all enumerated states for all three organs, material arbiter ablation, exact direct guard behavior including an unseen organ token, and canonical integrity. Do not select a subset and do not promote in this test.",
+    "objective": "EXHAUSTIVELY_VALIDATE_THE_REPAIRED_COGNITIVE_ARBITER_BEFORE_CANONICAL_ADMISSION",
+    "parents": [
+      "candidates/kernel-self-generated/g2-cognitive-conflict-arbitration-repair-v1.json",
+      "candidates/kernel-self-generated/g2-coding-experience-cognitive-consolidation-v2.json"
+    ],
+    "schema": "yado.g2.cognitive_consolidation_stress_admission_v2.request.v1",
+    "trigger": 1,
+    "trigger_reason": "PASS_SHADOW_G2_COGNITIVE_CONFLICT_ARBITRATION_REPAIR_V1"
+  },
+  "thinking_exhaustive": {
+    "ablation": 0.90625,
+    "ablation_drop": 0.09375,
+    "by_route_state": {
+      "MULTI": 1.0,
+      "ONE": 1.0,
+      "UNKNOWN": 1.0,
+      "ZERO": null
+    },
+    "count": 256,
+    "failures": [],
+    "score": 1.0
+  }
+}
