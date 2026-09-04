@@ -1,0 +1,23 @@
+{
+  "schema": "yado.g2.coding_open_ended_defect_hypothesis_v1.request.v1",
+  "objective": "MOVE_FROM_HOST_GIVEN_FAILED_TESTS_TO_YADO_SELECTED_DEFECT_EVIDENCE",
+  "instruction": "Consume the passed failure-driven hypothesis revision gene. On new bounded coding tasks, provide only seed observations, a safe probe domain and an oracle that answers a probe only after YADO selects it. YADO must enumerate behaviorally distinct hypotheses from its own active bounded program-repair mutation grammar, identify probe points where those hypotheses disagree, and use the already-active neutral evidence profile selector to choose the next probe. Only the selected oracle answer may be added to memory. Then active G2 program repair may revise the code. Final holdout labels must never be used for probe selection or repair. Require exact final holdout, material no-probe ablation, deterministic restore, shrinking hypothesis space, changed source on every task, and at least one task needing multiple self-selected probes.",
+  "parent": "candidates/kernel-self-generated/g2-coding-hypothesis-revision-generator-v1.json",
+  "required_active_capabilities": [
+    "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+    "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+  ],
+  "constraints": {
+    "host_selected_probe": false,
+    "host_selected_patch": false,
+    "external_coding_model": false,
+    "final_holdout_feedback": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "bounded_probe_domain": true,
+    "bounded_program_hypothesis_space": true
+  },
+  "host_role": "BOUNDED_SANDBOX_ORACLE_AND_FINAL_HOLDOUT_EVALUATOR_ONLY",
+  "trigger": 1,
+  "trigger_reason": "HYPOTHESIS_REVISION_V1_PASSED_NEXT_DEFICIT_IS_SELF_SELECTED_DEFECT_EVIDENCE"
+}
