@@ -97,7 +97,22 @@ checks={
  'rollback_parent_available':True,
  'canonical_unchanged':core.head.get('canonical_head_digest')==head_before.get('canonical_head_digest'),
 }
-passed=bool(development.get('state_committed')) and all(checks.values())
+required_true=(
+ 'exact_yado_process_consumed','exact_v2_failure_consumed','native_goal_created',
+ 'native_deficit_detected','native_mechanism_family_selected','fresh_transition_exact',
+ 'causal_ablation_drop','restore_exact','new_gene_identity_absent_from_parent',
+ 'rollback_parent_available','canonical_unchanged'
+)
+required_false=(
+ 'host_selected_mechanism_family','external_models_used','new_external_research_used',
+ 'host_source_template_used','host_ast_skeleton_used','host_patch_used',
+ 'automatic_canonical_promotion'
+)
+passed=(
+ bool(development.get('state_committed'))
+ and all(checks[k] is True for k in required_true)
+ and all(checks[k] is False for k in required_false)
+)
 status='PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_GENESIS_V3' if passed else 'WITHHOLD_G2_EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_GENESIS_V3'
 report={
  'schema':'yado.g2.experience_conditioned_native_emitter_gene_genesis.v3',
