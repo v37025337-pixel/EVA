@@ -11,14 +11,17 @@
     "candidate_source_compiles": false,
     "candidate_static_safety_gate": false,
     "canonical_unchanged": true,
+    "dimension_origin_yado_failure_history": true,
+    "dimension_selected_by_yado": true,
     "external_coding_models_used": false,
     "host_ast_skeleton_used": false,
     "host_emitter_schema_used": false,
     "host_gene_schema_used": false,
-    "host_new_dimension_name_used": false,
+    "host_new_dimension_name_invented": false,
     "host_patch_used": false,
     "host_source_template_used": false,
     "host_target_function_selected": false,
+    "host_transported_yado_selected_dimension": true,
     "native_deficit_detected": true,
     "native_goal_created": true,
     "native_zero_argument_source_realization_attempt_executed": true,
@@ -837,17 +840,17 @@
       "selection": "CHILD",
       "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
     },
-    "core.semantic_expression_synthesizer": "<yado_semantic_expression_synthesizer_v1.SemanticExpressionSynthesizerV1 object at 0x7f31731c5e50>"
+    "core.semantic_expression_synthesizer": "<yado_semantic_expression_synthesizer_v1.SemanticExpressionSynthesizerV1 object at 0x7f7c7700e240>"
   },
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-04T16:38:16.896740+00:00",
-        "deficit_id": "D-1402c8a403a1",
+        "created_at": "2026-09-04T17:20:53.696805+00:00",
+        "deficit_id": "D-1aa9a151eeea",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-4c8cd1a05090",
+        "goal_id": "G-cef488bd8f3e",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -855,16 +858,27 @@
         "target": "NATIVE_SOURCE_REALIZATION_OF_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1"
       }
     ],
-    "goal_id": "G-4c8cd1a05090"
+    "goal_id": "G-cef488bd8f3e"
   },
   "native_source_candidate_count": 0,
   "next_required_capability": "NATIVE_SOURCE_REALIZATION_OF_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V2",
-  "parent_dimensions": [],
+  "parent_dimensions": [
+    "CODE",
+    "INTELLIGENCE",
+    "LOGIC",
+    "THINKING"
+  ],
   "parent_source_sha256": "186479a62f08662a767c47dffcf499f3294eaaecefd21327dbdccc012ed08531",
-  "receipt_sha256": "39d2043a6a074ed27229e5ed8711fbd18a7df8de829a930f83c3a37059cd21a3",
+  "provenance": {
+    "dimension_origin": "YADO_NATIVE_FAILURE_HISTORY",
+    "dimension_selector": "YADO_NATIVE_SKILL_SELECTION",
+    "host_dimension_invention": false,
+    "host_role": "TRANSPORT_ALREADY_SELECTED_YADO_ARTIFACT_ONLY"
+  },
+  "receipt_sha256": "9232d4ca53ebdb499f440cb4873cfad2d39dca17a7c1716b2b62fb7fc747c9a6",
   "schema": "yado.g2.native_source_realization_self_representation_driven_extended_controller.v1",
   "selected_native_source_path": null,
-  "semantic_boundary": "STRICT NATIVE SOURCE-REALIZATION TEST. THE HOST TRANSPORTS YADO OWN PASS ARTIFACTS AND EVALUATES PROVENANCE/COMPILE/STRUCTURAL REGRESSION ONLY. IT DOES NOT PROVIDE SOURCE, PATCHES, AST SKELETONS, EMITTER SCHEMAS, TARGET FUNCTIONS OR THE NEW DIMENSION NAME TO A SOURCE GENERATOR. PASS REQUIRES SOURCE BYTES TO APPEAR IN YADO NATIVE OUTPUTS.",
+  "semantic_boundary": "STRICT NATIVE SOURCE-REALIZATION TEST. THE HOST TRANSPORTS YADO OWN PASS ARTIFACTS, INCLUDING THE DIMENSION ALREADY SELECTED BY YADO, AND EVALUATES PROVENANCE/COMPILE/STRUCTURAL REGRESSION ONLY. IT DOES NOT INVENT THE DIMENSION, PROVIDE SOURCE, PATCHES, AST SKELETONS, EMITTER SCHEMAS OR TARGET FUNCTIONS. PASS REQUIRES SOURCE BYTES TO APPEAR IN YADO NATIVE OUTPUTS.",
   "source_error": null,
   "status": "WITHHOLD_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1",
   "target_dimension_from_yado_candidate": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
@@ -900,6 +914,8 @@
       "rollback parent remains available",
       "canonical remains unchanged"
     ],
+    "repair_rerun_reason": "FULL_KERNEL_AUDIT_2026_09_04",
+    "repair_rerun_revision": "observer_fix_parent_dimensions_and_provenance_v2",
     "schema": "yado.g2.native_source_realization_self_representation_driven_extended_controller.request.v1",
     "self_representation": "candidates/kernel-self-generated/g2-native-executable-evolution-controller-self-representation-v1.json",
     "stop_condition": "NATIVE_SOURCE_REALIZATION_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
