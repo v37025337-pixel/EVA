@@ -1,0 +1,838 @@
+{
+  "canonical_mutation": false,
+  "discovered_candidate_count": 33,
+  "episodes": [
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 1,
+      "generated_tests": [
+        {
+          "args": [
+            1,
+            0
+          ],
+          "expected": -2
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return y - 1 + x\n",
+      "mutated_source_sha256": "cb3f961a5286dcecf63beb56f17d9e0961f827bb358bc0e64699bdb2cf31263f",
+      "oracle_expression": "((y-1)-x)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return y - 1 - x\n",
+      "patched_source_sha256": "c7eeac71d89ffa2f157fd90499c595f64db8e39fa993d9af06d80f01c96632ac",
+      "reference_source_sha256": "c7eeac71d89ffa2f157fd90499c595f64db8e39fa993d9af06d80f01c96632ac",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "ASSIGN",
+        "line": 45,
+        "normalized_expression": "y - 1 - x",
+        "op_count": 2,
+        "original_names": [
+          "left_ops",
+          "opcount"
+        ],
+        "original_segment": "opcount-1-left_ops",
+        "path": "runtime/yado_semantic_expression_synthesizer_v1.py",
+        "token": "SRC-7aea387cbe3ab5df",
+        "variable_count": 2
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-7aea387cbe3ab5df",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "c7eeac71d89ffa2f157fd90499c595f64db8e39fa993d9af06d80f01c96632ac",
+          "candidate_before_sha256": "cb3f961a5286dcecf63beb56f17d9e0961f827bb358bc0e64699bdb2cf31263f",
+          "cycle": 0,
+          "expected": -2,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.0197,
+          "token": "T-be98a831e19ffa",
+          "x": 1,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 1,
+      "generated_tests": [
+        {
+          "args": [
+            0,
+            1
+          ],
+          "expected": 1
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return x - y\n",
+      "mutated_source_sha256": "29dded0da1a2867b1b1ffb297bbe4357a66b5c3647c7c98f3a144716e7c5719d",
+      "oracle_expression": "(x+y)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return x + y\n",
+      "patched_source_sha256": "6af861ac024b831009c18d4909fa710f2ccec0f86f10dba56081b15c186e27f6",
+      "reference_source_sha256": "6af861ac024b831009c18d4909fa710f2ccec0f86f10dba56081b15c186e27f6",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 263,
+        "normalized_expression": "x + y",
+        "op_count": 1,
+        "original_names": [
+          "dev_train",
+          "dev_val"
+        ],
+        "original_segment": "dev_train+dev_val",
+        "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+        "token": "SRC-073ea9b47964aa76",
+        "variable_count": 2
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-073ea9b47964aa76",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "6af861ac024b831009c18d4909fa710f2ccec0f86f10dba56081b15c186e27f6",
+          "candidate_before_sha256": "29dded0da1a2867b1b1ffb297bbe4357a66b5c3647c7c98f3a144716e7c5719d",
+          "cycle": 0,
+          "expected": 1,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.0197,
+          "token": "T-0fc312d6728972",
+          "x": 0,
+          "y": 1
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 1,
+      "generated_tests": [
+        {
+          "args": [
+            1,
+            0
+          ],
+          "expected": -1
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return y + x\n",
+      "mutated_source_sha256": "f61e05a3161d3c1cee253dc9c9493ac51597ad8574dc1eb239a67318076004bc",
+      "oracle_expression": "(y-x)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return y - x\n",
+      "patched_source_sha256": "eb6ccbdbc947bd2018acf845c3b188420b7c53ffafa8e914dba2aeb9609fb452",
+      "reference_source_sha256": "eb6ccbdbc947bd2018acf845c3b188420b7c53ffafa8e914dba2aeb9609fb452",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 83,
+        "normalized_expression": "y - x",
+        "op_count": 1,
+        "original_names": [
+          "y1",
+          "y2"
+        ],
+        "original_segment": "y2-y1",
+        "path": "runtime/yado_ambiguity_aware_program_repair_v11.py",
+        "token": "SRC-40a09de31a3a6048",
+        "variable_count": 2
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-40a09de31a3a6048",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "eb6ccbdbc947bd2018acf845c3b188420b7c53ffafa8e914dba2aeb9609fb452",
+          "candidate_before_sha256": "f61e05a3161d3c1cee253dc9c9493ac51597ad8574dc1eb239a67318076004bc",
+          "cycle": 0,
+          "expected": -1,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.0197,
+          "token": "T-1131697c795b94",
+          "x": 1,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 1,
+      "generated_tests": [
+        {
+          "args": [
+            0,
+            1
+          ],
+          "expected": 0
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return y + x\n",
+      "mutated_source_sha256": "f61e05a3161d3c1cee253dc9c9493ac51597ad8574dc1eb239a67318076004bc",
+      "oracle_expression": "(x*y)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return y * x\n",
+      "patched_source_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+      "reference_source_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 56,
+        "normalized_expression": "y * x",
+        "op_count": 1,
+        "original_names": [
+          "b",
+          "q"
+        ],
+        "original_segment": "q*b",
+        "path": "runtime/yado_budget_adaptive_compositional_logic_v2.py",
+        "token": "SRC-634457181a5b9803",
+        "variable_count": 2
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-634457181a5b9803",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+          "candidate_before_sha256": "f61e05a3161d3c1cee253dc9c9493ac51597ad8574dc1eb239a67318076004bc",
+          "cycle": 0,
+          "expected": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.0197,
+          "token": "T-30c507ae137cc3",
+          "x": 0,
+          "y": 1
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 1,
+      "generated_tests": [
+        {
+          "args": [
+            0,
+            1
+          ],
+          "expected": 1
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return x - y\n",
+      "mutated_source_sha256": "29dded0da1a2867b1b1ffb297bbe4357a66b5c3647c7c98f3a144716e7c5719d",
+      "oracle_expression": "(x+y)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return x + y\n",
+      "patched_source_sha256": "6af861ac024b831009c18d4909fa710f2ccec0f86f10dba56081b15c186e27f6",
+      "reference_source_sha256": "6af861ac024b831009c18d4909fa710f2ccec0f86f10dba56081b15c186e27f6",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 67,
+        "normalized_expression": "x + y",
+        "op_count": 1,
+        "original_names": [
+          "conf",
+          "ng"
+        ],
+        "original_segment": "conf+ng",
+        "path": "runtime/yado_work_budget_adaptive_contingent_planner_v2.py",
+        "token": "SRC-6400d8b06b76927a",
+        "variable_count": 2
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-6400d8b06b76927a",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "6af861ac024b831009c18d4909fa710f2ccec0f86f10dba56081b15c186e27f6",
+          "candidate_before_sha256": "29dded0da1a2867b1b1ffb297bbe4357a66b5c3647c7c98f3a144716e7c5719d",
+          "cycle": 0,
+          "expected": 1,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.0197,
+          "token": "T-43e5e439206afe",
+          "x": 0,
+          "y": 1
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 1,
+      "generated_tests": [
+        {
+          "args": [
+            0,
+            -1
+          ],
+          "expected": 0
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return y + x\n",
+      "mutated_source_sha256": "f61e05a3161d3c1cee253dc9c9493ac51597ad8574dc1eb239a67318076004bc",
+      "oracle_expression": "(x*y)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return y * x\n",
+      "patched_source_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+      "reference_source_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 59,
+        "normalized_expression": "y * x",
+        "op_count": 1,
+        "original_names": [
+          "mx",
+          "slope"
+        ],
+        "original_segment": "slope*mx",
+        "path": "runtime/yado_bounded_scientific_data_reasoner_v1.py",
+        "token": "SRC-6e650f37231aa83b",
+        "variable_count": 2
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-6e650f37231aa83b",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+          "candidate_before_sha256": "f61e05a3161d3c1cee253dc9c9493ac51597ad8574dc1eb239a67318076004bc",
+          "cycle": 0,
+          "expected": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.0197,
+          "token": "T-0ee3aa3567b856",
+          "x": 0,
+          "y": -1
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 2,
+      "generated_tests": [
+        {
+          "args": [
+            -1,
+            0
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            0,
+            0
+          ],
+          "expected": 0
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return y + x\n",
+      "mutated_source_sha256": "f61e05a3161d3c1cee253dc9c9493ac51597ad8574dc1eb239a67318076004bc",
+      "oracle_expression": "(x*y)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return y * x\n",
+      "patched_source_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+      "reference_source_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 178,
+        "normalized_expression": "y * x",
+        "op_count": 1,
+        "original_names": [
+          "b",
+          "q"
+        ],
+        "original_segment": "q*b",
+        "path": "runtime/yado_evolutionary_genome_v1.py",
+        "token": "SRC-dff06830ee2b1655",
+        "variable_count": 2
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-dff06830ee2b1655",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "2fda339c8f43c4f5d5588339d0a85427e7e26430c6efdcd3b13512054222848d",
+          "candidate_before_sha256": "f61e05a3161d3c1cee253dc9c9493ac51597ad8574dc1eb239a67318076004bc",
+          "cycle": 0,
+          "expected": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.0197,
+          "token": "T-14a6d51ea93b15",
+          "x": -1,
+          "y": 0
+        },
+        {
+          "candidate_after_sha256": "98eaa67b126bf51bc2f25ace5fa168f49fc1bb4738be03af37879f36bbf11374",
+          "candidate_before_sha256": "2fda339c8f43c4f5d5588339d0a85427e7e26430c6efdcd3b13512054222848d",
+          "cycle": 1,
+          "expected": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.02,
+          "token": "T-bf93d2bd3f37ac",
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 2,
+      "generated_tests": [
+        {
+          "args": [
+            0,
+            0
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            -1,
+            0
+          ],
+          "expected": -2
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return x + 2\n",
+      "mutated_source_sha256": "cb29c60fb67a133b133342fa739fae8cf900d09670a59f593a27b6ed0943b76b",
+      "oracle_expression": "(2*x)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return x * 2\n",
+      "patched_source_sha256": "14f44b1f2c91d9931ddd2f80ab4020ae3a5565e0d0b8fb96a75079824fb76d5f",
+      "reference_source_sha256": "14f44b1f2c91d9931ddd2f80ab4020ae3a5565e0d0b8fb96a75079824fb76d5f",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 116,
+        "normalized_expression": "x * 2",
+        "op_count": 1,
+        "original_names": [
+          "min_support"
+        ],
+        "original_segment": "min_support*2",
+        "path": "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+        "token": "SRC-2dee005c6c008c85",
+        "variable_count": 1
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-2dee005c6c008c85",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "d604a0e2f1fe3aa5ad50b2d7ea420ca92af180d2753d9352f24c82e860bd001e",
+          "candidate_before_sha256": "cb29c60fb67a133b133342fa739fae8cf900d09670a59f593a27b6ed0943b76b",
+          "cycle": 0,
+          "expected": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.02,
+          "token": "T-06083733e7653a",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "candidate_after_sha256": "14f44b1f2c91d9931ddd2f80ab4020ae3a5565e0d0b8fb96a75079824fb76d5f",
+          "candidate_before_sha256": "d604a0e2f1fe3aa5ad50b2d7ea420ca92af180d2753d9352f24c82e860bd001e",
+          "cycle": 1,
+          "expected": -2,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.0197,
+          "token": "T-a6f9a760cfbb8f",
+          "x": -1,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 1,
+      "generated_tests": [
+        {
+          "args": [
+            0,
+            0
+          ],
+          "expected": 1
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return x - 1\n",
+      "mutated_source_sha256": "70a5cf086b4320414043660af32db810be9b6f8f25d525f0d9cd8841e023f842",
+      "oracle_expression": "(1+x)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return x + 1\n",
+      "patched_source_sha256": "b24f19872929321d2778e8a2df04dff00c941d78f1c7a04698075406d6042823",
+      "reference_source_sha256": "b24f19872929321d2778e8a2df04dff00c941d78f1c7a04698075406d6042823",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 157,
+        "normalized_expression": "x + 1",
+        "op_count": 1,
+        "original_names": [
+          "max_redirects"
+        ],
+        "original_segment": "max_redirects+1",
+        "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py",
+        "token": "SRC-435fce8999f02f07",
+        "variable_count": 1
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-435fce8999f02f07",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "b24f19872929321d2778e8a2df04dff00c941d78f1c7a04698075406d6042823",
+          "candidate_before_sha256": "70a5cf086b4320414043660af32db810be9b6f8f25d525f0d9cd8841e023f842",
+          "cycle": 0,
+          "expected": 1,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.02,
+          "token": "T-f8e90ca0a163f1",
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "formal_spec_count": 5,
+      "generated_test_count": 1,
+      "generated_tests": [
+        {
+          "args": [
+            0,
+            0
+          ],
+          "expected": 1
+        }
+      ],
+      "iterative_counterexample_repair": true,
+      "mutated_holdout_score": 0.0,
+      "mutated_source_excerpt": "def f(x, y):\n    return x - 1\n",
+      "mutated_source_sha256": "70a5cf086b4320414043660af32db810be9b6f8f25d525f0d9cd8841e023f842",
+      "oracle_expression": "(1+x)",
+      "oracle_hidden_score": 1.0,
+      "patched_source_excerpt": "def f(x, y):\n    return x + 1\n",
+      "patched_source_sha256": "b24f19872929321d2778e8a2df04dff00c941d78f1c7a04698075406d6042823",
+      "reference_source_sha256": "b24f19872929321d2778e8a2df04dff00c941d78f1c7a04698075406d6042823",
+      "repair_mode": "BASE_PORTFOLIO",
+      "repair_reason": null,
+      "repaired_holdout_score": 1.0,
+      "reversible_shadow_defect": true,
+      "source": {
+        "kind": "BINOP_SUBEXPR",
+        "line": 54,
+        "normalized_expression": "x + 1",
+        "op_count": 1,
+        "original_names": [
+          "max_depth"
+        ],
+        "original_segment": "max_depth+1",
+        "path": "runtime/yado_budgeted_stage_policy_v1.py",
+        "token": "SRC-7788ef9b41c5dc98",
+        "variable_count": 1
+      },
+      "source_changed": true,
+      "status": "EXECUTED",
+      "task_id": "SRC-7788ef9b41c5dc98",
+      "test_selection_trace": [
+        {
+          "candidate_after_sha256": "b24f19872929321d2778e8a2df04dff00c941d78f1c7a04698075406d6042823",
+          "candidate_before_sha256": "70a5cf086b4320414043660af32db810be9b6f8f25d525f0d9cd8841e023f842",
+          "cycle": 0,
+          "expected": 1,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_score": 1.02,
+          "token": "T-91ea61c23ba08b",
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  ],
+  "experience_digest": "2b0fd2aa6507d66c8acd9da4f018fe1103e8dfe99cb96c272f2fd3ac4eb47ea7",
+  "mean_generated_test_count": 1.2,
+  "mutated_holdout_score": 0.0,
+  "oracle_hidden_score": 1.0,
+  "parent_oracle_gene_id": "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+  "real_code_transfer_gene": {
+    "active_components": [
+      "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+    ],
+    "gene_digest": "aa0dc94b8fe55c85c0214972cdfe6b58bc667203234e19697711dd696b749bf0",
+    "gene_id": "GENE-G2-CODING-REAL-CODE-TRANSFER-V3-3765122f95603ece",
+    "gene_scope": [
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+      "2577493c0143b46f46e9433ce02c82e2608a6d16c878b8a7db0af67ae397974d",
+      "GENE-G2-CODING-REAL-CODE-TRANSFER-V2-ea7acb92374c95a7",
+      "32d663295445de0f3849da148e3cb0da7a2e5f4cf8938533185ca80eaedf8c9a"
+    ],
+    "mean_generated_test_count": 1.2,
+    "mechanism_kind": "REVERSIBLE_REAL_AST_DEFECT_TO_ITERATIVE_SELF_COUNTEREXAMPLE_ORACLE_REPAIR",
+    "mutated_holdout_score": 0.0,
+    "oracle_hidden_score": 1.0,
+    "organ": "THINKING",
+    "promotion_state": "SHADOW_ONLY",
+    "repair_ablation_score": 0.0,
+    "repaired_holdout_score": 1.0,
+    "schema": "yado.g2.coding_spec_generalization_real_code_transfer_gene.v3",
+    "source_file_count": 10,
+    "task_count": 10
+  },
+  "repair_ablation_score": 0.0,
+  "repaired_holdout_score": 1.0,
+  "restore_score": 1.0,
+  "scanned_source_files": [
+    "runtime/yado_neutral_evidence_profile_selector_v1.py",
+    "runtime/yado_semantic_expression_synthesizer_v1.py",
+    "runtime/yado_bounded_scientific_data_reasoner_v1.py",
+    "runtime/yado_bounded_capability_router_v1.py",
+    "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+    "runtime/yado_budgeted_stage_policy_v1.py",
+    "runtime/yado_conjunctive_rule_inducer_v1.py",
+    "runtime/yado_evolutionary_genome_v1.py",
+    "runtime/yado_ambiguity_aware_program_repair_v11.py",
+    "runtime/yado_budget_adaptive_compositional_logic_v2.py",
+    "runtime/yado_work_budget_adaptive_contingent_planner_v2.py",
+    "runtime/yado_coverage_pruned_compositional_schema_router_v3.py",
+    "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
+    "runtime/yado_g2_openapi_contract_capability_v1.py",
+    "runtime/yado_g2_openapi_readonly_executor_v1.py",
+    "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
+    "runtime/yado_g2_unified_execution_fabric_v3.py",
+    "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py",
+    "runtime/yado_rc8_v36/yado_core_v3_0_rc4_meta_autoevolution.py",
+    "runtime/yado_rc8_v36/yado_core_v3_0_rc5_algorithm_genesis.py",
+    "runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py",
+    "runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py",
+    "runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py"
+  ],
+  "schema": "yado.g2.coding_real_code_transfer.experience.v3",
+  "selected_fragments": [
+    {
+      "kind": "ASSIGN",
+      "line": 45,
+      "normalized_expression": "y - 1 - x",
+      "op_count": 2,
+      "original_names": [
+        "left_ops",
+        "opcount"
+      ],
+      "original_segment": "opcount-1-left_ops",
+      "path": "runtime/yado_semantic_expression_synthesizer_v1.py",
+      "token": "SRC-7aea387cbe3ab5df",
+      "variable_count": 2
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 263,
+      "normalized_expression": "x + y",
+      "op_count": 1,
+      "original_names": [
+        "dev_train",
+        "dev_val"
+      ],
+      "original_segment": "dev_train+dev_val",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "token": "SRC-073ea9b47964aa76",
+      "variable_count": 2
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 83,
+      "normalized_expression": "y - x",
+      "op_count": 1,
+      "original_names": [
+        "y1",
+        "y2"
+      ],
+      "original_segment": "y2-y1",
+      "path": "runtime/yado_ambiguity_aware_program_repair_v11.py",
+      "token": "SRC-40a09de31a3a6048",
+      "variable_count": 2
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 56,
+      "normalized_expression": "y * x",
+      "op_count": 1,
+      "original_names": [
+        "b",
+        "q"
+      ],
+      "original_segment": "q*b",
+      "path": "runtime/yado_budget_adaptive_compositional_logic_v2.py",
+      "token": "SRC-634457181a5b9803",
+      "variable_count": 2
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 67,
+      "normalized_expression": "x + y",
+      "op_count": 1,
+      "original_names": [
+        "conf",
+        "ng"
+      ],
+      "original_segment": "conf+ng",
+      "path": "runtime/yado_work_budget_adaptive_contingent_planner_v2.py",
+      "token": "SRC-6400d8b06b76927a",
+      "variable_count": 2
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 59,
+      "normalized_expression": "y * x",
+      "op_count": 1,
+      "original_names": [
+        "mx",
+        "slope"
+      ],
+      "original_segment": "slope*mx",
+      "path": "runtime/yado_bounded_scientific_data_reasoner_v1.py",
+      "token": "SRC-6e650f37231aa83b",
+      "variable_count": 2
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 178,
+      "normalized_expression": "y * x",
+      "op_count": 1,
+      "original_names": [
+        "b",
+        "q"
+      ],
+      "original_segment": "q*b",
+      "path": "runtime/yado_evolutionary_genome_v1.py",
+      "token": "SRC-dff06830ee2b1655",
+      "variable_count": 2
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 116,
+      "normalized_expression": "x * 2",
+      "op_count": 1,
+      "original_names": [
+        "min_support"
+      ],
+      "original_segment": "min_support*2",
+      "path": "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+      "token": "SRC-2dee005c6c008c85",
+      "variable_count": 1
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 157,
+      "normalized_expression": "x + 1",
+      "op_count": 1,
+      "original_names": [
+        "max_redirects"
+      ],
+      "original_segment": "max_redirects+1",
+      "path": "runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py",
+      "token": "SRC-435fce8999f02f07",
+      "variable_count": 1
+    },
+    {
+      "kind": "BINOP_SUBEXPR",
+      "line": 54,
+      "normalized_expression": "x + 1",
+      "op_count": 1,
+      "original_names": [
+        "max_depth"
+      ],
+      "original_segment": "max_depth+1",
+      "path": "runtime/yado_budgeted_stage_policy_v1.py",
+      "token": "SRC-7788ef9b41c5dc98",
+      "variable_count": 1
+    }
+  ],
+  "semantic_boundary": "V3 CONSUMES V1 DISCOVERY COVERAGE FAILURE AND V2 NEGATIVE REPAIR TRANSFER.  REAL TRANSFER HERE MEANS ALGEBRAIC AST FRAGMENTS MECHANICALLY EXTRACTED FROM CURRENT ACTIVE YADO SOURCE FILES, NORMALIZED ONLY BY VARIABLE RENAMING, THEN MUTATED IN SHADOW BY THE ACTIVE BOUNDED MUTATION GRAMMAR. THE ORIGINAL FRAGMENT IS HIDDEN FROM THE PATCH PATH AND USED ONLY FOR FORMAL SPEC/HIDDEN EVALUATION. THIS IS STRONGER THAN SYNTHETIC FUNCTIONS BUT IS NOT YET WHOLE-FUNCTION OR MULTI-FILE SOFTWARE REPAIR.",
+  "source_file_count": 10,
+  "source_files": [
+    "runtime/yado_ambiguity_aware_program_repair_v11.py",
+    "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+    "runtime/yado_bounded_scientific_data_reasoner_v1.py",
+    "runtime/yado_budget_adaptive_compositional_logic_v2.py",
+    "runtime/yado_budgeted_stage_policy_v1.py",
+    "runtime/yado_conjunctive_rule_inducer_v1.py",
+    "runtime/yado_evolutionary_genome_v1.py",
+    "runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py",
+    "runtime/yado_semantic_expression_synthesizer_v1.py",
+    "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
+  ],
+  "status": "TRAINED",
+  "task_count": 10,
+  "v1_failure_run_id": "33918917875",
+  "v1_failure_signature": "INSUFFICIENT_REAL_SOURCE_EXPRESSIONS:5",
+  "v2_failure_receipt": "32d663295445de0f3849da148e3cb0da7a2e5f4cf8938533185ca80eaedf8c9a",
+  "v2_failure_repaired_holdout": 0.5
+}
