@@ -4,7 +4,7 @@
   "candidate_sha256": null,
   "canonical_head_unchanged": true,
   "canonical_mutation": false,
-  "external_models_are_tools": true,
+  "external_models_are_materialization_tools_only": true,
   "external_tools_used": [
     {
       "model_id": "minimax-m2.7",
@@ -35,7 +35,7 @@
           "state_integrity": false,
           "structural": false
         },
-        "evidence_digest": "95c23864f4438d9ec519d54309647d9ffad9f6701e310ee0805da75241367794",
+        "evidence_digest": "94600ee2e7a0efed5ae2182256ff955f54e696e6b005e2b02e2bdee6a019dca9",
         "failed_critics": [
           "fit_marginal_gain",
           "heldout_gain_floor",
@@ -82,7 +82,7 @@
     "status": "NO_ADMISSIBLE_SKILLS"
   },
   "latest_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json",
-  "problem_packet_digest": "64a274964b262222def72458a2f34e408aac33bf734967cd7adcb5e0bc4b1f2c",
+  "problem_packet_digest": "2c174009112f59bd19f8a3974844db221a4bdf4f9b0f96ee7ebdac443318800b",
   "proposals": [
     {
       "candidate_source_sha256": null,
@@ -102,10 +102,16 @@
     },
     {
       "candidate_source_sha256": null,
-      "diagnosis": null,
-      "evidence_used": null,
+      "diagnosis": "The YADO-native evidence-binder gene (GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5) has been created and validated but not yet integrated into the shadow self-audit runtime. The target file implements the shadow action-evidence self-audit self-study repair mechanism (matching schema yado.g2.action_evidence_self_audit_self_study_repair.request.v1) and must load/bind the existing self-generated gene artifact rather than re-derive host rules.",
+      "evidence_used": [
+        "direct_priority_evidence: true",
+        "evidence_digest: 87932e01359943ebb9ad9725374d38ca6fe5ce0ee75a14b651fedef92e9117b9",
+        "self_generated_gene: candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
+        "schema: yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
+        "previous_self_study_receipt: candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json"
+      ],
       "model_id": "kilo-auto/free",
-      "parse_error": null,
+      "parse_error": "RuntimeError:REPAIR_MODEL_CALL_FAILED",
       "parsed": false,
       "patch_count": null,
       "provider_key": "kilo",
@@ -113,15 +119,17 @@
       "semantic_probe": null,
       "skill_id": "SELF_AUDIT_EVIDENCE_REPAIR_KILO_1",
       "static_evaluation": null,
-      "target_path": null,
-      "withhold": true
+      "target_path": "runtime/yado_g2_action_evidence_self_audit_self_study_repair_v1.py",
+      "withhold": false
     }
   ],
-  "receipt_sha256": "63b1d9e63dd58002e3e072066521449db39a110de168f42fe19376102c7ab652",
+  "receipt_sha256": "cc0d936219f426d6a94c3a2e5d98c0a40cfa8b136e0bfc325284fef1d8e93e98",
   "schema": "yado.g2.action_evidence_self_audit_self_study_repair.v1",
   "selected_skill_id": null,
   "selected_target_path": null,
-  "semantic_boundary": "YADO WAS GIVEN THE PROBLEM AND SUCCESS/SAFETY CONDITIONS. EXTERNAL NO-KEY MODELS MAY DIAGNOSE AND PROPOSE PATCHES AS TOOLS; YADO NATIVE SKILL ADMISSION SELECTS OR WITHHOLDS. HOST DOES NOT SELECT TARGET OR WRITE THE PATCH. PASS IS SHADOW ONLY AND REQUIRES AN ISOLATED FRESH SELF-AUDIT PLUS REGRESSION.",
+  "self_generated_gene_digest": "00b86ebd2afc186a0574ef5611dec74214d2a5e355d78160027e23539f69ed65",
+  "self_generated_gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
+  "semantic_boundary": "YADO FIRST CREATED THE EVIDENCE-BINDING GENE NATIVELY. THIS STAGE USES EXTERNAL NO-KEY CODING MODELS ONLY AS SOURCE-MATERIALIZATION TOOLS TO BIND THAT EXISTING YADO GENE; THEY MAY NOT INVENT A SUBSTITUTE POLICY. YADO NATIVE SKILL ADMISSION SELECTS OR WITHHOLDS. HOST DOES NOT SELECT TARGET OR WRITE THE PATCH. PASS IS SHADOW ONLY AND REQUIRES A VALID-EVIDENCE AUDIT CHANGE, AN INVALID-EVIDENCE FAIL-CLOSED COUNTERFACTUAL, COMPILEALL, AND REGRESSION.",
   "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1",
   "task": {
     "authorization": {
@@ -132,14 +140,17 @@
     },
     "constraints": {
       "fail_closed": true,
+      "must_bind_existing_self_generated_gene": true,
       "no_canonical_mutation": true,
       "no_eval_exec": true,
+      "no_hardcoded_pass": true,
       "no_host_selected_target": true,
       "no_host_solution_hint": true,
       "no_host_written_patch": true,
       "no_new_import_roots": true,
       "no_new_subprocess": true,
-      "no_secrets": true
+      "no_secrets": true,
+      "no_substitute_acceptance_policy": true
     },
     "evidence": {
       "direct_evidence_artifact": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
@@ -150,28 +161,31 @@
         33833049256
       ],
       "latest_deep_self_audit_run_id": 33832918251,
+      "native_gene_confirmation_run_id": 33841818519,
       "previous_self_study_receipt": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
-      "previous_self_study_run_id": 33833488285
+      "previous_self_study_run_id": 33833488285,
+      "self_generated_gene": "candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
+      "self_generated_gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5"
     },
-    "goal": "Continue from the kernel's own diagnosis, independently choose or reaffirm the repair target and solution path, and materialize an executable shadow candidate that passes isolated self-audit and regression gates.",
-    "host_role": "PROBLEM_CONTRACT_TRANSPORT_AND_ISOLATED_EVALUATION_ONLY",
-    "objective": "CONTINUE_KERNEL_NATIVE_REPAIR_FROM_OWN_DIAGNOSIS_TO_EXECUTABLE_CANDIDATE",
-    "problem": "Previous self-study run correctly diagnosed the action-evidence-to-self-audit disconnect but WITHHELD before materializing an executable repair candidate. Continue from the kernel's own prior diagnosis and produce a valid shadow repair or explicitly WITHHOLD again.",
+    "goal": "Let YADO use its own gene as the decision mechanism and select a safe source-level integration candidate. External coding models, if used, are materialization tools only; they must bind the existing YADO gene rather than invent a new rule.",
+    "host_role": "TASK_TRANSPORT_STRICT_EVALUATION_ONLY",
+    "objective": "INTEGRATE_YADO_SELF_GENERATED_EVIDENCE_BINDER_GENE_INTO_SHADOW_SELF_AUDIT",
+    "problem": "YADO has now created and fresh/blind/ablation-validated its own evidence-binding shadow gene, but the real deep self-audit does not yet consume that gene. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
     "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
-    "stop_condition": "EXECUTABLE_SHADOW_REPAIR_PASS_OR_EXPLICIT_KERNEL_WITHHOLD",
+    "stop_condition": "SELF_GENERATED_GENE_SHADOW_INTEGRATED_OR_EXPLICIT_WITHHOLD",
     "success_conditions": [
-      "kernel_reuses_or_rederives_its_own_prior_diagnosis",
-      "target_is_kernel_or_kernel_tool_selected_not_host_selected",
-      "patch_is_kernel_tool_proposed_not_host_written",
+      "candidate_binds_the_existing_yado_self_generated_gene",
+      "target_is_not_host_selected",
+      "patch_is_not_host_written",
+      "valid_fresh_direct_evidence_is_recognized_by_shadow_self_audit",
+      "invalid_counterfactual_direct_evidence_fails_closed",
       "candidate_compiles",
-      "isolated_fresh_self_audit_consumes_relevant_direct_evidence",
-      "LIVE_RESOURCE_EVIDENCE_SCOPE_is_only_closed_if_new_evidence_is_valid",
       "runtime_compileall_passes",
       "selected_regression_suite_passes",
       "kernel_native_skill_admission_selects_candidate_or_explicitly_withholds",
       "canonical_head_remains_unchanged"
     ],
-    "trigger": 2,
-    "trigger_reason": "CONTINUE_AFTER_SELF_DIAGNOSIS_WITHHOLD_TO_EXECUTABLE_REPAIR"
+    "trigger": 3,
+    "trigger_reason": "INTEGRATE_NATIVE_GENE_AFTER_RUN_33841818519_PASS"
   }
 }
