@@ -1,0 +1,25 @@
+{
+  "schema": "yado.g2.coding_hypothesis_revision_generator_v1.request.v1",
+  "objective": "TURN_V7_RETRY_CONTROL_INTO_REAL_FAILURE_DRIVEN_CODE_HYPOTHESIS_REVISION",
+  "instruction": "Join the successful historical coding-planning THINKING gene and the V7 iterative reasoning THINKING gene into one lineage. On fresh sandbox repair tasks, begin from a hypothesis that fits the seed observations but fails unseen behavior. Let the V7 reasoning policy decide REVISE_HYPOTHESIS after an observed failed consequence. Feed only that failed test input/expected output back as memory; never reveal final holdout labels. The already-active G2 AmbiguityAwareProgramRepairV11 must generate the revised source. Require changed source digests, retest decisions, exact untouched final holdout, causal no-feedback ablation, deterministic restore, and at least one task requiring more than one revision. No host-selected patch.",
+  "parents": [
+    "candidates/kernel-self-generated/g2-coding-apprenticeship-repair-v2.json",
+    "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v7.json"
+  ],
+  "required_active_capabilities": [
+    "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+  ],
+  "constraints": {
+    "third_party_code_execution": false,
+    "external_coding_model": false,
+    "ready_patch_from_host": false,
+    "host_selected_revised_source": false,
+    "final_holdout_feedback": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false
+  },
+  "host_role": "SANDBOX_TASK_AND_FAILED_TEST_EVIDENCE_PROVIDER_PLUS_STRICT_EVALUATOR_ONLY",
+  "trigger": 1,
+  "trigger_reason": "V7_PROVED_RETRY_CONTROL_NEXT_DEFICIT_IS_GENERATING_A_CHANGED_HYPOTHESIS_AFTER_FAILURE"
+}
