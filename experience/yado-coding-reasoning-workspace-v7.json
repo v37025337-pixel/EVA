@@ -1,0 +1,452 @@
+{
+  "ablation_score": 0.0,
+  "canonical_mutation": false,
+  "experience_digest": "2e5a84b667484f3fcff6f570e8e5947ceae2bfcf068fa8203b23d6ec8a4a25b0",
+  "failure_phase_score": 1.0,
+  "fresh_episodes": [
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x * 7 + 3\n",
+      "candidate_source_sha256": "64eed1fa2c3e33c55d2794a217ebb10cf5e2d0955b87ffd7a2fadca073a58e76",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "V7_LINEAR",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "task_id": "V7_CUBIC",
+      "task_kind": "REPAIR",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "task_id": "V7_MOD8",
+      "task_kind": "REPAIR",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x + 23 if x <= -10 else x + 11 if x <= -4 else x + 3\n",
+      "candidate_source_sha256": "2617490a37ed9f944a325e1be17ba346cbe3582db3d625d07f04bde499ffba03",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.6,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "V7_ABS3",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return 4 * 1 + 2 * x + -3 * (x * x)\n",
+      "candidate_source_sha256": "6d75a2668cf429d5c2d14abee310679c27c4764647de0a3a994da2f1c67325e9",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V7_QUADRATIC",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return -6 * 1 + x + 2 * (x * x * x)\n",
+      "candidate_source_sha256": "1012fff1f8dff3b230baf7afda3b742d89f4b89912caaa80fd7753d2094255f0",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V7_CUBIC",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": true
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "NO_UNIVARIATE_POLYNOMIAL_WITHIN_GENE_BUDGET",
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V7_DEGREE6",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": true,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "e09f888523377bc686b5a85d9ada5ecf6b35a2b81f9295c728763cf82f38545c",
+      "reason": "UNIVARIATE_ONLY",
+      "repair_mode": null,
+      "task_id": "V7_BIVARIATE",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    }
+  ],
+  "fresh_score": 1.0,
+  "nonbranch_phase_score": 1.0,
+  "parent_v6_receipt": "982773d159501e39f0a4cc4e6f5e4bb19a4704d52d099308fb23398ffc3d520c",
+  "restore_score": 1.0,
+  "retry_to_retest_rows": [
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V7_LINEAR"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V7_CUBIC"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V7_MOD8"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V7_ABS3"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V7_QUADRATIC"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V7_CUBIC"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V7_DEGREE6"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V7_BIVARIATE"
+    }
+  ],
+  "retry_to_retest_score": 1.0,
+  "schema": "yado.g2.coding_reasoning_workspace.experience.v7",
+  "semantic_boundary": "V7 CORRECTS THE V6 VALIDATOR SEMANTICS WITHOUT LOWERING BEHAVIORAL THRESHOLDS. PHASE COVERAGE IS PROVEN BY TYPED STAGE-LOCAL OBSERVATIONS AND DIRECT EXECUTION OF ALL THREE FAILURE/SUCCESS BRANCH PAIRS. THIS ESTABLISHES A GUARDED ITERATIVE REASONING CONTROL LOOP, NOT YET AUTONOMOUS SYNTHESIS OF A REVISED CODE HYPOTHESIS.",
+  "status": "TRAINED",
+  "success_phase_score": 1.0,
+  "thinking_gene": {
+    "ablation_score": 0.0,
+    "active_parent_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "fresh_score": 1.0,
+    "gene_digest": "5e23cc24b0fc023d2119ed0a853fe69a3b51a704ed0f077a73ec7840d171129e",
+    "gene_id": "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d",
+    "gene_scope": [
+      "THINKING",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC",
+      "INTELLIGENCE"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-REASONING-THINKING-V6-06547c18b3804a17",
+      "982773d159501e39f0a4cc4e6f5e4bb19a4704d52d099308fb23398ffc3d520c",
+      "d16b4640664a5ecae1d5201c3fd98d8956c9d14dd5d4dbf4c349cc57aa57ba8b"
+    ],
+    "mechanism_kind": "SEMANTIC_PHASE_BOUND_GUARDED_REASONING_ROUTER",
+    "organ": "THINKING",
+    "origin": "ACTIVE_G2_ROUTER_RELEARNED_WITH_SEMANTIC_PHASE_BINDING_AFTER_V6_VALIDATOR_COUNTEREXAMPLE",
+    "program": {
+      "clauses": [
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "MEMORY_READY"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ADVANCE",
+          "support": 48
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "CODE_READ"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "BUILD_MODEL",
+          "support": 48
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "IMPLEMENTED"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "CHECK_CONSEQUENCES",
+          "support": 48
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "MODEL_BUILT"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "FORM_HYPOTHESIS",
+          "support": 48
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "START"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "READ_CODE",
+          "support": 48
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "IMPLEMENT_CHANGE",
+          "support": 29
+        },
+        {
+          "atoms": [
+            {
+              "field": "candidate_present",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "TEST_HYPOTHESIS",
+          "support": 29
+        },
+        {
+          "atoms": [
+            {
+              "field": "fresh_exact",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 24
+        },
+        {
+          "atoms": [
+            {
+              "field": "fresh_exact",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "STORE_EXPERIENCE",
+          "support": 24
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 19
+        },
+        {
+          "atoms": [
+            {
+              "field": "candidate_present",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 19
+        }
+      ],
+      "fallback_output": "WITHHOLD_UNKNOWN",
+      "program_digest": "5611c50ed421e83d4c04b58d898f7a65c8be3ece4ad6749aa7dc823db4792ac3",
+      "schema": "yado.g2.semantic_phase_bound_coding_reasoning_program.v7",
+      "source_digest": "88729323d4f0e1a82d8ace9ea14e39c5bccbe410a0d89df3e58dacf92e964b79",
+      "typed_phase_binding": {
+        "candidate_present": "HYPOTHESIS_READY",
+        "fresh_exact": "CONSEQUENCE_RESULT",
+        "train_exact": "TEST_RESULT"
+      }
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "restore_score": 1.0,
+    "schema": "yado.g2.coding_reasoning_thinking_gene.v7",
+    "unknown_state_score": 1.0
+  },
+  "typed_retry_fields": [
+    "candidate_present",
+    "fresh_exact",
+    "train_exact"
+  ],
+  "unknown_state_score": 1.0
+}
