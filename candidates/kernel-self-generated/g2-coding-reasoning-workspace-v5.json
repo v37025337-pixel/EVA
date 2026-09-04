@@ -1,0 +1,316 @@
+{
+  "ablation_score": 0.0,
+  "active_mechanism": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+  "canonical_mutation": false,
+  "checks": {
+    "ablation_material_drop": true,
+    "active_router_capability_verified": true,
+    "all_valid_routes_require_known_stage": false,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "explicit_retry_clauses_guarded": false,
+    "explicit_retry_clauses_present": true,
+    "external_coding_model_used": false,
+    "fallback_is_withhold_unknown": true,
+    "fresh_reasoning_exact": true,
+    "fresh_success_and_failure_both_present": true,
+    "fresh_v5_tasks_executed": true,
+    "host_written_reasoning_rules": false,
+    "new_shadow_thinking_gene_created": true,
+    "ready_patch_from_host_used": false,
+    "restore_exact": true,
+    "retry_failure_stage_coverage": true,
+    "retry_to_retest_transition_exact": false,
+    "router_has_clauses": true,
+    "stage_cardinality_within_router_bound": true,
+    "stage_known_boundary_present": true,
+    "third_party_code_executed": false,
+    "unknown_states_fail_closed": false,
+    "v4_representation_defect_reproduced": true,
+    "v4_withhold_consumed": true
+  },
+  "fresh_failure_count": 4,
+  "fresh_score": 1.0,
+  "fresh_success_count": 4,
+  "fresh_task_count": 8,
+  "next_required_capability": "G2_CODING_REASONING_WORKSPACE_V6",
+  "promotion_applied": false,
+  "receipt_sha256": "966a9cde46da83c77490113e683d7f20429d7f713f2207e7358edd38f0b625ac",
+  "representation_repair": "KEEP_8_KNOWN_STAGE_VALUES_ADD_STAGE_KNOWN_BOOLEAN",
+  "restore_score": 1.0,
+  "retry_clause_count": 3,
+  "retry_states": [
+    "CONSEQUENCE_RESULT",
+    "HYPOTHESIS_READY",
+    "TEST_RESULT"
+  ],
+  "retry_to_retest_score": 0.625,
+  "router_clause_count": 11,
+  "schema": "yado.g2.coding_reasoning_workspace.v5",
+  "semantic_boundary": "V5 REPAIRS V4 INPUT REPRESENTATION WITHOUT CHANGING THE ACTIVE G2 ROUTER ALGORITHM. THE LEARNED POLICY EXPLICITLY GUARDS KNOWN FAILURE STATES AND FAILS CLOSED ON OOD STATES. RETRY CONTROL IS PROVEN; AUTONOMOUS NEW-HYPOTHESIS/PATCH GENERATION AFTER RETRY IS NOT YET PROVEN.",
+  "status": "WITHHOLD_G2_CODING_REASONING_WORKSPACE_V5",
+  "task": {
+    "constraints": {
+      "algorithm_change": false,
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_coding_model": false,
+      "host_written_reasoning_rules": false,
+      "ready_patch_from_host": false,
+      "third_party_code_execution": false
+    },
+    "host_role": "REPRESENTATION_REPAIR_CURRICULUM_TRANSPORT_FRESH_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+    "instruction": "Consume V4 as a negative counterexample. The V4 experiment exceeded the active router's categorical stage bound by inventing extra UNKNOWN stage tokens, causing stage to be excluded and yielding zero clauses. Keep exactly the eight known reasoning stage symbols and add a separate stage_known boolean boundary. Use the same already-active ALG-BOUNDED-CAPABILITY-ROUTER-V1 to learn the policy from accumulated coding memory. Require explicit guarded retry clauses, fail-closed unknown states, fresh exact reasoning, ablation/restore, and failure -> revise -> retest control continuity. Do not change the router algorithm and do not claim autonomous hypothesis generation yet.",
+    "objective": "REPAIR_V4_REPRESENTATION_WITHOUT_CHANGING_THE_ACTIVE_G2_REASONING_ALGORITHM",
+    "parent": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v4.json",
+    "representation_change": "ADD_STAGE_KNOWN_BOOLEAN_KEEP_STAGE_CARDINALITY_AT_8",
+    "required_active_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "schema": "yado.g2.coding_reasoning_workspace_v5.request.v1",
+    "trigger": 1,
+    "trigger_reason": "V4_ZERO_CLAUSES_DUE_TO_STAGE_CARDINALITY_EXCEEDING_ACTIVE_ROUTER_BOUND"
+  },
+  "thinking_gene": {
+    "ablation_score": 0.0,
+    "active_parent_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "fresh_score": 1.0,
+    "gene_digest": "13976f7583b1900d174949376a64934fafdae42d52c0839fe7cb1a5f047b0794",
+    "gene_id": "GENE-G2-CODING-REASONING-THINKING-V5-067308d7df7722a1",
+    "gene_scope": [
+      "THINKING",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC",
+      "INTELLIGENCE"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-REASONING-THINKING-V4-01668ec7cc02482c",
+      "244360027b70abb74a05b08ff895067e87b79bc9d7080cc63939e366caab7522",
+      "2e31906b3b69cd052b970f15f3ebbe5ff184c802f30eac4e054018646a657f47"
+    ],
+    "mechanism_kind": "GUARDED_STATE_CONDITIONED_ACTION_ROUTER",
+    "organ": "THINKING",
+    "origin": "ACTIVE_G2_ROUTER_LEARNED_GUARDED_RETRY_AFTER_REPRESENTATION_BOUNDARY_REPAIR",
+    "program": {
+      "clauses": [
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "TEST_RESULT"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "IMPLEMENT_CHANGE",
+          "support": 20
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "HYPOTHESIS_READY"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "TEST_HYPOTHESIS",
+          "support": 20
+        },
+        {
+          "atoms": [
+            {
+              "field": "fresh_exact",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "CONSEQUENCE_RESULT"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 16
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "TEST_RESULT"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 12
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "MEMORY_READY"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ADVANCE",
+          "support": 32
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "CODE_READ"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "BUILD_MODEL",
+          "support": 32
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "IMPLEMENTED"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "CHECK_CONSEQUENCES",
+          "support": 32
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "MODEL_BUILT"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "FORM_HYPOTHESIS",
+          "support": 32
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "START"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "READ_CODE",
+          "support": 32
+        },
+        {
+          "atoms": [
+            {
+              "field": "fresh_exact",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "CONSEQUENCE_RESULT"
+            }
+          ],
+          "confidence": 1.0,
+          "output": "STORE_EXPERIENCE",
+          "support": 16
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "HYPOTHESIS_READY"
+            },
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 12
+        }
+      ],
+      "fallback_output": "WITHHOLD_UNKNOWN",
+      "program_digest": "067308d7df7722a1b6605dec7b09e204732840beb81bc21548ed1be1457834ae",
+      "schema": "yado.g2.guarded_coding_reasoning_router_program.v5",
+      "source_digest": "c1944a68785cb08e51853a750b1ca9629f44076165450a7d8a1dd1d95a650c2a"
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "restore_score": 1.0,
+    "schema": "yado.g2.coding_reasoning_thinking_gene.v5",
+    "unknown_state_score": 0.75
+  },
+  "thinking_gene_id": "GENE-G2-CODING-REASONING-THINKING-V5-067308d7df7722a1",
+  "unknown_state_score": 0.75
+}
