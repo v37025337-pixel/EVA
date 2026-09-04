@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 274,
+  "event_count": 275,
   "events": [
     {
       "canonical_mutation": false,
@@ -4802,10 +4802,26 @@
       "source_digest": "10cee5d0afcfc84238da147710f93935b5c62cb57d1b589f9115db0389d86825",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33786600819.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0; NEXT=KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+      "event_hash": "18442ed7a31daca50f9474fc94466c04bf39ec5f6ef6463b8a24840226da365d",
+      "event_id": "E0275_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 274,
+      "parent_event_hash": "fadbab806b080de2fa2056a4840e30a32a504f1cd9669ba4dadc2225e336dced",
+      "promotion_applied": false,
+      "run_id": "33831996104",
+      "source_digest": "7f1dab251e0688a7887e5d252aa7ff1dc054fdd6da39d03545155a17a600417f",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33831996104.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "9138f43b3842f6896e60b70b63696cf0ccddbf8f8bc6822231fcf0b2977b21db",
+  "ledger_digest": "6800264ffddf9c07fd487152a3481e2c4819ab291c2bd25e9c413e3643851522",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -4843,5 +4859,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "fadbab806b080de2fa2056a4840e30a32a504f1cd9669ba4dadc2225e336dced"
+  "tail_event_hash": "18442ed7a31daca50f9474fc94466c04bf39ec5f6ef6463b8a24840226da365d"
 }
