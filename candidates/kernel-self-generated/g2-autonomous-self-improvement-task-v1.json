@@ -222,8 +222,8 @@
       "severity": "LOW"
     }
   ],
-  "latest_self_audit_receipt_sha256": "4957ccc9e0f00aeb9a37381b51489fb54d033fbde1d021b0dfda2dae9b04dc57",
-  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33732332480.json",
+  "latest_self_audit_receipt_sha256": "7f1dab251e0688a7887e5d252aa7ff1dc054fdd6da39d03545155a17a600417f",
+  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33831996104.json",
   "native_evolution_result": {
     "architecture_mutation": false,
     "child": {
@@ -518,7 +518,7 @@
     "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
   },
   "next_action": "KERNEL_CONTINUE_FROM_SELF_SELECTED_PRIORITY",
-  "receipt_sha256": "1a1325b8b8b3d07eaaa83e15d2db04e753d91e9a0d20304601ddbc6b896f5da0",
+  "receipt_sha256": "290dd75d45aaaa92b9785efdf7de77f10c369ba54847728629972a29e3b0d753",
   "schema": "yado.g2.autonomous_self_improvement_task.v1",
   "selected_child_genome_digest": "a812d2da7de8ec551c85478f3dedd8c51272a67d4e6c452f8cf2de33356b8545",
   "semantic_boundary": "THE HOST ONLY TRIGGERS AND PERSISTS. YADO SELECTS ITS OWN AUDIT PRIORITY, CONSULTS ITS EXPERIENCE, AND RUNS ITS CANONICAL NATIVE GENOME EVOLUTION. ANY CHANGE REMAINS SHADOW; THIS DOES NOT CLAIM OPEN-ENDED AUTONOMOUS SELF-REWRITING.",
@@ -554,44 +554,39 @@
     "host_selected_mechanism": null,
     "host_selected_target": null,
     "host_solution_hint": null,
+    "latest_audit_run_id": 33831996104,
+    "latest_self_selected_next_step": "LIVE_RESOURCE_EVIDENCE_SCOPE",
     "mechanism_selection": "KERNEL_SELF_SELECTED_NATIVE_OR_SELF_CREATED",
-    "objective": "SOLVE_CURRENT_SELF_REWRITE_BOOTSTRAP_DEFICIT_WITHOUT_HOST_SUPPLIED_MECHANISM",
+    "objective": "CONTINUE_FROM_KERNEL_SELF_SELECTED_PRIORITY",
     "previous_evidence": [
       "candidates/kernel-self-generated/g2-native-meta-grammar-compile-repair-v1.json",
       "candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json"
     ],
     "schema": "yado.g2.autonomous_self_improvement_request.v1",
-    "stop_condition": "KERNEL_REACHES_PASS_SHADOW_OR_EXPLICITLY_WITHHOLDS_AT_ITS_CURRENT_BOOTSTRAP_BOUNDARY",
-    "target_selection": "KERNEL_SELF_SELECTED",
+    "stop_condition": "DIRECT_PRIORITY_EVIDENCE_OR_EXPLICIT_KERNEL_WITHHOLD",
+    "target_selection": "KERNEL_SELF_SELECTED_FROM_LATEST_DEEP_SELF_AUDIT",
     "task": {
-      "allowed": [
-        "use_own_memory_and_accumulated_failure_history",
-        "use_existing_native_kernel_mechanisms",
-        "create_or_evolve_shadow_mechanisms_if_the_kernel_decides_they_are_needed",
-        "use_project_authorized_resources_subject_to_existing_safety_and_integrity_gates",
-        "withhold_if_the_kernel_cannot_satisfy_the_conditions"
-      ],
       "forbidden": [
+        "host_selected_target",
+        "host_selected_mechanism",
+        "host_solution_hint",
         "host_supplied_patch",
-        "host_selected_repair_operator",
-        "host_selected_target_file",
-        "host_supplied_solution_hint",
-        "relax_success_thresholds_to_force_pass"
+        "host_supplied_domain_specific_feature_dictionary",
+        "lowering_existing_integrity_or_freshness_gates"
       ],
-      "goal": "Restore and advance the self-rewrite capability while preserving current controller semantics.",
+      "goal": "Continue development from the latest kernel-native deep self-audit self_selected_next_step and produce directly relevant evidence.",
       "success_conditions": [
-        "kernel_identifies_the_current_deficit_and_chooses_its_own_solution_path",
-        "self_rewrite_controller_compiles",
-        "current_controller_semantics_are_preserved_by_fresh_or_regression_evidence",
-        "kernel_creates_a_self_rewrite_child_without_host_selected_target_or_patch",
-        "child_compiles",
-        "fresh_regression_passes",
-        "rollback_or_causal_check_passes",
-        "final_verdict_is_PASS_SHADOW"
+        "kernel_uses_latest_native_self_audit_priority",
+        "kernel_selects_its_own_target_and_solution_path",
+        "result_directly_addresses_the_selected_priority",
+        "fresh_or_conflict_resolution_evidence_is_produced_when_required_by_the_selected_priority",
+        "no_unrelated_generic_evolution_counts_as_task_completion",
+        "canonical_state_remains_unchanged_unless_a_separate_existing_admission_gate_authorizes_change",
+        "kernel_may_explicitly_WITHHOLD_if_current_native_mechanisms_cannot_close_the_priority"
       ],
-      "task_id": "G2-AUTONOMOUS-SELF-REWRITE-SEMANTIC-PRESERVATION"
+      "task_id": "G2-CONTINUE-FROM-SELF-SELECTED-PRIORITY"
     },
-    "trigger": 1,
+    "trigger": 2,
     "use_accumulated_experience": true
   }
 }
