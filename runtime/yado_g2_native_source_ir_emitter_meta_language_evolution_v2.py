@@ -96,16 +96,28 @@ all_failure_memory_bound=all(x in child_experience for x in failure_receipts)
 
 native_outputs={'kernel_calls':kernel_calls,'controller_calls':controller_calls}
 new_emitter_candidates=[]
+baseline_blob=canon({'parent':parent,'pre_meta':pre_meta,'pre_alg':pre_alg,'parent_evidence':parents})
+identity_keys=('gene_id','grammar_extension_id','meta_grammar_operator_id','component_id','program_id','constructor_id')
 
 def walk(x,path='root'):
     if isinstance(x,dict):
-        blob=canon(x).lower()
+        # Do not let nested copied failure-memory text masquerade as a newly born mechanism.
+        shallow={k:v for k,v in x.items() if k not in ('experience_sources','parent','child','native_outputs','kernel_calls','controller_calls')}
+        local_blob=canon(shallow).lower()
         d=x.get('gene_digest')
         new_gene=(d is not None and str(d) not in parent_gene_digests)
-        emitter_semantics=any(t in blob for t in ('source_emitter','source-emitter','ir_emitter','emitter_meta','meta_language','meta-language','source_material'))
+        identities=[str(x.get(k)) for k in identity_keys if x.get(k) not in (None,'')]
+        novel_identities=[z for z in identities if z not in baseline_blob]
+        emitter_semantics=any(t in local_blob for t in ('source_emitter','source-emitter','ir_emitter','emitter_meta','meta_language','meta-language','source_material'))
         failure_bound=any(r in canon(x) for r in failure_receipts)
-        if emitter_semantics and (new_gene or failure_bound):
-            new_emitter_candidates.append({'path':path,'digest':digest(x),'new_gene':new_gene,'failure_bound':failure_bound,'keys':sorted(map(str,x.keys()))})
+        mechanism_identity=bool(new_gene or novel_identities)
+        copied_memory_path='.experience_sources[' in path
+        if emitter_semantics and mechanism_identity and not copied_memory_path:
+            new_emitter_candidates.append({
+              'path':path,'digest':digest(x),'new_gene':new_gene,
+              'novel_identities':novel_identities,'failure_bound':failure_bound,
+              'keys':sorted(map(str,x.keys()))
+            })
         for k,v in x.items():walk(v,path+'.'+str(k))
     elif isinstance(x,list):
         for i,v in enumerate(x):walk(v,path+f'[{i}]')
@@ -136,6 +148,7 @@ checks={
  'native_evolution_or_genesis_executed':bool(evo.get('run_digest')) or bool(kernel_calls),
  'previously_absent_emitter_meta_language_created':actual_new_meta,
  'emitter_candidate_failure_memory_bound':any(x['failure_bound'] for x in fresh_candidates),
+ 'emitter_candidate_has_novel_identity':any(bool(x.get('new_gene') or x.get('novel_identities')) for x in fresh_candidates),
  'actual_python_source_already_emitted':bool(source_candidates),
  'external_coding_models_used':False,
  'new_external_research_used':False,
@@ -156,6 +169,7 @@ passed=(
  and checks['native_evolution_or_genesis_executed']
  and checks['previously_absent_emitter_meta_language_created']
  and checks['emitter_candidate_failure_memory_bound']
+ and checks['emitter_candidate_has_novel_identity']
  and checks['rollback_parent_available']
  and checks['canonical_unchanged']
 )
