@@ -1,0 +1,199 @@
+{
+  "baselines": {
+    "INTELLIGENCE": 0.5,
+    "LOGIC": 0.5,
+    "THINKING": 0.0
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "at_least_one_real_repair_generalized": true,
+    "at_least_one_real_written_program_generalized": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "coding_cognitive_layer_born": true,
+    "coding_layer_ablation_drop": true,
+    "coding_layer_fresh_exact": true,
+    "coding_layer_restore_exact": true,
+    "external_coding_model_used": false,
+    "external_learning_evidence_consumed": true,
+    "external_public_code_read": true,
+    "intelligence_coding_evolution_fresh_ge_baseline": true,
+    "internal_code_read": true,
+    "logic_coding_evolution_fresh_ge_baseline": true,
+    "ready_patch_from_host_used": false,
+    "repair_training_executed": true,
+    "rollback_parent_available": true,
+    "thinking_coding_evolution_fresh_gt_baseline": false,
+    "third_party_code_executed": false,
+    "write_training_executed": true
+  },
+  "coding_cognitive_layer_gene": {
+    "development": {
+      "ablation_score": 0.5,
+      "blind_cases": 4,
+      "candidate_score": 1.0,
+      "created_at": "2026-09-04T19:06:03.971387+00:00",
+      "experiment_id": "DEV22-1ebc86ecae5d",
+      "mechanism_kind": "RULE_PROGRAM",
+      "min_ablation_drop": 0.2,
+      "min_score": 0.99,
+      "program_digest": "72ac92856b79cd741a8736e61191f7be85e4ba34e6ef76d86a3597b51691c70e",
+      "program_id": "P-889661fda3a2",
+      "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+      "restore_score": 1.0,
+      "stage_ablation_scores": {},
+      "state_committed": true,
+      "target_capability": "CODING_COGNITIVE_CONTROL_LAYER_V1",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "train_cases": 12,
+      "verdict": "COMMIT"
+    },
+    "gene_digest": "83000a0af66aca6a7653a168d24cad4e9d9314ba42c89eca5b364670b83ab504",
+    "gene_id": "GENE-G2-CODING-COGNITIVE-LAYER-a571dd5b97dde5b3",
+    "gene_scope": [
+      "LOGIC",
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE"
+    ],
+    "mechanism_kind": "RULE_PROGRAM",
+    "origin": "YADO_NATIVE_DEVELOPMENTAL_EXECUTIVE_FROM_CODING_APPRENTICESHIP_EPISODES",
+    "program": {
+      "created_at": "2026-09-04T19:06:03.968788+00:00",
+      "default_output": "ACCEPT",
+      "program_id": "P-889661fda3a2",
+      "rules": [
+        {
+          "confidence": 1.0,
+          "output": "WITHHOLD",
+          "predicates": [
+            {
+              "field": "candidate_present",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "support": 4
+        },
+        {
+          "confidence": 1.0,
+          "output": "WITHHOLD",
+          "predicates": [
+            {
+              "field": "high_complexity",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "support": 4
+        },
+        {
+          "confidence": 1.0,
+          "output": "WITHHOLD",
+          "predicates": [
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "support": 4
+        }
+      ],
+      "source_digest": "8600515e3235b69c2946a61e4317a69a9c1d5c9f4d1304d3e8f4e2106e8da76f",
+      "status": "COMMITTED",
+      "target_capability": "CODING_COGNITIVE_CONTROL_LAYER_V1",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "training_count": 12
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.coding_cognitive_layer_gene.v1",
+    "selection": {
+      "candidates": [
+        {
+          "complexity": 7,
+          "kind": "RULE_PROGRAM",
+          "program_id": "P-889661fda3a2",
+          "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+          "selected": true,
+          "training_score": 1.0
+        }
+      ],
+      "created_at": "2026-09-04T19:06:03.969447+00:00",
+      "deficit_id": "D-a258d9ca447a",
+      "selected_kind": "RULE_PROGRAM",
+      "selected_program_id": "P-889661fda3a2",
+      "selection_id": "SEL-1c37c24a5e94",
+      "source_digest": "8600515e3235b69c2946a61e4317a69a9c1d5c9f4d1304d3e8f4e2106e8da76f",
+      "target_capability": "CODING_COGNITIVE_CONTROL_LAYER_V1",
+      "target_organ": "GENERATIVE_EXECUTIVE"
+    }
+  },
+  "experience_digest": "640eafe1c895babd050bf42e19d42188472bf53721be982bd62eea0365e55ed3",
+  "external_code_read_count": 3,
+  "fresh_gains": {
+    "INTELLIGENCE": 0.5,
+    "LOGIC": 0.5,
+    "THINKING": 0.0
+  },
+  "fresh_scores": {
+    "INTELLIGENCE": 1.0,
+    "LOGIC": 1.0,
+    "THINKING": 0.0
+  },
+  "next_required_capability": "G2_CODING_APPRENTICESHIP_REPAIR_V2",
+  "promotion_applied": false,
+  "read_source_count": 6,
+  "receipt_sha256": "f783e106f0dbda608f572b5914cc2cd823c1c83447be6309f23999ae3fc64ef0",
+  "repair_fresh_exact_rate": 0.625,
+  "schema": "yado.g2.coding_apprenticeship.v1",
+  "semantic_boundary": "THIRD-PARTY SOURCE IS READ/PARSED ONLY. EXECUTABLE REPAIR/WRITE TASKS ARE SANDBOXED PURE TRAINING FUNCTIONS. YADO NATIVE REPAIR/SYNTHESIS AND DEVELOPMENTAL MECHANISM SELECTION PRODUCE CANDIDATES. ALL LEARNING OUTPUTS REMAIN SHADOW.",
+  "status": "WITHHOLD_G2_CODING_APPRENTICESHIP_V1",
+  "task": {
+    "constraints": {
+      "ablation": true,
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_coding_model": false,
+      "fresh_holdout": true,
+      "ready_patch_from_host": false,
+      "rollback": true,
+      "third_party_code_execution": false
+    },
+    "curriculum": [
+      "CODE_READING",
+      "SEMANTIC_REPAIR",
+      "BOUNDED_SOURCE_WRITING",
+      "FRESH_TESTING",
+      "REFLECTION_MEMORY",
+      "CODING_LTI_EVOLUTION",
+      "COGNITIVE_LAYER_GENESIS"
+    ],
+    "external_code_read_only": [
+      "https://raw.githubusercontent.com/psf/requests/main/src/requests/utils.py",
+      "https://raw.githubusercontent.com/pallets/flask/main/src/flask/helpers.py",
+      "https://raw.githubusercontent.com/python/cpython/main/Lib/functools.py"
+    ],
+    "host_role": "PUBLIC_SOURCE_TRANSPORT_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+    "instruction": "Run a coding apprenticeship on real source evidence and bounded executable code tasks. Read internal YADO code and public Python source read-only; never execute third-party code. Repair and synthesize only sandboxed pure training functions using YADO native repair/synthesis mechanisms. Feed every outcome into LOGIC, THINKING, INTELLIGENCE and MEMORY. Let the native developmental executive synthesize a coding cognitive-layer candidate if the episode evidence supports it. Keep all new genes/layers shadow until separate admission.",
+    "internal_code_sources": [
+      "runtime/yado_ambiguity_aware_program_repair_v11.py",
+      "runtime/yado_evolutionary_genome_v1.py",
+      "runtime/yado_g2_experience_conditioned_lti_evolution_v1.py"
+    ],
+    "objective": "TRAIN_G2_AS_BOUNDED_PROGRAMMER_READ_UNDERSTAND_REPAIR_WRITE_TEST_REFLECT_EVOLVE",
+    "parent_evidence": [
+      "candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json",
+      "candidates/kernel-self-generated/g2-experience-conditioned-thinking-repair-v2.json",
+      "candidates/kernel-self-generated/g2-experience-conditioned-cognitive-portfolio-v1.json",
+      "experience/yado-user-external-corpus-learning-v1.json"
+    ],
+    "schema": "yado.g2.coding_apprenticeship_cycle.v1.request.v1",
+    "stop_condition": "PASS_SHADOW_CODING_APPRENTICESHIP_OR_EXPLICIT_WITHHOLD_WITH_DEFICIT",
+    "trigger": 1,
+    "trigger_reason": "START_USER_DIRECTED_CODING_APPRENTICESHIP_20260904"
+  },
+  "write_fresh_exact_rate": 0.625
+}
