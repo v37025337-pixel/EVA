@@ -1,13 +1,13 @@
 {
   "schema": "yado.g2.autonomous_self_improvement_request.v1",
-  "objective": "REPAIR_GOAL_TO_ACTION_BINDING",
+  "objective": "REPAIR_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING",
   "target_selection": "KERNEL_SELF_SELECTED",
   "mechanism_selection": "KERNEL_SELF_SELECTED_NATIVE_OR_SELF_CREATED",
   "use_accumulated_experience": true,
   "allow_shadow_code_evolution": true,
   "allow_canonical_mutation": false,
   "host_role": "TRIGGER_TRANSPORT_OBSERVATION_ONLY",
-  "stop_condition": "DIRECT_PRIORITY_ACTION_EVIDENCE_OR_EXPLICIT_WITHHOLD",
+  "stop_condition": "SELF_AUDIT_EVIDENCE_BINDING_REPAIRED_OR_EXPLICIT_KERNEL_WITHHOLD",
   "authorization": {
     "repository_read": true,
     "repository_write": true,
@@ -32,34 +32,42 @@
   "authorization_granted_at": "2026-09-03T17:53:24Z",
   "authorization_note": "USER_AUTHORIZED_FULL_PROJECT_SELF_IMPROVEMENT_SCOPE; SAFETY/INTEGRITY GATES REMAIN FAIL_CLOSED",
   "task": {
-    "task_id": "G2-GOAL-TO-ACTION-BINDING-REPAIR",
-    "problem": "The kernel correctly self-selects LIVE_RESOURCE_EVIDENCE_SCOPE, but the autonomous self-improvement cycle executes an unrelated fixed generic genome evolution instead of an action that directly addresses the selected priority.",
-    "goal": "Make the autonomous cycle bind the kernel-selected priority to a directly relevant action/result.",
+    "task_id": "G2-ACTION-EVIDENCE-SELF-AUDIT-BINDING-REPAIR",
+    "problem": "The kernel produced fresh direct evidence for LIVE_RESOURCE_EVIDENCE_SCOPE in three successful runs, but the next kernel-native deep self-audit still marked LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL and selected it again because the self-audit evidence model did not incorporate the new receipts.",
+    "goal": "Make the kernel's self-audit incorporate relevant fresh self-generated evidence so completed work can update the kernel's own developmental state assessment.",
+    "evidence_to_consider": [
+      "run:33832611701",
+      "run:33832670571",
+      "run:33832722100",
+      "deep_self_audit_run:33832918251"
+    ],
     "success_conditions": [
-      "kernel_self_selects_priority",
-      "kernel_self_selects_action_or_mechanism_for_that_priority",
-      "executed_action_is_directly_relevant_to_selected_priority",
-      "for_LIVE_RESOURCE_EVIDENCE_SCOPE_result_contains_live_resource_recheck_or_content_comprehension_or_conflict_resolution_evidence",
-      "unrelated_generic_genome_evolution_must_not_count_as_success",
-      "kernel_may_WITHHOLD_if_it_cannot_create_a_relevant_action"
+      "kernel_diagnoses_the_action_to_evidence_to_self_audit_disconnect",
+      "kernel_selects_its_own_solution_path",
+      "fresh_self_generated_receipts_can_be_used_by_self_audit_when_relevant",
+      "self_audit_does_not_repeat_a_priority_only_because_it_ignored_new_valid_evidence",
+      "if_LIVE_RESOURCE_EVIDENCE_SCOPE_is_actually_closed_the_next_self_audit_marks_it_resolved_or_moves_to_another_priority",
+      "if_evidence_is_insufficient_the_kernel_explicitly_explains_what_is_missing_and_WITHHOLDS",
+      "canonical_integrity_and_fail_closed_gates_remain_preserved"
     ],
     "forbidden": [
-      "host_selected_target",
-      "host_selected_solution",
-      "host_supplied_patch",
-      "host_selected_repair_operator",
-      "lowering_integrity_or_freshness_gates"
+      "host_selected_mechanism",
+      "host_selected_patch",
+      "host_selected_audit_result",
+      "host_solution_hint",
+      "forcing_LIVE_RESOURCE_EVIDENCE_SCOPE_to_PASS",
+      "lowering_freshness_or_integrity_gates"
     ]
   },
   "host_solution_hint": null,
   "host_selected_target": null,
   "host_selected_mechanism": null,
-  "trigger": 6,
+  "trigger": 7,
   "previous_evidence": [
     "candidates/kernel-self-generated/g2-native-meta-grammar-compile-repair-v1.json",
     "candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json"
   ],
-  "latest_audit_run_id": 33831996104,
+  "latest_audit_run_id": 33832918251,
   "latest_self_selected_next_step": "LIVE_RESOURCE_EVIDENCE_SCOPE",
   "experiment_series": {
     "series_id": "G2-GOAL-ACTION-BINDING-HOST-FIX-3-RUNS",
