@@ -1,0 +1,122 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "arbiter_not_host_written": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "clean_preserved_exact": true,
+    "composite_stress_high": true,
+    "conflict_fail_closed_exact": true,
+    "external_models_used": false,
+    "fresh_pair_and_triple_conflicts_present": true,
+    "guard_causal_ablation": true,
+    "guard_fresh_high": true,
+    "guard_restore_exact": true,
+    "intelligence_stress_high": true,
+    "logic_stress_high": true,
+    "native_generic_arbiter_learned": true,
+    "parent_cognitive_v2_consumed": true,
+    "stress_v1_conflict_zero_consumed": true,
+    "stress_v1_withhold_consumed": true,
+    "thinking_stress_high": true,
+    "unknown_fail_closed_exact": true
+  },
+  "clean_score": 1.0,
+  "cognitive_gene": {
+    "components": {
+      "CONFLICT_ARBITER": "GENE-G2-COGNITIVE-CONFLICT-ARBITER-V1-d1bffef06b4c5aae",
+      "INTELLIGENCE": "GENE-G2-CODING-EXPERIENCE-INTELLIGENCE-V2-2e8aff24dfeacd7a",
+      "LOGIC": "GENE-G2-CODING-EXPERIENCE-LOGIC-V2-481f40e6993138f6",
+      "THINKING": "GENE-G2-CODING-EXPERIENCE-THINKING-V2-1b8a2855f84c94c0"
+    },
+    "fresh_composite_stress": 1.0,
+    "gene_digest": "096eb7951838fcd8316dee82ecfc2fdcba4bb5c1ac213e41d52081a366207cb7",
+    "gene_id": "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V3-c09e6c4c7c8abfa0",
+    "heritage": [
+      "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V2-de62f13d7ffb7f71",
+      "b111fd8d0d28c57aa8ed052228bf76da989d192515b4c54cd5bb3fd15b66d956"
+    ],
+    "mechanism_kind": "EXPERIENCE_CONDITIONED_LTI_WITH_LEARNED_FAIL_CLOSED_CONFLICT_ARBITRATION",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.coding_experience_cognitive_layer_gene.v3"
+  },
+  "cognitive_gene_id": "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V3-c09e6c4c7c8abfa0",
+  "composite_stress": 1.0,
+  "conflict_score": 1.0,
+  "guard_ablation": 0.675,
+  "guard_fresh": 1.0,
+  "guard_gene": {
+    "ablation": 0.675,
+    "fresh": 1.0,
+    "gene_digest": "67dca7e717614c6635d88c9dcb2b74ddaed3c1e58f1654342179994355f6c758",
+    "gene_id": "GENE-G2-COGNITIVE-CONFLICT-ARBITER-V1-d1bffef06b4c5aae",
+    "heritage": [
+      "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V2-de62f13d7ffb7f71",
+      "b111fd8d0d28c57aa8ed052228bf76da989d192515b4c54cd5bb3fd15b66d956"
+    ],
+    "organ": "CONSCIOUS_WORKSPACE",
+    "origin": "YADO_NATIVE_CONJUNCTIVE_LEARNING_FROM_ADVERSARIAL_CONFLICT_WITHHOLD_EXPERIENCE",
+    "program": {
+      "default_output": "WITHHOLD",
+      "digest": "08ec4ee17721bf048ba5e2f70f9f89dfb18e89e7a8634ef233dd1d780eab4018",
+      "program_id": "CJ-907bb720cb19",
+      "rules": [
+        {
+          "confidence": 1.0,
+          "output": "PASS_THROUGH",
+          "predicates": [
+            {
+              "field": "route_cardinality",
+              "op": "EQ",
+              "value": "ONE"
+            }
+          ],
+          "support": 26
+        }
+      ],
+      "source_digest": "5db8454b5e108e70aad82fb003fc688b1bc0494a5af31eeb53290e4901e3f570",
+      "status": "SHADOW",
+      "target_capability": "G2_COGNITIVE_CONFLICT_ARBITRATION",
+      "target_organ": "CONSCIOUS_WORKSPACE",
+      "training_count": 57
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "restore": 1.0,
+    "schema": "yado.g2.cognitive_conflict_arbiter_gene.v1"
+  },
+  "guard_gene_id": "GENE-G2-COGNITIVE-CONFLICT-ARBITER-V1-d1bffef06b4c5aae",
+  "guard_restore": 1.0,
+  "intelligence_stress": 1.0,
+  "logic_stress": 1.0,
+  "next_required_capability": "G2_COGNITIVE_CONSOLIDATION_STRESS_AND_ADMISSION_V2",
+  "promotion_applied": false,
+  "receipt_sha256": "36c1b2300c440fb2056536e73a167639e8f58197df84d3801ec0116680a8d765",
+  "schema": "yado.g2.cognitive_conflict_arbitration_repair.v1",
+  "semantic_boundary": "THE NEW ARBITER IS LEARNED BY YADO GENERIC CONJUNCTIVE INDUCTION FROM THE FAILED V1 ADVERSARIAL EXPERIENCE AND CLEAN ROUTE PROTOTYPES. THE HOST COMPUTES ROUTE CARDINALITY AS A REPRESENTATION FEATURE BUT DOES NOT WRITE THE ARBITRATION RULE. MULTIPLE INCOMPATIBLE ACTIVE ROUTES FAIL CLOSED.",
+  "status": "PASS_SHADOW_G2_COGNITIVE_CONFLICT_ARBITRATION_REPAIR_V1",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "clean_preservation_exact": true,
+      "composite_stress_min": 0.95,
+      "conflict_fail_closed_exact": true,
+      "external_models": false,
+      "host_written_arbiter_rule": false,
+      "organ_stress_min": 0.95,
+      "unknown_fail_closed_exact": true
+    },
+    "host_role": "ROUTE_CARDINALITY_REPRESENTATION_AND_STRICT_HOLDOUT_EVALUATION_ONLY",
+    "instruction": "Consume the V1 cognitive stress WITHHOLD as mandatory negative experience. Preserve the three PASS shadow organ genes. Build a generic conflict representation from the number of distinct simultaneously matched native routes, whether the state is known, and organ identity. Use YADO's already-active generic conjunctive learner to learn PASS_THROUGH versus WITHHOLD; do not hand-write the arbitration rule. Validate on a new holdout containing fresh irrelevant perturbations, unknown states, all compatible pair conflicts, and compatible three-route conflicts. Clean single-route states must preserve the original decision; zero-route unknown or multi-route conflict states must fail closed. Require guard fresh >=0.95, material ablation, exact clean/unknown/conflict behavior, each organ stress >=0.95 and composite >=0.95. Keep canonical unchanged.",
+    "objective": "LEARN_FAIL_CLOSED_ARBITRATION_FROM_THE_ZERO_CONFLICT_SCORE_STRESS_FAILURE",
+    "parents": [
+      "candidates/kernel-self-generated/g2-coding-experience-cognitive-consolidation-v2.json",
+      "candidates/kernel-self-generated/g2-cognitive-consolidation-stress-admission-v1.json"
+    ],
+    "schema": "yado.g2.cognitive_conflict_arbitration_repair_v1.request.v1",
+    "trigger": 1,
+    "trigger_reason": "STRESS_V1_CONFLICT_MIN_0_COMPOSITE_0_6"
+  },
+  "thinking_stress": 1.0,
+  "unknown_score": 1.0
+}
