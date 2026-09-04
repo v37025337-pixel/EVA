@@ -1,0 +1,26 @@
+{
+  "schema": "yado.g2.experience_conditioned_cognitive_portfolio_v1.request.v1",
+  "objective": "YADO_SELECT_ONE_COHERENT_EXPERIENCE_CONDITIONED_COGNITIVE_PORTFOLIO",
+  "parents": [
+    "candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json",
+    "candidates/kernel-self-generated/g2-experience-conditioned-thinking-repair-v2.json"
+  ],
+  "instruction": "Use the existing fresh/ablation/rollback evidence for the experience-conditioned LOGIC, INTELLIGENCE, causal-history THINKING and transferred multicontext THINKING genes. Let YADO's native skill-admission gate select the portfolio. Do not merge model internals or canonically promote anything in this stage.",
+  "constraints": {
+    "host_selected_winners": false,
+    "host_rewrites_models": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "fail_closed": true
+  },
+  "success_conditions": [
+    "LTI PASS receipt consumed",
+    "THINKING V2 PASS receipt consumed",
+    "native skill gate evaluates all candidate genes",
+    "LOGIC and INTELLIGENCE positive-gain genes are admitted",
+    "at least one THINKING gene is admitted and multi-context THINKING V2 is admitted",
+    "all selected genes preserve rollback and state integrity",
+    "portfolio is shadow-only and canonical remains unchanged"
+  ],
+  "host_role": "EVIDENCE_TRANSPORT_AND_NATIVE_SKILL_GATE_INVOCATION_ONLY"
+}
