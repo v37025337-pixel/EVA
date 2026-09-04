@@ -1,0 +1,125 @@
+{
+  "ablation": 0.0,
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "causal_ablation_drop": false,
+    "chronological_fresh_ast_holdout": true,
+    "emitter_gene_consumed": true,
+    "external_models_used": false,
+    "fresh_exact_ge_0_95": false,
+    "hidden_ast_oracle_not_exposed_to_candidate": true,
+    "host_ast_emitter_template_used": false,
+    "host_grammar_used": false,
+    "host_patch_used": false,
+    "host_selected_mechanism_family": false,
+    "host_source_template_used": false,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_mechanism_selected": false,
+    "native_selector_executed": true,
+    "new_external_research_used": false,
+    "new_shadow_serializer_gene_created": false,
+    "only_yado_own_source_used": true,
+    "restore_exact": false,
+    "rollback_parent_available": true,
+    "source_v2_deficit_consumed": true
+  },
+  "development": null,
+  "example_count": 1012,
+  "fresh_exact": 0.0,
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-04T18:35:09.919444+00:00",
+        "deficit_id": "D-8867bf185f77",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-9465cff3b806",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 0.95,
+        "status": "OPEN",
+        "target": "NATIVE_SOURCE_PRIMITIVE_EXECUTION_AND_SERIALIZATION_V1"
+      }
+    ],
+    "goal_id": "G-9465cff3b806"
+  },
+  "next_required_capability": "NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "07b191d5ac6c911beb4a4cf5c752ea2bba24bf6b4d609fbfb5a6012713b67f84",
+  "restore": 0.0,
+  "schema": "yado.g2.native_source_primitive_execution_serialization.v1",
+  "selected_mechanism_kind": null,
+  "selection": null,
+  "selector_error": "ValueError:no supported bounded mechanism family fits the training evidence",
+  "semantic_boundary": "AST.UNPARSE IS USED ONLY BY THE HOST AS A HIDDEN LABEL ORACLE TO BUILD A FRESH TEST FROM YADO OWN SOURCE. ITS IMPLEMENTATION, GRAMMAR AND OUTPUT RULES ARE NOT AVAILABLE TO THE CANDIDATE. PASS REQUIRES A YADO-NATIVE SELECTED EXECUTABLE MECHANISM TO GENERALIZE STRUCTURE-TO-SOURCE ON HELD-OUT ASTS. FAILURE LOCALIZES A MISSING COMPOSITIONAL STRING TRANSDUCER GENE.",
+  "serializer_gene": null,
+  "source_provenance": [
+    {
+      "path": "runtime/yado_evolutionary_genome_v1.py",
+      "sha256": "186479a62f08662a767c47dffcf499f3294eaaecefd21327dbdccc012ed08531"
+    },
+    {
+      "path": "runtime/yado_ambiguity_aware_program_repair_v11.py",
+      "sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32"
+    },
+    {
+      "path": "runtime/yado_generic_compile_repair_meta_language_v1.py",
+      "sha256": "3d1f44d62e0844053e0e56aaa6f11909346bbce6d45ef0977336d6117ea76684"
+    },
+    {
+      "path": "runtime/yado_generic_history_compile_repair_meta_language_v1.py",
+      "sha256": "9bde86c8948eceb3bc0a57263aa870fb4a6a43d722701f8b4ab792b167f6ce2b"
+    }
+  ],
+  "split_counts": {
+    "blind": 203,
+    "fit": 607,
+    "validation": 202
+  },
+  "status": "WITHHOLD_G2_NATIVE_SOURCE_PRIMITIVE_EXECUTION_SERIALIZATION_V1",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_models": false,
+      "fail_closed": true,
+      "host_ast_emitter_template": false,
+      "host_grammar": false,
+      "host_patch": false,
+      "host_source_template": false,
+      "new_external_research": false
+    },
+    "host_role": "MECHANICAL_AST_EXTRACTION_HIDDEN_ORACLE_AND_STRICT_FRESH_EVALUATION_ONLY",
+    "instruction": "Use YADO's own checked-in Python source as experience. The host may mechanically extract Python AST expression structures and use Python's parser/unparser only as a hidden label oracle. Let YADO current native developmental mechanism selector attempt to infer a bounded structure-to-source serializer. Do not expose an AST emitter template, grammar, formatting rule, target implementation, or source patch to the candidate.",
+    "objective": "YADO_LEARN_NATIVE_STRUCTURE_TO_SOURCE_SERIALIZATION_FROM_ITS_OWN_SOURCE_MEMORY",
+    "parents": [
+      "candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v2.json",
+      "candidates/kernel-self-generated/g2-experience-conditioned-native-emitter-gene-genesis-v3.json"
+    ],
+    "pass_only_if": [
+      "source V2 deficit and emitter gene are consumed",
+      "training examples come only from YADO own source",
+      "fresh AST structures are chronologically held out",
+      "YADO native selector chooses an executable mechanism without host family selection",
+      "fresh exact source serialization is at least 0.95",
+      "ablation causes material degradation",
+      "restore is exact",
+      "new serializer gene is shadow-only",
+      "canonical remains unchanged"
+    ],
+    "schema": "yado.g2.native_source_primitive_execution_serialization_v1.request.v1",
+    "source_memory": [
+      "runtime/yado_evolutionary_genome_v1.py",
+      "runtime/yado_ambiguity_aware_program_repair_v11.py",
+      "runtime/yado_generic_compile_repair_meta_language_v1.py",
+      "runtime/yado_generic_history_compile_repair_meta_language_v1.py"
+    ],
+    "stop_condition": "SERIALIZER_PASS_SHADOW_OR_EXPLICIT_TRANSDUCER_GENE_DEFICIT",
+    "trigger": 1,
+    "trigger_reason": "START_AFTER_SOURCE_V2_LOCALIZED_SERIALIZATION_DEFICIT"
+  }
+}
