@@ -1,0 +1,443 @@
+{
+  "ablation_score": 0.0,
+  "canonical_mutation": false,
+  "experience_digest": "d16b4640664a5ecae1d5201c3fd98d8956c9d14dd5d4dbf4c349cc57aa57ba8b",
+  "fresh_episodes": [
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x * -4 + 13\n",
+      "candidate_source_sha256": "bd4e526424267ba5ec70aef36a9e0e312e1a62fc1d71747b336c31a591622c54",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "V6_LINEAR",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": true
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "task_id": "V6_QUARTIC",
+      "task_kind": "REPAIR",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "task_id": "V6_MOD7",
+      "task_kind": "REPAIR",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return max(x, 2)\n",
+      "candidate_source_sha256": "37133a2091767afa46ff3d3ce9de64c788e07a94e57ecc8bce930a8e329ea6da",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "BASE_PORTFOLIO",
+      "task_id": "V6_MAX2",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return 8 * 1 + -1 * x + 2 * (x * x)\n",
+      "candidate_source_sha256": "8f3c3daeb6c579a7a7f65bde04034fcf346574d1ca6406fa0ebcb0183fb85176",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V6_QUADRATIC",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return -5 * 1 + 2 * x + 3 * (x * x * x)\n",
+      "candidate_source_sha256": "736f09468d9d81af195f5d375c259919c7ad9aaafdebabe1f650492a2a597f95",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V6_CUBIC",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": true
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "NO_UNIVARIATE_POLYNOMIAL_WITHIN_GENE_BUDGET",
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V6_DEGREE6",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": true,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "e09f888523377bc686b5a85d9ada5ecf6b35a2b81f9295c728763cf82f38545c",
+      "reason": "UNIVARIATE_ONLY",
+      "repair_mode": null,
+      "task_id": "V6_BIVARIATE_DIFF",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    }
+  ],
+  "fresh_score": 1.0,
+  "parent_v5_receipt": "966a9cde46da83c77490113e683d7f20429d7f713f2207e7358edd38f0b625ac",
+  "representation_repair": "STAGE_LOCAL_OBSERVATIONS_PLUS_CONTRASTIVE_UNKNOWN_TWINS",
+  "restore_score": 1.0,
+  "retry_states": [],
+  "retry_to_retest_rows": [
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V6_LINEAR"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V6_QUARTIC"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V6_MOD7"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V6_MAX2"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V6_QUADRATIC"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V6_CUBIC"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V6_DEGREE6"
+    },
+    {
+      "failure_action": "REVISE_HYPOTHESIS",
+      "pass": true,
+      "revised_candidate_action": "TEST_HYPOTHESIS",
+      "task_id": "V6_BIVARIATE_DIFF"
+    }
+  ],
+  "retry_to_retest_score": 1.0,
+  "schema": "yado.g2.coding_reasoning_workspace.experience.v6",
+  "semantic_boundary": "V6 TRAINS A STAGE-LOCAL GUARDED REASONING CONTROL POLICY USING ONLY ACTIVE G2 ROUTING CAPABILITY AND ACCUMULATED CODING EXPERIENCE. CONTRASTIVE UNKNOWN TWINS PREVENT PROXY SHORTCUTS. THIS PROVES WHEN TO RETRY AND RETEST, BUT NOT YET HOW TO SYNTHESIZE A NEW HYPOTHESIS/PATCH AFTER RETRY.",
+  "status": "TRAINED",
+  "thinking_gene": {
+    "ablation_score": 0.0,
+    "active_parent_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "fresh_score": 1.0,
+    "gene_digest": "ba5a46e3b1e1204f8f7ed7de7f5188ffffded6909cfb41ded7dd274817e250a6",
+    "gene_id": "GENE-G2-CODING-REASONING-THINKING-V6-06547c18b3804a17",
+    "gene_scope": [
+      "THINKING",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC",
+      "INTELLIGENCE"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-REASONING-THINKING-V5-067308d7df7722a1",
+      "966a9cde46da83c77490113e683d7f20429d7f713f2207e7358edd38f0b625ac",
+      "55253a3a786a62fcafd9ec390c0b1b521151773483e861f761385d16bd53c20a"
+    ],
+    "mechanism_kind": "STAGE_LOCAL_GUARDED_STATE_ACTION_ROUTER",
+    "organ": "THINKING",
+    "origin": "ACTIVE_G2_ROUTER_LEARNED_STAGE_LOCAL_CONTRASTIVE_PROGRAMMER_REASONING_FROM_ACCUMULATED_FAILURES",
+    "program": {
+      "clauses": [
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "MEMORY_READY"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ADVANCE",
+          "support": 40
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "CODE_READ"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "BUILD_MODEL",
+          "support": 40
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "IMPLEMENTED"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "CHECK_CONSEQUENCES",
+          "support": 40
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "MODEL_BUILT"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "FORM_HYPOTHESIS",
+          "support": 40
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "START"
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "READ_CODE",
+          "support": 40
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "IMPLEMENT_CHANGE",
+          "support": 24
+        },
+        {
+          "atoms": [
+            {
+              "field": "candidate_present",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "TEST_HYPOTHESIS",
+          "support": 24
+        },
+        {
+          "atoms": [
+            {
+              "field": "fresh_exact",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 20
+        },
+        {
+          "atoms": [
+            {
+              "field": "fresh_exact",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "STORE_EXPERIENCE",
+          "support": 20
+        },
+        {
+          "atoms": [
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "train_exact",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 16
+        },
+        {
+          "atoms": [
+            {
+              "field": "candidate_present",
+              "op": "EQ",
+              "value": false
+            },
+            {
+              "field": "stage_known",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "confidence": 1.0,
+          "output": "REVISE_HYPOTHESIS",
+          "support": 16
+        }
+      ],
+      "fallback_output": "WITHHOLD_UNKNOWN",
+      "program_digest": "06547c18b3804a171fb18148c9cb1b60d31d936be620e9dd22911614839183ec",
+      "schema": "yado.g2.stage_local_guarded_coding_reasoning_program.v6",
+      "source_digest": "8b73082adb66df3fb83b7fef95fdd51f51ff5b0512c428a17cebdd6848e4234c"
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "restore_score": 1.0,
+    "schema": "yado.g2.coding_reasoning_thinking_gene.v6",
+    "unknown_state_score": 1.0
+  },
+  "training_episode_count": 40,
+  "unknown_state_score": 1.0,
+  "validation_episode_count": 8
+}
