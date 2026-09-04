@@ -74,6 +74,13 @@ subproc=[x for x in risk_calls if x['call'].startswith('subprocess.')]
 if subproc:add('INFO','ACTIVE_RUNTIME_SUBPROCESS_USAGE','Active runtime uses subprocess; review remains bounded by call sites.',subproc)
 
 wfs=list((ROOT/'.github/workflows').glob('*.y*ml'))
+allowlist_path=ROOT/'.github/yado-active-workflow-allowlist-v1.json'
+allowlist=json.loads(allowlist_path.read_text(encoding='utf-8')) if allowlist_path.exists() else {}
+active_allow=set(allowlist.get('active_workflows') or [])
+write_allow=set(allowlist.get('write_authorized_workflows') or [])
+workflow_names={p.name for p in wfs}
+unauthorized_active=sorted(workflow_names-active_allow)
+missing_active=sorted(active_allow-workflow_names)
 contents_write=[]
 pull_request_target=[]
 unpinned=[]
@@ -92,8 +99,13 @@ for p in wfs:
             if not action.startswith('actions/'):third_party.append({'workflow':p.name,'uses':spec})
     if '${{ secrets.' in s:secret_refs.append(p.name)
 
+if unauthorized_active:add('CRITICAL','WORKFLOW_OUTSIDE_SINGLE_CORE_ALLOWLIST','Executable workflows exist outside the single-core allowlist.',unauthorized_active)
+if missing_active:add('MEDIUM','ALLOWLIST_REFERENCES_MISSING_WORKFLOW','Allowlist references workflows not present in the executable directory.',missing_active)
+if len(wfs)>int(allowlist.get('max_active_workflow_count') or 40):add('HIGH','ACTIVE_WORKFLOW_COUNT_EXCEEDS_BOUND',f'{len(wfs)} executable workflows exceed the bounded single-core limit.',[p.name for p in wfs][:120])
 if pull_request_target:add('CRITICAL','PULL_REQUEST_TARGET_PRESENT','pull_request_target workflows require manual security review.',pull_request_target)
-if contents_write:add('HIGH','LARGE_WRITE_ENABLED_WORKFLOW_SURFACE',f'{len(contents_write)} workflows request contents: write.',contents_write[:120])
+unauthorized_write=sorted(set(contents_write)-write_allow)
+if unauthorized_write:add('HIGH','UNAUTHORIZED_WRITE_ENABLED_WORKFLOW','Workflows request contents: write without explicit single-core authorization.',unauthorized_write)
+elif contents_write:add('INFO','AUTHORIZED_BOUNDED_WRITE_WORKFLOW_SURFACE',f'{len(contents_write)} active G2 workflows have explicit contents: write authorization.',sorted(contents_write)[:120])
 if unpinned:add('MEDIUM','ACTIONS_NOT_PINNED_TO_COMMIT',f'{len(unpinned)} action references use tags/branches rather than immutable commit SHAs.',unpinned[:150])
 if third_party:add('MEDIUM','THIRD_PARTY_ACTIONS_USED',f'{len(third_party)} third-party action references are present.',third_party[:100])
 
