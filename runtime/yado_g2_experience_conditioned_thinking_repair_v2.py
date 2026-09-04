@@ -23,13 +23,13 @@ def digest(o):return hashlib.sha256(canon(o).encode()).hexdigest()
 def load(p):return json.loads(Path(p).read_text(encoding='utf-8'))
 
 task=load(TASK);exp=load(EXP);prov=load(PROV);parent=load(PARENT)
-if parent.get('status')!='WITHHOLD_G2_EXPERIENCE_CONDITIONED_LTI_EVOLUTION_V1':
-    raise RuntimeError('LTI_PARENT_NOT_WITHHOLD')
+if parent.get('status') not in ('PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_LTI_EVOLUTION_V1','WITHHOLD_G2_EXPERIENCE_CONDITIONED_LTI_EVOLUTION_V1'):
+    raise RuntimeError('LTI_PARENT_NOT_VALID_EXPERIENCE_RECEIPT')
 pc=parent.get('checks') or {}
 if not (pc.get('logic_fresh_beats_baseline') and pc.get('intelligence_fresh_beats_baseline')):
     raise RuntimeError('SUCCESSFUL_SIBLING_GENES_NOT_AVAILABLE')
-if pc.get('thinking_fresh_beats_baseline'):
-    raise RuntimeError('THINKING_PARENT_NOT_FAILED')
+if not (parent.get('shadow_genes') or {}).get('THINKING'):
+    raise RuntimeError('CURRENT_THINKING_EXPERIENCE_GENE_MISSING')
 
 # Verify historical source/receipt registration from current canonical provenance.
 row=next((b for b in prov.get('branches') or [] if b.get('branch')=='yado-v29-cognitive'),None)
@@ -101,7 +101,7 @@ checks={
  'v29_source_provenance_verified':True,
  'v29_receipt_provenance_verified':True,
  'historical_thinking_experience_consumed':True,
- 'failed_current_thinking_gene_consumed':bool(parent_thinking.get('gene_id')),
+ 'current_thinking_experience_gene_consumed':bool(parent_thinking.get('gene_id')),
  'logic_sibling_gene_preserved':bool(siblings['LOGIC']) and siblings['LOGIC']==(parent.get('shadow_genes') or {}).get('LOGIC'),
  'intelligence_sibling_gene_preserved':bool(siblings['INTELLIGENCE']) and siblings['INTELLIGENCE']==(parent.get('shadow_genes') or {}).get('INTELLIGENCE'),
  'legacy_runtime_activated':False,
@@ -111,6 +111,7 @@ checks={
  'context_ablation_material_drop':fresh-ablation>=.25,
  'restore_exact':restore==fresh,
  'new_thinking_shadow_gene_created':gene['gene_id']!=parent_thinking.get('gene_id'),
+ 'historical_transfer_adds_distinct_multicontext_capability':fresh==1.0 and gene['gene_id']!=parent_thinking.get('gene_id'),
  'external_models_used':False,'new_external_research_used':False,
  'host_written_planner':False,'host_selected_new_order':False,
  'automatic_canonical_promotion':False,
@@ -129,7 +130,7 @@ report={
  'parent_thinking_gene':parent_thinking,'preserved_sibling_genes':siblings,
  'thinking_gene':gene,'checks':checks,'canonical_mutation':False,'promotion_applied':False,
  'next_required_capability':None if passed else 'EXPERIENCE_CONDITIONED_THINKING_REPAIR_V3',
- 'semantic_boundary':'CURRENT G2 RELEARNS A VERIFIED HISTORICAL YADO THINKING PRINCIPLE AFTER DETERMINISTIC RENAMING OF CONTEXT AND ROLE IDENTITIES. LEGACY RUNTIME IS NOT EXECUTED. FRESH ACTION IDS, CONTEXT ABLATION AND RESTORE ARE REQUIRED. LOGIC AND INTELLIGENCE SUCCESSFUL LTI SIBLING GENES ARE PRESERVED.'
+ 'semantic_boundary':'CURRENT G2 RELEARNS A VERIFIED HISTORICAL YADO MULTICONTEXT THINKING PRINCIPLE AFTER DETERMINISTIC RENAMING OF CONTEXT AND ROLE IDENTITIES. THIS AUGMENTS THE CURRENT CAUSAL-LEDGER THINKING GENE; IT DOES NOT REPLACE IT. LEGACY RUNTIME IS NOT EXECUTED. FRESH ACTION IDS, CONTEXT ABLATION AND RESTORE ARE REQUIRED. LOGIC AND INTELLIGENCE SUCCESSFUL LTI SIBLING GENES ARE PRESERVED.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
