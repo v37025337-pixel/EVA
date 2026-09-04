@@ -319,11 +319,11 @@
       "severity": "LOW"
     }
   ],
-  "latest_self_audit_receipt_sha256": "7f1dab251e0688a7887e5d252aa7ff1dc054fdd6da39d03545155a17a600417f",
-  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33831996104.json",
+  "latest_self_audit_receipt_sha256": "5e7328999f466cf0281d55f2497d1de54d329655677c9dd6b2579d9731b81d82",
+  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json",
   "native_evolution_result": null,
   "next_action": "RE_AUDIT_AFTER_DIRECT_PRIORITY_ACTION",
-  "receipt_sha256": "f3c5f3661d06d182087cb1df132fb100a097b1fc83199cf17c350e9fd6202599",
+  "receipt_sha256": "8bc4f3dc8da0112e59e2dd15f5a556e6e85a75c1e2f6e20d1f4f006a57204d0a",
   "schema": "yado.g2.autonomous_self_improvement_task.v1",
   "selected_action": "LIVE_RESOURCE_EVIDENCE_RECHECK",
   "selected_child_genome_digest": null,
@@ -367,38 +367,46 @@
     "host_selected_mechanism": null,
     "host_selected_target": null,
     "host_solution_hint": null,
-    "latest_audit_run_id": 33831996104,
+    "latest_audit_run_id": 33832918251,
     "latest_self_selected_next_step": "LIVE_RESOURCE_EVIDENCE_SCOPE",
     "mechanism_selection": "KERNEL_SELF_SELECTED_NATIVE_OR_SELF_CREATED",
-    "objective": "REPAIR_GOAL_TO_ACTION_BINDING",
+    "objective": "REPAIR_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING",
     "previous_evidence": [
       "candidates/kernel-self-generated/g2-native-meta-grammar-compile-repair-v1.json",
       "candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json"
     ],
     "schema": "yado.g2.autonomous_self_improvement_request.v1",
-    "stop_condition": "DIRECT_PRIORITY_ACTION_EVIDENCE_OR_EXPLICIT_WITHHOLD",
+    "stop_condition": "SELF_AUDIT_EVIDENCE_BINDING_REPAIRED_OR_EXPLICIT_KERNEL_WITHHOLD",
     "target_selection": "KERNEL_SELF_SELECTED",
     "task": {
+      "evidence_to_consider": [
+        "run:33832611701",
+        "run:33832670571",
+        "run:33832722100",
+        "deep_self_audit_run:33832918251"
+      ],
       "forbidden": [
-        "host_selected_target",
-        "host_selected_solution",
-        "host_supplied_patch",
-        "host_selected_repair_operator",
-        "lowering_integrity_or_freshness_gates"
+        "host_selected_mechanism",
+        "host_selected_patch",
+        "host_selected_audit_result",
+        "host_solution_hint",
+        "forcing_LIVE_RESOURCE_EVIDENCE_SCOPE_to_PASS",
+        "lowering_freshness_or_integrity_gates"
       ],
-      "goal": "Make the autonomous cycle bind the kernel-selected priority to a directly relevant action/result.",
-      "problem": "The kernel correctly self-selects LIVE_RESOURCE_EVIDENCE_SCOPE, but the autonomous self-improvement cycle executes an unrelated fixed generic genome evolution instead of an action that directly addresses the selected priority.",
+      "goal": "Make the kernel's self-audit incorporate relevant fresh self-generated evidence so completed work can update the kernel's own developmental state assessment.",
+      "problem": "The kernel produced fresh direct evidence for LIVE_RESOURCE_EVIDENCE_SCOPE in three successful runs, but the next kernel-native deep self-audit still marked LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL and selected it again because the self-audit evidence model did not incorporate the new receipts.",
       "success_conditions": [
-        "kernel_self_selects_priority",
-        "kernel_self_selects_action_or_mechanism_for_that_priority",
-        "executed_action_is_directly_relevant_to_selected_priority",
-        "for_LIVE_RESOURCE_EVIDENCE_SCOPE_result_contains_live_resource_recheck_or_content_comprehension_or_conflict_resolution_evidence",
-        "unrelated_generic_genome_evolution_must_not_count_as_success",
-        "kernel_may_WITHHOLD_if_it_cannot_create_a_relevant_action"
+        "kernel_diagnoses_the_action_to_evidence_to_self_audit_disconnect",
+        "kernel_selects_its_own_solution_path",
+        "fresh_self_generated_receipts_can_be_used_by_self_audit_when_relevant",
+        "self_audit_does_not_repeat_a_priority_only_because_it_ignored_new_valid_evidence",
+        "if_LIVE_RESOURCE_EVIDENCE_SCOPE_is_actually_closed_the_next_self_audit_marks_it_resolved_or_moves_to_another_priority",
+        "if_evidence_is_insufficient_the_kernel_explicitly_explains_what_is_missing_and_WITHHOLDS",
+        "canonical_integrity_and_fail_closed_gates_remain_preserved"
       ],
-      "task_id": "G2-GOAL-TO-ACTION-BINDING-REPAIR"
+      "task_id": "G2-ACTION-EVIDENCE-SELF-AUDIT-BINDING-REPAIR"
     },
-    "trigger": 6,
+    "trigger": 7,
     "use_accumulated_experience": true
   }
 }
