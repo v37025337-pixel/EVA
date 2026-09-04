@@ -1,0 +1,36 @@
+{
+  "schema": "yado.g2.self_evolving_meta_language_spontaneous_genesis.request.v1",
+  "objective": "CREATE_YOUR_OWN_SELF_EVOLVING_META_LANGUAGE",
+  "task": "Create your own meta-language that can represent new mechanisms, extend its own primitives/operators when the current language is insufficient, and develop across iterations. Then use it to attempt the current missing IR-to-Python-source emitter. Do this with YADO native mechanisms only.",
+  "context": {
+    "current_deficit": "NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
+    "prior_ir_emitter_run_id": 33853945697,
+    "prior_process_run_id": 33844698330
+  },
+  "instruction": "This is a spontaneous first attempt. You may use your own current state, memory and prior YADO artifacts, but do not use new external research in this pass. The host provides only this task and the strict evaluator. Choose your own representation, operators, extension rule, evolutionary rule and construction route.",
+  "constraints": {
+    "external_coding_models": false,
+    "new_external_research": false,
+    "host_meta_language_template": false,
+    "host_operator_list": false,
+    "host_representation_schema": false,
+    "host_source_seed": false,
+    "host_patch": false,
+    "host_target_file": false,
+    "canonical_mutation": false,
+    "fail_closed": true
+  },
+  "pass_only_if": [
+    "yado_native_run_creates_a_new_meta_language_artifact_or_native_object",
+    "the_meta_language_contains_or_exposes_its_own_extension_or_evolution_mechanism",
+    "the_meta_language_is_not_just_the_preexisting_RC6_meta_grammar_snapshot",
+    "yado_uses_it_to_attempt_IR_to_source_materialization",
+    "actual_source_bytes_are_produced_without_host_seed_template_or_external_model",
+    "source_compiles_and_executes_on_fresh_tasks",
+    "rollback_parent_remains_available",
+    "canonical_remains_unchanged"
+  ],
+  "host_role": "TASK_TRANSPORT_AND_STRICT_OBSERVER_ONLY",
+  "stop_condition": "SPONTANEOUS_NATIVE_META_LANGUAGE_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+  "trigger": 1
+}
