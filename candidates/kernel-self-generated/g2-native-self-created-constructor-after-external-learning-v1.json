@@ -1,0 +1,244 @@
+{
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "case_counts": {
+    "blind": 22,
+    "fit": 36,
+    "validation": 10
+  },
+  "checks": {
+    "actual_valid_receipt_accepted": true,
+    "canonical_unchanged": true,
+    "causal_ablation_drop": true,
+    "external_learning_completed": true,
+    "external_models_used_for_constructor": false,
+    "fresh_blind_exact": true,
+    "gene_created": true,
+    "gene_shadow_only": true,
+    "host_selected_algorithm_family": false,
+    "kernel_skill_gate_selected": true,
+    "native_routes_evaluated": true
+  },
+  "external_learning": {
+    "experience_digest": "07775857591ec41ef1b7d5111dab5d9971eace6def7f66f2846438f6db81f607",
+    "fetched_count": 52,
+    "source_count": 60
+  },
+  "invented_gene": {
+    "canonical_active": false,
+    "contract_fields": [
+      "action_relevant",
+      "action_status_pass",
+      "canonical_immutable",
+      "comprehension_complete",
+      "conflict_resolution_pass",
+      "direct_priority_evidence",
+      "priority_match"
+    ],
+    "external_learning_experience_digest": "07775857591ec41ef1b7d5111dab5d9971eace6def7f66f2846438f6db81f607",
+    "external_model_generated": false,
+    "gene_digest": "99c46c090d4041b6d9ac72741cd7f6b5c882f66cd68cff4ccf1c35d0cda3b002",
+    "gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-9e31bcba356b954c",
+    "grammar_extension_id": null,
+    "model": {
+      "feature": "irrelevant_nonce",
+      "left": {
+        "label": "ACCEPT_FRESH_EVIDENCE"
+      },
+      "right": {
+        "label": "WITHHOLD_FRESH_EVIDENCE"
+      },
+      "threshold": 55.0
+    },
+    "origin": "YADO_NATIVE_ALGORITHM_BANK_AFTER_EXTERNAL_CORPUS_LEARNING",
+    "predicate_program": null,
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.native_self_created_evidence_binder_gene.v1",
+    "selected_algorithm": {
+      "family": "CART_AXIS",
+      "max_depth": 1
+    },
+    "selected_native_route": "NATIVE_META_EVOLVE_INTELLIGENCE",
+    "self_created_model": true
+  },
+  "kernel_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "79891f1de35eac481839b6ca65bb7ab0c09dfb313a16bff67e784f66515a94c1",
+    "rejected": [],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "487da4482b9e846c727d8667441bfbb23e1be283e916e0967d56810178658b1d",
+        "failed_critics": [],
+        "fit_gain": 1.0,
+        "heldout_gain": 0.13636363636363635,
+        "skill_id": "NATIVE_SELF_CREATED_0_NATIVE_META_EVOLVE_INTELLIGENCE",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "NATIVE_SELF_CREATED_0_NATIVE_META_EVOLVE_INTELLIGENCE"
+    ],
+    "status": "SELECTED"
+  },
+  "native_routes": [
+    {
+      "actual_receipt_prediction": "ACCEPT_FRESH_EVIDENCE",
+      "metrics": {
+        "ablation": 0.8636363636363636,
+        "fit": 1.0,
+        "fresh_blind": 1.0,
+        "validation": 1.0
+      },
+      "result": {
+        "fresh_blind": 1.0,
+        "model": {
+          "feature": "irrelevant_nonce",
+          "left": {
+            "label": "ACCEPT_FRESH_EVIDENCE"
+          },
+          "right": {
+            "label": "WITHHOLD_FRESH_EVIDENCE"
+          },
+          "threshold": 55.0
+        },
+        "organ": "INTELLIGENCE",
+        "selected_algorithm": {
+          "family": "CART_AXIS",
+          "max_depth": 1
+        },
+        "validation": 1.0
+      },
+      "route": "NATIVE_META_EVOLVE_INTELLIGENCE",
+      "skill_id": "NATIVE_SELF_CREATED_0_NATIVE_META_EVOLVE_INTELLIGENCE"
+    },
+    {
+      "actual_receipt_prediction": "ACCEPT_FRESH_EVIDENCE",
+      "metrics": {
+        "ablation": 0.8636363636363636,
+        "fit": 1.0,
+        "fresh_blind": 1.0,
+        "validation": 1.0
+      },
+      "result": {
+        "fresh_blind": 1.0,
+        "grammar_extension_id": "G_cf8c5bbd5d6d",
+        "model": {
+          "else": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 1
+            },
+            "model": {
+              "feature": "irrelevant_nonce",
+              "left": {
+                "label": "ACCEPT_FRESH_EVIDENCE"
+              },
+              "right": {
+                "label": "WITHHOLD_FRESH_EVIDENCE"
+              },
+              "threshold": 64.0
+            },
+            "op": "LEAF"
+          },
+          "op": "IF_PREDICATE",
+          "predicate_program": {
+            "kind": "LINEAR_THRESHOLD",
+            "signals": [
+              "action_relevant",
+              "action_status_pass"
+            ],
+            "threshold": -1.5,
+            "weights": [
+              -1.0,
+              -1.0
+            ]
+          },
+          "then": {
+            "algorithm": {
+              "family": "CART_AXIS",
+              "max_depth": 1
+            },
+            "model": {
+              "label": "WITHHOLD_FRESH_EVIDENCE"
+            },
+            "op": "LEAF"
+          }
+        },
+        "predicate_program": {
+          "kind": "LINEAR_THRESHOLD",
+          "signals": [
+            "action_relevant",
+            "action_status_pass"
+          ],
+          "threshold": -1.5,
+          "weights": [
+            -1.0,
+            -1.0
+          ]
+        },
+        "status": "SUPPORTED",
+        "validation": 1.0
+      },
+      "route": "NATIVE_EXTENDED_META_GRAMMAR",
+      "skill_id": "NATIVE_SELF_CREATED_1_NATIVE_EXTENDED_META_GRAMMAR"
+    }
+  ],
+  "receipt_sha256": "0ab34695997ebfe834c3bd6f44d162d6c201b06821ce0c3ed87bb0e46b89906e",
+  "schema": "yado.g2.native_self_created_constructor_after_external_learning.v1",
+  "selected_skill_id": "NATIVE_SELF_CREATED_0_NATIVE_META_EVOLVE_INTELLIGENCE",
+  "semantic_boundary": "YADO STUDIED THE USER-SUPPLIED PUBLIC CORPUS FIRST, THEN THE HOST PROVIDED ONLY A VALIDITY CONTRACT AND FRESH/ABLATION GATES. YADO CHOSE BETWEEN ITS NATIVE CONSTRUCTOR ROUTES AND ITS NATIVE SKILL GATE SELECTED THE EXECUTABLE MODEL. IF PASS, THE RESULT IS A YADO-GENERATED SHADOW GENE WITHIN EXISTING NATIVE ALGORITHM SUBSTRATES; IT IS NOT YET A NEW UNBOUNDED META-LANGUAGE FAMILY OR CANONICAL SELF-AUDIT INTEGRATION.",
+  "status": "WITHHOLD_G2_NATIVE_SELF_CREATED_CONSTRUCTOR_AFTER_EXTERNAL_LEARNING_V1",
+  "task": {
+    "constraints": {
+      "fail_closed": true,
+      "no_canonical_mutation": true,
+      "no_external_llm_for_constructor": true,
+      "no_host_selected_algorithm_family": true,
+      "no_host_written_patch": true,
+      "no_ready_external_template": true
+    },
+    "host_role": "LEARNING_TRANSPORT_VALIDITY_CONTRACT_AND_FRESH_EVALUATION_ONLY",
+    "instruction": "Use the learned corpus as experience, but construct the mechanism with YADO native constructor routes only. YADO chooses the native route/algorithm family by its own validation and skill-admission evidence.",
+    "learned_experience": "experience/yado-user-external-corpus-learning-v1.json",
+    "learning_receipt_run_id": 33834973218,
+    "objective": "YADO_CREATE_ITS_OWN_EVIDENCE_BINDING_MECHANISM_AFTER_EXTERNAL_LEARNING",
+    "problem": "The kernel learned from the user-supplied public corpus. Now create a YADO-native executable mechanism for deciding when fresh self-generated action evidence may update self-audit, without copying an external architecture or using an external model to generate the mechanism.",
+    "schema": "yado.g2.native_self_created_constructor_after_external_learning.request.v1",
+    "stop_condition": "YADO_NATIVE_SHADOW_GENE_PASS_OR_WITHHOLD",
+    "success_conditions": [
+      "external_learning_completed",
+      "no_external_model_used_for_constructor",
+      "host_does_not_select_algorithm_family",
+      "kernel_evaluates_its_native_constructor_routes",
+      "kernel_native_skill_gate_selects_or_withholds",
+      "fresh_blind_exact_for_selected_mechanism",
+      "causal_ablation_drop",
+      "current_valid_direct_receipt_is_accepted",
+      "invalid_counterfactual_receipts_are_withheld",
+      "new_mechanism_is_persisted_as_shadow_gene",
+      "canonical_state_unchanged"
+    ],
+    "trigger": 1
+  },
+  "training_contract_fields": [
+    "action_relevant",
+    "action_status_pass",
+    "canonical_immutable",
+    "comprehension_complete",
+    "conflict_resolution_pass",
+    "direct_priority_evidence",
+    "priority_match"
+  ]
+}
