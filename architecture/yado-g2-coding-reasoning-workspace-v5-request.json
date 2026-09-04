@@ -1,0 +1,20 @@
+{
+  "schema": "yado.g2.coding_reasoning_workspace_v5.request.v1",
+  "objective": "REPAIR_V4_REPRESENTATION_WITHOUT_CHANGING_THE_ACTIVE_G2_REASONING_ALGORITHM",
+  "instruction": "Consume V4 as a negative counterexample. The V4 experiment exceeded the active router's categorical stage bound by inventing extra UNKNOWN stage tokens, causing stage to be excluded and yielding zero clauses. Keep exactly the eight known reasoning stage symbols and add a separate stage_known boolean boundary. Use the same already-active ALG-BOUNDED-CAPABILITY-ROUTER-V1 to learn the policy from accumulated coding memory. Require explicit guarded retry clauses, fail-closed unknown states, fresh exact reasoning, ablation/restore, and failure -> revise -> retest control continuity. Do not change the router algorithm and do not claim autonomous hypothesis generation yet.",
+  "parent": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v4.json",
+  "required_active_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+  "representation_change": "ADD_STAGE_KNOWN_BOOLEAN_KEEP_STAGE_CARDINALITY_AT_8",
+  "constraints": {
+    "third_party_code_execution": false,
+    "external_coding_model": false,
+    "ready_patch_from_host": false,
+    "host_written_reasoning_rules": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "algorithm_change": false
+  },
+  "host_role": "REPRESENTATION_REPAIR_CURRICULUM_TRANSPORT_FRESH_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+  "trigger": 1,
+  "trigger_reason": "V4_ZERO_CLAUSES_DUE_TO_STAGE_CARDINALITY_EXCEEDING_ACTIVE_ROUTER_BOUND"
+}
