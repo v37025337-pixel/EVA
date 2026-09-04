@@ -1,0 +1,76 @@
+name: YADO G2 Coding Spec Generalization Real Code Transfer V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-coding-spec-generalization-real-code-transfer-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-coding-spec-generalization-real-code-transfer-v1
+  cancel-in-progress: true
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Preserve checked-in G2 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before real-code transfer
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile real-code transfer runtime
+        run: python -m py_compile runtime/yado_g2_coding_spec_generalization_real_code_transfer_v1.py
+      - name: Run YADO real-code transfer
+        id: evolve
+        continue-on-error: true
+        run: python runtime/yado_g2_coding_spec_generalization_real_code_transfer_v1.py
+      - name: Canonical guard after real-code transfer
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist real-code transfer evidence
+        if: always()
+        run: |
+          git config user.name "YADO Real Code Transfer V1"
+          git config user.email "actions@users.noreply.github.com"
+          git add experience/yado-coding-real-code-transfer-v1.json 2>/dev/null || true
+          git add candidates/kernel-self-generated/g2-coding-spec-generalization-real-code-transfer-v1.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO real code transfer V1 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest real-code transfer verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-coding-spec-generalization-real-code-transfer-v1.json")
+          if not p.exists(): raise SystemExit("MISSING_REAL_CODE_TRANSFER_EVIDENCE")
+          r=json.loads(p.read_text());c=r["checks"]
+          assert c["self_generated_oracle_parent_consumed"] is True,r
+          assert c["real_active_source_files_scanned"] is True,r
+          assert c["source_fragments_selected_by_yado_selector"] is True,r
+          assert c["defects_created_by_active_mutation_grammar"] is True,r
+          assert c["original_source_hidden_from_patch_path"] is True,r
+          assert c["host_selected_source_fragment"] is False,r
+          assert c["host_selected_patch"] is False,r
+          assert c["external_coding_model_used"] is False,r
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_CODING_SPEC_GENERALIZATION_REAL_CODE_TRANSFER_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+r["status"]+":"+str(r["next_required_capability"]))
+          print(r["status"],r["task_count"],r["source_file_count"],r["oracle_hidden_score"],r["mutated_holdout_score"],r["repaired_holdout_score"],r["repair_ablation_score"],r["mean_generated_test_count"],r["gene_id"],r["next_required_capability"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-coding-real-code-transfer-v1-${{ github.run_id }}
+          path: |
+            experience/yado-coding-real-code-transfer-v1.json
+            candidates/kernel-self-generated/g2-coding-spec-generalization-real-code-transfer-v1.json
+          if-no-files-found: warn
