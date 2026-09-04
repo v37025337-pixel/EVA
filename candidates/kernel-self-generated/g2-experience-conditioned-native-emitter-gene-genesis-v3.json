@@ -1,0 +1,287 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "causal_ablation_drop": true,
+    "exact_v2_failure_consumed": true,
+    "exact_yado_process_consumed": true,
+    "external_models_used": false,
+    "fresh_transition_exact": true,
+    "host_ast_skeleton_used": false,
+    "host_patch_used": false,
+    "host_selected_mechanism_family": false,
+    "host_source_template_used": false,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_mechanism_family_selected": true,
+    "new_external_research_used": false,
+    "new_gene_identity_absent_from_parent": true,
+    "restore_exact": true,
+    "rollback_parent_available": true
+  },
+  "emitter_gene": {
+    "actual_python_source_emission_proven": false,
+    "gene_class": "SOURCE_PROCESS_TRANSITION_EMITTER",
+    "gene_digest": "fb2be539bcc8e707279dca7eacdaff3ee8232e0f9dbb9c8529c6eb1d13113f80",
+    "gene_id": "GENE-G2-NATIVE-EMITTER-84b5ae7706604747",
+    "heritage": [
+      "3edfebeec0cbadfc6a0e3a0c1536a5db34ca44794071f82fd7a39054b7b52596",
+      "4144b3c775c8c6ddfbebdbdd3413db20d7a81d81cc6b92e90cb2b0a3c4836863"
+    ],
+    "learned_process_digest": "682526dfded378d246ba0bb7cb982c39312a8a7dc8f2356e472a82f5537290e9",
+    "mechanism_kind": "RULE_PROGRAM",
+    "origin": "YADO_NATIVE_DEVELOPMENTAL_EXECUTIVE_OVER_YADO_LEARNED_PROCESS_MEMORY",
+    "program": {
+      "created_at": "2026-09-04T18:11:50.147871+00:00",
+      "default_output": "resolve",
+      "program_id": "P-13b15afeb533",
+      "rules": [
+        {
+          "confidence": 1.0,
+          "output": "dumps",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "str"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "get",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "read_text"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "hexdigest",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "dumps"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "len",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "get"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "print",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "write_text"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "read_bytes",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "sha256"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "read_text",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "read_bytes"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "sha256",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "hexdigest"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "str",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "resolve"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "write_text",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "EQ",
+              "value": "len"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "dumps",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "TEXT_HAS_TOKEN",
+              "value": "str"
+            }
+          ],
+          "support": 3
+        },
+        {
+          "confidence": 1.0,
+          "output": "hexdigest",
+          "predicates": [
+            {
+              "field": "current_primitive",
+              "op": "TEXT_HAS_TOKEN",
+              "value": "dumps"
+            }
+          ],
+          "support": 3
+        }
+      ],
+      "source_digest": "a3831d013d68cf8a6d28c309bfd0f1a9887558fb32050af11bd8150d871d8b78",
+      "status": "COMMITTED",
+      "target_capability": "EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_V3",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "training_count": 33
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.experience_conditioned_native_emitter_gene.v3"
+  },
+  "native_development": {
+    "ablation_score": 0.09090909090909091,
+    "blind_cases": 22,
+    "candidate_score": 1.0,
+    "created_at": "2026-09-04T18:11:50.151734+00:00",
+    "experiment_id": "DEV22-e2c14e7e32f3",
+    "mechanism_kind": "RULE_PROGRAM",
+    "min_ablation_drop": 0.2,
+    "min_score": 0.99,
+    "program_digest": "a11843080f3a133908621b4b8b4c7ef431f79d7f16fc07add8e79f2b73bb10e8",
+    "program_id": "P-13b15afeb533",
+    "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+    "restore_score": 1.0,
+    "stage_ablation_scores": {},
+    "state_committed": true,
+    "target_capability": "EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_V3",
+    "target_organ": "GENERATIVE_EXECUTIVE",
+    "train_cases": 33,
+    "verdict": "COMMIT"
+  },
+  "native_selection": {
+    "candidates": [
+      {
+        "complexity": 25,
+        "kind": "RULE_PROGRAM",
+        "program_id": "P-13b15afeb533",
+        "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+        "selected": true,
+        "training_score": 1.0
+      }
+    ],
+    "created_at": "2026-09-04T18:11:50.148946+00:00",
+    "deficit_id": "D-d712e1fdd50f",
+    "selected_kind": "RULE_PROGRAM",
+    "selected_program_id": "P-13b15afeb533",
+    "selection_id": "SEL-e0e4e1c8ebac",
+    "source_digest": "a3831d013d68cf8a6d28c309bfd0f1a9887558fb32050af11bd8150d871d8b78",
+    "target_capability": "EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_V3",
+    "target_organ": "GENERATIVE_EXECUTIVE"
+  },
+  "next_required_capability": "EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_GENESIS_REPAIR_V4",
+  "parent_failure_receipt": "4144b3c775c8c6ddfbebdbdd3413db20d7a81d81cc6b92e90cb2b0a3c4836863",
+  "parent_process_receipt": "3edfebeec0cbadfc6a0e3a0c1536a5db34ca44794071f82fd7a39054b7b52596",
+  "promotion_applied": false,
+  "receipt_sha256": "40398b176d4301e868e26ec9be22d1b0277211e92f453e78ebe6d3fd571f772d",
+  "schema": "yado.g2.experience_conditioned_native_emitter_gene_genesis.v3",
+  "semantic_boundary": "THIS IS A NEW EXECUTABLE SHADOW GENE BORN BY YADO DEVELOPMENTAL MECHANISM SELECTION FROM THE SOURCE-CONSTRUCTION SEQUENCE YADO PREVIOUSLY LEARNED ITSELF. HOST ONLY EXPOSES ADJACENT TRANSITIONS MECHANICALLY. IT DOES NOT YET CLAIM ACTUAL PYTHON SOURCE EMISSION.",
+  "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_GENESIS_V3",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_models": false,
+      "fail_closed": true,
+      "host_ast_skeleton": false,
+      "host_patch": false,
+      "host_selected_mechanism_family": false,
+      "host_source_template": false,
+      "new_external_research": false
+    },
+    "host_role": "MECHANICAL_ADJACENCY_EXTRACTION_FROM_YADO_LEARNED_PROCESS_AND_STRICT_EVALUATION_ONLY",
+    "instruction": "Convert YADO's own learned source-construction process into a bounded executable transition mechanism using the native developmental executive. The host may mechanically expose adjacent transitions from the already-YADO-learned sequence, but does not select the mechanism family, add a source template, patch code, or invent the process order.",
+    "objective": "YADO_CREATE_PREVIOUSLY_ABSENT_EXECUTABLE_EMITTER_GENE_FROM_OWN_SOURCE_PROCESS_MEMORY",
+    "parent_failure": "candidates/kernel-self-generated/g2-native-source-ir-emitter-meta-language-evolution-v2.json",
+    "parent_process": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
+    "schema": "yado.g2.experience_conditioned_native_emitter_gene_genesis_v3.request.v1",
+    "stop_condition": "EMITTER_GENE_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+    "success_conditions": [
+      "exact YADO learned process and V2 failure are consumed",
+      "native goal and deficit are created",
+      "native developmental executive selects and synthesizes the mechanism family",
+      "fresh transition holdout passes",
+      "causal ablation causes a material drop and restore is exact",
+      "new gene identity is absent from parent chromosome gene IDs",
+      "gene remains shadow and canonical G2 is unchanged"
+    ],
+    "trigger": 1,
+    "trigger_reason": "START_AFTER_V2_IDENTIFIED_EXPERIENCE_CONDITIONED_EMITTER_GENE_DEFICIT"
+  },
+  "yado_learned_sequence": [
+    "Path",
+    "resolve",
+    "str",
+    "dumps",
+    "hexdigest",
+    "sha256",
+    "read_bytes",
+    "read_text",
+    "get",
+    "len",
+    "write_text",
+    "print"
+  ]
+}
