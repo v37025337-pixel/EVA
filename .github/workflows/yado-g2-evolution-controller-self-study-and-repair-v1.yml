@@ -1,0 +1,74 @@
+name: YADO G2 Evolution Controller Self Study and Repair V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-evolution-controller-self-study-and-repair-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-evolution-controller-self-study-and-repair-v1
+  cancel-in-progress: true
+jobs:
+  study_repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before self-study
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile self-study transport
+        run: python -m py_compile runtime/yado_g2_evolution_controller_self_study_and_repair_v1.py
+      - name: Let YADO study its result and solve the controller limitation
+        id: study_repair
+        continue-on-error: true
+        run: python runtime/yado_g2_evolution_controller_self_study_and_repair_v1.py
+      - name: Canonical guard after self-study
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist self-study and repair evidence
+        if: always()
+        run: |
+          git config user.name "YADO Evolution Controller Self Study"
+          git config user.email "actions@users.noreply.github.com"
+          files=()
+          [ -f experience/yado-evolution-controller-self-study-v1.json ] && files+=(experience/yado-evolution-controller-self-study-v1.json)
+          [ -f candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json ] && files+=(candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json)
+          [ ${#files[@]} -gt 0 ] && git add "${files[@]}"
+          git diff --cached --quiet || git commit -m "Persist YADO evolution controller self-study evidence [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json")
+          if not p.exists(): raise SystemExit("MISSING_SELF_STUDY_REPAIR_EVIDENCE")
+          r=json.loads(p.read_text())
+          c=r["checks"]
+          for key in ("external_coding_models_used","new_external_research_used","host_target_function_selected",
+                      "host_new_chromosome_name_used","host_gene_schema_used","host_mutation_rule_used",
+                      "host_patch_used","host_source_template_used"):
+              assert c[key] is False,r
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_EVOLUTION_CONTROLLER_SELF_STUDY_AND_REPAIR_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          assert len(r["new_dimensions"])>=1,r
+          print(r["status"],r["new_dimensions"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yado-g2-evolution-controller-self-study-and-repair-v1-${{ github.run_id }}
+          path: |
+            experience/yado-evolution-controller-self-study-v1.json
+            candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json
+          if-no-files-found: warn
