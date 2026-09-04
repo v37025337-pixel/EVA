@@ -1,0 +1,24 @@
+{
+  "schema": "yado.g2.coding_spec_generalization_real_code_transfer_v3.request.v1",
+  "objective": "LEARN_FROM_V2_NEGATIVE_TRANSFER_BY_REQUIRING_REVERSIBLE_DEFECTS_AND_ITERATIVE_SELF_COUNTEREXAMPLES",
+  "instruction": "Consume V2 as a negative transfer counterexample. V2 synthesized exact oracles but repair degraded mean hidden score from 0.5278 to 0.5 because the shadow defect generator admitted one-way structural wrappers such as abs(), while the current active mutation grammar has no inverse unwrap operation. V3 must not lower the 6-fragment / 4-source-file / exact-hidden gates. Discover additional real candidates from nested algebraic AST subexpressions. Admit only defects produced by non-structural active mutations for which the same active grammar can mechanically reach the original parent again. During repair, do not preselect a fixed batch of tests against only the initial defect. Repeatedly compare the current candidate to YADO's synthesized oracle, let the active evidence selector choose a new counterexample, add it to memory, and rerun active repair from the original mutated shadow source with accumulated self-tests. Stop only when no bounded disagreement remains or the iteration budget is exhausted. Original source remains hidden from the patch path.",
+  "parents": [
+    "candidates/kernel-self-generated/g2-coding-self-generated-test-oracle-v1.json",
+    "candidates/kernel-self-generated/g2-coding-spec-generalization-real-code-transfer-v2.json"
+  ],
+  "constraints": {
+    "minimum_executed_fragments": 6,
+    "minimum_distinct_source_files": 4,
+    "reversible_shadow_defect": true,
+    "iterative_self_counterexample_repair": true,
+    "host_selected_source_fragment": false,
+    "host_selected_patch": false,
+    "external_coding_model": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "threshold_reduction": false
+  },
+  "host_role": "REAL_AST_DISCOVERY_REVERSIBILITY_CHECK_AND_HIDDEN_REGRESSION_ONLY",
+  "trigger": 1,
+  "trigger_reason": "V2_EXACT_ORACLE_BUT_REPAIR_OVERFIT_ONE_WAY_STRUCTURAL_MUTATIONS"
+}
