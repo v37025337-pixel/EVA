@@ -1,0 +1,93 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "active_evidence_selector_verified": true,
+    "active_evolutionary_genome_verified": true,
+    "active_semantic_synthesizer_verified": true,
+    "all_final_code_holdouts_exact": true,
+    "all_oracles_hidden_exact": true,
+    "all_oracles_synthesized": true,
+    "all_patches_generated": true,
+    "all_sources_changed": true,
+    "all_tasks_generated_tests": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "external_coding_model_used": false,
+    "formal_spec_is_only_external_target_information": true,
+    "fresh_spec_to_oracle_tasks_executed": true,
+    "generated_tests_not_direct_spec_rows": true,
+    "host_selected_patch": false,
+    "host_selected_test_input": false,
+    "host_supplied_generated_test_expected": false,
+    "open_ended_parent_consumed": true,
+    "oracle_ablation_material_drop": true,
+    "restore_exact": true
+  },
+  "final_code_holdout_score": 1.0,
+  "gene_id": "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+  "initial_code_holdout_score": 0.041666666666666664,
+  "mean_self_generated_test_count": 5.0,
+  "next_required_capability": "G2_CODING_SPEC_GENERALIZATION_AND_REAL_CODE_TRANSFER_V1",
+  "oracle_ablation_score": 0.041666666666666664,
+  "oracle_gene": {
+    "active_components": [
+      "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+      "CTRL-G2-EVOLUTIONARY-GENOME-V1"
+    ],
+    "final_code_holdout_score": 1.0,
+    "gene_digest": "0370cb17810c9640c7b562afafa3401286046bfec7f7dcbe6231db6239877e1a",
+    "gene_id": "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+    "gene_scope": [
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+      "bd1f09a90e8c2fe1c8474242e8533d562405872c18e577e4721fa5e9b9acae1c"
+    ],
+    "initial_code_holdout_score": 0.041666666666666664,
+    "mean_self_generated_test_count": 5.0,
+    "mechanism_kind": "FORMAL_SPEC_TO_SYNTHESIZED_ORACLE_TO_SELF_SELECTED_TESTS_TO_EVOLUTIONARY_CODE_PATCH",
+    "oracle_ablation_score": 0.041666666666666664,
+    "oracle_hidden_validation_score": 1.0,
+    "organ": "THINKING",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.coding_self_generated_test_oracle_gene.v1"
+  },
+  "oracle_hidden_validation_score": 1.0,
+  "promotion_applied": false,
+  "receipt_sha256": "2577493c0143b46f46e9433ce02c82e2608a6d16c878b8a7db0af67ae397974d",
+  "restore_score": 1.0,
+  "schema": "yado.g2.coding_self_generated_test_oracle.v1",
+  "semantic_boundary": "THE HOST SUPPLIES A SMALL FORMAL SPECIFICATION DATASET, NOT GENERATED TEST CASES OR A READY ORACLE PROGRAM. ACTIVE G2 SEMANTIC SYNTHESIS BUILDS AN EXECUTABLE ORACLE EXPRESSION AND IS HIDDEN-VALIDATED WITHOUT FEEDBACK. YADO THEN SELECTS NEW TEST INPUTS AND COMPUTES THEIR EXPECTED VALUES ONLY THROUGH ITS SYNTHESIZED ORACLE. ACTIVE EVOLUTIONARY CODE SYNTHESIS BUILDS THE PATCH FROM THOSE SELF-GENERATED TESTS. THIS PROVES BOUNDED SPEC-TO-ORACLE-TO-TEST-TO-PATCH, NOT AUTONOMOUS REQUIREMENT DISCOVERY.",
+  "status": "PASS_SHADOW_G2_CODING_SELF_GENERATED_TEST_ORACLE_V1",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_coding_model": false,
+      "final_holdout_feedback": false,
+      "host_selected_patch": false,
+      "host_selected_test_input": false,
+      "host_supplied_generated_test_expected": false
+    },
+    "host_role": "FORMAL_SPECIFICATION_PROVIDER_AND_HIDDEN_VALIDATOR_ONLY",
+    "instruction": "Consume the passed open-ended defect hypothesis gene. For each fresh task, the host may provide a small formal specification dataset only. The already-active G2 semantic expression synthesizer must construct an executable oracle expression and pass a hidden oracle-validation set without receiving those labels back. YADO must then select new test inputs itself, compute expected values only through the synthesized oracle, and feed those self-generated tests to the active evolutionary coding gene to synthesize a patch. The formal specification rows must not be used directly as the patch training tests. Final code holdout labels must never be used for oracle synthesis, test selection or patch synthesis. Require exact hidden oracle validation, exact final code holdout, material no-oracle ablation, changed source, and deterministic restore.",
+    "objective": "REMOVE_THE_HOST_RUNTIME_ORACLE_BY_SYNTHESIZING_A_TEST_ORACLE_FROM_FORMAL_SPECIFICATION",
+    "parent": "candidates/kernel-self-generated/g2-coding-open-ended-defect-hypothesis-v1.json",
+    "required_active_capabilities": [
+      "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+      "CTRL-G2-EVOLUTIONARY-GENOME-V1"
+    ],
+    "schema": "yado.g2.coding_self_generated_test_oracle_v1.request.v1",
+    "trigger": 1,
+    "trigger_reason": "OPEN_ENDED_DEFECT_HYPOTHESIS_V1_PASSED_NEXT_DEFICIT_IS_REMOVING_RUNTIME_ORACLE_DEPENDENCE"
+  },
+  "task_count": 8
+}

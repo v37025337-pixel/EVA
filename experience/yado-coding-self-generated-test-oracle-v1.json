@@ -1,0 +1,765 @@
+{
+  "canonical_mutation": false,
+  "episodes": [
+    {
+      "final_code_holdout_score": 1.0,
+      "formal_spec_count": 5,
+      "initial_code_holdout_score": 0.0,
+      "oracle_expression": "(2+x)",
+      "oracle_hidden_validation_score": 1.0,
+      "oracle_ops": 1,
+      "oracle_states": [
+        9,
+        57
+      ],
+      "patch_operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "patch_reason": null,
+      "patch_source_excerpt": "def f(x):\n    return 2 * 1 + x\n",
+      "patch_source_sha256": "f2db1307c96f267e45458dcc1b6f2c232c3869d167a79247dfd23edf16595339",
+      "selected_test_tokens": [
+        "TX-42efd4d6b50973",
+        "TX-63fb95981a8250",
+        "TX-f02dbc32b74238",
+        "TX-02fa3d8e7dee30",
+        "TX-544f3f176bdc94"
+      ],
+      "self_generated_tests": [
+        {
+          "expected": 2,
+          "x": 0
+        },
+        {
+          "expected": 9,
+          "x": 7
+        },
+        {
+          "expected": -5,
+          "x": -7
+        },
+        {
+          "expected": 5,
+          "x": 3
+        },
+        {
+          "expected": -1,
+          "x": -3
+        }
+      ],
+      "source_changed": true,
+      "task_id": "ORACLE_X_PLUS_2",
+      "test_selection_trace": [
+        {
+          "candidate_count": 15,
+          "cycle": 0,
+          "oracle_expected": 2,
+          "selected_score": 1.02,
+          "selected_test_token": "TX-42efd4d6b50973",
+          "selected_x": 0
+        },
+        {
+          "candidate_count": 14,
+          "cycle": 1,
+          "oracle_expected": 9,
+          "selected_score": 1.018,
+          "selected_test_token": "TX-63fb95981a8250",
+          "selected_x": 7
+        },
+        {
+          "candidate_count": 13,
+          "cycle": 2,
+          "oracle_expected": -5,
+          "selected_score": 1.018,
+          "selected_test_token": "TX-f02dbc32b74238",
+          "selected_x": -7
+        },
+        {
+          "candidate_count": 12,
+          "cycle": 3,
+          "oracle_expected": 5,
+          "selected_score": 1.0077142857142858,
+          "selected_test_token": "TX-02fa3d8e7dee30",
+          "selected_x": 3
+        },
+        {
+          "candidate_count": 11,
+          "cycle": 4,
+          "oracle_expected": -1,
+          "selected_score": 1.0077142857142858,
+          "selected_test_token": "TX-544f3f176bdc94",
+          "selected_x": -3
+        }
+      ]
+    },
+    {
+      "final_code_holdout_score": 1.0,
+      "formal_spec_count": 5,
+      "initial_code_holdout_score": 0.0,
+      "oracle_expression": "((1+x)+x)",
+      "oracle_hidden_validation_score": 1.0,
+      "oracle_ops": 2,
+      "oracle_states": [
+        9,
+        57,
+        365
+      ],
+      "patch_operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "patch_reason": null,
+      "patch_source_excerpt": "def f(x):\n    return 1 + 2 * x\n",
+      "patch_source_sha256": "e87c056af17c3adb274b755294b0768d67cad3309dc805a705f682e677661793",
+      "selected_test_tokens": [
+        "TX-41afaad7441b30",
+        "TX-8bab23f7d337a7",
+        "TX-b60aa0d65c0166",
+        "TX-b482c1572c433f",
+        "TX-d6fe3f77e9a90d"
+      ],
+      "self_generated_tests": [
+        {
+          "expected": 1,
+          "x": 0
+        },
+        {
+          "expected": -13,
+          "x": -7
+        },
+        {
+          "expected": 15,
+          "x": 7
+        },
+        {
+          "expected": 7,
+          "x": 3
+        },
+        {
+          "expected": -5,
+          "x": -3
+        }
+      ],
+      "source_changed": true,
+      "task_id": "ORACLE_2X_PLUS_1",
+      "test_selection_trace": [
+        {
+          "candidate_count": 15,
+          "cycle": 0,
+          "oracle_expected": 1,
+          "selected_score": 1.02,
+          "selected_test_token": "TX-41afaad7441b30",
+          "selected_x": 0
+        },
+        {
+          "candidate_count": 14,
+          "cycle": 1,
+          "oracle_expected": -13,
+          "selected_score": 1.018,
+          "selected_test_token": "TX-8bab23f7d337a7",
+          "selected_x": -7
+        },
+        {
+          "candidate_count": 13,
+          "cycle": 2,
+          "oracle_expected": 15,
+          "selected_score": 1.018,
+          "selected_test_token": "TX-b60aa0d65c0166",
+          "selected_x": 7
+        },
+        {
+          "candidate_count": 12,
+          "cycle": 3,
+          "oracle_expected": 7,
+          "selected_score": 1.0077142857142858,
+          "selected_test_token": "TX-b482c1572c433f",
+          "selected_x": 3
+        },
+        {
+          "candidate_count": 11,
+          "cycle": 4,
+          "oracle_expected": -5,
+          "selected_score": 1.0077142857142858,
+          "selected_test_token": "TX-d6fe3f77e9a90d",
+          "selected_x": -3
+        }
+      ]
+    },
+    {
+      "final_code_holdout_score": 1.0,
+      "formal_spec_count": 5,
+      "initial_code_holdout_score": 0.16666666666666666,
+      "oracle_expression": "(x*x)",
+      "oracle_hidden_validation_score": 1.0,
+      "oracle_ops": 1,
+      "oracle_states": [
+        9,
+        57
+      ],
+      "patch_operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "patch_reason": null,
+      "patch_source_excerpt": "def f(x):\n    return x * x\n",
+      "patch_source_sha256": "d5b5f64f883eb21c92f2ad6efe380b59c847fd6a4c2559abdeb20966c482b2a6",
+      "selected_test_tokens": [
+        "TX-d056806f8ced10",
+        "TX-7cc73ee628d187",
+        "TX-b4085e11821fe3",
+        "TX-999a45586632d9",
+        "TX-fb15417b8806b7"
+      ],
+      "self_generated_tests": [
+        {
+          "expected": 1,
+          "x": -1
+        },
+        {
+          "expected": 36,
+          "x": 6
+        },
+        {
+          "expected": 49,
+          "x": -7
+        },
+        {
+          "expected": 4,
+          "x": 2
+        },
+        {
+          "expected": 16,
+          "x": -4
+        }
+      ],
+      "source_changed": true,
+      "task_id": "ORACLE_X2",
+      "test_selection_trace": [
+        {
+          "candidate_count": 15,
+          "cycle": 0,
+          "oracle_expected": 1,
+          "selected_score": 1.0197142857142856,
+          "selected_test_token": "TX-d056806f8ced10",
+          "selected_x": -1
+        },
+        {
+          "candidate_count": 14,
+          "cycle": 1,
+          "oracle_expected": 36,
+          "selected_score": 1.0182857142857142,
+          "selected_test_token": "TX-7cc73ee628d187",
+          "selected_x": 6
+        },
+        {
+          "candidate_count": 13,
+          "cycle": 2,
+          "oracle_expected": 49,
+          "selected_score": 1.0151428571428571,
+          "selected_test_token": "TX-b4085e11821fe3",
+          "selected_x": -7
+        },
+        {
+          "candidate_count": 12,
+          "cycle": 3,
+          "oracle_expected": 4,
+          "selected_score": 1.008,
+          "selected_test_token": "TX-999a45586632d9",
+          "selected_x": 2
+        },
+        {
+          "candidate_count": 11,
+          "cycle": 4,
+          "oracle_expected": 16,
+          "selected_score": 1.0074285714285716,
+          "selected_test_token": "TX-fb15417b8806b7",
+          "selected_x": -4
+        }
+      ]
+    },
+    {
+      "final_code_holdout_score": 1.0,
+      "formal_spec_count": 5,
+      "initial_code_holdout_score": 0.0,
+      "oracle_expression": "((x*x)+1)",
+      "oracle_hidden_validation_score": 1.0,
+      "oracle_ops": 2,
+      "oracle_states": [
+        9,
+        57,
+        365
+      ],
+      "patch_operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "patch_reason": null,
+      "patch_source_excerpt": "def f(x):\n    return 1 + x * x\n",
+      "patch_source_sha256": "e10c68e68e2defd8142d99e439f22d5cf3441aab59b9f944cc0735080e3ada7f",
+      "selected_test_tokens": [
+        "TX-f3a548b203c4cd",
+        "TX-5cb21559b3ea22",
+        "TX-969999ab9ff7ef",
+        "TX-ade6af07267c1b",
+        "TX-dddd29cbf9f8bd"
+      ],
+      "self_generated_tests": [
+        {
+          "expected": 1,
+          "x": 0
+        },
+        {
+          "expected": 50,
+          "x": 7
+        },
+        {
+          "expected": 50,
+          "x": -7
+        },
+        {
+          "expected": 10,
+          "x": -3
+        },
+        {
+          "expected": 10,
+          "x": 3
+        }
+      ],
+      "source_changed": true,
+      "task_id": "ORACLE_X2_PLUS_1",
+      "test_selection_trace": [
+        {
+          "candidate_count": 15,
+          "cycle": 0,
+          "oracle_expected": 1,
+          "selected_score": 1.02,
+          "selected_test_token": "TX-f3a548b203c4cd",
+          "selected_x": 0
+        },
+        {
+          "candidate_count": 14,
+          "cycle": 1,
+          "oracle_expected": 50,
+          "selected_score": 1.018,
+          "selected_test_token": "TX-5cb21559b3ea22",
+          "selected_x": 7
+        },
+        {
+          "candidate_count": 13,
+          "cycle": 2,
+          "oracle_expected": 50,
+          "selected_score": 1.018,
+          "selected_test_token": "TX-969999ab9ff7ef",
+          "selected_x": -7
+        },
+        {
+          "candidate_count": 12,
+          "cycle": 3,
+          "oracle_expected": 10,
+          "selected_score": 1.0077142857142858,
+          "selected_test_token": "TX-ade6af07267c1b",
+          "selected_x": -3
+        },
+        {
+          "candidate_count": 11,
+          "cycle": 4,
+          "oracle_expected": 10,
+          "selected_score": 1.0077142857142858,
+          "selected_test_token": "TX-dddd29cbf9f8bd",
+          "selected_x": 3
+        }
+      ]
+    },
+    {
+      "final_code_holdout_score": 1.0,
+      "formal_spec_count": 5,
+      "initial_code_holdout_score": 0.0,
+      "oracle_expression": "((1+x)*x)",
+      "oracle_hidden_validation_score": 1.0,
+      "oracle_ops": 2,
+      "oracle_states": [
+        9,
+        57,
+        365
+      ],
+      "patch_operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "patch_reason": null,
+      "patch_source_excerpt": "def f(x):\n    return x + x * x\n",
+      "patch_source_sha256": "6f7c73d413fdb9d7b35011a0b5f6f40b808e6c9f81cd6c9693e70ce4dcd8e81e",
+      "selected_test_tokens": [
+        "TX-3299571c7eef49",
+        "TX-a4cf2fef445bd1",
+        "TX-b9469316b8d241",
+        "TX-9709c1e7104d90",
+        "TX-185f93f04c8a11"
+      ],
+      "self_generated_tests": [
+        {
+          "expected": 2,
+          "x": 1
+        },
+        {
+          "expected": 30,
+          "x": -6
+        },
+        {
+          "expected": 56,
+          "x": 7
+        },
+        {
+          "expected": 2,
+          "x": -2
+        },
+        {
+          "expected": 20,
+          "x": 4
+        }
+      ],
+      "source_changed": true,
+      "task_id": "ORACLE_X2_PLUS_X",
+      "test_selection_trace": [
+        {
+          "candidate_count": 15,
+          "cycle": 0,
+          "oracle_expected": 2,
+          "selected_score": 1.0197142857142856,
+          "selected_test_token": "TX-3299571c7eef49",
+          "selected_x": 1
+        },
+        {
+          "candidate_count": 14,
+          "cycle": 1,
+          "oracle_expected": 30,
+          "selected_score": 1.0182857142857142,
+          "selected_test_token": "TX-a4cf2fef445bd1",
+          "selected_x": -6
+        },
+        {
+          "candidate_count": 13,
+          "cycle": 2,
+          "oracle_expected": 56,
+          "selected_score": 1.0151428571428571,
+          "selected_test_token": "TX-b9469316b8d241",
+          "selected_x": 7
+        },
+        {
+          "candidate_count": 12,
+          "cycle": 3,
+          "oracle_expected": 2,
+          "selected_score": 1.008,
+          "selected_test_token": "TX-9709c1e7104d90",
+          "selected_x": -2
+        },
+        {
+          "candidate_count": 11,
+          "cycle": 4,
+          "oracle_expected": 20,
+          "selected_score": 1.0074285714285716,
+          "selected_test_token": "TX-185f93f04c8a11",
+          "selected_x": 4
+        }
+      ]
+    },
+    {
+      "final_code_holdout_score": 1.0,
+      "formal_spec_count": 5,
+      "initial_code_holdout_score": 0.0,
+      "oracle_expression": "((x*x)-x)",
+      "oracle_hidden_validation_score": 1.0,
+      "oracle_ops": 2,
+      "oracle_states": [
+        9,
+        57,
+        365
+      ],
+      "patch_operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "patch_reason": null,
+      "patch_source_excerpt": "def f(x):\n    return -1 * x + x * x\n",
+      "patch_source_sha256": "17522c7073d6a2c35fe065e1072c51b08fc9235b885c286183009a72d6736daa",
+      "selected_test_tokens": [
+        "TX-18c02a8e4352a4",
+        "TX-afbb007de25ecf",
+        "TX-db3493e02d8976",
+        "TX-87479720346fa3",
+        "TX-64b2d235b12fde"
+      ],
+      "self_generated_tests": [
+        {
+          "expected": 2,
+          "x": -1
+        },
+        {
+          "expected": 30,
+          "x": 6
+        },
+        {
+          "expected": 56,
+          "x": -7
+        },
+        {
+          "expected": 6,
+          "x": 3
+        },
+        {
+          "expected": 20,
+          "x": -4
+        }
+      ],
+      "source_changed": true,
+      "task_id": "ORACLE_X2_MINUS_X",
+      "test_selection_trace": [
+        {
+          "candidate_count": 15,
+          "cycle": 0,
+          "oracle_expected": 2,
+          "selected_score": 1.0197142857142856,
+          "selected_test_token": "TX-18c02a8e4352a4",
+          "selected_x": -1
+        },
+        {
+          "candidate_count": 14,
+          "cycle": 1,
+          "oracle_expected": 30,
+          "selected_score": 1.0182857142857142,
+          "selected_test_token": "TX-afbb007de25ecf",
+          "selected_x": 6
+        },
+        {
+          "candidate_count": 13,
+          "cycle": 2,
+          "oracle_expected": 56,
+          "selected_score": 1.0151428571428571,
+          "selected_test_token": "TX-db3493e02d8976",
+          "selected_x": -7
+        },
+        {
+          "candidate_count": 12,
+          "cycle": 3,
+          "oracle_expected": 6,
+          "selected_score": 1.0077142857142858,
+          "selected_test_token": "TX-87479720346fa3",
+          "selected_x": 3
+        },
+        {
+          "candidate_count": 11,
+          "cycle": 4,
+          "oracle_expected": 20,
+          "selected_score": 1.0074285714285716,
+          "selected_test_token": "TX-64b2d235b12fde",
+          "selected_x": -4
+        }
+      ]
+    },
+    {
+      "final_code_holdout_score": 1.0,
+      "formal_spec_count": 5,
+      "initial_code_holdout_score": 0.16666666666666666,
+      "oracle_expression": "((x*x)*x)",
+      "oracle_hidden_validation_score": 1.0,
+      "oracle_ops": 2,
+      "oracle_states": [
+        9,
+        57,
+        365
+      ],
+      "patch_operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "patch_reason": null,
+      "patch_source_excerpt": "def f(x):\n    return x * x * x\n",
+      "patch_source_sha256": "94043276deb08c5ffb9aa4a0a57659c70bb0fcdd437442a17c1b6eb0e4849355",
+      "selected_test_tokens": [
+        "TX-6ef220e15c4fb0",
+        "TX-3978c9cd95876e",
+        "TX-766745658f42e2",
+        "TX-d3626afee16f60",
+        "TX-fbc74a277269c8"
+      ],
+      "self_generated_tests": [
+        {
+          "expected": -8,
+          "x": -2
+        },
+        {
+          "expected": 125,
+          "x": 5
+        },
+        {
+          "expected": -343,
+          "x": -7
+        },
+        {
+          "expected": 8,
+          "x": 2
+        },
+        {
+          "expected": -64,
+          "x": -4
+        }
+      ],
+      "source_changed": true,
+      "task_id": "ORACLE_X3",
+      "test_selection_trace": [
+        {
+          "candidate_count": 15,
+          "cycle": 0,
+          "oracle_expected": -8,
+          "selected_score": 1.0194285714285714,
+          "selected_test_token": "TX-6ef220e15c4fb0",
+          "selected_x": -2
+        },
+        {
+          "candidate_count": 14,
+          "cycle": 1,
+          "oracle_expected": 125,
+          "selected_score": 1.0185714285714285,
+          "selected_test_token": "TX-3978c9cd95876e",
+          "selected_x": 5
+        },
+        {
+          "candidate_count": 13,
+          "cycle": 2,
+          "oracle_expected": -343,
+          "selected_score": 1.0122857142857142,
+          "selected_test_token": "TX-766745658f42e2",
+          "selected_x": -7
+        },
+        {
+          "candidate_count": 12,
+          "cycle": 3,
+          "oracle_expected": 8,
+          "selected_score": 1.008,
+          "selected_test_token": "TX-d3626afee16f60",
+          "selected_x": 2
+        },
+        {
+          "candidate_count": 11,
+          "cycle": 4,
+          "oracle_expected": -64,
+          "selected_score": 1.0045714285714287,
+          "selected_test_token": "TX-fbc74a277269c8",
+          "selected_x": -4
+        }
+      ]
+    },
+    {
+      "final_code_holdout_score": 1.0,
+      "formal_spec_count": 5,
+      "initial_code_holdout_score": 0.0,
+      "oracle_expression": "(((x*x)*x)+x)",
+      "oracle_hidden_validation_score": 1.0,
+      "oracle_ops": 3,
+      "oracle_states": [
+        9,
+        57,
+        365,
+        2695
+      ],
+      "patch_operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "patch_reason": null,
+      "patch_source_excerpt": "def f(x):\n    return x + x * x * x\n",
+      "patch_source_sha256": "bba1851a34f739323a2a966b82fc07c1134d06bc281d0b3577b377d9cf5e713f",
+      "selected_test_tokens": [
+        "TX-c759b8a7a4bcee",
+        "TX-8031e874ce759b",
+        "TX-c3770a2135098b",
+        "TX-95093290d04f70",
+        "TX-2e084d4a839735"
+      ],
+      "self_generated_tests": [
+        {
+          "expected": -2,
+          "x": -1
+        },
+        {
+          "expected": 222,
+          "x": 6
+        },
+        {
+          "expected": -350,
+          "x": -7
+        },
+        {
+          "expected": 10,
+          "x": 2
+        },
+        {
+          "expected": -68,
+          "x": -4
+        }
+      ],
+      "source_changed": true,
+      "task_id": "ORACLE_X3_PLUS_X",
+      "test_selection_trace": [
+        {
+          "candidate_count": 15,
+          "cycle": 0,
+          "oracle_expected": -2,
+          "selected_score": 1.0197142857142856,
+          "selected_test_token": "TX-c759b8a7a4bcee",
+          "selected_x": -1
+        },
+        {
+          "candidate_count": 14,
+          "cycle": 1,
+          "oracle_expected": 222,
+          "selected_score": 1.0182857142857142,
+          "selected_test_token": "TX-8031e874ce759b",
+          "selected_x": 6
+        },
+        {
+          "candidate_count": 13,
+          "cycle": 2,
+          "oracle_expected": -350,
+          "selected_score": 1.0151428571428571,
+          "selected_test_token": "TX-c3770a2135098b",
+          "selected_x": -7
+        },
+        {
+          "candidate_count": 12,
+          "cycle": 3,
+          "oracle_expected": 10,
+          "selected_score": 1.008,
+          "selected_test_token": "TX-95093290d04f70",
+          "selected_x": 2
+        },
+        {
+          "candidate_count": 11,
+          "cycle": 4,
+          "oracle_expected": -68,
+          "selected_score": 1.0074285714285716,
+          "selected_test_token": "TX-2e084d4a839735",
+          "selected_x": -4
+        }
+      ]
+    }
+  ],
+  "experience_digest": "3c31847512cb073f84e65565cbc6de1724f2de6cf1ccce9773011d71f195ddf8",
+  "final_code_holdout_score": 1.0,
+  "initial_code_holdout_score": 0.041666666666666664,
+  "mean_self_generated_test_count": 5.0,
+  "oracle_ablation_score": 0.041666666666666664,
+  "oracle_gene": {
+    "active_components": [
+      "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+      "CTRL-G2-EVOLUTIONARY-GENOME-V1"
+    ],
+    "final_code_holdout_score": 1.0,
+    "gene_digest": "0370cb17810c9640c7b562afafa3401286046bfec7f7dcbe6231db6239877e1a",
+    "gene_id": "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+    "gene_scope": [
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+      "bd1f09a90e8c2fe1c8474242e8533d562405872c18e577e4721fa5e9b9acae1c"
+    ],
+    "initial_code_holdout_score": 0.041666666666666664,
+    "mean_self_generated_test_count": 5.0,
+    "mechanism_kind": "FORMAL_SPEC_TO_SYNTHESIZED_ORACLE_TO_SELF_SELECTED_TESTS_TO_EVOLUTIONARY_CODE_PATCH",
+    "oracle_ablation_score": 0.041666666666666664,
+    "oracle_hidden_validation_score": 1.0,
+    "organ": "THINKING",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.coding_self_generated_test_oracle_gene.v1"
+  },
+  "oracle_hidden_validation_score": 1.0,
+  "parent_open_ended_gene_id": "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+  "restore_score": 1.0,
+  "schema": "yado.g2.coding_self_generated_test_oracle.experience.v1",
+  "semantic_boundary": "THE HOST SUPPLIES A SMALL FORMAL SPECIFICATION DATASET, NOT GENERATED TEST CASES OR A READY ORACLE PROGRAM. ACTIVE G2 SEMANTIC SYNTHESIS BUILDS AN EXECUTABLE ORACLE EXPRESSION AND IS HIDDEN-VALIDATED WITHOUT FEEDBACK. YADO THEN SELECTS NEW TEST INPUTS AND COMPUTES THEIR EXPECTED VALUES ONLY THROUGH ITS SYNTHESIZED ORACLE. ACTIVE EVOLUTIONARY CODE SYNTHESIS BUILDS THE PATCH FROM THOSE SELF-GENERATED TESTS. THIS PROVES BOUNDED SPEC-TO-ORACLE-TO-TEST-TO-PATCH, NOT AUTONOMOUS REQUIREMENT DISCOVERY.",
+  "status": "TRAINED"
+}
