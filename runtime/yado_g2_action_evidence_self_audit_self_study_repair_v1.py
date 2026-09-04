@@ -12,6 +12,7 @@ from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8Externa
 TASK=REPO/'architecture/yado-kernel-study-action-evidence-self-audit-v1-request.json'
 FCM=REPO/'candidates/kernel-self-generated/g2-fcm-external-coding-resource-study-v1.json'
 ACTION_EVIDENCE=REPO/'candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'
+SELF_GENE=REPO/'candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json'
 OUT=REPO/'candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json'
 CAND_DIR=REPO/'candidates/g2-self-evolution'
 HEAD=REPO/'canonical/yado-main-head-g2.json'
@@ -104,6 +105,7 @@ def static_eval(parent,new,target):
     checks['no_new_subprocess_call']=not ('subprocess' in nc and 'subprocess' not in pc)
     checks['bounded_line_delta']=abs(len(new.splitlines())-len(parent.splitlines()))<=120
     checks['task_semantics_present']=sum(t in new.lower() for t in ('audit','evidence','receipt','fresh','priority'))>=3
+    checks['self_generated_gene_bound']=('g2-native-self-created-evidence-binder-gene-v1.json' in new or 'GENE-YADO-NATIVE-EVIDENCE-BINDER' in new)
     checks['no_secret_literal']='sk-' not in new and 'api_key=' not in new.lower()
     return {'score':sum(bool(v) for v in checks.values())/len(checks),'checks':checks,
             'line_delta_abs':abs(len(new.splitlines())-len(parent.splitlines()))}
@@ -131,6 +133,8 @@ def isolated_semantic_probe(target_path,new_src):
         compile_cp=subprocess.run([py,'-m','py_compile',str(tp)],cwd=dst,capture_output=True,text=True,timeout=30)
         if compile_cp.returncode!=0:
             return {'pass':False,'candidate_compile':False,'compile_stderr':compile_cp.stderr[-1200:]}
+        action_path=dst/'candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'
+        original_direct=load(action_path)
         audit_cp=subprocess.run([py,'runtime/yado_unified_core_deep_self_audit_v1.py'],cwd=dst,capture_output=True,text=True,timeout=120)
         audit_path=dst/'runtime/yado_unified_core_deep_self_audit_v1_receipt.json'
         audit={}
@@ -139,9 +143,24 @@ def isolated_semantic_probe(target_path,new_src):
             except Exception:audit={}
         live=next((x for x in audit.get('findings',[]) if x.get('code')=='LIVE_RESOURCE_EVIDENCE_SCOPE'),{})
         selected=audit.get('self_selected_next_step')
-        direct=load(dst/'candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json')
-        direct_valid=(direct.get('direct_priority_evidence') is True and str(direct.get('selected_action') or '')=='LIVE_RESOURCE_EVIDENCE_RECHECK')
+        direct_valid=(original_direct.get('direct_priority_evidence') is True and str(original_direct.get('selected_action') or '')=='LIVE_RESOURCE_EVIDENCE_RECHECK')
         audit_recognizes_new_evidence=(live.get('status')=='PASS' or selected!='LIVE_RESOURCE_EVIDENCE_SCOPE')
+
+        # Counterfactual fail-closed check: corrupt one required evidence contract field,
+        # rerun the same candidate audit, and require the finding NOT to close.
+        invalid_direct=copy.deepcopy(original_direct)
+        invalid_direct['direct_priority_evidence']=False
+        action_path.write_text(json.dumps(invalid_direct,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+        invalid_cp=subprocess.run([py,'runtime/yado_unified_core_deep_self_audit_v1.py'],cwd=dst,capture_output=True,text=True,timeout=120)
+        invalid_audit={}
+        if audit_path.exists():
+            try:invalid_audit=load(audit_path)
+            except Exception:invalid_audit={}
+        invalid_live=next((x for x in invalid_audit.get('findings',[]) if x.get('code')=='LIVE_RESOURCE_EVIDENCE_SCOPE'),{})
+        invalid_selected=invalid_audit.get('self_selected_next_step')
+        invalid_fail_closed=(invalid_live.get('status')!='PASS' and invalid_selected=='LIVE_RESOURCE_EVIDENCE_SCOPE')
+        action_path.write_text(json.dumps(original_direct,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+
         compileall=subprocess.run([py,'-m','compileall','-q','runtime'],cwd=dst,capture_output=True,text=True,timeout=120)
         tests=[
           'runtime/yado_rc8_v36/test_yado_rc8_self_audit_consistency_v1.py',
@@ -155,18 +174,24 @@ def isolated_semantic_probe(target_path,new_src):
           'audit_process_completed':audit_cp.returncode==0,
           'direct_priority_evidence_present':direct_valid,
           'audit_recognizes_fresh_self_generated_evidence':audit_recognizes_new_evidence,
+          'invalid_counterfactual_evidence_fails_closed':invalid_cp.returncode==0 and invalid_fail_closed,
           'runtime_compileall_pass':compileall.returncode==0,
           'selected_regression_suite_pass':regress.returncode==0,
         }
         return {'pass':all(checks.values()),'checks':checks,
                 'audit_status':audit.get('status'),'audit_verdict':audit.get('overall_verdict'),
                 'audit_selected_next_step':selected,'live_resource_finding':live,
+                'invalid_audit_selected_next_step':invalid_selected,'invalid_live_resource_finding':invalid_live,
                 'audit_stdout_tail':audit_cp.stdout[-1600:],'audit_stderr_tail':audit_cp.stderr[-1200:],
+                'invalid_audit_stdout_tail':invalid_cp.stdout[-1200:],'invalid_audit_stderr_tail':invalid_cp.stderr[-900:],
                 'regression_stdout_tail':regress.stdout[-1200:],'regression_stderr_tail':regress.stderr[-1200:]}
 
 task=load(TASK)
 audit_path,audit=latest_audit()
 action=load(ACTION_EVIDENCE)
+gene=load(SELF_GENE)
+if gene.get('promotion_state')!='SHADOW_ONLY' or gene.get('external_model_generated') is not False:
+    raise RuntimeError('SELF_GENERATED_GENE_CONTRACT_INVALID')
 head_before=fsha(HEAD)
 fcm=load(FCM)
 probes=[x for x in fcm.get('live_no_key_probes',[]) if x.get('probe',{}).get('http_status')==200 and x.get('probe',{}).get('synthetic_coding_check_pass')]
@@ -188,14 +213,21 @@ problem_packet={
     'direct_priority_evidence':action.get('direct_priority_evidence'),
     'goal_action_result':((action.get('goal_action_binding') or {}).get('result') or {}),
   },
+  'yado_self_generated_gene':{
+    'artifact':'candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json',
+    'gene_id':gene.get('gene_id'),'gene_digest':gene.get('gene_digest'),
+    'origin':gene.get('origin'),'selected_native_route':gene.get('selected_native_route'),
+    'selected_algorithm':gene.get('selected_algorithm'),'contract_fields':gene.get('contract_fields'),
+    'model':gene.get('model'),'promotion_state':gene.get('promotion_state')
+  },
   'runtime_inventory':inventory,
 }
 
 proposals=[]
 for row in probes[:2]:
     diagnose_prompt=(
-      'YADO asks you to study a software self-model update failure. Choose the ONE runtime Python file whose change is most directly justified by the evidence. '
-      'Do not assume the requested outcome is true; if the evidence is insufficient, return withhold=true and explain why. '
+      'YADO has already created its own validated shadow evidence-binding gene. Your role is ONLY to help materialize that YADO-created mechanism into source, not to invent a replacement policy. Choose the ONE runtime Python file whose change is most directly justified by the gene and evidence. '
+      'The candidate must load or explicitly bind the self-generated gene artifact rather than re-derive a host rule. Do not assume the requested outcome is true; if the evidence is insufficient, return withhold=true and explain why. '
       'Return JSON keys: withhold, diagnosis, target_path, evidence_used. target_path must be one exact path from runtime_inventory.\n\n'
       +json.dumps(problem_packet,sort_keys=True,default=str)
     )
@@ -219,8 +251,8 @@ for row in probes[:2]:
         if target not in allowed: raise ValueError('TARGET_NOT_IN_RUNTIME_INVENTORY')
         parent=(REPO/target).read_text(encoding='utf-8')
         repair_prompt=(
-          'Study the same YADO problem and propose a minimal SHADOW repair of the target file selected in your diagnosis. '
-          'Do not change the requested verdict by fiat. The repair must make self-audit consume relevant fresh self-generated evidence when valid, preserve fail-closed behavior, and preserve unrelated audit/regression behavior. '
+          'Materialize YADO\'s own self-generated evidence-binding gene into a minimal SHADOW repair of the target file selected in your diagnosis. '
+          'Do NOT invent a substitute acceptance rule and do NOT hard-code PASS. The candidate must bind/load the gene artifact and use its contract semantics to decide whether fresh self-generated evidence is admissible. It must preserve fail-closed behavior for invalid evidence and preserve unrelated audit/regression behavior. '
           'Return JSON keys: target_path, rationale, patches. patches is 1-3 exact find/replace objects. No new import roots, eval, exec, subprocess, secrets, credentials, or canonical mutation.\n\n'
           'PROBLEM PACKET:\n'+json.dumps(problem_packet,sort_keys=True,default=str)+'\n\n'
           'TARGET PATH:\n'+target+'\n\nPARENT SOURCE SHA256:\n'+hashlib.sha256(parent.encode()).hexdigest()+'\n\nPARENT SOURCE:\n'+parent
@@ -306,8 +338,10 @@ report={
  'canonical_head_unchanged':fsha(HEAD)==head_before,
  'host_selected_target':False,
  'host_wrote_candidate_patch':False,
- 'external_models_are_tools':True,
- 'semantic_boundary':'YADO WAS GIVEN THE PROBLEM AND SUCCESS/SAFETY CONDITIONS. EXTERNAL NO-KEY MODELS MAY DIAGNOSE AND PROPOSE PATCHES AS TOOLS; YADO NATIVE SKILL ADMISSION SELECTS OR WITHHOLDS. HOST DOES NOT SELECT TARGET OR WRITE THE PATCH. PASS IS SHADOW ONLY AND REQUIRES AN ISOLATED FRESH SELF-AUDIT PLUS REGRESSION.'
+ 'self_generated_gene_id':gene.get('gene_id'),
+ 'self_generated_gene_digest':gene.get('gene_digest'),
+ 'external_models_are_materialization_tools_only':True,
+ 'semantic_boundary':'YADO FIRST CREATED THE EVIDENCE-BINDING GENE NATIVELY. THIS STAGE USES EXTERNAL NO-KEY CODING MODELS ONLY AS SOURCE-MATERIALIZATION TOOLS TO BIND THAT EXISTING YADO GENE; THEY MAY NOT INVENT A SUBSTITUTE POLICY. YADO NATIVE SKILL ADMISSION SELECTS OR WITHHOLDS. HOST DOES NOT SELECT TARGET OR WRITE THE PATCH. PASS IS SHADOW ONLY AND REQUIRES A VALID-EVIDENCE AUDIT CHANGE, AN INVALID-EVIDENCE FAIL-CLOSED COUNTERFACTUAL, COMPILEALL, AND REGRESSION.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
