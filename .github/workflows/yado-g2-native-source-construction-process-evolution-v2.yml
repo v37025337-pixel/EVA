@@ -1,0 +1,69 @@
+name: YADO G2 Native Source Construction Process Evolution V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-native-source-construction-process-evolution-v2-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-native-source-construction-process-evolution-v2
+  cancel-in-progress: true
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before process evolution
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile process evolution transport
+        run: python -m py_compile runtime/yado_g2_native_source_construction_process_evolution_v2.py
+      - name: Let YADO evolve its native source-construction process
+        id: evolve
+        continue-on-error: true
+        run: python runtime/yado_g2_native_source_construction_process_evolution_v2.py
+      - name: Canonical guard after process evolution
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist process evolution evidence
+        if: always()
+        run: |
+          git config user.name "YADO Native Process Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json ]; then
+            git add candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json
+          fi
+          git diff --cached --quiet || git commit -m "Persist YADO native source-construction process V2 [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest native process verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json")
+          if not p.exists(): raise SystemExit("MISSING_PROCESS_EVOLUTION_EVIDENCE")
+          r=json.loads(p.read_text())
+          assert r["checks"]["external_coding_models_used"] is False,r
+          assert r["checks"]["host_patch_used"] is False,r
+          assert r["checks"]["host_target_file_selected"] is False,r
+          assert r["checks"]["process_order_host_authored"] is False,r
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          print(r["status"],r["process_mechanism"]["program_id"],r["next_required_capability"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yado-g2-native-source-construction-process-evolution-v2-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json
+          if-no-files-found: warn
