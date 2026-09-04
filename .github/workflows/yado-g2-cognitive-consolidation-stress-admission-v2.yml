@@ -1,0 +1,71 @@
+name: YADO G2 Cognitive Consolidation Stress Admission V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-cognitive-consolidation-stress-admission-v2-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-cognitive-consolidation-stress-admission-v2
+  cancel-in-progress: true
+jobs:
+  stress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Preserve checked-in G2 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before stress V2
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile stress V2 runtime
+        run: python -m py_compile runtime/yado_g2_cognitive_consolidation_stress_admission_v2.py
+      - name: Run cognitive exhaustive stress V2
+        continue-on-error: true
+        run: python runtime/yado_g2_cognitive_consolidation_stress_admission_v2.py
+      - name: Canonical guard after stress V2
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist stress V2 evidence
+        if: always()
+        run: |
+          git config user.name "YADO Cognitive Stress V2"
+          git config user.email "actions@users.noreply.github.com"
+          git add experience/yado-cognitive-consolidation-stress-v2.json 2>/dev/null || true
+          git add candidates/kernel-self-generated/g2-cognitive-consolidation-stress-admission-v2.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO cognitive stress V2 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest stress V2 verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-cognitive-consolidation-stress-admission-v2.json")
+          if not p.exists():raise SystemExit("MISSING_STRESS_V2_EVIDENCE")
+          r=json.loads(p.read_text());c=r["checks"]
+          assert c["repair_v1_consumed"] is True,r
+          assert c["exhaustive_boolean_state_space_used"] is True,r
+          assert c["host_selected_easy_subset"] is False,r
+          assert c["canonical_unchanged"] is True,r
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_COGNITIVE_CONSOLIDATION_STRESS_ADMISSION_V2":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+r["status"]+":"+str(r["next_required_capability"]))
+          print(r["status"],r["case_count"],r["composite_exhaustive"],r["min_ablation_drop"],r["admission_state"],r["next_required_capability"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-cognitive-stress-v2-${{ github.run_id }}
+          path: |
+            experience/yado-cognitive-consolidation-stress-v2.json
+            candidates/kernel-self-generated/g2-cognitive-consolidation-stress-admission-v2.json
+          if-no-files-found: warn
