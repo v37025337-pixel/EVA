@@ -1,7 +1,7 @@
 {
   "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
-  "objective": "KERNEL_STUDY_AND_REPAIR_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING",
-  "problem": "Fresh direct evidence is produced for the kernel-selected LIVE_RESOURCE_EVIDENCE_SCOPE priority, but the next kernel-native deep self-audit ignores that fresh self-generated evidence and repeats the same PARTIAL priority.",
+  "objective": "CONTINUE_KERNEL_NATIVE_REPAIR_FROM_OWN_DIAGNOSIS_TO_EXECUTABLE_CANDIDATE",
+  "problem": "Previous self-study run correctly diagnosed the action-evidence-to-self-audit disconnect but WITHHELD before materializing an executable repair candidate. Continue from the kernel's own prior diagnosis and produce a valid shadow repair or explicitly WITHHOLD again.",
   "evidence": {
     "latest_deep_self_audit_run_id": 33832918251,
     "direct_priority_runs": [
@@ -10,20 +10,22 @@
       33832722100,
       33833049256
     ],
-    "direct_evidence_artifact": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json"
+    "direct_evidence_artifact": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+    "previous_self_study_run_id": 33833488285,
+    "previous_self_study_receipt": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json"
   },
-  "goal": "Study the disconnect, choose a repair target and solution path, and produce a shadow repair that makes self-audit consume relevant fresh self-generated evidence without forcing a verdict.",
+  "goal": "Continue from the kernel's own diagnosis, independently choose or reaffirm the repair target and solution path, and materialize an executable shadow candidate that passes isolated self-audit and regression gates.",
   "success_conditions": [
-    "kernel_or_its_approved_tools_diagnose_the_disconnect",
-    "target_is_not_host_selected",
-    "patch_is_not_host_written",
+    "kernel_reuses_or_rederives_its_own_prior_diagnosis",
+    "target_is_kernel_or_kernel_tool_selected_not_host_selected",
+    "patch_is_kernel_tool_proposed_not_host_written",
     "candidate_compiles",
     "isolated_fresh_self_audit_consumes_relevant_direct_evidence",
-    "LIVE_RESOURCE_EVIDENCE_SCOPE_is_only_closed_if_the_new_evidence_is_valid",
+    "LIVE_RESOURCE_EVIDENCE_SCOPE_is_only_closed_if_new_evidence_is_valid",
     "runtime_compileall_passes",
     "selected_regression_suite_passes",
-    "canonical_head_remains_unchanged",
-    "kernel_native_skill_admission_selects_the_candidate_or_withholds"
+    "kernel_native_skill_admission_selects_candidate_or_explicitly_withholds",
+    "canonical_head_remains_unchanged"
   ],
   "constraints": {
     "no_host_solution_hint": true,
@@ -43,7 +45,7 @@
     "shadow_code_rewrite": true
   },
   "host_role": "PROBLEM_CONTRACT_TRANSPORT_AND_ISOLATED_EVALUATION_ONLY",
-  "stop_condition": "PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
-  "trigger": 1,
-  "trigger_reason": "START_KERNEL_SELF_STUDY_AND_SHADOW_REPAIR"
+  "stop_condition": "EXECUTABLE_SHADOW_REPAIR_PASS_OR_EXPLICIT_KERNEL_WITHHOLD",
+  "trigger": 2,
+  "trigger_reason": "CONTINUE_AFTER_SELF_DIAGNOSIS_WITHHOLD_TO_EXECUTABLE_REPAIR"
 }
