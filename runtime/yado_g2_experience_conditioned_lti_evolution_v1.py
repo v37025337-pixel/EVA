@@ -8,7 +8,7 @@ PKG=ROOT/'yado_rc8_v36'
 sys.path[:0]=[str(ROOT),str(PKG)]
 
 from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
-from yado_evolution_runtime_native_v1 import plan_acc,fit_bool_tree,acc_logic_model
+from yado_evolution_runtime_native_v1 import plan_acc,fit_bool_tree,acc_logic_model,fit_tree,tree_acc
 from yado_unified_core_v1 import UnifiedYADOCoreV1
 
 TASK=REPO/'architecture/yado-g2-experience-conditioned-lti-evolution-v1-request.json'
@@ -153,7 +153,30 @@ try:
            'resource_rejected_algorithms':logic_resource_rejected,
            'selection_policy':'YADO_NATIVE_BANK_VALIDATION_AFTER_GENERIC_RESOURCE_GATE'}
     thinking=k.meta_evolve_thinking(tf,tv_ep,tf+tv,tb_ep)
-    intelligence=k.meta_evolve_intelligence(inf,inv,inf+inv,inb)
+    intel_bank=list((k.organ_evolution_algorithm_bank() or {}).get('INTELLIGENCE') or [])
+    intel_feature_count=len(inf[0][0]) if inf else 0
+    intel_resource_rejected=[]
+    intel_candidates=[]
+    for a in intel_bank:
+        fam=a.get('family')
+        if fam=='LINEAR_SCORE_SEARCH' and intel_feature_count>6:
+            intel_resource_rejected.append({
+              'algorithm':a,
+              'reason':'LINEAR_SCORE_COMBINATORIAL_SEARCH_EXCEEDS_EXPERIENCE_EVOLUTION_RESOURCE_BUDGET',
+            })
+            continue
+        if fam=='CART_AXIS':
+            model=fit_tree(inf,int(a.get('max_depth',4)))
+            val=tree_acc(model,inv)
+            intel_candidates.append({'algorithm':a,'model':model,'validation':val})
+    if not intel_candidates:
+        raise RuntimeError('NO_RESOURCE_SAFE_NATIVE_INTELLIGENCE_ALGORITHM')
+    isel=max(intel_candidates,key=lambda z:(z['validation'],-int(z['algorithm'].get('max_depth') or 99),str(z['algorithm'])))
+    ialg=isel['algorithm'];imodel=fit_tree(inf+inv,int(ialg.get('max_depth',4)))
+    intelligence={'organ':'INTELLIGENCE','selected_algorithm':ialg,'validation':isel['validation'],'model':imodel,
+                  'fresh_blind':tree_acc(imodel,inb),
+                  'resource_rejected_algorithms':intel_resource_rejected,
+                  'selection_policy':'YADO_NATIVE_BANK_VALIDATION_AFTER_GENERIC_RESOURCE_GATE'}
 finally:
     try:k.close()
     except Exception:pass
@@ -202,6 +225,8 @@ checks={
  'logic_winner_selected_from_yado_native_bank':bool(logic.get('selected_algorithm')),
  'native_thinking_meta_evolution_executed':bool(thinking.get('selected_algorithm')),
  'native_intelligence_meta_evolution_executed':bool(intelligence.get('selected_algorithm')),
+ 'intelligence_generic_resource_gate_applied':bool(intelligence.get('resource_rejected_algorithms')),
+ 'intelligence_winner_selected_from_yado_native_bank':bool(intelligence.get('selected_algorithm')),
  'logic_fresh_beats_baseline':gains['LOGIC']>0.02,
  'thinking_fresh_beats_baseline':gains['THINKING']>0.02,
  'intelligence_fresh_beats_baseline':gains['INTELLIGENCE']>0.02,
@@ -218,7 +243,7 @@ required_true=(
  'causal_ledger_consumed','experience_registry_consumed','self_generated_gene_portfolio_consumed',
  'canonical_genome_parent_consumed','chronological_holdout_not_used_for_selection',
  'native_logic_meta_evolution_executed','logic_generic_resource_gate_applied','logic_winner_selected_from_yado_native_bank','native_thinking_meta_evolution_executed',
- 'native_intelligence_meta_evolution_executed','logic_fresh_beats_baseline',
+ 'native_intelligence_meta_evolution_executed','intelligence_generic_resource_gate_applied','intelligence_winner_selected_from_yado_native_bank','logic_fresh_beats_baseline',
  'thinking_fresh_beats_baseline','intelligence_fresh_beats_baseline',
  'three_new_shadow_gene_identities','rollback_parent_available','canonical_unchanged'
 )
@@ -244,7 +269,7 @@ report={
  'native_results':results,'baselines':baselines,'fresh_scores':fresh,'fresh_gains':gains,
  'shadow_genes':genes,'checks':checks,'canonical_mutation':False,'promotion_applied':False,
  'next_required_capability':None if passed else 'EXPERIENCE_CONDITIONED_LTI_EVOLUTION_REPAIR_V2',
- 'semantic_boundary':'YADO USES ITS NATIVE ORGAN ALGORITHM BANK WITH TRAINING/VALIDATION DERIVED MECHANICALLY FROM THE UNIFIED CAUSAL LEDGER. FOR LOGIC ONLY, A GENERIC RESOURCE GATE EXCLUDES ENUM_BOOLEAN WHEN THE FEATURE SURFACE EXCEEDS THE SAFE BOUNDED SEARCH LIMIT; YADO THEN SELECTS THE RESOURCE-SAFE NATIVE CANDIDATE BY VALIDATION. THE LATEST HISTORY IS FRESH HOLDOUT. HOST DOES NOT SELECT THE ALGORITHM FAMILY OR WRITE THE RESULTING ORGAN MODEL. GENES REMAIN SHADOW UNTIL SEPARATE ADMISSION.'
+ 'semantic_boundary':'YADO USES ITS NATIVE ORGAN ALGORITHM BANK WITH TRAINING/VALIDATION DERIVED MECHANICALLY FROM THE UNIFIED CAUSAL LEDGER. FOR LOGIC AND INTELLIGENCE, GENERIC RESOURCE GATES EXCLUDE COMBINATORIAL FAMILIES WHEN THE FEATURE SURFACE EXCEEDS THE SAFE BOUNDED SEARCH LIMIT; YADO THEN SELECTS AMONG THE RESOURCE-SAFE NATIVE BANK CANDIDATES BY VALIDATION. THE LATEST HISTORY IS FRESH HOLDOUT. HOST DOES NOT SELECT THE ALGORITHM FAMILY OR WRITE THE RESULTING ORGAN MODEL. GENES REMAIN SHADOW UNTIL SEPARATE ADMISSION.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
