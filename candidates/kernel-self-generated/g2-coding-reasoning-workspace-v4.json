@@ -1,0 +1,112 @@
+{
+  "ablation_score": 0.0,
+  "active_mechanism": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+  "canonical_mutation": false,
+  "checks": {
+    "ablation_material_drop": false,
+    "accumulated_memory_consumed": true,
+    "active_router_capability_verified": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "explicit_retry_clauses_guarded": false,
+    "explicit_retry_clauses_present": false,
+    "external_coding_model_used": false,
+    "fallback_is_withhold_unknown": true,
+    "fresh_reasoning_exact": false,
+    "fresh_success_and_failure_both_present": true,
+    "fresh_v4_tasks_executed": true,
+    "host_written_reasoning_rules": false,
+    "new_shadow_thinking_gene_created": true,
+    "ready_patch_from_host_used": false,
+    "restore_exact": true,
+    "retry_failure_stage_coverage": false,
+    "retry_to_retest_transition_exact": false,
+    "third_party_code_executed": false,
+    "unknown_states_fail_closed": true,
+    "v3_unknown_default_defect_repaired": true,
+    "v3_withhold_consumed": true
+  },
+  "fresh_failure_count": 4,
+  "fresh_score": 0.0,
+  "fresh_success_count": 4,
+  "fresh_task_count": 8,
+  "next_required_capability": "G2_CODING_REASONING_WORKSPACE_V5",
+  "promotion_applied": false,
+  "receipt_sha256": "244360027b70abb74a05b08ff895067e87b79bc9d7080cc63939e366caab7522",
+  "restore_score": 0.0,
+  "retry_clause_count": 0,
+  "retry_states": [],
+  "retry_to_retest_score": 0.0,
+  "schema": "yado.g2.coding_reasoning_workspace.v4",
+  "semantic_boundary": "ACTIVE G2 ROUTER LEARNS GUARDED STATE-CONDITIONED ACTIONS FROM ACCUMULATED CODING MEMORY. UNKNOWN STATES FAIL CLOSED. THIS PROVES CONTROL-POLICY RETRY/RETEST TRANSITIONS, NOT YET AUTONOMOUS SYNTHESIS OF A NEW DEFECT HYPOTHESIS OR PATCH AFTER RETRY.",
+  "status": "WITHHOLD_G2_CODING_REASONING_WORKSPACE_V4",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_coding_model": false,
+      "host_written_reasoning_rules": false,
+      "ready_patch_from_host": false,
+      "third_party_code_execution": false
+    },
+    "host_role": "CURRICULUM_TRANSPORT_FRESH_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+    "instruction": "Consume accumulated V1/V2/V3 coding experience. Verify ALG-BOUNDED-CAPABILITY-ROUTER-V1 is already active in canonical G2. Use that YADO capability to learn explicit state-conditioned actions. REVISE_HYPOTHESIS must be selected only by guarded known failure states; unknown states must WITHHOLD_UNKNOWN. Prove on new V4 coding holdout, unknown-state holdout, ablation/restore, and a controller transition failure -> revise -> revised-candidate -> retest. Do not claim that this transition itself generates a new hypothesis or patch.",
+    "objective": "REPAIR_V3_DEFAULT_RETRY_BY_LEARNING_EXPLICIT_GUARDED_FAILURE_BRANCHES_AND_FAIL_CLOSED_UNKNOWN_STATES",
+    "parents": [
+      "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v3.json",
+      "experience/yado-coding-reasoning-workspace-v3.json",
+      "experience/yado-coding-reasoning-workspace-v2.json",
+      "experience/yado-coding-apprenticeship-v1.json"
+    ],
+    "required_active_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "schema": "yado.g2.coding_reasoning_workspace_v4.request.v1",
+    "success_conditions": [
+      "fresh reasoning exact on new coding tasks",
+      "unknown states fail closed",
+      "REVISE_HYPOTHESIS has explicit multi-atom stage guards",
+      "retry guards cover hypothesis-ready, test-result, and consequence-result failures",
+      "failure -> revise -> retest controller transition is exact",
+      "ablation causes material drop and restore is exact",
+      "canonical G2 remains unchanged"
+    ],
+    "trigger": 1,
+    "trigger_reason": "V3_FRESH_EXACT_BUT_RETRY_WAS_DEFAULT_FALLBACK"
+  },
+  "thinking_gene": {
+    "ablation_score": 0.0,
+    "active_parent_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "fresh_score": 0.0,
+    "gene_digest": "e2f62eb4867b492fcb7aadbc5e2ead751dec62183d8a39334f4cd398d1c46c30",
+    "gene_id": "GENE-G2-CODING-REASONING-THINKING-V4-01668ec7cc02482c",
+    "gene_scope": [
+      "THINKING",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC",
+      "INTELLIGENCE"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-REASONING-THINKING-V3-d154001141456463",
+      "7e531bc6d99921ccf9fc2440e05c6368b5cded77811ffbbcbe80409ed56283d7",
+      "05df3c10a733402e7ee153389c06c7b25855820120466fe63d84e5348bd1370c"
+    ],
+    "mechanism_kind": "GUARDED_STATE_CONDITIONED_ACTION_ROUTER",
+    "organ": "THINKING",
+    "origin": "ACTIVE_G2_BOUNDED_CAPABILITY_ROUTER_LEARNED_GUARDED_RETRY_FROM_CODING_MEMORY",
+    "program": {
+      "clauses": [],
+      "fallback_output": "WITHHOLD_UNKNOWN",
+      "program_digest": "01668ec7cc02482cb63b74a10b1fa240b12098322a60db765cac1f25db4e77b8",
+      "schema": "yado.g2.guarded_coding_reasoning_router_program.v4",
+      "source_digest": "6dab90b619e90091c62e672c877bc8fd126c50fed61c2ea23b00712da708455d"
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "restore_score": 0.0,
+    "schema": "yado.g2.coding_reasoning_thinking_gene.v4",
+    "unknown_state_score": 1.0
+  },
+  "thinking_gene_id": "GENE-G2-CODING-REASONING-THINKING-V4-01668ec7cc02482c",
+  "unknown_state_score": 1.0,
+  "v3_default_output": "REVISE_HYPOTHESIS"
+}

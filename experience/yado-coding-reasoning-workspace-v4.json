@@ -1,0 +1,255 @@
+{
+  "ablation_score": 0.0,
+  "canonical_mutation": false,
+  "experience_digest": "2e31906b3b69cd052b970f15f3ebbe5ff184c802f30eac4e054018646a657f47",
+  "explicit_retry_states": [],
+  "fresh_episodes": [
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x * -5 + 9\n",
+      "candidate_source_sha256": "f21fc1db9cd045a58e673c66f4dccc4587ab3ac4c1a04fc1e08540ca3bc13aca",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "V4_LINEAR",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "task_id": "V4_QUADRATIC_REPAIR",
+      "task_kind": "REPAIR",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "task_id": "V4_FLOORDIV3",
+      "task_kind": "REPAIR",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return max(x, 0)\n",
+      "candidate_source_sha256": "d2707fa08e6ca1a6947eefecd2df72c0f390377940e0b44d83f382273da8a7d8",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "BASE_PORTFOLIO",
+      "task_id": "V4_RELU",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return 1 + 4 * x + -2 * (x * x)\n",
+      "candidate_source_sha256": "9e7989bed1c222ba6e2dfd4051826a23b1692af78c7846ffdfee71a2a092b64c",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V4_QUADRATIC_WRITE",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return 7 * 1 + -4 * x + x * x * x\n",
+      "candidate_source_sha256": "13e34b07221e56c7fcdd2db43dc1528ddcbb8300b43d6851b7e193dc6ba61c2a",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V4_CUBIC_WRITE",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": true
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "NO_UNIVARIATE_POLYNOMIAL_WITHIN_GENE_BUDGET",
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V4_DEGREE7",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": true,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "e09f888523377bc686b5a85d9ada5ecf6b35a2b81f9295c728763cf82f38545c",
+      "reason": "UNIVARIATE_ONLY",
+      "repair_mode": null,
+      "task_id": "V4_BIVARIATE_PRODUCT",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    }
+  ],
+  "fresh_reasoning_case_count": 64,
+  "fresh_score": 0.0,
+  "parent_v3_receipt": "7e531bc6d99921ccf9fc2440e05c6368b5cded77811ffbbcbe80409ed56283d7",
+  "restore_score": 0.0,
+  "retry_to_retest_rows": [
+    {
+      "failure_action": "WITHHOLD_UNKNOWN",
+      "pass": false,
+      "revised_candidate_action": "WITHHOLD_UNKNOWN",
+      "task_id": "V4_LINEAR"
+    },
+    {
+      "failure_action": "WITHHOLD_UNKNOWN",
+      "pass": false,
+      "revised_candidate_action": "WITHHOLD_UNKNOWN",
+      "task_id": "V4_QUADRATIC_REPAIR"
+    },
+    {
+      "failure_action": "WITHHOLD_UNKNOWN",
+      "pass": false,
+      "revised_candidate_action": "WITHHOLD_UNKNOWN",
+      "task_id": "V4_FLOORDIV3"
+    },
+    {
+      "failure_action": "WITHHOLD_UNKNOWN",
+      "pass": false,
+      "revised_candidate_action": "WITHHOLD_UNKNOWN",
+      "task_id": "V4_RELU"
+    },
+    {
+      "failure_action": "WITHHOLD_UNKNOWN",
+      "pass": false,
+      "revised_candidate_action": "WITHHOLD_UNKNOWN",
+      "task_id": "V4_QUADRATIC_WRITE"
+    },
+    {
+      "failure_action": "WITHHOLD_UNKNOWN",
+      "pass": false,
+      "revised_candidate_action": "WITHHOLD_UNKNOWN",
+      "task_id": "V4_CUBIC_WRITE"
+    },
+    {
+      "failure_action": "WITHHOLD_UNKNOWN",
+      "pass": false,
+      "revised_candidate_action": "WITHHOLD_UNKNOWN",
+      "task_id": "V4_DEGREE7"
+    },
+    {
+      "failure_action": "WITHHOLD_UNKNOWN",
+      "pass": false,
+      "revised_candidate_action": "WITHHOLD_UNKNOWN",
+      "task_id": "V4_BIVARIATE_PRODUCT"
+    }
+  ],
+  "retry_to_retest_score": 0.0,
+  "schema": "yado.g2.coding_reasoning_workspace.experience.v4",
+  "semantic_boundary": "ACTIVE G2 ROUTER LEARNS GUARDED STATE-CONDITIONED ACTIONS FROM ACCUMULATED CODING MEMORY. UNKNOWN STATES FAIL CLOSED. THIS PROVES CONTROL-POLICY RETRY/RETEST TRANSITIONS, NOT YET AUTONOMOUS SYNTHESIS OF A NEW DEFECT HYPOTHESIS OR PATCH AFTER RETRY.",
+  "status": "TRAINED",
+  "thinking_gene": {
+    "ablation_score": 0.0,
+    "active_parent_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+    "fresh_score": 0.0,
+    "gene_digest": "e2f62eb4867b492fcb7aadbc5e2ead751dec62183d8a39334f4cd398d1c46c30",
+    "gene_id": "GENE-G2-CODING-REASONING-THINKING-V4-01668ec7cc02482c",
+    "gene_scope": [
+      "THINKING",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC",
+      "INTELLIGENCE"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-REASONING-THINKING-V3-d154001141456463",
+      "7e531bc6d99921ccf9fc2440e05c6368b5cded77811ffbbcbe80409ed56283d7",
+      "05df3c10a733402e7ee153389c06c7b25855820120466fe63d84e5348bd1370c"
+    ],
+    "mechanism_kind": "GUARDED_STATE_CONDITIONED_ACTION_ROUTER",
+    "organ": "THINKING",
+    "origin": "ACTIVE_G2_BOUNDED_CAPABILITY_ROUTER_LEARNED_GUARDED_RETRY_FROM_CODING_MEMORY",
+    "program": {
+      "clauses": [],
+      "fallback_output": "WITHHOLD_UNKNOWN",
+      "program_digest": "01668ec7cc02482cb63b74a10b1fa240b12098322a60db765cac1f25db4e77b8",
+      "schema": "yado.g2.guarded_coding_reasoning_router_program.v4",
+      "source_digest": "6dab90b619e90091c62e672c877bc8fd126c50fed61c2ea23b00712da708455d"
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "restore_score": 0.0,
+    "schema": "yado.g2.coding_reasoning_thinking_gene.v4",
+    "unknown_state_score": 1.0
+  },
+  "training_episode_count": 24,
+  "unknown_state_score": 1.0,
+  "validation_episode_count": 8
+}
