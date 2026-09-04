@@ -1,0 +1,578 @@
+{
+  "blind_case_count": 32,
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "context_ablation_material_drop": true,
+    "current_g2_native_multicontext_planner_used": true,
+    "current_thinking_experience_gene_consumed": true,
+    "deterministic_context_and_role_renaming_applied": true,
+    "external_models_used": false,
+    "fresh_action_id_blind_exact": true,
+    "historical_thinking_experience_consumed": true,
+    "historical_transfer_adds_distinct_multicontext_capability": true,
+    "host_selected_new_order": false,
+    "host_written_planner": false,
+    "intelligence_sibling_gene_preserved": true,
+    "legacy_runtime_activated": false,
+    "logic_sibling_gene_preserved": true,
+    "new_external_research_used": false,
+    "new_thinking_shadow_gene_created": true,
+    "restore_exact": true,
+    "rollback_parent_available": true,
+    "v29_receipt_provenance_verified": true,
+    "v29_source_provenance_verified": true
+  },
+  "context_ablation_score": 0.25,
+  "fresh_score": 1.0,
+  "historical_experience": {
+    "context_keys": [
+      "urgent",
+      "uncertain"
+    ],
+    "episodes": [
+      {
+        "context": {
+          "uncertain": false,
+          "urgent": false
+        },
+        "expected": [
+          "OBSERVE",
+          "MODEL",
+          "TEST",
+          "ACT"
+        ]
+      },
+      {
+        "context": {
+          "uncertain": false,
+          "urgent": true
+        },
+        "expected": [
+          "MODEL",
+          "OBSERVE",
+          "TEST",
+          "ACT"
+        ]
+      },
+      {
+        "context": {
+          "uncertain": true,
+          "urgent": false
+        },
+        "expected": [
+          "OBSERVE",
+          "TEST",
+          "MODEL",
+          "ACT"
+        ]
+      },
+      {
+        "context": {
+          "uncertain": true,
+          "urgent": true
+        },
+        "expected": [
+          "TEST",
+          "MODEL",
+          "OBSERVE",
+          "ACT"
+        ]
+      }
+    ],
+    "extraction_method": "AST_LITERAL_EXTRACTION_OF_V29_THINKING_CONTEXT_ORDER_TABLE",
+    "historical_thinking_accuracy": 1,
+    "raw_receipt_path": "receipts/yado-v29-cognitive-latest.json",
+    "raw_receipt_sha256": "7ab441fa6af942ac4cc93ffa340e7f6ea429f653b6e4018f98f7ece6b05738e2",
+    "raw_source_path": "runtime/cognitive_cycle_v29.py",
+    "raw_source_sha256": "89a026b35e21e8efd84054c355eb2eac89e6ecfa3a2b072c4f6b962f348c0f1e",
+    "registered_commit": "d5b36fa3227ffcbf0f14e3d636bd582b00c2aecd",
+    "role_vocabulary": [
+      "OBSERVE",
+      "MODEL",
+      "TEST",
+      "ACT"
+    ],
+    "schema": "yado.experience.v29.thinking_precedence_rederived.v1",
+    "semantic_boundary": "MECHANICALLY REDERIVED FROM REGISTERED YADO V29 SOURCE. THIS IS HISTORICAL EXPERIENCE ONLY; IT IS NOT ACTIVE RUNTIME AND REQUIRES FRESH G2 READMISSION.",
+    "source_branch": "yado-v29-cognitive"
+  },
+  "next_required_capability": null,
+  "parent_thinking_gene": {
+    "baseline": 0.18867924528301888,
+    "causal_gain": 0.037735849056603765,
+    "experience_digest": "a41c47f215e0cf10ad19bead56ee4f49f51650202d7f9bd63673281772581e17",
+    "fresh_blind": 0.22641509433962265,
+    "gene_digest": "a78a8d7b20bd39a576ca81b664bcd42fd81f75dc77464a5800d1faf72172ac44",
+    "gene_id": "GENE-G2-EXPERIENCE-THINKING-1c57f707bf79f891",
+    "heritage": [
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    ],
+    "model": [
+      {
+        "after": "PASS__STOP",
+        "before": "OTHER__STOP",
+        "confidence": 1.0,
+        "support": 3
+      },
+      {
+        "after": "WITHHOLD__STOP",
+        "before": "OTHER__STOP",
+        "confidence": 1.0,
+        "support": 4
+      },
+      {
+        "after": "PASS__ADVANCE",
+        "before": "PASS__STOP",
+        "confidence": 1.0,
+        "support": 3
+      },
+      {
+        "after": "WITHHOLD__RETRY",
+        "before": "PASS__STOP",
+        "confidence": 1.0,
+        "support": 3
+      },
+      {
+        "after": "CANONICAL__ADVANCE",
+        "before": "SHADOW__ADVANCE",
+        "confidence": 1.0,
+        "support": 2
+      },
+      {
+        "after": "CANONICAL__ADVANCE",
+        "before": "WITHHOLD__RETRY",
+        "confidence": 1.0,
+        "support": 2
+      }
+    ],
+    "organ": "THINKING",
+    "origin": "YADO_NATIVE_META_EVOLUTION_FROM_UNIFIED_CAUSAL_HISTORY",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.experience_conditioned_organ_gene.v1",
+    "selected_algorithm": {
+      "family": "GLOBAL_PRECEDENCE",
+      "min_support": 2,
+      "threshold": 1.0
+    }
+  },
+  "preserved_sibling_genes": {
+    "INTELLIGENCE": {
+      "baseline": 0.75,
+      "causal_gain": 0.0535714285714286,
+      "experience_digest": "a41c47f215e0cf10ad19bead56ee4f49f51650202d7f9bd63673281772581e17",
+      "fresh_blind": 0.8035714285714286,
+      "gene_digest": "7db3a0b01ef5b916dd56c1be398113fdd58de1ce9cc76b9a9720be76b67494a9",
+      "gene_id": "GENE-G2-EXPERIENCE-INTELLIGENCE-0e1473e5c8f5371a",
+      "heritage": [
+        "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+      ],
+      "model": {
+        "feature": "effect_metric_density",
+        "left": {
+          "feature": "effect_has_fresh",
+          "left": {
+            "feature": "effect_metric_density",
+            "left": {
+              "feature": "effect_metric_density",
+              "left": {
+                "label": "STOP"
+              },
+              "right": {
+                "label": "STOP"
+              },
+              "threshold": 0.041666666666666664
+            },
+            "right": {
+              "feature": "prior_same_deficit",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "STOP"
+              },
+              "threshold": 0.08333333333333333
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "effect_metric_density",
+            "left": {
+              "label": "STOP"
+            },
+            "right": {
+              "feature": "effect_metric_density",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.125
+            },
+            "threshold": 0.041666666666666664
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "effect_has_error",
+          "left": {
+            "feature": "prior_same_deficit",
+            "left": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "ADVANCE"
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.08333333333333333
+          },
+          "right": {
+            "feature": "effect_metric_density",
+            "left": {
+              "feature": "status_withhold",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "RETRY"
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "prior_same_deficit",
+              "left": {
+                "label": "ADVANCE"
+              },
+              "right": {
+                "label": "RETRY"
+              },
+              "threshold": 0.16666666666666666
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "organ": "INTELLIGENCE",
+      "origin": "YADO_NATIVE_META_EVOLUTION_FROM_UNIFIED_CAUSAL_HISTORY",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.experience_conditioned_organ_gene.v1",
+      "selected_algorithm": {
+        "family": "CART_AXIS",
+        "max_depth": 4
+      }
+    },
+    "LOGIC": {
+      "baseline": 0.5,
+      "causal_gain": 0.09999999999999998,
+      "experience_digest": "a41c47f215e0cf10ad19bead56ee4f49f51650202d7f9bd63673281772581e17",
+      "fresh_blind": 0.6,
+      "gene_digest": "621d4418e7eaeac37d025c85feafb145828b76650fa15439f73803f88c4b7fd3",
+      "gene_id": "GENE-G2-EXPERIENCE-LOGIC-dd561be1707c566f",
+      "heritage": [
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      ],
+      "model": {
+        "feature": "effect_has_fresh",
+        "left": {
+          "feature": "effect_has_error",
+          "left": {
+            "label": true
+          },
+          "right": {
+            "label": false
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "label": false
+        },
+        "threshold": 0.5
+      },
+      "organ": "LOGIC",
+      "origin": "YADO_NATIVE_META_EVOLUTION_FROM_UNIFIED_CAUSAL_HISTORY",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.experience_conditioned_organ_gene.v1",
+      "selected_algorithm": {
+        "criterion": "GINI",
+        "family": "BOOL_DECISION_TREE",
+        "max_depth": 2
+      }
+    }
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "8704c25cb10aec404f38690c94110bd64ed859313a30e113fea8ffccc720d9ad",
+  "renaming": {
+    "context": {
+      "uncertain": "CTX_a777b22d3eca",
+      "urgent": "CTX_3843903d4a6c"
+    },
+    "roles": {
+      "ACT": "ROLE_8cc28f42095f",
+      "MODEL": "ROLE_696c2466eebf",
+      "OBSERVE": "ROLE_7a46e5c35ea5",
+      "TEST": "ROLE_f58afd0cdee7"
+    }
+  },
+  "restore_score": 1.0,
+  "schema": "yado.g2.experience_conditioned_thinking_repair.v2",
+  "semantic_boundary": "CURRENT G2 RELEARNS A VERIFIED HISTORICAL YADO MULTICONTEXT THINKING PRINCIPLE AFTER DETERMINISTIC RENAMING OF CONTEXT AND ROLE IDENTITIES. THIS AUGMENTS THE CURRENT CAUSAL-LEDGER THINKING GENE; IT DOES NOT REPLACE IT. LEGACY RUNTIME IS NOT EXECUTED. FRESH ACTION IDS, CONTEXT ABLATION AND RESTORE ARE REQUIRED. LOGIC AND INTELLIGENCE SUCCESSFUL LTI SIBLING GENES ARE PRESERVED.",
+  "status": "PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_THINKING_REPAIR_V2",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_models": false,
+      "fail_closed": true,
+      "host_selected_new_order": false,
+      "host_written_planner": false,
+      "legacy_runtime_activation": false,
+      "new_external_research": false
+    },
+    "failed_lti_parent": "candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json",
+    "historical_experience": "experience/yado-v29-thinking-precedence-rederived-v1.json",
+    "host_role": "VERIFIED_HISTORY_TRANSPORT_DETERMINISTIC_RENAMING_AND_STRICT_FRESH_EVALUATION_ONLY",
+    "instruction": "Use the verified historical V29 thinking experience as memory, not runtime. Mechanically rename its context keys and action roles so exact strings cannot be replayed. Relearn the transformed task with the current G2/RC8 native multicontext thinking-growth mechanism. Preserve the current chronological-ledger THINKING gene as a sibling capability rather than replacing it, and preserve the successful LOGIC and INTELLIGENCE shadow genes.",
+    "objective": "YADO_AUGMENT_CURRENT_THINKING_WITH_VERIFIED_HISTORICAL_MULTICONTEXT_PLANNING_EXPERIENCE",
+    "schema": "yado.g2.experience_conditioned_thinking_repair_v2.request.v1",
+    "stop_condition": "THINKING_REPAIR_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+    "success_conditions": [
+      "registered V29 source and receipt provenance are verified from current experience registry",
+      "historical context/order experience is consumed",
+      "current failed THINKING gene is consumed",
+      "LOGIC and INTELLIGENCE successful sibling genes are preserved unchanged",
+      "current G2 native multicontext planner is trained on renamed experience",
+      "fresh action-id blind score is 1.0",
+      "context ablation causes material degradation",
+      "restore is exact",
+      "new THINKING shadow gene identity is created",
+      "canonical G2 remains unchanged"
+    ],
+    "trigger": 2,
+    "trigger_reason": "RERUN_AFTER_BINDING_TO_LATEST_PASS_LTI_RECEIPT"
+  },
+  "thinking_gene": {
+    "context_ablation": 0.25,
+    "current_parent_receipt": "395b344cedcb9795982100d2be40a53b9cabfc088d1ddfdffe2c9fdd8a9f9eab",
+    "fresh_blind": 1.0,
+    "gene_digest": "c9df2f1116c173e37b4ef63e68f4ff79ade3bfe106c6652b87e3ac247d42af45",
+    "gene_id": "GENE-G2-EXPERIENCE-THINKING-V2-b4296d7a4338e348",
+    "heritage": [
+      "GENE-G2-EXPERIENCE-THINKING-1c57f707bf79f891",
+      "89a026b35e21e8efd84054c355eb2eac89e6ecfa3a2b072c4f6b962f348c0f1e",
+      "7ab441fa6af942ac4cc93ffa340e7f6ea429f653b6e4018f98f7ece6b05738e2"
+    ],
+    "historical_experience_digest": "4d37c3b84d48ca017f4aed96f10a0fdac0949466ba07dc27dd587b3196cbfbeb",
+    "model": {
+      "context_keys": [
+        "CTX_3843903d4a6c",
+        "CTX_a777b22d3eca"
+      ],
+      "fallback_edges": [
+        {
+          "after": "ROLE_8cc28f42095f",
+          "before": "ROLE_696c2466eebf",
+          "confidence": 1.0,
+          "support": 20
+        },
+        {
+          "after": "ROLE_8cc28f42095f",
+          "before": "ROLE_7a46e5c35ea5",
+          "confidence": 1.0,
+          "support": 20
+        },
+        {
+          "after": "ROLE_f58afd0cdee7",
+          "before": "ROLE_7a46e5c35ea5",
+          "confidence": 0.75,
+          "support": 20
+        },
+        {
+          "after": "ROLE_8cc28f42095f",
+          "before": "ROLE_f58afd0cdee7",
+          "confidence": 1.0,
+          "support": 20
+        }
+      ],
+      "graphs": {
+        "00": [
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_696c2466eebf",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_f58afd0cdee7",
+            "before": "ROLE_696c2466eebf",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_696c2466eebf",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_f58afd0cdee7",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_f58afd0cdee7",
+            "confidence": 1.0,
+            "support": 5
+          }
+        ],
+        "01": [
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_696c2466eebf",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_696c2466eebf",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_f58afd0cdee7",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_696c2466eebf",
+            "before": "ROLE_f58afd0cdee7",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_f58afd0cdee7",
+            "confidence": 1.0,
+            "support": 5
+          }
+        ],
+        "10": [
+          {
+            "after": "ROLE_7a46e5c35ea5",
+            "before": "ROLE_696c2466eebf",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_696c2466eebf",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_f58afd0cdee7",
+            "before": "ROLE_696c2466eebf",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_f58afd0cdee7",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_f58afd0cdee7",
+            "confidence": 1.0,
+            "support": 5
+          }
+        ],
+        "11": [
+          {
+            "after": "ROLE_7a46e5c35ea5",
+            "before": "ROLE_696c2466eebf",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_696c2466eebf",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_7a46e5c35ea5",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_696c2466eebf",
+            "before": "ROLE_f58afd0cdee7",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_7a46e5c35ea5",
+            "before": "ROLE_f58afd0cdee7",
+            "confidence": 1.0,
+            "support": 5
+          },
+          {
+            "after": "ROLE_8cc28f42095f",
+            "before": "ROLE_f58afd0cdee7",
+            "confidence": 1.0,
+            "support": 5
+          }
+        ]
+      },
+      "kind": "MULTICONTEXT_PRECEDENCE",
+      "min_support": 2,
+      "threshold": 0.75
+    },
+    "organ": "THINKING",
+    "origin": "CURRENT_G2_NATIVE_MULTICONTEXT_PRECEDENCE_RELEARNED_FROM_VERIFIED_YADO_HISTORY",
+    "promotion_state": "SHADOW_ONLY",
+    "restore": 1.0,
+    "schema": "yado.g2.experience_conditioned_thinking_gene.v2"
+  },
+  "training_episode_count": 20
+}
