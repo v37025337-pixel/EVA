@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: yado-g2-experience-conditioned-lti-evolution-thinking-repair-v7
+  group: yado-g2-experience-conditioned-lti-evolution-thinking-repair-v8
   cancel-in-progress: true
 jobs:
   evolve:
@@ -29,7 +29,10 @@ jobs:
       - name: Let YADO evolve LOGIC THINKING INTELLIGENCE from history
         id: evolve
         continue-on-error: true
-        run: python runtime/yado_g2_experience_conditioned_lti_evolution_v1.py
+        run: |
+          rm -f candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json
+          rm -f "receipts/yado-g2-experience-conditioned-lti-evolution-v1-run-${GITHUB_RUN_ID}.json"
+          python runtime/yado_g2_experience_conditioned_lti_evolution_v1.py
       - name: Canonical guard after LTI evolution
         if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
@@ -41,6 +44,9 @@ jobs:
           if [ -f candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json ]; then
             git add candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json
           fi
+          if [ -f "receipts/yado-g2-experience-conditioned-lti-evolution-v1-run-${GITHUB_RUN_ID}.json" ]; then
+            git add "receipts/yado-g2-experience-conditioned-lti-evolution-v1-run-${GITHUB_RUN_ID}.json"
+          fi
           git diff --cached --quiet || git commit -m "Persist YADO experience-conditioned LTI evolution [skip ci]"
           git reset --hard HEAD
           git clean -fd
@@ -51,9 +57,11 @@ jobs:
         run: |
           python - <<'PY'
           import json,pathlib
-          p=pathlib.Path("candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json")
-          if not p.exists():raise SystemExit("MISSING_LTI_EVIDENCE")
+          import os
+          p=pathlib.Path("receipts")/f"yado-g2-experience-conditioned-lti-evolution-v1-run-{os.environ['GITHUB_RUN_ID']}.json"
+          if not p.exists():raise SystemExit("MISSING_CURRENT_RUN_LTI_EVIDENCE")
           r=json.loads(p.read_text());c=r["checks"]
+          assert str(r.get("github_run_id"))==os.environ["GITHUB_RUN_ID"],r
           assert c["external_models_used"] is False,r
           assert c["host_selected_algorithm_family"] is False,r
           assert c["host_written_organ_model"] is False,r
@@ -66,5 +74,5 @@ jobs:
         if: always()
         with:
           name: yado-g2-experience-conditioned-lti-evolution-v1-${{ github.run_id }}
-          path: candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json
+          path: receipts/yado-g2-experience-conditioned-lti-evolution-v1-run-${{ github.run_id }}.json
           if-no-files-found: warn
