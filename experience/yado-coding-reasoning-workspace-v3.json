@@ -1,0 +1,325 @@
+{
+  "ablation_score": 0.203125,
+  "blind_reasoning_case_count": 64,
+  "canonical_mutation": false,
+  "conjunctive_fresh_score": 1.0,
+  "conjunctive_train_score": 1.0,
+  "experience_digest": "05df3c10a733402e7ee153389c06c7b25855820120466fe63d84e5348bd1370c",
+  "fresh_episodes": [
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x * 4 + -7\n",
+      "candidate_source_sha256": "96d1f6149f6a3470449787fe9992962a947b6d13eadefff07de75cc9236372c8",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "V3_LINEAR",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "task_id": "V3_CUBIC",
+      "task_kind": "REPAIR",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "AMBIGUOUS_UNSEEN_THRESHOLD",
+      "repair_mode": "AMBIGUITY_AWARE_WITHHOLD",
+      "task_id": "V3_MOD4",
+      "task_kind": "REPAIR",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x + 14 if x <= -6 else x * -1 + 2 if x <= 0 else x\n",
+      "candidate_source_sha256": "f44d965328910832037169521a051bec85fddafc437815b42ca9c44c4ccc63c2",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.8,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "V3_ABS_SHIFT",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return -5 * 1 + 2 * x + 3 * (x * x)\n",
+      "candidate_source_sha256": "62e50682877c07c5cab76ebc7cbfd5cd587a4bdbe0c6ba3f90e6804b979700b8",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V3_QUADRATIC",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return 6 * 1 + -1 * x + 2 * (x * x * x)\n",
+      "candidate_source_sha256": "e769aad2787a25d1c24bf6a406c792827993b1a868fd7ecce6551c4b838716a2",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V3_CUBIC_WRITE",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": true
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "NO_UNIVARIATE_POLYNOMIAL_WITHIN_GENE_BUDGET",
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "V3_DEGREE6",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": true,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "e09f888523377bc686b5a85d9ada5ecf6b35a2b81f9295c728763cf82f38545c",
+      "reason": "UNIVARIATE_ONLY",
+      "repair_mode": null,
+      "task_id": "V3_BIVARIATE",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    }
+  ],
+  "linear_baseline_score": 0.796875,
+  "parent_v1_experience": "640eafe1c895babd050bf42e19d42188472bf53721be982bd62eea0365e55ed3",
+  "parent_v2_experience": "72560afae40d86eef25a548eb3c2352efb4739289f51b02ae294356684f689ed",
+  "parent_v2_receipt": "4bb67f36212437fd6c4d69bddf492120b930aa5ea32f19616b770e4e24368286",
+  "restore_score": 1.0,
+  "schema": "yado.g2.coding_reasoning_workspace.experience.v3",
+  "semantic_boundary": "THE PROGRAM IS SYNTHESIZED BY THE ALREADY-ACTIVE G2 CONJUNCTIVE RULE INDUCER FROM ACCUMULATED CODING OUTCOMES. HOST DEFINES THE USER-REQUESTED CURRICULUM AND FRESH SANDBOX TASKS BUT WRITES NO REASONING RULES. THIRD-PARTY CODE IS NOT EXECUTED. THE RESULT REMAINS SHADOW.",
+  "single_predicate_fresh_score": 0.828125,
+  "status": "TRAINED",
+  "thinking_gene": {
+    "ablation_score": 0.203125,
+    "active_parent_capability": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+    "fresh_score": 1.0,
+    "gene_digest": "81de15381812a6532db2953f207f38f551a84a7e5af4790b2e92a293e986c970",
+    "gene_id": "GENE-G2-CODING-REASONING-THINKING-V3-d154001141456463",
+    "gene_scope": [
+      "THINKING",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC",
+      "INTELLIGENCE"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-COGNITIVE-LAYER-a571dd5b97dde5b3",
+      "GENE-G2-EXPERIENCE-THINKING-V2-b4296d7a4338e348",
+      "4bb67f36212437fd6c4d69bddf492120b930aa5ea32f19616b770e4e24368286",
+      "640eafe1c895babd050bf42e19d42188472bf53721be982bd62eea0365e55ed3",
+      "72560afae40d86eef25a548eb3c2352efb4739289f51b02ae294356684f689ed"
+    ],
+    "mechanism_kind": "CONJUNCTIVE_RULE_PROGRAM",
+    "organ": "THINKING",
+    "origin": "ACTIVE_G2_CONJUNCTIVE_RULE_INDUCER_LEARNED_FROM_ACCUMULATED_CODING_OUTCOMES",
+    "program": {
+      "default_output": "REVISE_HYPOTHESIS",
+      "program_digest": "d1540011414564636cce39fd2dd49866a7a38d7ce660805d404b91b8db5040db",
+      "program_id": "CJ-de37309fb4e3",
+      "rules": [
+        {
+          "confidence": 1.0,
+          "output": "BUILD_MODEL",
+          "predicates": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "CODE_READ"
+            }
+          ],
+          "support": 24
+        },
+        {
+          "confidence": 1.0,
+          "output": "CHECK_CONSEQUENCES",
+          "predicates": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "IMPLEMENTED"
+            }
+          ],
+          "support": 24
+        },
+        {
+          "confidence": 1.0,
+          "output": "ADVANCE",
+          "predicates": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "MEMORY_READY"
+            }
+          ],
+          "support": 24
+        },
+        {
+          "confidence": 1.0,
+          "output": "FORM_HYPOTHESIS",
+          "predicates": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "MODEL_BUILT"
+            }
+          ],
+          "support": 24
+        },
+        {
+          "confidence": 1.0,
+          "output": "READ_CODE",
+          "predicates": [
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "START"
+            }
+          ],
+          "support": 24
+        },
+        {
+          "confidence": 1.0,
+          "output": "TEST_HYPOTHESIS",
+          "predicates": [
+            {
+              "field": "candidate_present",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "HYPOTHESIS_READY"
+            }
+          ],
+          "support": 16
+        },
+        {
+          "confidence": 1.0,
+          "output": "IMPLEMENT_CHANGE",
+          "predicates": [
+            {
+              "field": "candidate_present",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "TEST_RESULT"
+            }
+          ],
+          "support": 16
+        },
+        {
+          "confidence": 1.0,
+          "output": "STORE_EXPERIENCE",
+          "predicates": [
+            {
+              "field": "fresh_exact",
+              "op": "EQ",
+              "value": true
+            },
+            {
+              "field": "stage",
+              "op": "EQ",
+              "value": "CONSEQUENCE_RESULT"
+            }
+          ],
+          "support": 13
+        }
+      ],
+      "source_digest": "8c597e9f3e016d4c3f8b1c02bb3e415a9a51bd48cffb0d8190c6af84eb839c5e",
+      "status": "SHADOW",
+      "target_capability": "CODING_REASONING_WORKSPACE_V3",
+      "target_organ": "THINKING",
+      "training_count": 192
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "restore_score": 1.0,
+    "schema": "yado.g2.coding_reasoning_thinking_gene.v3",
+    "train_score": 1.0
+  },
+  "training_episode_count": 24,
+  "training_reasoning_case_count": 192
+}
