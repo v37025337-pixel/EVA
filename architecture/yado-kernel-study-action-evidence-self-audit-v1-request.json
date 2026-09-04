@@ -1,7 +1,7 @@
 {
   "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
-  "objective": "CONTINUE_KERNEL_NATIVE_REPAIR_FROM_OWN_DIAGNOSIS_TO_EXECUTABLE_CANDIDATE",
-  "problem": "Previous self-study run correctly diagnosed the action-evidence-to-self-audit disconnect but WITHHELD before materializing an executable repair candidate. Continue from the kernel's own prior diagnosis and produce a valid shadow repair or explicitly WITHHOLD again.",
+  "objective": "INTEGRATE_YADO_SELF_GENERATED_EVIDENCE_BINDER_GENE_INTO_SHADOW_SELF_AUDIT",
+  "problem": "YADO has now created and fresh/blind/ablation-validated its own evidence-binding shadow gene, but the real deep self-audit does not yet consume that gene. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
   "evidence": {
     "latest_deep_self_audit_run_id": 33832918251,
     "direct_priority_runs": [
@@ -12,16 +12,19 @@
     ],
     "direct_evidence_artifact": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
     "previous_self_study_run_id": 33833488285,
-    "previous_self_study_receipt": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json"
+    "previous_self_study_receipt": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
+    "self_generated_gene": "candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
+    "self_generated_gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
+    "native_gene_confirmation_run_id": 33841818519
   },
-  "goal": "Continue from the kernel's own diagnosis, independently choose or reaffirm the repair target and solution path, and materialize an executable shadow candidate that passes isolated self-audit and regression gates.",
+  "goal": "Let YADO use its own gene as the decision mechanism and select a safe source-level integration candidate. External coding models, if used, are materialization tools only; they must bind the existing YADO gene rather than invent a new rule.",
   "success_conditions": [
-    "kernel_reuses_or_rederives_its_own_prior_diagnosis",
-    "target_is_kernel_or_kernel_tool_selected_not_host_selected",
-    "patch_is_kernel_tool_proposed_not_host_written",
+    "candidate_binds_the_existing_yado_self_generated_gene",
+    "target_is_not_host_selected",
+    "patch_is_not_host_written",
+    "valid_fresh_direct_evidence_is_recognized_by_shadow_self_audit",
+    "invalid_counterfactual_direct_evidence_fails_closed",
     "candidate_compiles",
-    "isolated_fresh_self_audit_consumes_relevant_direct_evidence",
-    "LIVE_RESOURCE_EVIDENCE_SCOPE_is_only_closed_if_new_evidence_is_valid",
     "runtime_compileall_passes",
     "selected_regression_suite_passes",
     "kernel_native_skill_admission_selects_candidate_or_explicitly_withholds",
@@ -31,6 +34,9 @@
     "no_host_solution_hint": true,
     "no_host_selected_target": true,
     "no_host_written_patch": true,
+    "no_substitute_acceptance_policy": true,
+    "must_bind_existing_self_generated_gene": true,
+    "no_hardcoded_pass": true,
     "no_new_import_roots": true,
     "no_eval_exec": true,
     "no_new_subprocess": true,
@@ -44,8 +50,8 @@
     "use_approved_external_no_key_coding_models_as_tools": true,
     "shadow_code_rewrite": true
   },
-  "host_role": "PROBLEM_CONTRACT_TRANSPORT_AND_ISOLATED_EVALUATION_ONLY",
-  "stop_condition": "EXECUTABLE_SHADOW_REPAIR_PASS_OR_EXPLICIT_KERNEL_WITHHOLD",
-  "trigger": 2,
-  "trigger_reason": "CONTINUE_AFTER_SELF_DIAGNOSIS_WITHHOLD_TO_EXECUTABLE_REPAIR"
+  "host_role": "TASK_TRANSPORT_STRICT_EVALUATION_ONLY",
+  "stop_condition": "SELF_GENERATED_GENE_SHADOW_INTEGRATED_OR_EXPLICIT_WITHHOLD",
+  "trigger": 3,
+  "trigger_reason": "INTEGRATE_NATIVE_GENE_AFTER_RUN_33841818519_PASS"
 }
