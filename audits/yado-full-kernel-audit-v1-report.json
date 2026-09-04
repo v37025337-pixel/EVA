@@ -1,5 +1,5 @@
 {
-  "audited_commit": "a82c44ef614bfdf07d860820d04ff50ee03be76d",
+  "audited_commit": "2c78458955bcd0612c8e96165bc3420abd2ae5c9",
   "branches": [
     {
       "active_only_commits": 1,
@@ -157,7 +157,7 @@
     "ledger_validation": "PASS"
   },
   "code": {
-    "compile_error_count": 1,
+    "compile_error_count": 0,
     "duplicate_groups": [],
     "stem_collisions": {},
     "unresolved_local_import_count": 0
@@ -170,180 +170,15 @@
     "historical_branches_audited": 14,
     "json_files": 811,
     "ledger_events": 278,
-    "local_import_edges": 1152,
+    "local_import_edges": 1154,
     "module_stem_collisions": 0,
     "runtime_python_files": 466,
     "workflow_files": 35
   },
-  "elapsed_seconds": 3.547179698944092,
-  "findings": [
-    {
-      "code": "PYTHON_COMPILE_ERRORS",
-      "details": [
-        {
-          "error": "PyCompileError('  File \"/home/runner/work/EVA/EVA/runtime/yado_g2_autonomous_self_rewrite_v1.py\", line 281\\n    ,p.name)\\n           ^\\nSyntaxError: unmatched \\')\\'\\n', 'SyntaxError', SyntaxError(\"unmatched ')'\", ('/home/runner/work/EVA/EVA/runtime/yado_g2_autonomous_self_rewrite_v1.py', 281, 8, ',p.name)', 281, 8)), '/home/runner/work/EVA/EVA/runtime/yado_g2_autonomous_self_rewrite_v1.py')",
-          "path": "runtime/yado_g2_autonomous_self_rewrite_v1.py"
-        }
-      ],
-      "message": "1 runtime Python files fail compilation.",
-      "severity": "CRITICAL"
-    },
-    {
-      "code": "AST_PARSE_ERRORS",
-      "details": [
-        {
-          "error": "SyntaxError(\"unmatched ')'\", ('<unknown>', 281, 8, ',p.name)', 281, 8))",
-          "path": "runtime/yado_g2_autonomous_self_rewrite_v1.py"
-        }
-      ],
-      "message": "1 runtime files fail AST parsing.",
-      "severity": "CRITICAL"
-    },
-    {
-      "code": "JSON_PARSE_ERRORS",
-      "details": [
-        {
-          "error": "JSONDecodeError('Extra data: line 6 column 2 (char 214)')",
-          "path": "architecture/yado-g2-second-novel-gene-inheritance-v1-request.json"
-        },
-        {
-          "error": "JSONDecodeError('Extra data: line 6 column 2 (char 210)')",
-          "path": "architecture/yado-g2-second-blind-novel-mechanism-invention-v1-request.json"
-        }
-      ],
-      "message": "2 JSON artifacts are invalid.",
-      "severity": "HIGH"
-    },
-    {
-      "code": "BROKEN_WORKFLOW_STATIC_REFERENCES",
-      "details": [
-        {
-          "path": "candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json",
-          "workflow": "yado-g2-autonomous-self-rewrite-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json",
-          "workflow": "yado-g2-autonomous-self-rewrite-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json",
-          "workflow": "yado-g2-autonomous-self-rewrite-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-self-synthesized-compile-repair-v1.json",
-          "workflow": "yado-g2-self-synthesized-compile-repair-v1.yml"
-        },
-        {
-          "path": "candidates/g2-self-evolution/yado_g2_autonomous_self_rewrite_v1_compile_repaired_candidate.py",
-          "workflow": "yado-g2-self-synthesized-compile-repair-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-self-synthesized-compile-repair-v1.json",
-          "workflow": "yado-g2-self-synthesized-compile-repair-v1.yml"
-        },
-        {
-          "path": "candidates/g2-self-evolution/yado_g2_autonomous_self_rewrite_v1_compile_repaired_candidate.py",
-          "workflow": "yado-g2-self-synthesized-compile-repair-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-native-action-evidence-binder-gene-v1.json",
-          "workflow": "yado-g2-native-action-evidence-binder-invention-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-native-action-evidence-binder-gene-v1.json",
-          "workflow": "yado-g2-native-action-evidence-binder-invention-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-native-action-evidence-binder-gene-v1.json",
-          "workflow": "yado-g2-native-action-evidence-binder-invention-v1.yml"
-        },
-        {
-          "path": "runtime/yado_current_frontier_execution_failure_history_v1_receipt.json",
-          "workflow": "yado-kernel-g2-raw-v4-robustness-self-evolution-v1.yml"
-        },
-        {
-          "path": "runtime/yado_kernel_g2_raw_representation_v4_robustness_self_evolution_v1_receipt.json",
-          "workflow": "yado-kernel-g2-raw-v4-robustness-self-evolution-v1.yml"
-        },
-        {
-          "path": "runtime/yado_kernel_g2_raw_representation_v4_robustness_self_evolution_v1_receipt.json",
-          "workflow": "yado-kernel-g2-raw-v4-robustness-self-evolution-v1.yml"
-        },
-        {
-          "path": "candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py",
-          "workflow": "yado-g2-native-source-realization-self-representation-driven-extended-controller-v1.yml"
-        },
-        {
-          "path": "candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py",
-          "workflow": "yado-g2-native-source-realization-self-representation-driven-extended-controller-v1.yml"
-        },
-        {
-          "path": "candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py",
-          "workflow": "yado-g2-native-source-realization-self-representation-driven-extended-controller-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_user_external_corpus_learning_v1_receipt.json",
-          "workflow": "yado-g2-user-external-corpus-learning-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_user_external_corpus_learning_v1_receipt.json",
-          "workflow": "yado-g2-user-external-corpus-learning-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_user_external_corpus_learning_v1_receipt.json",
-          "workflow": "yado-g2-user-external-corpus-learning-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_user_external_corpus_learning_v1_receipt.json",
-          "workflow": "yado-g2-user-external-corpus-learning-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_self_directed_development_cycle_v1_receipt.json",
-          "workflow": "yado-g2-self-directed-development-cycle-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_self_directed_development_cycle_v1_receipt.json",
-          "workflow": "yado-g2-self-directed-development-cycle-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_self_directed_development_cycle_v1_receipt.json",
-          "workflow": "yado-g2-self-directed-development-cycle-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_self_directed_development_cycle_v1_receipt.json",
-          "workflow": "yado-g2-self-directed-development-cycle-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-history-guided-compile-repair-invention-v1.json",
-          "workflow": "yado-g2-history-guided-compile-repair-invention-v1.yml"
-        },
-        {
-          "path": "candidates/g2-self-evolution/yado_g2_autonomous_self_rewrite_v1_history_repaired_candidate.py",
-          "workflow": "yado-g2-history-guided-compile-repair-invention-v1.yml"
-        },
-        {
-          "path": "candidates/kernel-self-generated/g2-history-guided-compile-repair-invention-v1.json",
-          "workflow": "yado-g2-history-guided-compile-repair-invention-v1.yml"
-        },
-        {
-          "path": "candidates/g2-self-evolution/yado_g2_autonomous_self_rewrite_v1_history_repaired_candidate.py",
-          "workflow": "yado-g2-history-guided-compile-repair-invention-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_algorithmic_transition_lineage_audit_v1_receipt.json",
-          "workflow": "yado-g2-algorithmic-transition-lineage-audit-v1.yml"
-        },
-        {
-          "path": "runtime/yado_g2_algorithmic_transition_lineage_audit_v1_receipt.json",
-          "workflow": "yado-g2-algorithmic-transition-lineage-audit-v1.yml"
-        }
-      ],
-      "message": "30 workflow references point to missing files.",
-      "severity": "HIGH"
-    }
-  ],
+  "elapsed_seconds": 3.5633656978607178,
+  "findings": [],
   "inventory": {
-    ".github": 36,
+    ".github": 37,
     ".gitignore": 1,
     "LICENSE": 1,
     "README.md": 1,
@@ -446,14 +281,15 @@
     }
   ],
   "schema": "yado.full_kernel_audit.v1",
-  "status": "FAIL_AUDIT",
+  "status": "PASS",
   "workflows": {
     "branch_trigger_counts": {
       "yado-architecture-shadow-search": 35
     },
     "count": 35,
+    "declared_generated_absent_count": 30,
     "request_trigger_count": 35,
-    "static_missing_reference_count": 30,
+    "static_missing_reference_count": 0,
     "yaml_error_count": 0
   }
 }
