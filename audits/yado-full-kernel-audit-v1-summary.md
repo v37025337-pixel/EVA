@@ -1,3 +1,7 @@
+# SUPERSEDED HISTORICAL AUDIT
+
+> This V1 report is preserved as historical evidence. Its physical-branch-divergence finding predates the verified G2 branch-closure work and must not be used as the current kernel verdict. Current runtime authority is `canonical/yado-unified-core-v1.json`; current head authority is `canonical/yado-main-head-g2.json`.
+
 # YADO Full Kernel Audit V1
 
 - Status: **FAIL_AUDIT**
