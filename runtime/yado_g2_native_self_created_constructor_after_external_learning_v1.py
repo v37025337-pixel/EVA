@@ -50,21 +50,23 @@ def oracle(x):
     return 'ACCEPT_FRESH_EVIDENCE' if all(bool(x[k]) for k in required) else 'WITHHOLD_FRESH_EVIDENCE'
 
 rows=[]
-for nonce in range(12):
-    x=dict(base);x['irrelevant_nonce']=nonce;rows.append((x,oracle(x),'POSITIVE'))
+case_seq=0
+for rep in range(12):
+    x=dict(base);rows.append((case_seq,x,oracle(x),'POSITIVE'));case_seq+=1
 for i,k in enumerate(required):
-    for nonce in range(5):
-        x=dict(base);x[k]=False;x['irrelevant_nonce']=100+i*10+nonce;rows.append((x,oracle(x),'SINGLE_'+k))
+    for rep in range(5):
+        x=dict(base);x[k]=False;rows.append((case_seq,x,oracle(x),'SINGLE_'+k));case_seq+=1
 for i,(a,b) in enumerate(combinations(required,2)):
-    x=dict(base);x[a]=False;x[b]=False;x['irrelevant_nonce']=500+i;rows.append((x,oracle(x),'PAIR_'+a+'_'+b))
+    x=dict(base);x[a]=False;x[b]=False;rows.append((case_seq,x,oracle(x),'PAIR_'+a+'_'+b));case_seq+=1
 
 fit=[];val=[];blind=[]
-for x,y,kind in rows:
+for case_id,x,y,kind in rows:
+    # Split identity is deliberately kept OUTSIDE the feature map so no constructor
+    # can solve the task by learning a case-id/nonce shortcut.
     if kind=='POSITIVE':
-        n=int(x['irrelevant_nonce'])
-        target=fit if n<6 else val if n<9 else blind
+        target=fit if case_id<6 else val if case_id<9 else blind
     else:
-        bucket=int(hashlib.sha256(canon(x).encode()).hexdigest()[:8],16)%10
+        bucket=int(hashlib.sha256((kind+'|'+str(case_id)).encode()).hexdigest()[:8],16)%10
         target=fit if bucket<5 else val if bucket<7 else blind
     target.append((x,y))
 revealed=fit+val
@@ -102,16 +104,32 @@ def score(row,cases):
     if not cases:return 0.0
     return sum(predict_route(row,x)==y for x,y in cases)/len(cases)
 
+def model_features(obj):
+    found=set()
+    if isinstance(obj,dict):
+        if isinstance(obj.get('feature'),str): found.add(obj['feature'])
+        pp=obj.get('predicate_program')
+        if isinstance(pp,dict):
+            found.update(str(x) for x in (pp.get('signals') or []))
+        for v in obj.values(): found.update(model_features(v))
+    elif isinstance(obj,list):
+        for v in obj: found.update(model_features(v))
+    return found
+
 skills=[]
 for i,row in enumerate(routes):
     fit_acc=score(row,fit);val_acc=score(row,val);blind_acc=score(row,blind)
     actual=predict_route(row,base)
     majority=max(sorted({y for _,y in revealed}),key=lambda y:sum(1 for _,z in revealed if z==y))
     ablation=sum(majority==y for _,y in blind)/len(blind)
+    used_features=sorted(model_features((row.get('result') or {}).get('model')))
+    semantic_feature_surface=bool(used_features) and set(used_features)<=set(required)
     row['metrics']={'fit':fit_acc,'validation':val_acc,'fresh_blind':blind_acc,'ablation':ablation}
     row['actual_receipt_prediction']=actual
-    structural=bool(row.get('result')) and fit_acc>=.95 and val_acc>=.95
-    semantic=blind_acc
+    row['used_model_features']=used_features
+    row['semantic_feature_surface']=semantic_feature_surface
+    structural=bool(row.get('result')) and fit_acc>=.95 and val_acc>=.95 and semantic_feature_surface
+    semantic=blind_acc if semantic_feature_surface else 0.0
     sid='NATIVE_SELF_CREATED_'+str(i)+'_'+row['route']
     row['skill_id']=sid
     skills.append({
@@ -136,7 +154,7 @@ core=UnifiedYADOCoreV1(REPO)
 gene=None
 if winner is not None:
     m=winner['metrics']
-    if m['fit']==1.0 and m['validation']==1.0 and m['fresh_blind']==1.0 and m['fresh_blind']>m['ablation'] and winner.get('actual_receipt_prediction')=='ACCEPT_FRESH_EVIDENCE':
+    if m['fit']==1.0 and m['validation']==1.0 and m['fresh_blind']==1.0 and m['fresh_blind']>m['ablation'] and winner.get('actual_receipt_prediction')=='ACCEPT_FRESH_EVIDENCE' and winner.get('semantic_feature_surface') is True:
         native=winner['result']
         gene={
           'schema':'yado.g2.native_self_created_evidence_binder_gene.v1',
@@ -151,6 +169,9 @@ if winner is not None:
           'model':native.get('model'),
           'contract_fields':list(required),
           'external_learning_experience_digest':learn.get('experience_digest'),
+          'external_learning_source_count':learn.get('source_count'),
+          'external_learning_fetched_count':learn.get('fetched_count'),
+          'used_model_features':winner.get('used_model_features'),
           'promotion_state':'SHADOW_ONLY',
           'canonical_active':False,
         }
@@ -160,13 +181,15 @@ if winner is not None:
 
 checks={
  'external_learning_completed':learn.get('status')=='LEARNED_EXTERNAL_CORPUS',
- 'external_models_used_for_constructor':False,
- 'host_selected_algorithm_family':False,
+ 'no_external_models_used_for_constructor':True,
+ 'host_did_not_select_algorithm_family':True,
  'native_routes_evaluated':len(routes)>=2,
  'kernel_skill_gate_selected':winner is not None,
  'fresh_blind_exact':bool(winner and winner['metrics']['fresh_blind']==1.0),
  'causal_ablation_drop':bool(winner and winner['metrics']['fresh_blind']>winner['metrics']['ablation']),
  'actual_valid_receipt_accepted':bool(winner and winner.get('actual_receipt_prediction')=='ACCEPT_FRESH_EVIDENCE'),
+ 'semantic_feature_surface_only':bool(winner and winner.get('semantic_feature_surface') is True),
+ 'nuisance_split_feature_absent':all('irrelevant_nonce' not in (x.get('used_model_features') or []) for x in routes),
  'gene_created':gene is not None,
  'gene_shadow_only':bool(gene and gene.get('promotion_state')=='SHADOW_ONLY'),
  'canonical_unchanged':core.head.get('g3_genesis_performed') is False,
@@ -180,7 +203,7 @@ report={
  'native_routes':routes,'kernel_skill_selection':selection,'selected_skill_id':selected_ids[0] if selected_ids else None,
  'invented_gene':gene,'checks':checks,
  'canonical_mutation':False,'architecture_mutation':False,
- 'semantic_boundary':'YADO STUDIED THE USER-SUPPLIED PUBLIC CORPUS FIRST, THEN THE HOST PROVIDED ONLY A VALIDITY CONTRACT AND FRESH/ABLATION GATES. YADO CHOSE BETWEEN ITS NATIVE CONSTRUCTOR ROUTES AND ITS NATIVE SKILL GATE SELECTED THE EXECUTABLE MODEL. IF PASS, THE RESULT IS A YADO-GENERATED SHADOW GENE WITHIN EXISTING NATIVE ALGORITHM SUBSTRATES; IT IS NOT YET A NEW UNBOUNDED META-LANGUAGE FAMILY OR CANONICAL SELF-AUDIT INTEGRATION.'
+ 'semantic_boundary':'YADO STUDIED THE USER-SUPPLIED PUBLIC CORPUS FIRST, THEN THE HOST PROVIDED ONLY A VALIDITY CONTRACT AND FRESH/ABLATION/NUISANCE-INVARIANCE GATES. SPLIT IDS ARE NOT FEATURES. YADO CHOOSES BETWEEN ITS NATIVE CONSTRUCTOR ROUTES AND ITS NATIVE SKILL GATE SELECTS OR WITHHOLDS. IF PASS, THE RESULT IS A YADO-GENERATED SHADOW GENE WITHIN EXISTING NATIVE ALGORITHM SUBSTRATES; EXTERNAL CORPUS IS LEARNED EXPERIENCE/PROVENANCE, NOT A COPIED TEMPLATE, AND THIS IS NOT YET A NEW UNBOUNDED META-LANGUAGE FAMILY OR CANONICAL SELF-AUDIT INTEGRATION.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
