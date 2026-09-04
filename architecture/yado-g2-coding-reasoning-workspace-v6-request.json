@@ -1,0 +1,20 @@
+{
+  "schema": "yado.g2.coding_reasoning_workspace_v6.request.v1",
+  "objective": "ELIMINATE_PROXY_SHORTCUTS_WITH_STAGE_LOCAL_OBSERVATIONS_AND_CONTRASTIVE_UNKNOWN_TWINS",
+  "instruction": "Consume V5 as a negative counterexample: fresh reasoning was exact and three retry clauses emerged, but two routes omitted stage_known and the HYPOTHESIS_READY decision used train_exact as a proxy for candidate_present. Keep the active ALG-BOUNDED-CAPABILITY-ROUTER-V1 unchanged. Expose only stage-local observable variables: candidate_present at HYPOTHESIS_READY, train_exact at TEST_RESULT, fresh_exact at CONSEQUENCE_RESULT. For every valid training/validation state add a contrastive twin with identical observations except stage_known=false and expected WITHHOLD_UNKNOWN. Learn again from accumulated coding experience, then require exact fresh reasoning, exact OOD fail-closed behavior, explicit guarded retry states, exact failure->revise->retest control, ablation and restore.",
+  "parent": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v5.json",
+  "required_active_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+  "representation_change": "STAGE_LOCAL_OBSERVATIONS_PLUS_CONTRASTIVE_UNKNOWN_TWINS",
+  "constraints": {
+    "third_party_code_execution": false,
+    "external_coding_model": false,
+    "ready_patch_from_host": false,
+    "host_written_reasoning_rules": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "algorithm_change": false
+  },
+  "host_role": "REPRESENTATION_REPAIR_CURRICULUM_TRANSPORT_FRESH_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+  "trigger": 1,
+  "trigger_reason": "V5_EXACT_FRESH_BUT_PROXY_SHORTCUTS_AND_OOD_GUARD_LEAK"
+}
