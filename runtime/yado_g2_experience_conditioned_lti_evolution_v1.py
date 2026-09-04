@@ -51,14 +51,9 @@ for e in events:
     x={
       'canonical_mutation':bool(e.get('canonical_mutation')),
       'promotion_applied':bool(e.get('promotion_applied')),
-      'has_parent_event_hash':bool(e.get('parent_event_hash')),
-      'has_source_digest':bool(e.get('source_digest')),
-      'has_run_id':bool(e.get('run_id')),
       'effect_has_fresh':'FRESH' in effect,
       'effect_has_rollback':'ROLLBACK' in effect,
-      'effect_has_base_reg':'BASE_REG' in effect or 'REGRESSION' in effect,
       'effect_has_error':'ERROR' in effect or 'FAILURE' in effect,
-      'effect_has_next':'NEXT=' in effect,
       'deficit_seen_before':prior>0,
     }
     logic_rows.append((x,status_pass(s)))
