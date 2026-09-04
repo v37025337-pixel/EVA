@@ -1,0 +1,73 @@
+name: YADO G2 Action Evidence Self Audit Self Study Repair V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-study-action-evidence-self-audit-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-action-evidence-self-audit-self-study-repair-v1
+  cancel-in-progress: true
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before self-study repair
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile self-study repair transport
+        run: python -m py_compile runtime/yado_g2_action_evidence_self_audit_self_study_repair_v1.py
+      - name: Run YADO self-study repair
+        id: repair
+        continue-on-error: true
+        run: python runtime/yado_g2_action_evidence_self_audit_self_study_repair_v1.py
+      - name: Canonical guard after self-study repair
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist PASS or WITHHOLD evidence
+        if: always()
+        run: |
+          git config user.name "YADO Self Study Repair"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json ]; then
+            git add candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json
+          fi
+          if compgen -G "candidates/g2-self-evolution/*_action_evidence_self_audit_candidate_v1.py" > /dev/null; then
+            git add candidates/g2-self-evolution/*_action_evidence_self_audit_candidate_v1.py
+          fi
+          git diff --cached --quiet || git commit -m "Persist YADO action-evidence self-audit self-study repair [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce semantic PASS
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json")
+          if not p.exists(): raise SystemExit("MISSING_SELF_STUDY_REPAIR_EVIDENCE")
+          r=json.loads(p.read_text())
+          assert r["host_selected_target"] is False,r
+          assert r["host_wrote_candidate_patch"] is False,r
+          assert r["canonical_mutation"] is False,r
+          assert r["canonical_head_unchanged"] is True,r
+          if r["status"]!="PASS_SHADOW_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          print(r["status"],r["selected_target_path"],r["selected_skill_id"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yado-g2-action-evidence-self-audit-self-study-repair-v1-${{ github.run_id }}
+          path: |
+            candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json
+            candidates/g2-self-evolution/*_action_evidence_self_audit_candidate_v1.py
+          if-no-files-found: warn
