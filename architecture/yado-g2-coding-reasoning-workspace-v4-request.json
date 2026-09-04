@@ -1,0 +1,32 @@
+{
+  "schema": "yado.g2.coding_reasoning_workspace_v4.request.v1",
+  "objective": "REPAIR_V3_DEFAULT_RETRY_BY_LEARNING_EXPLICIT_GUARDED_FAILURE_BRANCHES_AND_FAIL_CLOSED_UNKNOWN_STATES",
+  "instruction": "Consume accumulated V1/V2/V3 coding experience. Verify ALG-BOUNDED-CAPABILITY-ROUTER-V1 is already active in canonical G2. Use that YADO capability to learn explicit state-conditioned actions. REVISE_HYPOTHESIS must be selected only by guarded known failure states; unknown states must WITHHOLD_UNKNOWN. Prove on new V4 coding holdout, unknown-state holdout, ablation/restore, and a controller transition failure -> revise -> revised-candidate -> retest. Do not claim that this transition itself generates a new hypothesis or patch.",
+  "parents": [
+    "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v3.json",
+    "experience/yado-coding-reasoning-workspace-v3.json",
+    "experience/yado-coding-reasoning-workspace-v2.json",
+    "experience/yado-coding-apprenticeship-v1.json"
+  ],
+  "required_active_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+  "success_conditions": [
+    "fresh reasoning exact on new coding tasks",
+    "unknown states fail closed",
+    "REVISE_HYPOTHESIS has explicit multi-atom stage guards",
+    "retry guards cover hypothesis-ready, test-result, and consequence-result failures",
+    "failure -> revise -> retest controller transition is exact",
+    "ablation causes material drop and restore is exact",
+    "canonical G2 remains unchanged"
+  ],
+  "constraints": {
+    "third_party_code_execution": false,
+    "external_coding_model": false,
+    "ready_patch_from_host": false,
+    "host_written_reasoning_rules": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false
+  },
+  "host_role": "CURRICULUM_TRANSPORT_FRESH_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+  "trigger": 1,
+  "trigger_reason": "V3_FRESH_EXACT_BUT_RETRY_WAS_DEFAULT_FALLBACK"
+}
