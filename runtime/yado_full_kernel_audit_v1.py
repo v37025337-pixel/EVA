@@ -165,7 +165,11 @@ if missing_refs:add(findings,'HIGH','MISSING_CANONICAL_REFERENCES',f'{len(missin
 
 # ---------- workflows ----------
 workflows=list((ROOT/'.github/workflows').glob('*.y*ml'))
+generated_contract_path=ROOT/'.github/yado-generated-workflow-artifacts-v1.json'
+generated_contract=json.loads(generated_contract_path.read_text(encoding='utf-8')) if generated_contract_path.exists() else {'workflows':{}}
+generated_by_workflow={k:set(v or []) for k,v in (generated_contract.get('workflows') or {}).items()}
 workflow_ref_missing=[]
+workflow_generated_absent=[]
 workflow_branch_counts={}
 workflow_request_triggers=0
 path_re=re.compile(r'(?<![A-Za-z0-9_])((?:runtime|canonical|architecture|resources|candidates)/[A-Za-z0-9_./-]+\.(?:py|json))')
@@ -173,7 +177,11 @@ for p in workflows:
     txt=p.read_text(encoding='utf-8',errors='replace')
     for m in path_re.finditer(txt):
         rel=m.group(1)
-        if not (ROOT/rel).exists():workflow_ref_missing.append({'workflow':p.name,'path':rel})
+        if not (ROOT/rel).exists():
+            if rel in generated_by_workflow.get(p.name,set()):
+                workflow_generated_absent.append({'workflow':p.name,'path':rel})
+            else:
+                workflow_ref_missing.append({'workflow':p.name,'path':rel})
     if '-request.json' in txt:workflow_request_triggers+=1
     for b in re.findall(r'branches:\s*\[([^\]]+)\]',txt):
         for x in b.split(','):
@@ -263,7 +271,7 @@ report={
    'duplicate_groups':duplicate_groups[:100],'stem_collisions':stem_collisions
  },
  'workflows':{
-   'count':len(workflows),'static_missing_reference_count':len(workflow_ref_missing),
+   'count':len(workflows),'static_missing_reference_count':len(workflow_ref_missing),'declared_generated_absent_count':len(workflow_generated_absent),
    'yaml_error_count':len(yaml_errors),'request_trigger_count':workflow_request_triggers,
    'branch_trigger_counts':workflow_branch_counts
  },
