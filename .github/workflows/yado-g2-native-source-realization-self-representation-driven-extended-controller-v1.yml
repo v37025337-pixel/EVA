@@ -1,0 +1,76 @@
+name: YADO G2 Native Source Realization Extended Controller V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-native-source-realization-self-representation-driven-extended-controller-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-native-source-realization-extended-controller-v1
+  cancel-in-progress: true
+jobs:
+  source_realization:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before native source realization
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile strict observer
+        run: python -m py_compile runtime/yado_g2_native_source_realization_self_representation_driven_extended_controller_v1.py
+      - name: Let YADO realize its extended controller as source
+        id: realize
+        continue-on-error: true
+        run: python runtime/yado_g2_native_source_realization_self_representation_driven_extended_controller_v1.py
+      - name: Canonical guard after native source realization
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist native source-realization evidence
+        if: always()
+        run: |
+          git config user.name "YADO Native Source Realization"
+          git config user.email "actions@users.noreply.github.com"
+          files=()
+          [ -f candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json ] && files+=(candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json)
+          [ -f candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py ] && files+=(candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py)
+          if [ ${#files[@]} -gt 0 ]; then git add "${files[@]}"; fi
+          git diff --cached --quiet || git commit -m "Persist YADO native extended-controller source realization evidence [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce strict native source provenance verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json")
+          if not p.exists(): raise SystemExit("MISSING_NATIVE_SOURCE_REALIZATION_EVIDENCE")
+          r=json.loads(p.read_text())
+          c=r["checks"]
+          for key in ("external_coding_models_used","new_external_research_used","host_patch_used",
+                      "host_source_template_used","host_ast_skeleton_used","host_emitter_schema_used",
+                      "host_target_function_selected","host_new_dimension_name_used","host_gene_schema_used"):
+              assert c[key] is False,r
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          assert c["actual_new_source_bytes_produced_by_yado"] is True,r
+          assert c["candidate_source_compiles"] is True,r
+          assert c["structurally_broader_controller"] is True,r
+          print(r["status"],r["candidate_source_sha256"],r["candidate_dimensions"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yado-g2-native-source-realization-extended-controller-v1-${{ github.run_id }}
+          path: |
+            candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json
+            candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py
+          if-no-files-found: warn
