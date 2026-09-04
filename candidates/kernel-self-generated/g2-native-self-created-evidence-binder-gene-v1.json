@@ -10,19 +10,63 @@
     "priority_match"
   ],
   "external_learning_experience_digest": "07775857591ec41ef1b7d5111dab5d9971eace6def7f66f2846438f6db81f607",
+  "external_learning_fetched_count": 52,
+  "external_learning_source_count": 60,
   "external_model_generated": false,
-  "gene_digest": "99c46c090d4041b6d9ac72741cd7f6b5c882f66cd68cff4ccf1c35d0cda3b002",
-  "gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-9e31bcba356b954c",
+  "gene_digest": "00b86ebd2afc186a0574ef5611dec74214d2a5e355d78160027e23539f69ed65",
+  "gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
   "grammar_extension_id": null,
   "model": {
-    "feature": "irrelevant_nonce",
+    "feature": "priority_match",
     "left": {
-      "label": "ACCEPT_FRESH_EVIDENCE"
-    },
-    "right": {
       "label": "WITHHOLD_FRESH_EVIDENCE"
     },
-    "threshold": 55.0
+    "right": {
+      "feature": "comprehension_complete",
+      "left": {
+        "label": "WITHHOLD_FRESH_EVIDENCE"
+      },
+      "right": {
+        "feature": "direct_priority_evidence",
+        "left": {
+          "label": "WITHHOLD_FRESH_EVIDENCE"
+        },
+        "right": {
+          "feature": "canonical_immutable",
+          "left": {
+            "label": "WITHHOLD_FRESH_EVIDENCE"
+          },
+          "right": {
+            "feature": "conflict_resolution_pass",
+            "left": {
+              "label": "WITHHOLD_FRESH_EVIDENCE"
+            },
+            "right": {
+              "feature": "action_status_pass",
+              "left": {
+                "label": "WITHHOLD_FRESH_EVIDENCE"
+              },
+              "right": {
+                "feature": "action_relevant",
+                "left": {
+                  "label": "WITHHOLD_FRESH_EVIDENCE"
+                },
+                "right": {
+                  "label": "ACCEPT_FRESH_EVIDENCE"
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    "threshold": 0.5
   },
   "origin": "YADO_NATIVE_ALGORITHM_BANK_AFTER_EXTERNAL_CORPUS_LEARNING",
   "predicate_program": null,
@@ -30,8 +74,17 @@
   "schema": "yado.g2.native_self_created_evidence_binder_gene.v1",
   "selected_algorithm": {
     "family": "CART_AXIS",
-    "max_depth": 1
+    "max_depth": 7
   },
   "selected_native_route": "NATIVE_META_EVOLVE_INTELLIGENCE",
-  "self_created_model": true
+  "self_created_model": true,
+  "used_model_features": [
+    "action_relevant",
+    "action_status_pass",
+    "canonical_immutable",
+    "comprehension_complete",
+    "conflict_resolution_pass",
+    "direct_priority_evidence",
+    "priority_match"
+  ]
 }
