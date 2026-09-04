@@ -1,5 +1,11 @@
 from __future__ import annotations
 from copy import deepcopy
+from pathlib import Path
+import sys
+
+_ROOT=Path(__file__).resolve().parent
+_PKG=_ROOT/'yado_rc8_v36'
+if str(_PKG) not in sys.path:sys.path.insert(0,str(_PKG))
 
 from yado_organ_runtime_native_v1 import plan_with_edges, tree_predict
 from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
