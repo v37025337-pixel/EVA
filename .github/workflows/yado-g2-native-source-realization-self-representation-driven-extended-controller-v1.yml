@@ -56,8 +56,11 @@ jobs:
           c=r["checks"]
           for key in ("external_coding_models_used","new_external_research_used","host_patch_used",
                       "host_source_template_used","host_ast_skeleton_used","host_emitter_schema_used",
-                      "host_target_function_selected","host_new_dimension_name_used","host_gene_schema_used"):
+                      "host_target_function_selected","host_new_dimension_name_invented","host_gene_schema_used"):
               assert c[key] is False,r
+          assert c["host_transported_yado_selected_dimension"] is True,r
+          assert c["dimension_origin_yado_failure_history"] is True,r
+          assert c["dimension_selected_by_yado"] is True,r
           assert r["canonical_mutation"] is False,r
           if r["status"]!="PASS_SHADOW_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1":
               raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
