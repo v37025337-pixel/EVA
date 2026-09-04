@@ -1,0 +1,94 @@
+{
+  "architecture_mutation": false,
+  "candidate_digest": "a2b25703fb4efafc805f36b82c6560b0ed0ce6bda329fd7cc12979529dcfd063",
+  "canonical_component_digest": null,
+  "canonical_mechanism_mutation": false,
+  "checks": {
+    "architecture_family_unchanged": true,
+    "base_regression": true,
+    "candidate_fixed_before_fresh": true,
+    "fresh_direct_accuracy": false,
+    "fresh_sequential_accuracy": false,
+    "fresh_sequential_gain": true,
+    "fresh_wrapped_accuracy": false,
+    "g3_not_started": true,
+    "kernel_selects_v5": false,
+    "previous_v5_fresh_reproduction": true,
+    "v4_rollback_available": true
+  },
+  "fresh_dataset_digest": "857355c78789d872d4966ef6c0e533424e701a6e37cd7e08918634b39f4cc41b",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "kernel_selection": {
+    "candidate_count": 2,
+    "gate_digest": "090ba6a769a92e2bad2c8effde91fb6a4f8079136fb500080bdae320bef3a196",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "549f594d9425288c02c283206b68d5b242b3ca9709f1cceb534c353453e79e9d",
+        "failed_critics": [
+          "regression"
+        ],
+        "fit_gain": 0.053750000000000075,
+        "heldout_gain": 0.03083333333333338,
+        "skill_id": "ADMIT_RAW_V5_SEQUENCE_ROBUST",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "73b52b049cc1bf33fd59628aeba44efa0595b00a64350c4cdeb70e1c797b3f93",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_RAW_V4",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "metrics": {
+    "base_regression_accuracy": 1.0,
+    "parent_fresh_direct": 0.9583333333333334,
+    "parent_fresh_sequential": 0.9154166666666667,
+    "parent_fresh_wrapped": 0.9166666666666666,
+    "previous_v5_fresh_reproduction": 0.9861111111111112,
+    "v5_fresh_direct": 0.9583333333333334,
+    "v5_fresh_sequential": 0.94625,
+    "v5_fresh_wrapped": 0.9583333333333334
+  },
+  "new_head_digest": "ac4e7853b3b0dcb58a76b068f9d9c0098b764ab582a0df5aa115f9c0ea59c89a",
+  "next_required_capability": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "previous_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+  "receipt_sha256": "bc3f54f0f72ac94310d85e1ded193544c9f68bfcd1048522a0a43cb0d917e646",
+  "schema": "yado.g2.raw_representation_v5_canonical_admission.receipt.v1",
+  "selected_mode": "V4_PLUS_CORE_VOTE",
+  "selected_skill_id": null,
+  "semantic_boundary": "INDEPENDENT FRESH CANONICAL ADMISSION OF V5 SEQUENCE/WRAPPER ROBUST RAW ROUTING. SAME-G2 COMPONENT REPLACEMENT; V4 REMAINS ROLLBACK.",
+  "status": "WITHHOLD_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1"
+}
