@@ -198,7 +198,31 @@ checks={
  'host_source_template_used':False,
  'controller_mutation':False,
 }
-passed=all(checks.values())
+passed=(
+ checks['exact_prior_failure_consumed']
+ and checks['exact_controller_self_study_consumed']
+ and checks['mechanical_self_observation_only']
+ and checks['native_goal_created']
+ and checks['native_deficit_detected']
+ and checks['native_representation_created']
+ and checks['fresh_blind_ge_0_90']
+ and checks['causal_ablation_drop']
+ and checks['restore_exact']
+ and checks['probe_exact']
+ and checks['representation_visible_to_subsequent_evolution']
+ and checks['controller_source_unchanged']
+ and checks['rollback_parent_available']
+ and checks['canonical_unchanged']
+ and checks['external_coding_models_used'] is False
+ and checks['new_external_research_used'] is False
+ and checks['host_model_family_used'] is False
+ and checks['host_rule_used'] is False
+ and checks['host_target_function_selected'] is False
+ and checks['host_new_dimension_name_used'] is False
+ and checks['host_patch_used'] is False
+ and checks['host_source_template_used'] is False
+ and checks['controller_mutation'] is False
+)
 status='PASS_SHADOW_G2_NATIVE_EXECUTABLE_EVOLUTION_CONTROLLER_SELF_REPRESENTATION_V1' if passed else 'WITHHOLD_G2_NATIVE_EXECUTABLE_EVOLUTION_CONTROLLER_SELF_REPRESENTATION_V1'
 
 report={
