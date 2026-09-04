@@ -1,0 +1,173 @@
+{
+  "ablation_score": 0.140625,
+  "blind_reasoning_case_count": 64,
+  "branching_fresh_score": 0.765625,
+  "canonical_mutation": false,
+  "experience_digest": "72560afae40d86eef25a548eb3c2352efb4739289f51b02ae294356684f689ed",
+  "fit_reasoning_case_count": 128,
+  "fresh_episodes": [
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x * -3 + 5\n",
+      "candidate_source_sha256": "2bcc5f294f868612e2bf6f283485295befc4d8475fffe54d88cc5246a634393d",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "F2_NEG3P5",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x + -131 if x <= -5 else x * 6 + -1 if x <= 0 else x * 23 + -21\n",
+      "candidate_source_sha256": "60d6ddf39b93fb46d03b7266949738da43260c3a7eb51b030cf97deea0b58b00",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "F2_CUBIC",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x + 5 if x <= -5 else x + 5 if x <= -2 else x\n",
+      "candidate_source_sha256": "1d24ddbe7bf26c8db41c99da1cc23999d18c9c6000d778fa82c3a58d08dc1f5d",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.4,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "F2_MOD5",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return x + 12 if x <= -5 else x + 6 if x <= -2 else x + 2\n",
+      "candidate_source_sha256": "99ce11eb2950271a9d92967c218d8e2e09cd2f183bd0a8478f13766c78e3aab1",
+      "features": {
+        "is_write": false,
+        "multivariate": false,
+        "non_polynomial": true,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.6,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "SUPPORT_RANKED_RECURSIVE",
+      "task_id": "F2_ABS",
+      "task_kind": "REPAIR",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return 5 * 1 + -3 * x + 2 * (x * x)\n",
+      "candidate_source_sha256": "80965050764b2f67272e3789ce5cd11114f913565e63455aca9d3f8883b0da01",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "F2_QUAD",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": true,
+      "candidate_source_excerpt": "def f(x):\n    return 1 + 2 * x + x * x * x\n",
+      "candidate_source_sha256": "8013edb33a404580c32d94c31dc272ac46c92e61c769d224c8580c3e3c93db2f",
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": true,
+      "fresh_score": 1.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": null,
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "F2_CUBIC_WRITE",
+      "task_kind": "WRITE",
+      "train_score": 1.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": false,
+        "non_polynomial": false,
+        "requires_degree_gt3": true
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "reason": "NO_UNIVARIATE_POLYNOMIAL_WITHIN_GENE_BUDGET",
+      "repair_mode": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "task_id": "F2_QUARTIC_WRITE",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    },
+    {
+      "candidate_present": false,
+      "candidate_source_excerpt": null,
+      "candidate_source_sha256": null,
+      "features": {
+        "is_write": true,
+        "multivariate": true,
+        "non_polynomial": false,
+        "requires_degree_gt3": false
+      },
+      "fresh_exact": false,
+      "fresh_score": 0.0,
+      "input_source_sha256": "e09f888523377bc686b5a85d9ada5ecf6b35a2b81f9295c728763cf82f38545c",
+      "reason": "UNIVARIATE_ONLY",
+      "repair_mode": null,
+      "task_id": "F2_BIVARIATE_WRITE",
+      "task_kind": "WRITE",
+      "train_score": 0.0
+    }
+  ],
+  "historical_episode_count": 16,
+  "linear_baseline_score": 0.859375,
+  "majority_baseline_score": 0.140625,
+  "parent_experience_digest": "640eafe1c895babd050bf42e19d42188472bf53721be982bd62eea0365e55ed3",
+  "reasoning_gene": null,
+  "restore_score": 0.765625,
+  "retry_blind_count": 9,
+  "retry_fit_count": 18,
+  "schema": "yado.g2.coding_reasoning_workspace.experience.v2",
+  "semantic_boundary": "USER-SPECIFIED PROGRAMMER REASONING CURRICULUM DEFINES PHASE/RETRY SEMANTICS. YADO NATIVE DEVELOPMENTAL EXECUTIVE SYNTHESIZES THE ACTUAL STATE-CONDITIONED RULE PROGRAM FROM CODING SUCCESS/FAILURE MEMORY. NO READY HOST PATCH OR EXTERNAL CODING MODEL IS USED; ALL NEW STATE REMAINS SHADOW.",
+  "status": "TRAINED"
+}
