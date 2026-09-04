@@ -1,0 +1,344 @@
+{
+  "canonical_mutation": false,
+  "cognitive_gene": {
+    "components": {
+      "INTELLIGENCE": "GENE-G2-CODING-EXPERIENCE-INTELLIGENCE-V1-8145cee59b19c3b6",
+      "LOGIC": "GENE-G2-CODING-EXPERIENCE-LOGIC-V1-ef8ff811e1db281d",
+      "THINKING": "GENE-G2-CODING-EXPERIENCE-THINKING-V1-2520aebee4812646"
+    },
+    "fresh_composite": 0.85,
+    "gene_digest": "c1c71bfab315e8e1e7392fd6ca731dd16eee7eedb02401c1ac68ea6a88912f3c",
+    "gene_id": "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V1-9fccd4bc4d0d223b",
+    "heritage": [
+      "GENE-G2-EXPERIENCE-LOGIC-dd561be1707c566f",
+      "GENE-G2-EXPERIENCE-INTELLIGENCE-0e1473e5c8f5371a",
+      "GENE-G2-EXPERIENCE-THINKING-1c57f707bf79f891",
+      "GENE-G2-EXPERIENCE-THINKING-V2-b4296d7a4338e348",
+      "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d",
+      "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+      "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+      "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+      "GENE-G2-CODING-REAL-CODE-TRANSFER-V2-ea7acb92374c95a7",
+      "GENE-G2-CODING-REAL-CODE-TRANSFER-V3-3765122f95603ece"
+    ],
+    "mechanism_kind": "EXPERIENCE_CONDITIONED_FAIL_CLOSED_LOGIC_THINKING_INTELLIGENCE_COMPOSITE",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.coding_experience_cognitive_layer_gene.v1"
+  },
+  "experience_digest": "ac4cd838d1027544dc915496a40bbadb3be79045598afc439349d4e6b0d0de7e",
+  "metrics": {
+    "composite_fresh": 0.85,
+    "intelligence_fresh": 0.85,
+    "intelligence_unknown_fail_closed_score": 1.0,
+    "logic_ablation": 0.6111111111111112,
+    "logic_fresh": 0.9444444444444444,
+    "thinking_ablation": 0.55,
+    "thinking_fresh": 0.95,
+    "unknown_fail_closed": true
+  },
+  "organ_genes": {
+    "INTELLIGENCE": {
+      "ablation_unknown_fail_closed": 1.0,
+      "fresh": 0.85,
+      "gene_digest": "89fa87f3014476d75a00bf9f572ccfbefe90b31cead8d6d7478e268012bb968e",
+      "gene_id": "GENE-G2-CODING-EXPERIENCE-INTELLIGENCE-V1-8145cee59b19c3b6",
+      "heritage": [
+        "GENE-G2-EXPERIENCE-LOGIC-dd561be1707c566f",
+        "GENE-G2-EXPERIENCE-INTELLIGENCE-0e1473e5c8f5371a",
+        "GENE-G2-EXPERIENCE-THINKING-1c57f707bf79f891",
+        "GENE-G2-EXPERIENCE-THINKING-V2-b4296d7a4338e348",
+        "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d",
+        "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+        "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+        "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+        "GENE-G2-CODING-REAL-CODE-TRANSFER-V2-ea7acb92374c95a7",
+        "GENE-G2-CODING-REAL-CODE-TRANSFER-V3-3765122f95603ece"
+      ],
+      "model": {
+        "candidate_count": 98,
+        "fallback_output": "WITHHOLD",
+        "fields": [
+          "failure_seen",
+          "formal_spec_present",
+          "hypothesis_set_present",
+          "real_source",
+          "repair_regressed",
+          "result_exact",
+          "reversible",
+          "state_known"
+        ],
+        "kind": "COVERAGE_PRUNED_COMPOSITIONAL_TRIGGER_ROUTER_V3",
+        "outputs": [
+          "ACTIVE_EVIDENCE_SEARCH",
+          "HYPOTHESIS_REVISION",
+          "ITERATIVE_REAL_REPAIR",
+          "ORACLE_GUIDED_REPAIR",
+          "WITHHOLD"
+        ],
+        "triggers": {
+          "ACTIVE_EVIDENCE_SEARCH": [
+            {
+              "atoms": [
+                {
+                  "field": "hypothesis_set_present",
+                  "value": true
+                },
+                {
+                  "field": "state_known",
+                  "value": true
+                }
+              ],
+              "positive_gain": 17,
+              "precision": 1.0,
+              "support": 17
+            }
+          ],
+          "HYPOTHESIS_REVISION": [],
+          "ITERATIVE_REAL_REPAIR": [
+            {
+              "atoms": [
+                {
+                  "field": "reversible",
+                  "value": true
+                },
+                {
+                  "field": "state_known",
+                  "value": true
+                }
+              ],
+              "positive_gain": 7,
+              "precision": 1.0,
+              "support": 7
+            }
+          ],
+          "ORACLE_GUIDED_REPAIR": []
+        }
+      },
+      "organ": "INTELLIGENCE",
+      "promotion_state": "SHADOW_ONLY",
+      "restore": 0.85,
+      "schema": "yado.g2.coding_experience_intelligence_gene.v1"
+    },
+    "LOGIC": {
+      "ablation": 0.6111111111111112,
+      "fresh": 0.9444444444444444,
+      "gene_digest": "eef508d3feda3bfb6288fea0e756e18d897a6c613f93d171562a6f9f2c87309a",
+      "gene_id": "GENE-G2-CODING-EXPERIENCE-LOGIC-V1-ef8ff811e1db281d",
+      "heritage": [
+        "GENE-G2-EXPERIENCE-LOGIC-dd561be1707c566f",
+        "GENE-G2-EXPERIENCE-INTELLIGENCE-0e1473e5c8f5371a",
+        "GENE-G2-EXPERIENCE-THINKING-1c57f707bf79f891",
+        "GENE-G2-EXPERIENCE-THINKING-V2-b4296d7a4338e348",
+        "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d",
+        "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+        "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+        "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+        "GENE-G2-CODING-REAL-CODE-TRANSFER-V2-ea7acb92374c95a7",
+        "GENE-G2-CODING-REAL-CODE-TRANSFER-V3-3765122f95603ece"
+      ],
+      "organ": "LOGIC",
+      "program": {
+        "default_output": "WITHHOLD",
+        "digest": "ea0a2cfec745a8774e5cdb054b87a8bd68c0fc9c28c4f998e850d860c7d20464",
+        "program_id": "CJ-fe2eb1c805cb",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "ACCEPT",
+            "predicates": [
+              {
+                "field": "repair_regressed",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "state_known",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 26
+          }
+        ],
+        "source_digest": "3d6f8e13b035c60b62bbdabda48f9c0e0ff32c573ce334d06e7df76bed242f36",
+        "status": "SHADOW",
+        "target_capability": "G2_CODING_EXPERIENCE_LOGIC_CONSOLIDATION",
+        "target_organ": "LOGIC",
+        "training_count": 60
+      },
+      "promotion_state": "SHADOW_ONLY",
+      "restore": 0.9444444444444444,
+      "schema": "yado.g2.coding_experience_logic_gene.v1"
+    },
+    "THINKING": {
+      "ablation": 0.55,
+      "fresh": 0.95,
+      "gene_digest": "2c1bc75957ae6b6e243c4dd5f2c12b4f597ad9cac5cc47c56a7ab48e59e52435",
+      "gene_id": "GENE-G2-CODING-EXPERIENCE-THINKING-V1-2520aebee4812646",
+      "heritage": [
+        "GENE-G2-EXPERIENCE-LOGIC-dd561be1707c566f",
+        "GENE-G2-EXPERIENCE-INTELLIGENCE-0e1473e5c8f5371a",
+        "GENE-G2-EXPERIENCE-THINKING-1c57f707bf79f891",
+        "GENE-G2-EXPERIENCE-THINKING-V2-b4296d7a4338e348",
+        "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d",
+        "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+        "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+        "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+        "GENE-G2-CODING-REAL-CODE-TRANSFER-V2-ea7acb92374c95a7",
+        "GENE-G2-CODING-REAL-CODE-TRANSFER-V3-3765122f95603ece"
+      ],
+      "organ": "THINKING",
+      "program": {
+        "default_output": "WITHHOLD",
+        "digest": "27354cb53ce1e21f1444516a2a7fc583bbc2ad2123eec7063e80dc9c840240fb",
+        "program_id": "CJ-097bdcbc7c44",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "SEEK_EVIDENCE",
+            "predicates": [
+              {
+                "field": "state_known",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "oracle_available",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 35
+          },
+          {
+            "confidence": 1.0,
+            "output": "SEEK_EVIDENCE",
+            "predicates": [
+              {
+                "field": "state_known",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "hypothesis_set_present",
+                "op": "EQ",
+                "value": true
+              }
+            ],
+            "support": 17
+          },
+          {
+            "confidence": 1.0,
+            "output": "SEEK_EVIDENCE",
+            "predicates": [
+              {
+                "field": "failure_seen",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "state_known",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "repair_regressed",
+                "op": "EQ",
+                "value": false
+              }
+            ],
+            "support": 9
+          },
+          {
+            "confidence": 1.0,
+            "output": "ACCEPT",
+            "predicates": [
+              {
+                "field": "state_known",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "failure_seen",
+                "op": "EQ",
+                "value": false
+              }
+            ],
+            "support": 7
+          },
+          {
+            "confidence": 1.0,
+            "output": "BUILD_ORACLE",
+            "predicates": [
+              {
+                "field": "state_known",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "oracle_available",
+                "op": "EQ",
+                "value": false
+              }
+            ],
+            "support": 7
+          },
+          {
+            "confidence": 1.0,
+            "output": "REVISE",
+            "predicates": [
+              {
+                "field": "state_known",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "formal_spec_present",
+                "op": "EQ",
+                "value": false
+              },
+              {
+                "field": "candidate_available",
+                "op": "EQ",
+                "value": false
+              }
+            ],
+            "support": 5
+          }
+        ],
+        "source_digest": "79a20763dcfb826cf16c6ead0e0651cc8cb34b844c46e084e4be02ab11030579",
+        "status": "SHADOW",
+        "target_capability": "G2_CODING_EXPERIENCE_NEXT_COGNITIVE_ACTION",
+        "target_organ": "THINKING",
+        "training_count": 178
+      },
+      "promotion_state": "SHADOW_ONLY",
+      "restore": 0.95,
+      "schema": "yado.g2.coding_experience_thinking_gene.v1"
+    }
+  },
+  "row_counts": {
+    "intelligence": [
+      80,
+      20
+    ],
+    "logic": [
+      60,
+      18
+    ],
+    "thinking": [
+      178,
+      40
+    ]
+  },
+  "schema": "yado.g2.coding_experience_cognitive_consolidation.experience.v1",
+  "semantic_boundary": "THIS CONSOLIDATES OBSERVED YADO CODING EXPERIENCE INTO NEW SHADOW LOGIC/THINKING/INTELLIGENCE CONTROL GENES. TRAINING LABELS ARE MECHANICALLY EXTRACTED FROM ACTUAL RECORDED ACTIONS AND OUTCOMES; UNKNOWN CONTRASTIVE TWINS IMPLEMENT THE PREVIOUS V6/V7 FAIL-CLOSED REPRESENTATION LESSON. IT DOES NOT CHANGE MODEL WEIGHTS, CLAIM AGI, OR PROMOTE TO CANONICAL.",
+  "source_experience_digests": {
+    "open": "b6b5672fee274957ccca052f49feba77f57b0c1cd685a771874c582021082335",
+    "oracle": "3c31847512cb073f84e65565cbc6de1724f2de6cf1ccce9773011d71f195ddf8",
+    "real_v2": "afbc2f9e42469d5391addee4b0620c7291d71338619a521da0a7124e7a7091c7",
+    "real_v3": "2b0fd2aa6507d66c8acd9da4f018fe1103e8dfe99cb96c272f2fd3ac4eb47ea7",
+    "revision": "bc6ff2cbb415991695421e934930ead18ba09e33c2b4bd3377988e6259525195"
+  },
+  "status": "WITHHOLD"
+}
