@@ -4,7 +4,8 @@ import copy,hashlib,json,os,re,sys
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
-sys.path.insert(0,str(ROOT))
+PKG=ROOT/'yado_rc8_v36'
+sys.path[:0]=[str(ROOT),str(PKG)]
 
 from yado_organ_runtime_native_v1 import plan_with_edges,tree_predict
 from yado_work_budget_adaptive_contingent_planner_v2 import ContingentStage
