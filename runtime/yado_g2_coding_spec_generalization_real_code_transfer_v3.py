@@ -14,7 +14,8 @@ from yado_bounded_compositional_program_repair_v3 import BoundedCompositionalPro
 from yado_ambiguity_aware_program_repair_v11 import AmbiguityAwareProgramRepairV11
 
 TASK=REPO/'architecture/yado-g2-coding-spec-generalization-real-code-transfer-v3-request.json'
-PARENT=REPO/'candidates/kernel-self-generated/g2-coding-self-generated-test-oracle-v1.json'\nFAIL_PARENT=REPO/'candidates/kernel-self-generated/g2-coding-spec-generalization-real-code-transfer-v2.json'
+PARENT=REPO/'candidates/kernel-self-generated/g2-coding-self-generated-test-oracle-v1.json'
+FAIL_PARENT=REPO/'candidates/kernel-self-generated/g2-coding-spec-generalization-real-code-transfer-v2.json'
 HEAD=REPO/'canonical/yado-main-head-g2.json'
 OUT=REPO/'candidates/kernel-self-generated/g2-coding-spec-generalization-real-code-transfer-v3.json'
 EXP=REPO/'experience/yado-coding-real-code-transfer-v3.json'
@@ -327,7 +328,8 @@ experience={
  'oracle_hidden_score':oracle_hidden,'mutated_holdout_score':mutated_score,'repaired_holdout_score':repaired_score,
  'repair_ablation_score':ablation,'restore_score':restore,'mean_generated_test_count':mean_tests,
  'real_code_transfer_gene':gene,'canonical_mutation':False,
- 'v1_failure_run_id':'33918917875','v1_failure_signature':'INSUFFICIENT_REAL_SOURCE_EXPRESSIONS:5',\n 'v2_failure_receipt':fail_parent.get('receipt_sha256'),'v2_failure_repaired_holdout':fail_parent.get('repaired_holdout_score'),
+ 'v1_failure_run_id':'33918917875','v1_failure_signature':'INSUFFICIENT_REAL_SOURCE_EXPRESSIONS:5',
+ 'v2_failure_receipt':fail_parent.get('receipt_sha256'),'v2_failure_repaired_holdout':fail_parent.get('repaired_holdout_score'),
  'semantic_boundary':'V3 CONSUMES V1 DISCOVERY COVERAGE FAILURE AND V2 NEGATIVE REPAIR TRANSFER.  REAL TRANSFER HERE MEANS ALGEBRAIC AST FRAGMENTS MECHANICALLY EXTRACTED FROM CURRENT ACTIVE YADO SOURCE FILES, NORMALIZED ONLY BY VARIABLE RENAMING, THEN MUTATED IN SHADOW BY THE ACTIVE BOUNDED MUTATION GRAMMAR. THE ORIGINAL FRAGMENT IS HIDDEN FROM THE PATCH PATH AND USED ONLY FOR FORMAL SPEC/HIDDEN EVALUATION. THIS IS STRONGER THAN SYNTHETIC FUNCTIONS BUT IS NOT YET WHOLE-FUNCTION OR MULTI-FILE SOFTWARE REPAIR.'
 }
 experience['experience_digest']=digest(experience)
