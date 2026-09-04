@@ -1,0 +1,23 @@
+{
+  "schema": "yado.g2.coding_self_generated_test_oracle_v1.request.v1",
+  "objective": "REMOVE_THE_HOST_RUNTIME_ORACLE_BY_SYNTHESIZING_A_TEST_ORACLE_FROM_FORMAL_SPECIFICATION",
+  "instruction": "Consume the passed open-ended defect hypothesis gene. For each fresh task, the host may provide a small formal specification dataset only. The already-active G2 semantic expression synthesizer must construct an executable oracle expression and pass a hidden oracle-validation set without receiving those labels back. YADO must then select new test inputs itself, compute expected values only through the synthesized oracle, and feed those self-generated tests to the active evolutionary coding gene to synthesize a patch. The formal specification rows must not be used directly as the patch training tests. Final code holdout labels must never be used for oracle synthesis, test selection or patch synthesis. Require exact hidden oracle validation, exact final code holdout, material no-oracle ablation, changed source, and deterministic restore.",
+  "parent": "candidates/kernel-self-generated/g2-coding-open-ended-defect-hypothesis-v1.json",
+  "required_active_capabilities": [
+    "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
+    "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+    "CTRL-G2-EVOLUTIONARY-GENOME-V1"
+  ],
+  "constraints": {
+    "host_selected_test_input": false,
+    "host_supplied_generated_test_expected": false,
+    "host_selected_patch": false,
+    "external_coding_model": false,
+    "final_holdout_feedback": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false
+  },
+  "host_role": "FORMAL_SPECIFICATION_PROVIDER_AND_HIDDEN_VALIDATOR_ONLY",
+  "trigger": 1,
+  "trigger_reason": "OPEN_ENDED_DEFECT_HYPOTHESIS_V1_PASSED_NEXT_DEFICIT_IS_REMOVING_RUNTIME_ORACLE_DEPENDENCE"
+}
