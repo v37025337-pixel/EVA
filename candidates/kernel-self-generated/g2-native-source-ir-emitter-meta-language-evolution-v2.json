@@ -4,7 +4,8 @@
     "actual_python_source_already_emitted": false,
     "all_exact_parent_evidence_consumed": true,
     "canonical_unchanged": true,
-    "emitter_candidate_failure_memory_bound": true,
+    "emitter_candidate_failure_memory_bound": false,
+    "emitter_candidate_has_novel_identity": false,
     "external_coding_models_used": false,
     "host_ast_skeleton_used": false,
     "host_meta_language_template_used": false,
@@ -17,18 +18,18 @@
     "native_evolution_or_genesis_executed": true,
     "native_goal_created": true,
     "new_external_research_used": false,
-    "previously_absent_emitter_meta_language_created": true,
+    "previously_absent_emitter_meta_language_created": false,
     "rollback_parent_available": true
   },
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-04T17:53:01.099429+00:00",
-        "deficit_id": "D-9fa5423474e3",
+        "created_at": "2026-09-04T17:55:15.187000+00:00",
+        "deficit_id": "D-05a46afffd90",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-a5f831bb09f8",
+        "goal_id": "G-2be5025d1aff",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -36,7 +37,7 @@
         "target": "NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2"
       }
     ],
-    "goal_id": "G-a5f831bb09f8"
+    "goal_id": "G-2be5025d1aff"
   },
   "native_outputs": {
     "controller_calls": {
@@ -1176,95 +1177,8 @@
     }
   },
   "native_source_candidates": [],
-  "new_emitter_meta_language_candidates": [
-    {
-      "digest": "abbc141e840681cac8ed08e5afac21625110246753d8d0e749e066a2cc72bb2b",
-      "failure_bound": true,
-      "keys": [
-        "controller_calls",
-        "kernel_calls"
-      ],
-      "new_gene": false,
-      "path": "root"
-    },
-    {
-      "digest": "94f4c02e9ddd01c2bf63f26a0adc3e8b2b490158fdfb13f9ac33348aefb8b7dc",
-      "failure_bound": true,
-      "keys": [
-        "evolve_once"
-      ],
-      "new_gene": false,
-      "path": "root.controller_calls"
-    },
-    {
-      "digest": "9a426135376403a2a6586bb44c55a09dfd10772ab93f69b37125fcfbf2d8233c",
-      "failure_bound": true,
-      "keys": [
-        "architecture_mutation",
-        "child",
-        "controller_id",
-        "deficits",
-        "fitness",
-        "g3_genesis_performed",
-        "generation_transition",
-        "parent",
-        "promotion_authorized",
-        "run_digest",
-        "schema",
-        "selection",
-        "selection_semantics"
-      ],
-      "new_gene": false,
-      "path": "root.controller_calls.evolve_once"
-    },
-    {
-      "digest": "c5745fe2e9050b3f7a7820c8e84942e1ee6ffc64fb332e41723ad96067c6a6dc",
-      "failure_bound": true,
-      "keys": [
-        "chromosomes",
-        "experience_sources",
-        "generation",
-        "genome_digest",
-        "genome_id",
-        "mutation_count",
-        "novel_gene_count",
-        "parent_genome_digest",
-        "promotion_state",
-        "schema"
-      ],
-      "new_gene": false,
-      "path": "root.controller_calls.evolve_once.child"
-    },
-    {
-      "digest": "45cc6bfa0064a963404abefb7816e86eee6621e973b4f782374b6f67686e6198",
-      "failure_bound": true,
-      "keys": [
-        "artifact",
-        "checks",
-        "next_required_capability",
-        "receipt_sha256",
-        "role",
-        "status"
-      ],
-      "new_gene": false,
-      "path": "root.controller_calls.evolve_once.child.experience_sources[3]"
-    },
-    {
-      "digest": "08f0408c0dcb2c78bb7904c0908ddd84c63acffa9c41d0e98957ea2e8ab80fde",
-      "failure_bound": true,
-      "keys": [
-        "artifact",
-        "checks",
-        "next_required_capability",
-        "receipt_sha256",
-        "role",
-        "status"
-      ],
-      "new_gene": false,
-      "path": "root.controller_calls.evolve_once.child.experience_sources[4]"
-    }
-  ],
-  "next_required_capability": "NATIVE_SOURCE_REALIZATION_OF_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V2",
+  "new_emitter_meta_language_candidates": [],
+  "next_required_capability": "EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_GENESIS_V3",
   "parent_evidence": [
     {
       "artifact": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
@@ -1324,10 +1238,10 @@
       "unrestricted_self_code_rewrite": false
     }
   },
-  "receipt_sha256": "51e206ff0205a41af5b8f8b88c9902e182cdeb6c21b9ec60665a400abcd0c9ab",
+  "receipt_sha256": "4144b3c775c8c6ddfbebdbdd3413db20d7a81d81cc6b92e90cb2b0a3c4836863",
   "schema": "yado.g2.native_source_ir_emitter_meta_language_evolution.v2",
   "semantic_boundary": "FAILURE-MEMORY-CONDITIONED NATIVE EMITTER META-LANGUAGE TEST. HOST TRANSPORTS EXACT YADO ARTIFACTS AND OBSERVES NATIVE ZERO-ARG EVOLUTION/GENESIS OUTPUTS ONLY. NO GRAMMAR, OPERATOR SET, SOURCE TEMPLATE, AST SKELETON, PATCH, TARGET FUNCTION, NEW DIMENSION NAME, EXTERNAL MODEL OR NEW RESEARCH IS PROVIDED.",
-  "status": "PASS_SHADOW_G2_NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
+  "status": "WITHHOLD_G2_NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
   "task": {
     "constraints": {
       "canonical_mutation": false,
@@ -1345,7 +1259,10 @@
     "deficit": "NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
     "host_role": "FAILURE_MEMORY_TRANSPORT_AND_STRICT_PROVENANCE_OBSERVER_ONLY",
     "instruction": "Use your own PASS/WITHHOLD history as evolutionary experience. Create an emitter/meta-language mechanism only if it is produced by native YADO evolution/genesis/introspection. The host supplies no grammar, operator list, source template, AST skeleton, patch, target function, or new dimension name.",
+    "invalidated_prior_run_id": 33902878828,
+    "invalidated_prior_run_reason": "COPIED_FAILURE_MEMORY_TEXT_WAS_INCORRECTLY_CLASSIFIED_AS_NEW_EMITTER_MECHANISM",
     "objective": "YADO_EVOLVE_NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_FROM_OWN_FAILURE_MEMORY",
+    "observer_revision": "STRICT_NOVEL_MECHANISM_IDENTITY_GATE_V2",
     "parent_evidence": [
       "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
       "candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json",
@@ -1364,7 +1281,7 @@
     ],
     "schema": "yado.g2.native_source_ir_emitter_meta_language_evolution_v2.request.v1",
     "stop_condition": "NATIVE_EMITTER_META_LANGUAGE_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
-    "trigger": 1,
-    "trigger_reason": "START_V2_AFTER_SINGLE_CORE_MEMORY_CLOSURE"
+    "trigger": 2,
+    "trigger_reason": "RERUN_AFTER_FALSE_POSITIVE_DETECTOR_FIX"
   }
 }
