@@ -1,0 +1,37 @@
+{
+  "schema": "yado.g2.native_action_evidence_binder_invention.request.v1",
+  "objective": "KERNEL_CREATE_ITS_OWN_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING_MECHANISM",
+  "problem": "The kernel can produce valid fresh direct evidence, but the deep self-audit does not yet consume that evidence and repeats LIVE_RESOURCE_EVIDENCE_SCOPE.",
+  "goal": "Using only YADO native mechanism synthesis, create a new shadow evidence-binding mechanism that decides when fresh self-generated evidence is admissible to self-audit.",
+  "source_evidence": {
+    "action_receipt": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+    "prior_self_study_runs": [
+      33833488285,
+      33833780135
+    ]
+  },
+  "native_only": true,
+  "external_models_allowed": false,
+  "success_conditions": [
+    "YADO_native_meta_grammar_creates_a_new_executable_mechanism",
+    "validation_exact",
+    "fresh_blind_exact",
+    "causal_ablation_drop",
+    "current_valid_direct_evidence_is_accepted",
+    "invalid_counterfactual_evidence_is_withheld",
+    "no_external_model_used",
+    "no_host_patch_or_target_file_supplied",
+    "mechanism_remains_shadow"
+  ],
+  "constraints": {
+    "no_external_llm": true,
+    "no_host_solution_hint": true,
+    "no_host_selected_target_file": true,
+    "no_host_written_patch": true,
+    "no_canonical_mutation": true,
+    "fail_closed": true
+  },
+  "host_role": "TASK_CONTRACT_COUNTERFACTUAL_EVALUATION_TRANSPORT_ONLY",
+  "stop_condition": "NATIVE_SELF_SYNTHESIZED_SHADOW_GENE_PASS_OR_WITHHOLD",
+  "trigger": 1
+}
