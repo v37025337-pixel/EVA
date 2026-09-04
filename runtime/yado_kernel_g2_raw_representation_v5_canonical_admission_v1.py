@@ -134,16 +134,20 @@ for i in range(2400):
 parent_seq=acc(seq,parent.predict_capability);child_seq=acc(seq,child.predict_capability)
 
 prev_rows=[(r.get('text') or r.get('wrapped') or r.get('raw_text'),r['expected']) for r in prev.get('rows',[]) if (r.get('text') or r.get('wrapped') or r.get('raw_text'))]
-prev_repro=acc(prev_rows,child.predict_capability) if prev_rows else float(prev['fresh_metrics']['fresh_direct_accuracy'])
+prev_metrics=prev.get('metrics') or prev.get('fresh_metrics') or {}
+required_prev_metrics={'fresh_direct_accuracy','fresh_sequential_accuracy','parent_fresh_sequential'}
+if not required_prev_metrics.issubset(prev_metrics):
+    raise RuntimeError('PREVIOUS_V5_METRICS_SCHEMA_MISSING:'+str(sorted(required_prev_metrics-set(prev_metrics))))
+prev_repro=acc(prev_rows,child.predict_capability) if prev_rows else float(prev_metrics['fresh_direct_accuracy'])
 base_rows=[(r['raw_text'],r['expected']) for r in base['raw_unstructured']['rows']]
 base_reg=acc(base_rows,child.predict_capability)
 
 skills=[
  {'skill_id':'KEEP_RAW_V4','artifact_digest':v4['component_digest'],'structural_valid':True,'semantic_consistency':1.0,
-  'fit_baseline':float(prev['fresh_metrics']['parent_fresh_sequential']),'fit_candidate':float(prev['fresh_metrics']['parent_fresh_sequential']),
+  'fit_baseline':float(prev_metrics['parent_fresh_sequential']),'fit_candidate':float(prev_metrics['parent_fresh_sequential']),
   'heldout_baseline':parent_seq,'heldout_candidate':parent_seq,'regression_pass':True,'state_integrity':True,'rollback_available':True},
  {'skill_id':'ADMIT_RAW_V5_SEQUENCE_ROBUST','artifact_digest':cand['candidate_digest'],'structural_valid':True,'semantic_consistency':1.0,
-  'fit_baseline':float(prev['fresh_metrics']['parent_fresh_sequential']),'fit_candidate':float(prev['fresh_metrics']['fresh_sequential_accuracy']),
+  'fit_baseline':float(prev_metrics['parent_fresh_sequential']),'fit_candidate':float(prev_metrics['fresh_sequential_accuracy']),
   'heldout_baseline':parent_seq,'heldout_candidate':child_seq,
   'regression_pass':prev_repro>=.97 and base_reg>=.98 and child_direct>=.97 and child_wrap>=.96,'state_integrity':True,'rollback_available':True}
 ]
