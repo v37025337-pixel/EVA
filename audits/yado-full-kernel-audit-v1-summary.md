@@ -1,10 +1,10 @@
 # YADO Full Kernel Audit V1
 
 - Status: **PASS**
-- Commit: `2c78458955bcd0612c8e96165bc3420abd2ae5c9`
+- Commit: `0ca27f2c2af62d9de5c684b7f573891dfcc027fb`
 - Generation: `G2_CANDIDATE_TRCG_V1`; G3 started: `False`
 - Frontier: `KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2`
-- Runtime Python: 466; workflows: 35; JSON artifacts: 811; ledger events: 278
+- Runtime Python: 469; workflows: 38; JSON artifacts: 817; ledger events: 278
 - Canonical guard: PASS; ledger: PASS
 
 ## Findings
