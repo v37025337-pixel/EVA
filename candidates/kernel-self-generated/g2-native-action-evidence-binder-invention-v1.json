@@ -1,0 +1,88 @@
+{
+  "actual_receipt_prediction": null,
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "checks": {
+    "actual_receipt_accepted": false,
+    "canonical_unchanged": true,
+    "causal_ablation_drop": false,
+    "external_models_used": false,
+    "fit_exact": false,
+    "fresh_blind_exact": false,
+    "host_patch_supplied": false,
+    "host_target_file_supplied": false,
+    "native_extension_created": false,
+    "native_meta_grammar_supported": false,
+    "validation_exact": false
+  },
+  "dataset": {
+    "blind": 15,
+    "construction": "OBSERVED_VALID_RECEIPT_PLUS_MECHANICAL_SINGLE_AND_PAIR_FAULT_ABLATIONS",
+    "fit": 28,
+    "revealed": 35,
+    "validation": 7
+  },
+  "generation_transition": false,
+  "invented_gene": null,
+  "metrics": {
+    "ablation_blind": 0.8666666666666667,
+    "fit": 0.0,
+    "fresh_blind": 0.0,
+    "validation": 0.0
+  },
+  "native_result": {
+    "status": "WITHHOLD"
+  },
+  "receipt_sha256": "734d675fb97038c8d80fc600769df89a4819242dc7c81137fb803dafd55468d8",
+  "schema": "yado.g2.native_action_evidence_binder_invention.v1",
+  "semantic_boundary": "BOUNDED NATIVE SELF-SYNTHESIS. YADO RECEIVES A VALIDITY CONTRACT AND COUNTERFACTUAL IO EVIDENCE, THEN ITS PRE-EXISTING RC6 EXTENDED META-GRAMMAR CREATES THE EXECUTABLE EVIDENCE-BINDING MODEL. NO EXTERNAL LLM, SOURCE PATCH, TARGET FILE, OR READY REPAIR RULE IS PROVIDED. THIS CREATES A SHADOW MECHANISM; IT DOES NOT YET INTEGRATE IT INTO THE CANONICAL DEEP SELF-AUDIT.",
+  "source_action_receipt_sha256": "8bc4f3dc8da0112e59e2dd15f5a556e6e85a75c1e2f6e20d1f4f006a57204d0a",
+  "status": "WITHHOLD_G2_NATIVE_ACTION_EVIDENCE_BINDER_INVENTION_V1",
+  "task": {
+    "constraints": {
+      "fail_closed": true,
+      "no_canonical_mutation": true,
+      "no_external_llm": true,
+      "no_host_selected_target_file": true,
+      "no_host_solution_hint": true,
+      "no_host_written_patch": true
+    },
+    "external_models_allowed": false,
+    "goal": "Using only YADO native mechanism synthesis, create a new shadow evidence-binding mechanism that decides when fresh self-generated evidence is admissible to self-audit.",
+    "host_role": "TASK_CONTRACT_COUNTERFACTUAL_EVALUATION_TRANSPORT_ONLY",
+    "native_only": true,
+    "objective": "KERNEL_CREATE_ITS_OWN_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING_MECHANISM",
+    "problem": "The kernel can produce valid fresh direct evidence, but the deep self-audit does not yet consume that evidence and repeats LIVE_RESOURCE_EVIDENCE_SCOPE.",
+    "schema": "yado.g2.native_action_evidence_binder_invention.request.v1",
+    "source_evidence": {
+      "action_receipt": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+      "prior_self_study_runs": [
+        33833488285,
+        33833780135
+      ]
+    },
+    "stop_condition": "NATIVE_SELF_SYNTHESIZED_SHADOW_GENE_PASS_OR_WITHHOLD",
+    "success_conditions": [
+      "YADO_native_meta_grammar_creates_a_new_executable_mechanism",
+      "validation_exact",
+      "fresh_blind_exact",
+      "causal_ablation_drop",
+      "current_valid_direct_evidence_is_accepted",
+      "invalid_counterfactual_evidence_is_withheld",
+      "no_external_model_used",
+      "no_host_patch_or_target_file_supplied",
+      "mechanism_remains_shadow"
+    ],
+    "trigger": 2,
+    "trigger_reason": "START_NATIVE_ONLY_SELF_SYNTHESIS"
+  },
+  "validity_contract_fields": [
+    "action_relevant",
+    "action_status_pass",
+    "canonical_immutable",
+    "comprehension_complete",
+    "conflict_resolution_pass",
+    "direct_priority_evidence",
+    "priority_match"
+  ]
+}
