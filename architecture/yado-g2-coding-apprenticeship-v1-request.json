@@ -1,0 +1,42 @@
+{
+  "schema": "yado.g2.coding_apprenticeship_cycle.v1.request.v1",
+  "objective": "TRAIN_G2_AS_BOUNDED_PROGRAMMER_READ_UNDERSTAND_REPAIR_WRITE_TEST_REFLECT_EVOLVE",
+  "instruction": "Run a coding apprenticeship on real source evidence and bounded executable code tasks. Read internal YADO code and public Python source read-only; never execute third-party code. Repair and synthesize only sandboxed pure training functions using YADO native repair/synthesis mechanisms. Feed every outcome into LOGIC, THINKING, INTELLIGENCE and MEMORY. Let the native developmental executive synthesize a coding cognitive-layer candidate if the episode evidence supports it. Keep all new genes/layers shadow until separate admission.",
+  "external_code_read_only": [
+    "https://raw.githubusercontent.com/psf/requests/main/src/requests/utils.py",
+    "https://raw.githubusercontent.com/pallets/flask/main/src/flask/helpers.py",
+    "https://raw.githubusercontent.com/python/cpython/main/Lib/functools.py"
+  ],
+  "internal_code_sources": [
+    "runtime/yado_ambiguity_aware_program_repair_v11.py",
+    "runtime/yado_evolutionary_genome_v1.py",
+    "runtime/yado_g2_experience_conditioned_lti_evolution_v1.py"
+  ],
+  "parent_evidence": [
+    "candidates/kernel-self-generated/g2-experience-conditioned-lti-evolution-v1.json",
+    "candidates/kernel-self-generated/g2-experience-conditioned-thinking-repair-v2.json",
+    "candidates/kernel-self-generated/g2-experience-conditioned-cognitive-portfolio-v1.json",
+    "experience/yado-user-external-corpus-learning-v1.json"
+  ],
+  "curriculum": [
+    "CODE_READING",
+    "SEMANTIC_REPAIR",
+    "BOUNDED_SOURCE_WRITING",
+    "FRESH_TESTING",
+    "REFLECTION_MEMORY",
+    "CODING_LTI_EVOLUTION",
+    "COGNITIVE_LAYER_GENESIS"
+  ],
+  "constraints": {
+    "third_party_code_execution": false,
+    "external_coding_model": false,
+    "ready_patch_from_host": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "fresh_holdout": true,
+    "ablation": true,
+    "rollback": true
+  },
+  "host_role": "PUBLIC_SOURCE_TRANSPORT_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+  "stop_condition": "PASS_SHADOW_CODING_APPRENTICESHIP_OR_EXPLICIT_WITHHOLD_WITH_DEFICIT"
+}
