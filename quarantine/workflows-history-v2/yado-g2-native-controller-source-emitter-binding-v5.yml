@@ -1,0 +1,71 @@
+name: YADO G2 Native Controller Source Emitter Binding V5
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-native-controller-source-emitter-binding-v5-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-native-controller-source-emitter-binding-v5
+  cancel-in-progress: true
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Preserve checked-in G2 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before V5
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V5 observer
+        run: python -m py_compile runtime/yado_g2_native_controller_source_emitter_binding_v5.py
+      - name: Let YADO attempt native controller-source binding
+        id: bind
+        continue-on-error: true
+        run: python runtime/yado_g2_native_controller_source_emitter_binding_v5.py
+      - name: Canonical guard after V5
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist V5 evidence
+        if: always()
+        run: |
+          git config user.name "YADO Native Controller Source Binding"
+          git config user.email "actions@users.noreply.github.com"
+          git add candidates/kernel-self-generated/g2-native-controller-source-emitter-binding-v5.json 2>/dev/null || true
+          git add candidates/g2-self-evolution/yado_evolutionary_genome_native_bound_candidate_v5.py 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO native controller source binding V5 evidence [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest V5 verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-native-controller-source-emitter-binding-v5.json")
+          if not p.exists():raise SystemExit("MISSING_V5_EVIDENCE")
+          r=json.loads(p.read_text());c=r["checks"]
+          for k in ("observer_modified_arguments","observer_modified_return","external_models_used","new_external_research_used",
+                    "host_source_seed_used","host_target_function_selected","host_patch_used","host_ast_skeleton_used","automatic_canonical_promotion"):
+              assert c[k] is False,r
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_NATIVE_CONTROLLER_SOURCE_EMITTER_BINDING_V5":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+r["status"]+":"+str(r["next_required_capability"]))
+          print(r["status"],r["candidate_source_sha256"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-native-controller-source-emitter-binding-v5-${{ github.run_id }}
+          path: |
+            candidates/kernel-self-generated/g2-native-controller-source-emitter-binding-v5.json
+            candidates/g2-self-evolution/yado_evolutionary_genome_native_bound_candidate_v5.py
+          if-no-files-found: warn
