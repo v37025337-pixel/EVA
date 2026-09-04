@@ -58,7 +58,9 @@ jobs:
           assert r["checks"]["host_did_not_select_algorithm_family"] is True,r
           if r["status"]!="PASS_SHADOW_G2_NATIVE_SELF_CREATED_CONSTRUCTOR_AFTER_EXTERNAL_LEARNING_V1":
               raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
-          assert r["checks"]["semantic_feature_surface_only"] is True,r\n          assert r["checks"]["nuisance_split_feature_absent"] is True,r\n          print(r["status"],r["invented_gene"]["gene_id"])
+          assert r["checks"]["semantic_feature_surface_only"] is True,r
+          assert r["checks"]["nuisance_split_feature_absent"] is True,r
+          print(r["status"],r["invented_gene"]["gene_id"])
           PY
       - uses: actions/upload-artifact@v4
         if: always()
