@@ -1,0 +1,20 @@
+{
+  "schema": "yado.g2.coding_reasoning_workspace_v7.request.v1",
+  "objective": "VERIFY_TYPED_PHASE_SEMANTICS_WITHOUT_WEAKENING_THE_V6_BEHAVIORAL_GATES",
+  "instruction": "Consume V6 as both a success and a validator counterexample. V6 achieved fresh=1.0, unknown-state=1.0 and retry->retest=1.0, but its structural parser demanded literal stage atoms even though stage-local typed fields already identify the cognitive phase. Relearn with the unchanged active G2 router and keep all behavioral thresholds exact. Verify phase coverage semantically by direct execution of all three failure/success branch pairs and by typed bindings candidate_present->HYPOTHESIS_READY, train_exact->TEST_RESULT, fresh_exact->CONSEQUENCE_RESULT. Keep fail-closed OOD contrastive twins, ablation/restore and canonical immutability. This is a validator correction, not a threshold reduction.",
+  "parent": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v6.json",
+  "required_active_capability": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+  "constraints": {
+    "third_party_code_execution": false,
+    "external_coding_model": false,
+    "ready_patch_from_host": false,
+    "host_written_reasoning_rules": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "behavioral_threshold_reduction": false,
+    "algorithm_change": false
+  },
+  "host_role": "SEMANTIC_VALIDATOR_CORRECTION_FRESH_SANDBOX_TASK_GENERATION_AND_STRICT_EVALUATION_ONLY",
+  "trigger": 1,
+  "trigger_reason": "V6_BEHAVIORAL_PASS_BLOCKED_BY_LITERAL_STAGE_ATOM_PARSER"
+}
