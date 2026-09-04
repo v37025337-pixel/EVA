@@ -1,0 +1,76 @@
+name: YADO G2 Coding Self Generated Test Oracle V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-coding-self-generated-test-oracle-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-coding-self-generated-test-oracle-v1
+  cancel-in-progress: true
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Preserve checked-in G2 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before self-generated oracle
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile self-generated oracle runtime
+        run: python -m py_compile runtime/yado_g2_coding_self_generated_test_oracle_v1.py
+      - name: Run YADO self-generated test oracle
+        id: evolve
+        continue-on-error: true
+        run: python runtime/yado_g2_coding_self_generated_test_oracle_v1.py
+      - name: Canonical guard after self-generated oracle
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist self-generated oracle evidence
+        if: always()
+        run: |
+          git config user.name "YADO Self Generated Test Oracle V1"
+          git config user.email "actions@users.noreply.github.com"
+          git add experience/yado-coding-self-generated-test-oracle-v1.json 2>/dev/null || true
+          git add candidates/kernel-self-generated/g2-coding-self-generated-test-oracle-v1.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO self-generated test oracle V1 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest self-generated-oracle verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-coding-self-generated-test-oracle-v1.json")
+          if not p.exists(): raise SystemExit("MISSING_SELF_GENERATED_ORACLE_EVIDENCE")
+          r=json.loads(p.read_text());c=r["checks"]
+          assert c["open_ended_parent_consumed"] is True,r
+          assert c["active_semantic_synthesizer_verified"] is True,r
+          assert c["active_evidence_selector_verified"] is True,r
+          assert c["active_evolutionary_genome_verified"] is True,r
+          assert c["host_selected_test_input"] is False,r
+          assert c["host_supplied_generated_test_expected"] is False,r
+          assert c["host_selected_patch"] is False,r
+          assert c["external_coding_model_used"] is False,r
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_CODING_SELF_GENERATED_TEST_ORACLE_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+r["status"]+":"+str(r["next_required_capability"]))
+          print(r["status"],r["task_count"],r["oracle_hidden_validation_score"],r["initial_code_holdout_score"],r["final_code_holdout_score"],r["oracle_ablation_score"],r["mean_self_generated_test_count"],r["gene_id"],r["next_required_capability"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-coding-self-generated-test-oracle-v1-${{ github.run_id }}
+          path: |
+            experience/yado-coding-self-generated-test-oracle-v1.json
+            candidates/kernel-self-generated/g2-coding-self-generated-test-oracle-v1.json
+          if-no-files-found: warn
