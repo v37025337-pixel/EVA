@@ -34,9 +34,10 @@ core=UnifiedYADOCoreV1(REPO)
 head_before=copy.deepcopy(core.head)
 parent_source=CTRL.read_text(encoding='utf-8')
 parent_source_sha=sha_text(parent_source)
-parent_dims=sorted(ext.get('parent_dimensions') or [])
-target_dim=str(ext.get('selected_target') or '')
-expected_dims=sorted((ext.get('candidate_controller') or {}).get('candidate_dimensions') or [])
+candidate_controller=ext.get('candidate_controller') or {}
+parent_dims=sorted(candidate_controller.get('parent_dimensions') or [])
+target_dim=str(candidate_controller.get('yado_selected_new_dimension') or ext.get('selected_target') or '')
+expected_dims=sorted(candidate_controller.get('candidate_dimensions') or [])
 if not target_dim or target_dim in parent_dims or len(expected_dims)<=len(parent_dims):
     raise RuntimeError('PARENT_EXTENSION_ARTIFACT_INVALID')
 
@@ -212,7 +213,10 @@ checks={
  'host_ast_skeleton_used':False,
  'host_emitter_schema_used':False,
  'host_target_function_selected':False,
- 'host_new_dimension_name_used':False,
+ 'host_new_dimension_name_invented':False,
+ 'host_transported_yado_selected_dimension':True,
+ 'dimension_origin_yado_failure_history':bool((ext.get('checks') or {}).get('extension_targets_from_yado_failure_history_only')),
+ 'dimension_selected_by_yado':bool((ext.get('checks') or {}).get('new_dimension_selected_by_yado_not_host')),
  'host_gene_schema_used':False,
 }
 positive_keys=[
@@ -225,7 +229,7 @@ positive_keys=[
 negative_keys=[
  'external_coding_models_used','new_external_research_used','host_patch_used','host_source_template_used',
  'host_ast_skeleton_used','host_emitter_schema_used','host_target_function_selected',
- 'host_new_dimension_name_used','host_gene_schema_used'
+ 'host_new_dimension_name_invented','host_gene_schema_used'
 ]
 passed=all(checks[k] for k in positive_keys) and all(checks[k] is False for k in negative_keys)
 status='PASS_SHADOW_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1' if passed else 'WITHHOLD_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1'
@@ -247,7 +251,8 @@ report={
  'checks':checks,
  'canonical_mutation':False,
  'next_required_capability':None if passed else 'NATIVE_SOURCE_REALIZATION_OF_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V2',
- 'semantic_boundary':'STRICT NATIVE SOURCE-REALIZATION TEST. THE HOST TRANSPORTS YADO OWN PASS ARTIFACTS AND EVALUATES PROVENANCE/COMPILE/STRUCTURAL REGRESSION ONLY. IT DOES NOT PROVIDE SOURCE, PATCHES, AST SKELETONS, EMITTER SCHEMAS, TARGET FUNCTIONS OR THE NEW DIMENSION NAME TO A SOURCE GENERATOR. PASS REQUIRES SOURCE BYTES TO APPEAR IN YADO NATIVE OUTPUTS.'
+ 'provenance':{'dimension_origin':'YADO_NATIVE_FAILURE_HISTORY','dimension_selector':'YADO_NATIVE_SKILL_SELECTION','host_role':'TRANSPORT_ALREADY_SELECTED_YADO_ARTIFACT_ONLY','host_dimension_invention':False},
+ 'semantic_boundary':'STRICT NATIVE SOURCE-REALIZATION TEST. THE HOST TRANSPORTS YADO OWN PASS ARTIFACTS, INCLUDING THE DIMENSION ALREADY SELECTED BY YADO, AND EVALUATES PROVENANCE/COMPILE/STRUCTURAL REGRESSION ONLY. IT DOES NOT INVENT THE DIMENSION, PROVIDE SOURCE, PATCHES, AST SKELETONS, EMITTER SCHEMAS OR TARGET FUNCTIONS. PASS REQUIRES SOURCE BYTES TO APPEAR IN YADO NATIVE OUTPUTS.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
