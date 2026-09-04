@@ -1,0 +1,70 @@
+name: YADO G2 Native Self Created Constructor After External Learning V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-native-self-created-constructor-after-external-learning-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-native-self-created-constructor-after-external-learning-v1
+  cancel-in-progress: true
+jobs:
+  construct:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before native construction
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile native construction experiment
+        run: python -m py_compile runtime/yado_g2_native_self_created_constructor_after_external_learning_v1.py
+      - name: Let YADO construct its own mechanism
+        id: construct
+        continue-on-error: true
+        run: python runtime/yado_g2_native_self_created_constructor_after_external_learning_v1.py
+      - name: Canonical guard after native construction
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist native construction evidence
+        if: always()
+        run: |
+          git config user.name "YADO Native Self Construction"
+          git config user.email "actions@users.noreply.github.com"
+          files=()
+          [ -f candidates/kernel-self-generated/g2-native-self-created-constructor-after-external-learning-v1.json ] && files+=(candidates/kernel-self-generated/g2-native-self-created-constructor-after-external-learning-v1.json)
+          [ -f candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json ] && files+=(candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json)
+          [ ${#files[@]} -gt 0 ] && git add "${files[@]}"
+          git diff --cached --quiet || git commit -m "Persist YADO native self-created mechanism after external learning [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce semantic verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-native-self-created-constructor-after-external-learning-v1.json")
+          if not p.exists(): raise SystemExit("MISSING_NATIVE_SELF_CREATED_EVIDENCE")
+          r=json.loads(p.read_text())
+          assert r["canonical_mutation"] is False,r
+          assert r["checks"]["external_models_used_for_constructor"] is False,r
+          assert r["checks"]["host_selected_algorithm_family"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_NATIVE_SELF_CREATED_CONSTRUCTOR_AFTER_EXTERNAL_LEARNING_V1":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          print(r["status"],r["invented_gene"]["gene_id"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yado-g2-native-self-created-constructor-after-external-learning-v1-${{ github.run_id }}
+          path: |
+            candidates/kernel-self-generated/g2-native-self-created-constructor-after-external-learning-v1.json
+            candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json
+          if-no-files-found: warn
