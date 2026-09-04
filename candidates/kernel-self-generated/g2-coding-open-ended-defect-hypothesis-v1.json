@@ -1,0 +1,96 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "active_evidence_selector_verified": true,
+    "active_program_repair_verified": true,
+    "all_final_holdouts_exact": true,
+    "all_selected_probes_discriminative": true,
+    "all_tasks_changed_source": true,
+    "all_tasks_initially_ambiguous": true,
+    "all_tasks_narrowed_hypothesis_space": true,
+    "at_least_one_multi_probe_task": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "external_coding_model_used": false,
+    "final_holdout_never_used_for_selection": true,
+    "fresh_open_ended_tasks_executed": true,
+    "host_selected_patch": false,
+    "host_selected_probe": false,
+    "open_ended_gain_material": true,
+    "oracle_only_answered_selected_probes": true,
+    "probe_ablation_material_drop": true,
+    "restore_exact": true,
+    "revision_parent_consumed": true
+  },
+  "final_holdout_score": 1.0,
+  "gene_id": "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+  "initial_holdout_score": 0.3958333333333333,
+  "mean_final_hypothesis_count": 1.0,
+  "mean_initial_hypothesis_count": 17.375,
+  "mean_probe_count": 2.375,
+  "multi_probe_task_count": 8,
+  "next_required_capability": "G2_CODING_SELF_GENERATED_TEST_ORACLE_V1",
+  "open_ended_gene": {
+    "active_components": [
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+      "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3"
+    ],
+    "final_holdout_score": 1.0,
+    "gene_digest": "f45afeb861c54befdfc45f97a1b4ac6aa532070835934c35ece45e134f5f5934",
+    "gene_id": "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+    "gene_scope": [
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+      "70b837ea38bca36e5697b2c2ff494da573fd6b87ad652c01eb9325b37fc4ea8e"
+    ],
+    "initial_holdout_score": 0.3958333333333333,
+    "mean_final_hypothesis_count": 1.0,
+    "mean_initial_hypothesis_count": 17.375,
+    "mean_probe_count": 2.375,
+    "mechanism_kind": "ACTIVE_HYPOTHESIS_SET_DISAGREEMENT_DRIVEN_EVIDENCE_SELECTION_AND_REVISION",
+    "multi_probe_task_count": 8,
+    "organ": "THINKING",
+    "probe_ablation_score": 0.3958333333333333,
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.coding_open_ended_defect_hypothesis_gene.v1"
+  },
+  "probe_ablation_score": 0.3958333333333333,
+  "promotion_applied": false,
+  "receipt_sha256": "bd1f09a90e8c2fe1c8474242e8533d562405872c18e577e4721fa5e9b9acae1c",
+  "restore_score": 1.0,
+  "schema": "yado.g2.coding_open_ended_defect_hypothesis.v1",
+  "semantic_boundary": "THE HOST DEFINES A BOUNDED SANDBOX ORACLE, PROBE DOMAIN AND FINAL HOLDOUT BUT DOES NOT CHOOSE THE PROBE OR PATCH. YADO ENUMERATES ITS OWN BOUNDED PROGRAM HYPOTHESES, SCORES WHERE THEY DISAGREE, USES THE ACTIVE NEUTRAL EVIDENCE SELECTOR TO CHOOSE THE NEXT PROBE, RECEIVES ONLY THAT ORACLE ANSWER, THEN REVISES WITH ACTIVE G2 PROGRAM REPAIR. FINAL HOLDOUT LABELS ARE NEVER FED BACK. THIS PROVES BOUNDED ACTIVE DEFECT-EVIDENCE ACQUISITION, NOT GENERAL OPEN-WORLD SOFTWARE DEBUGGING.",
+  "status": "PASS_SHADOW_G2_CODING_OPEN_ENDED_DEFECT_HYPOTHESIS_V1",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "bounded_probe_domain": true,
+      "bounded_program_hypothesis_space": true,
+      "canonical_mutation": false,
+      "external_coding_model": false,
+      "final_holdout_feedback": false,
+      "host_selected_patch": false,
+      "host_selected_probe": false
+    },
+    "host_role": "BOUNDED_SANDBOX_ORACLE_AND_FINAL_HOLDOUT_EVALUATOR_ONLY",
+    "instruction": "Consume the passed failure-driven hypothesis revision gene. On new bounded coding tasks, provide only seed observations, a safe probe domain and an oracle that answers a probe only after YADO selects it. YADO must enumerate behaviorally distinct hypotheses from its own active bounded program-repair mutation grammar, identify probe points where those hypotheses disagree, and use the already-active neutral evidence profile selector to choose the next probe. Only the selected oracle answer may be added to memory. Then active G2 program repair may revise the code. Final holdout labels must never be used for probe selection or repair. Require exact final holdout, material no-probe ablation, deterministic restore, shrinking hypothesis space, changed source on every task, and at least one task needing multiple self-selected probes.",
+    "objective": "MOVE_FROM_HOST_GIVEN_FAILED_TESTS_TO_YADO_SELECTED_DEFECT_EVIDENCE",
+    "parent": "candidates/kernel-self-generated/g2-coding-hypothesis-revision-generator-v1.json",
+    "required_active_capabilities": [
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+    ],
+    "schema": "yado.g2.coding_open_ended_defect_hypothesis_v1.request.v1",
+    "trigger": 1,
+    "trigger_reason": "HYPOTHESIS_REVISION_V1_PASSED_NEXT_DEFICIT_IS_SELF_SELECTED_DEFECT_EVIDENCE"
+  },
+  "task_count": 8
+}

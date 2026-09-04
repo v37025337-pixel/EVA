@@ -1,0 +1,571 @@
+{
+  "canonical_mutation": false,
+  "episodes": [
+    {
+      "final_holdout_score": 1.0,
+      "final_hypothesis_count": 1,
+      "final_repair_mode": "BASE_PORTFOLIO",
+      "final_repair_reason": null,
+      "final_source_excerpt": "def f(x):\n    return abs(x)\n",
+      "final_source_sha256": "a9ed0dcc999c49b9716bd401cdb474cdf4e5dca7098dc79292518bab5edf7f62",
+      "initial_holdout_score": 0.5,
+      "initial_hypothesis_count": 21,
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "observed_count": 8,
+      "oracle_calls": [
+        {
+          "token": "PX-2e42a91d2375f9",
+          "x": -11,
+          "y": 11
+        },
+        {
+          "token": "PX-6b51d431df5d7f",
+          "x": 12,
+          "y": 12
+        },
+        {
+          "token": "PX-5feceb66ffc86f",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "token": "PX-7ed00270e394c3",
+          "x": -12,
+          "y": 12
+        }
+      ],
+      "probe_count": 4,
+      "probe_trace": [
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "a9ed0dcc999c49b9716bd401cdb474cdf4e5dca7098dc79292518bab5edf7f62",
+          "cycle": 0,
+          "hypothesis_count_after": 6,
+          "hypothesis_count_before": 21,
+          "oracle_output": 11,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.8571428571428572,
+          "selected_probe_token": "PX-2e42a91d2375f9",
+          "selected_probe_x": -11,
+          "selector_candidate_count": 15
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "a9ed0dcc999c49b9716bd401cdb474cdf4e5dca7098dc79292518bab5edf7f62",
+          "cycle": 1,
+          "hypothesis_count_after": 3,
+          "hypothesis_count_before": 6,
+          "oracle_output": 12,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.5,
+          "selected_probe_token": "PX-6b51d431df5d7f",
+          "selected_probe_x": 12,
+          "selector_candidate_count": 4
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "a9ed0dcc999c49b9716bd401cdb474cdf4e5dca7098dc79292518bab5edf7f62",
+          "cycle": 2,
+          "hypothesis_count_after": 2,
+          "hypothesis_count_before": 3,
+          "oracle_output": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.33333333333333337,
+          "selected_probe_token": "PX-5feceb66ffc86f",
+          "selected_probe_x": 0,
+          "selector_candidate_count": 2
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "a9ed0dcc999c49b9716bd401cdb474cdf4e5dca7098dc79292518bab5edf7f62",
+          "cycle": 3,
+          "hypothesis_count_after": 1,
+          "hypothesis_count_before": 2,
+          "oracle_output": 12,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.5,
+          "selected_probe_token": "PX-7ed00270e394c3",
+          "selected_probe_x": -12,
+          "selector_candidate_count": 1
+        }
+      ],
+      "seed_count": 4,
+      "source_changed": true,
+      "task_id": "OPEN_ABS"
+    },
+    {
+      "final_holdout_score": 1.0,
+      "final_hypothesis_count": 1,
+      "final_repair_mode": "BASE_PORTFOLIO",
+      "final_repair_reason": null,
+      "final_source_excerpt": "def f(x):\n    return max(x, 2)\n",
+      "final_source_sha256": "37133a2091767afa46ff3d3ce9de64c788e07a94e57ecc8bce930a8e329ea6da",
+      "initial_holdout_score": 0.5,
+      "initial_hypothesis_count": 24,
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "observed_count": 7,
+      "oracle_calls": [
+        {
+          "token": "PX-7ed00270e394c3",
+          "x": -12,
+          "y": 2
+        },
+        {
+          "token": "PX-1bad6b8cf97131",
+          "x": -1,
+          "y": 2
+        },
+        {
+          "token": "PX-6b51d431df5d7f",
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "probe_count": 3,
+      "probe_trace": [
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "37133a2091767afa46ff3d3ce9de64c788e07a94e57ecc8bce930a8e329ea6da",
+          "cycle": 0,
+          "hypothesis_count_after": 3,
+          "hypothesis_count_before": 24,
+          "oracle_output": 2,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.8333333333333334,
+          "selected_probe_token": "PX-7ed00270e394c3",
+          "selected_probe_x": -12,
+          "selector_candidate_count": 15
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "37133a2091767afa46ff3d3ce9de64c788e07a94e57ecc8bce930a8e329ea6da",
+          "cycle": 1,
+          "hypothesis_count_after": 2,
+          "hypothesis_count_before": 3,
+          "oracle_output": 2,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.33333333333333337,
+          "selected_probe_token": "PX-1bad6b8cf97131",
+          "selected_probe_x": -1,
+          "selector_candidate_count": 4
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "37133a2091767afa46ff3d3ce9de64c788e07a94e57ecc8bce930a8e329ea6da",
+          "cycle": 2,
+          "hypothesis_count_after": 1,
+          "hypothesis_count_before": 2,
+          "oracle_output": 12,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.5,
+          "selected_probe_token": "PX-6b51d431df5d7f",
+          "selected_probe_x": 12,
+          "selector_candidate_count": 1
+        }
+      ],
+      "seed_count": 4,
+      "source_changed": true,
+      "task_id": "OPEN_MAX2"
+    },
+    {
+      "final_holdout_score": 1.0,
+      "final_hypothesis_count": 1,
+      "final_repair_mode": "BASE_PORTFOLIO",
+      "final_repair_reason": null,
+      "final_source_excerpt": "def f(x):\n    return min(x, -1)\n",
+      "final_source_sha256": "877e312363f6bbcf80d6b7d33c46411f15495dde10bce8b65c39c22c55169c45",
+      "initial_holdout_score": 0.3333333333333333,
+      "initial_hypothesis_count": 19,
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "observed_count": 6,
+      "oracle_calls": [
+        {
+          "token": "PX-6b51d431df5d7f",
+          "x": 12,
+          "y": -1
+        },
+        {
+          "token": "PX-7ed00270e394c3",
+          "x": -12,
+          "y": -12
+        }
+      ],
+      "probe_count": 2,
+      "probe_trace": [
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "877e312363f6bbcf80d6b7d33c46411f15495dde10bce8b65c39c22c55169c45",
+          "cycle": 0,
+          "hypothesis_count_after": 2,
+          "hypothesis_count_before": 19,
+          "oracle_output": -1,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.8947368421052632,
+          "selected_probe_token": "PX-6b51d431df5d7f",
+          "selected_probe_x": 12,
+          "selector_candidate_count": 14
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "877e312363f6bbcf80d6b7d33c46411f15495dde10bce8b65c39c22c55169c45",
+          "cycle": 1,
+          "hypothesis_count_after": 1,
+          "hypothesis_count_before": 2,
+          "oracle_output": -12,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.5,
+          "selected_probe_token": "PX-7ed00270e394c3",
+          "selected_probe_x": -12,
+          "selector_candidate_count": 1
+        }
+      ],
+      "seed_count": 4,
+      "source_changed": true,
+      "task_id": "OPEN_MIN_NEG1"
+    },
+    {
+      "final_holdout_score": 1.0,
+      "final_hypothesis_count": 1,
+      "final_repair_mode": "BASE_PORTFOLIO",
+      "final_repair_reason": null,
+      "final_source_excerpt": "def f(x):\n    return max(x, 0)\n",
+      "final_source_sha256": "d2707fa08e6ca1a6947eefecd2df72c0f390377940e0b44d83f382273da8a7d8",
+      "initial_holdout_score": 0.5,
+      "initial_hypothesis_count": 17,
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "observed_count": 6,
+      "oracle_calls": [
+        {
+          "token": "PX-7ed00270e394c3",
+          "x": -12,
+          "y": 0
+        },
+        {
+          "token": "PX-6b51d431df5d7f",
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "probe_count": 2,
+      "probe_trace": [
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "d2707fa08e6ca1a6947eefecd2df72c0f390377940e0b44d83f382273da8a7d8",
+          "cycle": 0,
+          "hypothesis_count_after": 2,
+          "hypothesis_count_before": 17,
+          "oracle_output": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.8823529411764706,
+          "selected_probe_token": "PX-7ed00270e394c3",
+          "selected_probe_x": -12,
+          "selector_candidate_count": 13
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "d2707fa08e6ca1a6947eefecd2df72c0f390377940e0b44d83f382273da8a7d8",
+          "cycle": 1,
+          "hypothesis_count_after": 1,
+          "hypothesis_count_before": 2,
+          "oracle_output": 12,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.5,
+          "selected_probe_token": "PX-6b51d431df5d7f",
+          "selected_probe_x": 12,
+          "selector_candidate_count": 1
+        }
+      ],
+      "seed_count": 4,
+      "source_changed": true,
+      "task_id": "OPEN_RELU"
+    },
+    {
+      "final_holdout_score": 1.0,
+      "final_hypothesis_count": 1,
+      "final_repair_mode": "BASE_PORTFOLIO",
+      "final_repair_reason": null,
+      "final_source_excerpt": "def f(x):\n    return min(x, 0)\n",
+      "final_source_sha256": "86682df95a2c082e6daa3830b38413471c66528a615de7af0fa755de0c9aad31",
+      "initial_holdout_score": 0.3333333333333333,
+      "initial_hypothesis_count": 17,
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "observed_count": 6,
+      "oracle_calls": [
+        {
+          "token": "PX-6b51d431df5d7f",
+          "x": 12,
+          "y": 0
+        },
+        {
+          "token": "PX-7ed00270e394c3",
+          "x": -12,
+          "y": -12
+        }
+      ],
+      "probe_count": 2,
+      "probe_trace": [
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "86682df95a2c082e6daa3830b38413471c66528a615de7af0fa755de0c9aad31",
+          "cycle": 0,
+          "hypothesis_count_after": 2,
+          "hypothesis_count_before": 17,
+          "oracle_output": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.8823529411764706,
+          "selected_probe_token": "PX-6b51d431df5d7f",
+          "selected_probe_x": 12,
+          "selector_candidate_count": 13
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "86682df95a2c082e6daa3830b38413471c66528a615de7af0fa755de0c9aad31",
+          "cycle": 1,
+          "hypothesis_count_after": 1,
+          "hypothesis_count_before": 2,
+          "oracle_output": -12,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.5,
+          "selected_probe_token": "PX-7ed00270e394c3",
+          "selected_probe_x": -12,
+          "selector_candidate_count": 1
+        }
+      ],
+      "seed_count": 4,
+      "source_changed": true,
+      "task_id": "OPEN_MIN0"
+    },
+    {
+      "final_holdout_score": 1.0,
+      "final_hypothesis_count": 1,
+      "final_repair_mode": "BASE_PORTFOLIO",
+      "final_repair_reason": null,
+      "final_source_excerpt": "def f(x):\n    return max(min(x, 3), -2)\n",
+      "final_source_sha256": "42ab2789b88c7776f3931ca075d9dbee73f9cfd09fcc97a3114b02c333c6eeaf",
+      "initial_holdout_score": 0.3333333333333333,
+      "initial_hypothesis_count": 9,
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "observed_count": 7,
+      "oracle_calls": [
+        {
+          "token": "PX-7ed00270e394c3",
+          "x": -12,
+          "y": -2
+        },
+        {
+          "token": "PX-6b51d431df5d7f",
+          "x": 12,
+          "y": 3
+        }
+      ],
+      "probe_count": 2,
+      "probe_trace": [
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "571497278500c350221ca64946ce3ad84f1f4fb6b248a77ef9c43c1652e0ee79",
+          "cycle": 0,
+          "hypothesis_count_after": 3,
+          "hypothesis_count_before": 9,
+          "oracle_output": -2,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.5555555555555556,
+          "selected_probe_token": "PX-7ed00270e394c3",
+          "selected_probe_x": -12,
+          "selector_candidate_count": 19
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "42ab2789b88c7776f3931ca075d9dbee73f9cfd09fcc97a3114b02c333c6eeaf",
+          "cycle": 1,
+          "hypothesis_count_after": 1,
+          "hypothesis_count_before": 3,
+          "oracle_output": 3,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.6666666666666667,
+          "selected_probe_token": "PX-6b51d431df5d7f",
+          "selected_probe_x": 12,
+          "selector_candidate_count": 9
+        }
+      ],
+      "seed_count": 5,
+      "source_changed": true,
+      "task_id": "OPEN_CLAMP_NEG2_POS3"
+    },
+    {
+      "final_holdout_score": 1.0,
+      "final_hypothesis_count": 1,
+      "final_repair_mode": "BASE_PORTFOLIO",
+      "final_repair_reason": null,
+      "final_source_excerpt": "def f(x):\n    return max(min(x, 3), 0)\n",
+      "final_source_sha256": "f365df1a74cd305f7608dc11c60906b70b7287b9ae0ef98b4459e66342d6446c",
+      "initial_holdout_score": 0.3333333333333333,
+      "initial_hypothesis_count": 18,
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "observed_count": 6,
+      "oracle_calls": [
+        {
+          "token": "PX-7ed00270e394c3",
+          "x": -12,
+          "y": 0
+        },
+        {
+          "token": "PX-6b51d431df5d7f",
+          "x": 12,
+          "y": 3
+        }
+      ],
+      "probe_count": 2,
+      "probe_trace": [
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "d2707fa08e6ca1a6947eefecd2df72c0f390377940e0b44d83f382273da8a7d8",
+          "cycle": 0,
+          "hypothesis_count_after": 2,
+          "hypothesis_count_before": 18,
+          "oracle_output": 0,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.7777777777777778,
+          "selected_probe_token": "PX-7ed00270e394c3",
+          "selected_probe_x": -12,
+          "selector_candidate_count": 21
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "f365df1a74cd305f7608dc11c60906b70b7287b9ae0ef98b4459e66342d6446c",
+          "cycle": 1,
+          "hypothesis_count_after": 1,
+          "hypothesis_count_before": 2,
+          "oracle_output": 3,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.5,
+          "selected_probe_token": "PX-6b51d431df5d7f",
+          "selected_probe_x": 12,
+          "selector_candidate_count": 9
+        }
+      ],
+      "seed_count": 4,
+      "source_changed": true,
+      "task_id": "OPEN_CLAMP_0_3"
+    },
+    {
+      "final_holdout_score": 1.0,
+      "final_hypothesis_count": 1,
+      "final_repair_mode": "BASE_PORTFOLIO",
+      "final_repair_reason": null,
+      "final_source_excerpt": "def f(x):\n    return max(min(x, 2), -1)\n",
+      "final_source_sha256": "5611579823c0acc67e1bfda2bfa642c787b31d5d6b265b0804862328441cd4a5",
+      "initial_holdout_score": 0.3333333333333333,
+      "initial_hypothesis_count": 14,
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "observed_count": 6,
+      "oracle_calls": [
+        {
+          "token": "PX-7ed00270e394c3",
+          "x": -12,
+          "y": -1
+        },
+        {
+          "token": "PX-6b51d431df5d7f",
+          "x": 12,
+          "y": 2
+        }
+      ],
+      "probe_count": 2,
+      "probe_trace": [
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "1627954b3fee1dec95be5181fedcce417f6f60855028a9d434f47acd0e930c1b",
+          "cycle": 0,
+          "hypothesis_count_after": 3,
+          "hypothesis_count_before": 14,
+          "oracle_output": -1,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.6428571428571428,
+          "selected_probe_token": "PX-7ed00270e394c3",
+          "selected_probe_x": -12,
+          "selector_candidate_count": 21
+        },
+        {
+          "candidate_changed_from_initial": true,
+          "candidate_source_sha256": "5611579823c0acc67e1bfda2bfa642c787b31d5d6b265b0804862328441cd4a5",
+          "cycle": 1,
+          "hypothesis_count_after": 1,
+          "hypothesis_count_before": 3,
+          "oracle_output": 2,
+          "repair_mode": "BASE_PORTFOLIO",
+          "repair_reason": null,
+          "selected_probe_evidence": 0.6666666666666667,
+          "selected_probe_token": "PX-6b51d431df5d7f",
+          "selected_probe_x": 12,
+          "selector_candidate_count": 10
+        }
+      ],
+      "seed_count": 4,
+      "source_changed": true,
+      "task_id": "OPEN_CLAMP_NEG1_POS2"
+    }
+  ],
+  "experience_digest": "b6b5672fee274957ccca052f49feba77f57b0c1cd685a771874c582021082335",
+  "final_holdout_score": 1.0,
+  "initial_holdout_score": 0.3958333333333333,
+  "mean_final_hypothesis_count": 1.0,
+  "mean_initial_hypothesis_count": 17.375,
+  "mean_probe_count": 2.375,
+  "multi_probe_task_count": 8,
+  "open_ended_gene": {
+    "active_components": [
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+      "ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3"
+    ],
+    "final_holdout_score": 1.0,
+    "gene_digest": "f45afeb861c54befdfc45f97a1b4ac6aa532070835934c35ece45e134f5f5934",
+    "gene_id": "GENE-G2-CODING-OPEN-ENDED-DEFECT-HYPOTHESIS-V1-090e209c1e22b76c",
+    "gene_scope": [
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+      "70b837ea38bca36e5697b2c2ff494da573fd6b87ad652c01eb9325b37fc4ea8e"
+    ],
+    "initial_holdout_score": 0.3958333333333333,
+    "mean_final_hypothesis_count": 1.0,
+    "mean_initial_hypothesis_count": 17.375,
+    "mean_probe_count": 2.375,
+    "mechanism_kind": "ACTIVE_HYPOTHESIS_SET_DISAGREEMENT_DRIVEN_EVIDENCE_SELECTION_AND_REVISION",
+    "multi_probe_task_count": 8,
+    "organ": "THINKING",
+    "probe_ablation_score": 0.3958333333333333,
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.coding_open_ended_defect_hypothesis_gene.v1"
+  },
+  "parent_revision_gene_id": "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+  "probe_ablation_score": 0.3958333333333333,
+  "restore_score": 1.0,
+  "schema": "yado.g2.coding_open_ended_defect_hypothesis.experience.v1",
+  "semantic_boundary": "THE HOST DEFINES A BOUNDED SANDBOX ORACLE, PROBE DOMAIN AND FINAL HOLDOUT BUT DOES NOT CHOOSE THE PROBE OR PATCH. YADO ENUMERATES ITS OWN BOUNDED PROGRAM HYPOTHESES, SCORES WHERE THEY DISAGREE, USES THE ACTIVE NEUTRAL EVIDENCE SELECTOR TO CHOOSE THE NEXT PROBE, RECEIVES ONLY THAT ORACLE ANSWER, THEN REVISES WITH ACTIVE G2 PROGRAM REPAIR. FINAL HOLDOUT LABELS ARE NEVER FED BACK. THIS PROVES BOUNDED ACTIVE DEFECT-EVIDENCE ACQUISITION, NOT GENERAL OPEN-WORLD SOFTWARE DEBUGGING.",
+  "status": "TRAINED"
+}
