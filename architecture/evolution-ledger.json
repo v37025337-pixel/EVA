@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 275,
+  "event_count": 276,
   "events": [
     {
       "canonical_mutation": false,
@@ -4818,10 +4818,26 @@
       "source_digest": "7f1dab251e0688a7887e5d252aa7ff1dc054fdd6da39d03545155a17a600417f",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33831996104.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0; NEXT=KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+      "event_hash": "09019224de77858833731cae6a083614309d11df8cd0fcd0e5ddfc281cd0d826",
+      "event_id": "E0276_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 275,
+      "parent_event_hash": "18442ed7a31daca50f9474fc94466c04bf39ec5f6ef6463b8a24840226da365d",
+      "promotion_applied": false,
+      "run_id": "33832918251",
+      "source_digest": "5e7328999f466cf0281d55f2497d1de54d329655677c9dd6b2579d9731b81d82",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "6800264ffddf9c07fd487152a3481e2c4819ab291c2bd25e9c413e3643851522",
+  "ledger_digest": "cbe963010c2799aefe68b474db82265cbfef3faa400cd46232fd05f46467df57",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -4859,5 +4875,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "18442ed7a31daca50f9474fc94466c04bf39ec5f6ef6463b8a24840226da365d"
+  "tail_event_hash": "09019224de77858833731cae6a083614309d11df8cd0fcd0e5ddfc281cd0d826"
 }
