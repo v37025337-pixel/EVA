@@ -518,7 +518,7 @@
     "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
   },
   "next_action": "KERNEL_CONTINUE_FROM_SELF_SELECTED_PRIORITY",
-  "receipt_sha256": "290dd75d45aaaa92b9785efdf7de77f10c369ba54847728629972a29e3b0d753",
+  "receipt_sha256": "39548daf450236627dc74cb52328e17a5d0cb83d845befaa3c2e5903ceaeb308",
   "schema": "yado.g2.autonomous_self_improvement_task.v1",
   "selected_child_genome_digest": "a812d2da7de8ec551c85478f3dedd8c51272a67d4e6c452f8cf2de33356b8545",
   "semantic_boundary": "THE HOST ONLY TRIGGERS AND PERSISTS. YADO SELECTS ITS OWN AUDIT PRIORITY, CONSULTS ITS EXPERIENCE, AND RUNS ITS CANONICAL NATIVE GENOME EVOLUTION. ANY CHANGE REMAINS SHADOW; THIS DOES NOT CLAIM OPEN-ENDED AUTONOMOUS SELF-REWRITING.",
@@ -550,6 +550,12 @@
       "require_regression_gate": true,
       "require_rollback_path": true
     },
+    "experiment_series": {
+      "host_intervention_after_kernel_failure": true,
+      "max_runs": 3,
+      "run_index": 1,
+      "series_id": "G2-GOAL-ACTION-BINDING-3-RUNS"
+    },
     "host_role": "TRIGGER_TRANSPORT_OBSERVATION_ONLY",
     "host_selected_mechanism": null,
     "host_selected_target": null,
@@ -557,36 +563,35 @@
     "latest_audit_run_id": 33831996104,
     "latest_self_selected_next_step": "LIVE_RESOURCE_EVIDENCE_SCOPE",
     "mechanism_selection": "KERNEL_SELF_SELECTED_NATIVE_OR_SELF_CREATED",
-    "objective": "CONTINUE_FROM_KERNEL_SELF_SELECTED_PRIORITY",
+    "objective": "REPAIR_GOAL_TO_ACTION_BINDING",
     "previous_evidence": [
       "candidates/kernel-self-generated/g2-native-meta-grammar-compile-repair-v1.json",
       "candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json"
     ],
     "schema": "yado.g2.autonomous_self_improvement_request.v1",
-    "stop_condition": "DIRECT_PRIORITY_EVIDENCE_OR_EXPLICIT_KERNEL_WITHHOLD",
-    "target_selection": "KERNEL_SELF_SELECTED_FROM_LATEST_DEEP_SELF_AUDIT",
+    "stop_condition": "DIRECT_PRIORITY_ACTION_EVIDENCE_OR_EXPLICIT_WITHHOLD",
+    "target_selection": "KERNEL_SELF_SELECTED",
     "task": {
       "forbidden": [
         "host_selected_target",
-        "host_selected_mechanism",
-        "host_solution_hint",
+        "host_selected_solution",
         "host_supplied_patch",
-        "host_supplied_domain_specific_feature_dictionary",
-        "lowering_existing_integrity_or_freshness_gates"
+        "host_selected_repair_operator",
+        "lowering_integrity_or_freshness_gates"
       ],
-      "goal": "Continue development from the latest kernel-native deep self-audit self_selected_next_step and produce directly relevant evidence.",
+      "goal": "Make the autonomous cycle bind the kernel-selected priority to a directly relevant action/result.",
+      "problem": "The kernel correctly self-selects LIVE_RESOURCE_EVIDENCE_SCOPE, but the autonomous self-improvement cycle executes an unrelated fixed generic genome evolution instead of an action that directly addresses the selected priority.",
       "success_conditions": [
-        "kernel_uses_latest_native_self_audit_priority",
-        "kernel_selects_its_own_target_and_solution_path",
-        "result_directly_addresses_the_selected_priority",
-        "fresh_or_conflict_resolution_evidence_is_produced_when_required_by_the_selected_priority",
-        "no_unrelated_generic_evolution_counts_as_task_completion",
-        "canonical_state_remains_unchanged_unless_a_separate_existing_admission_gate_authorizes_change",
-        "kernel_may_explicitly_WITHHOLD_if_current_native_mechanisms_cannot_close_the_priority"
+        "kernel_self_selects_priority",
+        "kernel_self_selects_action_or_mechanism_for_that_priority",
+        "executed_action_is_directly_relevant_to_selected_priority",
+        "for_LIVE_RESOURCE_EVIDENCE_SCOPE_result_contains_live_resource_recheck_or_content_comprehension_or_conflict_resolution_evidence",
+        "unrelated_generic_genome_evolution_must_not_count_as_success",
+        "kernel_may_WITHHOLD_if_it_cannot_create_a_relevant_action"
       ],
-      "task_id": "G2-CONTINUE-FROM-SELF-SELECTED-PRIORITY"
+      "task_id": "G2-GOAL-TO-ACTION-BINDING-REPAIR"
     },
-    "trigger": 2,
+    "trigger": 3,
     "use_accumulated_experience": true
   }
 }
