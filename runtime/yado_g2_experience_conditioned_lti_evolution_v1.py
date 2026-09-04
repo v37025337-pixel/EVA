@@ -49,15 +49,23 @@ for e in events:
     effect=str(e.get('effect') or '')
     prior=seen.get(deficit,0);seen[deficit]=prior+1
     x={
-      'canonical_mutation':bool(e.get('canonical_mutation')),
       'promotion_applied':bool(e.get('promotion_applied')),
       'effect_has_fresh':'FRESH' in effect,
       'effect_has_rollback':'ROLLBACK' in effect,
       'effect_has_error':'ERROR' in effect or 'FAILURE' in effect,
-      'deficit_seen_before':prior>0,
     }
     logic_rows.append((x,status_pass(s)))
 lf,lv,lb=split(logic_rows)
+def balance_binary(rows):
+    pos=sum(1 for _,y in rows if bool(y)); neg=len(rows)-pos; n=min(pos,neg)
+    if n<4:return rows
+    used={True:0,False:0};out=[]
+    for row in rows:
+        y=bool(row[1])
+        if used[y]<n:
+            out.append(row);used[y]+=1
+    return out
+lf,lv,lb=map(balance_binary,(lf,lv,lb))
 if min(len(lf),len(lv),len(lb))<8:raise RuntimeError('LOGIC_HISTORY_SPLIT_TOO_SMALL')
 
 # THINKING: learn recurring causal ordering directly from normalized ledger event types.
