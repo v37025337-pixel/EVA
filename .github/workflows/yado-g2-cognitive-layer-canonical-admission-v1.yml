@@ -1,0 +1,111 @@
+name: YADO G2 Cognitive Layer Canonical Admission V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-cognitive-layer-canonical-admission-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-cognitive-layer-canonical-admission-v1
+  cancel-in-progress: true
+jobs:
+  admit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited RC8 runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Pre-admission canonical guard
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile cognitive admission and verification
+        run: >
+          python -m py_compile
+          runtime/yado_g2_experience_conditioned_cognitive_layer_v3.py
+          runtime/yado_g2_cognitive_layer_canonical_admission_v1.py
+          runtime/yado_g2_cognitive_layer_post_admission_v1.py
+          runtime/yado_g2_unified_module_kernel_v1.py
+          runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
+          runtime/yado_unified_core_deep_self_audit_v1.py
+      - name: Apply same-G2 cognitive layer admission
+        run: python runtime/yado_g2_cognitive_layer_canonical_admission_v1.py
+      - name: Post-admission cognitive execution audit
+        run: python runtime/yado_g2_cognitive_layer_post_admission_v1.py
+      - name: Require cognitive post-admission PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("audits/yado-g2-cognitive-layer-post-admission-v1.json"))
+          assert r["status"]=="PASS_G2_COGNITIVE_LAYER_POST_ADMISSION_V1",r
+          assert all(r["checks"].values()),r
+          assert r["active_capability_count"]==27,r
+          print(r["status"],r["active_capability_count"])
+          PY
+      - name: Re-run dynamic current module assembly
+        run: python runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
+      - name: Require 27 of 27 module assembly PASS
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/g2-unified-module-kernel-v1.json"))
+          assert r["status"]=="PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1",r
+          assert r["active_module_count"]==27,r
+          assert r["covered_module_count"]==27,r
+          assert r["registry_pass"] is True,r
+          assert r["module_coverage_pass"] is True,r
+          assert r["functional_assembly_pass"] is True,r
+          assert r["canonical_ready"] is True,r
+          assert r["binding_checks"]["canonical_experience_cognitive_layer_active"] is True,r
+          print(r["status"],r["active_module_count"],r["covered_module_count"])
+          PY
+      - name: Kernel-native deep self-audit
+        run: python runtime/yado_unified_core_deep_self_audit_v1.py
+      - name: Require deep self-audit no blockers
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_unified_core_deep_self_audit_v1_receipt.json"))
+          assert r["overall_verdict"]=="PASS_WITH_LIMITATIONS",r
+          assert r["summary"]["blocking_findings"]==0,r
+          assert r["summary"]["critical_failures"]==0,r
+          assert r["summary"]["high_failures"]==0,r
+          print(r["overall_verdict"],r["summary"])
+          PY
+      - name: Final canonical guard
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist cognitive layer canonical admission
+        run: |
+          mkdir -p receipts
+          cp runtime/yado_g2_cognitive_layer_canonical_admission_v1_receipt.json "receipts/yado-g2-cognitive-layer-canonical-admission-v1-run-${GITHUB_RUN_ID}.json"
+          cp runtime/yado_unified_core_deep_self_audit_v1_receipt.json "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}.json"
+          git config user.name "YADO G2 Cognitive Layer Admission"
+          git config user.email "actions@users.noreply.github.com"
+          git add runtime/yado_unified_core_v1.py
+          git add runtime/yado_g2_unified_module_kernel_v1.py runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
+          git add canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json
+          git add canonical/yado-g2-experience-conditioned-cognitive-layer-v3.json
+          git add architecture/evolution-ledger.json
+          git add audits/yado-g2-cognitive-layer-post-admission-v1.json
+          git add candidates/kernel-self-generated/g2-unified-module-kernel-v1.json
+          git add "receipts/yado-g2-cognitive-layer-canonical-admission-v1-run-${GITHUB_RUN_ID}.json"
+          git add "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}.json"
+          git diff --cached --quiet || git commit -m "Admit experience-conditioned cognitive layer V3 into G2 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-g2-cognitive-layer-canonical-admission-v1-${{ github.run_id }}
+          path: |
+            runtime/yado_g2_cognitive_layer_canonical_admission_v1_receipt.json
+            canonical/yado-g2-experience-conditioned-cognitive-layer-v3.json
+            audits/yado-g2-cognitive-layer-post-admission-v1.json
+            candidates/kernel-self-generated/g2-unified-module-kernel-v1.json
+          if-no-files-found: error
