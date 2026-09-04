@@ -35,6 +35,8 @@ jobs:
           assert r["host_selected_gene"] is False,r
           assert r["host_selected_operator"] is False,r
           assert r["host_wrote_candidate_mechanism"] is False,r
+          assert r["direct_priority_evidence"] is True,r
+          assert r["selected_action"],r
           assert r["canonical_mutation"] is False,r
           assert r["canonical_head_unchanged"] is True,r
           print(r["status"],r["kernel_selected_next_step"],r["shadow_change_produced"])
