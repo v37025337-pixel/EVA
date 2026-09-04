@@ -1,0 +1,100 @@
+{
+  "canonical_mutation": false,
+  "changed_hypothesis_rate": 1.0,
+  "checks": {
+    "active_program_repair_verified": true,
+    "active_reasoning_router_verified": true,
+    "all_initial_hypotheses_imperfect_on_holdout": true,
+    "all_post_revision_holdouts_exact": true,
+    "all_tasks_changed_hypothesis": true,
+    "all_tasks_triggered_revision": true,
+    "at_least_one_multi_revision_task": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "causal_revision_ablation_drop": true,
+    "controller_revision_and_retest_exact": true,
+    "external_coding_model_used": false,
+    "fresh_revision_tasks_executed": true,
+    "host_selected_revised_source": false,
+    "iterative_reasoning_parent_consumed": true,
+    "lineage_joined": true,
+    "new_shadow_revision_gene_created": true,
+    "planning_history_parent_consumed": true,
+    "ready_patch_from_host_used": false,
+    "restore_exact": true,
+    "revision_gain_material": true,
+    "third_party_code_executed": false
+  },
+  "gene_id": "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+  "multi_revision_task_count": 1,
+  "next_required_capability": "G2_CODING_OPEN_ENDED_DEFECT_HYPOTHESIS_V1",
+  "post_revision_fresh_score": 1.0,
+  "pre_fresh_score": 0.4888888888888889,
+  "promotion_applied": false,
+  "receipt_sha256": "70b837ea38bca36e5697b2c2ff494da573fd6b87ad652c01eb9325b37fc4ea8e",
+  "restore_score": 1.0,
+  "revision_ablation_score": 0.4888888888888889,
+  "revision_gene": {
+    "active_components": [
+      "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+    ],
+    "gene_digest": "db0e06d4b4cb61dc0afdc9fb40f03feb8bdf42559573a338fae09e899e4b1054",
+    "gene_id": "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+    "gene_scope": [
+      "THINKING",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC",
+      "INTELLIGENCE"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-THINKING-V2-ad9b080a825b7a98",
+      "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d",
+      "10d11c95e5694eaf3d779aa0d0a6e01cd3ccd449876f26ec1e94ec7ad70c0d20",
+      "f2ebdbe56a8946ab37f718895e628af3f53eb7cbbf223a525a62844c752bfb9a"
+    ],
+    "lineage_join": {
+      "contextual_planning_parent": "GENE-G2-CODING-THINKING-V2-ad9b080a825b7a98",
+      "iterative_reasoning_parent": "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d"
+    },
+    "mechanism_kind": "FAILURE_COUNTEREXAMPLE_DRIVEN_ACTIVE_G2_PROGRAM_REPAIR_REVISION_LOOP",
+    "organ": "THINKING",
+    "post_revision_fresh_score": 1.0,
+    "pre_fresh_score": 0.4888888888888889,
+    "promotion_state": "SHADOW_ONLY",
+    "restore_score": 1.0,
+    "revision_ablation_score": 0.4888888888888889,
+    "schema": "yado.g2.coding_hypothesis_revision_gene.v1"
+  },
+  "schema": "yado.g2.coding_hypothesis_revision_generator.v1",
+  "semantic_boundary": "THE HOST SUPPLIES ONLY SANDBOX TASKS AND OBSERVED FAILED TEST INPUT/EXPECTED OUTPUT AS CONSEQUENCE EVIDENCE. REVISED SOURCE IS GENERATED ONLY BY THE ALREADY-ACTIVE G2 PROGRAM-REPAIR CAPABILITY AFTER THE V7 THINKING POLICY CHOOSES REVISE_HYPOTHESIS. FINAL HOLDOUT LABELS ARE NEVER FED BACK. THIS PROVES BOUNDED FAILURE-DRIVEN HYPOTHESIS/PATCH REVISION, NOT GENERAL AUTONOMOUS SOFTWARE ENGINEERING.",
+  "status": "PASS_SHADOW_G2_CODING_HYPOTHESIS_REVISION_GENERATOR_V1",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_coding_model": false,
+      "final_holdout_feedback": false,
+      "host_selected_revised_source": false,
+      "ready_patch_from_host": false,
+      "third_party_code_execution": false
+    },
+    "host_role": "SANDBOX_TASK_AND_FAILED_TEST_EVIDENCE_PROVIDER_PLUS_STRICT_EVALUATOR_ONLY",
+    "instruction": "Join the successful historical coding-planning THINKING gene and the V7 iterative reasoning THINKING gene into one lineage. On fresh sandbox repair tasks, begin from a hypothesis that fits the seed observations but fails unseen behavior. Let the V7 reasoning policy decide REVISE_HYPOTHESIS after an observed failed consequence. Feed only that failed test input/expected output back as memory; never reveal final holdout labels. The already-active G2 AmbiguityAwareProgramRepairV11 must generate the revised source. Require changed source digests, retest decisions, exact untouched final holdout, causal no-feedback ablation, deterministic restore, and at least one task requiring more than one revision. No host-selected patch.",
+    "objective": "TURN_V7_RETRY_CONTROL_INTO_REAL_FAILURE_DRIVEN_CODE_HYPOTHESIS_REVISION",
+    "parents": [
+      "candidates/kernel-self-generated/g2-coding-apprenticeship-repair-v2.json",
+      "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v7.json"
+    ],
+    "required_active_capabilities": [
+      "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+    ],
+    "schema": "yado.g2.coding_hypothesis_revision_generator_v1.request.v1",
+    "trigger": 1,
+    "trigger_reason": "V7_PROVED_RETRY_CONTROL_NEXT_DEFICIT_IS_GENERATING_A_CHANGED_HYPOTHESIS_AFTER_FAILURE"
+  },
+  "task_count": 6
+}

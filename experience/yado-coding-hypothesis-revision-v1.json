@@ -1,0 +1,253 @@
+{
+  "canonical_mutation": false,
+  "changed_hypothesis_rate": 1.0,
+  "episodes": [
+    {
+      "changed_revision_count": 1,
+      "feedback_used_count": 1,
+      "final_seed_plus_feedback_score": 1.0,
+      "final_source_excerpt": "def f(x):\n    return abs(x)\n",
+      "final_source_sha256": "a9ed0dcc999c49b9716bd401cdb474cdf4e5dca7098dc79292518bab5edf7f62",
+      "initial_source_excerpt": "def f(x):\n    return x\n",
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "post_holdout_score": 1.0,
+      "pre_holdout_score": 0.6,
+      "revision_count": 1,
+      "revisions": [
+        {
+          "candidate_source_excerpt": "def f(x):\n    return abs(x)\n",
+          "candidate_source_sha256": "a9ed0dcc999c49b9716bd401cdb474cdf4e5dca7098dc79292518bab5edf7f62",
+          "changed": true,
+          "cycle": 0,
+          "decision": "REVISE_HYPOTHESIS",
+          "failure_expected": 5,
+          "failure_input": [
+            -5
+          ],
+          "post_cycle_holdout_score": 1.0,
+          "previous_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+          "reason": null,
+          "repair_mode": "BASE_PORTFOLIO",
+          "retest_decision": "TEST_HYPOTHESIS"
+        }
+      ],
+      "task_id": "REV_ABS"
+    },
+    {
+      "changed_revision_count": 1,
+      "feedback_used_count": 1,
+      "final_seed_plus_feedback_score": 1.0,
+      "final_source_excerpt": "def f(x):\n    return max(x, 2)\n",
+      "final_source_sha256": "37133a2091767afa46ff3d3ce9de64c788e07a94e57ecc8bce930a8e329ea6da",
+      "initial_source_excerpt": "def f(x):\n    return x\n",
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "post_holdout_score": 1.0,
+      "pre_holdout_score": 0.6,
+      "revision_count": 1,
+      "revisions": [
+        {
+          "candidate_source_excerpt": "def f(x):\n    return max(x, 2)\n",
+          "candidate_source_sha256": "37133a2091767afa46ff3d3ce9de64c788e07a94e57ecc8bce930a8e329ea6da",
+          "changed": true,
+          "cycle": 0,
+          "decision": "REVISE_HYPOTHESIS",
+          "failure_expected": 2,
+          "failure_input": [
+            -3
+          ],
+          "post_cycle_holdout_score": 1.0,
+          "previous_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+          "reason": null,
+          "repair_mode": "BASE_PORTFOLIO",
+          "retest_decision": "TEST_HYPOTHESIS"
+        }
+      ],
+      "task_id": "REV_MAX2"
+    },
+    {
+      "changed_revision_count": 1,
+      "feedback_used_count": 1,
+      "final_seed_plus_feedback_score": 1.0,
+      "final_source_excerpt": "def f(x):\n    return min(x, -1)\n",
+      "final_source_sha256": "877e312363f6bbcf80d6b7d33c46411f15495dde10bce8b65c39c22c55169c45",
+      "initial_source_excerpt": "def f(x):\n    return x\n",
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "post_holdout_score": 1.0,
+      "pre_holdout_score": 0.4,
+      "revision_count": 1,
+      "revisions": [
+        {
+          "candidate_source_excerpt": "def f(x):\n    return min(x, -1)\n",
+          "candidate_source_sha256": "877e312363f6bbcf80d6b7d33c46411f15495dde10bce8b65c39c22c55169c45",
+          "changed": true,
+          "cycle": 0,
+          "decision": "REVISE_HYPOTHESIS",
+          "failure_expected": -1,
+          "failure_input": [
+            0
+          ],
+          "post_cycle_holdout_score": 1.0,
+          "previous_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+          "reason": null,
+          "repair_mode": "BASE_PORTFOLIO",
+          "retest_decision": "TEST_HYPOTHESIS"
+        }
+      ],
+      "task_id": "REV_MIN_NEG1"
+    },
+    {
+      "changed_revision_count": 1,
+      "feedback_used_count": 1,
+      "final_seed_plus_feedback_score": 1.0,
+      "final_source_excerpt": "def f(x):\n    return max(x, 0)\n",
+      "final_source_sha256": "d2707fa08e6ca1a6947eefecd2df72c0f390377940e0b44d83f382273da8a7d8",
+      "initial_source_excerpt": "def f(x):\n    return x\n",
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "post_holdout_score": 1.0,
+      "pre_holdout_score": 0.6,
+      "revision_count": 1,
+      "revisions": [
+        {
+          "candidate_source_excerpt": "def f(x):\n    return max(x, 0)\n",
+          "candidate_source_sha256": "d2707fa08e6ca1a6947eefecd2df72c0f390377940e0b44d83f382273da8a7d8",
+          "changed": true,
+          "cycle": 0,
+          "decision": "REVISE_HYPOTHESIS",
+          "failure_expected": 0,
+          "failure_input": [
+            -4
+          ],
+          "post_cycle_holdout_score": 1.0,
+          "previous_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+          "reason": null,
+          "repair_mode": "BASE_PORTFOLIO",
+          "retest_decision": "TEST_HYPOTHESIS"
+        }
+      ],
+      "task_id": "REV_RELU"
+    },
+    {
+      "changed_revision_count": 1,
+      "feedback_used_count": 1,
+      "final_seed_plus_feedback_score": 1.0,
+      "final_source_excerpt": "def f(x):\n    return min(x, 0)\n",
+      "final_source_sha256": "86682df95a2c082e6daa3830b38413471c66528a615de7af0fa755de0c9aad31",
+      "initial_source_excerpt": "def f(x):\n    return x\n",
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "post_holdout_score": 1.0,
+      "pre_holdout_score": 0.4,
+      "revision_count": 1,
+      "revisions": [
+        {
+          "candidate_source_excerpt": "def f(x):\n    return min(x, 0)\n",
+          "candidate_source_sha256": "86682df95a2c082e6daa3830b38413471c66528a615de7af0fa755de0c9aad31",
+          "changed": true,
+          "cycle": 0,
+          "decision": "REVISE_HYPOTHESIS",
+          "failure_expected": 0,
+          "failure_input": [
+            4
+          ],
+          "post_cycle_holdout_score": 1.0,
+          "previous_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+          "reason": null,
+          "repair_mode": "BASE_PORTFOLIO",
+          "retest_decision": "TEST_HYPOTHESIS"
+        }
+      ],
+      "task_id": "REV_MIN0"
+    },
+    {
+      "changed_revision_count": 2,
+      "feedback_used_count": 2,
+      "final_seed_plus_feedback_score": 1.0,
+      "final_source_excerpt": "def f(x):\n    return max(min(x, 3), -2)\n",
+      "final_source_sha256": "42ab2789b88c7776f3931ca075d9dbee73f9cfd09fcc97a3114b02c333c6eeaf",
+      "initial_source_excerpt": "def f(x):\n    return x\n",
+      "initial_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "post_holdout_score": 1.0,
+      "pre_holdout_score": 0.3333333333333333,
+      "revision_count": 2,
+      "revisions": [
+        {
+          "candidate_source_excerpt": "def f(x):\n    return min(x, 3)\n",
+          "candidate_source_sha256": "131789b01b66860244f55e8a2b600ba611db9311b7cb4bef859ebb9df3b6c086",
+          "changed": true,
+          "cycle": 0,
+          "decision": "REVISE_HYPOTHESIS",
+          "failure_expected": 3,
+          "failure_input": [
+            5
+          ],
+          "post_cycle_holdout_score": 0.6666666666666666,
+          "previous_source_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+          "reason": null,
+          "repair_mode": "BASE_PORTFOLIO",
+          "retest_decision": "TEST_HYPOTHESIS"
+        },
+        {
+          "candidate_source_excerpt": "def f(x):\n    return max(min(x, 3), -2)\n",
+          "candidate_source_sha256": "42ab2789b88c7776f3931ca075d9dbee73f9cfd09fcc97a3114b02c333c6eeaf",
+          "changed": true,
+          "cycle": 1,
+          "decision": "REVISE_HYPOTHESIS",
+          "failure_expected": -2,
+          "failure_input": [
+            -5
+          ],
+          "post_cycle_holdout_score": 1.0,
+          "previous_source_sha256": "131789b01b66860244f55e8a2b600ba611db9311b7cb4bef859ebb9df3b6c086",
+          "reason": null,
+          "repair_mode": "BASE_PORTFOLIO",
+          "retest_decision": "TEST_HYPOTHESIS"
+        }
+      ],
+      "task_id": "REV_CLAMP_NEG2_POS3"
+    }
+  ],
+  "experience_digest": "bc6ff2cbb415991695421e934930ead18ba09e33c2b4bd3377988e6259525195",
+  "multi_revision_task_count": 1,
+  "parent_planning_gene_id": "GENE-G2-CODING-THINKING-V2-ad9b080a825b7a98",
+  "parent_reasoning_gene_id": "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d",
+  "post_revision_fresh_score": 1.0,
+  "pre_fresh_score": 0.4888888888888889,
+  "restore_score": 1.0,
+  "revision_ablation_score": 0.4888888888888889,
+  "revision_gene": {
+    "active_components": [
+      "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+    ],
+    "gene_digest": "db0e06d4b4cb61dc0afdc9fb40f03feb8bdf42559573a338fae09e899e4b1054",
+    "gene_id": "GENE-G2-CODING-HYPOTHESIS-REVISION-V1-d5bc7c669858a519",
+    "gene_scope": [
+      "THINKING",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC",
+      "INTELLIGENCE"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-THINKING-V2-ad9b080a825b7a98",
+      "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d",
+      "10d11c95e5694eaf3d779aa0d0a6e01cd3ccd449876f26ec1e94ec7ad70c0d20",
+      "f2ebdbe56a8946ab37f718895e628af3f53eb7cbbf223a525a62844c752bfb9a"
+    ],
+    "lineage_join": {
+      "contextual_planning_parent": "GENE-G2-CODING-THINKING-V2-ad9b080a825b7a98",
+      "iterative_reasoning_parent": "GENE-G2-CODING-REASONING-THINKING-V7-5611c50ed421e83d"
+    },
+    "mechanism_kind": "FAILURE_COUNTEREXAMPLE_DRIVEN_ACTIVE_G2_PROGRAM_REPAIR_REVISION_LOOP",
+    "organ": "THINKING",
+    "post_revision_fresh_score": 1.0,
+    "pre_fresh_score": 0.4888888888888889,
+    "promotion_state": "SHADOW_ONLY",
+    "restore_score": 1.0,
+    "revision_ablation_score": 0.4888888888888889,
+    "schema": "yado.g2.coding_hypothesis_revision_gene.v1"
+  },
+  "schema": "yado.g2.coding_hypothesis_revision.experience.v1",
+  "semantic_boundary": "THE HOST SUPPLIES ONLY SANDBOX TASKS AND OBSERVED FAILED TEST INPUT/EXPECTED OUTPUT AS CONSEQUENCE EVIDENCE. REVISED SOURCE IS GENERATED ONLY BY THE ALREADY-ACTIVE G2 PROGRAM-REPAIR CAPABILITY AFTER THE V7 THINKING POLICY CHOOSES REVISE_HYPOTHESIS. FINAL HOLDOUT LABELS ARE NEVER FED BACK. THIS PROVES BOUNDED FAILURE-DRIVEN HYPOTHESIS/PATCH REVISION, NOT GENERAL AUTONOMOUS SOFTWARE ENGINEERING.",
+  "status": "TRAINED"
+}
