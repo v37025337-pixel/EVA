@@ -1,0 +1,368 @@
+{
+  "candidate_source_sha256": null,
+  "canonical_mutation": false,
+  "checks": {
+    "candidate_source_compiles": false,
+    "candidate_source_produced_by_yado": false,
+    "canonical_mutation": false,
+    "external_coding_models_used": false,
+    "fresh_source_execution_pass": false,
+    "host_patch_used": false,
+    "host_source_seed_used": false,
+    "host_source_template_used": false,
+    "host_target_file_selected": false,
+    "native_ir_behavior_transfer": true,
+    "native_skill_gate_ran": true,
+    "parent_native_process_pass": true,
+    "python_self_study_available": true,
+    "rollback_parent_available": true
+  },
+  "kernel_skill_selection": {
+    "candidate_count": 4,
+    "gate_digest": "de0b028747772a2a18a2ac24288466e0cee4d2bac7644b2dbb6e18c2f3926476",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "f116cd0d32940aae72034b15000009ebdeb967b629fb503c824f74f577eb0968",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "EVOLUTIONARY_CODE_GENE",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "5387f4081fd14ee2faa87360b63f04470d790bee46b7c5a00910b66fc1fcc731",
+        "failed_critics": [
+          "structural"
+        ],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "IR_ONLY_Q1",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "7eeae0df05de9694cd4d9e94d18938bc38b3ae9dd1d60c7cba975c963d0ee842",
+        "failed_critics": [
+          "structural"
+        ],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "IR_ONLY_Q2",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "5b038fb66e9efffa90a30e2ba9abeb9372eb492eff1109e307be39451bc5bd7b",
+        "failed_critics": [
+          "structural"
+        ],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "IR_ONLY_Q3",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "native_capability_inventory": [
+    {
+      "method": "bounded_program_repair",
+      "signature": "()"
+    },
+    {
+      "method": "evolutionary_genome_cls",
+      "signature": "(parent_snapshot, experience_sources=None)"
+    },
+    {
+      "method": "evolutionary_parent_genome",
+      "signature": "() -> 'dict[str, Any]'"
+    },
+    {
+      "method": "evolve_cognitive_code_genome",
+      "signature": "() -> 'dict[str, Any]'"
+    },
+    {
+      "method": "execute_program_task",
+      "signature": "(source: 'str', function_name: 'str', args: 'tuple[Any, ...]') -> 'Any'"
+    },
+    {
+      "method": "repair_program",
+      "signature": "(source: 'str', function_name: 'str', train_examples: 'list[tuple[tuple[Any, ...], Any]]', max_candidates: 'int' = 10000) -> 'dict[str, Any]'"
+    },
+    {
+      "method": "semantic_expression_synthesizer",
+      "signature": "()"
+    },
+    {
+      "method": "synthesize_mathematical_expression",
+      "signature": "(train_rows: 'list[dict[str, Any]]', max_ops: 'int' = 3, max_states_per_level: 'int' = 30000) -> 'dict[str, Any]'"
+    },
+    {
+      "method": "temporal_evolution_on_stall",
+      "signature": "(execution_fabric, stream_id: 'str') -> 'dict[str, Any]'"
+    }
+  ],
+  "native_evolution": {
+    "candidate_source_present": false,
+    "code_gene": {
+      "expression": {
+        "max_degree": 3
+      },
+      "gene_digest": "deeeaaf73d785fb659a8a5cb1b2049be1d5dc67ad5982d26b89de9b9f7e7dd51",
+      "gene_id": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "heritage": [
+        "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      ],
+      "mutation_reason": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
+      "novel_gene": true
+    },
+    "run_digest": "c65aac78000c3176f8b868967157d2e20fa915842cfb136b37807aec9935f7f1",
+    "selection": "CHILD"
+  },
+  "native_ir_results": [
+    {
+      "actual_python_source": null,
+      "fresh_blind": [
+        {
+          "expected": 50,
+          "got": 50,
+          "ok": true,
+          "x": -7
+        },
+        {
+          "expected": 26,
+          "got": 26,
+          "ok": true,
+          "x": -5
+        },
+        {
+          "expected": 26,
+          "got": 26,
+          "ok": true,
+          "x": 5
+        },
+        {
+          "expected": 65,
+          "got": 65,
+          "ok": true,
+          "x": 8
+        }
+      ],
+      "fresh_blind_score": 1.0,
+      "id": "Q1",
+      "native_expression_result": {
+        "expression": [
+          "+",
+          [
+            "*",
+            "x",
+            "x"
+          ],
+          1
+        ],
+        "ops": 2,
+        "states": [
+          8,
+          34,
+          144
+        ]
+      }
+    },
+    {
+      "actual_python_source": null,
+      "fresh_blind": [
+        {
+          "expected": -25,
+          "got": -25,
+          "ok": true,
+          "x": -9
+        },
+        {
+          "expected": 5,
+          "got": 5,
+          "ok": true,
+          "x": 1
+        },
+        {
+          "expected": 23,
+          "got": 23,
+          "ok": true,
+          "x": 7
+        },
+        {
+          "expected": 35,
+          "got": 35,
+          "ok": true,
+          "x": 11
+        }
+      ],
+      "fresh_blind_score": 1.0,
+      "id": "Q2",
+      "native_expression_result": {
+        "expression": [
+          "+",
+          [
+            "*",
+            3,
+            "x"
+          ],
+          2
+        ],
+        "ops": 2,
+        "states": [
+          8,
+          34,
+          144
+        ]
+      }
+    },
+    {
+      "actual_python_source": null,
+      "fresh_blind": [
+        {
+          "expected": -210,
+          "got": -210,
+          "ok": true,
+          "x": -6
+        },
+        {
+          "expected": -120,
+          "got": -120,
+          "ok": true,
+          "x": -5
+        },
+        {
+          "expected": 120,
+          "got": 120,
+          "ok": true,
+          "x": 5
+        },
+        {
+          "expected": 336,
+          "got": 336,
+          "ok": true,
+          "x": 7
+        }
+      ],
+      "fresh_blind_score": 1.0,
+      "id": "Q3",
+      "native_expression_result": {
+        "expression": [
+          "-",
+          [
+            "*",
+            [
+              "*",
+              "x",
+              "x"
+            ],
+            "x"
+          ],
+          "x"
+        ],
+        "ops": 3,
+        "states": [
+          8,
+          34,
+          144,
+          668
+        ]
+      }
+    }
+  ],
+  "next_required_capability": "NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
+  "parent_process_receipt": "3edfebeec0cbadfc6a0e3a0c1536a5db34ca44794071f82fd7a39054b7b52596",
+  "receipt_sha256": "e4700dba1f88b61d3c6288316c29c64f1f2796aff30d7bb82f4a8a48df089382",
+  "schema": "yado.g2.native_source_ir_emitter_birth.v1",
+  "selected_skill_ids": [],
+  "semantic_boundary": "STRICT NATIVE IR-TO-SOURCE MILESTONE. YADO MAY PRODUCE INTERNAL EXPRESSION IR AND EVOLVE CODE GENES, BUT PASS IS FORBIDDEN UNLESS A NATIVE PATH PRODUCES ACTUAL NEW PYTHON SOURCE WITHOUT HOST SOURCE SEED/TEMPLATE/PATCH/TARGET OR EXTERNAL CODING MODEL, AND THAT SOURCE COMPILES AND EXECUTES.",
+  "source_error": null,
+  "status": "WITHHOLD_G2_NATIVE_SOURCE_IR_EMITTER_BIRTH_V1",
+  "study_digest": "f90bcd6f99c3ed8c5f93e0b59381f54912a5fdc3b557caf8e92c07c1c1ff9f67",
+  "task": {
+    "constraints": {
+      "canonical_mutation": false,
+      "external_coding_models": false,
+      "fail_closed": true,
+      "host_patch": false,
+      "host_source_seed": false,
+      "host_source_template": false,
+      "host_target": false
+    },
+    "deficit": "NATIVE_SOURCE_IR_EMITTER_BIRTH_V1",
+    "host_role": "TASK_TRANSPORT_FRESH_BENCHMARK_AND_STRICT_OBSERVER_ONLY",
+    "instruction": "Use the source-construction process and Python/self-study as experience. Create the missing IR-to-Python source emitter with YADO native mechanisms only, then use it to produce actual new Python source without receiving a host-written source seed, patch, target file, source template, or external coding model. The source must compile and solve fresh held-out tasks. If current native substrates cannot birth such an emitter, explicitly WITHHOLD and identify the exact next missing native capability.",
+    "objective": "YADO_BIRTH_NATIVE_SOURCE_IR_EMITTER_AND_USE_IT_TO_PRODUCE_PYTHON_SOURCE",
+    "parent_process_artifact": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
+    "parent_process_run_id": 33844698330,
+    "python_self_study": "experience/yado-native-seedless-source-constructor-python-self-study-v1.json",
+    "schema": "yado.g2.native_source_ir_emitter_birth.request.v1",
+    "stop_condition": "NATIVE_IR_EMITTER_SOURCE_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+    "success_conditions": [
+      "yado_creates_or_evolves_an_internal_program_representation",
+      "yado_creates_an_emitter_from_that_representation_to_python_source",
+      "no_host_source_seed_template_patch_or_target",
+      "no_external_coding_model",
+      "actual_candidate_source_bytes_are_produced_by_yado",
+      "candidate_source_compiles",
+      "fresh_heldout_program_tasks_pass",
+      "causal_ablation_removes_the_gain",
+      "restore_reproduces_the_gain",
+      "rollback_parent_is_available",
+      "canonical_unchanged"
+    ],
+    "trigger": 2,
+    "trigger_reason": "START_NATIVE_IR_TO_PYTHON_EMITTER_BIRTH"
+  }
+}
