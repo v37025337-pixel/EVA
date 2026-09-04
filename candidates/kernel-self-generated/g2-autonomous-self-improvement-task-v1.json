@@ -19,6 +19,7 @@
   "architecture_mutation": false,
   "canonical_head_unchanged": true,
   "canonical_mutation": false,
+  "direct_priority_evidence": true,
   "experience_consulted": [
     {
       "branch": "yado-kernel-task-v37-repair",
@@ -207,6 +208,102 @@
   "fitness_gain": null,
   "g3_genesis_performed": false,
   "generation_transition": false,
+  "goal_action_binding": {
+    "component_id": "CTRL-G2-GOAL-ACTION-BINDING-V1",
+    "direct_priority_evidence": true,
+    "result": {
+      "canonical_mutation": false,
+      "comprehension": {
+        "cross_file_provider_mentions": 2,
+        "no_key_provider_set_extracted": true,
+        "package_identity_extracted": true,
+        "provider_catalog_extracted": true,
+        "readme_title_extracted": true,
+        "repository_commit_identity_extracted": true
+      },
+      "conflict_resolution_pass": true,
+      "conflict_resolution_policy": "WHEN LIVE FETCH AND PARSE SUCCEED, CURRENT CONTENT-ADDRESSED LIVE EVIDENCE SUPERSEDES PRIOR MUTABLE CATALOG CLAIMS",
+      "direct_priority_evidence": true,
+      "evidence_digest": "87932e01359943ebb9ad9725374d38ca6fe5ce0ee75a14b651fedef92e9117b9",
+      "fetch": {
+        "commit": {
+          "bytes": 13785,
+          "http_status": 200,
+          "ok": true,
+          "sha256": "ec84d0d8d6a0c56c10f24173c90207fcf13de4253a2f6158d993a2aedb02ec76"
+        },
+        "files": {
+          "README.md": {
+            "bytes": 64057,
+            "http_status": 200,
+            "ok": true,
+            "sha256": "8ad6ce99125ff66f0c21968b15753f5c2b130c88e6db344ea1e04abbd482c9bf"
+          },
+          "package.json": {
+            "bytes": 2948,
+            "http_status": 200,
+            "ok": true,
+            "sha256": "9c138c8a6435dd7bbd16d280a47c04a7af2998aa9c4a20b63adb0c9df623f67e"
+          },
+          "sources.js": {
+            "bytes": 46864,
+            "http_status": 200,
+            "ok": true,
+            "sha256": "40a8bef06c2ae2b5d926634e50e034c3bd26fbe6b42eff6836d12091ae9a6606"
+          }
+        }
+      },
+      "live_commit_sha": "f611aaed0026b850323c070959147a82e289910c",
+      "live_semantic_extract": {
+        "no_key_provider_keys": [
+          "kilo",
+          "llm7"
+        ],
+        "package_name": "free-coding-models",
+        "package_version": "0.5.81",
+        "provider_count": 22,
+        "readme_title": "\ud83d\udca1 Why this tool?"
+      },
+      "prior_vs_live_conflicts": [],
+      "resource_repository": "vava-nessa/free-coding-models",
+      "status": "PASS_DIRECT_LIVE_RESOURCE_EVIDENCE_RECHECK"
+    },
+    "selected_action": "LIVE_RESOURCE_EVIDENCE_RECHECK",
+    "selection": {
+      "ranking": [
+        {
+          "action_id": "LIVE_RESOURCE_EVIDENCE_RECHECK",
+          "matched_tokens": [
+            "check",
+            "comprehension",
+            "conflict",
+            "content",
+            "evidence",
+            "live",
+            "resolution",
+            "resource"
+          ],
+          "score": 19
+        },
+        {
+          "action_id": "EXPERIENCE_EVIDENCE_REVIEW",
+          "matched_tokens": [
+            "evidence"
+          ],
+          "score": 5
+        },
+        {
+          "action_id": "GENOME_EVOLUTION",
+          "matched_tokens": [],
+          "score": 0
+        }
+      ],
+      "selected_action": "LIVE_RESOURCE_EVIDENCE_RECHECK",
+      "status": "ACTION_SELECTED"
+    },
+    "semantic_boundary": "HOST-CREATED GENERIC GOAL-TO-ACTION BINDER ADDED ONLY AFTER THREE OBSERVED PRIORITY/ACTION MISMATCHES. ACTION CHOICE IS CONTRACT-SCORED; EVIDENCE EXECUTION REMAINS BOUNDED AND CANONICAL-IMMUTABLE."
+  },
+  "host_created_goal_action_binder": true,
   "host_selected_gene": false,
   "host_selected_operator": false,
   "host_selected_target": false,
@@ -224,305 +321,14 @@
   ],
   "latest_self_audit_receipt_sha256": "7f1dab251e0688a7887e5d252aa7ff1dc054fdd6da39d03545155a17a600417f",
   "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33831996104.json",
-  "native_evolution_result": {
-    "architecture_mutation": false,
-    "child": {
-      "chromosomes": {
-        "CODE": {
-          "expression": {
-            "max_degree": 3
-          },
-          "gene_digest": "deeeaaf73d785fb659a8a5cb1b2049be1d5dc67ad5982d26b89de9b9f7e7dd51",
-          "gene_id": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
-          "heritage": [
-            "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
-            "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
-          ],
-          "mutation_reason": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
-          "novel_gene": true
-        },
-        "INTELLIGENCE": {
-          "expression": {
-            "candidate_generator": "GENERAL_COMBINATIONS_UP_TO_WIDTH",
-            "max_trigger_width": 3
-          },
-          "gene_digest": "7912ea5a80bc622dd954d8220d0f76a3fcbf04dfe79bd681bb24524e9039a04c",
-          "gene_id": "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
-          "heritage": [
-            "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
-          ],
-          "mutation_reason": "TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION",
-          "novel_gene": true
-        },
-        "LOGIC": {
-          "expression": {
-            "max_width": 3
-          },
-          "gene_digest": "7a43ad8ded171ca35b25d029aa636b8587e0b8e3e113efca884bb73d1fa0f003",
-          "gene_id": "GENE-LOGIC-BOOLEAN-DNF-V1",
-          "heritage": [
-            "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
-          ],
-          "mutation_reason": "ValueError:NOT_SYMMETRIC_DETERMINISTIC",
-          "novel_gene": true
-        },
-        "THINKING": {
-          "expression": {
-            "latency_tiebreak": true
-          },
-          "gene_digest": "07b84a3a66eaca0cf77c4de5298e7b46f2a6887429462dcecd72c54a51df38e4",
-          "gene_id": "GENE-THINKING-LATENCY-AWARE-PLANNER-V1",
-          "heritage": [
-            "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
-          ],
-          "mutation_reason": "EQUAL_UTILITY_LATENCY_TIE",
-          "novel_gene": false
-        }
-      },
-      "experience_sources": [
-        {
-          "branch": "yado-v29-cognitive",
-          "claim_boundary": null,
-          "evidence": [
-            "runtime/cognitive_cycle_v29.py",
-            "receipts/yado-v29-cognitive-latest.json"
-          ],
-          "lesson_provenance": {
-            "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
-            "semantic_validation_by_rederivation": false,
-            "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
-          },
-          "lessons": [
-            "BOUNDED_LOGIC_SYNTHESIS_CAN_GENERALIZE_ON_FRESH_PARITY",
-            "CONTEXT_CONDITIONED_THINKING_PRECEDENCE_CAN_TRANSFER_TO_FRESH_ACTION_IDS",
-            "FEATURE_SELECTED_INTELLIGENCE_STRATEGY_INDUCTION",
-            "LEARNING_EVENT_MUST_CLOSE_LOOP_IN_PERSISTENT_MEMORY"
-          ],
-          "rederived_evidence": {
-            "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
-            "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
-            "observation_count": 14,
-            "semantic_equivalence_to_host_lessons_claimed": false,
-            "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
-          },
-          "role": "COGNITIVE_GROWTH_EXPERIENCE",
-          "score": 6,
-          "tags": [
-            "logic",
-            "thinking",
-            "intelligence",
-            "memory",
-            "internet",
-            "closed_loop"
-          ]
-        },
-        {
-          "branch": "yado-kernel-task-v37-repair",
-          "claim_boundary": null,
-          "evidence": [
-            "runtime/yado_v37_integrity_self_repair_task.py",
-            "receipts/yado-v37-integrity-self-repair-task-latest.json"
-          ],
-          "lesson_provenance": {
-            "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
-            "semantic_validation_by_rederivation": false,
-            "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
-          },
-          "lessons": [
-            "DO_NOT_WEAKEN_CONTENT_ADDRESSED_INTEGRITY_TO_MAKE_A_CANDIDATE_PASS",
-            "PRESERVE_LAST_VERIFIED_LINEAGE_UNTIL_REPAIR_PASSES_FRESH_REGRESSION",
-            "PREFER_SMALLEST_EVIDENCE_BACKED_REPAIR",
-            "DIAGNOSIS_AND_REPAIR_SELECTION_CAN_BE_SEPARATE_FROM_REPAIR_APPLICATION"
-          ],
-          "rederived_evidence": {
-            "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
-            "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
-            "observation_count": 29,
-            "semantic_equivalence_to_host_lessons_claimed": false,
-            "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
-          },
-          "role": "FAIL_CLOSED_SELF_REPAIR_EXPERIENCE",
-          "score": 1,
-          "tags": [
-            "self_repair",
-            "integrity",
-            "rollback",
-            "diagnosis",
-            "fail_closed"
-          ]
-        },
-        {
-          "branch": "yado-rc8-v35-training",
-          "claim_boundary": null,
-          "evidence": [
-            "receipts/yado-rc8-v35-latest.json",
-            "receipts/yado-rc8-v35-internet-latest.json"
-          ],
-          "lesson_provenance": {
-            "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
-            "semantic_validation_by_rederivation": false,
-            "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
-          },
-          "lessons": [
-            "TRAINING_RESULTS_REQUIRE_EXTERNAL_RECEIPTS",
-            "INTERNET_ACCESS_IS_EVIDENCE_TRANSPORT_NOT_INTELLIGENCE_BY_ITSELF"
-          ],
-          "rederived_evidence": {
-            "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
-            "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
-            "observation_count": 8,
-            "semantic_equivalence_to_host_lessons_claimed": false,
-            "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
-          },
-          "role": "TRAINING_AND_INTERNET_EXPERIENCE",
-          "score": 1,
-          "tags": [
-            "training",
-            "internet",
-            "development"
-          ]
-        }
-      ],
-      "generation": "G2_CANDIDATE_TRCG_V1",
-      "genome_digest": "a812d2da7de8ec551c85478f3dedd8c51272a67d4e6c452f8cf2de33356b8545",
-      "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
-      "mutation_count": 4,
-      "novel_gene_count": 3,
-      "parent_genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
-      "promotion_state": "SHADOW_ONLY",
-      "schema": "yado.g2.evolutionary_genome.v1"
-    },
-    "controller_id": "CTRL-G2-EVOLUTIONARY-GENOME-V1",
-    "deficits": {
-      "CODE": {
-        "deficit": true,
-        "parent_holdout": 0.0,
-        "signature": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
-        "suggestion": "RECOMBINE_LOGIC_POLYNOMIAL_FIT_WITH_AST_RETURN_SYNTHESIS"
-      },
-      "INTELLIGENCE": {
-        "deficit": true,
-        "parent_route": [
-          "BASE"
-        ],
-        "signature": "TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION",
-        "suggestion": "INCREMENT_TRIGGER_WIDTH"
-      },
-      "LOGIC": {
-        "deficit": true,
-        "signature": "ValueError:NOT_SYMMETRIC_DETERMINISTIC",
-        "suggestion": "SYNTHESIZE_BOOLEAN_DNF_GENE"
-      },
-      "THINKING": {
-        "deficit": true,
-        "parent_action": "A_SLOW",
-        "signature": "EQUAL_UTILITY_LATENCY_TIE",
-        "suggestion": "MUTATE_STATE_KEY_WITH_LATENCY"
-      }
-    },
-    "fitness": {
-      "all_regressions_pass": true,
-      "child": {
-        "CODE": 1.0,
-        "INTELLIGENCE": 1.0,
-        "LOGIC": 1.0,
-        "THINKING": 1.0
-      },
-      "child_mean": 1.0,
-      "fitness_gain": 1.0,
-      "parent": {
-        "CODE": 0.0,
-        "INTELLIGENCE": 0.0,
-        "LOGIC": 0.0,
-        "THINKING": 0.0
-      },
-      "parent_mean": 0.0,
-      "regression": {
-        "CODE": true,
-        "INTELLIGENCE": true,
-        "LOGIC": true,
-        "THINKING": true
-      }
-    },
-    "g3_genesis_performed": false,
-    "generation_transition": false,
-    "parent": {
-      "chromosomes": {
-        "CODE": {
-          "expression": {
-            "mode": "CANONICAL_V11"
-          },
-          "gene_digest": "98271ea02611a375510fc6a9ee633837b4b4fa5e9c89286876d2fefac36d14ce",
-          "gene_id": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
-          "heritage": [
-            "G2"
-          ],
-          "mutation_reason": null,
-          "novel_gene": false
-        },
-        "INTELLIGENCE": {
-          "expression": {
-            "max_trigger_width": 2
-          },
-          "gene_digest": "27460d5a1a44bc936cbd3724842c5c86775df674212ba6ee80110089e289bc86",
-          "gene_id": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
-          "heritage": [
-            "G2"
-          ],
-          "mutation_reason": null,
-          "novel_gene": false
-        },
-        "LOGIC": {
-          "expression": {
-            "mode": "CANONICAL_V2"
-          },
-          "gene_digest": "0354aca82bc184cc55e379b0d70050dfa542b2cfdbb321262f6c4edd8804aea9",
-          "gene_id": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
-          "heritage": [
-            "G2"
-          ],
-          "mutation_reason": null,
-          "novel_gene": false
-        },
-        "THINKING": {
-          "expression": {
-            "mode": "CANONICAL_V2"
-          },
-          "gene_digest": "297a0093f790699c42eeab4723984e74265bfe324b4890980657a10ab59ea328",
-          "gene_id": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
-          "heritage": [
-            "G2"
-          ],
-          "mutation_reason": null,
-          "novel_gene": false
-        }
-      },
-      "component_digests": {
-        "CODE": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
-        "INTELLIGENCE": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
-        "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
-        "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
-      },
-      "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
-      "generation": "G2_CANDIDATE_TRCG_V1",
-      "genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
-      "genome_id": "G2-PARENT-GENOME-V1",
-      "parent_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
-      "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
-      "schema": "yado.g2.evolutionary_genome.v1"
-    },
-    "promotion_authorized": false,
-    "run_digest": "c65aac78000c3176f8b868967157d2e20fa915842cfb136b37807aec9935f7f1",
-    "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
-    "selection": "CHILD",
-    "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
-  },
-  "next_action": "KERNEL_CONTINUE_FROM_SELF_SELECTED_PRIORITY",
-  "receipt_sha256": "39548daf450236627dc74cb52328e17a5d0cb83d845befaa3c2e5903ceaeb308",
+  "native_evolution_result": null,
+  "next_action": "RE_AUDIT_AFTER_DIRECT_PRIORITY_ACTION",
+  "receipt_sha256": "23cc149729bd2f0a1aa6161b4fb0b3f1c98af1df78e3f64d17f21e489c65b4e2",
   "schema": "yado.g2.autonomous_self_improvement_task.v1",
-  "selected_child_genome_digest": "a812d2da7de8ec551c85478f3dedd8c51272a67d4e6c452f8cf2de33356b8545",
-  "semantic_boundary": "THE HOST ONLY TRIGGERS AND PERSISTS. YADO SELECTS ITS OWN AUDIT PRIORITY, CONSULTS ITS EXPERIENCE, AND RUNS ITS CANONICAL NATIVE GENOME EVOLUTION. ANY CHANGE REMAINS SHADOW; THIS DOES NOT CLAIM OPEN-ENDED AUTONOMOUS SELF-REWRITING.",
-  "shadow_change_produced": true,
+  "selected_action": "LIVE_RESOURCE_EVIDENCE_RECHECK",
+  "selected_child_genome_digest": null,
+  "semantic_boundary": "AFTER REPEATED KERNEL PRIORITY/ACTION MISMATCH, THE HOST ADDED A GENERIC CONTRACT-SCORED GOAL-TO-ACTION BINDER. THE BINDER DOES NOT SELECT A TARGET FILE OR PATCH. PASS NOW REQUIRES DIRECT EVIDENCE FOR THE KERNEL-SELECTED PRIORITY; UNRELATED GENERIC GENOME EVOLUTION CANNOT COUNT AS SUCCESS.",
+  "shadow_change_produced": false,
   "status": "PASS_SHADOW_G2_AUTONOMOUS_SELF_IMPROVEMENT_TASK_V1",
   "task": {
     "allow_canonical_mutation": false,
@@ -551,10 +357,11 @@
       "require_rollback_path": true
     },
     "experiment_series": {
-      "host_intervention_after_kernel_failure": true,
       "max_runs": 3,
+      "phase": "HOST_FIX_VALIDATION",
+      "preceded_by_kernel_self_repair_attempt_run": 33832344388,
       "run_index": 1,
-      "series_id": "G2-GOAL-ACTION-BINDING-3-RUNS"
+      "series_id": "G2-GOAL-ACTION-BINDING-HOST-FIX-3-RUNS"
     },
     "host_role": "TRIGGER_TRANSPORT_OBSERVATION_ONLY",
     "host_selected_mechanism": null,
@@ -591,7 +398,7 @@
       ],
       "task_id": "G2-GOAL-TO-ACTION-BINDING-REPAIR"
     },
-    "trigger": 3,
+    "trigger": 4,
     "use_accumulated_experience": true
   }
 }
