@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-import copy,hashlib,json,re,sys
+import copy,hashlib,json,re,sys,os
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
@@ -26,6 +26,8 @@ def status_pass(s):return str(s).startswith('PASS') or str(s) in ('VERIFIED','EX
 def status_withhold(s):return str(s).startswith('WITHHOLD') or str(s).startswith('FAIL')
 
 task=load(TASK);ledger=load(LEDGER);registry=load(REGISTRY);portfolio=load(PORTFOLIO);genome=load(GENOME)
+run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
+RUN_OUT=REPO/'receipts'/f'yado-g2-experience-conditioned-lti-evolution-v1-run-{run_id}.json'
 events=list(ledger.get('events') or [])
 if len(events)<100:raise RuntimeError('CAUSAL_HISTORY_TOO_SMALL')
 core=UnifiedYADOCoreV1(REPO);head_before=copy.deepcopy(core.head)
@@ -68,31 +70,55 @@ def balance_binary(rows):
 lf,lv,lb=map(balance_binary,(lf,lv,lb))
 if min(len(lf),len(lv),len(lb))<8:raise RuntimeError('LOGIC_HISTORY_SPLIT_TOO_SMALL')
 
-# THINKING: learn recurring causal ordering from early history and test only
-# later episodes composed of role types already observable during training.
-def norm_role(s):
-    s=re.sub(r'V\\d+','V#',str(s).upper())
-    s=re.sub(r'\\d+','#',s)
-    s=re.sub(r'_+','_',s).strip('_')
-    return s
-ne=len(events);ea=max(1,int(ne*.60));eb=max(ea+1,int(ne*.80))
+# THINKING: learn stable control-transition ordering from early causal history.
+# Representation is mechanically derived from status + NEXT relation, so it can
+# recur in later history even when concrete event/deficit names are new.
+def next_relation(e):
+    effect=str(e.get('effect') or '')
+    m=re.search(r'NEXT=([A-Z0-9_\\-]+)',effect)
+    if not m:return 'NONE'
+    nxt=m.group(1);cur=str(e.get('deficit') or '')
+    return 'SELF' if nxt==cur else 'OTHER'
+def control_role(e):
+    s=str(e.get('status') or '').upper()
+    if 'CANONICAL' in s:sg='CANONICAL'
+    elif 'SHADOW' in s:sg='SHADOW'
+    elif s.startswith('WITHHOLD'):sg='WITHHOLD'
+    elif s.startswith('FAIL'):sg='FAIL'
+    elif s.startswith('PASS') or s in ('VERIFIED','EXECUTE'):sg='PASS'
+    else:sg='OTHER'
+    return sg+'__NEXT_'+next_relation(e)
+
+ne=len(events);ea=max(2,int(ne*.60));eb=max(ea+2,int(ne*.80))
 event_fit,event_val,event_blind=events[:ea],events[ea:eb],events[eb:]
-fit_roles=[norm_role(e.get('event_type') or 'UNKNOWN') for e in event_fit]
-fit_freq={}
-for r in fit_roles:fit_freq[r]=fit_freq.get(r,0)+1
-known_roles={r for r,n in fit_freq.items() if n>=2}
-def build_windows(segment,width=4):
-    stream=[norm_role(e.get('event_type') or 'UNKNOWN') for e in segment]
-    stream=[r for r in stream if r in known_roles]
+
+# Derive stable directed relations only from training history.
+pair_counts={}
+for a,b in zip(event_fit,event_fit[1:]):
+    ra,rb=control_role(a),control_role(b)
+    if ra==rb:continue
+    key=tuple(sorted((ra,rb)))
+    d=pair_counts.setdefault(key,{(key[0],key[1]):0,(key[1],key[0]):0})
+    d[(ra,rb)]=d.get((ra,rb),0)+1
+stable=set()
+for key,d in pair_counts.items():
+    ab=d.get((key[0],key[1]),0);ba=d.get((key[1],key[0]),0);tot=ab+ba
+    if tot<2:continue
+    if ab/tot>=.75:stable.add((key[0],key[1]))
+    elif ba/tot>=.75:stable.add((key[1],key[0]))
+if len(stable)<2:raise RuntimeError('THINKING_STABLE_RELATIONS_TOO_SMALL:'+str(len(stable)))
+
+tf=[]
+for a,b in zip(event_fit,event_fit[1:]):
+    pair=(control_role(a),control_role(b))
+    if pair in stable:tf.append(list(pair))
+def holdout_pairs(segment):
     out=[]
-    for i in range(len(stream)):
-        seq=[]
-        for r in stream[i:]:
-            if r not in seq:seq.append(r)
-            if len(seq)==width:break
-        if len(seq)==width and seq not in out:out.append(seq)
+    for a,b in zip(segment,segment[1:]):
+        pair=(control_role(a),control_role(b))
+        if pair in stable:out.append(list(pair))
     return out
-tf=build_windows(event_fit);tv=build_windows(event_val);tb=build_windows(event_blind)
+tv=holdout_pairs(event_val);tb=holdout_pairs(event_blind)
 windows=tf+tv+tb
 if min(len(tf),len(tv),len(tb))<4:raise RuntimeError('THINKING_HISTORY_SPLIT_TOO_SMALL:'+str([len(tf),len(tv),len(tb)]))
 def episode(seq,salt):
@@ -266,7 +292,7 @@ passed=(
 status='PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_LTI_EVOLUTION_V1' if passed else 'WITHHOLD_G2_EXPERIENCE_CONDITIONED_LTI_EVOLUTION_V1'
 report={
  'schema':'yado.g2.experience_conditioned_lti_evolution.v1',
- 'status':status,'task':task,
+ 'status':status,'github_run_id':run_id,'task':task,
  'experience_digest':experience_digest,
  'history_counts':{'events':len(events),'logic':len(logic_rows),'thinking_windows':len(windows),'intelligence':len(intel_rows)},
  'split_counts':{
@@ -281,7 +307,10 @@ report={
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
-OUT.write_text(json.dumps(report,indent=2,sort_keys=True,default=str)+'\n',encoding='utf-8')
+RUN_OUT.parent.mkdir(parents=True,exist_ok=True)
+raw=json.dumps(report,indent=2,sort_keys=True,default=str)+'\n'
+OUT.write_text(raw,encoding='utf-8')
+RUN_OUT.write_text(raw,encoding='utf-8')
 print(json.dumps({
  'status':status,'fresh_scores':fresh,'baselines':baselines,'fresh_gains':gains,
  'genes':{k:v['gene_id'] for k,v in genes.items()},
