@@ -43,7 +43,8 @@ SOURCE_FILES=[
  'runtime/yado_rc8_v36/yado_core_v3_0_rc6_meta_grammar.py',
  'runtime/yado_rc8_v36/yado_core_v3_0_rc7_deep_integrity.py',
  'runtime/yado_rc8_v36/yado_core_v3_0_rc8_external_cognitive.py',
-]\nSPEC_POINTS=[(-3,2),(-1,-2),(0,3),(2,-1),(4,1)]
+]
+SPEC_POINTS=[(-3,2),(-1,-2),(0,3),(2,-1),(4,1)]
 HIDDEN_POINTS=[(-7,5),(-4,-3),(1,6),(3,-5),(5,2),(7,-1)]
 TEST_GRID=[(x,y) for x in range(-5,6) for y in range(-5,6)]
 
