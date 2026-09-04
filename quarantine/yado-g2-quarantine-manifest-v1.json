@@ -5,7 +5,8 @@
     "architecture_history": "CAUSAL_HISTORY_NOT_ACTIVE_RUNTIME",
     "historical_branch_code": "READ_ONLY_BY_REGISTERED_COMMIT_SHA",
     "receipts": "PERSISTENT_EVIDENCE_NOT_RUNTIME_IDENTITY",
-    "superseded_candidates": "EVIDENCE_ONLY_UNLESS_FRESH_READMISSION"
+    "superseded_candidates": "EVIDENCE_ONLY_UNLESS_FRESH_READMISSION",
+    "old_manifests": "HISTORICAL_ONLY_NOT_CONTROL_PLANE"
   },
   "manifest_digest": "b5bded61a41ded59c25b715254bcfb86f3ceb0aed0ff8c368b7c5c698b767e32",
   "operational_target": "ALL_NAMED_YADO_BRANCH_REFS_CONVERGE_TO_G2_AFTER_THIS_CANONICAL_COMMIT",
@@ -74,10 +75,11 @@
   "physical_ref_closure": {
     "active_branch": "yado-architecture-shadow-search",
     "closure_merge_commit": "c1b949bdb59ad681f3a02b9a8be8e85cd52a1830",
-    "final_metadata_ref_sync_required": true,
+    "final_metadata_ref_sync_required": false,
     "legacy_named_refs_at_closure_commit": 13,
     "legacy_registered_heads_in_merge_parent_set": 13,
-    "verification": "GIT_PARENT_SET_PLUS_REMOTE_REF_READBACK"
+    "verification": "GIT_PARENT_SET_PLUS_REMOTE_REF_READBACK",
+    "current_tip_convergence_policy": "ALL_NAMED_YADO_BRANCH_REFS_MAY_POINT_TO_CURRENT_G2 TIP; HISTORICAL IDENTITY IS PRESERVED BY REGISTERED SNAPSHOT COMMIT SHA, NOT BY KEEPING EXECUTABLE LEGACY BRANCH TIPS."
   },
   "preservation": {
     "delete_historical_receipts": false,
@@ -85,5 +87,8 @@
     "legacy_exact_retrieval_component": "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1"
   },
   "schema": "yado.g2.quarantine_manifest.v1",
-  "status": "PHYSICAL_REF_CONVERGENCE_VERIFIED"
+  "status": "PHYSICAL_REF_CONVERGENCE_VERIFIED",
+  "single_core_memory_closure": "architecture/yado-g2-single-core-memory-closure-v2.json",
+  "current_runtime_authority": "canonical/yado-unified-core-v1.json",
+  "current_head_authority": "canonical/yado-main-head-g2.json"
 }
