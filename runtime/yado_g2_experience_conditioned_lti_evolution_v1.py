@@ -68,24 +68,32 @@ def balance_binary(rows):
 lf,lv,lb=map(balance_binary,(lf,lv,lb))
 if min(len(lf),len(lv),len(lb))<8:raise RuntimeError('LOGIC_HISTORY_SPLIT_TOO_SMALL')
 
-# THINKING: learn recurring causal ordering directly from normalized ledger event types.
+# THINKING: learn recurring causal ordering from early history and test only
+# later episodes composed of role types already observable during training.
 def norm_role(s):
     s=re.sub(r'V\\d+','V#',str(s).upper())
     s=re.sub(r'\\d+','#',s)
     s=re.sub(r'_+','_',s).strip('_')
     return s
-raw_roles=[norm_role(e.get('event_type') or 'UNKNOWN') for e in events]
-freq={}
-for r in raw_roles:freq[r]=freq.get(r,0)+1
-stream=[r for r in raw_roles if freq.get(r,0)>=2]
-windows=[]
-for i in range(len(stream)):
-    seq=[]
-    for r in stream[i:]:
-        if r not in seq:seq.append(r)
-        if len(seq)==5:break
-    if len(seq)==5 and seq not in windows:windows.append(seq)
-tf,tv,tb=split(windows)
+ne=len(events);ea=max(1,int(ne*.60));eb=max(ea+1,int(ne*.80))
+event_fit,event_val,event_blind=events[:ea],events[ea:eb],events[eb:]
+fit_roles=[norm_role(e.get('event_type') or 'UNKNOWN') for e in event_fit]
+fit_freq={}
+for r in fit_roles:fit_freq[r]=fit_freq.get(r,0)+1
+known_roles={r for r,n in fit_freq.items() if n>=2}
+def build_windows(segment,width=4):
+    stream=[norm_role(e.get('event_type') or 'UNKNOWN') for e in segment]
+    stream=[r for r in stream if r in known_roles]
+    out=[]
+    for i in range(len(stream)):
+        seq=[]
+        for r in stream[i:]:
+            if r not in seq:seq.append(r)
+            if len(seq)==width:break
+        if len(seq)==width and seq not in out:out.append(seq)
+    return out
+tf=build_windows(event_fit);tv=build_windows(event_val);tb=build_windows(event_blind)
+windows=tf+tv+tb
 if min(len(tf),len(tv),len(tb))<4:raise RuntimeError('THINKING_HISTORY_SPLIT_TOO_SMALL:'+str([len(tf),len(tv),len(tb)]))
 def episode(seq,salt):
     actions=[]
