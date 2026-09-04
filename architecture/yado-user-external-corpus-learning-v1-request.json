@@ -2,11 +2,12 @@
   "schema": "yado.g2.user_external_corpus_learning.request.v1",
   "objective": "LEARN_FROM_ALL_RELEVANT_USER_SUPPLIED_PUBLIC_LINKS_AND_SCREENSHOT_DERIVED_RESOURCES_BEFORE_NEW_CONSTRUCTION",
   "corpus": "resources/yado-user-external-learning-corpus-v1.json",
-  "instruction": "Study the corpus as external evidence. Do not copy a ready architecture or repair. Preserve source provenance. After learning, the next task will require a YADO-native self-created mechanism.",
+  "instruction": "Study the expanded public corpus, emphasizing coding-agent failure analysis, iterative repair/reflection, Python AST representation, and public Python codebases. Do not copy a ready architecture or patch and do not execute third-party code. Preserve provenance; extract evidence useful for YADO-native coding apprenticeship.",
   "include_internal_project_history": true,
   "exclude_private_or_sensitive_screenshots": true,
   "no_third_party_code_execution": true,
   "no_canonical_mutation": true,
   "host_role": "SOURCE_TRANSPORT_AND_PERSISTENCE_ONLY",
-  "trigger": 1
+  "trigger": 2,
+  "trigger_reason": "CODING_APPRENTICESHIP_EXTERNAL_EVIDENCE_REFRESH_20260904"
 }
