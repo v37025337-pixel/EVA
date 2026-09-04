@@ -1,0 +1,521 @@
+{
+  "admission_state": "WITHHOLD_CONFLICT_ARBITRATION_DEFICIT",
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "clean_exact": true,
+    "composite_stress_high": false,
+    "conflict_cases_present": true,
+    "conflict_fail_closed_high": false,
+    "external_models_used": false,
+    "host_selected_easy_subset": false,
+    "irrelevant_perturbation_exact": true,
+    "parent_cognitive_v2_consumed": true,
+    "stress_generated_from_parent_program_structure": true,
+    "unknown_fail_closed_exact": true
+  },
+  "clean_min": 1.0,
+  "composite_stress": 0.6,
+  "conflict_min": 0.0,
+  "intelligence_stress": {
+    "by_kind": {
+      "CLEAN": 1.0,
+      "CONFLICT": 0.0,
+      "PERTURBED": 1.0,
+      "UNKNOWN": 1.0
+    },
+    "count": 16,
+    "failures": [
+      {
+        "conflicting_outputs": [
+          "ACTIVE_EVIDENCE_SEARCH",
+          "ITERATIVE_REAL_REPAIR"
+        ],
+        "expected": "WITHHOLD",
+        "got": [
+          "ACTIVE_EVIDENCE_SEARCH",
+          "ITERATIVE_REAL_REPAIR"
+        ],
+        "input": {
+          "hypothesis_set_present": true,
+          "reversible": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_ACTIVE_EVIDENCE_SEARCH_ITERATIVE_REAL_REPAIR_0_0"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_trigger": [
+          [
+            "ACTIVE_EVIDENCE_SEARCH",
+            0
+          ],
+          [
+            "ITERATIVE_REAL_REPAIR",
+            0
+          ]
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "ACTIVE_EVIDENCE_SEARCH",
+          "ORACLE_GUIDED_REPAIR"
+        ],
+        "expected": "WITHHOLD",
+        "got": [
+          "ACTIVE_EVIDENCE_SEARCH",
+          "ORACLE_GUIDED_REPAIR"
+        ],
+        "input": {
+          "formal_spec_present": true,
+          "hypothesis_set_present": true,
+          "real_source": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_ACTIVE_EVIDENCE_SEARCH_ORACLE_GUIDED_REPAIR_0_0"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_trigger": [
+          [
+            "ACTIVE_EVIDENCE_SEARCH",
+            0
+          ],
+          [
+            "ORACLE_GUIDED_REPAIR",
+            0
+          ]
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "HYPOTHESIS_REVISION",
+          "ITERATIVE_REAL_REPAIR"
+        ],
+        "expected": "WITHHOLD",
+        "got": [
+          "HYPOTHESIS_REVISION",
+          "ITERATIVE_REAL_REPAIR"
+        ],
+        "input": {
+          "formal_spec_present": false,
+          "hypothesis_set_present": false,
+          "reversible": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_HYPOTHESIS_REVISION_ITERATIVE_REAL_REPAIR_0_0"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_trigger": [
+          [
+            "HYPOTHESIS_REVISION",
+            0
+          ],
+          [
+            "ITERATIVE_REAL_REPAIR",
+            0
+          ]
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "ITERATIVE_REAL_REPAIR",
+          "ORACLE_GUIDED_REPAIR"
+        ],
+        "expected": "WITHHOLD",
+        "got": [
+          "ITERATIVE_REAL_REPAIR",
+          "ORACLE_GUIDED_REPAIR"
+        ],
+        "input": {
+          "formal_spec_present": true,
+          "real_source": false,
+          "reversible": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_ITERATIVE_REAL_REPAIR_ORACLE_GUIDED_REPAIR_0_0"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_trigger": [
+          [
+            "ITERATIVE_REAL_REPAIR",
+            0
+          ],
+          [
+            "ORACLE_GUIDED_REPAIR",
+            0
+          ]
+        ]
+      }
+    ],
+    "score": 0.75
+  },
+  "logic_stress": {
+    "by_kind": {
+      "CLEAN": 1.0,
+      "CONFLICT": 0.0,
+      "PERTURBED": 1.0,
+      "UNKNOWN": 1.0
+    },
+    "count": 9,
+    "failures": [
+      {
+        "conflicting_outputs": [
+          "ACCEPT",
+          "CONTINUE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "ACCEPT",
+        "input": {
+          "result_exact": true,
+          "search_incomplete": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_0_1"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          0,
+          1
+        ]
+      }
+    ],
+    "score": 0.8888888888888888
+  },
+  "next_required_capability": "G2_COGNITIVE_CONFLICT_ARBITRATION_REPAIR_V1",
+  "parent_cognitive_gene_id": "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V2-de62f13d7ffb7f71",
+  "perturb_min": 1.0,
+  "promotion_applied": false,
+  "receipt_sha256": "b111fd8d0d28c57aa8ed052228bf76da989d192515b4c54cd5bb3fd15b66d956",
+  "schema": "yado.g2.cognitive_consolidation_stress_admission.v1",
+  "semantic_boundary": "ADVERSARIAL STRUCTURAL STRESS OF THE SHADOW COGNITIVE LAYER. CLEAN AND PERTURBED CASES ARE GENERATED FROM LEARNED PROGRAM STRUCTURE; CONFLICT CASES ARE COMPATIBLE UNIONS OF DIFFERENT LEARNED DECISION ROUTES AND MUST FAIL CLOSED. THIS DOES NOT PROMOTE CANONICAL STATE.",
+  "status": "WITHHOLD_G2_COGNITIVE_CONSOLIDATION_STRESS_ADMISSION_V1",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "clean_exact": true,
+      "composite_stress_min": 0.95,
+      "conflict_fail_closed_min": 0.95,
+      "easy_subset_selection": false,
+      "external_models": false,
+      "perturbation_exact": true,
+      "unknown_fail_closed_exact": true
+    },
+    "host_role": "MECHANICAL_ADVERSARIAL_CASE_GENERATION_AND_STRICT_EVALUATION_ONLY",
+    "instruction": "Use the PASS shadow cognitive layer V2 as the only candidate under test. Mechanically generate clean cases from each learned decision route, irrelevant-field perturbations, unknown states, and compatible unions of routes that predict different actions. Conflict unions are fresh adversarial states and must fail closed to WITHHOLD rather than taking the first matching rule or emitting multiple incompatible actions. Evaluate LOGIC, THINKING and INTELLIGENCE separately and use the minimum organ score as composite stress. Require exact clean, exact irrelevant perturbation, exact unknown fail-closed, conflict fail-closed >=0.95, and composite stress >=0.95. Do not select an easy subset, use an external model, reduce thresholds, or mutate canonical state.",
+    "objective": "ADVERSARIALLY_STRESS_THE_NEW_LOGIC_THINKING_INTELLIGENCE_COMPOSITE_BEFORE_ANY_ADMISSION",
+    "parent": "candidates/kernel-self-generated/g2-coding-experience-cognitive-consolidation-v2.json",
+    "schema": "yado.g2.cognitive_consolidation_stress_admission_v1.request.v1",
+    "trigger": 1,
+    "trigger_reason": "PASS_SHADOW_G2_CODING_EXPERIENCE_COGNITIVE_CONSOLIDATION_V2"
+  },
+  "thinking_stress": {
+    "by_kind": {
+      "CLEAN": 1.0,
+      "CONFLICT": 0.0,
+      "PERTURBED": 1.0,
+      "UNKNOWN": 1.0
+    },
+    "count": 35,
+    "failures": [
+      {
+        "conflicting_outputs": [
+          "ACCEPT",
+          "SEEK_EVIDENCE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "failure_seen": false,
+          "oracle_available": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_0_3"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          0,
+          3
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "REVISE",
+          "SEEK_EVIDENCE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "candidate_available": false,
+          "formal_spec_present": false,
+          "oracle_available": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_0_5"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          0,
+          5
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "SEEK_EVIDENCE",
+          "TEST"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "candidate_available": true,
+          "formal_spec_present": false,
+          "hypothesis_set_present": false,
+          "oracle_available": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_0_6"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          0,
+          6
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "ACCEPT",
+          "SEEK_EVIDENCE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "failure_seen": false,
+          "hypothesis_set_present": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_1_3"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          1,
+          3
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "BUILD_ORACLE",
+          "SEEK_EVIDENCE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "hypothesis_set_present": true,
+          "oracle_available": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_1_4"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          1,
+          4
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "REVISE",
+          "SEEK_EVIDENCE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "candidate_available": false,
+          "formal_spec_present": false,
+          "hypothesis_set_present": true,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_1_5"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          1,
+          5
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "BUILD_ORACLE",
+          "SEEK_EVIDENCE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "failure_seen": true,
+          "oracle_available": false,
+          "repair_regressed": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_2_4"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          2,
+          4
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "REVISE",
+          "SEEK_EVIDENCE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "candidate_available": false,
+          "failure_seen": true,
+          "formal_spec_present": false,
+          "repair_regressed": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_2_5"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          2,
+          5
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "SEEK_EVIDENCE",
+          "TEST"
+        ],
+        "expected": "WITHHOLD",
+        "got": "SEEK_EVIDENCE",
+        "input": {
+          "candidate_available": true,
+          "failure_seen": true,
+          "formal_spec_present": false,
+          "hypothesis_set_present": false,
+          "repair_regressed": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_2_6"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          2,
+          6
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "ACCEPT",
+          "BUILD_ORACLE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "ACCEPT",
+        "input": {
+          "failure_seen": false,
+          "oracle_available": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_3_4"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          3,
+          4
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "ACCEPT",
+          "REVISE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "ACCEPT",
+        "input": {
+          "candidate_available": false,
+          "failure_seen": false,
+          "formal_spec_present": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_3_5"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          3,
+          5
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "ACCEPT",
+          "TEST"
+        ],
+        "expected": "WITHHOLD",
+        "got": "ACCEPT",
+        "input": {
+          "candidate_available": true,
+          "failure_seen": false,
+          "formal_spec_present": false,
+          "hypothesis_set_present": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_3_6"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          3,
+          6
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "BUILD_ORACLE",
+          "REVISE"
+        ],
+        "expected": "WITHHOLD",
+        "got": "BUILD_ORACLE",
+        "input": {
+          "candidate_available": false,
+          "formal_spec_present": false,
+          "oracle_available": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_4_5"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          4,
+          5
+        ]
+      },
+      {
+        "conflicting_outputs": [
+          "BUILD_ORACLE",
+          "TEST"
+        ],
+        "expected": "WITHHOLD",
+        "got": "BUILD_ORACLE",
+        "input": {
+          "candidate_available": true,
+          "formal_spec_present": false,
+          "hypothesis_set_present": false,
+          "oracle_available": false,
+          "state_known": true,
+          "stress_nonce": "CONFLICT_4_6"
+        },
+        "kind": "CONFLICT",
+        "pass": false,
+        "source_rule_indexes": [
+          4,
+          6
+        ]
+      }
+    ],
+    "score": 0.6
+  },
+  "unknown_min": 1.0
+}
