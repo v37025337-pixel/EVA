@@ -1,0 +1,34 @@
+{
+  "schema": "yado.g2.native_source_ir_emitter_birth.request.v1",
+  "objective": "YADO_BIRTH_NATIVE_SOURCE_IR_EMITTER_AND_USE_IT_TO_PRODUCE_PYTHON_SOURCE",
+  "parent_process_run_id": 33844698330,
+  "parent_process_artifact": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
+  "python_self_study": "experience/yado-native-seedless-source-constructor-python-self-study-v1.json",
+  "deficit": "NATIVE_SOURCE_IR_EMITTER_BIRTH_V1",
+  "instruction": "Use the source-construction process and Python/self-study as experience. Create the missing IR-to-Python source emitter with YADO native mechanisms only, then use it to produce actual new Python source without receiving a host-written source seed, patch, target file, source template, or external coding model. The source must compile and solve fresh held-out tasks. If current native substrates cannot birth such an emitter, explicitly WITHHOLD and identify the exact next missing native capability.",
+  "success_conditions": [
+    "yado_creates_or_evolves_an_internal_program_representation",
+    "yado_creates_an_emitter_from_that_representation_to_python_source",
+    "no_host_source_seed_template_patch_or_target",
+    "no_external_coding_model",
+    "actual_candidate_source_bytes_are_produced_by_yado",
+    "candidate_source_compiles",
+    "fresh_heldout_program_tasks_pass",
+    "causal_ablation_removes_the_gain",
+    "restore_reproduces_the_gain",
+    "rollback_parent_is_available",
+    "canonical_unchanged"
+  ],
+  "constraints": {
+    "external_coding_models": false,
+    "host_patch": false,
+    "host_target": false,
+    "host_source_seed": false,
+    "host_source_template": false,
+    "canonical_mutation": false,
+    "fail_closed": true
+  },
+  "host_role": "TASK_TRANSPORT_FRESH_BENCHMARK_AND_STRICT_OBSERVER_ONLY",
+  "stop_condition": "NATIVE_IR_EMITTER_SOURCE_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+  "trigger": 1
+}
