@@ -1,0 +1,100 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "all_oracles_hidden_exact": true,
+    "all_real_fragment_holdouts_exact_after_repair": false,
+    "all_repairs_changed_source": true,
+    "at_least_four_distinct_real_source_files": false,
+    "at_least_six_real_fragments_executed": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "defects_created_by_active_mutation_grammar": true,
+    "external_coding_model_used": false,
+    "formal_spec_not_used_as_patch_tests": true,
+    "host_selected_patch": false,
+    "host_selected_source_fragment": false,
+    "mechanical_ast_discovery_found_candidates": true,
+    "original_source_hidden_from_patch_path": true,
+    "real_active_source_files_scanned": true,
+    "repair_ablation_material_drop": false,
+    "repair_gain_material": false,
+    "restore_exact": true,
+    "self_generated_oracle_parent_consumed": true,
+    "source_fragments_selected_by_yado_selector": true
+  },
+  "discovered_candidate_count": 6,
+  "gene_id": "GENE-G2-CODING-REAL-CODE-TRANSFER-V2-ea7acb92374c95a7",
+  "mean_generated_test_count": 6.0,
+  "mutated_holdout_score": 0.5277777777777778,
+  "next_required_capability": "G2_CODING_SPEC_GENERALIZATION_AND_REAL_CODE_TRANSFER_V3",
+  "oracle_hidden_score": 1.0,
+  "promotion_applied": false,
+  "real_code_transfer_gene": {
+    "active_components": [
+      "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
+      "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11"
+    ],
+    "gene_digest": "59e6cdb97b543da25b4d2e0c5fb51f7760ea70e392d0a1efb3f76d58ceae8445",
+    "gene_id": "GENE-G2-CODING-REAL-CODE-TRANSFER-V2-ea7acb92374c95a7",
+    "gene_scope": [
+      "THINKING",
+      "INTELLIGENCE",
+      "CODE",
+      "MEMORY",
+      "GENERATIVE_EXECUTIVE",
+      "LOGIC"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-SELF-GENERATED-TEST-ORACLE-V1-291fffd7e31dcb23",
+      "2577493c0143b46f46e9433ce02c82e2608a6d16c878b8a7db0af67ae397974d"
+    ],
+    "mean_generated_test_count": 6.0,
+    "mechanism_kind": "REAL_ACTIVE_SOURCE_AST_FRAGMENT_TO_SHADOW_DEFECT_TO_SPEC_ORACLE_SELF_TEST_AND_REPAIR",
+    "mutated_holdout_score": 0.5277777777777778,
+    "oracle_hidden_score": 1.0,
+    "organ": "THINKING",
+    "promotion_state": "SHADOW_ONLY",
+    "repair_ablation_score": 0.5277777777777778,
+    "repaired_holdout_score": 0.5,
+    "schema": "yado.g2.coding_spec_generalization_real_code_transfer_gene.v2",
+    "source_file_count": 3,
+    "task_count": 6
+  },
+  "receipt_sha256": "32d663295445de0f3849da148e3cb0da7a2e5f4cf8938533185ca80eaedf8c9a",
+  "repair_ablation_score": 0.5277777777777778,
+  "repaired_holdout_score": 0.5,
+  "restore_score": 0.5,
+  "schema": "yado.g2.coding_spec_generalization_real_code_transfer.v2",
+  "semantic_boundary": "V2 CONSUMES V1 DISCOVERY FAILURE. REAL TRANSFER HERE MEANS ALGEBRAIC AST FRAGMENTS MECHANICALLY EXTRACTED FROM CURRENT ACTIVE YADO SOURCE FILES, NORMALIZED ONLY BY VARIABLE RENAMING, THEN MUTATED IN SHADOW BY THE ACTIVE BOUNDED MUTATION GRAMMAR. THE ORIGINAL FRAGMENT IS HIDDEN FROM THE PATCH PATH AND USED ONLY FOR FORMAL SPEC/HIDDEN EVALUATION. THIS IS STRONGER THAN SYNTHETIC FUNCTIONS BUT IS NOT YET WHOLE-FUNCTION OR MULTI-FILE SOFTWARE REPAIR.",
+  "source_file_count": 3,
+  "source_files": [
+    "runtime/yado_conjunctive_rule_inducer_v1.py",
+    "runtime/yado_evolutionary_genome_v1.py",
+    "runtime/yado_semantic_expression_synthesizer_v1.py"
+  ],
+  "status": "WITHHOLD_G2_CODING_SPEC_GENERALIZATION_REAL_CODE_TRANSFER_V2",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_coding_model": false,
+      "hidden_oracle_exact": true,
+      "host_selected_patch": false,
+      "host_selected_source_fragment": false,
+      "minimum_distinct_source_files": 4,
+      "minimum_executed_fragments": 6,
+      "threshold_reduction": false
+    },
+    "host_role": "DISCOVERY_COVERAGE_REPAIR_AND_STRICT_SHADOW_EVALUATION_ONLY",
+    "instruction": "Consume failure run 33918917875 as a discovery counterexample: the first real-code transfer harness found only five admissible expressions because it scanned only nine active files. Keep the same success gate of at least six executed fragments from at least four distinct real source files. Expand discovery across the broader canonical-active runtime surface, including active patch-registry, evolutionary, OpenAPI, execution-fabric, high-scale and RC cognitive runtime sources. The source fragment itself must still be selected by the active neutral evidence selector. Allow integer constants through plus/minus four and permit the unchanged active semantic synthesizer up to four operations; hidden oracle validation must remain exactly 1.0, so the grammar expansion cannot buy a pass by approximation. Defects remain one active-grammar mutation in shadow. Original source remains hidden from the patch path. Do not lower any transfer, ablation, restore or canonical-integrity threshold.",
+    "objective": "REPAIR_V1_DISCOVERY_COVERAGE_WITHOUT_LOWERING_REAL_CODE_TRANSFER_GATES",
+    "parent": "candidates/kernel-self-generated/g2-coding-self-generated-test-oracle-v1.json",
+    "schema": "yado.g2.coding_spec_generalization_real_code_transfer_v2.request.v1",
+    "trigger": 3,
+    "trigger_reason": "RESTART_AFTER_SECOND_HOST_COMPILE_HARNESS_FIX",
+    "v1_failure_run_id": "33918917875",
+    "v1_failure_signature": "INSUFFICIENT_REAL_SOURCE_EXPRESSIONS:5"
+  },
+  "task_count": 6
+}
