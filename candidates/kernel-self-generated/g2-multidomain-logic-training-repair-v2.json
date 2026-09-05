@@ -1,0 +1,134 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "balanced_accuracy_used": true,
+    "canonical_unchanged": true,
+    "counterexample_floor_ge_0_90": true,
+    "external_models_used": false,
+    "five_logic_tasks": true,
+    "intelligence_v1_preserved": true,
+    "mean_causal_drop_ge_0_45": true,
+    "mean_fresh_balanced_ge_0_95": true,
+    "min_fresh_balanced_ge_0_90": true,
+    "new_logic_gene_identity": true,
+    "parity_not_forced_to_tree": true,
+    "thinking_v1_preserved": true,
+    "v1_logic_failure_consumed": true
+  },
+  "gene_ids": {
+    "INTELLIGENCE": "GENE-G2-MULTIDOMAIN-INTELLIGENCE-V1-5636f552fc470ae2",
+    "LOGIC": "GENE-G2-MULTIDOMAIN-LOGIC-V2-78da24019759d2f4",
+    "THINKING": "GENE-G2-MULTIDOMAIN-THINKING-V1-a0811170cf6f6670"
+  },
+  "next_required_capability": "MULTIDOMAIN_COGNITIVE_COMPOSITION_TRAINING_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "56d9b5a42c8b4ccd5b4b53633d39468ae8ed49b5188a30d2cb587f14a293d815",
+  "schema": "yado.g2.multidomain_logic_training_repair.v2",
+  "status": "PASS_SHADOW_G2_MULTIDOMAIN_LOGIC_TRAINING_REPAIR_V2",
+  "summary": {
+    "exact_tasks": 5,
+    "mean_causal_drop": 0.5,
+    "mean_fresh_balanced": 1.0,
+    "min_counterexample_balanced": 1.0,
+    "min_fresh_balanced": 1.0,
+    "task_count": 5
+  },
+  "tasks": [
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 32,
+      "domain": "MATHEMATICS",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "negative_count": 16,
+      "positive_count": 16,
+      "selected": {
+        "complexity": 2,
+        "family": "SYMMETRIC_COUNT_MAP_V2",
+        "token": "SYMMETRIC_COUNT",
+        "validation_balanced": 1.0
+      },
+      "task_id": "MATH_PARITY",
+      "truth_table_count": 32
+    },
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 13,
+      "domain": "PROGRAMMING",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "negative_count": 29,
+      "positive_count": 3,
+      "selected": {
+        "complexity": 5,
+        "family": "BOOL_DECISION_TREE",
+        "token": "TREE_D5",
+        "validation_balanced": 1.0
+      },
+      "task_id": "CODE_RELEASE_INVARIANT",
+      "truth_table_count": 32
+    },
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 13,
+      "domain": "EXACT_SCIENCE",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "negative_count": 29,
+      "positive_count": 3,
+      "selected": {
+        "complexity": 5,
+        "family": "BOOL_DECISION_TREE",
+        "token": "TREE_D5",
+        "validation_balanced": 1.0
+      },
+      "task_id": "SCIENTIFIC_EVIDENCE_ACCEPT",
+      "truth_table_count": 32
+    },
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 6,
+      "domain": "CAUSAL_REASONING",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "negative_count": 31,
+      "positive_count": 1,
+      "selected": {
+        "complexity": 5,
+        "family": "BOOL_DECISION_TREE",
+        "token": "TREE_D5",
+        "validation_balanced": 1.0
+      },
+      "task_id": "CAUSAL_CLAIM_VALID",
+      "truth_table_count": 32
+    },
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 13,
+      "domain": "DATA_ANALYSIS",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "negative_count": 29,
+      "positive_count": 3,
+      "selected": {
+        "complexity": 5,
+        "family": "BOOL_DECISION_TREE",
+        "token": "TREE_D5",
+        "validation_balanced": 1.0
+      },
+      "task_id": "DATA_RESULT_TRUST",
+      "truth_table_count": 32
+    }
+  ]
+}

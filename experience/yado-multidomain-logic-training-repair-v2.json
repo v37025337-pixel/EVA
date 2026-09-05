@@ -1,0 +1,4070 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "balanced_accuracy_used": true,
+    "canonical_unchanged": true,
+    "counterexample_floor_ge_0_90": true,
+    "external_models_used": false,
+    "five_logic_tasks": true,
+    "intelligence_v1_preserved": true,
+    "mean_causal_drop_ge_0_45": true,
+    "mean_fresh_balanced_ge_0_95": true,
+    "min_fresh_balanced_ge_0_90": true,
+    "new_logic_gene_identity": true,
+    "parity_not_forced_to_tree": true,
+    "thinking_v1_preserved": true,
+    "v1_logic_failure_consumed": true
+  },
+  "experience_digest": "9975bd81232b75988d835529c695a927328994e8b52cdc29d50539456fbb5545",
+  "genes": {
+    "INTELLIGENCE": {
+      "gene_digest": "685a4447f62cabbc252f862db84c092a538a91a4c671aae3976378a844bcedc2",
+      "gene_id": "GENE-G2-MULTIDOMAIN-INTELLIGENCE-V1-5636f552fc470ae2",
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d"
+      ],
+      "organ": "INTELLIGENCE",
+      "origin": "YADO_NATIVE_MULTI_DOMAIN_FIT_VALIDATION_FRESH_TRAINING",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.multidomain_organ_portfolio_gene.v1",
+      "summary": {
+        "mean_ablation": 0.4188888888888889,
+        "mean_causal_drop": 0.578888888888889,
+        "mean_fresh": 0.9977777777777778,
+        "min_fresh": 0.9888888888888889,
+        "task_count": 5,
+        "tasks_ge_0_80": 5,
+        "tasks_ge_0_90": 5
+      },
+      "task_models": [
+        {
+          "ablation": 0.37777777777777777,
+          "blind_count": 180,
+          "causal_drop": 0.6222222222222222,
+          "domain": "PROGRAMMING",
+          "fit_count": 180,
+          "fresh": 1.0,
+          "model": {
+            "feature": "dag",
+            "left": {
+              "feature": "unweighted",
+              "left": {
+                "feature": "negative",
+                "left": {
+                  "label": "DIJKSTRA"
+                },
+                "right": {
+                  "label": "BELLMAN_FORD"
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "feature": "negative",
+                "left": {
+                  "label": "BFS"
+                },
+                "right": {
+                  "label": "BELLMAN_FORD"
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "label": "DAG_DP"
+            },
+            "threshold": 0.5
+          },
+          "selected": {
+            "depth": 3,
+            "token": "D3",
+            "validation": 1.0
+          },
+          "task_id": "ALGORITHM_SELECTION",
+          "validation_count": 90
+        },
+        {
+          "ablation": 0.3888888888888889,
+          "blind_count": 180,
+          "causal_drop": 0.6111111111111112,
+          "domain": "MATHEMATICS",
+          "fit_count": 180,
+          "fresh": 1.0,
+          "model": {
+            "feature": "exact_required",
+            "left": {
+              "feature": "large_sparse",
+              "left": {
+                "feature": "ill_conditioned",
+                "left": {
+                  "label": "DIRECT_NUMERIC"
+                },
+                "right": {
+                  "label": "ROBUST_NUMERIC"
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "label": "ITERATIVE"
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "label": "SYMBOLIC"
+            },
+            "threshold": 0.5
+          },
+          "selected": {
+            "depth": 3,
+            "token": "D3",
+            "validation": 1.0
+          },
+          "task_id": "MATH_METHOD",
+          "validation_count": 90
+        },
+        {
+          "ablation": 0.39444444444444443,
+          "blind_count": 180,
+          "causal_drop": 0.6055555555555556,
+          "domain": "EXACT_SCIENCE",
+          "fit_count": 180,
+          "fresh": 1.0,
+          "model": {
+            "feature": "temporal",
+            "left": {
+              "feature": "categorical_group",
+              "left": {
+                "feature": "causal_question",
+                "left": {
+                  "label": "CORRELATION"
+                },
+                "right": {
+                  "feature": "intervention_possible",
+                  "left": {
+                    "label": "CORRELATION"
+                  },
+                  "right": {
+                    "label": "CAUSAL_INTERVENTION"
+                  },
+                  "threshold": 0.5
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "feature": "causal_question",
+                "left": {
+                  "label": "GROUP_COMPARISON"
+                },
+                "right": {
+                  "feature": "intervention_possible",
+                  "left": {
+                    "label": "GROUP_COMPARISON"
+                  },
+                  "right": {
+                    "label": "CAUSAL_INTERVENTION"
+                  },
+                  "threshold": 0.5
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "causal_question",
+              "left": {
+                "label": "TIME_SERIES"
+              },
+              "right": {
+                "feature": "intervention_possible",
+                "left": {
+                  "label": "TIME_SERIES"
+                },
+                "right": {
+                  "label": "CAUSAL_INTERVENTION"
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "selected": {
+            "depth": 4,
+            "token": "D4",
+            "validation": 1.0
+          },
+          "task_id": "SCIENCE_ANALYSIS",
+          "validation_count": 90
+        },
+        {
+          "ablation": 0.37222222222222223,
+          "blind_count": 180,
+          "causal_drop": 0.6277777777777778,
+          "domain": "OPERATIONS",
+          "fit_count": 180,
+          "fresh": 1.0,
+          "model": {
+            "feature": "budget_low",
+            "left": {
+              "feature": "latency_pressure",
+              "left": {
+                "feature": "confidence",
+                "left": {
+                  "label": "DEEP_PROBE"
+                },
+                "right": {
+                  "label": "STOP"
+                },
+                "threshold": 0.8723796372630941
+              },
+              "right": {
+                "feature": "confidence",
+                "left": {
+                  "label": "PARALLEL_PROBES"
+                },
+                "right": {
+                  "label": "STOP"
+                },
+                "threshold": 0.8809225917628852
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "confidence",
+              "left": {
+                "label": "CHEAP_PROBE"
+              },
+              "right": {
+                "label": "STOP"
+              },
+              "threshold": 0.8821213430184142
+            },
+            "threshold": 0.5
+          },
+          "selected": {
+            "depth": 3,
+            "token": "D3",
+            "validation": 1.0
+          },
+          "task_id": "RESOURCE_STRATEGY",
+          "validation_count": 90
+        },
+        {
+          "ablation": 0.5611111111111111,
+          "blind_count": 180,
+          "causal_drop": 0.4277777777777778,
+          "domain": "DATA_ANALYSIS",
+          "fit_count": 180,
+          "fresh": 0.9888888888888889,
+          "model": {
+            "feature": "missingness",
+            "left": {
+              "feature": "outliers",
+              "left": {
+                "feature": "schema_broken",
+                "left": {
+                  "label": "USE_AS_IS"
+                },
+                "right": {
+                  "label": "REJECT"
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "feature": "schema_broken",
+                "left": {
+                  "label": "ROBUST_FILTER"
+                },
+                "right": {
+                  "label": "REJECT"
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.3948030951458051
+            },
+            "right": {
+              "feature": "schema_broken",
+              "left": {
+                "label": "IMPUTE"
+              },
+              "right": {
+                "label": "REJECT"
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.3536286815115329
+          },
+          "selected": {
+            "depth": 3,
+            "token": "D3",
+            "validation": 0.9888888888888889
+          },
+          "task_id": "DATA_REMEDIATION",
+          "validation_count": 90
+        }
+      ]
+    },
+    "LOGIC": {
+      "gene_digest": "5251554e9fa52fc5023e349e10054b5015fed4303bf50ed2eb55a06bd5a74a0f",
+      "gene_id": "GENE-G2-MULTIDOMAIN-LOGIC-V2-78da24019759d2f4",
+      "heritage": [
+        "GENE-G2-MULTIDOMAIN-LOGIC-V1-63e14ea4a2f046ae",
+        "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V3-a00c3f7d2b3021c0"
+      ],
+      "organ": "LOGIC",
+      "origin": "YADO_NATIVE_BALANCED_COMPOSITIONAL_LOGIC_TRAINING",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.multidomain_logic_portfolio_gene.v2",
+      "summary": {
+        "exact_tasks": 5,
+        "mean_causal_drop": 0.5,
+        "mean_fresh_balanced": 1.0,
+        "min_counterexample_balanced": 1.0,
+        "min_fresh_balanced": 1.0,
+        "task_count": 5
+      },
+      "task_models": [
+        {
+          "ablation_balanced": 0.5,
+          "causal_drop": 0.5,
+          "counterexample_balanced": 1.0,
+          "counterexample_count": 32,
+          "domain": "MATHEMATICS",
+          "fresh_balanced": 1.0,
+          "fresh_raw": 1.0,
+          "model": {
+            "count_to_output": {
+              "0": false,
+              "1": true,
+              "2": false,
+              "3": true,
+              "4": false,
+              "5": true
+            },
+            "default": false,
+            "fields": [
+              "b0",
+              "b1",
+              "b2",
+              "b3",
+              "b4"
+            ],
+            "kind": "SYMMETRIC_COUNT_MAP_V2",
+            "work_cells": 160
+          },
+          "negative_count": 16,
+          "positive_count": 16,
+          "selected": {
+            "complexity": 2,
+            "family": "SYMMETRIC_COUNT_MAP_V2",
+            "token": "SYMMETRIC_COUNT",
+            "validation_balanced": 1.0
+          },
+          "task_id": "MATH_PARITY",
+          "truth_table_count": 32
+        },
+        {
+          "ablation_balanced": 0.5,
+          "causal_drop": 0.5,
+          "counterexample_balanced": 1.0,
+          "counterexample_count": 13,
+          "domain": "PROGRAMMING",
+          "fresh_balanced": 1.0,
+          "fresh_raw": 1.0,
+          "model": {
+            "feature": "tests_pass",
+            "left": {
+              "label": false
+            },
+            "right": {
+              "feature": "rollback_ready",
+              "left": {
+                "label": false
+              },
+              "right": {
+                "feature": "invariant_break",
+                "left": {
+                  "feature": "reviewed",
+                  "left": {
+                    "feature": "low_risk",
+                    "left": {
+                      "label": false
+                    },
+                    "right": {
+                      "label": true
+                    },
+                    "threshold": 0.5
+                  },
+                  "right": {
+                    "label": true
+                  },
+                  "threshold": 0.5
+                },
+                "right": {
+                  "label": false
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "negative_count": 29,
+          "positive_count": 3,
+          "selected": {
+            "complexity": 5,
+            "family": "BOOL_DECISION_TREE",
+            "token": "TREE_D5",
+            "validation_balanced": 1.0
+          },
+          "task_id": "CODE_RELEASE_INVARIANT",
+          "truth_table_count": 32
+        },
+        {
+          "ablation_balanced": 0.5,
+          "causal_drop": 0.5,
+          "counterexample_balanced": 1.0,
+          "counterexample_count": 13,
+          "domain": "EXACT_SCIENCE",
+          "fresh_balanced": 1.0,
+          "fresh_raw": 1.0,
+          "model": {
+            "feature": "replicated",
+            "left": {
+              "label": false
+            },
+            "right": {
+              "feature": "measurement_valid",
+              "left": {
+                "label": false
+              },
+              "right": {
+                "feature": "contradiction",
+                "left": {
+                  "feature": "strong_effect",
+                  "left": {
+                    "feature": "high_power",
+                    "left": {
+                      "label": false
+                    },
+                    "right": {
+                      "label": true
+                    },
+                    "threshold": 0.5
+                  },
+                  "right": {
+                    "label": true
+                  },
+                  "threshold": 0.5
+                },
+                "right": {
+                  "label": false
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "negative_count": 29,
+          "positive_count": 3,
+          "selected": {
+            "complexity": 5,
+            "family": "BOOL_DECISION_TREE",
+            "token": "TREE_D5",
+            "validation_balanced": 1.0
+          },
+          "task_id": "SCIENTIFIC_EVIDENCE_ACCEPT",
+          "truth_table_count": 32
+        },
+        {
+          "ablation_balanced": 0.5,
+          "causal_drop": 0.5,
+          "counterexample_balanced": 1.0,
+          "counterexample_count": 6,
+          "domain": "CAUSAL_REASONING",
+          "fresh_balanced": 1.0,
+          "fresh_raw": 1.0,
+          "model": {
+            "feature": "temporal_order",
+            "left": {
+              "label": false
+            },
+            "right": {
+              "feature": "selection_bias",
+              "left": {
+                "feature": "mechanism",
+                "left": {
+                  "label": false
+                },
+                "right": {
+                  "feature": "intervention",
+                  "left": {
+                    "label": false
+                  },
+                  "right": {
+                    "feature": "confounder",
+                    "left": {
+                      "label": true
+                    },
+                    "right": {
+                      "label": false
+                    },
+                    "threshold": 0.5
+                  },
+                  "threshold": 0.5
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "label": false
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "negative_count": 31,
+          "positive_count": 1,
+          "selected": {
+            "complexity": 5,
+            "family": "BOOL_DECISION_TREE",
+            "token": "TREE_D5",
+            "validation_balanced": 1.0
+          },
+          "task_id": "CAUSAL_CLAIM_VALID",
+          "truth_table_count": 32
+        },
+        {
+          "ablation_balanced": 0.5,
+          "causal_drop": 0.5,
+          "counterexample_balanced": 1.0,
+          "counterexample_count": 13,
+          "domain": "DATA_ANALYSIS",
+          "fresh_balanced": 1.0,
+          "fresh_raw": 1.0,
+          "model": {
+            "feature": "schema_valid",
+            "left": {
+              "label": false
+            },
+            "right": {
+              "feature": "sample_adequate",
+              "left": {
+                "label": false
+              },
+              "right": {
+                "feature": "leakage",
+                "left": {
+                  "feature": "replicated",
+                  "left": {
+                    "feature": "external_check",
+                    "left": {
+                      "label": false
+                    },
+                    "right": {
+                      "label": true
+                    },
+                    "threshold": 0.5
+                  },
+                  "right": {
+                    "label": true
+                  },
+                  "threshold": 0.5
+                },
+                "right": {
+                  "label": false
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "negative_count": 29,
+          "positive_count": 3,
+          "selected": {
+            "complexity": 5,
+            "family": "BOOL_DECISION_TREE",
+            "token": "TREE_D5",
+            "validation_balanced": 1.0
+          },
+          "task_id": "DATA_RESULT_TRUST",
+          "truth_table_count": 32
+        }
+      ]
+    },
+    "THINKING": {
+      "gene_digest": "529f18b6fa02de48ab1240e61f72f94690acb35330164ef2c04acea0fbea4711",
+      "gene_id": "GENE-G2-MULTIDOMAIN-THINKING-V1-a0811170cf6f6670",
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac"
+      ],
+      "organ": "THINKING",
+      "origin": "YADO_NATIVE_MULTI_DOMAIN_FIT_VALIDATION_FRESH_TRAINING",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.multidomain_organ_portfolio_gene.v1",
+      "summary": {
+        "mean_ablation": 0.5225,
+        "mean_causal_drop": 0.47750000000000004,
+        "mean_fresh": 1.0,
+        "min_fresh": 1.0,
+        "task_count": 5,
+        "tasks_ge_0_80": 5,
+        "tasks_ge_0_90": 5
+      },
+      "task_models": [
+        {
+          "ablation": 0.525,
+          "blind_count": 80,
+          "causal_drop": 0.475,
+          "domain": "OPERATIONS",
+          "fit_count": 80,
+          "fresh": 1.0,
+          "model": {
+            "context_keys": [
+              "data_corruption"
+            ],
+            "fallback_edges": [
+              {
+                "after": "MONITOR",
+                "before": "DIAGNOSE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPAIR",
+                "before": "DIAGNOSE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "DIAGNOSE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "DIAGNOSE",
+                "before": "ISOLATE",
+                "confidence": 0.5625,
+                "support": 80
+              },
+              {
+                "after": "MONITOR",
+                "before": "ISOLATE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPAIR",
+                "before": "ISOLATE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "SNAPSHOT",
+                "before": "ISOLATE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "ISOLATE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "DIAGNOSE",
+                "before": "OBSERVE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "ISOLATE",
+                "before": "OBSERVE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "MONITOR",
+                "before": "OBSERVE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPAIR",
+                "before": "OBSERVE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "SNAPSHOT",
+                "before": "OBSERVE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "OBSERVE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "MONITOR",
+                "before": "REPAIR",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "REPAIR",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "DIAGNOSE",
+                "before": "SNAPSHOT",
+                "confidence": 0.5625,
+                "support": 80
+              },
+              {
+                "after": "MONITOR",
+                "before": "SNAPSHOT",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPAIR",
+                "before": "SNAPSHOT",
+                "confidence": 0.5625,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "SNAPSHOT",
+                "confidence": 0.5625,
+                "support": 80
+              },
+              {
+                "after": "MONITOR",
+                "before": "VERIFY",
+                "confidence": 1.0,
+                "support": 80
+              }
+            ],
+            "graphs": {
+              "0": [
+                {
+                  "after": "ISOLATE",
+                  "before": "DIAGNOSE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "DIAGNOSE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "REPAIR",
+                  "before": "DIAGNOSE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "SNAPSHOT",
+                  "before": "DIAGNOSE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "DIAGNOSE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "REPAIR",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "SNAPSHOT",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "DIAGNOSE",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "ISOLATE",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "REPAIR",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "SNAPSHOT",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "REPAIR",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "SNAPSHOT",
+                  "before": "REPAIR",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "REPAIR",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "SNAPSHOT",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "VERIFY",
+                  "confidence": 1.0,
+                  "support": 35
+                },
+                {
+                  "after": "SNAPSHOT",
+                  "before": "VERIFY",
+                  "confidence": 1.0,
+                  "support": 35
+                }
+              ],
+              "1": [
+                {
+                  "after": "MONITOR",
+                  "before": "DIAGNOSE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "REPAIR",
+                  "before": "DIAGNOSE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "DIAGNOSE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "DIAGNOSE",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "REPAIR",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "SNAPSHOT",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "ISOLATE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "DIAGNOSE",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "ISOLATE",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "REPAIR",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "SNAPSHOT",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "OBSERVE",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "REPAIR",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "REPAIR",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "DIAGNOSE",
+                  "before": "SNAPSHOT",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "SNAPSHOT",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "REPAIR",
+                  "before": "SNAPSHOT",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "SNAPSHOT",
+                  "confidence": 1.0,
+                  "support": 45
+                },
+                {
+                  "after": "MONITOR",
+                  "before": "VERIFY",
+                  "confidence": 1.0,
+                  "support": 45
+                }
+              ]
+            },
+            "kind": "MULTICONTEXT_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.55
+          },
+          "selected": {
+            "max_context_keys": 1,
+            "min_support": 2,
+            "threshold": 0.55,
+            "token": "T0.55_K1_S2",
+            "validation": 1.0
+          },
+          "task_id": "INCIDENT_RESPONSE",
+          "validation_count": 40
+        },
+        {
+          "ablation": 0.45,
+          "blind_count": 80,
+          "causal_drop": 0.55,
+          "domain": "SCIENCE",
+          "fit_count": 80,
+          "fresh": 1.0,
+          "model": {
+            "context_keys": [
+              "cost_pressure",
+              "confound_risk"
+            ],
+            "fallback_edges": [
+              {
+                "after": "REPLICATE",
+                "before": "ANALYZE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPLICATE",
+                "before": "BLIND",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "ANALYZE",
+                "before": "COLLECT",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPLICATE",
+                "before": "COLLECT",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "ANALYZE",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "BLIND",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COLLECT",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "POWER",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "RANDOMIZE",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPLICATE",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "ANALYZE",
+                "before": "POWER",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "BLIND",
+                "before": "POWER",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COLLECT",
+                "before": "POWER",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "RANDOMIZE",
+                "before": "POWER",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPLICATE",
+                "before": "POWER",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "BLIND",
+                "before": "RANDOMIZE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REPLICATE",
+                "before": "RANDOMIZE",
+                "confidence": 1.0,
+                "support": 80
+              }
+            ],
+            "graphs": {
+              "00": [
+                {
+                  "after": "BLIND",
+                  "before": "ANALYZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "ANALYZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "ANALYZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "BLIND",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BLIND",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BLIND",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "POWER",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BLIND",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BLIND",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                }
+              ],
+              "01": [
+                {
+                  "after": "REPLICATE",
+                  "before": "ANALYZE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "BLIND",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "BLIND",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "BLIND",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "BLIND",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "POWER",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "BLIND",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "BLIND",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 14
+                }
+              ],
+              "10": [
+                {
+                  "after": "BLIND",
+                  "before": "ANALYZE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "ANALYZE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "ANALYZE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "BLIND",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "BLIND",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "BLIND",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "POWER",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "BLIND",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "BLIND",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 21
+                }
+              ],
+              "11": [
+                {
+                  "after": "REPLICATE",
+                  "before": "ANALYZE",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "BLIND",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "BLIND",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "BLIND",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "COLLECT",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "BLIND",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "POWER",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "BLIND",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "RANDOMIZE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "POWER",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "ANALYZE",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "BLIND",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "COLLECT",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 23
+                },
+                {
+                  "after": "REPLICATE",
+                  "before": "RANDOMIZE",
+                  "confidence": 1.0,
+                  "support": 23
+                }
+              ]
+            },
+            "kind": "MULTICONTEXT_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.55
+          },
+          "selected": {
+            "max_context_keys": 2,
+            "min_support": 2,
+            "threshold": 0.55,
+            "token": "T0.55_K2_S2",
+            "validation": 1.0
+          },
+          "task_id": "EXPERIMENT_DESIGN",
+          "validation_count": 40
+        },
+        {
+          "ablation": 0.4625,
+          "blind_count": 80,
+          "causal_drop": 0.5375,
+          "domain": "MATHEMATICS",
+          "fit_count": 80,
+          "fresh": 1.0,
+          "model": {
+            "context_keys": [
+              "assumption_risk",
+              "counterexample_risk"
+            ],
+            "fallback_edges": [
+              {
+                "after": "FINALIZE",
+                "before": "COMPOSE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "COMPOSE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COMPOSE",
+                "before": "COUNTEREXAMPLE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "EDGE_CASES",
+                "before": "COUNTEREXAMPLE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "FINALIZE",
+                "before": "COUNTEREXAMPLE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "COUNTEREXAMPLE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "FINALIZE",
+                "before": "EDGE_CASES",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "EDGE_CASES",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COMPOSE",
+                "before": "LEMMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "FINALIZE",
+                "before": "LEMMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "LEMMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COMPOSE",
+                "before": "STATE_GOAL",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COUNTEREXAMPLE",
+                "before": "STATE_GOAL",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "EDGE_CASES",
+                "before": "STATE_GOAL",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "FINALIZE",
+                "before": "STATE_GOAL",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "LEMMA",
+                "before": "STATE_GOAL",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "VERIFY",
+                "before": "STATE_GOAL",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "FINALIZE",
+                "before": "VERIFY",
+                "confidence": 1.0,
+                "support": 80
+              }
+            ],
+            "graphs": {
+              "00": [
+                {
+                  "after": "EDGE_CASES",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "COUNTEREXAMPLE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "COUNTEREXAMPLE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "LEMMA",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 21
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "VERIFY",
+                  "confidence": 1.0,
+                  "support": 21
+                }
+              ],
+              "01": [
+                {
+                  "after": "FINALIZE",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "LEMMA",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "LEMMA",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "COUNTEREXAMPLE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "LEMMA",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "VERIFY",
+                  "confidence": 1.0,
+                  "support": 14
+                }
+              ],
+              "10": [
+                {
+                  "after": "EDGE_CASES",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "COUNTEREXAMPLE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "COUNTEREXAMPLE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "LEMMA",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "VERIFY",
+                  "confidence": 1.0,
+                  "support": 18
+                }
+              ],
+              "11": [
+                {
+                  "after": "FINALIZE",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "COMPOSE",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "LEMMA",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "COUNTEREXAMPLE",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "LEMMA",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "EDGE_CASES",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "LEMMA",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "COMPOSE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "COUNTEREXAMPLE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "EDGE_CASES",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "LEMMA",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "VERIFY",
+                  "before": "STATE_GOAL",
+                  "confidence": 1.0,
+                  "support": 27
+                },
+                {
+                  "after": "FINALIZE",
+                  "before": "VERIFY",
+                  "confidence": 1.0,
+                  "support": 27
+                }
+              ]
+            },
+            "kind": "MULTICONTEXT_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.55
+          },
+          "selected": {
+            "max_context_keys": 2,
+            "min_support": 2,
+            "threshold": 0.55,
+            "token": "T0.55_K2_S2",
+            "validation": 1.0
+          },
+          "task_id": "PROOF_WORKFLOW",
+          "validation_count": 40
+        },
+        {
+          "ablation": 0.6,
+          "blind_count": 80,
+          "causal_drop": 0.4,
+          "domain": "PROGRAMMING",
+          "fit_count": 80,
+          "fresh": 1.0,
+          "model": {
+            "context_keys": [
+              "regression_risk",
+              "oracle_missing"
+            ],
+            "fallback_edges": [
+              {
+                "after": "COMMIT",
+                "before": "BUILD_ORACLE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COMMIT",
+                "before": "HYPOTHESIZE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "PATCH",
+                "before": "HYPOTHESIZE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REGRESSION",
+                "before": "HYPOTHESIZE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "TEST",
+                "before": "HYPOTHESIZE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "BUILD_ORACLE",
+                "before": "OBSERVE_FAILURE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COMMIT",
+                "before": "OBSERVE_FAILURE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "HYPOTHESIZE",
+                "before": "OBSERVE_FAILURE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "PATCH",
+                "before": "OBSERVE_FAILURE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REGRESSION",
+                "before": "OBSERVE_FAILURE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "TEST",
+                "before": "OBSERVE_FAILURE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COMMIT",
+                "before": "PATCH",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REGRESSION",
+                "before": "PATCH",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COMMIT",
+                "before": "REGRESSION",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "COMMIT",
+                "before": "TEST",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "REGRESSION",
+                "before": "TEST",
+                "confidence": 1.0,
+                "support": 80
+              }
+            ],
+            "graphs": {
+              "00": [
+                {
+                  "after": "COMMIT",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "PATCH",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "TEST",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "HYPOTHESIZE",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "PATCH",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "TEST",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "REGRESSION",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "REGRESSION",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "PATCH",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 22
+                }
+              ],
+              "01": [
+                {
+                  "after": "COMMIT",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "HYPOTHESIZE",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "PATCH",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "TEST",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "PATCH",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "TEST",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "HYPOTHESIZE",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "PATCH",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "TEST",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "TEST",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "REGRESSION",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 16
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 16
+                }
+              ],
+              "10": [
+                {
+                  "after": "COMMIT",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "PATCH",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "TEST",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "HYPOTHESIZE",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "PATCH",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "TEST",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "REGRESSION",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "REGRESSION",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "PATCH",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 20
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 20
+                }
+              ],
+              "11": [
+                {
+                  "after": "COMMIT",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "HYPOTHESIZE",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "PATCH",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "TEST",
+                  "before": "BUILD_ORACLE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "PATCH",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "TEST",
+                  "before": "HYPOTHESIZE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "BUILD_ORACLE",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "HYPOTHESIZE",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "PATCH",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "TEST",
+                  "before": "OBSERVE_FAILURE",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "TEST",
+                  "before": "PATCH",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "REGRESSION",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "COMMIT",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 22
+                },
+                {
+                  "after": "REGRESSION",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 22
+                }
+              ]
+            },
+            "kind": "MULTICONTEXT_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.55
+          },
+          "selected": {
+            "max_context_keys": 2,
+            "min_support": 2,
+            "threshold": 0.55,
+            "token": "T0.55_K2_S2",
+            "validation": 1.0
+          },
+          "task_id": "CODE_REPAIR",
+          "validation_count": 40
+        },
+        {
+          "ablation": 0.575,
+          "blind_count": 80,
+          "causal_drop": 0.42500000000000004,
+          "domain": "DATA_ANALYSIS",
+          "fit_count": 80,
+          "fresh": 1.0,
+          "model": {
+            "context_keys": [
+              "missingness",
+              "dirty_data"
+            ],
+            "fallback_edges": [
+              {
+                "after": "CONCLUDE",
+                "before": "CLEAN",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "CLEAN",
+                "before": "HYPOTHESIS",
+                "confidence": 0.6,
+                "support": 80
+              },
+              {
+                "after": "CONCLUDE",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "ROBUSTNESS",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "TEST",
+                "before": "HYPOTHESIS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "CLEAN",
+                "before": "PROFILE",
+                "confidence": 0.6,
+                "support": 80
+              },
+              {
+                "after": "CONCLUDE",
+                "before": "PROFILE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "HYPOTHESIS",
+                "before": "PROFILE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "ROBUSTNESS",
+                "before": "PROFILE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "TEST",
+                "before": "PROFILE",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "CLEAN",
+                "before": "ROBUSTNESS",
+                "confidence": 0.6,
+                "support": 80
+              },
+              {
+                "after": "CONCLUDE",
+                "before": "ROBUSTNESS",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "CLEAN",
+                "before": "SCHEMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "CONCLUDE",
+                "before": "SCHEMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "HYPOTHESIS",
+                "before": "SCHEMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "PROFILE",
+                "before": "SCHEMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "ROBUSTNESS",
+                "before": "SCHEMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "TEST",
+                "before": "SCHEMA",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "CLEAN",
+                "before": "TEST",
+                "confidence": 0.6,
+                "support": 80
+              },
+              {
+                "after": "CONCLUDE",
+                "before": "TEST",
+                "confidence": 1.0,
+                "support": 80
+              },
+              {
+                "after": "ROBUSTNESS",
+                "before": "TEST",
+                "confidence": 1.0,
+                "support": 80
+              }
+            ],
+            "graphs": {
+              "00": [
+                {
+                  "after": "CONCLUDE",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "TEST",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "TEST",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "ROBUSTNESS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "ROBUSTNESS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "PROFILE",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "TEST",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 24
+                }
+              ],
+              "01": [
+                {
+                  "after": "CONCLUDE",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "PROFILE",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "TEST",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "TEST",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "TEST",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "ROBUSTNESS",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "PROFILE",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "TEST",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 18
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 18
+                }
+              ],
+              "10": [
+                {
+                  "after": "CONCLUDE",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "TEST",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "TEST",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "ROBUSTNESS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "ROBUSTNESS",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "PROFILE",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "TEST",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 24
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 24
+                }
+              ],
+              "11": [
+                {
+                  "after": "CONCLUDE",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "PROFILE",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "TEST",
+                  "before": "CLEAN",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "TEST",
+                  "before": "HYPOTHESIS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "TEST",
+                  "before": "PROFILE",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "ROBUSTNESS",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "CLEAN",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "HYPOTHESIS",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "PROFILE",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "TEST",
+                  "before": "SCHEMA",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "CONCLUDE",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 14
+                },
+                {
+                  "after": "ROBUSTNESS",
+                  "before": "TEST",
+                  "confidence": 1.0,
+                  "support": 14
+                }
+              ]
+            },
+            "kind": "MULTICONTEXT_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.55
+          },
+          "selected": {
+            "max_context_keys": 2,
+            "min_support": 2,
+            "threshold": 0.55,
+            "token": "T0.55_K2_S2",
+            "validation": 1.0
+          },
+          "task_id": "DATA_INVESTIGATION",
+          "validation_count": 40
+        }
+      ]
+    }
+  },
+  "schema": "yado.g2.multidomain_logic_training_repair.experience.v2",
+  "semantic_boundary": "V2 FIXES CLASS-IMBALANCED LOGIC TRAINING. SELECTION AND ABLATION USE BALANCED ACCURACY. FULL BOUNDED TRUTH TABLES TRAIN THE LOGICAL LAW; FRESH TESTS USE UNSEEN NOISE/ORDER PERTURBATIONS AND BOUNDARY COUNTEREXAMPLES. PARITY MAY USE THE EXISTING NATIVE SYMMETRIC COMPOSITIONAL LOGIC FAMILY. THINKING AND INTELLIGENCE PORTFOLIOS ARE PRESERVED.",
+  "status": "TRAINED",
+  "summary": {
+    "exact_tasks": 5,
+    "mean_causal_drop": 0.5,
+    "mean_fresh_balanced": 1.0,
+    "min_counterexample_balanced": 1.0,
+    "min_fresh_balanced": 1.0,
+    "task_count": 5
+  },
+  "tasks": [
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 32,
+      "domain": "MATHEMATICS",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "model": {
+        "count_to_output": {
+          "0": false,
+          "1": true,
+          "2": false,
+          "3": true,
+          "4": false,
+          "5": true
+        },
+        "default": false,
+        "fields": [
+          "b0",
+          "b1",
+          "b2",
+          "b3",
+          "b4"
+        ],
+        "kind": "SYMMETRIC_COUNT_MAP_V2",
+        "work_cells": 160
+      },
+      "native_selector": {
+        "candidate_count": 7,
+        "ranking": [
+          {
+            "score": 0.992,
+            "token": "SYMMETRIC_COUNT"
+          },
+          {
+            "score": 0.977,
+            "token": "TREE_D5"
+          },
+          {
+            "score": 0.972,
+            "token": "TREE_D6"
+          },
+          {
+            "score": 0.497,
+            "token": "TREE_D1"
+          },
+          {
+            "score": 0.492,
+            "token": "TREE_D2"
+          },
+          {
+            "score": 0.487,
+            "token": "TREE_D3"
+          },
+          {
+            "score": 0.482,
+            "token": "TREE_D4"
+          }
+        ],
+        "selected_score": 0.992,
+        "selected_token": "SYMMETRIC_COUNT"
+      },
+      "negative_count": 16,
+      "positive_count": 16,
+      "selected": {
+        "complexity": 2,
+        "family": "SYMMETRIC_COUNT_MAP_V2",
+        "token": "SYMMETRIC_COUNT",
+        "validation_balanced": 1.0
+      },
+      "task_id": "MATH_PARITY",
+      "truth_table_count": 32
+    },
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 13,
+      "domain": "PROGRAMMING",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "model": {
+        "feature": "tests_pass",
+        "left": {
+          "label": false
+        },
+        "right": {
+          "feature": "rollback_ready",
+          "left": {
+            "label": false
+          },
+          "right": {
+            "feature": "invariant_break",
+            "left": {
+              "feature": "reviewed",
+              "left": {
+                "feature": "low_risk",
+                "left": {
+                  "label": false
+                },
+                "right": {
+                  "label": true
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "label": true
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "label": false
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "native_selector": {
+        "candidate_count": 6,
+        "ranking": [
+          {
+            "score": 0.977,
+            "token": "TREE_D5"
+          },
+          {
+            "score": 0.972,
+            "token": "TREE_D6"
+          },
+          {
+            "score": 0.9697586206896552,
+            "token": "TREE_D3"
+          },
+          {
+            "score": 0.9647586206896552,
+            "token": "TREE_D4"
+          },
+          {
+            "score": 0.497,
+            "token": "TREE_D1"
+          },
+          {
+            "score": 0.492,
+            "token": "TREE_D2"
+          }
+        ],
+        "selected_score": 0.977,
+        "selected_token": "TREE_D5"
+      },
+      "negative_count": 29,
+      "positive_count": 3,
+      "selected": {
+        "complexity": 5,
+        "family": "BOOL_DECISION_TREE",
+        "token": "TREE_D5",
+        "validation_balanced": 1.0
+      },
+      "task_id": "CODE_RELEASE_INVARIANT",
+      "truth_table_count": 32
+    },
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 13,
+      "domain": "EXACT_SCIENCE",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "model": {
+        "feature": "replicated",
+        "left": {
+          "label": false
+        },
+        "right": {
+          "feature": "measurement_valid",
+          "left": {
+            "label": false
+          },
+          "right": {
+            "feature": "contradiction",
+            "left": {
+              "feature": "strong_effect",
+              "left": {
+                "feature": "high_power",
+                "left": {
+                  "label": false
+                },
+                "right": {
+                  "label": true
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "label": true
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "label": false
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "native_selector": {
+        "candidate_count": 6,
+        "ranking": [
+          {
+            "score": 0.977,
+            "token": "TREE_D5"
+          },
+          {
+            "score": 0.972,
+            "token": "TREE_D6"
+          },
+          {
+            "score": 0.9697586206896552,
+            "token": "TREE_D3"
+          },
+          {
+            "score": 0.9647586206896552,
+            "token": "TREE_D4"
+          },
+          {
+            "score": 0.497,
+            "token": "TREE_D1"
+          },
+          {
+            "score": 0.492,
+            "token": "TREE_D2"
+          }
+        ],
+        "selected_score": 0.977,
+        "selected_token": "TREE_D5"
+      },
+      "negative_count": 29,
+      "positive_count": 3,
+      "selected": {
+        "complexity": 5,
+        "family": "BOOL_DECISION_TREE",
+        "token": "TREE_D5",
+        "validation_balanced": 1.0
+      },
+      "task_id": "SCIENTIFIC_EVIDENCE_ACCEPT",
+      "truth_table_count": 32
+    },
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 6,
+      "domain": "CAUSAL_REASONING",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "model": {
+        "feature": "temporal_order",
+        "left": {
+          "label": false
+        },
+        "right": {
+          "feature": "selection_bias",
+          "left": {
+            "feature": "mechanism",
+            "left": {
+              "label": false
+            },
+            "right": {
+              "feature": "intervention",
+              "left": {
+                "label": false
+              },
+              "right": {
+                "feature": "confounder",
+                "left": {
+                  "label": true
+                },
+                "right": {
+                  "label": false
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "label": false
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "native_selector": {
+        "candidate_count": 6,
+        "ranking": [
+          {
+            "score": 0.977,
+            "token": "TREE_D5"
+          },
+          {
+            "score": 0.972,
+            "token": "TREE_D6"
+          },
+          {
+            "score": 0.9658709677419355,
+            "token": "TREE_D4"
+          },
+          {
+            "score": 0.497,
+            "token": "TREE_D1"
+          },
+          {
+            "score": 0.492,
+            "token": "TREE_D2"
+          },
+          {
+            "score": 0.487,
+            "token": "TREE_D3"
+          }
+        ],
+        "selected_score": 0.977,
+        "selected_token": "TREE_D5"
+      },
+      "negative_count": 31,
+      "positive_count": 1,
+      "selected": {
+        "complexity": 5,
+        "family": "BOOL_DECISION_TREE",
+        "token": "TREE_D5",
+        "validation_balanced": 1.0
+      },
+      "task_id": "CAUSAL_CLAIM_VALID",
+      "truth_table_count": 32
+    },
+    {
+      "ablation_balanced": 0.5,
+      "causal_drop": 0.5,
+      "counterexample_balanced": 1.0,
+      "counterexample_count": 13,
+      "domain": "DATA_ANALYSIS",
+      "fresh_balanced": 1.0,
+      "fresh_raw": 1.0,
+      "model": {
+        "feature": "schema_valid",
+        "left": {
+          "label": false
+        },
+        "right": {
+          "feature": "sample_adequate",
+          "left": {
+            "label": false
+          },
+          "right": {
+            "feature": "leakage",
+            "left": {
+              "feature": "replicated",
+              "left": {
+                "feature": "external_check",
+                "left": {
+                  "label": false
+                },
+                "right": {
+                  "label": true
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "label": true
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "label": false
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "native_selector": {
+        "candidate_count": 6,
+        "ranking": [
+          {
+            "score": 0.977,
+            "token": "TREE_D5"
+          },
+          {
+            "score": 0.972,
+            "token": "TREE_D6"
+          },
+          {
+            "score": 0.9697586206896552,
+            "token": "TREE_D3"
+          },
+          {
+            "score": 0.9647586206896552,
+            "token": "TREE_D4"
+          },
+          {
+            "score": 0.497,
+            "token": "TREE_D1"
+          },
+          {
+            "score": 0.492,
+            "token": "TREE_D2"
+          }
+        ],
+        "selected_score": 0.977,
+        "selected_token": "TREE_D5"
+      },
+      "negative_count": 29,
+      "positive_count": 3,
+      "selected": {
+        "complexity": 5,
+        "family": "BOOL_DECISION_TREE",
+        "token": "TREE_D5",
+        "validation_balanced": 1.0
+      },
+      "task_id": "DATA_RESULT_TRUST",
+      "truth_table_count": 32
+    }
+  ]
+}
