@@ -1,0 +1,51 @@
+name: YADO G2 Global Experience Cognitive Genesis V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: ["architecture/yado-g2-global-experience-cognitive-genesis-v2-request.json"]
+permissions: {contents: write}
+jobs:
+  genesis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+      - run: python -m py_compile runtime/yado_g2_global_experience_cognitive_genesis_v2.py
+      - name: Evolve global cognitive genome V2
+        continue-on-error: true
+        run: python runtime/yado_g2_global_experience_cognitive_genesis_v2.py
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+        if: always()
+      - name: Persist global cognitive genesis V2
+        if: always()
+        run: |
+          git config user.name "YADO Global Experience Cognitive Genesis V2"
+          git config user.email "actions@users.noreply.github.com"
+          git add experience/yado-global-experience-cognitive-genesis-v2.json 2>/dev/null || true
+          git add candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v2.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO global cognitive genesis V2 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce V2 verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path("candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v2.json").read_text())
+          if r["status"]!="PASS_SHADOW_G2_GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_V2":raise SystemExit("GLOBAL_V2_WITHHOLD:"+r["next_required_capability"])
+          assert r["checks"]["logic_fresh_beats_baseline"],r
+          assert r["checks"]["thinking_fresh_beats_baseline"],r
+          assert r["checks"]["intelligence_fresh_beats_baseline"],r
+          assert r["checks"]["cognitive_native_commit"],r
+          assert r["checks"]["cognitive_unknown_fail_closed"],r
+          assert r["checks"]["canonical_unchanged"],r
+          print(r["status"],r["genome_id"],r["gene_ids"],r["fresh_scores"],r["cognitive_history_accuracy"])
+          PY
