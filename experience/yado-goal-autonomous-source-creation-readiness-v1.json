@@ -1,0 +1,115 @@
+{
+  "autonomous_goal_deficits": [
+    {
+      "created_at": "2026-09-05T06:16:10.513646+00:00",
+      "deficit_id": "D-60d9eb0ac5bf",
+      "evidence": [
+        "capability:not_registered"
+      ],
+      "goal_id": "G-c5ea04db797f",
+      "kind": "CAPABILITY_MISSING",
+      "observed": 0.0,
+      "required": 1.0,
+      "status": "OPEN",
+      "target": "TASK_CONDITIONED_NATIVE_SOURCE_EMISSION"
+    },
+    {
+      "created_at": "2026-09-05T06:16:10.514355+00:00",
+      "deficit_id": "D-2874ef530883",
+      "evidence": [
+        "capability:not_registered"
+      ],
+      "goal_id": "G-c5ea04db797f",
+      "kind": "CAPABILITY_MISSING",
+      "observed": 0.0,
+      "required": 1.0,
+      "status": "OPEN",
+      "target": "PERSISTENT_GOAL_LOOP"
+    }
+  ],
+  "canonical_mutation": false,
+  "executive_methods": [
+    {
+      "name": "create_goal",
+      "signature": "(objective: 'str', required_capabilities: 'Mapping[str, float]', success_criteria: 'Optional[Mapping[str, Any]]' = None) -> 'GoalState'"
+    },
+    {
+      "name": "detect_deficits",
+      "signature": "(goal_id: 'str') -> 'List[DeficitState]'"
+    },
+    {
+      "name": "evaluate_candidate",
+      "signature": "(candidate_id: 'str', baseline_score: 'float', candidate_score: 'float', ablation_score: 'float', min_gain: 'float' = 0.05, min_ablation_drop: 'float' = 0.03) -> 'ExperimentReceipt'"
+    },
+    {
+      "name": "evaluate_mechanism",
+      "signature": "(program_id: 'str', blind_cases: 'Sequence[Mapping[str, Any]]', min_score: 'Optional[float]' = None, min_ablation_drop: 'float' = 0.2) -> 'MechanismDevelopmentReceipt'"
+    },
+    {
+      "name": "evaluate_program",
+      "signature": "(program_id: 'str', blind_cases: 'Sequence[Mapping[str, Any]]', min_score: 'Optional[float]' = None, min_ablation_drop: 'float' = 0.2) -> 'MechanismDevelopmentReceipt'"
+    },
+    {
+      "name": "execute_capability",
+      "signature": "(capability: 'str', payload: 'Mapping[str, Any]') -> 'Any'"
+    },
+    {
+      "name": "run_cycle",
+      "signature": "(goal_id: 'str') -> 'Dict[str, Any]'"
+    },
+    {
+      "name": "synthesize_best_mechanism",
+      "signature": "(deficit_id: 'str', target_organ: 'str', training_examples: 'Sequence[Mapping[str, Any]]', min_support: 'int' = 2) -> 'Tuple[Mechanism, MechanismSelectionReceipt]'"
+    },
+    {
+      "name": "synthesize_program",
+      "signature": "(deficit_id: 'str', target_organ: 'str', training_examples: 'Sequence[Mapping[str, Any]]', min_support: 'int' = 2) -> 'RuleProgram'"
+    }
+  ],
+  "experience_digest": "8ac3a565816866aa10941809ab7fcb27518a7493772b2a5990a2e778f6925342",
+  "goal_runs": [
+    {
+      "capture_count": 1,
+      "emitted_source_sha256": "e10c68e68e2defd8142d99e439f22d5cf3441aab59b9f944cc0735080e3ada7f",
+      "evolution_run_digest": "116f5ef95e6b44e13b1e95e23c4d72879f238b953f8ca6a136a72b8093557c40",
+      "fresh_goal_score": 0.0,
+      "goal_fresh_digest": "2ee5c166aa02e2e306229a68d1880bde16879d486c1d96ce597309f19277a092",
+      "goal_id": "FRESH-GOAL-A",
+      "goal_train_digest": "48997bcb8bfa5f2d88cc374e6f0ed939d91a84e1bc3b4470b356cc673b0f46b4",
+      "materialized_file_preexisted": false,
+      "materialized_path": "candidates/g2-self-evolution/goal_readiness_fresh_goal_a_e10c68e68e2d.py",
+      "native_example_count": 7,
+      "native_examples_digest": "494cb17b6ee202805dc973879d7716dd5f0a6c3e7c54c5d069637527b80c6f17",
+      "native_source_input_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "selection": "CHILD",
+      "task_conditioning_visible_in_native_call": false,
+      "valid_source_count": 1
+    },
+    {
+      "capture_count": 1,
+      "emitted_source_sha256": "e10c68e68e2defd8142d99e439f22d5cf3441aab59b9f944cc0735080e3ada7f",
+      "evolution_run_digest": "ae9758eda58c2f887da6d08700949ba824742a819a9c5eed436447bb79c901e0",
+      "fresh_goal_score": 0.0,
+      "goal_fresh_digest": "8eafa5b82324f09a8ae7226d160414cf49c92ce3b1fbf112908ec41268be11ef",
+      "goal_id": "FRESH-GOAL-B",
+      "goal_train_digest": "af6a7438b43ef01603d34c366c62f442e6c9dbbebd3cd114471a3fb13f4a384b",
+      "materialized_file_preexisted": false,
+      "materialized_path": "candidates/g2-self-evolution/goal_readiness_fresh_goal_b_e10c68e68e2d.py",
+      "native_example_count": 7,
+      "native_examples_digest": "494cb17b6ee202805dc973879d7716dd5f0a6c3e7c54c5d069637527b80c6f17",
+      "native_source_input_sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+      "selection": "CHILD",
+      "task_conditioning_visible_in_native_call": false,
+      "valid_source_count": 1
+    }
+  ],
+  "missing_capabilities": [
+    "TASK_CONDITIONED_NATIVE_SOURCE_EMISSION_V1",
+    "NATIVE_PERSISTENT_GOAL_LOOP_CONTROLLER_V1"
+  ],
+  "native_loop_named_methods": [],
+  "same_source_for_different_goals": true,
+  "schema": "yado.g2.goal_autonomous_source_creation_readiness.experience.v1",
+  "semantic_boundary": "READINESS EXAM ONLY. NATIVE SOURCE EMISSION IS OBSERVED WITHOUT OBSERVER-SUPPLIED SOURCE/FUNCTION/EXAMPLES, BUT SUCCESS REQUIRES THAT DIFFERENT USER GOALS ACTUALLY CONDITION THE NATIVE SOURCE CALL AND THAT A NATIVE MULTI-STEP GOAL CONTROLLER EXISTS. HOST MATERIALIZATION OF RETURNED SOURCE BYTES DOES NOT COUNT AS NATIVE GOAL AUTONOMY.",
+  "status": "WITHHOLD"
+}
