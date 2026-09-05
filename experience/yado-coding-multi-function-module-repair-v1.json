@@ -1,0 +1,309 @@
+{
+  "canonical_mutation": false,
+  "episode": {
+    "blame_target_correct": true,
+    "defect_calibration_score": 0.0,
+    "defect_edit_kind": "value",
+    "defect_selector": {
+      "candidate_count": 17,
+      "ranking": [
+        {
+          "score": 1.0,
+          "token": "DEF-0404468d7d60c5bd"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-109048f2ab933aa4"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-109dff08275f3c58"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-4a4cab7e89e33121"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-705ae87a74c51cf4"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-75747738a81c6e8d"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-951967c8c97f505f"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-acf679e70e801c46"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-bb4ef4cf416f014f"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-c737651a63fe8852"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-ce5b91646ec33b09"
+        },
+        {
+          "score": 0.7777777777777778,
+          "token": "DEF-df2bc531131127c1"
+        },
+        {
+          "score": 0.5555555555555556,
+          "token": "DEF-f0a6e82b7f1d3411"
+        },
+        {
+          "score": 0.38888888888888884,
+          "token": "DEF-1d28ee111dc68bcb"
+        },
+        {
+          "score": 0.38888888888888884,
+          "token": "DEF-2504860680297475"
+        },
+        {
+          "score": 0.38888888888888884,
+          "token": "DEF-72e1336ceb5c9d0c"
+        },
+        {
+          "score": 0.2777777777777778,
+          "token": "DEF-319f8e52dfeacba1"
+        }
+      ],
+      "selected_score": 1.0,
+      "selected_token": "DEF-0404468d7d60c5bd"
+    },
+    "defect_target": "_pred",
+    "exact_parent_module_ast_recovered": true,
+    "full_domain_score": 1.0,
+    "hidden_never_seen": true,
+    "logic_final": {
+      "decision": "ACCEPT",
+      "gate": "PASS_THROUGH",
+      "guard_features": {
+        "organ": "LOGIC",
+        "route_cardinality": "ONE",
+        "state_known": true
+      },
+      "matched_outputs": [
+        "ACCEPT"
+      ],
+      "route_cardinality": "ONE"
+    },
+    "mutated_hidden_score": 0.0,
+    "mutated_source_sha256": "0404468d7d60c5bd9cd5e5bf2feaff7a031f277e136104c2d2ce1f0bce3cfd65",
+    "repair_selected_target": "_pred",
+    "repaired_hidden_score": 1.0,
+    "repaired_source_sha256": "7e958ca46c6f653ffb6bbacb2980ca910c48e09011896d06d6a0b2cd8c340dc2",
+    "selected_probe_count": 1,
+    "thinking_final": {
+      "decision": "ACCEPT",
+      "gate": "PASS_THROUGH",
+      "guard_features": {
+        "organ": "THINKING",
+        "route_cardinality": "ONE",
+        "state_known": true
+      },
+      "matched_outputs": [
+        "ACCEPT"
+      ],
+      "route_cardinality": "ONE"
+    },
+    "trace": [
+      {
+        "candidate_sha256": "7e958ca46c6f653ffb6bbacb2980ca910c48e09011896d06d6a0b2cd8c340dc2",
+        "cycle": 0,
+        "expected": "B",
+        "hypothesis_count_after": 2,
+        "hypothesis_count_before": 2,
+        "intelligence_evidence": "ACTIVE_EVIDENCE_SEARCH",
+        "intelligence_repair": "ITERATIVE_REAL_REPAIR",
+        "probe_token": "P-2ff35fea86a06f9c",
+        "selected_edit_kind": "value",
+        "selected_repair_target": "_pred",
+        "thinking_evidence": "SEEK_EVIDENCE",
+        "thinking_repair": "REVISE",
+        "thinking_test": "TEST"
+      }
+    ]
+  },
+  "experience_digest": "5f2f02ed34fc726f7db239e5a6c7e71ef48c6d2ae139ff79d3bd173808f39392",
+  "module": {
+    "calibration_count": 18,
+    "callee": "_dot",
+    "caller": "_pred",
+    "hidden_count": 24,
+    "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+    "probe_count": 84,
+    "seed_count": 8,
+    "state_count": 134
+  },
+  "module_repair_gene": {
+    "callee": "_dot",
+    "caller": "_pred",
+    "gene_digest": "6a2fdf44e2764aba5907c5aae9bb08dc23f70dce67e36e7f1fde8fa6f09e152e",
+    "gene_id": "GENE-G2-CODING-MODULE-REPAIR-V1-73559d9b1703077c",
+    "gene_scope": [
+      "THINKING",
+      "INTELLIGENCE",
+      "LOGIC",
+      "CODE",
+      "MEMORY"
+    ],
+    "heritage": [
+      "GENE-G2-CODING-WHOLE-FUNCTION-REAL-REPAIR-V2-68226c9a51457c4b",
+      "f6fc10569409c2c0736a3d1c2f6645348578eb6236585c350d83510be5d7363e",
+      "GENE-G2-CODE-MODULE-SUBSTRATE-V1-6519dbade7e8d6f4",
+      "2b708e6603e04041c6f2aa93d34d0148beb8d009a1bdc69624899f1c4c8dd1d5",
+      "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3"
+    ],
+    "mechanism_kind": "CALLER_LEVEL_COUNTEREXAMPLE_DEPENDENCY_AWARE_TWO_FUNCTION_MODULE_REPAIR",
+    "module_path": "runtime/yado_raw_task_representation_candidate_v3.py",
+    "organ": "THINKING",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.coding_multi_function_module_repair_gene.v1"
+  },
+  "repair_gain": 1.0,
+  "restore_episode": {
+    "blame_target_correct": true,
+    "defect_calibration_score": 0.0,
+    "defect_edit_kind": "value",
+    "defect_selector": {
+      "candidate_count": 17,
+      "ranking": [
+        {
+          "score": 1.0,
+          "token": "DEF-0404468d7d60c5bd"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-109048f2ab933aa4"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-109dff08275f3c58"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-4a4cab7e89e33121"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-705ae87a74c51cf4"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-75747738a81c6e8d"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-951967c8c97f505f"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-acf679e70e801c46"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-bb4ef4cf416f014f"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-c737651a63fe8852"
+        },
+        {
+          "score": 1.0,
+          "token": "DEF-ce5b91646ec33b09"
+        },
+        {
+          "score": 0.7777777777777778,
+          "token": "DEF-df2bc531131127c1"
+        },
+        {
+          "score": 0.5555555555555556,
+          "token": "DEF-f0a6e82b7f1d3411"
+        },
+        {
+          "score": 0.38888888888888884,
+          "token": "DEF-1d28ee111dc68bcb"
+        },
+        {
+          "score": 0.38888888888888884,
+          "token": "DEF-2504860680297475"
+        },
+        {
+          "score": 0.38888888888888884,
+          "token": "DEF-72e1336ceb5c9d0c"
+        },
+        {
+          "score": 0.2777777777777778,
+          "token": "DEF-319f8e52dfeacba1"
+        }
+      ],
+      "selected_score": 1.0,
+      "selected_token": "DEF-0404468d7d60c5bd"
+    },
+    "defect_target": "_pred",
+    "exact_parent_module_ast_recovered": true,
+    "full_domain_score": 1.0,
+    "hidden_never_seen": true,
+    "logic_final": {
+      "decision": "ACCEPT",
+      "gate": "PASS_THROUGH",
+      "guard_features": {
+        "organ": "LOGIC",
+        "route_cardinality": "ONE",
+        "state_known": true
+      },
+      "matched_outputs": [
+        "ACCEPT"
+      ],
+      "route_cardinality": "ONE"
+    },
+    "mutated_hidden_score": 0.0,
+    "mutated_source_sha256": "0404468d7d60c5bd9cd5e5bf2feaff7a031f277e136104c2d2ce1f0bce3cfd65",
+    "repair_selected_target": "_pred",
+    "repaired_hidden_score": 1.0,
+    "repaired_source_sha256": "7e958ca46c6f653ffb6bbacb2980ca910c48e09011896d06d6a0b2cd8c340dc2",
+    "selected_probe_count": 1,
+    "thinking_final": {
+      "decision": "ACCEPT",
+      "gate": "PASS_THROUGH",
+      "guard_features": {
+        "organ": "THINKING",
+        "route_cardinality": "ONE",
+        "state_known": true
+      },
+      "matched_outputs": [
+        "ACCEPT"
+      ],
+      "route_cardinality": "ONE"
+    },
+    "trace": [
+      {
+        "candidate_sha256": "7e958ca46c6f653ffb6bbacb2980ca910c48e09011896d06d6a0b2cd8c340dc2",
+        "cycle": 0,
+        "expected": "B",
+        "hypothesis_count_after": 2,
+        "hypothesis_count_before": 2,
+        "intelligence_evidence": "ACTIVE_EVIDENCE_SEARCH",
+        "intelligence_repair": "ITERATIVE_REAL_REPAIR",
+        "probe_token": "P-2ff35fea86a06f9c",
+        "selected_edit_kind": "value",
+        "selected_repair_target": "_pred",
+        "thinking_evidence": "SEEK_EVIDENCE",
+        "thinking_repair": "REVISE",
+        "thinking_test": "TEST"
+      }
+    ]
+  },
+  "schema": "yado.g2.coding_multi_function_module_repair.experience.v1",
+  "semantic_boundary": "FIRST DEPENDENCY-AWARE REPAIR OF TWO REAL TOP-LEVEL FUNCTIONS IN ONE ACTIVE YADO MODULE. THE DEFECT TARGET IS SELECTED DURING SHADOW INJECTION BUT IS NOT PROVIDED TO THE REPAIR LOOP; REPAIR HYPOTHESES MAY EDIT EITHER CALLER OR CALLEE AND ARE FILTERED ONLY BY CALLER-LEVEL EVIDENCE. THIS DOES NOT YET PROVE GENERAL MULTI-FILE REPAIR.",
+  "status": "TRAINED"
+}
