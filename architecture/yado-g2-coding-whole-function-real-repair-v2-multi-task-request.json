@@ -1,9 +1,24 @@
 {
- "schema":"yado.g2.coding_whole_function_real_repair_v2_multi_task.request.v1",
- "objective":"DEMONSTRATE_THE_COGNITIVE_REPAIR_LOOP_ON_TWO_COMPLETE_REAL_FUNCTIONS_FROM_TWO_ACTIVE_RUNTIME_FILES",
- "instruction":"Consume the first whole-function PASS and substrate V3. Mechanically form the target set from the V1 selected function plus the V3 incremental function; the host must not choose additional functions. Use one shared shadow CODE substrate with int,float,str and readonly get/items, and the canonical cognitive layer. For each complete function independently create a reversible material shadow defect, partition its deterministic executable input domain into calibration, seed, active-probe and hidden sets, keep hidden inputs completely unavailable to repair, and require YADO to choose disagreement probes. Require SEEK_EVIDENCE, ACTIVE_EVIDENCE_SEARCH, REVISE, ITERATIVE_REAL_REPAIR, TEST and final ACCEPT for each task. Both functions must reach exact hidden and full-domain behavior with deterministic restore. Keep canonical unchanged.",
- "parents":["candidates/kernel-self-generated/g2-coding-whole-function-real-repair-v1.json","candidates/kernel-self-generated/g2-coding-whole-function-substrate-expansion-v3.json"],
- "constraints":{"task_count":2,"source_file_count":2,"whole_functions_only":true,"hidden_never_queried":true,"self_selected_probes":true,"cognitive_layer_required":true,"canonical_mutation":false,"external_coding_model":false},
- "host_role":"TARGET_SET_TRANSPORT_SHADOW_DEFECT_INJECTION_HIDDEN_ORACLE_AND_STRICT_EVALUATION_ONLY",
- "trigger":1
+  "schema": "yado.g2.coding_whole_function_real_repair_v2_multi_task.request.v1",
+  "objective": "DEMONSTRATE_THE_COGNITIVE_REPAIR_LOOP_ON_TWO_COMPLETE_REAL_FUNCTIONS_FROM_TWO_ACTIVE_RUNTIME_FILES",
+  "instruction": "Consume the first whole-function PASS and substrate V3. Mechanically form the target set from the V1 selected function plus the V3 incremental function; the host must not choose additional functions. Use one shared shadow CODE substrate with int,float,str and readonly get/items, and the canonical cognitive layer. For each complete function independently create a reversible material shadow defect, partition its deterministic executable input domain into calibration, seed, active-probe and hidden sets, keep hidden inputs completely unavailable to repair, and require YADO to choose disagreement probes. Require SEEK_EVIDENCE, ACTIVE_EVIDENCE_SEARCH, REVISE, ITERATIVE_REAL_REPAIR, TEST and final ACCEPT for each task. Both functions must reach exact hidden and full-domain behavior with deterministic restore. Keep canonical unchanged.",
+  "parents": [
+    "candidates/kernel-self-generated/g2-coding-whole-function-real-repair-v1.json",
+    "candidates/kernel-self-generated/g2-coding-whole-function-substrate-expansion-v3.json"
+  ],
+  "constraints": {
+    "task_count": 2,
+    "source_file_count": 2,
+    "whole_functions_only": true,
+    "hidden_never_queried": true,
+    "self_selected_probes": true,
+    "cognitive_layer_required": true,
+    "canonical_mutation": false,
+    "external_coding_model": false
+  },
+  "host_role": "TARGET_SET_TRANSPORT_SHADOW_DEFECT_INJECTION_HIDDEN_ORACLE_AND_STRICT_EVALUATION_ONLY",
+  "trigger": 2,
+  "trigger_reason": "RESTART_AFTER_HOST_MIXED_KEY_PROBE_CANONICALIZATION_FIX",
+  "host_harness_failure_run_id": "33948464857",
+  "host_harness_failure_signature": "TypeError_SORT_KEYS_MIXED_STR_INT"
 }
