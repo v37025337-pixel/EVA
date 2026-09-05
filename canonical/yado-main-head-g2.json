@@ -26,16 +26,16 @@
     "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
     "RUNTIME-G2-HIGH-SCALE-BINDING-V5",
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1",
-    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4"
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5"
   ],
   "active_patch_registry": {
     "registry_digest": "e9311a0069632a27143d1fea29148afb72c316d533fc8d702209f0f9486c3aa2",
     "status": "CANONICAL_ACTIVE"
   },
   "algorithm_provenance_registry": {
-    "current_execution_label": "G2_COGNITIVE_CONTINUITY_V4_CANONICAL",
+    "current_execution_label": "G2_COGNITIVE_CONTINUITY_FILE_INTEGRITY_V5_CANONICAL",
     "registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-    "registry_digest": "b1126c2eb5c0ab9687fd2b3fdfd315490f670e0a69e554241a0da2abbf5528c8",
+    "registry_digest": "b4a998fa818fa650a7275c84ed75a579a0e43df90f649013e812bebdc78b0ee3",
     "registry_id": "YADO_G2_ALGORITHM_PROVENANCE_REGISTRY_V1"
   },
   "applied_experience_binding": {
@@ -151,7 +151,7 @@
   },
   "candidate_architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
   "candidate_digest": "b292c7ed0bd9e060a2ce736a33ac30e92403ca8d57c94a8f2d354538f584eaa0",
-  "canonical_head_digest": "6c000a5f20e2890e6c3bbbde4e8725b31c643c7d223c419f7312061a9f2eb7f2",
+  "canonical_head_digest": "55a7074ddbf04fa7b3f79c39cb5585c9b836a1b999bb7d36b8452aef66ac24c8",
   "capability_scores": {
     "integrity": 1,
     "intelligence": 1,
@@ -167,20 +167,24 @@
   "cognitive_continuity_checkpoint_v1": {
     "attempt_history_restore": true,
     "checkpoint_schema": "yado.g2.cognitive_continuity_checkpoint.v1",
-    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
     "decision_continuity_after_restart": true,
+    "file_integrity_shadow_receipt_sha256": "af2ad9fd726034ce1c5587d343ec43860543846ae338219efab770115c6a3066",
+    "file_schema": "yado.g2.cognitive_continuity_file.v2",
     "fresh_gate_receipt_sha256": "b87ee9e06fda91921f0400f88c6a0aff387cd6084cfb04fe5dbe3369268a2f3e",
+    "parent_execution_fabric": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",
     "stage_outcome_restore": true,
-    "status": "CANONICAL_ACTIVE"
+    "status": "CANONICAL_ACTIVE",
+    "typed_value_preservation": true
   },
   "cognitive_temporal_kernel_v1": {
     "automatic_canonical_promotion": false,
     "component_id": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
-    "execution_fabric": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",
+    "execution_fabric": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
     "fresh_gate_receipt_sha256": "55b32a04cd308aed28eacf4bb7635ae7bc39e94096e74cc8a566cf779b2be9ad",
     "separate_active_capability": false,
     "stall_threshold": 20,
-    "state_persistence": "UNIFIED_ATOMIC_TEMPORAL_RECURRENT_CHECKPOINT",
+    "state_persistence": "UNIFIED_TYPED_ATOMIC_TEMPORAL_RECURRENT_CHECKPOINT",
     "status": "CANONICAL_EMBEDDED"
   },
   "compatibility_quarantine_v1": {
@@ -271,6 +275,7 @@
     "temporal_stall_to_evolution_signal": true
   },
   "execution_fabric_v4": {
+    "canonical_active": false,
     "canonical_component_digest": "1cdb29aae672360ebd90c649b4ec3e00228ce7d196a564b5ff2365f716e1f83a",
     "checkpoint_schema": "yado.g2.cognitive_continuity_checkpoint.v1",
     "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",
@@ -278,7 +283,19 @@
     "failed_stage_retry_suppression_after_restore": true,
     "fresh_gate_receipt_sha256": "b87ee9e06fda91921f0400f88c6a0aff387cd6084cfb04fe5dbe3369268a2f3e",
     "parent_component": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
-    "status": "CANONICAL_ACTIVE"
+    "status": "SUPERSEDED_BY_V5",
+    "superseded_by": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5"
+  },
+  "execution_fabric_v5": {
+    "canonical_component_digest": "63f877b5b9028ae6cb647fe8f3175b162b6df34b92a493ff70b777f83216a101",
+    "checkpoint_schema": "yado.g2.cognitive_continuity_checkpoint.v1",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
+    "file_schema": "yado.g2.cognitive_continuity_file.v2",
+    "parent_component": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",
+    "pre_restore_full_integrity_validation": true,
+    "shadow_gate_receipt_sha256": "af2ad9fd726034ce1c5587d343ec43860543846ae338219efab770115c6a3066",
+    "status": "CANONICAL_ACTIVE",
+    "typed_value_preservation": true
   },
   "experience_conditioned_cognitive_layer_v3": {
     "automatic_canonical_promotion": false,
@@ -380,7 +397,8 @@
     "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V1",
     "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V2",
     "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
-    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4"
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5"
   ],
   "openapi_contract_capability_v1": {
     "canonical_component_digest": "cc7051cd785a5dd277bdcc32bd6a9ff3395d0dfa8d007708589e0baf6e6954b3",
@@ -705,7 +723,7 @@
     "single_active_context": true
   },
   "unified_core": {
-    "algorithm_provenance_registry_digest": "b1126c2eb5c0ab9687fd2b3fdfd315490f670e0a69e554241a0da2abbf5528c8",
+    "algorithm_provenance_registry_digest": "b4a998fa818fa650a7275c84ed75a579a0e43df90f649013e812bebdc78b0ee3",
     "audit_invariant": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
     "bounded_program_repair_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
     "canonical_write_guard_source_sha256": "a200096ea63d74426a12e1ebe4fa1e5c6e3facee29215eb355ff6106fa321e9d",
@@ -714,7 +732,7 @@
     "contextual_stream_adapter_source_sha256": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52",
     "control_plane_binding": "CANONICAL",
     "control_plane_binding_gate_run_id": "33391800337",
-    "core_digest": "36117aac378072d846d0d4ffdf5607d38d8e5ee380937c0b48afe5a8a9e983d6",
+    "core_digest": "99b02693340f057d33ae7194e82e935af7ca534458f857c9f3f43cff2678b5a2",
     "core_id": "UNIFIED_YADO_CORE_V1",
     "counterexample_lineage_memory_binding": "architecture/evolution-ledger.json+receipts/",
     "deep_self_audit_source_sha256": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
@@ -729,8 +747,8 @@
     "logic_active_component": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
     "logic_ceiling_source_sha256": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
     "raw_task_representation_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
-    "runtime_integrity_manifest_digest": "880b6bf66de4356fafbaebaf7de92d4009edaf9b3e5729a686b97b3965022ce7",
-    "runtime_sha256": "9ea00fce5be53b3c3868c6c2d6655d8b225e8183ae362c16e613cf8cc272f4d3",
+    "runtime_integrity_manifest_digest": "36e41d593b787592916511206a3c070d637a919f1f4392718bc153d092db57cb",
+    "runtime_sha256": "5ac9ede7c59053e67009c929960fdc9770aeb2dae2b1b0e97505582800c3cd5d",
     "scientific_data_reasoner_source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b",
     "semantic_expression_synthesizer_source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
     "single_active_lineage": true,

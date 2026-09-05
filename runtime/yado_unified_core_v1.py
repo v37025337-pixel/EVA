@@ -25,6 +25,7 @@ from yado_g2_unified_execution_fabric_v1 import G2UnifiedExecutionFabricV1
 from yado_g2_unified_execution_fabric_v2 import G2UnifiedExecutionFabricV2
 from yado_g2_unified_execution_fabric_v3 import G2UnifiedExecutionFabricV3
 from yado_g2_unified_execution_fabric_v4 import G2UnifiedExecutionFabricV4
+from yado_g2_unified_execution_fabric_v5 import G2UnifiedExecutionFabricV5
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
@@ -61,7 +62,7 @@ class UnifiedYADOCoreV1:
         self.compositional_logic=BudgetAdaptiveCompositionalLogicV2
         self.compositional_schema_router=CoveragePrunedCompositionalSchemaRouterV3
         self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
-        self.execution_fabric_cls=G2UnifiedExecutionFabricV4
+        self.execution_fabric_cls=G2UnifiedExecutionFabricV5
         self.openapi_contract_capability_cls=G2OpenAPIContractCapabilityV1
         self.openapi_readonly_executor_cls=G2OpenAPIReadOnlyExecutorV1
         self.evolutionary_genome_cls=YADOEvolutionaryGenomeV1
