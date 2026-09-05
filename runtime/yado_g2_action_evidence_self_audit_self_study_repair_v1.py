@@ -122,6 +122,30 @@ def runtime_inventory():
         rows.append({'path':rel,'bytes':b})
     return rows
 
+def focused_parent_context(src:str):
+    lines=src.splitlines()
+    if not lines:return ''
+    wanted=set(range(min(80,len(lines))))
+    anchors=('SELF_AUDIT_RUNTIME_BINDING','LIVE_RESOURCE_EVIDENCE_SCOPE')
+    for i,line in enumerate(lines):
+        if any(a in line for a in anchors):
+            lo=max(0,i-28); hi=min(len(lines),i+34)
+            wanted.update(range(lo,hi))
+    ordered=sorted(wanted)
+    chunks=[]; start=None; prev=None
+    for i in ordered:
+        if start is None:
+            start=prev=i;continue
+        if i==prev+1:
+            prev=i;continue
+        chunks.append((start,prev));start=prev=i
+    if start is not None:chunks.append((start,prev))
+    out=[]
+    for a,b in chunks:
+        out.append(f'--- SOURCE EXCERPT LINES {a+1}-{b+1} ---')
+        out.extend(lines[a:b+1])
+    return '\n'.join(out)
+
 def isolated_semantic_probe(target_path,new_src):
     with tempfile.TemporaryDirectory(prefix='yado-self-study-') as td:
         dst=Path(td)/'repo'
@@ -259,12 +283,15 @@ for row in probes[:2]:
             proposals.append(entry);continue
         if target not in allowed: raise ValueError('TARGET_NOT_IN_RUNTIME_INVENTORY')
         parent=(REPO/target).read_text(encoding='utf-8')
+        focused_parent=focused_parent_context(parent)
         repair_prompt=(
           'Materialize YADO\'s own self-generated evidence-binding gene into a minimal SHADOW repair of the target file selected in your diagnosis. '
           'Do NOT invent a substitute acceptance rule and do NOT hard-code PASS. The candidate must bind/load the gene artifact and use its contract semantics to decide whether fresh self-generated evidence is admissible. It must preserve fail-closed behavior for invalid evidence and preserve unrelated audit/regression behavior. '
-          'Return JSON keys: target_path, rationale, patches. patches is 1-3 exact find/replace objects. No new import roots, eval, exec, subprocess, secrets, credentials, or canonical mutation.\n\n'
+          'Return JSON keys: target_path, rationale, patches. patches is 1-3 exact find/replace objects. Each find string must be copied exactly from the focused source excerpts and will be applied against the COMPLETE parent source with uniqueness checks. No new import roots, eval, exec, subprocess, secrets, credentials, or canonical mutation.\n\n'
           'PROBLEM PACKET:\n'+json.dumps(problem_packet,sort_keys=True,default=str)+'\n\n'
-          'TARGET PATH:\n'+target+'\n\nPARENT SOURCE SHA256:\n'+hashlib.sha256(parent.encode()).hexdigest()+'\n\nPARENT SOURCE:\n'+parent
+          'TARGET PATH:\n'+target+'\n\nPARENT SOURCE SHA256:\n'+hashlib.sha256(parent.encode()).hexdigest()+
+          '\nPARENT SOURCE LINE COUNT:\n'+str(len(parent.splitlines()))+
+          '\n\nFOCUSED PARENT SOURCE EXCERPTS:\n'+focused_parent
         )
         rres=call_model(row['url'],row['model_id'],repair_prompt)
         entry['repair_response']={k:v for k,v in rres.items() if k!='content'}
@@ -339,6 +366,7 @@ report={
    'withhold':p.get('withhold'),'diagnosis':p.get('diagnosis'),'evidence_used':p.get('evidence_used'),
    'target_path':p.get('target_path'),'parsed':p.get('parsed'),'parse_error':p.get('parse_error'),
    'rationale':p.get('rationale'),'patch_count':p.get('patch_count'),
+   'repair_context_mode':'DYNAMIC_FOCUSED_EXCERPTS',
    'static_evaluation':p.get('static_evaluation'),'semantic_probe':p.get('semantic_probe'),
    'candidate_source_sha256':hashlib.sha256(p.get('new_source','').encode()).hexdigest() if p.get('new_source') else None,
  } for p in proposals],
