@@ -108,8 +108,8 @@ if len(episodes)<90:raise RuntimeError('V2_FAILURE_EPISODES_TOO_SMALL:'+str(len(
 episodes.sort(key=lambda e:(e['workflow'],e['created_at'],int(e['run_id'])))
 
 def bucket(name):return int(hashlib.sha256(name.encode()).hexdigest()[:8],16)%10
-train0=[e for e in episodes if bucket(e['workflow'])<=6]
-validation0=[e for e in episodes if bucket(e['workflow'])==7]
+train0=[e for e in episodes if bucket(e['workflow'])<=5]
+validation0=[e for e in episodes if 6<=bucket(e['workflow'])<=7]
 blind0=[e for e in episodes if bucket(e['workflow'])>=8]
 if min(len(train0),len(validation0),len(blind0))<15:raise RuntimeError('WORKFLOW_DISJOINT_SPLIT_TOO_SMALL:'+str([len(train0),len(validation0),len(blind0)]))
 if ({e['workflow'] for e in train0}&{e['workflow'] for e in blind0}) or ({e['workflow'] for e in validation0}&{e['workflow'] for e in blind0}):
