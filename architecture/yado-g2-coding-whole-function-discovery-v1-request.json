@@ -1,0 +1,17 @@
+{
+  "schema": "yado.g2.coding_whole_function_discovery_v1.request.v1",
+  "objective": "MECHANICALLY_DISCOVER_COMPLETE_REAL_RUNTIME_FUNCTIONS_SUITABLE_FOR_BOUNDED_SHADOW_REPAIR",
+  "instruction": "Scan the current canonical G2 active runtime sources after cognitive-layer admission. Consider complete top-level functions only. Strip annotations and decorators only for standalone execution, preserve the complete function body, require one or two positional arguments, no varargs/kwargs/keyword-only arguments, acceptance by the active bounded program validator, at least eight successful bounded integer probes, and at least two distinct outputs. Record all admissible candidates and source diversity. Do not select tasks, mutate functions, repair code, use an external model, or change canonical state.",
+  "constraints": {
+    "whole_function_only": true,
+    "active_runtime_sources_only": true,
+    "bounded_validator_required": true,
+    "min_successful_probes": 8,
+    "min_distinct_outputs": 2,
+    "canonical_mutation": false,
+    "external_model": false
+  },
+  "host_role": "MECHANICAL_DISCOVERY_ONLY",
+  "trigger": 1,
+  "trigger_reason": "CANONICAL_G2_COGNITIVE_LAYER_ACTIVE_AND_NEXT_FRONTIER_WHOLE_FUNCTION_REAL_REPAIR"
+}
