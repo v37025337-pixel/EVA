@@ -1,0 +1,88 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "external_models_used": false,
+    "github_real_runs_ge_30": true,
+    "github_source_hashed": true,
+    "intelligence_real_fresh_ge_0_85": true,
+    "intelligence_real_gain_ge_0_30": true,
+    "logic_real_causal_drop_ge_0_20": true,
+    "logic_real_fresh_ge_0_75": true,
+    "thinking_real_causal_drop_ge_0_15": true,
+    "thinking_real_fresh_ge_0_75": true,
+    "thinking_success_and_failure_in_blind": true,
+    "three_real_data_gene_identities": true,
+    "uci_exact_150_rows": true,
+    "uci_source_hashed": true,
+    "usgs_live_fetch": true,
+    "usgs_source_hashed": true
+  },
+  "gene_ids": {
+    "INTELLIGENCE": "GENE-G2-REAL-DATA-INTELLIGENCE-V1-ea380fc901dc58ab",
+    "LOGIC": "GENE-G2-REAL-DATA-LOGIC-V1-40527e5ca77aad30",
+    "THINKING": "GENE-G2-REAL-DATA-THINKING-V1-50d61a10446f3f5e"
+  },
+  "metrics": {
+    "INTELLIGENCE": {
+      "ablation": 0.26666666666666666,
+      "blind_count": 30,
+      "drop": 0.6666666666666667,
+      "fresh": 0.9333333333333333
+    },
+    "LOGIC": {
+      "ablation_balanced": 0.5,
+      "blind_count": 2272,
+      "drop": 0.49653379549393417,
+      "fresh_balanced": 0.9965337954939342,
+      "sig_threshold_from_fit": 74.0
+    },
+    "THINKING": {
+      "ablation": 0.0,
+      "blind_count": 20,
+      "class_scores": {
+        "failure": {
+          "accuracy": 1.0,
+          "count": 14
+        },
+        "success": {
+          "accuracy": 1.0,
+          "count": 6
+        }
+      },
+      "drop": 1.0,
+      "fresh": 1.0
+    }
+  },
+  "next_required_capability": "REAL_DATA_COGNITIVE_COMPOSITION_AND_TRANSFER_V1",
+  "portfolio_digest": "1b2888c2f8b38c453f875effc152595c25d8cb1eeb909e0d6f0c3d795108b42e",
+  "portfolio_id": "PORT-G2-REAL-DATA-09b41b462f439b0a",
+  "promotion_applied": false,
+  "receipt_sha256": "7bc58498d2fb943a33ab2507fb79ecf431b863dedebef0b887c662f2aa7b901c",
+  "schema": "yado.g2.multidomain_real_data_training.v1",
+  "sources": {
+    "GITHUB_ACTIONS": {
+      "blind_class_counts": {
+        "failure": 14,
+        "success": 6
+      },
+      "sha256": "be39377457150e203a8b10b370f56b3e2c282d0e59cf355b4367bb06cef8a7f0",
+      "url": "https://api.github.com/repos/v37025337-pixel/EVA/actions/runs?per_page=100",
+      "usable_run_count": 96
+    },
+    "UCI_IRIS": {
+      "row_count": 150,
+      "sha256": "d11fe30213d36434a0879aab7cb00ce3c812eb7ba2495874438abff7b7b762e9",
+      "url": "https://cdn.uci-ics-mlr-prod.aws.uci.edu/53/iris.zip",
+      "zip_member": "iris.data"
+    },
+    "USGS": {
+      "event_count": 11357,
+      "feed_generated": 1788608480000,
+      "sha256": "4b263da1c8a9d6fcffa6d5dc46a4979730df9ee28c3dd0dd4bf310bc4d81a4fe",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson"
+    }
+  },
+  "status": "PASS_SHADOW_G2_MULTIDOMAIN_REAL_DATA_TRAINING_V1"
+}

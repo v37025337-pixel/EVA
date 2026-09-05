@@ -1,0 +1,641 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "external_models_used": false,
+    "github_real_runs_ge_30": true,
+    "github_source_hashed": true,
+    "intelligence_real_fresh_ge_0_85": true,
+    "intelligence_real_gain_ge_0_30": true,
+    "logic_real_causal_drop_ge_0_20": true,
+    "logic_real_fresh_ge_0_75": true,
+    "thinking_real_causal_drop_ge_0_15": true,
+    "thinking_real_fresh_ge_0_75": true,
+    "thinking_success_and_failure_in_blind": true,
+    "three_real_data_gene_identities": true,
+    "uci_exact_150_rows": true,
+    "uci_source_hashed": true,
+    "usgs_live_fetch": true,
+    "usgs_source_hashed": true
+  },
+  "experience_digest": "535e60b609d5d399092f427b51f9968ab078277c5fbc9f7ad49476dc4225fb9e",
+  "genes": {
+    "INTELLIGENCE": {
+      "ablation": 0.26666666666666666,
+      "fresh": 0.9333333333333333,
+      "gene_digest": "d7b1466bfe619d989c4f8cbcaf709a716bf2a8bf72cede860eb879fe77ab2731",
+      "gene_id": "GENE-G2-REAL-DATA-INTELLIGENCE-V1-ea380fc901dc58ab",
+      "heritage": [
+        "GENE-G2-MULTIDOMAIN-INTELLIGENCE-V1-5636f552fc470ae2"
+      ],
+      "model": {
+        "feature": "petal_width",
+        "left": {
+          "label": "Iris-setosa"
+        },
+        "right": {
+          "feature": "petal_width",
+          "left": {
+            "feature": "petal_length",
+            "left": {
+              "label": "Iris-versicolor"
+            },
+            "right": {
+              "label": "Iris-virginica"
+            },
+            "threshold": 4.95
+          },
+          "right": {
+            "label": "Iris-virginica"
+          },
+          "threshold": 1.75
+        },
+        "threshold": 0.8
+      },
+      "organ": "INTELLIGENCE",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.real_data_intelligence_gene.v1",
+      "selected": {
+        "depth": 3,
+        "token": "CART_D3",
+        "validation": 1.0
+      },
+      "source_sha256": "d11fe30213d36434a0879aab7cb00ce3c812eb7ba2495874438abff7b7b762e9",
+      "source_url": "https://cdn.uci-ics-mlr-prod.aws.uci.edu/53/iris.zip",
+      "task": "UCI_IRIS_SPECIES_CLASSIFICATION"
+    },
+    "LOGIC": {
+      "ablation_balanced": 0.5,
+      "fresh_balanced": 0.9965337954939342,
+      "gene_digest": "a3f08242cdeb1a286300a3829e328514e1a6f5c884279f0837091d5347af5384",
+      "gene_id": "GENE-G2-REAL-DATA-LOGIC-V1-40527e5ca77aad30",
+      "heritage": [
+        "GENE-G2-MULTIDOMAIN-LOGIC-V2-78da24019759d2f4"
+      ],
+      "model": {
+        "feature": "mag_ge_q75",
+        "left": {
+          "label": false
+        },
+        "right": {
+          "label": true
+        },
+        "threshold": 0.5
+      },
+      "organ": "LOGIC",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.real_data_logic_gene.v1",
+      "selected": {
+        "depth": 1,
+        "token": "TREE_D1",
+        "validation_balanced": 0.9990494296577948
+      },
+      "source_sha256": "4b263da1c8a9d6fcffa6d5dc46a4979730df9ee28c3dd0dd4bf310bc4d81a4fe",
+      "source_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
+      "task": "USGS_EARTHQUAKE_SIGNIFICANCE"
+    },
+    "THINKING": {
+      "ablation": 0.0,
+      "class_scores": {
+        "failure": {
+          "accuracy": 1.0,
+          "count": 14
+        },
+        "success": {
+          "accuracy": 1.0,
+          "count": 6
+        }
+      },
+      "fresh": 1.0,
+      "gene_digest": "bd20e5e32a227c06b85ae0dc3ebc4ae0cc48a0e0360458a4dd266d29e7b09daf",
+      "gene_id": "GENE-G2-REAL-DATA-THINKING-V1-50d61a10446f3f5e",
+      "heritage": [
+        "GENE-G2-MULTIDOMAIN-THINKING-V1-a0811170cf6f6670"
+      ],
+      "model": {
+        "context_keys": [
+          "failure"
+        ],
+        "fallback_edges": [
+          {
+            "after": "MONITOR",
+            "before": "ARCHIVE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "REPAIR",
+            "before": "DIAGNOSE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "RETRY",
+            "before": "DIAGNOSE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "ARCHIVE",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "CHECK_DEPENDENCY",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "DIAGNOSE",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "MONITOR",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "REPAIR",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "RETRY",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "VERIFY",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "RETRY",
+            "before": "REPAIR",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "ARCHIVE",
+            "before": "VERIFY",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "CHECK_DEPENDENCY",
+            "before": "VERIFY",
+            "confidence": 1.0,
+            "support": 76
+          },
+          {
+            "after": "MONITOR",
+            "before": "VERIFY",
+            "confidence": 1.0,
+            "support": 76
+          }
+        ],
+        "graphs": {
+          "0": [
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "REPAIR",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "CHECK_DEPENDENCY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "REPAIR",
+              "before": "CHECK_DEPENDENCY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "CHECK_DEPENDENCY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "REPAIR",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "MONITOR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "MONITOR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "REPAIR",
+              "before": "MONITOR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "MONITOR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "REPAIR",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "REPAIR",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            }
+          ],
+          "1": [
+            {
+              "after": "MONITOR",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "CHECK_DEPENDENCY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "CHECK_DEPENDENCY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "REPAIR",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "VERIFY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "REPAIR",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "RETRY",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "VERIFY",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "RETRY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "RETRY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "RETRY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "VERIFY",
+              "before": "RETRY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            },
+            {
+              "after": "MONITOR",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 38
+            }
+          ]
+        },
+        "kind": "MULTICONTEXT_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.55
+      },
+      "organ": "THINKING",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.real_data_thinking_gene.v1",
+      "selected": {
+        "keys": 1,
+        "support": 2,
+        "threshold": 0.55,
+        "token": "T0.55_K1_S2",
+        "validation": 1.0
+      },
+      "source_sha256": "be39377457150e203a8b10b370f56b3e2c282d0e59cf355b4367bb06cef8a7f0",
+      "source_url": "https://api.github.com/repos/v37025337-pixel/EVA/actions/runs?per_page=100",
+      "task": "YADO_GITHUB_ACTIONS_RESPONSE_PLANNING"
+    }
+  },
+  "metrics": {
+    "INTELLIGENCE": {
+      "ablation": 0.26666666666666666,
+      "blind_count": 30,
+      "drop": 0.6666666666666667,
+      "fresh": 0.9333333333333333
+    },
+    "LOGIC": {
+      "ablation_balanced": 0.5,
+      "blind_count": 2272,
+      "drop": 0.49653379549393417,
+      "fresh_balanced": 0.9965337954939342,
+      "sig_threshold_from_fit": 74.0
+    },
+    "THINKING": {
+      "ablation": 0.0,
+      "blind_count": 20,
+      "class_scores": {
+        "failure": {
+          "accuracy": 1.0,
+          "count": 14
+        },
+        "success": {
+          "accuracy": 1.0,
+          "count": 6
+        }
+      },
+      "drop": 1.0,
+      "fresh": 1.0
+    }
+  },
+  "portfolio": {
+    "automatic_canonical_promotion": false,
+    "genes": {
+      "INTELLIGENCE": "GENE-G2-REAL-DATA-INTELLIGENCE-V1-ea380fc901dc58ab",
+      "LOGIC": "GENE-G2-REAL-DATA-LOGIC-V1-40527e5ca77aad30",
+      "THINKING": "GENE-G2-REAL-DATA-THINKING-V1-50d61a10446f3f5e"
+    },
+    "parents": {
+      "INTELLIGENCE": "GENE-G2-MULTIDOMAIN-INTELLIGENCE-V1-5636f552fc470ae2",
+      "LOGIC": "GENE-G2-MULTIDOMAIN-LOGIC-V2-78da24019759d2f4",
+      "THINKING": "GENE-G2-MULTIDOMAIN-THINKING-V1-a0811170cf6f6670"
+    },
+    "portfolio_digest": "1b2888c2f8b38c453f875effc152595c25d8cb1eeb909e0d6f0c3d795108b42e",
+    "portfolio_id": "PORT-G2-REAL-DATA-09b41b462f439b0a",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.real_data_organ_portfolio.v1"
+  },
+  "schema": "yado.g2.multidomain_real_data_training.experience.v1",
+  "semantic_boundary": "REAL-DATA ORGAN TRAINING. LOGIC USES LIVE USGS EARTHQUAKE OBSERVATIONS WITH A TRAIN-DERIVED SIGNIFICANCE THRESHOLD; INTELLIGENCE USES THE UCI IRIS REAL MEASUREMENT/LABEL DATASET; THINKING USES ACTUAL YADO GITHUB ACTIONS RUN HISTORY WITH POLICY-DERIVED RESPONSE ORDER LABELS. NO EXTERNAL MODEL IS USED. THESE ARE THREE REAL-DATA SPECIALISTS; CROSS-ORGAN REAL-WORLD COGNITIVE COMPOSITION IS A SEPARATE NEXT TEST.",
+  "sources": {
+    "GITHUB_ACTIONS": {
+      "blind_class_counts": {
+        "failure": 14,
+        "success": 6
+      },
+      "sha256": "be39377457150e203a8b10b370f56b3e2c282d0e59cf355b4367bb06cef8a7f0",
+      "url": "https://api.github.com/repos/v37025337-pixel/EVA/actions/runs?per_page=100",
+      "usable_run_count": 96
+    },
+    "UCI_IRIS": {
+      "row_count": 150,
+      "sha256": "d11fe30213d36434a0879aab7cb00ce3c812eb7ba2495874438abff7b7b762e9",
+      "url": "https://cdn.uci-ics-mlr-prod.aws.uci.edu/53/iris.zip",
+      "zip_member": "iris.data"
+    },
+    "USGS": {
+      "event_count": 11357,
+      "feed_generated": 1788608480000,
+      "sha256": "4b263da1c8a9d6fcffa6d5dc46a4979730df9ee28c3dd0dd4bf310bc4d81a4fe",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson"
+    }
+  },
+  "status": "TRAINED"
+}
