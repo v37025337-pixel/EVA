@@ -197,6 +197,10 @@ fcm=load(FCM)
 probes=[x for x in fcm.get('live_no_key_probes',[]) if x.get('probe',{}).get('http_status')==200 and x.get('probe',{}).get('synthetic_coding_check_pass')]
 if not probes: raise RuntimeError('NO_APPROVED_LIVE_NO_KEY_CODING_TOOLS')
 inventory=runtime_inventory()
+allowed_paths={x['path'] for x in inventory}
+kernel_binding=((task.get('evidence') or {}).get('audit_runtime_binding_evidence') or {})
+kernel_audit_runtime=str(kernel_binding.get('this_audit_runtime') or '')
+kernel_audit_runtime_valid=bool(kernel_audit_runtime and kernel_audit_runtime in allowed_paths)
 
 problem_packet={
   'task':task,
@@ -220,15 +224,20 @@ problem_packet={
     'selected_algorithm':gene.get('selected_algorithm'),'contract_fields':gene.get('contract_fields'),
     'model':gene.get('model'),'promotion_state':gene.get('promotion_state')
   },
-  'runtime_inventory':inventory,
+  'kernel_audit_runtime_binding':kernel_binding,
+  'runtime_inventory_summary':{
+    'path_count':len(inventory),
+    'kernel_audit_runtime_in_inventory':kernel_audit_runtime_valid,
+  },
 }
 
 proposals=[]
 for row in probes[:2]:
     diagnose_prompt=(
       'YADO has already created its own validated shadow evidence-binding gene. Your role is ONLY to help materialize that YADO-created mechanism into source, not to invent a replacement policy. Choose the ONE runtime Python file whose change is most directly justified by the gene and evidence. '
+      'The latest kernel-native deep self-audit explicitly reports its own audit runtime path in kernel_audit_runtime_binding. Treat that path as KERNEL PROVENANCE, not as a host-selected target or solution hint. Select it only if the objective and YADO gene directly justify modifying that audit runtime; otherwise return withhold=true. Do not infer a different target from host text. '
       'The candidate must load or explicitly bind the self-generated gene artifact rather than re-derive a host rule. Do not assume the requested outcome is true; if the evidence is insufficient, return withhold=true and explain why. '
-      'Return JSON keys: withhold, diagnosis, target_path, evidence_used. target_path must be one exact path from runtime_inventory.\n\n'
+      'Return JSON keys: withhold, diagnosis, target_path, evidence_used. Any non-withheld target_path will be checked internally against the complete runtime inventory, which is intentionally not sent in this prompt.\n\n'
       +json.dumps(problem_packet,sort_keys=True,default=str)
     )
     dres=call_model(row['url'],row['model_id'],diagnose_prompt)
@@ -244,7 +253,7 @@ for row in probes[:2]:
         entry['withhold']=bool(dobj.get('withhold'))
         target=str(dobj.get('target_path') or '')
         entry['target_path']=target
-        allowed={x['path'] for x in inventory}
+        allowed=allowed_paths
         if entry['withhold']:
             entry.update({'parsed':True,'evaluation':{'score':0.0,'checks':{'model_withheld':True}}})
             proposals.append(entry);continue
@@ -319,6 +328,9 @@ report={
  'status':status,'task':task,
  'latest_audit_source':str(audit_path.relative_to(REPO)),
  'problem_packet_digest':digest(problem_packet),
+ 'kernel_audit_runtime_binding':kernel_binding,
+ 'kernel_audit_runtime_valid':kernel_audit_runtime_valid,
+ 'full_runtime_inventory_not_sent_to_materializer':True,
  'external_tools_used':[{'provider_key':x['provider_key'],'model_id':x['model_id'],'url':x['url']} for x in probes[:2]],
  'proposals':[{
    'provider_key':p['provider_key'],'model_id':p['model_id'],'skill_id':p.get('skill_id'),
