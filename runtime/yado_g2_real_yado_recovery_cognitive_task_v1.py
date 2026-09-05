@@ -76,7 +76,7 @@ if min(len(train0),len(validation0),len(blind0))<18:raise RuntimeError('CHRONOLO
 
 # Thresholds derive from training history only.
 durs=sorted(e['current_duration'] for e in train0)
-q50=durs[int(.50*(len(durs)-1))];q75=durs[int(.75*(len(durs)-1)]
+q50=durs[int(.50*(len(durs)-1))];q75=durs[int(.75*(len(durs)-1))]
 recovery_durs=sorted(e['next_duration'] for e in train0 if e['next_success'])
 if len(recovery_durs)<10:raise RuntimeError('RECOVERY_TRAIN_TOO_SMALL')
 rec_med=recovery_durs[len(recovery_durs)//2]
