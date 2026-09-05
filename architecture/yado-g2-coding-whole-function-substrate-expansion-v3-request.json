@@ -1,0 +1,9 @@
+{
+ "schema":"yado.g2.coding_whole_function_substrate_expansion_v3.request.v1",
+ "objective":"FIND_THE_MINIMUM_SAFE_COMBINATION_THAT_ADDS_INCREMENTAL_REAL_WHOLE_FUNCTION_COVERAGE_WHILE_PRESERVING_THE_TWO_FUNCTION_TWO_FILE_GATE",
+ "instruction":"Consume the V2 WITHHOLD caused by total-coverage accounting and the V3 incremental gap diagnostic. Keep int as the parent extension. Search combinations of at most four additional capabilities drawn only from pure builtin calls and readonly builtin methods observed in real functions. Score only functions newly unlocked beyond the parent. A profile is eligible only if it adds at least one new real function and the resulting substrate covers at least two complete functions from at least two active runtime files. Let YADO neutral evidence selection and native skill gating choose among eligible profiles. Do not allow mutating methods, module attributes, bare attributes, loops, imports, filesystem or network.",
+ "parents":["candidates/kernel-self-generated/g2-coding-whole-function-substrate-expansion-v2.json","candidates/kernel-self-generated/g2-coding-whole-function-incremental-gap-diagnostic-v3.json","candidates/kernel-self-generated/g2-coding-whole-function-substrate-evolution-v2.json"],
+ "constraints":{"incremental_coverage":true,"total_function_min":2,"total_source_file_min":2,"max_added_capabilities":4,"mutating_methods":false,"module_attributes":false,"filesystem":false,"network":false,"loops":false,"canonical_mutation":false},
+ "host_role":"GENERIC_SAFE_COMBINATION_SEARCH_AND_INCREMENTAL_EVALUATION_ONLY",
+ "trigger":1
+}
