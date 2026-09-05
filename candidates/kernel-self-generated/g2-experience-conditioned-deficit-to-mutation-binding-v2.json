@@ -1,0 +1,265 @@
+{
+  "binding_gene": {
+    "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+    "development": {
+      "ablation_score": 0.5,
+      "blind_cases": 46,
+      "candidate_score": 1.0,
+      "created_at": "2026-09-05T16:38:27.869087+00:00",
+      "experiment_id": "DEV22-a49bcc4449af",
+      "mechanism_kind": "RULE_PROGRAM",
+      "min_ablation_drop": 0.2,
+      "min_score": 0.95,
+      "program_digest": "2d840083bf4a6bc2a1ba1562346b613293b44948a8027fff170069a445fa7cac",
+      "program_id": "P-1afa3d7e6841",
+      "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+      "restore_score": 1.0,
+      "stage_ablation_scores": {},
+      "state_committed": true,
+      "target_capability": "EXPERIENCE_CONDITIONED_DEFICIT_BINDING_V2",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "train_cases": 100,
+      "verdict": "COMMIT"
+    },
+    "gene_digest": "354ce45b97a337406133de74e2931cdf66ae76dc3ab5e3792922311badccb7a1",
+    "gene_id": "GENE-G2-EXPERIENCE-DEFICIT-BINDER-V2-70e1c44972c25d55",
+    "heritage": [
+      "589b22dfb24d72f2fd9e3ef62c76e4b27c66c976e8cc8801125fcb91e7aa5eb4",
+      "955668281303157f82f599e4d34a4c67ec9ed7c0e054f174f4d964736626ab96"
+    ],
+    "organ": "GENERATIVE_EXECUTIVE",
+    "origin": "YADO_NATIVE_DEVELOPMENTAL_EXECUTIVE_OVER_CONTENT_ADDRESSED_GLOBAL_EXPERIENCE",
+    "program": {
+      "created_at": "2026-09-05T16:38:27.864401+00:00",
+      "default_output": "BIND_EXPERIENCE_DEFICIT",
+      "program_id": "P-1afa3d7e6841",
+      "rules": [
+        {
+          "confidence": 1.0,
+          "output": "WITHHOLD_DEFICIT_BINDING",
+          "predicates": [
+            {
+              "field": "status_pass",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "support": 47
+        },
+        {
+          "confidence": 1.0,
+          "output": "WITHHOLD_DEFICIT_BINDING",
+          "predicates": [
+            {
+              "field": "status_withhold",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "support": 47
+        },
+        {
+          "confidence": 1.0,
+          "output": "WITHHOLD_DEFICIT_BINDING",
+          "predicates": [
+            {
+              "field": "next_present",
+              "op": "EQ",
+              "value": false
+            }
+          ],
+          "support": 16
+        },
+        {
+          "confidence": 1.0,
+          "output": "WITHHOLD_DEFICIT_BINDING",
+          "predicates": [
+            {
+              "field": "domain_memory",
+              "op": "EQ",
+              "value": true
+            }
+          ],
+          "support": 3
+        }
+      ],
+      "source_digest": "ee040212a00b417c423f6a57a228a83f1692e9d33f7b18281986b4d67eb47bd3",
+      "status": "COMMITTED",
+      "target_capability": "EXPERIENCE_CONDITIONED_DEFICIT_BINDING_V2",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "training_count": 100
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.experience_conditioned_deficit_binding_gene.v2",
+    "selection": {
+      "candidates": [
+        {
+          "complexity": 9,
+          "kind": "RULE_PROGRAM",
+          "program_id": "P-1afa3d7e6841",
+          "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+          "selected": true,
+          "training_score": 1.0
+        }
+      ],
+      "created_at": "2026-09-05T16:38:27.865980+00:00",
+      "deficit_id": "D-880f26e1a22a",
+      "selected_kind": "RULE_PROGRAM",
+      "selected_program_id": "P-1afa3d7e6841",
+      "selection_id": "SEL-70b5e5072ac8",
+      "source_digest": "ee040212a00b417c423f6a57a228a83f1692e9d33f7b18281986b4d67eb47bd3",
+      "target_capability": "EXPERIENCE_CONDITIONED_DEFICIT_BINDING_V2",
+      "target_organ": "GENERATIVE_EXECUTIVE"
+    }
+  },
+  "bound_deficit": {
+    "bridge_receipt": "589b22dfb24d72f2fd9e3ef62c76e4b27c66c976e8cc8801125fcb91e7aa5eb4",
+    "cognitive_decision": "REVISE",
+    "deficit_digest": "3f3152865f18c143d3023a44d938d891aedac060f6b593d0e176fd8a7e339704",
+    "deficit_id": "XD-a58a78010daffeb5",
+    "intelligence_route": "RETRY",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.experience_conditioned_deficit.v2",
+    "source_receipt": "955668281303157f82f599e4d34a4c67ec9ed7c0e054f174f4d964736626ab96",
+    "status": "OPEN_SHADOW",
+    "target_capability": "NATIVE_GENERAL_BINDER_SOURCE_REALIZATION_OR_SOURCE_LANGUAGE_EXPANSION_V2",
+    "target_domain": "CODE"
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "balanced_blind": true,
+    "balanced_fit": true,
+    "balanced_validation": true,
+    "bound_target_differs_from_legacy_quadratic_signature": true,
+    "bound_target_is_kernel_generated_next": true,
+    "bridge_v1_consumed": true,
+    "canonical_unchanged": true,
+    "causal_ablation_drop_ge_0_20": true,
+    "content_addressed_split_used": true,
+    "counterfactual_missing_next_fails_closed": true,
+    "current_failure_post_corpus": true,
+    "current_post_corpus_prediction_binds_deficit": true,
+    "external_models_used": false,
+    "fresh_blind_ge_0_95": true,
+    "host_authored_target_capability": false,
+    "host_patch_used": false,
+    "host_selected_mutation_family": false,
+    "legacy_polynomial_not_selected_by_v2": true,
+    "native_deficit_detected": true,
+    "native_development_committed": true,
+    "native_goal_created": true,
+    "native_mechanism_selected": true,
+    "restore_exact": true,
+    "retraining_v6": false,
+    "validation_ge_0_95": true
+  },
+  "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+  "current_failure_receipt": "955668281303157f82f599e4d34a4c67ec9ed7c0e054f174f4d964736626ab96",
+  "current_post_corpus": {
+    "counterfactual_prediction": "WITHHOLD_DEFICIT_BINDING",
+    "input": {
+      "ablation_positive": false,
+      "canonical_unchanged": true,
+      "domain_code": true,
+      "domain_cognitive": false,
+      "domain_evolution": false,
+      "domain_execution": false,
+      "domain_memory": false,
+      "domain_representation": false,
+      "fresh_positive": true,
+      "next_present": true,
+      "rollback_available": false,
+      "same_domain_next": true,
+      "source_candidate": true,
+      "source_receipt": false,
+      "status_pass": false,
+      "status_withhold": true
+    },
+    "prediction": "BIND_EXPERIENCE_DEFICIT"
+  },
+  "legacy_code_selection": {
+    "expression": {
+      "max_degree": 3
+    },
+    "gene_id": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+    "mutation_reason": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER"
+  },
+  "metrics": {
+    "ablation": 0.5,
+    "candidate": 1.0,
+    "fresh_blind": 1.0,
+    "restore": 1.0,
+    "validation": 1.0
+  },
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-05T16:38:27.859489+00:00",
+        "deficit_id": "D-880f26e1a22a",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-d4bae98da61a",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "RESOLVED",
+        "target": "EXPERIENCE_CONDITIONED_DEFICIT_BINDING_V2"
+      }
+    ],
+    "goal_id": "G-d4bae98da61a"
+  },
+  "next_required_capability": "EXPERIENCE_CONDITIONED_MUTATION_FAMILY_SELECTION_V3",
+  "parent_bridge_receipt": "589b22dfb24d72f2fd9e3ef62c76e4b27c66c976e8cc8801125fcb91e7aa5eb4",
+  "promotion_applied": false,
+  "receipt_sha256": "e0102e01b7ccb9d2eb810a21508dd90888f21baec429985a1af2e5a0fb4cf1be",
+  "schema": "yado.g2.experience_conditioned_deficit_to_mutation_binding.v2",
+  "semantic_boundary": "V2 DOES NOT PATCH THE EVOLUTIONARY CONTROLLER OR CHOOSE A MUTATION FAMILY. YADO NATIVE DEVELOPMENTAL EXECUTIVE LEARNS, FROM CONTENT-ADDRESSED GLOBAL HISTORY, WHEN A FAILED STATE WITH A KERNEL-GENERATED NEXT CAPABILITY MAY BE BOUND AS AN OPEN SHADOW EVOLUTION DEFICIT. THE EXACT TARGET CAPABILITY IS CARRIED FROM YADO OWN POST-CORPUS RECEIPT AND IS NOT PREDICTED OR HOST-AUTHORED. PASS PROVES EXPERIENCE CAN CONTROL DEFICIT FORMATION; MUTATION-FAMILY SELECTION REMAINS A SEPARATE NEXT GATE.",
+  "split_counts": {
+    "blind": 46,
+    "fit": 86,
+    "validation": 14
+  },
+  "status": "PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_DEFICIT_TO_MUTATION_BINDING_V2",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_models": false,
+      "fail_closed": true,
+      "host_authored_target_capability": false,
+      "host_patch": false,
+      "host_selected_mutation_family": false,
+      "shadow_only": true,
+      "v6_retraining": false
+    },
+    "host_role": "CONTENT_ADDRESSED_HISTORY_TRANSPORT_GENERIC_FEATURE_ENCODING_AND_STRICT_EVALUATION_ONLY",
+    "objective": "YADO_LEARN_WHEN_ITS_OWN_NEXT_REQUIRED_CAPABILITY_BECOMES_AN_EVOLUTION_DEFICIT_FROM_GLOBAL_EXPERIENCE",
+    "parents": {
+      "bridge_v1": "candidates/kernel-self-generated/g2-experience-conditioned-evolution-action-bridge-v1.json",
+      "global_experience_corpus": "experience/yado-global-experience-corpus-v1.json",
+      "post_corpus_failure": "candidates/kernel-self-generated/g2-native-action-evidence-binder-source-realization-v1.json"
+    },
+    "schema": "yado.g2.experience_conditioned_deficit_to_mutation_binding.request.v2",
+    "stop_condition": "EXPERIENCE_CONDITIONED_DEFICIT_BINDING_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+    "success_conditions": [
+      "content-addressed train validation blind split",
+      "balanced positive and negative deficit-binding cases",
+      "native developmental executive selects and commits the binding mechanism",
+      "validation at least 0.95",
+      "fresh blind at least 0.95",
+      "causal ablation drop at least 0.20",
+      "restore exact",
+      "post-corpus binder-source failure is accepted for deficit binding",
+      "same evidence without next capability fails closed",
+      "bound target equals YADO own next_required_capability exactly",
+      "bound target differs from legacy fixed quadratic mutation reason",
+      "no mutation family selected in V2",
+      "canonical G2 unchanged"
+    ],
+    "task": "Consume the proven V1 decision-to-mutation disconnect and the content-addressed global experience corpus. Use YADO native developmental synthesis to learn a generic fail-closed policy for binding a failed state with an explicit kernel-generated next capability into an open shadow evolution deficit. Do not predict or invent the exact target capability; carry it unchanged from the YADO receipt only after the native binding policy accepts. Do not select a mutation family and do not patch the evolutionary controller in this stage.",
+    "trigger": 1,
+    "trigger_reason": "START_AFTER_V1_PROVED_FROZEN_EXPERIENCE_COORDINATOR_REVISE_BUT_LEGACY_GENOME_STILL_SELECTED_FIXED_POLYNOMIAL_MUTATION"
+  }
+}
