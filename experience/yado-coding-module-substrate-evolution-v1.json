@@ -1,0 +1,190 @@
+{
+  "canonical_mutation": false,
+  "experience_digest": "64be568ef4da3aa19c8772b8cb8ca3835f9de5b8f9406f34457a1768e827e7f2",
+  "module_substrate_gene": {
+    "allow_local_sort": true,
+    "allow_pure_sort_key_lambda": true,
+    "canonical_parent_unchanged": true,
+    "gene_digest": "ff2fb0ffb9145530b5e4ce280ba81a9c31231e657bb5aebddd9450e96455c221",
+    "gene_id": "GENE-G2-CODE-MODULE-SUBSTRATE-V1-6519dbade7e8d6f4",
+    "heritage": [
+      "GENE-G2-CODING-WHOLE-FUNCTION-REAL-REPAIR-V2-68226c9a51457c4b",
+      "f6fc10569409c2c0736a3d1c2f6645348578eb6236585c350d83510be5d7363e",
+      "GENE-G2-CODE-WHOLE-FUNCTION-SUBSTRATE-V4-b3c4ca5623695767",
+      "811396aec5ecc8eecf137f0d482f198ce3fb7fde48b82da4663bdc5188b461eb",
+      "396f18cd7b6a83c8add0bc2c0d5020c29c767d90f2e2feed141d66d53343c70b"
+    ],
+    "local_calls_only_within_two_function_module": true,
+    "mutation_kind": "LOCAL_LIST_SORT_WITH_PURE_KEY_LAMBDA_MODULE_LINK",
+    "organ": "CODE",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.code_module_substrate_gene.v1",
+    "selected_pair": {
+      "callee": "_dot",
+      "caller": "_pred",
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py"
+    }
+  },
+  "native_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "5b3285e8116bfa4123a447281355bb369187feb84bda3025fde9b2855fc6da64",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "44ac7116ec481c922a8cfb8b543758554ac307ec7b4a3a0f927a72e07343e894",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_WHOLE_FUNCTION_SUBSTRATE_V3",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "c18ceeb53274857a8bb1695ccfdba276792429e80ad93d739dee53a8f8a07ae9",
+        "failed_critics": [],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "ADMIT_SHADOW_MODULE_LOCAL_SORT_WITH_PURE_KEY_LAMBDA",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_SHADOW_MODULE_LOCAL_SORT_WITH_PURE_KEY_LAMBDA"
+    ],
+    "status": "SELECTED"
+  },
+  "negative_safety_controls": {
+    "lambda_attribute_rejected": true,
+    "lambda_call_rejected": true,
+    "lambda_outside_sort_rejected": true,
+    "sort_on_input_rejected": true,
+    "sort_without_key_rejected": true
+  },
+  "pair_profile_evaluations": [
+    {
+      "callee": "_dot",
+      "caller": "_pred",
+      "distinct_output_count": 0,
+      "gap_cost": 2,
+      "pair_index": 0,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "profile": {
+        "allow_local_sort": false,
+        "allow_pure_sort_lambda": false,
+        "token": "KEEP_PARENT"
+      },
+      "success_count": 0,
+      "token": "PAIR0_KEEP_PARENT",
+      "valid": false,
+      "validation_error": "ValueError:SORT_NOT_ALLOWED"
+    },
+    {
+      "callee": "_dot",
+      "caller": "_pred",
+      "distinct_output_count": 0,
+      "gap_cost": 2,
+      "pair_index": 0,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "profile": {
+        "allow_local_sort": true,
+        "allow_pure_sort_lambda": false,
+        "token": "LOCAL_SORT_ONLY"
+      },
+      "success_count": 0,
+      "token": "PAIR0_LOCAL_SORT_ONLY",
+      "valid": false,
+      "validation_error": "ValueError:LAMBDA_NOT_ALLOWED"
+    },
+    {
+      "callee": "_dot",
+      "caller": "_pred",
+      "distinct_output_count": 0,
+      "gap_cost": 2,
+      "pair_index": 0,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "profile": {
+        "allow_local_sort": false,
+        "allow_pure_sort_lambda": true,
+        "token": "PURE_SORT_KEY_LAMBDA_ONLY"
+      },
+      "success_count": 0,
+      "token": "PAIR0_PURE_SORT_KEY_LAMBDA_ONLY",
+      "valid": false,
+      "validation_error": "ValueError:SORT_NOT_ALLOWED"
+    },
+    {
+      "callee": "_dot",
+      "caller": "_pred",
+      "distinct_output_count": 5,
+      "gap_cost": 2,
+      "pair_index": 0,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "profile": {
+        "allow_local_sort": true,
+        "allow_pure_sort_lambda": true,
+        "token": "LOCAL_SORT_WITH_PURE_KEY_LAMBDA"
+      },
+      "success_count": 54,
+      "token": "PAIR0_LOCAL_SORT_WITH_PURE_KEY_LAMBDA",
+      "valid": true,
+      "validation_error": null
+    }
+  ],
+  "schema": "yado.g2.coding_module_substrate_evolution.experience.v1",
+  "selected": {
+    "callee": "_dot",
+    "caller": "_pred",
+    "distinct_output_count": 5,
+    "gap_cost": 2,
+    "pair_index": 0,
+    "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+    "profile": {
+      "allow_local_sort": true,
+      "allow_pure_sort_lambda": true,
+      "token": "LOCAL_SORT_WITH_PURE_KEY_LAMBDA"
+    },
+    "success_count": 54,
+    "token": "PAIR0_LOCAL_SORT_WITH_PURE_KEY_LAMBDA",
+    "valid": true,
+    "validation_error": null
+  },
+  "selector": {
+    "candidate_count": 1,
+    "ranking": [
+      {
+        "score": 2.53,
+        "token": "PAIR0_LOCAL_SORT_WITH_PURE_KEY_LAMBDA"
+      }
+    ],
+    "selected_score": 2.53,
+    "selected_token": "PAIR0_LOCAL_SORT_WITH_PURE_KEY_LAMBDA"
+  },
+  "semantic_boundary": "SHADOW MODULE SUBSTRATE FOR EXACTLY TWO LOCAL FUNCTIONS. sort IS ALLOWED ONLY ON A LOCALLY CREATED LIST AND ONLY WITH ONE PURE key LAMBDA. THE LAMBDA MAY NOT CALL FUNCTIONS OR ACCESS ATTRIBUTES. INPUT MUTATION, GENERAL ATTRIBUTES, MODULE ATTRIBUTES, FILESYSTEM, NETWORK, IMPORTS, AND LOOPS REMAIN FORBIDDEN.",
+  "status": "TRAINED"
+}
