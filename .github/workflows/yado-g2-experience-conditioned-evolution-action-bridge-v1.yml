@@ -59,6 +59,7 @@ jobs:
           assert c["canonical_unchanged"] is True,r
           if r["status"]!="PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_EVOLUTION_ACTION_BRIDGE_V1":
               raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          assert c["experience_thinking_signal_observed"] is True,r
           assert c["experience_cognitive_decision_is_revise"] is True,r
           assert c["measured_decision_to_mutation_disconnect"] is True,r
           print(r["status"],r["v6_predictions"],r["legacy_evolution_code_selection"])
