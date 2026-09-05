@@ -1,0 +1,34 @@
+{
+  "schema": "yado.g2.cognitive_continuity.canonical_admission.request.v1",
+  "objective": "CANONICALLY_ADMIT_PROCESS_RESTART_CONTINUITY_FOR_TEMPORAL_AND_ACTIONABLE_RECURRENT_MEMORY",
+  "task": "Use the passed shadow continuity candidate as prior evidence, then run an independent fresh destroy-and-restore case with different stage identities before changing canonical state. Admit V4 only if the fresh runtime restores logical tick, recurrent sequence, episode memory, attempted failed stage, same-stream predecessor, memory feedback, and the same next decision while suppressing retry of the failed stage. Preserve the current developmental frontier, G2 generation, rollback boundaries, and fail-closed canonical invariant guard.",
+  "parent_candidate": "candidates/kernel-self-generated/g2-cognitive-continuity-checkpoint-v1.json",
+  "constraints": {
+    "same_generation_g2": true,
+    "architecture_mutation": false,
+    "generation_transition": false,
+    "g3_genesis": false,
+    "automatic_child_promotion": false,
+    "independent_fresh_restart_required": true,
+    "canonical_guard_before_and_after": true
+  },
+  "success_conditions": [
+    "shadow continuity receipt is PASS",
+    "independent fresh failed stage is recorded",
+    "fresh checkpoint survives destruction of original runtime",
+    "fresh runtime restores tick and recurrent memory exactly",
+    "fresh next decision matches pre-restart decision",
+    "fresh failed stage is not retried",
+    "fresh thinking consumes restored stage outcome",
+    "V3 is replaced by V4 in active capabilities",
+    "UnifiedYADOCoreV1 instantiates V4",
+    "runtime integrity manifest is rebound",
+    "ledger event is appended",
+    "frontier remains unchanged",
+    "canonical invariant guard passes after mutation"
+  ],
+  "host_role": "CANONICAL_ADMISSION_TRANSPORT_FRESH_RESTART_VERIFICATION_AND_INTEGRITY_REBINDING_ONLY",
+  "stop_condition": "COGNITIVE_CONTINUITY_V4_CANONICAL_PASS_OR_EXPLICIT_FAILURE",
+  "trigger": 1,
+  "trigger_reason": "START_AFTER_PASS_SHADOW_G2_COGNITIVE_CONTINUITY_CHECKPOINT_V1"
+}
