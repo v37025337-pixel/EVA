@@ -90,7 +90,8 @@ targets=[]
 for t in whole2.get('target_set') or []:
     src=extract_function(REPO/t['path'],t['function_name'])
     targets.append({'path':t['path'],'function_name':t['function_name'],'source':src,'source_sha256':sha(src)})
-if len(targets)!=2 or len({x['path'] for x in targets})!=2: raise RuntimeError('EXPECTED_TWO_REAL_WHOLE_FUNCTION_TARGETS')
+targets=[t for t in targets if t['function_name']=='split_bucket']
+if len(targets)!=1: raise RuntimeError('EXPECTED_SPLIT_BUCKET_REAL_TARGET')
 
 def indirect_keys(tree,arg):
     keys=[]
@@ -164,15 +165,15 @@ def one_mutations(source,examples):
         if len(out)>=120:break
     return out
 
-def choose_two_edit_defect(reference,name,calibration):
+def choose_two_edit_defects(reference,name,calibration,count=3):
     examples=[(copy.deepcopy(a),execute(reference,name,a)) for a in calibration]
     cands=[];mp={}
     first=one_mutations(reference,examples)
-    for c1 in first[:60]:
+    for c1 in first[:80]:
         if same_ast(c1,reference):continue
         back1=one_mutations(c1,examples)
         if not any(same_ast(x,reference) for x in back1):continue
-        for c2 in back1[:80]:
+        for c2 in back1[:100]:
             if same_ast(c2,reference) or same_ast(c2,c1):continue
             backs2=one_mutations(c2,examples)
             if any(same_ast(x,reference) for x in backs2):continue
@@ -183,12 +184,17 @@ def choose_two_edit_defect(reference,name,calibration):
             if tok in mp:continue
             mp[tok]=(c2,sc,c1)
             cands.append(EvidenceCandidate(token=tok,evidence=1.0-sc,complexity=2.0,risk=0.0,novelty=1.0))
-            if len(cands)>=80:break
-        if len(cands)>=80:break
-    if not cands:raise RuntimeError('NO_TWO_EDIT_REVERSIBLE_DEFECT:'+name)
-    sel=NeutralEvidenceProfileSelectorV1.select(cands,complexity_penalty=.01,risk_penalty=.5,novelty_bonus=.01)
-    c2,sc,c1=mp[sel['selected_token']]
-    return c2,sc,c1,sel
+            if len(cands)>=120:break
+        if len(cands)>=120:break
+    if len(cands)<count:raise RuntimeError('INSUFFICIENT_TWO_EDIT_REVERSIBLE_DEFECTS:'+name+':'+str(len(cands)))
+    ranked=[]
+    remaining=list(cands)
+    while remaining and len(ranked)<count:
+        sel=NeutralEvidenceProfileSelectorV1.select(remaining,complexity_penalty=.01,risk_penalty=.5,novelty_bonus=.01)
+        c2,sc,c1=mp[sel['selected_token']]
+        ranked.append((c2,sc,c1,sel))
+        remaining=[x for x in remaining if x.token!=sel['selected_token']]
+    return ranked
 
 def hypotheses(mutated,name,known,max_count=100):
     xs=[];seen=set();first=[]
@@ -332,10 +338,11 @@ for t in targets:
         k=canon(a)
         if k not in seen:seen.add(k);uniq.append(a)
     part=partition(uniq,'JOINT_REAL_CODE_V1|'+t['path']+'|'+t['function_name'])
-    defect,cal_score,intermediate,sel=choose_two_edit_defect(t['source'],t['function_name'],part[0])
-    prepared.append({**t,'states':uniq,'partition':part,'defect':defect,'defect_calibration_score':cal_score,
-      'defect_selector':sel,'intermediate_sha256':sha(intermediate),'two_edit_no_direct_one_step':True,
-      'mutated_hidden_score':score(defect,t['function_name'],part[3],t['source'])})
+    defects=choose_two_edit_defects(t['source'],t['function_name'],part[0],count=3)
+    for variant,(defect,cal_score,intermediate,sel) in enumerate(defects,1):
+        prepared.append({**t,'variant_id':'TWO_EDIT_'+str(variant),'states':uniq,'partition':part,'defect':defect,
+          'defect_calibration_score':cal_score,'defect_selector':sel,'intermediate_sha256':sha(intermediate),
+          'two_edit_no_direct_one_step':True,'mutated_hidden_score':score(defect,t['function_name'],part[3],t['source'])})
 
 baseline=[run_episode(t,t['defect'],'CANONICAL') for t in prepared]
 trained=[run_episode(t,t['defect'],'TRAINED') for t in prepared]
@@ -352,11 +359,11 @@ measured_gain=(trained_success>baseline_success) or (trained_success==baseline_s
 joint_gene={'schema':'yado.g2.joint_real_code_cognitive_transfer_gene.v1',
  'gene_id':'GENE-G2-JOINT-REAL-CODE-COGNITIVE-TRANSFER-V1-'+digest({'trained':trained,'parents':[genes['LOGIC']['gene_digest'],genes['THINKING']['gene_digest'],genes['INTELLIGENCE']['gene_digest'],genes['COGNITIVE']['gene_digest']]})[:16],
  'organ':'CONSCIOUS_WORKSPACE','heritage':[genes['LOGIC']['gene_id'],genes['THINKING']['gene_id'],genes['INTELLIGENCE']['gene_id'],genes['COGNITIVE']['gene_id']],
- 'mechanism_kind':'TRAINED_MULTIDOMAIN_CONTROL_OVER_TWO_EDIT_REAL_WHOLE_FUNCTION_REPAIR','promotion_state':'SHADOW_ONLY'}
+ 'mechanism_kind':'TRAINED_MULTIDOMAIN_CONTROL_OVER_THREE_TWO_EDIT_VARIANTS_OF_REAL_WHOLE_FUNCTION_REPAIR','promotion_state':'SHADOW_ONLY'}
 joint_gene['gene_digest']=digest(joint_gene)
 
 checks={
- 'two_real_whole_functions':len(prepared)==2 and len({x['path'] for x in prepared})==2,
+ 'three_two_edit_real_episodes':len(prepared)==3 and len({x['path'] for x in prepared})==1,
  'two_edit_defects_material':all(x['mutated_hidden_score']<=.75 for x in prepared),
  'trained_control_uses_multidomain_logic':genes['LOGIC']['gene_id']=='GENE-G2-MULTIDOMAIN-LOGIC-V2-78da24019759d2f4',
  'trained_control_uses_multidomain_thinking':genes['THINKING']['gene_id']=='GENE-G2-MULTIDOMAIN-THINKING-V1-a0811170cf6f6670',
@@ -383,15 +390,15 @@ experience={'schema':'yado.g2.joint_real_code_cognitive_transfer.experience.v1',
  'metrics':{'baseline_success':baseline_success,'trained_success':trained_success,'baseline_mean_probes':baseline_probes,'trained_mean_probes':trained_probes,
             'baseline_mean_repair_tried':baseline_tried,'trained_mean_repair_tried':trained_tried},
  'joint_gene':joint_gene,'checks':checks,'canonical_mutation':False,
- 'semantic_boundary':'JOINT REAL WHOLE-FUNCTION TRANSFER ON TWO ACTIVE YADO FUNCTIONS WITH REVERSIBLE TWO-EDIT SHADOW DEFECTS. THE SAME REPAIR SUBSTRATE, HIDDEN DOMAIN AND DEFECT ARE USED FOR THE CANONICAL CONTROL BASELINE AND THE TRAINED MULTIDOMAIN CONTROL. TRAINED CONTROL USES CODE_RELEASE LOGIC, CODE_REPAIR THINKING, RESOURCE_STRATEGY INTELLIGENCE AND THE MULTIDOMAIN COGNITIVE KNN. HOST ONLY MAPS LEARNED CONTROL OUTPUTS TO BOUNDED PROBE COUNTS/RELEASE ACTIONS; IT DOES NOT SELECT THE PATCH. PASS PROVES JOINT TRANSFER, NOT AGI.'
+ 'semantic_boundary':'JOINT REAL WHOLE-FUNCTION TRANSFER ON THREE INDEPENDENT REVERSIBLE TWO-EDIT SHADOW DEFECTS OF THE ACTIVE YADO split_bucket FUNCTION. THE SAME REPAIR SUBSTRATE, HIDDEN DOMAIN AND DEFECT ARE USED FOR THE CANONICAL CONTROL BASELINE AND THE TRAINED MULTIDOMAIN CONTROL. TRAINED CONTROL USES CODE_RELEASE LOGIC, CODE_REPAIR THINKING, RESOURCE_STRATEGY INTELLIGENCE AND THE MULTIDOMAIN COGNITIVE KNN. HOST ONLY MAPS LEARNED CONTROL OUTPUTS TO BOUNDED PROBE COUNTS/RELEASE ACTIONS; IT DOES NOT SELECT THE PATCH. PASS PROVES JOINT TRANSFER, NOT AGI.'
 }
 experience['experience_digest']=digest(experience);EXP.parent.mkdir(parents=True,exist_ok=True);EXP.write_text(json.dumps(experience,indent=2,sort_keys=True,default=str)+'\n')
 report={'schema':'yado.g2.joint_real_code_cognitive_transfer.v1','status':status,'growth_verdict':growth,
- 'metrics':experience['metrics'],'task_results':[{'path':t['path'],'function_name':t['function_name'],'mutated_hidden_score':p['mutated_hidden_score'],
+ 'metrics':experience['metrics'],'task_results':[{'path':p['path'],'function_name':p['function_name'],'variant_id':p['variant_id'],'mutated_hidden_score':p['mutated_hidden_score'],
       'baseline_hidden':b['hidden_score'],'baseline_full':b['full_score'],'baseline_probes':b['probe_count'],'baseline_tried':b['repair_tried'],
       'trained_hidden':n['hidden_score'],'trained_full':n['full_score'],'trained_probes':n['probe_count'],'trained_tried':n['repair_tried'],
       'trained_release':n['release'],'trained_final_cognitive_action':n['final_cognitive_action']}
-      for t,p,b,n in zip(targets,prepared,baseline,trained)],
+      for p,b,n in zip(prepared,baseline,trained)],
  'gene_id':joint_gene['gene_id'],'gene_digest':joint_gene['gene_digest'],'checks':checks,'canonical_mutation':False,'promotion_applied':False,
  'next_required_capability':('JOINT_REAL_CODE_COGNITIVE_DIFFICULTY_ESCALATION_V2' if passed and not measured_gain else
                              'JOINT_REAL_CODE_COGNITIVE_STRESS_V2' if passed else 'JOINT_REAL_CODE_COGNITIVE_TRANSFER_REPAIR_V2'),
