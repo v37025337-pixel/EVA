@@ -1,0 +1,628 @@
+{
+  "candidate_function_count": 22,
+  "parent_known_candidate_tokens": [
+    "WF-1c85307659c40ea7"
+  ],
+  "profile_counts": {
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"BoundedRuleSandbox.execute\",\"out.append\"],\"other_banned\":[\"For\"],\"other_calls\":[],\"pure_names\":[],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"BoundedRuleSandbox.execute\"],\"other_banned\":[],\"other_calls\":[],\"pure_names\":[],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"Constant.join\",\"c.items\",\"c.values\",\"math.sqrt\"],\"other_banned\":[\"For\"],\"other_calls\":[\"NAME:Counter\",\"NAME:_add_ngram\",\"NAME:_hi\",\"NAME:clauses\",\"NAME:words\"],\"pure_names\":[\"enumerate\",\"float\",\"int\",\"range\"],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"Constant.join\"],\"other_banned\":[],\"other_calls\":[\"NAME:_segments\",\"NAME:_tokens\",\"NAME:edge_delimiterless\"],\"pure_names\":[],\"readonly_methods\":[\"strip\"]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"_HEX64.match\",\"_NEXT.search\",\"copy.deepcopy\",\"e.get\",\"latest.get\",\"m.group\",\"seen.add\"],\"other_banned\":[\"For\",\"Raise\"],\"other_calls\":[\"NAME:ValueError\",\"NAME:digest\",\"NAME:event_hash\",\"NAME:isinstance\"],\"pure_names\":[\"bool\",\"enumerate\",\"set\",\"str\"],\"readonly_methods\":[\"get\",\"items\"]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"a.sort\"],\"other_banned\":[\"Lambda\"],\"other_calls\":[\"NAME:_dot\"],\"pure_names\":[\"float\"],\"readonly_methods\":[\"get\"]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"df.items\"],\"other_banned\":[\"For\",\"Lambda\"],\"other_calls\":[\"NAME:Counter\",\"NAME:words\"],\"pure_names\":[\"set\",\"sorted\"],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"hashlib.sha256\"],\"other_banned\":[],\"other_calls\":[\"ATTR:CALL.hexdigest\",\"ATTR:s.encode\"],\"pure_names\":[\"int\"],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"out.append\",\"out.extend\"],\"other_banned\":[],\"other_calls\":[],\"pure_names\":[],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"out.append\",\"r.choice\",\"r.randint\",\"random.Random\"],\"other_banned\":[\"For\"],\"other_calls\":[],\"pure_names\":[\"range\"],\"readonly_methods\":[]}": 2,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"out.append\",\"r.randint\",\"random.Random\"],\"other_banned\":[\"For\"],\"other_calls\":[\"NAME:active\"],\"pure_names\":[],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"out.extend\"],\"other_banned\":[\"For\"],\"other_calls\":[\"NAME:gen\"],\"pure_names\":[\"range\"],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"p.strip\",\"re.split\"],\"other_banned\":[],\"other_calls\":[],\"pure_names\":[\"str\"],\"readonly_methods\":[\"strip\"]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"re.search\"],\"other_banned\":[],\"other_calls\":[\"NAME:_segments\",\"NAME:_tokens\"],\"pure_names\":[\"str\"],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[\"re.sub\"],\"other_banned\":[\"For\",\"While\"],\"other_calls\":[\"NAME:bracketless\"],\"pure_names\":[\"str\"],\"readonly_methods\":[\"strip\"]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[],\"other_banned\":[\"Raise\"],\"other_calls\":[\"NAME:ValueError\",\"NAME:isinstance\"],\"pure_names\":[\"bool\"],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[],\"other_banned\":[\"While\"],\"other_calls\":[],\"pure_names\":[\"bool\"],\"readonly_methods\":[\"get\"]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[],\"other_banned\":[],\"other_calls\":[\"ATTR:p.execute\"],\"pure_names\":[],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[],\"other_banned\":[],\"other_calls\":[\"ATTR:program.execute\"],\"pure_names\":[],\"readonly_methods\":[]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[],\"other_banned\":[],\"other_calls\":[],\"pure_names\":[\"float\",\"str\"],\"readonly_methods\":[\"get\",\"items\"]}": 1,
+    "{\"bare_attrs\":[],\"local_mutators\":[],\"module_attrs\":[],\"other_banned\":[],\"other_calls\":[],\"pure_names\":[\"int\"],\"readonly_methods\":[]}": 1
+  },
+  "ranked_all": [
+    {
+      "arg_count": 1,
+      "function": "split_bucket",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [],
+        "other_banned": [],
+        "other_calls": [],
+        "pure_names": [
+          "int"
+        ],
+        "readonly_methods": []
+      },
+      "line": 180,
+      "mutatable_node_count": 13,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "_dot",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [],
+        "other_banned": [],
+        "other_calls": [],
+        "pure_names": [
+          "float",
+          "str"
+        ],
+        "readonly_methods": [
+          "get",
+          "items"
+        ]
+      },
+      "line": 48,
+      "mutatable_node_count": 1,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "source": "def _dot(w, x):\n    return sum((float(w.get(str(k), w.get(k, 0.0))) * v for k, v in x.items()))\n"
+    },
+    {
+      "arg_count": 3,
+      "function": "router_acc",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [],
+        "other_banned": [],
+        "other_calls": [
+          "ATTR:program.execute"
+        ],
+        "pure_names": [],
+        "readonly_methods": []
+      },
+      "line": 105,
+      "mutatable_node_count": 2,
+      "path": "runtime/yado_bounded_capability_router_v1.py",
+      "source": "def router_acc(program, cases, ablated):\n    return sum((program.execute(e['input'], ablated=ablated) == e['expected'] for e in cases)) / len(cases)\n"
+    },
+    {
+      "arg_count": 3,
+      "function": "program_acc",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [],
+        "other_banned": [],
+        "other_calls": [
+          "ATTR:p.execute"
+        ],
+        "pure_names": [],
+        "readonly_methods": []
+      },
+      "line": 207,
+      "mutatable_node_count": 2,
+      "path": "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+      "source": "def program_acc(p, cases, ablated):\n    if not cases:\n        return 0.0\n    return sum((p.execute(e['input'], ablated=ablated) == e['expected'] for e in cases)) / len(cases)\n"
+    },
+    {
+      "arg_count": 3,
+      "function": "program_acc",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "BoundedRuleSandbox.execute"
+        ],
+        "other_banned": [],
+        "other_calls": [],
+        "pure_names": [],
+        "readonly_methods": []
+      },
+      "line": 128,
+      "mutatable_node_count": 2,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def program_acc(p, cases, ablated):\n    if not cases:\n        return 0.0\n    return sum((BoundedRuleSandbox.execute(p, e['input'], ablated=ablated) == e['expected'] for e in cases)) / len(cases)\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "predict",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [],
+        "other_banned": [
+          "While"
+        ],
+        "other_calls": [],
+        "pure_names": [
+          "bool"
+        ],
+        "readonly_methods": [
+          "get"
+        ]
+      },
+      "line": 7,
+      "mutatable_node_count": 1,
+      "path": "runtime/yado_rc8_v36/yado_openapi_adapter_runtime.py",
+      "source": "def predict(tree, row):\n    cur = tree\n    while 'label' not in cur:\n        cur = cur['true'] if bool(row.get(cur['feature'])) else cur['false']\n    return cur['label']\n"
+    },
+    {
+      "arg_count": 1,
+      "function": "active",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "out.append",
+          "out.extend"
+        ],
+        "other_banned": [],
+        "other_calls": [],
+        "pure_names": [],
+        "readonly_methods": []
+      },
+      "line": 161,
+      "mutatable_node_count": 5,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def active(ctx):\n    out = []\n    if ctx['current_generation_active']:\n        out.extend(GEN)\n    if not ctx['lineage_verified']:\n        out.append(CAN[0])\n    if not ctx['dependency_lock_verified']:\n        out.append(CAN[1])\n    if not ctx['evidence_fetch_hardened']:\n        out.append(CAN[2])\n    if not ctx['historical_state_protected']:\n        out.append(CAN[3])\n    out.extend(CAN[4:])\n    return out\n"
+    },
+    {
+      "arg_count": 1,
+      "function": "_segments",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "p.strip",
+          "re.split"
+        ],
+        "other_banned": [],
+        "other_calls": [],
+        "pure_names": [
+          "str"
+        ],
+        "readonly_methods": [
+          "strip"
+        ]
+      },
+      "line": 8,
+      "mutatable_node_count": 1,
+      "path": "runtime/yado_raw_task_representation_robustness_v4.py",
+      "source": "def _segments(text):\n    parts = [p.strip() for p in re.split('(?<=[.!?;:])\\\\s+', str(text)) if p.strip()]\n    return parts or [str(text).strip()]\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "effective",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "BoundedRuleSandbox.execute",
+          "out.append"
+        ],
+        "other_banned": [
+          "For"
+        ],
+        "other_calls": [],
+        "pure_names": [],
+        "readonly_methods": []
+      },
+      "line": 264,
+      "mutatable_node_count": 2,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def effective(ctx, ablated):\n    out = []\n    for role in ALL:\n        payload = {'role': role, **ctx, 'irrelevant_nonce': 99}\n        if BoundedRuleSandbox.execute(dev_p_obj, payload, ablated=ablated) == 'KEEP':\n            out.append(role)\n    return out\n"
+    },
+    {
+      "arg_count": 4,
+      "function": "eval_rule",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [],
+        "other_banned": [
+          "Raise"
+        ],
+        "other_calls": [
+          "NAME:ValueError",
+          "NAME:isinstance"
+        ],
+        "pure_names": [
+          "bool"
+        ],
+        "readonly_methods": []
+      },
+      "line": 41,
+      "mutatable_node_count": 12,
+      "path": "runtime/yado_core_audit_invariant_self_evolution_v1.py",
+      "source": "def eval_rule(rule, manifest_frontier, head_frontier, open_deficits):\n    if rule == 'NONEMPTY':\n        return isinstance(manifest_frontier, str) and bool(manifest_frontier)\n    if rule == 'HEAD_MANIFEST_CONSISTENT':\n        return bool(manifest_frontier) and manifest_frontier == head_frontier\n    if rule == 'HEAD_MANIFEST_CONSISTENT_WITH_LEDGER':\n        return bool(manifest_frontier) and manifest_frontier == head_frontier and isinstance(open_deficits, list) and (len(open_deficits) >= 1)\n    if rule == 'EXACT_OLD':\n        return manifest_frontier == 'G2_RAW_TASK_REPRESENTATION_AND_GROUNDING_V1'\n    raise ValueError(rule)\n"
+    },
+    {
+      "arg_count": 1,
+      "function": "wrapper_signal",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "re.search"
+        ],
+        "other_banned": [],
+        "other_calls": [
+          "NAME:_segments",
+          "NAME:_tokens"
+        ],
+        "pure_names": [
+          "str"
+        ],
+        "readonly_methods": []
+      },
+      "line": 47,
+      "mutatable_node_count": 10,
+      "path": "runtime/yado_raw_task_representation_robustness_v4.py",
+      "source": "def wrapper_signal(text):\n    t = str(text)\n    if re.search('\\\\[[^\\\\]]{0,160}\\\\]', t):\n        return True\n    seg = _segments(t)\n    return len(seg) >= 2 and (len(_tokens(seg[0])) <= 4 or len(_tokens(seg[-1])) <= 4)\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "ensure_support",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "out.extend"
+        ],
+        "other_banned": [
+          "For"
+        ],
+        "other_calls": [
+          "NAME:gen"
+        ],
+        "pure_names": [
+          "range"
+        ],
+        "readonly_methods": []
+      },
+      "line": 218,
+      "mutatable_node_count": 3,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def ensure_support(gen, start):\n    out = []\n    for i in range(4):\n        out.extend(gen(start + i, 80))\n    return out\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "_hi",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "hashlib.sha256"
+        ],
+        "other_banned": [],
+        "other_calls": [
+          "ATTR:CALL.hexdigest",
+          "ATTR:s.encode"
+        ],
+        "pure_names": [
+          "int"
+        ],
+        "readonly_methods": []
+      },
+      "line": 12,
+      "mutatable_node_count": 3,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "source": "def _hi(s, dim):\n    return int(hashlib.sha256(s.encode('utf-8')).hexdigest()[:16], 16) % int(dim)\n"
+    },
+    {
+      "arg_count": 4,
+      "function": "_pred",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "a.sort"
+        ],
+        "other_banned": [
+          "Lambda"
+        ],
+        "other_calls": [
+          "NAME:_dot"
+        ],
+        "pure_names": [
+          "float"
+        ],
+        "readonly_methods": [
+          "get"
+        ]
+      },
+      "line": 51,
+      "mutatable_node_count": 5,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "source": "def _pred(labels, w, b, x):\n    a = [(_dot(w.get(l, {}), x) + float(b.get(l, 0.0)), l) for l in labels]\n    a.sort(key=lambda z: (-z[0], z[1]))\n    return a[0][1]\n"
+    },
+    {
+      "arg_count": 1,
+      "function": "core_view",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "Constant.join"
+        ],
+        "other_banned": [],
+        "other_calls": [
+          "NAME:_segments",
+          "NAME:_tokens",
+          "NAME:edge_delimiterless"
+        ],
+        "pure_names": [],
+        "readonly_methods": [
+          "strip"
+        ]
+      },
+      "line": 32,
+      "mutatable_node_count": 15,
+      "path": "runtime/yado_raw_task_representation_robustness_v4.py",
+      "source": "def core_view(text):\n    t = edge_delimiterless(text)\n    seg = _segments(t)\n    if len(seg) >= 2 and len(_tokens(seg[0])) <= 4:\n        seg = seg[1:]\n    if len(seg) >= 2 and len(_tokens(seg[-1])) <= 4:\n        seg = seg[:-1]\n    out = ' '.join(seg).strip()\n    return out or t\n"
+    },
+    {
+      "arg_count": 1,
+      "function": "edge_delimiterless",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "re.sub"
+        ],
+        "other_banned": [
+          "For",
+          "While"
+        ],
+        "other_calls": [
+          "NAME:bracketless"
+        ],
+        "pure_names": [
+          "str"
+        ],
+        "readonly_methods": [
+          "strip"
+        ]
+      },
+      "line": 15,
+      "mutatable_node_count": 1,
+      "path": "runtime/yado_raw_task_representation_robustness_v4.py",
+      "source": "def edge_delimiterless(text):\n    t = str(text).strip()\n    patterns = [('^\\\\([^\\\\)]{0,80}\\\\)\\\\s*', ''), ('^\\\\{[^\\\\}]{0,80}\\\\}\\\\s*', ''), ('^<[^>]{0,80}>\\\\s*', ''), ('\\\\s*<[^>]{0,80}>$', ''), ('\\\\s*\\\\{[^\\\\}]{0,80}\\\\}$', ''), ('\\\\s*\\\\([^\\\\)]{0,80}\\\\)$', '')]\n    prev = None\n    while prev != t:\n        prev = t\n        for pat, repl in patterns:\n            t = re.sub(pat, repl, t).strip()\n    return bracketless(t)\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "dev_cases",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "out.append",
+          "r.randint",
+          "random.Random"
+        ],
+        "other_banned": [
+          "For"
+        ],
+        "other_calls": [
+          "NAME:active"
+        ],
+        "pure_names": [],
+        "readonly_methods": []
+      },
+      "line": 171,
+      "mutatable_node_count": 3,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def dev_cases(ctxs, noise_seed):\n    r = random.Random(noise_seed)\n    out = []\n    for c in ctxs:\n        for role in ALL:\n            x = {'role': role, **c, 'irrelevant_nonce': r.randint(0, 3)}\n            out.append({'input': x, 'expected': 'KEEP' if role in active(c) else 'DROP'})\n    return out\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "transfer_a_cases",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "out.append",
+          "r.choice",
+          "r.randint",
+          "random.Random"
+        ],
+        "other_banned": [
+          "For"
+        ],
+        "other_calls": [],
+        "pure_names": [
+          "range"
+        ],
+        "readonly_methods": []
+      },
+      "line": 192,
+      "mutatable_node_count": 4,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def transfer_a_cases(seed, n):\n    r = random.Random(seed)\n    out = []\n    for _ in range(n):\n        x = {'source_kind': r.choice(['REAL', 'SIMULATED', 'DERIVED']), 'verified': r.choice([True, False]), 'priority': r.choice(['LOW', 'HIGH']), 'noise': r.randint(0, 5)}\n        y = 'WITHHOLD' if x['source_kind'] == 'SIMULATED' and (not x['verified']) else 'ACCEPT'\n        out.append({'input': x, 'expected': y})\n    return out\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "transfer_b_cases",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "out.append",
+          "r.choice",
+          "r.randint",
+          "random.Random"
+        ],
+        "other_banned": [
+          "For"
+        ],
+        "other_calls": [],
+        "pure_names": [
+          "range"
+        ],
+        "readonly_methods": []
+      },
+      "line": 205,
+      "mutatable_node_count": 4,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def transfer_b_cases(seed, n):\n    r = random.Random(seed)\n    out = []\n    for _ in range(n):\n        x = {'component': r.choice(['CORE', 'PLUGIN', 'EXPERIMENT']), 'tests_passed': r.choice([True, False]), 'rollback_ready': r.choice([True, False]), 'noise': r.randint(0, 5)}\n        y = 'PROMOTE' if x['component'] == 'EXPERIMENT' and x['tests_passed'] and x['rollback_ready'] else 'HOLD'\n        out.append({'input': x, 'expected': y})\n    return out\n"
+    },
+    {
+      "arg_count": 3,
+      "function": "discover_pivot_candidates",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "df.items"
+        ],
+        "other_banned": [
+          "For",
+          "Lambda"
+        ],
+        "other_calls": [
+          "NAME:Counter",
+          "NAME:words"
+        ],
+        "pure_names": [
+          "set",
+          "sorted"
+        ],
+        "readonly_methods": []
+      },
+      "line": 79,
+      "mutatable_node_count": 7,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "source": "def discover_pivot_candidates(rows, max_candidates, min_df):\n    df = Counter()\n    for text, _ in rows:\n        for w in set(words(text)):\n            df[w] += 1\n    ranked = sorted([(n, w) for w, n in df.items() if n >= min_df and len(w) >= 2], key=lambda z: (-z[0], z[1]))\n    return [w for _, w in ranked[:max_candidates]]\n"
+    },
+    {
+      "arg_count": 4,
+      "function": "features",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "Constant.join",
+          "c.items",
+          "c.values",
+          "math.sqrt"
+        ],
+        "other_banned": [
+          "For"
+        ],
+        "other_calls": [
+          "NAME:Counter",
+          "NAME:_add_ngram",
+          "NAME:_hi",
+          "NAME:clauses",
+          "NAME:words"
+        ],
+        "pure_names": [
+          "enumerate",
+          "float",
+          "int",
+          "range"
+        ],
+        "readonly_methods": []
+      },
+      "line": 24,
+      "mutatable_node_count": 29,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "source": "def features(text, mode, dim, pivot):\n    c = Counter()\n    _add_ngram(c, 'F|', text, dim, 1.0)\n    ws = words(text)\n    if mode in ('POSITIONAL', 'CLAUSE', 'PIVOT_CLAUSE'):\n        q = max(1, (len(ws) + 3) // 4)\n        for i in range(4):\n            seg = ' '.join(ws[i * q:(i + 1) * q])\n            if seg:\n                _add_ngram(c, f'P{i}|', seg, dim, 0.65)\n    if mode in ('CLAUSE', 'PIVOT_CLAUSE'):\n        cs = clauses(text)\n        for i, seg in enumerate(cs):\n            tag = 'LAST' if i == len(cs) - 1 else 'FIRST' if i == 0 else 'MID'\n            _add_ngram(c, tag + '|', seg, dim, 0.8 if tag == 'LAST' else 0.55)\n    if mode == 'PIVOT_CLAUSE' and pivot:\n        idx = [i for i, w in enumerate(ws) if w == pivot]\n        if idx:\n            j = idx[-1]\n            pre = ' '.join(ws[:j])\n            post = ' '.join(ws[j + 1:])\n            if pre:\n                _add_ngram(c, 'PRE|', pre, dim, 0.45)\n            if post:\n                _add_ngram(c, 'POST|', post, dim, 1.05)\n            c[_hi('PIVOT_PRESENT:' + pivot, dim)] += 1.0\n    z = math.sqrt(sum((v * v for v in c.values()))) or 1.0\n    return {int(k): float(v) / z for k, v in c.items()}\n"
+    },
+    {
+      "arg_count": 1,
+      "function": "validate_ledger_v2",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [
+          "_HEX64.match",
+          "_NEXT.search",
+          "copy.deepcopy",
+          "e.get",
+          "latest.get",
+          "m.group",
+          "seen.add"
+        ],
+        "other_banned": [
+          "For",
+          "Raise"
+        ],
+        "other_calls": [
+          "NAME:ValueError",
+          "NAME:digest",
+          "NAME:event_hash",
+          "NAME:isinstance"
+        ],
+        "pure_names": [
+          "bool",
+          "enumerate",
+          "set",
+          "str"
+        ],
+        "readonly_methods": [
+          "get",
+          "items"
+        ]
+      },
+      "line": 18,
+      "mutatable_node_count": 28,
+      "path": "runtime/yado_evolution_ledger_v2.py",
+      "source": "def validate_ledger_v2(ledger):\n    prev = 'GENESIS'\n    seen = set()\n    events = ledger.get('events', [])\n    for i, e in enumerate(events):\n        if e.get('index') != i:\n            raise ValueError(f'BAD_INDEX:{i}')\n        if e.get('parent_event_hash') != prev:\n            raise ValueError(f'BAD_PARENT_HASH:{i}')\n        if e.get('event_hash') != event_hash(e):\n            raise ValueError(f'BAD_EVENT_HASH:{i}')\n        if e.get('event_id') in seen:\n            raise ValueError(f\"DUPLICATE_EVENT_ID:{e.get('event_id')}\")\n        seen.add(e.get('event_id'))\n        prev = e.get('event_hash')\n    if ledger.get('tail_event_hash') != prev:\n        raise ValueError('BAD_TAIL')\n    if ledger.get('event_count') != len(events):\n        raise ValueError('BAD_EVENT_COUNT')\n    stored_ledger_digest = ledger.get('ledger_digest')\n    if stored_ledger_digest:\n        computed = digest({k: v for k, v in ledger.items() if k != 'ledger_digest'})\n        if stored_ledger_digest != computed:\n            raise ValueError('BAD_LEDGER_DIGEST')\n    current = ledger.get('current_head')\n    if not current:\n        raise ValueError('MISSING_CURRENT_HEAD')\n    transitions = [e for e in events if e.get('promotion_applied') is True]\n    if not transitions:\n        raise ValueError('NO_PROMOTED_HEAD_HISTORY')\n    latest = transitions[-1]\n    latest_target = latest.get('to_generation') or latest.get('generation')\n    if latest_target != current:\n        raise ValueError(f'CURRENT_HEAD_NOT_LATEST_PROMOTION:{latest_target}!={current}')\n    if ledger.get('current_head_event_id') and ledger['current_head_event_id'] != latest.get('event_id'):\n        raise ValueError('CURRENT_HEAD_EVENT_MISMATCH')\n    head_digest = str(ledger.get('current_head_digest') or '')\n    if not _HEX64.match(head_digest):\n        raise ValueError('BAD_CURRENT_HEAD_DIGEST')\n    mutations = [e for e in events if e.get('canonical_mutation') is True and e.get('new_head_digest')]\n    if mutations and mutations[-1].get('new_head_digest') != head_digest:\n        raise ValueError('CURRENT_HEAD_DIGEST_NOT_LATEST_CANONICAL_MUTATION')\n    deficits = ledger.get('open_deficits')\n    if not isinstance(deficits, list) or not defici"
+    }
+  ],
+  "receipt_sha256": "1cfa0c7d922d7d214164901fbbc33ecbe34f8d66a34bc53f6ccd60865b79d18a",
+  "safe_local_mutator_combo_count": 0,
+  "safe_local_mutator_combo_functions": [],
+  "safe_pure_readonly_combo_count": 2,
+  "safe_pure_readonly_combo_functions": [
+    {
+      "arg_count": 1,
+      "function": "split_bucket",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [],
+        "other_banned": [],
+        "other_calls": [],
+        "pure_names": [
+          "int"
+        ],
+        "readonly_methods": []
+      },
+      "line": 180,
+      "mutatable_node_count": 13,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n"
+    },
+    {
+      "arg_count": 2,
+      "function": "_dot",
+      "gaps": {
+        "bare_attrs": [],
+        "local_mutators": [],
+        "module_attrs": [],
+        "other_banned": [],
+        "other_calls": [],
+        "pure_names": [
+          "float",
+          "str"
+        ],
+        "readonly_methods": [
+          "get",
+          "items"
+        ]
+      },
+      "line": 48,
+      "mutatable_node_count": 1,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "source": "def _dot(w, x):\n    return sum((float(w.get(str(k), w.get(k, 0.0))) * v for k, v in x.items()))\n"
+    }
+  ],
+  "schema": "yado.g2.coding_whole_function_incremental_gap_diagnostic.v3",
+  "semantic_boundary": "STATIC INCREMENTAL GAP DIAGNOSTIC. V2 TOTAL-COVERAGE METRIC IS NOT USED. NO LANGUAGE CAPABILITY, EXECUTION PERMISSION, REPAIR, OR CANONICAL STATE IS CHANGED.",
+  "status": "PASS_INCREMENTAL_GAP_DIAGNOSTIC"
+}
