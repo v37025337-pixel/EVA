@@ -207,17 +207,35 @@ def discover(profile):
     return rows
 
 profiles=[]
-caps=sorted(CAP_VALUES)
-for width in range(1,5):
-    for combo in combinations(caps,width):
-        rows=discover(combo)
-        ids={(x['path'],x['function_name']) for x in rows}
-        inc=sorted(ids-parent_identities)
-        total=sorted(ids|parent_identities)
-        files={x[0] for x in total}
-        profiles.append({'token':'PROFILE_'+'_'.join(combo),'caps':list(combo),'candidate_count':len(ids),
-          'incremental_count':len(inc),'incremental_identities':inc,'total_identity_count':len(total),
-          'total_source_file_count':len(files),'candidates':rows})
+# Derive the executable search frontier directly from the prior static gap diagnostic.
+# This preserves the same capability universe and <=4-extension budget while avoiding
+# re-running thousands of combinations that cannot close any observed safe function gap.
+required_combos=set()
+for row in diag.get('safe_pure_readonly_combo_functions') or []:
+    caps=[]
+    for name in row.get('gaps',{}).get('pure_names') or []:
+        if name=='int':
+            continue
+        key='CALL_'+str(name)
+        if key in CAP_VALUES:
+            caps.append(key)
+    for name in row.get('gaps',{}).get('readonly_methods') or []:
+        key='ATTR_'+str(name)
+        if key in CAP_VALUES:
+            caps.append(key)
+    caps=tuple(sorted(set(caps)))
+    if caps and len(caps)<=4:
+        required_combos.add(caps)
+
+for combo in sorted(required_combos):
+    rows=discover(combo)
+    ids={(x['path'],x['function_name']) for x in rows}
+    inc=sorted(ids-parent_identities)
+    total=sorted(ids|parent_identities)
+    files={x[0] for x in total}
+    profiles.append({'token':'PROFILE_'+'_'.join(combo),'caps':list(combo),'candidate_count':len(ids),
+      'incremental_count':len(inc),'incremental_identities':inc,'total_identity_count':len(total),
+      'total_source_file_count':len(files),'candidates':rows})
 eligible=[x for x in profiles if x['incremental_count']>=1 and x['total_identity_count']>=2 and x['total_source_file_count']>=2]
 if not eligible:
     raise RuntimeError('NO_SAFE_COMBINATION_REACHES_TWO_FUNCTION_TWO_FILE_GATE')
