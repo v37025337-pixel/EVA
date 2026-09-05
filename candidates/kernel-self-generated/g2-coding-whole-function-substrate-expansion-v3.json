@@ -1,0 +1,291 @@
+{
+  "added_readonly_attributes": [
+    "get",
+    "items"
+  ],
+  "added_safe_calls": [
+    "float",
+    "str"
+  ],
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "external_model_used": false,
+    "incremental_coverage_used": true,
+    "native_neutral_selector_selected_profile": true,
+    "native_skill_gate_selected_child": true,
+    "no_filesystem_permission_added": true,
+    "no_loop_permission_added": true,
+    "no_module_attribute_added": true,
+    "no_mutating_attribute_added": true,
+    "no_network_permission_added": true,
+    "only_pure_builtin_and_readonly_extensions": true,
+    "two_file_gate_preserved": true,
+    "two_function_gate_preserved": true,
+    "v2_total_coverage_metric_failure_consumed": true
+  },
+  "gene_id": "GENE-G2-CODE-WHOLE-FUNCTION-SUBSTRATE-V4-b3c4ca5623695767",
+  "incremental_candidate_count": 1,
+  "incremental_identities": [
+    [
+      "runtime/yado_raw_task_representation_candidate_v3.py",
+      "_dot"
+    ]
+  ],
+  "native_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "efbe5d1f656dfeed678793d400e8a073b4369534dcad14ad6afc5b090a6718ac",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "5cd3e0bf604397646c358e43ec6951f914346d162c172e086ed9148f707f0502",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_INT_ONLY_SUBSTRATE",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "2dfb1db66d94748cc629141a70e2cba93330724eaf639f20c1cdec8501ade036",
+        "failed_critics": [],
+        "fit_gain": 0.5,
+        "heldout_gain": 0.5,
+        "skill_id": "ADMIT_SHADOW_COMBO_PROFILE_ATTR_get_ATTR_items_CALL_float_CALL_str",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_SHADOW_COMBO_PROFILE_ATTR_get_ATTR_items_CALL_float_CALL_str"
+    ],
+    "status": "SELECTED"
+  },
+  "next_required_capability": "G2_CODING_WHOLE_FUNCTION_REAL_REPAIR_V2_MULTI_TASK",
+  "promotion_applied": false,
+  "receipt_sha256": "811396aec5ecc8eecf137f0d482f198ce3fb7fde48b82da4663bdc5188b461eb",
+  "schema": "yado.g2.coding_whole_function_substrate_expansion.v3",
+  "selected_caps": [
+    "ATTR_get",
+    "ATTR_items",
+    "CALL_float",
+    "CALL_str"
+  ],
+  "selected_profile": "PROFILE_ATTR_get_ATTR_items_CALL_float_CALL_str",
+  "selector": {
+    "candidate_count": 1,
+    "ranking": [
+      {
+        "score": 5.390000000000001,
+        "token": "PROFILE_ATTR_get_ATTR_items_CALL_float_CALL_str"
+      }
+    ],
+    "selected_score": 5.390000000000001,
+    "selected_token": "PROFILE_ATTR_get_ATTR_items_CALL_float_CALL_str"
+  },
+  "status": "PASS_SHADOW_G2_CODING_WHOLE_FUNCTION_SUBSTRATE_EXPANSION_V3",
+  "substrate_gene": {
+    "added_readonly_attributes": [
+      "get",
+      "items"
+    ],
+    "added_safe_calls": [
+      "float",
+      "str"
+    ],
+    "canonical_parent_unchanged": true,
+    "gene_digest": "3efb20243d6f6dc6065b1285684d60cfbc944f5bcd0c588222c7b86518559518",
+    "gene_id": "GENE-G2-CODE-WHOLE-FUNCTION-SUBSTRATE-V4-b3c4ca5623695767",
+    "heritage": [
+      "GENE-G2-CODE-WHOLE-FUNCTION-SUBSTRATE-V2-e84e549a6f6a0d9e",
+      "57c29eddca9b77d4843c6d8e3f2957e7b268699b871633d45088eda70f8eb7b6",
+      "GENE-G2-CODING-WHOLE-FUNCTION-REAL-REPAIR-V1-29b8317a56aec09f",
+      "c1dd4fdab474e184f154e3b9b4ab880db8c0c8e86c1411e7583ef95107b9ce0e",
+      "92f7ea436e54aaa9fa4e291f3f568495cf4fa7e222892aff66ddad4ded17fda8",
+      "1cfa0c7d922d7d214164901fbbc33ecbe34f8d66a34bc53f6ccd60865b79d18a"
+    ],
+    "incremental_candidate_count": 1,
+    "mutation_kind": "MINIMAL_SAFE_PURE_READONLY_COMBINATION_EXTENSION",
+    "organ": "CODE",
+    "parent_safe_calls": [
+      "int"
+    ],
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.code_whole_function_substrate_gene.v4",
+    "selected_profile": "PROFILE_ATTR_get_ATTR_items_CALL_float_CALL_str",
+    "total_function_count": 2,
+    "total_source_file_count": 2
+  },
+  "total_function_count": 2,
+  "total_source_file_count": 2,
+  "unlocked_candidates": [
+    {
+      "arg_names": [
+        "w",
+        "x"
+      ],
+      "distinct_output_count": 11,
+      "function_name": "_dot",
+      "line": 48,
+      "mutatable_node_count": 1,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "probe_count": 320,
+      "probe_success_count": 320,
+      "sample_probes": [
+        {
+          "args": [
+            {},
+            {}
+          ],
+          "output": 0
+        },
+        {
+          "args": [
+            {},
+            {
+              "0": 0
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "0": 1
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "0": 2
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "0": -1
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "0": 0.5
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "1": 0
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "1": 1
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "1": 2
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "1": -1
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "1": 0.5
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "a": 0
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "a": 1
+            }
+          ],
+          "output": 0.0
+        },
+        {
+          "args": [
+            {},
+            {
+              "a": 2
+            }
+          ],
+          "output": 0.0
+        }
+      ],
+      "source": "def _dot(w, x):\n    return sum((float(w.get(str(k), w.get(k, 0.0))) * v for k, v in x.items()))\n",
+      "source_sha256": "dc0cde534c4d61e7b32e24ac9b5ce88d0ad724792e96e3bb2b6e84dd561c78db",
+      "token": "WF3-c97828c00ecceceb"
+    }
+  ]
+}
