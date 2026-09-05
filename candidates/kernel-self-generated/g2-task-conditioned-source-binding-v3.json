@@ -1,0 +1,134 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "balanced_causal_blind": true,
+    "blind_exact": true,
+    "canonical_unchanged": true,
+    "causal_ablation_drop_ge_0_20": true,
+    "external_coding_model_used": false,
+    "host_mechanical_goal_to_gene_dispatch": true,
+    "host_patch_used": false,
+    "host_source_template_used": false,
+    "native_policy_committed": true,
+    "negative_unknown_fail_closed": true,
+    "readiness_v2_consumed": true,
+    "restore_exact": true,
+    "seed_from_yado_source": true,
+    "threshold_not_lowered": true,
+    "two_compile_pass": true,
+    "two_distinct_sources": true,
+    "two_fresh_exact": true,
+    "v1_raw_conjunction_failure_consumed": true,
+    "v2_causal_class_imbalance_failure_consumed": true
+  },
+  "gene": {
+    "gene_digest": "f802050f78d99db8010719ae8b069540e2046d063ff5f7b07886673790c14cb9",
+    "gene_id": "GENE-G2-TASK-CONDITIONED-SOURCE-BINDING-V3-d14e11262d5a500c",
+    "heritage": [
+      "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "610d5c21e9e6c40c3ff0101b071b6968af72f545887a33956b36ca4a7acc86be"
+    ],
+    "mechanism_kind": "BALANCED_CAUSAL_TYPED_LOCAL_GOAL_BINDING_TO_NATIVE_CODE_GENE",
+    "organ": "GENERATIVE_EXECUTIVE",
+    "policy_program_id": "P-2dade66c9a82",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.task_conditioned_source_binding_gene.v3"
+  },
+  "gene_id": "GENE-G2-TASK-CONDITIONED-SOURCE-BINDING-V3-d14e11262d5a500c",
+  "goal_results": [
+    {
+      "action": "EMIT_SOURCE",
+      "artifact_path": "candidates/g2-self-evolution/task_conditioned_source_binding_v3_goal_a_a21ac8739531.py",
+      "compile_pass": true,
+      "degree": 3,
+      "fresh_score": 1.0,
+      "goal_id": "A",
+      "operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "source_sha256": "a21ac873953116e604b519950189333ea40a81c073d5aec7941a85eca39488b5",
+      "typed_state": "ELIGIBLE"
+    },
+    {
+      "action": "EMIT_SOURCE",
+      "artifact_path": "candidates/g2-self-evolution/task_conditioned_source_binding_v3_goal_b_9b487b2d5dd5.py",
+      "compile_pass": true,
+      "degree": 1,
+      "fresh_score": 1.0,
+      "goal_id": "B",
+      "operator_gene": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+      "source_sha256": "9b487b2d5dd56343ac84b26e869ca2fa39b7819f52b570ada2bf15539b103c37",
+      "typed_state": "ELIGIBLE"
+    }
+  ],
+  "native_policy": {
+    "development": {
+      "ablation_score": 0.5,
+      "blind_cases": 40,
+      "candidate_score": 1.0,
+      "created_at": "2026-09-05T06:28:10.131366+00:00",
+      "experiment_id": "DEV22-3ec6701face3",
+      "mechanism_kind": "RULE_PROGRAM",
+      "min_ablation_drop": 0.2,
+      "min_score": 1.0,
+      "program_digest": "ae4011c5b1f68b6ad5cc2009db0bcd92faddc46ce8211de982c1c2e4826b7243",
+      "program_id": "P-2dade66c9a82",
+      "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+      "restore_score": 1.0,
+      "stage_ablation_scores": {},
+      "state_committed": true,
+      "target_capability": "TASK_CONDITIONED_SOURCE_BINDING_POLICY_V3",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "train_cases": 60,
+      "verdict": "COMMIT"
+    },
+    "program_id": "P-2dade66c9a82",
+    "selection": {
+      "candidates": [
+        {
+          "complexity": 25,
+          "kind": "RULE_PROGRAM",
+          "program_id": "P-2dade66c9a82",
+          "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+          "selected": true,
+          "training_score": 1.0
+        }
+      ],
+      "created_at": "2026-09-05T06:28:10.127285+00:00",
+      "deficit_id": "D-831a6a7238f9",
+      "selected_kind": "RULE_PROGRAM",
+      "selected_program_id": "P-2dade66c9a82",
+      "selection_id": "SEL-a94d59968b52",
+      "source_digest": "b2c8abcf9c870fdd7871827a3634dca29afd87e1fb81f466cc49689741cbe634",
+      "target_capability": "TASK_CONDITIONED_SOURCE_BINDING_POLICY_V3",
+      "target_organ": "GENERATIVE_EXECUTIVE"
+    }
+  },
+  "negative_routes": [
+    {
+      "action": "WITHHOLD",
+      "state": "NO_EXAMPLES"
+    },
+    {
+      "action": "WITHHOLD",
+      "state": "MULTIVARIATE"
+    },
+    {
+      "action": "WITHHOLD",
+      "state": "NO_SOURCE_REQUEST"
+    },
+    {
+      "action": "WITHHOLD",
+      "state": "CANONICAL_MUTATION_REQUESTED"
+    },
+    {
+      "action": "WITHHOLD",
+      "state": "UNKNOWN"
+    }
+  ],
+  "next_required_capability": "NATIVE_TASK_CONDITIONED_SOURCE_DISPATCH_CONTROLLER_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "50c3ab9a87f117ed516e514c3473937d3ece9796d687050e3a1008dcfccdad21",
+  "schema": "yado.g2.task_conditioned_source_binding.v3",
+  "semantic_boundary": "V3 RETAINS THE 1.0 BLIND AND 0.20 ABLATION THRESHOLDS, BUT BALANCES THE CAUSAL EVALUATION SO ABLATING THE EMIT POLICY CAN PRODUCE A MEASURABLE DROP. SAFETY NEGATIVES ARE TESTED SEPARATELY. PASS IS A SHADOW BINDING MILESTONE; HOST STILL PERFORMS THE FINAL MECHANICAL DISPATCH FROM AN ADMITTED YADO POLICY TO THE EXISTING NATIVE CODE GENE.",
+  "status": "PASS_SHADOW_G2_TASK_CONDITIONED_SOURCE_BINDING_V3"
+}
