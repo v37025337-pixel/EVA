@@ -1,0 +1,104 @@
+{
+  "canonical_mutation": false,
+  "checkpoint_projection": {
+    "attempted_stages_before_restart": [
+      "FAILED_A"
+    ],
+    "checkpoint_digest": "bc6b62797a710a2eee0890adb5267ea0c72af136501fd98a106a54079de961a9",
+    "episode_count_before_restart": 8,
+    "post_restart_tick": 5,
+    "recurrent_sequence_before_restart": 8,
+    "restored_attempted_stages": [
+      "FAILED_A"
+    ],
+    "restored_recurrent_sequence": 8,
+    "restored_tick": 4,
+    "stage_outcome_count_before_restart": 1,
+    "tick_before_restart": 4
+  },
+  "checks": {
+    "auto_checkpoint_advances_after_restart": true,
+    "auto_checkpoint_file_created": true,
+    "automatic_canonical_promotion_false": true,
+    "budget_after_restart_does_not_retry_failed_stage": true,
+    "budget_decision_before_restart_avoids_failed_stage": true,
+    "canonical_mutation_false": true,
+    "canonical_unchanged": true,
+    "checkpoint_contains_temporal_and_recurrent_state": true,
+    "checkpoint_has_atomic_digest": true,
+    "cross_layer_forgery_rejected": true,
+    "decision_after_restart_matches_before": true,
+    "failed_stage_attempt_persisted_before_restart": true,
+    "failed_stage_outcome_recorded": true,
+    "first_post_restart_predecessor_preserved": true,
+    "first_post_restart_tick_continues_monotonically": true,
+    "initial_failed_stage_was_selected": true,
+    "memory_feedback_after_restart": true,
+    "restart_binds_original_checkpoint_digest": true,
+    "restart_restores_episode_count": true,
+    "restart_restores_exact_recurrent_sequence": true,
+    "restart_restores_exact_tick": true,
+    "restart_restores_failed_stage_attempt": true,
+    "restart_restores_stage_outcome_count": true,
+    "stage_outcome_persisted_before_restart": true,
+    "tampered_recurrent_memory_rejected": true,
+    "thinking_before_restart_avoids_failed_stage": true,
+    "thinking_before_restart_uses_memory": true
+  },
+  "component": {
+    "architecture_family": "TYPED_RECURRENT_CAPABILITY_GRAPH",
+    "architecture_mutation": false,
+    "automatic_canonical_promotion": false,
+    "canonical_active": false,
+    "component_digest": "fadbda01b7ed7519fb72ca154b1e31ec44b878ba3457ca8f3e4ea17ada21e599",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",
+    "continuity": {
+      "atomic_local_file_persistence": true,
+      "cross_layer_digest_validation": true,
+      "fail_closed_on_checkpoint_tamper": true,
+      "optional_auto_checkpoint_after_top_level_state_change": true,
+      "restart_restores_attempted_stages": true,
+      "restart_restores_stage_outcomes": true,
+      "restart_restores_temporal_predecessor": true,
+      "unified_temporal_and_recurrent_checkpoint": true
+    },
+    "dispatches": [
+      "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+      "ALG-BUDGETED-STAGE-POLICY-V1",
+      "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+      "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+      "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+      "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
+      "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
+      "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+      "RESOURCE-PORTFOLIO-V1"
+    ],
+    "network_execution": {
+      "credentials_allowed": false,
+      "enabled": true,
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "read_only_only": true,
+      "redirects_followed": false
+    },
+    "parent_component": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+    "schema": "yado.g2.unified_execution_fabric.v4",
+    "semantic_boundary": "SHADOW SUCCESSOR OF FABRIC V3. IT PERSISTS LOGICAL TIME AND RECURRENT EXECUTION MEMORY AS ONE ATOMIC CHECKPOINT SO RESTART DOES NOT ERASE STAGE OUTCOMES OR ATTEMPT HISTORY. LOCAL CHECKPOINT DURABILITY IS NOT DISTRIBUTED CONSENSUS."
+  },
+  "decision_projection": {
+    "budget_after_restart": "NEXT_B",
+    "budget_before_restart": "NEXT_B",
+    "failed_stage": "FAILED_A",
+    "initial": "FAILED_A",
+    "thinking_after_restart": "NEXT_B",
+    "thinking_before_restart": "NEXT_B"
+  },
+  "next_required_capability": "COGNITIVE_CONTINUITY_CANONICAL_ADMISSION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "b87ee9e06fda91921f0400f88c6a0aff387cd6084cfb04fe5dbe3369268a2f3e",
+  "schema": "yado.g2.cognitive_continuity_checkpoint.v1",
+  "semantic_boundary": "SHADOW RESTART TEST OF ONE ATOMIC TEMPORAL+RECURRENT CHECKPOINT. THE ORIGINAL RUNTIME OBJECT IS DESTROYED AND A FRESH RUNTIME RESTORES THE CHECKPOINT. PASS REQUIRES STAGE OUTCOME, ATTEMPT HISTORY, TEMPORAL PREDECESSOR AND NEXT DECISION TO SURVIVE RESTART, PLUS FAIL-CLOSED DIGEST AND CROSS-LAYER TAMPER CHECKS.",
+  "status": "PASS_SHADOW_G2_COGNITIVE_CONTINUITY_CHECKPOINT_V1"
+}
