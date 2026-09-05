@@ -1,0 +1,370 @@
+{
+  "candidate_primitives": [
+    {
+      "blind": 0.0,
+      "fit": 0.0,
+      "primitive": "dump",
+      "signature": "(node, annotate_fields=True, include_attributes=False, *, indent=None)",
+      "skill_id": "PYTHON_AST_PRIMITIVE_DUMP",
+      "study_evidence": {
+        "all_file_support": 1,
+        "name": "dump",
+        "python_doc_page_count": 1,
+        "python_doc_pages": [
+          "AST"
+        ],
+        "source_history_ratio": 0.0,
+        "source_history_support": 0
+      },
+      "validation": 0.0
+    },
+    {
+      "blind": 0.0,
+      "fit": 0.0,
+      "primitive": "fix_missing_locations",
+      "signature": "(node)",
+      "skill_id": "PYTHON_AST_PRIMITIVE_FIX_MISSING_LOCATIONS",
+      "study_evidence": {
+        "all_file_support": 6,
+        "name": "fix_missing_locations",
+        "python_doc_page_count": 1,
+        "python_doc_pages": [
+          "AST"
+        ],
+        "source_history_ratio": 0.0,
+        "source_history_support": 0
+      },
+      "validation": 0.0
+    },
+    {
+      "blind": 0.0,
+      "fit": 0.0,
+      "primitive": "parse",
+      "signature": "(source, filename='<unknown>', mode='exec', *, type_comments=False, feature_version=None)",
+      "skill_id": "PYTHON_AST_PRIMITIVE_PARSE",
+      "study_evidence": {
+        "all_file_support": 41,
+        "name": "parse",
+        "python_doc_page_count": 3,
+        "python_doc_pages": [
+          "AST",
+          "BUILTINS",
+          "TOKENIZE"
+        ],
+        "source_history_ratio": 0.2767857142857143,
+        "source_history_support": 31
+      },
+      "validation": 0.0
+    },
+    {
+      "blind": 1.0,
+      "fit": 1.0,
+      "primitive": "unparse",
+      "signature": "(ast_obj)",
+      "skill_id": "PYTHON_AST_PRIMITIVE_UNPARSE",
+      "study_evidence": {
+        "all_file_support": 6,
+        "name": "unparse",
+        "python_doc_page_count": 1,
+        "python_doc_pages": [
+          "AST"
+        ],
+        "source_history_ratio": 0.0,
+        "source_history_support": 0
+      },
+      "validation": 1.0
+    },
+    {
+      "blind": 0.0,
+      "fit": 0.0,
+      "primitive": "walk",
+      "signature": "(node)",
+      "skill_id": "PYTHON_AST_PRIMITIVE_WALK",
+      "study_evidence": {
+        "all_file_support": 37,
+        "name": "walk",
+        "python_doc_page_count": 2,
+        "python_doc_pages": [
+          "AST",
+          "PATHLIB"
+        ],
+        "source_history_ratio": 0.23214285714285715,
+        "source_history_support": 26
+      },
+      "validation": 0.0
+    }
+  ],
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "candidate_inventory_mechanical_from_ast_runtime_and_study": true,
+    "canonical_unchanged": true,
+    "canonical_v5_continuity_active": true,
+    "content_addressed_fit_validation_blind": true,
+    "external_models_used": false,
+    "host_patch_used": false,
+    "host_selected_primitive": false,
+    "host_serializer_used": false,
+    "host_source_template_used": false,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_selector_selected_one_primitive": true,
+    "native_skill_selector_executed": true,
+    "prior_1012_example_serializer_failure_consumed": true,
+    "prior_python_self_study_consumed": true,
+    "selected_primitive_compile_rate_ge_0_95": true,
+    "selected_primitive_fresh_exact_ge_0_95": true,
+    "selected_primitive_was_previously_discovered_in_python_docs": true,
+    "v4_target_semantic_deficit_consumed": true,
+    "yado_own_ast_source_examples_ge_1000": true
+  },
+  "emitted_fresh_source_samples": [
+    {
+      "chars": 8,
+      "compiles_eval": true,
+      "node_type": "UnaryOp",
+      "source_sha256": "6d3922a3494972229356f0f43673b9ca61b742e8303fc7b28a087ead54b32b1f"
+    },
+    {
+      "chars": 49,
+      "compiles_eval": true,
+      "node_type": "Subscript",
+      "source_sha256": "3e7a67c7726ec8e0df31c1178202ec927d36b3a10ee5f509e2bc5b1f17b682de"
+    },
+    {
+      "chars": 31,
+      "compiles_eval": true,
+      "node_type": "Compare",
+      "source_sha256": "269c4b0cd83d4b67297f2d652f96bec72c93519591b5eb2f6a912f9b1a8cb905"
+    },
+    {
+      "chars": 14,
+      "compiles_eval": true,
+      "node_type": "Subscript",
+      "source_sha256": "a21b56cadbc6797f66136deb451a906a1874711e7e9a264d49221e958a65e670"
+    },
+    {
+      "chars": 46,
+      "compiles_eval": true,
+      "node_type": "Call",
+      "source_sha256": "ce530b06e5e04fba23432c8cdd19e76892336ce9c75e5fa1b43dcc67394e6559"
+    },
+    {
+      "chars": 54,
+      "compiles_eval": true,
+      "node_type": "Compare",
+      "source_sha256": "d40e4e2e08c5c78666a03b94bf165504ae70f83ef055b958fee458969bca1837"
+    },
+    {
+      "chars": 9,
+      "compiles_eval": true,
+      "node_type": "Subscript",
+      "source_sha256": "7b7f18b7890d84975f7ea9184b13cfeb31f251ec36c90bef235c767e8e65888c"
+    },
+    {
+      "chars": 77,
+      "compiles_eval": true,
+      "node_type": "Dict",
+      "source_sha256": "11896258a6d789f6b217679791571e451e8bad6cbeeacba32e8cece9cbe34a2d"
+    },
+    {
+      "chars": 62,
+      "compiles_eval": true,
+      "node_type": "Call",
+      "source_sha256": "ccc7f630b3403d54f456f876760af09b63168a2bf014518faf7aacc808cd76fb"
+    },
+    {
+      "chars": 48,
+      "compiles_eval": true,
+      "node_type": "Call",
+      "source_sha256": "7e9808f8227b518637b3a4b5e465f93dcf590aa5847a7efd1787e64974ea8a07"
+    },
+    {
+      "chars": 27,
+      "compiles_eval": true,
+      "node_type": "Subscript",
+      "source_sha256": "8808f68ea70425c8f21529f73638c495bc88ffa5ad1d6a5708a9aaa3509068dc"
+    },
+    {
+      "chars": 31,
+      "compiles_eval": true,
+      "node_type": "Subscript",
+      "source_sha256": "a95a5e2bd3354699001c296669d86d69b6e03eafc10390f631bb07ab38256e8d"
+    }
+  ],
+  "fresh_compile_rate": 1.0,
+  "fresh_exact": 1.0,
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-05T21:17:33.772875+00:00",
+        "deficit_id": "D-d44b8d034a95",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-fc7272367f4e",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "OPEN",
+        "target": "TARGET_SEMANTIC_SOURCE_CONSTRUCTOR_GENESIS_V5"
+      }
+    ],
+    "goal_id": "G-fc7272367f4e"
+  },
+  "native_skill_selection": {
+    "candidate_count": 5,
+    "gate_digest": "69f7d71ce32a0dd0c4813779d8b6e74500ddf4f0bddf4a4907ed085e7debf7fe",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "b4387b8db87662f9955b7356ad1bee60da8271f5d68df811c4f8eaf9d88fc52f",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "PYTHON_AST_PRIMITIVE_DUMP",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "90b627fa344e62c30667c98854433e391d4d2fbd086d33ff50fd12880cf60ec9",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "PYTHON_AST_PRIMITIVE_FIX_MISSING_LOCATIONS",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "0b2039fe4c9002ec8244b9377864bc13962ef261d0dcdbe9c0e72149b63a011f",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "PYTHON_AST_PRIMITIVE_PARSE",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "6e6ab3c7ec59859bfc77125e35b69fcb2f4ef18ed0fa8403fcfd3522e142883e",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "PYTHON_AST_PRIMITIVE_WALK",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "cf1191ff9286d0fc156afb14b7eb5c36c297fdc4f5312ada66f96812bf05e9b0",
+        "failed_critics": [],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "PYTHON_AST_PRIMITIVE_UNPARSE",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "PYTHON_AST_PRIMITIVE_UNPARSE"
+    ],
+    "status": "SELECTED"
+  },
+  "next_required_capability": "NATIVE_SEMANTIC_EDIT_TO_AST_MATERIALIZATION_V6",
+  "parent_v4_receipt": "cb8a25b109463e064b4d64ab7caf9158eb62e62a7bce6a4ca56a0007f8ac0570",
+  "promotion_applied": false,
+  "python_self_study_digest": "f90bcd6f99c3ed8c5f93e0b59381f54912a5fdc3b557caf8e92c07c1c1ff9f67",
+  "receipt_sha256": "8c19271b07dcc7700b17d6e1ef44e3ae50ae267b24a95fb788e43c4b639f754c",
+  "schema": "yado.g2.target_semantic_source_constructor_genesis.v5",
+  "selected_metric": {
+    "blind": 1.0,
+    "fit": 1.0,
+    "primitive": "unparse",
+    "signature": "(ast_obj)",
+    "skill_id": "PYTHON_AST_PRIMITIVE_UNPARSE",
+    "study_evidence": {
+      "all_file_support": 6,
+      "name": "unparse",
+      "python_doc_page_count": 1,
+      "python_doc_pages": [
+        "AST"
+      ],
+      "source_history_ratio": 0.0,
+      "source_history_support": 0
+    },
+    "validation": 1.0
+  },
+  "selected_primitive": "unparse",
+  "semantic_boundary": "V5 DOES NOT CLAIM A SELF-GENERATED SERIALIZER. IT TESTS WHETHER YADO CAN REUSE ITS OWN PRIOR PYTHON RESEARCH TO SELECT A STANDARD AST RUNTIME PRIMITIVE FOR AST-TO-SOURCE MATERIALIZATION THROUGH ITS NATIVE SKILL GATE. THE HOST MECHANICALLY ENUMERATES STUDIED ONE-ARG PUBLIC AST CALLABLES AND MEASURES FIT/VALIDATION/BLIND; IT DOES NOT SELECT THE WINNER OR WRITE A SERIALIZER. PASS CLOSES SOURCE SERIALIZATION AS A TOOL-USE CAPABILITY, WHILE THE NEXT GAP REMAINS TURNING YADO SEMANTIC EDIT INTENT INTO A NEW AST.",
+  "status": "PASS_SHADOW_G2_TARGET_SEMANTIC_SOURCE_CONSTRUCTOR_GENESIS_V5"
+}
