@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "ac9692ba79b16756f7ba8caf1a7afd5f6f6d2d2365a44d344c23be4821c60fa9",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 281,
+  "event_count": 282,
   "events": [
     {
       "canonical_mutation": false,
@@ -4925,10 +4925,26 @@
       "source_digest": "744aeef79ab2476e09a9463798dbc088995f5afe4641f26f60b9e54ef1991a56",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33974251430.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0; NEXT=KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+      "event_hash": "53f0c623e1a9a162e3a0c01d926e4670712b01ac587fa2517a3d1815ad86e6dd",
+      "event_id": "E0282_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 281,
+      "parent_event_hash": "597583cd9d28be8e48fec5dcf94dda56a47f89b407b4bdb11247918f9cf95064",
+      "promotion_applied": false,
+      "run_id": "33974358612",
+      "source_digest": "3334c625f45819925b57b3dd1669b6261e7931877d0cf1ab9607c26f816573af",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33974358612.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "bddec86a1e0ce91bd71f29edb3257473bd3e9d06844c7d5735a115f88085e000",
+  "ledger_digest": "d44c6ae51d6a34ec5e2c1ef269db775c005beec61fd8e5e04030dbc7a845d362",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -4966,5 +4982,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "597583cd9d28be8e48fec5dcf94dda56a47f89b407b4bdb11247918f9cf95064"
+  "tail_event_hash": "53f0c623e1a9a162e3a0c01d926e4670712b01ac587fa2517a3d1815ad86e6dd"
 }
