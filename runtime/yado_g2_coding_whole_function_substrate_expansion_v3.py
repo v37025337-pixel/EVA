@@ -152,7 +152,7 @@ def domain_for(tree,arg):
         if len(basekeys)>=2:
             for a in vals[:4]:
                 for b in vals[:4]:out.append({basekeys[0]:a,basekeys[1]:b})
-        out.extend([{0:1,1:2},{0:-1,1:3},{'0':2,0:1},{'a':1,'b':-2},{'a':0.5,'b':2}])
+        out.extend([{0:1,1:2},{0:-1,1:3},{'0':2,'1':1},{'a':1,'b':-2},{'a':0.5,'b':2}])
         seen=[];keys_seen=set()
         for x in out:
             k=canon(x)
