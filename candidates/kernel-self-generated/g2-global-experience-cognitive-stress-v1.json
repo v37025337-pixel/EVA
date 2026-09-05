@@ -1,0 +1,126 @@
+{
+  "base_accuracy": 0.7951807228915663,
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "base_heldout_ge_0_80": false,
+    "canonical_unchanged": true,
+    "context_only_below_full": true,
+    "domain_slice_floor": false,
+    "external_models_used": false,
+    "host_retrained_models": false,
+    "intelligence_ablation_positive": false,
+    "irrelevant_noise_invariant": true,
+    "logic_ablation_positive": false,
+    "organ_only_beats_chance": false,
+    "organ_only_material": false,
+    "post_corpus_accuracy_ge_0_66": true,
+    "post_corpus_rows_present": true,
+    "restore_exact": true,
+    "source_slice_floor": true,
+    "thinking_ablation_positive": true,
+    "v4_parent_pass": true,
+    "v4_safety_gate_previously_exact": true,
+    "v4_unknown_fail_closed": true
+  },
+  "context_only_accuracy": 0.42168674698795183,
+  "domain_slices": {
+    "CODE": {
+      "accuracy": 0.7333333333333333,
+      "count": 30
+    },
+    "COGNITIVE": {
+      "accuracy": 0.8333333333333334,
+      "count": 12
+    },
+    "EVOLUTION": {
+      "accuracy": 0.3333333333333333,
+      "count": 6
+    },
+    "EXECUTION": {
+      "accuracy": 0.5714285714285714,
+      "count": 7
+    },
+    "GENERAL": {
+      "accuracy": 1.0,
+      "count": 12
+    },
+    "REPRESENTATION": {
+      "accuracy": 1.0,
+      "count": 14
+    }
+  },
+  "heldout_count": 83,
+  "individual_organ_ablations": {
+    "INTELLIGENCE": {
+      "drop": 0.0,
+      "score": 0.7951807228915663
+    },
+    "LOGIC": {
+      "drop": 0.0,
+      "score": 0.7951807228915663
+    },
+    "THINKING": {
+      "drop": 0.37349397590361444,
+      "score": 0.42168674698795183
+    }
+  },
+  "irrelevant_noise_accuracy": 0.7951807228915663,
+  "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V2",
+  "organ_only_accuracy": 0.1686746987951807,
+  "parent_gene_ids": {
+    "COGNITIVE": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V4-455901860a7b7631",
+    "INTELLIGENCE": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+    "LOGIC": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V2-6d1ec1d85217b9bd",
+    "THINKING": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac"
+  },
+  "parent_genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V4-ed7cba65228d53a9",
+  "post_corpus_accuracy": 0.8333333333333334,
+  "post_corpus_evaluation": [
+    {
+      "expected": "REVISE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v2.json",
+      "predicted": "REVISE"
+    },
+    {
+      "expected": "SEEK_EVIDENCE",
+      "path": "experience/yado-global-experience-cognitive-genesis-v2.json",
+      "predicted": "SEEK_EVIDENCE"
+    },
+    {
+      "expected": "REVISE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v3.json",
+      "predicted": "REVISE"
+    },
+    {
+      "expected": "SEEK_EVIDENCE",
+      "path": "experience/yado-global-experience-cognitive-genesis-v3.json",
+      "predicted": "SEEK_EVIDENCE"
+    },
+    {
+      "expected": "CONTINUE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v4.json",
+      "predicted": "CONTINUE"
+    },
+    {
+      "expected": "COMMIT",
+      "path": "experience/yado-global-experience-cognitive-genesis-v4.json",
+      "predicted": "SEEK_EVIDENCE"
+    }
+  ],
+  "promotion_applied": false,
+  "receipt_sha256": "267fa5a9226d4dd15fa9827ad1c5163e55d26e5eff0f455996b31e0a1452b273",
+  "schema": "yado.g2.global_experience_cognitive_stress.v1",
+  "semantic_boundary": "FROZEN V4 GENOME STRESS ONLY. NO MODEL IS RETRAINED. TESTS INDIVIDUAL ORGAN CAUSAL CONTRIBUTION, ORGAN-ONLY VS CONTEXT-ONLY PERFORMANCE, IRRELEVANT-NOISE INVARIANCE, SOURCE/DOMAIN SLICES, AND POST-CORPUS ARTIFACTS CREATED AFTER THE FROZEN GLOBAL CORPUS.",
+  "source_slices": {
+    "CANDIDATE": {
+      "accuracy": 0.5833333333333334,
+      "count": 24
+    },
+    "RECEIPT": {
+      "accuracy": 0.8771929824561403,
+      "count": 57
+    }
+  },
+  "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V1"
+}
