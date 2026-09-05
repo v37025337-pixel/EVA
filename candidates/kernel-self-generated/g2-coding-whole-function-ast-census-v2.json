@@ -1,0 +1,727 @@
+{
+  "active_source_count": 32,
+  "banned_node_counts": {
+    "Attribute": 81,
+    "For": 11,
+    "Lambda": 4,
+    "Raise": 2,
+    "While": 2
+  },
+  "banned_profiles": {
+    "('Attribute', 'For')": 7,
+    "('Attribute', 'For', 'Lambda')": 2,
+    "('Attribute', 'For', 'Raise')": 1,
+    "('Attribute', 'For', 'While')": 1,
+    "('Attribute', 'Lambda')": 1,
+    "('Attribute', 'While')": 1,
+    "('Attribute',)": 68,
+    "('Lambda',)": 1,
+    "('Raise',)": 1,
+    "()": 3
+  },
+  "call_counts": {
+    "ATTR:BinOp.encode": 1,
+    "ATTR:BoundedRuleSandbox.execute": 2,
+    "ATTR:Call.encode": 20,
+    "ATTR:Call.hexdigest": 25,
+    "ATTR:Call.lower": 2,
+    "ATTR:Call.strip": 5,
+    "ATTR:Constant.join": 3,
+    "ATTR:Subscript.get": 2,
+    "ATTR:_HEX64.match": 1,
+    "ATTR:_NEXT.search": 1,
+    "ATTR:a.sort": 1,
+    "ATTR:b.get": 1,
+    "ATTR:c.items": 1,
+    "ATTR:c.values": 1,
+    "ATTR:copy.deepcopy": 4,
+    "ATTR:df.items": 1,
+    "ATTR:e.get": 1,
+    "ATTR:findings.append": 1,
+    "ATTR:hashlib.sha256": 25,
+    "ATTR:json.dumps": 21,
+    "ATTR:json.loads": 5,
+    "ATTR:latest.get": 1,
+    "ATTR:ledger.get": 1,
+    "ATTR:ledger.items": 1,
+    "ATTR:m.group": 1,
+    "ATTR:math.sqrt": 1,
+    "ATTR:out.append": 5,
+    "ATTR:out.extend": 2,
+    "ATTR:p.digest": 1,
+    "ATTR:p.execute": 1,
+    "ATTR:p.read_bytes": 2,
+    "ATTR:p.read_text": 3,
+    "ATTR:p.strip": 1,
+    "ATTR:path.read_bytes": 1,
+    "ATTR:path.read_text": 2,
+    "ATTR:program.execute": 1,
+    "ATTR:r.choice": 2,
+    "ATTR:r.randint": 3,
+    "ATTR:random.Random": 3,
+    "ATTR:re.findall": 2,
+    "ATTR:re.match": 1,
+    "ATTR:re.search": 2,
+    "ATTR:re.split": 2,
+    "ATTR:re.sub": 2,
+    "ATTR:row.get": 1,
+    "ATTR:s.encode": 1,
+    "ATTR:seen.add": 1,
+    "ATTR:w.get": 2,
+    "ATTR:x.items": 2,
+    "ATTR:x.pop": 3,
+    "ATTR:x.strip": 1,
+    "NAME:Counter": 2,
+    "NAME:StructuralRawRepresentationSpecV3": 1,
+    "NAME:ValueError": 2,
+    "NAME:_add_ngram": 1,
+    "NAME:_canon": 6,
+    "NAME:_canon_v2": 1,
+    "NAME:_canon_v3": 1,
+    "NAME:_dot": 1,
+    "NAME:_hi": 2,
+    "NAME:_pred": 1,
+    "NAME:_segments": 3,
+    "NAME:_tokens": 3,
+    "NAME:active": 1,
+    "NAME:asdict": 1,
+    "NAME:bool": 4,
+    "NAME:bracketless": 2,
+    "NAME:canon": 12,
+    "NAME:clauses": 1,
+    "NAME:digest": 2,
+    "NAME:enumerate": 2,
+    "NAME:float": 4,
+    "NAME:int": 4,
+    "NAME:isinstance": 2,
+    "NAME:range": 6,
+    "NAME:set": 2,
+    "NAME:sorted": 2,
+    "NAME:str": 12,
+    "NAME:words": 3,
+    "NAME:zip": 2
+  },
+  "minimal_extension_candidates": [
+    {
+      "arg_count": 1,
+      "attribute_calls": [],
+      "banned_nodes": [],
+      "function": "freeze",
+      "line": 23,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def freeze(v):\n    return canon(v)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": [
+        "NAME:canon"
+      ]
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [],
+      "banned_nodes": [],
+      "function": "split_bucket",
+      "line": 180,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+      "statement_count": 2,
+      "unsupported_name_calls": [
+        "NAME:int"
+      ]
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "spec_to_json",
+      "line": 101,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "source": "def spec_to_json(spec):\n    return {'family': spec.family, 'labels': spec.labels, 'payload': spec.payload}\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 2,
+      "attribute_calls": [],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "component",
+      "line": 104,
+      "path": "runtime/yado_raw_task_representation_robustness_v4.py",
+      "source": "def component(mode, parent_digest):\n    return {'schema': 'yado.g2.raw_task_representation_robustness_v4.component.v1', 'component_id': RobustRawTaskRepresentationRuntimeV4.COMPONENT_ID, 'parent_component_id': 'ALG-G2-RAW-TASK-REPRESENTATION-V3', 'parent_component_digest': parent_digest, 'mode': mode, 'generic_wrapper_invariance': True, 'class_specific_rules': False, 'parent_model_retrained': False, 'canonical_active': False}\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 7,
+      "path": "runtime/yado_bounded_capability_router_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 7,
+      "path": "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 6,
+      "path": "runtime/yado_budgeted_stage_policy_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 16,
+      "path": "runtime/yado_canonical_invariant_guard_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 20,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 20,
+      "path": "runtime/yado_core_audit_invariant_self_evolution_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 7,
+      "path": "runtime/yado_evolution_ledger_v2.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_canon",
+      "line": 13,
+      "path": "runtime/yado_evolutionary_genome_v1.py",
+      "source": "def _canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_canon",
+      "line": 6,
+      "path": "runtime/yado_g2_cognitive_clock_v1.py",
+      "source": "def _canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 11,
+      "path": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 14,
+      "path": "runtime/yado_g2_experience_conditioned_cognitive_layer_v3.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_canon",
+      "line": 5,
+      "path": "runtime/yado_g2_openapi_contract_capability_v1.py",
+      "source": "def _canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_canon",
+      "line": 4,
+      "path": "runtime/yado_g2_openapi_readonly_executor_v1.py",
+      "source": "def _canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 16,
+      "path": "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_canon",
+      "line": 20,
+      "path": "runtime/yado_g2_unified_execution_fabric_v1.py",
+      "source": "def _canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_canon_v2",
+      "line": 9,
+      "path": "runtime/yado_g2_unified_execution_fabric_v2.py",
+      "source": "def _canon_v2(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_canon_v3",
+      "line": 7,
+      "path": "runtime/yado_g2_unified_execution_fabric_v3.py",
+      "source": "def _canon_v3(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 5,
+      "path": "runtime/yado_neutral_evidence_profile_selector_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_canon",
+      "line": 20,
+      "path": "runtime/yado_unified_context_kernel_v1.py",
+      "source": "def _canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.dumps"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canon",
+      "line": 35,
+      "path": "runtime/yado_unified_core_deep_self_audit_v1.py",
+      "source": "def canon(o):\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 3,
+      "attribute_calls": [
+        "ATTR:program.execute"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "router_acc",
+      "line": 105,
+      "path": "runtime/yado_bounded_capability_router_v1.py",
+      "source": "def router_acc(program, cases, ablated):\n    return sum((program.execute(e['input'], ablated=ablated) == e['expected'] for e in cases)) / len(cases)\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 3,
+      "attribute_calls": [
+        "ATTR:p.execute"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "program_acc",
+      "line": 207,
+      "path": "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+      "source": "def program_acc(p, cases, ablated):\n    if not cases:\n        return 0.0\n    return sum((p.execute(e['input'], ablated=ablated) == e['expected'] for e in cases)) / len(cases)\n",
+      "statement_count": 2,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 3,
+      "attribute_calls": [
+        "ATTR:BoundedRuleSandbox.execute"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "program_acc",
+      "line": 128,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def program_acc(p, cases, ablated):\n    if not cases:\n        return 0.0\n    return sum((BoundedRuleSandbox.execute(p, e['input'], ablated=ablated) == e['expected'] for e in cases)) / len(cases)\n",
+      "statement_count": 2,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.loads",
+        "ATTR:p.read_text"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "load",
+      "line": 19,
+      "path": "runtime/yado_canonical_invariant_guard_v1.py",
+      "source": "def load(p):\n    return json.loads(p.read_text(encoding='utf-8'))\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:p.digest"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "canonical_program",
+      "line": 132,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def canonical_program(p):\n    return {'program_id': p.program_id, 'target_capability': p.target_capability, 'target_organ': p.target_organ, 'rules': [{'predicates': [asdict(q) for q in r.predicates], 'output': r.output, 'support': r.support, 'confidence': r.confidence} for r in p.rules], 'default_output': p.default_output, 'source_digest': p.source_digest, 'training_count': p.training_count, 'status': p.status, 'digest': p.digest()}\n",
+      "statement_count": 1,
+      "unsupported_name_calls": [
+        "NAME:asdict"
+      ]
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:out.append",
+        "ATTR:out.extend"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "active",
+      "line": 161,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source": "def active(ctx):\n    out = []\n    if ctx['current_generation_active']:\n        out.extend(GEN)\n    if not ctx['lineage_verified']:\n        out.append(CAN[0])\n    if not ctx['dependency_lock_verified']:\n        out.append(CAN[1])\n    if not ctx['evidence_fetch_hardened']:\n        out.append(CAN[2])\n    if not ctx['historical_state_protected']:\n        out.append(CAN[3])\n    out.extend(CAN[4:])\n    return out\n",
+      "statement_count": 8,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.loads",
+        "ATTR:p.read_text"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "load",
+      "line": 22,
+      "path": "runtime/yado_core_audit_invariant_self_evolution_v1.py",
+      "source": "def load(p):\n    return json.loads(p.read_text(encoding='utf-8'))\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.loads",
+        "ATTR:path.read_text"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_load",
+      "line": 12,
+      "path": "runtime/yado_g2_canonical_high_scale_binding_runtime_v5.py",
+      "source": "def _load(path):\n    return json.loads(path.read_text(encoding='utf-8'))\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:re.findall"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_tokens",
+      "line": 5,
+      "path": "runtime/yado_raw_task_representation_robustness_v4.py",
+      "source": "def _tokens(s):\n    return re.findall('[A-Za-z0-9_]+', str(s))\n",
+      "statement_count": 1,
+      "unsupported_name_calls": [
+        "NAME:str"
+      ]
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.loads",
+        "ATTR:path.read_text"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "_load",
+      "line": 17,
+      "path": "runtime/yado_unified_context_kernel_v1.py",
+      "source": "def _load(path):\n    return json.loads(path.read_text(encoding='utf-8'))\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:json.loads",
+        "ATTR:p.read_text"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "load",
+      "line": 38,
+      "path": "runtime/yado_unified_core_deep_self_audit_v1.py",
+      "source": "def load(p):\n    return json.loads(p.read_text(encoding='utf-8'))\n",
+      "statement_count": 1,
+      "unsupported_name_calls": []
+    },
+    {
+      "arg_count": 7,
+      "attribute_calls": [
+        "ATTR:findings.append"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "add",
+      "line": 49,
+      "path": "runtime/yado_unified_core_deep_self_audit_v1.py",
+      "source": "def add(code, area, severity, status, evidence, recommendation, blocking):\n    findings.append({'code': code, 'area': area, 'severity': severity, 'status': status, 'blocking': bool(blocking), 'evidence': evidence, 'recommendation': recommendation})\n",
+      "statement_count": 1,
+      "unsupported_name_calls": [
+        "NAME:bool"
+      ]
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:copy.deepcopy",
+        "ATTR:x.pop"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "event_hash",
+      "line": 13,
+      "path": "runtime/yado_evolution_ledger_v2.py",
+      "source": "def event_hash(event):\n    x = copy.deepcopy(event)\n    x.pop('event_hash', None)\n    return digest(x)\n",
+      "statement_count": 3,
+      "unsupported_name_calls": [
+        "NAME:digest"
+      ]
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:Call.lower",
+        "ATTR:re.findall"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "words",
+      "line": 6,
+      "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+      "source": "def words(text):\n    return re.findall('[a-zA-Z0-9_]+', str(text).lower())\n",
+      "statement_count": 1,
+      "unsupported_name_calls": [
+        "NAME:str"
+      ]
+    },
+    {
+      "arg_count": 1,
+      "attribute_calls": [
+        "ATTR:Call.strip",
+        "ATTR:re.sub"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "bracketless",
+      "line": 12,
+      "path": "runtime/yado_raw_task_representation_robustness_v4.py",
+      "source": "def bracketless(text):\n    return re.sub('\\\\[[^\\\\]]{0,160}\\\\]', ' ', str(text)).strip()\n",
+      "statement_count": 1,
+      "unsupported_name_calls": [
+        "NAME:str"
+      ]
+    },
+    {
+      "arg_count": 2,
+      "attribute_calls": [
+        "ATTR:copy.deepcopy",
+        "ATTR:x.pop"
+      ],
+      "banned_nodes": [
+        "Attribute"
+      ],
+      "function": "cdig",
+      "line": 20,
+      "path": "runtime/yado_canonical_invariant_guard_v1.py",
+      "source": "def cdig(o, field):\n    x = copy.deepcopy(o)\n    x.pop(field, None)\n    return h(x)\n",
+      "statement_count": 3,
+      "unsupported_name_calls": [
+        "NAME:h"
+      ]
+    }
+  ],
+  "receipt_sha256": "20db19d808b431bee9dda2918100a13ba4b2c2174ab16d484a3453b8c90444d8",
+  "schema": "yado.g2.coding_whole_function_ast_census.v2",
+  "semantic_boundary": "STATIC AST CENSUS ONLY. IT DOES NOT AUTHORIZE ANY NEW AST NODE, CALL, EXECUTION, REPAIR, OR CANONICAL CHANGE.",
+  "status": "PASS_AST_CENSUS",
+  "top_level_function_count": 86
+}
