@@ -1,0 +1,15 @@
+{
+  "schema": "yado.g2.continuity_v5_metadata_digest_rebind.request.v1",
+  "objective": "REBIND_STALE_CONTINUITY_CANONICAL_COMPONENT_DIGEST_AFTER_V5_ADMISSION_WITHOUT_RUNTIME_BEHAVIOR_CHANGE",
+  "task": "Rebind the continuity canonical_component_digest in canonical core/head/provenance to the actual V5 canonical continuity artifact digest, append a ledger metadata-rebind event, and rerun the canonical invariant guard. Do not change runtime behavior, generation, frontier or architecture.",
+  "constraints": {
+    "runtime_behavior_change": false,
+    "architecture_mutation": false,
+    "generation_transition": false,
+    "g3_genesis": false,
+    "frontier_change": false,
+    "canonical_guard_before_and_after": true
+  },
+  "trigger": 1,
+  "trigger_reason": "STALE_V4_CONTINUITY_CANONICAL_COMPONENT_DIGEST_FOUND_AFTER_SUCCESSFUL_V5_CANONICAL_ADMISSION"
+}
