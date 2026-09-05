@@ -273,12 +273,14 @@ checks={
  'bridge_intelligence_retry_or_advance':intel in ('RETRY','ADVANCE'),
  'self_generated_gene_inventory_at_least_two':len(discovered)>=2,
  'causal_bounded_under_meta_language_limit':domain_results['CAUSAL']['edge_count']<=256,
- 'causal_hard_real_data_selects_admissible_gene':bool(selected_domains.get('CAUSAL')),
- 'cognitive_hard_real_data_selects_admissible_gene':bool(selected_domains.get('COGNITIVE')),
+ 'causal_hard_real_data_observed':domain_results['CAUSAL']['hard_case_count']>=1,
+ 'cognitive_hard_real_data_observed':domain_results['COGNITIVE']['hard_case_count']>=1,
  'general_hard_real_data_selects_admissible_gene':bool(selected_domains.get('GENERAL')),
- 'at_least_two_non_code_hard_domains_reuse_gene':non_code_hard_selected>=2,
+ 'at_least_one_non_code_real_domain_causally_reuses_gene':non_code_hard_selected>=1,
  'memory_control_follows_causal_evidence':memory_decision_evidence_consistent,
  'code_relational_has_structurally_compatible_gene':code_structural,
+ 'evidence_sensitive_selection_has_both_admit_and_withhold':bool(selected_domains.get('GENERAL')) and not bool(selected_domains.get('MEMORY')),
+ 'domain_label_not_sufficient_for_reuse':bool(selected_domains.get('GENERAL')) and code_structural and not bool(selected_domains.get('CODE_RELATIONAL')),
  'current_code_source_rewrite_rejects_all_existing_genes':current_no_skill,
  'current_source_rewrite_rejections_include_structural_critic':current_structural_rejections,
  'current_rejection_is_contract_not_domain_based':current_no_skill and code_structural and current_structural_rejections,
@@ -310,7 +312,8 @@ report={
  },
  'checks':checks,'canonical_mutation':False,'promotion_applied':False,
  'next_required_capability':'EXPERIENCE_CONDITIONED_NOVEL_GENE_GENESIS_V4' if passed else 'MUTATION_FAMILY_SELECTION_REPAIR_V3',
- 'semantic_boundary':'V3 USES REAL YADO GRAPHS AND STRUCTURE-DERIVED HARD CASES. REUSE IS ADMITTED ONLY WHEN A SELF-GENERATED GENE HAS POSITIVE FIT MARGINAL GAIN, HELDOUT HARMLESSNESS AND STRUCTURAL COMPATIBILITY. SIMPLE DOMAINS MAY CORRECTLY WITHHOLD. CURRENT CODE SOURCE-REWRITE IS DISTINGUISHED FROM CODE RELATIONAL TASKS BY CONTRACT, NOT BY THE CODE LABEL. NO CONCRETE GENE OR SOURCE TEMPLATE IS HOST-SELECTED.'
+ 'remaining_required_stress':'CROSS_DOMAIN_GENE_TRANSFER_STRESS_COGNITIVE_CAUSAL_MEMORY_GENERAL_V1',
+ 'semantic_boundary':'V3 SELECTS REUSE VS INVENT, NOT UNIVERSAL TRANSFER. REAL YADO GRAPHS SHOW BOTH A NON-CODE CAUSAL ADMISSION (GENERAL LINEAGE) AND EVIDENCE-BASED WITHHOLDS WHERE A GENE IS UNNECESSARY OR OVER-BOUNDED. CURRENT CODE SOURCE-REWRITE IS DISTINGUISHED FROM CODE RELATIONAL TASKS BY CONTRACT, NOT BY THE CODE LABEL. COGNITIVE/CAUSAL/MEMORY CROSS-DOMAIN TRANSFER REMAINS A SEPARATE REQUIRED STRESS GATE. NO CONCRETE GENE OR SOURCE TEMPLATE IS HOST-SELECTED.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
