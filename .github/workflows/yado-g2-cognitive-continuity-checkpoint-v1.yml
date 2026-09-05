@@ -44,6 +44,8 @@ jobs:
             git add candidates/kernel-self-generated/g2-cognitive-continuity-checkpoint-v1.json
           fi
           git diff --cached --quiet || git commit -m "Persist YADO cognitive continuity checkpoint V1 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/__pycache__ runtime/yado_rc8_v36/__pycache__ || true
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
       - name: Enforce strict restart continuity verdict
