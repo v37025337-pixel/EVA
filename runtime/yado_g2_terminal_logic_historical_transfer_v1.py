@@ -84,7 +84,10 @@ for r0 in hist.get('rows') or []:
     if r0.get('outcome') not in ('PASS','WITHHOLD'):continue
     b=subprocess.run(['git','cat-file','blob',r0['git_object']],cwd=REPO,capture_output=True,check=True).stdout
     obj=json.loads(b.decode('utf-8'))
-    r=dict(r0);r['metrics']=metric_summary(obj)
+    r=dict(r0)
+    pth=str(r.get('path') or '')
+    r['source_class']='RECEIPT' if pth.startswith('receipts/') else ('CANDIDATE' if pth.startswith('candidates/kernel-self-generated/') else ('EXPERIENCE' if pth.startswith('experience/') else 'HISTORICAL'))
+    r['metrics']=metric_summary(obj)
     hist_rows.append(r)
 if len(hist_rows)<40:raise RuntimeError('REHYDRATED_HISTORICAL_ROWS_TOO_SMALL')
 
