@@ -1,0 +1,1205 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "canonical_v5_continuity_active": true,
+    "content_addressed_partitions_present": true,
+    "existing_coordinate_algebra_fails_exact_serialization": true,
+    "existing_coordinate_meta_grammar_executed": true,
+    "external_models_used": false,
+    "failure_experience_retained": true,
+    "genome_v2_v3_are_fixed_family_inventors": true,
+    "host_ast_compiler_used": false,
+    "host_patch_used": false,
+    "host_primitive_inventory_used": false,
+    "host_serializer_used": false,
+    "host_string_grammar_used": false,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_meta_evolution_routes_executed": true,
+    "new_language_binds_current_failure": false,
+    "new_language_has_novel_identity": false,
+    "new_self_extending_string_meta_language_created": false,
+    "prior_1012_example_failure_consumed": true,
+    "self_source_memory_at_least_1000": true,
+    "v1_failure_consumed": true,
+    "v6_serialization_gap_consumed": true
+  },
+  "example_count": 1012,
+  "existing_meta_grammar_probe": {
+    "best_train_exact": 0.0,
+    "component": "LowLevelCoordinateSynthesizer",
+    "generated_programs": 216,
+    "preexisting_low_level_algebra": true,
+    "selected_program": {
+      "bias": 0,
+      "inner_count": 1,
+      "inner_step": 0,
+      "last_coeff": 0,
+      "origin": "LOW_LEVEL_COORDINATE_SEARCH",
+      "outer_step": 1,
+      "rank": 1
+    },
+    "train_case_count": 48
+  },
+  "fixed_family_genome_evidence": {
+    "v2_component": {
+      "architecture_mutation": false,
+      "automatic_canonical_promotion": false,
+      "canonical_active": false,
+      "chromosomes": [
+        "LOGIC",
+        "THINKING",
+        "INTELLIGENCE",
+        "CODE"
+      ],
+      "component_digest": "08383c566d869dd9a6be91cbbddb4eccb85472ec21bc4f96d8b92bf162022529",
+      "component_id": "CTRL-G2-EVOLUTIONARY-GENOME-V2",
+      "fresh_gate_required_for_promotion": true,
+      "meta_language": {
+        "arbitrary_python_generation": false,
+        "architecture_mutation": false,
+        "candidate_program_count": 72,
+        "canonical_active": false,
+        "component_digest": "8cb5a210801e93ec45b309f9edaf8e4baf0f8c395e8fd6d2091ff6ddf4bf94f0",
+        "component_id": "LANG-G2-GENERIC-RELATIONAL-STATE-META-V1",
+        "full_task_operator_predeclared": false,
+        "max_stable_steps": 64,
+        "primitive_categories": [
+          "SEED",
+          "RELATIONAL_IMAGE",
+          "STATE_MERGE",
+          "BOUNDED_ITERATION"
+        ],
+        "schema": "yado.g2.generic_relational_state_meta_language.v1",
+        "semantic_boundary": "GENERIC BOUNDED PROGRAM SEARCH OVER RELATION/STATE PRIMITIVES. NO DOMAIN-SPECIFIC REACHABILITY/ANCESTRY/DEPENDENCY OPERATOR IS PREDECLARED."
+      },
+      "novel_operator_invention": true,
+      "operator_invention_requires_temporal_stall": true,
+      "parent_component": "CTRL-G2-EVOLUTIONARY-GENOME-V1",
+      "schema": "yado.g2.evolutionary_genome.controller.v2",
+      "semantic_boundary": "SHADOW SUCCESSOR OF GENOME V1. IT MAY INVENT A NEW EXECUTABLE GENE BY SEARCHING GENERIC META-LANGUAGE COMPOSITIONS AFTER A TEMPORAL STALL, BUT CANNOT PROMOTE IT."
+    },
+    "v2_methods": [
+      "component",
+      "evaluate",
+      "evolve_once",
+      "invent_operator_from_examples",
+      "mutate",
+      "observe_parent_deficits",
+      "parent_genome"
+    ],
+    "v3_component": {
+      "architecture_mutation": false,
+      "automatic_canonical_promotion": false,
+      "canonical_active": false,
+      "chromosomes": [
+        "LOGIC",
+        "THINKING",
+        "INTELLIGENCE",
+        "CODE"
+      ],
+      "component_digest": "6b4dfa8193f8de45988294dfd86609625a20f4ff2fce027f413e12cf5f8f4a57",
+      "component_id": "CTRL-G2-EVOLUTIONARY-GENOME-V3",
+      "event_state_operator_invention": true,
+      "fresh_gate_required_for_promotion": true,
+      "meta_language": {
+        "bounded_search": true,
+        "close_policies": [
+          "ANY",
+          "MATCH_KEY",
+          "REMOVE_KEY"
+        ],
+        "component_digest": "c6cd32755acef00adb244b3a9bf01902c94a360a9f0921b23c9accea1292cdcc",
+        "component_id": "LANG-G2-GENERIC-EVENT-STATE-META-V1",
+        "domain_specific_operator_names": false,
+        "failure_policies": [
+          "REJECT",
+          "IGNORE"
+        ],
+        "final_policies": [
+          "EMPTY_AND_VALID",
+          "VALID_ONLY"
+        ],
+        "primitives": [
+          "EVENT_CODE",
+          "EVENT_KEY",
+          "COUNT_STATE",
+          "SET_STATE",
+          "SEQUENCE_STATE",
+          "OPEN_UPDATE",
+          "CLOSE_UPDATE",
+          "FINAL_PREDICATE"
+        ],
+        "schema": "yado.g2.generic_event_state_meta_language.v1",
+        "semantic_boundary": "GENERIC BOUNDED EVENT/STATE META-LANGUAGE. IT SEARCHES STATE UPDATE COMPOSITIONS FROM IO EXAMPLES; IT DOES NOT RECEIVE A NESTING/STACK/PUSHDOWN TASK LABEL.",
+        "state_modes": [
+          "COUNT",
+          "SET",
+          "STACK"
+        ]
+      },
+      "operator_invention_requires_temporal_stall": true,
+      "parent_component": "CTRL-G2-EVOLUTIONARY-GENOME-V2",
+      "schema": "yado.g2.evolutionary_genome.controller.v3",
+      "semantic_boundary": "SHADOW SUCCESSOR USED ONLY FOR A SECOND BLIND INVENTION TEST. IT SEARCHES GENERIC EVENT/STATE COMPOSITIONS AFTER A TEMPORAL STALL AND CANNOT PROMOTE ITS GENE."
+    },
+    "v3_methods": [
+      "component",
+      "evaluate",
+      "evolve_once",
+      "invent_event_state_operator_from_examples",
+      "invent_operator_from_examples",
+      "mutate",
+      "observe_parent_deficits",
+      "parent_genome"
+    ]
+  },
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-05T20:53:57.882022+00:00",
+        "deficit_id": "D-452a01a25c03",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-4efc28788c7a",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "OPEN",
+        "target": "SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2"
+      }
+    ],
+    "goal_id": "G-4efc28788c7a"
+  },
+  "native_outputs": {
+    "controller": {
+      "evolve_once": {
+        "architecture_mutation": false,
+        "child": {
+          "chromosomes": {
+            "CODE": {
+              "expression": {
+                "max_degree": 3
+              },
+              "gene_digest": "deeeaaf73d785fb659a8a5cb1b2049be1d5dc67ad5982d26b89de9b9f7e7dd51",
+              "gene_id": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+              "heritage": [
+                "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+                "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+              ],
+              "mutation_reason": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
+              "novel_gene": true
+            },
+            "INTELLIGENCE": {
+              "expression": {
+                "candidate_generator": "GENERAL_COMBINATIONS_UP_TO_WIDTH",
+                "max_trigger_width": 3
+              },
+              "gene_digest": "7912ea5a80bc622dd954d8220d0f76a3fcbf04dfe79bd681bb24524e9039a04c",
+              "gene_id": "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+              "heritage": [
+                "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+              ],
+              "mutation_reason": "TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION",
+              "novel_gene": true
+            },
+            "LOGIC": {
+              "expression": {
+                "max_width": 3
+              },
+              "gene_digest": "7a43ad8ded171ca35b25d029aa636b8587e0b8e3e113efca884bb73d1fa0f003",
+              "gene_id": "GENE-LOGIC-BOOLEAN-DNF-V1",
+              "heritage": [
+                "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+              ],
+              "mutation_reason": "ValueError:NOT_SYMMETRIC_DETERMINISTIC",
+              "novel_gene": true
+            },
+            "THINKING": {
+              "expression": {
+                "latency_tiebreak": true
+              },
+              "gene_digest": "07b84a3a66eaca0cf77c4de5298e7b46f2a6887429462dcecd72c54a51df38e4",
+              "gene_id": "GENE-THINKING-LATENCY-AWARE-PLANNER-V1",
+              "heritage": [
+                "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+              ],
+              "mutation_reason": "EQUAL_UTILITY_LATENCY_TIE",
+              "novel_gene": false
+            }
+          },
+          "experience_sources": [
+            {
+              "branch": "yado-v29-cognitive",
+              "claim_boundary": null,
+              "evidence": [
+                "runtime/cognitive_cycle_v29.py",
+                "receipts/yado-v29-cognitive-latest.json"
+              ],
+              "lesson_provenance": {
+                "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                "semantic_validation_by_rederivation": false,
+                "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+              },
+              "lessons": [
+                "BOUNDED_LOGIC_SYNTHESIS_CAN_GENERALIZE_ON_FRESH_PARITY",
+                "CONTEXT_CONDITIONED_THINKING_PRECEDENCE_CAN_TRANSFER_TO_FRESH_ACTION_IDS",
+                "FEATURE_SELECTED_INTELLIGENCE_STRATEGY_INDUCTION",
+                "LEARNING_EVENT_MUST_CLOSE_LOOP_IN_PERSISTENT_MEMORY"
+              ],
+              "rederived_evidence": {
+                "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                "observation_count": 14,
+                "semantic_equivalence_to_host_lessons_claimed": false,
+                "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+              },
+              "role": "COGNITIVE_GROWTH_EXPERIENCE",
+              "score": 6,
+              "tags": [
+                "logic",
+                "thinking",
+                "intelligence",
+                "memory",
+                "internet",
+                "closed_loop"
+              ]
+            },
+            {
+              "branch": "yado-kernel-task-v37-repair",
+              "claim_boundary": null,
+              "evidence": [
+                "runtime/yado_v37_integrity_self_repair_task.py",
+                "receipts/yado-v37-integrity-self-repair-task-latest.json"
+              ],
+              "lesson_provenance": {
+                "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                "semantic_validation_by_rederivation": false,
+                "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+              },
+              "lessons": [
+                "DO_NOT_WEAKEN_CONTENT_ADDRESSED_INTEGRITY_TO_MAKE_A_CANDIDATE_PASS",
+                "PRESERVE_LAST_VERIFIED_LINEAGE_UNTIL_REPAIR_PASSES_FRESH_REGRESSION",
+                "PREFER_SMALLEST_EVIDENCE_BACKED_REPAIR",
+                "DIAGNOSIS_AND_REPAIR_SELECTION_CAN_BE_SEPARATE_FROM_REPAIR_APPLICATION"
+              ],
+              "rederived_evidence": {
+                "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                "observation_count": 29,
+                "semantic_equivalence_to_host_lessons_claimed": false,
+                "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+              },
+              "role": "FAIL_CLOSED_SELF_REPAIR_EXPERIENCE",
+              "score": 1,
+              "tags": [
+                "self_repair",
+                "integrity",
+                "rollback",
+                "diagnosis",
+                "fail_closed"
+              ]
+            },
+            {
+              "branch": "yado-rc8-v35-training",
+              "claim_boundary": null,
+              "evidence": [
+                "receipts/yado-rc8-v35-latest.json",
+                "receipts/yado-rc8-v35-internet-latest.json"
+              ],
+              "lesson_provenance": {
+                "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                "semantic_validation_by_rederivation": false,
+                "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+              },
+              "lessons": [
+                "TRAINING_RESULTS_REQUIRE_EXTERNAL_RECEIPTS",
+                "INTERNET_ACCESS_IS_EVIDENCE_TRANSPORT_NOT_INTELLIGENCE_BY_ITSELF"
+              ],
+              "rederived_evidence": {
+                "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                "observation_count": 8,
+                "semantic_equivalence_to_host_lessons_claimed": false,
+                "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+              },
+              "role": "TRAINING_AND_INTERNET_EXPERIENCE",
+              "score": 1,
+              "tags": [
+                "training",
+                "internet",
+                "development"
+              ]
+            },
+            {
+              "artifact": "candidates/kernel-self-generated/g2-native-compositional-string-transducer-gene-genesis-v1.json",
+              "checks": {
+                "automatic_canonical_promotion": false,
+                "blind_labels_not_exposed_to_native_experience": true,
+                "canonical_unchanged": true,
+                "canonical_v5_continuity_active": true,
+                "content_addressed_fit_validation_blind_split": true,
+                "external_models_used": false,
+                "failure_experience_retained_by_child": true,
+                "host_ast_compiler_used": false,
+                "host_operator_inventory_used": false,
+                "host_patch_used": false,
+                "host_serializer_used": false,
+                "host_source_template_used": false,
+                "host_string_grammar_used": false,
+                "native_deficit_detected": true,
+                "native_goal_created": true,
+                "native_meta_evolution_genesis_routes_executed": true,
+                "new_compositional_string_transducer_gene_created": false,
+                "new_transducer_gene_binds_current_failure": false,
+                "new_transducer_gene_has_novel_identity": false,
+                "prior_1012_example_failure_consumed": true,
+                "rollback_parent_available": true,
+                "v5_semantic_edit_gene_consumed": true,
+                "v6_transducer_deficit_consumed": true,
+                "yado_own_ast_memory_reconstructed": true
+              },
+              "next_required_capability": "SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2",
+              "receipt_sha256": "b23aeb8f9b2b4a817467b5e433a9f613d253371bfda09358c7c1e0741e9ad5be",
+              "role": "YADO_SELF_EXTENDING_META_LANGUAGE_FAILURE",
+              "status": "WITHHOLD_G2_NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1"
+            },
+            {
+              "artifact": "candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json",
+              "next_required_capability": "NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1",
+              "receipt_sha256": "696e1c1604c20ff48566b6df92dce2b9fbb1e92c2955f8421018958b7fb9ec50",
+              "role": "YADO_SOURCE_SERIALIZATION_GAP",
+              "status": "WITHHOLD_G2_HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6"
+            },
+            {
+              "artifact": "candidates/kernel-self-generated/g2-native-source-primitive-execution-serialization-v1.json",
+              "example_count": 1012,
+              "receipt_sha256": "07b191d5ac6c911beb4a4cf5c752ea2bba24bf6b4d609fbfb5a6012713b67f84",
+              "role": "YADO_PRIOR_BOUNDED_SELECTOR_EXPRESSIVENESS_FAILURE",
+              "selector_error": "ValueError:no supported bounded mechanism family fits the training evidence"
+            },
+            {
+              "coordinate_programs_generated": 216,
+              "coordinate_train_exact": 0.0,
+              "host_supplied_coordinate_algebra_is_preexisting": true,
+              "role": "YADO_EXISTING_META_GRAMMAR_EXPRESSIVENESS_PROBE",
+              "selected_program": {
+                "bias": 0,
+                "inner_count": 1,
+                "inner_step": 0,
+                "last_coeff": 0,
+                "origin": "LOW_LEVEL_COORDINATE_SEARCH",
+                "outer_step": 1,
+                "rank": 1
+              }
+            }
+          ],
+          "generation": "G2_CANDIDATE_TRCG_V1",
+          "genome_digest": "f114b4937e3f2fd2a932d762c3c78fc23332e024da8e9f0d75698f8c2081209f",
+          "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
+          "mutation_count": 4,
+          "novel_gene_count": 3,
+          "parent_genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+          "promotion_state": "SHADOW_ONLY",
+          "schema": "yado.g2.evolutionary_genome.v1"
+        },
+        "controller_id": "CTRL-G2-EVOLUTIONARY-GENOME-V1",
+        "deficits": {
+          "CODE": {
+            "deficit": true,
+            "parent_holdout": 0.0,
+            "signature": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
+            "suggestion": "RECOMBINE_LOGIC_POLYNOMIAL_FIT_WITH_AST_RETURN_SYNTHESIS"
+          },
+          "INTELLIGENCE": {
+            "deficit": true,
+            "parent_route": [
+              "BASE"
+            ],
+            "signature": "TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION",
+            "suggestion": "INCREMENT_TRIGGER_WIDTH"
+          },
+          "LOGIC": {
+            "deficit": true,
+            "signature": "ValueError:NOT_SYMMETRIC_DETERMINISTIC",
+            "suggestion": "SYNTHESIZE_BOOLEAN_DNF_GENE"
+          },
+          "THINKING": {
+            "deficit": true,
+            "parent_action": "A_SLOW",
+            "signature": "EQUAL_UTILITY_LATENCY_TIE",
+            "suggestion": "MUTATE_STATE_KEY_WITH_LATENCY"
+          }
+        },
+        "fitness": {
+          "all_regressions_pass": true,
+          "child": {
+            "CODE": 1.0,
+            "INTELLIGENCE": 1.0,
+            "LOGIC": 1.0,
+            "THINKING": 1.0
+          },
+          "child_mean": 1.0,
+          "fitness_gain": 1.0,
+          "parent": {
+            "CODE": 0.0,
+            "INTELLIGENCE": 0.0,
+            "LOGIC": 0.0,
+            "THINKING": 0.0
+          },
+          "parent_mean": 0.0,
+          "regression": {
+            "CODE": true,
+            "INTELLIGENCE": true,
+            "LOGIC": true,
+            "THINKING": true
+          }
+        },
+        "g3_genesis_performed": false,
+        "generation_transition": false,
+        "parent": {
+          "chromosomes": {
+            "CODE": {
+              "expression": {
+                "mode": "CANONICAL_V11"
+              },
+              "gene_digest": "98271ea02611a375510fc6a9ee633837b4b4fa5e9c89286876d2fefac36d14ce",
+              "gene_id": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+              "heritage": [
+                "G2"
+              ],
+              "mutation_reason": null,
+              "novel_gene": false
+            },
+            "INTELLIGENCE": {
+              "expression": {
+                "max_trigger_width": 2
+              },
+              "gene_digest": "27460d5a1a44bc936cbd3724842c5c86775df674212ba6ee80110089e289bc86",
+              "gene_id": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+              "heritage": [
+                "G2"
+              ],
+              "mutation_reason": null,
+              "novel_gene": false
+            },
+            "LOGIC": {
+              "expression": {
+                "mode": "CANONICAL_V2"
+              },
+              "gene_digest": "0354aca82bc184cc55e379b0d70050dfa542b2cfdbb321262f6c4edd8804aea9",
+              "gene_id": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+              "heritage": [
+                "G2"
+              ],
+              "mutation_reason": null,
+              "novel_gene": false
+            },
+            "THINKING": {
+              "expression": {
+                "mode": "CANONICAL_V2"
+              },
+              "gene_digest": "297a0093f790699c42eeab4723984e74265bfe324b4890980657a10ab59ea328",
+              "gene_id": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+              "heritage": [
+                "G2"
+              ],
+              "mutation_reason": null,
+              "novel_gene": false
+            }
+          },
+          "component_digests": {
+            "CODE": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+            "INTELLIGENCE": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
+            "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
+            "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
+          },
+          "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+          "generation": "G2_CANDIDATE_TRCG_V1",
+          "genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+          "genome_id": "G2-PARENT-GENOME-V1",
+          "parent_head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
+          "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
+          "schema": "yado.g2.evolutionary_genome.v1"
+        },
+        "promotion_authorized": false,
+        "run_digest": "911a2fe66f63ad0f81cf345e080675bef46e84c9790fc45a7a74ecc89a898eb6",
+        "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
+        "selection": "CHILD",
+        "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
+      }
+    },
+    "kernel": {
+      "algorithm_constructor_registry": [
+        {
+          "constraints": [
+            {
+              "a": "$SIGNAL_0",
+              "b": "$SIGNAL_1",
+              "type": "NOT_EQUAL"
+            }
+          ],
+          "constructor_id": "C_65cc0f771747",
+          "observed_sources": [
+            "THINKING"
+          ],
+          "program_template": {
+            "else": {
+              "else": {
+                "op": "LEAF"
+              },
+              "op": "IF_SIGNAL",
+              "signal": {
+                "key": "$SIGNAL_0",
+                "source": "EPISODE_CONTEXT",
+                "threshold": 0.5
+              },
+              "then": {
+                "op": "LEAF"
+              }
+            },
+            "op": "IF_SIGNAL",
+            "signal": {
+              "key": "$SIGNAL_1",
+              "source": "EPISODE_CONTEXT",
+              "threshold": 0.5
+            },
+            "then": {
+              "op": "LEAF"
+            }
+          },
+          "support_count": 2
+        },
+        {
+          "constraints": [],
+          "constructor_id": "C_fac3b284e56b",
+          "observed_sources": [
+            "INTELLIGENCE",
+            "LOGIC"
+          ],
+          "program_template": {
+            "else": {
+              "op": "LEAF"
+            },
+            "op": "IF_SIGNAL",
+            "signal": {
+              "key": "$SIGNAL_0",
+              "source": "INPUT",
+              "threshold": 0.5
+            },
+            "then": {
+              "op": "LEAF"
+            }
+          },
+          "support_count": 4
+        }
+      ],
+      "algorithm_genesis_snapshot": {
+        "constructors": [
+          "C_65cc0f771747",
+          "C_fac3b284e56b"
+        ],
+        "enabled": true,
+        "policy": {
+          "constructor_source": "CONTENT_DERIVED_ANTI_UNIFICATION",
+          "durable_scope": "LOCAL_PROJECT_ARTIFACT",
+          "fresh_blind_used_for_selection": false,
+          "rollback_required": true,
+          "selection": "REVEALED_VALIDATION_ONLY",
+          "shadow_first": true,
+          "trigger": "ALL_SINGLE_EVOLUTION_ALGORITHMS_UNDERPERFORM",
+          "unrestricted_self_code_rewrite": false
+        }
+      },
+      "evolution_event_count": 0,
+      "meta_evolution_snapshot": {
+        "algorithm_counts": {
+          "INTELLIGENCE": 8,
+          "LOGIC": 8,
+          "THINKING": 12
+        },
+        "enabled": true,
+        "profile": "YADO_V3_0_RC8_VERIFIED_EXTERNAL_COGNITIVE_RUNTIME",
+        "selection_policy": {
+          "algorithm_selection": "REVEALED_VALIDATION_ONLY",
+          "durable_scope": "LOCAL_PROJECT_ARTIFACT",
+          "fresh_blind_used_for_selection": false,
+          "rollback_required": true,
+          "shadow_first": true,
+          "trigger": "EVOLUTION_ALGORITHM_UNDERPERFORMS_ON_REVEALED_VALIDATION",
+          "unrestricted_self_code_rewrite": false
+        }
+      },
+      "meta_grammar_extension_registry": [
+        {
+          "derived_from": [
+            {
+              "grammar_extension_id": "G_667036ab06dc",
+              "organ": "LOGIC",
+              "predicate_kind": "BOOL_TABLE",
+              "round": "cycle1"
+            },
+            {
+              "grammar_extension_id": "G_00df267b2e62",
+              "organ": "THINKING",
+              "predicate_kind": "LINEAR_THRESHOLD",
+              "round": "cycle1"
+            },
+            {
+              "grammar_extension_id": "G_00df267b2e62",
+              "organ": "INTELLIGENCE",
+              "predicate_kind": "LINEAR_THRESHOLD",
+              "round": "cycle1"
+            },
+            {
+              "grammar_extension_id": "G_667036ab06dc",
+              "organ": "LOGIC",
+              "predicate_kind": "BOOL_TABLE",
+              "round": "cycle2"
+            },
+            {
+              "grammar_extension_id": "G_00df267b2e62",
+              "organ": "THINKING",
+              "predicate_kind": "LINEAR_THRESHOLD",
+              "round": "cycle2"
+            },
+            {
+              "grammar_extension_id": "G_00df267b2e62",
+              "organ": "INTELLIGENCE",
+              "predicate_kind": "LINEAR_THRESHOLD",
+              "round": "cycle2"
+            }
+          ],
+          "meta_grammar_operator_id": "MG_1d259d9fa9ea",
+          "observed_organs": [
+            "INTELLIGENCE",
+            "LOGIC",
+            "THINKING"
+          ],
+          "predicate_program_types": [
+            "BOOL_TABLE",
+            "LINEAR_THRESHOLD"
+          ],
+          "program_template": {
+            "else": {
+              "op": "LEAF"
+            },
+            "op": "IF_PREDICATE",
+            "predicate_program": "$PREDICATE_PROGRAM",
+            "then": {
+              "op": "LEAF"
+            }
+          },
+          "selection_contract": "REVEALED_TRAIN_VALIDATION_ONLY",
+          "semantic": "ROUTE_EXISTING_EVOLUTION_ALGORITHMS_BY_EVIDENCE_INVENTED_PREDICATE",
+          "support_count": 6
+        }
+      ],
+      "meta_grammar_snapshot": {
+        "enabled": true,
+        "operators": [
+          "MG_1d259d9fa9ea"
+        ],
+        "policy": {
+          "durable_scope": "LOCAL_PROJECT_ARTIFACT",
+          "fresh_blind_used_for_selection": false,
+          "rollback_required": true,
+          "selection": "REVEALED_TRAIN_VALIDATION_ONLY",
+          "shadow_first": true,
+          "trigger": "RC5_CONSTRUCTOR_LANGUAGE_VALIDATION_BELOW_1",
+          "unrestricted_self_code_rewrite": false
+        }
+      },
+      "metacognitive_control_capability": {
+        "changes_foundation_weights": false,
+        "provenance": {
+          "external_code_copied_verbatim": false,
+          "foundation_weights_modified": false,
+          "kind": "BOUNDED_NATIVE_REDERIVATION_FROM_EXTERNAL_RESEARCH_PRINCIPLES",
+          "research": "yado_rc8_metacognitive_training_research_v1.json"
+        },
+        "routes_epistemic_conflict_before_execution": true,
+        "status": "ACTIVE_BOUNDED_METACOGNITIVE_CONTROL_V1",
+        "uses_evidence_coverage": true,
+        "uses_historical_capability_profile": true
+      },
+      "organ_autoevolution_models": {
+        "INTELLIGENCE": {
+          "evidence": {
+            "ablation": 0.1111111111111111,
+            "baseline": 0.1111111111111111,
+            "blind": 1.0,
+            "restore": 1.0
+          },
+          "model": {
+            "feature": "regression",
+            "left": {
+              "feature": "uncertainty",
+              "left": {
+                "feature": "expressiveness_gap",
+                "left": {
+                  "feature": "evidence_complete",
+                  "left": {
+                    "label": "WITHHOLD"
+                  },
+                  "right": {
+                    "feature": "blind",
+                    "left": {
+                      "label": "WITHHOLD"
+                    },
+                    "right": {
+                      "label": "ACCEPT_DURABLE"
+                    },
+                    "threshold": 0.8999999999999999
+                  },
+                  "threshold": 0.5
+                },
+                "right": {
+                  "label": "EXPAND_SUBSTRATE"
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "label": "SEEK_EVIDENCE"
+              },
+              "threshold": 0.55
+            },
+            "right": {
+              "label": "ROLLBACK"
+            },
+            "threshold": 0.5
+          },
+          "model_digest": "cec19967f1fd05f56ee3514c62951dc5965cc12624ac657464317cb664ca9f37",
+          "model_type": "STRATEGY_TREE",
+          "selected_depth": 5
+        },
+        "LOGIC": {
+          "evidence": {
+            "ablation": 0.5,
+            "baseline": 0.5,
+            "blind": 1.0,
+            "restore": 1.0
+          },
+          "model": [
+            "XOR",
+            [
+              "AND",
+              [
+                "VAR",
+                "consistent"
+              ],
+              [
+                "VAR",
+                "verified"
+              ]
+            ],
+            [
+              "VAR",
+              "counterexample"
+            ]
+          ],
+          "model_digest": "a04cd7f64b7d790c768fcc553d725dbe5f44f122d92acfdd11a8e45bc67efe7f",
+          "model_type": "BOOLEAN_PROGRAM"
+        },
+        "THINKING": {
+          "evidence": {
+            "ablation": 0.2,
+            "baseline": 0.2,
+            "blind": 1.0,
+            "restore": 1.0
+          },
+          "model": [
+            {
+              "after": "COMMIT",
+              "before": "CRITIQUE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "LEARN",
+              "before": "CRITIQUE",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "VERIFY",
+              "before": "CRITIQUE",
+              "confidence": 1.0,
+              "support": 6
+            },
+            {
+              "after": "COMMIT",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "CRITIQUE",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 6
+            },
+            {
+              "after": "LEARN",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 4
+            },
+            {
+              "after": "SIMULATE",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "VERIFY",
+              "before": "HYPOTHESIZE",
+              "confidence": 1.0,
+              "support": 6
+            },
+            {
+              "after": "COMMIT",
+              "before": "LEARN",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "COMMIT",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "CRITIQUE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 6
+            },
+            {
+              "after": "HYPOTHESIZE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 6
+            },
+            {
+              "after": "LEARN",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 4
+            },
+            {
+              "after": "RESEARCH",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "SIMULATE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 6
+            },
+            {
+              "after": "COMMIT",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 6
+            },
+            {
+              "after": "CRITIQUE",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "HYPOTHESIZE",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "LEARN",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 4
+            },
+            {
+              "after": "SIMULATE",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "VERIFY",
+              "before": "RESEARCH",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "COMMIT",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 6
+            },
+            {
+              "after": "CRITIQUE",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "LEARN",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "VERIFY",
+              "before": "SIMULATE",
+              "confidence": 1.0,
+              "support": 5
+            },
+            {
+              "after": "COMMIT",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "LEARN",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 4
+            }
+          ],
+          "model_digest": "4e73ecd538214d30ac73ee67d3e22c628523688b4bf8e398428e254e408183b2",
+          "model_type": "PRECEDENCE_GRAPH",
+          "selected_threshold": 1.0
+        }
+      },
+      "organ_evolution_algorithm_bank": {
+        "INTELLIGENCE": [
+          {
+            "family": "CART_AXIS",
+            "max_depth": 1
+          },
+          {
+            "family": "CART_AXIS",
+            "max_depth": 2
+          },
+          {
+            "family": "CART_AXIS",
+            "max_depth": 3
+          },
+          {
+            "family": "CART_AXIS",
+            "max_depth": 4
+          },
+          {
+            "family": "CART_AXIS",
+            "max_depth": 5
+          },
+          {
+            "family": "CART_AXIS",
+            "max_depth": 6
+          },
+          {
+            "family": "CART_AXIS",
+            "max_depth": 7
+          },
+          {
+            "family": "LINEAR_SCORE_SEARCH",
+            "weight_basis": [
+              -1,
+              0,
+              1
+            ]
+          }
+        ],
+        "LOGIC": [
+          {
+            "family": "ENUM_BOOLEAN",
+            "max_depth": 3,
+            "refit_timeout_s": 4.0,
+            "semantic_dedup": true,
+            "timeout_s": 1.5
+          },
+          {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 2
+          },
+          {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 3
+          },
+          {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 4
+          },
+          {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 5
+          },
+          {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 6
+          },
+          {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 7
+          },
+          {
+            "criterion": "GINI",
+            "family": "BOOL_DECISION_TREE",
+            "max_depth": 8
+          }
+        ],
+        "THINKING": [
+          {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.5
+          },
+          {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.6
+          },
+          {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.67
+          },
+          {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.75
+          },
+          {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 0.8
+          },
+          {
+            "family": "GLOBAL_PRECEDENCE",
+            "min_support": 2,
+            "threshold": 1.0
+          },
+          {
+            "family": "CONTEXTUAL_PRECEDENCE",
+            "min_support": 2,
+            "partition": "ROLE_PRESENCE",
+            "threshold": 0.5
+          },
+          {
+            "family": "CONTEXTUAL_PRECEDENCE",
+            "min_support": 2,
+            "partition": "ROLE_PRESENCE",
+            "threshold": 0.6
+          },
+          {
+            "family": "CONTEXTUAL_PRECEDENCE",
+            "min_support": 2,
+            "partition": "ROLE_PRESENCE",
+            "threshold": 0.67
+          },
+          {
+            "family": "CONTEXTUAL_PRECEDENCE",
+            "min_support": 2,
+            "partition": "ROLE_PRESENCE",
+            "threshold": 0.75
+          },
+          {
+            "family": "CONTEXTUAL_PRECEDENCE",
+            "min_support": 2,
+            "partition": "ROLE_PRESENCE",
+            "threshold": 0.8
+          },
+          {
+            "family": "CONTEXTUAL_PRECEDENCE",
+            "min_support": 2,
+            "partition": "ROLE_PRESENCE",
+            "threshold": 1.0
+          }
+        ]
+      }
+    }
+  },
+  "new_meta_language_candidates": [],
+  "next_required_capability": "SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3",
+  "parent_v1_receipt": "b23aeb8f9b2b4a817467b5e433a9f613d253371bfda09358c7c1e0741e9ad5be",
+  "parent_v6_receipt": "696e1c1604c20ff48566b6df92dce2b9fbb1e92c2955f8421018958b7fb9ec50",
+  "prior_serializer_receipt": "07b191d5ac6c911beb4a4cf5c752ea2bba24bf6b4d609fbfb5a6012713b67f84",
+  "promotion_applied": false,
+  "receipt_sha256": "ff27ea04d87b8894d8f6a18c8340e2508ea22fa23899a6ea697cf4cc425e40fb",
+  "schema": "yado.g2.self_extending_string_transducer_meta_language_genesis.v2",
+  "selected_candidate": null,
+  "semantic_boundary": "V2 TESTS WHETHER YADO CAN MOVE FROM GENE-INVENTION INSIDE A FIXED META-LANGUAGE TO INVENTING A NEW STRING/SOURCE META-LANGUAGE FAMILY. THE PREEXISTING LOW-LEVEL COORDINATE META-GRAMMAR IS ALLOWED ONLY AS AN EXPRESSIVENESS PROBE AND ITS ALGEBRA IS NOT CLAIMED AS SELF-GENERATED. HOST PROVIDES NO STRING GRAMMAR, PRIMITIVE INVENTORY, SERIALIZER, AST COMPILER OR PATCH. WITHHOLD LOCALIZES THE NEXT GAP TO SELF-GENERATION OF A NEW PRIMITIVE ALGEBRA.",
+  "split_counts": {
+    "blind": 208,
+    "fit": 605,
+    "validation": 199
+  },
+  "status": "WITHHOLD_G2_SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2",
+  "task": {
+    "constraints": {
+      "automatic_promotion": false,
+      "canonical_mutation": false,
+      "external_models": false,
+      "external_research": false,
+      "fail_closed": true,
+      "host_ast_compiler": false,
+      "host_patch": false,
+      "host_primitive_inventory": false,
+      "host_serializer": false,
+      "host_source_template": false,
+      "host_string_grammar": false,
+      "shadow_only": true
+    },
+    "host_role": "SELF_SOURCE_MEMORY_RECONSTRUCTION_EXISTING_META_GRAMMAR_EXPRESSIVENESS_PROBE_AND_STRICT_NATIVE_OUTPUT_OBSERVATION_ONLY",
+    "objective": "YADO_MOVE_FROM_GENE_INVENTION_INSIDE_FIXED_META_LANGUAGES_TO_SELF_GENERATION_OF_A_NEW_STRING_SOURCE_META_LANGUAGE_FAMILY",
+    "parents": {
+      "canonical_continuity_v5": "canonical/yado-g2-cognitive-continuity-checkpoint-v1.json",
+      "prior_serializer_failure": "candidates/kernel-self-generated/g2-native-source-primitive-execution-serialization-v1.json",
+      "serialization_v6": "candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json",
+      "string_transducer_gene_genesis_v1": "candidates/kernel-self-generated/g2-native-compositional-string-transducer-gene-genesis-v1.json"
+    },
+    "schema": "yado.g2.self_extending_string_transducer_meta_language_genesis.request.v2",
+    "stop_condition": "NEW_SELF_EXTENDING_STRING_META_LANGUAGE_PASS_SHADOW_OR_EXPLICIT_SELF_GENERATED_PRIMITIVE_ALGEBRA_DEFICIT",
+    "success_conditions": [
+      "canonical execution fabric V5 remains active",
+      "current V1 and V6 failures are consumed",
+      "prior 1012-example serializer failure is consumed",
+      "at least 1000 YADO-own AST/source examples are reconstructed",
+      "content-addressed fit validation blind partitions exist",
+      "existing low-level coordinate meta-grammar executes as an expressiveness probe",
+      "existing coordinate algebra does not falsely count as self-generated string grammar",
+      "Genome V2/V3 fixed-family invention boundary is measured",
+      "native goal and deficit are created",
+      "native meta/evolution/genesis routes execute",
+      "child retains the current failure experience",
+      "native output creates a new self-extending string/source meta-language family",
+      "new family has novel identity",
+      "new family binds the current failure",
+      "canonical G2 remains unchanged"
+    ],
+    "task": "Consume the failed native string-transducer gene genesis V1, the V6 serialization gap, the prior 1012-example serializer failure, and YADO own AST/source memory. Use the already-existing low-level coordinate meta-grammar only as an expressiveness probe; do not treat its host-supplied coordinate algebra as self-generated. Inspect and run existing native meta/evolution/genesis routes. Pass only if YADO creates a new string/source meta-language family with novel identity bound to the current failure. Do not provide a string grammar, primitive inventory, serializer, AST compiler, source template, patch, external model or new external research.",
+    "trigger": 1,
+    "trigger_reason": "CONTINUE_AFTER_NATIVE_STRING_TRANSDUCER_GENE_GENESIS_V1_WITHHELD_WITH_ZERO_CANDIDATES"
+  }
+}
