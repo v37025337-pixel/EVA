@@ -1,0 +1,81 @@
+name: YADO G2 Experience Conditioned Novel Gene Genesis V4
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-experience-conditioned-novel-gene-genesis-v4-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-experience-conditioned-novel-gene-genesis-v4
+  cancel-in-progress: true
+jobs:
+  genesis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before V4
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V4
+        run: python -m py_compile runtime/yado_g2_experience_conditioned_novel_gene_genesis_v4.py
+      - name: Run strict native invention-space audit
+        id: genesis
+        continue-on-error: true
+        run: python runtime/yado_g2_experience_conditioned_novel_gene_genesis_v4.py
+      - name: Canonical guard after V4
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist V4 evidence
+        if: always()
+        run: |
+          git config user.name "YADO Novel Gene Genesis V4"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-experience-conditioned-novel-gene-genesis-v4.json ]; then
+            git add candidates/kernel-self-generated/g2-experience-conditioned-novel-gene-genesis-v4.json
+          fi
+          git diff --cached --quiet || git commit -m "Persist YADO novel gene genesis V4 evidence [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/__pycache__ runtime/yado_rc8_v36/__pycache__ || true
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest V4 boundary verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-experience-conditioned-novel-gene-genesis-v4.json")
+          if not p.exists(): raise SystemExit("MISSING_NOVEL_GENE_V4")
+          r=json.loads(p.read_text()); c=r["checks"]
+          assert r["status"]=="WITHHOLD_G2_EXPERIENCE_CONDITIONED_NOVEL_GENE_GENESIS_V4",r
+          assert r["gap_proven"] is True,r
+          assert c["genome_v2_v3_have_no_source_edit_invention_api"] is True,r
+          assert c["target_already_compiles"] is True,r
+          assert c["generic_compile_repair_is_inert_on_semantic_target"] is True,r
+          assert c["generic_history_compile_repair_is_inert_on_compiling_target"] is True,r
+          assert c["target_not_in_proven_whole_function_substrate"] is True,r
+          assert c["lower_meta_grammar_exists_but_is_bounded"] is True,r
+          assert c["lower_algorithm_genesis_exists_but_is_bounded"] is True,r
+          assert c["new_semantic_source_edit_gene_created"] is False,r
+          assert c["new_python_source_candidate_created"] is False,r
+          assert c["host_supplied_source_edit_grammar"] is False,r
+          assert c["host_supplied_ast_skeleton"] is False,r
+          assert c["host_supplied_patch"] is False,r
+          assert c["external_models_used"] is False,r
+          assert c["canonical_unchanged"] is True,r
+          assert r["next_required_capability"]=="TASK_CONDITIONED_SEMANTIC_SOURCE_EDIT_META_LANGUAGE_GENESIS_V5",r
+          print("PASS_BOUNDARY_PROOF",r["status"],r["next_required_capability"],r["receipt_sha256"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-experience-conditioned-novel-gene-genesis-v4-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-experience-conditioned-novel-gene-genesis-v4.json
+          if-no-files-found: warn
