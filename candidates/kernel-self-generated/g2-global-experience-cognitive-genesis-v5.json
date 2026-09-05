@@ -1,0 +1,94 @@
+{
+  "blind_organ_ablation_drops": {
+    "INTELLIGENCE": 0.29166666666666663,
+    "LOGIC": 0.04166666666666663,
+    "THINKING": 0.25
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "domain_slice_floor": true,
+    "external_models_used": false,
+    "fresh_ge_0_55": true,
+    "fresh_intelligence_causal": true,
+    "fresh_logic_causal": true,
+    "fresh_thinking_causal": true,
+    "host_selected_family": false,
+    "host_written_cognitive_model": false,
+    "native_family_selection": true,
+    "new_cognitive_identity": true,
+    "organ_only_training_surface": true,
+    "restore_exact": true,
+    "safety_gate_ablation": true,
+    "safety_gate_commit": true,
+    "safety_gate_exact": true,
+    "source_slice_floor": true,
+    "stress_shortcut_failure_consumed": true,
+    "unknown_fail_closed": true,
+    "v3_intelligence_preserved": true,
+    "v3_logic_preserved": true,
+    "v3_thinking_preserved": true,
+    "validation_all_organs_causal": true,
+    "validation_ge_0_55": true
+  },
+  "domain_slices": {
+    "CODE": {
+      "accuracy": 0.875,
+      "count": 8
+    }
+  },
+  "fresh": 0.7916666666666666,
+  "gene_ids": {
+    "COGNITIVE": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V5-783391cbb7ef77da",
+    "INTELLIGENCE": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+    "LOGIC": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V2-6d1ec1d85217b9bd",
+    "THINKING": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac"
+  },
+  "genome_digest": "e9d8fe16a783aac2f98744a2764f64ba5909ea39aa63d6fda2556a19f8ddfddc",
+  "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V5-5e5d66476d724fa2",
+  "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V2",
+  "promotion_applied": false,
+  "receipt_sha256": "2ce9b8b4ebf852a6f41a1a0ced0c358431c98db6fbea0d6f47ce4d144406cc4e",
+  "safety_gate": {
+    "ablation_score": 0.5,
+    "blind_cases": 40,
+    "candidate_score": 1.0,
+    "created_at": "2026-09-05T10:03:33.750731+00:00",
+    "experiment_id": "DEV22-4cc70ffd764c",
+    "mechanism_kind": "RULE_PROGRAM",
+    "min_ablation_drop": 0.2,
+    "min_score": 1.0,
+    "program_digest": "1e2f8a675cb882ece09c62b22c1f3392a87586dc4912875b18b0584fb64a0efd",
+    "program_id": "P-e767bce1af76",
+    "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+    "restore_score": 1.0,
+    "stage_ablation_scores": {},
+    "state_committed": true,
+    "target_capability": "GLOBAL_EXPERIENCE_COGNITIVE_SAFETY_GATE_V5",
+    "target_organ": "CONSCIOUS_WORKSPACE",
+    "train_cases": 80,
+    "verdict": "COMMIT"
+  },
+  "schema": "yado.g2.global_experience_cognitive_genesis.v5",
+  "selected_profile": {
+    "complexity": 2,
+    "drops": {
+      "INTELLIGENCE": 0.4,
+      "LOGIC": 0.15000000000000002,
+      "THINKING": 0.25
+    },
+    "family": "CART_AXIS",
+    "param": 2,
+    "token": "CART_D2",
+    "validation": 0.9
+  },
+  "semantic_boundary": "V5 REMOVES ALL NON-ORGAN SHORTCUT CONTEXT FROM COGNITIVE TRAINING. ONLY THE OUTPUTS OF GLOBAL LOGIC, MULTICONTEXT THINKING AND GLOBAL INTELLIGENCE ARE AVAILABLE. NATIVE CART/KNN/CENTROID CANDIDATES ARE ELIGIBLE ONLY IF ALL THREE ORGAN ABLATIONS REDUCE VALIDATION ACCURACY. YADO NATIVE SELECTOR CHOOSES AMONG ELIGIBLE CANDIDATES. UNKNOWN REMAINS FAIL-CLOSED THROUGH A SEPARATE NATIVE SAFETY GATE.",
+  "source_slices": {
+    "RECEIPT": {
+      "accuracy": 0.8235294117647058,
+      "count": 17
+    }
+  },
+  "status": "PASS_SHADOW_G2_GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_V5"
+}
