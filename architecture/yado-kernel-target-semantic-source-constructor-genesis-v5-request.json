@@ -1,0 +1,41 @@
+{
+  "schema": "yado.g2.target_semantic_source_constructor_genesis.request.v5",
+  "objective": "YADO_SELECT_AND_APPLY_A_RESEARCHED_NATIVE_AST_TO_SOURCE_PRIMITIVE_WITHOUT_A_HOST_WRITTEN_SERIALIZER",
+  "task": "Consume the V4 target-semantic source-constructor failure, YADO's prior Python self-study, and the prior 1012-example serializer failure. Reconstruct YADO-own AST/source examples. Mechanically enumerate only public one-argument AST callables that were already present in YADO's Python study, measure them on content-addressed fit/validation/blind splits, and let YADO native skill selection choose at most one primitive. Apply only the selected primitive to fresh blind AST nodes. Do not write a serializer, choose the primitive by name, provide a source template, patch, external model, or new external research. Pass only if the selected primitive achieves >=0.95 fresh exact AST-to-source output and >=0.95 compile rate.",
+  "parents": {
+    "family_constructor_v4": "candidates/kernel-self-generated/g2-self-hosted-meta-language-family-constructor-v4.json",
+    "python_self_study": "experience/yado-native-seedless-source-constructor-python-self-study-v1.json",
+    "prior_serializer_failure": "candidates/kernel-self-generated/g2-native-source-primitive-execution-serialization-v1.json"
+  },
+  "constraints": {
+    "external_models": false,
+    "external_research": false,
+    "host_serializer": false,
+    "host_selected_primitive": false,
+    "host_source_template": false,
+    "host_patch": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "shadow_only": true,
+    "fail_closed": true
+  },
+  "success_conditions": [
+    "canonical V5 continuity remains active",
+    "V4 deficit is consumed",
+    "prior Python self-study is consumed",
+    "prior 1012-example serializer failure is consumed",
+    "at least 1000 YADO-own AST/source examples are reconstructed",
+    "fit validation blind partitions are content addressed",
+    "candidate inventory is derived mechanically from public AST runtime plus prior study",
+    "native goal and deficit are created",
+    "native skill selector chooses exactly one primitive",
+    "selected primitive was previously discovered in Python documentation",
+    "fresh blind AST-to-source exact score is at least 0.95",
+    "fresh emitted source compile rate is at least 0.95",
+    "canonical G2 remains unchanged"
+  ],
+  "host_role": "MECHANICAL_AST_PRIMITIVE_ENUMERATION_FRESH_EVALUATION_AND_NATIVE_SELECTION_TRANSPORT_ONLY",
+  "stop_condition": "NATIVE_AST_TO_SOURCE_TOOL_USE_PASS_SHADOW_OR_EXPLICIT_PRIMITIVE_RESEARCH_REPAIR",
+  "trigger": 1,
+  "trigger_reason": "CONTINUE_FROM_V4_RESULT_OLD_POLYNOMIAL_SOURCE_PATH_ONLY_AND_APPLY_YADO_PRIOR_PYTHON_RESEARCH"
+}
