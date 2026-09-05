@@ -1,0 +1,156 @@
+{
+  "ablations": {
+    "INTELLIGENCE": {
+      "drop": 0.1686746987951807,
+      "score": 0.7590361445783133
+    },
+    "LOGIC": {
+      "drop": 0.09638554216867468,
+      "score": 0.8313253012048193
+    },
+    "TERMINAL_LOGIC": {
+      "drop": 0.09638554216867468,
+      "score": 0.8313253012048193
+    },
+    "THINKING": {
+      "drop": 0.4819277108433735,
+      "score": 0.4457831325301205
+    }
+  },
+  "action_class_slices": {
+    "COMMIT": {
+      "accuracy": 0.6428571428571429,
+      "count": 14
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 40
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 23
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.8333333333333334,
+      "count": 6
+    }
+  },
+  "base_accuracy": 0.927710843373494,
+  "canonical_mutation": false,
+  "checks": {
+    "all_action_classes_ge_0_60": true,
+    "all_action_classes_present": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "combined_ablation_drop_ge_0_40": true,
+    "commit_ge_0_70": false,
+    "domain_slice_floor": true,
+    "execution_slice_repaired": true,
+    "external_models_used": false,
+    "full_blind_ge_0_88": true,
+    "improves_over_stress_v2": true,
+    "intelligence_causal": true,
+    "irrelevant_noise_invariant": true,
+    "logic_causal": true,
+    "organ_vector_deterministic": true,
+    "post_corpus_accuracy_ge_0_75": true,
+    "post_corpus_count_ge_4": true,
+    "restore_exact": true,
+    "retraining_performed": false,
+    "seek_evidence_ge_0_60": true,
+    "source_slice_floor": true,
+    "terminal_logic_causal": true,
+    "terminal_overall_ge_0_75": false,
+    "terminal_pass_ge_0_70": false,
+    "terminal_withhold_ge_0_60": true,
+    "thinking_causal": true,
+    "v6_parent_pass": true,
+    "v6_safety_gate_ablation": true,
+    "v6_safety_gate_exact": true,
+    "v6_unknown_fail_closed": true
+  },
+  "combined_ablation_drop": 0.6506024096385542,
+  "combined_ablation_score": 0.27710843373493976,
+  "domain_slices": {
+    "CODE": {
+      "accuracy": 0.9666666666666667,
+      "count": 30
+    },
+    "COGNITIVE": {
+      "accuracy": 0.9166666666666666,
+      "count": 12
+    },
+    "EVOLUTION": {
+      "accuracy": 0.6666666666666666,
+      "count": 6
+    },
+    "EXECUTION": {
+      "accuracy": 0.7142857142857143,
+      "count": 7
+    },
+    "GENERAL": {
+      "accuracy": 1.0,
+      "count": 12
+    },
+    "REPRESENTATION": {
+      "accuracy": 1.0,
+      "count": 14
+    }
+  },
+  "full_heldout_count": 83,
+  "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V4",
+  "parent_gene_ids": {
+    "COGNITIVE": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-a28b427999ed9dd4",
+    "INTELLIGENCE": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+    "LOGIC": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V3-a00c3f7d2b3021c0",
+    "THINKING": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac"
+  },
+  "parent_genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-4ea96397b2e55b2c",
+  "post_corpus_accuracy": 0.75,
+  "post_corpus_evaluation": [
+    {
+      "expected": "REVISE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-stress-v2.json",
+      "predicted": "REVISE"
+    },
+    {
+      "expected": "REVISE",
+      "path": "experience/yado-global-experience-cognitive-stress-v2.json",
+      "predicted": "REVISE"
+    },
+    {
+      "expected": "CONTINUE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v6.json",
+      "predicted": "CONTINUE"
+    },
+    {
+      "expected": "COMMIT",
+      "path": "experience/yado-global-experience-cognitive-genesis-v6.json",
+      "predicted": "SEEK_EVIDENCE"
+    }
+  ],
+  "promotion_applied": false,
+  "receipt_sha256": "0e6f8dbf3ba1766a867fd5efad78b76c85a0bf63206ae3424048ec8d2d60aa12",
+  "schema": "yado.g2.global_experience_cognitive_stress.experience.v3",
+  "semantic_boundary": "FROZEN V6 STRESS ONLY. NO RETRAINING. TESTS FULL CONTENT-HELDOUT HISTORY, TERMINAL PASS/WITHHOLD SEPARATELY, LOGIC/TERMINAL-LOGIC/THINKING/INTELLIGENCE CAUSAL ABLATIONS, COMBINED ABLATION, ACTION/SOURCE/DOMAIN SLICES, EXECUTION REPAIR, NOISE INVARIANCE, POST-CORPUS TRANSFER, SAFETY AND RESTORE.",
+  "source_slices": {
+    "CANDIDATE": {
+      "accuracy": 0.7916666666666666,
+      "count": 24
+    },
+    "RECEIPT": {
+      "accuracy": 0.9824561403508771,
+      "count": 57
+    }
+  },
+  "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3",
+  "stress_v2_accuracy": 0.8795180722891566,
+  "terminal_metrics": {
+    "accuracy": 0.7,
+    "count": 20,
+    "pass_accuracy": 0.6428571428571429,
+    "pass_count": 14,
+    "withhold_accuracy": 0.8333333333333334,
+    "withhold_count": 6
+  }
+}
