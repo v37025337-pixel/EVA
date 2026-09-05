@@ -1,0 +1,76 @@
+name: YADO G2 Experience Conditioned Mutation Family Selection V3
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-experience-conditioned-mutation-family-selection-v3-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-experience-conditioned-mutation-family-selection-v3
+  cancel-in-progress: true
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before V3
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V3
+        run: python -m py_compile runtime/yado_g2_experience_conditioned_mutation_family_selection_v3.py
+      - name: Run experience-conditioned mutation family selection V3
+        id: select
+        continue-on-error: true
+        run: python runtime/yado_g2_experience_conditioned_mutation_family_selection_v3.py
+      - name: Canonical guard after V3
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist V3 evidence
+        if: always()
+        run: |
+          git config user.name "YADO Mutation Family V3"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-experience-conditioned-mutation-family-selection-v3.json ]; then
+            git add candidates/kernel-self-generated/g2-experience-conditioned-mutation-family-selection-v3.json
+          fi
+          git diff --cached --quiet || git commit -m "Persist YADO mutation family selection V3 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/__pycache__ runtime/yado_rc8_v36/__pycache__ || true
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce strict V3 verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-experience-conditioned-mutation-family-selection-v3.json")
+          if not p.exists(): raise SystemExit("MISSING_MUTATION_FAMILY_V3")
+          r=json.loads(p.read_text());c=r["checks"]
+          if r["status"]!="PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_MUTATION_FAMILY_SELECTION_V3":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          assert c["non_code_domains_reuse_self_generated_genes"] is True,r
+          assert c["current_code_source_rewrite_rejects_all_existing_genes"] is True,r
+          assert c["current_rejection_is_contract_not_domain_based"] is True,r
+          assert c["mutation_family_is_invention_only_after_no_admissible_skill"] is True,r
+          assert c["legacy_polynomial_gene_not_selected"] is True,r
+          assert c["host_selected_concrete_gene"] is False,r
+          assert c["host_authored_source_template"] is False,r
+          assert c["external_models_used"] is False,r
+          assert c["canonical_unchanged"] is True,r
+          assert r["mutation_family_decision"]["family"]=="INVENT_NEW_GENE",r
+          print(r["status"],r["mutation_family_decision"],r["selected_skill_by_domain"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-experience-conditioned-mutation-family-selection-v3-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-experience-conditioned-mutation-family-selection-v3.json
+          if-no-files-found: warn
