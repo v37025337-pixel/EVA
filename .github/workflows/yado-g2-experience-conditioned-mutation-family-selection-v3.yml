@@ -56,9 +56,11 @@ jobs:
           r=json.loads(p.read_text());c=r["checks"]
           if r["status"]!="PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_MUTATION_FAMILY_SELECTION_V3":
               raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
-          assert c["at_least_two_non_code_hard_domains_reuse_gene"] is True,r
+          assert c["at_least_one_non_code_real_domain_causally_reuses_gene"] is True,r
           assert c["memory_control_follows_causal_evidence"] is True,r
           assert c["code_relational_has_structurally_compatible_gene"] is True,r
+          assert c["evidence_sensitive_selection_has_both_admit_and_withhold"] is True,r
+          assert c["domain_label_not_sufficient_for_reuse"] is True,r
           assert c["current_code_source_rewrite_rejects_all_existing_genes"] is True,r
           assert c["current_source_rewrite_rejections_include_structural_critic"] is True,r
           assert c["current_rejection_is_contract_not_domain_based"] is True,r
