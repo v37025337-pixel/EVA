@@ -1,0 +1,51 @@
+name: YADO G2 Module Substrate Evolution V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: ["architecture/yado-g2-coding-module-substrate-evolution-v1-request.json"]
+permissions: {contents: write}
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+      - run: python -m py_compile runtime/yado_g2_coding_module_substrate_evolution_v1.py
+      - name: Evolve constrained module substrate
+        continue-on-error: true
+        run: python runtime/yado_g2_coding_module_substrate_evolution_v1.py
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+        if: always()
+      - name: Persist module substrate evidence
+        if: always()
+        run: |
+          git config user.name "YADO Module Substrate Evolution V1"
+          git config user.email "actions@users.noreply.github.com"
+          git add experience/yado-coding-module-substrate-evolution-v1.json 2>/dev/null || true
+          git add candidates/kernel-self-generated/g2-coding-module-substrate-evolution-v1.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO module substrate evolution V1 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce module substrate verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-coding-module-substrate-evolution-v1.json")
+          if not p.exists():raise SystemExit("MISSING_MODULE_SUBSTRATE_EVIDENCE")
+          r=json.loads(p.read_text())
+          if r["status"]!="PASS_SHADOW_G2_CODING_MODULE_SUBSTRATE_EVOLUTION_V1":
+              raise SystemExit("MODULE_SUBSTRATE_WITHHOLD:"+r["status"]+":"+r["next_required_capability"])
+          assert r["checks"]["all_negative_safety_controls_rejected"] is True,r
+          assert r["checks"]["native_skill_gate_selected_child"] is True,r
+          assert r["checks"]["canonical_unchanged"] is True,r
+          print(r["status"],r["selected_pair"],r["selected_profile"],r["execution_success_count"],r["distinct_output_count"])
+          PY
