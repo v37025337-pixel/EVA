@@ -1,0 +1,90 @@
+{
+  "after": {
+    "candidate_count": 2,
+    "capability_score": null,
+    "deficit_count": 2,
+    "goal_status": "OPEN"
+  },
+  "before": {
+    "candidate_count": 0,
+    "capability_score": null,
+    "deficit_count": 0,
+    "goal_status": "OPEN"
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "canonical_unchanged": true,
+    "host_submitted_experiment_metrics": false,
+    "native_self_continuing_goal_loop": false,
+    "run_cycle_method_exists": true,
+    "run_cycle_returns_external_experiment_handoff": true,
+    "second_cycle_without_metrics_does_not_progress": true,
+    "v1_task_conditioning_failure_preserved": true
+  },
+  "experience_digest": "29b547c5d7bb3003969154efcdd0867cfda21741e71a6791247c64e895c5d41a",
+  "first_cycle": {
+    "candidate": {
+      "action_type": "BUILD_CAPABILITY",
+      "candidate_id": "C-03a031125d14",
+      "deficit_id": "D-db7fb879cad5",
+      "description": "Bounded candidate to address TASK_CONDITIONED_NATIVE_SOURCE_EMISSION",
+      "expected_effect": "Raise TASK_CONDITIONED_NATIVE_SOURCE_EMISSION from 0.000 toward >= 1.000",
+      "status": "SHADOW"
+    },
+    "deficit": {
+      "created_at": "2026-09-05T06:18:57.111919+00:00",
+      "deficit_id": "D-db7fb879cad5",
+      "evidence": [
+        "capability:not_registered"
+      ],
+      "goal_id": "G-8acf6df3223c",
+      "kind": "CAPABILITY_MISSING",
+      "observed": 0.0,
+      "required": 1.0,
+      "status": "OPEN",
+      "target": "TASK_CONDITIONED_NATIVE_SOURCE_EMISSION"
+    },
+    "goal_id": "G-8acf6df3223c",
+    "next_action": "run_bounded_experiment_then_submit_metrics",
+    "state": "CANDIDATE_READY"
+  },
+  "mid": {
+    "candidate_count": 1,
+    "capability_score": null,
+    "deficit_count": 1,
+    "goal_status": "OPEN"
+  },
+  "missing_capabilities": [
+    "TASK_CONDITIONED_NATIVE_SOURCE_EMISSION_V1",
+    "NATIVE_PERSISTENT_GOAL_LOOP_CONTROLLER_V1"
+  ],
+  "schema": "yado.g2.goal_autonomous_source_creation_readiness.experience.v2",
+  "second_cycle": {
+    "candidate": {
+      "action_type": "BUILD_CAPABILITY",
+      "candidate_id": "C-414219bcdf56",
+      "deficit_id": "D-c8479573d1f9",
+      "description": "Bounded candidate to address TASK_CONDITIONED_NATIVE_SOURCE_EMISSION",
+      "expected_effect": "Raise TASK_CONDITIONED_NATIVE_SOURCE_EMISSION from 0.000 toward >= 1.000",
+      "status": "SHADOW"
+    },
+    "deficit": {
+      "created_at": "2026-09-05T06:18:57.113630+00:00",
+      "deficit_id": "D-c8479573d1f9",
+      "evidence": [
+        "capability:not_registered"
+      ],
+      "goal_id": "G-8acf6df3223c",
+      "kind": "CAPABILITY_MISSING",
+      "observed": 0.0,
+      "required": 1.0,
+      "status": "OPEN",
+      "target": "TASK_CONDITIONED_NATIVE_SOURCE_EMISSION"
+    },
+    "goal_id": "G-8acf6df3223c",
+    "next_action": "run_bounded_experiment_then_submit_metrics",
+    "state": "CANDIDATE_READY"
+  },
+  "semantic_boundary": "V2 CORRECTS THE V1 LOOP DETECTOR. run_cycle EXISTS, BUT ONE CALL STOPS AT CANDIDATE_READY AND EXPLICITLY HANDS OFF TO AN EXTERNAL BOUNDED EXPERIMENT/METRICS SUBMISSION. A SECOND CALL WITHOUT THAT EXTERNAL STEP CREATES ANOTHER CANDIDATE AND DOES NOT ADVANCE THE GOAL.",
+  "status": "WITHHOLD"
+}
