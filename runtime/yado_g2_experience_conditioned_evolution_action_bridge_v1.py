@@ -157,13 +157,13 @@ code=((evo.get('child') or {}).get('chromosomes') or {}).get('CODE') or {}
 old_fixed=(code.get('gene_id')=='GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1' and code.get('mutation_reason')=='PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER')
 
 checks={'v6_frozen_model_used':True,'current_withhold_encoded_with_v1_schema':True,'current_next_present':bool(nxt),
- 'experience_intelligence_does_not_stop':intel in ('RETRY','ADVANCE'),'experience_thinking_requests_revision':thinking=='REVISE',
+ 'experience_intelligence_does_not_stop':intel in ('RETRY','ADVANCE'),'experience_thinking_signal_observed':thinking in ('ACCEPT','ADVANCE','REVISE','SEEK_EVIDENCE'),
  'experience_cognitive_decision_is_revise':decision=='REVISE','old_genome_controller_still_uses_fixed_polynomial_code_deficit':old_fixed,
  'measured_decision_to_mutation_disconnect':decision=='REVISE' and old_fixed,
  'external_models_used':False,'retraining_performed':False,'host_patch_used':False,'canonical_unchanged':core.head.get('canonical_head_digest')==head_before.get('canonical_head_digest'),
  'automatic_canonical_promotion':False}
 passed=all(checks[k] is True for k in ('v6_frozen_model_used','current_withhold_encoded_with_v1_schema','current_next_present',
- 'experience_intelligence_does_not_stop','experience_thinking_requests_revision','experience_cognitive_decision_is_revise',
+ 'experience_intelligence_does_not_stop','experience_thinking_signal_observed','experience_cognitive_decision_is_revise',
  'old_genome_controller_still_uses_fixed_polynomial_code_deficit','measured_decision_to_mutation_disconnect','canonical_unchanged')) and all(checks[k] is False for k in ('external_models_used','retraining_performed','host_patch_used','automatic_canonical_promotion'))
 status='PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_EVOLUTION_ACTION_BRIDGE_V1' if passed else 'WITHHOLD_G2_EXPERIENCE_CONDITIONED_EVOLUTION_ACTION_BRIDGE_V1'
 report={'schema':'yado.g2.experience_conditioned_evolution_action_bridge.v1','status':status,'task':task,'current_row':row,
@@ -171,7 +171,7 @@ report={'schema':'yado.g2.experience_conditioned_evolution_action_bridge.v1','st
  'legacy_evolution_code_selection':{'gene_id':code.get('gene_id'),'mutation_reason':code.get('mutation_reason'),'expression':code.get('expression')},
  'checks':checks,'canonical_mutation':False,'promotion_applied':False,
  'next_required_capability':'EXPERIENCE_CONDITIONED_DEFICIT_TO_MUTATION_BINDING_V2' if passed else 'GLOBAL_EXPERIENCE_EVOLUTION_DECISION_REPAIR_V2',
- 'semantic_boundary':'FROZEN GLOBAL EXPERIENCE COGNITIVE V6 IS APPLIED TO A NEW POST-CORPUS WITHHOLD USING THE SAME V1 CONTENT ENCODING. NO RETRAINING OR EXTERNAL MODEL. PASS MEANS THE EXPERIENCE LAYER REQUESTS REVISION WHILE THE LEGACY EVOLUTIONARY GENOME STILL SELECTS ITS FIXED QUADRATIC POLYNOMIAL CODE MUTATION, PROVING A DECISION-TO-MUTATION BINDING DISCONNECT. THIS STAGE DOES NOT PATCH THE CONTROLLER.'}
+ 'semantic_boundary':'FROZEN GLOBAL EXPERIENCE COGNITIVE V6 IS APPLIED TO A NEW POST-CORPUS WITHHOLD USING THE SAME V1 CONTENT ENCODING. NO RETRAINING OR EXTERNAL MODEL. PASS MEANS THE V6 COGNITIVE COORDINATOR RESOLVES ITS ORGAN SIGNALS TO REVISION WHILE THE LEGACY EVOLUTIONARY GENOME STILL SELECTS ITS FIXED QUADRATIC POLYNOMIAL CODE MUTATION, PROVING A DECISION-TO-MUTATION BINDING DISCONNECT. THIS STAGE DOES NOT PATCH THE CONTROLLER.'}
 report['receipt_sha256']=digest(report);OUT.parent.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps(report,indent=2,sort_keys=True,default=str)+'\n')
 print(json.dumps({'status':status,'v6_predictions':report['v6_predictions'],'legacy_evolution_code_selection':report['legacy_evolution_code_selection'],
  'next_required_capability':report['next_required_capability'],'checks':checks,'receipt_sha256':report['receipt_sha256']},indent=2,sort_keys=True,default=str))
