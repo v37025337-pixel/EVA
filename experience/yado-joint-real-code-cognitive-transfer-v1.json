@@ -1,0 +1,2199 @@
+{
+  "baseline": [
+    {
+      "exact_parent_ast_recovered": true,
+      "final_cognitive_action": "CANONICAL_ACCEPT",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "CANONICAL",
+      "mutated_source_sha256": "02ecf82f11bcc995f0c626129ed2edce6e704da582034efc71eb0fa5924069ed",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 1,
+      "release": "ACCEPT",
+      "repair_tried": 2750,
+      "repaired_source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "trace": [
+        {
+          "confidence": 1.0,
+          "cycle": 0,
+          "release": "ACCEPT",
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 2,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+            "tried": 2750
+          },
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "expected": 2,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.55,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-e392fa9608ffb4b8"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  }
+                ],
+                "selected_score": 0.55,
+                "selected_token": "P-7395df0c6d5dffcf"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exact_parent_ast_recovered": true,
+      "final_cognitive_action": "CANONICAL_ACCEPT",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "CANONICAL",
+      "mutated_source_sha256": "07941e11508558dba8a90d26b4a7b7ba8185ea1c720807e1470442d4f380f386",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 1,
+      "release": "ACCEPT",
+      "repair_tried": 2750,
+      "repaired_source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "trace": [
+        {
+          "confidence": 1.0,
+          "cycle": 0,
+          "release": "ACCEPT",
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 2,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+            "tried": 2750
+          },
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 0,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-0be0e6798ffbc712"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exact_parent_ast_recovered": false,
+      "final_cognitive_action": "CANONICAL_ACCEPT",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "CANONICAL",
+      "mutated_source_sha256": "12a403889cedab223151fb333fbe83ed36801c7545a54bfb18fd0c219020ca0e",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 1,
+      "release": "ACCEPT",
+      "repair_tried": 88,
+      "repaired_source_sha256": "68e695b9fd54b9496927ad11bb37ba6cfda14d0943d300f68ea513af2620049b",
+      "trace": [
+        {
+          "confidence": 1.0,
+          "cycle": 0,
+          "release": "ACCEPT",
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 1,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 6 * bits[4]) % 4\n",
+            "tried": 88
+          },
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "expected": 2,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.41363636363636364,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.41363636363636364,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-e392fa9608ffb4b8"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  }
+                ],
+                "selected_score": 0.41363636363636364,
+                "selected_token": "P-7395df0c6d5dffcf"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "canonical_mutation": false,
+  "checks": {
+    "all_trained_full_exact": true,
+    "all_trained_hidden_exact": true,
+    "all_trained_hidden_never_seen": true,
+    "all_trained_release_accept": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "external_coding_model_used": false,
+    "host_selected_patch": false,
+    "restore_exact": true,
+    "three_two_edit_real_episodes": true,
+    "trained_control_uses_multidomain_cognitive": true,
+    "trained_control_uses_multidomain_intelligence": true,
+    "trained_control_uses_multidomain_logic": true,
+    "trained_control_uses_multidomain_thinking": true,
+    "trained_not_worse_than_canonical": true,
+    "trained_probe_overhead_bounded": true,
+    "two_edit_defects_material": true
+  },
+  "experience_digest": "a810ad05fdef9492a7c8f72aca6fae6cd6e5fff72b8e8441b3d8cc10951e3a11",
+  "growth_verdict": "TRANSFER_WITHOUT_MEASURED_GAIN",
+  "joint_gene": {
+    "gene_digest": "3cf5f2cc52636331d245e190949ba96f31eb7b5aa454cf7da7180a3015c5add0",
+    "gene_id": "GENE-G2-JOINT-REAL-CODE-COGNITIVE-TRANSFER-V1-ecb0f320f62315b9",
+    "heritage": [
+      "GENE-G2-MULTIDOMAIN-LOGIC-V2-78da24019759d2f4",
+      "GENE-G2-MULTIDOMAIN-THINKING-V1-a0811170cf6f6670",
+      "GENE-G2-MULTIDOMAIN-INTELLIGENCE-V1-5636f552fc470ae2",
+      "GENE-G2-MULTIDOMAIN-COGNITIVE-V1-bd9df590793e7885"
+    ],
+    "mechanism_kind": "TRAINED_MULTIDOMAIN_CONTROL_OVER_THREE_TWO_EDIT_VARIANTS_OF_REAL_WHOLE_FUNCTION_REPAIR",
+    "organ": "CONSCIOUS_WORKSPACE",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.joint_real_code_cognitive_transfer_gene.v1"
+  },
+  "metrics": {
+    "baseline_mean_probes": 1.0,
+    "baseline_mean_repair_tried": 1862.6666666666667,
+    "baseline_success": 1.0,
+    "trained_mean_probes": 2.0,
+    "trained_mean_repair_tried": 1862.6666666666667,
+    "trained_success": 1.0
+  },
+  "prepared_tasks": [
+    {
+      "defect_calibration_score": 0.0,
+      "defect_selector": {
+        "candidate_count": 64,
+        "ranking": [
+          {
+            "score": 0.99,
+            "token": "D2-02ecf82f11bcc995"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-07941e11508558db"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-12a403889cedab22"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-18d522f31f5ef141"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-1ad5db022034739e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-1b2f1a6cedd27a8a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-23e95e96d4d87717"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-26887a5a494b5725"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2a81144aa1d427c5"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2a867f12425f4767"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2b7c102d51341ee7"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2b8d1fdf3051d48d"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2ec878ff2005eacb"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2f589c730465604b"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-315060f92a6751c6"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-33fd35240dad63be"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-349e20f2f73f71d3"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-3b8503781d979709"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-44e53d838e2d5e36"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5934d51606d7cae0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5a68a9d6e6ac6489"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5bf730d77dae505d"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6216796f8b3a5caa"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6568d5a735ae2b9e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-657773ed10666d7e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-65ee61ee6e941ef8"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6c527e789cadcf43"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6ca033f4eb7f0641"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-70e0e63e0a0e4882"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-71e9d6d38369cb79"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-7bd749fbafcfae5c"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-81cec66463c2d1dc"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-87a00e3b7b76ba1a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-89e3fc58e2347ca0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-8a224d67a4019c32"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-927449ddc84042ac"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-a62705e52fc22335"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b006495b94b6636a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b46ad75c6ce7742c"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b4b3988b8af972b3"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b8074fd5bc7f0639"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ba86afb355c13e6f"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c286e0a5ac765546"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c8bb40c74c6407d6"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c9051aaa022b800f"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c99cd154114af710"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ca1a2f893bc41180"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ca40de7068b1a6dc"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-cc8c924ab87ff2d2"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d1b229b3f03dcb26"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d6b59b05a5eec9ba"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d6b71acdcffed2d4"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-dc80246a296165cd"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-debcbf89647ac546"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-e340e100c7106663"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ec71992ea82075b1"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ed15c4068e86d9eb"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-f83d564851b591f0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-f888afaa8cfbe58e"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-452f09f9305988d7"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-8329daafba10d467"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-8dd4a1e19379bbb4"
+          },
+          {
+            "score": 0.365,
+            "token": "D2-4cc75e377a48cac4"
+          },
+          {
+            "score": 0.365,
+            "token": "D2-ad56a56822c7d494"
+          }
+        ],
+        "selected_score": 0.99,
+        "selected_token": "D2-02ecf82f11bcc995"
+      },
+      "function_name": "split_bucket",
+      "intermediate_sha256": "c2f9eeb7b3cb07aba6ad5f8f26abb7a80553f50e83722e3d5c784e6ccbebf84a",
+      "mutated_hidden_score": 0.0,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "two_edit_no_direct_one_step": true,
+      "variant_id": "TWO_EDIT_1"
+    },
+    {
+      "defect_calibration_score": 0.0,
+      "defect_selector": {
+        "candidate_count": 64,
+        "ranking": [
+          {
+            "score": 0.99,
+            "token": "D2-07941e11508558db"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-12a403889cedab22"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-18d522f31f5ef141"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-1ad5db022034739e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-1b2f1a6cedd27a8a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-23e95e96d4d87717"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-26887a5a494b5725"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2a81144aa1d427c5"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2a867f12425f4767"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2b7c102d51341ee7"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2b8d1fdf3051d48d"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2ec878ff2005eacb"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2f589c730465604b"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-315060f92a6751c6"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-33fd35240dad63be"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-349e20f2f73f71d3"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-3b8503781d979709"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-44e53d838e2d5e36"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5934d51606d7cae0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5a68a9d6e6ac6489"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5bf730d77dae505d"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6216796f8b3a5caa"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6568d5a735ae2b9e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-657773ed10666d7e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-65ee61ee6e941ef8"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6c527e789cadcf43"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6ca033f4eb7f0641"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-70e0e63e0a0e4882"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-71e9d6d38369cb79"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-7bd749fbafcfae5c"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-81cec66463c2d1dc"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-87a00e3b7b76ba1a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-89e3fc58e2347ca0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-8a224d67a4019c32"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-927449ddc84042ac"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-a62705e52fc22335"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b006495b94b6636a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b46ad75c6ce7742c"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b4b3988b8af972b3"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b8074fd5bc7f0639"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ba86afb355c13e6f"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c286e0a5ac765546"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c8bb40c74c6407d6"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c9051aaa022b800f"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c99cd154114af710"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ca1a2f893bc41180"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ca40de7068b1a6dc"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-cc8c924ab87ff2d2"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d1b229b3f03dcb26"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d6b59b05a5eec9ba"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d6b71acdcffed2d4"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-dc80246a296165cd"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-debcbf89647ac546"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-e213dda6e785cc2a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-e340e100c7106663"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ec71992ea82075b1"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ed15c4068e86d9eb"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-f83d564851b591f0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-f888afaa8cfbe58e"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-452f09f9305988d7"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-8329daafba10d467"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-8dd4a1e19379bbb4"
+          },
+          {
+            "score": 0.365,
+            "token": "D2-4cc75e377a48cac4"
+          },
+          {
+            "score": 0.365,
+            "token": "D2-ad56a56822c7d494"
+          }
+        ],
+        "selected_score": 0.99,
+        "selected_token": "D2-07941e11508558db"
+      },
+      "function_name": "split_bucket",
+      "intermediate_sha256": "c2f9eeb7b3cb07aba6ad5f8f26abb7a80553f50e83722e3d5c784e6ccbebf84a",
+      "mutated_hidden_score": 0.0,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "two_edit_no_direct_one_step": true,
+      "variant_id": "TWO_EDIT_2"
+    },
+    {
+      "defect_calibration_score": 0.0,
+      "defect_selector": {
+        "candidate_count": 64,
+        "ranking": [
+          {
+            "score": 0.99,
+            "token": "D2-12a403889cedab22"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-18d522f31f5ef141"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-1ad5db022034739e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-1b2f1a6cedd27a8a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-23e95e96d4d87717"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-26887a5a494b5725"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2a81144aa1d427c5"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2a867f12425f4767"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2b7c102d51341ee7"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2b8d1fdf3051d48d"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2ec878ff2005eacb"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-2f589c730465604b"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-315060f92a6751c6"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-33fd35240dad63be"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-349e20f2f73f71d3"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-3b8503781d979709"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-44e53d838e2d5e36"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5934d51606d7cae0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5a68a9d6e6ac6489"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-5bf730d77dae505d"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6216796f8b3a5caa"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6568d5a735ae2b9e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-657773ed10666d7e"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-65ee61ee6e941ef8"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6c527e789cadcf43"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-6ca033f4eb7f0641"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-70e0e63e0a0e4882"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-71e9d6d38369cb79"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-7bd749fbafcfae5c"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-81cec66463c2d1dc"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-87a00e3b7b76ba1a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-89e3fc58e2347ca0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-8a224d67a4019c32"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-927449ddc84042ac"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-a62705e52fc22335"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b006495b94b6636a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b46ad75c6ce7742c"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b4b3988b8af972b3"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-b8074fd5bc7f0639"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ba86afb355c13e6f"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c286e0a5ac765546"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c8bb40c74c6407d6"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c9051aaa022b800f"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-c99cd154114af710"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ca1a2f893bc41180"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ca40de7068b1a6dc"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-cc8c924ab87ff2d2"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-cc989d32063d97a0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d1b229b3f03dcb26"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d6b59b05a5eec9ba"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-d6b71acdcffed2d4"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-dc80246a296165cd"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-debcbf89647ac546"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-e213dda6e785cc2a"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-e340e100c7106663"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ec71992ea82075b1"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-ed15c4068e86d9eb"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-f83d564851b591f0"
+          },
+          {
+            "score": 0.99,
+            "token": "D2-f888afaa8cfbe58e"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-452f09f9305988d7"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-8329daafba10d467"
+          },
+          {
+            "score": 0.865,
+            "token": "D2-8dd4a1e19379bbb4"
+          },
+          {
+            "score": 0.365,
+            "token": "D2-4cc75e377a48cac4"
+          },
+          {
+            "score": 0.365,
+            "token": "D2-ad56a56822c7d494"
+          }
+        ],
+        "selected_score": 0.99,
+        "selected_token": "D2-12a403889cedab22"
+      },
+      "function_name": "split_bucket",
+      "intermediate_sha256": "c2f9eeb7b3cb07aba6ad5f8f26abb7a80553f50e83722e3d5c784e6ccbebf84a",
+      "mutated_hidden_score": 0.0,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "two_edit_no_direct_one_step": true,
+      "variant_id": "TWO_EDIT_3"
+    }
+  ],
+  "restore": [
+    {
+      "exact_parent_ast_recovered": true,
+      "final_cognitive_action": "ACT_WITH_GUARD",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "TRAINED",
+      "mutated_source_sha256": "02ecf82f11bcc995f0c626129ed2edce6e704da582034efc71eb0fa5924069ed",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 2,
+      "release": "ACCEPT",
+      "repair_tried": 2750,
+      "repaired_source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "trace": [
+        {
+          "cognitive_action": "ACT_WITH_GUARD",
+          "confidence": 1.0,
+          "cycle": 0,
+          "logic_accept": true,
+          "plan_order": [
+            "OBSERVE_FAILURE",
+            "HYPOTHESIZE",
+            "TEST",
+            "PATCH",
+            "REGRESSION",
+            "BUILD_ORACLE",
+            "COMMIT"
+          ],
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 2,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+            "tried": 2750
+          },
+          "resource_strategy": "STOP",
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "expected": 2,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.55,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-e392fa9608ffb4b8"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  }
+                ],
+                "selected_score": 0.55,
+                "selected_token": "P-7395df0c6d5dffcf"
+              }
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 0,
+              "selector": {
+                "candidate_count": 11,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-0be0e6798ffbc712"
+              }
+            }
+          ],
+          "thinking_cautious": false
+        }
+      ]
+    },
+    {
+      "exact_parent_ast_recovered": true,
+      "final_cognitive_action": "ACT_WITH_GUARD",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "TRAINED",
+      "mutated_source_sha256": "07941e11508558dba8a90d26b4a7b7ba8185ea1c720807e1470442d4f380f386",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 2,
+      "release": "ACCEPT",
+      "repair_tried": 2750,
+      "repaired_source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "trace": [
+        {
+          "cognitive_action": "ACT_WITH_GUARD",
+          "confidence": 1.0,
+          "cycle": 0,
+          "logic_accept": true,
+          "plan_order": [
+            "OBSERVE_FAILURE",
+            "HYPOTHESIZE",
+            "TEST",
+            "PATCH",
+            "REGRESSION",
+            "BUILD_ORACLE",
+            "COMMIT"
+          ],
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 2,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+            "tried": 2750
+          },
+          "resource_strategy": "STOP",
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 0,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-0be0e6798ffbc712"
+              }
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 1,
+              "selector": {
+                "candidate_count": 11,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-1e6f820d20a67255"
+              }
+            }
+          ],
+          "thinking_cautious": false
+        }
+      ]
+    },
+    {
+      "exact_parent_ast_recovered": false,
+      "final_cognitive_action": "ACT_WITH_GUARD",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "TRAINED",
+      "mutated_source_sha256": "12a403889cedab223151fb333fbe83ed36801c7545a54bfb18fd0c219020ca0e",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 2,
+      "release": "ACCEPT",
+      "repair_tried": 88,
+      "repaired_source_sha256": "68e695b9fd54b9496927ad11bb37ba6cfda14d0943d300f68ea513af2620049b",
+      "trace": [
+        {
+          "cognitive_action": "ACT_WITH_GUARD",
+          "confidence": 1.0,
+          "cycle": 0,
+          "logic_accept": true,
+          "plan_order": [
+            "OBSERVE_FAILURE",
+            "HYPOTHESIZE",
+            "TEST",
+            "PATCH",
+            "REGRESSION",
+            "BUILD_ORACLE",
+            "COMMIT"
+          ],
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 1,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 6 * bits[4]) % 4\n",
+            "tried": 88
+          },
+          "resource_strategy": "STOP",
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "expected": 2,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.41363636363636364,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.41363636363636364,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-e392fa9608ffb4b8"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  }
+                ],
+                "selected_score": 0.41363636363636364,
+                "selected_token": "P-7395df0c6d5dffcf"
+              }
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 0,
+              "selector": {
+                "candidate_count": 11,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-0be0e6798ffbc712"
+              }
+            }
+          ],
+          "thinking_cautious": false
+        }
+      ]
+    }
+  ],
+  "schema": "yado.g2.joint_real_code_cognitive_transfer.experience.v1",
+  "semantic_boundary": "JOINT REAL WHOLE-FUNCTION TRANSFER ON THREE INDEPENDENT REVERSIBLE TWO-EDIT SHADOW DEFECTS OF THE ACTIVE YADO split_bucket FUNCTION. THE SAME REPAIR SUBSTRATE, HIDDEN DOMAIN AND DEFECT ARE USED FOR THE CANONICAL CONTROL BASELINE AND THE TRAINED MULTIDOMAIN CONTROL. TRAINED CONTROL USES CODE_RELEASE LOGIC, CODE_REPAIR THINKING, RESOURCE_STRATEGY INTELLIGENCE AND THE MULTIDOMAIN COGNITIVE KNN. HOST ONLY MAPS LEARNED CONTROL OUTPUTS TO BOUNDED PROBE COUNTS/RELEASE ACTIONS; IT DOES NOT SELECT THE PATCH. PASS PROVES JOINT TRANSFER, NOT AGI.",
+  "status": "TRAINED",
+  "trained": [
+    {
+      "exact_parent_ast_recovered": true,
+      "final_cognitive_action": "ACT_WITH_GUARD",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "TRAINED",
+      "mutated_source_sha256": "02ecf82f11bcc995f0c626129ed2edce6e704da582034efc71eb0fa5924069ed",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 2,
+      "release": "ACCEPT",
+      "repair_tried": 2750,
+      "repaired_source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "trace": [
+        {
+          "cognitive_action": "ACT_WITH_GUARD",
+          "confidence": 1.0,
+          "cycle": 0,
+          "logic_accept": true,
+          "plan_order": [
+            "OBSERVE_FAILURE",
+            "HYPOTHESIZE",
+            "TEST",
+            "PATCH",
+            "REGRESSION",
+            "BUILD_ORACLE",
+            "COMMIT"
+          ],
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 2,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+            "tried": 2750
+          },
+          "resource_strategy": "STOP",
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "expected": 2,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.55,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.55,
+                    "token": "P-e392fa9608ffb4b8"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  }
+                ],
+                "selected_score": 0.55,
+                "selected_token": "P-7395df0c6d5dffcf"
+              }
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 0,
+              "selector": {
+                "candidate_count": 11,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-0be0e6798ffbc712"
+              }
+            }
+          ],
+          "thinking_cautious": false
+        }
+      ]
+    },
+    {
+      "exact_parent_ast_recovered": true,
+      "final_cognitive_action": "ACT_WITH_GUARD",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "TRAINED",
+      "mutated_source_sha256": "07941e11508558dba8a90d26b4a7b7ba8185ea1c720807e1470442d4f380f386",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 2,
+      "release": "ACCEPT",
+      "repair_tried": 2750,
+      "repaired_source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "trace": [
+        {
+          "cognitive_action": "ACT_WITH_GUARD",
+          "confidence": 1.0,
+          "cycle": 0,
+          "logic_accept": true,
+          "plan_order": [
+            "OBSERVE_FAILURE",
+            "HYPOTHESIZE",
+            "TEST",
+            "PATCH",
+            "REGRESSION",
+            "BUILD_ORACLE",
+            "COMMIT"
+          ],
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 2,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+            "tried": 2750
+          },
+          "resource_strategy": "STOP",
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 0,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-0be0e6798ffbc712"
+              }
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 1,
+              "selector": {
+                "candidate_count": 11,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-1e6f820d20a67255"
+              }
+            }
+          ],
+          "thinking_cautious": false
+        }
+      ]
+    },
+    {
+      "exact_parent_ast_recovered": false,
+      "final_cognitive_action": "ACT_WITH_GUARD",
+      "full_score": 1.0,
+      "function_name": "split_bucket",
+      "hidden_never_seen": true,
+      "hidden_score": 1.0,
+      "mode": "TRAINED",
+      "mutated_source_sha256": "12a403889cedab223151fb333fbe83ed36801c7545a54bfb18fd0c219020ca0e",
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 2,
+      "release": "ACCEPT",
+      "repair_tried": 88,
+      "repaired_source_sha256": "68e695b9fd54b9496927ad11bb37ba6cfda14d0943d300f68ea513af2620049b",
+      "trace": [
+        {
+          "cognitive_action": "ACT_WITH_GUARD",
+          "confidence": 1.0,
+          "cycle": 0,
+          "logic_accept": true,
+          "plan_order": [
+            "OBSERVE_FAILURE",
+            "HYPOTHESIZE",
+            "TEST",
+            "PATCH",
+            "REGRESSION",
+            "BUILD_ORACLE",
+            "COMMIT"
+          ],
+          "repair": {
+            "candidate_count": 1,
+            "edit_depth": 1,
+            "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 6 * bits[4]) % 4\n",
+            "tried": 88
+          },
+          "resource_strategy": "STOP",
+          "selected": [
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "expected": 2,
+              "selector": {
+                "candidate_count": 12,
+                "ranking": [
+                  {
+                    "score": 0.41363636363636364,
+                    "token": "P-7395df0c6d5dffcf"
+                  },
+                  {
+                    "score": 0.41363636363636364,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.2318181818181818,
+                    "token": "P-e392fa9608ffb4b8"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  }
+                ],
+                "selected_score": 0.41363636363636364,
+                "selected_token": "P-7395df0c6d5dffcf"
+              }
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": true
+                }
+              ],
+              "expected": 0,
+              "selector": {
+                "candidate_count": 11,
+                "ranking": [
+                  {
+                    "score": 0.05,
+                    "token": "P-0be0e6798ffbc712"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-1e6f820d20a67255"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-711ecb56f6e008bc"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-7700be03a028299e"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-793dc170e99355c1"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-824e128b70187e87"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a158cbee396aab42"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-a43ffde6df35639b"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-ae20e8dcc1917dbb"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-b874c306cd8cc72a"
+                  },
+                  {
+                    "score": 0.05,
+                    "token": "P-e392fa9608ffb4b8"
+                  }
+                ],
+                "selected_score": 0.05,
+                "selected_token": "P-0be0e6798ffbc712"
+              }
+            }
+          ],
+          "thinking_cautious": false
+        }
+      ]
+    }
+  ]
+}
