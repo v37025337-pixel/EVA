@@ -180,7 +180,7 @@ class TestG2ContinuityFileIntegrity(TestCase):
             m=next(e['result'] for e in reversed(f.base.episodes)
                    if isinstance(e.get('result'),dict) and e['result'].get('kind')=='SYMMETRIC_COUNT_MAP_V2')
             intel=next(e['result'] for e in reversed(f.base.episodes)
-                       if e.get('selected_capability')==CAP_INTEL_V3)
+                       if e.get('kind')=='FABRIC_EPISODE' and e.get('selected_capability')==CAP_INTEL_V3)
             out=f.execute_capability(CAP_LOGIC_V2,{'operation':'predict_symmetric','model':m,
                 'payload':{'a':True,'b':True},'stream_id':'CHILD'})['result']
             print(json.dumps({'answer':out,'int_keys':all(isinstance(k,int) for k in m['count_to_output']),
@@ -243,6 +243,7 @@ class TestG2ContinuityFileIntegrity(TestCase):
         self.assertEqual(len(base.episodes),0)
 
         # Recreate a valid file, then forge an internally re-digested cross-layer link.
+        self.path.unlink()
         f=self._new();f.record_outcome('SAFE2','FAILED2',0.0);state=f.export_continuity_state();del f
         changed=False
         for e in reversed(state['recurrent_memory_state']['episodes']):
