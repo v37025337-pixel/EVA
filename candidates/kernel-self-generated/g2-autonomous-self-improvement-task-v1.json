@@ -224,47 +224,78 @@
       "conflict_resolution_pass": true,
       "conflict_resolution_policy": "WHEN LIVE FETCH AND PARSE SUCCEED, CURRENT CONTENT-ADDRESSED LIVE EVIDENCE SUPERSEDES PRIOR MUTABLE CATALOG CLAIMS",
       "direct_priority_evidence": true,
-      "evidence_digest": "87932e01359943ebb9ad9725374d38ca6fe5ce0ee75a14b651fedef92e9117b9",
+      "evidence_digest": "e4050e29e6534d0242f29e6faf4a2c6080a82d1d24a100f92a08ea2dd8ccede2",
       "fetch": {
         "commit": {
-          "bytes": 13785,
+          "bytes": 5968,
           "http_status": 200,
           "ok": true,
-          "sha256": "ec84d0d8d6a0c56c10f24173c90207fcf13de4253a2f6158d993a2aedb02ec76"
+          "sha256": "a9d8632ca0ae10b755d01ac1e1f35d6a9d1e989af59b9ebe4244dc445c41d826"
         },
         "files": {
           "README.md": {
-            "bytes": 64057,
+            "bytes": 66628,
             "http_status": 200,
             "ok": true,
-            "sha256": "8ad6ce99125ff66f0c21968b15753f5c2b130c88e6db344ea1e04abbd482c9bf"
+            "sha256": "458448ba5d5cf2ceddaa20c7692c2df55c80b8c55d9b7c857dbd125171b4fa97"
           },
           "package.json": {
-            "bytes": 2948,
+            "bytes": 2974,
             "http_status": 200,
             "ok": true,
-            "sha256": "9c138c8a6435dd7bbd16d280a47c04a7af2998aa9c4a20b63adb0c9df623f67e"
+            "sha256": "0888e4598852864d6214278d501d4f57fb95584e4ba1b894d4f487bbbbb7bac2"
           },
           "sources.js": {
-            "bytes": 46864,
+            "bytes": 47835,
             "http_status": 200,
             "ok": true,
-            "sha256": "40a8bef06c2ae2b5d926634e50e034c3bd26fbe6b42eff6836d12091ae9a6606"
+            "sha256": "0416494c69dd968fb9d58b33a0a715509a487e26de36b3fcb7aa6eb45db3ebf2"
           }
         }
       },
-      "live_commit_sha": "f611aaed0026b850323c070959147a82e289910c",
+      "live_commit_sha": "fb1d80216ca186d674378119da49dd4bd5363847",
       "live_semantic_extract": {
         "no_key_provider_keys": [
           "kilo",
           "llm7"
         ],
         "package_name": "free-coding-models",
-        "package_version": "0.5.81",
-        "provider_count": 22,
+        "package_version": "0.5.83",
+        "provider_count": 23,
         "readme_title": "\ud83d\udca1 Why this tool?"
       },
-      "prior_vs_live_conflicts": [],
+      "prior_vs_live_conflicts": [
+        {
+          "field": "commit_sha",
+          "live": "fb1d80216ca186d674378119da49dd4bd5363847",
+          "prior": "f611aaed0026b850323c070959147a82e289910c",
+          "resolution": "LIVE_SUPERSEDES_PRIOR_MUTABLE_STATE"
+        },
+        {
+          "field": "file_sha256:README.md",
+          "live": "458448ba5d5cf2ceddaa20c7692c2df55c80b8c55d9b7c857dbd125171b4fa97",
+          "prior": "8ad6ce99125ff66f0c21968b15753f5c2b130c88e6db344ea1e04abbd482c9bf",
+          "resolution": "LIVE_SUPERSEDES_PRIOR_MUTABLE_STATE"
+        },
+        {
+          "field": "file_sha256:sources.js",
+          "live": "0416494c69dd968fb9d58b33a0a715509a487e26de36b3fcb7aa6eb45db3ebf2",
+          "prior": "40a8bef06c2ae2b5d926634e50e034c3bd26fbe6b42eff6836d12091ae9a6606",
+          "resolution": "LIVE_SUPERSEDES_PRIOR_MUTABLE_STATE"
+        },
+        {
+          "field": "file_sha256:package.json",
+          "live": "0888e4598852864d6214278d501d4f57fb95584e4ba1b894d4f487bbbbb7bac2",
+          "prior": "9c138c8a6435dd7bbd16d280a47c04a7af2998aa9c4a20b63adb0c9df623f67e",
+          "resolution": "LIVE_SUPERSEDES_PRIOR_MUTABLE_STATE"
+        },
+        {
+          "field": "provider_count",
+          "live": 23,
+          "prior": 22,
+          "resolution": "LIVE_PARSED_CATALOG_SUPERSEDES_PRIOR"
+        }
+      ],
       "resource_repository": "vava-nessa/free-coding-models",
       "status": "PASS_DIRECT_LIVE_RESOURCE_EVIDENCE_RECHECK"
     },
@@ -319,11 +350,11 @@
       "severity": "LOW"
     }
   ],
-  "latest_self_audit_receipt_sha256": "5e7328999f466cf0281d55f2497d1de54d329655677c9dd6b2579d9731b81d82",
-  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json",
+  "latest_self_audit_receipt_sha256": "744aeef79ab2476e09a9463798dbc088995f5afe4641f26f60b9e54ef1991a56",
+  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33974251430.json",
   "native_evolution_result": null,
   "next_action": "RE_AUDIT_AFTER_DIRECT_PRIORITY_ACTION",
-  "receipt_sha256": "8bc4f3dc8da0112e59e2dd15f5a556e6e85a75c1e2f6e20d1f4f006a57204d0a",
+  "receipt_sha256": "dbbf72a8e3f5170a95bfd023ec9656903f818dc3e9b7ca254854da5fb36b9475",
   "schema": "yado.g2.autonomous_self_improvement_task.v1",
   "selected_action": "LIVE_RESOURCE_EVIDENCE_RECHECK",
   "selected_child_genome_digest": null,
@@ -346,7 +377,7 @@
       "shadow_evolution_allowed": true
     },
     "authorization_granted_at": "2026-09-03T17:53:24Z",
-    "authorization_note": "USER_AUTHORIZED_FULL_PROJECT_SELF_IMPROVEMENT_SCOPE; SAFETY/INTEGRITY GATES REMAIN FAIL_CLOSED",
+    "authorization_note": "USER_AUTHORIZED_FULL_PROJECT_SELF_IMPROVEMENT_SCOPE; SAFETY/INTEGRITY_GATES_REMAIN_FAIL_CLOSED",
     "constraints": {
       "no_private_data_transmission": true,
       "no_secret_transmission": true,
@@ -357,23 +388,24 @@
       "require_rollback_path": true
     },
     "experiment_series": {
-      "max_runs": 3,
-      "phase": "HOST_FIX_VALIDATION",
+      "max_runs": 1,
+      "phase": "KERNEL_SELF_SELECTED_DIRECT_ACTION",
       "preceded_by_kernel_self_repair_attempt_run": 33832344388,
-      "run_index": 3,
-      "series_id": "G2-GOAL-ACTION-BINDING-HOST-FIX-3-RUNS"
+      "run_index": 1,
+      "series_id": "G2-GOAL-ACTION-BINDING-POST-COGNITIVE-TRANSFER"
     },
     "host_role": "TRIGGER_TRANSPORT_OBSERVATION_ONLY",
     "host_selected_mechanism": null,
     "host_selected_target": null,
     "host_solution_hint": null,
-    "latest_audit_run_id": 33832918251,
+    "latest_audit_run_id": 33974251430,
     "latest_self_selected_next_step": "LIVE_RESOURCE_EVIDENCE_SCOPE",
     "mechanism_selection": "KERNEL_SELF_SELECTED_NATIVE_OR_SELF_CREATED",
     "objective": "REPAIR_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING",
     "previous_evidence": [
       "candidates/kernel-self-generated/g2-native-meta-grammar-compile-repair-v1.json",
-      "candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json"
+      "candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json",
+      "experience/yado-joint-real-code-cognitive-transfer-v1.json"
     ],
     "schema": "yado.g2.autonomous_self_improvement_request.v1",
     "stop_condition": "SELF_AUDIT_EVIDENCE_BINDING_REPAIRED_OR_EXPLICIT_KERNEL_WITHHOLD",
@@ -383,7 +415,8 @@
         "run:33832611701",
         "run:33832670571",
         "run:33832722100",
-        "deep_self_audit_run:33832918251"
+        "deep_self_audit_run:33832918251",
+        "deep_self_audit_run:33974251430"
       ],
       "forbidden": [
         "host_selected_mechanism",
@@ -393,8 +426,8 @@
         "forcing_LIVE_RESOURCE_EVIDENCE_SCOPE_to_PASS",
         "lowering_freshness_or_integrity_gates"
       ],
-      "goal": "Make the kernel's self-audit incorporate relevant fresh self-generated evidence so completed work can update the kernel's own developmental state assessment.",
-      "problem": "The kernel produced fresh direct evidence for LIVE_RESOURCE_EVIDENCE_SCOPE in three successful runs, but the next kernel-native deep self-audit still marked LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL and selected it again because the self-audit evidence model did not incorporate the new receipts.",
+      "goal": "Make the kernel's self-audit incorporate relevant fresh self-generated evidence so completed work can update the kernel's own developmental state assessment, or explicitly WITHHOLD with the missing evidence requirement.",
+      "problem": "The kernel produced fresh direct evidence for LIVE_RESOURCE_EVIDENCE_SCOPE in successful runs, but the latest kernel-native deep self-audit still marks LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL and selects it again. The kernel must decide whether evidence is insufficient or its self-audit evidence binding remains incomplete.",
       "success_conditions": [
         "kernel_diagnoses_the_action_to_evidence_to_self_audit_disconnect",
         "kernel_selects_its_own_solution_path",
@@ -406,7 +439,7 @@
       ],
       "task_id": "G2-ACTION-EVIDENCE-SELF-AUDIT-BINDING-REPAIR"
     },
-    "trigger": 7,
+    "trigger": 8,
     "use_accumulated_experience": true
   }
 }
