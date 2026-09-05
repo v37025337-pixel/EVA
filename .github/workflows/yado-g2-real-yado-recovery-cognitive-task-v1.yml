@@ -1,0 +1,50 @@
+name: YADO G2 Real YADO Recovery Cognitive Task V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: ["architecture/yado-g2-real-yado-recovery-cognitive-task-v1-request.json"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+      - run: python -m py_compile runtime/yado_g2_real_yado_recovery_cognitive_task_v1.py
+      - name: Train all organs on one real YADO recovery task
+        continue-on-error: true
+        run: python runtime/yado_g2_real_yado_recovery_cognitive_task_v1.py
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+        if: always()
+      - name: Persist real recovery cognitive evidence
+        if: always()
+        run: |
+          git config user.name "YADO Real Recovery Cognitive Task V1"
+          git config user.email "actions@users.noreply.github.com"
+          git add experience/yado-real-yado-recovery-cognitive-task-v1.json 2>/dev/null || true
+          git add candidates/kernel-self-generated/g2-real-yado-recovery-cognitive-task-v1.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO real recovery cognitive task V1 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce real recovery verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path("candidates/kernel-self-generated/g2-real-yado-recovery-cognitive-task-v1.json").read_text())
+          if r["status"]!="PASS_SHADOW_G2_REAL_YADO_RECOVERY_COGNITIVE_TASK_V1":
+              raise SystemExit("REAL_RECOVERY_WITHHOLD:"+r["next_required_capability"])
+          print(r["status"],r["metrics"]["LOGIC"],r["metrics"]["THINKING"],r["metrics"]["INTELLIGENCE"],r["metrics"]["COGNITIVE"],r["genome_id"])
+          PY
