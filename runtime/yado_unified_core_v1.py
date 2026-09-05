@@ -24,6 +24,7 @@ from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoord
 from yado_g2_unified_execution_fabric_v1 import G2UnifiedExecutionFabricV1
 from yado_g2_unified_execution_fabric_v2 import G2UnifiedExecutionFabricV2
 from yado_g2_unified_execution_fabric_v3 import G2UnifiedExecutionFabricV3
+from yado_g2_unified_execution_fabric_v4 import G2UnifiedExecutionFabricV4
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
@@ -60,7 +61,7 @@ class UnifiedYADOCoreV1:
         self.compositional_logic=BudgetAdaptiveCompositionalLogicV2
         self.compositional_schema_router=CoveragePrunedCompositionalSchemaRouterV3
         self.capability_set_coordinator=BoundedCapabilitySetCoordinatorV1
-        self.execution_fabric_cls=G2UnifiedExecutionFabricV3
+        self.execution_fabric_cls=G2UnifiedExecutionFabricV4
         self.openapi_contract_capability_cls=G2OpenAPIContractCapabilityV1
         self.openapi_readonly_executor_cls=G2OpenAPIReadOnlyExecutorV1
         self.evolutionary_genome_cls=YADOEvolutionaryGenomeV1
@@ -243,11 +244,14 @@ class UnifiedYADOCoreV1:
             return ContextualStreamCapabilityAdapterV1(runtime,'BOUNDED_STREAM_CONTEXT_MAP')
         return runtime
 
-    def instantiate_execution_fabric(self,router_program,scalar_program,relation_program,api_state=None,temporal_state=None):
+    def instantiate_execution_fabric(self,router_program,scalar_program,relation_program,api_state=None,temporal_state=None,continuity_state=None,checkpoint_path=None):
         base=G2TypedRecurrentCapabilityGraphRuntimeV1(
             self.architecture,router_program,scalar_program,relation_program,self.portfolio
         )
-        return self.execution_fabric_cls(base,api_state=api_state,temporal_state=temporal_state)
+        return self.execution_fabric_cls(
+            base,api_state=api_state,temporal_state=temporal_state,
+            continuity_state=continuity_state,checkpoint_path=checkpoint_path
+        )
 
     def compile_openapi_contract_plan(self,state_section:dict[str,Any],contract_id:str)->dict[str,Any]:
         return self.openapi_contract_capability_cls(state_section).compile_plan(contract_id)
@@ -291,6 +295,19 @@ class UnifiedYADOCoreV1:
         if not hasattr(execution_fabric,'export_temporal_state'):
             raise TypeError('TEMPORAL_EXECUTION_FABRIC_REQUIRED')
         return execution_fabric.export_temporal_state()
+
+    def export_cognitive_continuity_state(self,execution_fabric)->dict[str,Any]:
+        if not hasattr(execution_fabric,'export_continuity_state'):
+            raise TypeError('CONTINUITY_EXECUTION_FABRIC_REQUIRED')
+        return execution_fabric.export_continuity_state()
+
+    def save_cognitive_continuity_checkpoint(self,execution_fabric,path)->dict[str,Any]:
+        if not hasattr(execution_fabric,'save_continuity_checkpoint'):
+            raise TypeError('CONTINUITY_EXECUTION_FABRIC_REQUIRED')
+        return execution_fabric.save_continuity_checkpoint(path)
+
+    def load_cognitive_continuity_checkpoint(self,path)->dict[str,Any]:
+        return self.execution_fabric_cls.load_continuity_checkpoint(path)
 
     def temporal_evolution_on_stall(self,execution_fabric,stream_id:str)->dict[str,Any]:
         if not hasattr(execution_fabric,'temporal_evolution_signal'):

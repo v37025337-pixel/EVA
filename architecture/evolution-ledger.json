@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "ac9692ba79b16756f7ba8caf1a7afd5f6f6d2d2365a44d344c23be4821c60fa9",
+  "current_head_digest": "6c000a5f20e2890e6c3bbbde4e8725b31c643c7d223c419f7312061a9f2eb7f2",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 282,
+  "event_count": 283,
   "events": [
     {
       "canonical_mutation": false,
@@ -4941,10 +4941,31 @@
       "source_digest": "3334c625f45819925b57b3dd1669b6261e7931877d0cf1ab9607c26f816573af",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-33974358612.json",
       "status": "PASS"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": true,
+      "canonical_mutation": true,
+      "deficit": "COGNITIVE_RESTART_MEMORY_CONTINUITY_GAP",
+      "effect": "REPLACED_ACTIVE=RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3->RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4; TEMPORAL_RECURRENT_CHECKPOINT=True; STAGE_OUTCOME_RESTORE=True; ATTEMPT_HISTORY_RESTORE=True; DECISION_RESTART_STABLE=True; FAILED_STAGE_RETRY_SUPPRESSED=True; FRONTIER_UNCHANGED=KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+      "event_hash": "fc18c512b5d6aad3b725a03763248437a8ee2edd9dcd75bb5f3b3f956bfc2374",
+      "event_id": "E0283_G2_COGNITIVE_CONTINUITY_CANONICAL_ADMISSION_V1",
+      "event_type": "G2_COGNITIVE_CONTINUITY_CANONICAL_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 282,
+      "new_head_digest": "6c000a5f20e2890e6c3bbbde4e8725b31c643c7d223c419f7312061a9f2eb7f2",
+      "parent_event_hash": "53f0c623e1a9a162e3a0c01d926e4670712b01ac587fa2517a3d1815ad86e6dd",
+      "previous_head_digest": "ac9692ba79b16756f7ba8caf1a7afd5f6f6d2d2365a44d344c23be4821c60fa9",
+      "promotion_applied": false,
+      "run_id": "33979381889",
+      "source_digest": "af34cdd19edb471e8c23e40ed207a550bf78b6d89d27daeff42bd2d44c10126f",
+      "source_path": "receipts/yado-g2-cognitive-continuity-canonical-admission-v1-run-33979381889.json",
+      "status": "PASS_CANONICAL"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "d44c6ae51d6a34ec5e2c1ef269db775c005beec61fd8e5e04030dbc7a845d362",
+  "ledger_digest": "8a5472829bc36ba58ca80d3d56994cf4c24fd76309c78c7403b2a0f8d0373a92",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -4982,5 +5003,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "53f0c623e1a9a162e3a0c01d926e4670712b01ac587fa2517a3d1815ad86e6dd"
+  "tail_event_hash": "fc18c512b5d6aad3b725a03763248437a8ee2edd9dcd75bb5f3b3f956bfc2374"
 }
