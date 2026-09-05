@@ -90,7 +90,7 @@
     "status": "NO_ADMISSIBLE_SKILLS"
   },
   "latest_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33974358612.json",
-  "problem_packet_digest": "ce0ad6d68a8ddb8f3bf3a4adb33d03952db615f96a382bb4c46f76814d198de6",
+  "problem_packet_digest": "5df146a0b07e84a0375b92e09705cc7a29c5fbf101f054ecedd23fb4f504451e",
   "proposals": [
     {
       "candidate_source_sha256": null,
@@ -107,6 +107,7 @@
       "patch_count": null,
       "provider_key": "llm7",
       "rationale": null,
+      "repair_context_mode": "DYNAMIC_FOCUSED_EXCERPTS",
       "repair_response": null,
       "semantic_probe": null,
       "skill_id": "SELF_AUDIT_EVIDENCE_REPAIR_LLM7_0",
@@ -116,18 +117,17 @@
     },
     {
       "candidate_source_sha256": null,
-      "diagnosis": "The kernel-native deep self-audit runtime identified by kernel_audit_runtime_binding is the component currently reporting LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL due to not consuming direct priority evidence. The objective requires integrating the existing YADO self-generated evidence binder gene into the shadow self-audit. This runtime must load and bind the gene artifact (candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json) to evaluate direct evidence per the gene's contract fields (direct_priority_evidence, comprehension_complete, conflict_resolution_pass, action_status_pass, canonical_immutable, action_relevant) and resolve the PARTIAL status.",
+      "diagnosis": "The kernel-provenant deep self-audit runtime (runtime/yado_unified_core_deep_self_audit_v1.py) does not bind the existing YADO self-generated evidence binder gene, so it cannot apply the gene's validated decision logic to the passing fresh direct priority evidence, resulting in LIVE_RESOURCE_EVIDENCE_SCOPE being incorrectly marked PARTIAL despite evidence meeting all comprehension and conflict resolution requirements.",
       "diagnosis_response": {
         "http_status": 200,
         "ok": true,
-        "response_digest": "9be943491a061752671cd9354990038a30575b28c7cf2e3110d1b55a434356c1"
+        "response_digest": "228af868b6ce200b94c091cba3fede93ece0fbe88bd2e400ddceab32397693d2"
       },
       "evidence_used": [
-        "kernel_audit_runtime_binding: this_audit_runtime=runtime/yado_unified_core_deep_self_audit_v1.py (KERNEL PROVENANCE)",
-        "objective: INTEGRATE_YADO_SELF_GENERATED_EVIDENCE_BINDER_GENE_INTO_SHADOW_SELF_AUDIT",
-        "problem: deep self-audit reports LIVE_RESOURCE_EVIDENCE_SCOPE PARTIAL because it does not consume direct evidence",
-        "self_generated_gene: candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json with contract fields for evidence binding",
-        "latest_audit: overall_verdict=PASS_WITH_LIMITATIONS, self_selected_next_step=LIVE_RESOURCE_EVIDENCE_SCOPE"
+        "Kernel-native deep self-audit binding identifying runtime/yado_unified_core_deep_self_audit_v1.py as the audit runtime (source_run_id 33974358612, provenance KERNEL_NATIVE_DEEP_SELF_AUDIT_FINDING)",
+        "YADO self-generated evidence binder gene artifact at candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json with validated contract and SHADOW_ONLY promotion state",
+        "Latest audit evidence confirming direct_priority_evidence is true, conflict_resolution_pass is true, and all live resource checks pass, yet LIVE_RESOURCE_EVIDENCE_SCOPE remains PARTIAL",
+        "Problem statement confirming the audit fails to consume direct evidence due to missing gene binding"
       ],
       "model_id": "kilo-auto/free",
       "parse_error": "RuntimeError:REPAIR_MODEL_CALL_FAILED",
@@ -135,6 +135,7 @@
       "patch_count": null,
       "provider_key": "kilo",
       "rationale": null,
+      "repair_context_mode": "DYNAMIC_FOCUSED_EXCERPTS",
       "repair_response": {
         "error": "TimeoutError:The read operation timed out",
         "http_status": null,
@@ -147,7 +148,7 @@
       "withhold": false
     }
   ],
-  "receipt_sha256": "c51a333f7d5eca7a3fe85959c788cfef0ead635261590d6f92b28be1ddc15854",
+  "receipt_sha256": "5c6e57885e3aae831f84825ae2b02b02f492bf575c0188d73c4e4eacc5a3634f",
   "schema": "yado.g2.action_evidence_self_audit_self_study_repair.v1",
   "selected_skill_id": null,
   "selected_target_path": null,
@@ -208,8 +209,8 @@
     "host_role": "TASK_TRANSPORT_STRICT_EVALUATION_ONLY",
     "host_solution_hint": null,
     "objective": "INTEGRATE_YADO_SELF_GENERATED_EVIDENCE_BINDER_GENE_INTO_SHADOW_SELF_AUDIT",
-    "previous_result": "WITHHOLD_DIAGNOSIS_CALL_NOT_PARSED_TRANSPORT_REASON_NOT_PERSISTED",
-    "previous_run_id": 33974877876,
+    "previous_result": "WITHHOLD_KILO_DIAGNOSIS_SELECTED_KERNEL_AUDIT_RUNTIME_BUT_REPAIR_CALL_TIMED_OUT",
+    "previous_run_id": 33975082159,
     "problem": "YADO has already created and validated its own evidence-binding shadow gene. A fresh direct LIVE_RESOURCE_EVIDENCE_RECHECK now passes comprehension and conflict-resolution checks, but the next real deep self-audit still reports LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL because it does not consume that direct evidence. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
     "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
     "stop_condition": "SELF_GENERATED_GENE_SHADOW_INTEGRATED_OR_EXPLICIT_WITHHOLD",
@@ -226,7 +227,7 @@
       "canonical_head_remains_unchanged"
     ],
     "target_path": null,
-    "trigger": 8,
-    "trigger_reason": "RETRY_WITH_MATERIALIZER_TRANSPORT_OBSERVABILITY"
+    "trigger": 9,
+    "trigger_reason": "RETRY_AFTER_REPAIR_CONTEXT_REDUCED_TO_DYNAMIC_KERNEL_RELEVANT_EXCERPTS"
   }
 }
