@@ -1,0 +1,1445 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "cognitive_all_historical_classes_ge_0_60": true,
+    "cognitive_historical_fresh_ge_0_75": true,
+    "cognitive_historical_intelligence_causal": true,
+    "cognitive_historical_logic_causal": true,
+    "cognitive_historical_thinking_causal": true,
+    "cognitive_native_selection": true,
+    "external_models_used": false,
+    "historical_fresh_not_in_adaptation": true,
+    "historical_fresh_stratified": true,
+    "host_written_models": false,
+    "intelligence_preserved": true,
+    "new_historical_evidence_consumed": true,
+    "new_logic_identity": true,
+    "old_commit_ge_0_70": true,
+    "old_corpus_regression_ge_0_93": true,
+    "old_seek_evidence_ge_0_70": true,
+    "terminal_historical_fresh_ge_0_75": false,
+    "terminal_historical_pass_ge_2_3": true,
+    "terminal_historical_withhold_ge_2_3": true,
+    "terminal_native_selection": true,
+    "thinking_preserved": true,
+    "v6_safety_preserved": true
+  },
+  "cognitive_historical_class_scores": {
+    "COMMIT": {
+      "accuracy": 0.6666666666666666,
+      "count": 6
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 4
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 4
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.6666666666666666,
+      "count": 3
+    }
+  },
+  "cognitive_historical_fresh": 0.8235294117647058,
+  "cognitive_historical_organ_drops": {
+    "INTELLIGENCE": 0.3529411764705882,
+    "LOGIC": 0.17647058823529405,
+    "THINKING": 0.23529411764705876
+  },
+  "cognitive_selected": {
+    "complexity": 3,
+    "cv_accuracy": 0.9630780249410179,
+    "cv_drops": {
+      "INTELLIGENCE": 0.22930878552971573,
+      "LOGIC": 0.1719466913829907,
+      "THINKING": 0.5481077968767554
+    },
+    "evidence": 1.0318567014942142,
+    "family": "CART_AXIS",
+    "param": 3,
+    "token": "CART_AXIS_3"
+  },
+  "cognitive_trials": [
+    {
+      "complexity": 1,
+      "cv_accuracy": 0.7569764633187283,
+      "cv_drops": {
+        "INTELLIGENCE": 0.0,
+        "LOGIC": 0.0,
+        "THINKING": 0.5481077968767554
+      },
+      "evidence": 0.7569764633187283,
+      "family": "CART_AXIS",
+      "param": 1,
+      "token": "CART_AXIS_1"
+    },
+    {
+      "complexity": 2,
+      "cv_accuracy": 0.9426379058532749,
+      "cv_drops": {
+        "INTELLIGENCE": 0.20886866644197283,
+        "LOGIC": 0.0,
+        "THINKING": 0.5481077968767554
+      },
+      "evidence": 0.9426379058532749,
+      "family": "CART_AXIS",
+      "param": 2,
+      "token": "CART_AXIS_2"
+    },
+    {
+      "complexity": 3,
+      "cv_accuracy": 0.9630780249410179,
+      "cv_drops": {
+        "INTELLIGENCE": 0.22930878552971573,
+        "LOGIC": 0.1719466913829907,
+        "THINKING": 0.5481077968767554
+      },
+      "evidence": 1.0318567014942142,
+      "family": "CART_AXIS",
+      "param": 3,
+      "token": "CART_AXIS_3"
+    },
+    {
+      "complexity": 4,
+      "cv_accuracy": 0.9472084597236267,
+      "cv_drops": {
+        "INTELLIGENCE": 0.21343922031232446,
+        "LOGIC": 0.1143379957308168,
+        "THINKING": 0.5481077968767554
+      },
+      "evidence": 0.9929436580159534,
+      "family": "CART_AXIS",
+      "param": 4,
+      "token": "CART_AXIS_4"
+    },
+    {
+      "complexity": 5,
+      "cv_accuracy": 0.9472084597236267,
+      "cv_drops": {
+        "INTELLIGENCE": 0.21343922031232446,
+        "LOGIC": 0.1143379957308168,
+        "THINKING": 0.5481077968767554
+      },
+      "evidence": 0.9929436580159534,
+      "family": "CART_AXIS",
+      "param": 5,
+      "token": "CART_AXIS_5"
+    },
+    {
+      "complexity": 1,
+      "cv_accuracy": 0.9611619480957195,
+      "cv_drops": {
+        "INTELLIGENCE": 0.1856614425345467,
+        "LOGIC": 0.018524042242444683,
+        "THINKING": 0.1856614425345467
+      },
+      "evidence": 0.9685715649926974,
+      "family": "KNN_STRATEGY",
+      "param": 1,
+      "token": "KNN_STRATEGY_1"
+    },
+    {
+      "complexity": 3,
+      "cv_accuracy": 0.9611619480957195,
+      "cv_drops": {
+        "INTELLIGENCE": 0.1856614425345467,
+        "LOGIC": 0.018524042242444683,
+        "THINKING": 0.1856614425345467
+      },
+      "evidence": 0.9685715649926974,
+      "family": "KNN_STRATEGY",
+      "param": 3,
+      "token": "KNN_STRATEGY_3"
+    },
+    {
+      "complexity": 5,
+      "cv_accuracy": 0.956510785305022,
+      "cv_drops": {
+        "INTELLIGENCE": 0.18101027974384903,
+        "LOGIC": 0.018524042242444704,
+        "THINKING": 0.18101027974384903
+      },
+      "evidence": 0.9639204022019998,
+      "family": "KNN_STRATEGY",
+      "param": 5,
+      "token": "KNN_STRATEGY_5"
+    },
+    {
+      "complexity": 7,
+      "cv_accuracy": 0.951962981687451,
+      "cv_drops": {
+        "INTELLIGENCE": 0.176462476126278,
+        "LOGIC": 0.01852404224244473,
+        "THINKING": 0.176462476126278
+      },
+      "evidence": 0.9593725985844289,
+      "family": "KNN_STRATEGY",
+      "param": 7,
+      "token": "KNN_STRATEGY_7"
+    },
+    {
+      "complexity": 9,
+      "cv_accuracy": 0.951962981687451,
+      "cv_drops": {
+        "INTELLIGENCE": 0.176462476126278,
+        "LOGIC": 0.01852404224244473,
+        "THINKING": 0.176462476126278
+      },
+      "evidence": 0.9593725985844289,
+      "family": "KNN_STRATEGY",
+      "param": 9,
+      "token": "KNN_STRATEGY_9"
+    },
+    {
+      "complexity": 1,
+      "cv_accuracy": 0.7569764633187283,
+      "cv_drops": {
+        "INTELLIGENCE": 0.0,
+        "LOGIC": 0.0,
+        "THINKING": 0.20886866644197283
+      },
+      "evidence": 0.7569764633187283,
+      "family": "CENTROID_STRATEGY",
+      "param": 1,
+      "token": "CENTROID_STRATEGY_1"
+    },
+    {
+      "complexity": 2,
+      "cv_accuracy": 0.7569764633187283,
+      "cv_drops": {
+        "INTELLIGENCE": 0.0,
+        "LOGIC": 0.0,
+        "THINKING": 0.5481077968767554
+      },
+      "evidence": 0.7569764633187283,
+      "family": "CENTROID_STRATEGY",
+      "param": 2,
+      "token": "CENTROID_STRATEGY_2"
+    },
+    {
+      "complexity": 3,
+      "cv_accuracy": 0.9426379058532749,
+      "cv_drops": {
+        "INTELLIGENCE": 0.20886866644197283,
+        "LOGIC": 0.0,
+        "THINKING": 0.2251963262554769
+      },
+      "evidence": 0.9426379058532749,
+      "family": "CENTROID_STRATEGY",
+      "param": 3,
+      "token": "CENTROID_STRATEGY_3"
+    },
+    {
+      "complexity": 4,
+      "cv_accuracy": 0.9426379058532749,
+      "cv_drops": {
+        "INTELLIGENCE": 0.20886866644197283,
+        "LOGIC": 0.0,
+        "THINKING": 0.46126895854398386
+      },
+      "evidence": 0.9426379058532749,
+      "family": "CENTROID_STRATEGY",
+      "param": 4,
+      "token": "CENTROID_STRATEGY_4"
+    },
+    {
+      "complexity": 5,
+      "cv_accuracy": 0.9538790585327492,
+      "cv_drops": {
+        "INTELLIGENCE": 0.2525095494888215,
+        "LOGIC": 0.1719466913829907,
+        "THINKING": 0.15361335804965737
+      },
+      "evidence": 1.0153244017526122,
+      "family": "CENTROID_STRATEGY",
+      "param": 5,
+      "token": "CENTROID_STRATEGY_5"
+    },
+    {
+      "complexity": 6,
+      "cv_accuracy": 0.9538790585327492,
+      "cv_drops": {
+        "INTELLIGENCE": 0.23389843837771038,
+        "LOGIC": 0.1719466913829907,
+        "THINKING": 0.16945343219862938
+      },
+      "evidence": 1.021660431412201,
+      "family": "CENTROID_STRATEGY",
+      "param": 6,
+      "token": "CENTROID_STRATEGY_6"
+    },
+    {
+      "complexity": 7,
+      "cv_accuracy": 0.9538790585327492,
+      "cv_drops": {
+        "INTELLIGENCE": 0.23389843837771038,
+        "LOGIC": 0.1719466913829907,
+        "THINKING": 0.15583558027187958
+      },
+      "evidence": 1.0162132906415011,
+      "family": "CENTROID_STRATEGY",
+      "param": 7,
+      "token": "CENTROID_STRATEGY_7"
+    },
+    {
+      "complexity": 8,
+      "cv_accuracy": 0.9538790585327492,
+      "cv_drops": {
+        "INTELLIGENCE": 0.23389843837771038,
+        "LOGIC": 0.1719466913829907,
+        "THINKING": 0.15583558027187958
+      },
+      "evidence": 1.0162132906415011,
+      "family": "CENTROID_STRATEGY",
+      "param": 8,
+      "token": "CENTROID_STRATEGY_8"
+    },
+    {
+      "complexity": 9,
+      "cv_accuracy": 0.9538790585327492,
+      "cv_drops": {
+        "INTELLIGENCE": 0.23389843837771038,
+        "LOGIC": 0.1719466913829907,
+        "THINKING": 0.15583558027187958
+      },
+      "evidence": 1.0162132906415011,
+      "family": "CENTROID_STRATEGY",
+      "param": 9,
+      "token": "CENTROID_STRATEGY_9"
+    },
+    {
+      "complexity": 10,
+      "cv_accuracy": 0.9538790585327492,
+      "cv_drops": {
+        "INTELLIGENCE": 0.23389843837771038,
+        "LOGIC": 0.1719466913829907,
+        "THINKING": 0.15583558027187958
+      },
+      "evidence": 1.0162132906415011,
+      "family": "CENTROID_STRATEGY",
+      "param": 10,
+      "token": "CENTROID_STRATEGY_10"
+    }
+  ],
+  "experience_digest": "a094f62fff12b1c6a6c92b26b25e6f0d7968227dabd680e4872f2a1ff0777d05",
+  "genes": {
+    "COGNITIVE": {
+      "gene_digest": "eee19c9c231a015f2039c67c24425d1dd76855a4748c9ebd0497968727bf55e3",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-99df30816d19ee15",
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-a28b427999ed9dd4",
+        "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V4-f3ba5774879769b3",
+        "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac",
+        "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d"
+      ],
+      "historical_class_scores": {
+        "COMMIT": {
+          "accuracy": 0.6666666666666666,
+          "count": 6
+        },
+        "CONTINUE": {
+          "accuracy": 1.0,
+          "count": 4
+        },
+        "REVISE": {
+          "accuracy": 1.0,
+          "count": 4
+        },
+        "SEEK_EVIDENCE": {
+          "accuracy": 0.6666666666666666,
+          "count": 3
+        }
+      },
+      "historical_fresh": 0.8235294117647058,
+      "historical_organ_ablation_drops": {
+        "INTELLIGENCE": 0.3529411764705882,
+        "LOGIC": 0.17647058823529405,
+        "THINKING": 0.23529411764705876
+      },
+      "model": {
+        "feature": "think_advance",
+        "left": {
+          "feature": "intel_stop",
+          "left": {
+            "label": "REVISE"
+          },
+          "right": {
+            "feature": "logic_terminal",
+            "left": {
+              "label": "SEEK_EVIDENCE"
+            },
+            "right": {
+              "label": "COMMIT"
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "label": "CONTINUE"
+        },
+        "threshold": 0.5
+      },
+      "native_selector": {
+        "candidate_count": 14,
+        "ranking": [
+          {
+            "score": 1.0098567014942141,
+            "token": "CART_AXIS_3"
+          },
+          {
+            "score": 0.9773244017526121,
+            "token": "CENTROID_STRATEGY_5"
+          },
+          {
+            "score": 0.975660431412201,
+            "token": "CENTROID_STRATEGY_6"
+          },
+          {
+            "score": 0.9629436580159534,
+            "token": "CART_AXIS_4"
+          },
+          {
+            "score": 0.9625715649926974,
+            "token": "KNN_STRATEGY_1"
+          },
+          {
+            "score": 0.9622132906415011,
+            "token": "CENTROID_STRATEGY_7"
+          },
+          {
+            "score": 0.9549436580159534,
+            "token": "CART_AXIS_5"
+          },
+          {
+            "score": 0.9542132906415011,
+            "token": "CENTROID_STRATEGY_8"
+          },
+          {
+            "score": 0.9465715649926973,
+            "token": "KNN_STRATEGY_3"
+          },
+          {
+            "score": 0.9462132906415011,
+            "token": "CENTROID_STRATEGY_9"
+          },
+          {
+            "score": 0.9382132906415012,
+            "token": "CENTROID_STRATEGY_10"
+          },
+          {
+            "score": 0.9259204022019998,
+            "token": "KNN_STRATEGY_5"
+          },
+          {
+            "score": 0.9053725985844289,
+            "token": "KNN_STRATEGY_7"
+          },
+          {
+            "score": 0.889372598584429,
+            "token": "KNN_STRATEGY_9"
+          }
+        ],
+        "selected_score": 1.0098567014942141,
+        "selected_token": "CART_AXIS_3"
+      },
+      "old_corpus_class_scores": {
+        "COMMIT": {
+          "accuracy": 0.8734177215189873,
+          "count": 79
+        },
+        "CONTINUE": {
+          "accuracy": 1.0,
+          "count": 229
+        },
+        "REVISE": {
+          "accuracy": 1.0,
+          "count": 73
+        },
+        "SEEK_EVIDENCE": {
+          "accuracy": 0.85,
+          "count": 20
+        }
+      },
+      "old_corpus_regression": 0.9675810473815462,
+      "organ": "CONSCIOUS_WORKSPACE",
+      "origin": "YADO_NATIVE_COGNITIVE_RELEARNING_WITH_UNSEEN_GIT_HISTORY_TRANSFER",
+      "promotion_state": "SHADOW_ONLY",
+      "safety_program_digest": "be640221cf0d5d8db068bf02e9a5415bc6887938ce825f76ab8f4d6e248867d0",
+      "safety_program_id": "P-175fb79989a9",
+      "schema": "yado.g2.global_experience_cognitive_gene.v7",
+      "selected_profile": {
+        "complexity": 3,
+        "cv_accuracy": 0.9630780249410179,
+        "cv_drops": {
+          "INTELLIGENCE": 0.22930878552971573,
+          "LOGIC": 0.1719466913829907,
+          "THINKING": 0.5481077968767554
+        },
+        "evidence": 1.0318567014942142,
+        "family": "CART_AXIS",
+        "param": 3,
+        "token": "CART_AXIS_3"
+      },
+      "strategy_family": "CART_AXIS",
+      "unknown_fail_closed": true
+    },
+    "INTELLIGENCE": {
+      "baseline": 0.3333333333333333,
+      "causal_gain": 0.6666666666666667,
+      "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+      "fresh_blind": 1.0,
+      "gene_digest": "993b16dd0528d291bfad1f8cbaa8cb39a0eda6fa55fec76694ae115895959a90",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+      "heritage": [
+        "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+      ],
+      "model": {
+        "feature": "same_domain_next",
+        "left": {
+          "feature": "next_present",
+          "left": {
+            "label": "STOP"
+          },
+          "right": {
+            "label": "ADVANCE"
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "label": "RETRY"
+        },
+        "threshold": 0.5
+      },
+      "organ": "INTELLIGENCE",
+      "origin": "YADO_NATIVE_META_EVOLUTION_FROM_GLOBAL_CONTENT_ADDRESSED_HISTORY",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.global_experience_organ_gene.v2",
+      "selected_algorithm": {
+        "family": "CART_AXIS",
+        "max_depth": 2
+      }
+    },
+    "LOGIC": {
+      "gene_digest": "54f6986d990f7ced4aa84e3c5bc82804320bfae18f015c9d95ea01770b0cdf77",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V4-f3ba5774879769b3",
+      "general_model": {
+        "feature": "canonical_unchanged",
+        "left": {
+          "feature": "next_present",
+          "left": {
+            "label": true
+          },
+          "right": {
+            "label": true
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "source_is_receipt",
+          "left": {
+            "label": false
+          },
+          "right": {
+            "label": true
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V3-a00c3f7d2b3021c0",
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      ],
+      "historical_adaptation_count": 17,
+      "historical_fresh": 0.6666666666666666,
+      "historical_fresh_count": 9,
+      "historical_pass_recall": 0.6666666666666666,
+      "historical_withhold_recall": 0.6666666666666666,
+      "native_selector": {
+        "candidate_count": 19,
+        "ranking": [
+          {
+            "score": 0.7227582992691689,
+            "token": "CENTROID_STRATEGY_5"
+          },
+          {
+            "score": 0.7099424625294192,
+            "token": "CENTROID_STRATEGY_11"
+          },
+          {
+            "score": 0.7094809240678807,
+            "token": "CENTROID_STRATEGY_10"
+          },
+          {
+            "score": 0.7026983153722284,
+            "token": "CENTROID_STRATEGY_8"
+          },
+          {
+            "score": 0.7019127028366159,
+            "token": "CENTROID_STRATEGY_6"
+          },
+          {
+            "score": 0.6977116932986499,
+            "token": "CENTROID_STRATEGY_12"
+          },
+          {
+            "score": 0.6946983153722284,
+            "token": "CENTROID_STRATEGY_9"
+          },
+          {
+            "score": 0.6934698930296757,
+            "token": "CENTROID_STRATEGY_1"
+          },
+          {
+            "score": 0.6926983153722284,
+            "token": "CENTROID_STRATEGY_7"
+          },
+          {
+            "score": 0.6760724018332714,
+            "token": "CENTROID_STRATEGY_13"
+          },
+          {
+            "score": 0.6728550105289236,
+            "token": "CENTROID_STRATEGY_14"
+          },
+          {
+            "score": 0.6648550105289236,
+            "token": "CENTROID_STRATEGY_15"
+          },
+          {
+            "score": 0.6568550105289236,
+            "token": "CENTROID_STRATEGY_16"
+          },
+          {
+            "score": 0.6488550105289236,
+            "token": "CENTROID_STRATEGY_17"
+          },
+          {
+            "score": 0.6408550105289236,
+            "token": "CENTROID_STRATEGY_18"
+          },
+          {
+            "score": 0.6328550105289236,
+            "token": "CENTROID_STRATEGY_19"
+          },
+          {
+            "score": 0.6248550105289236,
+            "token": "CENTROID_STRATEGY_20"
+          },
+          {
+            "score": 0.6168550105289236,
+            "token": "CENTROID_STRATEGY_21"
+          },
+          {
+            "score": 0.6088550105289237,
+            "token": "CENTROID_STRATEGY_22"
+          }
+        ],
+        "selected_score": 0.7227582992691689,
+        "selected_token": "CENTROID_STRATEGY_5"
+      },
+      "organ": "LOGIC",
+      "origin": "YADO_NATIVE_TERMINAL_LOGIC_RELEARNED_WITH_UNSEEN_GIT_HISTORY_TRANSFER",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.global_experience_logic_gene.v4",
+      "terminal_expert_family": "CENTROID_STRATEGY",
+      "terminal_expert_model": {
+        "centroids": {
+          "False": {
+            "canonical_unchanged": 0.96,
+            "domain_evolution": 0.04,
+            "domain_execution": 0.32,
+            "source_experience": 0.28,
+            "source_receipt": 0.36
+          },
+          "True": {
+            "canonical_unchanged": 0.4065934065934066,
+            "domain_evolution": 0.21978021978021978,
+            "domain_execution": 0.06593406593406594,
+            "source_experience": 0.02197802197802198,
+            "source_receipt": 0.5714285714285714
+          }
+        },
+        "features": [
+          "canonical_unchanged",
+          "source_experience",
+          "domain_execution",
+          "domain_evolution",
+          "source_receipt"
+        ],
+        "kind": "CENTROID_STRATEGY",
+        "label_values": {
+          "False": false,
+          "True": true
+        },
+        "scales": {
+          "canonical_unchanged": 0.5014970093378549,
+          "domain_evolution": 0.38671724151834275,
+          "domain_execution": 0.3271795787661864,
+          "source_experience": 0.2686799314188285,
+          "source_receipt": 0.5014970093378549
+        }
+      },
+      "terminal_profile": {
+        "complexity": 5,
+        "cv_accuracy": 0.8268332713984888,
+        "cv_pass_recall": 0.8461538461538461,
+        "cv_withhold_recall": 0.68,
+        "evidence": 0.7607582992691689,
+        "family": "CENTROID_STRATEGY",
+        "param": 5,
+        "token": "CENTROID_STRATEGY_5"
+      }
+    },
+    "THINKING": {
+      "context_ablation": 0.42592592592592593,
+      "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+      "fresh_blind": 0.5555555555555556,
+      "gain_vs_parent": 0.12962962962962965,
+      "gene_digest": "f70c352d3ced1990c20e8390e8aa2c563f116ffae309498457625ba7c5d4e93c",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac",
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V2-ee24a86eb1100680",
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      ],
+      "model": {
+        "context_keys": [
+          "WINDOW_HAS_PASS",
+          "START_HAS_NEXT",
+          "START_PASS"
+        ],
+        "fallback_edges": [
+          {
+            "after": "REVISE",
+            "before": "ACCEPT",
+            "confidence": 0.6428571428571429,
+            "support": 14
+          },
+          {
+            "after": "SEEK_EVIDENCE",
+            "before": "ACCEPT",
+            "confidence": 0.8333333333333334,
+            "support": 6
+          },
+          {
+            "after": "REVISE",
+            "before": "ADVANCE",
+            "confidence": 0.6428571428571429,
+            "support": 84
+          },
+          {
+            "after": "ADVANCE",
+            "before": "SEEK_EVIDENCE",
+            "confidence": 0.7,
+            "support": 10
+          },
+          {
+            "after": "REVISE",
+            "before": "SEEK_EVIDENCE",
+            "confidence": 0.625,
+            "support": 8
+          }
+        ],
+        "graphs": {
+          "010": [],
+          "100": [
+            {
+              "after": "ADVANCE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 1.0,
+              "support": 4
+            }
+          ],
+          "101": [
+            {
+              "after": "ADVANCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 17
+            },
+            {
+              "after": "REVISE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 2
+            }
+          ],
+          "110": [
+            {
+              "after": "ACCEPT",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 3
+            },
+            {
+              "after": "ADVANCE",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 28
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 2
+            },
+            {
+              "after": "ADVANCE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 1.0,
+              "support": 2
+            }
+          ],
+          "111": [
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 2
+            },
+            {
+              "after": "ACCEPT",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 17
+            },
+            {
+              "after": "REVISE",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 51
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 3
+            },
+            {
+              "after": "REVISE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 0.6666666666666666,
+              "support": 3
+            }
+          ]
+        },
+        "kind": "MULTICONTEXT_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.6
+      },
+      "native_selector": {
+        "candidate_count": 48,
+        "ranking": [
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.60_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.67_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.75_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.80_K3_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.60_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.67_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.75_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.80_K2_S2"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.60_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.67_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.75_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.80_K3_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.60_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.67_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.75_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.80_K2_S3"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.60_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.67_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.75_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.80_K4_S2"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.60_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.67_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.75_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.80_K4_S3"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.60_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.67_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.75_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.80_K1_S2"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.60_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.67_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.75_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.80_K1_S3"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.60_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.67_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.75_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.80_K1_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.60_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.67_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.75_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.80_K3_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.60_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.67_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.75_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.80_K2_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.60_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.67_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.75_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.80_K4_S4"
+          }
+        ],
+        "selected_score": 0.17072222222222222,
+        "selected_token": "T0.60_K3_S2"
+      },
+      "organ": "THINKING",
+      "origin": "YADO_NATIVE_MULTICONTEXT_PRECEDENCE_FROM_GLOBAL_RUN_HISTORY",
+      "parent_global_precedence_fresh": 0.42592592592592593,
+      "promotion_state": "SHADOW_ONLY",
+      "restore": 0.5555555555555556,
+      "schema": "yado.g2.global_experience_thinking_gene.v3",
+      "selected_profile": {
+        "max_context_keys": 3,
+        "min_support": 2,
+        "threshold": 0.6,
+        "token": "T0.60_K3_S2",
+        "validation": 0.2222222222222222
+      }
+    }
+  },
+  "genome": {
+    "automatic_canonical_promotion": false,
+    "base_corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+    "generation": "G2_SHADOW",
+    "genome_digest": "60da25283f2b36bd773597df9222e2fc737b1719bda75370ae07db48ba3bc18d",
+    "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-614e673cb28190cb",
+    "historical_corpus_digest": "ca7cfc4e5127e0142defa1c791c4451a7659aaf2c5d9c08241f7c7edacf7001d",
+    "organs": {
+      "COGNITIVE": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-99df30816d19ee15",
+      "INTELLIGENCE": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+      "LOGIC": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V4-f3ba5774879769b3",
+      "THINKING": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac"
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.global_experience_cognitive_genome.v7"
+  },
+  "historical_counts": {
+    "adapt": 33,
+    "adapt_by_action": {
+      "COMMIT": 12,
+      "CONTINUE": 8,
+      "REVISE": 8,
+      "SEEK_EVIDENCE": 5
+    },
+    "fresh": 17,
+    "fresh_by_action": {
+      "COMMIT": 6,
+      "CONTINUE": 4,
+      "REVISE": 4,
+      "SEEK_EVIDENCE": 3
+    },
+    "total": 50
+  },
+  "old_corpus_class_scores": {
+    "COMMIT": {
+      "accuracy": 0.8734177215189873,
+      "count": 79
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 229
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 73
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.85,
+      "count": 20
+    }
+  },
+  "old_corpus_regression": 0.9675810473815462,
+  "schema": "yado.g2.global_experience_terminal_logic_historical_transfer.experience.v1",
+  "semantic_boundary": "UNSEEN HISTORICAL GIT BLOBS NOT PRESENT IN GLOBAL CORPUS V1 ARE STRATIFIED BEFORE SELECTION. ONLY ADAPTATION BLOBS MAY INFLUENCE MODEL FIT; FRESH HISTORICAL BLOBS REMAIN BLIND UNTIL FINAL TRANSFER EVALUATION. OLD V1 HOLDOUT IS NOW REGRESSION DATA, NOT CLAIMED FRESH. THINKING AND INTELLIGENCE ARE PRESERVED.",
+  "status": "WITHHOLD",
+  "terminal_fresh": 0.6666666666666666,
+  "terminal_pass_recall": 0.6666666666666666,
+  "terminal_selected": {
+    "complexity": 5,
+    "cv_accuracy": 0.8268332713984888,
+    "cv_pass_recall": 0.8461538461538461,
+    "cv_withhold_recall": 0.68,
+    "evidence": 0.7607582992691689,
+    "family": "CENTROID_STRATEGY",
+    "param": 5,
+    "token": "CENTROID_STRATEGY_5"
+  },
+  "terminal_trials": [
+    {
+      "complexity": 1,
+      "cv_accuracy": 0.7642790784095131,
+      "cv_pass_recall": 0.978021978021978,
+      "cv_withhold_recall": 0.0,
+      "evidence": 0.4203534931252323,
+      "family": "CART_AXIS",
+      "param": 1,
+      "token": "CART_AXIS_1"
+    },
+    {
+      "complexity": 2,
+      "cv_accuracy": 0.7524201040505388,
+      "cv_pass_recall": 0.8461538461538461,
+      "cv_withhold_recall": 0.4,
+      "evidence": 0.5938310572277964,
+      "family": "CART_AXIS",
+      "param": 2,
+      "token": "CART_AXIS_2"
+    },
+    {
+      "complexity": 3,
+      "cv_accuracy": 0.7910132540567323,
+      "cv_pass_recall": 0.8681318681318682,
+      "cv_withhold_recall": 0.52,
+      "evidence": 0.6690572897312028,
+      "family": "CART_AXIS",
+      "param": 3,
+      "token": "CART_AXIS_3"
+    },
+    {
+      "complexity": 4,
+      "cv_accuracy": 0.8186129691564474,
+      "cv_pass_recall": 0.8901098901098901,
+      "cv_withhold_recall": 0.56,
+      "evidence": 0.7022371330360462,
+      "family": "CART_AXIS",
+      "param": 4,
+      "token": "CART_AXIS_4"
+    },
+    {
+      "complexity": 5,
+      "cv_accuracy": 0.8459277839712623,
+      "cv_pass_recall": 0.9120879120879121,
+      "cv_withhold_recall": 0.6,
+      "evidence": 0.7352602811841944,
+      "family": "CART_AXIS",
+      "param": 5,
+      "token": "CART_AXIS_5"
+    },
+    {
+      "complexity": 1,
+      "cv_accuracy": 0.8097160287377679,
+      "cv_pass_recall": 0.8681318681318682,
+      "cv_withhold_recall": 0.64,
+      "evidence": 0.7333438158057725,
+      "family": "KNN_STRATEGY",
+      "param": 1,
+      "token": "KNN_STRATEGY_1"
+    },
+    {
+      "complexity": 3,
+      "cv_accuracy": 0.8568608324043107,
+      "cv_pass_recall": 0.9340659340659341,
+      "cv_withhold_recall": 0.6,
+      "evidence": 0.741273457822371,
+      "family": "KNN_STRATEGY",
+      "param": 3,
+      "token": "KNN_STRATEGY_3"
+    },
+    {
+      "complexity": 5,
+      "cv_accuracy": 0.8369534249969032,
+      "cv_pass_recall": 0.9230769230769231,
+      "cv_withhold_recall": 0.56,
+      "evidence": 0.7123243837482969,
+      "family": "KNN_STRATEGY",
+      "param": 5,
+      "token": "KNN_STRATEGY_5"
+    },
+    {
+      "complexity": 7,
+      "cv_accuracy": 0.813436764523721,
+      "cv_pass_recall": 0.9010989010989011,
+      "cv_withhold_recall": 0.48,
+      "evidence": 0.6633902204880466,
+      "family": "KNN_STRATEGY",
+      "param": 7,
+      "token": "KNN_STRATEGY_7"
+    },
+    {
+      "complexity": 9,
+      "cv_accuracy": 0.8221324166976341,
+      "cv_pass_recall": 0.9010989010989011,
+      "cv_withhold_recall": 0.52,
+      "evidence": 0.6861728291836988,
+      "family": "KNN_STRATEGY",
+      "param": 9,
+      "token": "KNN_STRATEGY_9"
+    },
+    {
+      "complexity": 1,
+      "cv_accuracy": 0.7143208844295801,
+      "cv_pass_recall": 0.6813186813186813,
+      "cv_withhold_recall": 0.84,
+      "evidence": 0.6994698930296757,
+      "family": "CENTROID_STRATEGY",
+      "param": 1,
+      "token": "CENTROID_STRATEGY_1"
+    },
+    {
+      "complexity": 2,
+      "cv_accuracy": 0.6989362690449648,
+      "cv_pass_recall": 0.6593406593406593,
+      "cv_withhold_recall": 0.84,
+      "evidence": 0.6811182446780273,
+      "family": "CENTROID_STRATEGY",
+      "param": 2,
+      "token": "CENTROID_STRATEGY_2"
+    },
+    {
+      "complexity": 3,
+      "cv_accuracy": 0.8606357611792393,
+      "cv_pass_recall": 0.9230769230769231,
+      "cv_withhold_recall": 0.6,
+      "evidence": 0.7433496686485817,
+      "family": "CENTROID_STRATEGY",
+      "param": 3,
+      "token": "CENTROID_STRATEGY_3"
+    },
+    {
+      "complexity": 4,
+      "cv_accuracy": 0.7905146785581568,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.64,
+      "evidence": 0.7227830732069863,
+      "family": "CENTROID_STRATEGY",
+      "param": 4,
+      "token": "CENTROID_STRATEGY_4"
+    },
+    {
+      "complexity": 5,
+      "cv_accuracy": 0.8268332713984888,
+      "cv_pass_recall": 0.8461538461538461,
+      "cv_withhold_recall": 0.68,
+      "evidence": 0.7607582992691689,
+      "family": "CENTROID_STRATEGY",
+      "param": 5,
+      "token": "CENTROID_STRATEGY_5"
+    },
+    {
+      "complexity": 6,
+      "cv_accuracy": 0.8034776415211198,
+      "cv_pass_recall": 0.8131868131868132,
+      "cv_withhold_recall": 0.68,
+      "evidence": 0.7479127028366159,
+      "family": "CENTROID_STRATEGY",
+      "param": 6,
+      "token": "CENTROID_STRATEGY_6"
+    },
+    {
+      "complexity": 7,
+      "cv_accuracy": 0.8012696643131425,
+      "cv_pass_recall": 0.8241758241758241,
+      "cv_withhold_recall": 0.68,
+      "evidence": 0.7466983153722284,
+      "family": "CENTROID_STRATEGY",
+      "param": 7,
+      "token": "CENTROID_STRATEGY_7"
+    },
+    {
+      "complexity": 8,
+      "cv_accuracy": 0.8012696643131425,
+      "cv_pass_recall": 0.8131868131868132,
+      "cv_withhold_recall": 0.72,
+      "evidence": 0.7646983153722284,
+      "family": "CENTROID_STRATEGY",
+      "param": 8,
+      "token": "CENTROID_STRATEGY_8"
+    },
+    {
+      "complexity": 9,
+      "cv_accuracy": 0.8012696643131425,
+      "cv_pass_recall": 0.8131868131868132,
+      "cv_withhold_recall": 0.72,
+      "evidence": 0.7646983153722284,
+      "family": "CENTROID_STRATEGY",
+      "param": 9,
+      "token": "CENTROID_STRATEGY_9"
+    },
+    {
+      "complexity": 10,
+      "cv_accuracy": 0.8099653164870556,
+      "cv_pass_recall": 0.8131868131868132,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7874809240678806,
+      "family": "CENTROID_STRATEGY",
+      "param": 10,
+      "token": "CENTROID_STRATEGY_10"
+    },
+    {
+      "complexity": 11,
+      "cv_accuracy": 0.8253499318716709,
+      "cv_pass_recall": 0.8351648351648352,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7959424625294191,
+      "family": "CENTROID_STRATEGY",
+      "param": 11,
+      "token": "CENTROID_STRATEGY_11"
+    },
+    {
+      "complexity": 12,
+      "cv_accuracy": 0.8176576241793633,
+      "cv_pass_recall": 0.8241758241758241,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7917116932986499,
+      "family": "CENTROID_STRATEGY",
+      "param": 12,
+      "token": "CENTROID_STRATEGY_12"
+    },
+    {
+      "complexity": 13,
+      "cv_accuracy": 0.7928589124241299,
+      "cv_pass_recall": 0.7912087912087912,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7780724018332714,
+      "family": "CENTROID_STRATEGY",
+      "param": 13,
+      "token": "CENTROID_STRATEGY_13"
+    },
+    {
+      "complexity": 14,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 14,
+      "token": "CENTROID_STRATEGY_14"
+    },
+    {
+      "complexity": 15,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 15,
+      "token": "CENTROID_STRATEGY_15"
+    },
+    {
+      "complexity": 16,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 16,
+      "token": "CENTROID_STRATEGY_16"
+    },
+    {
+      "complexity": 17,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 17,
+      "token": "CENTROID_STRATEGY_17"
+    },
+    {
+      "complexity": 18,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 18,
+      "token": "CENTROID_STRATEGY_18"
+    },
+    {
+      "complexity": 19,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 19,
+      "token": "CENTROID_STRATEGY_19"
+    },
+    {
+      "complexity": 20,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 20,
+      "token": "CENTROID_STRATEGY_20"
+    },
+    {
+      "complexity": 21,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 21,
+      "token": "CENTROID_STRATEGY_21"
+    },
+    {
+      "complexity": 22,
+      "cv_accuracy": 0.8015545645980428,
+      "cv_pass_recall": 0.8021978021978022,
+      "cv_withhold_recall": 0.76,
+      "evidence": 0.7828550105289236,
+      "family": "CENTROID_STRATEGY",
+      "param": 22,
+      "token": "CENTROID_STRATEGY_22"
+    }
+  ],
+  "terminal_withhold_recall": 0.6666666666666666
+}
