@@ -1,0 +1,31 @@
+name: YADO G2 Whole Function AST Census V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths: ["architecture/yado-g2-coding-whole-function-ast-census-v2-request.json"]
+permissions: {contents: write}
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+      - run: python -m py_compile runtime/yado_g2_coding_whole_function_ast_census_v2.py
+      - run: python runtime/yado_g2_coding_whole_function_ast_census_v2.py
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist census
+        run: |
+          git config user.name "YADO Whole Function AST Census V2"
+          git config user.email "actions@users.noreply.github.com"
+          git add candidates/kernel-self-generated/g2-coding-whole-function-ast-census-v2.json
+          git diff --cached --quiet || git commit -m "Persist YADO whole-function AST census V2 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
