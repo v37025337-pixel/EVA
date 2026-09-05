@@ -16,7 +16,19 @@
     "previous_self_study_receipt": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
     "self_generated_gene": "candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
     "self_generated_gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
-    "native_gene_confirmation_run_id": 33841818519
+    "native_gene_confirmation_run_id": 33841818519,
+    "audit_runtime_binding_evidence": {
+      "source_run_id": 33974358612,
+      "finding_code": "SELF_AUDIT_RUNTIME_BINDING",
+      "this_audit_runtime": "runtime/yado_unified_core_deep_self_audit_v1.py",
+      "provenance": "KERNEL_NATIVE_DEEP_SELF_AUDIT_FINDING"
+    },
+    "previous_model_selected_target": {
+      "source_run_id": 33842251880,
+      "provider_key": "kilo",
+      "target_path": "runtime/yado_g2_action_evidence_self_audit_self_study_repair_v1.py",
+      "note": "HISTORICAL_MODEL_SELECTION_ONLY_NOT_HOST_TARGET_AND_NOT_ASSUMED_CORRECT"
+    }
   },
   "goal": "Let YADO use its own gene as the decision mechanism and select a safe source-level integration candidate. External coding models, if used, are materialization tools only; they must bind the existing YADO gene rather than invent a new rule.",
   "success_conditions": [
@@ -53,10 +65,10 @@
   },
   "host_role": "TASK_TRANSPORT_STRICT_EVALUATION_ONLY",
   "stop_condition": "SELF_GENERATED_GENE_SHADOW_INTEGRATED_OR_EXPLICIT_WITHHOLD",
-  "trigger": 5,
-  "trigger_reason": "RETRY_EXISTING_YADO_GENE_AFTER_FRESH_DIRECT_EVIDENCE_PASS_AND_REAUDIT_STILL_PARTIAL",
-  "previous_run_id": 33842251880,
-  "previous_result": "WITHHOLD_PREVIOUS_MATERIALIZATION;_NEW_DIRECT_EVIDENCE_AVAILABLE",
+  "trigger": 6,
+  "trigger_reason": "RETRY_EXISTING_YADO_GENE_WITH_KERNEL_SELF_AUDIT_RUNTIME_BINDING_EVIDENCE",
+  "previous_run_id": 33974474398,
+  "previous_result": "WITHHOLD_MATERIALIZER_COULD_NOT_IDENTIFY_TARGET_FROM_OVERSIZED_RUNTIME_INVENTORY",
   "host_solution_hint": null,
   "target_path": null
 }
