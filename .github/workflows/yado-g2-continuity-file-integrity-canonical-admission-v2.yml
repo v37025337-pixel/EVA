@@ -1,0 +1,81 @@
+name: YADO G2 Continuity File Integrity Canonical Admission V2
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-continuity-file-integrity-canonical-admission-v2-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-continuity-file-integrity-canonical-admission-v2
+  cancel-in-progress: true
+jobs:
+  admit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before V5 admission
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V5 admission stack
+        run: |
+          python -m py_compile runtime/yado_g2_unified_execution_fabric_v5.py
+          python -m py_compile runtime/yado_g2_continuity_file_integrity_canonical_admission_v2.py
+          python -m py_compile tests/test_g2_continuity_file_integrity.py
+      - name: Re-run focused integrity regressions before canonical mutation
+        run: python -m unittest discover -s tests -p test_g2_continuity_file_integrity.py -v
+      - name: Canonically admit V5 file integrity
+        env:
+          YADO_CONTINUITY_FILE_TESTS_PASS: "1"
+        run: python runtime/yado_g2_continuity_file_integrity_canonical_admission_v2.py
+      - name: Canonical guard after V5 admission
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Enforce V5 canonical verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("runtime/yado_g2_continuity_file_integrity_canonical_admission_v2_receipt.json")
+          if not p.exists(): raise SystemExit("MISSING_V5_CANONICAL_RECEIPT")
+          r=json.loads(p.read_text())
+          if r["status"]!="PASS_G2_CONTINUITY_FILE_INTEGRITY_CANONICAL_ADMISSION_V2":
+              raise SystemExit("V5_CANONICAL_WITHHOLD:"+str(r["status"]))
+          assert r["execution_fabric"]=="RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",r
+          assert r["parent_execution_fabric"]=="RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",r
+          assert r["checkpoint_schema"]=="yado.g2.cognitive_continuity_checkpoint.v1",r
+          assert r["file_schema"]=="yado.g2.cognitive_continuity_file.v2",r
+          assert r["architecture_mutation"] is False,r
+          assert r["generation_transition"] is False,r
+          assert r["g3_genesis_performed"] is False,r
+          assert r["kernel_generated_source"] is False,r
+          assert r["general_intelligence_gain_evidence"] is False,r
+          print(r["status"],r["new_head_digest"],r["receipt_sha256"])
+          PY
+      - name: Persist V5 canonical admission
+        if: always()
+        run: |
+          git config user.name "YADO Continuity File Integrity Admission"
+          git config user.email "actions@users.noreply.github.com"
+          git add             canonical/yado-main-head-g2.json             canonical/yado-unified-core-v1.json             canonical/yado-algorithm-provenance-registry-v1.json             canonical/yado-g2-cognitive-continuity-checkpoint-v1.json             canonical/yado-g2-continuity-file-integrity-v2.json             architecture/evolution-ledger.json             runtime/yado_unified_core_v1.py             runtime/yado_g2_continuity_file_integrity_canonical_admission_v2_receipt.json
+          git add receipts/yado-g2-continuity-file-integrity-canonical-admission-v2-run-*.json
+          git diff --cached --quiet || git commit -m "Admit YADO continuity file integrity V5 canonical [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/__pycache__ runtime/yado_rc8_v36/__pycache__ tests/__pycache__ || true
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-continuity-file-integrity-canonical-admission-v2-${{ github.run_id }}
+          path: |
+            runtime/yado_g2_continuity_file_integrity_canonical_admission_v2_receipt.json
+            canonical/yado-g2-continuity-file-integrity-v2.json
+          if-no-files-found: warn
