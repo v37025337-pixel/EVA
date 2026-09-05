@@ -1,0 +1,9 @@
+{
+ "schema":"yado.g2.coding_whole_function_substrate_expansion_v2.request.v1",
+ "objective":"EXPAND_THE_SHADOW_WHOLE_FUNCTION_CODE_SUBSTRATE_WITH_THE_MINIMUM_READONLY_ATTRIBUTE_PROFILE_THAT_UNLOCKS_MULTIPLE_REAL_FUNCTIONS",
+ "instruction":"Consume the first successful whole-function repair and the int-only substrate. Evaluate only small readonly method profiles observed in active runtime code: dictionary get/items/values and string strip/lower. Bare attribute reads, mutating methods, module attributes, imports, loops, filesystem and network must remain forbidden. Restrict runtime arguments to recursively plain builtin values. Let YADO neutral evidence selection and the native skill gate choose the profile that maximizes real complete-function coverage with source diversity under minimal complexity. Require at least two unlocked functions from at least two files, unchanged canonical state, and no external model.",
+ "parents":["candidates/kernel-self-generated/g2-coding-whole-function-real-repair-v1.json","candidates/kernel-self-generated/g2-coding-whole-function-substrate-evolution-v2.json","candidates/kernel-self-generated/g2-coding-whole-function-ast-census-v2.json"],
+ "constraints":{"readonly_attributes_only":true,"mutating_methods":false,"module_attributes":false,"filesystem":false,"network":false,"loops":false,"canonical_mutation":false},
+ "host_role":"GENERIC_READONLY_ATTRIBUTE_PROFILE_SEARCH_AND_STRICT_SANDBOX_EVALUATION_ONLY",
+ "trigger":1
+}
