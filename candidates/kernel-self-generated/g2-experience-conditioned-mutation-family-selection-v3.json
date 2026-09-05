@@ -15,23 +15,26 @@
   "bridge_receipt": "589b22dfb24d72f2fd9e3ef62c76e4b27c66c976e8cc8801125fcb91e7aa5eb4",
   "canonical_mutation": false,
   "checks": {
+    "at_least_two_non_code_hard_domains_reuse_gene": false,
     "automatic_canonical_promotion": false,
     "bridge_cognitive_revise": true,
     "bridge_intelligence_retry_or_advance": true,
     "canonical_continuity_v4_active": true,
     "canonical_unchanged": true,
-    "causal_real_data_selects_admissible_gene": false,
-    "code_relational_real_data_selects_admissible_gene": false,
-    "cognitive_real_data_selects_admissible_gene": false,
+    "causal_bounded_under_meta_language_limit": true,
+    "causal_hard_real_data_selects_admissible_gene": false,
+    "code_relational_has_structurally_compatible_gene": true,
+    "cognitive_hard_real_data_selects_admissible_gene": false,
     "current_code_source_rewrite_rejects_all_existing_genes": true,
-    "current_rejection_is_contract_not_domain_based": false,
+    "current_rejection_is_contract_not_domain_based": true,
+    "current_source_rewrite_rejections_include_structural_critic": true,
     "external_models_used": false,
+    "general_hard_real_data_selects_admissible_gene": true,
     "host_authored_source_template": false,
     "host_selected_concrete_gene": false,
     "legacy_polynomial_gene_not_selected": true,
-    "memory_real_data_selects_admissible_gene": false,
+    "memory_control_follows_causal_evidence": true,
     "mutation_family_is_invention_only_after_no_admissible_skill": true,
-    "non_code_domains_reuse_self_generated_genes": false,
     "self_generated_gene_inventory_at_least_two": true,
     "v2_bound_deficit_consumed": true
   },
@@ -133,11 +136,11 @@
   "promotion_applied": false,
   "real_cross_domain_selection": {
     "CAUSAL": {
-      "edge_count": 283,
+      "edge_count": 119,
       "evidence": [
         {
           "fit": 0.0,
-          "fit_ablation": 0.0,
+          "fit_ablation": 0.25,
           "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
           "heldout": 0.0,
           "heldout_ablation": 0.0,
@@ -161,7 +164,18 @@
         }
       ],
       "fit_case_count": 4,
+      "hard_case_count": 8,
       "heldout_case_count": 4,
+      "selected_depths": [
+        119,
+        118,
+        117,
+        116,
+        115,
+        114,
+        113,
+        112
+      ],
       "selector": {
         "candidate_count": 3,
         "gate_digest": "1ad2f9e6797178c35c2a3a94c9be211e4b49ca947617700caaf3b47ef023bbbb",
@@ -178,11 +192,11 @@
               "state_integrity": true,
               "structural": true
             },
-            "evidence_digest": "d3467dc1b2c1dfa3917feaee67dfd32aa67bd9df6cb650b7320f773a50979a19",
+            "evidence_digest": "39f917a4d97a95378d48bb02df6b61c65265ec62712923c26cb6be7d9d4aaf0d",
             "failed_critics": [
               "fit_marginal_gain"
             ],
-            "fit_gain": 0.0,
+            "fit_gain": -0.25,
             "heldout_gain": 0.0,
             "skill_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6@CAUSAL",
             "verdict": "REJECT_PRECOMMIT"
@@ -269,7 +283,18 @@
         }
       ],
       "fit_case_count": 4,
+      "hard_case_count": 0,
       "heldout_case_count": 4,
+      "selected_depths": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
       "selector": {
         "candidate_count": 3,
         "gate_digest": "3aa414b31466663a9278a76a673fbfc598d168c74cff808b611db2de2939a0bf",
@@ -356,7 +381,7 @@
           "fit_ablation": 1.0,
           "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
           "heldout": 1.0,
-          "heldout_ablation": 0.6666666666666666,
+          "heldout_ablation": 0.5,
           "structural": true
         },
         {
@@ -376,8 +401,14 @@
           "structural": false
         }
       ],
-      "fit_case_count": 3,
-      "heldout_case_count": 3,
+      "fit_case_count": 1,
+      "hard_case_count": 3,
+      "heldout_case_count": 2,
+      "selected_depths": [
+        5,
+        4,
+        4
+      ],
       "selector": {
         "candidate_count": 3,
         "gate_digest": "1f62178c99831afdd42f068c76ebea6f7fa3fa96df41481de0b188e6a677ec65",
@@ -394,12 +425,12 @@
               "state_integrity": true,
               "structural": true
             },
-            "evidence_digest": "16b7e6f53b909f7bc9ab49d3f822a4d8e5822dc93079775bbb70fcfc976ff4e8",
+            "evidence_digest": "0a151aaa9e69d672e9b330bcc598570a540d3c7dda7d730d167eda978dd79e4d",
             "failed_critics": [
               "fit_marginal_gain"
             ],
             "fit_gain": 0.0,
-            "heldout_gain": 0.33333333333333337,
+            "heldout_gain": 0.5,
             "skill_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6@COGNITIVE",
             "verdict": "REJECT_PRECOMMIT"
           },
@@ -456,6 +487,126 @@
         "status": "NO_ADMISSIBLE_SKILLS"
       }
     },
+    "GENERAL": {
+      "edge_count": 16,
+      "evidence": [
+        {
+          "fit": 1.0,
+          "fit_ablation": 0.0,
+          "gene_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6",
+          "heldout": 1.0,
+          "heldout_ablation": 0.0,
+          "structural": true
+        },
+        {
+          "fit": null,
+          "fit_ablation": null,
+          "gene_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98",
+          "heldout": null,
+          "heldout_ablation": null,
+          "structural": false
+        },
+        {
+          "fit": null,
+          "fit_ablation": null,
+          "gene_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3",
+          "heldout": null,
+          "heldout_ablation": null,
+          "structural": false
+        }
+      ],
+      "fit_case_count": 4,
+      "hard_case_count": 8,
+      "heldout_case_count": 4,
+      "selected_depths": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "selector": {
+        "candidate_count": 3,
+        "gate_digest": "e43a409e21a9a194b995df5241b141684f269745f308b48541f0359d4e462194",
+        "rejected": [
+          {
+            "admitted": false,
+            "critics": {
+              "fit_marginal_gain": false,
+              "heldout_gain_floor": true,
+              "heldout_harmlessness": true,
+              "regression": true,
+              "rollback": true,
+              "semantic": false,
+              "state_integrity": true,
+              "structural": false
+            },
+            "evidence_digest": "983c0cfd420aba039540f1a9aaa47ab484045e9ebc77374030198647e44a0157",
+            "failed_critics": [
+              "fit_marginal_gain",
+              "semantic",
+              "structural"
+            ],
+            "fit_gain": 0.0,
+            "heldout_gain": 0.0,
+            "skill_id": "GENE-SELF-SYNTHESIZED-EVENT-2f252f852fda7ce3@GENERAL",
+            "verdict": "REJECT_PRECOMMIT"
+          },
+          {
+            "admitted": false,
+            "critics": {
+              "fit_marginal_gain": false,
+              "heldout_gain_floor": true,
+              "heldout_harmlessness": true,
+              "regression": true,
+              "rollback": true,
+              "semantic": false,
+              "state_integrity": true,
+              "structural": false
+            },
+            "evidence_digest": "935ac385f90e01d13b26ba5dac3807ea9c2c35b93b547f3debc29a49f61eaf84",
+            "failed_critics": [
+              "fit_marginal_gain",
+              "semantic",
+              "structural"
+            ],
+            "fit_gain": 0.0,
+            "heldout_gain": 0.0,
+            "skill_id": "GENE-SELF-SYNTHESIZED-WEIGHTED-b78cd1969fcc5e98@GENERAL",
+            "verdict": "REJECT_PRECOMMIT"
+          }
+        ],
+        "selected": [
+          {
+            "admitted": true,
+            "critics": {
+              "fit_marginal_gain": true,
+              "heldout_gain_floor": true,
+              "heldout_harmlessness": true,
+              "regression": true,
+              "rollback": true,
+              "semantic": true,
+              "state_integrity": true,
+              "structural": true
+            },
+            "evidence_digest": "a9a0842ef604e6058b4971891d00efbf7e251d7d5bfc7506d17cc1f01a685e8a",
+            "failed_critics": [],
+            "fit_gain": 1.0,
+            "heldout_gain": 1.0,
+            "skill_id": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6@GENERAL",
+            "verdict": "ADMIT"
+          }
+        ],
+        "selected_count": 1,
+        "selected_skill_ids": [
+          "GENE-SELF-SYNTHESIZED-6eee65d8570426d6@GENERAL"
+        ],
+        "status": "SELECTED"
+      }
+    },
     "MEMORY": {
       "edge_count": 126,
       "evidence": [
@@ -485,7 +636,18 @@
         }
       ],
       "fit_case_count": 4,
+      "hard_case_count": 0,
       "heldout_case_count": 4,
+      "selected_depths": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
       "selector": {
         "candidate_count": 3,
         "gate_digest": "ce2b2faca90846d2b026f1304a5ea587681df2abcf044ca9312f3a5c65cc66f5",
@@ -565,14 +727,15 @@
       }
     }
   },
-  "receipt_sha256": "664f462f67eef2262c3f9cc557cab4fb55ffa58f83fa40aaae942f296400e6e5",
+  "receipt_sha256": "0790a81f588de90ba3778870e6fbd4942d5b993ff2b9e402ef072f45ec89daf4",
   "schema": "yado.g2.experience_conditioned_mutation_family_selection.v3",
   "selected_skill_by_domain": {
     "CAUSAL": null,
     "CODE_RELATIONAL": null,
     "COGNITIVE": null,
+    "GENERAL": "GENE-SELF-SYNTHESIZED-6eee65d8570426d6@GENERAL",
     "MEMORY": null
   },
-  "semantic_boundary": "V3 SELECTS ONLY A MUTATION META-FAMILY. REAL YADO GRAPHS FROM CAUSAL, COGNITIVE, MEMORY AND CODE DOMAINS TEST CONTRACT-BASED REUSE OF SELF-GENERATED GENES THROUGH THE NATIVE RC8 PRECOMMIT SKILL GATE. THE CURRENT CODE SOURCE-REWRITE DEFICIT IS NOT FORCED INTO A CODE FAMILY: ALL EXISTING GENES MUST BE REJECTED FOR CONTRACT INCOMPATIBILITY BEFORE INVENT_NEW_GENE IS ALLOWED. NO CONCRETE GENE OR SOURCE TEMPLATE IS HOST-SELECTED.",
+  "semantic_boundary": "V3 USES REAL YADO GRAPHS AND STRUCTURE-DERIVED HARD CASES. REUSE IS ADMITTED ONLY WHEN A SELF-GENERATED GENE HAS POSITIVE FIT MARGINAL GAIN, HELDOUT HARMLESSNESS AND STRUCTURAL COMPATIBILITY. SIMPLE DOMAINS MAY CORRECTLY WITHHOLD. CURRENT CODE SOURCE-REWRITE IS DISTINGUISHED FROM CODE RELATIONAL TASKS BY CONTRACT, NOT BY THE CODE LABEL. NO CONCRETE GENE OR SOURCE TEMPLATE IS HOST-SELECTED.",
   "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_MUTATION_FAMILY_SELECTION_V3"
 }
