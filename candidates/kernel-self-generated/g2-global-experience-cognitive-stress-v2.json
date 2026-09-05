@@ -1,0 +1,159 @@
+{
+  "action_class_slices": {
+    "COMMIT": {
+      "accuracy": 0.5714285714285714,
+      "count": 14
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 40
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 23
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.3333333333333333,
+      "count": 6
+    }
+  },
+  "base_accuracy": 0.8795180722891566,
+  "canonical_mutation": false,
+  "checks": {
+    "action_class_floor": false,
+    "all_action_classes_present": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "combined_organ_ablation_drop_ge_0_20": true,
+    "domain_slice_floor": false,
+    "external_models_used": false,
+    "full_blind_ge_0_75": true,
+    "intelligence_causal": true,
+    "logic_causal": true,
+    "no_material_accuracy_loss_vs_v4": true,
+    "organ_vector_deterministic": true,
+    "post_corpus_accuracy_ge_0_70": true,
+    "post_corpus_count_ge_8": true,
+    "restore_exact": true,
+    "retraining_performed": false,
+    "safety_gate_v5_ablation": true,
+    "safety_gate_v5_exact": true,
+    "source_slice_floor": true,
+    "thinking_causal": true,
+    "unknown_fail_closed": true,
+    "v5_parent_pass": true
+  },
+  "combined_organ_ablation_drop": 0.6024096385542168,
+  "combined_organ_ablation_score": 0.27710843373493976,
+  "domain_slices": {
+    "CODE": {
+      "accuracy": 0.9333333333333333,
+      "count": 30
+    },
+    "COGNITIVE": {
+      "accuracy": 0.9166666666666666,
+      "count": 12
+    },
+    "EVOLUTION": {
+      "accuracy": 0.5,
+      "count": 6
+    },
+    "EXECUTION": {
+      "accuracy": 0.42857142857142855,
+      "count": 7
+    },
+    "GENERAL": {
+      "accuracy": 1.0,
+      "count": 12
+    },
+    "REPRESENTATION": {
+      "accuracy": 1.0,
+      "count": 14
+    }
+  },
+  "individual_organ_ablations": {
+    "INTELLIGENCE": {
+      "drop": 0.12048192771084332,
+      "score": 0.7590361445783133
+    },
+    "LOGIC": {
+      "drop": 0.04819277108433728,
+      "score": 0.8313253012048193
+    },
+    "THINKING": {
+      "drop": 0.48192771084337344,
+      "score": 0.39759036144578314
+    }
+  },
+  "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V3",
+  "parent_genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V5-5e5d66476d724fa2",
+  "post_corpus_accuracy": 0.8,
+  "post_corpus_evaluation": [
+    {
+      "expected": "REVISE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v2.json",
+      "predicted": "REVISE"
+    },
+    {
+      "expected": "SEEK_EVIDENCE",
+      "path": "experience/yado-global-experience-cognitive-genesis-v2.json",
+      "predicted": "SEEK_EVIDENCE"
+    },
+    {
+      "expected": "REVISE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v3.json",
+      "predicted": "REVISE"
+    },
+    {
+      "expected": "SEEK_EVIDENCE",
+      "path": "experience/yado-global-experience-cognitive-genesis-v3.json",
+      "predicted": "SEEK_EVIDENCE"
+    },
+    {
+      "expected": "CONTINUE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v4.json",
+      "predicted": "CONTINUE"
+    },
+    {
+      "expected": "COMMIT",
+      "path": "experience/yado-global-experience-cognitive-genesis-v4.json",
+      "predicted": "SEEK_EVIDENCE"
+    },
+    {
+      "expected": "REVISE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-stress-v1.json",
+      "predicted": "REVISE"
+    },
+    {
+      "expected": "REVISE",
+      "path": "experience/yado-global-experience-cognitive-stress-v1.json",
+      "predicted": "REVISE"
+    },
+    {
+      "expected": "CONTINUE",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v5.json",
+      "predicted": "CONTINUE"
+    },
+    {
+      "expected": "COMMIT",
+      "path": "experience/yado-global-experience-cognitive-genesis-v5.json",
+      "predicted": "SEEK_EVIDENCE"
+    }
+  ],
+  "promotion_applied": false,
+  "receipt_sha256": "ef9a93819eda948b7e38826c8407bc540d56295967e4e9b1b66f2d94d075dcae",
+  "schema": "yado.g2.global_experience_cognitive_stress.v2",
+  "semantic_boundary": "FROZEN V5 ORGAN-ONLY STRESS. COMPARES AGAINST V4 SHORTCUT MODEL WITHOUT REUSING ITS CONTEXT FEATURES, REQUIRES ALL THREE ORGAN CAUSAL CONTRIBUTIONS, ACTION-CLASS/SOURCE/DOMAIN SLICES, POST-CORPUS TRANSFER, COMBINED ABLATION, SAFETY EVIDENCE AND DETERMINISTIC RESTORE. NO RETRAINING.",
+  "source_slices": {
+    "CANDIDATE": {
+      "accuracy": 0.7083333333333334,
+      "count": 24
+    },
+    "RECEIPT": {
+      "accuracy": 0.9473684210526315,
+      "count": 57
+    }
+  },
+  "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V2",
+  "v4_shortcut_base_accuracy": 0.7951807228915663
+}
