@@ -1,0 +1,81 @@
+name: YADO G2 History Derived Semantic Source Edit Serialization V6
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-history-derived-semantic-source-edit-serialization-v6-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-history-derived-semantic-source-edit-serialization-v6
+  cancel-in-progress: true
+jobs:
+  serialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before V6
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V6
+        run: python -m py_compile runtime/yado_g2_history_derived_semantic_source_edit_serialization_v6.py
+      - name: Run existing-native serializer gate
+        id: serialize
+        continue-on-error: true
+        run: python runtime/yado_g2_history_derived_semantic_source_edit_serialization_v6.py
+      - name: Canonical guard after V6
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist V6 evidence
+        if: always()
+        run: |
+          git config user.name "YADO Semantic Serialization V6"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json ]; then
+            git add candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json
+          fi
+          git diff --cached --quiet || git commit -m "Persist YADO semantic source serialization V6 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/__pycache__ runtime/yado_rc8_v36/__pycache__ || true
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest V6 boundary verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json")
+          if not p.exists(): raise SystemExit("MISSING_SEMANTIC_SERIALIZATION_V6")
+          r=json.loads(p.read_text());c=r["checks"]
+          assert r["status"]=="WITHHOLD_G2_HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6",r
+          assert r["gap_proven"] is True,r
+          for k in (
+            "v5_gene_consumed","v5_gene_is_new_identity","kernel_provenant_target_consumed",
+            "existing_native_serializer_was_previously_attempted",
+            "previous_serializer_training_used_many_self_ast_examples",
+            "previous_serializer_native_family_missing",
+            "hidden_code_emitter_is_real_but_unrelated",
+            "controller_target_binding_previously_withheld",
+            "process_emitter_does_not_prove_python_source",
+            "no_existing_target_bound_serializer_candidate",
+            "canonical_unchanged"
+          ):
+              assert c[k] is True,(k,r)
+          for k in ("new_python_source_candidate_created","host_created_serializer","host_created_ast_compiler","host_supplied_patch","external_models_used","automatic_canonical_promotion"):
+              assert c[k] is False,(k,r)
+          assert r["next_required_capability"]=="NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1",r
+          print("PASS_SERIALIZATION_GAP_PROOF",r["receipt_sha256"],r["next_required_capability"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-history-derived-semantic-source-edit-serialization-v6-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json
+          if-no-files-found: warn
