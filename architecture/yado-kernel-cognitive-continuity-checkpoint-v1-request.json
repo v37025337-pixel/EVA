@@ -1,0 +1,41 @@
+{
+  "schema": "yado.g2.cognitive_continuity_checkpoint.request.v1",
+  "objective": "ELIMINATE_RESTART_GAP_BETWEEN_LOGICAL_TIME_AND_ACTIONABLE_RECURRENT_MEMORY",
+  "task": "Create and verify a shadow successor of the current temporal execution fabric that persists temporal ticks and recurrent execution memory as one atomic local checkpoint. Destroy the original runtime object, reconstruct a fresh runtime from the checkpoint, and prove that completed stage outcomes, attempted-stage history, temporal predecessor continuity, and the next planning decision survive restart. A previously failed stage must not be selected again after restoration. Tampered memory or cross-layer continuity must fail closed.",
+  "observed_defect": {
+    "temporal_state_persists": true,
+    "recurrent_stage_outcomes_persist": false,
+    "recurrent_attempt_history_persists": false,
+    "risk": "AFTER_RESTART_THE_KERNEL_CAN_REPEAT_AN_ALREADY_FAILED_STAGE"
+  },
+  "constraints": {
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "shadow_only": true,
+    "external_models": false,
+    "no_change_to_reasoning_policy": true,
+    "persistence_substrate_only": true,
+    "atomic_checkpoint": true,
+    "fail_closed_on_tamper": true
+  },
+  "success_conditions": [
+    "one checkpoint contains temporal state and recurrent memory state",
+    "checkpoint written atomically to a local durable file",
+    "original runtime is destroyed before restore",
+    "fresh runtime restores exact logical tick",
+    "fresh runtime restores recurrent sequence and episode count",
+    "stage outcome survives restart",
+    "attempted failed stage survives restart",
+    "thinking memory feedback remains active after restart",
+    "decision after restart equals decision before restart",
+    "failed stage is not selected again after restart",
+    "first post-restart tick is monotonic and preserves same-stream predecessor",
+    "memory tamper fails closed",
+    "cross-layer temporal-memory forgery fails closed",
+    "canonical G2 remains unchanged"
+  ],
+  "host_role": "CONTINUITY_SUBSTRATE_IMPLEMENTATION_AND_STRICT_RESTART_VERIFICATION_ONLY",
+  "stop_condition": "COGNITIVE_CONTINUITY_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+  "trigger": 1,
+  "trigger_reason": "USER_REQUESTED_ELIMINATION_OF_RESTART_MEMORY_GAP_AFTER_REVIEW_FOUND_TICKS_SURVIVE_BUT_COMPLETED_STAGE_MEMORY_DOES_NOT"
+}
