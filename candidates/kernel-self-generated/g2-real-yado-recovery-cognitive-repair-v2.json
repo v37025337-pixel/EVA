@@ -1,0 +1,174 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "actions_runs_ge_2000": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "cognitive_beats_best_single_by_0_05": false,
+    "cognitive_fresh_ge_0_70": false,
+    "combined_ablation_drop_ge_0_25": false,
+    "external_models_used": false,
+    "failure_episodes_ge_90": true,
+    "intelligence_causal": true,
+    "intelligence_fresh_ge_0_90": true,
+    "intelligence_gain_ge_0_30": true,
+    "job_step_evidence_complete": true,
+    "logic_causal": false,
+    "logic_fresh_ge_0_60": false,
+    "logic_gain_ge_0_08": true,
+    "source_hashed": true,
+    "thinking_causal": false,
+    "thinking_fresh_ge_0_70": false,
+    "thinking_gain_ge_0_20": false,
+    "v1_failure_consumed": true,
+    "workflow_disjoint_split": true
+  },
+  "gene_ids": {
+    "COGNITIVE": "GENE-G2-REAL-RECOVERY-EVIDENCE-COGNITIVE-V2-977594df7a5cc741",
+    "INTELLIGENCE": "GENE-G2-REAL-RECOVERY-EVIDENCE-INTELLIGENCE-V2-475cc7b6233eb7c3",
+    "LOGIC": "GENE-G2-REAL-RECOVERY-EVIDENCE-LOGIC-V2-10bbdf97874c225e",
+    "THINKING": "GENE-G2-REAL-RECOVERY-EVIDENCE-THINKING-V2-1d5f7883e77a7c6f"
+  },
+  "genome_digest": "3b3ba9cc69801b44893d7734168451267392e6e12de51b1a12b33540a8063281",
+  "genome_id": "GENOME-G2-REAL-YADO-RECOVERY-EVIDENCE-V2-5238d66f7320a592",
+  "metrics": {
+    "COGNITIVE": {
+      "best_single": 0.41666666666666663,
+      "classes": {
+        "REPLAN": {
+          "accuracy": 1.0,
+          "count": 5
+        },
+        "RETRY_AFTER_FIX": {
+          "accuracy": 0.0,
+          "count": 1
+        },
+        "VERIFY_RECOVERY": {
+          "accuracy": 0.0,
+          "count": 15
+        },
+        "WITHHOLD_ESCALATE": {
+          "accuracy": 0.6666666666666666,
+          "count": 3
+        }
+      },
+      "combined_ablation": 0.25,
+      "fresh_macro": 0.41666666666666663,
+      "organ_drops": {
+        "INTELLIGENCE": 0.16666666666666663,
+        "LOGIC": 0.0,
+        "THINKING": 0.0
+      },
+      "selected": {
+        "drops": {
+          "INTELLIGENCE": 0.3333333333333333,
+          "LOGIC": 0.0,
+          "THINKING": 0.0
+        },
+        "family": "CENTROID_STRATEGY",
+        "param": 1,
+        "token": "CENTROID_STRATEGY_1",
+        "validation": 0.6666666666666666
+      },
+      "single_scores": {
+        "INTELLIGENCE": 0.41666666666666663,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      }
+    },
+    "INTELLIGENCE": {
+      "ablation_macro": 0.3333333333333333,
+      "classes": {
+        "HIGH": {
+          "accuracy": 0.9090909090909091,
+          "count": 11
+        },
+        "LOW": {
+          "accuracy": 1.0,
+          "count": 5
+        },
+        "MEDIUM": {
+          "accuracy": 1.0,
+          "count": 8
+        }
+      },
+      "drop": 0.6363636363636365,
+      "fresh_macro": 0.9696969696969697,
+      "selected": {
+        "family": "CART_AXIS",
+        "param": 6,
+        "token": "CART_AXIS_6",
+        "validation": 1.0
+      }
+    },
+    "LOGIC": {
+      "ablation_macro": 0.5,
+      "classes": {
+        "false": {
+          "accuracy": 0.875,
+          "count": 8
+        },
+        "true": {
+          "accuracy": 0.3125,
+          "count": 16
+        }
+      },
+      "drop": 0.09375,
+      "fresh_macro": 0.59375,
+      "selected": {
+        "family": "KNN_STRATEGY",
+        "param": 1,
+        "token": "KNN_STRATEGY_1",
+        "validation": 0.4855769230769231
+      }
+    },
+    "THINKING": {
+      "ablation_macro": 0.25,
+      "classes": {
+        "OTHER": {
+          "accuracy": 0.0,
+          "count": 4
+        },
+        "SEMANTIC": {
+          "accuracy": 1.0,
+          "count": 11
+        },
+        "STATE": {
+          "accuracy": 0.0,
+          "count": 6
+        },
+        "TRANSPORT": {
+          "accuracy": 0.0,
+          "count": 3
+        }
+      },
+      "drop": 0.0,
+      "fresh_macro": 0.25,
+      "selected": {
+        "keys": 1,
+        "support": 2,
+        "threshold": 0.55,
+        "token": "T0.55_K1_S2",
+        "validation": 0.25
+      }
+    },
+    "source": {
+      "blind": 24,
+      "blind_workflows": 17,
+      "failure_episodes": 126,
+      "job_evidence_count": 126,
+      "source_sha256": "744ef5870cf5f1413c1c9cb6b2d890999926e032b7ad5ef159a062810f2d21a4",
+      "train": 73,
+      "train_workflows": 44,
+      "usable_runs": 2477,
+      "validation": 29,
+      "validation_workflows": 18
+    }
+  },
+  "next_required_capability": "REAL_YADO_RECOVERY_EVIDENCE_REPAIR_V3",
+  "promotion_applied": false,
+  "receipt_sha256": "d96db690b6802bebde8af33b2446781ef2bd6478d611889b7185d641ebe9174c",
+  "schema": "yado.g2.real_yado_recovery_cognitive_repair.v2",
+  "semantic_boundary": "V2 REPAIRS THE V1 OBSERVABILITY DEFICIT BY ADDING ONLY REAL FAILED-JOB/STEP EVIDENCE AVAILABLE AT THE CURRENT RUN. ENTIRE WORKFLOW NAMES ARE DISJOINT BETWEEN TRAIN/VALIDATION/BLIND. LOGIC STILL PREDICTS ACTUAL NEXT SAME-WORKFLOW RECOVERY; THINKING LEARNS RESPONSE ORDER FROM CURRENT FAILURE CATEGORY; INTELLIGENCE LEARNS CURRENT RISK; COGNITIVE SEES ONLY ORGAN OUTPUTS. NO WORKFLOW NAME OR FUTURE OUTCOME IS A MODEL FEATURE.",
+  "status": "WITHHOLD_G2_REAL_YADO_RECOVERY_COGNITIVE_REPAIR_V2"
+}
