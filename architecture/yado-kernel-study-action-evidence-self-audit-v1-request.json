@@ -1,14 +1,15 @@
 {
   "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
   "objective": "INTEGRATE_YADO_SELF_GENERATED_EVIDENCE_BINDER_GENE_INTO_SHADOW_SELF_AUDIT",
-  "problem": "YADO has now created and fresh/blind/ablation-validated its own evidence-binding shadow gene, but the real deep self-audit does not yet consume that gene. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
+  "problem": "YADO has already created and validated its own evidence-binding shadow gene. A fresh direct LIVE_RESOURCE_EVIDENCE_RECHECK now passes comprehension and conflict-resolution checks, but the next real deep self-audit still reports LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL because it does not consume that direct evidence. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
   "evidence": {
-    "latest_deep_self_audit_run_id": 33832918251,
+    "latest_deep_self_audit_run_id": 33974358612,
     "direct_priority_runs": [
       33832611701,
       33832670571,
       33832722100,
-      33833049256
+      33833049256,
+      33974316485
     ],
     "direct_evidence_artifact": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
     "previous_self_study_run_id": 33833488285,
@@ -52,10 +53,10 @@
   },
   "host_role": "TASK_TRANSPORT_STRICT_EVALUATION_ONLY",
   "stop_condition": "SELF_GENERATED_GENE_SHADOW_INTEGRATED_OR_EXPLICIT_WITHHOLD",
-  "trigger": 4,
-  "trigger_reason": "RETRY_SAME_GENE_INTEGRATION_AFTER_REPAIR_TOOL_TRANSPORT_FAILURE",
+  "trigger": 5,
+  "trigger_reason": "RETRY_EXISTING_YADO_GENE_AFTER_FRESH_DIRECT_EVIDENCE_PASS_AND_REAUDIT_STILL_PARTIAL",
   "previous_run_id": 33842251880,
-  "previous_result": "WITHHOLD_REPAIR_MODEL_CALL_FAILED_AFTER_KERNEL_TOOL_SELECTED_TARGET",
+  "previous_result": "WITHHOLD_PREVIOUS_MATERIALIZATION;_NEW_DIRECT_EVIDENCE_AVAILABLE",
   "host_solution_hint": null,
   "target_path": null
 }
