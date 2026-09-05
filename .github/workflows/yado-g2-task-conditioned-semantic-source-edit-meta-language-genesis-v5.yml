@@ -1,0 +1,85 @@
+name: YADO G2 Task Conditioned Semantic Source Edit Meta Language Genesis V5
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-task-conditioned-semantic-source-edit-meta-language-genesis-v5-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5
+  cancel-in-progress: true
+jobs:
+  genesis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before V5
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V5
+        run: python -m py_compile runtime/yado_g2_task_conditioned_semantic_source_edit_meta_language_genesis_v5.py
+      - name: Run history-derived semantic meta-language genesis
+        id: genesis
+        continue-on-error: true
+        run: python runtime/yado_g2_task_conditioned_semantic_source_edit_meta_language_genesis_v5.py
+      - name: Canonical guard after V5
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist V5 evidence
+        if: always()
+        run: |
+          git config user.name "YADO Semantic Source Meta V5"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json ]; then
+            git add candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json
+          fi
+          git diff --cached --quiet || git commit -m "Persist YADO semantic source edit meta-language V5 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/__pycache__ runtime/yado_rc8_v36/__pycache__ || true
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce strict V5 verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json")
+          if not p.exists(): raise SystemExit("MISSING_SEMANTIC_SOURCE_META_V5")
+          r=json.loads(p.read_text()); c=r["checks"]
+          if r["status"]!="PASS_SHADOW_G2_TASK_CONDITIONED_SEMANTIC_SOURCE_EDIT_META_LANGUAGE_GENESIS_V5":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          for k in (
+            "historical_source_hash_chain_valid",
+            "historical_semantic_conditionalization_transition_found",
+            "target_has_matching_unconditional_partial_shape",
+            "binder_gene_self_created",
+            "binder_accepts_valid_fresh_evidence",
+            "binder_counterfactuals_fail_closed",
+            "candidate_semantics_exact",
+            "causal_gain_over_always_withhold",
+            "native_precommit_admits_gene",
+            "new_gene_identity",
+            "actual_python_source_not_claimed",
+            "canonical_unchanged"
+          ):
+              assert c[k] is True,(k,r)
+          for k in ("host_supplied_patch","host_supplied_ast_skeleton","host_supplied_binder_logic","external_models_used","automatic_canonical_promotion"):
+              assert c[k] is False,(k,r)
+          assert r["meta_language_gene"]["actual_python_source_emission_proven"] is False,r
+          assert r["next_required_capability"]=="HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6",r
+          print(r["status"],r["meta_language_gene"]["gene_id"],r["metrics"],r["receipt_sha256"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json
+          if-no-files-found: warn
