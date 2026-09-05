@@ -17,8 +17,16 @@
       "url": "https://api.kilo.ai/api/gateway/chat/completions"
     }
   ],
+  "full_runtime_inventory_not_sent_to_materializer": true,
   "host_selected_target": false,
   "host_wrote_candidate_patch": false,
+  "kernel_audit_runtime_binding": {
+    "finding_code": "SELF_AUDIT_RUNTIME_BINDING",
+    "provenance": "KERNEL_NATIVE_DEEP_SELF_AUDIT_FINDING",
+    "source_run_id": 33974358612,
+    "this_audit_runtime": "runtime/yado_unified_core_deep_self_audit_v1.py"
+  },
+  "kernel_audit_runtime_valid": true,
   "kernel_skill_selection": {
     "candidate_count": 2,
     "gate_digest": "7006013bd1e86c272c7769a55541024c941ed568df2c0666595b3f33a0361bf1",
@@ -82,7 +90,7 @@
     "status": "NO_ADMISSIBLE_SKILLS"
   },
   "latest_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33974358612.json",
-  "problem_packet_digest": "b98ac998eb5a97fe8f6cadcfec20405371c705c11a83de7a0c7bf33663d64260",
+  "problem_packet_digest": "5443aef9aec355a80547fb3842df9350ac749808ecb0ee55ae256e1233443b30",
   "proposals": [
     {
       "candidate_source_sha256": null,
@@ -117,7 +125,7 @@
       "withhold": true
     }
   ],
-  "receipt_sha256": "1809e6b659f1343f10dce4f796bcb842d4c2225e16eca116a88ba7a04fbbb009",
+  "receipt_sha256": "01d24866452d101f1f2fb4a584b9d27d0469e7869acd20081b613bcf52571d0e",
   "schema": "yado.g2.action_evidence_self_audit_self_study_repair.v1",
   "selected_skill_id": null,
   "selected_target_path": null,
@@ -178,8 +186,8 @@
     "host_role": "TASK_TRANSPORT_STRICT_EVALUATION_ONLY",
     "host_solution_hint": null,
     "objective": "INTEGRATE_YADO_SELF_GENERATED_EVIDENCE_BINDER_GENE_INTO_SHADOW_SELF_AUDIT",
-    "previous_result": "WITHHOLD_MATERIALIZER_COULD_NOT_IDENTIFY_TARGET_FROM_OVERSIZED_RUNTIME_INVENTORY",
-    "previous_run_id": 33974474398,
+    "previous_result": "WITHHOLD_MATERIALIZER_CONTEXT_TOO_BROAD",
+    "previous_run_id": 33974635057,
     "problem": "YADO has already created and validated its own evidence-binding shadow gene. A fresh direct LIVE_RESOURCE_EVIDENCE_RECHECK now passes comprehension and conflict-resolution checks, but the next real deep self-audit still reports LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL because it does not consume that direct evidence. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
     "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
     "stop_condition": "SELF_GENERATED_GENE_SHADOW_INTEGRATED_OR_EXPLICIT_WITHHOLD",
@@ -196,7 +204,7 @@
       "canonical_head_remains_unchanged"
     ],
     "target_path": null,
-    "trigger": 6,
-    "trigger_reason": "RETRY_EXISTING_YADO_GENE_WITH_KERNEL_SELF_AUDIT_RUNTIME_BINDING_EVIDENCE"
+    "trigger": 7,
+    "trigger_reason": "RETRY_AFTER_TRANSPORT_CONTEXT_BOUND_TO_KERNEL_AUDIT_PROVENANCE"
   }
 }
