@@ -1,0 +1,301 @@
+{
+  "allowed_readonly_attributes": [
+    "get"
+  ],
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "builtins_only_runtime_arguments": true,
+    "canonical_unchanged": true,
+    "external_model_used": false,
+    "int_substrate_parent_consumed": true,
+    "native_neutral_selector_selected_profile": true,
+    "native_skill_gate_selected_child": true,
+    "no_filesystem_permission_added": true,
+    "no_loop_permission_added": true,
+    "no_module_attribute_permission_added": true,
+    "no_mutating_attribute_method": true,
+    "no_network_permission_added": true,
+    "readonly_profiles_only": true,
+    "selected_profile_has_source_diversity": false,
+    "selected_profile_unlocks_multiple_functions": false,
+    "whole_function_v1_consumed": true
+  },
+  "gene_id": "GENE-G2-CODE-WHOLE-FUNCTION-SUBSTRATE-V3-aea387e48439ac7d",
+  "native_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "f48fb157e0caf42cdfe73c83e1923a6a2a7e060da2a2848898979086b34bdfbb",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "8b6a23a446d09790c8b07816a777f88dddabcb28fdefb643a5c806cd046177e6",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_INT_ONLY_SUBSTRATE",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "a5e14a8fbffbcecc96fe194c1c53200cdb757b63aea488f4aa4521b403d34b30",
+        "failed_critics": [],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "ADMIT_SHADOW_ATTR_DICT_GET_ONLY",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_SHADOW_ATTR_DICT_GET_ONLY"
+    ],
+    "status": "SELECTED"
+  },
+  "next_required_capability": "G2_CODING_WHOLE_FUNCTION_SUBSTRATE_EXPANSION_V3",
+  "promotion_applied": false,
+  "receipt_sha256": "92f7ea436e54aaa9fa4e291f3f568495cf4fa7e222892aff66ddad4ded17fda8",
+  "schema": "yado.g2.coding_whole_function_substrate_expansion.v2",
+  "selected_profile": "DICT_GET_ONLY",
+  "selector": {
+    "candidate_count": 4,
+    "ranking": [
+      {
+        "score": 1.325,
+        "token": "DICT_GET_ONLY"
+      },
+      {
+        "score": 1.22,
+        "token": "STR_NORMALIZE_ONLY"
+      },
+      {
+        "score": 1.22,
+        "token": "STR_READONLY"
+      },
+      {
+        "score": 1.115,
+        "token": "DICT_READONLY"
+      }
+    ],
+    "selected_score": 1.325,
+    "selected_token": "DICT_GET_ONLY"
+  },
+  "status": "WITHHOLD_G2_CODING_WHOLE_FUNCTION_SUBSTRATE_EXPANSION_V2",
+  "substrate_gene": {
+    "allowed_readonly_attributes": [
+      "get"
+    ],
+    "canonical_parent_unchanged": true,
+    "gene_digest": "42b32fb81cd39f31838880bb2fe25c3040c5e06e0297b0040e2522b34c53b003",
+    "gene_id": "GENE-G2-CODE-WHOLE-FUNCTION-SUBSTRATE-V3-aea387e48439ac7d",
+    "heritage": [
+      "GENE-G2-CODE-WHOLE-FUNCTION-SUBSTRATE-V2-e84e549a6f6a0d9e",
+      "57c29eddca9b77d4843c6d8e3f2957e7b268699b871633d45088eda70f8eb7b6",
+      "GENE-G2-CODING-WHOLE-FUNCTION-REAL-REPAIR-V1-29b8317a56aec09f",
+      "c1dd4fdab474e184f154e3b9b4ab880db8c0c8e86c1411e7583ef95107b9ce0e",
+      "20db19d808b431bee9dda2918100a13ba4b2c2174ab16d484a3453b8c90444d8"
+    ],
+    "mutation_kind": "READONLY_ATTRIBUTE_PROFILE_EXTENSION",
+    "organ": "CODE",
+    "parent_safe_calls": [
+      "int"
+    ],
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.code_whole_function_substrate_gene.v3",
+    "selected_profile": "DICT_GET_ONLY",
+    "unlocked_candidate_count": 1,
+    "unlocked_source_file_count": 1
+  },
+  "unlocked_candidate_count": 1,
+  "unlocked_candidates": [
+    {
+      "allowed_attrs": [
+        "get"
+      ],
+      "arg_names": [
+        "ctx"
+      ],
+      "distinct_output_count": 4,
+      "function_name": "split_bucket",
+      "line": 180,
+      "mutatable_node_count": 13,
+      "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+      "probe_count": 47,
+      "probe_success_count": 32,
+      "sample_probes": [
+        {
+          "args": [
+            {
+              "current_generation_active": false,
+              "dependency_lock_verified": false,
+              "evidence_fetch_hardened": false,
+              "historical_state_protected": false,
+              "lineage_verified": false
+            }
+          ],
+          "output": 0
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": true,
+              "dependency_lock_verified": false,
+              "evidence_fetch_hardened": false,
+              "historical_state_protected": false,
+              "lineage_verified": false
+            }
+          ],
+          "output": 2
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": false,
+              "dependency_lock_verified": false,
+              "evidence_fetch_hardened": false,
+              "historical_state_protected": true,
+              "lineage_verified": false
+            }
+          ],
+          "output": 1
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": true,
+              "dependency_lock_verified": false,
+              "evidence_fetch_hardened": false,
+              "historical_state_protected": true,
+              "lineage_verified": false
+            }
+          ],
+          "output": 3
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": false,
+              "dependency_lock_verified": false,
+              "evidence_fetch_hardened": true,
+              "historical_state_protected": false,
+              "lineage_verified": false
+            }
+          ],
+          "output": 1
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": true,
+              "dependency_lock_verified": false,
+              "evidence_fetch_hardened": true,
+              "historical_state_protected": false,
+              "lineage_verified": false
+            }
+          ],
+          "output": 3
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": false,
+              "dependency_lock_verified": false,
+              "evidence_fetch_hardened": true,
+              "historical_state_protected": true,
+              "lineage_verified": false
+            }
+          ],
+          "output": 2
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": true,
+              "dependency_lock_verified": false,
+              "evidence_fetch_hardened": true,
+              "historical_state_protected": true,
+              "lineage_verified": false
+            }
+          ],
+          "output": 0
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": false,
+              "dependency_lock_verified": true,
+              "evidence_fetch_hardened": false,
+              "historical_state_protected": false,
+              "lineage_verified": false
+            }
+          ],
+          "output": 1
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": true,
+              "dependency_lock_verified": true,
+              "evidence_fetch_hardened": false,
+              "historical_state_protected": false,
+              "lineage_verified": false
+            }
+          ],
+          "output": 3
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": false,
+              "dependency_lock_verified": true,
+              "evidence_fetch_hardened": false,
+              "historical_state_protected": true,
+              "lineage_verified": false
+            }
+          ],
+          "output": 2
+        },
+        {
+          "args": [
+            {
+              "current_generation_active": true,
+              "dependency_lock_verified": true,
+              "evidence_fetch_hardened": false,
+              "historical_state_protected": true,
+              "lineage_verified": false
+            }
+          ],
+          "output": 0
+        }
+      ],
+      "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+      "source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+      "token": "WF2-1c85307659c40ea7"
+    }
+  ],
+  "unlocked_source_file_count": 1
+}
