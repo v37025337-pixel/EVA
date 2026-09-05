@@ -1,0 +1,408 @@
+{
+  "canonical_mutation": false,
+  "experience_digest": "8ba3293a391b6b167b2118f9b37a4061ff34ba9b7bfa93d21146a7aa70562c62",
+  "native_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "24ed198ba7e9a19fa13a7974fda79571e810de2772fae1d3b92d34f2be6a01a5",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "38240a019e9d0b5e2850d5c85916fa08d97f864bfdc1fa86f29545b067a35a13",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_PARENT_CODE_SUBSTRATE",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "557b01e4b539812a5366b756e013954e488b943a14c46558a5f44eb0af8b8fae",
+        "failed_critics": [],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "ADMIT_SHADOW_ADD_PURE_BUILTIN_INT",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_SHADOW_ADD_PURE_BUILTIN_INT"
+    ],
+    "status": "SELECTED"
+  },
+  "observed_pure_builtin_gaps": [
+    "bool",
+    "enumerate",
+    "float",
+    "int",
+    "range",
+    "set",
+    "sorted",
+    "str",
+    "zip"
+  ],
+  "profile_evaluations": [
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [],
+      "source_file_count": 0,
+      "token": "KEEP_PARENT"
+    },
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [
+        "bool"
+      ],
+      "source_file_count": 0,
+      "token": "ADD_PURE_BUILTIN_BOOL"
+    },
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [
+        "enumerate"
+      ],
+      "source_file_count": 0,
+      "token": "ADD_PURE_BUILTIN_ENUMERATE"
+    },
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [
+        "float"
+      ],
+      "source_file_count": 0,
+      "token": "ADD_PURE_BUILTIN_FLOAT"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "arg_names": [
+            "ctx"
+          ],
+          "distinct_output_count": 4,
+          "function_name": "split_bucket",
+          "line": 180,
+          "mutatable_node_count": 13,
+          "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+          "probe_count": 32,
+          "probe_success_count": 32,
+          "sample_probes": [
+            {
+              "args": [
+                {
+                  "current_generation_active": false,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 0
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 2
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": false,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 1
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 3
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": false,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 1
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 3
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": false,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": true,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 2
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": false,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": true,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 0
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": false,
+                  "dependency_lock_verified": true,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 1
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": true,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 3
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": false,
+                  "dependency_lock_verified": true,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 2
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": true,
+                  "evidence_fetch_hardened": false,
+                  "historical_state_protected": true,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 0
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": false,
+                  "dependency_lock_verified": true,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 2
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": true,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": false,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 0
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": false,
+                  "dependency_lock_verified": true,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": true,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 3
+            },
+            {
+              "args": [
+                {
+                  "current_generation_active": true,
+                  "dependency_lock_verified": true,
+                  "evidence_fetch_hardened": true,
+                  "historical_state_protected": true,
+                  "lineage_verified": false
+                }
+              ],
+              "output": 1
+            }
+          ],
+          "source": "def split_bucket(ctx):\n    bits = [int(ctx[k]) for k in ('lineage_verified', 'dependency_lock_verified', 'evidence_fetch_hardened', 'historical_state_protected', 'current_generation_active')]\n    return (bits[0] + bits[1] + bits[2] + bits[3] + 2 * bits[4]) % 4\n",
+          "source_sha256": "eb777f5f7e9e4ca191930d6abe1d93705943cbb5515f07f9e39049a211c1f236",
+          "token": "WF-1c85307659c40ea7"
+        }
+      ],
+      "extra": [
+        "int"
+      ],
+      "source_file_count": 1,
+      "token": "ADD_PURE_BUILTIN_INT"
+    },
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [
+        "range"
+      ],
+      "source_file_count": 0,
+      "token": "ADD_PURE_BUILTIN_RANGE"
+    },
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [
+        "set"
+      ],
+      "source_file_count": 0,
+      "token": "ADD_PURE_BUILTIN_SET"
+    },
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [
+        "sorted"
+      ],
+      "source_file_count": 0,
+      "token": "ADD_PURE_BUILTIN_SORTED"
+    },
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [
+        "str"
+      ],
+      "source_file_count": 0,
+      "token": "ADD_PURE_BUILTIN_STR"
+    },
+    {
+      "candidate_count": 0,
+      "candidates": [],
+      "extra": [
+        "zip"
+      ],
+      "source_file_count": 0,
+      "token": "ADD_PURE_BUILTIN_ZIP"
+    }
+  ],
+  "representation_repair": "INDIRECT_SUBSCRIPT_KEY_INFERENCE",
+  "schema": "yado.g2.coding_whole_function_substrate_evolution.experience.v2",
+  "selector": {
+    "candidate_count": 1,
+    "ranking": [
+      {
+        "score": 1.22,
+        "token": "ADD_PURE_BUILTIN_INT"
+      }
+    ],
+    "selected_score": 1.22,
+    "selected_token": "ADD_PURE_BUILTIN_INT"
+  },
+  "semantic_boundary": "V2 CORRECTS INPUT-SHAPE INFERENCE FOR INDIRECT DICTIONARY SUBSCRIPTS BEFORE RE-EVALUATING THE SAME SINGLE PURE-BUILTIN GRAMMAR SEARCH SPACE. SAFETY SCOPE IS UNCHANGED.",
+  "status": "TRAINED",
+  "substrate_gene": {
+    "added_safe_calls": [
+      "int"
+    ],
+    "canonical_parent_unchanged": true,
+    "gene_digest": "ceb3073d272bd5cf01926f1d9712d24f409b828e5c0739c6b46194785380e51c",
+    "gene_id": "GENE-G2-CODE-WHOLE-FUNCTION-SUBSTRATE-V2-e84e549a6f6a0d9e",
+    "heritage": [
+      "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+      "7db128b701f2e9add3e978ac0347fda605b1e9ec151af9f4567acd636efb7860",
+      "e10951dea4d190a5171b5a0b391bf64bf417bcf32594d20198b8f721c61cde24",
+      "20db19d808b431bee9dda2918100a13ba4b2c2174ab16d484a3453b8c90444d8",
+      "V1_INPUT_SHAPE_INFERENCE_FAILURE"
+    ],
+    "mutation_kind": "SAFE_CALL_GRAMMAR_EXTENSION_AFTER_INPUT_REPRESENTATION_REPAIR",
+    "organ": "CODE",
+    "promotion_state": "SHADOW_ONLY",
+    "representation_repair": "INDIRECT_SUBSCRIPT_KEY_INFERENCE",
+    "schema": "yado.g2.code_whole_function_substrate_gene.v2",
+    "selected_profile": "ADD_PURE_BUILTIN_INT",
+    "unlocked_candidate_count": 1,
+    "unlocked_source_file_count": 1
+  },
+  "v1_failure_signature": "NO_SINGLE_PURE_BUILTIN_EXTENSION_UNLOCKS_WHOLE_FUNCTION"
+}
