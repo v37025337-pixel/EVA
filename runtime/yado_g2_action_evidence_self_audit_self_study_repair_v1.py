@@ -334,6 +334,8 @@ report={
  'external_tools_used':[{'provider_key':x['provider_key'],'model_id':x['model_id'],'url':x['url']} for x in probes[:2]],
  'proposals':[{
    'provider_key':p['provider_key'],'model_id':p['model_id'],'skill_id':p.get('skill_id'),
+   'diagnosis_response':p.get('diagnosis_response'),
+   'repair_response':p.get('repair_response'),
    'withhold':p.get('withhold'),'diagnosis':p.get('diagnosis'),'evidence_used':p.get('evidence_used'),
    'target_path':p.get('target_path'),'parsed':p.get('parsed'),'parse_error':p.get('parse_error'),
    'rationale':p.get('rationale'),'patch_count':p.get('patch_count'),
@@ -362,6 +364,12 @@ print(json.dumps({
  'status':status,'selected_skill_id':report['selected_skill_id'],'selected_target_path':report['selected_target_path'],
  'candidate_path':report['candidate_path'],'canonical_head_unchanged':report['canonical_head_unchanged'],
  'proposal_summary':[{'provider':p['provider_key'],'withhold':p.get('withhold'),'target':p.get('target_path'),
+                      'diagnosis_ok':(p.get('diagnosis_response') or {}).get('ok'),
+                      'diagnosis_http_status':(p.get('diagnosis_response') or {}).get('http_status'),
+                      'diagnosis_error':(p.get('diagnosis_response') or {}).get('error'),
+                      'repair_ok':(p.get('repair_response') or {}).get('ok'),
+                      'repair_http_status':(p.get('repair_response') or {}).get('http_status'),
+                      'repair_error':(p.get('repair_response') or {}).get('error'),
                       'score':(p.get('evaluation') or {}).get('score',0.0),'probe_pass':(p.get('semantic_probe') or {}).get('pass'),
                       'parse_error':p.get('parse_error')} for p in proposals],
  'receipt_sha256':report['receipt_sha256']
