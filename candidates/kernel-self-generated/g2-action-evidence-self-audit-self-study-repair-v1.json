@@ -61,7 +61,7 @@
           "state_integrity": false,
           "structural": false
         },
-        "evidence_digest": "330b0620afc4c6691d16be52405a4c27d5aabf799caf2abab472311e1481d040",
+        "evidence_digest": "0fc18148cf69d02355194f498583c6c2044e22b9c5676bceb46df218f658a1d3",
         "failed_critics": [
           "fit_marginal_gain",
           "heldout_gain_floor",
@@ -81,23 +81,29 @@
     "selected_skill_ids": [],
     "status": "NO_ADMISSIBLE_SKILLS"
   },
-  "latest_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33832918251.json",
-  "problem_packet_digest": "99f0e6d8a61aacc24d75f4b3efe97775705ad1de5febc561ae79e67c485a27b6",
+  "latest_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-33974358612.json",
+  "problem_packet_digest": "b72980e40e9b7cf768e3e3772280f6ec6a917a7fee9ac38d14750c45327f3386",
   "proposals": [
     {
       "candidate_source_sha256": null,
-      "diagnosis": null,
-      "evidence_used": null,
+      "diagnosis": "Insufficient evidence to definitively identify the single target file. The runtime_inventory contains hundreds of Python files with truncated paths, making it impossible to determine which specific file handles LIVE_RESOURCE_EVIDENCE_SCOPE consumption or shadow gene binding. The gene's contract fields (action_relevant, action_status_pass, canonical_immutable, comprehension_complete, conflict_resolution_pass, direct_priority_evidence, priority_match) indicate a decision mechanism for evidence acceptance, but the inventory paths are not visible. Without seeing actual file paths, I cannot select the correct target. The problem requires binding the existing self_generated_gene artifact into an audit candidate, but the specific file requiring modification is not identifiable from the provided inventory data.",
+      "evidence_used": [
+        "yado_self_generated_gene.promotion_state=SHADOW_ONLY indicates gene exists but is not yet integrated into runtime",
+        "latest_audit.area=RESOURCE_AND_EVIDENCE with code=LIVE_RESOURCE_EVIDENCE_SCOPE shows partial status due to evidence not being consumed",
+        "task.constraints.must_bind_existing_self_generated_gene=true confirms binding requirement",
+        "runtime_inventory contains 300+ Python files with paths truncated, preventing target identification",
+        "goal requires integrating existing YADO-created gene into shadow audit candidate without inventing replacement policy"
+      ],
       "model_id": "minimax-m2.7",
       "parse_error": null,
-      "parsed": false,
+      "parsed": true,
       "patch_count": null,
       "provider_key": "llm7",
       "rationale": null,
       "semantic_probe": null,
       "skill_id": "SELF_AUDIT_EVIDENCE_REPAIR_LLM7_0",
       "static_evaluation": null,
-      "target_path": null,
+      "target_path": "",
       "withhold": true
     },
     {
@@ -117,7 +123,7 @@
       "withhold": true
     }
   ],
-  "receipt_sha256": "3feb877ff8c2967029495a05b92f50296c7bf8e061488ed4316450af8690ab9d",
+  "receipt_sha256": "2e78cb78b6c3ab65738bdb0fca5d17415b2191392f84d765e1cfd325ac93145b",
   "schema": "yado.g2.action_evidence_self_audit_self_study_repair.v1",
   "selected_skill_id": null,
   "selected_target_path": null,
@@ -152,9 +158,10 @@
         33832611701,
         33832670571,
         33832722100,
-        33833049256
+        33833049256,
+        33974316485
       ],
-      "latest_deep_self_audit_run_id": 33832918251,
+      "latest_deep_self_audit_run_id": 33974358612,
       "native_gene_confirmation_run_id": 33841818519,
       "previous_self_study_receipt": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
       "previous_self_study_run_id": 33833488285,
@@ -165,9 +172,9 @@
     "host_role": "TASK_TRANSPORT_STRICT_EVALUATION_ONLY",
     "host_solution_hint": null,
     "objective": "INTEGRATE_YADO_SELF_GENERATED_EVIDENCE_BINDER_GENE_INTO_SHADOW_SELF_AUDIT",
-    "previous_result": "WITHHOLD_REPAIR_MODEL_CALL_FAILED_AFTER_KERNEL_TOOL_SELECTED_TARGET",
+    "previous_result": "WITHHOLD_PREVIOUS_MATERIALIZATION;_NEW_DIRECT_EVIDENCE_AVAILABLE",
     "previous_run_id": 33842251880,
-    "problem": "YADO has now created and fresh/blind/ablation-validated its own evidence-binding shadow gene, but the real deep self-audit does not yet consume that gene. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
+    "problem": "YADO has already created and validated its own evidence-binding shadow gene. A fresh direct LIVE_RESOURCE_EVIDENCE_RECHECK now passes comprehension and conflict-resolution checks, but the next real deep self-audit still reports LIVE_RESOURCE_EVIDENCE_SCOPE as PARTIAL because it does not consume that direct evidence. Integrate the existing YADO-created gene into a shadow audit candidate without inventing a replacement policy.",
     "schema": "yado.g2.action_evidence_self_audit_self_study_repair.request.v1",
     "stop_condition": "SELF_GENERATED_GENE_SHADOW_INTEGRATED_OR_EXPLICIT_WITHHOLD",
     "success_conditions": [
@@ -183,7 +190,7 @@
       "canonical_head_remains_unchanged"
     ],
     "target_path": null,
-    "trigger": 4,
-    "trigger_reason": "RETRY_SAME_GENE_INTEGRATION_AFTER_REPAIR_TOOL_TRANSPORT_FAILURE"
+    "trigger": 5,
+    "trigger_reason": "RETRY_EXISTING_YADO_GENE_AFTER_FRESH_DIRECT_EVIDENCE_PASS_AND_REAUDIT_STILL_PARTIAL"
   }
 }
