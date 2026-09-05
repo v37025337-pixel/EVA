@@ -1,0 +1,634 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "all_blind_action_classes_present": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "chronological_split": true,
+    "cognitive_beats_best_single_by_0_03": true,
+    "cognitive_fresh_macro_ge_0_60": false,
+    "combined_ablation_drop_ge_0_20": false,
+    "external_models_used": false,
+    "failure_episodes_ge_90": true,
+    "intelligence_causal": true,
+    "intelligence_fresh_macro_ge_0_90": true,
+    "intelligence_gain_ge_0_30": true,
+    "logic_causal": true,
+    "logic_fresh_macro_ge_0_60": false,
+    "logic_gain_ge_0_08": false,
+    "real_actions_runs_ge_1500": true,
+    "source_hashed": true,
+    "thinking_causal": false,
+    "thinking_fresh_macro_ge_0_50": false,
+    "thinking_gain_ge_0_08": false
+  },
+  "experience_digest": "57964ae4232462956dde33c60edf9a50ed7258cf4176f32fe6066a29cb53e6fd",
+  "genes": {
+    "COGNITIVE": {
+      "gene_digest": "a2afc64ac7f032f9b2d12c51f6cec80fafffee20a232b1898cf271ca563bb122",
+      "gene_id": "GENE-G2-REAL-RECOVERY-COGNITIVE-V1-c0cdcf3ceea616d7",
+      "model": {
+        "feature": "logic_recoverable",
+        "left": {
+          "feature": "intel_low",
+          "left": {
+            "label": "WITHHOLD"
+          },
+          "right": {
+            "label": "WITHHOLD"
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "intel_low",
+          "left": {
+            "label": "REPLAN_VERIFY"
+          },
+          "right": {
+            "label": "ACT_REPAIR"
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "parent": "GENE-G2-MULTIDOMAIN-COGNITIVE-V1-bd9df590793e7885"
+    },
+    "INTELLIGENCE": {
+      "gene_digest": "575f6c4da2a41e6eaf73769ca733ae4e95784bd4014a59e43bfbd0a89a56e03e",
+      "gene_id": "GENE-G2-REAL-RECOVERY-INTELLIGENCE-V1-d5c0511be35f541a",
+      "model": {
+        "feature": "duration_ge_q50",
+        "left": {
+          "feature": "streak_ge_2",
+          "left": {
+            "label": "LOW"
+          },
+          "right": {
+            "label": "HIGH"
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "duration_ge_q75",
+          "left": {
+            "feature": "streak_ge_2",
+            "left": {
+              "label": "MEDIUM"
+            },
+            "right": {
+              "label": "HIGH"
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "label": "HIGH"
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "parent": "GENE-G2-REAL-DATA-INTELLIGENCE-V1-ea380fc901dc58ab"
+    },
+    "LOGIC": {
+      "gene_digest": "4268c4bdb72f27dcb4d289e1e48e88a4032dc9a86ba2f964a766d43b35e92bf3",
+      "gene_id": "GENE-G2-REAL-RECOVERY-LOGIC-V1-31760eb01237757b",
+      "model": {
+        "feature": "duration_ge_q75",
+        "left": {
+          "feature": "tok_rewrite",
+          "left": {
+            "feature": "tok_module",
+            "left": {
+              "feature": "tok_representation",
+              "left": {
+                "feature": "tok_intelligence",
+                "left": {
+                  "feature": "streak_ge_2",
+                  "left": {
+                    "label": true
+                  },
+                  "right": {
+                    "label": true
+                  },
+                  "threshold": 0.5
+                },
+                "right": {
+                  "label": true
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "label": true
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "streak_ge_2",
+              "left": {
+                "label": false
+              },
+              "right": {
+                "feature": "duration_ge_q50",
+                "left": {
+                  "feature": "streak_ge_3",
+                  "left": {
+                    "label": true
+                  },
+                  "right": {
+                    "label": true
+                  },
+                  "threshold": 0.5
+                },
+                "right": {
+                  "label": false
+                },
+                "threshold": 0.5
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "label": false
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "tok_transfer",
+          "left": {
+            "feature": "tok_evolution",
+            "left": {
+              "feature": "tok_rewrite",
+              "left": {
+                "feature": "tok_source",
+                "left": {
+                  "feature": "tok_audit",
+                  "left": {
+                    "label": false
+                  },
+                  "right": {
+                    "label": false
+                  },
+                  "threshold": 0.5
+                },
+                "right": {
+                  "feature": "streak_ge_3",
+                  "left": {
+                    "label": false
+                  },
+                  "right": {
+                    "label": false
+                  },
+                  "threshold": 0.5
+                },
+                "threshold": 0.5
+              },
+              "right": {
+                "label": false
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "label": true
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "label": true
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "parent": "GENE-G2-REAL-DATA-LOGIC-V1-40527e5ca77aad30"
+    },
+    "THINKING": {
+      "gene_digest": "82fead29bf04152fdb986532a0580f6790a3ddbab2e8860ad3607f9fbd147de8",
+      "gene_id": "GENE-G2-REAL-RECOVERY-THINKING-V1-b540afbffd184d3b",
+      "model": {
+        "context_keys": [
+          "event_push",
+          "duration_ge_q50",
+          "streak_ge_2"
+        ],
+        "fallback_edges": [
+          {
+            "after": "DEEP_REPLAN",
+            "before": "DIAGNOSE",
+            "confidence": 1.0,
+            "support": 86
+          },
+          {
+            "after": "LOCAL_REPAIR",
+            "before": "DIAGNOSE",
+            "confidence": 1.0,
+            "support": 86
+          },
+          {
+            "after": "VERIFY",
+            "before": "DIAGNOSE",
+            "confidence": 1.0,
+            "support": 86
+          },
+          {
+            "after": "VERIFY",
+            "before": "LOCAL_REPAIR",
+            "confidence": 1.0,
+            "support": 86
+          },
+          {
+            "after": "DEEP_REPLAN",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 86
+          },
+          {
+            "after": "DIAGNOSE",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 86
+          },
+          {
+            "after": "LOCAL_REPAIR",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 86
+          },
+          {
+            "after": "VERIFY",
+            "before": "OBSERVE",
+            "confidence": 1.0,
+            "support": 86
+          }
+        ],
+        "graphs": {
+          "100": [
+            {
+              "after": "DEEP_REPLAN",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 31
+            },
+            {
+              "after": "LOCAL_REPAIR",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 31
+            },
+            {
+              "after": "VERIFY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 31
+            },
+            {
+              "after": "VERIFY",
+              "before": "LOCAL_REPAIR",
+              "confidence": 1.0,
+              "support": 31
+            },
+            {
+              "after": "DEEP_REPLAN",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 31
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 31
+            },
+            {
+              "after": "LOCAL_REPAIR",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 31
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 31
+            }
+          ],
+          "101": [
+            {
+              "after": "DEEP_REPLAN",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "LOCAL_REPAIR",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "VERIFY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "VERIFY",
+              "before": "LOCAL_REPAIR",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "DEEP_REPLAN",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "LOCAL_REPAIR",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 7
+            }
+          ],
+          "110": [
+            {
+              "after": "VERIFY",
+              "before": "DEEP_REPLAN",
+              "confidence": 0.8260869565217391,
+              "support": 23
+            },
+            {
+              "after": "DEEP_REPLAN",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 23
+            },
+            {
+              "after": "LOCAL_REPAIR",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 23
+            },
+            {
+              "after": "VERIFY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 23
+            },
+            {
+              "after": "VERIFY",
+              "before": "LOCAL_REPAIR",
+              "confidence": 1.0,
+              "support": 23
+            },
+            {
+              "after": "DEEP_REPLAN",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 23
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 23
+            },
+            {
+              "after": "LOCAL_REPAIR",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 23
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 23
+            }
+          ],
+          "111": [
+            {
+              "after": "VERIFY",
+              "before": "DEEP_REPLAN",
+              "confidence": 0.92,
+              "support": 25
+            },
+            {
+              "after": "DEEP_REPLAN",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 25
+            },
+            {
+              "after": "LOCAL_REPAIR",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 25
+            },
+            {
+              "after": "VERIFY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 25
+            },
+            {
+              "after": "VERIFY",
+              "before": "LOCAL_REPAIR",
+              "confidence": 1.0,
+              "support": 25
+            },
+            {
+              "after": "DEEP_REPLAN",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 25
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 25
+            },
+            {
+              "after": "LOCAL_REPAIR",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 25
+            },
+            {
+              "after": "VERIFY",
+              "before": "OBSERVE",
+              "confidence": 1.0,
+              "support": 25
+            }
+          ]
+        },
+        "kind": "MULTICONTEXT_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.75
+      },
+      "parent": "GENE-G2-REAL-DATA-THINKING-V1-50d61a10446f3f5e"
+    }
+  },
+  "genome": {
+    "automatic_canonical_promotion": false,
+    "genome_digest": "801b238621205cc57127a05cb55979d42030a84b9327aa99c0551fdbb030c1b5",
+    "genome_id": "GENOME-G2-REAL-YADO-RECOVERY-V1-9e692c7ef994769b",
+    "organs": {
+      "COGNITIVE": "GENE-G2-REAL-RECOVERY-COGNITIVE-V1-c0cdcf3ceea616d7",
+      "INTELLIGENCE": "GENE-G2-REAL-RECOVERY-INTELLIGENCE-V1-d5c0511be35f541a",
+      "LOGIC": "GENE-G2-REAL-RECOVERY-LOGIC-V1-31760eb01237757b",
+      "THINKING": "GENE-G2-REAL-RECOVERY-THINKING-V1-b540afbffd184d3b"
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.real_yado_recovery_cognitive_genome.v1"
+  },
+  "metrics": {
+    "COGNITIVE": {
+      "best_single": 0.25,
+      "class_scores": {
+        "ACT_REPAIR": {
+          "accuracy": 1.0,
+          "count": 2
+        },
+        "REPLAN_VERIFY": {
+          "accuracy": 0.4,
+          "count": 5
+        },
+        "VERIFY": {
+          "accuracy": 0.0,
+          "count": 3
+        },
+        "WITHHOLD": {
+          "accuracy": 0.0,
+          "count": 12
+        }
+      },
+      "combined_ablation": 0.25,
+      "fresh_macro": 0.35,
+      "organ_ablation_drops": {
+        "INTELLIGENCE": 0.19999999999999998,
+        "LOGIC": 0.09999999999999998,
+        "THINKING": 0.0
+      },
+      "selected": {
+        "drops": {
+          "INTELLIGENCE": 0.19999999999999996,
+          "LOGIC": 0.25384615384615383,
+          "THINKING": 0.0
+        },
+        "family": "CART_AXIS",
+        "param": 2,
+        "token": "CART_AXIS_2",
+        "validation_macro": 0.5038461538461538
+      },
+      "single_organ_scores": {
+        "INTELLIGENCE": 0.25,
+        "LOGIC": 0.15,
+        "THINKING": 0.25
+      }
+    },
+    "INTELLIGENCE": {
+      "ablation_macro": 0.3333333333333333,
+      "class_scores": {
+        "HIGH": {
+          "accuracy": 1.0,
+          "count": 11
+        },
+        "LOW": {
+          "accuracy": 1.0,
+          "count": 5
+        },
+        "MEDIUM": {
+          "accuracy": 1.0,
+          "count": 6
+        }
+      },
+      "drop": 0.6666666666666667,
+      "fresh_macro": 1.0,
+      "selected": {
+        "depth": 3,
+        "token": "CART_D3",
+        "validation_macro": 1.0
+      }
+    },
+    "LOGIC": {
+      "ablation_macro": 0.5,
+      "class_scores": {
+        "false": {
+          "accuracy": 0.0,
+          "count": 12
+        },
+        "true": {
+          "accuracy": 0.8,
+          "count": 10
+        }
+      },
+      "drop": -0.09999999999999998,
+      "fresh_macro": 0.4,
+      "selected": {
+        "depth": 6,
+        "token": "CART_D6",
+        "validation_macro": 0.5854700854700855
+      }
+    },
+    "THINKING": {
+      "ablation_macro": 0.3333333333333333,
+      "class_scores": {
+        "DEEP": {
+          "accuracy": 0.0,
+          "count": 5
+        },
+        "ESCALATE": {
+          "accuracy": 1.0,
+          "count": 12
+        },
+        "QUICK": {
+          "accuracy": 0.0,
+          "count": 5
+        }
+      },
+      "drop": 0.0,
+      "fresh_macro": 0.3333333333333333,
+      "selected": {
+        "keys": 3,
+        "support": 2,
+        "threshold": 0.75,
+        "token": "T0.75_K3_S2",
+        "validation_macro": 0.37435897435897436
+      }
+    },
+    "source": {
+      "blind_count": 22,
+      "blind_end": "2026-09-05T10:52:14Z",
+      "failure_episodes": 108,
+      "github_actions_pages": 20,
+      "source_sha256": "6b401d3f06705fb21d03636cc119b663f05008fd7282e2a0b6404712cf095c12",
+      "train_count": 64,
+      "train_end": "2026-09-03T06:03:28Z",
+      "usable_runs": 1985,
+      "validation_count": 22,
+      "validation_end": "2026-09-04T05:54:40Z"
+    },
+    "thresholds_from_train": {
+      "duration_q50_s": 32.0,
+      "duration_q75_s": 42.0,
+      "recovery_duration_median_s": 34.0
+    }
+  },
+  "schema": "yado.g2.real_yado_recovery_cognitive_task.experience.v1",
+  "semantic_boundary": "ONE SHARED REAL OPERATIONAL TASK: RECOVERY AFTER AN ACTUAL YADO GITHUB ACTIONS FAILURE. FEATURES AVAILABLE AT THE FAILED RUN OR EARLIER FEED ALL THREE ORGANS. LOGIC PREDICTS NEXT-RUN RECOVERY; THINKING PREDICTS A RECOVERY ORDER; INTELLIGENCE PREDICTS CURRENT OPERATIONAL RISK. COGNITIVE SEES ONLY ORGAN OUTPUTS AND SELECTS THE CONTROL ACTION. TARGET RECOVERY LABELS USE ACTUAL NEXT SAME-WORKFLOW OUTCOMES. THIS IS HISTORICAL CHRONOLOGICAL HOLDOUT, NOT A CLAIM OF GENERAL AUTONOMY.",
+  "status": "WITHHOLD"
+}

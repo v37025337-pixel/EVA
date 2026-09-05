@@ -1,0 +1,172 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "all_blind_action_classes_present": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "chronological_split": true,
+    "cognitive_beats_best_single_by_0_03": true,
+    "cognitive_fresh_macro_ge_0_60": false,
+    "combined_ablation_drop_ge_0_20": false,
+    "external_models_used": false,
+    "failure_episodes_ge_90": true,
+    "intelligence_causal": true,
+    "intelligence_fresh_macro_ge_0_90": true,
+    "intelligence_gain_ge_0_30": true,
+    "logic_causal": true,
+    "logic_fresh_macro_ge_0_60": false,
+    "logic_gain_ge_0_08": false,
+    "real_actions_runs_ge_1500": true,
+    "source_hashed": true,
+    "thinking_causal": false,
+    "thinking_fresh_macro_ge_0_50": false,
+    "thinking_gain_ge_0_08": false
+  },
+  "gene_ids": {
+    "COGNITIVE": "GENE-G2-REAL-RECOVERY-COGNITIVE-V1-c0cdcf3ceea616d7",
+    "INTELLIGENCE": "GENE-G2-REAL-RECOVERY-INTELLIGENCE-V1-d5c0511be35f541a",
+    "LOGIC": "GENE-G2-REAL-RECOVERY-LOGIC-V1-31760eb01237757b",
+    "THINKING": "GENE-G2-REAL-RECOVERY-THINKING-V1-b540afbffd184d3b"
+  },
+  "genome_digest": "801b238621205cc57127a05cb55979d42030a84b9327aa99c0551fdbb030c1b5",
+  "genome_id": "GENOME-G2-REAL-YADO-RECOVERY-V1-9e692c7ef994769b",
+  "metrics": {
+    "COGNITIVE": {
+      "best_single": 0.25,
+      "class_scores": {
+        "ACT_REPAIR": {
+          "accuracy": 1.0,
+          "count": 2
+        },
+        "REPLAN_VERIFY": {
+          "accuracy": 0.4,
+          "count": 5
+        },
+        "VERIFY": {
+          "accuracy": 0.0,
+          "count": 3
+        },
+        "WITHHOLD": {
+          "accuracy": 0.0,
+          "count": 12
+        }
+      },
+      "combined_ablation": 0.25,
+      "fresh_macro": 0.35,
+      "organ_ablation_drops": {
+        "INTELLIGENCE": 0.19999999999999998,
+        "LOGIC": 0.09999999999999998,
+        "THINKING": 0.0
+      },
+      "selected": {
+        "drops": {
+          "INTELLIGENCE": 0.19999999999999996,
+          "LOGIC": 0.25384615384615383,
+          "THINKING": 0.0
+        },
+        "family": "CART_AXIS",
+        "param": 2,
+        "token": "CART_AXIS_2",
+        "validation_macro": 0.5038461538461538
+      },
+      "single_organ_scores": {
+        "INTELLIGENCE": 0.25,
+        "LOGIC": 0.15,
+        "THINKING": 0.25
+      }
+    },
+    "INTELLIGENCE": {
+      "ablation_macro": 0.3333333333333333,
+      "class_scores": {
+        "HIGH": {
+          "accuracy": 1.0,
+          "count": 11
+        },
+        "LOW": {
+          "accuracy": 1.0,
+          "count": 5
+        },
+        "MEDIUM": {
+          "accuracy": 1.0,
+          "count": 6
+        }
+      },
+      "drop": 0.6666666666666667,
+      "fresh_macro": 1.0,
+      "selected": {
+        "depth": 3,
+        "token": "CART_D3",
+        "validation_macro": 1.0
+      }
+    },
+    "LOGIC": {
+      "ablation_macro": 0.5,
+      "class_scores": {
+        "false": {
+          "accuracy": 0.0,
+          "count": 12
+        },
+        "true": {
+          "accuracy": 0.8,
+          "count": 10
+        }
+      },
+      "drop": -0.09999999999999998,
+      "fresh_macro": 0.4,
+      "selected": {
+        "depth": 6,
+        "token": "CART_D6",
+        "validation_macro": 0.5854700854700855
+      }
+    },
+    "THINKING": {
+      "ablation_macro": 0.3333333333333333,
+      "class_scores": {
+        "DEEP": {
+          "accuracy": 0.0,
+          "count": 5
+        },
+        "ESCALATE": {
+          "accuracy": 1.0,
+          "count": 12
+        },
+        "QUICK": {
+          "accuracy": 0.0,
+          "count": 5
+        }
+      },
+      "drop": 0.0,
+      "fresh_macro": 0.3333333333333333,
+      "selected": {
+        "keys": 3,
+        "support": 2,
+        "threshold": 0.75,
+        "token": "T0.75_K3_S2",
+        "validation_macro": 0.37435897435897436
+      }
+    },
+    "source": {
+      "blind_count": 22,
+      "blind_end": "2026-09-05T10:52:14Z",
+      "failure_episodes": 108,
+      "github_actions_pages": 20,
+      "source_sha256": "6b401d3f06705fb21d03636cc119b663f05008fd7282e2a0b6404712cf095c12",
+      "train_count": 64,
+      "train_end": "2026-09-03T06:03:28Z",
+      "usable_runs": 1985,
+      "validation_count": 22,
+      "validation_end": "2026-09-04T05:54:40Z"
+    },
+    "thresholds_from_train": {
+      "duration_q50_s": 32.0,
+      "duration_q75_s": 42.0,
+      "recovery_duration_median_s": 34.0
+    }
+  },
+  "next_required_capability": "REAL_YADO_RECOVERY_COGNITIVE_REPAIR_V2",
+  "promotion_applied": false,
+  "receipt_sha256": "c846b563a8b5099fc5c189845d69de189c16026c52385abbe7adfb03aacff5d7",
+  "schema": "yado.g2.real_yado_recovery_cognitive_task.v1",
+  "semantic_boundary": "ONE SHARED REAL OPERATIONAL TASK: RECOVERY AFTER AN ACTUAL YADO GITHUB ACTIONS FAILURE. FEATURES AVAILABLE AT THE FAILED RUN OR EARLIER FEED ALL THREE ORGANS. LOGIC PREDICTS NEXT-RUN RECOVERY; THINKING PREDICTS A RECOVERY ORDER; INTELLIGENCE PREDICTS CURRENT OPERATIONAL RISK. COGNITIVE SEES ONLY ORGAN OUTPUTS AND SELECTS THE CONTROL ACTION. TARGET RECOVERY LABELS USE ACTUAL NEXT SAME-WORKFLOW OUTCOMES. THIS IS HISTORICAL CHRONOLOGICAL HOLDOUT, NOT A CLAIM OF GENERAL AUTONOMY.",
+  "status": "WITHHOLD_G2_REAL_YADO_RECOVERY_COGNITIVE_TASK_V1"
+}
