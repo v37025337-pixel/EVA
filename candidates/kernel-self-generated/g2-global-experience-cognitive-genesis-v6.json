@@ -1,0 +1,111 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "all_class_floor_ge_0_60": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "cognitive_fresh_ge_0_75": true,
+    "cognitive_native_selection": true,
+    "cognitive_validation_ge_0_70": true,
+    "commit_class_ge_0_60": true,
+    "external_models_used": false,
+    "host_selected_family": false,
+    "host_written_logic_model": false,
+    "intelligence_causal": true,
+    "intelligence_preserved": true,
+    "logic_causal": true,
+    "new_logic_identity": true,
+    "restore_exact": true,
+    "safety_gate_ablation": true,
+    "safety_gate_commit": true,
+    "seek_evidence_class_ge_0_60": true,
+    "stress_v2_terminal_failure_consumed": true,
+    "terminal_logic_beats_parent": true,
+    "terminal_logic_fresh_ge_0_65": true,
+    "terminal_logic_native_selection": true,
+    "terminal_logic_validation_ge_0_65": true,
+    "thinking_causal": true,
+    "thinking_preserved": true,
+    "unknown_fail_closed": true
+  },
+  "class_scores": {
+    "COMMIT": {
+      "accuracy": 0.8333333333333334,
+      "count": 6
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 6
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 6
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.8333333333333334,
+      "count": 6
+    }
+  },
+  "cognitive_selected": {
+    "complexity": 2,
+    "drops": {
+      "INTELLIGENCE": 0.5,
+      "LOGIC": 0.25,
+      "THINKING": 0.25
+    },
+    "family": "CART_AXIS",
+    "param": 2,
+    "token": "CART_D2",
+    "validation": 1.0
+  },
+  "fresh": 0.9166666666666666,
+  "gene_ids": {
+    "COGNITIVE": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-a28b427999ed9dd4",
+    "INTELLIGENCE": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+    "LOGIC": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V3-a00c3f7d2b3021c0",
+    "THINKING": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac"
+  },
+  "genome_digest": "f1bba42cfd8b26a0ee7d2284ea8b07e9a2e5215f7f9fe7d92046de4b03b85f27",
+  "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-4ea96397b2e55b2c",
+  "individual_organ_drops": {
+    "INTELLIGENCE": 0.41666666666666663,
+    "LOGIC": 0.16666666666666663,
+    "THINKING": 0.25
+  },
+  "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3",
+  "promotion_applied": false,
+  "receipt_sha256": "ae293a181348df4f1de9b21333323f26761c578e516327efa378edaaf52730d9",
+  "safety_gate": {
+    "ablation_score": 0.5,
+    "blind_cases": 40,
+    "candidate_score": 1.0,
+    "created_at": "2026-09-05T10:08:15.852104+00:00",
+    "experiment_id": "DEV22-368af0d5a01d",
+    "mechanism_kind": "RULE_PROGRAM",
+    "min_ablation_drop": 0.2,
+    "min_score": 1.0,
+    "program_digest": "be640221cf0d5d8db068bf02e9a5415bc6887938ce825f76ab8f4d6e248867d0",
+    "program_id": "P-175fb79989a9",
+    "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+    "restore_score": 1.0,
+    "stage_ablation_scores": {},
+    "state_committed": true,
+    "target_capability": "GLOBAL_EXPERIENCE_COGNITIVE_SAFETY_GATE_V6",
+    "target_organ": "CONSCIOUS_WORKSPACE",
+    "train_cases": 80,
+    "verdict": "COMMIT"
+  },
+  "schema": "yado.g2.global_experience_cognitive_genesis.v6",
+  "semantic_boundary": "V6 ADDS A YADO-NATIVE TERMINAL LOGIC EXPERT FOR NO-NEXT STATES, PRESERVES V3 THINKING AND V2 INTELLIGENCE, AND RELEARNS AN ORGAN-ONLY COGNITIVE STRATEGY. BOTH TERMINAL LOGIC AND COGNITIVE FAMILY SELECTION ARE NATIVE BOUNDED SEARCHES. PASS REQUIRES TERMINAL IMPROVEMENT, ALL THREE ORGAN CAUSALITY, ACTION-CLASS FLOORS AND UNKNOWN FAIL-CLOSED SAFETY.",
+  "status": "PASS_SHADOW_G2_GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_V6",
+  "terminal_fresh": 0.8333333333333334,
+  "terminal_gain": 0.25,
+  "terminal_logic_selected": {
+    "complexity": 1,
+    "family": "KNN_STRATEGY",
+    "param": 1,
+    "token": "KNN_K1",
+    "validation": 1.0
+  },
+  "terminal_parent_fresh": 0.5833333333333334
+}

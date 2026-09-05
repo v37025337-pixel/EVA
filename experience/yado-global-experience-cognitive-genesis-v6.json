@@ -1,0 +1,1971 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "all_class_floor_ge_0_60": true,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "cognitive_fresh_ge_0_75": true,
+    "cognitive_native_selection": true,
+    "cognitive_validation_ge_0_70": true,
+    "commit_class_ge_0_60": true,
+    "external_models_used": false,
+    "host_selected_family": false,
+    "host_written_logic_model": false,
+    "intelligence_causal": true,
+    "intelligence_preserved": true,
+    "logic_causal": true,
+    "new_logic_identity": true,
+    "restore_exact": true,
+    "safety_gate_ablation": true,
+    "safety_gate_commit": true,
+    "seek_evidence_class_ge_0_60": true,
+    "stress_v2_terminal_failure_consumed": true,
+    "terminal_logic_beats_parent": true,
+    "terminal_logic_fresh_ge_0_65": true,
+    "terminal_logic_native_selection": true,
+    "terminal_logic_validation_ge_0_65": true,
+    "thinking_causal": true,
+    "thinking_preserved": true,
+    "unknown_fail_closed": true
+  },
+  "class_scores": {
+    "COMMIT": {
+      "accuracy": 0.8333333333333334,
+      "count": 6
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 6
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 6
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.8333333333333334,
+      "count": 6
+    }
+  },
+  "cognitive_eligible_trials": [
+    {
+      "complexity": 2,
+      "drops": {
+        "INTELLIGENCE": 0.5,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CART_AXIS",
+      "param": 2,
+      "token": "CART_D2",
+      "validation": 1.0
+    },
+    {
+      "complexity": 3,
+      "drops": {
+        "INTELLIGENCE": 0.5,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CART_AXIS",
+      "param": 3,
+      "token": "CART_D3",
+      "validation": 1.0
+    },
+    {
+      "complexity": 4,
+      "drops": {
+        "INTELLIGENCE": 0.5,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CART_AXIS",
+      "param": 4,
+      "token": "CART_D4",
+      "validation": 1.0
+    },
+    {
+      "complexity": 5,
+      "drops": {
+        "INTELLIGENCE": 0.5,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CART_AXIS",
+      "param": 5,
+      "token": "CART_D5",
+      "validation": 1.0
+    },
+    {
+      "complexity": 1,
+      "drops": {
+        "INTELLIGENCE": 0.35,
+        "LOGIC": 0.25,
+        "THINKING": 0.19999999999999996
+      },
+      "family": "KNN_STRATEGY",
+      "param": 1,
+      "token": "KNN_K1",
+      "validation": 1.0
+    },
+    {
+      "complexity": 3,
+      "drops": {
+        "INTELLIGENCE": 0.35,
+        "LOGIC": 0.25,
+        "THINKING": 0.19999999999999996
+      },
+      "family": "KNN_STRATEGY",
+      "param": 3,
+      "token": "KNN_K3",
+      "validation": 1.0
+    },
+    {
+      "complexity": 5,
+      "drops": {
+        "INTELLIGENCE": 0.19999999999999996,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "KNN_STRATEGY",
+      "param": 5,
+      "token": "KNN_K5",
+      "validation": 1.0
+    },
+    {
+      "complexity": 7,
+      "drops": {
+        "INTELLIGENCE": 0.19999999999999996,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "KNN_STRATEGY",
+      "param": 7,
+      "token": "KNN_K7",
+      "validation": 1.0
+    },
+    {
+      "complexity": 9,
+      "drops": {
+        "INTELLIGENCE": 0.19999999999999996,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "KNN_STRATEGY",
+      "param": 9,
+      "token": "KNN_K9",
+      "validation": 1.0
+    },
+    {
+      "complexity": 5,
+      "drops": {
+        "INTELLIGENCE": 0.25,
+        "LOGIC": 0.25,
+        "THINKING": 0.35
+      },
+      "family": "CENTROID_STRATEGY",
+      "param": 5,
+      "token": "CENTROID_F5",
+      "validation": 1.0
+    },
+    {
+      "complexity": 6,
+      "drops": {
+        "INTELLIGENCE": 0.19999999999999996,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CENTROID_STRATEGY",
+      "param": 6,
+      "token": "CENTROID_F6",
+      "validation": 1.0
+    },
+    {
+      "complexity": 7,
+      "drops": {
+        "INTELLIGENCE": 0.19999999999999996,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CENTROID_STRATEGY",
+      "param": 7,
+      "token": "CENTROID_F7",
+      "validation": 1.0
+    },
+    {
+      "complexity": 8,
+      "drops": {
+        "INTELLIGENCE": 0.19999999999999996,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CENTROID_STRATEGY",
+      "param": 8,
+      "token": "CENTROID_F8",
+      "validation": 1.0
+    },
+    {
+      "complexity": 9,
+      "drops": {
+        "INTELLIGENCE": 0.19999999999999996,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CENTROID_STRATEGY",
+      "param": 9,
+      "token": "CENTROID_F9",
+      "validation": 1.0
+    },
+    {
+      "complexity": 10,
+      "drops": {
+        "INTELLIGENCE": 0.19999999999999996,
+        "LOGIC": 0.25,
+        "THINKING": 0.25
+      },
+      "family": "CENTROID_STRATEGY",
+      "param": 10,
+      "token": "CENTROID_F10",
+      "validation": 1.0
+    }
+  ],
+  "cognitive_selected": {
+    "complexity": 2,
+    "drops": {
+      "INTELLIGENCE": 0.5,
+      "LOGIC": 0.25,
+      "THINKING": 0.25
+    },
+    "family": "CART_AXIS",
+    "param": 2,
+    "token": "CART_D2",
+    "validation": 1.0
+  },
+  "drops": {
+    "INTELLIGENCE": 0.41666666666666663,
+    "LOGIC": 0.16666666666666663,
+    "THINKING": 0.25
+  },
+  "experience_digest": "4a90e031d0f785c51c2689d5eb1bf23f9d74aae9c29d4c6ba2f3acd38b8b14b9",
+  "fresh": 0.9166666666666666,
+  "genes": {
+    "COGNITIVE": {
+      "class_scores": {
+        "COMMIT": {
+          "accuracy": 0.8333333333333334,
+          "count": 6
+        },
+        "CONTINUE": {
+          "accuracy": 1.0,
+          "count": 6
+        },
+        "REVISE": {
+          "accuracy": 1.0,
+          "count": 6
+        },
+        "SEEK_EVIDENCE": {
+          "accuracy": 0.8333333333333334,
+          "count": 6
+        }
+      },
+      "fresh_blind": 0.9166666666666666,
+      "gene_digest": "fba5f6a7cc832a03f93be1a872f988a7dbe75d4c101bde98618bbe4f983e3e8e",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-a28b427999ed9dd4",
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V5-783391cbb7ef77da",
+        "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V3-a00c3f7d2b3021c0",
+        "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac",
+        "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d"
+      ],
+      "individual_organ_ablation_drops": {
+        "INTELLIGENCE": 0.41666666666666663,
+        "LOGIC": 0.16666666666666663,
+        "THINKING": 0.25
+      },
+      "model": {
+        "feature": "intel_stop",
+        "left": {
+          "feature": "think_advance",
+          "left": {
+            "label": "REVISE"
+          },
+          "right": {
+            "label": "CONTINUE"
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "logic_terminal",
+          "left": {
+            "label": "SEEK_EVIDENCE"
+          },
+          "right": {
+            "label": "COMMIT"
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "native_selector": {
+        "candidate_count": 15,
+        "ranking": [
+          {
+            "score": 1.107,
+            "token": "CART_D2"
+          },
+          {
+            "score": 1.097,
+            "token": "CART_D3"
+          },
+          {
+            "score": 1.092,
+            "token": "KNN_K1"
+          },
+          {
+            "score": 1.087,
+            "token": "CART_D4"
+          },
+          {
+            "score": 1.077,
+            "token": "CART_D5"
+          },
+          {
+            "score": 1.077,
+            "token": "CENTROID_F5"
+          },
+          {
+            "score": 1.072,
+            "token": "KNN_K3"
+          },
+          {
+            "score": 1.052,
+            "token": "KNN_K5"
+          },
+          {
+            "score": 1.042,
+            "token": "CENTROID_F6"
+          },
+          {
+            "score": 1.032,
+            "token": "CENTROID_F7"
+          },
+          {
+            "score": 1.032,
+            "token": "KNN_K7"
+          },
+          {
+            "score": 1.022,
+            "token": "CENTROID_F8"
+          },
+          {
+            "score": 1.012,
+            "token": "CENTROID_F9"
+          },
+          {
+            "score": 1.012,
+            "token": "KNN_K9"
+          },
+          {
+            "score": 1.002,
+            "token": "CENTROID_F10"
+          }
+        ],
+        "selected_score": 1.107,
+        "selected_token": "CART_D2"
+      },
+      "organ": "CONSCIOUS_WORKSPACE",
+      "origin": "YADO_NATIVE_COGNITIVE_INTEGRATION_WITH_TERMINAL_LOGIC_EXPERT",
+      "promotion_state": "SHADOW_ONLY",
+      "restore": 0.9166666666666666,
+      "safety_program_digest": "be640221cf0d5d8db068bf02e9a5415bc6887938ce825f76ab8f4d6e248867d0",
+      "safety_program_id": "P-175fb79989a9",
+      "schema": "yado.g2.global_experience_cognitive_gene.v6",
+      "selected_profile": {
+        "complexity": 2,
+        "drops": {
+          "INTELLIGENCE": 0.5,
+          "LOGIC": 0.25,
+          "THINKING": 0.25
+        },
+        "family": "CART_AXIS",
+        "param": 2,
+        "token": "CART_D2",
+        "validation": 1.0
+      },
+      "strategy_family": "CART_AXIS",
+      "unknown_fail_closed": true
+    },
+    "INTELLIGENCE": {
+      "baseline": 0.3333333333333333,
+      "causal_gain": 0.6666666666666667,
+      "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+      "fresh_blind": 1.0,
+      "gene_digest": "993b16dd0528d291bfad1f8cbaa8cb39a0eda6fa55fec76694ae115895959a90",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+      "heritage": [
+        "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+      ],
+      "model": {
+        "feature": "same_domain_next",
+        "left": {
+          "feature": "next_present",
+          "left": {
+            "label": "STOP"
+          },
+          "right": {
+            "label": "ADVANCE"
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "label": "RETRY"
+        },
+        "threshold": 0.5
+      },
+      "organ": "INTELLIGENCE",
+      "origin": "YADO_NATIVE_META_EVOLUTION_FROM_GLOBAL_CONTENT_ADDRESSED_HISTORY",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.global_experience_organ_gene.v2",
+      "selected_algorithm": {
+        "family": "CART_AXIS",
+        "max_depth": 2
+      }
+    },
+    "LOGIC": {
+      "gene_digest": "9119a1b23135332933b0fd7b09ea89379ad1a45574e508be2364c04f7f96d171",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V3-a00c3f7d2b3021c0",
+      "general_model": {
+        "feature": "canonical_unchanged",
+        "left": {
+          "feature": "next_present",
+          "left": {
+            "label": true
+          },
+          "right": {
+            "label": true
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "source_is_receipt",
+          "left": {
+            "label": false
+          },
+          "right": {
+            "label": true
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V2-6d1ec1d85217b9bd",
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      ],
+      "native_selector": {
+        "candidate_count": 17,
+        "ranking": [
+          {
+            "score": 0.992,
+            "token": "KNN_K1"
+          },
+          {
+            "score": 0.892,
+            "token": "CENTROID_F1"
+          },
+          {
+            "score": 0.882,
+            "token": "CENTROID_F2"
+          },
+          {
+            "score": 0.872,
+            "token": "CENTROID_F3"
+          },
+          {
+            "score": 0.872,
+            "token": "KNN_K3"
+          },
+          {
+            "score": 0.862,
+            "token": "CENTROID_F4"
+          },
+          {
+            "score": 0.852,
+            "token": "CENTROID_F5"
+          },
+          {
+            "score": 0.8420000000000001,
+            "token": "CENTROID_F6"
+          },
+          {
+            "score": 0.8320000000000001,
+            "token": "CENTROID_F7"
+          },
+          {
+            "score": 0.8220000000000001,
+            "token": "CENTROID_F8"
+          },
+          {
+            "score": 0.812,
+            "token": "CENTROID_F9"
+          },
+          {
+            "score": 0.782,
+            "token": "CART_D2"
+          },
+          {
+            "score": 0.772,
+            "token": "CART_D3"
+          },
+          {
+            "score": 0.762,
+            "token": "CART_D4"
+          },
+          {
+            "score": 0.752,
+            "token": "CART_D5"
+          },
+          {
+            "score": 0.752,
+            "token": "KNN_K5"
+          },
+          {
+            "score": 0.692,
+            "token": "CART_D1"
+          }
+        ],
+        "selected_score": 0.992,
+        "selected_token": "KNN_K1"
+      },
+      "organ": "LOGIC",
+      "origin": "YADO_NATIVE_TERMINAL_LOGIC_EXPERT_AUGMENTING_GLOBAL_GENERAL_LOGIC",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.global_experience_logic_gene.v3",
+      "terminal_expert_family": "KNN_STRATEGY",
+      "terminal_expert_model": {
+        "features": [
+          "ablation_positive",
+          "canonical_unchanged",
+          "domain_code",
+          "domain_cognitive",
+          "domain_evolution",
+          "domain_execution",
+          "domain_memory",
+          "domain_representation",
+          "evidence_density",
+          "fresh_positive",
+          "has_ablation",
+          "has_fresh",
+          "has_regression",
+          "has_safety",
+          "promotion_applied",
+          "regression_positive",
+          "rollback_available",
+          "safety_positive",
+          "source_candidate",
+          "source_experience",
+          "source_legacy",
+          "source_receipt"
+        ],
+        "k": 1,
+        "kind": "KNN_STRATEGY",
+        "rows": [
+          [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            true
+          ],
+          [
+            [
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.5,
+              0.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.6666666666666666,
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.16666666666666666,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            false
+          ],
+          [
+            [
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.8333333333333334,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.3333333333333333,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.16666666666666666,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.16666666666666666,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.3333333333333333,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.16666666666666666,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.16666666666666666,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.5,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            false
+          ],
+          [
+            [
+              1.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.3333333333333333,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            false
+          ],
+          [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.6666666666666666,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.5,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.16666666666666666,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.5,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            true
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.16666666666666666,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            false
+          ],
+          [
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.3333333333333333,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            false
+          ],
+          [
+            [
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.5,
+              1.0,
+              1.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            false
+          ]
+        ]
+      },
+      "terminal_fresh": 0.8333333333333334,
+      "terminal_gain": 0.25,
+      "terminal_parent_fresh": 0.5833333333333334,
+      "terminal_profile": {
+        "complexity": 1,
+        "family": "KNN_STRATEGY",
+        "param": 1,
+        "token": "KNN_K1",
+        "validation": 1.0
+      }
+    },
+    "THINKING": {
+      "context_ablation": 0.42592592592592593,
+      "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+      "fresh_blind": 0.5555555555555556,
+      "gain_vs_parent": 0.12962962962962965,
+      "gene_digest": "f70c352d3ced1990c20e8390e8aa2c563f116ffae309498457625ba7c5d4e93c",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac",
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V2-ee24a86eb1100680",
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      ],
+      "model": {
+        "context_keys": [
+          "WINDOW_HAS_PASS",
+          "START_HAS_NEXT",
+          "START_PASS"
+        ],
+        "fallback_edges": [
+          {
+            "after": "REVISE",
+            "before": "ACCEPT",
+            "confidence": 0.6428571428571429,
+            "support": 14
+          },
+          {
+            "after": "SEEK_EVIDENCE",
+            "before": "ACCEPT",
+            "confidence": 0.8333333333333334,
+            "support": 6
+          },
+          {
+            "after": "REVISE",
+            "before": "ADVANCE",
+            "confidence": 0.6428571428571429,
+            "support": 84
+          },
+          {
+            "after": "ADVANCE",
+            "before": "SEEK_EVIDENCE",
+            "confidence": 0.7,
+            "support": 10
+          },
+          {
+            "after": "REVISE",
+            "before": "SEEK_EVIDENCE",
+            "confidence": 0.625,
+            "support": 8
+          }
+        ],
+        "graphs": {
+          "010": [],
+          "100": [
+            {
+              "after": "ADVANCE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 1.0,
+              "support": 4
+            }
+          ],
+          "101": [
+            {
+              "after": "ADVANCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 17
+            },
+            {
+              "after": "REVISE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 2
+            }
+          ],
+          "110": [
+            {
+              "after": "ACCEPT",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 3
+            },
+            {
+              "after": "ADVANCE",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 28
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 2
+            },
+            {
+              "after": "ADVANCE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 1.0,
+              "support": 2
+            }
+          ],
+          "111": [
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 2
+            },
+            {
+              "after": "ACCEPT",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 17
+            },
+            {
+              "after": "REVISE",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 51
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 3
+            },
+            {
+              "after": "REVISE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 0.6666666666666666,
+              "support": 3
+            }
+          ]
+        },
+        "kind": "MULTICONTEXT_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.6
+      },
+      "native_selector": {
+        "candidate_count": 48,
+        "ranking": [
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.60_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.67_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.75_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.80_K3_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.60_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.67_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.75_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.80_K2_S2"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.60_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.67_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.75_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.80_K3_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.60_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.67_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.75_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.80_K2_S3"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.60_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.67_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.75_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.80_K4_S2"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.60_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.67_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.75_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.80_K4_S3"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.60_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.67_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.75_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.80_K1_S2"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.60_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.67_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.75_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.80_K1_S3"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.60_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.67_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.75_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.80_K1_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.60_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.67_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.75_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.80_K3_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.60_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.67_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.75_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.80_K2_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.60_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.67_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.75_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.80_K4_S4"
+          }
+        ],
+        "selected_score": 0.17072222222222222,
+        "selected_token": "T0.60_K3_S2"
+      },
+      "organ": "THINKING",
+      "origin": "YADO_NATIVE_MULTICONTEXT_PRECEDENCE_FROM_GLOBAL_RUN_HISTORY",
+      "parent_global_precedence_fresh": 0.42592592592592593,
+      "promotion_state": "SHADOW_ONLY",
+      "restore": 0.5555555555555556,
+      "schema": "yado.g2.global_experience_thinking_gene.v3",
+      "selected_profile": {
+        "max_context_keys": 3,
+        "min_support": 2,
+        "threshold": 0.6,
+        "token": "T0.60_K3_S2",
+        "validation": 0.2222222222222222
+      }
+    }
+  },
+  "genome": {
+    "automatic_canonical_promotion": false,
+    "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+    "generation": "G2_SHADOW",
+    "genome_digest": "f1bba42cfd8b26a0ee7d2284ea8b07e9a2e5215f7f9fe7d92046de4b03b85f27",
+    "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-4ea96397b2e55b2c",
+    "organs": {
+      "COGNITIVE": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-a28b427999ed9dd4",
+      "INTELLIGENCE": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+      "LOGIC": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V3-a00c3f7d2b3021c0",
+      "THINKING": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac"
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.global_experience_cognitive_genome.v6"
+  },
+  "safety_gate": {
+    "ablation_score": 0.5,
+    "blind_cases": 40,
+    "candidate_score": 1.0,
+    "created_at": "2026-09-05T10:08:15.852104+00:00",
+    "experiment_id": "DEV22-368af0d5a01d",
+    "mechanism_kind": "RULE_PROGRAM",
+    "min_ablation_drop": 0.2,
+    "min_score": 1.0,
+    "program_digest": "be640221cf0d5d8db068bf02e9a5415bc6887938ce825f76ab8f4d6e248867d0",
+    "program_id": "P-175fb79989a9",
+    "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+    "restore_score": 1.0,
+    "stage_ablation_scores": {},
+    "state_committed": true,
+    "target_capability": "GLOBAL_EXPERIENCE_COGNITIVE_SAFETY_GATE_V6",
+    "target_organ": "CONSCIOUS_WORKSPACE",
+    "train_cases": 80,
+    "verdict": "COMMIT"
+  },
+  "schema": "yado.g2.global_experience_cognitive_genesis.experience.v6",
+  "semantic_boundary": "V6 ADDS A YADO-NATIVE TERMINAL LOGIC EXPERT FOR NO-NEXT STATES, PRESERVES V3 THINKING AND V2 INTELLIGENCE, AND RELEARNS AN ORGAN-ONLY COGNITIVE STRATEGY. BOTH TERMINAL LOGIC AND COGNITIVE FAMILY SELECTION ARE NATIVE BOUNDED SEARCHES. PASS REQUIRES TERMINAL IMPROVEMENT, ALL THREE ORGAN CAUSALITY, ACTION-CLASS FLOORS AND UNKNOWN FAIL-CLOSED SAFETY.",
+  "status": "TRAINED",
+  "terminal_fresh": 0.8333333333333334,
+  "terminal_gain": 0.25,
+  "terminal_logic_selected": {
+    "complexity": 1,
+    "family": "KNN_STRATEGY",
+    "param": 1,
+    "token": "KNN_K1",
+    "validation": 1.0
+  },
+  "terminal_logic_trials": [
+    {
+      "complexity": 1,
+      "family": "CART_AXIS",
+      "param": 1,
+      "token": "CART_D1",
+      "validation": 0.7
+    },
+    {
+      "complexity": 2,
+      "family": "CART_AXIS",
+      "param": 2,
+      "token": "CART_D2",
+      "validation": 0.8
+    },
+    {
+      "complexity": 3,
+      "family": "CART_AXIS",
+      "param": 3,
+      "token": "CART_D3",
+      "validation": 0.8
+    },
+    {
+      "complexity": 4,
+      "family": "CART_AXIS",
+      "param": 4,
+      "token": "CART_D4",
+      "validation": 0.8
+    },
+    {
+      "complexity": 5,
+      "family": "CART_AXIS",
+      "param": 5,
+      "token": "CART_D5",
+      "validation": 0.8
+    },
+    {
+      "complexity": 1,
+      "family": "KNN_STRATEGY",
+      "param": 1,
+      "token": "KNN_K1",
+      "validation": 1.0
+    },
+    {
+      "complexity": 3,
+      "family": "KNN_STRATEGY",
+      "param": 3,
+      "token": "KNN_K3",
+      "validation": 0.9
+    },
+    {
+      "complexity": 5,
+      "family": "KNN_STRATEGY",
+      "param": 5,
+      "token": "KNN_K5",
+      "validation": 0.8
+    },
+    {
+      "complexity": 7,
+      "family": "KNN_STRATEGY",
+      "param": 7,
+      "token": "KNN_K7",
+      "validation": 0.5
+    },
+    {
+      "complexity": 9,
+      "family": "KNN_STRATEGY",
+      "param": 9,
+      "token": "KNN_K9",
+      "validation": 0.5
+    },
+    {
+      "complexity": 1,
+      "family": "CENTROID_STRATEGY",
+      "param": 1,
+      "token": "CENTROID_F1",
+      "validation": 0.9
+    },
+    {
+      "complexity": 2,
+      "family": "CENTROID_STRATEGY",
+      "param": 2,
+      "token": "CENTROID_F2",
+      "validation": 0.9
+    },
+    {
+      "complexity": 3,
+      "family": "CENTROID_STRATEGY",
+      "param": 3,
+      "token": "CENTROID_F3",
+      "validation": 0.9
+    },
+    {
+      "complexity": 4,
+      "family": "CENTROID_STRATEGY",
+      "param": 4,
+      "token": "CENTROID_F4",
+      "validation": 0.9
+    },
+    {
+      "complexity": 5,
+      "family": "CENTROID_STRATEGY",
+      "param": 5,
+      "token": "CENTROID_F5",
+      "validation": 0.9
+    },
+    {
+      "complexity": 6,
+      "family": "CENTROID_STRATEGY",
+      "param": 6,
+      "token": "CENTROID_F6",
+      "validation": 0.9
+    },
+    {
+      "complexity": 7,
+      "family": "CENTROID_STRATEGY",
+      "param": 7,
+      "token": "CENTROID_F7",
+      "validation": 0.9
+    },
+    {
+      "complexity": 8,
+      "family": "CENTROID_STRATEGY",
+      "param": 8,
+      "token": "CENTROID_F8",
+      "validation": 0.9
+    },
+    {
+      "complexity": 9,
+      "family": "CENTROID_STRATEGY",
+      "param": 9,
+      "token": "CENTROID_F9",
+      "validation": 0.9
+    },
+    {
+      "complexity": 10,
+      "family": "CENTROID_STRATEGY",
+      "param": 10,
+      "token": "CENTROID_F10",
+      "validation": 0.6
+    },
+    {
+      "complexity": 11,
+      "family": "CENTROID_STRATEGY",
+      "param": 11,
+      "token": "CENTROID_F11",
+      "validation": 0.6
+    },
+    {
+      "complexity": 12,
+      "family": "CENTROID_STRATEGY",
+      "param": 12,
+      "token": "CENTROID_F12",
+      "validation": 0.6
+    },
+    {
+      "complexity": 13,
+      "family": "CENTROID_STRATEGY",
+      "param": 13,
+      "token": "CENTROID_F13",
+      "validation": 0.6
+    },
+    {
+      "complexity": 14,
+      "family": "CENTROID_STRATEGY",
+      "param": 14,
+      "token": "CENTROID_F14",
+      "validation": 0.6
+    },
+    {
+      "complexity": 15,
+      "family": "CENTROID_STRATEGY",
+      "param": 15,
+      "token": "CENTROID_F15",
+      "validation": 0.5
+    },
+    {
+      "complexity": 16,
+      "family": "CENTROID_STRATEGY",
+      "param": 16,
+      "token": "CENTROID_F16",
+      "validation": 0.5
+    },
+    {
+      "complexity": 17,
+      "family": "CENTROID_STRATEGY",
+      "param": 17,
+      "token": "CENTROID_F17",
+      "validation": 0.5
+    },
+    {
+      "complexity": 18,
+      "family": "CENTROID_STRATEGY",
+      "param": 18,
+      "token": "CENTROID_F18",
+      "validation": 0.5
+    },
+    {
+      "complexity": 19,
+      "family": "CENTROID_STRATEGY",
+      "param": 19,
+      "token": "CENTROID_F19",
+      "validation": 0.5
+    },
+    {
+      "complexity": 20,
+      "family": "CENTROID_STRATEGY",
+      "param": 20,
+      "token": "CENTROID_F20",
+      "validation": 0.5
+    },
+    {
+      "complexity": 21,
+      "family": "CENTROID_STRATEGY",
+      "param": 21,
+      "token": "CENTROID_F21",
+      "validation": 0.5
+    },
+    {
+      "complexity": 22,
+      "family": "CENTROID_STRATEGY",
+      "param": 22,
+      "token": "CENTROID_F22",
+      "validation": 0.5
+    }
+  ],
+  "terminal_parent_fresh": 0.5833333333333334
+}
