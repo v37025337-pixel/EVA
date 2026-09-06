@@ -1,0 +1,45 @@
+{
+  "schema": "yado.g2.native_contextual_ast_context_binding_repair.request.v14",
+  "objective": "REPAIR_V13_SCOPE_ACCOUNTING_WITHOUT_CHANGING_YADO_FEATURE_LOGIC_OR_ADMISSION_THRESHOLDS",
+  "task": "Consume the V13 context-binding WITHHOLD. Correct only Python lexical dependency accounting: builtins are already bound, comprehension-local variables are not external dependencies, and top-level YADO symbols may be followed mechanically to a closure. Reuse the exact seven-field feature dict already present in YADO's own semantic-edit runtime. Let native skill admission select or withhold at the same thresholds. Do not rewrite feature logic, author imports, select the feature dict, create target AST/source, use an external model, or mutate canonical G2.",
+  "parents": {
+    "v13_failure": "candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-genesis-v13.json",
+    "v12_gene": "candidates/kernel-self-generated/g2-native-contextual-ast-operand-materialization-gene-v12.json",
+    "binder_gene": "candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
+    "direct_action_evidence": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+    "semantic_edit_runtime": "runtime/yado_g2_task_conditioned_semantic_source_edit_meta_language_genesis_v5.py"
+  },
+  "constraints": {
+    "thresholds_unchanged": true,
+    "external_models": false,
+    "host_authored_feature_logic": false,
+    "host_authored_import_binding": false,
+    "host_selected_feature_dict": false,
+    "host_authored_ast": false,
+    "host_patch": false,
+    "host_source_template": false,
+    "target_source_integration": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "shadow_only": true,
+    "fail_closed": true
+  },
+  "success_conditions": [
+    "V13 failure is consumed",
+    "V13 failure is localized to dependency accounting",
+    "builtins all bool str are not external dependencies",
+    "comprehension-local k is not an external dependency",
+    "native skill selector executes at unchanged thresholds",
+    "one feature binding is selected",
+    "selected feature dict exactly matches the seven-field binder contract",
+    "selected direct dependencies are resolved from YADO source",
+    "recursive dependency closure has no unresolved names",
+    "current real evidence remains ACCEPT_FRESH_EVIDENCE",
+    "all single-fault counterfactuals remain WITHHOLD_FRESH_EVIDENCE",
+    "canonical G2 remains unchanged"
+  ],
+  "host_role": "DEPENDENCY_ANALYZER_REPAIR_AND_STRICT_VERIFICATION_ONLY",
+  "stop_condition": "CONTEXT_BINDING_REPAIR_PASS_SHADOW_OR_EXPLICIT_CONTEXT_COMPOSITION_REPAIR_FRONTIER",
+  "trigger": 1,
+  "trigger_reason": "V13_FOUND_EXACT_SEVEN_FIELD_FEATURE_DICT_BUT_FALSE_NEGATIVE_DEPENDENCY_RATIO_0_6_DUE_TO_BUILTINS_AND_COMPREHENSION_LOCAL_SCOPE"
+}
