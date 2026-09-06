@@ -1,0 +1,202 @@
+{
+  "actual_target_source_integration_proven": false,
+  "candidate_artifact": null,
+  "candidate_source_sha256": null,
+  "canonical_mutation": false,
+  "checks": {
+    "actual_target_source_integration_proven_in_isolated_shadow": false,
+    "automatic_canonical_promotion": false,
+    "candidate_source_changed": true,
+    "candidate_source_compiles": true,
+    "canonical_unchanged": true,
+    "context_bindings_materialized_from_v17": true,
+    "counterfactual_fails_closed": true,
+    "counterfactual_retains_priority": true,
+    "external_models_used": false,
+    "fresh_isolated_probe_pass": false,
+    "host_authored_context_values": false,
+    "host_authored_semantic_logic": false,
+    "host_integration_transport": true,
+    "host_selected_target_file": false,
+    "kernel_provenant_target_consumed": true,
+    "latest_kernel_self_audit_still_selects_live_resource": true,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_skill_selector_selected_realized_source": false,
+    "regression_suite_pass": false,
+    "semantic_anchor_consumed": true,
+    "v12_ifexp_consumed": true,
+    "v12_v17_free_context_exact": true,
+    "v17_frontier_matches_v18": true,
+    "v17_full_context_bound": true,
+    "v17_pass_consumed": true,
+    "valid_evidence_changes_future_priority": true,
+    "valid_evidence_closes_finding": true
+  },
+  "isolated_probe": {
+    "checks": {
+      "candidate_compile": true,
+      "invalid_counterfactual_fails_closed": true,
+      "invalid_counterfactual_retains_priority": true,
+      "runtime_compileall_pass": true,
+      "selected_regression_suite_pass": false,
+      "valid_real_evidence_changes_future_priority": true,
+      "valid_real_evidence_closes_finding": true
+    },
+    "invalid_live_finding": {
+      "area": "RESOURCE_AND_EVIDENCE",
+      "blocking": false,
+      "code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
+      "evidence": {
+        "last_live_availability_score": 1.0,
+        "note": "Availability is point-in-time infrastructure evidence; comprehension/integration was not proven.",
+        "sample_size": null
+      },
+      "recommendation": "Re-check live resources on demand and separately test content comprehension/conflict resolution.",
+      "severity": "LOW",
+      "status": "PARTIAL"
+    },
+    "invalid_self_selected_next_step": "LIVE_RESOURCE_EVIDENCE_SCOPE",
+    "invalid_stdout_tail": "{\n  \"overall_verdict\": \"PASS_WITH_LIMITATIONS\",\n  \"receipt_sha256\": \"5e80f6a33152993e5d07d0c1d7ef6c14106a5894bf9831386d60ac0988127f90\",\n  \"self_selected_next_step\": \"LIVE_RESOURCE_EVIDENCE_SCOPE\",\n  \"self_selected_priority\": [\n    {\n      \"area\": \"RESOURCE_AND_EVIDENCE\",\n      \"blocking\": false,\n      \"code\": \"LIVE_RESOURCE_EVIDENCE_SCOPE\",\n      \"rank\": 1,\n      \"recommended_action\": \"Re-check live resources on demand and separately test content comprehension/conflict resolution.\",\n      \"severity\": \"LOW\"\n    },\n    {\n      \"area\": \"MEMORY_AND_EXPERIENCE\",\n      \"blocking\": false,\n      \"code\": \"REMOTE_BRANCH_INVENTORY_MATCH\",\n      \"rank\": 2,\n      \"recommended_action\": \"Keep experience registry synchronized with actual branch inventory.\",\n      \"severity\": \"LOW\"\n    }\n  ],\n  \"status\": \"PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1\",\n  \"summary\": {\n    \"blocking_findings\": 0,\n    \"critical_failures\": 0,\n    \"finding_count\": 20,\n    \"high_failures\": 0,\n    \"partial_findings\": 1,\n    \"pass_findings\": 18\n  }\n}\n",
+    "pass": false,
+    "regression_stderr_tail": "-----------------\nImportError: Failed to import test module: test_yado_skill_admission_runtime_v1\nTraceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/unittest/loader.py\", line 137, in loadTestsFromName\n    module = __import__(module_name)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/yado-v18-tbvrrhrg/repo/runtime/yado_rc8_v36/test_yado_skill_admission_runtime_v1.py\", line 2, in <module>\n    from yado_skill_admission_runtime_v1 import SkillCandidate, SkillAdmissionGate, contamination_score\nModuleNotFoundError: No module named 'yado_skill_admission_runtime_v1'\n\n\n======================================================================\nERROR: test_yado_transfer_evaluation_runtime_v1 (unittest.loader._FailedTest.test_yado_transfer_evaluation_runtime_v1)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_yado_transfer_evaluation_runtime_v1\nTraceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/unittest/loader.py\", line 137, in loadTestsFromName\n    module = __import__(module_name)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/yado-v18-tbvrrhrg/repo/runtime/yado_rc8_v36/test_yado_transfer_evaluation_runtime_v1.py\", line 2, in <module>\n    from yado_transfer_evaluation_runtime_v1 import TransferEvaluationCase,TransferEvaluationRuntime\nModuleNotFoundError: No module named 'yado_transfer_evaluation_runtime_v1'\n\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nFAILED (errors=4)\n",
+    "regression_stdout_tail": "",
+    "valid_live_finding": {
+      "area": "RESOURCE_AND_EVIDENCE",
+      "blocking": false,
+      "code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
+      "evidence": {
+        "last_live_availability_score": 1.0,
+        "note": "Availability is point-in-time infrastructure evidence; comprehension/integration was not proven.",
+        "sample_size": null
+      },
+      "recommendation": "Re-check live resources on demand and separately test content comprehension/conflict resolution.",
+      "severity": "LOW",
+      "status": "PASS"
+    },
+    "valid_self_selected_next_step": "REMOTE_BRANCH_INVENTORY_MATCH",
+    "valid_stdout_tail": "{\n  \"overall_verdict\": \"PASS_WITH_LIMITATIONS\",\n  \"receipt_sha256\": \"59b60b58f70b3d6b7fbebb31eb9f313b3be2acf178be3c35b333eed7005e1678\",\n  \"self_selected_next_step\": \"REMOTE_BRANCH_INVENTORY_MATCH\",\n  \"self_selected_priority\": [\n    {\n      \"area\": \"MEMORY_AND_EXPERIENCE\",\n      \"blocking\": false,\n      \"code\": \"REMOTE_BRANCH_INVENTORY_MATCH\",\n      \"rank\": 1,\n      \"recommended_action\": \"Keep experience registry synchronized with actual branch inventory.\",\n      \"severity\": \"LOW\"\n    }\n  ],\n  \"status\": \"PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1\",\n  \"summary\": {\n    \"blocking_findings\": 0,\n    \"critical_failures\": 0,\n    \"finding_count\": 20,\n    \"high_failures\": 0,\n    \"partial_findings\": 0,\n    \"pass_findings\": 19\n  }\n}\n"
+  },
+  "kernel_provenant_target_path": "runtime/yado_unified_core_deep_self_audit_v1.py",
+  "latest_kernel_self_audit": "receipts/yado-unified-core-deep-self-audit-v1-run-34028009802.json",
+  "latest_kernel_self_audit_receipt_sha256": "679d21580b802bc476eda375cc63c08bf229e193167798fb72160c46238cff3f",
+  "materialized_context_source": [
+    "Assign(targets=[Name(id='ACTION', ctx=Store())], value=BinOp(left=Name(id='REPO', ctx=Load()), op=Div(), right=Constant(value='candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json')))",
+    "Assign(targets=[Name(id='BINDER', ctx=Store())], value=BinOp(left=Name(id='REPO', ctx=Load()), op=Div(), right=Constant(value='candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json')))",
+    "Assign(targets=[Name(id='action', ctx=Store())], value=Call(func=Name(id='load', ctx=Load()), args=[Name(id='ACTION', ctx=Load())], keywords=[]))",
+    "Assign(targets=[Name(id='binder', ctx=Store())], value=Call(func=Name(id='load', ctx=Load()), args=[Name(id='BINDER', ctx=Load())], keywords=[]))",
+    "Assign(targets=[Name(id='priority', ctx=Store())], value=Call(func=Name(id='str', ctx=Load()), args=[BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='kernel_selected_next_step')], keywords=[]), Constant(value='')])], keywords=[]))",
+    "Assign(targets=[Name(id='result', ctx=Store())], value=BoolOp(op=Or(), values=[Call(func=Attribute(value=BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='goal_action_binding')], keywords=[]), Dict(keys=[], values=[])]), attr='get', ctx=Load()), args=[Constant(value='result')], keywords=[]), Dict(keys=[], values=[])]))",
+    "Assign(targets=[Name(id='selected_action', ctx=Store())], value=Call(func=Name(id='str', ctx=Load()), args=[BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='selected_action')], keywords=[]), Constant(value='')])], keywords=[]))",
+    "Assign(targets=[Name(id='target_code', ctx=Store())], value=Constant(value='LIVE_RESOURCE_EVIDENCE_SCOPE'))",
+    "from yado_organ_runtime_native_v1 import tree_predict",
+    "Assign(targets=[Name(id='comp', ctx=Store())], value=BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='comprehension')], keywords=[]), Dict(keys=[], values=[])]))",
+    "Assign(targets=[Name(id='feat', ctx=Store())], value=Dict(keys=[Constant(value='priority_match'), Constant(value='comprehension_complete'), Constant(value='direct_priority_evidence'), Constant(value='canonical_immutable'), Constant(value='conflict_resolution_pass'), Constant(value='action_status_pass'), Constant(value='action_relevant')], values=[Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())]), Call(func=Name(id='all', ctx=Load()), args=[GeneratorExp(elt=Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='comp', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='k', ctx=Load())], keywords=[])], keywords=[]), generators=[comprehension(target=Name(id='k', ctx=Store()), iter=Tuple(elts=[Constant(value='repository_commit_identity_extracted'), Constant(value='readme_title_extracted'), Constant(value='package_identity_extracted'), Constant(value='provider_catalog_extracted'), Constant(value='no_key_provider_set_extracted')], ctx=Load()), ifs=[], is_async=0)])], keywords=[]), BoolOp(op=And(), values=[Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[]), Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[])]), BoolOp(op=And(), values=[Compare(left=Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_head_unchanged')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_mutation')], keywords=[]), ops=[Is()], comparators=[Constant(value=False)])]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='conflict_resolution_pass')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Call(func=Attribute(value=Call(func=Name(id='str', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='status'), Constant(value='')], keywords=[])], keywords=[]), attr='startswith', ctx=Load()), args=[Constant(value='PASS')], keywords=[]), BoolOp(op=And(), values=[Compare(left=Name(id='selected_action', ctx=Load()), ops=[Eq()], comparators=[Constant(value='LIVE_RESOURCE_EVIDENCE_RECHECK')]), Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())])])]))"
+  ],
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-06T10:45:50.546617+00:00",
+        "deficit_id": "D-eb12467cc185",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-676712583df2",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "OPEN",
+        "target": "NATIVE_CONTEXT_BOUND_AST_SOURCE_REALIZATION_V18"
+      }
+    ],
+    "goal_id": "G-676712583df2"
+  },
+  "native_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "568148796df7729f7f5af0b5723d4c32f95e9f50ced73fbdcfcec2cc646b5a15",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "aad0bd33f54e948a7669aa84ff933dfc427d79eb9c93ebaff2fe6c30f17b1c61",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "V18_PARENT_UNCHANGED",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "512a492579fb49b298d961d82578a6897d77fdb29754e5ec35585a271ca22e72",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "regression",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "V18_V17_CONTEXT_PLUS_V12_IFEXP",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "next_required_capability": "NATIVE_CONTEXT_BOUND_AST_SOURCE_REALIZATION_REPAIR_V19",
+  "parent_source_sha256": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
+  "parent_v17_receipt": "55dce2cd5920092d854a2af19eda651f3694a1ed06c94385d254cfeb2e716a86",
+  "promotion_applied": false,
+  "receipt_sha256": "b1d7698e02e272401532a167c081d46daba83c9a0ef76faeba671fc81817e299",
+  "schema": "yado.g2.native_context_bound_ast_source_realization.v18",
+  "semantic_anchor": {
+    "call_name": "add",
+    "finding_code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
+    "required_before_status_shape": "Constant",
+    "required_before_status_value": "PARTIAL"
+  },
+  "semantic_boundary": "V18 REALIZES YADO-OWN V12 CONDITIONAL AST AND V17 FULL CONTEXT INTO A TARGET-BOUND SHADOW SOURCE AND TESTS IT CAUSALLY IN AN ISOLATED COPY. THE SEMANTIC CONDITION, FEATURE LOGIC, CONTEXT VALUES, TARGET ANCHOR AND TARGET PATH COME FROM YADO-ORIGIN ARTIFACTS. HOWEVER THE AST PLACEMENT/MATERIALIZATION TRANSPORT IS STILL HOST-SCAFFOLDED; THEREFORE V18 IS NOT YET PROOF THAT YADO CAN SELF-HOST THE ENTIRE SOURCE-REALIZATION TRANSPORT. CANONICAL G2 IS NOT MUTATED.",
+  "status": "WITHHOLD_G2_NATIVE_CONTEXT_BOUND_AST_SOURCE_REALIZATION_V18",
+  "v12_gene_digest": "8fd38e17a7d074940f62866f5e17eb0f9e6b6e45b444de051b78e78d0c5d3a82",
+  "v12_gene_id": "GENE-G2-NATIVE-AST-OPERAND-MATERIALIZATION-V12-8f478aa50276f2c0",
+  "v12_ifexp_free_names": [
+    "binder",
+    "feat",
+    "tree_predict"
+  ],
+  "v12_materialized_ifexp_source": "'PASS' if tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE' else 'PARTIAL'",
+  "v17_expected_free_names": [
+    "binder",
+    "feat",
+    "tree_predict"
+  ],
+  "v17_gene_digest": "40c1d69237a165c353fb70f95a4b9cb2bbf8da84330078bbfd483983c99cfec7",
+  "v17_gene_id": "GENE-G2-NATIVE-AST-CONTEXT-RUNTIME-BINDING-V17-fc0851cf87906cc5"
+}
