@@ -1,0 +1,109 @@
+{
+  "ablation_drops": {
+    "INTELLIGENCE": 0.33333333333333337,
+    "LOGIC": 0.20833333333333337,
+    "THINKING": 0.33333333333333337
+  },
+  "ablation_scores": {
+    "INTELLIGENCE": 0.625,
+    "LOGIC": 0.75,
+    "THINKING": 0.625
+  },
+  "active_capability_count_after": 28,
+  "active_capability_count_before": 27,
+  "architecture_mutation": false,
+  "automatic_canonical_promotion": false,
+  "canonical_component_digest": "28de07f2cca87167af44819f4138febe3e67e6c8ca698eae6e0a07ca6081cee3",
+  "canonical_mechanism_mutation": true,
+  "canonical_mutation": true,
+  "checks": {
+    "all_action_class_floor_ge_0_60": true,
+    "all_action_classes_present": true,
+    "automatic_canonical_promotion_false": true,
+    "g3_not_started": true,
+    "intelligence_causal_drop_ge_0_15": true,
+    "intelligence_conflict_fail_closed": true,
+    "irrelevant_noise_invariant": true,
+    "logic_causal_drop_ge_0_15": true,
+    "missing_signal_fail_closed": true,
+    "old_corpus_regression_ge_0_95": true,
+    "reproduced_blind_fresh_ge_0_90": true,
+    "reproduced_blind_matches_receipt": true,
+    "thinking_causal_drop_ge_0_15": true,
+    "thinking_conflict_fail_closed": true,
+    "unknown_state_fail_closed": true,
+    "v4_behavior_unchanged": true,
+    "v4_not_replaced": true,
+    "v4_rollback_parent_active": true,
+    "v4_snapshot_unchanged": true,
+    "v7_transfer_status_pass": true,
+    "valid_meta_action": true
+  },
+  "class_scores": {
+    "COMMIT": {
+      "accuracy": 1.0,
+      "count": 12
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 16
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 14
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.6666666666666666,
+      "count": 6
+    }
+  },
+  "component_id": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
+  "fail_closed": {
+    "intelligence_conflict": {
+      "decision": "WITHHOLD",
+      "gate": "WITHHOLD",
+      "reason": "INTELLIGENCE_SIGNAL_CONFLICT",
+      "source": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7"
+    },
+    "missing": {
+      "decision": "WITHHOLD",
+      "gate": "WITHHOLD",
+      "missing": [
+        "logic_terminal"
+      ],
+      "reason": "MISSING_SIGNALS",
+      "source": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7"
+    },
+    "thinking_conflict": {
+      "decision": "WITHHOLD",
+      "gate": "WITHHOLD",
+      "reason": "THINKING_SIGNAL_CONFLICT",
+      "source": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7"
+    },
+    "unknown": {
+      "decision": "WITHHOLD",
+      "gate": "WITHHOLD",
+      "reason": "STATE_UNKNOWN",
+      "source": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7"
+    }
+  },
+  "fresh_case_count": 48,
+  "fresh_score": 0.9583333333333334,
+  "frontier_preserved": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "genome_digest": "f5be58219cc9b49abad4c5c89871e6bb450a807c3e236f8cf404aba0d0eeb174",
+  "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-dd1cb791d312e0ff",
+  "new_head_digest": "718ba80c4f5afe9fee12ccd5f48dc9f4d179db9b0c98e2f72b1352cfe97a8f95",
+  "next_required_capability": "V7_META_CONTROLLER_LIVE_SELF_EVOLUTION_AB_TEST_V1",
+  "old_corpus_regression": 0.972568578553616,
+  "previous_head_digest": "795d84c12027aab467cd3bb16fb3024886f4525c40d8cf359848a1d60fd983ce",
+  "receipt_sha256": "4c7eb35215b8419b786d746213269252dc676ec2936bf580b12827475bb25bc4",
+  "rollback_parent_component": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+  "schema": "yado.g2.global_experience_meta_controller_v7.canonical_admission.v1",
+  "semantic_boundary": "SAME-G2 ADDITIVE ADMISSION OF THE YADO-GENERATED V7 EXPERIENCE META-CONTROLLER. V4 REMAINS ACTIVE AND UNMODIFIED AS TASK COGNITIVE EXECUTOR/ROLLBACK PARENT. META ACTIONS DO NOT SELF-PROMOTE.",
+  "status": "PASS_G2_GLOBAL_EXPERIENCE_META_CONTROLLER_V7_CANONICAL_ADMISSION_V1",
+  "v4_behavior_unchanged": true,
+  "v4_replaced": false,
+  "v4_snapshot_unchanged": true
+}

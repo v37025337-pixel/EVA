@@ -1,0 +1,837 @@
+{
+  "admission_ablation_drops": {
+    "INTELLIGENCE": 0.33333333333333337,
+    "LOGIC": 0.20833333333333337,
+    "THINKING": 0.33333333333333337
+  },
+  "admission_ablation_scores": {
+    "INTELLIGENCE": 0.625,
+    "LOGIC": 0.75,
+    "THINKING": 0.625
+  },
+  "admission_class_scores": {
+    "COMMIT": {
+      "accuracy": 1.0,
+      "count": 12
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 16
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 14
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.6666666666666666,
+      "count": 6
+    }
+  },
+  "admission_fresh_score": 0.9583333333333334,
+  "automatic_canonical_promotion": false,
+  "canonical_component_digest": "28de07f2cca87167af44819f4138febe3e67e6c8ca698eae6e0a07ca6081cee3",
+  "component_id": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "genes": {
+    "COGNITIVE": {
+      "gene_digest": "f9a1e56fcb3313aac47d20aa28b6b15ff437bb271da516bad1e18c0790043ecb",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-42c9ea0f46adbeac",
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-a28b427999ed9dd4",
+        "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V4-55bdfecd17b00cf7",
+        "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac",
+        "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d"
+      ],
+      "historical_class_scores": {
+        "COMMIT": {
+          "accuracy": 1.0,
+          "count": 12
+        },
+        "CONTINUE": {
+          "accuracy": 1.0,
+          "count": 16
+        },
+        "REVISE": {
+          "accuracy": 1.0,
+          "count": 14
+        },
+        "SEEK_EVIDENCE": {
+          "accuracy": 0.6666666666666666,
+          "count": 6
+        }
+      },
+      "historical_fresh": 0.9583333333333334,
+      "historical_organ_ablation_drops": {
+        "INTELLIGENCE": 0.33333333333333337,
+        "LOGIC": 0.20833333333333337,
+        "THINKING": 0.33333333333333337
+      },
+      "model": {
+        "feature": "think_advance",
+        "left": {
+          "feature": "intel_stop",
+          "left": {
+            "label": "REVISE"
+          },
+          "right": {
+            "feature": "logic_terminal",
+            "left": {
+              "label": "SEEK_EVIDENCE"
+            },
+            "right": {
+              "label": "COMMIT"
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "label": "CONTINUE"
+        },
+        "threshold": 0.5
+      },
+      "native_selector": {
+        "candidate_count": 12,
+        "ranking": [
+          {
+            "score": 1.0145985669195938,
+            "token": "CART_AXIS_3"
+          },
+          {
+            "score": 1.0065985669195938,
+            "token": "CART_AXIS_4"
+          },
+          {
+            "score": 0.9985985669195938,
+            "token": "CART_AXIS_5"
+          },
+          {
+            "score": 0.9911259048951284,
+            "token": "CENTROID_STRATEGY_6"
+          },
+          {
+            "score": 0.979551825239948,
+            "token": "CENTROID_STRATEGY_7"
+          },
+          {
+            "score": 0.971551825239948,
+            "token": "CENTROID_STRATEGY_8"
+          },
+          {
+            "score": 0.963551825239948,
+            "token": "CENTROID_STRATEGY_9"
+          },
+          {
+            "score": 0.9555518252399481,
+            "token": "CENTROID_STRATEGY_10"
+          },
+          {
+            "score": 0.9231389240487996,
+            "token": "CENTROID_STRATEGY_5"
+          },
+          {
+            "score": 0.906211476640003,
+            "token": "KNN_STRATEGY_5"
+          },
+          {
+            "score": 0.9002538528218378,
+            "token": "KNN_STRATEGY_9"
+          },
+          {
+            "score": 0.8843397155508506,
+            "token": "KNN_STRATEGY_7"
+          }
+        ],
+        "selected_score": 1.0145985669195938,
+        "selected_token": "CART_AXIS_3"
+      },
+      "old_corpus_class_scores": {
+        "COMMIT": {
+          "accuracy": 0.8987341772151899,
+          "count": 79
+        },
+        "CONTINUE": {
+          "accuracy": 1.0,
+          "count": 229
+        },
+        "REVISE": {
+          "accuracy": 1.0,
+          "count": 73
+        },
+        "SEEK_EVIDENCE": {
+          "accuracy": 0.85,
+          "count": 20
+        }
+      },
+      "old_corpus_regression": 0.972568578553616,
+      "organ": "CONSCIOUS_WORKSPACE",
+      "origin": "YADO_NATIVE_COGNITIVE_RELEARNING_WITH_UNSEEN_GIT_HISTORY_TRANSFER",
+      "promotion_state": "SHADOW_ONLY",
+      "safety_program_digest": "211b44e590e6e8070d149ca8117432d80f918aeda53bc8fb0b7abf557e73dcac",
+      "safety_program_id": "P-68d17b98356e",
+      "schema": "yado.g2.global_experience_cognitive_gene.v7",
+      "selected_profile": {
+        "complexity": 3,
+        "cv_accuracy": 0.9675921421298762,
+        "cv_drops": {
+          "INTELLIGENCE": 0.23528528340409788,
+          "LOGIC": 0.17251606197429395,
+          "THINKING": 0.5313472609268389
+        },
+        "evidence": 1.0365985669195938,
+        "family": "CART_AXIS",
+        "param": 3,
+        "token": "CART_AXIS_3"
+      },
+      "strategy_family": "CART_AXIS",
+      "unknown_fail_closed": true
+    },
+    "INTELLIGENCE": {
+      "baseline": 0.3333333333333333,
+      "causal_gain": 0.6666666666666667,
+      "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+      "fresh_blind": 1.0,
+      "gene_digest": "993b16dd0528d291bfad1f8cbaa8cb39a0eda6fa55fec76694ae115895959a90",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
+      "heritage": [
+        "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+      ],
+      "model": {
+        "feature": "same_domain_next",
+        "left": {
+          "feature": "next_present",
+          "left": {
+            "label": "STOP"
+          },
+          "right": {
+            "label": "ADVANCE"
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "label": "RETRY"
+        },
+        "threshold": 0.5
+      },
+      "organ": "INTELLIGENCE",
+      "origin": "YADO_NATIVE_META_EVOLUTION_FROM_GLOBAL_CONTENT_ADDRESSED_HISTORY",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.global_experience_organ_gene.v2",
+      "selected_algorithm": {
+        "family": "CART_AXIS",
+        "max_depth": 2
+      }
+    },
+    "LOGIC": {
+      "gene_digest": "2ce62f0fb4c46d73a3d1d584b8af5f66d940eec3ecf24b437480f9e9beab5d71",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V4-55bdfecd17b00cf7",
+      "general_model": {
+        "feature": "canonical_unchanged",
+        "left": {
+          "feature": "next_present",
+          "left": {
+            "label": true
+          },
+          "right": {
+            "label": true
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "source_is_receipt",
+          "left": {
+            "label": false
+          },
+          "right": {
+            "label": true
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V3-a00c3f7d2b3021c0",
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+      ],
+      "historical_adaptation_count": 33,
+      "historical_fresh": 0.8888888888888888,
+      "historical_fresh_count": 18,
+      "historical_pass_recall": 1.0,
+      "historical_withhold_recall": 0.6666666666666666,
+      "native_selector": {
+        "candidate_count": 23,
+        "ranking": [
+          {
+            "score": 0.7885961538461539,
+            "token": "CART_AXIS_4"
+          },
+          {
+            "score": 0.7706633581472291,
+            "token": "CART_AXIS_5"
+          },
+          {
+            "score": 0.7661991315136476,
+            "token": "KNN_STRATEGY_3"
+          },
+          {
+            "score": 0.7647775020678247,
+            "token": "KNN_STRATEGY_1"
+          },
+          {
+            "score": 0.7417425230736474,
+            "token": "CENTROID_STRATEGY_10"
+          },
+          {
+            "score": 0.7382111597015781,
+            "token": "CENTROID_STRATEGY_6"
+          },
+          {
+            "score": 0.7375268346313539,
+            "token": "CENTROID_STRATEGY_8"
+          },
+          {
+            "score": 0.7346122828784118,
+            "token": "CENTROID_STRATEGY_7"
+          },
+          {
+            "score": 0.7257386904323189,
+            "token": "CENTROID_STRATEGY_11"
+          },
+          {
+            "score": 0.708699911554431,
+            "token": "CENTROID_STRATEGY_12"
+          },
+          {
+            "score": 0.6995800248138958,
+            "token": "CENTROID_STRATEGY_5"
+          },
+          {
+            "score": 0.698170388751034,
+            "token": "CART_AXIS_2"
+          },
+          {
+            "score": 0.6864751861042184,
+            "token": "CENTROID_STRATEGY_9"
+          },
+          {
+            "score": 0.6775954720782253,
+            "token": "CENTROID_STRATEGY_13"
+          },
+          {
+            "score": 0.6695954720782253,
+            "token": "CENTROID_STRATEGY_14"
+          },
+          {
+            "score": 0.6660062034739455,
+            "token": "CENTROID_STRATEGY_15"
+          },
+          {
+            "score": 0.6580062034739455,
+            "token": "CENTROID_STRATEGY_16"
+          },
+          {
+            "score": 0.6128742967348845,
+            "token": "CENTROID_STRATEGY_18"
+          },
+          {
+            "score": 0.6118355178569966,
+            "token": "CENTROID_STRATEGY_17"
+          },
+          {
+            "score": 0.5887387436634482,
+            "token": "CENTROID_STRATEGY_19"
+          },
+          {
+            "score": 0.5807387436634482,
+            "token": "CENTROID_STRATEGY_20"
+          },
+          {
+            "score": 0.5727387436634482,
+            "token": "CENTROID_STRATEGY_21"
+          },
+          {
+            "score": 0.5647387436634483,
+            "token": "CENTROID_STRATEGY_22"
+          }
+        ],
+        "selected_score": 0.7885961538461539,
+        "selected_token": "CART_AXIS_4"
+      },
+      "organ": "LOGIC",
+      "origin": "YADO_NATIVE_TERMINAL_LOGIC_RELEARNED_WITH_UNSEEN_GIT_HISTORY_TRANSFER",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.global_experience_logic_gene.v4",
+      "terminal_expert_family": "CART_AXIS",
+      "terminal_expert_model": {
+        "feature": "canonical_unchanged",
+        "left": {
+          "feature": "source_candidate",
+          "left": {
+            "label": true
+          },
+          "right": {
+            "feature": "domain_evolution",
+            "left": {
+              "label": true
+            },
+            "right": {
+              "label": true
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "domain_evolution",
+          "left": {
+            "feature": "evidence_density",
+            "left": {
+              "feature": "ablation_positive",
+              "left": {
+                "label": false
+              },
+              "right": {
+                "label": true
+              },
+              "threshold": 0.5
+            },
+            "right": {
+              "feature": "source_experience",
+              "left": {
+                "label": true
+              },
+              "right": {
+                "label": true
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5833333333333333
+          },
+          "right": {
+            "feature": "safety_positive",
+            "left": {
+              "label": true
+            },
+            "right": {
+              "feature": "regression_positive",
+              "left": {
+                "label": false
+              },
+              "right": {
+                "label": true
+              },
+              "threshold": 0.5
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "terminal_profile": {
+        "complexity": 4,
+        "cv_accuracy": 0.854925558312655,
+        "cv_pass_recall": 0.8811881188118812,
+        "cv_withhold_recall": 0.7741935483870968,
+        "evidence": 0.8185961538461539,
+        "family": "CART_AXIS",
+        "param": 4,
+        "token": "CART_AXIS_4"
+      }
+    },
+    "THINKING": {
+      "context_ablation": 0.42592592592592593,
+      "corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
+      "fresh_blind": 0.5555555555555556,
+      "gain_vs_parent": 0.12962962962962965,
+      "gene_digest": "f70c352d3ced1990c20e8390e8aa2c563f116ffae309498457625ba7c5d4e93c",
+      "gene_id": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac",
+      "heritage": [
+        "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V2-ee24a86eb1100680",
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      ],
+      "model": {
+        "context_keys": [
+          "WINDOW_HAS_PASS",
+          "START_HAS_NEXT",
+          "START_PASS"
+        ],
+        "fallback_edges": [
+          {
+            "after": "REVISE",
+            "before": "ACCEPT",
+            "confidence": 0.6428571428571429,
+            "support": 14
+          },
+          {
+            "after": "SEEK_EVIDENCE",
+            "before": "ACCEPT",
+            "confidence": 0.8333333333333334,
+            "support": 6
+          },
+          {
+            "after": "REVISE",
+            "before": "ADVANCE",
+            "confidence": 0.6428571428571429,
+            "support": 84
+          },
+          {
+            "after": "ADVANCE",
+            "before": "SEEK_EVIDENCE",
+            "confidence": 0.7,
+            "support": 10
+          },
+          {
+            "after": "REVISE",
+            "before": "SEEK_EVIDENCE",
+            "confidence": 0.625,
+            "support": 8
+          }
+        ],
+        "graphs": {
+          "010": [],
+          "100": [
+            {
+              "after": "ADVANCE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 1.0,
+              "support": 4
+            }
+          ],
+          "101": [
+            {
+              "after": "ADVANCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 17
+            },
+            {
+              "after": "REVISE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 7
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 2
+            }
+          ],
+          "110": [
+            {
+              "after": "ACCEPT",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 3
+            },
+            {
+              "after": "ADVANCE",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 28
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "REVISE",
+              "confidence": 1.0,
+              "support": 2
+            },
+            {
+              "after": "ADVANCE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 1.0,
+              "support": 2
+            }
+          ],
+          "111": [
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ACCEPT",
+              "confidence": 1.0,
+              "support": 2
+            },
+            {
+              "after": "ACCEPT",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 17
+            },
+            {
+              "after": "REVISE",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 51
+            },
+            {
+              "after": "SEEK_EVIDENCE",
+              "before": "ADVANCE",
+              "confidence": 1.0,
+              "support": 3
+            },
+            {
+              "after": "REVISE",
+              "before": "SEEK_EVIDENCE",
+              "confidence": 0.6666666666666666,
+              "support": 3
+            }
+          ]
+        },
+        "kind": "MULTICONTEXT_PRECEDENCE",
+        "min_support": 2,
+        "threshold": 0.6
+      },
+      "native_selector": {
+        "candidate_count": 48,
+        "ranking": [
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.60_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.67_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.75_K3_S2"
+          },
+          {
+            "score": 0.17072222222222222,
+            "token": "T0.80_K3_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.60_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.67_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.75_K2_S2"
+          },
+          {
+            "score": 0.1672037037037037,
+            "token": "T0.80_K2_S2"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.60_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.67_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.75_K3_S3"
+          },
+          {
+            "score": 0.16697222222222222,
+            "token": "T0.80_K3_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.60_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.67_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.75_K2_S3"
+          },
+          {
+            "score": 0.1634537037037037,
+            "token": "T0.80_K2_S3"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.60_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.67_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.75_K4_S2"
+          },
+          {
+            "score": 0.1372037037037037,
+            "token": "T0.80_K4_S2"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.60_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.67_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.75_K4_S3"
+          },
+          {
+            "score": 0.13345370370370369,
+            "token": "T0.80_K4_S3"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.60_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.67_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.75_K1_S2"
+          },
+          {
+            "score": 0.10812962962962963,
+            "token": "T0.80_K1_S2"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.60_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.67_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.75_K1_S3"
+          },
+          {
+            "score": 0.10437962962962963,
+            "token": "T0.80_K1_S3"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.60_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.67_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.75_K1_S4"
+          },
+          {
+            "score": 0.10062962962962962,
+            "token": "T0.80_K1_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.60_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.67_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.75_K3_S4"
+          },
+          {
+            "score": 0.08914814814814814,
+            "token": "T0.80_K3_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.60_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.67_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.75_K2_S4"
+          },
+          {
+            "score": 0.08562962962962962,
+            "token": "T0.80_K2_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.60_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.67_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.75_K4_S4"
+          },
+          {
+            "score": 0.07414814814814814,
+            "token": "T0.80_K4_S4"
+          }
+        ],
+        "selected_score": 0.17072222222222222,
+        "selected_token": "T0.60_K3_S2"
+      },
+      "organ": "THINKING",
+      "origin": "YADO_NATIVE_MULTICONTEXT_PRECEDENCE_FROM_GLOBAL_RUN_HISTORY",
+      "parent_global_precedence_fresh": 0.42592592592592593,
+      "promotion_state": "SHADOW_ONLY",
+      "restore": 0.5555555555555556,
+      "schema": "yado.g2.global_experience_thinking_gene.v3",
+      "selected_profile": {
+        "max_context_keys": 3,
+        "min_support": 2,
+        "threshold": 0.6,
+        "token": "T0.60_K3_S2",
+        "validation": 0.2222222222222222
+      }
+    }
+  },
+  "genome_digest": "f5be58219cc9b49abad4c5c89871e6bb450a807c3e236f8cf404aba0d0eeb174",
+  "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-dd1cb791d312e0ff",
+  "historical_class_scores": {
+    "COMMIT": {
+      "accuracy": 1.0,
+      "count": 12
+    },
+    "CONTINUE": {
+      "accuracy": 1.0,
+      "count": 16
+    },
+    "REVISE": {
+      "accuracy": 1.0,
+      "count": 14
+    },
+    "SEEK_EVIDENCE": {
+      "accuracy": 0.6666666666666666,
+      "count": 6
+    }
+  },
+  "historical_fresh": 0.9583333333333334,
+  "historical_fresh_count": 48,
+  "historical_organ_ablation_drops": {
+    "INTELLIGENCE": 0.33333333333333337,
+    "LOGIC": 0.20833333333333337,
+    "THINKING": 0.33333333333333337
+  },
+  "historical_outcome_count": 138,
+  "old_corpus_regression": 0.972568578553616,
+  "role": "EXPERIENCE_DERIVED_META_ACTION_CONTROLLER",
+  "rollback_parent_component": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+  "runtime_sha256": "f96ba6ce0026968bfb4fbebb5d61f1fd8ed33c575b725c7a5a84119e373aa794",
+  "schema": "yado.g2.global_experience_meta_controller.canonical.v7",
+  "semantic_boundary": "ADDITIVE G2 META-ACTION CONTROLLER OVER ACCUMULATED EXPERIENCE. V4 REMAINS THE ACTIVE TASK COGNITIVE EXECUTOR AND ROLLBACK PARENT. META OUTPUT CANNOT SELF-PROMOTE.",
+  "source_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+  "source_transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+  "status": "CANONICAL_ACTIVE",
+  "v4_replaced": false
+}

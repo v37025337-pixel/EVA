@@ -15,14 +15,29 @@
     "module_assembly_27_of_27",
     "kernel_native_self_audit_no_blockers"
   ],
-  "classify_roles": ["PRIMARY","COMPATIBILITY","STATE","CONTROL","SUPERSEDED"],
+  "classify_roles": [
+    "PRIMARY",
+    "COMPATIBILITY",
+    "STATE",
+    "CONTROL",
+    "SUPERSEDED"
+  ],
   "removal_policy": "NO_COMPATIBILITY_MODULE_REMOVAL_WITHOUT_FRESH_ABLATION",
   "canonical_mutation": false,
   "architecture_mutation": false,
   "generation_transition": false,
   "g3_genesis": false,
-  "audit_revision": "2026-09-06-current-head-post-full-kernel-audit",
-  "attempt": 2,
+  "audit_revision": "2026-09-06-main-post-v7-meta-controller-admission",
+  "attempt": 4,
   "previous_failed_run_id": 34028762157,
-  "retry_reason": "FULL_RECHECK_AFTER_CURRENT_HEAD_AUDIT_AND_RAW_V4_V3_WITHHOLD"
+  "retry_reason": "POST_ADMISSION_28_MODULE_INTEGRITY_WITH_V7_META_CONTROLLER",
+  "prerequisite_evidence": {
+    "admitted_component": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
+    "main_security_run_id": 34053142240,
+    "security_status": "PASS",
+    "expected_active_module_count": 28,
+    "expected_orphans": 0,
+    "v4_replaced": false,
+    "g3_genesis": false
+  }
 }

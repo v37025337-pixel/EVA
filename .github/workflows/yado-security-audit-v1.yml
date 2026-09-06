@@ -32,7 +32,9 @@ jobs:
           git config user.name "YADO Security Audit"
           git config user.email "actions@users.noreply.github.com"
           git add audits/yado-security-audit-v1-report.json audits/yado-pip-audit-v1.json
-          git commit -m "Persist YADO security audit V1 [skip ci]"
+          if ! git diff --cached --quiet; then
+            git commit -m "Persist YADO security audit V1 [skip ci]"
+          fi
           git reset --hard HEAD
           git clean -fd
           for attempt in 1 2 3; do

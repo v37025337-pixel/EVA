@@ -30,6 +30,7 @@ from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
 from yado_g2_experience_conditioned_cognitive_layer_v4 import G2ExperienceConditionedCognitiveLayerV4
+from yado_g2_global_experience_meta_controller_v7 import G2GlobalExperienceMetaControllerV7
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -67,6 +68,7 @@ class UnifiedYADOCoreV1:
         self.openapi_readonly_executor_cls=G2OpenAPIReadOnlyExecutorV1
         self.evolutionary_genome_cls=YADOEvolutionaryGenomeV1
         self.experience_cognitive_layer=G2ExperienceConditionedCognitiveLayerV4(self._load('canonical/yado-g2-experience-conditioned-cognitive-layer-v4.json'))
+        self.global_experience_meta_controller=G2GlobalExperienceMetaControllerV7(self._load('canonical/yado-g2-global-experience-meta-controller-v7.json'))
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -324,6 +326,15 @@ class UnifiedYADOCoreV1:
           'promotion_authorized':False,
           'semantic_boundary':'TEMPORAL STALL MAY TRIGGER SHADOW GENOME EVOLUTION BUT CANNOT PROMOTE THE CHILD.'
         }
+
+    def global_experience_meta_decide(self,signals:dict[str,Any])->dict[str,Any]:
+        return self.global_experience_meta_controller.decide_signals(signals)
+
+    def global_experience_meta_decide_evidence(self,evidence:dict[str,Any])->dict[str,Any]:
+        return self.global_experience_meta_controller.decide_evidence(evidence)
+
+    def global_experience_meta_snapshot(self)->dict[str,Any]:
+        return self.global_experience_meta_controller.snapshot()
 
     def cognitive_experience_decide(self,organ:str,payload:dict[str,Any])->dict[str,Any]:
         return self.experience_cognitive_layer.decide(organ,payload)

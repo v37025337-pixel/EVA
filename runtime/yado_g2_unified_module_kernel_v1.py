@@ -39,6 +39,7 @@ CAP_API=CAP_API_V1
 CAP_API_EXEC='ALG-G2-OPENAPI-READONLY-EXECUTOR-V1'
 CAP_GENOME='CTRL-G2-EVOLUTIONARY-GENOME-V1'
 CAP_COGNITIVE='RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4'
+CAP_META_V7='CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7'
 
 MODULE_REGISTRY={
  CAP_ROUTER:('EXECUTOR','runtime/yado_bounded_capability_router_v1.py'),
@@ -68,6 +69,7 @@ MODULE_REGISTRY={
  CAP_API_EXEC:('NETWORK_READONLY_EXECUTOR','runtime/yado_g2_openapi_readonly_executor_v1.py'),
  CAP_GENOME:('EVOLUTION_CONTROL','runtime/yado_evolutionary_genome_v1.py'),
  CAP_COGNITIVE:('COGNITIVE_COORDINATOR','runtime/yado_g2_experience_conditioned_cognitive_layer_v4.py'),
+ CAP_META_V7:('META_CONTROLLER','runtime/yado_g2_global_experience_meta_controller_v7.py'),
 }
 
 DIRECT_FABRIC={CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES,CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3}
@@ -204,6 +206,16 @@ class UnifiedYADOModuleKernelV1:
                 ex=G2OpenAPIReadOnlyExecutorV1(task['allowed_hosts'],max_bytes=int(task.get('max_bytes',1024*1024)),timeout=float(task.get('timeout',10)))
                 out=ex.execute(task['plan'],task['base_url'],query=task.get('query'),headers=task.get('headers'))
             else:raise ValueError('UNKNOWN_API_EXEC_ACTION:'+str(action))
+        elif mid==CAP_META_V7:
+            action=task.get('action','decide_signals')
+            if action=='decide_signals':
+                out=self.core.global_experience_meta_decide(task.get('signals',{}))
+            elif action=='decide_evidence':
+                out=self.core.global_experience_meta_decide_evidence(task.get('evidence',{}))
+            elif action=='snapshot':
+                out=self.core.global_experience_meta_snapshot()
+            else:
+                raise ValueError('UNKNOWN_META_V7_ACTION:'+str(action))
         elif mid==CAP_COGNITIVE:
             action=task.get('action','decide')
             if action=='decide':

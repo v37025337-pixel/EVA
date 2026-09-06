@@ -148,6 +148,7 @@ run(CAP_API,{'action':'compile_plan','state_section':api_state,'contract_id':'GE
 run(CAP_API_EXEC,{'action':'component','stream_id':'API-EXEC-S'},lambda x:x.get('component_id')==CAP_API_EXEC and x.get('methods')==['GET','HEAD'] and x.get('credentials_allowed') is False)
 run(CAP_GENOME,{'action':'component','stream_id':'GENOME-S'},lambda x:x.get('component_id')==CAP_GENOME and x.get('automatic_canonical_promotion') is False and x.get('novel_gene_synthesis') is True)
 run(CAP_COGNITIVE,{'action':'decide','organ':'LOGIC','payload':{'result_exact':True,'state_known':True},'stream_id':'COG-S'},lambda x:x.get('decision')=='ACCEPT' and x.get('route_cardinality')=='ONE')
+run(CAP_META_V7,{'action':'decide_signals','signals':{'state_known':True,'logic_general':1.0,'logic_terminal':1.0,'intel_stop':0.0,'intel_retry':0.0,'intel_advance':1.0,'think_accept':0.0,'think_advance':1.0,'think_revise':0.0,'think_seek':0.0},'stream_id':'META-V7-S'},lambda x:x.get('decision')=='CONTINUE' and x.get('gate')=='META_ACTION')
 
 # Mark embedded high-scale IDs and persistent/control nodes covered by the explicit calls above.
 coverage.update({CAP_HS_MODEL,CAP_SCALE_ROUTE,CAP_HS_RUNTIME,CAP_COUNTERMEM,CAP_AUDIT,CAP_FABRIC,CAP_API,CAP_API_EXEC,CAP_GENOME})
@@ -226,6 +227,7 @@ binding_checks={
  'canonical_evolutionary_genome_active':CAP_GENOME in active and core_manifest.get('evolutionary_genome_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('evolutionary_genome_v1',{}).get('automatic_canonical_promotion') is False,
  'canonical_temporal_kernel_embedded':core_manifest.get('cognitive_temporal_kernel_v1',{}).get('status')=='CANONICAL_EMBEDDED' and core_manifest.get('cognitive_temporal_kernel_v1',{}).get('separate_active_capability') is False,
  'canonical_experience_cognitive_layer_active':CAP_COGNITIVE in active and core_manifest.get('experience_conditioned_cognitive_layer_v4',{}).get('status')=='CANONICAL_ACTIVE',
+ 'canonical_global_experience_meta_v7_active':CAP_META_V7 in active and core_manifest.get('global_experience_meta_controller_v7',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('global_experience_meta_controller_v7',{}).get('v4_replaced') is False,
  'api_network_execution_disabled':api_smoke.get('pass') is True,
 }
 pycache=subprocess_result=None
