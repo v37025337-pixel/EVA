@@ -277,7 +277,7 @@ genome['genome_digest']=digest(genome)
 
 core=UnifiedYADOCoreV1(REPO);head_before=copy.deepcopy(core.head)
 checks={
- 'new_historical_evidence_consumed':len(hist_rows)==50,
+ 'new_historical_evidence_consumed':len(hist_rows)==int(hist.get('new_historical_outcome_count',0)),
  'historical_fresh_stratified':min(fresh_counts.values())>=3,
  'historical_fresh_not_in_adaptation':not ({r['sha256'] for r in fresh}&{r['sha256'] for r in adapt}),
  'terminal_native_selection':lsel.get('selected_token')==lc['token'],

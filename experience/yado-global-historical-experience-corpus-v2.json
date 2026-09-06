@@ -1,25 +1,25 @@
 {
   "base_corpus_digest": "087959e50164324f401351c3beb9354cc858ee71114f5617cc46bc2aee051e6c",
-  "corpus_digest": "ca7cfc4e5127e0142defa1c791c4451a7659aaf2c5d9c08241f7c7edacf7001d",
-  "git_object_path_pair_count": 537,
-  "new_historical_blob_count": 66,
-  "new_historical_outcome_count": 50,
+  "corpus_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+  "git_object_path_pair_count": 636,
+  "new_historical_blob_count": 165,
+  "new_historical_outcome_count": 138,
   "new_outcome_by_class": {
-    "PASS": 30,
-    "WITHHOLD": 20
+    "PASS": 81,
+    "WITHHOLD": 57
   },
   "new_outcome_by_domain": {
-    "CODE": 17,
-    "COGNITIVE": 11,
-    "EVOLUTION": 16,
+    "CODE": 59,
+    "COGNITIVE": 27,
+    "EVOLUTION": 23,
     "EXECUTION": 1,
-    "GENERAL": 2,
-    "MEMORY": 2,
-    "REPRESENTATION": 1
+    "GENERAL": 6,
+    "MEMORY": 8,
+    "REPRESENTATION": 14
   },
-  "new_terminal_count": 26,
-  "new_terminal_pass_count": 18,
-  "new_terminal_withhold_count": 8,
+  "new_terminal_count": 51,
+  "new_terminal_pass_count": 34,
+  "new_terminal_withhold_count": 17,
   "parse_failure_count": 0,
   "parse_failures": [],
   "rows": [
@@ -44,6 +44,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "5f4cde1e49ed96c6440577b2bfdfaa08ab59eac1b83883b6ea75edb9d0dfb786",
       "status": "RUNNING_BOOT_COMPLETED"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "037c76487b5057a3febfd2ee3e527619733939b2",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_RUNTIME_BINDING_REPAIR_V17",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-composition-genesis-v16.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "abc94806a44e23afec45900964f201bc3799f0efdb51802f4551fb5800607c35",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_GENESIS_V16"
     },
     {
       "domain": "CODE",
@@ -77,6 +88,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "321c9234340d48d4d9f23315cee6caa52b3de49bcdc296f119b2df2fdd2cb06b",
       "status": "WITHHOLD"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "0b23966ccb5bc2133538579fc9a9fd99021fa7a5",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "REAL_DATA_COGNITIVE_COMPOSITION_AND_TRANSFER_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-multidomain-real-data-training-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "ed17e0f12be784e52bcb8440ec4ae8acdf5b8e82559d701ffb134b7a029d9492",
+      "status": "PASS_SHADOW_G2_MULTIDOMAIN_REAL_DATA_TRAINING_V1"
     },
     {
       "domain": "GENERAL",
@@ -135,6 +157,17 @@
     },
     {
       "domain": "CODE",
+      "git_object": "147df8deba48a9a25550250770438cf240b0ca92",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "experience/yado-real-yado-recovery-cognitive-repair-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "5979ded38b6e192734b9ce2906bf3d73046eeec3b7845a77fd7ff83f6a2505a2",
+      "status": "WITHHOLD"
+    },
+    {
+      "domain": "CODE",
       "git_object": "1497bc5a3275ac6083a6428db19bea4a74d316d3",
       "next_domain": "CODE",
       "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V4",
@@ -143,6 +176,28 @@
       "present_in_global_corpus_v1": false,
       "sha256": "8b66f42bae951afe41dcba9a33bdd8a5c4361c3481f1686dca592f401b9b53d1",
       "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "156ffed06f5c93dd8888977c5e36505685cd5c1b",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "experience/yado-multidomain-logic-training-repair-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "b3065614ed6848d091575d02fa57c0892342bc5cf2089f84f0323220adaf2242",
+      "status": "TRAINED"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "161814d2c166290aac9df0d0cf15f45e21c2a1e4",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "UNIFIED_CORE_POST_RAW_REPRESENTATION_SELF_AUDIT_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-unified-core-deep-self-audit-v1-run-33974358612.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "7d80bc95c26cf8978c981cc33bfa5ced184018a0c0227eabf0b182ab2a58c62e",
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1"
     },
     {
       "domain": "MEMORY",
@@ -154,6 +209,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "55dc03af30fba7daec35ed62810a073d32b123ff4e9aa7291d10bdc50a8448ef",
       "status": "PASS_CAUSAL_EVOLUTION_LEDGER_V1"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "19b2a2066e16a98533beabfb73d9d53eb6fa0eac",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-compositional-string-transducer-gene-genesis-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "29b6ff87528b5bd76d981c5ad9d6fc11123e61030415964dee59e64286eb28d3",
+      "status": "WITHHOLD_G2_NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1"
     },
     {
       "domain": "MEMORY",
@@ -187,6 +253,39 @@
       "present_in_global_corpus_v1": false,
       "sha256": "0ce3ae3582225efe356667e3ffcdd11e7924d14a7eb9eec78b8b6592f28b109f",
       "status": "LEARNED_EXTERNAL_CORPUS"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "1da3700751ce3da7fdb32350b6115e62539dfa18",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_GENE_GENESIS_V7",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-semantic-edit-to-ast-materialization-v6.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "70094be5e3f3012868a5093b6862dde1bc537bbda1ff4b29225fa2df5fbf7d50",
+      "status": "WITHHOLD_G2_NATIVE_SEMANTIC_EDIT_TO_AST_MATERIALIZATION_V6"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "209126538c2ac9311a5f7d5092086e7e8b384a1e",
+      "next_domain": "EVOLUTION",
+      "next_required_capability": "NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "138ad6323244b41689b365e31066f2b3a9d3ff3c4cd67703d07aca9a7583046f",
+      "status": "WITHHOLD_G2_HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6"
+    },
+    {
+      "domain": "MEMORY",
+      "git_object": "23efc7786cc311e514defcabf7540a779a6f6827",
+      "next_domain": "MEMORY",
+      "next_required_capability": "EXPERIENCE_CONDITIONED_NOVEL_GENE_GENESIS_V4",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-mutation-family-selection-v3.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "0f7e3bb2c2b3991706a5481ee20d2de321e7a5ad4ae62cca393386e9d3a71e5d",
+      "status": "PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_MUTATION_FAMILY_SELECTION_V3"
     },
     {
       "domain": "COGNITIVE",
@@ -233,6 +332,39 @@
       "status": "EXTERNAL_COGNITIVE_GROWTH_PASS"
     },
     {
+      "domain": "CODE",
+      "git_object": "2e37cfdb7158e0c6809fabbdef132f711fc9be05",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-operand-binding-gene-v11.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "daab49c82477ecb5cd45c98cbb70371152b37ffcfef753a87c43b473c7fd430e",
+      "status": null
+    },
+    {
+      "domain": "CODE",
+      "git_object": "2f7ba62b918cee5a5d9015465cc82163c7d1dd4a",
+      "next_domain": "CODE",
+      "next_required_capability": "COGNITIVE_CONTINUITY_FILE_INTEGRITY_REPAIR_V3",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-continuity-file-integrity-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "0f95ee71e13ce84de12365b2b0ca572927bc40074d242369af7448459cc7408c",
+      "status": "WITHHOLD_G2_CONTINUITY_FILE_INTEGRITY_V2"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "30404bc3946e006783bb44346eec3f879d73f6db",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v6.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "0aea5cf0019b65e65f9037d9019ec58efecd14ecfd16c25e785f25447f95e080",
+      "status": "PASS_SHADOW_G2_GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_V6"
+    },
+    {
       "domain": "EVOLUTION",
       "git_object": "30e463a4100c642f195c37ebb92866a9ddd5253b",
       "next_domain": "GENERAL",
@@ -245,6 +377,17 @@
     },
     {
       "domain": "EVOLUTION",
+      "git_object": "32173947c15ff2e0506306cf1fd7ab78d064333e",
+      "next_domain": "GENERAL",
+      "next_required_capability": "RE_AUDIT_AFTER_DIRECT_PRIORITY_ACTION",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "2aea79293c41f818dce2983e9a16385650c20b7d3753ae44886f4084083b3909",
+      "status": "PASS_SHADOW_G2_AUTONOMOUS_SELF_IMPROVEMENT_TASK_V1"
+    },
+    {
+      "domain": "EVOLUTION",
       "git_object": "32a445c24909ed6326215f149e2496d152941412",
       "next_domain": "GENERAL",
       "next_required_capability": "KERNEL_CONTINUE_FROM_SELF_SELECTED_PRIORITY",
@@ -253,6 +396,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "dbee7b6a70caa55373f182ce60e3ccc1c1dee06adfa5bfc698dee2363dc9329b",
       "status": "PASS_SHADOW_G2_AUTONOMOUS_SELF_IMPROVEMENT_TASK_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "349f171e6385d1297d27361c4813951c4c1f9adf",
+      "next_domain": "CODE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V4",
+      "outcome": "WITHHOLD",
+      "path": "experience/yado-global-experience-cognitive-stress-v3.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "d8c16e93c98a249c0cd5db3e3e516f6168671992b8d47fab8313f7f7e356a3af",
+      "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3"
     },
     {
       "domain": "EXECUTION",
@@ -289,6 +443,50 @@
     },
     {
       "domain": "CODE",
+      "git_object": "414005093d7de7bbefb102ab68f557fadc10694a",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXT_BOUND_AST_SOURCE_REALIZATION_V18",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-runtime-binding-repair-v17.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "d379642065f4ac56b90822a04c6878dd0b6fbb82c7fffac27c72c71cefaf4694",
+      "status": "PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_RUNTIME_BINDING_REPAIR_V17"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "43bf5cadca8abcd298708f26ba83b277e11d1a97",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_SOURCE_REALIZATION_V9",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-transformer-policy-repair-v8.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "6b01496a82c650774edd89bcf200308243f90e501d7074e04d29a4258e05a4ec",
+      "status": "PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_REPAIR_V8"
+    },
+    {
+      "domain": "EVOLUTION",
+      "git_object": "4604ca10c08b341d2e6ac04e719d0bbc57401e16",
+      "next_domain": "GENERAL",
+      "next_required_capability": "AUTONOMOUS_EXTERNAL_USER_GOAL_LOOP_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-user-goal-ip-evidence-intake-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "cf7e6f49816dd858d935acb95a5144dc039c9f90ff1513c68d366f248e2a9b07",
+      "status": "PASS_G2_NEW_EXTERNAL_USER_GOAL_INTAKE_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "4b2cabcd6e1ff95c5748cf8e78ffff222ea451a0",
+      "next_domain": "CODE",
+      "next_required_capability": "MUTATION_FAMILY_SELECTION_REPAIR_V3",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-mutation-family-selection-v3.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "014615239153b3445365a582c997c0807030c48bf4b3a0f7d53dee15b12ee308",
+      "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_MUTATION_FAMILY_SELECTION_V3"
+    },
+    {
+      "domain": "CODE",
       "git_object": "50f1fcdfcb7f09227712bff3e792b0472bf950b3",
       "next_domain": "CODE",
       "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V3",
@@ -297,6 +495,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "a5817992d70a41a289f6005b6d5264237aeee092bd7485a4a3c1b1a7d6861e33",
       "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V2"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "51c58d19f2aae7577c07333900e6db9444b6c2c9",
+      "next_domain": "CODE",
+      "next_required_capability": "MULTIDOMAIN_ORGAN_TRAINING_REPAIR_V2",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-multidomain-organ-training-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "f6a947248b129d00a276c43737e36b138a33af1c840369f307deb0ea1468ac44",
+      "status": "WITHHOLD_G2_MULTIDOMAIN_ORGAN_TRAINING_V1"
     },
     {
       "domain": "EVOLUTION",
@@ -310,6 +519,28 @@
       "status": "PASS_SHADOW_G2_AUTONOMOUS_SELF_IMPROVEMENT_TASK_V1"
     },
     {
+      "domain": "MEMORY",
+      "git_object": "5384e2b5144f1379bf33627999f362dba241e284",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "experience/yado-user-external-corpus-learning-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "34f2d1bd7580a51da43171e98b6ac30823c3b6503e1d3f2ee3d8649841685970",
+      "status": "LEARNED_EXTERNAL_CORPUS"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "53d7222487fb352f56a8927acf11816c60477f13",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_REPAIR_V14",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-genesis-v13.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "18103b3415bf2ed2838c129032b4d3265ec74b4472ae575a90b835774ea5a1a0",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_GENESIS_V13"
+    },
+    {
       "domain": "EVOLUTION",
       "git_object": "56286d32751dcdf78f1f106c92e2bf259804b540",
       "next_domain": null,
@@ -319,6 +550,61 @@
       "present_in_global_corpus_v1": false,
       "sha256": "fe1b47213fc1e8782fddff8dd67ad94699cf9c917608cfe24c91de63a0454524",
       "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
+    },
+    {
+      "domain": "EVOLUTION",
+      "git_object": "56296b59cb518a863feb3254b6540f158be0c5ef",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-unified-module-kernel-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "1c5c22fd58a289e852df1d6d260e15f7427b8094decc916b06804ffa1f63944e",
+      "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
+    },
+    {
+      "domain": "EVOLUTION",
+      "git_object": "5658a63c41b2c9726c02ac5a995636586bfce2a7",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-unified-module-kernel-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "7dcb76b01ba77121c2188f69a161d6c9a05033e6c2471f542769e0e53abf8f5f",
+      "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "56df82be56703eca9a09de0cd1b0671d439e3be0",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "824a7543825644ac82215792fed8a43d61dd5d2f1d886adc77eb3f156e0b170b",
+      "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1"
+    },
+    {
+      "domain": "MEMORY",
+      "git_object": "59fa2dcd868a47ad80eb9e5f2d5bc587d8f27e39",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "experience/yado-multidomain-real-data-training-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "57763ef9e33e6297389c073e182f0e29251b60d34048fa2b4173e42ad2a1b8c5",
+      "status": "TRAINED"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "5b2a255e7ff264c1964296ff2e77a43e98423a44",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "6e20a11274fd2bc3559d5f7e8c21275b3f0a0fd8788f848a441a4312666a074c",
+      "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1"
     },
     {
       "domain": "CODE",
@@ -343,6 +629,39 @@
       "status": "RC8_V30_EXACT_PACKAGE_EXTERNAL_BOOT_PASS"
     },
     {
+      "domain": "CODE",
+      "git_object": "60b7f4436ab3d5522889a0358542989a1267b871",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONSTRUCTOR_PRIMITIVE_GENESIS_V10",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-transformer-source-realization-v9.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "ac1202ac720ef46e6f7c996d8c59eb0a40f6fa6751f78a645bacbf7a50337f50",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_SOURCE_REALIZATION_V9"
+    },
+    {
+      "domain": "EVOLUTION",
+      "git_object": "62c5b1f3a61b4afaa7467f1f3db56e6547e7c83f",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-unified-module-kernel-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "7da7bda667227299ca18b12a0fc2d5b2ca2121b625749f5c3a1f41b827032506",
+      "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "6458ff25b7e0c010f069651f6f6591655cdb0dc9",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_REPAIR_V15",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-repair-v14.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "22a463264118b8f40557efe648349dfd29abb61b2ad00af9f4d84071e526add3",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_REPAIR_V14"
+    },
+    {
       "domain": "EVOLUTION",
       "git_object": "665e6fe0baf8b7236e97cedb126118465b1aa72a",
       "next_domain": null,
@@ -354,6 +673,28 @@
       "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
     },
     {
+      "domain": "CODE",
+      "git_object": "67ecddc54817147c2a0f723790dc5022575616f7",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_GENERAL_BINDER_SOURCE_REALIZATION_OR_SOURCE_LANGUAGE_EXPANSION_V2",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-action-evidence-binder-source-realization-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "ac8309b0d267d9f71bc715e782c1f6223a3f4f59ffda650a604260b2457d44ea",
+      "status": "WITHHOLD_G2_NATIVE_ACTION_EVIDENCE_BINDER_SOURCE_REALIZATION_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "6a58df8ff10766940e07d2fd6d248a176209088a",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-transformer-gene-v8.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "88a55ecb50dbd6ea21c26bce11147514e936bdc926952fc08ed92c818ecc0fcd",
+      "status": null
+    },
+    {
       "domain": "EVOLUTION",
       "git_object": "6a77a295521a17286ba8f9c956800d5f70d29a27",
       "next_domain": null,
@@ -363,6 +704,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "2424a6731365e7fadda7d0bc660ed536bc40d0d3933f8455ccce4ae4a008efdc",
       "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "6a78d71ab908207f58f86a437b20851011ed7ef1",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "UNIFIED_CORE_POST_RAW_REPRESENTATION_SELF_AUDIT_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-unified-core-deep-self-audit-v1-run-34028009802.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "8146a3a6c67468e90ae819c3a595ec57a4b239beff59c03cad51930ad383341f",
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1"
     },
     {
       "domain": "CODE",
@@ -387,6 +739,28 @@
       "status": "LEARNED_EXTERNAL_CORPUS"
     },
     {
+      "domain": "CODE",
+      "git_object": "71636127f5c51b0bb98b50852049c7a188e9a03e",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-operand-materialization-gene-v12.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "e3f923afe9f165bfa57487c62c5f5ead61f77ac8a4e84914a35df2eaf9dca6a9",
+      "status": null
+    },
+    {
+      "domain": "CODE",
+      "git_object": "71ae1abd01e48dd9e9b8a99209a8079458a79ab1",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-native-self-hosted-ast-source-realization-transport-v19.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "fc1d05947b08ca5ce9fe34fed1af1388a62934cc43a374b61242c76788398b1b",
+      "status": "PASS_CANONICAL_G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT_V19"
+    },
+    {
       "domain": "GENERAL",
       "git_object": "759e7d751861412a2efba8b5ee7faf12eb7040fe",
       "next_domain": null,
@@ -396,6 +770,28 @@
       "present_in_global_corpus_v1": false,
       "sha256": "721f2a800cc5fbee8706755f7e2b199994cb787dd6f389a1b22f813c8df5d6a7",
       "status": "PASS_BOUNDED_DIRECT_METACOGNITIVE_RESEARCH"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "75b3448b7ef3f6609335df227396e703fad3f2b2",
+      "next_domain": "CODE",
+      "next_required_capability": "MUTATION_FAMILY_SELECTION_REPAIR_V3",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-mutation-family-selection-v3.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "80f34e7f2a24149b3b5454b89b555ff41985f08e3ede69aaa21575d28946f5eb",
+      "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_MUTATION_FAMILY_SELECTION_V3"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "75c80767eb40ebb268e8029cee3374ae1c66906d",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "experience/yado-joint-real-code-cognitive-transfer-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "1c6d80764f6f7432fb8a5d49b815f841302906d811a411720975c7b978625792",
+      "status": "TRAINED"
     },
     {
       "domain": "GENERAL",
@@ -420,6 +816,72 @@
       "status": "TRAINED"
     },
     {
+      "domain": "EVOLUTION",
+      "git_object": "78d82855e1c95dcbea8859096501a35dd76362b6",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-unified-module-kernel-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "de59ec0b0ad776bdc768de28308207f6b5b906b09bfb1c185a77f65aaa36ff85",
+      "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "799233f5bb30f9e4babb12fc47daa60faae5aca8",
+      "next_domain": "CODE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_REPAIR_V3",
+      "outcome": null,
+      "path": "experience/yado-global-historical-experience-corpus-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "41937e2c5f73cccdd713cf1c1d6a6105be34c786a7700874fbc30e34c5061b05",
+      "status": null
+    },
+    {
+      "domain": "MEMORY",
+      "git_object": "7d043edb43a90d4f4c934319d428f4d9d60beb7d",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "experience/yado-user-external-corpus-learning-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "142a116e8e8da9187d5b0df94930a4f17421eb85dd059b4777e2b5936da9ed58",
+      "status": "LEARNED_EXTERNAL_CORPUS"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "7d65ce35f10aa3980ed7696cb5005806e50c80fa",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "3a22ec114decd15fcd7a7fd2e9ae1f54f783844e23651afe55cd855d573ce8b3",
+      "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "7e22b3e0f88283f7cad271c0a4b5e85d19043991",
+      "next_domain": "GENERAL",
+      "next_required_capability": "SINGLE_CORE_BRANCH_LINEAGE_CONSOLIDATION_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-cognitive-experience-consolidation-v4.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "b8ed3a1992357d0c3e3cd9633b745c0cd20ffc74b32e68d0b6953d0ff04c1608",
+      "status": "PASS_G2_COGNITIVE_EXPERIENCE_CONSOLIDATION_V4"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "817244e418b71b1878e9b9ab1d0c1ca8029032be",
+      "next_domain": "CODE",
+      "next_required_capability": "TASK_CONDITIONED_SEMANTIC_SOURCE_EDIT_META_LANGUAGE_GENESIS_V5",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-novel-gene-genesis-v4.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "c7b1066ce59bf9ba502e4a4521a20e3418c6eb0455b94e050fcba84a3848409d",
+      "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_NOVEL_GENE_GENESIS_V4"
+    },
+    {
       "domain": "COGNITIVE",
       "git_object": "82334e6fa706235405e6b95e70fe9cda340a5a2d",
       "next_domain": null,
@@ -431,6 +893,17 @@
       "status": "WITHHOLD"
     },
     {
+      "domain": "REPRESENTATION",
+      "git_object": "84bedd515b4abc817ac6392ea2f193ad10126773",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "SELF_HOSTED_META_LANGUAGE_FAMILY_CONSTRUCTOR_V4",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "cce64c2f9b35066188dbb583887c0185f5feb8eea2d6822210a40af9003602e6",
+      "status": "WITHHOLD_G2_SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3"
+    },
+    {
       "domain": "COGNITIVE",
       "git_object": "85d9d50eeccdff8f7d232afb8a3eb6ff0cf1e8c8",
       "next_domain": null,
@@ -440,6 +913,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "f5d557fcbe21edae0583180985d0ef66ee9ad71be8254ffb2659ccb3477da0cd",
       "status": "PASS_BOUNDED_YADO_DIGITAL_CAUSAL_WORKSPACE_V1"
+    },
+    {
+      "domain": "GENERAL",
+      "git_object": "87145ce6860a8b3c22927f5adf7c3a27a96b36a6",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "receipts/yado-g2-continuity-v5-metadata-digest-rebind-v1-run-33989478964.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "b61131c546e452e8f3c10b38ddb3f42d1346d56e89f0a9c6b1f6d9b0d862124c",
+      "status": "PASS_G2_CONTINUITY_V5_METADATA_DIGEST_REBIND_V1"
     },
     {
       "domain": "EVOLUTION",
@@ -464,6 +948,17 @@
       "status": "RC8_FUNCTIONAL_CONSCIOUSNESS_READINESS_AUDIT_PASS"
     },
     {
+      "domain": "REPRESENTATION",
+      "git_object": "88ff1979257742f5dda6184d221ab11b7d570bcb",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "UNIFIED_CORE_POST_RAW_REPRESENTATION_SELF_AUDIT_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-unified-core-deep-self-audit-v1-run-34042438357.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "0855067997ac89650c22d36f73a60bdb29ff23bed0ede500ffadbd1c7e2345d7",
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1"
+    },
+    {
       "domain": "GENERAL",
       "git_object": "89738b4eaab13c37a3769c816b749dddec6a0919",
       "next_domain": null,
@@ -473,6 +968,50 @@
       "present_in_global_corpus_v1": false,
       "sha256": "94061caa365cabefa51920a6b7288fd50e3a4cc8770c81a577c2efd00d365d4c",
       "status": "RC8_V35_EXACT_EXTERNAL_SELF_AUDIT_TRAINING_PASS"
+    },
+    {
+      "domain": "MEMORY",
+      "git_object": "8b45d899b467404fe63f8a0bc6784487e0096691",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "experience/yado-user-external-corpus-learning-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "e6d18ec9d037cccbb9846230f309b8237eb7b62f006ac7c3891be39ebaf6a82c",
+      "status": "LEARNED_EXTERNAL_CORPUS"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "8c1113c662a4f0cd68e82dfd3b7c377f02c6712d",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "UNIFIED_CORE_POST_RAW_REPRESENTATION_SELF_AUDIT_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-unified-core-deep-self-audit-v1-run-33974251430.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "24a072a0172f114c3588e53ce4f937aeb66fd31dae273711c25a60fd967c4836",
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "8dca1dca1482cdab1692abac6d165c26bee5d223",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "receipts/yado-g2-cognitive-continuity-canonical-admission-v1-run-33979381889.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "3c2db1799a5950660e40c6585bb5183fc084221ade78c8103f01520cc7af62bb",
+      "status": "PASS_G2_COGNITIVE_CONTINUITY_CANONICAL_ADMISSION_V1"
+    },
+    {
+      "domain": "MEMORY",
+      "git_object": "8e9d4f267328bdf8f9e272e5e3cb14df9d65cae7",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "experience/yado-multidomain-real-data-training-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "e8dcdaf819b374a40cfa59374158ae039a3842bff34e9d76b70dc57d9cca0ae8",
+      "status": "TRAINED"
     },
     {
       "domain": "GENERAL",
@@ -497,6 +1036,17 @@
       "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
     },
     {
+      "domain": "COGNITIVE",
+      "git_object": "904b0a59f7b8313d45ae51811b118123c01be730",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_TERMINAL_LOGIC_HISTORICAL_TRANSFER_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "baf47861e0accaa235338f65cad6da7aecc0029208b21ed5dea86570e7a4960b",
+      "status": "PASS_G2_GLOBAL_HISTORICAL_EXPERIENCE_CENSUS_V2"
+    },
+    {
       "domain": "CODE",
       "git_object": "94fcbb9e723caadebc7431a5ba21f4463501b311",
       "next_domain": null,
@@ -506,6 +1056,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "911cd49437ac2ca5c8225fcbbe75d283f90cd86e556932a1a2408a302253047e",
       "status": null
+    },
+    {
+      "domain": "CODE",
+      "git_object": "9672a058d1cfcfeb174956db01a2ff9ec20fb1bf",
+      "next_domain": "CODE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_TERMINAL_LOGIC_HISTORICAL_TRANSFER_REPAIR_V2",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "48a8746487cecb1b2ab61f1294eba405614395494bde604875e06972b32238e6",
+      "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_TERMINAL_LOGIC_HISTORICAL_TRANSFER_V1"
     },
     {
       "domain": "GENERAL",
@@ -519,6 +1080,39 @@
       "status": "RC8_V33_EXACT_PACKAGE_EXTERNAL_EVOLUTION_PASS"
     },
     {
+      "domain": "GENERAL",
+      "git_object": "997ea985559136baf2f2a0cd4839939f930a1e23",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "receipts/yado-g2-continuity-file-integrity-canonical-admission-v2-run-33989394024.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "096c1caa3d87ae43bdf0c3b9b6243ba7b985af44b78c8aff174fa95b30e7c375",
+      "status": "PASS_G2_CONTINUITY_FILE_INTEGRITY_CANONICAL_ADMISSION_V2"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "9a3ede25d8407a950ae06b12b8d228c4edc387ee",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_GENESIS_V13",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-operand-materialization-v12.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "d16c10d9418e224e929fbace85730af7fc8741c4d74c027f17a3c3508e3d30a1",
+      "status": "PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_OPERAND_MATERIALIZATION_V12"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "9b823806fb46ebaa52051f5ada53f233ba592b2b",
+      "next_domain": "CODE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_REPAIR_V3",
+      "outcome": null,
+      "path": "experience/yado-global-historical-experience-corpus-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "c966525e19b495f5e69e1723a068f8595c4b22174214c44c853cd852c36716af",
+      "status": null
+    },
+    {
       "domain": "MEMORY",
       "git_object": "9c0044c292371481da34399147209a5fb118264e",
       "next_domain": "GENERAL",
@@ -528,6 +1122,39 @@
       "present_in_global_corpus_v1": false,
       "sha256": "34fa6afbcc71fb44bfc38b5181983a65cbcfef21dd462bcab5dd86ea5d3bb8eb",
       "status": null
+    },
+    {
+      "domain": "CODE",
+      "git_object": "9d60080093333e2dff71d020e1affc835c33dde8",
+      "next_domain": "CODE",
+      "next_required_capability": "HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "a1abd0ecebb4baeb0a0e8111f87ef6cfbf8098245b17811731c0823a29823e7d",
+      "status": "PASS_SHADOW_G2_TASK_CONDITIONED_SEMANTIC_SOURCE_EDIT_META_LANGUAGE_GENESIS_V5"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "a0d4fbdb0a3cd491cad9e47334caa6b68f2d2c22",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-runtime-binding-gene-v17.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "2dcb6a236eacc6ac611882cff2664702e9579614c445551ddd2571164ef6f65c",
+      "status": null
+    },
+    {
+      "domain": "MEMORY",
+      "git_object": "a1a27029c378b268e54ef068fa3fa29e8e7735de",
+      "next_domain": "MEMORY",
+      "next_required_capability": "EXPERIENCE_CONDITIONED_MUTATION_FAMILY_SELECTION_V3",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-deficit-to-mutation-binding-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "5478d76679b294de9a9216fd27039367974f33aa8ed713f8d3806847249c8b36",
+      "status": "PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_DEFICIT_TO_MUTATION_BINDING_V2"
     },
     {
       "domain": "EVOLUTION",
@@ -542,6 +1169,28 @@
     },
     {
       "domain": "CODE",
+      "git_object": "a43f047469b9e315d0e3181644c13b232e6616df",
+      "next_domain": "CODE",
+      "next_required_capability": "REAL_YADO_RECOVERY_EVIDENCE_REPAIR_V3",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-real-yado-recovery-cognitive-repair-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "a7a2f2c36936c121ff0e684d19e0eb156afbf732e4b1e15fc7c6a19b24461d68",
+      "status": "WITHHOLD_G2_REAL_YADO_RECOVERY_COGNITIVE_REPAIR_V2"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "a8fc200b13022ceafdd400611e1c124959978dd5",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXT_BOUND_AST_SOURCE_REALIZATION_REPAIR_V19",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-context-bound-ast-source-realization-v18.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "5f6d2ced7a1f3bf50f32f568f87ac863709cc1b86eb9d245f01ef218c8566b15",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXT_BOUND_AST_SOURCE_REALIZATION_V18"
+    },
+    {
+      "domain": "CODE",
       "git_object": "a93109c5523020d02ced9b242baa0e2179bc29d5",
       "next_domain": "CODE",
       "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V3",
@@ -550,6 +1199,28 @@
       "present_in_global_corpus_v1": false,
       "sha256": "763971dde3b6f984cdc4bd565032b1f6b9ded95465e08074eb7f06efbe87713b",
       "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V2"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "a9deaa5d7d9f2753a58b8629aa9c4c9c3bfb21e1",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "UNIFIED_CORE_POST_RAW_REPRESENTATION_SELF_AUDIT_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-unified-core-deep-self-audit-v1-run-34038203075.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "017751e49e5923eb1a6966c71a46b50d992f028077021e1347ac282f59af520d",
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "a9f31c8b0fe7b4901cd22c353b82f2064d90219e",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "0f25f1f11abd9fc520374b2929dc424c1124e8a6a9d8784fbe6c5df52e8e5dcc",
+      "status": "WITHHOLD"
     },
     {
       "domain": "EVOLUTION",
@@ -596,6 +1267,39 @@
       "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3"
     },
     {
+      "domain": "COGNITIVE",
+      "git_object": "ad59a1576c314513bcdc60e0f8f807d3012804df",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_CANONICAL_ADMISSION_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "63bb9f257cdc96bf92febe269df56f4388243434e1fef9898d6b982df5d5b590",
+      "status": "PASS_SHADOW_G2_GLOBAL_EXPERIENCE_TERMINAL_LOGIC_HISTORICAL_TRANSFER_V1"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "aeb8e1520bd77b35220d0f2220bcc046c860524d",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "COGNITIVE_CONTINUITY_FILE_INTEGRITY_CANONICAL_ADMISSION_V2",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-continuity-file-integrity-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "c78a6d1fbb345bece0aafdf9632245510b513bec0c2a41290a446b86afc38d03",
+      "status": "PASS_SHADOW_G2_CONTINUITY_FILE_INTEGRITY_V2"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "af1a9ac56d44cde27eff52a8686536057d176c97",
+      "next_domain": "CODE",
+      "next_required_capability": "REAL_YADO_RECOVERY_COGNITIVE_REPAIR_V2",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-real-yado-recovery-cognitive-task-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "5c0230fb9aa8047efe95624144bc97669ad2d37645140f49c42e1e919fe9799d",
+      "status": "WITHHOLD_G2_REAL_YADO_RECOVERY_COGNITIVE_TASK_V1"
+    },
+    {
       "domain": "EVOLUTION",
       "git_object": "b0f06446fdd8e3cc276b542a453d09220ab38301",
       "next_domain": null,
@@ -629,6 +1333,17 @@
       "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1"
     },
     {
+      "domain": "EVOLUTION",
+      "git_object": "b891fe1d3152a9affb5d86aee5b3c89262368482",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "167f82cbbed4be72664c15296b18ba6639798afc28f80375be555feed36c0f12",
+      "status": null
+    },
+    {
       "domain": "CODE",
       "git_object": "bb65bb70f2139afea2406c11163f716fcde46f46",
       "next_domain": null,
@@ -638,6 +1353,105 @@
       "present_in_global_corpus_v1": false,
       "sha256": "4ecfb7451e5c65c106fde7d0f489e2f918e01cc0f66432bdc107f278e0f76727",
       "status": "WITHHOLD_G2_SELF_REWRITE_REPAIRED_CONTROLLER_FRESH_REGRESSION_V1"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "bbeb0f723f917b238c9b0ec6660068567cf9fcc0",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "experience/yado-real-yado-recovery-cognitive-task-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "6721930a2271f15c282c8296aaf842d783fc9c7d724a54b5a4ce671b5a7ac155",
+      "status": "WITHHOLD"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "c1d5e03d65c5d320ecf9bfd34e348218e646baff",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "REAL_DATA_COGNITIVE_COMPOSITION_AND_TRANSFER_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-multidomain-real-data-training-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "eadc5dfdc0f97b7f98cabae04ae0039973d2f315230601746f823b57fdeaad0f",
+      "status": "PASS_SHADOW_G2_MULTIDOMAIN_REAL_DATA_TRAINING_V1"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "c2cb6f8d308f516e81250173339f54450ae9e73b",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "UNIFIED_CORE_POST_RAW_REPRESENTATION_SELF_AUDIT_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-unified-core-deep-self-audit-v1-run-34033000501.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "e4d89f225cdf1a71de512444c380a47c43f1dddaabdd75bbae179e819e7352b9",
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "c34451ab49eaa9e835cf5cbcad97f32d5bf5598d",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "experience/yado-global-experience-cognitive-genesis-v6.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "fc7b4c22d93a8e8a1f798b2b68272ea5edb5d7bc92504278b5d17d419bbf6d78",
+      "status": "TRAINED"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "c428324368358fe363b56f67ac79037cf09d03f3",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_TERMINAL_LOGIC_HISTORICAL_TRANSFER_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "fdbb10da2d1fc16e9005d273b1d022d55d8a080553002a9582041e8c4c05879a",
+      "status": "PASS_G2_GLOBAL_HISTORICAL_EXPERIENCE_CENSUS_V2"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "c524e71af65660afa5aa018a2de2576752a31708",
+      "next_domain": "CODE",
+      "next_required_capability": "TARGET_SEMANTIC_SOURCE_CONSTRUCTOR_GENESIS_V5",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-self-hosted-meta-language-family-constructor-v4.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "407f6f02ad75f165a599c9919e5aa6f34b1281bab2af19cf9ba116b58f0ad7d1",
+      "status": "WITHHOLD_G2_SELF_HOSTED_META_LANGUAGE_FAMILY_CONSTRUCTOR_V4"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "c6a9b66d3846586cbdca53a7aaca05d3e42b0afd",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "UNIFIED_CORE_POST_RAW_REPRESENTATION_SELF_AUDIT_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-unified-core-deep-self-audit-v1-run-34028922834.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "02092396dc885e6753b539f04bd99f16ec6db924029e9de8393fc4c48dcc6a98",
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "c6f9caf6b909679d9a0acbca9e64918397ba6489",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "7fa01421bfa29b98af435daa40d914e44b8277958ff5fe91d4d477b2d89578db",
+      "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "c72117da07515af38f43e9f2b11b331f3a5e5ee0",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "experience/yado-multidomain-cognitive-composition-training-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "35c8353a15ee3fa8bff435bd97d6adde5daac24daed2e6e63da27eb05791cbd0",
+      "status": "TRAINED"
     },
     {
       "domain": "COGNITIVE",
@@ -651,6 +1465,61 @@
       "status": "TRAINED"
     },
     {
+      "domain": "GENERAL",
+      "git_object": "ca55085130825213878dcae6d7b37587076c94e2",
+      "next_domain": "GENERAL",
+      "next_required_capability": "YADO_NATIVE_SELF_CREATED_CONSTRUCTOR_FROM_LEARNED_CORPUS_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-g2-user-external-corpus-learning-v1-run-34038415215.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "fe9c7c449f32a528c87f056d69a696a10852c196bdc35b68023ad57c15ec1a2b",
+      "status": "PASS_G2_USER_EXTERNAL_CORPUS_LEARNING_V1"
+    },
+    {
+      "domain": "GENERAL",
+      "git_object": "cb2f01af5c1ecbf6d1fb0dc63612bca02a6d41b5",
+      "next_domain": "GENERAL",
+      "next_required_capability": "YADO_NATIVE_SELF_CREATED_CONSTRUCTOR_FROM_LEARNED_CORPUS_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-g2-user-external-corpus-learning-v1-run-34032205738.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "346846c6999fedfd3b6a6fe0f082f0c274c483ef3a886e0eaafb9680fc1783b3",
+      "status": "PASS_G2_USER_EXTERNAL_CORPUS_LEARNING_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "cb5fd340a078caf626cf9d3e19669a2f9243dec9",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_SEMANTIC_EDIT_TO_AST_MATERIALIZATION_V6",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-target-semantic-source-constructor-genesis-v5.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "3637f634fe0da95e93acc02ff53fe3d81d171a3fdaf18c11be8e65f80d61b517",
+      "status": "PASS_SHADOW_G2_TARGET_SEMANTIC_SOURCE_CONSTRUCTOR_GENESIS_V5"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "cc0f0c8fea65147ca199789208352e2d3b9154cb",
+      "next_domain": "GENERAL",
+      "next_required_capability": "MULTIDOMAIN_REAL_DATA_TRANSFER_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-multidomain-cognitive-composition-training-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "8008d092228fefc9c551057b15cd81b81bc35e6d3838634c00ae397be9e16615",
+      "status": "PASS_SHADOW_G2_MULTIDOMAIN_COGNITIVE_COMPOSITION_TRAINING_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "cd10e899a64bf148726e52d2c4cef670b506e4d4",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": null,
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-constructor-primitive-gene-v10.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "b912bec18b4eb116aa6b83f0b9142c1e3cee79b5b613381e6e8d07ac8e6b22f4",
+      "status": null
+    },
+    {
       "domain": "COGNITIVE",
       "git_object": "cf13abe5467d4b29b528fd63b4c1f4542cf4ed28",
       "next_domain": null,
@@ -660,6 +1529,39 @@
       "present_in_global_corpus_v1": false,
       "sha256": "8daa6002855d46de2f85c38d71e82409783b8c9b033485b8cd32c373fc010a83",
       "status": "PASS"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "d0bc5a1cfb4a6e9a63d1c4c90f27c7de1ba3bc46",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_OPERAND_MATERIALIZATION_V12",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-operand-binding-genesis-v11.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "de2fa0c41c1e4327bffce9227e400df7aa6cda7351641e56f4ea5ac98797253a",
+      "status": "PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_OPERAND_BINDING_GENESIS_V11"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "d1e78687b5e954230141c3217e8a24b42a1c656f",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "KERNEL_G2_RAW_REPRESENTATION_META_ARCHITECTURE_EXPANSION_V4",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-raw-v4-hierarchical-residual-self-evolution-v3.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "80c20088410b03aaa613bfb74643bf87040b27e7272ddbaa366a06f4b0cc5136",
+      "status": "WITHHOLD_G2_RAW_V4_HIERARCHICAL_RESIDUAL_SELF_EVOLUTION_V3"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "d222b0b3252192731a5d9b9498c839741d7b918c",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_REPAIR_V8",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-transformer-gene-genesis-v7.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "a7d4d5058adbf15d36cc602891d06a4ef68c7a6302ffb386a16d0fad7ecf216e",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_GENE_GENESIS_V7"
     },
     {
       "domain": "COGNITIVE",
@@ -673,6 +1575,39 @@
       "status": "PASS_SHADOW_G2_COGNITIVE_TEMPORAL_KERNEL_V1"
     },
     {
+      "domain": "COGNITIVE",
+      "git_object": "d483bddd8f70698f39dbd27a6b9e94bfa5734898",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "b2c655455e997606ab2c386e5ef453797ac20bc9dcd01e20669196a629557896",
+      "status": "TRAINED"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "d74b8893f9d431b51deeb57b83cc65c512464962",
+      "next_domain": "CODE",
+      "next_required_capability": "JOINT_REAL_CODE_COGNITIVE_DIFFICULTY_ESCALATION_V2",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-joint-real-code-cognitive-transfer-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "5f8cf47f33647e40660909a76b80c6818318a71280710bd287c863bec8ec7f2c",
+      "status": "PASS_SHADOW_G2_JOINT_REAL_CODE_COGNITIVE_TRANSFER_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "d7f7f69bbf72c2c79e811649ec81f655da97da8d",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_OPERAND_BINDING_GENESIS_V11",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-constructor-primitive-genesis-v10.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "4dd99e4372c6ce3300aaf020f552840c94263f6a52f8bc8cce4afe0c16161ff0",
+      "status": "PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_CONSTRUCTOR_PRIMITIVE_GENESIS_V10"
+    },
+    {
       "domain": "CODE",
       "git_object": "d9d9796d71830ae00ee491d5ab5b502e86c58d62",
       "next_domain": null,
@@ -682,6 +1617,72 @@
       "present_in_global_corpus_v1": false,
       "sha256": "6f6f2c5f91852cad4b8f3a5c5a0350745c0b0dc7b576d75360a72821d3002e4c",
       "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1"
+    },
+    {
+      "domain": "MEMORY",
+      "git_object": "db5f08bb0fbbf1d45027e216968def60d9c647e5",
+      "next_domain": "MEMORY",
+      "next_required_capability": "EXPERIENCE_CONDITIONED_DEFICIT_TO_MUTATION_BINDING_V2",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-evolution-action-bridge-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "d535c5276857d77e9f011fbdb535cc7b0b2b095c27f07f3369eade99e174b2f1",
+      "status": "PASS_SHADOW_G2_EXPERIENCE_CONDITIONED_EVOLUTION_ACTION_BRIDGE_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "dede32ff62ae255d3aa123395c8848b241bccecc",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_GENERAL_BINDER_SOURCE_REALIZATION_OR_SOURCE_LANGUAGE_EXPANSION_V2",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-action-evidence-binder-source-realization-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "45fa6bf9e7df0b61a274f23e29a90d4cf1ba7f949e2d2901c3711ee1d6c9d766",
+      "status": "WITHHOLD_G2_NATIVE_ACTION_EVIDENCE_BINDER_SOURCE_REALIZATION_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "dfb38fbaed086865c52639b3b0cd9c17e7d5f111",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_GENESIS_V16",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-composition-repair-v15.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "93d59820839be1462db221adce6fd610f689af9c5befe76c8cc8f29e6451998d",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_REPAIR_V15"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "dfdbe5ec83105c7be45b7487ed13305852e72b6c",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "UNIFIED_CORE_POST_RAW_REPRESENTATION_SELF_AUDIT_V1",
+      "outcome": "PASS",
+      "path": "receipts/yado-unified-core-deep-self-audit-v1-run-34031111095.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "933689e47bfa6ac201edf5b4a0ca7d84cfeb14196289b9d3a48bf4b14ceaa1b8",
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "e20ad2b1ab7ed3ba7d77a51581e10b6cc5e416c6",
+      "next_domain": "CODE",
+      "next_required_capability": "NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT_V19",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-native-context-bound-ast-source-realization-v18.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "233c425edec2f55a12fc2415b10325d7b8b162f0c430589a1df73fc277630953",
+      "status": "PASS_SHADOW_G2_NATIVE_CONTEXT_BOUND_AST_SOURCE_REALIZATION_V18"
+    },
+    {
+      "domain": "EVOLUTION",
+      "git_object": "e292f721a22ec7e39420b3b05fc0c478ee98adfd",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-native-self-created-constructor-after-external-learning-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "96f13b7e708174ec7cb7515e3a93ad0daad242ca59fce655b9991ea3a1d37a02",
+      "status": "PASS_SHADOW_G2_NATIVE_SELF_CREATED_CONSTRUCTOR_AFTER_EXTERNAL_LEARNING_V1"
     },
     {
       "domain": "CODE",
@@ -695,6 +1696,17 @@
       "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_GENESIS_V3"
     },
     {
+      "domain": "REPRESENTATION",
+      "git_object": "e72f0a7fec961065c77f148ddc0de5ba493ef4d0",
+      "next_domain": "REPRESENTATION",
+      "next_required_capability": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V3",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-raw-v4-semantic-grounding-self-evolution-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "ddd4f1336d26cc69ee46fb4218fcc38b45a2d58b2c2f7acf03ddb89d2b400b21",
+      "status": "WITHHOLD_G2_RAW_V4_SEMANTIC_GROUNDING_SELF_EVOLUTION_V2"
+    },
+    {
       "domain": "EVOLUTION",
       "git_object": "e9222477753a873b485189b03e4f35a72abb32f9",
       "next_domain": "GENERAL",
@@ -704,6 +1716,17 @@
       "present_in_global_corpus_v1": false,
       "sha256": "5c1356814990a55a60063bbed8b041afbb2940e5afeda226fe1e520f25e6f473",
       "status": "PASS_SHADOW_G2_AUTONOMOUS_SELF_IMPROVEMENT_TASK_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "eca735bc1d7cf4aa3a7880b5b08f0c80ceea8471",
+      "next_domain": "CODE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V4",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-stress-v3.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "39671cbf3e1e598904569362dcc54b80e99db8995097998eacba993f5fc22160",
+      "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3"
     },
     {
       "domain": "CODE",
@@ -728,6 +1751,39 @@
       "status": "WITHHOLD_G2_NATIVE_SELF_CREATED_CONSTRUCTOR_AFTER_EXTERNAL_LEARNING_V1"
     },
     {
+      "domain": "CODE",
+      "git_object": "f0abd96fd477cb06c078efce409d89ac57e511a7",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "MULTIDOMAIN_COGNITIVE_COMPOSITION_TRAINING_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-multidomain-logic-training-repair-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "25eb73a6338b9af60cb1f7f9ef3f9c2018877ebac9cf739f9cc2dc8204656bb1",
+      "status": "PASS_SHADOW_G2_MULTIDOMAIN_LOGIC_TRAINING_REPAIR_V2"
+    },
+    {
+      "domain": "REPRESENTATION",
+      "git_object": "f31685932f4661e433ada2142a6e8f0a0a103b8f",
+      "next_domain": "EVOLUTION",
+      "next_required_capability": "SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-self-extending-string-transducer-meta-language-genesis-v2.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "1371151d6988eae57a6ee0307840913520c09080dcb628cdaac1919c1702ee43",
+      "status": "WITHHOLD_G2_SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2"
+    },
+    {
+      "domain": "MEMORY",
+      "git_object": "f3ef3040d7e61b8daa65d1aaef37b89535e0771c",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "experience/yado-multidomain-organ-training-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "95c7188b06b42605a653769ce99112e41f7b6e0465ec1065088da4a83a7bd11d",
+      "status": "WITHHOLD"
+    },
+    {
       "domain": "EVOLUTION",
       "git_object": "f6a17fc827599d1a46ab9dc69766ad4c52b470d5",
       "next_domain": null,
@@ -739,6 +1795,17 @@
       "status": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1"
     },
     {
+      "domain": "CODE",
+      "git_object": "f7c33c8550aef09743e5b410e02c2d46b700b7bf",
+      "next_domain": "CODE",
+      "next_required_capability": "GLOBAL_EXPERIENCE_EVOLUTION_DECISION_REPAIR_V2",
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-evolution-action-bridge-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "aae9c07d99e451222fea5ded5f6e1eaef6a63e311a0426cbc1952ca70412eb94",
+      "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_EVOLUTION_ACTION_BRIDGE_V1"
+    },
+    {
       "domain": "COGNITIVE",
       "git_object": "fe2b0669c84c406c81c480fb81239631da179410",
       "next_domain": null,
@@ -748,9 +1815,31 @@
       "present_in_global_corpus_v1": false,
       "sha256": "60831fd2f1a41bb478252604670ec59784e8d48455ee5dbac6b5f8f6da1b98ac",
       "status": "TRAINED"
+    },
+    {
+      "domain": "COGNITIVE",
+      "git_object": "fe3d91e9aa7291dbcdc09e0ebe9a1295c421c343",
+      "next_domain": "COGNITIVE",
+      "next_required_capability": "COGNITIVE_CONTINUITY_CANONICAL_ADMISSION_V1",
+      "outcome": "PASS",
+      "path": "candidates/kernel-self-generated/g2-cognitive-continuity-checkpoint-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "40e07fa9c968f068e7538c698b5a99b986f765b775a51cc2933c7afd83347846",
+      "status": "PASS_SHADOW_G2_COGNITIVE_CONTINUITY_CHECKPOINT_V1"
+    },
+    {
+      "domain": "CODE",
+      "git_object": "fe78eb79183c1c0ce691a9b5a8cd6503ceefb142",
+      "next_domain": null,
+      "next_required_capability": null,
+      "outcome": "WITHHOLD",
+      "path": "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
+      "present_in_global_corpus_v1": false,
+      "sha256": "da050f7b85d53d6c153354cca8873a04f8ca91b08417716077dc4a3cd227e0d3",
+      "status": "WITHHOLD_G2_ACTION_EVIDENCE_SELF_AUDIT_SELF_STUDY_REPAIR_V1"
     }
   ],
   "schema": "yado.g2.global_historical_experience_corpus.v2",
   "source_policy": "ALL_REACHABLE_GIT_OBJECTS_UNDER_RECEIPTS_EXPERIENCE_AND_SELF_GENERATED_CANDIDATES_NOT_PRESENT_BY_SHA256_IN_GLOBAL_CORPUS_V1",
-  "unique_json_blob_count": 537
+  "unique_json_blob_count": 636
 }
