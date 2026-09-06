@@ -267,7 +267,13 @@ def isolated_probe(source):
           'runtime/yado_rc8_v36/test_yado_skill_admission_runtime_v1.py',
           'runtime/yado_rc8_v36/test_yado_transfer_evaluation_runtime_v1.py',
         ]
-        rg=subprocess.run([py,'-m','unittest',*tests],cwd=dst,capture_output=True,text=True,timeout=240)
+        test_env=dict(os.environ)
+        test_env['PYTHONPATH']=os.pathsep.join([
+          str(dst/'runtime'),
+          str(dst/'runtime/yado_rc8_v36'),
+          test_env.get('PYTHONPATH',''),
+        ])
+        rg=subprocess.run([py,'-m','unittest',*tests],cwd=dst,env=test_env,capture_output=True,text=True,timeout=240)
         checks={
           'candidate_compile':True,
           'valid_real_evidence_closes_finding':valid_ok,
