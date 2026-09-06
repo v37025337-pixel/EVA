@@ -23,6 +23,7 @@
     "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
     "runtime/yado_g2_experience_conditioned_cognitive_layer_v3.py",
     "runtime/yado_g2_experience_conditioned_cognitive_layer_v4.py",
+    "runtime/yado_g2_global_experience_meta_controller_v7.py",
     "runtime/yado_g2_openapi_contract_capability_v1.py",
     "runtime/yado_g2_openapi_readonly_executor_v1.py",
     "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py",
@@ -42,7 +43,7 @@
     "runtime/yado_work_budget_adaptive_contingent_planner_v2.py"
   ],
   "algorithm_provenance_registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-  "algorithm_provenance_registry_digest": "a2bececc52055b3b56c83c868d2ff5a57d5c3329b31a999c6b15f5d42d4a01b5",
+  "algorithm_provenance_registry_digest": "444130ae28fb1f19d1fb1a75a533a9d06a5da8e7a17ed9c7b2c4eafdbe5084f2",
   "applied_experience_binding": {
     "application_scope": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
     "artifact": "canonical/yado-g2-applied-experience-binding-v1.json",
@@ -287,7 +288,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "e81547903e81eba2d3cc44d730c1e25b4265e0c2918dea3f6830688f8afb2a3c",
+  "core_digest": "6d1270ed273d6f774ca301b0f963751c4e7446ee49ec30894d65ce4b0a5202ca",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -504,6 +505,43 @@
   "frontier_source": "architecture/evolution-ledger.json:open_deficits",
   "g3_genesis_performed": false,
   "generation": "G2_CANDIDATE_TRCG_V1",
+  "global_experience_meta_controller_v7": {
+    "admission_ablation_drops": {
+      "INTELLIGENCE": 0.33333333333333337,
+      "LOGIC": 0.20833333333333337,
+      "THINKING": 0.33333333333333337
+    },
+    "admission_class_scores": {
+      "COMMIT": {
+        "accuracy": 1.0,
+        "count": 12
+      },
+      "CONTINUE": {
+        "accuracy": 1.0,
+        "count": 16
+      },
+      "REVISE": {
+        "accuracy": 1.0,
+        "count": 14
+      },
+      "SEEK_EVIDENCE": {
+        "accuracy": 0.6666666666666666,
+        "count": 6
+      }
+    },
+    "admission_fresh_score": 0.9583333333333334,
+    "automatic_canonical_promotion": false,
+    "canonical_component_digest": "28de07f2cca87167af44819f4138febe3e67e6c8ca698eae6e0a07ca6081cee3",
+    "component_id": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
+    "genome_digest": "f5be58219cc9b49abad4c5c89871e6bb450a807c3e236f8cf404aba0d0eeb174",
+    "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-dd1cb791d312e0ff",
+    "old_corpus_regression": 0.972568578553616,
+    "rollback_parent_component": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+    "runtime_sha256": "f96ba6ce0026968bfb4fbebb5d61f1fd8ed33c575b725c7a5a84119e373aa794",
+    "source_transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+    "status": "CANONICAL_ACTIVE",
+    "v4_replaced": false
+  },
   "intelligence_ceiling": {
     "architecture_sha256": "e2e331521334b210700357ed418f975bf4b43a464f6147728ce175d8b3485bd4",
     "candidate_digest": "10e457bde0473a3eb744d5715237509bdae15a86bdd13daf372faf130934e2fa",
@@ -771,6 +809,7 @@
         "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
         "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
         "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
+        "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
       ],
       "branch_closure_mode": "READ_ONLY_HISTORY_INTO_G2",
@@ -789,6 +828,7 @@
       "legacy_experience_retrieval": "ACTIVE_READ_ONLY_EXACT",
       "plane_id": "MEMORY_AND_EXPERIENCE",
       "responsibilities": [
+        "accumulated_history_to_meta_action_control",
         "automatic_planning_feedback_source",
         "bounded_context_conditioned_stream_routing",
         "bounded_external_evidence_metadata_memory",
@@ -888,6 +928,7 @@
         "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4",
         "ALG-G2-SCALE-ROUTE-SEMANTICS-V5",
         "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1",
+        "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
         "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
         "RUNTIME-G2-HIGH-SCALE-BINDING-V5"
       ],
@@ -912,6 +953,7 @@
         "distribution_shift_spurious_trigger_suppression",
         "evidence_weighted_selection",
         "experience_conditioned_strategy_routing",
+        "experience_derived_commit_continue_revise_seek_selection",
         "multi_chromosome_evolution_selection",
         "paired_schema_alignment",
         "positive_cover_trigger_pruning",
@@ -924,6 +966,7 @@
     },
     {
       "active_components": [
+        "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
         "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1",
         "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5"
@@ -939,6 +982,7 @@
       "note": "Legacy workspace/consciousness mechanisms are experience only, not active consciousness claims.",
       "plane_id": "WORKSPACE_AND_INTEGRATION",
       "responsibilities": [
+        "additive_meta_action_control_over_v4_without_task_executor_replacement",
         "atomic_temporal_recurrent_checkpoint",
         "causal_integration",
         "external_evidence_to_recurrent_workspace",
@@ -993,6 +1037,7 @@
         "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
         "ALG-G2-DEEP-SELF-AUDIT-V1",
         "CTRL-G2-EVOLUTIONARY-GENOME-V1",
+        "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
         "architecture/evolution-ledger.json",
         "canonical/yado-g2-active-patch-registry-v1.json"
       ],
@@ -1013,6 +1058,7 @@
         "continuity_checkpoint_digest_validation",
         "continuity_file_digest_validation",
         "evidence_resolution_before_commit",
+        "fail_closed_meta_action_before_future_self_change",
         "fail_closed_repair_policy",
         "fresh_fitness_gate_before_promotion",
         "multi_edit_patch_synthesis",
@@ -1472,7 +1518,7 @@
   },
   "runtime_integrity_manifest": {
     "algorithm": "SHA256",
-    "manifest_digest": "bbd36e45e09ddcfc074ad68df326fa1926743bb5d3c488516da1a5c1869ec88b",
+    "manifest_digest": "a60b3ed48c561d0fad66e835a5d608385cc5ad3000a174dbcaaf90ee384aa008",
     "sources": {
       "runtime/yado_ambiguity_aware_program_repair_v11.py": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
       "runtime/yado_bounded_capability_router_v1.py": "442d53602f7a35aecc0ab7cfd9c7c5036cf7c5d00b4946d37f6fb08c93125206",
@@ -1492,6 +1538,7 @@
       "runtime/yado_g2_contextual_stream_capability_adapter_v1.py": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b",
       "runtime/yado_g2_experience_conditioned_cognitive_layer_v3.py": "ff3bb089ba080b30909238b06b390d3c0359c56fb3ddb09c0a93cfddb2abd093",
       "runtime/yado_g2_experience_conditioned_cognitive_layer_v4.py": "2e58ac59df9a3486415b7a5218428a6499cbf36298b7cd87b04277c993d2a906",
+      "runtime/yado_g2_global_experience_meta_controller_v7.py": "f96ba6ce0026968bfb4fbebb5d61f1fd8ed33c575b725c7a5a84119e373aa794",
       "runtime/yado_g2_openapi_contract_capability_v1.py": "3288d9483c64767d74309691546425b91c71eea93b37b14d83a7bb9f73d8f33b",
       "runtime/yado_g2_openapi_readonly_executor_v1.py": "9d7bc5289377a790e81263eeef27a4d0960312825b8c1184d6bdde303acc355e",
       "runtime/yado_g2_typed_recurrent_capability_graph_runtime_v1.py": "79eba84158de120f026e164b4914bec0fd00358bfe8a56e81b0497e924b7e762",
@@ -1511,7 +1558,7 @@
       "runtime/yado_work_budget_adaptive_contingent_planner_v2.py": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
     }
   },
-  "runtime_sha256": "12e68a3ff8f066fac14d0e88fd85df812c8e461c87af0adfba95f68fcb3cb8c1",
+  "runtime_sha256": "dd70f92a394b20b7f4e22ee0d34513cd194f133c97267a7ab8faf53952e54dc3",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
