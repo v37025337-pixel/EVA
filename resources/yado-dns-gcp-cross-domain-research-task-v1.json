@@ -238,7 +238,7 @@
     },
     {
       "id": "GCP_COMPUTE_OFFICIAL",
-      "url": "https://docs.cloud.google.com/compute/docs/reference/rest/v1"
+      "url": "https://docs.cloud.google.com/compute/docs/reference/rest/v1/routes/get"
     },
     {
       "id": "GCP_CLOUD_RUN_OFFICIAL",
@@ -282,7 +282,7 @@
     },
     {
       "id": "GCP_VERTEX_OFFICIAL",
-      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest"
+      "url": "https://docs.cloud.google.com/vertex-ai/docs/samples/aiplatform-deploy-model-sample"
     },
     {
       "id": "GCP_VISION_OFFICIAL",
@@ -307,5 +307,13 @@
     "canonical_mutation": false,
     "automatic_promotion": false,
     "g3_genesis": false
+  },
+  "source_repair_v2": {
+    "reason": "RAW_REFERENCE_INDEX_DID_NOT_EXPOSE_COMPUTE_SERVICE_HOST; VERTEX_SOURCE_WAS_TOO_BROAD",
+    "compute_source_change": "GENERAL_REST_INDEX_TO_OFFICIAL_METHOD_WITH_EXPLICIT_HTTP_ENDPOINT",
+    "vertex_source_change": "AGENT_PLATFORM_INDEX_TO_VERTEX_AI_DEPLOY_MODEL_SAMPLE_WITH_EXPLICIT_REGIONAL_API_ENDPOINT",
+    "thresholds_changed": false,
+    "genes_reselected": false,
+    "expected_answers_added": false
   }
 }
