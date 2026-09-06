@@ -1,0 +1,151 @@
+{
+  "actual_target_source_integration_proven": false,
+  "all_context_dependencies_bound": true,
+  "binder_gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
+  "context_closure": {
+    "ACTION": {
+      "external_dependencies": [
+        "REPO"
+      ],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "BinOp(left=Name(id='REPO', ctx=Load()), op=Div(), right=Constant(value='candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'))",
+      "rhs_source": "REPO / 'candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'"
+    },
+    "BINDER": {
+      "external_dependencies": [
+        "REPO"
+      ],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "BinOp(left=Name(id='REPO', ctx=Load()), op=Div(), right=Constant(value='candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json'))",
+      "rhs_source": "REPO / 'candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json'"
+    },
+    "Path": {
+      "kind": "IMPORT",
+      "source": "from pathlib import Path"
+    },
+    "REPO": {
+      "external_dependencies": [
+        "ROOT"
+      ],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "Attribute(value=Name(id='ROOT', ctx=Load()), attr='parent', ctx=Load())",
+      "rhs_source": "ROOT.parent"
+    },
+    "ROOT": {
+      "external_dependencies": [
+        "Path"
+      ],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "Attribute(value=Call(func=Attribute(value=Call(func=Name(id='Path', ctx=Load()), args=[Name(id='__file__', ctx=Load())], keywords=[]), attr='resolve', ctx=Load()), args=[], keywords=[]), attr='parent', ctx=Load())",
+      "rhs_source": "Path(__file__).resolve().parent"
+    },
+    "action": {
+      "kind": "UNPACK_MAP_ARTIFACT_BINDING",
+      "loader_name": "load",
+      "source_statement": "v4, v3, binder, action, j4, j5, j6 = map(load, [V4, V3, BINDER, ACTION, J4, J5, J6])",
+      "source_symbol": "ACTION",
+      "source_symbol_binding": {
+        "external_dependencies": [
+          "REPO"
+        ],
+        "kind": "SIMPLE_ASSIGN",
+        "rhs_dump": "BinOp(left=Name(id='REPO', ctx=Load()), op=Div(), right=Constant(value='candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'))",
+        "rhs_source": "REPO / 'candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'"
+      }
+    },
+    "binder": {
+      "kind": "UNPACK_MAP_ARTIFACT_BINDING",
+      "loader_name": "load",
+      "source_statement": "v4, v3, binder, action, j4, j5, j6 = map(load, [V4, V3, BINDER, ACTION, J4, J5, J6])",
+      "source_symbol": "BINDER",
+      "source_symbol_binding": {
+        "external_dependencies": [
+          "REPO"
+        ],
+        "kind": "SIMPLE_ASSIGN",
+        "rhs_dump": "BinOp(left=Name(id='REPO', ctx=Load()), op=Div(), right=Constant(value='candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json'))",
+        "rhs_source": "REPO / 'candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json'"
+      }
+    },
+    "comp": {
+      "external_dependencies": [
+        "result"
+      ],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='comprehension')], keywords=[]), Dict(keys=[], values=[])])",
+      "rhs_source": "result.get('comprehension') or {}"
+    },
+    "feat": {
+      "assignment_name": "features",
+      "contract_keys": [
+        "action_relevant",
+        "action_status_pass",
+        "canonical_immutable",
+        "comprehension_complete",
+        "conflict_resolution_pass",
+        "direct_priority_evidence",
+        "priority_match"
+      ],
+      "kind": "FEATURE_DICT_EXPRESSION",
+      "rhs_dump": "Dict(keys=[Constant(value='priority_match'), Constant(value='comprehension_complete'), Constant(value='direct_priority_evidence'), Constant(value='canonical_immutable'), Constant(value='conflict_resolution_pass'), Constant(value='action_status_pass'), Constant(value='action_relevant')], values=[Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())]), Call(func=Name(id='all', ctx=Load()), args=[GeneratorExp(elt=Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='comp', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='k', ctx=Load())], keywords=[])], keywords=[]), generators=[comprehension(target=Name(id='k', ctx=Store()), iter=Tuple(elts=[Constant(value='repository_commit_identity_extracted'), Constant(value='readme_title_extracted'), Constant(value='package_identity_extracted'), Constant(value='provider_catalog_extracted'), Constant(value='no_key_provider_set_extracted')], ctx=Load()), ifs=[], is_async=0)])], keywords=[]), BoolOp(op=And(), values=[Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[]), Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[])]), BoolOp(op=And(), values=[Compare(left=Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_head_unchanged')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_mutation')], keywords=[]), ops=[Is()], comparators=[Constant(value=False)])]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='conflict_resolution_pass')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Call(func=Attribute(value=Call(func=Name(id='str', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='status'), Constant(value='')], keywords=[])], keywords=[]), attr='startswith', ctx=Load()), args=[Constant(value='PASS')], keywords=[]), BoolOp(op=And(), values=[Compare(left=Name(id='selected_action', ctx=Load()), ops=[Eq()], comparators=[Constant(value='LIVE_RESOURCE_EVIDENCE_RECHECK')]), Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())])])])",
+      "rhs_source": "{'priority_match': priority == target_code, 'comprehension_complete': all((bool(comp.get(k)) for k in ('repository_commit_identity_extracted', 'readme_title_extracted', 'package_identity_extracted', 'provider_catalog_extracted', 'no_key_provider_set_extracted'))), 'direct_priority_evidence': bool(action.get('direct_priority_evidence')) and bool(result.get('direct_priority_evidence')), 'canonical_immutable': action.get('canonical_head_unchanged') is True and result.get('canonical_mutation') is False, 'conflict_resolution_pass': result.get('conflict_resolution_pass') is True, 'action_status_pass': str(result.get('status', '')).startswith('PASS'), 'action_relevant': selected_action == 'LIVE_RESOURCE_EVIDENCE_RECHECK' and priority == target_code}"
+    },
+    "load": {
+      "kind": "FUNCTION",
+      "source_sha256": "fe6fe00f78f45c19287e8cb4d48dcd215349362011c76cae6729e2062838bb6d"
+    },
+    "priority": {
+      "external_dependencies": [
+        "action"
+      ],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "Call(func=Name(id='str', ctx=Load()), args=[BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='kernel_selected_next_step')], keywords=[]), Constant(value='')])], keywords=[])",
+      "rhs_source": "str(action.get('kernel_selected_next_step') or '')"
+    },
+    "result": {
+      "external_dependencies": [
+        "action"
+      ],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "BoolOp(op=Or(), values=[Call(func=Attribute(value=BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='goal_action_binding')], keywords=[]), Dict(keys=[], values=[])]), attr='get', ctx=Load()), args=[Constant(value='result')], keywords=[]), Dict(keys=[], values=[])])",
+      "rhs_source": "(action.get('goal_action_binding') or {}).get('result') or {}"
+    },
+    "selected_action": {
+      "external_dependencies": [
+        "action"
+      ],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "Call(func=Name(id='str', ctx=Load()), args=[BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='selected_action')], keywords=[]), Constant(value='')])], keywords=[])",
+      "rhs_source": "str(action.get('selected_action') or '')"
+    },
+    "target_code": {
+      "external_dependencies": [],
+      "kind": "SIMPLE_ASSIGN",
+      "rhs_dump": "Constant(value='LIVE_RESOURCE_EVIDENCE_SCOPE')",
+      "rhs_source": "'LIVE_RESOURCE_EVIDENCE_SCOPE'"
+    },
+    "tree_predict": {
+      "kind": "IMPORT",
+      "source": "from yado_organ_runtime_native_v1 import tree_predict"
+    }
+  },
+  "counterfactual_fail_closed": true,
+  "full_free_context_names": [
+    "binder",
+    "feat",
+    "tree_predict"
+  ],
+  "gene_digest": "40c1d69237a165c353fb70f95a4b9cb2bbf8da84330078bbfd483983c99cfec7",
+  "gene_id": "GENE-G2-NATIVE-AST-CONTEXT-RUNTIME-BINDING-V17-fc0851cf87906cc5",
+  "gene_scope": [
+    "CODE",
+    "SELF_AUDIT_AND_REPAIR",
+    "GENERATIVE_EXECUTIVE"
+  ],
+  "ground_verdict": "ACCEPT_FRESH_EVIDENCE",
+  "novel_gene": true,
+  "origin": "YADO_NATIVE_SELECTION_OVER_FULL_V12_FREE_CONTEXT",
+  "promotion_state": "SHADOW_ONLY",
+  "schema": "yado.g2.native_contextual_ast_context_runtime_binding_gene.v17",
+  "v12_operand_materialization_gene_id": "GENE-G2-NATIVE-AST-OPERAND-MATERIALIZATION-V12-8f478aa50276f2c0"
+}
