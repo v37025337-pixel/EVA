@@ -1,5 +1,5 @@
 {
-  "active_module_count": 26,
+  "active_module_count": 27,
   "compatibility_modules": [
     "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
     "ALG-BUDGETED-STAGE-POLICY-V1",
@@ -7,9 +7,9 @@
     "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
   ],
-  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "graph_digest": "f032eb1fe614e2d0599cefc26d159bc8d2f0222fc219e2b32aa4f82a3829e109",
+  "graph_digest": "66a17d52ad6b7c48e67ac8e9a520bab03f866bbea037abef3db06ea9be13e8d5",
   "inactive_superseded_policy": "SUPERSEDED MODULES ARE NOT ACTIVE BY PRESENCE; KEEP AS HISTORY/QUARANTINE UNLESS FRESHLY RE-ADMITTED.",
   "orphans": [],
   "quarantine_candidates_require_fresh_ablation": [],
@@ -24,7 +24,7 @@
   "role_counts": {
     "COMPATIBILITY": 5,
     "CONTROL": 2,
-    "PRIMARY": 16,
+    "PRIMARY": 17,
     "STATE": 3
   },
   "roles": {
@@ -51,13 +51,14 @@
     "COUNTEREXAMPLE_LINEAGE_MEMORY_V1": "STATE",
     "CTRL-G2-EVOLUTIONARY-GENOME-V1": "CONTROL",
     "RESOURCE-PORTFOLIO-V1": "STATE",
+    "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3": "PRIMARY",
     "RUNTIME-G2-HIGH-SCALE-BINDING-V5": "PRIMARY",
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1": "COMPATIBILITY",
-    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3": "PRIMARY"
+    "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5": "PRIMARY"
   },
   "schema": "yado.g2.module_dependency_graph.v1",
   "semantic_boundary": "DEPENDENCY/ROLE GRAPH OF CURRENT ACTIVE G2. CLASSIFICATION DOES NOT BY ITSELF AUTHORIZE DELETION.",
-  "semantic_edge_count": 32,
+  "semantic_edge_count": 36,
   "semantic_edges": [
     {
       "from": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
@@ -69,58 +70,58 @@
       "from": "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
       "kind": "ROUTING",
       "reason": "router selects capability for unified execution fabric",
-      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3"
+      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "RUNTIME",
       "reason": "unified fabric delegates legacy execution and recurrent memory to base runtime",
       "to": "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "DISPATCH",
       "reason": "canonical unified fabric can dispatch this module",
       "to": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "DISPATCH",
       "reason": "canonical unified fabric can dispatch this module",
       "to": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "DISPATCH",
       "reason": "canonical unified fabric can dispatch this module",
       "to": "ALG-BUDGETED-STAGE-POLICY-V1"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "DISPATCH",
       "reason": "canonical unified fabric can dispatch this module",
       "to": "RESOURCE-PORTFOLIO-V1"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "DISPATCH",
       "reason": "canonical unified fabric can dispatch this module",
       "to": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "DISPATCH",
       "reason": "canonical unified fabric can dispatch this module",
       "to": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "DISPATCH",
       "reason": "canonical unified fabric can dispatch this module",
       "to": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "DISPATCH",
       "reason": "canonical unified fabric can dispatch this module",
       "to": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1"
@@ -129,22 +130,22 @@
       "from": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
       "kind": "COORDINATION",
       "reason": "capability sets execute through unified fabric",
-      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3"
+      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5"
     },
     {
       "from": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
       "kind": "MEMORY_CONTEXT",
       "reason": "bounded stream-context memory wraps current runtime/fabric",
-      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3"
+      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "MEMORY_FEEDBACK",
       "reason": "stage outcome episodes can be consumed by Thinking V2",
       "to": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
     },
     {
-      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
+      "from": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
       "kind": "CAUSAL_HISTORY",
       "reason": "runtime outcomes coexist with persistent ledger/receipt counterexample memory",
       "to": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1"
@@ -207,7 +208,7 @@
       "from": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
       "kind": "REPAIR_EXECUTION",
       "reason": "repaired program capability coexists with canonical execution fabric",
-      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3"
+      "to": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5"
     },
     {
       "from": "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
@@ -250,9 +251,33 @@
       "kind": "META_COORDINATION",
       "reason": "Intelligence V3 selects/composes capability sets for coordinator",
       "to": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1"
+    },
+    {
+      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
+      "kind": "EXPERIENCE_CONDITIONED_ORGAN_CONTROL",
+      "reason": "experience-conditioned cognitive layer provides bounded LOGIC decisions",
+      "to": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+    },
+    {
+      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
+      "kind": "EXPERIENCE_CONDITIONED_ORGAN_CONTROL",
+      "reason": "experience-conditioned cognitive layer provides bounded THINKING decisions",
+      "to": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+    },
+    {
+      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
+      "kind": "EXPERIENCE_CONDITIONED_ORGAN_CONTROL",
+      "reason": "experience-conditioned cognitive layer provides bounded INTELLIGENCE decisions",
+      "to": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+    },
+    {
+      "from": "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
+      "kind": "EXPERIENCE_CONDITIONING",
+      "reason": "historical experience provenance conditions the cognitive control layer",
+      "to": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3"
     }
   ],
-  "static_import_edge_count": 22,
+  "static_import_edge_count": 25,
   "static_import_edges": [
     {
       "from_source": "runtime/yado_canonical_invariant_guard_v1.py",
@@ -348,6 +373,21 @@
       "from_source": "runtime/yado_g2_unified_execution_fabric_v3.py",
       "kind": "PYTHON_IMPORT",
       "to_source": "runtime/yado_g2_unified_execution_fabric_v2.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_unified_execution_fabric_v4.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_g2_unified_execution_fabric_v3.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_unified_execution_fabric_v5.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_g2_cognitive_clock_v1.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_unified_execution_fabric_v5.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_g2_unified_execution_fabric_v4.py"
     },
     {
       "from_source": "runtime/yado_raw_task_representation_robustness_v4.py",

@@ -1,5 +1,5 @@
 {
-  "active_module_count": 26,
+  "active_module_count": 27,
   "api_boundary": {
     "canonical_active": true,
     "component_id": "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
@@ -29,7 +29,7 @@
     "openapi_readonly_executor_canonical": true,
     "python_cache_clean": true,
     "registry_exact": true,
-    "temporal_fabric_v3_canonical": true
+    "temporal_fabric_v5_canonical": true
   },
   "compatibility_quarantine_candidates_require_fresh_ablation": [],
   "compatibility_retain": [
@@ -40,21 +40,22 @@
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
   ],
   "compile_errors": [],
-  "dependency_graph_digest": "f032eb1fe614e2d0599cefc26d159bc8d2f0222fc219e2b32aa4f82a3829e109",
+  "dependency_graph_digest": "66a17d52ad6b7c48e67ac8e9a520bab03f866bbea037abef3db06ea9be13e8d5",
   "execution_fabric": {
     "architecture_mutation": false,
-    "canonical_component_digest": "a2177410e9665ccffa2167b4c6715f13e2cfd88cd4af314095702bc18bd50e9d",
-    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V3",
-    "fresh_gate_receipt_sha256": "55b32a04cd308aed28eacf4bb7635ae7bc39e94096e74cc8a566cf779b2be9ad",
-    "logical_tick_ordering": true,
-    "no_progress_detection": true,
-    "runtime_sha256": "2905a3091fccdeeccbb5e6889c559734dcdb20f40e994ae84bcc6e4d6784d6bb",
+    "canonical_component_digest": "63f877b5b9028ae6cb647fe8f3175b162b6df34b92a493ff70b777f83216a101",
+    "checkpoint_schema": "yado.g2.cognitive_continuity_checkpoint.v1",
+    "component_id": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
+    "file_encoding": "YADO_TYPED_JSON_V1",
+    "file_schema": "yado.g2.cognitive_continuity_file.v2",
+    "parent_component": "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V4",
+    "pre_restore_full_integrity_validation": true,
+    "runtime_sha256": "a317c21e9ca569fc2ab0fda601e474044abc4ad013db6c04b054fd0ecd34cb07",
+    "shadow_gate_receipt_sha256": "af2ad9fd726034ce1c5587d343ec43860543846ae338219efab770115c6a3066",
     "status": "CANONICAL_ACTIVE",
-    "temporal_kernel": "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
-    "temporal_kernel_embedded": true,
-    "temporal_stall_to_evolution_signal": true
+    "typed_value_preservation": true
   },
-  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
   "g3_genesis_performed": false,
   "generation": "G2_CANDIDATE_TRCG_V1",
   "generation_transition": false,
@@ -74,15 +75,15 @@
     "source_sha256": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b"
   },
   "missing_active_runtime_sources": [],
-  "module_assembly_receipt_sha256": "e4c6b81d5c4bd3ad04cc323b4f50757113e00f3ee24b25016db35d2460fdadca",
+  "module_assembly_receipt_sha256": "a020c3176393594f28d53969a9bc9e3654fdd6db01c81392eb717a3ece563f26",
   "orphan_modules": [],
   "parse_errors": [],
   "patch_failures": [],
-  "report_digest": "270e77dc565e2d78b1b4197f895aaafea30d4714f257507c183bcfeb205dad51",
+  "report_digest": "70a0051a4d5a3f17d2d0c9e33e21274df7b7dbd01dc7005e751c0255371d6b99",
   "role_counts": {
     "COMPATIBILITY": 5,
     "CONTROL": 2,
-    "PRIMARY": 16,
+    "PRIMARY": 17,
     "STATE": 3
   },
   "schema": "yado.g2.post_module_full_integrity.v1",
