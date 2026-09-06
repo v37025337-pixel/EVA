@@ -64,6 +64,7 @@ jobs:
           print(r["status"],r["fetched_count"],r["source_count"])
           PY
       - name: Run optional fresh DNS GCP cross-domain research stress
+        continue-on-error: true
         run: |
           python - <<'PY'
           import json,pathlib,subprocess,sys
@@ -75,8 +76,10 @@ jobs:
               print("NO_OPTIONAL_CROSS_DOMAIN_STRESS",task)
           PY
       - name: Canonical guard after optional cross-domain stress
+        if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Persist optional cross-domain stress evidence
+        if: always()
         run: |
           git config user.name "YADO DNS GCP Research Stress"
           git config user.email "actions@users.noreply.github.com"
@@ -89,6 +92,23 @@ jobs:
             git pull --rebase origin yado-architecture-shadow-search
             git push origin HEAD:yado-architecture-shadow-search
           fi
+      - name: Enforce optional cross-domain stress verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          req=json.loads(pathlib.Path("architecture/yado-user-external-corpus-learning-v1-request.json").read_text())
+          task=(req.get("cross_domain_task") or {}).get("id")
+          if task=="USER_20260906_DNS_GCP_RESEARCH_V1":
+              p=pathlib.Path("candidates/kernel-self-generated/g2-dns-gcp-cross-domain-research-stress-v1.json")
+              if not p.exists(): raise SystemExit("MISSING_DNS_GCP_STRESS_REPORT")
+              r=json.loads(p.read_text())
+              if r.get("status")!="PASS_SHADOW_G2_DNS_GCP_CROSS_DOMAIN_RESEARCH_STRESS_V1":
+                  raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+              print(r["status"],r["logic"],r["thinking"],r["intelligence"])
+          else:
+              print("NO_OPTIONAL_CROSS_DOMAIN_STRESS_TO_ENFORCE",task)
+          PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
