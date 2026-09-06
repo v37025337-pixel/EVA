@@ -1,7 +1,7 @@
 name: YADO G2 Post Module Full Integrity V1
 on:
   push:
-    branches: [yado-architecture-shadow-search]
+    branches: [main, yado-architecture-shadow-search, yado-main-selective-admission-v1]
     paths:
       - "architecture/yado-g2-post-module-full-integrity-v1-request.json"
 permissions:
@@ -50,8 +50,8 @@ jobs:
           git diff --cached --quiet || git commit -m "Persist post-module G2 full integrity evidence [skip ci]"
           git reset --hard HEAD
           git clean -fd runtime/yado_rc8_v36
-          git pull --rebase origin yado-architecture-shadow-search
-          git push origin HEAD:yado-architecture-shadow-search
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: yado-g2-post-module-full-integrity-v1-${{ github.run_id }}
