@@ -1,0 +1,260 @@
+{
+  "action_receipt_sha256": "dbbf72a8e3f5170a95bfd023ec9656903f818dc3e9b7ca254854da5fb36b9475",
+  "binder_counterfactuals": [
+    {
+      "decision": "WITHHOLD_FRESH_EVIDENCE",
+      "flipped_field": "action_relevant"
+    },
+    {
+      "decision": "WITHHOLD_FRESH_EVIDENCE",
+      "flipped_field": "action_status_pass"
+    },
+    {
+      "decision": "WITHHOLD_FRESH_EVIDENCE",
+      "flipped_field": "canonical_immutable"
+    },
+    {
+      "decision": "WITHHOLD_FRESH_EVIDENCE",
+      "flipped_field": "comprehension_complete"
+    },
+    {
+      "decision": "WITHHOLD_FRESH_EVIDENCE",
+      "flipped_field": "conflict_resolution_pass"
+    },
+    {
+      "decision": "WITHHOLD_FRESH_EVIDENCE",
+      "flipped_field": "direct_priority_evidence"
+    },
+    {
+      "decision": "WITHHOLD_FRESH_EVIDENCE",
+      "flipped_field": "priority_match"
+    }
+  ],
+  "binder_gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
+  "binder_positive_decision": "ACCEPT_FRESH_EVIDENCE",
+  "candidate_metrics": [
+    {
+      "counterfactual_preserves_original": true,
+      "positive_conditionalized": false,
+      "positive_shape": null,
+      "primitive": "dump",
+      "structural_score": 0.5
+    },
+    {
+      "counterfactual_preserves_original": true,
+      "positive_conditionalized": false,
+      "positive_shape": "Constant",
+      "primitive": "fix_missing_locations",
+      "structural_score": 0.5
+    },
+    {
+      "counterfactual_preserves_original": true,
+      "positive_conditionalized": false,
+      "positive_shape": "Constant",
+      "primitive": "parse",
+      "structural_score": 0.5
+    },
+    {
+      "counterfactual_preserves_original": true,
+      "positive_conditionalized": false,
+      "positive_shape": null,
+      "primitive": "unparse",
+      "structural_score": 0.5
+    },
+    {
+      "counterfactual_preserves_original": true,
+      "positive_conditionalized": false,
+      "positive_shape": null,
+      "primitive": "walk",
+      "structural_score": 0.5
+    }
+  ],
+  "candidate_source_sha256": null,
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "binder_accepts_real_evidence": true,
+    "binder_single_fault_counterfactuals_withhold": true,
+    "candidate_ast_materialized": false,
+    "candidate_source_changed": false,
+    "candidate_source_compiles": false,
+    "candidate_source_materialized_via_v5_unparse": false,
+    "canonical_unchanged": true,
+    "canonical_v5_continuity_active": true,
+    "external_models_used": false,
+    "host_authored_condition_expression": false,
+    "host_authored_replacement_ast": false,
+    "host_selected_ast_primitive": false,
+    "native_binder_consumed": true,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_selector_selected_ast_transformer": false,
+    "native_skill_selector_executed": true,
+    "prior_v6_gap_consumed": true,
+    "real_action_evidence_consumed": true,
+    "researched_ast_primitive_inventory_nonempty": true,
+    "selected_transformer_conditionalizes_ast": false,
+    "selected_transformer_preserves_invalid_counterfactual": false,
+    "semantic_edit_gene_consumed": true,
+    "v5_source_constructor_consumed": true
+  },
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-06T09:42:37.872759+00:00",
+        "deficit_id": "D-3c188cccdf6f",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-12268cbea19e",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "OPEN",
+        "target": "NATIVE_SEMANTIC_EDIT_TO_AST_MATERIALIZATION_V6"
+      }
+    ],
+    "goal_id": "G-12268cbea19e"
+  },
+  "native_skill_selection": {
+    "candidate_count": 5,
+    "gate_digest": "823f351d99a7f096332593e5d5b154465c6f3676b1cf40607a55fa24ee7a4c83",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "7c311775f4c147276ad0fc1004738393f8d6461f8214e6b398acd267228d8b61",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SEMANTIC_AST_PRIMITIVE_DUMP",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "cfc1cc4a0d50197a379ca91e42e9d30f2d343ee0a00f4e1d8975b50d9a86a1a9",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SEMANTIC_AST_PRIMITIVE_FIX_MISSING_LOCATIONS",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "2be0c4dc9a2a6db4b32c4dde66924ce6ae793d5267682e076722fc404a0df45f",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SEMANTIC_AST_PRIMITIVE_PARSE",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "216a023b806bc44288c0d34147f642583486998dcb185363f088654fc790f7c4",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SEMANTIC_AST_PRIMITIVE_UNPARSE",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "10984a594a7898a82150e1eec87e91369ff240c218329985f094546c8d78b1e3",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SEMANTIC_AST_PRIMITIVE_WALK",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "next_required_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_GENE_GENESIS_V7",
+  "parent_v5_receipt": "8c19271b07dcc7700b17d6e1ef44e3ae50ae267b24a95fb788e43c4b639f754c",
+  "promotion_applied": false,
+  "receipt_sha256": "fcacafc756b8364924c12b281634edf7eb8bca107109b3c5bfa5ea0b29ef6c4e",
+  "schema": "yado.g2.native_semantic_edit_to_ast_materialization.v6",
+  "selected_primitive": null,
+  "semantic_boundary": "V6 TESTS THE MISSING SEMANTIC-INTENT-TO-AST STEP WITHOUT HOST-AUTHORING THE REPLACEMENT AST. THE YADO SELF-GENERATED BINDER CONTROLS ACCEPT/WITHHOLD. ONLY AST PRIMITIVES ALREADY RESEARCHED IN V5 ARE ELIGIBLE, AND YADO NATIVE SKILL ADMISSION SELECTS OR WITHHOLDS. THE HOST REQUIRES ONLY A STRUCTURAL PROPERTY: ACCEPTED EVIDENCE MUST TURN THE STATUS NODE INTO A CONDITIONAL AST WHILE SINGLE-FAULT COUNTERFACTUALS PRESERVE THE ORIGINAL PARTIAL CONSTANT. NO CONDITION/BODY/ORELSE AST IS PROVIDED. WITHHOLD MEANS YADO STILL NEEDS A CONTEXTUAL AST-TRANSFORMER GENE.",
+  "semantic_gene_id": "GENE-G2-SEMANTIC-SOURCE-EDIT-META-V5-9a318cac23226cd5",
+  "status": "WITHHOLD_G2_NATIVE_SEMANTIC_EDIT_TO_AST_MATERIALIZATION_V6",
+  "target_path": "runtime/yado_unified_core_deep_self_audit_v1.py",
+  "target_status_ast_before": "Constant(value='PARTIAL')"
+}
