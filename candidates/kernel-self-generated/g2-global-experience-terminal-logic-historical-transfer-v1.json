@@ -19,7 +19,7 @@
     "old_commit_ge_0_70": true,
     "old_corpus_regression_ge_0_93": true,
     "old_seek_evidence_ge_0_70": true,
-    "terminal_historical_fresh_ge_0_75": false,
+    "terminal_historical_fresh_ge_0_75": true,
     "terminal_historical_pass_ge_2_3": true,
     "terminal_historical_withhold_ge_2_3": true,
     "terminal_native_selection": true,
@@ -28,70 +28,70 @@
   },
   "cognitive_historical_class_scores": {
     "COMMIT": {
-      "accuracy": 0.6666666666666666,
-      "count": 6
+      "accuracy": 1.0,
+      "count": 11
     },
     "CONTINUE": {
       "accuracy": 1.0,
-      "count": 4
+      "count": 15
     },
     "REVISE": {
       "accuracy": 1.0,
-      "count": 4
+      "count": 14
     },
     "SEEK_EVIDENCE": {
       "accuracy": 0.6666666666666666,
-      "count": 3
+      "count": 6
     }
   },
-  "cognitive_historical_fresh": 0.8235294117647058,
+  "cognitive_historical_fresh": 0.9565217391304348,
   "cognitive_historical_organ_drops": {
-    "INTELLIGENCE": 0.3529411764705882,
-    "LOGIC": 0.17647058823529405,
-    "THINKING": 0.23529411764705876
+    "INTELLIGENCE": 0.32608695652173914,
+    "LOGIC": 0.19565217391304346,
+    "THINKING": 0.32608695652173914
   },
   "cognitive_selected": {
     "complexity": 3,
-    "cv_accuracy": 0.9630780249410179,
+    "cv_accuracy": 0.9778416923578213,
     "cv_drops": {
-      "INTELLIGENCE": 0.22930878552971573,
-      "LOGIC": 0.1719466913829907,
-      "THINKING": 0.5481077968767554
+      "INTELLIGENCE": 0.24655530754851637,
+      "LOGIC": 0.18357721131914678,
+      "THINKING": 0.5300089111039875
     },
-    "evidence": 1.0318567014942142,
+    "evidence": 1.05127257688548,
     "family": "CART_AXIS",
     "param": 3,
     "token": "CART_AXIS_3"
   },
   "gene_ids": {
-    "COGNITIVE": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-99df30816d19ee15",
+    "COGNITIVE": "GENE-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-3dfe9f4648298f24",
     "INTELLIGENCE": "GENE-G2-GLOBAL-EXPERIENCE-INTELLIGENCE-V2-64c61db88585744d",
-    "LOGIC": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V4-f3ba5774879769b3",
+    "LOGIC": "GENE-G2-GLOBAL-EXPERIENCE-LOGIC-V4-3a0c0ded78c63898",
     "THINKING": "GENE-G2-GLOBAL-EXPERIENCE-THINKING-V3-70cc30f21cdab3ac"
   },
-  "genome_digest": "60da25283f2b36bd773597df9222e2fc737b1719bda75370ae07db48ba3bc18d",
-  "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-614e673cb28190cb",
+  "genome_digest": "38d06a734289bb0070199136e0a4cd4a9bf638b1c323e7c57c2e1df6cfedcb3d",
+  "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-bddca3004d871f0c",
   "historical_counts": {
-    "adapt": 33,
+    "adapt": 89,
     "adapt_by_action": {
-      "COMMIT": 12,
-      "CONTINUE": 8,
-      "REVISE": 8,
-      "SEEK_EVIDENCE": 5
+      "COMMIT": 22,
+      "CONTINUE": 30,
+      "REVISE": 26,
+      "SEEK_EVIDENCE": 11
     },
-    "fresh": 17,
+    "fresh": 46,
     "fresh_by_action": {
-      "COMMIT": 6,
-      "CONTINUE": 4,
-      "REVISE": 4,
-      "SEEK_EVIDENCE": 3
+      "COMMIT": 11,
+      "CONTINUE": 15,
+      "REVISE": 14,
+      "SEEK_EVIDENCE": 6
     },
-    "total": 50
+    "total": 135
   },
-  "next_required_capability": "GLOBAL_EXPERIENCE_TERMINAL_LOGIC_HISTORICAL_TRANSFER_REPAIR_V2",
+  "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_CANONICAL_ADMISSION_V1",
   "old_corpus_class_scores": {
     "COMMIT": {
-      "accuracy": 0.8734177215189873,
+      "accuracy": 0.9493670886075949,
       "count": 79
     },
     "CONTINUE": {
@@ -107,23 +107,23 @@
       "count": 20
     }
   },
-  "old_corpus_regression": 0.9675810473815462,
+  "old_corpus_regression": 0.9825436408977556,
   "promotion_applied": false,
-  "receipt_sha256": "1cf24b22744c06c59fd330d9ec2d38cb6b06e201e5ec2ced4f39f2d4aac0a69c",
+  "receipt_sha256": "92df1c185b2db091464725c75c6ffb5316624a958526477885665cc6ae0f4e5b",
   "schema": "yado.g2.global_experience_terminal_logic_historical_transfer.v1",
   "semantic_boundary": "UNSEEN HISTORICAL GIT BLOBS NOT PRESENT IN GLOBAL CORPUS V1 ARE STRATIFIED BEFORE SELECTION. ONLY ADAPTATION BLOBS MAY INFLUENCE MODEL FIT; FRESH HISTORICAL BLOBS REMAIN BLIND UNTIL FINAL TRANSFER EVALUATION. OLD V1 HOLDOUT IS NOW REGRESSION DATA, NOT CLAIMED FRESH. THINKING AND INTELLIGENCE ARE PRESERVED.",
-  "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_TERMINAL_LOGIC_HISTORICAL_TRANSFER_V1",
-  "terminal_historical_fresh": 0.6666666666666666,
-  "terminal_historical_pass_recall": 0.6666666666666666,
+  "status": "PASS_SHADOW_G2_GLOBAL_EXPERIENCE_TERMINAL_LOGIC_HISTORICAL_TRANSFER_V1",
+  "terminal_historical_fresh": 0.8823529411764706,
+  "terminal_historical_pass_recall": 1.0,
   "terminal_historical_withhold_recall": 0.6666666666666666,
   "terminal_selected": {
     "complexity": 5,
-    "cv_accuracy": 0.8268332713984888,
-    "cv_pass_recall": 0.8461538461538461,
-    "cv_withhold_recall": 0.68,
-    "evidence": 0.7607582992691689,
-    "family": "CENTROID_STRATEGY",
+    "cv_accuracy": 0.8712627257799671,
+    "cv_pass_recall": 0.8910891089108911,
+    "cv_withhold_recall": 0.8064516129032258,
+    "evidence": 0.8420977249854336,
+    "family": "CART_AXIS",
     "param": 5,
-    "token": "CENTROID_STRATEGY_5"
+    "token": "CART_AXIS_5"
   }
 }
