@@ -17,6 +17,24 @@ def load(p):return json.loads(Path(p).read_text(encoding='utf-8'))
 def sha(b):return hashlib.sha256(b).hexdigest()
 
 STOP=set('the a an and or of to in for on with from by is are be as at this that it its you your we our can use using into not no if then than via about over under after before will may do does done their they them have has had'.split())
+
+# Public documentation can contain intentionally leaked/test credentials.
+# Keep source provenance/hash intact, but never persist credential-shaped literals
+# into the learned text/index. The security audit remains fail-closed.
+SECRET_LIKE_PATTERNS=[
+    (re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----'), '[REDACTED_PRIVATE_KEY_HEADER]'),
+    (re.compile(r'\b(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}\b'), '[REDACTED_GITHUB_TOKEN]'),
+    (re.compile(r'\bgithub_pat_[A-Za-z0-9_]{20,}\b'), '[REDACTED_GITHUB_PAT]'),
+    (re.compile(r'\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b'), '[REDACTED_OPENAI_KEY]'),
+    (re.compile(r'\bAKIA[0-9A-Z]{16}\b'), '[REDACTED_AWS_ACCESS_KEY]'),
+    (re.compile(r'\bAIza[0-9A-Za-z_-]{35}\b'), '[REDACTED_GOOGLE_API_KEY]'),
+]
+def sanitize_public_text(text):
+    redactions=0
+    for rx,replacement in SECRET_LIKE_PATTERNS:
+        text,n=rx.subn(replacement,text)
+        redactions+=n
+    return text,redactions
 def plain(raw:bytes,content_type=''):
     text=raw.decode('utf-8','replace')
     if 'html' in content_type.lower() or '<html' in text[:500].lower():
@@ -83,10 +101,13 @@ with ThreadPoolExecutor(max_workers=8) as ex:
         out.update({'ids':sorted(set(meta['ids'])),'kinds':sorted(set(meta['kinds'])),'origins':sorted(set(meta['origins']))})
         if r.get('ok'):
             txt=r['text']
-            cnt=Counter(tokens(txt))
+            safe_txt,redaction_count=sanitize_public_text(txt)
+            cnt=Counter(tokens(safe_txt))
             out['text_chars']=len(txt)
             out['top_terms']=[{'token':t,'count':n} for t,n in cnt.most_common(40)]
-            out['text_excerpt']=txt[:14000]
+            out['text_excerpt']=safe_txt[:14000]
+            if redaction_count:
+                out['secret_like_redactions']=redaction_count
             out['learnable_unit_digest']=digest({'sha256':out['sha256'],'terms':out['top_terms'],'excerpt':out['text_excerpt']})
         records.append(out)
 
