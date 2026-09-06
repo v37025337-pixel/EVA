@@ -238,7 +238,7 @@
     },
     {
       "id": "GCP_COMPUTE_OFFICIAL",
-      "url": "https://docs.cloud.google.com/compute/docs/reference/rest/v1/routes/get"
+      "url": "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest"
     },
     {
       "id": "GCP_CLOUD_RUN_OFFICIAL",
@@ -315,5 +315,13 @@
     "thresholds_changed": false,
     "genes_reselected": false,
     "expected_answers_added": false
+  },
+  "source_repair_v3": {
+    "reason": "GOOGLE_DOCS_RAW_HTML_OMITS_COMPUTE_ENDPOINT_CONTENT_FOR_URLLIB_TRANSPORT",
+    "replacement": "OFFICIAL_GOOGLE_API_DISCOVERY_DOCUMENT",
+    "expected_answer_hardcoded": false,
+    "thresholds_changed": false,
+    "genes_reselected": false,
+    "gate_changed": false
   }
 }
