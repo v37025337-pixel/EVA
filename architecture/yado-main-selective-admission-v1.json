@@ -1,6 +1,6 @@
 {
   "schema": "yado.main_selective_admission.v1",
-  "status": "CANDIDATE",
+  "status": "GATES_2_OF_3_PASS",
   "base_main_sha": "a3960f13e47f7506650ab9fb929611b4e1ab11c8",
   "source_shadow_sha": "f77bd249dc6a3b3fa8abc09cfd6b063d8f92bff3",
   "policy": "SELECTIVE_PASS_ONLY_NO_EXPERIMENTAL_RETRY_MERGE",
@@ -32,5 +32,14 @@
     "POST_MODULE_FULL_INTEGRITY",
     "SECURITY_AUDIT",
     "FULL_KERNEL_AUDIT_WITH_TOP_LEVEL_REGRESSION"
-  ]
+  ],
+  "admission_evidence": {
+    "module_integrity_run_id": 34042438357,
+    "module_integrity": "PASS_G2_POST_MODULE_FULL_INTEGRITY_V1",
+    "security_run_id": 34042480388,
+    "security": "PASS",
+    "high_confidence_secret_hits": 0,
+    "dependency_vulnerability_count": 0,
+    "final_full_audit": "PENDING"
+  }
 }
