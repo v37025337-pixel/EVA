@@ -23,7 +23,7 @@ jobs:
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Compile module and integrity audits
         run: python -m py_compile runtime/yado_g2_unified_module_kernel_v1.py runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py runtime/yado_g2_post_module_full_integrity_v1.py
-      - name: Re-run 25-module interaction gate
+      - name: Re-run 27-module interaction gate
         run: python runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
       - name: Run post-module full integrity and dependency graph
         run: python runtime/yado_g2_post_module_full_integrity_v1.py
