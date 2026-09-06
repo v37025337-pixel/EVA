@@ -87,6 +87,8 @@ head['canonical_head_digest']=cdig(head,'canonical_head_digest')
 write(HEAD,head)
 
 ledger['current_head_digest']=head['canonical_head_digest']
+ledger['ledger_digest']=digest({k:v for k,v in ledger.items() if k!='ledger_digest'})
+validate_ledger_v2(ledger)
 write(LEDGER,ledger)
 
 pre=subprocess.run([sys.executable,str(GUARD)],cwd=REPO,capture_output=True,text=True,timeout=90)
