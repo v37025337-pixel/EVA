@@ -19,7 +19,7 @@
     "usgs_live_fetch": true,
     "usgs_source_hashed": true
   },
-  "experience_digest": "535e60b609d5d399092f427b51f9968ab078277c5fbc9f7ad49476dc4225fb9e",
+  "experience_digest": "c2f55f054dccb6dc2b49287a3957b8b8303d031b2cf912e18a400bde0a862071",
   "genes": {
     "INTELLIGENCE": {
       "ablation": 0.26666666666666666,
@@ -67,9 +67,9 @@
     },
     "LOGIC": {
       "ablation_balanced": 0.5,
-      "fresh_balanced": 0.9965337954939342,
-      "gene_digest": "a3f08242cdeb1a286300a3829e328514e1a6f5c884279f0837091d5347af5384",
-      "gene_id": "GENE-G2-REAL-DATA-LOGIC-V1-40527e5ca77aad30",
+      "fresh_balanced": 0.9956672443674177,
+      "gene_digest": "cbf4c7f7b46c1ef564cec5c15ef0bcf121f62485acdf4550109481c873aa143e",
+      "gene_id": "GENE-G2-REAL-DATA-LOGIC-V1-1df36335c1ee7268",
       "heritage": [
         "GENE-G2-MULTIDOMAIN-LOGIC-V2-78da24019759d2f4"
       ],
@@ -89,9 +89,9 @@
       "selected": {
         "depth": 1,
         "token": "TREE_D1",
-        "validation_balanced": 0.9990494296577948
+        "validation_balanced": 1.0
       },
-      "source_sha256": "4b263da1c8a9d6fcffa6d5dc46a4979730df9ee28c3dd0dd4bf310bc4d81a4fe",
+      "source_sha256": "3f30a0ea8b15c68dcdf2c9061d68a06b51ea19e63234899c0a4e4ec55b5f1c55",
       "source_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
       "task": "USGS_EARTHQUAKE_SIGNIFICANCE"
     },
@@ -100,448 +100,448 @@
       "class_scores": {
         "failure": {
           "accuracy": 1.0,
-          "count": 14
+          "count": 11
         },
         "success": {
           "accuracy": 1.0,
-          "count": 6
+          "count": 9
         }
       },
       "fresh": 1.0,
-      "gene_digest": "bd20e5e32a227c06b85ae0dc3ebc4ae0cc48a0e0360458a4dd266d29e7b09daf",
-      "gene_id": "GENE-G2-REAL-DATA-THINKING-V1-50d61a10446f3f5e",
+      "gene_digest": "e50cb7e54424a997f8ac1147576afeb2ca55880ac9ef4d1215f505fc5ddb8b96",
+      "gene_id": "GENE-G2-REAL-DATA-THINKING-V1-7a31f3af0a2a3ba7",
       "heritage": [
         "GENE-G2-MULTIDOMAIN-THINKING-V1-a0811170cf6f6670"
       ],
       "model": {
         "context_keys": [
-          "failure"
+          "success"
         ],
         "fallback_edges": [
           {
             "after": "MONITOR",
             "before": "ARCHIVE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "REPAIR",
             "before": "DIAGNOSE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "RETRY",
             "before": "DIAGNOSE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "ARCHIVE",
             "before": "OBSERVE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "CHECK_DEPENDENCY",
             "before": "OBSERVE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "DIAGNOSE",
             "before": "OBSERVE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "MONITOR",
             "before": "OBSERVE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "REPAIR",
             "before": "OBSERVE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "RETRY",
             "before": "OBSERVE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "VERIFY",
             "before": "OBSERVE",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "RETRY",
             "before": "REPAIR",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "ARCHIVE",
             "before": "VERIFY",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "CHECK_DEPENDENCY",
             "before": "VERIFY",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           },
           {
             "after": "MONITOR",
             "before": "VERIFY",
             "confidence": 1.0,
-            "support": 76
+            "support": 78
           }
         ],
         "graphs": {
           "0": [
             {
-              "after": "CHECK_DEPENDENCY",
-              "before": "ARCHIVE",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "DIAGNOSE",
-              "before": "ARCHIVE",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
               "after": "MONITOR",
               "before": "ARCHIVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
-              "after": "REPAIR",
-              "before": "ARCHIVE",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "RETRY",
-              "before": "ARCHIVE",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "DIAGNOSE",
+              "after": "ARCHIVE",
               "before": "CHECK_DEPENDENCY",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
-              "after": "REPAIR",
+              "after": "MONITOR",
               "before": "CHECK_DEPENDENCY",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
-              "after": "RETRY",
-              "before": "CHECK_DEPENDENCY",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "REPAIR",
+              "after": "ARCHIVE",
               "before": "DIAGNOSE",
               "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "RETRY",
-              "before": "DIAGNOSE",
-              "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "CHECK_DEPENDENCY",
-              "before": "MONITOR",
+              "before": "DIAGNOSE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
-              "after": "DIAGNOSE",
-              "before": "MONITOR",
+              "after": "MONITOR",
+              "before": "DIAGNOSE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "REPAIR",
-              "before": "MONITOR",
+              "before": "DIAGNOSE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "RETRY",
-              "before": "MONITOR",
+              "before": "DIAGNOSE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
+            },
+            {
+              "after": "VERIFY",
+              "before": "DIAGNOSE",
+              "confidence": 1.0,
+              "support": 37
             },
             {
               "after": "ARCHIVE",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "CHECK_DEPENDENCY",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "DIAGNOSE",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "MONITOR",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "REPAIR",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "RETRY",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "VERIFY",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 37
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 37
+            },
+            {
+              "after": "MONITOR",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 37
             },
             {
               "after": "RETRY",
               "before": "REPAIR",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
+            },
+            {
+              "after": "VERIFY",
+              "before": "REPAIR",
+              "confidence": 1.0,
+              "support": 37
+            },
+            {
+              "after": "ARCHIVE",
+              "before": "RETRY",
+              "confidence": 1.0,
+              "support": 37
+            },
+            {
+              "after": "CHECK_DEPENDENCY",
+              "before": "RETRY",
+              "confidence": 1.0,
+              "support": 37
+            },
+            {
+              "after": "MONITOR",
+              "before": "RETRY",
+              "confidence": 1.0,
+              "support": 37
+            },
+            {
+              "after": "VERIFY",
+              "before": "RETRY",
+              "confidence": 1.0,
+              "support": 37
             },
             {
               "after": "ARCHIVE",
               "before": "VERIFY",
               "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "CHECK_DEPENDENCY",
               "before": "VERIFY",
               "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "DIAGNOSE",
-              "before": "VERIFY",
-              "confidence": 1.0,
-              "support": 38
+              "support": 37
             },
             {
               "after": "MONITOR",
               "before": "VERIFY",
               "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "REPAIR",
-              "before": "VERIFY",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "RETRY",
-              "before": "VERIFY",
-              "confidence": 1.0,
-              "support": 38
+              "support": 37
             }
           ],
           "1": [
             {
+              "after": "CHECK_DEPENDENCY",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 41
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 41
+            },
+            {
               "after": "MONITOR",
               "before": "ARCHIVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
-              "after": "ARCHIVE",
+              "after": "REPAIR",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 41
+            },
+            {
+              "after": "RETRY",
+              "before": "ARCHIVE",
+              "confidence": 1.0,
+              "support": 41
+            },
+            {
+              "after": "DIAGNOSE",
               "before": "CHECK_DEPENDENCY",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
-              "after": "MONITOR",
+              "after": "REPAIR",
               "before": "CHECK_DEPENDENCY",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
-              "after": "ARCHIVE",
-              "before": "DIAGNOSE",
+              "after": "RETRY",
+              "before": "CHECK_DEPENDENCY",
               "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "CHECK_DEPENDENCY",
-              "before": "DIAGNOSE",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "MONITOR",
-              "before": "DIAGNOSE",
-              "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "REPAIR",
               "before": "DIAGNOSE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "RETRY",
               "before": "DIAGNOSE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
-              "after": "VERIFY",
-              "before": "DIAGNOSE",
+              "after": "CHECK_DEPENDENCY",
+              "before": "MONITOR",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "MONITOR",
+              "confidence": 1.0,
+              "support": 41
+            },
+            {
+              "after": "REPAIR",
+              "before": "MONITOR",
+              "confidence": 1.0,
+              "support": 41
+            },
+            {
+              "after": "RETRY",
+              "before": "MONITOR",
+              "confidence": 1.0,
+              "support": 41
             },
             {
               "after": "ARCHIVE",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "CHECK_DEPENDENCY",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "DIAGNOSE",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "MONITOR",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "REPAIR",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "RETRY",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "VERIFY",
               "before": "OBSERVE",
               "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "ARCHIVE",
-              "before": "REPAIR",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "CHECK_DEPENDENCY",
-              "before": "REPAIR",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "MONITOR",
-              "before": "REPAIR",
-              "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "RETRY",
               "before": "REPAIR",
               "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "VERIFY",
-              "before": "REPAIR",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "ARCHIVE",
-              "before": "RETRY",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "CHECK_DEPENDENCY",
-              "before": "RETRY",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "MONITOR",
-              "before": "RETRY",
-              "confidence": 1.0,
-              "support": 38
-            },
-            {
-              "after": "VERIFY",
-              "before": "RETRY",
-              "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "ARCHIVE",
               "before": "VERIFY",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
             },
             {
               "after": "CHECK_DEPENDENCY",
               "before": "VERIFY",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
+            },
+            {
+              "after": "DIAGNOSE",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 41
             },
             {
               "after": "MONITOR",
               "before": "VERIFY",
               "confidence": 1.0,
-              "support": 38
+              "support": 41
+            },
+            {
+              "after": "REPAIR",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 41
+            },
+            {
+              "after": "RETRY",
+              "before": "VERIFY",
+              "confidence": 1.0,
+              "support": 41
             }
           ]
         },
@@ -559,7 +559,7 @@
         "token": "T0.55_K1_S2",
         "validation": 1.0
       },
-      "source_sha256": "be39377457150e203a8b10b370f56b3e2c282d0e59cf355b4367bb06cef8a7f0",
+      "source_sha256": "9a6689bd62290d4847633fe07a2a4eda50f09d205497470437511a375a94b376",
       "source_url": "https://api.github.com/repos/v37025337-pixel/EVA/actions/runs?per_page=100",
       "task": "YADO_GITHUB_ACTIONS_RESPONSE_PLANNING"
     }
@@ -573,9 +573,9 @@
     },
     "LOGIC": {
       "ablation_balanced": 0.5,
-      "blind_count": 2272,
-      "drop": 0.49653379549393417,
-      "fresh_balanced": 0.9965337954939342,
+      "blind_count": 2230,
+      "drop": 0.4956672443674177,
+      "fresh_balanced": 0.9956672443674177,
       "sig_threshold_from_fit": 74.0
     },
     "THINKING": {
@@ -584,11 +584,11 @@
       "class_scores": {
         "failure": {
           "accuracy": 1.0,
-          "count": 14
+          "count": 11
         },
         "success": {
           "accuracy": 1.0,
-          "count": 6
+          "count": 9
         }
       },
       "drop": 1.0,
@@ -599,16 +599,16 @@
     "automatic_canonical_promotion": false,
     "genes": {
       "INTELLIGENCE": "GENE-G2-REAL-DATA-INTELLIGENCE-V1-ea380fc901dc58ab",
-      "LOGIC": "GENE-G2-REAL-DATA-LOGIC-V1-40527e5ca77aad30",
-      "THINKING": "GENE-G2-REAL-DATA-THINKING-V1-50d61a10446f3f5e"
+      "LOGIC": "GENE-G2-REAL-DATA-LOGIC-V1-1df36335c1ee7268",
+      "THINKING": "GENE-G2-REAL-DATA-THINKING-V1-7a31f3af0a2a3ba7"
     },
     "parents": {
       "INTELLIGENCE": "GENE-G2-MULTIDOMAIN-INTELLIGENCE-V1-5636f552fc470ae2",
       "LOGIC": "GENE-G2-MULTIDOMAIN-LOGIC-V2-78da24019759d2f4",
       "THINKING": "GENE-G2-MULTIDOMAIN-THINKING-V1-a0811170cf6f6670"
     },
-    "portfolio_digest": "1b2888c2f8b38c453f875effc152595c25d8cb1eeb909e0d6f0c3d795108b42e",
-    "portfolio_id": "PORT-G2-REAL-DATA-09b41b462f439b0a",
+    "portfolio_digest": "e2ba4f473cdd4523d18b8c718cc20029ac30ebe0078bc9742882bbae73b78376",
+    "portfolio_id": "PORT-G2-REAL-DATA-d8e4bd61e7855571",
     "promotion_state": "SHADOW_ONLY",
     "schema": "yado.g2.real_data_organ_portfolio.v1"
   },
@@ -617,12 +617,12 @@
   "sources": {
     "GITHUB_ACTIONS": {
       "blind_class_counts": {
-        "failure": 14,
-        "success": 6
+        "failure": 11,
+        "success": 9
       },
-      "sha256": "be39377457150e203a8b10b370f56b3e2c282d0e59cf355b4367bb06cef8a7f0",
+      "sha256": "9a6689bd62290d4847633fe07a2a4eda50f09d205497470437511a375a94b376",
       "url": "https://api.github.com/repos/v37025337-pixel/EVA/actions/runs?per_page=100",
-      "usable_run_count": 96
+      "usable_run_count": 98
     },
     "UCI_IRIS": {
       "row_count": 150,
@@ -631,9 +631,9 @@
       "zip_member": "iris.data"
     },
     "USGS": {
-      "event_count": 11357,
-      "feed_generated": 1788608480000,
-      "sha256": "4b263da1c8a9d6fcffa6d5dc46a4979730df9ee28c3dd0dd4bf310bc4d81a4fe",
+      "event_count": 11150,
+      "feed_generated": 1788695102000,
+      "sha256": "3f30a0ea8b15c68dcdf2c9061d68a06b51ea19e63234899c0a4e4ec55b5f1c55",
       "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson"
     }
   },

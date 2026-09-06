@@ -225,7 +225,7 @@ binding_checks={
  'canonical_openapi_readonly_executor_active':CAP_API_EXEC in active and core_manifest.get('openapi_readonly_executor_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('openapi_readonly_executor_v1',{}).get('read_only_only') is True,
  'canonical_evolutionary_genome_active':CAP_GENOME in active and core_manifest.get('evolutionary_genome_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('evolutionary_genome_v1',{}).get('automatic_canonical_promotion') is False,
  'canonical_temporal_kernel_embedded':core_manifest.get('cognitive_temporal_kernel_v1',{}).get('status')=='CANONICAL_EMBEDDED' and core_manifest.get('cognitive_temporal_kernel_v1',{}).get('separate_active_capability') is False,
- 'canonical_experience_cognitive_layer_active':CAP_COGNITIVE in active and core_manifest.get('experience_conditioned_cognitive_layer_v3',{}).get('status')=='CANONICAL_ACTIVE',
+ 'canonical_experience_cognitive_layer_active':CAP_COGNITIVE in active and core_manifest.get('experience_conditioned_cognitive_layer_v4',{}).get('status')=='CANONICAL_ACTIVE',
  'api_network_execution_disabled':api_smoke.get('pass') is True,
 }
 pycache=subprocess_result=None

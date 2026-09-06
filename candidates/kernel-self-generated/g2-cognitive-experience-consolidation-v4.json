@@ -1,0 +1,129 @@
+{
+  "active_capability_count": 27,
+  "architecture_mutation": false,
+  "automatic_canonical_promotion": false,
+  "canonical_mechanism_mutation": true,
+  "canonical_mutation": true,
+  "checks": {
+    "canonical_parent_available": true,
+    "canonical_unchanged_before_commit": true,
+    "cognitive_composer_equivalence": true,
+    "g3_not_started": true,
+    "global_failed_stress_rejected": true,
+    "multidomain_causal_floor_ge_0_10": true,
+    "multidomain_fresh_floor_ge_0_95": true,
+    "native_skill_gate_selected_v4": true,
+    "real_data_causal_floor_ge_0_20": true,
+    "real_data_fresh_floor_ge_0_90": true,
+    "specialist_runtime_equivalence": true,
+    "v3_fallback_equivalence": true
+  },
+  "component_id": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+  "fresh_evidence": {
+    "multidomain_causal_drop_floor": 0.4,
+    "multidomain_floor": 0.9888888888888889,
+    "portfolio_causal_drop_floor": 0.4,
+    "portfolio_fresh_floor": 0.9333333333333333,
+    "real_data_causal_drop_floor": 0.4956672443674177,
+    "real_data_floor": 0.9333333333333333
+  },
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "global_negative_evidence": {
+    "failed_checks": [
+      "commit_ge_0_70",
+      "terminal_overall_ge_0_75",
+      "terminal_pass_ge_0_70"
+    ],
+    "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-ba372863026459fa",
+    "stress_receipt_sha256": "b21cb29d8d5d406edaa01f981a4afe0158b28ca4f0de31a11cb8baffdac8ef9c",
+    "stress_status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3"
+  },
+  "multidomain_genome_id": "GENOME-G2-MULTIDOMAIN-COGNITIVE-V1-c273b8cdc70909d8",
+  "native_selection": {
+    "candidate_count": 3,
+    "gate_digest": "3d6045ad54392da92be87c412c881619c8bb5f77b5e8f99c5bc0992cc67ad6c6",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "d9e66c405bc6b5dad53ba86ceec6385e57f218c91fa908201af14db9edcc2878",
+        "failed_critics": [
+          "regression"
+        ],
+        "fit_gain": 0.31666666666666665,
+        "heldout_gain": 0.327710843373494,
+        "skill_id": "GLOBAL_V6_WITH_FAILED_STRESS",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "81b167b5c7de767cc32fb3966b44ea2fb5cd5169bc2a221eb47357bbee222e56",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_CANONICAL_COGNITIVE_V3",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "eb1a71f10f7ebe2d54cd5c8553a49c56e49c155617c330b97cbb9753f44c1926",
+        "failed_critics": [],
+        "fit_gain": 0.4,
+        "heldout_gain": 0.4,
+        "skill_id": "ADMIT_MULTIDOMAIN_REALDATA_COGNITIVE_V4",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_MULTIDOMAIN_REALDATA_COGNITIVE_V4"
+    ],
+    "status": "SELECTED"
+  },
+  "new_head_digest": "2ccaf4a0d534cb68fc6c7185a93c1db91b4a7e34ec98fba6a267633df2c8551f",
+  "next_required_capability": "SINGLE_CORE_BRANCH_LINEAGE_CONSOLIDATION_V1",
+  "parent_component": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
+  "previous_head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
+  "real_data_portfolio_id": "PORT-G2-REAL-DATA-d8e4bd61e7855571",
+  "receipt_sha256": "fe9bf3cd9b8ef0de4e3eedb2ca50b51a5fd02ff5ca2f86b449e5d7c3b167b4d9",
+  "schema": "yado.g2.cognitive_experience_consolidation.v4",
+  "semantic_boundary": "V4 IS A SAME-G2 REPLACEMENT OF THE SINGLE ACTIVE COGNITIVE LAYER. V3 IS RETAINED AS FAIL-CLOSED ROLLBACK PARENT; MULTIDOMAIN AND REAL-DATA EXPERTS ARE ADDED ONLY WHERE FRESH EVIDENCE PASSED. FAILED GLOBAL-STRESS V6 IS NEGATIVE EXPERIENCE, NOT AN ADMITTED MODEL.",
+  "specialist_equivalence_cases": 416,
+  "specialist_equivalence_pass": 416,
+  "status": "PASS_G2_COGNITIVE_EXPERIENCE_CONSOLIDATION_V4"
+}
