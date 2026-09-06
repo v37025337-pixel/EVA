@@ -1,0 +1,45 @@
+{
+  "schema": "yado.g2.native_semantic_edit_to_ast_materialization.request.v6",
+  "objective": "MATERIALIZE_YADO_SEMANTIC_SOURCE_EDIT_INTENT_INTO_A_NEW_AST_WITHOUT_HOST_AUTHORED_REPLACEMENT_AST",
+  "task": "Consume the passed V5 target-semantic source constructor, the YADO-created semantic source-edit gene, the YADO self-created evidence binder gene, the real direct action evidence and the prior V6 serialization gap. Let the binder decide whether fresh evidence is admissible. Enumerate only AST primitives already researched in V5, and let YADO native skill admission select or withhold. Do not provide an IfExp condition, body, orelse, AST skeleton, serializer, patch, target replacement source or external model. Pass only if an admitted existing AST primitive turns the current LIVE_RESOURCE_EVIDENCE_SCOPE status AST from Constant('PARTIAL') into a conditional AST under accepted evidence while invalid single-field counterfactuals preserve the original AST, and the resulting source is materialized through the V5-selected ast.unparse path and compiles.",
+  "parents": {
+    "target_semantic_source_constructor_v5": "candidates/kernel-self-generated/g2-target-semantic-source-constructor-genesis-v5.json",
+    "semantic_edit_gene_v5": "candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json",
+    "self_created_binder_gene": "candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
+    "direct_action_evidence": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+    "prior_serialization_gap_v6": "candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json"
+  },
+  "constraints": {
+    "external_models": false,
+    "host_authored_replacement_ast": false,
+    "host_authored_condition_expression": false,
+    "host_selected_ast_primitive": false,
+    "host_patch": false,
+    "host_source_template": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "shadow_only": true,
+    "fail_closed": true
+  },
+  "success_conditions": [
+    "canonical V5 continuity remains active",
+    "V5 ast.unparse source-constructor result is consumed",
+    "semantic edit gene and self-created evidence binder are consumed",
+    "real direct action evidence is accepted by the binder",
+    "all single-field binder counterfactuals withhold",
+    "candidate inventory contains only V5-researched AST primitives",
+    "native goal and deficit are created",
+    "YADO native skill selector executes",
+    "YADO selects an AST transformer candidate",
+    "accepted evidence changes the status AST to a conditional node",
+    "invalid evidence preserves the original PARTIAL AST",
+    "new AST is materialized",
+    "ast.unparse materializes changed source",
+    "changed source compiles",
+    "canonical G2 remains unchanged"
+  ],
+  "host_role": "EVIDENCE_TRANSPORT_AST_PRIMITIVE_ENUMERATION_STRUCTURAL_ORACLE_AND_STRICT_NATIVE_SELECTION_ONLY",
+  "stop_condition": "SEMANTIC_EDIT_AST_PASS_SHADOW_OR_EXPLICIT_CONTEXTUAL_AST_TRANSFORMER_GENE_DEFICIT",
+  "trigger": 1,
+  "trigger_reason": "CONTINUE_AFTER_V5_PROVED_AST_TO_SOURCE_TOOL_USE_BUT_LEFT_SEMANTIC_INTENT_TO_AST_AS_THE_NEXT_GAP"
+}
