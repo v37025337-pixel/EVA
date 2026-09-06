@@ -25,38 +25,6 @@ jobs:
           python -m pip install --disable-pip-version-check pyyaml
       - name: Compile audit
         run: python -m py_compile runtime/yado_full_kernel_audit_v1.py
-      - name: Compile accumulated-experience refresh
-        run: >
-          python -m py_compile
-          runtime/yado_g2_global_historical_experience_census_v2.py
-          runtime/yado_g2_terminal_logic_historical_transfer_v1.py
-          runtime/yado_g2_accumulated_experience_main_binding_v1.py
-      - name: Rebuild historical experience census from all refs
-        run: python runtime/yado_g2_global_historical_experience_census_v2.py
-      - name: Re-run native historical transfer on expanded experience
-        id: historical_transfer
-        continue-on-error: true
-        run: python runtime/yado_g2_terminal_logic_historical_transfer_v1.py
-      - name: Report historical transfer verdict
-        if: always()
-        run: |
-          python - <<'PY'
-          import json, pathlib
-          p=pathlib.Path("candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json")
-          if not p.exists():
-              raise SystemExit("MISSING_HISTORICAL_TRANSFER_REPORT")
-          r=json.loads(p.read_text())
-          print(r["status"])
-          print("terminal_historical_fresh",r.get("terminal_historical_fresh"))
-          print("terminal_historical_pass_recall",r.get("terminal_historical_pass_recall"))
-          print("terminal_historical_withhold_recall",r.get("terminal_historical_withhold_recall"))
-          print("cognitive_historical_fresh",r.get("cognitive_historical_fresh"))
-          print("next_required_capability",r.get("next_required_capability"))
-          PY
-      - name: Bind accumulated experience into canonical registry
-        run: python runtime/yado_g2_accumulated_experience_main_binding_v1.py
-      - name: Canonical guard after experience binding
-        run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Run top-level regression tests
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Run full kernel audit
@@ -66,13 +34,7 @@ jobs:
           git config user.name "YADO Full Kernel Audit"
           git config user.email "actions@users.noreply.github.com"
           git add audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md
-          git add experience/yado-global-historical-experience-corpus-v2.json 2>/dev/null || true
-          git add candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json 2>/dev/null || true
-          git add candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json 2>/dev/null || true
-          git add experience/yado-global-experience-terminal-logic-historical-transfer-v1.json 2>/dev/null || true
-          git add canonical/yado-unified-experience-registry-v1.json 2>/dev/null || true
-          git add candidates/kernel-self-generated/g2-accumulated-experience-main-binding-v1.json 2>/dev/null || true
-          git commit -m "Persist YADO accumulated-experience refresh evidence [skip ci]"
+          git commit -m "Persist YADO full kernel audit V1 [skip ci]"
           for attempt in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}"
             if git push origin HEAD:"${GITHUB_REF_NAME}"; then exit 0; fi
