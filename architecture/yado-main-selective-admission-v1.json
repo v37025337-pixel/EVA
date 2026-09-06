@@ -1,0 +1,36 @@
+{
+  "schema": "yado.main_selective_admission.v1",
+  "status": "CANDIDATE",
+  "base_main_sha": "a3960f13e47f7506650ab9fb929611b4e1ab11c8",
+  "source_shadow_sha": "f77bd249dc6a3b3fa8abc09cfd6b063d8f92bff3",
+  "policy": "SELECTIVE_PASS_ONLY_NO_EXPERIMENTAL_RETRY_MERGE",
+  "admitted": [
+    "runtime/yado_g2_user_external_corpus_learning_v1.py",
+    "experience/yado-user-external-corpus-learning-v1.json",
+    "receipts/yado-g2-user-external-corpus-learning-v1-run-34038415215.json",
+    ".github/workflows/yado-full-kernel-audit-v1.yml",
+    ".github/workflows/yado-security-audit-v1.yml",
+    ".github/workflows/yado-g2-post-module-full-integrity-v1.yml"
+  ],
+  "explicitly_excluded": [
+    "runtime/yado_g2_new_external_user_goal_intake_v1.py",
+    "runtime/yado_g2_raw_v4_semantic_grounding_self_evolution_v2.py",
+    "runtime/yado_g2_raw_v4_hierarchical_residual_self_evolution_v3.py",
+    "candidates/kernel-self-generated/g2-user-goal-ip-evidence-intake-v1.json",
+    "candidates/kernel-self-generated/g2-raw-v4-semantic-grounding-self-evolution-v2.json",
+    "candidates/kernel-self-generated/g2-raw-v4-hierarchical-residual-self-evolution-v3.json"
+  ],
+  "evidence": {
+    "shadow_full_audit_run_id": 34038562777,
+    "shadow_module_integrity_run_id": 34038203075,
+    "shadow_security_run_id": 34038458092,
+    "shadow_corpus_rebuild_run_id": 34038415215
+  },
+  "canonical_state_mutation": false,
+  "ledger_mutation": false,
+  "required_gates": [
+    "POST_MODULE_FULL_INTEGRITY",
+    "SECURITY_AUDIT",
+    "FULL_KERNEL_AUDIT_WITH_TOP_LEVEL_REGRESSION"
+  ]
+}
