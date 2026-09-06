@@ -128,7 +128,10 @@ jobs:
           fi
           if [ ${#files[@]} -gt 0 ]; then
             git add "${files[@]}"
-            git diff --cached --quiet || git commit -m "Persist YADO DNS GCP fresh cross-domain stress [skip ci]"
+            git diff --cached --quiet || git commit -m "Persist YADO tri-organ/cross-domain evidence [skip ci]"
+            # Every intended binding mutation is now inside the commit. Discard only
+            # residual tracked runner output before rebase; never widen the staged set.
+            git reset --hard HEAD
             git pull --rebase origin yado-architecture-shadow-search
             git push origin HEAD:yado-architecture-shadow-search
           fi
