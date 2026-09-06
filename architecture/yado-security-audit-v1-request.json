@@ -9,7 +9,7 @@
   ],
   "active_branch": "yado-architecture-shadow-search",
   "mutate_canonical_state": false,
-  "repair_rerun_revision": "2026-09-06-main-post-v7-meta-admission-security",
+  "repair_rerun_revision": "2026-09-06-main-post-v7-security-idempotent-persist",
   "repair_focus": [
     "POST_ADMISSION_MAIN_V7_META_CONTROLLER",
     "SECRET_SCAN",
@@ -19,12 +19,17 @@
     "ACTIVE_RUNTIME_REVIEW",
     "FAIL_CLOSED_SECURITY_EXIT"
   ],
-  "security_trigger": 7,
+  "security_trigger": 8,
   "prerequisite_evidence": {
     "admitted_main_head_before_cleanup": "2ea921172f2749e7a5cfa4b85b610917bae310c3",
     "v7_component": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
     "active_capability_count": 28,
     "v4_replaced": false,
-    "g3_genesis": false
+    "g3_genesis": false,
+    "previous_run_id": 34053033826,
+    "previous_content_status": "PASS",
+    "previous_transport_failure": "NO_CHANGES_TO_COMMIT_TREATED_AS_FAILURE",
+    "repair": "IDEMPOTENT_SECURITY_REPORT_PERSIST",
+    "security_threshold_change": false
   }
 }
