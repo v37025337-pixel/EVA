@@ -238,7 +238,7 @@
     },
     {
       "id": "GCP_COMPUTE_OFFICIAL",
-      "url": "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest"
+      "url": "https://compute.googleapis.com/$discovery/rest?version=v1"
     },
     {
       "id": "GCP_CLOUD_RUN_OFFICIAL",
@@ -323,5 +323,14 @@
     "thresholds_changed": false,
     "genes_reselected": false,
     "gate_changed": false
+  },
+  "source_repair_v4": {
+    "reason": "DISCOVERY_AGGREGATOR_DOCUMENT_EXCEEDED_BOUNDED_RESEARCH_WINDOW",
+    "replacement": "SERVICE_SCOPED_PUBLIC_DISCOVERY_ENDPOINT",
+    "endpoint_derivation": "SUCCESSFULLY_FETCHED_SERVICE_SOURCE_HOST_MAY_BE_USED_IF_BODY_HAS_NO_SERVICE_DECLARATION",
+    "thresholds_changed": false,
+    "gate_changed": false,
+    "genes_reselected": false,
+    "expected_answers_added": false
   }
 }
