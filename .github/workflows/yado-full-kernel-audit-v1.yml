@@ -1,7 +1,7 @@
 name: YADO Full Kernel Audit V1
 on:
   push:
-    branches: [yado-architecture-shadow-search]
+    branches: [main, yado-architecture-shadow-search, yado-main-selective-admission-v1]
     paths:
       - "architecture/yado-full-kernel-audit-v1-request.json"
 permissions:
@@ -25,6 +25,8 @@ jobs:
           python -m pip install --disable-pip-version-check pyyaml
       - name: Compile audit
         run: python -m py_compile runtime/yado_full_kernel_audit_v1.py
+      - name: Run top-level regression tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Run full kernel audit
         run: python runtime/yado_full_kernel_audit_v1.py
       - name: Persist audit report only
@@ -34,8 +36,8 @@ jobs:
           git add audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md
           git commit -m "Persist YADO full kernel audit V1 [skip ci]"
           for attempt in 1 2 3; do
-            git pull --rebase origin yado-architecture-shadow-search
-            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            if git push origin HEAD:"${GITHUB_REF_NAME}"; then exit 0; fi
             sleep 2
           done
           exit 1
