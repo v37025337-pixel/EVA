@@ -1,0 +1,351 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "action_artifact_binding_found": true,
+    "actual_target_source_integration_proven": false,
+    "automatic_canonical_promotion": false,
+    "binder_artifact_binding_found": true,
+    "canonical_unchanged": true,
+    "canonical_v5_continuity_active": true,
+    "current_binder_ground_accepts": true,
+    "exact_feature_dict_preserved_unchanged": true,
+    "external_models_used": false,
+    "host_authored_artifact_values": false,
+    "host_authored_feature_logic": false,
+    "host_selected_composition": false,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_selector_selected_one_composition": false,
+    "native_skill_selector_executed": true,
+    "selected_action_binding_is_yado_artifact_binding": false,
+    "selected_binder_binding_is_yado_artifact_binding": false,
+    "selected_composition_has_no_unresolved_context": true,
+    "selected_composition_is_simple_plus_unpack": false,
+    "single_fault_counterfactuals_withhold": true,
+    "threshold_not_lowered": true,
+    "unpack_map_binding_found_in_yado_source": true,
+    "v14_failure_consumed": true,
+    "v14_remaining_gap_was_action_artifact_binding": true,
+    "v14_scope_repair_preserved": true
+  },
+  "composition_strategies": [
+    {
+      "artifact_binding_count": 0,
+      "closure": {
+        "action": {
+          "kind": "UNRESOLVED"
+        },
+        "comp": {
+          "external_dependencies": [
+            "result"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='comprehension')], keywords=[]), Dict(keys=[], values=[])])",
+          "rhs_source": "result.get('comprehension') or {}"
+        },
+        "priority": {
+          "external_dependencies": [
+            "action"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "Call(func=Name(id='str', ctx=Load()), args=[BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='kernel_selected_next_step')], keywords=[]), Constant(value='')])], keywords=[])",
+          "rhs_source": "str(action.get('kernel_selected_next_step') or '')"
+        },
+        "result": {
+          "external_dependencies": [
+            "action"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "BoolOp(op=Or(), values=[Call(func=Attribute(value=BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='goal_action_binding')], keywords=[]), Dict(keys=[], values=[])]), attr='get', ctx=Load()), args=[Constant(value='result')], keywords=[]), Dict(keys=[], values=[])])",
+          "rhs_source": "(action.get('goal_action_binding') or {}).get('result') or {}"
+        },
+        "selected_action": {
+          "external_dependencies": [
+            "action"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "Call(func=Name(id='str', ctx=Load()), args=[BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='selected_action')], keywords=[]), Constant(value='')])], keywords=[])",
+          "rhs_source": "str(action.get('selected_action') or '')"
+        },
+        "target_code": {
+          "external_dependencies": [],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "Constant(value='LIVE_RESOURCE_EVIDENCE_SCOPE')",
+          "rhs_source": "'LIVE_RESOURCE_EVIDENCE_SCOPE'"
+        }
+      },
+      "feature_assignment": "features",
+      "feature_rhs_dump": "Dict(keys=[Constant(value='priority_match'), Constant(value='comprehension_complete'), Constant(value='direct_priority_evidence'), Constant(value='canonical_immutable'), Constant(value='conflict_resolution_pass'), Constant(value='action_status_pass'), Constant(value='action_relevant')], values=[Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())]), Call(func=Name(id='all', ctx=Load()), args=[GeneratorExp(elt=Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='comp', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='k', ctx=Load())], keywords=[])], keywords=[]), generators=[comprehension(target=Name(id='k', ctx=Store()), iter=Tuple(elts=[Constant(value='repository_commit_identity_extracted'), Constant(value='readme_title_extracted'), Constant(value='package_identity_extracted'), Constant(value='provider_catalog_extracted'), Constant(value='no_key_provider_set_extracted')], ctx=Load()), ifs=[], is_async=0)])], keywords=[]), BoolOp(op=And(), values=[Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[]), Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[])]), BoolOp(op=And(), values=[Compare(left=Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_head_unchanged')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_mutation')], keywords=[]), ops=[Is()], comparators=[Constant(value=False)])]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='conflict_resolution_pass')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Call(func=Attribute(value=Call(func=Name(id='str', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='status'), Constant(value='')], keywords=[])], keywords=[]), attr='startswith', ctx=Load()), args=[Constant(value='PASS')], keywords=[]), BoolOp(op=And(), values=[Compare(left=Name(id='selected_action', ctx=Load()), ops=[Eq()], comparators=[Constant(value='LIVE_RESOURCE_EVIDENCE_RECHECK')]), Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())])])])",
+      "mode": "SIMPLE_ONLY",
+      "score": 0.0,
+      "skill_id": "CONTEXT_COMPOSITION_SIMPLE_ONLY",
+      "unresolved": [
+        "action"
+      ]
+    },
+    {
+      "artifact_binding_count": 1,
+      "closure": {
+        "ACTION": {
+          "external_dependencies": [
+            "REPO"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "BinOp(left=Name(id='REPO', ctx=Load()), op=Div(), right=Constant(value='candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'))",
+          "rhs_source": "REPO / 'candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'"
+        },
+        "Path": {
+          "kind": "IMPORT",
+          "source": "from pathlib import Path"
+        },
+        "REPO": {
+          "external_dependencies": [
+            "ROOT"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "Attribute(value=Name(id='ROOT', ctx=Load()), attr='parent', ctx=Load())",
+          "rhs_source": "ROOT.parent"
+        },
+        "ROOT": {
+          "external_dependencies": [
+            "Path",
+            "__file__"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "Attribute(value=Call(func=Attribute(value=Call(func=Name(id='Path', ctx=Load()), args=[Name(id='__file__', ctx=Load())], keywords=[]), attr='resolve', ctx=Load()), args=[], keywords=[]), attr='parent', ctx=Load())",
+          "rhs_source": "Path(__file__).resolve().parent"
+        },
+        "__file__": {
+          "kind": "UNRESOLVED"
+        },
+        "action": {
+          "kind": "UNPACK_MAP_ARTIFACT_BINDING",
+          "loader_name": "load",
+          "source_statement": "v4, v3, binder, action, j4, j5, j6 = map(load, [V4, V3, BINDER, ACTION, J4, J5, J6])",
+          "source_symbol": "ACTION",
+          "source_symbol_binding": {
+            "external_dependencies": [
+              "REPO"
+            ],
+            "kind": "SIMPLE_ASSIGN",
+            "rhs_dump": "BinOp(left=Name(id='REPO', ctx=Load()), op=Div(), right=Constant(value='candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'))",
+            "rhs_source": "REPO / 'candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'"
+          }
+        },
+        "comp": {
+          "external_dependencies": [
+            "result"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='comprehension')], keywords=[]), Dict(keys=[], values=[])])",
+          "rhs_source": "result.get('comprehension') or {}"
+        },
+        "load": {
+          "kind": "FUNCTION",
+          "source_sha256": "fe6fe00f78f45c19287e8cb4d48dcd215349362011c76cae6729e2062838bb6d"
+        },
+        "priority": {
+          "external_dependencies": [
+            "action"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "Call(func=Name(id='str', ctx=Load()), args=[BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='kernel_selected_next_step')], keywords=[]), Constant(value='')])], keywords=[])",
+          "rhs_source": "str(action.get('kernel_selected_next_step') or '')"
+        },
+        "result": {
+          "external_dependencies": [
+            "action"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "BoolOp(op=Or(), values=[Call(func=Attribute(value=BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='goal_action_binding')], keywords=[]), Dict(keys=[], values=[])]), attr='get', ctx=Load()), args=[Constant(value='result')], keywords=[]), Dict(keys=[], values=[])])",
+          "rhs_source": "(action.get('goal_action_binding') or {}).get('result') or {}"
+        },
+        "selected_action": {
+          "external_dependencies": [
+            "action"
+          ],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "Call(func=Name(id='str', ctx=Load()), args=[BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='selected_action')], keywords=[]), Constant(value='')])], keywords=[])",
+          "rhs_source": "str(action.get('selected_action') or '')"
+        },
+        "target_code": {
+          "external_dependencies": [],
+          "kind": "SIMPLE_ASSIGN",
+          "rhs_dump": "Constant(value='LIVE_RESOURCE_EVIDENCE_SCOPE')",
+          "rhs_source": "'LIVE_RESOURCE_EVIDENCE_SCOPE'"
+        }
+      },
+      "feature_assignment": "features",
+      "feature_rhs_dump": "Dict(keys=[Constant(value='priority_match'), Constant(value='comprehension_complete'), Constant(value='direct_priority_evidence'), Constant(value='canonical_immutable'), Constant(value='conflict_resolution_pass'), Constant(value='action_status_pass'), Constant(value='action_relevant')], values=[Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())]), Call(func=Name(id='all', ctx=Load()), args=[GeneratorExp(elt=Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='comp', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='k', ctx=Load())], keywords=[])], keywords=[]), generators=[comprehension(target=Name(id='k', ctx=Store()), iter=Tuple(elts=[Constant(value='repository_commit_identity_extracted'), Constant(value='readme_title_extracted'), Constant(value='package_identity_extracted'), Constant(value='provider_catalog_extracted'), Constant(value='no_key_provider_set_extracted')], ctx=Load()), ifs=[], is_async=0)])], keywords=[]), BoolOp(op=And(), values=[Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[]), Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[])]), BoolOp(op=And(), values=[Compare(left=Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_head_unchanged')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_mutation')], keywords=[]), ops=[Is()], comparators=[Constant(value=False)])]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='conflict_resolution_pass')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Call(func=Attribute(value=Call(func=Name(id='str', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='status'), Constant(value='')], keywords=[])], keywords=[]), attr='startswith', ctx=Load()), args=[Constant(value='PASS')], keywords=[]), BoolOp(op=And(), values=[Compare(left=Name(id='selected_action', ctx=Load()), ops=[Eq()], comparators=[Constant(value='LIVE_RESOURCE_EVIDENCE_RECHECK')]), Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())])])])",
+      "mode": "SIMPLE_PLUS_UNPACK",
+      "score": 0.0,
+      "skill_id": "CONTEXT_COMPOSITION_SIMPLE_PLUS_UNPACK",
+      "unresolved": [
+        "__file__"
+      ]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "field": "action_relevant",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "action_status_pass",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "canonical_immutable",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "comprehension_complete",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "conflict_resolution_pass",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "direct_priority_evidence",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "priority_match",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    }
+  ],
+  "feature_binding": {
+    "assignment_name": "features",
+    "external_dependencies": [
+      "action",
+      "comp",
+      "priority",
+      "result",
+      "selected_action",
+      "target_code"
+    ],
+    "keys": [
+      "action_relevant",
+      "action_status_pass",
+      "canonical_immutable",
+      "comprehension_complete",
+      "conflict_resolution_pass",
+      "direct_priority_evidence",
+      "priority_match"
+    ],
+    "rhs_dump": "Dict(keys=[Constant(value='priority_match'), Constant(value='comprehension_complete'), Constant(value='direct_priority_evidence'), Constant(value='canonical_immutable'), Constant(value='conflict_resolution_pass'), Constant(value='action_status_pass'), Constant(value='action_relevant')], values=[Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())]), Call(func=Name(id='all', ctx=Load()), args=[GeneratorExp(elt=Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='comp', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='k', ctx=Load())], keywords=[])], keywords=[]), generators=[comprehension(target=Name(id='k', ctx=Store()), iter=Tuple(elts=[Constant(value='repository_commit_identity_extracted'), Constant(value='readme_title_extracted'), Constant(value='package_identity_extracted'), Constant(value='provider_catalog_extracted'), Constant(value='no_key_provider_set_extracted')], ctx=Load()), ifs=[], is_async=0)])], keywords=[]), BoolOp(op=And(), values=[Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[]), Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[])]), BoolOp(op=And(), values=[Compare(left=Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_head_unchanged')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_mutation')], keywords=[]), ops=[Is()], comparators=[Constant(value=False)])]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='conflict_resolution_pass')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Call(func=Attribute(value=Call(func=Name(id='str', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='status'), Constant(value='')], keywords=[])], keywords=[]), attr='startswith', ctx=Load()), args=[Constant(value='PASS')], keywords=[]), BoolOp(op=And(), values=[Compare(left=Name(id='selected_action', ctx=Load()), ops=[Eq()], comparators=[Constant(value='LIVE_RESOURCE_EVIDENCE_RECHECK')]), Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())])])])",
+    "rhs_source": "{'priority_match': priority == target_code, 'comprehension_complete': all((bool(comp.get(k)) for k in ('repository_commit_identity_extracted', 'readme_title_extracted', 'package_identity_extracted', 'provider_catalog_extracted', 'no_key_provider_set_extracted'))), 'direct_priority_evidence': bool(action.get('direct_priority_evidence')) and bool(result.get('direct_priority_evidence')), 'canonical_immutable': action.get('canonical_head_unchanged') is True and result.get('canonical_mutation') is False, 'conflict_resolution_pass': result.get('conflict_resolution_pass') is True, 'action_status_pass': str(result.get('status', '')).startswith('PASS'), 'action_relevant': selected_action == 'LIVE_RESOURCE_EVIDENCE_RECHECK' and priority == target_code}"
+  },
+  "gene": null,
+  "ground_verdict": "ACCEPT_FRESH_EVIDENCE",
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-06T10:19:54.337920+00:00",
+        "deficit_id": "D-dc36cba960ea",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-d9cb9bb675d7",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "OPEN",
+        "target": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_REPAIR_V15"
+      }
+    ],
+    "goal_id": "G-d9cb9bb675d7"
+  },
+  "native_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "3a04777c340ef18ad1005c68aaf8a1e67b2481916bb75b29dc8c050dfdf39809",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "2573de18a92a3c9357a5a0d19d3fb7a7b64599999676fa2db2d35d4d6dc3b329",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CONTEXT_COMPOSITION_SIMPLE_ONLY",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "2c001acd46e23a7cbf33a0ffb5fa7535c3905949583cd6d5220c0842f7fe8476",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CONTEXT_COMPOSITION_SIMPLE_PLUS_UNPACK",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_GENESIS_V16",
+  "parent_v14_receipt": "d865e8015968531be5887bfb57413cdb29bd002b508f8db7bc5fdeff3bae7e97",
+  "promotion_applied": false,
+  "receipt_sha256": "3cb1c8f2647e5f1bc12f1e8c2bc574b856110b7dc4a64e1198c4ce28aeab1966",
+  "schema": "yado.g2.native_contextual_ast_context_composition_repair.v15",
+  "selected_composition": null,
+  "semantic_boundary": "V15 REPAIRS ONLY CONTEXT COMPOSITION. IT RECOGNIZES A GENERIC YADO-SOURCE PATTERN WHERE MULTIPLE ARTIFACT OBJECTS ARE CREATED BY DESTRUCTURING MAP(LOAD,[PATH_SYMBOLS...]) AND COMPOSES THAT WITH SIMPLE ASSIGNMENTS AND THE UNCHANGED SEVEN-FIELD FEATURE DICT. YADO NATIVE SKILL ADMISSION CHOOSES BETWEEN COMPOSITION STRATEGIES AT UNCHANGED THRESHOLDS. NO FEATURE SEMANTICS, ARTIFACT VALUES, AST PATCH OR TARGET SOURCE ARE AUTHORED BY THE HOST.",
+  "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_REPAIR_V15",
+  "unpack_bindings": [
+    {
+      "loader_name": "load",
+      "pattern": "UNPACK_MAP",
+      "source": "v4, v3, binder, action, j4, j5, j6 = map(load, [V4, V3, BINDER, ACTION, J4, J5, J6])",
+      "source_names": [
+        "V4",
+        "V3",
+        "BINDER",
+        "ACTION",
+        "J4",
+        "J5",
+        "J6"
+      ],
+      "target_names": [
+        "v4",
+        "v3",
+        "binder",
+        "action",
+        "j4",
+        "j5",
+        "j6"
+      ]
+    }
+  ]
+}
