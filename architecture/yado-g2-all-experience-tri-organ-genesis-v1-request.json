@@ -32,7 +32,7 @@
     "regression_tests": "ALL_PASS",
     "full_kernel_audit": "PASS"
   },
-  "trigger_revision": "2026-09-06-v2-selection-diagnostic",
+  "trigger_revision": "2026-09-06-v3-causal-underflow-counterexample",
   "previous_run": {
     "run_id": 34057295462,
     "failure": "YADO_PORTFOLIO_DID_NOT_SELECT_BOTH_ORGAN_TYPES",
@@ -41,5 +41,23 @@
     "thresholds_changed": false,
     "algorithms_changed": false
   },
-  "diagnostic_required": true
+  "diagnostic_required": true,
+  "previous_diagnostic": {
+    "run_id": 34057426328,
+    "logic": {
+      "selected": true,
+      "score": 1,
+      "best_ablation_accuracy": 0.5714285714285714,
+      "causal_gap": 0.4285714285714286
+    },
+    "thinking": {
+      "selected": false,
+      "score": 1,
+      "best_ablation_accuracy": 1,
+      "causal_gap": 0
+    },
+    "diagnosis": "UNDERFLOW_COUNTEREXAMPLE_DID_NOT_DISTINGUISH_REJECT_FROM_IGNORE",
+    "threshold_change": false,
+    "selector_change": false
+  }
 }
