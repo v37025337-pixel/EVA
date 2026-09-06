@@ -42,7 +42,8 @@ state={
  'RESOURCE-PORTFOLIO-V1',
 }
 GENOME='CTRL-G2-EVOLUTIONARY-GENOME-V1'
-control={'ALG-G2-DEEP-SELF-AUDIT-V1',GENOME}
+META_V7='CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7'
+control={'ALG-G2-DEEP-SELF-AUDIT-V1',GENOME,META_V7}
 for m in sorted(active):
     if m in compat:ROLE[m]='COMPATIBILITY'
     elif m in state:ROLE[m]='STATE'
@@ -99,6 +100,8 @@ edge(API_EXEC,SELECT,'NETWORK_EVIDENCE_SELECTION','bounded read-only network evi
 edge(SEM,LOGIC2,'SEMANTIC_TO_LOGIC','synthesized semantic result can be classified by Logic V2')
 edge(REPAIR,FAB,'REPAIR_EXECUTION','repaired program capability coexists with canonical execution fabric')
 edge(EXP,GENOME,'EVOLUTION_EXPERIENCE','verified experience is available to the evolution controller')
+edge(EXP,META_V7,'EXPERIENCE_META_CONTROL','verified accumulated historical outcomes feed the bounded V7 meta-action controller')
+edge(META_V7,GENOME,'META_ACTION_GATES_EVOLUTION','V7 COMMIT/CONTINUE/REVISE/SEEK_EVIDENCE output gates bounded future genome evolution without self-promotion')
 edge(COUNTER,GENOME,'EVOLUTION_COUNTEREXAMPLES','counterexample lineage is available to the evolution controller')
 edge(GENOME,LOGIC2,'EVOLUTION_TARGET','logic is a bounded evolution target')
 edge(GENOME,THINK2,'EVOLUTION_TARGET','thinking is a bounded evolution target')
