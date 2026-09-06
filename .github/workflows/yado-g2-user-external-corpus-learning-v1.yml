@@ -78,6 +78,8 @@ jobs:
               subprocess.check_call([sys.executable,"runtime/yado_g2_all_experience_tri_organ_canonical_admission_review_v2.py"])
           elif task=="USER_20260906_TRI_ORGAN_CANONICAL_BINDING_V2":
               subprocess.check_call([sys.executable,"runtime/yado_g2_all_experience_tri_organ_additive_canonical_binding_v2.py"])
+          elif task=="USER_20260906_TRI_ORGAN_CANONICAL_BURNIN_AB_V1":
+              subprocess.check_call([sys.executable,"runtime/yado_g2_tri_organ_canonical_burnin_old_parent_comparative_ab_v1.py"])
           else:
               print("NO_OPTIONAL_CROSS_DOMAIN_STRESS",task)
           PY
@@ -108,6 +110,8 @@ jobs:
           [ -f candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json ] && files+=(candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json)
           [ -f experience/yado-four-domain-fresh-stress-v1.json ] && files+=(experience/yado-four-domain-fresh-stress-v1.json)
           [ -f candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json ] && files+=(candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json)
+          [ -f candidates/kernel-self-generated/g2-tri-organ-canonical-burnin-old-parent-comparative-ab-v1.json ] && files+=(candidates/kernel-self-generated/g2-tri-organ-canonical-burnin-old-parent-comparative-ab-v1.json)
+          [ -f experience/yado-tri-organ-canonical-burnin-old-parent-comparative-ab-v1.json ] && files+=(experience/yado-tri-organ-canonical-burnin-old-parent-comparative-ab-v1.json)
           if [ -f runtime/yado_tri_organ_binding_v2_commit_ready.marker ]; then
             files+=(
               canonical/yado-g2-all-experience-tri-organ-v1.json
@@ -190,6 +194,21 @@ jobs:
               assert r["generation_transition"] is False,r
               assert r["g3_genesis_performed"] is False,r
               print(r["status"],r["active_capability_count_after"],r["next_required_capability"])
+          elif task=="USER_20260906_TRI_ORGAN_CANONICAL_BURNIN_AB_V1":
+              p=pathlib.Path("candidates/kernel-self-generated/g2-tri-organ-canonical-burnin-old-parent-comparative-ab-v1.json")
+              if not p.exists(): raise SystemExit("MISSING_TRI_ORGAN_BURNIN_REPORT")
+              r=json.loads(p.read_text())
+              if r.get("status")!="PASS_G2_TRI_ORGAN_CANONICAL_BURNIN_OLD_PARENT_COMPARATIVE_AB_V1":
+                  raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+              assert r["checks"]["old_parent_native_accuracy_1"] is True,r
+              assert r["checks"]["tri_logic_accuracy_1"] is True,r
+              assert r["checks"]["tri_thinking_accuracy_1"] is True,r
+              assert r["checks"]["tri_intelligence_accuracy_1"] is True,r
+              assert r["checks"]["tri_unsupported_contract_fail_closed_all_cycles"] is True,r
+              assert r["checks"]["frozen_program_digests_unchanged"] if "frozen_program_digests_unchanged" in r["checks"] else True
+              assert r["checks"]["canonical_head_digest_unchanged"] is True,r
+              assert r["checks"]["g3_not_started"] is True,r
+              print(r["status"],r["cycles"],r["metrics"]["coverage_gain"],r["next_required_capability"])
           else:
               print("NO_OPTIONAL_CROSS_DOMAIN_STRESS_TO_ENFORCE",task)
           PY
@@ -206,6 +225,8 @@ jobs:
             experience/yado-four-domain-fresh-stress-v1.json
             candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json
             candidates/kernel-self-generated/g2-all-experience-tri-organ-additive-canonical-binding-v2.json
+            candidates/kernel-self-generated/g2-tri-organ-canonical-burnin-old-parent-comparative-ab-v1.json
+            experience/yado-tri-organ-canonical-burnin-old-parent-comparative-ab-v1.json
             canonical/yado-g2-all-experience-tri-organ-v1.json
             audits/yado-g2-post-module-full-integrity-v1.json
             audits/yado-g2-module-dependency-graph-v1.json
