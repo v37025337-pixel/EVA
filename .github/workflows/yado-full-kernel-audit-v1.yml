@@ -63,9 +63,12 @@ jobs:
           git add candidates/kernel-self-generated/g2-global-experience-meta-controller-v7-canonical-admission-v1.json
           git add receipts/yado-g2-global-experience-meta-controller-v7-canonical-admission-v1-run-*.json
           git add candidates/kernel-self-generated/g2-unified-module-kernel-v1.json 2>/dev/null || true
-          git add audits/yado-g2-post-module-full-integrity-v1.json 2>/dev/null || true
+          git add audits/yado-g2-post-module-full-integrity-v1.json audits/yado-g2-module-dependency-graph-v1.json 2>/dev/null || true
           git add runtime/yado_unified_core_deep_self_audit_v1_receipt.json 2>/dev/null || true
+          git add -u
           git commit -m "Persist V7 metacognitive admission evidence [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
           for attempt in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}"
             if git push origin HEAD:"${GITHUB_REF_NAME}"; then exit 0; fi
