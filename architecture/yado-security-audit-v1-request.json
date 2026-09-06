@@ -9,7 +9,7 @@
   ],
   "active_branch": "yado-architecture-shadow-search",
   "mutate_canonical_state": false,
-  "repair_rerun_revision": "2026-09-06-all-experience-tri-organ-shadow-security",
+  "repair_rerun_revision": "2026-09-06-tri-organ-workflow-quarantined",
   "repair_focus": [
     "TRI_ORGAN_DEVELOPMENTAL_RUNTIME",
     "TRI_ORGAN_EXPERIENCE_ARTIFACT",
@@ -18,9 +18,17 @@
     "WORKFLOW_PERMISSION_ALLOWLIST",
     "NO_CANONICAL_MUTATION"
   ],
-  "security_trigger": 9,
+  "security_trigger": 10,
   "prerequisite_evidence": {
-    "tri_organ_run_id": 34057513806,
-    "tri_organ_status": "PASS_SHADOW_G2_ALL_EXPERIENCE_TRI_ORGAN_GENESIS_V1"
+    "previous_security_run_id": 34057653527,
+    "previous_failure_codes": [
+      "WORKFLOW_OUTSIDE_SINGLE_CORE_ALLOWLIST",
+      "ACTIVE_WORKFLOW_COUNT_EXCEEDS_BOUND",
+      "UNAUTHORIZED_WRITE_ENABLED_WORKFLOW"
+    ],
+    "repair": "ARCHIVE_COMPLETED_ONE_TIME_WORKFLOW_AND_REMOVE_FROM_ACTIVE_WORKFLOWS",
+    "allowlist_expanded": false,
+    "workflow_bound_expanded": false,
+    "security_threshold_change": false
   }
 }
