@@ -1,0 +1,30 @@
+{
+  "schema": "yado.g2.raw_v4_semantic_grounding_self_evolution.request.v2",
+  "objective": "LEARN_FROM_THE_NEW_USER_IP_EVIDENCE_COUNTEREXAMPLE_WITHOUT_ADDING_AN_IP_SPECIFIC_RULE",
+  "observed_failure_artifact": "candidates/kernel-self-generated/g2-user-goal-ip-evidence-intake-v1.json",
+  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "instruction": "Use the current canonical V4 representation as parent. Treat the user-provided claim statements as new task experience, not as a hard-coded routing rule. Reuse historical raw-task datasets, let YADO's native skill gate select among existing YADO structural representation families, keep the exact user goal and semantic-transfer cases out of model selection, and require fresh regression plus causal ablation. Do not mutate canonical G2 in this stage.",
+  "success_conditions": [
+    "exact_user_goal_routes_to_RESOURCE_PORTFOLIO_V1_after_training",
+    "external_evidence_needed_becomes_true_for_exact_goal",
+    "historical_and_blind_regression_remain_at_least_0_95",
+    "fresh_semantic_transfer_passes",
+    "resource_transfer_improves_over_parent",
+    "new_user_experience_has_causal_effect_under_ablation",
+    "no_IP_specific_keyword_rule",
+    "host_does_not_select_model_or_pivot",
+    "canonical_G2_unchanged"
+  ],
+  "constraints": {
+    "canonical_mutation": false,
+    "architecture_mutation": false,
+    "external_models": false,
+    "ip_specific_rule": false,
+    "fresh_cases_used_for_selection": false,
+    "rollback_parent_required": true,
+    "fail_closed": true
+  },
+  "host_role": "NEW_COUNTEREXAMPLE_TRANSPORT_DATASET_SPLIT_AND_STRICT_FRESH_EVALUATION_ONLY",
+  "trigger": 1,
+  "requested_at": "2026-09-06T12:47:33Z"
+}
