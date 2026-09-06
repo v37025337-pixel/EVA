@@ -8,10 +8,10 @@
   "no_third_party_code_execution": true,
   "no_canonical_mutation": true,
   "host_role": "SOURCE_TRANSPORT_AND_PERSISTENCE_ONLY",
-  "trigger": 14,
-  "trigger_reason": "USER_20260906_TRI_ORGAN_BINDING_V2_LEDGER_TRANSACTION_REPAIR",
+  "trigger": 15,
+  "trigger_reason": "USER_20260906_TRI_ORGAN_BINDING_V2_PERSISTENCE_REBASE_REPAIR",
   "requested_at": "2026-09-06T21:51:23Z",
-  "purpose": "RERUN_ADDITIVE_BINDING_AFTER_CAUSAL_LEDGER_ORDERING_REPAIR",
+  "purpose": "RERUN_IDENTICAL_PROVEN_BINDING_WITH_CLEAN_POST_COMMIT_REBASE_TRANSPORT",
   "canonical_mutation": false,
   "cross_domain_task": {
     "id": "USER_20260906_TRI_ORGAN_CANONICAL_BINDING_V2",
@@ -67,21 +67,30 @@
     "receipt_sha256": "054c1512f7f1e3bdfa19b15fd0217bd927abf4fffb8eb0f220590f07069edaa6"
   },
   "previous_binding_attempt": {
-    "run_id": 34062945233,
-    "result": "WITHHOLD_BEFORE_PERSIST",
-    "failure": "CURRENT_HEAD_DIGEST_NOT_LATEST_CANONICAL_MUTATION",
-    "cause": "HEAD_DIGEST_UPDATED_BEFORE_CANONICAL_MUTATION_EVENT_WAS_APPENDED",
-    "canonical_changes_persisted": false,
-    "branch_active_capability_count_after_failed_attempt": 28,
-    "branch_canonical_head_digest_after_failed_attempt": "718ba80c4f5afe9fee12ccd5f48dc9f4d179db9b0c98e2f72b1352cfe97a8f95",
+    "run_id": 34063088641,
+    "binding_status": "PASS_G2_TRI_ORGAN_ADDITIVE_CANONICAL_BINDING_V2",
+    "local_active_capability_count_after": 31,
+    "local_active_runtime_source_count_after": 39,
+    "local_new_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+    "local_module_assembly": "PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1",
+    "local_post_module_integrity": "PASS_G2_POST_MODULE_FULL_INTEGRITY_V1",
+    "outer_canonical_guard": "PASS",
+    "enforce": "PASS",
+    "persistence_failure": "GIT_PULL_REBASE_REFUSED_RESIDUAL_UNSTAGED_RUNNER_OUTPUT",
+    "canonical_binding_commit_pushed": false,
     "thresholds_changed": false,
     "organ_genes_changed": false,
-    "evidence_gates_changed": false
+    "binding_algorithm_changed": false
   },
   "transaction_repair": {
     "provisional_ephemeral_event_before_post_binding_guards": true,
     "final_event_rebound_to_pass_receipt_only_after_all_gates": true,
     "commit_requires_marker": true,
     "incomplete_binding_hard_reset_before_persistence": true
+  },
+  "persistence_repair": {
+    "staged_binding_set_unchanged": true,
+    "commit_then_hard_reset_residual_tracked_output": true,
+    "rebase_after_clean_worktree": true
   }
 }
