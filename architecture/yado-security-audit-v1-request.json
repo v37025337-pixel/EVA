@@ -9,13 +9,15 @@
   ],
   "active_branch": "yado-architecture-shadow-search",
   "mutate_canonical_state": false,
-  "repair_rerun_revision": "2026-09-06-full-kernel-security-post-v18",
+  "repair_rerun_revision": "2026-09-06-after-workflow-quarantine-and-corpus-secret-redaction",
   "repair_focus": [
     "ACTIVE_WORKFLOW_ALLOWLIST",
-    "IMMUTABLE_ACTION_PINS",
+    "WORKFLOW_QUARANTINE_EXACT_BLOBS",
     "SECRET_SCAN",
     "DEPENDENCY_AUDIT",
-    "SINGLE_CORE_CONTROL_PLANE"
+    "IMMUTABLE_ACTION_PINS",
+    "SINGLE_CORE_CONTROL_PLANE",
+    "FAIL_CLOSED_AUDIT_EXIT"
   ],
-  "security_trigger": 2
+  "security_trigger": 3
 }
