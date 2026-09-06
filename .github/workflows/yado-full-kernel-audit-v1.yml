@@ -1,7 +1,7 @@
 name: YADO Full Kernel Audit V1
 on:
   push:
-    branches: [main, yado-architecture-shadow-search, yado-main-selective-admission-v1, yado-main-experience-refresh-v1]
+    branches: [main, yado-architecture-shadow-search, yado-main-selective-admission-v1, yado-main-experience-refresh-v1, yado-v7-meta-admission-shadow-v1]
     paths:
       - "architecture/yado-full-kernel-audit-v1-request.json"
 permissions:
@@ -25,6 +25,29 @@ jobs:
           python -m pip install --disable-pip-version-check pyyaml
       - name: Compile audit
         run: python -m py_compile runtime/yado_full_kernel_audit_v1.py
+      - name: Compile V7 meta-controller admission
+        run: >
+          python -m py_compile
+          runtime/yado_g2_global_experience_meta_controller_v7.py
+          runtime/yado_g2_global_experience_meta_controller_v7_canonical_admission_v1.py
+      - name: Run V7 meta-controller admission gate
+        run: python runtime/yado_g2_global_experience_meta_controller_v7_canonical_admission_v1.py
+      - name: Canonical guard after V7 admission
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Re-run unified module fresh gate
+        run: python runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
+      - name: Run post-module full integrity
+        run: python runtime/yado_g2_post_module_full_integrity_v1.py
+      - name: Kernel-native self-audit
+        run: python runtime/yado_unified_core_deep_self_audit_v1.py
+      - name: Require kernel-native audit
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("runtime/yado_unified_core_deep_self_audit_v1_receipt.json"))
+          assert r["overall_verdict"]=="PASS_WITH_LIMITATIONS",r
+          assert r["summary"]["blocking_findings"]==0,r
+          PY
       - name: Run top-level regression tests
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Run full kernel audit
@@ -34,7 +57,15 @@ jobs:
           git config user.name "YADO Full Kernel Audit"
           git config user.email "actions@users.noreply.github.com"
           git add audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md
-          git commit -m "Persist YADO full kernel audit V1 [skip ci]"
+          git add canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json canonical/yado-algorithm-provenance-registry-v1.json architecture/evolution-ledger.json
+          git add canonical/yado-g2-global-experience-meta-controller-v7.json
+          git add runtime/yado_unified_core_v1.py runtime/yado_g2_unified_module_kernel_v1.py runtime/yado_g2_unified_module_kernel_fresh_gate_v1.py
+          git add candidates/kernel-self-generated/g2-global-experience-meta-controller-v7-canonical-admission-v1.json
+          git add receipts/yado-g2-global-experience-meta-controller-v7-canonical-admission-v1-run-*.json
+          git add candidates/kernel-self-generated/g2-unified-module-kernel-v1.json 2>/dev/null || true
+          git add audits/yado-g2-post-module-full-integrity-v1.json 2>/dev/null || true
+          git add runtime/yado_unified_core_deep_self_audit_v1_receipt.json 2>/dev/null || true
+          git commit -m "Persist V7 metacognitive admission evidence [skip ci]"
           for attempt in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}"
             if git push origin HEAD:"${GITHUB_REF_NAME}"; then exit 0; fi
