@@ -254,7 +254,53 @@ fresh_eval={
 sel_logic=(portfolio.get('selected_by_task') or {}).get('ALL_EXPERIENCE_LOGIC_SELECTION')
 sel_think=(portfolio.get('selected_by_task') or {}).get('ALL_EXPERIENCE_THINKING_SELECTION')
 if not sel_logic or not sel_think:
-    raise RuntimeError('YADO_PORTFOLIO_DID_NOT_SELECT_BOTH_ORGAN_TYPES')
+    diagnostic={
+      'schema':'yado.g2.all_experience_tri_organ_genesis.selection_diagnostic.v1',
+      'status':'WITHHOLD_G2_ALL_EXPERIENCE_TRI_ORGAN_SELECTION_DIAGNOSTIC_V1',
+      'all_experience_digest':all_experience_digest,
+      'all_experience_inventory_count':len(inventory),
+      'parse_failure_count':len(parse_failures),
+      'structured_outcome_count':len(structured),
+      'artifact_reference_edge_count':len(ref_edges),
+      'ledger_event_count':len(events),
+      'logic_selection_case_count':len(logic_select),
+      'logic_fresh_case_count':len(logic_fresh),
+      'thinking_selection_case_count':len(thinking_select),
+      'thinking_fresh_case_count':len(thinking_fresh),
+      'discovered_shadow_genes':[{
+        'gene_id':x['gene'].get('gene_id'),
+        'gene_digest':x['gene'].get('gene_digest'),
+        'meta_language_component':x['gene'].get('meta_language_component'),
+        'source_path':x.get('source_path'),
+      } for x in discovered],
+      'selection_portfolio':portfolio,
+      'logic_selected':sel_logic,
+      'thinking_selected':sel_think,
+      'failure_reason':'YADO_PORTFOLIO_DID_NOT_SELECT_BOTH_ORGAN_TYPES',
+      'canonical_mutation':False,
+      'automatic_canonical_promotion':False,
+      'next_required_capability':'ALL_EXPERIENCE_TRI_ORGAN_FAILED_SELECTION_CAUSAL_DIAGNOSIS_V2',
+      'semantic_boundary':'DIAGNOSTIC ONLY. THRESHOLDS AND SELECTION ALGORITHMS ARE UNCHANGED. THE SCORE MATRIX IS PERSISTED SO THE FAILING ORGAN CAN BE DISTINGUISHED FROM A TRANSPORT FAILURE.'
+    }
+    diagnostic['receipt_sha256']=digest(diagnostic)
+    OUT.parent.mkdir(parents=True,exist_ok=True)
+    OUT.write_text(json.dumps(diagnostic,indent=2,sort_keys=True,default=str)+'\n',encoding='utf-8')
+    EXP.parent.mkdir(parents=True,exist_ok=True)
+    EXP.write_text(json.dumps({
+      'schema':'yado.g2.all_experience_tri_organ_genesis.experience_diagnostic.v1',
+      'status':'WITHHOLD_SELECTION_DIAGNOSTIC',
+      'all_experience_digest':all_experience_digest,
+      'inventory_count':len(inventory),
+      'structured_outcome_count':len(structured),
+      'action_counts':dict(sorted(actions.items())),
+      'schema_count':len(schemas),
+      'artifact_reference_edge_count':len(ref_edges),
+      'ledger_event_count':len(events),
+      'portfolio':portfolio,
+      'canonical_mutation':False,
+    },indent=2,sort_keys=True,default=str)+'\n',encoding='utf-8')
+    print(json.dumps(diagnostic,indent=2,sort_keys=True,default=str))
+    raise SystemExit(2)
 
 by_digest={x['gene']['gene_digest']:x for x in portfolio.get('selected_genes',[])}
 logic_item=by_digest[sel_logic['gene_digest']]
