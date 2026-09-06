@@ -38,8 +38,39 @@ if float(transfer.get('cognitive_historical_fresh') or 0)<.75:
     raise RuntimeError('COGNITIVE_FRESH_BELOW_ADMISSION')
 if float(transfer.get('old_corpus_regression') or 0)<.93:
     raise RuntimeError('OLD_CORPUS_REGRESSION_BELOW_ADMISSION')
-if not all((transfer.get('checks') or {}).values()):
-    raise RuntimeError('TRANSFER_CHECK_NOT_ALL_PASS')
+tchecks=transfer.get('checks') or {}
+positive_transfer_checks=(
+    'canonical_unchanged',
+    'cognitive_all_historical_classes_ge_0_60',
+    'cognitive_historical_fresh_ge_0_75',
+    'cognitive_historical_intelligence_causal',
+    'cognitive_historical_logic_causal',
+    'cognitive_historical_thinking_causal',
+    'cognitive_native_selection',
+    'historical_fresh_not_in_adaptation',
+    'historical_fresh_stratified',
+    'intelligence_preserved',
+    'new_historical_evidence_consumed',
+    'new_logic_identity',
+    'old_commit_ge_0_70',
+    'old_corpus_regression_ge_0_93',
+    'old_seek_evidence_ge_0_70',
+    'terminal_historical_fresh_ge_0_75',
+    'terminal_historical_pass_ge_2_3',
+    'terminal_historical_withhold_ge_2_3',
+    'terminal_native_selection',
+    'thinking_preserved',
+    'v6_safety_preserved',
+)
+negative_transfer_checks=(
+    'automatic_canonical_promotion',
+    'external_models_used',
+    'host_written_models',
+)
+if not all(tchecks.get(k) is True for k in positive_transfer_checks):
+    raise RuntimeError('TRANSFER_POSITIVE_CHECK_FAILED:'+json.dumps({k:tchecks.get(k) for k in positive_transfer_checks},sort_keys=True))
+if not all(tchecks.get(k) is False for k in negative_transfer_checks):
+    raise RuntimeError('TRANSFER_NEGATIVE_INVARIANT_FAILED:'+json.dumps({k:tchecks.get(k) for k in negative_transfer_checks},sort_keys=True))
 
 branches=registry.get('branches') or []
 main=next((x for x in branches if x.get('branch')=='main'),None)
