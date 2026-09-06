@@ -75,6 +75,7 @@ INTEL3='ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3'
 REPAIR='ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11'
 SEM='ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1'
 COUNTER='COUNTEREXAMPLE_LINEAGE_MEMORY_V1'
+COG='RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3'
 
 edge(RAW,ROUTER,'ROUTING','raw representation yields capability/routing descriptor')
 edge(ROUTER,FAB,'ROUTING','router selects capability for unified execution fabric')
@@ -104,6 +105,10 @@ edge(GENOME,THINK2,'EVOLUTION_TARGET','thinking is a bounded evolution target')
 edge(GENOME,INTEL3,'EVOLUTION_TARGET','intelligence is a bounded evolution target')
 edge(GENOME,REPAIR,'EVOLUTION_TARGET','program repair is a bounded evolution target')
 edge(INTEL3,COORD,'META_COORDINATION','Intelligence V3 selects/composes capability sets for coordinator')
+edge(COG,LOGIC2,'EXPERIENCE_CONDITIONED_ORGAN_CONTROL','experience-conditioned cognitive layer provides bounded LOGIC decisions')
+edge(COG,THINK2,'EXPERIENCE_CONDITIONED_ORGAN_CONTROL','experience-conditioned cognitive layer provides bounded THINKING decisions')
+edge(COG,INTEL3,'EXPERIENCE_CONDITIONED_ORGAN_CONTROL','experience-conditioned cognitive layer provides bounded INTELLIGENCE decisions')
+edge(EXP,COG,'EXPERIENCE_CONDITIONING','historical experience provenance conditions the cognitive control layer')
 
 # Static source-to-source imports for active sources.
 sources=sorted(set(core.get('active_runtime_sources',[])))
