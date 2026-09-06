@@ -1,6 +1,6 @@
 {
   "schema": "yado.main_accumulated_experience_admission.v1",
-  "status": "GATES_2_OF_3_PASS",
+  "status": "PASS_MAIN_ACCUMULATED_EXPERIENCE_ADMISSION_V1",
   "base_main_sha": "85770f6ce96800ef3dcd69c4a1124e343167be9c",
   "objective": "UPDATE_CANONICAL_MAIN_MEMORY_AND_META_SELECTION_CONTEXT_FROM_ACCUMULATED_PASS_WITHHOLD_HISTORY",
   "policy": "ADMIT_ACCUMULATED_EXPERIENCE_ONLY_AFTER_BLIND_TRANSFER_REGRESSION_INTEGRITY_SECURITY",
@@ -51,7 +51,7 @@
     "SECURITY_AUDIT",
     "FULL_KERNEL_AUDIT_WITH_13_REGRESSION_TESTS"
   ],
-  "main_fast_forward_allowed": false,
+  "main_fast_forward_allowed": true,
   "final_gate_evidence": {
     "module_integrity_run_id": 34049754165,
     "module_integrity_status": "PASS_G2_POST_MODULE_FULL_INTEGRITY_V1",
@@ -60,6 +60,12 @@
     "high_confidence_secret_hits": 0,
     "generic_credential_hits": 0,
     "dependency_vulnerability_count": 0,
-    "full_kernel_audit": "PENDING"
-  }
+    "full_kernel_audit": "PENDING",
+    "full_kernel_audit_run_id": 34049850959,
+    "full_kernel_audit_status": "PASS",
+    "regression_tests": "PASS_13_OF_13",
+    "canonical_guard": "PASS",
+    "findings": 0
+  },
+  "admission_decision": "ADMIT_TO_MAIN"
 }
