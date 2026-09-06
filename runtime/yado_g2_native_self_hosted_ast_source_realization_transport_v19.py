@@ -86,6 +86,24 @@ prev_head=head['canonical_head_digest']
 head['canonical_head_digest']=cdig(head,'canonical_head_digest')
 write(HEAD,head)
 
+run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
+provisional_event={
+ 'index':len(ledger['events']),
+ 'event_id':f"E{len(ledger['events'])+1:04d}_G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT_V19_ADMISSION",
+ 'event_type':'G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT_ADMISSION',
+ 'status':'PASS_CANONICAL_PENDING_FRESH_VERIFICATION','generation':ledger['current_head'],
+ 'deficit':'LIVE_RESOURCE_EVIDENCE_SCOPE_SELF_AUDIT_BINDING',
+ 'effect':f"TRANSPORT_EXACT_YADO_V18_SOURCE={candidate_sha}; ROLLBACK={parent_sha}; POST_VERIFICATION_REQUIRED=True",
+ 'source_path':'candidates/kernel-self-generated/g2-native-context-bound-ast-source-realization-v18.json',
+ 'source_digest':v18.get('receipt_sha256'),'run_id':run_id,'parent_event_hash':ledger['tail_event_hash'],
+ 'canonical_mutation':False,'canonical_mechanism_mutation':False,'architecture_mutation':False,
+ 'promotion_applied':False,'generation_transition':False,
+ 'previous_head_digest':head['canonical_head_digest'],'new_head_digest':head['canonical_head_digest']
+}
+provisional_event['event_hash']=event_hash(provisional_event)
+ledger['events'].append(provisional_event)
+ledger['event_count']=len(ledger['events'])
+ledger['tail_event_hash']=provisional_event['event_hash']
 ledger['current_head_digest']=head['canonical_head_digest']
 ledger['ledger_digest']=digest({k:v for k,v in ledger.items() if k!='ledger_digest'})
 validate_ledger_v2(ledger)
@@ -141,7 +159,6 @@ software_checks={'runtime_compileall_pass':compileall.returncode==0,'selected_re
 
 # Deep audit appended its own ledger event. Re-read and append the V19 transport event.
 ledger=load(LEDGER);validate_ledger_v2(ledger)
-run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
 checks={
  'v18_pass_consumed':True,'parent_source_exact':parent_sha==v18.get('parent_source_sha256'),
  'candidate_source_exact':candidate_sha==v18.get('candidate_source_sha256'),
@@ -174,7 +191,7 @@ event={
  'index':len(ledger['events']),
  'event_id':f"E{len(ledger['events'])+1:04d}_G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT_V19",
  'event_type':'G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT',
- 'status':'PASS_CANONICAL','generation':ledger['current_head'],
+ 'status':'PASS_VERIFIED','generation':ledger['current_head'],
  'deficit':'LIVE_RESOURCE_EVIDENCE_SCOPE_SELF_AUDIT_BINDING',
  'effect':f"TRANSPORTED_YADO_V18_SOURCE={candidate_sha}; LIVE_RESOURCE=PASS; ROLLBACK={parent_sha}",
  'source_path':'candidates/kernel-self-generated/g2-native-self-hosted-ast-source-realization-transport-v19.json',
