@@ -262,7 +262,29 @@ head['current_frontier']=FRONT
 head['canonical_head_digest']=cdig(head,'canonical_head_digest')
 write(HEAD,head)
 
-# Temporary ledger synchronization allows fail-closed local post-binding gates before event commit.
+# A canonical head digest must always have a causal canonical-mutation event.
+# Create a provisional tail event in the ephemeral checkout before running any post-binding
+# guard. It is not persistable unless all gates pass and the final receipt rewrites its
+# evidence binding below.
+run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
+provisional_event={
+ 'index':len(ledger['events']),
+ 'event_id':f"E{len(ledger['events'])+1:04d}_G2_ALL_EXPERIENCE_TRI_ORGAN_ADDITIVE_CANONICAL_BINDING_V2",
+ 'event_type':'G2_ALL_EXPERIENCE_TRI_ORGAN_ADDITIVE_CANONICAL_BINDING',
+ 'status':'PASS_CANONICAL','generation':ledger['current_head'],
+ 'deficit':'EXPERIENCE_DERIVED_TRI_ORGAN_TYPES_SHADOW_ONLY',
+ 'effect':f"ADDED={CAP_LOGIC},{CAP_THINK},{CAP_INTEL}; PARENTS_PRESERVED=true; ACTIVE_CAPS={len(head['active_capabilities'])}; FRONTIER_UNCHANGED={FRONT}",
+ 'source_path':'candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json',
+ 'source_digest':review['receipt_sha256'],'run_id':run_id,
+ 'parent_event_hash':ledger['tail_event_hash'],
+ 'canonical_mutation':True,'canonical_mechanism_mutation':True,'architecture_mutation':False,
+ 'promotion_applied':False,'generation_transition':False,
+ 'previous_head_digest':prev_head,'new_head_digest':head['canonical_head_digest']
+}
+provisional_event['event_hash']=event_hash(provisional_event)
+ledger['events'].append(provisional_event)
+ledger['event_count']=len(ledger['events'])
+ledger['tail_event_hash']=provisional_event['event_hash']
 ledger['current_head_digest']=head['canonical_head_digest']
 ledger['open_deficits']=[FRONT]
 ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
@@ -280,8 +302,7 @@ post_report=load(REPO/'audits/yado-g2-post-module-full-integrity-v1.json')
 if post_report.get('status')!='PASS_G2_POST_MODULE_FULL_INTEGRITY_V1':
     raise RuntimeError('TRI_ORGAN_POST_MODULE_WITHHOLD:'+canon(post_report))
 
-# Only now create the immutable receipt/event for this same-G2 canonical mechanism mutation.
-run_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')
+# Only now create the immutable receipt for this same-G2 canonical mechanism mutation.
 receipt={
  'schema':'yado.g2.all_experience_tri_organ.additive_canonical_binding.v2',
  'status':'PASS_G2_TRI_ORGAN_ADDITIVE_CANONICAL_BINDING_V2',
@@ -315,22 +336,15 @@ write(OUT,receipt)
 receipt_path=REPO/f'receipts/yado-g2-all-experience-tri-organ-additive-canonical-binding-v2-run-{run_id}.json'
 write(receipt_path,receipt)
 
-event={
- 'index':len(ledger['events']),
- 'event_id':f"E{len(ledger['events'])+1:04d}_G2_ALL_EXPERIENCE_TRI_ORGAN_ADDITIVE_CANONICAL_BINDING_V2",
- 'event_type':'G2_ALL_EXPERIENCE_TRI_ORGAN_ADDITIVE_CANONICAL_BINDING',
- 'status':'PASS_CANONICAL','generation':ledger['current_head'],
- 'deficit':'EXPERIENCE_DERIVED_TRI_ORGAN_TYPES_SHADOW_ONLY',
- 'effect':f"ADDED={CAP_LOGIC},{CAP_THINK},{CAP_INTEL}; PARENTS_PRESERVED=true; ACTIVE_CAPS={len(head['active_capabilities'])}; FRONTIER_UNCHANGED={FRONT}",
- 'source_path':f'receipts/yado-g2-all-experience-tri-organ-additive-canonical-binding-v2-run-{run_id}.json',
- 'source_digest':receipt['receipt_sha256'],'run_id':run_id,
- 'parent_event_hash':ledger['tail_event_hash'],
- 'canonical_mutation':True,'canonical_mechanism_mutation':True,'architecture_mutation':False,
- 'promotion_applied':False,'generation_transition':False,
- 'previous_head_digest':prev_head,'new_head_digest':head['canonical_head_digest']
-}
+# Finalize the already-validated provisional tail event with the immutable PASS receipt.
+event=ledger['events'][-1]
+expected_event_id=f"E{len(ledger['events']):04d}_G2_ALL_EXPERIENCE_TRI_ORGAN_ADDITIVE_CANONICAL_BINDING_V2"
+if event.get('event_id')!=expected_event_id:
+    raise RuntimeError('PROVISIONAL_EVENT_ID_DRIFT:'+str(event.get('event_id'))+'!='+expected_event_id)
+event['source_path']=f'receipts/yado-g2-all-experience-tri-organ-additive-canonical-binding-v2-run-{run_id}.json'
+event['source_digest']=receipt['receipt_sha256']
 event['event_hash']=event_hash(event)
-ledger['events'].append(event);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=event['event_hash']
+ledger['tail_event_hash']=event['event_hash']
 ledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})
 validate_ledger_v2(ledger);write(LEDGER,ledger)
 
