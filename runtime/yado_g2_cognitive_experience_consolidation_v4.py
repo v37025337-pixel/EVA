@@ -66,7 +66,7 @@ mg=multi['genes'];rg=real['genes'];gg=glob['genes']
 
 def multi_fresh(g):
     s=g.get('summary') or {}
-    xs=[x for x in [s.get('min_fresh'),s.get('mean_fresh'),g.get('fresh_blind'),g.get('fresh_balanced'),g.get('fresh')] if x is not None]
+    xs=[x for x in [s.get('min_fresh'),s.get('mean_fresh'),s.get('min_fresh_balanced'),s.get('mean_fresh_balanced'),g.get('fresh_blind'),g.get('fresh_balanced'),g.get('fresh')] if x is not None]
     return min(float(x) for x in xs) if xs else 0.0
 
 def multi_drop(g):
