@@ -76,6 +76,8 @@ jobs:
               subprocess.check_call([sys.executable,"runtime/yado_g2_four_domain_fresh_stress_v1.py"])
           elif task=="USER_20260906_TRI_ORGAN_ADMISSION_REVIEW_V2":
               subprocess.check_call([sys.executable,"runtime/yado_g2_all_experience_tri_organ_canonical_admission_review_v2.py"])
+          elif task=="USER_20260906_TRI_ORGAN_CANONICAL_BINDING_V2":
+              subprocess.check_call([sys.executable,"runtime/yado_g2_all_experience_tri_organ_additive_canonical_binding_v2.py"])
           else:
               print("NO_OPTIONAL_CROSS_DOMAIN_STRESS",task)
           PY
@@ -93,6 +95,24 @@ jobs:
           [ -f candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json ] && files+=(candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json)
           [ -f experience/yado-four-domain-fresh-stress-v1.json ] && files+=(experience/yado-four-domain-fresh-stress-v1.json)
           [ -f candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json ] && files+=(candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json)
+          if [ -f runtime/yado_tri_organ_binding_v2_commit_ready.marker ]; then
+            files+=(
+              canonical/yado-g2-all-experience-tri-organ-v1.json
+              canonical/yado-main-head-g2.json
+              canonical/yado-unified-core-v1.json
+              canonical/yado-algorithm-provenance-registry-v1.json
+              architecture/evolution-ledger.json
+              runtime/yado_unified_core_v1.py
+              runtime/yado_g2_unified_module_kernel_v1.py
+              candidates/kernel-self-generated/g2-unified-module-kernel-v1.json
+              audits/yado-g2-post-module-full-integrity-v1.json
+              audits/yado-g2-module-dependency-graph-v1.json
+              candidates/kernel-self-generated/g2-all-experience-tri-organ-additive-canonical-binding-v2.json
+            )
+            for rf in receipts/yado-g2-all-experience-tri-organ-additive-canonical-binding-v2-run-*.json; do
+              [ -f "${rf}" ] && files+=("${rf}")
+            done
+          fi
           if [ ${#files[@]} -gt 0 ]; then
             git add "${files[@]}"
             git diff --cached --quiet || git commit -m "Persist YADO DNS GCP fresh cross-domain stress [skip ci]"
@@ -136,6 +156,24 @@ jobs:
               assert r["admission_plan"]["replace_existing_organs"] is False,r
               assert r["canonical_mutation"] is False,r
               print(r["status"],r["next_required_capability"])
+          elif task=="USER_20260906_TRI_ORGAN_CANONICAL_BINDING_V2":
+              p=pathlib.Path("candidates/kernel-self-generated/g2-all-experience-tri-organ-additive-canonical-binding-v2.json")
+              if not p.exists(): raise SystemExit("MISSING_TRI_ORGAN_BINDING_REPORT")
+              r=json.loads(p.read_text())
+              if r.get("status")!="PASS_G2_TRI_ORGAN_ADDITIVE_CANONICAL_BINDING_V2":
+                  raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+              assert r["replace_existing_organs"] is False,r
+              assert r["v4_preserved"] is True,r
+              assert r["v7_preserved"] is True,r
+              assert r["active_capability_count_before"]==28,r
+              assert r["active_capability_count_after"]==31,r
+              assert r["post_binding_gates"]["canonical_guard"] is True,r
+              assert r["post_binding_gates"]["regression_tests"] is True,r
+              assert r["post_binding_gates"]["unified_module_fresh_gate"]=="PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1",r
+              assert r["post_binding_gates"]["post_module_integrity"]=="PASS_G2_POST_MODULE_FULL_INTEGRITY_V1",r
+              assert r["generation_transition"] is False,r
+              assert r["g3_genesis_performed"] is False,r
+              print(r["status"],r["active_capability_count_after"],r["next_required_capability"])
           else:
               print("NO_OPTIONAL_CROSS_DOMAIN_STRESS_TO_ENFORCE",task)
           PY
@@ -151,4 +189,8 @@ jobs:
             candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json
             experience/yado-four-domain-fresh-stress-v1.json
             candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json
+            candidates/kernel-self-generated/g2-all-experience-tri-organ-additive-canonical-binding-v2.json
+            canonical/yado-g2-all-experience-tri-organ-v1.json
+            audits/yado-g2-post-module-full-integrity-v1.json
+            audits/yado-g2-module-dependency-graph-v1.json
           if-no-files-found: warn
