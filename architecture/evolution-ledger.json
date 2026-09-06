@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "2ccaf4a0d534cb68fc6c7185a93c1db91b4a7e34ec98fba6a267633df2c8551f",
+  "current_head_digest": "795d84c12027aab467cd3bb16fb3024886f4525c40d8cf359848a1d60fd983ce",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 288,
+  "event_count": 291,
   "events": [
     {
       "canonical_mutation": false,
@@ -5057,10 +5057,68 @@
       "source_digest": "bd78f857373c098f65bd01075abe7ce8cd5cf661d0c5ce56e9c38a29e8b3c54c",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-34031111095.json",
       "status": "PASS"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": true,
+      "canonical_mutation": true,
+      "deficit": "LIVE_RESOURCE_EVIDENCE_SCOPE_SELF_AUDIT_BINDING",
+      "effect": "TRANSPORT_EXACT_YADO_V18_SOURCE=700d1a176560ba24d25e22ebab8b1aaf5725e53e8c1cf81d45aaeacd495dd422; ROLLBACK=78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5; POST_VERIFICATION_REQUIRED=True",
+      "event_hash": "bcdd25023003859a68d9c07eed9e986f512d34d8573db1b4561115169856e6de",
+      "event_id": "E0289_G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT_V19_ADMISSION",
+      "event_type": "G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 288,
+      "new_head_digest": "795d84c12027aab467cd3bb16fb3024886f4525c40d8cf359848a1d60fd983ce",
+      "parent_event_hash": "70546fc313b38e4cf7cc6c1f58c23da8275468798f3ae7e58597fa0b8514064b",
+      "previous_head_digest": "2ccaf4a0d534cb68fc6c7185a93c1db91b4a7e34ec98fba6a267633df2c8551f",
+      "promotion_applied": false,
+      "run_id": "34033000501",
+      "source_digest": "922146d0317e12643d3b22693b7683d55b2430692d1a4c0f15f8362b6004bdd0",
+      "source_path": "candidates/kernel-self-generated/g2-native-context-bound-ast-source-realization-v18.json",
+      "status": "PASS_CANONICAL_PENDING_FRESH_VERIFICATION"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0; NEXT=KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+      "event_hash": "91c14bf626d1e897b6c48c0045bc9e925b9702a0479e3a3a4628439b650d67c4",
+      "event_id": "E0290_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 289,
+      "parent_event_hash": "bcdd25023003859a68d9c07eed9e986f512d34d8573db1b4561115169856e6de",
+      "promotion_applied": false,
+      "run_id": "34033000501",
+      "source_digest": "5b0716da6525db8740412473d5744aedde88376be064a9b915968929eb2daf0c",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-34033000501.json",
+      "status": "PASS"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": false,
+      "deficit": "LIVE_RESOURCE_EVIDENCE_SCOPE_SELF_AUDIT_BINDING",
+      "effect": "TRANSPORTED_YADO_V18_SOURCE=700d1a176560ba24d25e22ebab8b1aaf5725e53e8c1cf81d45aaeacd495dd422; LIVE_RESOURCE=PASS; ROLLBACK=78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
+      "event_hash": "3a102138fa2ccb14e15e1c4e05d8a257b746c522315c25a4dbda9b9a891cbcf8",
+      "event_id": "E0291_G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT_V19",
+      "event_type": "G2_NATIVE_SELF_HOSTED_AST_SOURCE_REALIZATION_TRANSPORT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 290,
+      "new_head_digest": "795d84c12027aab467cd3bb16fb3024886f4525c40d8cf359848a1d60fd983ce",
+      "parent_event_hash": "91c14bf626d1e897b6c48c0045bc9e925b9702a0479e3a3a4628439b650d67c4",
+      "previous_head_digest": "795d84c12027aab467cd3bb16fb3024886f4525c40d8cf359848a1d60fd983ce",
+      "promotion_applied": false,
+      "run_id": "34033000501",
+      "source_digest": "3378d0f1d3aaa9c50c496e32bc21fdf2232a52e22c25fde03bc0783e4b7e6d43",
+      "source_path": "candidates/kernel-self-generated/g2-native-self-hosted-ast-source-realization-transport-v19.json",
+      "status": "PASS_VERIFIED"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "b08175fafe61c5bf7e1c4f4093aafb235b09dfd91b0d00599cd97a85c1a0926e",
+  "ledger_digest": "437f4a75b126baaf3189b92fcabb0c07a0fd71e82162e275ea6a11f84fb3fc69",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -5098,5 +5156,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "70546fc313b38e4cf7cc6c1f58c23da8275468798f3ae7e58597fa0b8514064b"
+  "tail_event_hash": "3a102138fa2ccb14e15e1c4e05d8a257b746c522315c25a4dbda9b9a891cbcf8"
 }
