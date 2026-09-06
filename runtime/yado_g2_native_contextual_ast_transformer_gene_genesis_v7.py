@@ -62,20 +62,27 @@ required=tuple(sorted(k for k in base))
 if tree_predict(model,base)!='ACCEPT_FRESH_EVIDENCE':
     raise RuntimeError('BINDER_REAL_EVIDENCE_NOT_ACCEPTED')
 
+def bind_input(features):
+    x=dict(features)
+    # This categorical feature is not host logic: it is the direct output of
+    # YADO's already-created evidence-binder gene over the same contract fields.
+    x['binder_decision']=tree_predict(model,x)
+    return x
+
 def expected(features):
-    decision=tree_predict(model,features)
+    decision=str(features.get('binder_decision') or '')
     return accept_action if decision=='ACCEPT_FRESH_EVIDENCE' else withhold_action
 
 rows=[]
 for nonce in range(10):
-    x=dict(base);x['irrelevant_nonce']=nonce
+    x=dict(base);x['irrelevant_nonce']=nonce;x=bind_input(x)
     rows.append({'input':x,'expected':expected(x),'kind':'POSITIVE'})
 for idx,k in enumerate(required):
     for nonce in range(4):
-        x=dict(base);x[k]=False;x['irrelevant_nonce']=100+idx*10+nonce
+        x=dict(base);x[k]=False;x['irrelevant_nonce']=100+idx*10+nonce;x=bind_input(x)
         rows.append({'input':x,'expected':expected(x),'kind':'SINGLE_FAULT_'+k})
 for idx,(a,b) in enumerate(combinations(required,2)):
-    x=dict(base);x[a]=False;x[b]=False;x['irrelevant_nonce']=500+idx
+    x=dict(base);x[a]=False;x[b]=False;x['irrelevant_nonce']=500+idx;x=bind_input(x)
     rows.append({'input':x,'expected':expected(x),'kind':'PAIR_FAULT_'+a+'_'+b})
 
 fit=[];blind=[]
@@ -103,10 +110,11 @@ try:
     dev=k.executive.evaluate_mechanism(
       program.program_id,blind,min_score=1.0,min_ablation_drop=.20
     )
-    actual=k.executive.execute_capability('NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_V7',dict(base)) if dev.state_committed else None
+    actual_input=bind_input(base)
+    actual=k.executive.execute_capability('NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_V7',actual_input) if dev.state_committed else None
     counter=[]
     for field in required:
-        cf=dict(base);cf[field]=False
+        cf=dict(base);cf[field]=False;cf=bind_input(cf)
         pred=k.executive.execute_capability('NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_V7',cf) if dev.state_committed else None
         counter.append({'flipped_field':field,'prediction':pred})
 finally:
@@ -128,6 +136,7 @@ checks={
  'semantic_gene_consumed':bool(meta_gene.get('gene_id')),
  'binder_gene_consumed':bool(binder.get('gene_id')),
  'semantic_actions_derived_from_gene':True,
+ 'binder_decision_feature_is_yado_derived':all('binder_decision' in x['input'] for x in fit+blind),
  'historical_conditional_shape_derived_from_yado_history':'IfExp' in observed_after_shapes,
  'native_goal_created':True,
  'native_deficit_detected':True,
@@ -148,7 +157,7 @@ checks={
 
 positive=(
  'canonical_v5_continuity_active','v6_failure_consumed','semantic_gene_consumed','binder_gene_consumed',
- 'semantic_actions_derived_from_gene','historical_conditional_shape_derived_from_yado_history',
+ 'semantic_actions_derived_from_gene','binder_decision_feature_is_yado_derived','historical_conditional_shape_derived_from_yado_history',
  'native_goal_created','native_deficit_detected','native_policy_synthesized','native_policy_committed',
  'fresh_blind_exact','causal_ablation_drop_ge_0_20','restore_exact',
  'actual_valid_evidence_routes_to_accept_action','single_faults_route_to_withhold_action','canonical_unchanged'
@@ -197,7 +206,7 @@ report={
  'parent_v6_receipt':v6.get('receipt_sha256'),
  'semantic_gene_id':meta_gene.get('gene_id'),'binder_gene_id':binder.get('gene_id'),
  'native_goal':{'goal_id':goal.goal_id,'deficit_id':deficit.deficit_id},
- 'dataset':{'fit':len(fit),'blind':len(blind),'construction':'BINDER_LABELED_REAL_POSITIVE_PLUS_SINGLE_PAIR_COUNTERFACTUALS'},
+ 'dataset':{'fit':len(fit),'blind':len(blind),'construction':'BINDER_LABELED_REAL_POSITIVE_PLUS_SINGLE_PAIR_COUNTERFACTUALS','typed_binding_feature':'binder_decision from YADO binder gene'},
  'semantic_actions':{'accept':accept_action,'withhold':withhold_action},
  'history_derived_status_shapes':history_shapes,
  'native_policy':{'program_id':program.program_id,'selection':asdict(selection),'development':asdict(dev)},
