@@ -22,6 +22,7 @@ REAL=REPO/'receipts/yado-g2-real-world-transfer-benchmark-v1-run-33363995201.jso
 OUT=REPO/'candidates/kernel-self-generated/g2-raw-v4-semantic-grounding-self-evolution-v2.json'
 MODEL_OUT=REPO/'candidates/kernel-self-generated/raw-task-representation-v4-semantic-grounding-repair-v2.json'
 DB=ROOT/'yado_raw_v4_semantic_grounding_v2.sqlite'
+HEAD=REPO/'canonical/yado-main-head-g2.json'
 
 RESOURCE='RESOURCE-PORTFOLIO-V1'
 LABELS=(
@@ -50,6 +51,7 @@ def bucket(t,y):
     return int(hashlib.sha256((t+'|'+y).encode()).hexdigest()[:8],16)%10
 
 task,intake,v3,v4,struct,v4fresh,real=map(load,[TASK,INTAKE,V3,V4,STRUCT,V4FRESH,REAL])
+canonical_head_before=load(HEAD).get('canonical_head_digest')
 if intake.get('status')!='PASS_G2_NEW_EXTERNAL_USER_GOAL_INTAKE_V1':
     raise RuntimeError('NEW_GOAL_INTAKE_PASS_REQUIRED')
 rep=intake.get('raw_task_representation') or {}
@@ -200,12 +202,12 @@ checks={
  'no_ip_specific_rule':True,
  'host_selected_model':False,
  'host_selected_pivot':False,
- 'canonical_unchanged':UnifiedYADOCoreV1(REPO).head.get('canonical_head_digest')==head_before if False else True,
+ 'canonical_unchanged':False,
 }
 
 # Read canonical head explicitly to prove no mutation in this shadow run.
-head_now=load(REPO/'canonical/yado-main-head-g2.json')
-checks['canonical_unchanged']=head_now.get('canonical_head_digest')==core_head if False else True
+head_now=load(HEAD)
+checks['canonical_unchanged']=head_now.get('canonical_head_digest')==canonical_head_before
 
 # We never write canonical artifacts in this stage; hash before/after via current core object.
 core=UnifiedYADOCoreV1(REPO)
