@@ -77,6 +77,9 @@ REPAIR='ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11'
 SEM='ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1'
 COUNTER='COUNTEREXAMPLE_LINEAGE_MEMORY_V1'
 COG='RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4'
+TRI_LOGIC='ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1'
+TRI_THINK='ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1'
+TRI_INTEL='ALG-G2-ALL-EXPERIENCE-CAUSAL-GENE-PORTFOLIO-INTELLIGENCE-V1'
 
 edge(RAW,ROUTER,'ROUTING','raw representation yields capability/routing descriptor')
 edge(ROUTER,FAB,'ROUTING','router selects capability for unified execution fabric')
@@ -112,6 +115,15 @@ edge(COG,LOGIC2,'EXPERIENCE_CONDITIONED_ORGAN_CONTROL','experience-conditioned c
 edge(COG,THINK2,'EXPERIENCE_CONDITIONED_ORGAN_CONTROL','experience-conditioned cognitive layer provides bounded THINKING decisions')
 edge(COG,INTEL3,'EXPERIENCE_CONDITIONED_ORGAN_CONTROL','experience-conditioned cognitive layer provides bounded INTELLIGENCE decisions')
 edge(EXP,COG,'EXPERIENCE_CONDITIONING','historical experience provenance conditions the cognitive control layer')
+edge(EXP,TRI_INTEL,'EXPERIENCE_DERIVED_PORTFOLIO','admitted tri-organ intelligence is derived from accumulated verified experience')
+edge(TRI_INTEL,TRI_LOGIC,'PORTFOLIO_ROUTE','tri-organ intelligence routes relation-state contracts to the admitted relational causal logic')
+edge(TRI_INTEL,TRI_THINK,'PORTFOLIO_ROUTE','tri-organ intelligence routes event-state contracts to the admitted causal event thinking')
+edge(TRI_LOGIC,LOGIC2,'ROLLBACK_PARENT','Logic V2 remains active as rollback parent for additive relational causal logic')
+edge(TRI_THINK,THINK2,'ROLLBACK_PARENT','Thinking V2 remains active as rollback parent for additive causal event thinking')
+edge(TRI_INTEL,INTEL3,'ROLLBACK_PARENT','Intelligence V3 remains active as rollback parent for additive portfolio intelligence')
+edge(GENOME,TRI_LOGIC,'EVOLUTION_TARGET','admitted relational causal logic remains a bounded future evolution target')
+edge(GENOME,TRI_THINK,'EVOLUTION_TARGET','admitted causal event thinking remains a bounded future evolution target')
+edge(GENOME,TRI_INTEL,'EVOLUTION_TARGET','admitted causal portfolio intelligence remains a bounded future evolution target')
 
 # Static source-to-source imports for active sources.
 sources=sorted(set(core.get('active_runtime_sources',[])))
@@ -180,6 +192,7 @@ checks={
  'openapi_canonical_plan_only':core.get('openapi_contract_capability_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('openapi_contract_capability_v1',{}).get('network_execute') is False and API in active,
  'openapi_readonly_executor_canonical':core.get('openapi_readonly_executor_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('openapi_readonly_executor_v1',{}).get('read_only_only') is True and API_EXEC in active,
  'evolutionary_genome_controller_canonical':core.get('evolutionary_genome_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('evolutionary_genome_v1',{}).get('automatic_canonical_promotion') is False and GENOME in active,
+ 'all_experience_tri_organ_additive_canonical':core.get('all_experience_tri_organ_v1',{}).get('status')=='CANONICAL_ACTIVE' and core.get('all_experience_tri_organ_v1',{}).get('replace_existing_organs') is False and all(x in active for x in [TRI_LOGIC,TRI_THINK,TRI_INTEL]) and all(x in active for x in [LOGIC2,THINK2,INTEL3]),
  'cognitive_temporal_kernel_embedded':core.get('cognitive_temporal_kernel_v1',{}).get('status')=='CANONICAL_EMBEDDED' and core.get('cognitive_temporal_kernel_v1',{}).get('separate_active_capability') is False,
  'temporal_fabric_v5_canonical':core.get('execution_fabric_v5',{}).get('status')=='CANONICAL_ACTIVE' and core.get('cognitive_temporal_kernel_v1',{}).get('execution_fabric')==FAB,
  'module_assembly_pass':assembly.get('status')=='PASS_CURRENT_G2_UNIFIED_MODULE_ASSEMBLY_V1' and assembly.get('active_module_count')==len(active) and assembly.get('covered_module_count')==len(active) and assembly.get('functional_assembly_pass') is True and assembly.get('canonical_ready') is True,
