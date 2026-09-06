@@ -2,7 +2,7 @@
   "canonical_mutation": false,
   "checks": {
     "all_five_dns_address_claims_supported": true,
-    "all_gcp_endpoint_claims_determined": false,
+    "all_gcp_endpoint_claims_determined": true,
     "all_region_claims_supported": true,
     "canonical_unchanged": true,
     "dns_anycast_semantics_found": true,
@@ -153,7 +153,7 @@
       "status": "SUPPORTED"
     }
   ],
-  "experience_digest": "9d1d0d89da720adbd78f1edd63bac69825958a8fd50ba03ef8f217486781ff89",
+  "experience_digest": "757bf1e759831b47d2ab91410c324373e7e8e15bc5b5ecdbfdbe26bfe1c4fae6",
   "fresh_logic": {
     "accuracy": 1.0,
     "best_structural_ablation_accuracy": 0.0,
@@ -200,13 +200,13 @@
       "claim_parse": "PARSED",
       "claimed_base": "https://googleapis.com",
       "claimed_host": "googleapis.com",
-      "derive_mode": "NO_SERVICE_HOST",
-      "official_endpoint": null,
-      "official_service_host": null,
+      "derive_mode": "SUCCESSFULLY_FETCHED_OFFICIAL_SERVICE_SOURCE_HOST",
+      "official_endpoint": "https://compute.googleapis.com",
+      "official_service_host": "compute.googleapis.com",
       "regional_endpoint_examples": [],
       "service": "Compute Engine",
       "source_id": "GCP_COMPUTE_OFFICIAL",
-      "status": "UNDETERMINED_SOURCE_EXTRACTION"
+      "status": "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
     },
     {
       "claim_id": "GCP_CLOUD_RUN",
@@ -488,16 +488,16 @@
       "ok": true,
       "requested_url": "https://developers.google.com/speed/public-dns/faq",
       "resolved_url": "https://developers.google.com/speed/public-dns/faq",
-      "sha256": "b0146b1e85293aea4b4e3f4d0951dedfbf08a339d79cf31a0650b40831831953"
+      "sha256": "a7938e6d2765ed2e8ab58cc5e5f79ef488e2863de877659ec30ce6db6c262107"
     },
     "DNS_GOOGLE_OFFICIAL": {
-      "bytes": 68959,
+      "bytes": 68963,
       "content_type": "text/html; charset=utf-8",
       "http_status": 200,
       "ok": true,
       "requested_url": "https://developers.google.com/speed/public-dns/",
       "resolved_url": "https://developers.google.com/speed/public-dns/",
-      "sha256": "455d1c795fc30514bb207082f6f4c3271cd6bf85c01ffdd47b7f65e710fd07ec"
+      "sha256": "62aedefc32e5813ec74983bdff8ca82f603e93013c6bd9468d26a2f256120c98"
     },
     "DNS_OPENDNS_OFFICIAL": {
       "bytes": 14594,
@@ -524,7 +524,7 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/appengine/docs/admin-api/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/appengine/docs/admin-api/reference/rest",
-      "sha256": "b7d7f682d6bf6bec4eb587a100f8e4f046ed5f1d88dc0402103d7018ed39c016"
+      "sha256": "fb5f8e0c337eaff3e08d37c4aa3ca943db6655fdc6769578be6b08f2a2654ae7"
     },
     "GCP_BIGQUERY_OFFICIAL": {
       "bytes": 500000,
@@ -533,16 +533,16 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/bigquery/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/bigquery/docs/reference/rest",
-      "sha256": "926d4955eea8c66dd948f7588a09da18efc2ffd6ab3072a85f7c5a4343508f7c"
+      "sha256": "e93b87a94a042ca4731a39074446c43a33694f897bd49b94b45364fdbbeff638"
     },
     "GCP_CLOUDSQL_OFFICIAL": {
-      "bytes": 252151,
+      "bytes": 252155,
       "content_type": "text/html; charset=utf-8",
       "http_status": 200,
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/sql/docs/mysql/admin-api/rest",
       "resolved_url": "https://docs.cloud.google.com/sql/docs/mysql/admin-api/rest",
-      "sha256": "bfe69e9c954365cdbe179a1a97cb6486154ce2adca1c75bbeffee31dbad194b3"
+      "sha256": "3c5582297781ca349f13c945c1ae700a318844d3919e401f61f73ba534fd853e"
     },
     "GCP_CLOUD_RUN_OFFICIAL": {
       "bytes": 238712,
@@ -551,16 +551,16 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/run/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/run/docs/reference/rest",
-      "sha256": "8d689754ef802a9aeaa4b7638eb7b8d4c4094abf81abe769ef87ec9779f413f9"
+      "sha256": "f674575a4d75fe079c64af4946d371d5c121dd108bd383dc27e19ef1a6cb1337"
     },
     "GCP_COMPUTE_OFFICIAL": {
       "bytes": 500000,
       "content_type": "application/json; charset=UTF-8",
       "http_status": 200,
       "ok": true,
-      "requested_url": "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
-      "resolved_url": "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest",
-      "sha256": "ceaaa623d77bbee536bf3f66be0e38dad720dc063686f24f98e6878a565acc8b"
+      "requested_url": "https://compute.googleapis.com/$discovery/rest?version=v1",
+      "resolved_url": "https://compute.googleapis.com/$discovery/rest?version=v1",
+      "sha256": "ca823c9117d9d6db618403a8a8d89d1b2e366215155289ece75e7c7454f85217"
     },
     "GCP_DATAFLOW_OFFICIAL": {
       "bytes": 184478,
@@ -569,16 +569,16 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/dataflow/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/dataflow/docs/reference/rest",
-      "sha256": "b67ebcaaa5db5dc2a5f38dfebe4136ee09e4da62238d4c0fb86c400c74793d57"
+      "sha256": "b3f412d9c7c0f76b8894fe66883b0a5f5fbc6812008c768782d96ceae1d69482"
     },
     "GCP_FILESTORE_OFFICIAL": {
-      "bytes": 190079,
+      "bytes": 189893,
       "content_type": "text/html; charset=utf-8",
       "http_status": 200,
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/filestore/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/filestore/docs/reference/rest",
-      "sha256": "919999439e6de5d782e1cd78e563193d7b6cd31fd713e26213d831b901d778a1"
+      "sha256": "0bdce03d576ce691d4b4d980e56871a2973a7b90d0fd0f7d8daf78b09c3d1b78"
     },
     "GCP_FIRESTORE_OFFICIAL": {
       "bytes": 222132,
@@ -587,7 +587,7 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/firestore/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/firestore/docs/reference/rest",
-      "sha256": "c47fc64b9d505393755654f73e4854b3ef5b941d66307f3b97dbed27af569020"
+      "sha256": "9e0e7b933515d7e4eeb9ddb92cb44e854e8c6373a79ed3b3b3c661a857230300"
     },
     "GCP_PUBSUB_OFFICIAL": {
       "bytes": 163262,
@@ -596,7 +596,7 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/pubsub/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/pubsub/docs/reference/rest",
-      "sha256": "6612f5753d059e7d4e6a0280a15144aca112d0ce819b76fa37b67c5a0118bfb7"
+      "sha256": "1ca52b983f74f643437abb0dd192e86560ee0a256bba38dad062f0f559548771"
     },
     "GCP_REGIONS_OFFICIAL": {
       "bytes": 468846,
@@ -605,7 +605,7 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/compute/docs/regions-zones",
       "resolved_url": "https://docs.cloud.google.com/compute/docs/regions-zones",
-      "sha256": "2f9718c2b43d0cfe26774bbfc1030f72db6cf6d4afd09a8c706495316c09d1de"
+      "sha256": "bf3831086982094cef7e1408998ef29b8858fdaf4ec57b00a6fcc9e0c13fdea3"
     },
     "GCP_SPANNER_OFFICIAL": {
       "bytes": 356226,
@@ -614,7 +614,7 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/spanner/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/spanner/docs/reference/rest",
-      "sha256": "9dc33d427c37c949409d9efadde69deedcf856b19ac73477cac020e85a7ac1b7"
+      "sha256": "cc804c20ae62638a033def48951c9a15398c1988a51b340f869adb4f8d87dee9"
     },
     "GCP_SPEECH_OFFICIAL": {
       "bytes": 172952,
@@ -623,16 +623,16 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/speech-to-text/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/speech-to-text/docs/reference/rest",
-      "sha256": "a6b533d4641e519ae2531adb19b868c063706e77449e991b4b975868c365f13c"
+      "sha256": "51deba5b45db21f7cfc48ae8c51a23cf4a336dd14d92653b818777ed4949f227"
     },
     "GCP_STORAGE_OFFICIAL": {
-      "bytes": 271140,
+      "bytes": 271136,
       "content_type": "text/html; charset=utf-8",
       "http_status": 200,
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/storage/docs/request-endpoints",
       "resolved_url": "https://docs.cloud.google.com/storage/docs/request-endpoints",
-      "sha256": "d0c785567729cdeb64d6919a12ee74189c0d9633c766af80fff4839d70255fcc"
+      "sha256": "8624cdc52823dc20041f824ad50bfc0e47c99db486ac8761574bd2999c631c68"
     },
     "GCP_VERTEX_OFFICIAL": {
       "bytes": 265091,
@@ -641,7 +641,7 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/vertex-ai/docs/samples/aiplatform-deploy-model-sample",
       "resolved_url": "https://docs.cloud.google.com/vertex-ai/docs/samples/aiplatform-deploy-model-sample",
-      "sha256": "7e01ef5193b539d75d10a742b72802a6cd3b69a07701aad5270ca19692a05541"
+      "sha256": "ca502662f7ba7ccbfb316c8738215bd0c29f0d8108144eaad117ba5692e10276"
     },
     "GCP_VISION_OFFICIAL": {
       "bytes": 201634,
@@ -650,9 +650,9 @@
       "ok": true,
       "requested_url": "https://docs.cloud.google.com/vision/docs/reference/rest",
       "resolved_url": "https://docs.cloud.google.com/vision/docs/reference/rest",
-      "sha256": "4a4cf8afb09171842eb070985780de2292d5ccd235c374a38822f8789f501232"
+      "sha256": "fa731e38c64538833e787ab11eb14d7df6122078d8321b933f3877421fc0e27b"
     }
   },
-  "status": "WITHHOLD_FRESH_STRESS_EVIDENCE",
+  "status": "TRAINED_FRESH_STRESS_EVIDENCE",
   "task_id": "USER_20260906_DNS_GCP_RESEARCH_V1"
 }
