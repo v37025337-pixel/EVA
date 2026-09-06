@@ -63,6 +63,32 @@ jobs:
           assert r.get("canonical_mutation") is False,r
           print(r["status"],r["fetched_count"],r["source_count"])
           PY
+      - name: Run optional fresh DNS GCP cross-domain research stress
+        run: |
+          python - <<'PY'
+          import json,pathlib,subprocess,sys
+          req=json.loads(pathlib.Path("architecture/yado-user-external-corpus-learning-v1-request.json").read_text())
+          task=(req.get("cross_domain_task") or {}).get("id")
+          if task=="USER_20260906_DNS_GCP_RESEARCH_V1":
+              subprocess.check_call([sys.executable,"runtime/yado_g2_dns_gcp_cross_domain_research_stress_v1.py"])
+          else:
+              print("NO_OPTIONAL_CROSS_DOMAIN_STRESS",task)
+          PY
+      - name: Canonical guard after optional cross-domain stress
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist optional cross-domain stress evidence
+        run: |
+          git config user.name "YADO DNS GCP Research Stress"
+          git config user.email "actions@users.noreply.github.com"
+          files=()
+          [ -f candidates/kernel-self-generated/g2-dns-gcp-cross-domain-research-stress-v1.json ] && files+=(candidates/kernel-self-generated/g2-dns-gcp-cross-domain-research-stress-v1.json)
+          [ -f experience/yado-dns-gcp-cross-domain-research-stress-v1.json ] && files+=(experience/yado-dns-gcp-cross-domain-research-stress-v1.json)
+          if [ ${#files[@]} -gt 0 ]; then
+            git add "${files[@]}"
+            git diff --cached --quiet || git commit -m "Persist YADO DNS GCP fresh cross-domain stress [skip ci]"
+            git pull --rebase origin yado-architecture-shadow-search
+            git push origin HEAD:yado-architecture-shadow-search
+          fi
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
@@ -70,4 +96,6 @@ jobs:
           path: |
             runtime/yado_g2_user_external_corpus_learning_v1_receipt.json
             experience/yado-user-external-corpus-learning-v1.json
+            candidates/kernel-self-generated/g2-dns-gcp-cross-domain-research-stress-v1.json
+            experience/yado-dns-gcp-cross-domain-research-stress-v1.json
           if-no-files-found: warn
