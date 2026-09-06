@@ -15,7 +15,7 @@
   "active_branch": "yado-architecture-shadow-search",
   "mutate_canonical_state": false,
   "persist_report_only": true,
-  "repair_rerun_revision": "2026-09-06-current-head-full-audit-after-raw-v4-v3",
+  "repair_rerun_revision": "2026-09-06-final-after-security-corpus-redaction-repair",
   "repair_focus": [
     "SINGLE_ACTIVE_G2_CORE",
     "CURRENT_SHADOW_HEAD",
@@ -23,6 +23,7 @@
     "ALL_27_ACTIVE_MODULES",
     "ALL_9_ARCHITECTURE_PLANES",
     "MEMORY_AND_EXPERIENCE",
+    "EXTERNAL_CORPUS_SANITIZED_DIGEST_INTEGRITY",
     "BRANCH_HISTORY_PROVENANCE",
     "PYTHON_COMPILE_AND_AST",
     "LOCAL_IMPORT_GRAPH",
@@ -33,11 +34,15 @@
     "EVOLUTION_LEDGER",
     "DUPLICATE_MODULES"
   ],
-  "audit_trigger": 11,
+  "audit_trigger": 12,
   "prerequisite_evidence": {
-    "raw_v4_hierarchical_residual_v3_run_id": 34035343668,
-    "raw_v4_hierarchical_residual_v3_status": "WITHHOLD_G2_RAW_V4_HIERARCHICAL_RESIDUAL_SELF_EVOLUTION_V3",
-    "canonical_guard_after_v3": "PASS",
-    "strict_gate_bypassed": false
+    "post_module_integrity_run_id": 34038203075,
+    "post_module_integrity_status": "PASS_G2_POST_MODULE_FULL_INTEGRITY_V1",
+    "external_corpus_rebuild_run_id": 34038415215,
+    "external_corpus_rebuild_status": "PASS_G2_USER_EXTERNAL_CORPUS_LEARNING_V1",
+    "security_audit_run_id": 34038458092,
+    "security_audit_status": "PASS",
+    "high_confidence_secret_hits": 0,
+    "dependency_vulnerability_count": 0
   }
 }
