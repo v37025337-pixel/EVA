@@ -1,6 +1,6 @@
 {
   "schema": "yado.main_v7_meta_controller_admission.v1",
-  "status": "SECURITY_PASS_FINAL_AUDIT_PENDING",
+  "status": "PASS_MAIN_V7_META_CONTROLLER_ADMISSION_V1",
   "objective": "ADMIT_YADO_GENERATED_V7_ACCUMULATED_EXPERIENCE_AS_ADDITIVE_ACTIVE_META_CONTROLLER_WITHOUT_REPLACING_V4",
   "base_main_sha": "b3a23c3d0ac8249e553c55f18accba64c295afa7",
   "component_id": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
@@ -57,7 +57,7 @@
     "SECURITY_AUDIT",
     "NORMAL_MODE_FULL_KERNEL_AUDIT"
   ],
-  "main_fast_forward_allowed": false,
+  "main_fast_forward_allowed": true,
   "security_gate": {
     "run_id": 34052803966,
     "status": "PASS",
@@ -66,5 +66,16 @@
     "dependency_vulnerability_count": 0,
     "unpinned_actions": 0,
     "third_party_actions": 0
-  }
+  },
+  "final_normal_audit": {
+    "run_id": 34052869096,
+    "status": "PASS",
+    "regression_tests": "PASS_13_OF_13",
+    "findings": 0,
+    "active_capabilities": 28,
+    "active_runtime_sources": 36,
+    "ledger_events": 293,
+    "canonical_guard": "PASS"
+  },
+  "admission_decision": "ADMIT_TO_MAIN"
 }
