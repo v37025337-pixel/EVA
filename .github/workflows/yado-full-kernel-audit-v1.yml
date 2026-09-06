@@ -30,6 +30,7 @@ jobs:
           python -m py_compile
           runtime/yado_g2_global_historical_experience_census_v2.py
           runtime/yado_g2_terminal_logic_historical_transfer_v1.py
+          runtime/yado_g2_accumulated_experience_main_binding_v1.py
       - name: Rebuild historical experience census from all refs
         run: python runtime/yado_g2_global_historical_experience_census_v2.py
       - name: Re-run native historical transfer on expanded experience
@@ -52,6 +53,10 @@ jobs:
           print("cognitive_historical_fresh",r.get("cognitive_historical_fresh"))
           print("next_required_capability",r.get("next_required_capability"))
           PY
+      - name: Bind accumulated experience into canonical registry
+        run: python runtime/yado_g2_accumulated_experience_main_binding_v1.py
+      - name: Canonical guard after experience binding
+        run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Run top-level regression tests
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Run full kernel audit
@@ -65,6 +70,8 @@ jobs:
           git add candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json 2>/dev/null || true
           git add candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json 2>/dev/null || true
           git add experience/yado-global-experience-terminal-logic-historical-transfer-v1.json 2>/dev/null || true
+          git add canonical/yado-unified-experience-registry-v1.json 2>/dev/null || true
+          git add candidates/kernel-self-generated/g2-accumulated-experience-main-binding-v1.json 2>/dev/null || true
           git commit -m "Persist YADO accumulated-experience refresh evidence [skip ci]"
           for attempt in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}"
