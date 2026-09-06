@@ -25,6 +25,8 @@ jobs:
           python -m pip install --disable-pip-version-check pyyaml
       - name: Compile audit
         run: python -m py_compile runtime/yado_full_kernel_audit_v1.py
+      - name: Run top-level regression tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Run full kernel audit
         run: python runtime/yado_full_kernel_audit_v1.py
       - name: Persist audit report only
