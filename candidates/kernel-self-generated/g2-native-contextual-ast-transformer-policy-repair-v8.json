@@ -1,0 +1,161 @@
+{
+  "actual_prediction": "CONDITIONALIZE_FINDING_AS_RESOLVED_BY_FRESH_EVIDENCE",
+  "canonical_mutation": false,
+  "checks": {
+    "actual_valid_evidence_routes_to_accept_action": true,
+    "automatic_canonical_promotion": false,
+    "binder_decision_feature_is_yado_derived": true,
+    "blind_causal_classes_balanced": true,
+    "canonical_unchanged": true,
+    "canonical_v5_continuity_active": true,
+    "causal_ablation_drop_ge_0_20": true,
+    "external_models_used": false,
+    "fresh_blind_exact": true,
+    "historical_conditional_shape_derived_from_yado_history": true,
+    "host_authored_ast_subtree": false,
+    "host_authored_transform_condition": false,
+    "host_authored_transition_action": false,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_policy_committed": true,
+    "native_policy_synthesized": true,
+    "restore_exact": true,
+    "semantic_actions_derived_from_gene": true,
+    "single_faults_route_to_withhold_action": true,
+    "threshold_not_lowered": true,
+    "v7_exact_candidate_preserved": true,
+    "v7_failure_consumed": true,
+    "v7_failure_was_ablation_imbalance": true,
+    "v7_restore_exact_preserved": true
+  },
+  "counterfactual_predictions": [
+    {
+      "flipped_field": "action_relevant",
+      "prediction": "PRESERVE_EXISTING_PARTIAL_FINDING"
+    },
+    {
+      "flipped_field": "action_status_pass",
+      "prediction": "PRESERVE_EXISTING_PARTIAL_FINDING"
+    },
+    {
+      "flipped_field": "canonical_immutable",
+      "prediction": "PRESERVE_EXISTING_PARTIAL_FINDING"
+    },
+    {
+      "flipped_field": "comprehension_complete",
+      "prediction": "PRESERVE_EXISTING_PARTIAL_FINDING"
+    },
+    {
+      "flipped_field": "conflict_resolution_pass",
+      "prediction": "PRESERVE_EXISTING_PARTIAL_FINDING"
+    },
+    {
+      "flipped_field": "direct_priority_evidence",
+      "prediction": "PRESERVE_EXISTING_PARTIAL_FINDING"
+    },
+    {
+      "flipped_field": "priority_match",
+      "prediction": "PRESERVE_EXISTING_PARTIAL_FINDING"
+    }
+  ],
+  "dataset": {
+    "blind": 40,
+    "blind_accept": 20,
+    "blind_withhold": 20,
+    "fit": 92
+  },
+  "gene": {
+    "actual_ast_materialization_proven": false,
+    "anchor_contract": {
+      "call_name": "add",
+      "finding_code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
+      "required_before_status_shape": "Constant",
+      "required_before_status_value": "PARTIAL"
+    },
+    "binder_gene_digest": "00b86ebd2afc186a0574ef5611dec74214d2a5e355d78160027e23539f69ed65",
+    "binder_gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
+    "execution_mode": "CONTEXTUAL_AST_TRANSFORM_POLICY",
+    "gene_digest": "88709f2a1c67cd00089af100e28d0a1010affdf902c02f179998f48c133bf7c8",
+    "gene_id": "GENE-G2-NATIVE-CONTEXTUAL-AST-TRANSFORMER-V8-b2c448b92e6202b4",
+    "gene_scope": [
+      "CODE",
+      "SELF_AUDIT_AND_REPAIR",
+      "GENERATIVE_EXECUTIVE"
+    ],
+    "history_derived_target_status_shape": "IfExp",
+    "novel_gene": true,
+    "origin": "YADO_NATIVE_GENERATIVE_EXECUTIVE_BALANCED_CAUSAL_POLICY_REPAIR",
+    "policy_program_digest": "90d3765a8e177f9232e332b48feaf960636108f45da620506b491608a23039ab",
+    "policy_program_id": "P-6792dec60269",
+    "promotion_state": "SHADOW_ONLY",
+    "python_source_emission_proven": false,
+    "schema": "yado.g2.native_contextual_ast_transformer_gene.v8",
+    "semantic_edit_gene_digest": "9fe064da26a78470494ddc22bb23f81add1ec0ea97bde23dcfa32d987d4e06b9",
+    "semantic_edit_gene_id": "GENE-G2-SEMANTIC-SOURCE-EDIT-META-V5-9a318cac23226cd5",
+    "transition_semantics": {
+      "historical_support": [
+        "V5_TO_V6:LEGACY_EXPERIENCE_SUMMARY_PROVENANCE"
+      ],
+      "on_accept": "CONDITIONALIZE_FINDING_AS_RESOLVED_BY_FRESH_EVIDENCE",
+      "on_withhold": "PRESERVE_EXISTING_PARTIAL_FINDING"
+    }
+  },
+  "native_goal": {
+    "deficit_id": "D-6b5ba9d7caf5",
+    "goal_id": "G-37bc80087069"
+  },
+  "native_policy": {
+    "development": {
+      "ablation_score": 0.5,
+      "blind_cases": 40,
+      "candidate_score": 1.0,
+      "created_at": "2026-09-06T09:48:52.694224+00:00",
+      "experiment_id": "DEV22-28cb29b113e2",
+      "mechanism_kind": "RULE_PROGRAM",
+      "min_ablation_drop": 0.2,
+      "min_score": 1.0,
+      "program_digest": "90d3765a8e177f9232e332b48feaf960636108f45da620506b491608a23039ab",
+      "program_id": "P-6792dec60269",
+      "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+      "restore_score": 1.0,
+      "stage_ablation_scores": {},
+      "state_committed": true,
+      "target_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_V8",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "train_cases": 92,
+      "verdict": "COMMIT"
+    },
+    "program_id": "P-6792dec60269",
+    "selection": {
+      "candidates": [
+        {
+          "complexity": 5,
+          "kind": "RULE_PROGRAM",
+          "program_id": "P-6792dec60269",
+          "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+          "selected": true,
+          "training_score": 1.0
+        }
+      ],
+      "created_at": "2026-09-06T09:48:52.691601+00:00",
+      "deficit_id": "D-6b5ba9d7caf5",
+      "selected_kind": "RULE_PROGRAM",
+      "selected_program_id": "P-6792dec60269",
+      "selection_id": "SEL-3cbcf7a08151",
+      "source_digest": "1e35e2082806ebe585c08447b6a60ba326a269eca0b843b1ede842eb4d843e70",
+      "target_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_V8",
+      "target_organ": "GENERATIVE_EXECUTIVE"
+    }
+  },
+  "next_required_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_SOURCE_REALIZATION_V9",
+  "parent_v7_receipt": "6729104971433d77d846f0e56b91b1da89b04e58b0410e1623482a28b93e5716",
+  "promotion_applied": false,
+  "receipt_sha256": "257d8e3df365ad2afa5c08834bbd2e981cc7505e153a5b3876af413998f8d2cb",
+  "schema": "yado.g2.native_contextual_ast_transformer_policy_repair.v8",
+  "semantic_actions": {
+    "accept": "CONDITIONALIZE_FINDING_AS_RESOLVED_BY_FRESH_EVIDENCE",
+    "withhold": "PRESERVE_EXISTING_PARTIAL_FINDING"
+  },
+  "semantic_boundary": "V8 REPAIRS ONLY THE CAUSAL EVALUATION DISTRIBUTION FROM V7. IT DOES NOT LOWER THE 1.0 FRESH SCORE OR 0.20 ABLATION-DROP THRESHOLDS AND DOES NOT CHANGE THE YADO-DERIVED BINDER DECISION OR SEMANTIC TRANSITION ACTIONS. PASS CREATES A SHADOW POLICY GENE ONLY; AST/SOURCE MATERIALIZATION REMAINS FOR V9.",
+  "status": "PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_REPAIR_V8"
+}
