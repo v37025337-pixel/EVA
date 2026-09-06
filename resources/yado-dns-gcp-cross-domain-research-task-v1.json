@@ -1,0 +1,311 @@
+{
+  "schema": "yado.g2.dns_gcp_cross_domain_research_task.v1",
+  "task_id": "USER_20260906_DNS_GCP_RESEARCH_V1",
+  "provenance": "user_message_2026-09-06T20:33:08Z",
+  "fresh_relative_to_tri_organ_genesis": true,
+  "frozen_tri_organ_genome_id": "GENOME-G2-ALL-EXPERIENCE-TRI-ORGAN-V1-9e3b058de601792a",
+  "research_questions": [
+    "Verify the five public DNS resolver IPv4 address pairs shown by the user.",
+    "Distinguish DNS lookup latency from general Internet throughput and explain anycast versus a single physical address.",
+    "Fact-check the claim that Google Cloud services share the generic base URL https://googleapis.com.",
+    "Derive the actual service-specific API endpoint for each listed Google Cloud service from official documentation.",
+    "Check the regional endpoint syntax, especially Vertex AI and Cloud SQL.",
+    "Verify the listed Google Cloud region-to-location mappings.",
+    "Separate DNS resolver network location semantics from Google Cloud data/service region semantics."
+  ],
+  "dns_claims": [
+    {
+      "id": "DNS_GOOGLE",
+      "provider": "Google Public DNS",
+      "claimed_ipv4": [
+        "8.8.8.8",
+        "8.8.4.4"
+      ],
+      "source_id": "DNS_GOOGLE_OFFICIAL"
+    },
+    {
+      "id": "DNS_CLOUDFLARE",
+      "provider": "Cloudflare 1.1.1.1",
+      "claimed_ipv4": [
+        "1.1.1.1",
+        "1.0.0.1"
+      ],
+      "source_id": "DNS_CLOUDFLARE_OFFICIAL"
+    },
+    {
+      "id": "DNS_QUAD9",
+      "provider": "Quad9 Secure",
+      "claimed_ipv4": [
+        "9.9.9.9",
+        "149.112.112.112"
+      ],
+      "source_id": "DNS_QUAD9_OFFICIAL"
+    },
+    {
+      "id": "DNS_OPENDNS",
+      "provider": "OpenDNS",
+      "claimed_ipv4": [
+        "208.67.222.222",
+        "208.67.220.220"
+      ],
+      "source_id": "DNS_OPENDNS_OFFICIAL"
+    },
+    {
+      "id": "DNS_ADGUARD",
+      "provider": "AdGuard DNS Default",
+      "claimed_ipv4": [
+        "94.140.14.14",
+        "94.140.15.15"
+      ],
+      "source_id": "DNS_ADGUARD_OFFICIAL"
+    }
+  ],
+  "gcp_endpoint_claims": [
+    {
+      "id": "GCP_COMPUTE",
+      "service": "Compute Engine",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_COMPUTE_OFFICIAL"
+    },
+    {
+      "id": "GCP_CLOUD_RUN",
+      "service": "Cloud Run",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_CLOUD_RUN_OFFICIAL"
+    },
+    {
+      "id": "GCP_APPENGINE",
+      "service": "App Engine",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_APPENGINE_OFFICIAL"
+    },
+    {
+      "id": "GCP_STORAGE",
+      "service": "Cloud Storage",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_STORAGE_OFFICIAL"
+    },
+    {
+      "id": "GCP_FILESTORE",
+      "service": "Filestore",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_FILESTORE_OFFICIAL"
+    },
+    {
+      "id": "GCP_CLOUDSQL",
+      "service": "Cloud SQL",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_CLOUDSQL_OFFICIAL"
+    },
+    {
+      "id": "GCP_FIRESTORE",
+      "service": "Firestore",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_FIRESTORE_OFFICIAL"
+    },
+    {
+      "id": "GCP_SPANNER",
+      "service": "Spanner",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_SPANNER_OFFICIAL"
+    },
+    {
+      "id": "GCP_BIGQUERY",
+      "service": "BigQuery",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_BIGQUERY_OFFICIAL"
+    },
+    {
+      "id": "GCP_DATAFLOW",
+      "service": "Dataflow",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_DATAFLOW_OFFICIAL"
+    },
+    {
+      "id": "GCP_PUBSUB",
+      "service": "Pub/Sub",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_PUBSUB_OFFICIAL"
+    },
+    {
+      "id": "GCP_VERTEX",
+      "service": "Vertex AI",
+      "claimed_base": "https://<REGION>://googleapis.com",
+      "source_id": "GCP_VERTEX_OFFICIAL"
+    },
+    {
+      "id": "GCP_VISION",
+      "service": "Vision API",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_VISION_OFFICIAL"
+    },
+    {
+      "id": "GCP_SPEECH",
+      "service": "Speech-to-Text",
+      "claimed_base": "https://googleapis.com",
+      "source_id": "GCP_SPEECH_OFFICIAL"
+    }
+  ],
+  "region_claims": [
+    {
+      "id": "REG_EU_W3",
+      "region": "europe-west3",
+      "claimed_location": "Frankfurt",
+      "location_terms": [
+        "Frankfurt",
+        "Germany"
+      ]
+    },
+    {
+      "id": "REG_EU_W1",
+      "region": "europe-west1",
+      "claimed_location": "Belgium",
+      "location_terms": [
+        "Belgium",
+        "St. Ghislain"
+      ]
+    },
+    {
+      "id": "REG_EU_W4",
+      "region": "europe-west4",
+      "claimed_location": "Netherlands",
+      "location_terms": [
+        "Netherlands",
+        "Eemshaven"
+      ]
+    },
+    {
+      "id": "REG_US_C1",
+      "region": "us-central1",
+      "claimed_location": "Iowa",
+      "location_terms": [
+        "Iowa",
+        "Council Bluffs"
+      ]
+    },
+    {
+      "id": "REG_US_E1",
+      "region": "us-east1",
+      "claimed_location": "South Carolina",
+      "location_terms": [
+        "South Carolina",
+        "Moncks Corner"
+      ]
+    },
+    {
+      "id": "REG_ASIA_E1",
+      "region": "asia-east1",
+      "claimed_location": "Taiwan",
+      "location_terms": [
+        "Taiwan",
+        "Changhua"
+      ]
+    },
+    {
+      "id": "REG_ASIA_NE1",
+      "region": "asia-northeast1",
+      "claimed_location": "Tokyo",
+      "location_terms": [
+        "Tokyo",
+        "Japan"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "DNS_GOOGLE_OFFICIAL",
+      "url": "https://developers.google.com/speed/public-dns/"
+    },
+    {
+      "id": "DNS_GOOGLE_ANYCAST",
+      "url": "https://developers.google.com/speed/public-dns/faq"
+    },
+    {
+      "id": "DNS_CLOUDFLARE_OFFICIAL",
+      "url": "https://developers.cloudflare.com/1.1.1.1/ip-addresses/"
+    },
+    {
+      "id": "DNS_QUAD9_OFFICIAL",
+      "url": "https://docs.quad9.net/services/"
+    },
+    {
+      "id": "DNS_OPENDNS_OFFICIAL",
+      "url": "https://www.opendns.com/setupguide/"
+    },
+    {
+      "id": "DNS_ADGUARD_OFFICIAL",
+      "url": "https://adguard-dns.io/kb/general/dns-providers/"
+    },
+    {
+      "id": "GCP_COMPUTE_OFFICIAL",
+      "url": "https://docs.cloud.google.com/compute/docs/reference/rest/v1"
+    },
+    {
+      "id": "GCP_CLOUD_RUN_OFFICIAL",
+      "url": "https://docs.cloud.google.com/run/docs/reference/rest"
+    },
+    {
+      "id": "GCP_APPENGINE_OFFICIAL",
+      "url": "https://docs.cloud.google.com/appengine/docs/admin-api/reference/rest"
+    },
+    {
+      "id": "GCP_STORAGE_OFFICIAL",
+      "url": "https://docs.cloud.google.com/storage/docs/request-endpoints"
+    },
+    {
+      "id": "GCP_FILESTORE_OFFICIAL",
+      "url": "https://docs.cloud.google.com/filestore/docs/reference/rest"
+    },
+    {
+      "id": "GCP_CLOUDSQL_OFFICIAL",
+      "url": "https://docs.cloud.google.com/sql/docs/mysql/admin-api/rest"
+    },
+    {
+      "id": "GCP_FIRESTORE_OFFICIAL",
+      "url": "https://docs.cloud.google.com/firestore/docs/reference/rest"
+    },
+    {
+      "id": "GCP_SPANNER_OFFICIAL",
+      "url": "https://docs.cloud.google.com/spanner/docs/reference/rest"
+    },
+    {
+      "id": "GCP_BIGQUERY_OFFICIAL",
+      "url": "https://docs.cloud.google.com/bigquery/docs/reference/rest"
+    },
+    {
+      "id": "GCP_DATAFLOW_OFFICIAL",
+      "url": "https://docs.cloud.google.com/dataflow/docs/reference/rest"
+    },
+    {
+      "id": "GCP_PUBSUB_OFFICIAL",
+      "url": "https://docs.cloud.google.com/pubsub/docs/reference/rest"
+    },
+    {
+      "id": "GCP_VERTEX_OFFICIAL",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest"
+    },
+    {
+      "id": "GCP_VISION_OFFICIAL",
+      "url": "https://docs.cloud.google.com/vision/docs/reference/rest"
+    },
+    {
+      "id": "GCP_SPEECH_OFFICIAL",
+      "url": "https://docs.cloud.google.com/speech-to-text/docs/reference/rest"
+    },
+    {
+      "id": "GCP_REGIONS_OFFICIAL",
+      "url": "https://docs.cloud.google.com/compute/docs/regions-zones"
+    }
+  ],
+  "constraints": {
+    "official_public_sources_only": true,
+    "no_credentials": true,
+    "no_third_party_code_execution": true,
+    "frozen_genes_no_reselection": true,
+    "fresh_not_used_for_gene_selection": true,
+    "structural_ablation_required": true,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  }
+}
