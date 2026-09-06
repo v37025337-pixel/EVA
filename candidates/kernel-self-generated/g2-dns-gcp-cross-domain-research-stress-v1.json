@@ -1,0 +1,88 @@
+{
+  "architecture_mutation": false,
+  "automatic_canonical_promotion": false,
+  "canonical_mutation": false,
+  "checks": {
+    "all_five_dns_address_claims_supported": true,
+    "all_gcp_endpoint_claims_determined": false,
+    "all_region_claims_supported": true,
+    "canonical_unchanged": true,
+    "dns_anycast_semantics_found": true,
+    "dns_speed_semantics_found": true,
+    "frozen_genome_matches": true,
+    "frozen_intelligence_event_exact": true,
+    "frozen_intelligence_not_reselected": true,
+    "frozen_intelligence_relation_exact": true,
+    "g3_not_started": true,
+    "generic_googleapis_claim_exposed_as_wrong": true,
+    "logic_fresh_exact": true,
+    "logic_structural_ablation_drop_ge_0_20": true,
+    "source_fetch_ratio_ge_0_90": true,
+    "task_is_fresh_relative_to_tri_organ_genesis": true,
+    "thinking_fresh_exact": true,
+    "thinking_structural_ablation_drop_ge_0_10": true
+  },
+  "conceptual_findings": {
+    "dns_single_physical_address_claim": {
+      "finding": "Public resolver IPs are commonly anycast service addresses routed to distributed points of presence; an IP such as 8.8.8.8 is not one fixed physical server location.",
+      "status": "SUPPORTED_WITH_NUANCE"
+    },
+    "dns_speed_claim": {
+      "finding": "Changing recursive DNS can change name-resolution/lookup latency and perceived browsing startup, but it is not a general increase of the access link bandwidth or throughput.",
+      "status": "SUPPORTED_WITH_NUANCE"
+    },
+    "gcp_region_is_universal_physical_data_address_claim": {
+      "finding": "Google Cloud region identifiers correspond to geographic deployment locations, but service endpoints and data-location/residency semantics are product-specific; a region identifier is not a universal physical address for every service or every data flow.",
+      "status": "OVERGENERALIZED"
+    }
+  },
+  "dns_summary": {
+    "supported": 5,
+    "total": 5
+  },
+  "experience_digest": "01d6e0e955563ecae7ca7d78bdcd7813d9fb99c5f6b70507437cb85cac64880e",
+  "frozen_tri_organ_genome_id": "GENOME-G2-ALL-EXPERIENCE-TRI-ORGAN-V1-9e3b058de601792a",
+  "g3_genesis_performed": false,
+  "gcp_endpoint_summary": {
+    "determined": 13,
+    "generic_claim_contradictions": 13,
+    "total": 14
+  },
+  "generation_transition": false,
+  "intelligence": {
+    "event_best_score": 1.0,
+    "gene_id": "GENE-G2-ALL-EXPERIENCE-INTELLIGENCE-TYPE-V1-594261c030db685e",
+    "relation_best_score": 1.0,
+    "reselection_performed": false,
+    "resynthesis_performed": false
+  },
+  "logic": {
+    "accuracy": 1.0,
+    "best_structural_ablation_accuracy": 0.0,
+    "case_count": 26,
+    "causal_drop": 1.0,
+    "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8"
+  },
+  "next_required_capability": "DNS_GCP_CROSS_DOMAIN_STRESS_REPAIR_V2",
+  "receipt_sha256": "1ec4b42c80820ff6978b2d1a9c2f21da84eb6df53338a0bdc560f3c30e237ebc",
+  "region_summary": {
+    "supported": 7,
+    "total": 7
+  },
+  "schema": "yado.g2.dns_gcp_cross_domain_research_stress.v1",
+  "semantic_boundary": "FRESH PUBLIC DNS/GCP RESEARCH STRESS AGAINST A FROZEN TRI-ORGAN SHADOW GENOME. OFFICIAL SOURCES ARE FETCHED AS EVIDENCE; NO THIRD-PARTY CODE IS EXECUTED; NO GENE IS RESELECTED OR RESYNTHESIZED; NO CANONICAL MUTATION OCCURS.",
+  "source_fetch": {
+    "ok": 21,
+    "ratio": 1.0,
+    "total": 21
+  },
+  "status": "WITHHOLD_G2_DNS_GCP_CROSS_DOMAIN_RESEARCH_STRESS_V1",
+  "task_id": "USER_20260906_DNS_GCP_RESEARCH_V1",
+  "thinking": {
+    "accuracy": 1.0,
+    "best_structural_ablation_accuracy": 0.8333333333333334,
+    "case_count": 156,
+    "causal_drop": 0.16666666666666663,
+    "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4"
+  }
+}
