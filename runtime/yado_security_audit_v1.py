@@ -136,3 +136,4 @@ report={
 }
 OUT.write_text(json.dumps(report,indent=2,sort_keys=True)+'\n',encoding='utf-8')
 print(json.dumps(report,indent=2,sort_keys=True))
+if status!='PASS':raise SystemExit(2)
