@@ -1,0 +1,140 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "canonical_v5_continuity_active": true,
+    "context_dependencies_still_unbound": true,
+    "external_models_used": false,
+    "fallback_derived_from_target_parent": true,
+    "host_authored_body_value": false,
+    "host_authored_orelse_value": false,
+    "host_authored_test_expression": false,
+    "host_selected_test_prototype": false,
+    "ifexp_ast_materialized": true,
+    "ifexp_body_is_pass": true,
+    "ifexp_expression_compiles": true,
+    "ifexp_orelse_is_parent_partial": true,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_selector_selected_one_test_operand": true,
+    "native_skill_selector_executed": true,
+    "resolved_body_derived_from_yado_history": true,
+    "selected_test_is_acceptance_bound": true,
+    "selected_test_is_binder_runtime_bound": true,
+    "selected_test_is_target_independent": true,
+    "v10_ifexp_constructor_gene_consumed": true,
+    "v11_operand_binding_gene_consumed": true,
+    "yado_test_prototype_inventory_nonempty": true
+  },
+  "free_context_names": [
+    "binder",
+    "feat",
+    "tree_predict"
+  ],
+  "gene": {
+    "actual_target_source_integration_proven": false,
+    "body_operand_source": "'PASS'",
+    "constructor_primitive": "ast.IfExp",
+    "context_dependencies_bound": false,
+    "free_context_names": [
+      "binder",
+      "feat",
+      "tree_predict"
+    ],
+    "gene_digest": "8fd38e17a7d074940f62866f5e17eb0f9e6b6e45b444de051b78e78d0c5d3a82",
+    "gene_id": "GENE-G2-NATIVE-AST-OPERAND-MATERIALIZATION-V12-8f478aa50276f2c0",
+    "gene_scope": [
+      "CODE",
+      "SELF_AUDIT_AND_REPAIR",
+      "GENERATIVE_EXECUTIVE"
+    ],
+    "materialized_ifexp_ast_dump": "IfExp(test=Compare(left=Call(func=Name(id='tree_predict', ctx=Load()), args=[Subscript(value=Name(id='binder', ctx=Load()), slice=Constant(value='model'), ctx=Load()), Name(id='feat', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value='ACCEPT_FRESH_EVIDENCE')]), body=Constant(value='PASS'), orelse=Constant(value='PARTIAL'))",
+    "materialized_ifexp_source": "'PASS' if tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE' else 'PARTIAL'",
+    "novel_gene": true,
+    "orelse_operand_source": "'PARTIAL'",
+    "origin": "YADO_NATIVE_SELECTION_OF_YADO_OWN_BINDER_TEST_PROTOTYPE_PLUS_V10_V11_GENES",
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.native_contextual_ast_operand_materialization_gene.v12",
+    "test_operand_ast_dump": "Compare(left=Call(func=Name(id='tree_predict', ctx=Load()), args=[Subscript(value=Name(id='binder', ctx=Load()), slice=Constant(value='model'), ctx=Load()), Name(id='feat', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value='ACCEPT_FRESH_EVIDENCE')])",
+    "test_operand_source": "tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE'"
+  },
+  "materialized_ifexp_ast_dump": "IfExp(test=Compare(left=Call(func=Name(id='tree_predict', ctx=Load()), args=[Subscript(value=Name(id='binder', ctx=Load()), slice=Constant(value='model'), ctx=Load()), Name(id='feat', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value='ACCEPT_FRESH_EVIDENCE')]), body=Constant(value='PASS'), orelse=Constant(value='PARTIAL'))",
+  "materialized_ifexp_source": "'PASS' if tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE' else 'PARTIAL'",
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-06T10:00:09.482827+00:00",
+        "deficit_id": "D-251ae7ccced9",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-cf6c687c658b",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "OPEN",
+        "target": "NATIVE_CONTEXTUAL_AST_OPERAND_MATERIALIZATION_V12"
+      }
+    ],
+    "goal_id": "G-cf6c687c658b"
+  },
+  "native_skill_selection": {
+    "candidate_count": 1,
+    "gate_digest": "cfe476f1262d35f011a8e0157d27b919975f2fd8806d0c7668b12ec4727c2d61",
+    "rejected": [],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "8b585b945d499c06a189300f6f9c93ff4aba196c46f7d67f423d7dd255a814a4",
+        "failed_critics": [],
+        "fit_gain": 1.0,
+        "heldout_gain": 1.0,
+        "skill_id": "AST_TEST_OPERAND_14AB539A1639",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "AST_TEST_OPERAND_14AB539A1639"
+    ],
+    "status": "SELECTED"
+  },
+  "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_GENESIS_V13",
+  "parent_v11_receipt": "cae2a5be55b7e0a11567b70e8661fb02d5b4b153d222ed4ca06d5eed89f46f49",
+  "promotion_applied": false,
+  "receipt_sha256": "58eea7573352cf6467086c99e75fa0f9590c9050821acdff9759bd3fb7a0cf7e",
+  "schema": "yado.g2.native_contextual_ast_operand_materialization.v12",
+  "selected_test_operand": {
+    "acceptance_label_bound": true,
+    "ast_dump": "Compare(left=Call(func=Name(id='tree_predict', ctx=Load()), args=[Subscript(value=Name(id='binder', ctx=Load()), slice=Constant(value='model'), ctx=Load()), Name(id='feat', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value='ACCEPT_FRESH_EVIDENCE')])",
+    "binder_runtime_bound": true,
+    "score": 1.0,
+    "skill_id": "AST_TEST_OPERAND_14AB539A1639",
+    "source": "tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE'",
+    "target_independent": true
+  },
+  "semantic_boundary": "V12 MATERIALIZES AN IFE XP OPERAND AST BUT DOES NOT INTEGRATE IT INTO THE TARGET SOURCE. TEST CANDIDATES ARE EXTRACTED VERBATIM FROM YADO OWN SEMANTIC-EDIT RUNTIME AND YADO NATIVE SKILL ADMISSION SELECTS THE BINDER-ACCEPTANCE-BOUND PROTOTYPE. BODY PASS COMES FROM YADO OWN V5->V6 HISTORY; ORELSE PARTIAL COMES FROM THE CURRENT TARGET PARENT. ANY FREE CONTEXT NAMES REMAIN EXPLICITLY UNBOUND, SO TARGET SOURCE INTEGRATION IS NOT CLAIMED.",
+  "status": "PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_OPERAND_MATERIALIZATION_V12",
+  "test_candidates": [
+    {
+      "acceptance_label_bound": true,
+      "ast_dump": "Compare(left=Call(func=Name(id='tree_predict', ctx=Load()), args=[Subscript(value=Name(id='binder', ctx=Load()), slice=Constant(value='model'), ctx=Load()), Name(id='feat', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value='ACCEPT_FRESH_EVIDENCE')])",
+      "binder_runtime_bound": true,
+      "score": 1.0,
+      "skill_id": "AST_TEST_OPERAND_14AB539A1639",
+      "source": "tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE'",
+      "target_independent": true
+    }
+  ]
+}

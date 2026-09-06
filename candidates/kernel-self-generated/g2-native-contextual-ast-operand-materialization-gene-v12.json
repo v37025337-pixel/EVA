@@ -1,0 +1,27 @@
+{
+  "actual_target_source_integration_proven": false,
+  "body_operand_source": "'PASS'",
+  "constructor_primitive": "ast.IfExp",
+  "context_dependencies_bound": false,
+  "free_context_names": [
+    "binder",
+    "feat",
+    "tree_predict"
+  ],
+  "gene_digest": "8fd38e17a7d074940f62866f5e17eb0f9e6b6e45b444de051b78e78d0c5d3a82",
+  "gene_id": "GENE-G2-NATIVE-AST-OPERAND-MATERIALIZATION-V12-8f478aa50276f2c0",
+  "gene_scope": [
+    "CODE",
+    "SELF_AUDIT_AND_REPAIR",
+    "GENERATIVE_EXECUTIVE"
+  ],
+  "materialized_ifexp_ast_dump": "IfExp(test=Compare(left=Call(func=Name(id='tree_predict', ctx=Load()), args=[Subscript(value=Name(id='binder', ctx=Load()), slice=Constant(value='model'), ctx=Load()), Name(id='feat', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value='ACCEPT_FRESH_EVIDENCE')]), body=Constant(value='PASS'), orelse=Constant(value='PARTIAL'))",
+  "materialized_ifexp_source": "'PASS' if tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE' else 'PARTIAL'",
+  "novel_gene": true,
+  "orelse_operand_source": "'PARTIAL'",
+  "origin": "YADO_NATIVE_SELECTION_OF_YADO_OWN_BINDER_TEST_PROTOTYPE_PLUS_V10_V11_GENES",
+  "promotion_state": "SHADOW_ONLY",
+  "schema": "yado.g2.native_contextual_ast_operand_materialization_gene.v12",
+  "test_operand_ast_dump": "Compare(left=Call(func=Name(id='tree_predict', ctx=Load()), args=[Subscript(value=Name(id='binder', ctx=Load()), slice=Constant(value='model'), ctx=Load()), Name(id='feat', ctx=Load())], keywords=[]), ops=[Eq()], comparators=[Constant(value='ACCEPT_FRESH_EVIDENCE')])",
+  "test_operand_source": "tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE'"
+}
