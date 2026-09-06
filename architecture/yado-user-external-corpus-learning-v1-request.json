@@ -2,15 +2,27 @@
   "schema": "yado.g2.user_external_corpus_learning.request.v1",
   "objective": "LEARN_FROM_ALL_RELEVANT_USER_SUPPLIED_PUBLIC_LINKS_AND_SCREENSHOT_DERIVED_RESOURCES_BEFORE_NEW_CONSTRUCTION",
   "corpus": "resources/yado-user-external-learning-corpus-v1.json",
-  "instruction": "Study the expanded public corpus, emphasizing coding-agent failure analysis, iterative repair/reflection, Python AST representation, and public Python codebases. Do not copy a ready architecture or patch and do not execute third-party code. Preserve provenance; extract evidence useful for YADO-native coding apprenticeship.",
+  "instruction": "Study the newly added official DNS and Google Cloud sources. Verify the user's supplied resolver addresses and features; distinguish DNS lookup latency from connection throughput; investigate anycast/location semantics; verify each Google Cloud service endpoint rather than assuming one generic googleapis.com base; verify regional endpoint syntax and region/location mappings. Preserve contradictory evidence. Do not copy a ready architecture and do not execute third-party code.",
   "include_internal_project_history": true,
   "exclude_private_or_sensitive_screenshots": true,
   "no_third_party_code_execution": true,
   "no_canonical_mutation": true,
   "host_role": "SOURCE_TRANSPORT_AND_PERSISTENCE_ONLY",
-  "trigger": 4,
-  "trigger_reason": "SECURITY_REPAIR_SANITIZE_PUBLIC_SECRET_LIKE_TEST_VECTORS_20260906",
-  "requested_at": "2026-09-06T14:10:00Z",
-  "purpose": "REBUILD_PUBLIC_CORPUS_WITH_FAIL_CLOSED_SECRET_LIKE_REDACTION_AND_RECOMPUTED_DIGESTS",
-  "canonical_mutation": false
+  "trigger": 5,
+  "trigger_reason": "USER_20260906_DNS_GCP_CROSS_DOMAIN_RESEARCH",
+  "requested_at": "2026-09-06T20:33:08Z",
+  "purpose": "FETCH_AND_INDEX_OFFICIAL_DNS_AND_GOOGLE_CLOUD_SOURCES_FOR_FRESH_CROSS_DOMAIN_STRESS",
+  "canonical_mutation": false,
+  "cross_domain_task": {
+    "id": "USER_20260906_DNS_GCP_RESEARCH_V1",
+    "domains": [
+      "DNS_RESOLUTION",
+      "NETWORK_PRIVACY_SECURITY",
+      "CLOUD_API_ENDPOINTS",
+      "CLOUD_REGIONS_AND_DATA_LOCATION"
+    ],
+    "fresh_relative_to_tri_organ_genesis": true,
+    "target_shadow_genome": "GENOME-G2-ALL-EXPERIENCE-TRI-ORGAN-V1-9e3b058de601792a",
+    "canonical_mutation": false
+  }
 }
