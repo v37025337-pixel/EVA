@@ -1,0 +1,133 @@
+{
+  "actual_prediction": null,
+  "binder_gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
+  "canonical_mutation": false,
+  "checks": {
+    "actual_valid_evidence_routes_to_accept_action": false,
+    "automatic_canonical_promotion": false,
+    "binder_decision_feature_is_yado_derived": true,
+    "binder_gene_consumed": true,
+    "canonical_unchanged": true,
+    "canonical_v5_continuity_active": true,
+    "causal_ablation_drop_ge_0_20": false,
+    "external_models_used": false,
+    "fresh_blind_exact": true,
+    "historical_conditional_shape_derived_from_yado_history": true,
+    "host_authored_ast_subtree": false,
+    "host_authored_transform_condition": false,
+    "host_authored_transition_action": false,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_policy_committed": false,
+    "native_policy_synthesized": true,
+    "restore_exact": true,
+    "semantic_actions_derived_from_gene": true,
+    "semantic_gene_consumed": true,
+    "single_faults_route_to_withhold_action": false,
+    "v6_failure_consumed": true
+  },
+  "counterfactual_predictions": [
+    {
+      "flipped_field": "action_relevant",
+      "prediction": null
+    },
+    {
+      "flipped_field": "action_status_pass",
+      "prediction": null
+    },
+    {
+      "flipped_field": "canonical_immutable",
+      "prediction": null
+    },
+    {
+      "flipped_field": "comprehension_complete",
+      "prediction": null
+    },
+    {
+      "flipped_field": "conflict_resolution_pass",
+      "prediction": null
+    },
+    {
+      "flipped_field": "direct_priority_evidence",
+      "prediction": null
+    },
+    {
+      "flipped_field": "priority_match",
+      "prediction": null
+    }
+  ],
+  "dataset": {
+    "blind": 10,
+    "construction": "BINDER_LABELED_REAL_POSITIVE_PLUS_SINGLE_PAIR_COUNTERFACTUALS",
+    "fit": 49,
+    "typed_binding_feature": "binder_decision from YADO binder gene"
+  },
+  "gene": null,
+  "history_derived_status_shapes": [
+    {
+      "after": "IfExp",
+      "before": "Constant",
+      "finding_code": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+      "transition": "V5_TO_V6"
+    }
+  ],
+  "native_goal": {
+    "deficit_id": "D-db7a46de259e",
+    "goal_id": "G-dcaf7e85ffd9"
+  },
+  "native_policy": {
+    "development": {
+      "ablation_score": 0.8,
+      "blind_cases": 10,
+      "candidate_score": 1.0,
+      "created_at": "2026-09-06T09:46:50.812974+00:00",
+      "experiment_id": "DEV22-a490ca3eac2a",
+      "mechanism_kind": "RULE_PROGRAM",
+      "min_ablation_drop": 0.2,
+      "min_score": 1.0,
+      "program_digest": "52a746711ff2fdb8739ed525fbfc0a39e922c5f39713960a11c17f42f69065b7",
+      "program_id": "P-6756abeebfdc",
+      "reason": "ablation_not_causal",
+      "restore_score": 1.0,
+      "stage_ablation_scores": {},
+      "state_committed": false,
+      "target_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_V7",
+      "target_organ": "GENERATIVE_EXECUTIVE",
+      "train_cases": 49,
+      "verdict": "ROLLBACK"
+    },
+    "program_id": "P-6756abeebfdc",
+    "selection": {
+      "candidates": [
+        {
+          "complexity": 5,
+          "kind": "RULE_PROGRAM",
+          "program_id": "P-6756abeebfdc",
+          "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+          "selected": true,
+          "training_score": 1.0
+        }
+      ],
+      "created_at": "2026-09-06T09:46:50.811503+00:00",
+      "deficit_id": "D-db7a46de259e",
+      "selected_kind": "RULE_PROGRAM",
+      "selected_program_id": "P-6756abeebfdc",
+      "selection_id": "SEL-d3e50fc71d6f",
+      "source_digest": "e7dedce86c7bae48bcfbde590330ae64c47b5a09008003ee320efd9b75265e5c",
+      "target_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_V7",
+      "target_organ": "GENERATIVE_EXECUTIVE"
+    }
+  },
+  "next_required_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_REPAIR_V8",
+  "parent_v6_receipt": "fcacafc756b8364924c12b281634edf7eb8bca107109b3c5bfa5ea0b29ef6c4e",
+  "promotion_applied": false,
+  "receipt_sha256": "6729104971433d77d846f0e56b91b1da89b04e58b0410e1623482a28b93e5716",
+  "schema": "yado.g2.native_contextual_ast_transformer_gene_genesis.v7",
+  "semantic_actions": {
+    "accept": "CONDITIONALIZE_FINDING_AS_RESOLVED_BY_FRESH_EVIDENCE",
+    "withhold": "PRESERVE_EXISTING_PARTIAL_FINDING"
+  },
+  "semantic_boundary": "V7 CREATES A DATA-LEVEL CONTEXTUAL AST-TRANSFORMER POLICY GENE. THE TWO TRANSITION ACTIONS COME VERBATIM FROM YADO OWN SEMANTIC SOURCE-EDIT GENE; ACCEPT/WITHHOLD LABELS COME FROM YADO OWN EVIDENCE-BINDER MODEL; THE CONDITIONAL TARGET SHAPE IS OBSERVED IN YADO OWN SOURCE HISTORY. THE HOST DOES NOT AUTHOR AN AST SUBTREE, CONDITION, OR TRANSITION ACTION. PASS DOES NOT YET CLAIM AST OR PYTHON SOURCE MATERIALIZATION; V8 MUST REALIZE THIS GENE INTO SOURCE/AST AND PASS FRESH REGRESSION.",
+  "semantic_gene_id": "GENE-G2-SEMANTIC-SOURCE-EDIT-META-V5-9a318cac23226cd5",
+  "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_GENE_GENESIS_V7"
+}
