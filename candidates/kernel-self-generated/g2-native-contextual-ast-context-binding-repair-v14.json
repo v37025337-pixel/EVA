@@ -1,0 +1,467 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "actual_target_source_integration_proven": false,
+    "automatic_canonical_promotion": false,
+    "canonical_unchanged": true,
+    "canonical_v5_continuity_active": true,
+    "current_binder_ground_accepts": true,
+    "dependency_closure_has_no_unresolved_names": true,
+    "external_models_used": false,
+    "host_authored_feature_logic": false,
+    "host_authored_import_binding": false,
+    "host_selected_feature_dict": false,
+    "native_deficit_detected": true,
+    "native_goal_created": true,
+    "native_selector_selected_one_feature_binding": false,
+    "native_skill_selector_executed": true,
+    "scope_repair_treats_builtins_as_bound": true,
+    "scope_repair_treats_comprehension_local_as_bound": true,
+    "selected_feature_has_no_unresolved_direct_dependencies": false,
+    "selected_feature_keys_exact_contract": false,
+    "single_fault_counterfactuals_withhold": true,
+    "threshold_not_lowered": true,
+    "v13_failure_consumed": true,
+    "v13_failure_was_dependency_analysis": true
+  },
+  "counterfactuals": [
+    {
+      "field": "action_relevant",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "action_status_pass",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "canonical_immutable",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "comprehension_complete",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "conflict_resolution_pass",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "direct_priority_evidence",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    },
+    {
+      "field": "priority_match",
+      "verdict": "WITHHOLD_FRESH_EVIDENCE"
+    }
+  ],
+  "dependency_closure": {},
+  "feature_binding_candidates": [
+    {
+      "assignment_name": "history_chain",
+      "exact_contract_keys": false,
+      "external_dependencies": [
+        "j4",
+        "j5",
+        "j6"
+      ],
+      "keys": [
+        "v4_candidate_sha",
+        "v5_candidate_sha",
+        "v5_parent_sha",
+        "v6_candidate_sha",
+        "v6_parent_sha"
+      ],
+      "required_coverage": 0.0,
+      "rhs_dump": "Dict(keys=[Constant(value='v4_candidate_sha'), Constant(value='v5_parent_sha'), Constant(value='v5_candidate_sha'), Constant(value='v6_parent_sha'), Constant(value='v6_candidate_sha')], values=[Call(func=Attribute(value=Name(id='j4', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='candidate_source_sha256')], keywords=[]), Call(func=Attribute(value=Name(id='j5', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='source_runtime_sha256')], keywords=[]), Call(func=Attribute(value=Name(id='j5', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='candidate_source_sha256')], keywords=[]), Call(func=Attribute(value=Name(id='j6', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='source_runtime_sha256')], keywords=[]), Call(func=Attribute(value=Name(id='j6', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='candidate_source_sha256')], keywords=[])])",
+      "rhs_source": "{'v4_candidate_sha': j4.get('candidate_source_sha256'), 'v5_parent_sha': j5.get('source_runtime_sha256'), 'v5_candidate_sha': j5.get('candidate_source_sha256'), 'v6_parent_sha': j6.get('source_runtime_sha256'), 'v6_candidate_sha': j6.get('candidate_source_sha256')}",
+      "score": 0.0,
+      "skill_id": "CONTEXT_BINDING_REPAIR_559D5E072AF1",
+      "unresolved_dependencies": [
+        "j4",
+        "j5",
+        "j6"
+      ]
+    },
+    {
+      "assignment_name": "features",
+      "exact_contract_keys": true,
+      "external_dependencies": [
+        "action",
+        "comp",
+        "priority",
+        "result",
+        "selected_action",
+        "target_code"
+      ],
+      "keys": [
+        "action_relevant",
+        "action_status_pass",
+        "canonical_immutable",
+        "comprehension_complete",
+        "conflict_resolution_pass",
+        "direct_priority_evidence",
+        "priority_match"
+      ],
+      "required_coverage": 1.0,
+      "rhs_dump": "Dict(keys=[Constant(value='priority_match'), Constant(value='comprehension_complete'), Constant(value='direct_priority_evidence'), Constant(value='canonical_immutable'), Constant(value='conflict_resolution_pass'), Constant(value='action_status_pass'), Constant(value='action_relevant')], values=[Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())]), Call(func=Name(id='all', ctx=Load()), args=[GeneratorExp(elt=Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='comp', ctx=Load()), attr='get', ctx=Load()), args=[Name(id='k', ctx=Load())], keywords=[])], keywords=[]), generators=[comprehension(target=Name(id='k', ctx=Store()), iter=Tuple(elts=[Constant(value='repository_commit_identity_extracted'), Constant(value='readme_title_extracted'), Constant(value='package_identity_extracted'), Constant(value='provider_catalog_extracted'), Constant(value='no_key_provider_set_extracted')], ctx=Load()), ifs=[], is_async=0)])], keywords=[]), BoolOp(op=And(), values=[Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[]), Call(func=Name(id='bool', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[])], keywords=[])]), BoolOp(op=And(), values=[Compare(left=Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_head_unchanged')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_mutation')], keywords=[]), ops=[Is()], comparators=[Constant(value=False)])]), Compare(left=Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='conflict_resolution_pass')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Call(func=Attribute(value=Call(func=Name(id='str', ctx=Load()), args=[Call(func=Attribute(value=Name(id='result', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='status'), Constant(value='')], keywords=[])], keywords=[]), attr='startswith', ctx=Load()), args=[Constant(value='PASS')], keywords=[]), BoolOp(op=And(), values=[Compare(left=Name(id='selected_action', ctx=Load()), ops=[Eq()], comparators=[Constant(value='LIVE_RESOURCE_EVIDENCE_RECHECK')]), Compare(left=Name(id='priority', ctx=Load()), ops=[Eq()], comparators=[Name(id='target_code', ctx=Load())])])])",
+      "rhs_source": "{'priority_match': priority == target_code, 'comprehension_complete': all((bool(comp.get(k)) for k in ('repository_commit_identity_extracted', 'readme_title_extracted', 'package_identity_extracted', 'provider_catalog_extracted', 'no_key_provider_set_extracted'))), 'direct_priority_evidence': bool(action.get('direct_priority_evidence')) and bool(result.get('direct_priority_evidence')), 'canonical_immutable': action.get('canonical_head_unchanged') is True and result.get('canonical_mutation') is False, 'conflict_resolution_pass': result.get('conflict_resolution_pass') is True, 'action_status_pass': str(result.get('status', '')).startswith('PASS'), 'action_relevant': selected_action == 'LIVE_RESOURCE_EVIDENCE_RECHECK' and priority == target_code}",
+      "score": 0.0,
+      "skill_id": "CONTEXT_BINDING_REPAIR_21700175D898",
+      "unresolved_dependencies": [
+        "action"
+      ]
+    },
+    {
+      "assignment_name": "operator_program",
+      "exact_contract_keys": false,
+      "external_dependencies": [
+        "binder",
+        "conditional_history",
+        "features",
+        "target_code"
+      ],
+      "keys": [
+        "anchor_contract",
+        "evidence_binding",
+        "operator_family",
+        "schema",
+        "source_emission",
+        "transition_semantics"
+      ],
+      "required_coverage": 0.0,
+      "rhs_dump": "Dict(keys=[Constant(value='schema'), Constant(value='operator_family'), Constant(value='anchor_contract'), Constant(value='evidence_binding'), Constant(value='transition_semantics'), Constant(value='source_emission')], values=[Constant(value='yado.g2.history_derived_semantic_source_edit_program.v1'), Constant(value='HISTORY_DERIVED_FINDING_CONDITIONALIZATION'), Dict(keys=[Constant(value='call_name'), Constant(value='finding_code'), Constant(value='required_before_status_shape'), Constant(value='required_before_status_value')], values=[Constant(value='add'), Name(id='target_code', ctx=Load()), Constant(value='Constant'), Constant(value='PARTIAL')]), Dict(keys=[Constant(value='binder_gene_id'), Constant(value='binder_gene_digest'), Constant(value='runtime_interpreter'), Constant(value='feature_names'), Constant(value='accept_label'), Constant(value='withhold_label')], values=[Call(func=Attribute(value=Name(id='binder', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='gene_id')], keywords=[]), Call(func=Attribute(value=Name(id='binder', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='gene_digest')], keywords=[]), Constant(value='yado_organ_runtime_native_v1.tree_predict'), Call(func=Name(id='sorted', ctx=Load()), args=[Name(id='features', ctx=Load())], keywords=[]), Constant(value='ACCEPT_FRESH_EVIDENCE'), Constant(value='WITHHOLD_FRESH_EVIDENCE')]), Dict(keys=[Constant(value='on_accept'), Constant(value='on_withhold'), Constant(value='historical_support')], values=[Constant(value='CONDITIONALIZE_FINDING_AS_RESOLVED_BY_FRESH_EVIDENCE'), Constant(value='PRESERVE_EXISTING_PARTIAL_FINDING'), ListComp(elt=BinOp(left=BinOp(left=Subscript(value=Name(id='x', ctx=Load()), slice=Constant(value='transition'), ctx=Load()), op=Add(), right=Constant(value=':')), op=Add(), right=Subscript(value=Name(id='x', ctx=Load()), slice=Constant(value='finding_code'), ctx=Load())), generators=[comprehension(target=Name(id='x', ctx=Store()), iter=Name(id='conditional_history', ctx=Load()), ifs=[], is_async=0)])]), Dict(keys=[Constant(value='python_source_emitted'), Constant(value='ast_serialized'), Constant(value='requires_next_stage')], values=[Constant(value=False), Constant(value=False), Constant(value='HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6')])])",
+      "rhs_source": "{'schema': 'yado.g2.history_derived_semantic_source_edit_program.v1', 'operator_family': 'HISTORY_DERIVED_FINDING_CONDITIONALIZATION', 'anchor_contract': {'call_name': 'add', 'finding_code': target_code, 'required_before_status_shape': 'Constant', 'required_before_status_value': 'PARTIAL'}, 'evidence_binding': {'binder_gene_id': binder.get('gene_id'), 'binder_gene_digest': binder.get('gene_digest'), 'runtime_interpreter': 'yado_organ_runtime_native_v1.tree_predict', 'feature_names': sorted(features), 'accept_label': 'ACCEPT_FRESH_EVIDENCE', 'withhold_label': 'WITHHOLD_FRESH_EVIDENCE'}, 'transition_semantics': {'on_accept': 'CONDITIONALIZE_FINDING_AS_RESOLVED_BY_FRESH_EVIDENCE', 'on_withhold': 'PRESERVE_EXISTING_PARTIAL_FINDING', 'historical_support': [x['transition'] + ':' + x['finding_code'] for x in conditional_history]}, 'source_emission': {'python_source_emitted': False, 'ast_serialized': False, 'requires_next_stage': 'HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6'}}",
+      "score": 0.0,
+      "skill_id": "CONTEXT_BINDING_REPAIR_FCAFDE79476A",
+      "unresolved_dependencies": [
+        "binder"
+      ]
+    },
+    {
+      "assignment_name": "gene",
+      "exact_contract_keys": false,
+      "external_dependencies": [
+        "action",
+        "binder",
+        "j4",
+        "j5",
+        "j6",
+        "operator_program",
+        "v3",
+        "v4"
+      ],
+      "keys": [
+        "actual_python_source_emission_proven",
+        "gene_class",
+        "gene_id",
+        "heritage",
+        "operator_program",
+        "origin",
+        "promotion_state",
+        "schema"
+      ],
+      "required_coverage": 0.0,
+      "rhs_dump": "Dict(keys=[Constant(value='schema'), Constant(value='gene_id'), Constant(value='gene_class'), Constant(value='origin'), Constant(value='heritage'), Constant(value='operator_program'), Constant(value='promotion_state'), Constant(value='actual_python_source_emission_proven')], values=[Constant(value='yado.g2.task_conditioned_semantic_source_edit_meta_language_gene.v5'), BinOp(left=Constant(value='GENE-G2-SEMANTIC-SOURCE-EDIT-META-V5-'), op=Add(), right=Subscript(value=Subscript(value=Name(id='operator_program', ctx=Load()), slice=Constant(value='program_digest'), ctx=Load()), slice=Slice(upper=Constant(value=16)), ctx=Load())), Constant(value='HISTORY_DERIVED_EVIDENCE_CONDITIONALIZATION'), Constant(value='YADO_SELF_AUDIT_HISTORY_PLUS_YADO_SELF_CREATED_BINDER_PLUS_YADO_DIRECT_ACTION_EVIDENCE'), List(elts=[Call(func=Attribute(value=Name(id='j4', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='candidate_digest')], keywords=[]), Call(func=Attribute(value=Name(id='j5', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='candidate_digest')], keywords=[]), Call(func=Attribute(value=Name(id='j6', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='candidate_digest')], keywords=[]), Call(func=Attribute(value=Name(id='binder', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='gene_digest')], keywords=[]), Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='receipt_sha256')], keywords=[]), Call(func=Attribute(value=Name(id='v3', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='receipt_sha256')], keywords=[]), Call(func=Attribute(value=Name(id='v4', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='receipt_sha256')], keywords=[])], ctx=Load()), Name(id='operator_program', ctx=Load()), Constant(value='SHADOW_ONLY'), Constant(value=False)])",
+      "rhs_source": "{'schema': 'yado.g2.task_conditioned_semantic_source_edit_meta_language_gene.v5', 'gene_id': 'GENE-G2-SEMANTIC-SOURCE-EDIT-META-V5-' + operator_program['program_digest'][:16], 'gene_class': 'HISTORY_DERIVED_EVIDENCE_CONDITIONALIZATION', 'origin': 'YADO_SELF_AUDIT_HISTORY_PLUS_YADO_SELF_CREATED_BINDER_PLUS_YADO_DIRECT_ACTION_EVIDENCE', 'heritage': [j4.get('candidate_digest'), j5.get('candidate_digest'), j6.get('candidate_digest'), binder.get('gene_digest'), action.get('receipt_sha256'), v3.get('receipt_sha256'), v4.get('receipt_sha256')], 'operator_program': operator_program, 'promotion_state': 'SHADOW_ONLY', 'actual_python_source_emission_proven': False}",
+      "score": 0.0,
+      "skill_id": "CONTEXT_BINDING_REPAIR_42E3E33EED69",
+      "unresolved_dependencies": [
+        "action",
+        "binder",
+        "j4",
+        "j5",
+        "j6",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "assignment_name": "checks",
+      "exact_contract_keys": false,
+      "external_dependencies": [
+        "action",
+        "baseline_acc",
+        "binder",
+        "binder_verdict",
+        "candidate_acc",
+        "conditional_history",
+        "core",
+        "counterfactual_fail_closed",
+        "gene",
+        "head_before",
+        "history_hash_chain_valid",
+        "selected",
+        "target_is_unconditional_partial",
+        "v3"
+      ],
+      "keys": [
+        "actual_python_source_not_claimed",
+        "automatic_canonical_promotion",
+        "binder_accepts_valid_fresh_evidence",
+        "binder_counterfactuals_fail_closed",
+        "binder_gene_self_created",
+        "candidate_semantics_exact",
+        "canonical_unchanged",
+        "causal_gain_over_always_withhold",
+        "external_models_used",
+        "fresh_action_evidence_consumed",
+        "historical_semantic_conditionalization_transition_found",
+        "historical_source_hash_chain_valid",
+        "host_supplied_ast_skeleton",
+        "host_supplied_binder_logic",
+        "host_supplied_patch",
+        "native_precommit_admits_gene",
+        "new_gene_identity",
+        "target_has_matching_unconditional_partial_shape",
+        "v3_invent_family_consumed",
+        "v4_gap_proof_consumed"
+      ],
+      "required_coverage": 0.0,
+      "rhs_dump": "Dict(keys=[Constant(value='v4_gap_proof_consumed'), Constant(value='v3_invent_family_consumed'), Constant(value='historical_source_hash_chain_valid'), Constant(value='historical_semantic_conditionalization_transition_found'), Constant(value='target_has_matching_unconditional_partial_shape'), Constant(value='binder_gene_self_created'), Constant(value='fresh_action_evidence_consumed'), Constant(value='binder_accepts_valid_fresh_evidence'), Constant(value='binder_counterfactuals_fail_closed'), Constant(value='candidate_semantics_exact'), Constant(value='causal_gain_over_always_withhold'), Constant(value='native_precommit_admits_gene'), Constant(value='new_gene_identity'), Constant(value='actual_python_source_not_claimed'), Constant(value='host_supplied_patch'), Constant(value='host_supplied_ast_skeleton'), Constant(value='host_supplied_binder_logic'), Constant(value='external_models_used'), Constant(value='canonical_unchanged'), Constant(value='automatic_canonical_promotion')], values=[Constant(value=True), Compare(left=Call(func=Attribute(value=BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='v3', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='mutation_family_decision')], keywords=[]), Dict(keys=[], values=[])]), attr='get', ctx=Load()), args=[Constant(value='family')], keywords=[]), ops=[Eq()], comparators=[Constant(value='INVENT_NEW_GENE')]), Name(id='history_hash_chain_valid', ctx=Load()), Call(func=Name(id='bool', ctx=Load()), args=[Name(id='conditional_history', ctx=Load())], keywords=[]), Name(id='target_is_unconditional_partial', ctx=Load()), BoolOp(op=And(), values=[Compare(left=Call(func=Attribute(value=Name(id='binder', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='self_created_model')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Compare(left=Call(func=Attribute(value=Name(id='binder', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='external_model_generated')], keywords=[]), ops=[Is()], comparators=[Constant(value=False)])]), Compare(left=Call(func=Attribute(value=Name(id='action', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='direct_priority_evidence')], keywords=[]), ops=[Is()], comparators=[Constant(value=True)]), Compare(left=Name(id='binder_verdict', ctx=Load()), ops=[Eq()], comparators=[Constant(value='ACCEPT_FRESH_EVIDENCE')]), Name(id='counterfactual_fail_closed', ctx=Load()), Compare(left=Name(id='candidate_acc', ctx=Load()), ops=[Eq()], comparators=[Constant(value=1.0)]), Compare(left=BinOp(left=Name(id='candidate_acc', ctx=Load()), op=Sub(), right=Name(id='baseline_acc', ctx=Load())), ops=[GtE()], comparators=[Constant(value=0.01)]), Compare(left=Name(id='selected', ctx=Load()), ops=[Eq()], comparators=[Subscript(value=Name(id='gene', ctx=Load()), slice=Constant(value='gene_id'), ctx=Load())]), Compare(left=Subscript(value=Name(id='gene', ctx=Load()), slice=Constant(value='gene_id'), ctx=Load()), ops=[NotIn()], comparators=[Set(elts=[Call(func=Name(id='str', ctx=Load()), args=[Call(func=Attribute(value=Name(id='binder', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='gene_id')], keywords=[])], keywords=[]), Call(func=Name(id='str', ctx=Load()), args=[Call(func=Attribute(value=BoolOp(op=Or(), values=[Call(func=Attribute(value=Name(id='v3', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='mutation_family_decision')], keywords=[]), Dict(keys=[], values=[])]), attr='get', ctx=Load()), args=[Constant(value='concrete_gene_selected')], keywords=[])], keywords=[])])]), Compare(left=Subscript(value=Name(id='gene', ctx=Load()), slice=Constant(value='actual_python_source_emission_proven'), ctx=Load()), ops=[Is()], comparators=[Constant(value=False)]), Constant(value=False), Constant(value=False), Constant(value=False), Constant(value=False), Compare(left=Call(func=Attribute(value=Attribute(value=Name(id='core', ctx=Load()), attr='head', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_head_digest')], keywords=[]), ops=[Eq()], comparators=[Call(func=Attribute(value=Name(id='head_before', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='canonical_head_digest')], keywords=[])]), Constant(value=False)])",
+      "rhs_source": "{'v4_gap_proof_consumed': True, 'v3_invent_family_consumed': (v3.get('mutation_family_decision') or {}).get('family') == 'INVENT_NEW_GENE', 'historical_source_hash_chain_valid': history_hash_chain_valid, 'historical_semantic_conditionalization_transition_found': bool(conditional_history), 'target_has_matching_unconditional_partial_shape': target_is_unconditional_partial, 'binder_gene_self_created': binder.get('self_created_model') is True and binder.get('external_model_generated') is False, 'fresh_action_evidence_consumed': action.get('direct_priority_evidence') is True, 'binder_accepts_valid_fresh_evidence': binder_verdict == 'ACCEPT_FRESH_EVIDENCE', 'binder_counterfactuals_fail_closed': counterfactual_fail_closed, 'candidate_semantics_exact': candidate_acc == 1.0, 'causal_gain_over_always_withhold': candidate_acc - baseline_acc >= 0.01, 'native_precommit_admits_gene': selected == gene['gene_id'], 'new_gene_identity': gene['gene_id'] not in {str(binder.get('gene_id')), str((v3.get('mutation_family_decision') or {}).get('concrete_gene_selected'))}, 'actual_python_source_not_claimed': gene['actual_python_source_emission_proven'] is False, 'host_supplied_patch': False, 'host_supplied_ast_skeleton': False, 'host_supplied_binder_logic': False, 'external_models_used': False, 'canonical_unchanged': core.head.get('canonical_head_digest') == head_before.get('canonical_head_digest'), 'automatic_canonical_promotion': False}",
+      "score": 0.0,
+      "skill_id": "CONTEXT_BINDING_REPAIR_1D7D760D3AA3",
+      "unresolved_dependencies": [
+        "action",
+        "binder",
+        "v3"
+      ]
+    },
+    {
+      "assignment_name": "report",
+      "exact_contract_keys": false,
+      "external_dependencies": [
+        "baseline_acc",
+        "binder_verdict",
+        "candidate_acc",
+        "checks",
+        "conditional_history",
+        "counterfactuals",
+        "features",
+        "gene",
+        "history_chain",
+        "history_transitions",
+        "passed",
+        "selection",
+        "status",
+        "target_shape",
+        "v3",
+        "v4"
+      ],
+      "keys": [
+        "binder_features",
+        "binder_verdict",
+        "canonical_mutation",
+        "checks",
+        "conditional_history_support",
+        "counterfactuals",
+        "history_chain",
+        "history_transitions",
+        "meta_language_gene",
+        "metrics",
+        "native_precommit_selection",
+        "next_required_capability",
+        "parent_v3_receipt",
+        "parent_v4_receipt",
+        "promotion_applied",
+        "schema",
+        "semantic_boundary",
+        "status",
+        "target_finding_shape"
+      ],
+      "required_coverage": 0.0,
+      "rhs_dump": "Dict(keys=[Constant(value='schema'), Constant(value='status'), Constant(value='parent_v4_receipt'), Constant(value='parent_v3_receipt'), Constant(value='history_chain'), Constant(value='history_transitions'), Constant(value='conditional_history_support'), Constant(value='target_finding_shape'), Constant(value='binder_features'), Constant(value='binder_verdict'), Constant(value='counterfactuals'), Constant(value='meta_language_gene'), Constant(value='native_precommit_selection'), Constant(value='metrics'), Constant(value='checks'), Constant(value='canonical_mutation'), Constant(value='promotion_applied'), Constant(value='next_required_capability'), Constant(value='semantic_boundary')], values=[Constant(value='yado.g2.task_conditioned_semantic_source_edit_meta_language_genesis.v5'), Name(id='status', ctx=Load()), Call(func=Attribute(value=Name(id='v4', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='receipt_sha256')], keywords=[]), Call(func=Attribute(value=Name(id='v3', ctx=Load()), attr='get', ctx=Load()), args=[Constant(value='receipt_sha256')], keywords=[]), Name(id='history_chain', ctx=Load()), Name(id='history_transitions', ctx=Load()), Name(id='conditional_history', ctx=Load()), Name(id='target_shape', ctx=Load()), Name(id='features', ctx=Load()), Name(id='binder_verdict', ctx=Load()), Name(id='counterfactuals', ctx=Load()), Name(id='gene', ctx=Load()), Name(id='selection', ctx=Load()), Dict(keys=[Constant(value='candidate_accuracy'), Constant(value='always_withhold_baseline'), Constant(value='gain')], values=[Name(id='candidate_acc', ctx=Load()), Name(id='baseline_acc', ctx=Load()), BinOp(left=Name(id='candidate_acc', ctx=Load()), op=Sub(), right=Name(id='baseline_acc', ctx=Load()))]), Name(id='checks', ctx=Load()), Constant(value=False), Constant(value=False), IfExp(test=Name(id='passed', ctx=Load()), body=Constant(value='HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6'), orelse=Constant(value='SEMANTIC_SOURCE_EDIT_META_LANGUAGE_REPAIR_V5')), Constant(value='V5 CREATES A DATA-LEVEL SEMANTIC SOURCE-EDIT META-LANGUAGE GENE FROM YADO OWN SUCCESSFUL SELF-AUDIT SOURCE HISTORY, YADO SELF-CREATED EVIDENCE-BINDER MODEL, AND YADO DIRECT ACTION EVIDENCE. THE HISTORICAL OPERATOR TYPE IS EXTRACTED MECHANICALLY FROM AST TRANSITIONS; THE BINDER LOGIC IS EXECUTED BY THE EXISTING NATIVE TREE RUNTIME. NO PYTHON PATCH OR AST SKELETON IS CLAIMED OR EMITTED. V6 MUST SERIALIZE THIS GENE TO SOURCE AND PASS VALID/COUNTERFACTUAL/COMPILE/REGRESSION GATES.')])",
+      "rhs_source": "{'schema': 'yado.g2.task_conditioned_semantic_source_edit_meta_language_genesis.v5', 'status': status, 'parent_v4_receipt': v4.get('receipt_sha256'), 'parent_v3_receipt': v3.get('receipt_sha256'), 'history_chain': history_chain, 'history_transitions': history_transitions, 'conditional_history_support': conditional_history, 'target_finding_shape': target_shape, 'binder_features': features, 'binder_verdict': binder_verdict, 'counterfactuals': counterfactuals, 'meta_language_gene': gene, 'native_precommit_selection': selection, 'metrics': {'candidate_accuracy': candidate_acc, 'always_withhold_baseline': baseline_acc, 'gain': candidate_acc - baseline_acc}, 'checks': checks, 'canonical_mutation': False, 'promotion_applied': False, 'next_required_capability': 'HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6' if passed else 'SEMANTIC_SOURCE_EDIT_META_LANGUAGE_REPAIR_V5', 'semantic_boundary': 'V5 CREATES A DATA-LEVEL SEMANTIC SOURCE-EDIT META-LANGUAGE GENE FROM YADO OWN SUCCESSFUL SELF-AUDIT SOURCE HISTORY, YADO SELF-CREATED EVIDENCE-BINDER MODEL, AND YADO DIRECT ACTION EVIDENCE. THE HISTORICAL OPERATOR TYPE IS EXTRACTED MECHANICALLY FROM AST TRANSITIONS; THE BINDER LOGIC IS EXECUTED BY THE EXISTING NATIVE TREE RUNTIME. NO PYTHON PATCH OR AST SKELETON IS CLAIMED OR EMITTED. V6 MUST SERIALIZE THIS GENE TO SOURCE AND PASS VALID/COUNTERFACTUAL/COMPILE/REGRESSION GATES.'}",
+      "score": 0.0,
+      "skill_id": "CONTEXT_BINDING_REPAIR_B28AB9742B97",
+      "unresolved_dependencies": [
+        "selection",
+        "v3",
+        "v4"
+      ]
+    }
+  ],
+  "gene": null,
+  "ground_verdict": "ACCEPT_FRESH_EVIDENCE",
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-06T10:17:11.091753+00:00",
+        "deficit_id": "D-31bd2cd68868",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-20746451224e",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "OPEN",
+        "target": "NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_REPAIR_V14"
+      }
+    ],
+    "goal_id": "G-20746451224e"
+  },
+  "native_skill_selection": {
+    "candidate_count": 6,
+    "gate_digest": "b3a9f698bb7aabaa45f9e178870734916996fab51dd831aac793070f4c66e481",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "88618192313847139a730e3bde0ac173200142b31b65d6b4bfd2aec60549a26c",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CONTEXT_BINDING_REPAIR_1D7D760D3AA3",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "3fd21a0fb2713d6d0687b8c03002c5211028ac94118a57d4482b67250844c1a5",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CONTEXT_BINDING_REPAIR_21700175D898",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "3c0c955a0f15baa556f4b49a357996c39d62b9112cba13906f510debef0d23c6",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CONTEXT_BINDING_REPAIR_42E3E33EED69",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "2d3487032cbec802eb8070cc86c3bb5b476952ab33f166aeaf7b02f475cc4e23",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CONTEXT_BINDING_REPAIR_559D5E072AF1",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "2650784a1f1d6c4f0cd4e05a3b890df2b37a88bf7f27f5a2c9b17b586ca2333b",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CONTEXT_BINDING_REPAIR_B28AB9742B97",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "3172f287e0589d557b9e41638175911370a5791c0bb9fd318a6ff100c24e4659",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "CONTEXT_BINDING_REPAIR_FCAFDE79476A",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_REPAIR_V15",
+  "parent_v13_receipt": "30667fc3b13629b03a3d2b8b9a1f67e2d44f64ce7535f86e4ee574ca2b626039",
+  "promotion_applied": false,
+  "receipt_sha256": "d865e8015968531be5887bfb57413cdb29bd002b508f8db7bc5fdeff3bae7e97",
+  "schema": "yado.g2.native_contextual_ast_context_binding_repair.v14",
+  "selected_feature_binding": null,
+  "semantic_boundary": "V14 REPAIRS ONLY V13 DEPENDENCY ACCOUNTING: PYTHON BUILTINS AND COMPREHENSION-LOCAL VARIABLES ARE NO LONGER COUNTED AS EXTERNAL CONTEXT, AND TOP-LEVEL YADO SYMBOLS ARE FOLLOWED MECHANICALLY TO A DEPENDENCY CLOSURE. THE FEATURE DICT ITSELF IS COPIED UNCHANGED FROM YADO OWN SEMANTIC-EDIT RUNTIME; YADO NATIVE SKILL ADMISSION STILL SELECTS OR WITHHOLDS AT THE SAME 1.0/0.99 THRESHOLDS. NO TARGET SOURCE INTEGRATION IS CLAIMED.",
+  "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_REPAIR_V14",
+  "unresolved_closure_names": []
+}
