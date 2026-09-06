@@ -1,0 +1,53 @@
+{
+  "schema": "yado.g2.four_domain_fresh_stress.request.v1",
+  "task_id": "USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1",
+  "created_after_dns_gcp_pass": true,
+  "frozen_tri_organ_genome_id": "GENOME-G2-ALL-EXPERIENCE-TRI-ORGAN-V1-9e3b058de601792a",
+  "prior_cross_domain_receipt_sha256": "5bccd44513ae30aeb1ac71daf26a0615f205664c011598dd3548bb1813c497cc",
+  "domains": [
+    {
+      "id": "GEOSCIENCE_USGS",
+      "source": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
+      "source_authority": "USGS",
+      "source_kind": "public_geojson",
+      "minimum_records": 8
+    },
+    {
+      "id": "ECONOMICS_WORLDBANK",
+      "source": "https://api.worldbank.org/v2/country/HRV;DEU/indicator/SP.POP.TOTL?format=json&per_page=100&date=2022:2024",
+      "source_authority": "World Bank",
+      "source_kind": "public_json_api",
+      "minimum_records": 2
+    },
+    {
+      "id": "MEDICINE_OPENFDA",
+      "source": "https://api.fda.gov/drug/label.json?limit=8",
+      "source_authority": "U.S. FDA",
+      "source_kind": "public_json_api",
+      "minimum_records": 5
+    },
+    {
+      "id": "CYBERSECURITY_CISA_KEV",
+      "source": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "source_authority": "CISA",
+      "source_kind": "public_json_catalog",
+      "minimum_records": 8
+    }
+  ],
+  "constraints": {
+    "same_frozen_genome_for_all_domains": true,
+    "no_gene_reselection": true,
+    "no_resynthesis": true,
+    "no_domain_specific_gene_patch": true,
+    "no_expected_answers_hardcoded": true,
+    "require_per_domain_logic_fresh_exact": true,
+    "require_per_domain_thinking_fresh_exact": true,
+    "require_per_domain_intelligence_exact": true,
+    "require_structural_ablation": true,
+    "no_third_party_code_execution": true,
+    "no_credentials": true,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  }
+}
