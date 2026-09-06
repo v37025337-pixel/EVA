@@ -8,10 +8,10 @@
   "no_third_party_code_execution": true,
   "no_canonical_mutation": true,
   "host_role": "SOURCE_TRANSPORT_AND_PERSISTENCE_ONLY",
-  "trigger": 7,
-  "trigger_reason": "USER_20260906_DNS_GCP_STRESS_DIAGNOSTIC_RERUN",
+  "trigger": 8,
+  "trigger_reason": "USER_20260906_DNS_GCP_SOURCE_REPAIR_V2",
   "requested_at": "2026-09-06T20:33:08Z",
-  "purpose": "PERSIST_FULL_WITHHOLD_DIAGNOSTIC_WITHOUT_CHANGING_GATES",
+  "purpose": "RERUN_FROZEN_TRI_ORGAN_STRESS_AFTER_PRIMARY_SOURCE_REPAIR_ONLY",
   "canonical_mutation": false,
   "cross_domain_task": {
     "id": "USER_20260906_DNS_GCP_RESEARCH_V1",
@@ -33,5 +33,30 @@
     "gcp_endpoints_determined": "13/14",
     "thresholds_changed": false,
     "genes_reselected": false
+  },
+  "previous_diagnostic": {
+    "run_id": 34058880039,
+    "status": "WITHHOLD_G2_DNS_GCP_CROSS_DOMAIN_RESEARCH_STRESS_V1",
+    "sole_failed_gate": "all_gcp_endpoint_claims_determined",
+    "undetermined_service": "Compute Engine",
+    "gcp_endpoints_determined": "13/14",
+    "logic": {
+      "accuracy": 1,
+      "causal_drop": 1
+    },
+    "thinking": {
+      "accuracy": 1,
+      "causal_drop": 0.16666666666666663
+    },
+    "intelligence": {
+      "relation": 1,
+      "event": 1,
+      "reselection": false,
+      "resynthesis": false
+    },
+    "source_repair_only": true,
+    "thresholds_changed": false,
+    "genes_reselected": false,
+    "expected_answers_added": false
   }
 }
