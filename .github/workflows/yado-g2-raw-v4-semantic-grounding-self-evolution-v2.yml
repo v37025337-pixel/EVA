@@ -27,8 +27,27 @@ jobs:
       - name: Compile semantic V2
         run: python -m py_compile runtime/yado_g2_raw_v4_semantic_grounding_self_evolution_v2.py
       - name: Let YADO learn from the new real counterexample
+        id: semantic_v2
+        continue-on-error: true
         run: python runtime/yado_g2_raw_v4_semantic_grounding_self_evolution_v2.py
+      - name: Persist semantic PASS or WITHHOLD as causal experience
+        if: always()
+        run: |
+          git config user.name "YADO Raw Semantic Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          if [ -f candidates/kernel-self-generated/g2-raw-v4-semantic-grounding-self-evolution-v2.json ]; then
+            git add candidates/kernel-self-generated/g2-raw-v4-semantic-grounding-self-evolution-v2.json
+          fi
+          if [ -f candidates/kernel-self-generated/raw-task-representation-v4-semantic-grounding-repair-v2.json ]; then
+            git add candidates/kernel-self-generated/raw-task-representation-v4-semantic-grounding-repair-v2.json
+          fi
+          git diff --cached --quiet || git commit -m "Persist YADO raw semantic V2 causal evidence [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
       - name: Require strict shadow semantic PASS
+        if: always()
         run: |
           python - <<'PY'
           import json
@@ -47,17 +66,6 @@ jobs:
           PY
       - name: Canonical guard after semantic V2
         run: python runtime/yado_canonical_invariant_guard_v1.py
-      - name: Persist shadow semantic evidence
-        run: |
-          git config user.name "YADO Raw Semantic Evolution"
-          git config user.email "actions@users.noreply.github.com"
-          git add candidates/kernel-self-generated/g2-raw-v4-semantic-grounding-self-evolution-v2.json
-          git add candidates/kernel-self-generated/raw-task-representation-v4-semantic-grounding-repair-v2.json
-          git diff --cached --quiet || git commit -m "Persist YADO raw semantic grounding V2 shadow evidence [skip ci]"
-          git reset --hard HEAD
-          git clean -fd runtime/yado_rc8_v36
-          git pull --rebase origin yado-architecture-shadow-search
-          git push origin HEAD:yado-architecture-shadow-search
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
