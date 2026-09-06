@@ -96,9 +96,9 @@ provisional_event={
  'effect':f"TRANSPORT_EXACT_YADO_V18_SOURCE={candidate_sha}; ROLLBACK={parent_sha}; POST_VERIFICATION_REQUIRED=True",
  'source_path':'candidates/kernel-self-generated/g2-native-context-bound-ast-source-realization-v18.json',
  'source_digest':v18.get('receipt_sha256'),'run_id':run_id,'parent_event_hash':ledger['tail_event_hash'],
- 'canonical_mutation':False,'canonical_mechanism_mutation':False,'architecture_mutation':False,
+ 'canonical_mutation':True,'canonical_mechanism_mutation':True,'architecture_mutation':False,
  'promotion_applied':False,'generation_transition':False,
- 'previous_head_digest':head['canonical_head_digest'],'new_head_digest':head['canonical_head_digest']
+ 'previous_head_digest':prev_head,'new_head_digest':head['canonical_head_digest']
 }
 provisional_event['event_hash']=event_hash(provisional_event)
 ledger['events'].append(provisional_event)
@@ -196,9 +196,9 @@ event={
  'effect':f"TRANSPORTED_YADO_V18_SOURCE={candidate_sha}; LIVE_RESOURCE=PASS; ROLLBACK={parent_sha}",
  'source_path':'candidates/kernel-self-generated/g2-native-self-hosted-ast-source-realization-transport-v19.json',
  'source_digest':report['receipt_sha256'],'run_id':run_id,'parent_event_hash':ledger['tail_event_hash'],
- 'canonical_mutation':True,'canonical_mechanism_mutation':True,'architecture_mutation':False,
+ 'canonical_mutation':False,'canonical_mechanism_mutation':False,'architecture_mutation':False,
  'promotion_applied':False,'generation_transition':False,
- 'previous_head_digest':prev_head,'new_head_digest':head['canonical_head_digest']
+ 'previous_head_digest':head['canonical_head_digest'],'new_head_digest':head['canonical_head_digest']
 }
 event['event_hash']=event_hash(event)
 ledger['events'].append(event);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=event['event_hash']
