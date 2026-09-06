@@ -1,0 +1,43 @@
+{
+  "schema": "yado.g2.native_contextual_ast_transformer_policy_repair.request.v8",
+  "objective": "REPAIR_V7_CAUSAL_EVALUATION_WITHOUT_LOWERING_THRESHOLDS_OR_CHANGING_YADO_SEMANTICS",
+  "task": "Consume the V7 WITHHOLD caused by ablation_not_causal despite candidate_score=1.0 and restore_score=1.0. Preserve the YADO-derived binder_decision typed feature and the two semantic transition actions copied from the YADO semantic-edit gene. Rebuild only the causal blind distribution so ACCEPT and WITHHOLD are balanced 50/50, while keeping min_score=1.0 and min_ablation_drop=0.20. Let YADO native Generative Executive synthesize, evaluate, commit or rollback. Do not author AST, transform condition, transition action, source template, patch or external-model output.",
+  "parents": {
+    "contextual_ast_transformer_v7": "candidates/kernel-self-generated/g2-native-contextual-ast-transformer-gene-genesis-v7.json",
+    "semantic_source_edit_gene_v5": "candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json",
+    "self_created_evidence_binder": "candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
+    "direct_action_evidence": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json"
+  },
+  "constraints": {
+    "min_score": 1.0,
+    "min_ablation_drop": 0.20,
+    "external_models": false,
+    "host_authored_transition_action": false,
+    "host_authored_ast_subtree": false,
+    "host_authored_transform_condition": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "shadow_only": true,
+    "fail_closed": true
+  },
+  "success_conditions": [
+    "V7 exact candidate and restore evidence are consumed",
+    "V7 failure reason is ablation_not_causal",
+    "score and ablation thresholds are unchanged",
+    "blind ACCEPT and WITHHOLD classes are balanced",
+    "binder_decision remains YADO-derived",
+    "transition actions remain copied from YADO semantic gene",
+    "YADO native policy is synthesized and committed",
+    "fresh blind score is 1.0",
+    "causal ablation drop is at least 0.20",
+    "restore is exact",
+    "real valid evidence routes to on_accept",
+    "all single-field faults route to on_withhold",
+    "new shadow policy gene is emitted without claiming AST/source materialization",
+    "canonical G2 remains unchanged"
+  ],
+  "host_role": "CAUSAL_EVALUATION_REBALANCING_AND_STRICT_NATIVE_GATE_ONLY",
+  "stop_condition": "BALANCED_CONTEXTUAL_AST_POLICY_PASS_SHADOW_OR_EXPLICIT_NEXT_REPAIR_DEFICIT",
+  "trigger": 1,
+  "trigger_reason": "CONTINUE_FROM_V7_WHERE_THE_NATIVE_RULE_WAS_EXACT_BUT_ROLLED_BACK_ONLY_BECAUSE_THE_CAUSAL_BLIND_BASELINE_WAS_0_8"
+}
