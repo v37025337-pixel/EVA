@@ -198,6 +198,12 @@ for c in task.get('gcp_endpoint_claims') or []:
     src=source_results.get(c['source_id']) or {}
     text=src.get('text','')
     official_host,derive_mode=derive_service_host(text) if src.get('ok') else (None,'SOURCE_UNAVAILABLE')
+    if official_host is None and src.get('ok'):
+        source_url=str(src.get('resolved_url') or src.get('requested_url') or '')
+        source_host=(urlparse(source_url).hostname or '').lower()
+        if source_host.endswith('.googleapis.com') and source_host not in {'www.googleapis.com'}:
+            official_host=source_host
+            derive_mode='SUCCESSFULLY_FETCHED_OFFICIAL_SERVICE_SOURCE_HOST'
     chost,claim_mode=claimed_host(c['claimed_base'])
     if chost is None:
         status='CONTRADICTED_INVALID_SYNTAX'
