@@ -18,6 +18,7 @@ from yado_bounded_capability_set_coordinator_v1 import BoundedCapabilitySetCoord
 from yado_neutral_evidence_profile_selector_v1 import NeutralEvidenceProfileSelectorV1,EvidenceCandidate
 from yado_g2_canonical_high_scale_binding_runtime_v5 import CanonicalHighScaleBindingRuntimeV5
 from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
+from yado_g2_all_experience_tri_organ_runtime_v1 import CAP_LOGIC as CAP_TRI_LOGIC,CAP_THINKING as CAP_TRI_THINKING,CAP_INTELLIGENCE as CAP_TRI_INTELLIGENCE
 
 CAP_ROUTER='ALG-BOUNDED-CAPABILITY-ROUTER-V1'
 CAP_REPAIR='ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11'
@@ -70,6 +71,9 @@ MODULE_REGISTRY={
  CAP_GENOME:('EVOLUTION_CONTROL','runtime/yado_evolutionary_genome_v1.py'),
  CAP_COGNITIVE:('COGNITIVE_COORDINATOR','runtime/yado_g2_experience_conditioned_cognitive_layer_v4.py'),
  CAP_META_V7:('META_CONTROLLER','runtime/yado_g2_global_experience_meta_controller_v7.py'),
+ CAP_TRI_LOGIC:('EXECUTOR','runtime/yado_g2_all_experience_tri_organ_runtime_v1.py'),
+ CAP_TRI_THINKING:('EXECUTOR','runtime/yado_g2_all_experience_tri_organ_runtime_v1.py'),
+ CAP_TRI_INTELLIGENCE:('META_SELECTOR','runtime/yado_g2_all_experience_tri_organ_runtime_v1.py'),
 }
 
 DIRECT_FABRIC={CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES,CAP_LOGIC_V2,CAP_THINK_V2,CAP_INTEL_V3}
@@ -206,6 +210,12 @@ class UnifiedYADOModuleKernelV1:
                 ex=G2OpenAPIReadOnlyExecutorV1(task['allowed_hosts'],max_bytes=int(task.get('max_bytes',1024*1024)),timeout=float(task.get('timeout',10)))
                 out=ex.execute(task['plan'],task['base_url'],query=task.get('query'),headers=task.get('headers'))
             else:raise ValueError('UNKNOWN_API_EXEC_ACTION:'+str(action))
+        elif mid==CAP_TRI_LOGIC:
+            out=self.core.all_experience_logic(task.get('relation',()),task.get('start'))
+        elif mid==CAP_TRI_THINKING:
+            out=self.core.all_experience_thinking(task.get('events',()))
+        elif mid==CAP_TRI_INTELLIGENCE:
+            out=self.core.all_experience_intelligence(task)
         elif mid==CAP_META_V7:
             action=task.get('action','decide_signals')
             if action=='decide_signals':
