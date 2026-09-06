@@ -22,7 +22,7 @@
   "current_head": "G2_CANDIDATE_TRCG_V1",
   "current_head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 285,
+  "event_count": 286,
   "events": [
     {
       "canonical_mutation": false,
@@ -5004,10 +5004,26 @@
       "source_digest": "5d2e659653ad0430b0602f299eea438dee35a55295ea1559b315fba4067f5a5c",
       "source_path": "receipts/yado-g2-continuity-v5-metadata-digest-rebind-v1-run-33989478964.json",
       "status": "PASS_CANONICAL"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0; NEXT=KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+      "event_hash": "b121635a74a37c9ae5de81db30704222baada70f16ee3c79aedd93c2d0299afd",
+      "event_id": "E0286_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 285,
+      "parent_event_hash": "efaa05c7cfc58c478640b870cf8e2ba82cf0e8d02fa76784f9f48a06050f7386",
+      "promotion_applied": false,
+      "run_id": "34028009802",
+      "source_digest": "679d21580b802bc476eda375cc63c08bf229e193167798fb72160c46238cff3f",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-34028009802.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "d8d868ca5cf46ae6985d109a8c066ac84ab34d6179aac616db898017c4938b30",
+  "ledger_digest": "f75ddf50c916f2a5abce9ac57bec867b442e25f7bd23aa4d691957a4d8c24c70",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -5045,5 +5061,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "efaa05c7cfc58c478640b870cf8e2ba82cf0e8d02fa76784f9f48a06050f7386"
+  "tail_event_hash": "b121635a74a37c9ae5de81db30704222baada70f16ee3c79aedd93c2d0299afd"
 }
