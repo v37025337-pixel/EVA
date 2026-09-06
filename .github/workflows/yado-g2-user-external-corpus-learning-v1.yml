@@ -72,6 +72,8 @@ jobs:
           task=(req.get("cross_domain_task") or {}).get("id")
           if task=="USER_20260906_DNS_GCP_RESEARCH_V1":
               subprocess.check_call([sys.executable,"runtime/yado_g2_dns_gcp_cross_domain_research_stress_v1.py"])
+          elif task=="USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1":
+              subprocess.check_call([sys.executable,"runtime/yado_g2_four_domain_fresh_stress_v1.py"])
           else:
               print("NO_OPTIONAL_CROSS_DOMAIN_STRESS",task)
           PY
@@ -86,6 +88,8 @@ jobs:
           files=()
           [ -f candidates/kernel-self-generated/g2-dns-gcp-cross-domain-research-stress-v1.json ] && files+=(candidates/kernel-self-generated/g2-dns-gcp-cross-domain-research-stress-v1.json)
           [ -f experience/yado-dns-gcp-cross-domain-research-stress-v1.json ] && files+=(experience/yado-dns-gcp-cross-domain-research-stress-v1.json)
+          [ -f candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json ] && files+=(candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json)
+          [ -f experience/yado-four-domain-fresh-stress-v1.json ] && files+=(experience/yado-four-domain-fresh-stress-v1.json)
           if [ ${#files[@]} -gt 0 ]; then
             git add "${files[@]}"
             git diff --cached --quiet || git commit -m "Persist YADO DNS GCP fresh cross-domain stress [skip ci]"
@@ -106,6 +110,19 @@ jobs:
               if r.get("status")!="PASS_SHADOW_G2_DNS_GCP_CROSS_DOMAIN_RESEARCH_STRESS_V1":
                   raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
               print(r["status"],r["logic"],r["thinking"],r["intelligence"])
+          elif task=="USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1":
+              p=pathlib.Path("candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json")
+              if not p.exists(): raise SystemExit("MISSING_FOUR_DOMAIN_STRESS_REPORT")
+              r=json.loads(p.read_text())
+              if r.get("status")!="PASS_SHADOW_G2_FOUR_DOMAIN_FRESH_STRESS_V1":
+                  raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+              assert r["checks"]["four_domains_present"] is True,r
+              assert r["checks"]["all_domain_gates_pass"] is True,r
+              assert r["checks"]["frozen_program_digests_unchanged"] is True,r
+              assert r["checks"]["no_gene_reselection"] is True,r
+              assert r["checks"]["no_resynthesis"] is True,r
+              assert r["checks"]["canonical_unchanged"] is True,r
+              print(r["status"],r["next_required_capability"])
           else:
               print("NO_OPTIONAL_CROSS_DOMAIN_STRESS_TO_ENFORCE",task)
           PY
@@ -118,4 +135,6 @@ jobs:
             experience/yado-user-external-corpus-learning-v1.json
             candidates/kernel-self-generated/g2-dns-gcp-cross-domain-research-stress-v1.json
             experience/yado-dns-gcp-cross-domain-research-stress-v1.json
+            candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json
+            experience/yado-four-domain-fresh-stress-v1.json
           if-no-files-found: warn
