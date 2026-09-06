@@ -81,6 +81,19 @@ jobs:
           else:
               print("NO_OPTIONAL_CROSS_DOMAIN_STRESS",task)
           PY
+      - name: Roll back incomplete optional canonical binding
+        if: always()
+        run: |
+          task="$(python - <<'PY'
+          import json
+          r=json.load(open("architecture/yado-user-external-corpus-learning-v1-request.json"))
+          print((r.get("cross_domain_task") or {}).get("id") or "")
+          PY
+          )"
+          if [ "$task" = "USER_20260906_TRI_ORGAN_CANONICAL_BINDING_V2" ] && [ ! -f runtime/yado_tri_organ_binding_v2_commit_ready.marker ]; then
+            echo "Binding did not reach commit-ready marker; restoring checkout to last committed state."
+            git reset --hard HEAD
+          fi
       - name: Canonical guard after optional cross-domain stress
         if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
