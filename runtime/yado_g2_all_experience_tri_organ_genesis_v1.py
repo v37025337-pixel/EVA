@@ -67,7 +67,10 @@ def event_variants(keys):
     Q='Q';R='R'
     valid=tuple([(Q,k) for k in keys]+[(R,k) for k in reversed(keys)])
     crossed=tuple([(Q,k) for k in keys]+[(R,k) for k in keys])
-    underflow=tuple([(R,keys[0])]+list(valid[:max(4,len(valid)//2)]))
+    # Underflow must be causally identifiable: after the invalid close, the
+    # remaining suffix is fully balanced. REJECT stays False; IGNORE would turn True.
+    balance_key=keys[-1]
+    underflow=tuple([(R,keys[0]),(Q,balance_key),(R,balance_key)])
     unfinished=tuple(list(valid)[:-1])
     wrong='WRONG_'+hashlib.sha256(str(keys).encode()).hexdigest()[:12]
     w=list(valid);w[len(keys)]=(R,wrong)
