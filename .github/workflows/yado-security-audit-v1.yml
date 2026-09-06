@@ -1,7 +1,7 @@
 name: YADO Security Audit V1
 on:
   push:
-    branches: [yado-architecture-shadow-search]
+    branches: [main, yado-architecture-shadow-search, yado-main-selective-admission-v1]
     paths:
       - "architecture/yado-security-audit-v1-request.json"
 permissions:
@@ -36,8 +36,8 @@ jobs:
           git reset --hard HEAD
           git clean -fd
           for attempt in 1 2 3; do
-            git pull --rebase origin yado-architecture-shadow-search
-            if git push origin HEAD:yado-architecture-shadow-search; then exit 0; fi
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            if git push origin HEAD:"${GITHUB_REF_NAME}"; then exit 0; fi
             sleep 2
           done
           exit 1
