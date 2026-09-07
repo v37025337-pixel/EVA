@@ -1,0 +1,30 @@
+{
+  "schema": "yado.g2.native_raw_representation_strategy_genesis.request.v3",
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "current_canonical_frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "parent_v2_receipt": "5a489eddec0b04dfdd5651771d4ba4efd52b7acd8b1f552c61dcadb227f959a2",
+  "deficit": "NATIVE_RAW_REPRESENTATION_STRATEGY_GENESIS_V3",
+  "instruction": "Use the exact spent V2 robustness failure to synthesize a new context-dependent representation policy. The policy may see only predictions/agreement from YADO's existing V3/V4 views plus generic wrapper/length signals. Give identical spent evidence to multiple existing native learner families and let native precommit selection choose the family. Do not provide domain words, a target rule, a selected family, a selected capability label rule, or fresh V3 cases before selection.",
+  "constraints": {
+    "external_models": false,
+    "host_selected_family": false,
+    "host_rule": false,
+    "class_specific_rules": false,
+    "fresh_after_selection": true,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  },
+  "pass_only_if": [
+    "a native learner family is selected under precommit",
+    "fresh direct >= 0.98",
+    "fresh wrapped >= 0.98",
+    "fresh sequential >= 0.98",
+    "fresh sequential improves over CORE_GUARDED >= 0.005",
+    "base regression >= 0.98",
+    "ablation causes >= 0.05 drop",
+    "canonical unchanged"
+  ],
+  "host_role": "MECHANICAL_VIEW_FEATURE_EXTRACTION_SPENT_EVIDENCE_TRANSPORT_AND_STRICT_FRESH_EVALUATION_ONLY",
+  "trigger": 1
+}
