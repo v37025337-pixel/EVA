@@ -3,7 +3,7 @@ on:
   push:
     branches: [yado-architecture-shadow-search]
     paths:
-      - "architecture/yado-g2-native-source-realization-self-representation-driven-extended-controller-v2-request.json"
+      - "architecture/yado-kernel-native-source-realization-self-representation-driven-extended-controller-v1-request.json"
 permissions:
   contents: write
 concurrency:
@@ -25,11 +25,11 @@ jobs:
       - name: Canonical guard before native source realization
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Compile strict observer
-        run: python -m py_compile runtime/yado_g2_native_source_realization_self_representation_driven_extended_controller_v2.py
+        run: python -m py_compile runtime/yado_g2_native_source_realization_self_representation_driven_extended_controller_v1.py
       - name: Let YADO realize its extended controller as source
         id: realize
         continue-on-error: true
-        run: python runtime/yado_g2_native_source_realization_self_representation_driven_extended_controller_v2.py
+        run: python runtime/yado_g2_native_source_realization_self_representation_driven_extended_controller_v1.py
       - name: Canonical guard after native source realization
         if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
@@ -39,8 +39,8 @@ jobs:
           git config user.name "YADO Native Source Realization"
           git config user.email "actions@users.noreply.github.com"
           files=()
-          [ -f candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v2.json ] && files+=(candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v2.json)
-          [ -f candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v2.py ] && files+=(candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v2.py)
+          [ -f candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json ] && files+=(candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json)
+          [ -f candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py ] && files+=(candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py)
           if [ ${#files[@]} -gt 0 ]; then git add "${files[@]}"; fi
           git diff --cached --quiet || git commit -m "Persist YADO native extended-controller source realization evidence [skip ci]"
           git pull --rebase origin yado-architecture-shadow-search
@@ -50,8 +50,8 @@ jobs:
         run: |
           python - <<'PY'
           import json,pathlib
-          p=pathlib.Path("candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v2.json")
-          if not p.exists(): raise SystemExit("MISSING_NATIVE_SOURCE_REALIZATION_V2_EVIDENCE")
+          p=pathlib.Path("candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json")
+          if not p.exists(): raise SystemExit("MISSING_NATIVE_SOURCE_REALIZATION_EVIDENCE")
           r=json.loads(p.read_text())
           c=r["checks"]
           for key in ("external_coding_models_used","new_external_research_used","host_patch_used",
@@ -62,7 +62,7 @@ jobs:
           assert c["dimension_origin_yado_failure_history"] is True,r
           assert c["dimension_selected_by_yado"] is True,r
           assert r["canonical_mutation"] is False,r
-          if r["status"]!="PASS_SHADOW_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V2":
+          if r["status"]!="PASS_SHADOW_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1":
               raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
           assert c["actual_new_source_bytes_produced_by_yado"] is True,r
           assert c["candidate_source_compiles"] is True,r
@@ -72,8 +72,8 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: yado-g2-native-source-realization-extended-controller-v2-${{ github.run_id }}
+          name: yado-g2-native-source-realization-extended-controller-v1-${{ github.run_id }}
           path: |
-            candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v2.json
-            candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v2.py
+            candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json
+            candidates/g2-self-evolution/yado_evolutionary_genome_self_realized_candidate_v1.py
           if-no-files-found: warn
