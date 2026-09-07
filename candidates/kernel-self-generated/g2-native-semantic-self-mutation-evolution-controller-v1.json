@@ -1,7 +1,16 @@
 {
+  "accumulated_experience_evidence": {
+    "anonymous_compute_experience_digest": "d58f26d70f09ec4dce3b6d4473557d4a7fd5341dda5edc39a9e1815d501e5401",
+    "developer_resource_experience_digest": "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2",
+    "ir_emitter_failure_receipt": "c63f538a25262707253a443b03d6d74f454e38dbf1aa03260d3a75c38b279233",
+    "meta_language_failure_receipt": "73c58fa7644d2e1fc44737a9e951cfddf163a948817f7fd683c40329d94432a2",
+    "self_deployment_experience_digest": "71d44756495391673ddb9ec2b1aa564969d14c67359744232c702c7dec255c2c",
+    "source_process_receipt": "2879c77500aebee3c97fbd91c930a1ec1cce21e47b4608e15f3b8f0bdb314f7a"
+  },
   "candidate_source_sha256": null,
   "canonical_mutation": false,
   "checks": {
+    "anonymous_compute_failure_consumed": true,
     "candidate_source_compiles": false,
     "canonical_unchanged": true,
     "exact_prior_failure_consumed": true,
@@ -13,6 +22,8 @@
     "host_patch_used": false,
     "host_source_template_used": false,
     "host_target_function_selected": false,
+    "ir_emitter_failure_consumed": true,
+    "meta_language_failure_consumed": true,
     "native_controller_attempt_executed": true,
     "native_controller_mutation_or_equivalent_produced": false,
     "native_deficit_detected": true,
@@ -20,6 +31,8 @@
     "new_external_research_used": false,
     "previously_absent_class_created": false,
     "rollback_parent_available": true,
+    "self_deployment_failure_consumed": true,
+    "source_process_success_consumed": true,
     "structurally_broader_search_space": false
   },
   "child_dimensions": [
@@ -31,8 +44,11 @@
   "controller_path": "runtime/yado_evolutionary_genome_v1.py",
   "controller_sha256": "186479a62f08662a767c47dffcf499f3294eaaecefd21327dbdccc012ed08531",
   "native_calls": [
+    "core.all_experience_tri_organ_snapshot",
+    "core.cognitive_experience_snapshot",
     "core.evolutionary_parent_genome",
     "core.evolve_cognitive_code_genome",
+    "core.global_experience_meta_snapshot",
     "core.snapshot",
     "controller.component",
     "controller.evolve_once"
@@ -41,12 +57,12 @@
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-04T11:28:02.743642+00:00",
-        "deficit_id": "D-758c7a91d525",
+        "created_at": "2026-09-07T15:01:13.015384+00:00",
+        "deficit_id": "D-b5aabf7ba93e",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-32f0ec806bec",
+        "goal_id": "G-f6f8cc496982",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -54,7 +70,7 @@
         "target": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER"
       }
     ],
-    "goal_id": "G-32f0ec806bec"
+    "goal_id": "G-f6f8cc496982"
   },
   "native_outputs": {
     "controller.component": {
@@ -173,6 +189,60 @@
               "memory",
               "internet",
               "closed_loop"
+            ]
+          },
+          {
+            "branch": "main",
+            "claim_boundary": null,
+            "evidence": [
+              "experience/yado-global-historical-experience-corpus-v2.json",
+              "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+              "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+              "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+              "semantic_validation_by_rederivation": true,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+            },
+            "lessons": [
+              "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+              "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+              "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+              "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+            ],
+            "rederived_evidence": {
+              "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+              "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+              "cognitive_historical_fresh": 0.9583333333333334,
+              "observation_count": 138,
+              "old_corpus_regression": 0.972568578553616,
+              "pass_count": 81,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+              "terminal_historical_fresh": 0.8888888888888888,
+              "terminal_observation_count": 51,
+              "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+              "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+              "withhold_count": 57
+            },
+            "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+            "score": 4,
+            "tags": [
+              "experience",
+              "history",
+              "logic",
+              "thinking",
+              "intelligence",
+              "cognitive",
+              "meta",
+              "repair",
+              "representation",
+              "withhold",
+              "regression",
+              "transfer"
             ]
           },
           {
@@ -313,28 +383,93 @@
               }
             ],
             "role": "YADO_OWN_CONTROLLER_SELF_STUDY",
-            "study_digest": "6e3f08a0defe917a7d9ef6410e786d995630ed5e9024b6bce652e711f379d0d1"
+            "study_digest": "296330b677035005414d1dce076710f3759a60f6ba6130f0ef6c4a3178ab594f"
           },
           {
             "artifact": "candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json",
             "new_dimensions": [],
             "next_required_capability": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
-            "receipt_sha256": "0aebc2174192fac6a7936ea62c0ef7891ac3f19c29bfca06c909b3c6277a44da",
+            "receipt_sha256": "c28fcc90411469965d99fde8c4366a4c086971625d855535dba5b2c1fa252b28",
             "role": "YADO_OWN_FAILED_CONTROLLER_REPAIR",
             "status": "WITHHOLD_G2_EVOLUTION_CONTROLLER_SELF_STUDY_AND_REPAIR_V1"
           },
           {
-            "objective": "YADO_SEMANTICALLY_MUTATE_ITS_OWN_EVOLUTIONARY_CONTROLLER",
+            "artifact": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
+            "receipt_sha256": "2879c77500aebee3c97fbd91c930a1ec1cce21e47b4608e15f3b8f0bdb314f7a",
+            "role": "YADO_ACCUMULATED_SOURCE_PROCESS_SUCCESS",
+            "status": "PASS_NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2",
+            "target_priority": "CODING_UNSUPPORTED_PROGRAM_FAMILIES"
+          },
+          {
+            "artifact": "candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json",
+            "next_required_capability": "NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
+            "receipt_sha256": "c63f538a25262707253a443b03d6d74f454e38dbf1aa03260d3a75c38b279233",
+            "role": "YADO_ACCUMULATED_IR_EMITTER_FAILURE",
+            "status": "WITHHOLD_G2_NATIVE_SOURCE_IR_EMITTER_BIRTH_V1"
+          },
+          {
+            "artifact": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
+            "next_required_capability": "SELF_EVOLVING_META_LANGUAGE_V2",
+            "receipt_sha256": "73c58fa7644d2e1fc44737a9e951cfddf163a948817f7fd683c40329d94432a2",
+            "role": "YADO_ACCUMULATED_META_LANGUAGE_FAILURE",
+            "status": "WITHHOLD_G2_NATIVE_TASK_CONDITIONED_META_LANGUAGE_SELF_GENESIS_V2"
+          },
+          {
+            "artifact": "architecture/yado-g2-open-developer-resource-learning-application-v1.json",
+            "causal_lessons": [
+              {
+                "future_behavior": "USE_DOCUMENTATION_TO_FORM_HYPOTHESES_THEN_REQUIRE_YADO_NATIVE_REPAIR_OR_INVENTION_AND_FRESH_TESTS",
+                "id": "DEV-RESOURCE-001",
+                "rule": "DOCUMENTATION_IS_EVIDENCE_NOT_A_READY_PATCH"
+              },
+              {
+                "future_behavior": "PREFER_NO_KEY_GET_EVIDENCE_FOR_PARSING_HTTP_DATA_AND_SCHEMA_TRANSFER_TASKS",
+                "id": "DEV-RESOURCE-002",
+                "rule": "READ_ONLY_PUBLIC_APIS_CAN_SUPPLY_FRESH_STRUCTURED_EXAMPLES"
+              },
+              {
+                "future_behavior": "RETAIN_403_OR_429_AS_ACCESS_EVIDENCE_AND_USE_OTHER_REACHABLE_PRIMARY_SOURCES",
+                "id": "DEV-RESOURCE-003",
+                "rule": "INTERACTIVE_SANDBOX_UNAVAILABLE_TO_RUNNER_DOES_NOT_INVALIDATE_RESOURCE_CLASS"
+              },
+              {
+                "future_behavior": "LET_KERNEL_SELF_SELECT_FRESH_REPAIR_OR_SYNTHESIS_TASKS_FROM_EVIDENCE_WITHOUT_HOST_WRITTEN_PATCH",
+                "id": "DEV-RESOURCE-004",
+                "rule": "REGEX_AND_DATA_TRANSFORM_RESOURCES_ARE_RELEVANT_TO_UNSUPPORTED_PROGRAM_FAMILY_EXPANSION"
+              },
+              {
+                "future_behavior": "PARSE_READ_AND_REDERIVE_BEFORE_ANY_SANDBOXED_SELF_GENERATED_EXECUTION",
+                "id": "DEV-RESOURCE-005",
+                "rule": "EXTERNAL_CODE_OR_EXAMPLES_MUST_NOT_BE_EXECUTED_AS_TRUSTED_THIRD_PARTY_CODE"
+              }
+            ],
+            "experience_digest": "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2",
+            "role": "YADO_ACCUMULATED_OPEN_DEVELOPER_EXPERIENCE"
+          },
+          {
+            "artifact": "experience/yado-autonomous-free-compute-self-deployment-v1.json",
+            "experience_digest": "71d44756495391673ddb9ec2b1aa564969d14c67359744232c702c7dec255c2c",
+            "next_required_capability": "AUTHORIZED_FREE_COMPUTE_PROVIDER_SESSION_OR_ANONYMOUS_DEPLOYMENT_INTERFACE",
+            "role": "YADO_ACCUMULATED_SELF_DEPLOYMENT_FAILURE"
+          },
+          {
+            "artifact": "experience/yado-anonymous-compute-interface-discovery-v2.json",
+            "experience_digest": "d58f26d70f09ec4dce3b6d4473557d4a7fd5341dda5edc39a9e1815d501e5401",
+            "next_required_capability": "ANONYMOUS_REMOTE_EXECUTION_PROVIDER_WITH_EXPLICIT_NO_AUTH_EVIDENCE",
+            "role": "YADO_ACCUMULATED_ANONYMOUS_COMPUTE_FAILURE"
+          },
+          {
+            "objective": "YADO_USE_ACCUMULATED_EXPERIENCE_TO_SEMANTICALLY_MUTATE_ITS_EVOLUTIONARY_CONTROLLER",
             "role": "YADO_CURRENT_SEMANTIC_SELF_MUTATION_TASK",
-            "task": "Study your own controller limitation and solve it yourself. Treat the evolutionary controller itself as the object that may need to change. Produce a native shadow mutation that removes the fixed four-dimension ceiling and proves that a previously absent evolutionary class can be created from a new deficit."
+            "task": "Use the newest controller self-study WITHHOLD together with all accumulated relevant experience to improve the evolutionary controller itself. The fixed LOGIC/THINKING/INTELLIGENCE/CODE dimension ceiling is now repeatedly confirmed. Attempt a native shadow mutation or equivalent evolvable-controller representation that can produce a previously absent evolutionary class without the host naming it."
           }
         ],
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "b8b0801eb482b573344b311b1fe634ed18dff25be004582cd05f21ded03fd005",
+        "genome_digest": "2c7e679fe40bfbded5611ea2d01f127e29fa7725aa892b57ae625df06968d7a5",
         "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
         "mutation_count": 4,
         "novel_gene_count": 3,
-        "parent_genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+        "parent_genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "promotion_state": "SHADOW_ONLY",
         "schema": "yado.g2.evolutionary_genome.v1"
       },
@@ -449,19 +584,66 @@
           "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
           "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
         },
-        "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+        "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+        "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "genome_id": "G2-PARENT-GENOME-V1",
-        "parent_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+        "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
         "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
         "schema": "yado.g2.evolutionary_genome.v1"
       },
       "promotion_authorized": false,
-      "run_digest": "553af260ee34ff43825d3660766ae17e26e36c0aa0e469408d8c020d4e284d01",
+      "run_digest": "7ea0d7940abfee3813c25f793af3bc1d871440aa8f96110db6d7bcb24f045157",
       "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
       "selection": "CHILD",
       "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
+    },
+    "core.all_experience_tri_organ_snapshot": {
+      "automatic_canonical_promotion": false,
+      "components": {
+        "INTELLIGENCE": "ALG-G2-ALL-EXPERIENCE-CAUSAL-GENE-PORTFOLIO-INTELLIGENCE-V1",
+        "LOGIC": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+        "THINKING": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1"
+      },
+      "contract_routes": {
+        "EVENT_SEQUENCE_TO_BOOLEAN": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+        "RELATION_START_TO_STATE": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1"
+      },
+      "genome_id": "GENOME-G2-ALL-EXPERIENCE-TRI-ORGAN-V1-9e3b058de601792a",
+      "rollback_parents": {
+        "INTELLIGENCE": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+        "LOGIC": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "THINKING": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      },
+      "schema": "yado.g2.all_experience_tri_organ.runtime_snapshot.v1",
+      "status": "CANONICAL_ACTIVE",
+      "v4_preserved": true,
+      "v7_preserved": true
+    },
+    "core.cognitive_experience_snapshot": {
+      "automatic_canonical_promotion": false,
+      "component_id": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+      "global_negative_evidence": {
+        "failed_checks": [
+          "commit_ge_0_70",
+          "terminal_overall_ge_0_75",
+          "terminal_pass_ge_0_70"
+        ],
+        "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-ba372863026459fa",
+        "stress_receipt_sha256": "b21cb29d8d5d406edaa01f981a4afe0158b28ca4f0de31a11cb8baffdac8ef9c",
+        "stress_status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3"
+      },
+      "multidomain_genome_id": "GENOME-G2-MULTIDOMAIN-COGNITIVE-V1-c273b8cdc70909d8",
+      "parent_component": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
+      "real_data_portfolio_id": "PORT-G2-REAL-DATA-d8e4bd61e7855571",
+      "schema": "yado.g2.experience_conditioned_cognitive_layer.snapshot.v4",
+      "semantic_boundary": "V4 IS A SINGLE BOUNDED COGNITIVE LAYER WITH TASK-ID SPECIALISTS AND V3 FAIL-CLOSED FALLBACK. IT DOES NOT CLAIM SUBJECTIVE CONSCIOUSNESS OR GENERAL INTELLIGENCE.",
+      "specialist_task_counts": {
+        "INTELLIGENCE": 6,
+        "LOGIC": 6,
+        "THINKING": 6
+      },
+      "status": "CANONICAL_ACTIVE"
     },
     "core.evolutionary_parent_genome": {
       "experience": [
@@ -499,6 +681,60 @@
             "memory",
             "internet",
             "closed_loop"
+          ]
+        },
+        {
+          "branch": "main",
+          "claim_boundary": null,
+          "evidence": [
+            "experience/yado-global-historical-experience-corpus-v2.json",
+            "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+            "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+            "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+          ],
+          "lesson_provenance": {
+            "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+            "semantic_validation_by_rederivation": true,
+            "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+          },
+          "lessons": [
+            "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+            "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+            "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+            "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+            "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+            "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+          ],
+          "rederived_evidence": {
+            "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+            "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+            "cognitive_historical_fresh": 0.9583333333333334,
+            "observation_count": 138,
+            "old_corpus_regression": 0.972568578553616,
+            "pass_count": 81,
+            "semantic_equivalence_to_host_lessons_claimed": false,
+            "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+            "terminal_historical_fresh": 0.8888888888888888,
+            "terminal_observation_count": 51,
+            "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+            "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+            "withhold_count": 57
+          },
+          "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+          "score": 4,
+          "tags": [
+            "experience",
+            "history",
+            "logic",
+            "thinking",
+            "intelligence",
+            "cognitive",
+            "meta",
+            "repair",
+            "representation",
+            "withhold",
+            "regression",
+            "transfer"
           ]
         },
         {
@@ -625,11 +861,11 @@
           "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
           "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
         },
-        "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+        "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+        "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "genome_id": "G2-PARENT-GENOME-V1",
-        "parent_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+        "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
         "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
         "schema": "yado.g2.evolutionary_genome.v1"
       }
@@ -727,6 +963,60 @@
             ]
           },
           {
+            "branch": "main",
+            "claim_boundary": null,
+            "evidence": [
+              "experience/yado-global-historical-experience-corpus-v2.json",
+              "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+              "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+              "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+              "semantic_validation_by_rederivation": true,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+            },
+            "lessons": [
+              "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+              "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+              "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+              "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+            ],
+            "rederived_evidence": {
+              "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+              "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+              "cognitive_historical_fresh": 0.9583333333333334,
+              "observation_count": 138,
+              "old_corpus_regression": 0.972568578553616,
+              "pass_count": 81,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+              "terminal_historical_fresh": 0.8888888888888888,
+              "terminal_observation_count": 51,
+              "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+              "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+              "withhold_count": 57
+            },
+            "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+            "score": 4,
+            "tags": [
+              "experience",
+              "history",
+              "logic",
+              "thinking",
+              "intelligence",
+              "cognitive",
+              "meta",
+              "repair",
+              "representation",
+              "withhold",
+              "regression",
+              "transfer"
+            ]
+          },
+          {
             "branch": "yado-kernel-task-v37-repair",
             "claim_boundary": null,
             "evidence": [
@@ -794,11 +1084,11 @@
           }
         ],
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "a812d2da7de8ec551c85478f3dedd8c51272a67d4e6c452f8cf2de33356b8545",
+        "genome_digest": "d558575d57425bc6a3f1c5d454a6ca4085fd5e0b7c54d10f93ec89009577632a",
         "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
         "mutation_count": 4,
         "novel_gene_count": 3,
-        "parent_genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+        "parent_genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "promotion_state": "SHADOW_ONLY",
         "schema": "yado.g2.evolutionary_genome.v1"
       },
@@ -913,19 +1203,35 @@
           "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
           "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
         },
-        "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+        "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+        "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "genome_id": "G2-PARENT-GENOME-V1",
-        "parent_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+        "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
         "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
         "schema": "yado.g2.evolutionary_genome.v1"
       },
       "promotion_authorized": false,
-      "run_digest": "c65aac78000c3176f8b868967157d2e20fa915842cfb136b37807aec9935f7f1",
+      "run_digest": "c9d3eb8c7d00e6f298e7728140201fbb0f4d5b8a2b1ee047c6365baa2e1bd0c8",
       "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
       "selection": "CHILD",
       "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
+    },
+    "core.global_experience_meta_snapshot": {
+      "allowed_actions": [
+        "COMMIT",
+        "CONTINUE",
+        "REVISE",
+        "SEEK_EVIDENCE"
+      ],
+      "automatic_canonical_promotion": false,
+      "component_id": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
+      "genome_digest": "f5be58219cc9b49abad4c5c89871e6bb450a807c3e236f8cf404aba0d0eeb174",
+      "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-dd1cb791d312e0ff",
+      "rollback_parent_component": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+      "schema": "yado.g2.global_experience_meta_controller.snapshot.v7",
+      "semantic_boundary": "BOUNDED EXPERIENCE-DERIVED META-ACTION CONTROLLER. IT DOES NOT REPLACE THE V4 COGNITIVE TASK EXECUTOR AND CANNOT PROMOTE ITS OWN OUTPUT TO CANONICAL STATE.",
+      "status": "CANONICAL_ACTIVE"
     },
     "core.snapshot": {
       "architecture_id": "G2_ARCH_3bd5db0089f7a52f",
@@ -948,26 +1254,26 @@
           "required_active_families_present": true
         },
         "core_id": "UNIFIED_YADO_CORE_V1",
-        "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+        "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
         "frontier_source": "architecture/evolution-ledger.json:open_deficits",
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "head_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+        "head_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
         "legacy_experience_count": 13,
-        "manifest_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+        "manifest_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
         "open_deficits": [
-          "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1"
+          "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2"
         ],
         "pass": true
       },
       "core_id": "UNIFIED_YADO_CORE_V1",
-      "experience_registry_digest": "462e2455ab722dc34347d55a033704e4da3c9350cf4ee777d114bc744d8f66fa",
+      "experience_registry_digest": "c1a0c40b1494827a2794371f544d8531e14168e96b7ecbc53a0548fed164be43",
       "frontier": {
-        "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+        "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
         "frontier_source": "architecture/evolution-ledger.json:open_deficits",
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "manifest_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1",
+        "manifest_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
         "open_deficits": [
-          "KERNEL_G2_RAW_REPRESENTATION_V5_CANONICAL_ADMISSION_V1"
+          "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2"
         ],
         "recommended_experience": [
           {
@@ -1007,6 +1313,60 @@
               "source_monitoring",
               "metacognition",
               "ablation"
+            ]
+          },
+          {
+            "branch": "main",
+            "claim_boundary": null,
+            "evidence": [
+              "experience/yado-global-historical-experience-corpus-v2.json",
+              "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+              "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+              "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+              "semantic_validation_by_rederivation": true,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+            },
+            "lessons": [
+              "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+              "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+              "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+              "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+            ],
+            "rederived_evidence": {
+              "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+              "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+              "cognitive_historical_fresh": 0.9583333333333334,
+              "observation_count": 138,
+              "old_corpus_regression": 0.972568578553616,
+              "pass_count": 81,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+              "terminal_historical_fresh": 0.8888888888888888,
+              "terminal_observation_count": 51,
+              "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+              "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+              "withhold_count": 57
+            },
+            "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+            "score": 2,
+            "tags": [
+              "experience",
+              "history",
+              "logic",
+              "thinking",
+              "intelligence",
+              "cognitive",
+              "meta",
+              "repair",
+              "representation",
+              "withhold",
+              "regression",
+              "transfer"
             ]
           },
           {
@@ -1116,8 +1476,8 @@
         ]
       },
       "generation": "G2_CANDIDATE_TRCG_V1",
-      "head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
-      "manifest_digest": "22616e00246027433f9596fa1c6b74dcc1553eae0f6441f65820d94570065a41",
+      "head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+      "manifest_digest": "0681c02118548b95f08954201eab1faedfd24f7a0313b6667e93348662b142fc",
       "schema": "yado.unified_core.snapshot.v1",
       "semantic_boundary": "ONE ACTIVE YADO SOFTWARE KERNEL WITH LEGACY BRANCHES AS READ-ONLY EXPERIENCE; NOT AGI OR SUBJECTIVE CONSCIOUSNESS."
     }
@@ -1131,11 +1491,19 @@
     "LOGIC",
     "THINKING"
   ],
-  "receipt_sha256": "bd388f8bb84104e5626e325c6f879b3142ffd45bd38ae0a08d2634d1b89e35e6",
+  "receipt_sha256": "c2248f52b054f6973ed3a5582ab37fff2c592943fb127b8b40f4c639ad102c2e",
   "schema": "yado.g2.native_semantic_self_mutation_evolution_controller.v1",
-  "semantic_boundary": "STRICT SELF-MUTATION ATTEMPT. HOST TRANSPORTS THE TASK, PRIOR FAILURE, SELF-STUDY AND OWN CONTROLLER SOURCE ONLY. IT DOES NOT CHOOSE A FUNCTION, PATCH, NEW DIMENSION, GENE SCHEMA, MUTATION RULE OR SOURCE TEMPLATE. PASS REQUIRES NATIVE STRUCTURAL EXPANSION OF THE EVOLUTIONARY SPACE.",
+  "semantic_boundary": "STRICT SELF-MUTATION ATTEMPT CONDITIONED ON YADO OWN ACCUMULATED SUCCESS/FAILURE EXPERIENCE. HOST TRANSPORTS THE TASK, PRIOR FAILURE, SELF-STUDY AND OWN CONTROLLER SOURCE ONLY. IT DOES NOT CHOOSE A FUNCTION, PATCH, NEW DIMENSION, GENE SCHEMA, MUTATION RULE OR SOURCE TEMPLATE. PASS REQUIRES NATIVE STRUCTURAL EXPANSION OF THE EVOLUTIONARY SPACE.",
   "status": "WITHHOLD_G2_NATIVE_SEMANTIC_SELF_MUTATION_EVOLUTION_CONTROLLER_V1",
   "task": {
+    "accumulated_experience": {
+      "anonymous_compute_failure": "experience/yado-anonymous-compute-interface-discovery-v2.json",
+      "developer_resource_application": "architecture/yado-g2-open-developer-resource-learning-application-v1.json",
+      "ir_emitter_failure": "candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json",
+      "meta_language_failure": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
+      "self_deployment_failure": "experience/yado-autonomous-free-compute-self-deployment-v1.json",
+      "source_process": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json"
+    },
     "constraints": {
       "canonical_mutation": false,
       "external_coding_models": false,
@@ -1151,8 +1519,8 @@
     },
     "controller_self_study": "experience/yado-evolution-controller-self-study-v1.json",
     "host_role": "SELF_SOURCE_TRANSPORT_AND_STRICT_EVALUATION_ONLY",
-    "instruction": "Choose what part of your controller must change, what internal representation to use, and what mutation mechanism to apply. Use only your own current source, memory, developmental/evolutionary mechanisms, and prior YADO artifacts. The host does not choose a function, patch, new dimension, schema, mutation operator, or source template.",
-    "objective": "YADO_SEMANTICALLY_MUTATE_ITS_OWN_EVOLUTIONARY_CONTROLLER",
+    "instruction": "Consume the exact latest self-study/failure plus source-process success, IR-emitter failure, meta-language failure, open developer research, self-deployment failure and anonymous-compute failure. Choose what part of the controller must change and how to represent that change yourself. The host provides no target function, patch, new dimension name, gene schema, mutation rule, source template, operator inventory, or external coding model. Require rollback and canonical integrity.",
+    "objective": "YADO_USE_ACCUMULATED_EXPERIENCE_TO_SEMANTICALLY_MUTATE_ITS_EVOLUTIONARY_CONTROLLER",
     "parent_self_study": "candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json",
     "pass_only_if": [
       "the exact prior self-study and failure are consumed",
@@ -1167,8 +1535,8 @@
     ],
     "schema": "yado.g2.native_semantic_self_mutation_evolution_controller.request.v1",
     "stop_condition": "NATIVE_SEMANTIC_CONTROLLER_SELF_MUTATION_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
-    "task": "Study your own controller limitation and solve it yourself. Treat the evolutionary controller itself as the object that may need to change. Produce a native shadow mutation that removes the fixed four-dimension ceiling and proves that a previously absent evolutionary class can be created from a new deficit.",
-    "trigger": 2,
-    "trigger_reason": "START_NATIVE_SEMANTIC_SELF_MUTATION_FROM_YADO_OWN_SELF_STUDY"
+    "task": "Use the newest controller self-study WITHHOLD together with all accumulated relevant experience to improve the evolutionary controller itself. The fixed LOGIC/THINKING/INTELLIGENCE/CODE dimension ceiling is now repeatedly confirmed. Attempt a native shadow mutation or equivalent evolvable-controller representation that can produce a previously absent evolutionary class without the host naming it.",
+    "trigger": 3,
+    "trigger_reason": "ACCUMULATED_EXPERIENCE_NATIVE_SEMANTIC_SELF_MUTATION_AFTER_SELF_STUDY_WITHHOLD"
   }
 }
