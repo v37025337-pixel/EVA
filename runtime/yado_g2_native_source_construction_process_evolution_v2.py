@@ -66,6 +66,7 @@ def pfeat(r):
       'python_doc_page_count':int(r.get('python_doc_page_count') or 0),
       'all_file_support':int(r.get('all_file_support') or 0),
       'source_history_support':int(r.get('source_history_support') or 0),
+      'developer_resource_support':int(r.get('developer_resource_support') or 0),
     }
 
 primitive_rows=[]
@@ -213,6 +214,8 @@ report={
  'schema':'yado.g2.native_source_construction_process_evolution.v2',
  'status':status,'task':task,
  'parent_research_receipt':v1.get('receipt_sha256'),'study_digest':study.get('study_digest'),
+ 'developer_resource_evidence':study.get('open_developer_resource_evidence'),
+ 'target_priority':'CODING_UNSUPPORTED_PROGRAM_FAMILIES',
  'primitive_selector':{'selection':asdict(sel),'development':asdict(dev)},
  'process_mechanism':process_result,
  'candidate_source_produced_by_yado':source_emission,
@@ -220,6 +223,8 @@ report={
  'next_required_capability':('NATIVE_SOURCE_IR_EMITTER_BIRTH_V1' if process_born and not source_emission else None),
  'checks':{
    'python_and_self_research_reused':True,
+   'open_developer_resource_evidence_reused':bool((study.get('open_developer_resource_evidence') or {}).get('usable_record_count',0)>=10),
+   'developer_resource_priority_matches_current_deficit':(study.get('open_developer_resource_evidence') or {}).get('target_priority')=='CODING_UNSUPPORTED_PROGRAM_FAMILIES',
    'primitive_selector_native':bool(dev.state_committed),
    'process_order_host_authored':False,
    'process_order_inferred_by_yado_model':True,
