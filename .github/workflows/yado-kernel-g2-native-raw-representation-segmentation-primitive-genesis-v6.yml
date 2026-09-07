@@ -12,7 +12,7 @@ concurrency:
 jobs:
   genesis:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with: {fetch-depth: 0}
@@ -27,7 +27,7 @@ jobs:
       - name: Let YADO learn segmentation primitive
         id: genesis
         continue-on-error: true
-        run: timeout --signal=TERM --kill-after=30s 2100s python runtime/yado_kernel_g2_native_raw_representation_segmentation_primitive_genesis_v6.py
+        run: timeout --signal=TERM --kill-after=30s 3600s python runtime/yado_kernel_g2_native_raw_representation_segmentation_primitive_genesis_v6.py
       - name: Canonical guard after segmentation V6
         if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
