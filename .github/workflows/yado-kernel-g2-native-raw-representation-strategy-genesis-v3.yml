@@ -44,6 +44,8 @@ jobs:
           [ -f resources/yado-raw-task-representation-strategy-genesis-v3-fresh.json ] && files+=(resources/yado-raw-task-representation-strategy-genesis-v3-fresh.json)
           if [ ${#files[@]} -gt 0 ]; then git add "${files[@]}"; fi
           git diff --cached --quiet || git commit -m "Persist YADO native raw strategy genesis V3 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
       - name: Enforce honest V3 verdict
