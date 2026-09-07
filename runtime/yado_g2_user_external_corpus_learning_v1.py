@@ -76,6 +76,32 @@ def fetch(url,timeout=16,max_bytes=350000):
             last=type(e).__name__+':'+str(e)[:220]
     return {'ok':False,'requested_url':original,'error':last}
 
+def read_internal(rel_path,max_bytes=350000):
+    rel=str(rel_path or '').strip()
+    if not rel:
+        return {'ok':False,'requested_url':'internal:','error':'EMPTY_INTERNAL_PATH'}
+    p=(REPO/rel).resolve()
+    try:
+        p.relative_to(REPO.resolve())
+    except Exception:
+        return {'ok':False,'requested_url':'internal:'+rel,'error':'INTERNAL_PATH_ESCAPE'}
+    if not p.is_file():
+        return {'ok':False,'requested_url':'internal:'+rel,'error':'INTERNAL_FILE_MISSING'}
+    try:
+        body=p.read_bytes()[:max_bytes]
+        txt=plain(body,'text/plain')
+        if len(txt)<20:
+            raise ValueError('TOO_LITTLE_INTERNAL_TEXT')
+        return {
+          'ok':True,'requested_url':'internal:'+rel,'resolved_url':rel,
+          'content_type':'text/plain','bytes':len(body),'sha256':sha(body),'text':txt,
+          'ids':[rel],'kinds':['internal_project_evidence'],'origins':['INTERNAL_PROJECT']
+        }
+    except Exception as e:
+        return {'ok':False,'requested_url':'internal:'+rel,'resolved_url':rel,
+                'error':type(e).__name__+':'+str(e)[:220],
+                'ids':[rel],'kinds':['internal_project_evidence'],'origins':['INTERNAL_PROJECT']}
+
 c=load(CORPUS)
 sources={}
 def add(row,origin):
@@ -110,6 +136,24 @@ with ThreadPoolExecutor(max_workers=8) as ex:
                 out['secret_like_redactions']=redaction_count
             out['learnable_unit_digest']=digest({'sha256':out['sha256'],'terms':out['top_terms'],'excerpt':out['text_excerpt']})
         records.append(out)
+
+# Internal project evidence is actual training evidence, not merely a pointer list.
+# It is read-only, bounded, sanitized with the same secret-like filters, and indexed
+# into the same experience graph as public evidence.
+for rel in c.get('internal_project_evidence_to_reuse',[]):
+    r=read_internal(rel)
+    out={k:v for k,v in r.items() if k!='text'}
+    if r.get('ok'):
+        txt=r['text']
+        safe_txt,redaction_count=sanitize_public_text(txt)
+        cnt=Counter(tokens(safe_txt))
+        out['text_chars']=len(txt)
+        out['top_terms']=[{'token':t,'count':n} for t,n in cnt.most_common(40)]
+        out['text_excerpt']=safe_txt[:14000]
+        if redaction_count:
+            out['secret_like_redactions']=redaction_count
+        out['learnable_unit_digest']=digest({'sha256':out['sha256'],'terms':out['top_terms'],'excerpt':out['text_excerpt']})
+    records.append(out)
 
 records.sort(key=lambda x:x.get('requested_url',''))
 ok=[x for x in records if x.get('ok')]
@@ -146,7 +190,7 @@ experience={
  'excluded_private_screenshot_classes':c.get('excluded_private_screenshot_classes',[]),
  'construction_instruction':c.get('construction_instruction'),
  'canonical_mutation':False,
- 'semantic_boundary':'PUBLIC EXTERNAL EVIDENCE INGESTION AND GENERIC CONTENT INDEXING ONLY. NO SOURCE IS COPIED AS A READY YADO ARCHITECTURE OR REPAIR. NO THIRD-PARTY CODE IS EXECUTED.'
+ 'semantic_boundary':'PUBLIC EXTERNAL AND REPOSITORY-LOCAL EVIDENCE INGESTION WITH GENERIC CONTENT INDEXING ONLY. NO SOURCE IS COPIED AS A READY YADO ARCHITECTURE OR REPAIR. NO THIRD-PARTY CODE IS EXECUTED.'
 }
 experience['experience_digest']=digest(experience)
 OUT.parent.mkdir(parents=True,exist_ok=True)
