@@ -1,0 +1,182 @@
+{
+  "schema": "yado.g2.dns_screenshot_research_task.v2",
+  "task_id": "USER_20260907_DNS_SCREENSHOT_RESEARCH_V2",
+  "provenance": "user_screenshot_2026-09-07T11:07:52Z",
+  "input_semantics": "SCREENSHOT_CLAIMS_ARE_HYPOTHESES_NOT_TRUTH",
+  "frozen_canonical_tri_organ": "canonical/yado-g2-all-experience-tri-organ-v1.json",
+  "screenshot_claims": [
+    {
+      "id": "GOOGLE_ADDR",
+      "provider": "Google Public DNS",
+      "kind": "ADDRESS_PAIR",
+      "claimed_ipv4": [
+        "8.8.8.8",
+        "8.8.4.4"
+      ],
+      "source_id": "GOOGLE_OFFICIAL"
+    },
+    {
+      "id": "GOOGLE_NO_IP_LOGS",
+      "provider": "Google Public DNS",
+      "kind": "NO_IP_LOGS",
+      "claim": "No logging of IP addresses",
+      "source_id": "GOOGLE_PRIVACY"
+    },
+    {
+      "id": "CLOUDFLARE_ADDR",
+      "provider": "Cloudflare 1.1.1.1",
+      "kind": "ADDRESS_PAIR",
+      "claimed_ipv4": [
+        "1.1.1.1",
+        "1.0.0.1"
+      ],
+      "source_id": "CLOUDFLARE_IPS"
+    },
+    {
+      "id": "CLOUDFLARE_NO_LOGS",
+      "provider": "Cloudflare 1.1.1.1",
+      "kind": "NO_LOGS_ABSOLUTE",
+      "claim": "Privacy-focused (no logs)",
+      "source_id": "CLOUDFLARE_PRIVACY"
+    },
+    {
+      "id": "CLOUDFLARE_BLOCKS_BY_DEFAULT",
+      "provider": "Cloudflare 1.1.1.1",
+      "kind": "DEFAULT_THREAT_FILTERING",
+      "claim": "Blocks many threats by default",
+      "source_id": "CLOUDFLARE_IPS"
+    },
+    {
+      "id": "OPENDNS_ADDR",
+      "provider": "OpenDNS",
+      "kind": "ADDRESS_PAIR",
+      "claimed_ipv4": [
+        "208.67.222.222",
+        "208.67.220.220"
+      ],
+      "source_id": "OPENDNS_SETUP"
+    },
+    {
+      "id": "OPENDNS_FAMILYSHIELD_ON_PAIR",
+      "provider": "OpenDNS",
+      "kind": "FEATURE_ON_STANDARD_PAIR",
+      "claim": "Offers FamilyShield on the listed pair",
+      "source_id": "OPENDNS_SETUP"
+    },
+    {
+      "id": "QUAD9_ADDR",
+      "provider": "Quad9",
+      "kind": "ADDRESS_PAIR",
+      "claimed_ipv4": [
+        "9.9.9.9",
+        "149.112.112.112"
+      ],
+      "source_id": "QUAD9_SERVICES"
+    },
+    {
+      "id": "QUAD9_THREAT_BLOCKING",
+      "provider": "Quad9",
+      "kind": "THREAT_BLOCKING",
+      "claim": "Blocks malware, phishing and malicious sites",
+      "source_id": "QUAD9_SERVICES"
+    },
+    {
+      "id": "QUAD9_PRIVACY",
+      "provider": "Quad9",
+      "kind": "NO_ENDUSER_IP_LOGGING",
+      "claim": "Privacy-focused",
+      "source_id": "QUAD9_PRIVACY"
+    },
+    {
+      "id": "NEXTDNS_ADDR",
+      "provider": "NextDNS",
+      "kind": "ADDRESS_PAIR",
+      "claimed_ipv4": [
+        "45.90.28.0",
+        "45.90.30.0"
+      ],
+      "source_id": "NEXTDNS_DIAG"
+    },
+    {
+      "id": "NEXTDNS_PARENTAL",
+      "provider": "NextDNS",
+      "kind": "PARENTAL_CONTROLS",
+      "claim": "Parental controls and blocking",
+      "source_id": "NEXTDNS_SITE"
+    },
+    {
+      "id": "NEXTDNS_LOGGING_DISABLE",
+      "provider": "NextDNS",
+      "kind": "LOGGING_CAN_DISABLE",
+      "claim": "Logs can be disabled",
+      "source_id": "NEXTDNS_SITE"
+    },
+    {
+      "id": "NEXTDNS_CONFIG_NUANCE",
+      "provider": "NextDNS",
+      "kind": "PROFILE_CONFIGURATION",
+      "claim": "Listed raw IPs alone imply all personalized NextDNS features",
+      "source_id": "NEXTDNS_WINDOWS"
+    }
+  ],
+  "sources": [
+    {
+      "id": "GOOGLE_OFFICIAL",
+      "url": "https://developers.google.com/speed/public-dns/"
+    },
+    {
+      "id": "GOOGLE_PRIVACY",
+      "url": "https://developers.google.com/speed/public-dns/privacy"
+    },
+    {
+      "id": "CLOUDFLARE_IPS",
+      "url": "https://developers.cloudflare.com/1.1.1.1/ip-addresses/"
+    },
+    {
+      "id": "CLOUDFLARE_PRIVACY",
+      "url": "https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/"
+    },
+    {
+      "id": "OPENDNS_SETUP",
+      "url": "https://www.opendns.com/setupguide/"
+    },
+    {
+      "id": "QUAD9_SERVICES",
+      "url": "https://docs.quad9.net/services/"
+    },
+    {
+      "id": "QUAD9_PRIVACY",
+      "url": "https://www.quad9.net/privacy/policy/"
+    },
+    {
+      "id": "NEXTDNS_DIAG",
+      "url": "https://raw.githubusercontent.com/nextdns/diag/main/main.go"
+    },
+    {
+      "id": "NEXTDNS_SITE",
+      "url": "https://nextdns.io/"
+    },
+    {
+      "id": "NEXTDNS_WINDOWS",
+      "url": "https://github.com/nextdns/nextdns/wiki/Windows"
+    }
+  ],
+  "questions": [
+    "Which IPv4 pairs in the screenshot are supported by current official sources?",
+    "Which privacy/logging claims are absolute overstatements?",
+    "Which threat-blocking features require a different resolver variant or configuration?",
+    "Does OpenDNS FamilyShield use the same addresses shown in the screenshot?",
+    "Do NextDNS personalization features require configuration beyond merely knowing its anycast IPs?",
+    "Apply the verified outcome as new causal experience without mutating canonical main."
+  ],
+  "constraints": {
+    "official_first_party_sources_only": true,
+    "no_credentials": true,
+    "no_third_party_code_execution": true,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false,
+    "fresh_reasoning_cases": true,
+    "structural_ablation_required": true
+  }
+}
