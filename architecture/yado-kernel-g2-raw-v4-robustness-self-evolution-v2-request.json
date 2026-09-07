@@ -1,0 +1,31 @@
+{
+  "schema": "yado.g2.raw_v4_robustness_self_evolution.request.v2",
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "source_failure_run": 33900049280,
+  "source_failure_receipt": "bc3f54f0f72ac94310d85e1ded193544c9f68bfcd1048522a0a43cb0d917e646",
+  "failure_critic": "regression",
+  "instruction": "Consume the failed V5 canonical-admission receipt as spent negative evidence. Discover the existing V5 strategy surface from YADO's own runtime source. Let native skill admission select at most one strategy different from the previously failed mode using spent V1 evidence only. Reveal a new nested-wrapper/sequential stress only after selection. Do not lower canonical admission thresholds, add class-specific rules, retrain V4, or let the host choose a mode.",
+  "constraints": {
+    "host_selected_mode": false,
+    "runtime_mode_surface_discovered_from_yado_source": true,
+    "previous_failure_retained": true,
+    "fresh_after_selection": true,
+    "class_specific_rules": false,
+    "parent_retraining": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  },
+  "pass_only_if": [
+    "native selector chooses exactly one existing V5 mode different from the mode that failed canonical admission",
+    "fresh direct accuracy >= 0.97",
+    "fresh wrapped accuracy >= 0.96",
+    "fresh sequential accuracy >= 0.98",
+    "fresh wrapped and sequential improve over canonical V4 by >= 0.01",
+    "base regression >= 0.98",
+    "canonical G2 remains unchanged"
+  ],
+  "host_role": "SPENT_EVIDENCE_TRANSPORT_FRESH_STRESS_GENERATION_AND_STRICT_OBSERVER_ONLY",
+  "trigger": 1
+}
