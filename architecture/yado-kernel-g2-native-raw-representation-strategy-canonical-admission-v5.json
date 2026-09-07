@@ -1,0 +1,109 @@
+{
+  "admission_metrics": {
+    "candidate_base_regression": 1.0,
+    "candidate_direct": 0.9791666666666666,
+    "candidate_sequential": 0.8432,
+    "candidate_traps": 1.0,
+    "candidate_wrapped": 0.984375,
+    "parent_base_regression": 1.0,
+    "parent_direct": 0.9375,
+    "parent_sequential": 0.7196,
+    "parent_traps": 0.875,
+    "parent_wrapped": 0.84375
+  },
+  "candidate_digest": "03bf3624f16ddca433f02ce4f956258e2dee72046f65571fa4b226c65183ef6d",
+  "canonical_mutation": false,
+  "checks": {
+    "admission_direct_ge_0_97": true,
+    "admission_sequential_ge_0_98": false,
+    "admission_traps_ge_0_95": true,
+    "admission_wrapped_ge_0_97": true,
+    "base_regression_ge_0_98": true,
+    "candidate_fixed_by_digest": true,
+    "canonical_mutation": false,
+    "g3_not_started": true,
+    "model_fixed_by_digest": true,
+    "native_gate_selects_candidate": true,
+    "post_direct_ge_0_97": true,
+    "post_selection_fresh_not_used_by_gate": true,
+    "post_sequential_ge_0_98": false,
+    "post_traps_ge_0_95": true,
+    "post_wrapped_ge_0_97": true,
+    "revalidated_shadow_pass_consumed": true,
+    "rollback_v4_available": true
+  },
+  "fresh_dataset_digest": "2b79bc324d2bb2ffaf9e0b10d8072f95e6dc739b505943242424a0b06674f99b",
+  "g3_genesis_performed": false,
+  "model_digest": "ec9ab1ecc29d45ee2d7c0d616e7e23fcf28d235348a0f5a270dffdeb4e0f7505",
+  "native_selection": {
+    "candidate_count": 2,
+    "gate_digest": "b4cb2c0ebcaddc9499e04ff3f9606a23cf198709ec4703d83a815754018b8958",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "2a131045d937eaca7fd41bb5545d68a60f44b789a67f6c034de27cf63bb1a696",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_CANONICAL_RAW_V4",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "7a75eceb8148635202542041a4d7c4f1bc317dbb996b41d696b1787d256dd046",
+        "failed_critics": [],
+        "fit_gain": 0.04166666666666663,
+        "heldout_gain": 0.12359999999999993,
+        "skill_id": "ADMIT_RAW_MODEL_V6",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_RAW_MODEL_V6"
+    ],
+    "status": "SELECTED"
+  },
+  "next_required_capability": "NATIVE_RAW_REPRESENTATION_MODEL_FAMILY_EXPANSION_V5",
+  "post_selection_fresh_metrics": {
+    "candidate_direct": 1.0,
+    "candidate_sequential": 0.9443333333333334,
+    "candidate_traps": 1.0,
+    "candidate_wrapped": 1.0,
+    "parent_direct": 0.90625,
+    "parent_sequential": 0.7723333333333333,
+    "parent_wrapped": 0.8229166666666666
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "43ff8c9cea4259aa87d7f877edb7ca48c19bc258f209401dd474d1e21ae367d4",
+  "schema": "yado.g2.native_raw_representation_strategy_canonical_admission.v5",
+  "selected_family": "HASHED_CHAR45_PERCEPTRON",
+  "semantic_boundary": "INDEPENDENT CANONICAL-ADMISSION READINESS GATE FOR A FROZEN YADO-SELECTED REPRESENTATION MODEL. THIS STAGE DOES NOT MUTATE CANONICAL G2. THE CANDIDATE IS COMPARED AGAINST CANONICAL V4 ON NEW CONTRASTIVE DIRECT/WRAPPED/DEEP-SEQUENTIAL CASES, THEN A SECOND POST-SELECTION FRESH CHALLENGE. PASS ONLY AUTHORIZES A SEPARATE TRANSACTIONAL BINDING STAGE.",
+  "source_revalidation_receipt": "2d4866f26c9601794e0815f3d48bfbce6abd2a42eb45b219da59cb7b7721404e",
+  "status": "WITHHOLD_G2_NATIVE_RAW_REPRESENTATION_STRATEGY_CANONICAL_ADMISSION_V5"
+}
