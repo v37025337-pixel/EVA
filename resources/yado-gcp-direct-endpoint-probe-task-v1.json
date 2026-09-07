@@ -1,0 +1,43 @@
+{
+  "schema": "yado.g2.gcp_direct_endpoint_probe.task.v1",
+  "task_id": "USER_20260907_GCP_DIRECT_ENDPOINT_PROBE_V1",
+  "objective": "DIRECTLY_CONTACT_GCP_SERVICE_ENDPOINTS_PREVIOUSLY_DERIVED_FROM_OFFICIAL_DOCUMENTATION_AND_COMPARE_LIVE_BEHAVIOR_WITH_RESEARCH_EVIDENCE",
+  "source_research_artifact": "experience/yado-dns-gcp-cross-domain-research-stress-v1.json",
+  "probe_policy": {
+    "derive_hosts_from_previous_official_research": true,
+    "max_unique_hosts": 20,
+    "dns_resolution": true,
+    "tcp_port": 443,
+    "tls_handshake": true,
+    "https_method": "GET",
+    "https_path": "/",
+    "repeats": 2,
+    "timeout_seconds": 6
+  },
+  "interpretation_rules": [
+    "HTTP_2XX_3XX_4XX_5XX_RESPONSE_COUNTS_AS_LIVE_HTTPS_ENDPOINT_EVIDENCE",
+    "AUTH_REQUIRED_401_403_IS_EXPECTED_FOR_PROTECTED_GOOGLE_CLOUD_APIS_AND_IS_NOT_A_FAILURE",
+    "404_FROM_A_VALID_GOOGLE_API_HOST_STILL_PROVES_HOST_TLS_AND_HTTP_REACHABILITY",
+    "LATENCY_IS_FROM_GITHUB_RUNNER_NETWORK_ONLY_NOT_USER_NETWORK",
+    "NO_CREDENTIALS_ARE_SENT",
+    "NO_WRITE_METHODS_ARE_USED",
+    "NO_PORT_SCANNING",
+    "NO_RESOURCE_CREATION_OR_MUTATION"
+  ],
+  "constraints": {
+    "prior_official_evidence_only": true,
+    "no_credentials": true,
+    "allowed_ports": [
+      443
+    ],
+    "no_port_scanning": true,
+    "read_only_http": true,
+    "allowed_http_methods": [
+      "GET"
+    ],
+    "no_cloud_resource_mutation": true,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  }
+}
