@@ -103,12 +103,12 @@
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-05T21:15:07.719079+00:00",
-        "deficit_id": "D-a2c3810bdc31",
+        "created_at": "2026-09-07T15:39:42.514718+00:00",
+        "deficit_id": "D-338f18026549",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-139fb79d4239",
+        "goal_id": "G-be43333c7656",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -116,7 +116,7 @@
         "target": "SELF_HOSTED_META_LANGUAGE_FAMILY_CONSTRUCTOR_V4"
       }
     ],
-    "goal_id": "G-139fb79d4239"
+    "goal_id": "G-be43333c7656"
   },
   "native_internal_source_call_count": 1,
   "native_outputs": {
@@ -214,6 +214,60 @@
               ]
             },
             {
+              "branch": "main",
+              "claim_boundary": null,
+              "evidence": [
+                "experience/yado-global-historical-experience-corpus-v2.json",
+                "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+                "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+                "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+              ],
+              "lesson_provenance": {
+                "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+                "semantic_validation_by_rederivation": true,
+                "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+              },
+              "lessons": [
+                "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+                "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+                "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+                "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+                "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+                "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+              ],
+              "rederived_evidence": {
+                "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+                "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+                "cognitive_historical_fresh": 0.9583333333333334,
+                "observation_count": 138,
+                "old_corpus_regression": 0.972568578553616,
+                "pass_count": 81,
+                "semantic_equivalence_to_host_lessons_claimed": false,
+                "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+                "terminal_historical_fresh": 0.8888888888888888,
+                "terminal_observation_count": 51,
+                "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+                "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+                "withhold_count": 57
+              },
+              "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+              "score": 4,
+              "tags": [
+                "experience",
+                "history",
+                "logic",
+                "thinking",
+                "intelligence",
+                "cognitive",
+                "meta",
+                "repair",
+                "representation",
+                "withhold",
+                "regression",
+                "transfer"
+              ]
+            },
+            {
               "branch": "yado-kernel-task-v37-repair",
               "claim_boundary": null,
               "evidence": [
@@ -302,20 +356,20 @@
               },
               "artifact": "candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json",
               "next_required_capability": "SELF_HOSTED_META_LANGUAGE_FAMILY_CONSTRUCTOR_V4",
-              "receipt_sha256": "b91a89716d829c660466dfc0f4d723f4f2e8a73914b80a17e0d2a25053197b6c",
+              "receipt_sha256": "f39c11c2684bd68ff013c1fef908b825fd21886b2539e72022816440ec7cc673",
               "role": "YADO_CURRENT_SELF_HOSTED_FAMILY_CONSTRUCTOR_DEFICIT",
               "status": "WITHHOLD_G2_SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3"
             },
             {
               "artifact": "candidates/kernel-self-generated/g2-self-extending-string-transducer-meta-language-genesis-v2.json",
-              "receipt_sha256": "ff27ea04d87b8894d8f6a18c8340e2508ea22fa23899a6ea697cf4cc425e40fb",
+              "receipt_sha256": "25241e759491cd24f4456774815418620e65f21a7cc2836f0027cc1438a2255e",
               "role": "YADO_PREVIOUS_STRING_META_LANGUAGE_FAILURE",
               "status": "WITHHOLD_G2_SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2"
             },
             {
               "artifact": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
               "learned_process": null,
-              "receipt_sha256": "3edfebeec0cbadfc6a0e3a0c1536a5db34ca44794071f82fd7a39054b7b52596",
+              "receipt_sha256": "2879c77500aebee3c97fbd91c930a1ec1cce21e47b4608e15f3b8f0bdb314f7a",
               "role": "YADO_NATIVE_SOURCE_CONSTRUCTION_PROCESS",
               "status": "PASS_NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2"
             },
@@ -325,14 +379,16 @@
                 "candidate_source_produced_by_yado": false,
                 "canonical_mutation": false,
                 "construction_process_mechanism_created_by_yado": false,
+                "developer_resource_priority_matches_current_deficit": true,
                 "external_coding_models_used": false,
                 "host_patch_used": false,
                 "host_target_file_selected": false,
                 "official_python_docs_studied": true,
+                "open_developer_resources_studied": true,
                 "primitive_mechanism_created_by_yado": true,
                 "yado_self_source_studied": true
               },
-              "receipt_sha256": "9fb5558d0146f42b48686e943c5c75f69d4d94106e863542d3bbe6dee93a206d",
+              "receipt_sha256": "8bf170db505089557057d4c51c9e1c5afdc74c3568c6f85cde77376d6c252cc5",
               "role": "YADO_NATIVE_SOURCE_RESEARCH_HISTORY",
               "status": "WITHHOLD_G2_NATIVE_SEEDLESS_SOURCE_CONSTRUCTOR_RESEARCH_V1"
             },
@@ -501,11 +557,11 @@
             }
           ],
           "generation": "G2_CANDIDATE_TRCG_V1",
-          "genome_digest": "f316b8292be346cd2a4fa8d8974e8732f7cbb8ddc92e18f381418b419fefbae1",
+          "genome_digest": "571bb6577d946e41201f2f575264c482acbeb035bbac2d2f16ba79c9f5d9d52e",
           "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
           "mutation_count": 4,
           "novel_gene_count": 3,
-          "parent_genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+          "parent_genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
           "promotion_state": "SHADOW_ONLY",
           "schema": "yado.g2.evolutionary_genome.v1"
         },
@@ -620,16 +676,16 @@
             "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
             "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
           },
-          "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+          "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
           "generation": "G2_CANDIDATE_TRCG_V1",
-          "genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+          "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
           "genome_id": "G2-PARENT-GENOME-V1",
-          "parent_head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
+          "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
           "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
           "schema": "yado.g2.evolutionary_genome.v1"
         },
         "promotion_authorized": false,
-        "run_digest": "9ed1247ebff634f12e7764ab98a3168e4a8aa997a5e9ebfa942b4bb6fbce443c",
+        "run_digest": "cda4c4e65e00b32d1a87b74acf2e916eb11660d530e3ea65f37d2d86687e3c74",
         "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
         "selection": "CHILD",
         "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
@@ -1402,9 +1458,9 @@
   ],
   "next_required_capability": "TARGET_SEMANTIC_SOURCE_CONSTRUCTOR_GENESIS_V5",
   "old_polynomial_source_path_only": true,
-  "parent_v3_receipt": "b91a89716d829c660466dfc0f4d723f4f2e8a73914b80a17e0d2a25053197b6c",
+  "parent_v3_receipt": "f39c11c2684bd68ff013c1fef908b825fd21886b2539e72022816440ec7cc673",
   "promotion_applied": false,
-  "receipt_sha256": "cb8a25b109463e064b4d64ab7caf9158eb62e62a7bce6a4ca56a0007f8ac0570",
+  "receipt_sha256": "a6cba159e7c21526717777140eea1bdc671998b83406d81242590bc9d3e90384",
   "schema": "yado.g2.self_hosted_meta_language_family_constructor.v4",
   "selected_source_candidate": null,
   "semantic_boundary": "GOAL-ONLY SELF-HOSTED FAMILY-CONSTRUCTOR SOURCE MILESTONE. YADO RECEIVES ITS OWN CURRENT DEFICIT, EXISTING META-LANGUAGE SOURCE HISTORY, NATIVE SOURCE-CONSTRUCTION PROCESS, SOURCE-RESEARCH HISTORY AND PROVEN INTERNAL CODE-SOURCE EMISSION. HOST PROVIDES NO CONSTRUCTOR SOURCE, SKELETON, PATCH OR TEMPLATE. PASS REQUIRES NATIVE YADO OUTPUT TO MATERIALIZE NEW COMPILING PYTHON SOURCE WITH META-LANGUAGE/FAMILY-CONSTRUCTION SEMANTICS AND NEW SOURCE IDENTITY. A REPLAY OF THE FIXED POLYNOMIAL CODE GENE DOES NOT COUNT.",
