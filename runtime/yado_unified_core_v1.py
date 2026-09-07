@@ -82,6 +82,8 @@ class UnifiedYADOCoreV1:
         ledger_frontier=open_deficits[0] if len(open_deficits)==1 else None
         active=[x for x in branches if x.get('mode')=='ACTIVE_LINEAGE']
         legacy=[x for x in branches if x.get('mode')=='EXPERIENCE_ONLY']
+        closure=self.experience.get('closure',{})
+        expected_branch_count=closure.get('remote_branch_count')
         active_components=set()
         for p in self.manifest.get('planes',[]):
             active_components.update(p.get('active_components',[]))
@@ -89,8 +91,8 @@ class UnifiedYADOCoreV1:
             'core_id':self.manifest.get('core_id')==self.CORE_ID,
             'generation_is_g2':self.head.get('generation_id')=='G2_CANDIDATE_TRCG_V1',
             'one_active_experience_lineage':len(active)==1 and active[0].get('branch')=='yado-architecture-shadow-search',
-            'all_other_branches_experience_only':len(legacy)==13 and all(x.get('mode')=='EXPERIENCE_ONLY' for x in legacy),
-            'branch_inventory_complete':len(branches)==14,
+            'all_other_branches_experience_only':len(active)==1 and len(legacy)==len(branches)-1 and all(x.get('mode')=='EXPERIENCE_ONLY' for x in legacy),
+            'branch_inventory_complete':bool(branches) and expected_branch_count==len(branches) and closure.get('all_remote_branches_registered') is True,
             'legacy_auto_execution_forbidden':self.experience.get('policy',{}).get('legacy_code_import_forbidden_without_fresh_admission_gate') is True,
             'ledger_head_matches_generation':self.ledger.get('current_head')==self.head.get('generation_id'),
             'ledger_head_digest_matches':self.ledger.get('current_head_digest')==self.head.get('canonical_head_digest'),

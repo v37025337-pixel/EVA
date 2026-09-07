@@ -91,7 +91,9 @@ add('RUNTIME_CONTROL_PLANE_BINDING', 'IDENTITY_AND_LINEAGE', 'HIGH' if not bindi
 branches = cexp.get('branches', [])
 active = [x for x in branches if x.get('mode') == 'ACTIVE_LINEAGE']
 legacy = [x for x in branches if x.get('mode') == 'EXPERIENCE_ONLY']
-inventory_ok = len(branches) == 14 and len(active) == 1 and (len(legacy) == 13)
+closure = cexp.get('closure', {})
+expected_branch_count = closure.get('remote_branch_count')
+inventory_ok = bool(branches) and len(active) == 1 and active[0].get('branch') == 'yado-architecture-shadow-search' and len(legacy) == len(branches) - 1 and expected_branch_count == len(branches) and closure.get('all_remote_branches_registered') is True
 add('EXPERIENCE_BRANCH_MODE_INVARIANT', 'MEMORY_AND_EXPERIENCE', 'HIGH' if not inventory_ok else 'INFO', 'PASS' if inventory_ok else 'FAIL', {'branch_count': len(branches), 'active_count': len(active), 'experience_only_count': len(legacy)}, 'Keep exactly one active lineage and all legacy branches read-only.', not inventory_ok)
 remote_branches = []
 remote_error = None

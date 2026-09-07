@@ -317,7 +317,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "f00d66ce6a4d5b9ac5658375556fb30a7edcfc7cf9ddb0013a4d8b743373c666",
+  "core_digest": "60d3b30e0937086b7e6fec43c9701d2213fb2c1b8aa26ae7b14b2fbe5a4766b4",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -373,21 +373,25 @@
   },
   "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
   "deep_self_audit": {
+    "branch_inventory_invariant": "DYNAMIC_REMOTE_BOUND_V2",
     "candidate_digest": "38beaa01e9063f1cad9d1d55bf4897dd029cca7a01a9cbe9ba7e9c35fe6d1a23",
     "canonical_integration_run_id": "33440913407",
     "component_id": "ALG-G2-DEEP-SELF-AUDIT-V1",
     "evidence_selector": "CANONICAL_DOMAIN_BINDINGS_SUPERSEDE_PRE_CAPABILITY_DIAGNOSTICS",
     "fresh_admission_receipt_sha256": "6318b2bf0aa061260f21c22bf5ea6e1664b2477a6b4f2ff523df38c40f05949f",
-    "implementation_version": 8,
+    "implementation_version": 9,
     "legacy_retrieval_detector": "MANIFEST_PLUS_RUNTIME_BEHAVIOR",
     "provenance_selector": "VERIFIED_RAW_DERIVATION_DISTINCT_FROM_HOST_SUMMARIES",
-    "source_sha256": "700d1a176560ba24d25e22ebab8b1aaf5725e53e8c1cf81d45aaeacd495dd422",
+    "repair_gate_run_id": "34161135084",
+    "repair_parent_source_sha256": "700d1a176560ba24d25e22ebab8b1aaf5725e53e8c1cf81d45aaeacd495dd422",
+    "source_sha256": "b5f42580e1cd986a06e37d842a8c48f4486dbe910d57d853d3c6bcf96d33b3b6",
     "v19_transport": {
       "candidate_source_sha256": "700d1a176560ba24d25e22ebab8b1aaf5725e53e8c1cf81d45aaeacd495dd422",
+      "current_source_sha256": "b5f42580e1cd986a06e37d842a8c48f4486dbe910d57d853d3c6bcf96d33b3b6",
       "host_authored_semantic_logic": false,
       "rollback_parent_source_sha256": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
       "source": "YADO_V18_EXACT_CANDIDATE_BYTES",
-      "status": "CANONICAL_ACTIVE",
+      "status": "SUPERSEDED_BY_BOUNDED_BRANCH_INVENTORY_AUDIT_REPAIR_V2",
       "v18_receipt_sha256": "922146d0317e12643d3b22693b7683d55b2430692d1a4c0f15f8362b6004bdd0"
     }
   },
@@ -530,7 +534,7 @@
     "status": "CANONICAL_ACTIVE"
   },
   "experience_registry": "canonical/yado-unified-experience-registry-v1.json",
-  "experience_registry_digest": "77e95480b48d8c7a824f235993a7309f4c003228c3d8b9018a994b6fb910498a",
+  "experience_registry_digest": "05058dae35279861dd4f1c3f7f6d65ce3cdcf0d26b04a4d709f094d672febcfe",
   "frontier_source": "architecture/evolution-ledger.json:open_deficits",
   "g3_genesis_performed": false,
   "generation": "G2_CANDIDATE_TRCG_V1",
@@ -661,7 +665,7 @@
     "HISTORICAL_EXPERIENCE_MAY_GUIDE_G2_BUT_LEGACY_MECHANISMS_REQUIRE_FRESH_ADMISSION",
     "ALL_OPERATIONAL_BRANCH_REFS_MUST_CONVERGE_TO_SINGLE_G2_TREE_AFTER_CLOSURE"
   ],
-  "legacy_branch_count": 13,
+  "legacy_branch_count": 19,
   "legacy_experience_provenance": {
     "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
     "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
@@ -841,7 +845,7 @@
         "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
         "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1"
       ],
-      "branch_closure_mode": "READ_ONLY_HISTORY_INTO_G2",
+      "branch_closure_mode": "READ_ONLY_HISTORY_INTO_G2_DYNAMIC_INVENTORY_V2",
       "experience_binding": "canonical/yado-g2-applied-experience-binding-v1.json",
       "experience_binding_digest": "a4603815530fd93316d11b9dccf5b4e5cd8df4589302b0f6ceb6691889f98dc7",
       "experience_components": [
@@ -853,9 +857,10 @@
         "yado-rc8-digital-consciousness-v1",
         "yado-rc8-v36-digital-consciousness"
       ],
-      "historical_branch_count": 13,
+      "historical_branch_count": 19,
       "legacy_experience_retrieval": "ACTIVE_READ_ONLY_EXACT",
       "plane_id": "MEMORY_AND_EXPERIENCE",
+      "remote_branch_count": 20,
       "responsibilities": [
         "accumulated_history_to_meta_action_control",
         "automatic_planning_feedback_source",
@@ -1553,7 +1558,7 @@
   },
   "runtime_integrity_manifest": {
     "algorithm": "SHA256",
-    "manifest_digest": "f27afba2a411ed7491f43c4efc3c32dc117a9931cb93928ff08d7d92f35e5576",
+    "manifest_digest": "edd2153c04004559bc472c59c6392732001d0cc3f7b87af5e1dd3a85a4669779",
     "sources": {
       "runtime/yado_ambiguity_aware_program_repair_v11.py": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
       "runtime/yado_bounded_capability_router_v1.py": "442d53602f7a35aecc0ab7cfd9c7c5036cf7c5d00b4946d37f6fb08c93125206",
@@ -1592,11 +1597,11 @@
       "runtime/yado_rc8_v36/yado_openapi_adapter_runtime.py": "527687d69fdedd480f625f1721331f50be90b2d4defdea2276f0016dfaa57ecb",
       "runtime/yado_semantic_expression_synthesizer_v1.py": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
       "runtime/yado_unified_context_kernel_v1.py": "9e157a08ba0dde6e55f4edb6c074e9a829c9455d5debbac948b222d69854657a",
-      "runtime/yado_unified_core_deep_self_audit_v1.py": "700d1a176560ba24d25e22ebab8b1aaf5725e53e8c1cf81d45aaeacd495dd422",
+      "runtime/yado_unified_core_deep_self_audit_v1.py": "b5f42580e1cd986a06e37d842a8c48f4486dbe910d57d853d3c6bcf96d33b3b6",
       "runtime/yado_work_budget_adaptive_contingent_planner_v2.py": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
     }
   },
-  "runtime_sha256": "8bd45299fe9ad0e74de42017f2d2bba1fe77c9e9dbf9017c358434afe05e95d8",
+  "runtime_sha256": "becab6cf3dedad7e2a848811f464684ed081dd15de95870834a3d60cc8105d2b",
   "runtime_source": "runtime/yado_unified_core_v1.py",
   "schema": "yado.unified_core_manifest.v1",
   "science_reasoning": {
