@@ -17,8 +17,8 @@
     "no_gene_reselection": true,
     "official_source_fetch_ratio_ge_0_90": true,
     "opendns_familyshield_address_separation_exposed": true,
-    "quad9_threat_blocking_supported": false,
-    "thinking_ablation_drop": false,
+    "quad9_threat_blocking_supported": true,
+    "thinking_ablation_drop": true,
     "thinking_fresh_exact": true
   },
   "claim_findings": [
@@ -154,12 +154,12 @@
       "claim": "Blocks malware, phishing and malicious sites",
       "claim_id": "QUAD9_THREAT_BLOCKING",
       "claimed_ipv4": null,
-      "evidence_excerpt": " (Encrypted) Windows Windows Windows 10 Windows 11 (Encrypted) iOS iOS iOS 14 and later (Encrypted) Services Quad9 offers several variations of our free, private DNS service. 9.9.9.9 (Secure) Our most-popular service. A threat-blocking, privacy-first recursive DNS service. IPv4 IPv6 DNS over TLS DNS over HTTPS 9.9.9.9 , 149.112.112.112 2620:fe::fe , 2620:fe::9 dns.quad9.net https://dns.quad9.net/dns-query 9.9.9.10 (No Threat Blocking) F",
+      "evidence_excerpt": "ecifically aligned with the security and privacy of our end users and not with the extraction of money from customers. Quad9 continually adds to and modifies the set of threat providers to extend more accurate and rapid threat-blocking abilities to our user community. Quad9 c/o SWITCH Werdstrasse 2 8004 Z\u00fcrich Switzerland Founding Organizations This work is licensed under a CC BY-NC-SA 4.0 License",
       "kind": "THREAT_BLOCKING",
       "provider": "Quad9",
-      "reason": "NO_CLEAR_SIGNAL",
-      "source_id": "QUAD9_SERVICES",
-      "verdict": "UNDETERMINED"
+      "reason": "OFFICIAL_SERVICE_DESCRIBES_THREAT_BLOCKING",
+      "source_id": "QUAD9_THREAT",
+      "verdict": "SUPPORTED"
     },
     {
       "claim": "Privacy-focused",
@@ -224,7 +224,7 @@
       "verdict": "OVERGENERALIZED_REQUIRES_CONFIGURATION"
     }
   ],
-  "experience_digest": "a286d2e4a9fab921b9b6ae366a80111a36d34978c95ee524faf6ce5b616f25e7",
+  "experience_digest": "d2196db58bc2929691b83ea3770d29f007136da08b2a366418f8c820488ee3fc",
   "fresh_logic": {
     "accuracy": 1.0,
     "best_ablation_accuracy": 0.0,
@@ -234,9 +234,9 @@
   },
   "fresh_thinking": {
     "accuracy": 1.0,
-    "best_ablation_accuracy": 1.0,
-    "case_count": 28,
-    "causal_drop": 0.0,
+    "best_ablation_accuracy": 0.8333333333333334,
+    "case_count": 84,
+    "causal_drop": 0.16666666666666663,
     "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4"
   },
   "frozen_intelligence": {
@@ -274,16 +274,16 @@
       "ok": true,
       "requested_url": "https://developers.google.com/speed/public-dns/",
       "resolved_url": "https://developers.google.com/speed/public-dns/",
-      "sha256": "a7cd587ff33f6207064cfe67e831c418e4fdd5e6c8848702f26e775e7682dedc"
+      "sha256": "29245415486b05b809c5a901bfa893ad47b486cb8587401ad8faee00f00f8d97"
     },
     "GOOGLE_PRIVACY": {
-      "bytes": 74005,
+      "bytes": 74001,
       "content_type": "text/html; charset=utf-8",
       "http_status": 200,
       "ok": true,
       "requested_url": "https://developers.google.com/speed/public-dns/privacy",
       "resolved_url": "https://developers.google.com/speed/public-dns/privacy",
-      "sha256": "070cf0f963c4bb83d631304857a0f68d39f212bde4591f3470b31ba226b288e3"
+      "sha256": "3b958372f129efe773af0d5f079f6175d5e3534e2770d64a96709c8c680a16a7"
     },
     "NEXTDNS_DIAG": {
       "bytes": 9010,
@@ -304,13 +304,13 @@
       "sha256": "06facad42e3c4660ef7cdea2e24be276d912363e1cc62d8f46381092978ce091"
     },
     "NEXTDNS_WINDOWS": {
-      "bytes": 262991,
+      "bytes": 262987,
       "content_type": "text/html; charset=utf-8",
       "http_status": 200,
       "ok": true,
       "requested_url": "https://github.com/nextdns/nextdns/wiki/Windows",
       "resolved_url": "https://github.com/nextdns/nextdns/wiki/Windows",
-      "sha256": "b0dd7fa6c32bf41fc6924833248df64cac132d51f9806f020617f8720a20f59d"
+      "sha256": "b64f41adfa445c4961589fe4c1a9d077d66ef70fed4ca129e0d6b766dd357ebb"
     },
     "OPENDNS_SETUP": {
       "bytes": 14594,
@@ -338,14 +338,23 @@
       "requested_url": "https://docs.quad9.net/services/",
       "resolved_url": "https://docs.quad9.net/services/",
       "sha256": "fee48fe583c142e00475b8b8ed1c41d6f00c589032633da669e992289bda5822"
+    },
+    "QUAD9_THREAT": {
+      "bytes": 15284,
+      "content_type": "text/html",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://www.quad9.net/service/threat-blocking",
+      "resolved_url": "https://quad9.net/service/threat-blocking/",
+      "sha256": "285610e98ecb41cf8b6624b54f36bee49a35cb3788389e991b6728c173787c5f"
     }
   },
-  "status": "WITHHOLD_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2",
+  "status": "PASS_SHADOW_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2",
   "summary": {
     "contradicted_or_overgeneralized": 4,
-    "supported": 7,
+    "supported": 8,
     "supported_with_nuance": 2,
-    "undetermined": 1
+    "undetermined": 0
   },
   "task_id": "USER_20260907_DNS_SCREENSHOT_RESEARCH_V2"
 }

@@ -16,8 +16,8 @@
     "no_gene_reselection": true,
     "official_source_fetch_ratio_ge_0_90": true,
     "opendns_familyshield_address_separation_exposed": true,
-    "quad9_threat_blocking_supported": false,
-    "thinking_ablation_drop": false,
+    "quad9_threat_blocking_supported": true,
+    "thinking_ablation_drop": true,
     "thinking_fresh_exact": true
   },
   "claim_findings": [
@@ -153,12 +153,12 @@
       "claim": "Blocks malware, phishing and malicious sites",
       "claim_id": "QUAD9_THREAT_BLOCKING",
       "claimed_ipv4": null,
-      "evidence_excerpt": " (Encrypted) Windows Windows Windows 10 Windows 11 (Encrypted) iOS iOS iOS 14 and later (Encrypted) Services Quad9 offers several variations of our free, private DNS service. 9.9.9.9 (Secure) Our most-popular service. A threat-blocking, privacy-first recursive DNS service. IPv4 IPv6 DNS over TLS DNS over HTTPS 9.9.9.9 , 149.112.112.112 2620:fe::fe , 2620:fe::9 dns.quad9.net https://dns.quad9.net/dns-query 9.9.9.10 (No Threat Blocking) F",
+      "evidence_excerpt": "ecifically aligned with the security and privacy of our end users and not with the extraction of money from customers. Quad9 continually adds to and modifies the set of threat providers to extend more accurate and rapid threat-blocking abilities to our user community. Quad9 c/o SWITCH Werdstrasse 2 8004 Z\u00fcrich Switzerland Founding Organizations This work is licensed under a CC BY-NC-SA 4.0 License",
       "kind": "THREAT_BLOCKING",
       "provider": "Quad9",
-      "reason": "NO_CLEAR_SIGNAL",
-      "source_id": "QUAD9_SERVICES",
-      "verdict": "UNDETERMINED"
+      "reason": "OFFICIAL_SERVICE_DESCRIBES_THREAT_BLOCKING",
+      "source_id": "QUAD9_THREAT",
+      "verdict": "SUPPORTED"
     },
     {
       "claim": "Privacy-focused",
@@ -223,7 +223,7 @@
       "verdict": "OVERGENERALIZED_REQUIRES_CONFIGURATION"
     }
   ],
-  "experience_digest": "a286d2e4a9fab921b9b6ae366a80111a36d34978c95ee524faf6ce5b616f25e7",
+  "experience_digest": "d2196db58bc2929691b83ea3770d29f007136da08b2a366418f8c820488ee3fc",
   "g3_genesis_performed": false,
   "generation_transition": false,
   "intelligence": {
@@ -239,28 +239,28 @@
     "causal_drop": 1.0,
     "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8"
   },
-  "next_required_capability": "DNS_SCREENSHOT_RESEARCH_REPAIR_V3",
-  "receipt_sha256": "77e670acd6dbcf8dfa1d63e2c2f1efe4f57418e5c39ddd522bf9a9853a6a221c",
+  "next_required_capability": "APPLY_DNS_SCREENSHOT_EVIDENCE_TO_CAUSAL_MEMORY",
+  "receipt_sha256": "667e94355f68aae41e6128a6b321b1ee143a4c943b57fb46007a1d73830fdb23",
   "schema": "yado.g2.dns_screenshot_research_stress.v2",
   "semantic_boundary": "BOUNDED FACT-CHECKING AND FRESH CAUSAL-REASONING STRESS OVER USER-SUPPLIED DNS INFOGRAPHIC CLAIMS. THIS DOES NOT MEASURE REAL-WORLD LATENCY FROM THE USER NETWORK.",
   "source_fetch": {
-    "ok": 10,
+    "ok": 11,
     "ratio": 1.0,
-    "total": 10
+    "total": 11
   },
-  "status": "WITHHOLD_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2",
+  "status": "PASS_SHADOW_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2",
   "summary": {
     "contradicted_or_overgeneralized": 4,
-    "supported": 7,
+    "supported": 8,
     "supported_with_nuance": 2,
-    "undetermined": 1
+    "undetermined": 0
   },
   "task_id": "USER_20260907_DNS_SCREENSHOT_RESEARCH_V2",
   "thinking": {
     "accuracy": 1.0,
-    "best_ablation_accuracy": 1.0,
-    "case_count": 28,
-    "causal_drop": 0.0,
+    "best_ablation_accuracy": 0.8333333333333334,
+    "case_count": 84,
+    "causal_drop": 0.16666666666666663,
     "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4"
   }
 }
