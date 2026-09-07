@@ -1,0 +1,161 @@
+{
+  "schema": "yado.g2.causal_library_kernel_architecture.v1",
+  "status": "SHADOW_CANDIDATE",
+  "architecture_id": "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1",
+  "objective": "ONE_KERNEL_LIBRARY_WITH_CAUSALLY_LINKED_LAYERS_AND_ROLLBACK_PRESERVING_GENETICS",
+  "design_traits": [
+    "CAUSAL_TYPED_LAYERS",
+    "SINGLE_OWNER_PER_CONTRACT",
+    "EXPERIENCE_CONDITIONED_ROUTING",
+    "ROLLBACK_PRESERVING_GENETICS",
+    "OPEN_ENDED_SHADOW_EVOLUTION",
+    "FAIL_CLOSED_UNSUPPORTED_CONTRACTS"
+  ],
+  "layers": [
+    {
+      "index": 0,
+      "id": "L0_INPUT_GROUNDING",
+      "components": [
+        "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+        "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
+        "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1"
+      ]
+    },
+    {
+      "index": 1,
+      "id": "L1_MEMORY_EXPERIENCE",
+      "components": [
+        "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
+        "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
+        "RESOURCE-PORTFOLIO-V1"
+      ]
+    },
+    {
+      "index": 2,
+      "id": "L2_EXPERIENCE_CONDITIONING",
+      "components": [
+        "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4"
+      ]
+    },
+    {
+      "index": 3,
+      "id": "L3_LOGIC_THINKING",
+      "components": [
+        "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+        "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+        "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+        "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+      ]
+    },
+    {
+      "index": 4,
+      "id": "L4_INTELLIGENCE_ROUTING",
+      "components": [
+        "ALG-G2-ALL-EXPERIENCE-CAUSAL-GENE-PORTFOLIO-INTELLIGENCE-V1",
+        "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+        "ALG-BOUNDED-CAPABILITY-ROUTER-V1",
+        "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1",
+        "ALG-G2-HIGH-SCALE-TRIPLE-KNN-V4",
+        "ALG-G2-SCALE-ROUTE-SEMANTICS-V5",
+        "RUNTIME-G2-HIGH-SCALE-BINDING-V5",
+        "ALG-NEUTRAL-EVIDENCE-PROFILE-SELECTOR-V1"
+      ]
+    },
+    {
+      "index": 5,
+      "id": "L5_EXECUTION_EVIDENCE",
+      "components": [
+        "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5",
+        "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+        "ALG-G2-BOUNDED-SCIENTIFIC-DATA-REASONER-V1",
+        "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1"
+      ]
+    },
+    {
+      "index": 6,
+      "id": "L6_SELF_AUDIT_EVOLUTION",
+      "components": [
+        "ALG-G2-DEEP-SELF-AUDIT-V1",
+        "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
+        "CTRL-G2-EVOLUTIONARY-GENOME-V1"
+      ]
+    },
+    {
+      "index": 7,
+      "id": "L7_CONTINUITY_TIME",
+      "components": [
+        "RUNTIME-G2-COGNITIVE-TEMPORAL-KERNEL-V1",
+        "YADO_UNIFIED_CONTEXT_KERNEL_V1"
+      ]
+    }
+  ],
+  "forward_edges": [
+    [
+      "L0_INPUT_GROUNDING",
+      "L1_MEMORY_EXPERIENCE"
+    ],
+    [
+      "L1_MEMORY_EXPERIENCE",
+      "L2_EXPERIENCE_CONDITIONING"
+    ],
+    [
+      "L2_EXPERIENCE_CONDITIONING",
+      "L3_LOGIC_THINKING"
+    ],
+    [
+      "L3_LOGIC_THINKING",
+      "L4_INTELLIGENCE_ROUTING"
+    ],
+    [
+      "L4_INTELLIGENCE_ROUTING",
+      "L5_EXECUTION_EVIDENCE"
+    ],
+    [
+      "L5_EXECUTION_EVIDENCE",
+      "L6_SELF_AUDIT_EVOLUTION"
+    ],
+    [
+      "L6_SELF_AUDIT_EVOLUTION",
+      "L7_CONTINUITY_TIME"
+    ]
+  ],
+  "feedback_edges": [
+    {
+      "from": "L5_EXECUTION_EVIDENCE",
+      "to": "L1_MEMORY_EXPERIENCE",
+      "kind": "OUTCOME_TO_MEMORY"
+    },
+    {
+      "from": "L6_SELF_AUDIT_EVOLUTION",
+      "to": "L1_MEMORY_EXPERIENCE",
+      "kind": "AUDIT_AND_COUNTEREXAMPLE_MEMORY"
+    },
+    {
+      "from": "L6_SELF_AUDIT_EVOLUTION",
+      "to": "L3_LOGIC_THINKING",
+      "kind": "BOUNDED_EVOLUTION_TARGET"
+    },
+    {
+      "from": "L6_SELF_AUDIT_EVOLUTION",
+      "to": "L4_INTELLIGENCE_ROUTING",
+      "kind": "BOUNDED_EVOLUTION_TARGET"
+    },
+    {
+      "from": "L7_CONTINUITY_TIME",
+      "to": "L1_MEMORY_EXPERIENCE",
+      "kind": "TEMPORAL_CHECKPOINT_RESTORE"
+    }
+  ],
+  "causal_cycle": "INPUT -> MEMORY -> CONDITIONING -> LOGIC/THINKING -> INTELLIGENCE -> EXECUTION/EVIDENCE -> SELF_AUDIT/EVOLUTION -> CONTINUITY -> MEMORY",
+  "promotion": {
+    "automatic": false,
+    "requires": [
+      "FRESH_TRANSFER",
+      "ABLATION",
+      "REGRESSION",
+      "SECURITY_AUDIT",
+      "FULL_KERNEL_AUDIT"
+    ]
+  },
+  "g3_genesis": false
+}

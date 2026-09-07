@@ -1,0 +1,18 @@
+{
+  "schema": "yado.g2.causal_library_kernel.request.v1",
+  "objective": "CONSOLIDATE_ALL_PARALLEL_LINEAGE_EXPERIENCE_INTO_ONE_DEDUPLICATED_CAUSAL_LIBRARY_KERNEL_CANDIDATE",
+  "source_branch": "yado-architecture-shadow-search",
+  "candidate_branch": "yado-g2-causal-library-kernel-v1",
+  "source_shadow_sha": "55c58a8a06de036f8e6f193bff43263acb7a0ede",
+  "branch_lineage_physically_closed": true,
+  "duplicate_policy": "ONE_NORMAL_DISPATCH_OWNER_PER_CONTRACT; PRESERVE_ROLLBACK_MODULES AS FALLBACK",
+  "required_gates": [
+    "PY_COMPILE",
+    "UNIT_REGRESSION",
+    "SECURITY_AUDIT",
+    "FULL_KERNEL_AUDIT"
+  ],
+  "canonical_mutation": false,
+  "generation_transition": false,
+  "g3_genesis": false
+}
