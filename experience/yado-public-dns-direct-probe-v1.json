@@ -1,0 +1,2454 @@
+{
+  "aggregate": {
+    "addresses_udp_reachable": 10,
+    "dnssec_validation_consistent_providers": 5,
+    "nxdomain_observed_providers": 5,
+    "providers_tcp_reachable": 5,
+    "providers_udp_reachable": 5,
+    "runner_latency_ranking": [
+      {
+        "provider": "OpenDNS",
+        "provider_id": "OPENDNS",
+        "runner_median_ms": 5.314
+      },
+      {
+        "provider": "Quad9 Secure",
+        "provider_id": "QUAD9",
+        "runner_median_ms": 5.466
+      },
+      {
+        "provider": "NextDNS Anycast",
+        "provider_id": "NEXTDNS",
+        "runner_median_ms": 5.468
+      },
+      {
+        "provider": "Cloudflare 1.1.1.1",
+        "provider_id": "CLOUDFLARE",
+        "runner_median_ms": 6.116
+      },
+      {
+        "provider": "Google Public DNS",
+        "provider_id": "GOOGLE",
+        "runner_median_ms": 8.443
+      }
+    ]
+  },
+  "application_rule": "FUTURE_DNS_SELECTION_MUST_USE_DIRECT_MEASUREMENT_FOR_THE_CURRENT_EXECUTION_LOCATION_AND_MUST_KEEP_FEATURE_VARIANT_AND_PROFILE_CONTEXT_SEPARATE",
+  "automatic_promotion": false,
+  "canonical_mutation": false,
+  "causal_lessons": [
+    {
+      "evidence": "UDP_AND_TCP_PROBES_TO_EXACT_SCREENSHOT_IPS",
+      "id": "DNS-DIRECT-001",
+      "rule": "DIRECT_RESOLVER_USE_MUST_BE_MEASURED_PER_TARGET_AND_PER_TRANSPORT"
+    },
+    {
+      "evidence": "MEASUREMENTS_ORIGINATE_FROM_GITHUB_HOSTED_RUNNER",
+      "id": "DNS-DIRECT-002",
+      "rule": "RUNNER_RELATIVE_LATENCY_IS_NOT_USER_RELATIVE_LATENCY"
+    },
+    {
+      "evidence": "DNSSEC_FAILED_ORG_RESPONSE_CODE",
+      "id": "DNS-DIRECT-003",
+      "rule": "DNSSEC_VALIDATION_CAN_BE_OBSERVED_WITH_A_KNOWN_BOGUS_DOMAIN_BUT_NOT_INFERRED_FROM_MARKETING"
+    },
+    {
+      "evidence": "CHAOS_CLASS_ID_SERVER_IS_OPTIONAL",
+      "id": "DNS-DIRECT-004",
+      "rule": "OPTIONAL_CHAOS_IDENTITY_NONRESPONSE_DOES_NOT_INVALIDATE_RESOLVER_FUNCTION"
+    },
+    {
+      "evidence": "DIRECT_IP_PROBE_HAS_NO_ACCOUNT_CONFIGURATION_CONTEXT",
+      "id": "DNS-DIRECT-005",
+      "rule": "NEXTDNS_RAW_ANYCAST_REACHABILITY_DOES_NOT_PROVE_PROFILE_SPECIFIC_FILTERING"
+    }
+  ],
+  "checks": {
+    "at_least_eight_of_ten_addresses_udp_reachable": true,
+    "at_least_four_dnssec_behaviors_determined": true,
+    "at_least_four_nxdomain_behaviors_observed": true,
+    "at_least_four_of_five_providers_tcp_reachable": true,
+    "at_least_four_of_five_providers_udp_reachable": true,
+    "automatic_promotion_false": true,
+    "canonical_mutation_false": true,
+    "g3_false": true,
+    "no_system_resolver_reconfiguration": true,
+    "only_port_53_declared": true
+  },
+  "experience_digest": "eedbe60d1f75a1da174dd23a6e6aa4dc31c7b7be16e429f3d1dc7fbaf6003dd9",
+  "g3_genesis": false,
+  "providers": [
+    {
+      "addresses": [
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 5.529,
+            "ok": true,
+            "peer": "8.8.8.8",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 44.722,
+            "ok": true,
+            "peer": "8.8.8.8",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "8.8.8.8",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 64,
+                "section": "authority",
+                "ttl": 86397,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 6.402,
+            "ok": true,
+            "peer": "8.8.8.8",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 300,
+                "type": 1
+              },
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 300,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.817,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 10.992,
+              "ok": true,
+              "peer": "8.8.8.8",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 11.287,
+              "ok": true,
+              "peer": "8.8.8.8",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 9.845,
+              "ok": true,
+              "peer": "8.8.8.8",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 11.287,
+            "median": 10.992,
+            "min": 9.845,
+            "samples": [
+              10.992,
+              11.287,
+              9.845
+            ]
+          },
+          "udp_success_count": 3
+        },
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 5.532,
+            "ok": true,
+            "peer": "8.8.4.4",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 40.197,
+            "ok": true,
+            "peer": "8.8.4.4",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "8.8.4.4",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 64,
+                "section": "authority",
+                "ttl": 86370,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 5.696,
+            "ok": true,
+            "peer": "8.8.4.4",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 300,
+                "type": 1
+              },
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 300,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 11.613,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.662,
+              "ok": true,
+              "peer": "8.8.4.4",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 10.844,
+              "ok": true,
+              "peer": "8.8.4.4",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 300,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.893,
+              "ok": true,
+              "peer": "8.8.4.4",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 10.844,
+            "median": 5.893,
+            "min": 5.662,
+            "samples": [
+              5.662,
+              10.844,
+              5.893
+            ]
+          },
+          "udp_success_count": 3
+        }
+      ],
+      "provider": "Google Public DNS",
+      "provider_dnssec_validation_consistent": true,
+      "provider_id": "GOOGLE",
+      "provider_nxdomain_observed": true,
+      "provider_runner_median_ms": 8.443,
+      "provider_tcp_reachable": true,
+      "provider_udp_reachable": true
+    },
+    {
+      "addresses": [
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 1,
+            "answers": [
+              {
+                "class": 3,
+                "rdlen": 6,
+                "section": "answer",
+                "ttl": 0,
+                "txt": "iad19",
+                "type": 16
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 5.605,
+            "ok": true,
+            "peer": "1.1.1.1",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [
+            "iad19"
+          ],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 33.101,
+            "ok": true,
+            "peer": "1.1.1.1",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "1.1.1.1",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 64,
+                "section": "authority",
+                "ttl": 86400,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 7.116,
+            "ok": true,
+            "peer": "1.1.1.1",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 152,
+                "type": 1
+              },
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 152,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.906,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 158,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 158,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 7.121,
+              "ok": true,
+              "peer": "1.1.1.1",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 114,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 114,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 6.151,
+              "ok": true,
+              "peer": "1.1.1.1",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 158,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 158,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.964,
+              "ok": true,
+              "peer": "1.1.1.1",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 7.121,
+            "median": 6.151,
+            "min": 5.964,
+            "samples": [
+              7.121,
+              6.151,
+              5.964
+            ]
+          },
+          "udp_success_count": 3
+        },
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 1,
+            "answers": [
+              {
+                "class": 3,
+                "rdlen": 6,
+                "section": "answer",
+                "ttl": 0,
+                "txt": "iad17",
+                "type": 16
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 5.744,
+            "ok": true,
+            "peer": "1.0.0.1",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [
+            "iad17"
+          ],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 40.557,
+            "ok": true,
+            "peer": "1.0.0.1",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "1.0.0.1",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 64,
+                "section": "authority",
+                "ttl": 86400,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 8.22,
+            "ok": true,
+            "peer": "1.0.0.1",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 182,
+                "type": 1
+              },
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 182,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.571,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 167,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 167,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 6.081,
+              "ok": true,
+              "peer": "1.0.0.1",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 77,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 77,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 9.094,
+              "ok": true,
+              "peer": "1.0.0.1",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 37,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 37,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.682,
+              "ok": true,
+              "peer": "1.0.0.1",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 9.094,
+            "median": 6.081,
+            "min": 5.682,
+            "samples": [
+              6.081,
+              9.094,
+              5.682
+            ]
+          },
+          "udp_success_count": 3
+        }
+      ],
+      "provider": "Cloudflare 1.1.1.1",
+      "provider_dnssec_validation_consistent": true,
+      "provider_id": "CLOUDFLARE",
+      "provider_nxdomain_observed": true,
+      "provider_runner_median_ms": 6.116,
+      "provider_tcp_reachable": true,
+      "provider_udp_reachable": true
+    },
+    {
+      "addresses": [
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 6.289,
+            "ok": true,
+            "peer": "208.67.222.222",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 5,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 81.391,
+            "ok": true,
+            "peer": "208.67.222.222",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "208.67.222.222",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": true,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 40,
+                "section": "authority",
+                "ttl": 10800,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 5.386,
+            "ok": true,
+            "peer": "208.67.222.222",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 133,
+                "type": 1
+              },
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 133,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.259,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 60,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 60,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.545,
+              "ok": true,
+              "peer": "208.67.222.222",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 57,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 57,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.169,
+              "ok": true,
+              "peer": "208.67.222.222",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 213,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 213,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.35,
+              "ok": true,
+              "peer": "208.67.222.222",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 5.545,
+            "median": 5.35,
+            "min": 5.169,
+            "samples": [
+              5.545,
+              5.169,
+              5.35
+            ]
+          },
+          "udp_success_count": 3
+        },
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 5.337,
+            "ok": true,
+            "peer": "208.67.220.220",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 5,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 76.132,
+            "ok": true,
+            "peer": "208.67.220.220",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "208.67.220.220",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": true,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 40,
+                "section": "authority",
+                "ttl": 10800,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 6.326,
+            "ok": true,
+            "peer": "208.67.220.220",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 73,
+                "type": 1
+              },
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 73,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.458,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 50,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 50,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.327,
+              "ok": true,
+              "peer": "208.67.220.220",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 133,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 133,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.279,
+              "ok": true,
+              "peer": "208.67.220.220",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 213,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 213,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.038,
+              "ok": true,
+              "peer": "208.67.220.220",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 5.327,
+            "median": 5.279,
+            "min": 5.038,
+            "samples": [
+              5.327,
+              5.279,
+              5.038
+            ]
+          },
+          "udp_success_count": 3
+        }
+      ],
+      "provider": "OpenDNS",
+      "provider_dnssec_validation_consistent": true,
+      "provider_id": "OPENDNS",
+      "provider_nxdomain_observed": true,
+      "provider_runner_median_ms": 5.314,
+      "provider_tcp_reachable": true,
+      "provider_udp_reachable": true
+    },
+    {
+      "addresses": [
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 1,
+            "answers": [
+              {
+                "class": 3,
+                "rdlen": 11,
+                "section": "answer",
+                "ttl": 0,
+                "txt": "res710.iad",
+                "type": 16
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 5.662,
+            "ok": true,
+            "peer": "9.9.9.9",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [
+            "res710.iad"
+          ],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 21.471,
+            "ok": true,
+            "peer": "9.9.9.9",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "9.9.9.9",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 64,
+                "section": "authority",
+                "ttl": 1320,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 11.003,
+            "ok": true,
+            "peer": "9.9.9.9",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 152,
+                "type": 1
+              },
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 152,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.061,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 293,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 293,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.793,
+              "ok": true,
+              "peer": "9.9.9.9",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 87,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 87,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.304,
+              "ok": true,
+              "peer": "9.9.9.9",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 111,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 111,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.184,
+              "ok": true,
+              "peer": "9.9.9.9",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 5.793,
+            "median": 5.304,
+            "min": 5.184,
+            "samples": [
+              5.793,
+              5.304,
+              5.184
+            ]
+          },
+          "udp_success_count": 3
+        },
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 6.092,
+            "ok": true,
+            "peer": "149.112.112.112",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 5,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 19.144,
+            "ok": true,
+            "peer": "149.112.112.112",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "149.112.112.112",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 64,
+                "section": "authority",
+                "ttl": 2408,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 5.576,
+            "ok": true,
+            "peer": "149.112.112.112",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 152,
+                "type": 1
+              },
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 152,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.09,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 87,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 87,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.371,
+              "ok": true,
+              "peer": "149.112.112.112",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 293,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 293,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.75,
+              "ok": true,
+              "peer": "149.112.112.112",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 152,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 152,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.627,
+              "ok": true,
+              "peer": "149.112.112.112",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 5.75,
+            "median": 5.627,
+            "min": 5.371,
+            "samples": [
+              5.371,
+              5.75,
+              5.627
+            ]
+          },
+          "udp_success_count": 3
+        }
+      ],
+      "provider": "Quad9 Secure",
+      "provider_dnssec_validation_consistent": true,
+      "provider_id": "QUAD9",
+      "provider_nxdomain_observed": true,
+      "provider_runner_median_ms": 5.466,
+      "provider_tcp_reachable": true,
+      "provider_udp_reachable": true
+    },
+    {
+      "addresses": [
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 5.324,
+            "ok": true,
+            "peer": "45.90.28.0",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 5,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 248.382,
+            "ok": true,
+            "peer": "45.90.28.0",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "45.90.28.0",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": true,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 40,
+                "section": "authority",
+                "ttl": 10800,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 6.032,
+            "ok": true,
+            "peer": "45.90.28.0",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 253,
+                "type": 1
+              },
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 253,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.195,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 253,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 253,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.767,
+              "ok": true,
+              "peer": "45.90.28.0",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 253,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 253,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.372,
+              "ok": true,
+              "peer": "45.90.28.0",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 253,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 253,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.414,
+              "ok": true,
+              "peer": "45.90.28.0",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 5.767,
+            "median": 5.414,
+            "min": 5.372,
+            "samples": [
+              5.767,
+              5.372,
+              5.414
+            ]
+          },
+          "udp_success_count": 3
+        },
+        {
+          "chaos_id_server": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 5.652,
+            "ok": true,
+            "peer": "45.90.30.0",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 5,
+            "rd": false,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "chaos_identity_txt": [],
+          "dnssec_failed_org": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 172.402,
+            "ok": true,
+            "peer": "45.90.30.0",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 2,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "dnssec_validation_consistent": true,
+          "ip": "45.90.30.0",
+          "nxdomain_behavior_observed": true,
+          "nxdomain_probe": {
+            "aa": true,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 0,
+            "answers": [
+              {
+                "class": 1,
+                "rdlen": 40,
+                "section": "authority",
+                "ttl": 10800,
+                "type": 6
+              }
+            ],
+            "authority_count": 1,
+            "cd": false,
+            "latency_ms": 5.52,
+            "ok": true,
+            "peer": "45.90.30.0",
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 3,
+            "rd": true,
+            "tc": false,
+            "transport": "UDP"
+          },
+          "recursive_available_observed": true,
+          "tcp_example": {
+            "aa": false,
+            "ad": false,
+            "additional_count": 0,
+            "answer_count": 2,
+            "answers": [
+              {
+                "a": "104.20.23.154",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 203,
+                "type": 1
+              },
+              {
+                "a": "172.66.147.243",
+                "class": 1,
+                "rdlen": 4,
+                "section": "answer",
+                "ttl": 203,
+                "type": 1
+              }
+            ],
+            "authority_count": 0,
+            "cd": false,
+            "latency_ms": 10.542,
+            "ok": true,
+            "qr": true,
+            "question_count": 1,
+            "ra": true,
+            "rcode": 0,
+            "rd": true,
+            "tc": false,
+            "transport": "TCP"
+          },
+          "udp_example_repeats": [
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 203,
+                  "type": 1
+                },
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 203,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.65,
+              "ok": true,
+              "peer": "45.90.30.0",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 203,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 203,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.457,
+              "ok": true,
+              "peer": "45.90.30.0",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            },
+            {
+              "aa": false,
+              "ad": false,
+              "additional_count": 0,
+              "answer_count": 2,
+              "answers": [
+                {
+                  "a": "104.20.23.154",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 203,
+                  "type": 1
+                },
+                {
+                  "a": "172.66.147.243",
+                  "class": 1,
+                  "rdlen": 4,
+                  "section": "answer",
+                  "ttl": 203,
+                  "type": 1
+                }
+              ],
+              "authority_count": 0,
+              "cd": false,
+              "latency_ms": 5.523,
+              "ok": true,
+              "peer": "45.90.30.0",
+              "qr": true,
+              "question_count": 1,
+              "ra": true,
+              "rcode": 0,
+              "rd": true,
+              "tc": false,
+              "transport": "UDP"
+            }
+          ],
+          "udp_latency_ms": {
+            "max": 5.65,
+            "median": 5.523,
+            "min": 5.457,
+            "samples": [
+              5.65,
+              5.457,
+              5.523
+            ]
+          },
+          "udp_success_count": 3
+        }
+      ],
+      "provider": "NextDNS Anycast",
+      "provider_dnssec_validation_consistent": true,
+      "provider_id": "NEXTDNS",
+      "provider_nxdomain_observed": true,
+      "provider_runner_median_ms": 5.468,
+      "provider_tcp_reachable": true,
+      "provider_udp_reachable": true
+    }
+  ],
+  "schema": "yado.g2.public_dns_direct_probe.experience.v1",
+  "semantic_boundary": "DIRECT PUBLIC DNS QUERIES FROM A GITHUB-HOSTED RUNNER TO THE SCREENSHOT IP ADDRESSES ON PORT 53 ONLY. THIS IS NOT A PORT SCAN AND DOES NOT CLAIM USER-LOCAL PERFORMANCE.",
+  "status": "PASS_SHADOW_G2_PUBLIC_DNS_DIRECT_PROBE_V1",
+  "task_id": "USER_20260907_PUBLIC_DNS_DIRECT_PROBE_V1"
+}
