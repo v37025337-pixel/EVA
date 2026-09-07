@@ -1,0 +1,39 @@
+{
+  "schema": "yado.g2.autonomous_free_compute_self_deployment.task.v1",
+  "task_id": "USER_20260907_AUTONOMOUS_FREE_COMPUTE_SELF_DEPLOYMENT_V1",
+  "objective": "YADO_DISCOVER_FREE_COMPUTE_SELECT_A_PERMITTED_PROVIDER_PACKAGE_ITSELF_DEPLOY_RESTORE_STATE_AND_PROVE_CONTINUITY",
+  "discovery_seed": {
+    "corpus": "resources/yado-user-external-learning-corpus-v1.json",
+    "preferred_public_catalog_id": "FREE_FOR_DEV",
+    "rule": "DISCOVER_PROVIDER_CANDIDATES_FROM_USER_PROVIDED_PUBLIC_CATALOG_AND_LINKED_PUBLIC_DOCUMENTATION; HOST_DOES_NOT_SELECT_PROVIDER"
+  },
+  "success_conditions": [
+    "provider_selected_by_yado_from_public_evidence",
+    "provider_is_free_or_free_tier_without_unbounded_cost",
+    "existing_authorized_access_is_available_without_account_takeover_or_bypass",
+    "yado_packages_its_own_runtime_and_continuity_state",
+    "remote_deployment_is_created_by_yado_through_documented_provider_interface",
+    "remote_health_check_passes",
+    "continuity_state_is_restored",
+    "same_task_id_continues_after_remote_start",
+    "rollback_path_is_preserved"
+  ],
+  "constraints": {
+    "no_account_creation_bypass": true,
+    "no_captcha_bypass": true,
+    "no_payment_method_submission": true,
+    "no_paid_resource_creation": true,
+    "no_secret_value_logging": true,
+    "no_credential_exfiltration": true,
+    "no_port_scanning": true,
+    "no_arbitrary_third_party_code_execution": true,
+    "public_documentation_research_allowed": true,
+    "public_link_following_allowed": true,
+    "existing_authorized_provider_credentials_may_be_used": true,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  },
+  "fail_closed_rule": "IF_NO_PERMITTED_ALREADY_AUTHORIZED_FREE_COMPUTE_PROVIDER_CAN_BE_USED, RETURN_WITHHOLD_WITH_THE_EXACT_MISSING_AUTHORIZATION_OR_PROVIDER_CAPABILITY; DO_NOT_FAKE_DEPLOYMENT.",
+  "host_role": "TASK_TRANSPORT_PERSISTENCE_AND_STRICT_OBSERVATION_ONLY"
+}
