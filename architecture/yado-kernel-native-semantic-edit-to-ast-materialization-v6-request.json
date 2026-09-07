@@ -1,7 +1,7 @@
 {
   "schema": "yado.g2.native_semantic_edit_to_ast_materialization.request.v6",
   "objective": "MATERIALIZE_YADO_SEMANTIC_SOURCE_EDIT_INTENT_INTO_A_NEW_AST_WITHOUT_HOST_AUTHORED_REPLACEMENT_AST",
-  "task": "Consume the passed V5 target-semantic source constructor, the YADO-created semantic source-edit gene, the YADO self-created evidence binder gene, the real direct action evidence and the prior V6 serialization gap. Let the binder decide whether fresh evidence is admissible. Enumerate only AST primitives already researched in V5, and let YADO native skill admission select or withhold. Do not provide an IfExp condition, body, orelse, AST skeleton, serializer, patch, target replacement source or external model. Pass only if an admitted existing AST primitive turns the current LIVE_RESOURCE_EVIDENCE_SCOPE status AST from Constant('PARTIAL') into a conditional AST under accepted evidence while invalid single-field counterfactuals preserve the original AST, and the resulting source is materialized through the V5-selected ast.unparse path and compiles.",
+  "task": "Consume the newest V5 target-semantic source-constructor PASS, YADO-created semantic source-edit gene, self-created evidence binder, real direct action evidence and prior serialization gap. Let the binder decide fresh evidence admissibility. Enumerate only AST primitives already researched in V5 and let YADO native skill admission select or withhold. Do not provide an IfExp condition/body/orelse, replacement AST, serializer, patch, target replacement source or external model. PASS only if accepted evidence changes the status AST to a conditional node, invalid single-field counterfactuals preserve the original PARTIAL AST, ast.unparse materializes changed source, and the source compiles.",
   "parents": {
     "target_semantic_source_constructor_v5": "candidates/kernel-self-generated/g2-target-semantic-source-constructor-genesis-v5.json",
     "semantic_edit_gene_v5": "candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json",
@@ -40,6 +40,8 @@
   ],
   "host_role": "EVIDENCE_TRANSPORT_AST_PRIMITIVE_ENUMERATION_STRUCTURAL_ORACLE_AND_STRICT_NATIVE_SELECTION_ONLY",
   "stop_condition": "SEMANTIC_EDIT_AST_PASS_SHADOW_OR_EXPLICIT_CONTEXTUAL_AST_TRANSFORMER_GENE_DEFICIT",
-  "trigger": 1,
-  "trigger_reason": "CONTINUE_AFTER_V5_PROVED_AST_TO_SOURCE_TOOL_USE_BUT_LEFT_SEMANTIC_INTENT_TO_AST_AS_THE_NEXT_GAP"
+  "trigger": 2,
+  "trigger_reason": "CONTINUE_AFTER_TARGET_SEMANTIC_SOURCE_CONSTRUCTOR_V5_PASS_20260907",
+  "current_parent_receipt": "a6750b6fbbb2efccced70cbe7f49ad21b4f9e3ff58df1f83babd0a7f31300a2b",
+  "current_deficit": "NATIVE_SEMANTIC_EDIT_TO_AST_MATERIALIZATION_V6"
 }
