@@ -14,6 +14,12 @@ from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8Externa
 TASK=REPO/'architecture/yado-kernel-native-semantic-self-mutation-evolution-controller-v1-request.json'
 PARENT=REPO/'candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json'
 STUDY=REPO/'experience/yado-evolution-controller-self-study-v1.json'
+PROCESS=REPO/'candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json'
+IRFAIL=REPO/'candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json'
+METAFAIL=REPO/'candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json'
+DEPLOY=REPO/'experience/yado-autonomous-free-compute-self-deployment-v1.json'
+ANON=REPO/'experience/yado-anonymous-compute-interface-discovery-v2.json'
+DEVAPP=REPO/'architecture/yado-g2-open-developer-resource-learning-application-v1.json'
 CTRL=REPO/'runtime/yado_evolutionary_genome_v1.py'
 OUT=REPO/'candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json'
 DB=ROOT/'yado_native_semantic_controller_self_mutation_v1.sqlite'
@@ -22,7 +28,7 @@ def canon(o): return json.dumps(o,sort_keys=True,separators=(',',':'),default=st
 def digest(o): return hashlib.sha256(canon(o).encode()).hexdigest()
 def load(p): return json.loads(Path(p).read_text(encoding='utf-8'))
 
-task=load(TASK); parent_report=load(PARENT); study=load(STUDY)
+task=load(TASK); parent_report=load(PARENT); study=load(STUDY); process=load(PROCESS); irfail=load(IRFAIL); metafail=load(METAFAIL); deploy=load(DEPLOY); anon=load(ANON); devapp=load(DEVAPP)
 core=UnifiedYADOCoreV1(REPO)
 head_before=copy.deepcopy(core.head)
 parent_state=core.evolutionary_parent_genome()
@@ -62,6 +68,45 @@ experience += [
     'receipt_sha256':parent_report.get('receipt_sha256'),
     'next_required_capability':parent_report.get('next_required_capability'),
     'new_dimensions':parent_report.get('new_dimensions'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_SOURCE_PROCESS_SUCCESS',
+    'artifact':str(PROCESS.relative_to(REPO)),
+    'receipt_sha256':process.get('receipt_sha256'),
+    'status':process.get('status'),
+    'target_priority':process.get('target_priority'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_IR_EMITTER_FAILURE',
+    'artifact':str(IRFAIL.relative_to(REPO)),
+    'receipt_sha256':irfail.get('receipt_sha256'),
+    'status':irfail.get('status'),
+    'next_required_capability':irfail.get('next_required_capability'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_META_LANGUAGE_FAILURE',
+    'artifact':str(METAFAIL.relative_to(REPO)),
+    'receipt_sha256':metafail.get('receipt_sha256'),
+    'status':metafail.get('status'),
+    'next_required_capability':metafail.get('next_required_capability'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_OPEN_DEVELOPER_EXPERIENCE',
+    'artifact':str(DEVAPP.relative_to(REPO)),
+    'experience_digest':devapp.get('source_experience_digest'),
+    'causal_lessons':devapp.get('causal_lessons'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_SELF_DEPLOYMENT_FAILURE',
+    'artifact':str(DEPLOY.relative_to(REPO)),
+    'experience_digest':deploy.get('experience_digest'),
+    'next_required_capability':deploy.get('next_required_capability'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_ANONYMOUS_COMPUTE_FAILURE',
+    'artifact':str(ANON.relative_to(REPO)),
+    'experience_digest':anon.get('experience_digest'),
+    'next_required_capability':anon.get('next_required_capability'),
   },
   {
     'role':'YADO_CURRENT_SEMANTIC_SELF_MUTATION_TASK',
@@ -135,8 +180,14 @@ if candidate_source:
     except Exception:
         candidate_compiles=False
 
-study_retained=str(study.get('study_digest')) in canon(child.get('experience_sources') or [])
-failure_retained=str(parent_report.get('receipt_sha256')) in canon(child.get('experience_sources') or [])
+child_experience_blob=canon(child.get('experience_sources') or [])
+study_retained=str(study.get('study_digest')) in child_experience_blob
+failure_retained=str(parent_report.get('receipt_sha256')) in child_experience_blob
+process_retained=str(process.get('receipt_sha256')) in child_experience_blob
+ir_retained=str(irfail.get('receipt_sha256')) in child_experience_blob
+meta_retained=str(metafail.get('receipt_sha256')) in child_experience_blob
+deploy_retained=str(deploy.get('experience_digest')) in child_experience_blob
+anon_retained=str(anon.get('experience_digest')) in child_experience_blob
 broader=bool(new_dims)
 explicit_equivalent=bool(representation_candidates)
 native_mutation_produced=bool(candidate_source) or explicit_equivalent or broader
@@ -144,6 +195,11 @@ native_mutation_produced=bool(candidate_source) or explicit_equivalent or broade
 checks={
  'exact_prior_self_study_consumed':study_retained,
  'exact_prior_failure_consumed':failure_retained,
+ 'source_process_success_consumed':process_retained,
+ 'ir_emitter_failure_consumed':ir_retained,
+ 'meta_language_failure_consumed':meta_retained,
+ 'self_deployment_failure_consumed':deploy_retained,
+ 'anonymous_compute_failure_consumed':anon_retained,
  'native_goal_created':True,
  'native_deficit_detected':bool(native_goal['deficits']),
  'native_controller_attempt_executed':bool(evolution.get('run_digest')),
@@ -166,6 +222,11 @@ checks={
 passed=(
  checks['exact_prior_self_study_consumed']
  and checks['exact_prior_failure_consumed']
+ and checks['source_process_success_consumed']
+ and checks['ir_emitter_failure_consumed']
+ and checks['meta_language_failure_consumed']
+ and checks['self_deployment_failure_consumed']
+ and checks['anonymous_compute_failure_consumed']
  and checks['native_controller_attempt_executed']
  and checks['native_controller_mutation_or_equivalent_produced']
  and checks['structurally_broader_search_space']
@@ -181,6 +242,14 @@ report={
  'status':status,
  'task':task,
  'native_goal':native_goal,
+ 'accumulated_experience_evidence':{
+   'source_process_receipt':process.get('receipt_sha256'),
+   'ir_emitter_failure_receipt':irfail.get('receipt_sha256'),
+   'meta_language_failure_receipt':metafail.get('receipt_sha256'),
+   'developer_resource_experience_digest':devapp.get('source_experience_digest'),
+   'self_deployment_experience_digest':deploy.get('experience_digest'),
+   'anonymous_compute_experience_digest':anon.get('experience_digest'),
+ },
  'controller_path':str(CTRL.relative_to(REPO)),
  'controller_sha256':controller_sha,
  'native_calls':native_calls,
@@ -194,7 +263,7 @@ report={
  'checks':checks,
  'canonical_mutation':False,
  'next_required_capability':None if passed else 'NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER',
- 'semantic_boundary':'STRICT SELF-MUTATION ATTEMPT. HOST TRANSPORTS THE TASK, PRIOR FAILURE, SELF-STUDY AND OWN CONTROLLER SOURCE ONLY. IT DOES NOT CHOOSE A FUNCTION, PATCH, NEW DIMENSION, GENE SCHEMA, MUTATION RULE OR SOURCE TEMPLATE. PASS REQUIRES NATIVE STRUCTURAL EXPANSION OF THE EVOLUTIONARY SPACE.'
+ 'semantic_boundary':'STRICT SELF-MUTATION ATTEMPT CONDITIONED ON YADO OWN ACCUMULATED SUCCESS/FAILURE EXPERIENCE. HOST TRANSPORTS THE TASK, PRIOR FAILURE, SELF-STUDY AND OWN CONTROLLER SOURCE ONLY. IT DOES NOT CHOOSE A FUNCTION, PATCH, NEW DIMENSION, GENE SCHEMA, MUTATION RULE OR SOURCE TEMPLATE. PASS REQUIRES NATIVE STRUCTURAL EXPANSION OF THE EVOLUTIONARY SPACE.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
