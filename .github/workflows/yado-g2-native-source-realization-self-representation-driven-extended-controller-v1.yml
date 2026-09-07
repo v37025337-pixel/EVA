@@ -3,7 +3,7 @@ on:
   push:
     branches: [yado-architecture-shadow-search]
     paths:
-      - "architecture/yado-kernel-native-contextual-ast-context-binding-genesis-v13-request.json"
+      - "architecture/yado-kernel-native-contextual-ast-context-binding-repair-v14-request.json"
 permissions:
   contents: write
 concurrency:
@@ -25,11 +25,11 @@ jobs:
       - name: Canonical guard before native source realization
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Compile strict observer
-        run: python -m py_compile runtime/yado_g2_native_contextual_ast_context_binding_genesis_v13.py
+        run: python -m py_compile runtime/yado_g2_native_contextual_ast_context_binding_repair_v14.py
       - name: Let YADO realize its extended controller as source
         id: realize
         continue-on-error: true
-        run: python runtime/yado_g2_native_contextual_ast_context_binding_genesis_v13.py
+        run: python runtime/yado_g2_native_contextual_ast_context_binding_repair_v14.py
       - name: Canonical guard after native source realization
         if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
@@ -39,10 +39,10 @@ jobs:
           git config user.name "YADO Native Source Realization"
           git config user.email "actions@users.noreply.github.com"
           files=()
-          [ -f candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-genesis-v13.json ] && files+=(candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-genesis-v13.json)
-          [ -f candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-gene-v13.json ] && files+=(candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-gene-v13.json)
+          [ -f candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-repair-v14.json ] && files+=(candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-repair-v14.json)
+          [ -f candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-gene-v14.json ] && files+=(candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-gene-v14.json)
           if [ ${#files[@]} -gt 0 ]; then git add "${files[@]}"; fi
-          git diff --cached --quiet || git commit -m "Persist YADO contextual AST context binding V13 [skip ci]"
+          git diff --cached --quiet || git commit -m "Persist YADO contextual AST context binding repair V14 [skip ci]"
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
       - name: Enforce strict native source provenance verdict
@@ -50,23 +50,24 @@ jobs:
         run: |
           python - <<'PY'
           import json,pathlib
-          p=pathlib.Path("candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-genesis-v13.json")
-          if not p.exists(): raise SystemExit("MISSING_AST_CONTEXT_BINDING_V13")
+          p=pathlib.Path("candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-repair-v14.json")
+          if not p.exists(): raise SystemExit("MISSING_AST_CONTEXT_BINDING_REPAIR_V14")
           r=json.loads(p.read_text()); c=r["checks"]
           for key in ("host_authored_feature_logic","host_authored_import_binding","host_selected_feature_dict",
                       "external_models_used","actual_target_source_integration_proven","automatic_canonical_promotion"):
               assert c[key] is False,(key,r)
           assert c["canonical_unchanged"] is True,r
-          if r["status"] not in ("PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_GENESIS_V13",
-                                  "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_GENESIS_V13"):
-              raise SystemExit("BAD_AST_CONTEXT_BINDING_STATUS:"+str(r["status"]))
-          print(r["status"],(r.get("gene") or {}).get("gene_id"),r.get("selected_feature_binding"),r.get("ground_verdict"),r.get("next_required_capability"))
+          assert c["threshold_not_lowered"] is True,r
+          if r["status"] not in ("PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_REPAIR_V14",
+                                  "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_REPAIR_V14"):
+              raise SystemExit("BAD_AST_CONTEXT_BINDING_REPAIR_STATUS:"+str(r["status"]))
+          print(r["status"],(r.get("gene") or {}).get("gene_id"),r.get("selected_feature_binding"),r.get("unresolved_closure_names"),r.get("ground_verdict"),r.get("next_required_capability"))
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: yado-g2-contextual-ast-context-binding-v13-${{ github.run_id }}
+          name: yado-g2-contextual-ast-context-binding-repair-v14-${{ github.run_id }}
           path: |
-            candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-genesis-v13.json
-            candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-gene-v13.json
+            candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-repair-v14.json
+            candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-gene-v14.json
           if-no-files-found: warn
