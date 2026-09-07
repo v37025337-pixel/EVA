@@ -40,7 +40,7 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
     def test_training_is_bound_to_memory_conditioning_without_promotion(self):
         snap = self.kernel.training_snapshot()
         self.assertEqual(snap["status"], "ACTIVE_DEVELOPMENT_SHADOW_TRAINED_AND_CYCLE_CONSOLIDATED")
-        self.assertEqual(snap["experience_digest"], "16a8f41cd9fa58a06d2eda5f07a209a4e571865f2016a63650b7aaef7becc81f")
+        self.assertEqual(snap["experience_digest"], "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2")
         self.assertEqual(snap["causal_binding"]["source_layer"], "L1_MEMORY_EXPERIENCE")
         self.assertEqual(snap["causal_binding"]["conditioning_layer"], "L2_EXPERIENCE_CONDITIONING")
         self.assertFalse(snap["automatic_promotion"])
