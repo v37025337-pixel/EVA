@@ -8,6 +8,7 @@ GEN = ROOT / "architecture/yado-g2-genetic-lineage-library-v1.json"
 ARCH = ROOT / "architecture/yado-g2-causal-library-kernel-architecture-v1.json"
 TRAINING = ROOT / "architecture/yado-g2-causal-training-binding-v1.json"
 LEARNING_CYCLE = ROOT / "architecture/yado-g2-read-understand-apply-learn-cycle-v1.json"
+DYNAMIC_MEMORY = ROOT / "experience/yado-g2-dynamic-experience-memory-v1.json"
 
 class G2CausalLibraryKernelV1:
     COMPONENT_ID = "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1"
@@ -19,6 +20,7 @@ class G2CausalLibraryKernelV1:
         self.architecture = self._load(self.root / ARCH.relative_to(ROOT))
         self.training = self._load(self.root / TRAINING.relative_to(ROOT))
         self.learning_cycle = self._load(self.root / LEARNING_CYCLE.relative_to(ROOT))
+        self.dynamic_memory = self._load(self.root / DYNAMIC_MEMORY.relative_to(ROOT))
 
     @staticmethod
     def _load(path: Path):
@@ -90,6 +92,15 @@ class G2CausalLibraryKernelV1:
             raise ValueError("LEARNING_CYCLE_AUTO_PROMOTION_FORBIDDEN")
         if not self.learning_cycle.get("unresolved_deficits"):
             raise ValueError("LEARNING_CYCLE_MUST_RETAIN_OPEN_DEFICITS")
+        if self.dynamic_memory.get("status") != "PASS_SHADOW_G2_DYNAMIC_EXPERIENCE_MEMORY_V1":
+            raise ValueError("DYNAMIC_EXPERIENCE_MEMORY_NOT_PASS")
+        dm_checks = self.dynamic_memory.get("checks") or {}
+        if not all(dm_checks.values()):
+            raise ValueError("DYNAMIC_EXPERIENCE_MEMORY_CHECK_FAILED")
+        for row in self.dynamic_memory.get("branches", []):
+            if row.get("inventory_class") == "RAW_BRANCH_INVENTORY_ONLY":
+                if row.get("semantic_use_allowed") is not False or row.get("lessons"):
+                    raise ValueError("RAW_BRANCH_SEMANTIC_LEAK:" + str(row.get("branch")))
         cb = self.training.get("causal_binding") or {}
         if cb.get("source_layer") != "L1_MEMORY_EXPERIENCE" or cb.get("conditioning_layer") != "L2_EXPERIENCE_CONDITIONING":
             raise ValueError("TRAINING_CAUSAL_LAYER_BINDING_MISMATCH")
@@ -106,6 +117,9 @@ class G2CausalLibraryKernelV1:
             "training_fetched_count": int(self.training["corpus"]["fetched_count"]),
             "learning_cycle_status": self.learning_cycle["status"],
             "learning_cycle_latest_experience_digest": self.training["learning_cycle"]["latest_experience_digest"],
+            "dynamic_memory_experience_digest": self.dynamic_memory["experience_digest"],
+            "dynamic_memory_branch_count": int(self.dynamic_memory["remote_branch_count"]),
+            "dynamic_memory_raw_lineage_count": int(self.dynamic_memory["raw_lineage_count"]),
             "g3_genesis": self.architecture["g3_genesis"],
         }
 
@@ -149,6 +163,19 @@ class G2CausalLibraryKernelV1:
             "automatic_promotion": False,
         }
 
+    def dynamic_memory_snapshot(self):
+        return {
+            "status": self.dynamic_memory["status"],
+            "experience_digest": self.dynamic_memory["experience_digest"],
+            "remote_branch_count": self.dynamic_memory["remote_branch_count"],
+            "canonical_registry_branch_count": self.dynamic_memory["canonical_registry_branch_count"],
+            "raw_lineage_count": self.dynamic_memory["raw_lineage_count"],
+            "raw_lineage_branches": list(self.dynamic_memory["raw_lineage_branches"]),
+            "next_required_capability": self.dynamic_memory["next_required_capability"],
+            "raw_branch_inventory_is_not_semantic_knowledge": self.dynamic_memory["policy"]["raw_branch_inventory_is_not_semantic_knowledge"],
+            "automatic_promotion": False,
+        }
+
     def causal_trace(self, contract: str):
         route = self.route_contract(contract)
         return {
@@ -159,6 +186,7 @@ class G2CausalLibraryKernelV1:
             "feedback": [dict(x) for x in self.architecture["feedback_edges"]],
             "training": self.training_snapshot(),
             "learning_cycle": self.learning_cycle_snapshot(),
+            "dynamic_memory": self.dynamic_memory_snapshot(),
             "automatic_promotion": False,
         }
 
