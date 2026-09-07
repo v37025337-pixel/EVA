@@ -1,7 +1,7 @@
 {
   "schema": "yado.g2.native_contextual_ast_transformer_policy_repair.request.v8",
   "objective": "REPAIR_V7_CAUSAL_EVALUATION_WITHOUT_LOWERING_THRESHOLDS_OR_CHANGING_YADO_SEMANTICS",
-  "task": "Consume the V7 WITHHOLD caused by ablation_not_causal despite candidate_score=1.0 and restore_score=1.0. Preserve the YADO-derived binder_decision typed feature and the two semantic transition actions copied from the YADO semantic-edit gene. Rebuild only the causal blind distribution so ACCEPT and WITHHOLD are balanced 50/50, while keeping min_score=1.0 and min_ablation_drop=0.20. Let YADO native Generative Executive synthesize, evaluate, commit or rollback. Do not author AST, transform condition, transition action, source template, patch or external-model output.",
+  "task": "Consume the newest V7 WITHHOLD caused only by ablation_not_causal while candidate_score and restore_score were both 1.0. Preserve the YADO-derived binder_decision typed feature and semantic transition actions. Rebuild only the blind causal distribution so ACCEPT and WITHHOLD are balanced 50/50, without lowering min_score=1.0 or min_ablation_drop=0.20. Let YADO's Generative Executive synthesize/evaluate/commit or rollback. Host provides no AST subtree, transform condition, transition action, source template, patch or external model.",
   "parents": {
     "contextual_ast_transformer_v7": "candidates/kernel-self-generated/g2-native-contextual-ast-transformer-gene-genesis-v7.json",
     "semantic_source_edit_gene_v5": "candidates/kernel-self-generated/g2-task-conditioned-semantic-source-edit-meta-language-genesis-v5.json",
@@ -9,8 +9,8 @@
     "direct_action_evidence": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json"
   },
   "constraints": {
-    "min_score": 1.0,
-    "min_ablation_drop": 0.20,
+    "min_score": 1,
+    "min_ablation_drop": 0.2,
     "external_models": false,
     "host_authored_transition_action": false,
     "host_authored_ast_subtree": false,
@@ -38,6 +38,8 @@
   ],
   "host_role": "CAUSAL_EVALUATION_REBALANCING_AND_STRICT_NATIVE_GATE_ONLY",
   "stop_condition": "BALANCED_CONTEXTUAL_AST_POLICY_PASS_SHADOW_OR_EXPLICIT_NEXT_REPAIR_DEFICIT",
-  "trigger": 1,
-  "trigger_reason": "CONTINUE_FROM_V7_WHERE_THE_NATIVE_RULE_WAS_EXACT_BUT_ROLLED_BACK_ONLY_BECAUSE_THE_CAUSAL_BLIND_BASELINE_WAS_0_8"
+  "trigger": 2,
+  "trigger_reason": "CONTINUE_AFTER_CONTEXTUAL_AST_TRANSFORMER_V7_ABLATION_WITHHOLD_20260907",
+  "current_parent_receipt": "6729104971433d77d846f0e56b91b1da89b04e58b0410e1623482a28b93e5716",
+  "current_deficit": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_REPAIR_V8"
 }
