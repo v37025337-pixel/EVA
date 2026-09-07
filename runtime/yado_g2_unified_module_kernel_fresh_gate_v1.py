@@ -149,6 +149,11 @@ run(CAP_API_EXEC,{'action':'component','stream_id':'API-EXEC-S'},lambda x:x.get(
 run(CAP_GENOME,{'action':'component','stream_id':'GENOME-S'},lambda x:x.get('component_id')==CAP_GENOME and x.get('automatic_canonical_promotion') is False and x.get('novel_gene_synthesis') is True)
 run(CAP_COGNITIVE,{'action':'decide','organ':'LOGIC','payload':{'result_exact':True,'state_known':True},'stream_id':'COG-S'},lambda x:x.get('decision')=='ACCEPT' and x.get('route_cardinality')=='ONE')
 run(CAP_META_V7,{'action':'decide_signals','signals':{'state_known':True,'logic_general':1.0,'logic_terminal':1.0,'intel_stop':0.0,'intel_retry':0.0,'intel_advance':1.0,'think_accept':0.0,'think_advance':1.0,'think_revise':0.0,'think_seek':0.0},'stream_id':'META-V7-S'},lambda x:x.get('decision')=='CONTINUE' and x.get('gate')=='META_ACTION')
+tri_rel=(('TRI-A','TRI-B'),('TRI-B','TRI-C'),('TRI-X','TRI-Y'))
+tri_evt=(('Q','TRI-A'),('Q','TRI-B'),('R','TRI-B'),('R','TRI-A'))
+run(CAP_TRI_LOGIC,{'relation':tri_rel,'start':'TRI-A','stream_id':'TRI-L-S'},lambda x:set(x.get('result',()))=={'TRI-A','TRI-B','TRI-C'} and x.get('canonical_promotion_authorized') is False)
+run(CAP_TRI_THINKING,{'events':tri_evt,'stream_id':'TRI-T-S'},lambda x:x.get('result') is True and x.get('canonical_promotion_authorized') is False)
+run(CAP_TRI_INTELLIGENCE,{'input_contract':'RELATION_START_TO_STATE','relation':tri_rel,'start':'TRI-A','stream_id':'TRI-I-S'},lambda x:x.get('selected_component')==CAP_TRI_LOGIC and set(x.get('result',()))=={'TRI-A','TRI-B','TRI-C'} and x.get('canonical_promotion_authorized') is False)
 
 # Mark embedded high-scale IDs and persistent/control nodes covered by the explicit calls above.
 coverage.update({CAP_HS_MODEL,CAP_SCALE_ROUTE,CAP_HS_RUNTIME,CAP_COUNTERMEM,CAP_AUDIT,CAP_FABRIC,CAP_API,CAP_API_EXEC,CAP_GENOME})
@@ -228,6 +233,7 @@ binding_checks={
  'canonical_temporal_kernel_embedded':core_manifest.get('cognitive_temporal_kernel_v1',{}).get('status')=='CANONICAL_EMBEDDED' and core_manifest.get('cognitive_temporal_kernel_v1',{}).get('separate_active_capability') is False,
  'canonical_experience_cognitive_layer_active':CAP_COGNITIVE in active and core_manifest.get('experience_conditioned_cognitive_layer_v4',{}).get('status')=='CANONICAL_ACTIVE',
  'canonical_global_experience_meta_v7_active':CAP_META_V7 in active and core_manifest.get('global_experience_meta_controller_v7',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('global_experience_meta_controller_v7',{}).get('v4_replaced') is False,
+ 'canonical_all_experience_tri_organ_additive_active':all(x in active for x in [CAP_TRI_LOGIC,CAP_TRI_THINKING,CAP_TRI_INTELLIGENCE]) and core_manifest.get('all_experience_tri_organ_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('all_experience_tri_organ_v1',{}).get('replace_existing_organs') is False,
  'api_network_execution_disabled':api_smoke.get('pass') is True,
 }
 pycache=subprocess_result=None
