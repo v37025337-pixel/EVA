@@ -22,6 +22,8 @@ LEDGER = REPO / "architecture/evolution-ledger.json"
 REQ = REPO / "architecture/yado-g2-branch-inventory-registry-reconciliation-v2-request.json"
 OUT = ROOT / "yado_g2_branch_inventory_registry_reconciliation_v2_receipt.json"
 GUARD = ROOT / "yado_canonical_invariant_guard_v1.py"
+UNIFIED_RUNTIME = ROOT / "yado_unified_core_v1.py"
+DEEP_AUDIT_RUNTIME = ROOT / "yado_unified_core_deep_self_audit_v1.py"
 ACTIVE = "yado-architecture-shadow-search"
 
 
@@ -45,6 +47,10 @@ def content_digest(obj, field):
     x = copy.deepcopy(obj)
     x.pop(field, None)
     return h(x)
+
+
+def fsha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def run_git(*args, check=True):
@@ -109,6 +115,54 @@ for name, sha in sorted(remote.items()):
     ancestry[name] = p.returncode == 0
 if not all(ancestry.values()):
     raise RuntimeError("NON_ACTIVE_TIP_OUTSIDE_ACTIVE_ANCESTRY:" + json.dumps(sorted(k for k, v in ancestry.items() if not v)))
+
+old_unified_sha = fsha(UNIFIED_RUNTIME)
+old_deep_audit_sha = fsha(DEEP_AUDIT_RUNTIME)
+
+unified_text = UNIFIED_RUNTIME.read_text(encoding="utf-8")
+unified_old = """        active=[x for x in branches if x.get('mode')=='ACTIVE_LINEAGE']
+        legacy=[x for x in branches if x.get('mode')=='EXPERIENCE_ONLY']
+        active_components=set()
+"""
+unified_new = """        active=[x for x in branches if x.get('mode')=='ACTIVE_LINEAGE']
+        legacy=[x for x in branches if x.get('mode')=='EXPERIENCE_ONLY']
+        closure=self.experience.get('closure',{})
+        expected_branch_count=closure.get('remote_branch_count')
+        active_components=set()
+"""
+if unified_text.count(unified_old) != 1:
+    raise RuntimeError("UNIFIED_CORE_AUDIT_REPAIR_ANCHOR_MISMATCH")
+unified_text = unified_text.replace(unified_old, unified_new)
+unified_old_checks = """            'all_other_branches_experience_only':len(legacy)==13 and all(x.get('mode')=='EXPERIENCE_ONLY' for x in legacy),
+            'branch_inventory_complete':len(branches)==14,
+"""
+unified_new_checks = """            'all_other_branches_experience_only':len(active)==1 and len(legacy)==len(branches)-1 and all(x.get('mode')=='EXPERIENCE_ONLY' for x in legacy),
+            'branch_inventory_complete':bool(branches) and expected_branch_count==len(branches) and closure.get('all_remote_branches_registered') is True,
+"""
+if unified_text.count(unified_old_checks) != 1:
+    raise RuntimeError("UNIFIED_CORE_BRANCH_COUNT_REPAIR_ANCHOR_MISMATCH")
+unified_text = unified_text.replace(unified_old_checks, unified_new_checks)
+UNIFIED_RUNTIME.write_text(unified_text, encoding="utf-8")
+
+deep_text = DEEP_AUDIT_RUNTIME.read_text(encoding="utf-8")
+deep_old = "inventory_ok = len(branches) == 14 and len(active) == 1 and (len(legacy) == 13)"
+deep_new = "closure = cexp.get('closure', {})\nexpected_branch_count = closure.get('remote_branch_count')\ninventory_ok = bool(branches) and len(active) == 1 and active[0].get('branch') == 'yado-architecture-shadow-search' and len(legacy) == len(branches) - 1 and expected_branch_count == len(branches) and closure.get('all_remote_branches_registered') is True"
+if deep_text.count(deep_old) != 1:
+    raise RuntimeError("DEEP_AUDIT_BRANCH_COUNT_REPAIR_ANCHOR_MISMATCH")
+deep_text = deep_text.replace(deep_old, deep_new)
+DEEP_AUDIT_RUNTIME.write_text(deep_text, encoding="utf-8")
+
+compile_check = subprocess.run(
+    [sys.executable, "-m", "py_compile", str(UNIFIED_RUNTIME), str(DEEP_AUDIT_RUNTIME)],
+    cwd=REPO, capture_output=True, text=True, timeout=120,
+)
+if compile_check.returncode != 0:
+    raise RuntimeError("AUDIT_RUNTIME_REPAIR_COMPILE_FAILED:" + compile_check.stderr[-2000:])
+
+new_unified_sha = fsha(UNIFIED_RUNTIME)
+new_deep_audit_sha = fsha(DEEP_AUDIT_RUNTIME)
+if new_unified_sha == old_unified_sha or new_deep_audit_sha == old_deep_audit_sha:
+    raise RuntimeError("AUDIT_RUNTIME_REPAIR_DID_NOT_CHANGE_BOTH_BOUND_SOURCES")
 
 for name in missing:
     reg.setdefault("branches", []).append({
@@ -193,6 +247,22 @@ reg["registry_digest"] = content_digest(reg, "registry_digest")
 core["experience_registry"] = "canonical/yado-unified-experience-registry-v1.json"
 core["experience_registry_digest"] = reg["registry_digest"]
 core["legacy_branch_count"] = len(legacy)
+core["runtime_sha256"] = new_unified_sha
+deep_meta = core.setdefault("deep_self_audit", {})
+deep_meta["repair_parent_source_sha256"] = old_deep_audit_sha
+deep_meta["source_sha256"] = new_deep_audit_sha
+deep_meta["implementation_version"] = int(deep_meta.get("implementation_version", 0)) + 1
+deep_meta["branch_inventory_invariant"] = "DYNAMIC_REMOTE_BOUND_V2"
+deep_meta["repair_gate_run_id"] = str(os.getenv("GITHUB_RUN_ID") or "LOCAL")
+transport = deep_meta.get("v19_transport")
+if isinstance(transport, dict) and transport.get("candidate_source_sha256") == old_deep_audit_sha:
+    transport["status"] = "SUPERSEDED_BY_BOUNDED_BRANCH_INVENTORY_AUDIT_REPAIR_V2"
+    transport["current_source_sha256"] = new_deep_audit_sha
+rim = core.setdefault("runtime_integrity_manifest", {})
+sources = rim.setdefault("sources", {})
+sources["runtime/yado_unified_core_v1.py"] = new_unified_sha
+sources["runtime/yado_unified_core_deep_self_audit_v1.py"] = new_deep_audit_sha
+rim["manifest_digest"] = h(sources)
 for plane in core.get("planes", []):
     if plane.get("plane_id") == "MEMORY_AND_EXPERIENCE":
         plane["historical_branch_count"] = len(legacy)
@@ -221,6 +291,9 @@ head["current_frontier"] = frontier
 head["frontier_source"] = "architecture/evolution-ledger.json:open_deficits"
 head.setdefault("unified_core", {})["experience_registry_digest"] = reg["registry_digest"]
 head["unified_core"]["legacy_branch_count"] = len(legacy)
+head["unified_core"]["runtime_sha256"] = new_unified_sha
+head["unified_core"]["deep_self_audit_source_sha256"] = new_deep_audit_sha
+head["unified_core"]["runtime_integrity_manifest_digest"] = rim["manifest_digest"]
 head["unified_core"]["core_digest"] = core["core_digest"]
 bh = head.setdefault("branch_history_closure", {})
 bh.update({
@@ -243,6 +316,13 @@ evidence_digest = h({
     "added_branches": missing,
     "historical_branch_tips": {x["branch"]: x["head_sha"] for x in legacy},
     "ancestry": ancestry,
+    "audit_runtime_repair": {
+        "old_unified_sha": old_unified_sha,
+        "new_unified_sha": new_unified_sha,
+        "old_deep_audit_sha": old_deep_audit_sha,
+        "new_deep_audit_sha": new_deep_audit_sha,
+        "runtime_integrity_manifest_digest": rim["manifest_digest"],
+    },
 })
 
 ledger["current_head_digest"] = head["canonical_head_digest"]
@@ -295,6 +375,12 @@ checks = {
     "active_capabilities_unchanged": head.get("active_capabilities", []) == before_capabilities,
     "g3_not_started": head.get("g3_genesis_performed") is False,
     "canonical_guard": guard_payload.get("status") == "PASS_CANONICAL_INVARIANT_GUARD_V1",
+    "unified_core_audit_runtime_repaired": fsha(UNIFIED_RUNTIME) == new_unified_sha,
+    "deep_self_audit_runtime_repaired": fsha(DEEP_AUDIT_RUNTIME) == new_deep_audit_sha,
+    "runtime_integrity_manifest_rebound": (
+        core.get("runtime_integrity_manifest", {}).get("sources", {}).get("runtime/yado_unified_core_v1.py") == new_unified_sha
+        and core.get("runtime_integrity_manifest", {}).get("sources", {}).get("runtime/yado_unified_core_deep_self_audit_v1.py") == new_deep_audit_sha
+    ),
 }
 if not all(checks.values()):
     raise RuntimeError("RECONCILIATION_CHECK_FAILED:" + json.dumps(checks, sort_keys=True))
@@ -313,6 +399,13 @@ receipt = {
     "new_registry_digest": reg["registry_digest"],
     "previous_head_digest": previous_head_digest,
     "new_head_digest": head["canonical_head_digest"],
+    "audit_runtime_repair": {
+        "old_unified_sha": old_unified_sha,
+        "new_unified_sha": new_unified_sha,
+        "old_deep_audit_sha": old_deep_audit_sha,
+        "new_deep_audit_sha": new_deep_audit_sha,
+        "runtime_integrity_manifest_digest": rim["manifest_digest"],
+    },
     "evidence_digest": evidence_digest,
     "checks": checks,
     "canonical_mutation": True,
@@ -320,7 +413,7 @@ receipt = {
     "promotion_applied": False,
     "generation_transition": False,
     "g3_genesis_performed": False,
-    "semantic_boundary": "CANONICAL MEMORY/PROVENANCE METADATA RECONCILIATION ONLY. NEW BRANCHES ARE REGISTERED AS READ-ONLY HISTORY WITHOUT SEMANTIC LESSON CLAIMS OR CAPABILITY ADMISSION.",
+    "semantic_boundary": "CANONICAL MEMORY/PROVENANCE METADATA RECONCILIATION PLUS MINIMAL SELF-AUDIT IMPLEMENTATION REPAIR REMOVING OBSOLETE 14/13 BRANCH HARD-CODES. CAPABILITY SET, FRONTIER, GENERATION AND G3 STATE ARE UNCHANGED.",
 }
 receipt["receipt_sha256"] = h(receipt)
 write(OUT, receipt)
