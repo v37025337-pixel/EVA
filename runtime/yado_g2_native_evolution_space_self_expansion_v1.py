@@ -13,6 +13,11 @@ from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8Externa
 
 TASK=REPO/'architecture/yado-kernel-native-evolution-space-self-expansion-v1-request.json'
 FAIL=REPO/'candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json'
+PROCESS=REPO/'candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json'
+IRFAIL=REPO/'candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json'
+DEVAPP=REPO/'architecture/yado-g2-open-developer-resource-learning-application-v1.json'
+DEPLOY=REPO/'experience/yado-autonomous-free-compute-self-deployment-v1.json'
+ANON=REPO/'experience/yado-anonymous-compute-interface-discovery-v2.json'
 OUT=REPO/'candidates/kernel-self-generated/g2-native-evolution-space-self-expansion-v1.json'
 DB=ROOT/'yado_native_evolution_space_self_expansion_v1.sqlite'
 
@@ -20,7 +25,7 @@ def canon(o):return json.dumps(o,sort_keys=True,separators=(',',':'),default=str
 def digest(o):return hashlib.sha256(canon(o).encode()).hexdigest()
 def load(p):return json.loads(Path(p).read_text(encoding='utf-8'))
 
-task=load(TASK); failure=load(FAIL)
+task=load(TASK); failure=load(FAIL); process=load(PROCESS); irfail=load(IRFAIL); devapp=load(DEVAPP); deploy=load(DEPLOY); anon=load(ANON)
 core=UnifiedYADOCoreV1(REPO)
 head_before=copy.deepcopy(core.head)
 
@@ -51,6 +56,49 @@ experience.append({
   'language_gene_hits':failure.get('language_gene_hits'),
   'checks':failure.get('checks'),
 })
+experience += [
+  {
+    'role':'YADO_DEVELOPER_EVIDENCE_BACKED_SOURCE_PROCESS',
+    'artifact':str(PROCESS.relative_to(REPO)),
+    'status':process.get('status'),
+    'receipt_sha256':process.get('receipt_sha256'),
+    'target_priority':process.get('target_priority'),
+    'developer_resource_evidence':process.get('developer_resource_evidence'),
+    'process_mechanism':process.get('process_mechanism'),
+  },
+  {
+    'role':'YADO_IR_EMITTER_FAILURE',
+    'artifact':str(IRFAIL.relative_to(REPO)),
+    'status':irfail.get('status'),
+    'receipt_sha256':irfail.get('receipt_sha256'),
+    'next_required_capability':irfail.get('next_required_capability'),
+    'native_ir_results':irfail.get('native_ir_results'),
+  },
+  {
+    'role':'YADO_OPEN_DEVELOPER_RESOURCE_EXPERIENCE',
+    'artifact':str(DEVAPP.relative_to(REPO)),
+    'experience_digest':devapp.get('source_experience_digest'),
+    'target_priority':devapp.get('target_priority'),
+    'causal_lessons':devapp.get('causal_lessons'),
+  },
+  {
+    'role':'YADO_SELF_DEPLOYMENT_FAILURE_EXPERIENCE',
+    'artifact':str(DEPLOY.relative_to(REPO)),
+    'status':deploy.get('status'),
+    'experience_digest':deploy.get('experience_digest'),
+    'next_required_capability':deploy.get('next_required_capability'),
+    'selected_provider':(deploy.get('selected_provider') or {}).get('label'),
+    'local_staging_pass':((deploy.get('local_staging') or {}).get('pass')),
+  },
+  {
+    'role':'YADO_ANONYMOUS_COMPUTE_DISCOVERY_FAILURE_EXPERIENCE',
+    'artifact':str(ANON.relative_to(REPO)),
+    'status':anon.get('status'),
+    'experience_digest':anon.get('experience_digest'),
+    'next_required_capability':anon.get('next_required_capability'),
+    'candidate_count':len(anon.get('candidates') or []),
+  },
+]
 experience.append({
   'role':'CURRENT_TASK',
   'objective':task.get('objective'),
@@ -92,7 +140,12 @@ child_gene_ids={str(v.get('gene_id')) for v in (child.get('chromosomes') or {}).
 new_gene_ids=sorted(x for x in child_gene_ids-parent_gene_ids if x and x!='None')
 
 task_failure_digest=failure.get('receipt_sha256')
-failure_retained=task_failure_digest in canon(child.get('experience_sources') or [])
+child_experience_blob=canon(child.get('experience_sources') or [])
+failure_retained=task_failure_digest in child_experience_blob
+process_retained=str(process.get('receipt_sha256')) in child_experience_blob
+dev_retained=str(devapp.get('source_experience_digest')) in child_experience_blob
+deploy_retained=str(deploy.get('experience_digest')) in child_experience_blob
+anon_retained=str(anon.get('experience_digest')) in child_experience_blob
 
 structural_expansion=bool(new_chromosomes)
 new_class_chosen_by_yado=bool(new_chromosomes)
@@ -100,6 +153,10 @@ rollback_parent=bool(evolution.get('parent',{}).get('genome_digest'))
 
 checks={
   'prior_failure_consumed_as_experience':failure_retained,
+  'developer_evidence_backed_process_consumed':process_retained,
+  'open_developer_resource_experience_consumed':dev_retained,
+  'self_deployment_failure_consumed':deploy_retained,
+  'anonymous_compute_failure_consumed':anon_retained,
   'native_goal_created':True,
   'native_deficit_detected':bool(native_goal['deficits']),
   'native_evolution_executed':bool(evolution.get('run_digest')),
@@ -122,6 +179,10 @@ checks={
 
 passed=(
   checks['prior_failure_consumed_as_experience']
+  and checks['developer_evidence_backed_process_consumed']
+  and checks['open_developer_resource_experience_consumed']
+  and checks['self_deployment_failure_consumed']
+  and checks['anonymous_compute_failure_consumed']
   and checks['native_goal_created']
   and checks['native_deficit_detected']
   and checks['native_evolution_executed']
@@ -137,6 +198,12 @@ report={
  'status':status,
  'task':task,
  'native_goal':native_goal,
+ 'accumulated_experience_evidence':{
+   'source_process_receipt':process.get('receipt_sha256'),
+   'developer_resource_experience_digest':devapp.get('source_experience_digest'),
+   'self_deployment_experience_digest':deploy.get('experience_digest'),
+   'anonymous_compute_experience_digest':anon.get('experience_digest'),
+ },
  'parent_failure_receipt':task_failure_digest,
  'parent_chromosomes':sorted(parent_chromosomes),
  'child_chromosomes':sorted(child_chromosomes),
@@ -148,7 +215,7 @@ report={
  'checks':checks,
  'canonical_mutation':False,
  'next_required_capability':None if passed else 'NATIVE_EVOLUTIONARY_CONTROLLER_SELF_REPRESENTATION_AND_MUTATION_V2',
- 'semantic_boundary':'TASK-ONLY STRUCTURAL SELF-EXPANSION TEST. NEW GENE VALUES INSIDE THE SAME FIXED CHROMOSOME SET DO NOT COUNT. PASS REQUIRES YADO TO CREATE A PREVIOUSLY ABSENT EVOLUTIONARY CLASS/DIMENSION WITHOUT HOST NAMING OR SCHEMA.'
+ 'semantic_boundary':'STRUCTURAL SELF-EXPANSION TEST CONDITIONED ON ACCUMULATED YADO EXPERIENCE: CODING RESEARCH, SOURCE-PROCESS SUCCESS, IR-EMITTER FAILURE, META-LANGUAGE FAILURE, SELF-DEPLOYMENT FAILURE, AND ANONYMOUS-COMPUTE DISCOVERY FAILURE. NEW GENE VALUES INSIDE THE SAME FIXED CHROMOSOME SET DO NOT COUNT. PASS REQUIRES YADO TO CREATE A PREVIOUSLY ABSENT EVOLUTIONARY CLASS/DIMENSION WITHOUT HOST NAMING OR SCHEMA.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
