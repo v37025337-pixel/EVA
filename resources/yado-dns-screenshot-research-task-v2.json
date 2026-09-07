@@ -78,7 +78,7 @@
       "provider": "Quad9",
       "kind": "THREAT_BLOCKING",
       "claim": "Blocks malware, phishing and malicious sites",
-      "source_id": "QUAD9_SERVICES"
+      "source_id": "QUAD9_THREAT"
     },
     {
       "id": "QUAD9_PRIVACY",
@@ -159,6 +159,10 @@
     {
       "id": "NEXTDNS_WINDOWS",
       "url": "https://github.com/nextdns/nextdns/wiki/Windows"
+    },
+    {
+      "id": "QUAD9_THREAT",
+      "url": "https://www.quad9.net/service/threat-blocking"
     }
   ],
   "questions": [
@@ -178,5 +182,18 @@
     "g3_genesis": false,
     "fresh_reasoning_cases": true,
     "structural_ablation_required": true
+  },
+  "repair_v3": {
+    "parent_run_id": 34115539046,
+    "parent_status": "WITHHOLD_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2",
+    "failed_checks": [
+      "quad9_threat_blocking_supported",
+      "thinking_ablation_drop"
+    ],
+    "source_repair": "QUAD9_GENERAL_SERVICE_DOC_TO_OFFICIAL_THREAT_BLOCKING_PAGE",
+    "test_repair": "ADD_UNDERFLOW_UNFINISHED_WRONG_KEY_AND_REPEATED_VALID_EVENT_CASES",
+    "thresholds_changed": false,
+    "expected_answers_added": false,
+    "genes_reselected": false
   }
 }
