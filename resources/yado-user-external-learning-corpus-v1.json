@@ -1,6 +1,6 @@
 {
   "schema": "yado.user_external_learning_corpus.v1",
-  "objective": "LEARN_FROM_ALL_RELEVANT_USER_SUPPLIED_PUBLIC_LINKS_AND_SCREENSHOT_DERIVED_RESOURCES_INCLUDING_20260906_DNS_AND_GCP_CROSS_DOMAIN_RESEARCH",
+  "objective": "LEARN_FROM_ALL_RELEVANT_AVAILABLE_INTERNAL_PROJECT_EVIDENCE_PLUS_USER_SUPPLIED_AND_FRESH_PUBLIC_EXTERNAL_SOURCES",
   "policy": {
     "public_read_only": true,
     "no_auto_install": true,
@@ -395,6 +395,30 @@
       "url": "https://docs.cloud.google.com/application-design-center/docs/locations",
       "kind": "official_cloud_locations_reference",
       "provenance": "user_20260906_gcp_cross_domain_task"
+    },
+    {
+      "id": "PYWHY_DOWHY",
+      "url": "https://github.com/py-why/dowhy",
+      "kind": "causal_inference_library",
+      "provenance": "assistant_external_research_20260907"
+    },
+    {
+      "id": "PYWHY_CAUSAL_LEARN",
+      "url": "https://github.com/py-why/causal-learn",
+      "kind": "causal_discovery_library",
+      "provenance": "assistant_external_research_20260907"
+    },
+    {
+      "id": "HYPOTHESIS",
+      "url": "https://github.com/HypothesisWorks/hypothesis",
+      "kind": "property_based_testing_library",
+      "provenance": "assistant_external_research_20260907"
+    },
+    {
+      "id": "Z3",
+      "url": "https://github.com/Z3Prover/z3",
+      "kind": "theorem_prover_and_smt_solver",
+      "provenance": "assistant_external_research_20260907"
     }
   ],
   "user_shared_arxiv": [
@@ -422,7 +446,19 @@
     "https://arxiv.org/abs/2607.07743",
     "https://arxiv.org/abs/2604.00273",
     "https://arxiv.org/abs/2204.05133",
-    "https://arxiv.org/abs/2110.13827"
+    "https://arxiv.org/abs/2110.13827",
+    "https://arxiv.org/abs/2607.13091",
+    "https://arxiv.org/abs/2609.04681",
+    "https://arxiv.org/abs/2603.07670",
+    "https://arxiv.org/abs/2604.27003",
+    "https://arxiv.org/abs/2603.01761",
+    "https://arxiv.org/abs/2605.17292",
+    "https://arxiv.org/abs/2605.05097",
+    "https://arxiv.org/abs/2606.25161",
+    "https://arxiv.org/abs/2604.20039",
+    "https://arxiv.org/abs/2608.22215",
+    "https://arxiv.org/abs/2607.04293",
+    "https://arxiv.org/abs/2506.11442"
   ],
   "internal_project_evidence_to_reuse": [
     "resources/yado-unified-external-resource-portfolio-v1.json",
@@ -431,13 +467,28 @@
     "candidates/kernel-self-generated/g2-native-action-evidence-binder-invention-v1.json",
     "candidates/kernel-self-generated/g2-action-evidence-self-audit-self-study-repair-v1.json",
     "canonical/yado-legacy-experience-derived-provenance-v1.json",
-    "architecture/evolution-ledger.json"
+    "architecture/evolution-ledger.json",
+    "canonical/yado-main-head-g2.json",
+    "canonical/yado-unified-core-v1.json",
+    "canonical/yado-algorithm-provenance-registry-v1.json",
+    "canonical/yado-g2-applied-experience-binding-v1.json",
+    "architecture/yado-g2-kernel-component-library-v1.json",
+    "architecture/yado-g2-genetic-lineage-library-v1.json",
+    "architecture/yado-g2-causal-library-kernel-architecture-v1.json",
+    "receipts/yado-g2-causal-library-kernel-v1-validation.json",
+    "audits/yado-full-kernel-audit-v1-report.json",
+    "audits/yado-security-audit-v1-report.json",
+    "audits/yado-g2-module-dependency-graph-v1.json",
+    "experience/yado-user-external-corpus-learning-v1.json",
+    "experience/yado-tri-organ-canonical-burnin-old-parent-comparative-ab-v1.json",
+    "experience/yado-four-domain-fresh-stress-v1.json",
+    "experience/yado-dns-gcp-cross-domain-research-stress-v1.json"
   ],
   "excluded_private_screenshot_classes": [
     "payment_or_billing_verification",
     "personal_account_identifiers",
     "credentials_or_secrets"
   ],
-  "construction_instruction": "Use public sources as evidence, not as ready architecture. For the 2026-09-06 DNS/GCP task, independently verify resolver addresses/features, anycast/location semantics, service-specific Google Cloud API endpoints, regional endpoint syntax, and region/location claims. Preserve contradictions as evidence. Do not execute third-party code.",
+  "construction_instruction": "Use internal project evidence and public sources as bounded evidence, not as ready architecture. Preserve contradictions and negative evidence. Prefer causal, memory, verification, planning, testing, and self-improvement lessons that can be re-derived from source content. Do not execute third-party code; do not transmit secrets; do not mutate canonical main during ingestion.",
   "coding_apprenticeship_instruction": "READ PUBLIC CODE AND METHODS AS EVIDENCE. DO NOT EXECUTE THIRD-PARTY CODE. USE SOURCE STRUCTURE, TEST FAILURES, COMPILER RESULTS, FRESH HOLDOUTS, AND YOUR OWN REPAIR/GENESIS MECHANISMS TO LEARN CODING. FEED EVERY EPISODE BACK INTO LOGIC, THINKING, INTELLIGENCE, MEMORY, AND EVOLUTION."
 }
