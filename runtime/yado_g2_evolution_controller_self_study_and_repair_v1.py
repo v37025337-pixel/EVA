@@ -13,6 +13,12 @@ from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8Externa
 
 TASK=REPO/'architecture/yado-kernel-evolution-controller-self-study-and-repair-v1-request.json'
 FAIL=REPO/'candidates/kernel-self-generated/g2-native-evolution-space-self-expansion-v1.json'
+PROCESS=REPO/'candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json'
+IRFAIL=REPO/'candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json'
+METAFAIL=REPO/'candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json'
+DEPLOY=REPO/'experience/yado-autonomous-free-compute-self-deployment-v1.json'
+ANON=REPO/'experience/yado-anonymous-compute-interface-discovery-v2.json'
+DEVAPP=REPO/'architecture/yado-g2-open-developer-resource-learning-application-v1.json'
 CTRL=REPO/'runtime/yado_evolutionary_genome_v1.py'
 OUT=REPO/'candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json'
 STUDY=REPO/'experience/yado-evolution-controller-self-study-v1.json'
@@ -22,7 +28,7 @@ def canon(o):return json.dumps(o,sort_keys=True,separators=(',',':'),default=str
 def digest(o):return hashlib.sha256(canon(o).encode()).hexdigest()
 def load(p):return json.loads(Path(p).read_text(encoding='utf-8'))
 
-task=load(TASK); failure=load(FAIL)
+task=load(TASK); failure=load(FAIL); process=load(PROCESS); irfail=load(IRFAIL); metafail=load(METAFAIL); deploy=load(DEPLOY); anon=load(ANON); devapp=load(DEVAPP)
 core=UnifiedYADOCoreV1(REPO)
 head_before=copy.deepcopy(core.head)
 
@@ -94,6 +100,46 @@ experience += [
     'fixed_surface':fixed_surface,
   },
   {
+    'role':'YADO_ACCUMULATED_SOURCE_PROCESS_SUCCESS',
+    'artifact':str(PROCESS.relative_to(REPO)),
+    'receipt_sha256':process.get('receipt_sha256'),
+    'status':process.get('status'),
+    'target_priority':process.get('target_priority'),
+    'process_mechanism':process.get('process_mechanism'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_IR_EMITTER_FAILURE',
+    'artifact':str(IRFAIL.relative_to(REPO)),
+    'receipt_sha256':irfail.get('receipt_sha256'),
+    'status':irfail.get('status'),
+    'next_required_capability':irfail.get('next_required_capability'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_META_LANGUAGE_FAILURE',
+    'artifact':str(METAFAIL.relative_to(REPO)),
+    'receipt_sha256':metafail.get('receipt_sha256'),
+    'status':metafail.get('status'),
+    'next_required_capability':metafail.get('next_required_capability'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_OPEN_DEVELOPER_EXPERIENCE',
+    'artifact':str(DEVAPP.relative_to(REPO)),
+    'experience_digest':devapp.get('source_experience_digest'),
+    'causal_lessons':devapp.get('causal_lessons'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_SELF_DEPLOYMENT_FAILURE',
+    'artifact':str(DEPLOY.relative_to(REPO)),
+    'experience_digest':deploy.get('experience_digest'),
+    'next_required_capability':deploy.get('next_required_capability'),
+  },
+  {
+    'role':'YADO_ACCUMULATED_ANONYMOUS_COMPUTE_FAILURE',
+    'artifact':str(ANON.relative_to(REPO)),
+    'experience_digest':anon.get('experience_digest'),
+    'next_required_capability':anon.get('next_required_capability'),
+  },
+  {
     'role':'YADO_OWN_EVOLUTION_SPACE_FAILURE',
     'artifact':str(FAIL.relative_to(REPO)),
     'receipt_sha256':failure.get('receipt_sha256'),
@@ -109,13 +155,24 @@ child=evolution.get('child') or {}
 child_dims=sorted((child.get('chromosomes') or {}).keys())
 new_dims=sorted(set(child_dims)-set(parent_dims))
 study_retained=study['study_digest'] in canon(child.get('experience_sources') or [])
-failure_retained=str(failure.get('receipt_sha256')) in canon(child.get('experience_sources') or [])
+child_experience_blob=canon(child.get('experience_sources') or [])
+failure_retained=str(failure.get('receipt_sha256')) in child_experience_blob
+process_retained=str(process.get('receipt_sha256')) in child_experience_blob
+ir_retained=str(irfail.get('receipt_sha256')) in child_experience_blob
+meta_retained=str(metafail.get('receipt_sha256')) in child_experience_blob
+deploy_retained=str(deploy.get('experience_digest')) in child_experience_blob
+anon_retained=str(anon.get('experience_digest')) in child_experience_blob
 
 checks={
  'exact_failed_result_studied':study['source_failure_receipt']==failure.get('receipt_sha256'),
  'controller_source_studied':bool(funcs),
  'self_study_retained_as_experience':study_retained,
  'failure_retained_as_experience':failure_retained,
+ 'source_process_success_retained':process_retained,
+ 'ir_emitter_failure_retained':ir_retained,
+ 'meta_language_failure_retained':meta_retained,
+ 'self_deployment_failure_retained':deploy_retained,
+ 'anonymous_compute_failure_retained':anon_retained,
  'native_goal_created':True,
  'native_deficit_detected':bool(native_goal['deficits']),
  'native_attempt_after_study':bool(evolution.get('run_digest')),
@@ -137,6 +194,9 @@ checks={
 passed=(
  checks['exact_failed_result_studied'] and checks['controller_source_studied']
  and checks['self_study_retained_as_experience'] and checks['failure_retained_as_experience']
+ and checks['source_process_success_retained'] and checks['ir_emitter_failure_retained']
+ and checks['meta_language_failure_retained'] and checks['self_deployment_failure_retained']
+ and checks['anonymous_compute_failure_retained']
  and checks['native_attempt_after_study'] and checks['structurally_broader_search_space']
  and checks['previously_absent_class_created'] and checks['rollback_parent_available']
  and checks['canonical_unchanged']
@@ -148,11 +208,19 @@ report={
  'status':status,'task':task,'native_goal':native_goal,
  'study_artifact':str(STUDY.relative_to(REPO)),'study_digest':study['study_digest'],
  'self_study_summary':study,
+ 'accumulated_experience_evidence':{
+   'source_process_receipt':process.get('receipt_sha256'),
+   'ir_emitter_failure_receipt':irfail.get('receipt_sha256'),
+   'meta_language_failure_receipt':metafail.get('receipt_sha256'),
+   'developer_resource_experience_digest':devapp.get('source_experience_digest'),
+   'self_deployment_experience_digest':deploy.get('experience_digest'),
+   'anonymous_compute_experience_digest':anon.get('experience_digest'),
+ },
  'native_evolution':evolution,
  'parent_dimensions':parent_dims,'child_dimensions':child_dims,'new_dimensions':new_dims,
  'checks':checks,'canonical_mutation':False,
  'next_required_capability':None if passed else 'NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER',
- 'semantic_boundary':'YADO STUDIES ITS OWN FAILED RESULT AND CONTROLLER SOURCE, RETAINS THAT STUDY AS EXPERIENCE, THEN RE-RUNS ITS NATIVE EVOLUTIONARY CONTROLLER. THE HOST DOES NOT CHOOSE A TARGET FUNCTION OR WRITE A PATCH. PASS REQUIRES A REAL NEW EVOLUTIONARY DIMENSION; REPEATING NEW GENES INSIDE THE SAME FIXED DIMENSIONS IS WITHHOLD.'
+ 'semantic_boundary':'YADO STUDIES ITS OWN FAILED RESULT AND CONTROLLER SOURCE, RETAINS THAT STUDY PLUS ACCUMULATED SUCCESS/FAILURE EXPERIENCE, THEN RE-RUNS ITS NATIVE EVOLUTIONARY CONTROLLER. THE HOST DOES NOT CHOOSE A TARGET FUNCTION, NEW DIMENSION, OR PATCH. PASS REQUIRES A REAL NEW EVOLUTIONARY DIMENSION; REPEATING NEW GENES INSIDE THE SAME FIXED DIMENSIONS IS WITHHOLD.'
 }
 report['receipt_sha256']=digest(report)
 OUT.parent.mkdir(parents=True,exist_ok=True)
