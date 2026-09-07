@@ -76,6 +76,8 @@ jobs:
               subprocess.check_call([sys.executable,"runtime/yado_g2_dns_screenshot_research_stress_v2.py"])
           elif task=="USER_20260907_PUBLIC_DNS_DIRECT_PROBE_V1":
               subprocess.check_call([sys.executable,"runtime/yado_g2_public_dns_direct_probe_v1.py"])
+          elif task=="USER_20260907_GCP_DIRECT_ENDPOINT_PROBE_V1":
+              subprocess.check_call([sys.executable,"runtime/yado_g2_gcp_direct_endpoint_probe_v1.py"])
           elif task=="USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1":
               subprocess.check_call([sys.executable,"runtime/yado_g2_four_domain_fresh_stress_v1.py"])
           elif task=="USER_20260906_TRI_ORGAN_ADMISSION_REVIEW_V2":
@@ -115,6 +117,8 @@ jobs:
           [ -f experience/yado-dns-screenshot-research-stress-v2.json ] && files+=(experience/yado-dns-screenshot-research-stress-v2.json)
           [ -f candidates/kernel-self-generated/g2-public-dns-direct-probe-v1.json ] && files+=(candidates/kernel-self-generated/g2-public-dns-direct-probe-v1.json)
           [ -f experience/yado-public-dns-direct-probe-v1.json ] && files+=(experience/yado-public-dns-direct-probe-v1.json)
+          [ -f candidates/kernel-self-generated/g2-gcp-direct-endpoint-probe-v1.json ] && files+=(candidates/kernel-self-generated/g2-gcp-direct-endpoint-probe-v1.json)
+          [ -f experience/yado-gcp-direct-endpoint-probe-v1.json ] && files+=(experience/yado-gcp-direct-endpoint-probe-v1.json)
           [ -f candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json ] && files+=(candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json)
           [ -f experience/yado-four-domain-fresh-stress-v1.json ] && files+=(experience/yado-four-domain-fresh-stress-v1.json)
           [ -f candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json ] && files+=(candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json)
@@ -183,6 +187,19 @@ jobs:
               assert r["checks"]["at_least_four_of_five_providers_udp_reachable"] is True,r
               assert r["checks"]["at_least_four_of_five_providers_tcp_reachable"] is True,r
               assert r["checks"]["at_least_eight_of_ten_addresses_udp_reachable"] is True,r
+              assert r["canonical_mutation"] is False,r
+              print(r["status"],r["aggregate"],r["next_required_capability"])
+          elif task=="USER_20260907_GCP_DIRECT_ENDPOINT_PROBE_V1":
+              p=pathlib.Path("candidates/kernel-self-generated/g2-gcp-direct-endpoint-probe-v1.json")
+              if not p.exists(): raise SystemExit("MISSING_GCP_DIRECT_ENDPOINT_PROBE_REPORT")
+              r=json.loads(p.read_text())
+              if r.get("status")!="PASS_SHADOW_G2_GCP_DIRECT_ENDPOINT_PROBE_V1":
+                  raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+              assert r["checks"]["at_least_ninety_percent_dns_resolve"] is True,r
+              assert r["checks"]["at_least_ninety_percent_tls_handshake"] is True,r
+              assert r["checks"]["at_least_ninety_percent_https_response"] is True,r
+              assert r["checks"]["only_https_443_used"] is True,r
+              assert r["checks"]["only_get_used"] is True,r
               assert r["canonical_mutation"] is False,r
               print(r["status"],r["aggregate"],r["next_required_capability"])
           elif task=="USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1":
@@ -257,6 +274,8 @@ jobs:
             experience/yado-dns-screenshot-research-stress-v2.json
             candidates/kernel-self-generated/g2-public-dns-direct-probe-v1.json
             experience/yado-public-dns-direct-probe-v1.json
+            candidates/kernel-self-generated/g2-gcp-direct-endpoint-probe-v1.json
+            experience/yado-gcp-direct-endpoint-probe-v1.json
             candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json
             experience/yado-four-domain-fresh-stress-v1.json
             candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json
