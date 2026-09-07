@@ -1,0 +1,94 @@
+{
+  "schema": "yado.g2.dns_screenshot_learning_application.v1",
+  "status": "ACTIVE_DEVELOPMENT_SHADOW_APPLIED",
+  "kernel_id": "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1",
+  "source_run_id": 34115677305,
+  "source_experience": "experience/yado-dns-screenshot-research-stress-v2.json",
+  "source_experience_digest": "d2196db58bc2929691b83ea3770d29f007136da08b2a366418f8c820488ee3fc",
+  "source_status": "PASS_SHADOW_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2",
+  "applied_findings": [
+    {
+      "provider": "Google Public DNS",
+      "result": "ADDRESS_PAIR_SUPPORTED",
+      "lesson": "ABSOLUTE_NO_IP_LOGGING_CLAIM_CONTRADICTED_BY_TEMPORARY_IP_BEARING_LOGS"
+    },
+    {
+      "provider": "Cloudflare 1.1.1.1",
+      "result": "ADDRESS_PAIR_SUPPORTED",
+      "lesson": "STANDARD_1_1_1_1_HAS_NO_CONTENT_FILTERING; FILTERING_USES_SEPARATE_VARIANTS"
+    },
+    {
+      "provider": "OpenDNS",
+      "result": "ADDRESS_PAIR_SUPPORTED",
+      "lesson": "FAMILYSHIELD_USES_DISTINCT_208_67_222_123_AND_208_67_220_123_ADDRESSES"
+    },
+    {
+      "provider": "Quad9",
+      "result": "ADDRESS_PAIR_AND_THREAT_BLOCKING_SUPPORTED",
+      "lesson": "SECURE_RESOLVER_FEATURES_MUST_BE_BOUND_TO_THE_SERVICE_VARIANT_AND_PRIVACY_POLICY_SCOPE"
+    },
+    {
+      "provider": "NextDNS",
+      "result": "ADDRESS_PAIR_AND_FEATURES_SUPPORTED_WITH_CONFIGURATION_NUANCE",
+      "lesson": "PERSONALIZED_FILTERING_LOGGING_AND_PARENTAL_BEHAVIOR_REQUIRES_CONFIGURATION_CONTEXT"
+    }
+  ],
+  "causal_lessons": [
+    {
+      "id": "DNS-L1-SOURCE-001",
+      "rule": "SCREENSHOT_OR_MARKETING_CLAIM_IS_HYPOTHESIS_UNTIL_FIRST_PARTY_EVIDENCE_IS_READ",
+      "future_behavior": "REQUIRE_PROVIDER_DOCUMENTATION_BEFORE_MEMORY_PROMOTION"
+    },
+    {
+      "id": "DNS-L1-VARIANT-002",
+      "rule": "RESOLVER_IP_PAIR_AND_FEATURE_VARIANT_MUST_BE_BOUND_TOGETHER",
+      "future_behavior": "DO_NOT_TRANSFER_FILTERING_FEATURES_FROM_FAMILY_OR_SECURE_VARIANTS_TO_STANDARD_ADDRESSES"
+    },
+    {
+      "id": "DNS-L1-PRIVACY-003",
+      "rule": "ABSOLUTE_NO_LOGS_OR_NO_IP_LOGS_LANGUAGE_REQUIRES_POLICY_SCOPE_CHECK",
+      "future_behavior": "DISTINGUISH_TEMPORARY_OPERATIONAL_LOGGING_SAMPLING_AND_PERSONALIZED_LOGGING_CONTROLS"
+    },
+    {
+      "id": "DNS-L1-CONFIG-004",
+      "rule": "CUSTOMIZABLE_DNS_FEATURES_REQUIRE_CONFIGURATION_CONTEXT",
+      "future_behavior": "DO_NOT_INFER_PERSONALIZED_BLOCKING_FROM_RAW_ANYCAST_IPS_ALONE"
+    },
+    {
+      "id": "DNS-L1-PERF-005",
+      "rule": "FASTEST_OR_FASTER_IS_NOT_INFERRED_FROM_PROVIDER_MARKETING_OR_GLOBAL_ANYCAST_ALONE",
+      "future_behavior": "REQUIRE_LOCAL_OR_TARGET_NETWORK_LATENCY_MEASUREMENT_BEFORE_PERFORMANCE_RANKING"
+    }
+  ],
+  "causal_binding": {
+    "source_layer": "L1_MEMORY_EXPERIENCE",
+    "conditioning_layer": "L2_EXPERIENCE_CONDITIONING",
+    "consumers": [
+      "L3_LOGIC_THINKING",
+      "L4_INTELLIGENCE_ROUTING",
+      "L6_SELF_AUDIT_EVOLUTION"
+    ],
+    "future_task_guard": "EXTERNAL_TECHNICAL_CLAIM_SOURCE_VARIANT_CONFIGURATION_AND_MEASUREMENT_GUARD"
+  },
+  "retained_failure_history": {
+    "first_run_id": 34115539046,
+    "first_status": "WITHHOLD_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2",
+    "failed_checks": [
+      "quad9_threat_blocking_supported",
+      "thinking_ablation_drop"
+    ],
+    "repair_applied": [
+      "OFFICIAL_QUAD9_THREAT_SOURCE",
+      "RICHER_EVENT_STATE_ABLATION_CASES"
+    ],
+    "thresholds_lowered": false
+  },
+  "safety": {
+    "third_party_code_executed": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "gene_reselection": false,
+    "g3_genesis": false
+  },
+  "semantic_boundary": "APPLIED DOMAIN EXPERIENCE FOR FUTURE SOURCE EVALUATION AND CAUSAL CONDITIONING. THIS DOES NOT CLAIM A UNIVERSALLY FASTEST DNS RESOLVER OR MEASURE THE USER'S NETWORK LATENCY."
+}
