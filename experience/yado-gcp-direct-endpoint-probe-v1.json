@@ -1,0 +1,1398 @@
+{
+  "aggregate": {
+    "auth_required_or_forbidden_observed": 0,
+    "dns_resolved": 15,
+    "https_reachable": 15,
+    "live_endpoint_evidence": 15,
+    "not_found_observed": 14,
+    "runner_https_latency_ranking": [
+      {
+        "host": "pubsub.googleapis.com",
+        "runner_median_ms": 11.802,
+        "services": [
+          "Pub/Sub"
+        ]
+      },
+      {
+        "host": "bigquery.googleapis.com",
+        "runner_median_ms": 12.442,
+        "services": [
+          "BigQuery"
+        ]
+      },
+      {
+        "host": "run.googleapis.com",
+        "runner_median_ms": 15.067,
+        "services": [
+          "Cloud Run"
+        ]
+      },
+      {
+        "host": "sqladmin.googleapis.com",
+        "runner_median_ms": 15.327,
+        "services": [
+          "Cloud SQL"
+        ]
+      },
+      {
+        "host": "spanner.googleapis.com",
+        "runner_median_ms": 17.983,
+        "services": [
+          "Spanner"
+        ]
+      },
+      {
+        "host": "firestore.googleapis.com",
+        "runner_median_ms": 18.737,
+        "services": [
+          "Firestore"
+        ]
+      },
+      {
+        "host": "storage.googleapis.com",
+        "runner_median_ms": 18.751,
+        "services": [
+          "Cloud Storage"
+        ]
+      },
+      {
+        "host": "vision.googleapis.com",
+        "runner_median_ms": 26.031,
+        "services": [
+          "Vision API"
+        ]
+      },
+      {
+        "host": "file.googleapis.com",
+        "runner_median_ms": 35.237,
+        "services": [
+          "Filestore"
+        ]
+      },
+      {
+        "host": "speech.googleapis.com",
+        "runner_median_ms": 56.881,
+        "services": [
+          "Speech-to-Text"
+        ]
+      },
+      {
+        "host": "compute.googleapis.com",
+        "runner_median_ms": 111.487,
+        "services": [
+          "Compute Engine"
+        ]
+      },
+      {
+        "host": "dataflow.googleapis.com",
+        "runner_median_ms": 162.547,
+        "services": [
+          "Dataflow"
+        ]
+      },
+      {
+        "host": "us-central1-aiplatform.googleapis.com",
+        "runner_median_ms": 162.732,
+        "services": [
+          "Vertex AI"
+        ]
+      },
+      {
+        "host": "appengine.googleapis.com",
+        "runner_median_ms": 171.475,
+        "services": [
+          "App Engine"
+        ]
+      },
+      {
+        "host": "sqladmin.us-central1.rep.googleapis.com",
+        "runner_median_ms": 177.981,
+        "services": [
+          "Cloud SQL"
+        ]
+      }
+    ],
+    "tls_handshake_ok": 15
+  },
+  "canonical_mutation": false,
+  "checks": {
+    "at_least_ninety_percent_dns_resolve": true,
+    "at_least_ninety_percent_https_response": true,
+    "at_least_ninety_percent_tls_handshake": true,
+    "at_least_twelve_targets_derived_from_prior_official_research": true,
+    "canonical_unchanged": true,
+    "g3_not_started": true,
+    "live_endpoint_evidence_at_least_ninety_percent": true,
+    "no_cloud_resource_mutation": true,
+    "no_credentials": true,
+    "only_get_used": true,
+    "only_googleapis_hosts_probed": true,
+    "only_https_443_used": true
+  },
+  "experience_digest": "b384270a67618cd007bef2aa3ff48f7c646d0d2269d024af5504ea86b897d37c",
+  "results": [
+    {
+      "dns": {
+        "ips": [
+          "173.194.45.95",
+          "2607:f8b0:4004:c21::5f"
+        ],
+        "latency_ms": 7.333,
+        "ok": true
+      },
+      "host": "compute.googleapis.com",
+      "https_latency_median_ms": 111.487,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 110.472,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 112.502,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SUCCESSFULLY_FETCHED_OFFICIAL_SERVICE_SOURCE_HOST"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Compute Engine"
+        ],
+        "source_ids": [
+          "GCP_COMPUTE_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 8.038,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "142.250.31.95",
+          "142.251.111.95",
+          "142.251.16.95",
+          "192.179.18.95",
+          "173.194.45.95",
+          "142.251.163.95",
+          "142.251.167.95",
+          "142.251.179.95"
+        ],
+        "latency_ms": 13.41,
+        "ok": true
+      },
+      "host": "run.googleapis.com",
+      "https_latency_median_ms": 15.067,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 14.44,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 15.695,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Cloud Run"
+        ],
+        "source_ids": [
+          "GCP_CLOUD_RUN_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 6.283,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "192.178.155.95",
+          "2607:f8b0:4004:c0b::5f"
+        ],
+        "latency_ms": 5.174,
+        "ok": true
+      },
+      "host": "appengine.googleapis.com",
+      "https_latency_median_ms": 171.475,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 38,
+          "body_sha256": "34206816d81f004f2cab85a53569e0bab09edbf23da17b75d9f16b716511509b",
+          "content_type": "text/html; charset=utf-8",
+          "latency_ms": 170.27,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 38,
+          "body_sha256": "34206816d81f004f2cab85a53569e0bab09edbf23da17b75d9f16b716511509b",
+          "content_type": "text/html; charset=utf-8",
+          "latency_ms": 172.679,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "App Engine"
+        ],
+        "source_ids": [
+          "GCP_APPENGINE_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 8.669,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "172.253.62.207",
+          "192.178.155.207",
+          "172.253.115.207",
+          "142.250.31.207",
+          "142.251.111.207",
+          "142.251.16.207",
+          "192.179.18.207",
+          "173.194.45.207"
+        ],
+        "latency_ms": 3.585,
+        "ok": true
+      },
+      "host": "storage.googleapis.com",
+      "https_latency_median_ms": 18.751,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 181,
+          "body_sha256": "13945ecc33afee74ac7f72e1d5bb73050894356c4bf63d02a1a53e76830567f5",
+          "content_type": "application/xml; charset=UTF-8",
+          "latency_ms": 18.111,
+          "ok": true,
+          "reason": "Bad Request",
+          "server": "UploadServer",
+          "status": 400
+        },
+        {
+          "body_bytes_sampled": 181,
+          "body_sha256": "13945ecc33afee74ac7f72e1d5bb73050894356c4bf63d02a1a53e76830567f5",
+          "content_type": "application/xml; charset=UTF-8",
+          "latency_ms": 19.391,
+          "ok": true,
+          "reason": "Bad Request",
+          "server": "UploadServer",
+          "status": 400
+        }
+      ],
+      "https_statuses": [
+        400,
+        400
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "MOST_FREQUENT_OFFICIAL_HOST"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Cloud Storage"
+        ],
+        "source_ids": [
+          "GCP_STORAGE_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "storage.googleapis.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 9.176,
+        "ok": true,
+        "san_count": 1,
+        "san_sample": [
+          "storage.googleapis.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "142.251.163.95",
+          "2607:f8b0:4004:c1b::5f"
+        ],
+        "latency_ms": 11.524,
+        "ok": true
+      },
+      "host": "file.googleapis.com",
+      "https_latency_median_ms": 35.237,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 34.424,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 36.05,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Filestore"
+        ],
+        "source_ids": [
+          "GCP_FILESTORE_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 8.754,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "172.217.119.4",
+          "172.217.114.4",
+          "172.217.116.4",
+          "172.217.118.4",
+          "172.217.113.4",
+          "172.217.115.4",
+          "172.217.112.4",
+          "172.217.117.4"
+        ],
+        "latency_ms": 27.043,
+        "ok": true
+      },
+      "host": "sqladmin.googleapis.com",
+      "https_latency_median_ms": 15.327,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 13.617,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 17.036,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Cloud SQL"
+        ],
+        "source_ids": [
+          "GCP_CLOUDSQL_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 8.763,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "192.178.155.95",
+          "2607:f8b0:4004:c1f::5f"
+        ],
+        "latency_ms": 5.959,
+        "ok": true
+      },
+      "host": "firestore.googleapis.com",
+      "https_latency_median_ms": 18.737,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 20.192,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 17.282,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Firestore"
+        ],
+        "source_ids": [
+          "GCP_FIRESTORE_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "edgecert.googleapis.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 7.922,
+        "ok": true,
+        "san_count": 15,
+        "san_sample": [
+          "edgecert.googleapis.com",
+          "android.googleapis.com",
+          "bigtable.googleapis.com",
+          "container.googleapis.com",
+          "dataflow.googleapis.com",
+          "datastore.googleapis.com",
+          "dlp.googleapis.com",
+          "firestore.googleapis.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "192.179.18.95",
+          "2607:f8b0:4004:c1d::5f"
+        ],
+        "latency_ms": 15.464,
+        "ok": true
+      },
+      "host": "spanner.googleapis.com",
+      "https_latency_median_ms": 17.983,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 18.319,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 17.648,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Spanner"
+        ],
+        "source_ids": [
+          "GCP_SPANNER_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "edgecert.googleapis.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 7.13,
+        "ok": true,
+        "san_count": 15,
+        "san_sample": [
+          "edgecert.googleapis.com",
+          "android.googleapis.com",
+          "bigtable.googleapis.com",
+          "container.googleapis.com",
+          "dataflow.googleapis.com",
+          "datastore.googleapis.com",
+          "dlp.googleapis.com",
+          "firestore.googleapis.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "172.253.62.95",
+          "2607:f8b0:4004:c07::5f"
+        ],
+        "latency_ms": 4.451,
+        "ok": true
+      },
+      "host": "bigquery.googleapis.com",
+      "https_latency_median_ms": 12.442,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 174,
+          "body_sha256": "6792438efd8ec4cdc2e85325182071381d90aa73875c9e0ba02b723433d16ce5",
+          "content_type": "application/json; charset=UTF-8",
+          "latency_ms": 12.71,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 174,
+          "body_sha256": "6792438efd8ec4cdc2e85325182071381d90aa73875c9e0ba02b723433d16ce5",
+          "content_type": "application/json; charset=UTF-8",
+          "latency_ms": 12.173,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "BigQuery"
+        ],
+        "source_ids": [
+          "GCP_BIGQUERY_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 6.879,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "64.233.180.95",
+          "2607:f8b0:4004:c17::5f"
+        ],
+        "latency_ms": 13.05,
+        "ok": true
+      },
+      "host": "dataflow.googleapis.com",
+      "https_latency_median_ms": 162.547,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 162.243,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 162.851,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Dataflow"
+        ],
+        "source_ids": [
+          "GCP_DATAFLOW_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "edgecert.googleapis.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 7.865,
+        "ok": true,
+        "san_count": 15,
+        "san_sample": [
+          "edgecert.googleapis.com",
+          "android.googleapis.com",
+          "bigtable.googleapis.com",
+          "container.googleapis.com",
+          "dataflow.googleapis.com",
+          "datastore.googleapis.com",
+          "dlp.googleapis.com",
+          "firestore.googleapis.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "142.250.31.95",
+          "142.251.111.95",
+          "192.179.18.95",
+          "142.251.163.95",
+          "142.251.167.95",
+          "142.251.179.95",
+          "64.233.180.95",
+          "172.253.62.95"
+        ],
+        "latency_ms": 12.749,
+        "ok": true
+      },
+      "host": "pubsub.googleapis.com",
+      "https_latency_median_ms": 11.802,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 11.627,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 11.977,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Pub/Sub"
+        ],
+        "source_ids": [
+          "GCP_PUBSUB_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "edgecert.googleapis.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 7.584,
+        "ok": true,
+        "san_count": 15,
+        "san_sample": [
+          "edgecert.googleapis.com",
+          "android.googleapis.com",
+          "bigtable.googleapis.com",
+          "container.googleapis.com",
+          "dataflow.googleapis.com",
+          "datastore.googleapis.com",
+          "dlp.googleapis.com",
+          "firestore.googleapis.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "172.217.118.4",
+          "172.217.115.4",
+          "172.217.116.4",
+          "172.217.113.4",
+          "172.217.117.4",
+          "172.217.119.4",
+          "172.217.114.4",
+          "172.217.112.4"
+        ],
+        "latency_ms": 13.173,
+        "ok": true
+      },
+      "host": "us-central1-aiplatform.googleapis.com",
+      "https_latency_median_ms": 162.732,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 156.55,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 168.914,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "MOST_FREQUENT_OFFICIAL_HOST"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_INVALID_SYNTAX"
+        ],
+        "services": [
+          "Vertex AI"
+        ],
+        "source_ids": [
+          "GCP_VERTEX_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 8.552,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "172.217.119.4",
+          "172.217.112.4",
+          "172.217.118.4",
+          "172.217.116.4",
+          "172.217.114.4",
+          "172.217.113.4",
+          "172.217.117.4",
+          "172.217.115.4"
+        ],
+        "latency_ms": 5.92,
+        "ok": true
+      },
+      "host": "vision.googleapis.com",
+      "https_latency_median_ms": 26.031,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 23.975,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 28.087,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Vision API"
+        ],
+        "source_ids": [
+          "GCP_VISION_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 10.34,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "172.253.115.95",
+          "172.253.63.95",
+          "142.250.31.95",
+          "142.251.111.95",
+          "142.251.16.95",
+          "173.194.45.95",
+          "142.251.163.95",
+          "142.251.167.95"
+        ],
+        "latency_ms": 12.189,
+        "ok": true
+      },
+      "host": "speech.googleapis.com",
+      "https_latency_median_ms": 56.881,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 25.341,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 88.421,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "ESF",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "SERVICE_DECLARATION"
+        ],
+        "prior_statuses": [
+          "CONTRADICTED_SERVICE_SPECIFIC_ENDPOINT"
+        ],
+        "services": [
+          "Speech-to-Text"
+        ],
+        "source_ids": [
+          "GCP_SPEECH_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR2",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "upload.video.google.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 8.248,
+        "ok": true,
+        "san_count": 17,
+        "san_sample": [
+          "upload.video.google.com",
+          "*.clients.google.com",
+          "*.docs.google.com",
+          "*.drive.google.com",
+          "*.gdata.youtube.com",
+          "*.googleapis.com",
+          "*.photos.google.com",
+          "*.youtube-3rd-party.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "ips": [
+          "34.1.71.28"
+        ],
+        "latency_ms": 110.223,
+        "ok": true
+      },
+      "host": "sqladmin.us-central1.rep.googleapis.com",
+      "https_latency_median_ms": 177.981,
+      "https_reachable": true,
+      "https_runs": [
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 200.675,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "envoy",
+          "status": 404
+        },
+        {
+          "body_bytes_sampled": 1561,
+          "body_sha256": "23926e9185d8d43c02807a838ffb373cc1977726094a4e46807c66ada9dd7660",
+          "content_type": "text/html; charset=UTF-8",
+          "latency_ms": 155.286,
+          "ok": true,
+          "reason": "Not Found",
+          "server": "envoy",
+          "status": 404
+        }
+      ],
+      "https_statuses": [
+        404,
+        404
+      ],
+      "live_endpoint_evidence": true,
+      "prior_research": {
+        "derive_modes": [
+          "PRIOR_OFFICIAL_RESEARCH_REGIONAL_EXAMPLE"
+        ],
+        "prior_statuses": [
+          "REGIONAL_EXAMPLE_FROM_PRIOR_OFFICIAL_RESEARCH"
+        ],
+        "services": [
+          "Cloud SQL"
+        ],
+        "source_ids": [
+          "GCP_CLOUDSQL_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "cert_issuer": {
+          "commonName": "WR3",
+          "countryName": "US",
+          "organizationName": "Google Trust Services"
+        },
+        "cert_subject": {
+          "commonName": "sqladmin.us-central1.rep.googleapis.com"
+        },
+        "cipher": "TLS_AES_256_GCM_SHA384",
+        "latency_ms": 166.302,
+        "ok": true,
+        "san_count": 1,
+        "san_sample": [
+          "sqladmin.us-central1.rep.googleapis.com"
+        ],
+        "version": "TLSv1.3"
+      }
+    },
+    {
+      "dns": {
+        "error": "gaierror:[Errno -2] Name or service not known",
+        "ips": [],
+        "latency_ms": 0.068,
+        "ok": false
+      },
+      "host": "sqladmin.{region}.rep.googleapis.com",
+      "https_latency_median_ms": null,
+      "https_reachable": false,
+      "https_runs": [
+        {
+          "error": "gaierror:[Errno -2] Name or service not known",
+          "latency_ms": 0.058,
+          "ok": false,
+          "status": null
+        },
+        {
+          "error": "gaierror:[Errno -2] Name or service not known",
+          "latency_ms": 0.033,
+          "ok": false,
+          "status": null
+        }
+      ],
+      "https_statuses": [],
+      "live_endpoint_evidence": false,
+      "prior_research": {
+        "derive_modes": [
+          "PRIOR_OFFICIAL_RESEARCH_REGIONAL_EXAMPLE"
+        ],
+        "prior_statuses": [
+          "REGIONAL_EXAMPLE_FROM_PRIOR_OFFICIAL_RESEARCH"
+        ],
+        "services": [
+          "Cloud SQL"
+        ],
+        "source_ids": [
+          "GCP_CLOUDSQL_OFFICIAL"
+        ]
+      },
+      "tls": {
+        "error": "gaierror:[Errno -2] Name or service not known",
+        "latency_ms": 0.019,
+        "ok": false
+      }
+    }
+  ],
+  "schema": "yado.g2.gcp_direct_endpoint_probe.experience.v1",
+  "semantic_boundary": "DIRECT READ-ONLY NETWORK OBSERVATION OF GCP GOOGLEAPIS HOSTS THAT YADO PREVIOUSLY DERIVED FROM OFFICIAL PUBLIC DOCUMENTATION. ONLY DNS RESOLUTION, TCP/TLS 443, AND HTTPS GET / ARE USED; NO CREDENTIALS, RESOURCE CREATION, MUTATION, OR PORT SCANNING.",
+  "source_research_artifact": "experience/yado-dns-gcp-cross-domain-research-stress-v1.json",
+  "status": "TRAINED_DIRECT_GCP_ENDPOINT_EVIDENCE",
+  "target_count": 16
+}
