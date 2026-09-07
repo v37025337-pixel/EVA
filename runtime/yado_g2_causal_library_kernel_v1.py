@@ -11,6 +11,7 @@ LEARNING_CYCLE = ROOT / "architecture/yado-g2-read-understand-apply-learn-cycle-
 DYNAMIC_MEMORY = ROOT / "experience/yado-g2-dynamic-experience-memory-v1.json"
 DNS_SCREENSHOT_APPLICATION = ROOT / "architecture/yado-g2-dns-screenshot-learning-application-v1.json"
 PUBLIC_DNS_DIRECT_APPLICATION = ROOT / "architecture/yado-g2-public-dns-direct-probe-application-v1.json"
+GCP_DIRECT_ENDPOINT_APPLICATION = ROOT / "architecture/yado-g2-gcp-direct-endpoint-probe-application-v1.json"
 
 class G2CausalLibraryKernelV1:
     COMPONENT_ID = "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1"
@@ -25,6 +26,7 @@ class G2CausalLibraryKernelV1:
         self.dynamic_memory = self._load(self.root / DYNAMIC_MEMORY.relative_to(ROOT))
         self.dns_screenshot_application = self._load(self.root / DNS_SCREENSHOT_APPLICATION.relative_to(ROOT))
         self.public_dns_direct_application = self._load(self.root / PUBLIC_DNS_DIRECT_APPLICATION.relative_to(ROOT))
+        self.gcp_direct_endpoint_application = self._load(self.root / GCP_DIRECT_ENDPOINT_APPLICATION.relative_to(ROOT))
 
     @staticmethod
     def _load(path: Path):
@@ -132,6 +134,20 @@ class G2CausalLibraryKernelV1:
             raise ValueError("PUBLIC_DNS_DIRECT_CONTEXT_GUARD_MISSING")
         if direct.get("safety",{}).get("canonical_mutation") is not False or direct.get("safety",{}).get("automatic_promotion") is not False:
             raise ValueError("PUBLIC_DNS_DIRECT_APPLICATION_SAFETY_VIOLATION")
+        gcp = self.gcp_direct_endpoint_application
+        if gcp.get("status") != "ACTIVE_DEVELOPMENT_SHADOW_APPLIED":
+            raise ValueError("GCP_DIRECT_ENDPOINT_APPLICATION_NOT_ACTIVE")
+        if gcp.get("source_experience_digest") != "b384270a67618cd007bef2aa3ff48f7c646d0d2269d024af5504ea86b897d37c":
+            raise ValueError("GCP_DIRECT_ENDPOINT_APPLICATION_DIGEST_MISMATCH")
+        g_bound = applied.get("GCP_DIRECT_ENDPOINT_PROBE_V1") or {}
+        if g_bound.get("source_experience_digest") != gcp.get("source_experience_digest"):
+            raise ValueError("GCP_DIRECT_ENDPOINT_TRAINING_BINDING_MISMATCH")
+        if gcp.get("observed",{}).get("concrete_live_endpoint_count",0) < 15:
+            raise ValueError("GCP_DIRECT_ENDPOINT_LIVE_EVIDENCE_TOO_LOW")
+        if gcp.get("observed",{}).get("unresolved_symbolic_template") != "sqladmin.{region}.rep.googleapis.com":
+            raise ValueError("GCP_DIRECT_ENDPOINT_TEMPLATE_LESSON_MISSING")
+        if gcp.get("safety",{}).get("canonical_mutation") is not False or gcp.get("safety",{}).get("automatic_promotion") is not False:
+            raise ValueError("GCP_DIRECT_ENDPOINT_APPLICATION_SAFETY_VIOLATION")
         cb = self.training.get("causal_binding") or {}
         if cb.get("source_layer") != "L1_MEMORY_EXPERIENCE" or cb.get("conditioning_layer") != "L2_EXPERIENCE_CONDITIONING":
             raise ValueError("TRAINING_CAUSAL_LAYER_BINDING_MISMATCH")
@@ -156,6 +172,8 @@ class G2CausalLibraryKernelV1:
             "latest_applied_experience_digest": self.training.get("latest_applied_experience_digest"),
             "current_dns_preferred_provider": self.public_dns_direct_application["current_execution_context_policy"]["preferred_provider_for_direct_dns_if_no_other_requirement"],
             "current_dns_remeasure_before_reuse": self.public_dns_direct_application["current_execution_context_policy"]["remeasure_before_reuse"],
+            "gcp_direct_live_endpoint_count": self.gcp_direct_endpoint_application["observed"]["concrete_live_endpoint_count"],
+            "gcp_direct_unresolved_template": self.gcp_direct_endpoint_application["observed"]["unresolved_symbolic_template"],
             "g3_genesis": self.architecture["g3_genesis"],
         }
 
@@ -240,6 +258,19 @@ class G2CausalLibraryKernelV1:
             "automatic_promotion": False,
         }
 
+    def gcp_direct_endpoint_application_snapshot(self):
+        p = self.gcp_direct_endpoint_application
+        return {
+            "status": p["status"],
+            "source_run_id": p["source_run_id"],
+            "source_experience_digest": p["source_experience_digest"],
+            "concrete_live_endpoint_count": p["observed"]["concrete_live_endpoint_count"],
+            "unresolved_symbolic_template": p["observed"]["unresolved_symbolic_template"],
+            "future_task_guard": p["causal_binding"]["future_task_guard"],
+            "lesson_ids": [x["id"] for x in p["causal_lessons"]],
+            "automatic_promotion": False,
+        }
+
     def causal_trace(self, contract: str):
         route = self.route_contract(contract)
         return {
@@ -253,6 +284,7 @@ class G2CausalLibraryKernelV1:
             "dynamic_memory": self.dynamic_memory_snapshot(),
             "dns_screenshot_application": self.dns_screenshot_application_snapshot(),
             "public_dns_direct_application": self.public_dns_direct_application_snapshot(),
+            "gcp_direct_endpoint_application": self.gcp_direct_endpoint_application_snapshot(),
             "automatic_promotion": False,
         }
 
