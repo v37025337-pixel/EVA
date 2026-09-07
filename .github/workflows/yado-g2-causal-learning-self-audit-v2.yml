@@ -31,10 +31,11 @@ jobs:
           python - <<'PY'
           import json
           r=json.load(open("candidates/kernel-self-generated/g2-causal-learning-self-audit-v2.json"))
+          q=json.load(open("architecture/yado-g2-causal-learning-self-audit-v2-request.json"))
           assert r["status"]=="PASS_SHADOW_G2_CAUSAL_LEARNING_SELF_AUDIT_V2",r
           assert r["previous_deficit_now_pass"] is True,r
           assert r["behavior_changed"] is True,r
-          assert r["self_selected_next_step"]=="RAW_BRANCH_EVIDENCE_REDERIVATION",r
+          assert r["self_selected_next_step"]==q["expected_next_step"],(r,q)
           assert r["canonical_mutation"] is False,r
           assert r["automatic_promotion"] is False,r
           print(r["status"],r["self_selected_next_step"],r["behavior_changed"])
