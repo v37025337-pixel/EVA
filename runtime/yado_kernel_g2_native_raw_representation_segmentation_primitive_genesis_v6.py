@@ -1,6 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 from collections import Counter
+from bisect import bisect_left,bisect_right
 import hashlib,json,random,re,sys
 
 ROOT=Path(__file__).resolve().parent
@@ -56,10 +57,9 @@ def raw_scores(text):
         rows.append((float(s),label))
     rows.sort(key=lambda z:(-z[0],z[1]));return rows
 
-def word_windows(text,width,stride):
-    toks=re.findall(r"[a-zA-Z0-9_]+",str(text))
+def word_windows_from_tokens(toks,original_text,width,stride):
     n=len(toks)
-    if not toks:return [(0,0,str(text))]
+    if not toks:return [(0,0,str(original_text))]
     if n<=width:return [(0,n,' '.join(toks))]
     out=[]
     for start in range(0,max(1,n-width+1),max(1,stride)):
@@ -68,11 +68,14 @@ def word_windows(text,width,stride):
     if not out or out[-1][0]!=tail:out.append((tail,n,' '.join(toks[tail:])))
     return out
 
+_PARITY_BUDGET=8
+
 def segment_records(text):
+    global _PARITY_BUDGET
     toks=re.findall(r"[a-zA-Z0-9_]+",str(text));n=max(1,len(toks))
     segs=[{'start':0,'end':n,'width':n,'text':str(text),'whole':1.0}]
     for w in v5['selected_spec']['widths']:
-        for a,b,z in word_windows(text,int(w),max(1,int(w)//int(v5['selected_spec']['stride_div']))):
+        for a,b,z in word_windows_from_tokens(toks,text,int(w),max(1,int(w)//int(v5['selected_spec']['stride_div']))):
             segs.append({'start':a,'end':b,'width':int(w),'text':z,'whole':0.0})
     uniq=[];seen=set()
     for q in segs:
@@ -99,11 +102,32 @@ def segment_records(text):
             run=(r-p)/max(1,len(arr))
             for k in range(p,r):run_by_index[arr[k][0]]=run
             p=r
+    # Exact local-support computation in O(n log n), replacing the original O(n^2) scan.
+    raw_centers=[(q['start']+q['end'])/2 for q in uniq]
+    order=sorted(range(len(uniq)),key=lambda i:(raw_centers[i],i))
+    sorted_centers=[raw_centers[i] for i in order]
+    prefix={label:[0] for label in labels}
+    for idx in order:
+        qlabel=uniq[idx]['label']
+        for label in labels:
+            prefix[label].append(prefix[label][-1]+(1 if qlabel==label else 0))
+
     rows=[]
+    parity_this_call=_PARITY_BUDGET>0
     for i,q in enumerate(uniq):
-        center=(q['start']+q['end'])/(2*n)
-        neighbors=[z for z in uniq if z is not q and abs(((z['start']+z['end'])/2)-((q['start']+q['end'])/2))<=max(8,q['width'])]
-        local=sum(z['label']==q['label'] for z in neighbors)/max(1,len(neighbors))
+        raw_center=raw_centers[i]
+        radius=max(8,q['width'])
+        left=bisect_left(sorted_centers,raw_center-radius)
+        right=bisect_right(sorted_centers,raw_center+radius)
+        neighbor_count=max(0,(right-left)-1)
+        same_count=(prefix[q['label']][right]-prefix[q['label']][left])-1
+        local=same_count/max(1,neighbor_count)
+        if parity_this_call:
+            slow_neighbors=[z for z in uniq if z is not q and abs(((z['start']+z['end'])/2)-raw_center)<=radius]
+            slow_local=sum(z['label']==q['label'] for z in slow_neighbors)/max(1,len(slow_neighbors))
+            if abs(local-slow_local)>1e-15:
+                raise RuntimeError('LOCAL_SUPPORT_FAST_PATH_DRIFT')
+        center=raw_center/n
         feat={
           'margin':q['margin'],'top_score':q['top_score'],'margin_rank':mr[i],'score_rank':sr[i],
           'start_frac':q['start']/n,'end_frac':q['end']/n,'center_dist':abs(center-.5),
@@ -112,16 +136,25 @@ def segment_records(text):
           'same_label_run':run_by_index.get(i,0.0),'whole_agreement':1.0 if q['label']==whole_label else 0.0,
         }
         rows.append({'label':q['label'],'margin':q['margin'],'top_score':q['top_score'],'features':feat,'index':i})
+    if parity_this_call:_PARITY_BUDGET-=1
     return rows
 
-def segmented_predict(text,leaf):
-    rows=segment_records(text);kept=[r for r in rows if predict_intel_component(leaf,r['features'])=='KEEP']
-    if not kept:return v5rt.predict_capability(text)
+def parent_from_segment_rows(rows):
+    q=sorted(rows,key=lambda r:(-r['margin'],-r['top_score'],r['label'],r['index']))[0]
+    return q['label']
+
+def segmented_from_rows(rows,leaf):
+    kept=[r for r in rows if predict_intel_component(leaf,r['features'])=='KEEP']
+    if not kept:return parent_from_segment_rows(rows)
     sums=Counter()
     for r in kept:
         f=r['features'];weight=max(1e-9,r['margin'])*(1.0+f['local_label_support']+f['same_label_run'])
         sums[r['label']]+=weight
     return sorted(sums.items(),key=lambda z:(-z[1],z[0]))[0][0]
+
+def segmented_predict(text,leaf):
+    rows=segment_records(text)
+    return segmented_from_rows(rows,leaf)
 
 # Reconstruct spent V6 admission corpus exactly.
 templates={
@@ -221,7 +254,19 @@ finally:
     except Exception:pass
 leaf={'op':'LEAF','algorithm':meta['selected_algorithm'],'model':meta['model']}
 seg_pred=lambda x:segmented_predict(x,leaf)
-base_sel=acc(select_docs,v5rt.predict_capability);seg_sel=acc(select_docs,seg_pred)
+
+# Verify the shared-row parent path exactly matches the frozen V5 runtime before using it.
+for text,_ in select_docs[:16]:
+    rows=segment_records(text)
+    if parent_from_segment_rows(rows)!=v5rt.predict_capability(text):
+        raise RuntimeError('PARENT_SHARED_SCORE_PATH_DRIFT')
+
+base_hits=0;seg_hits=0
+for text,expected in select_docs:
+    rows=segment_records(text)
+    base_hits+=parent_from_segment_rows(rows)==expected
+    seg_hits+=segmented_from_rows(rows,leaf)==expected
+base_sel=base_hits/max(1,len(select_docs));seg_sel=seg_hits/max(1,len(select_docs))
 skills=[
  {'skill_id':'KEEP_MULTISCALE_V5','artifact_digest':v5['candidate_digest'],'structural_valid':True,'semantic_consistency':1.0,
   'fit_baseline':base_sel,'fit_candidate':base_sel,'heldout_baseline':base_sel,'heldout_candidate':base_sel,
@@ -280,12 +325,30 @@ for i in range(5000):
     for layer in range(1,1+(i%12)):z=wrap_e(z,i+41011*layer,layer)
     fresh_seq.append((z,y))
 base_rows=[(r['raw_text'],r['expected']) for r in base['raw_unstructured']['rows']]
+
+def pair_accuracy(rows,leaf,use_segmentation):
+    parent_hits=0;candidate_hits=0
+    for text,expected in rows:
+        sr=segment_records(text)
+        pp=parent_from_segment_rows(sr)
+        cp=segmented_from_rows(sr,leaf) if use_segmentation else pp
+        parent_hits+=pp==expected
+        candidate_hits+=cp==expected
+    n=max(1,len(rows))
+    return parent_hits/n,candidate_hits/n
+
+use_segmentation=selected=='SEGMENT_FILTER_GENESIS_V6'
+pd,cd=pair_accuracy(fresh_direct,leaf,use_segmentation)
+pt,ct=pair_accuracy(fresh_traps,leaf,use_segmentation)
+pw,cw=pair_accuracy(fresh_wrapped,leaf,use_segmentation)
+ps,cs=pair_accuracy(fresh_seq,leaf,use_segmentation)
+pb,cb=pair_accuracy(base_rows,leaf,use_segmentation)
 fresh_metrics={
- 'parent_direct':acc(fresh_direct,v5rt.predict_capability),'candidate_direct':acc(fresh_direct,candidate_pred),
- 'parent_traps':acc(fresh_traps,v5rt.predict_capability),'candidate_traps':acc(fresh_traps,candidate_pred),
- 'parent_wrapped':acc(fresh_wrapped,v5rt.predict_capability),'candidate_wrapped':acc(fresh_wrapped,candidate_pred),
- 'parent_sequential':acc(fresh_seq,v5rt.predict_capability),'candidate_sequential':acc(fresh_seq,candidate_pred),
- 'parent_base_regression':acc(base_rows,v5rt.predict_capability),'candidate_base_regression':acc(base_rows,candidate_pred),
+ 'parent_direct':pd,'candidate_direct':cd,
+ 'parent_traps':pt,'candidate_traps':ct,
+ 'parent_wrapped':pw,'candidate_wrapped':cw,
+ 'parent_sequential':ps,'candidate_sequential':cs,
+ 'parent_base_regression':pb,'candidate_base_regression':cb,
 }
 checks={
  'v6_withhold_consumed':True,'v6_spent_exactly_reproduced':abs(spent_repro-float(v6['admission_metrics']['multiscale']['sequential']))<1e-12,
