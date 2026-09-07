@@ -7,11 +7,13 @@
     "action_pinning",
     "dependency_vulnerabilities"
   ],
-  "active_branch": "yado-architecture-shadow-search",
+  "active_branch": "main",
   "mutate_canonical_state": false,
-  "repair_rerun_revision": "2026-09-06-main-post-v7-security-idempotent-persist",
+  "repair_rerun_revision": "2026-09-07-main-post-tri-organ-security",
   "repair_focus": [
-    "POST_ADMISSION_MAIN_V7_META_CONTROLLER",
+    "POST_MAIN_TRI_ORGAN_SELECTIVE_ADMISSION",
+    "31_ACTIVE_CAPABILITIES",
+    "39_ACTIVE_RUNTIME_SOURCES",
     "SECRET_SCAN",
     "DEPENDENCY_AUDIT",
     "WORKFLOW_PERMISSION_ALLOWLIST",
@@ -19,17 +21,14 @@
     "ACTIVE_RUNTIME_REVIEW",
     "FAIL_CLOSED_SECURITY_EXIT"
   ],
-  "security_trigger": 8,
+  "security_trigger": 9,
   "prerequisite_evidence": {
-    "admitted_main_head_before_cleanup": "2ea921172f2749e7a5cfa4b85b610917bae310c3",
-    "v7_component": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
-    "active_capability_count": 28,
-    "v4_replaced": false,
-    "g3_genesis": false,
-    "previous_run_id": 34053033826,
-    "previous_content_status": "PASS",
-    "previous_transport_failure": "NO_CHANGES_TO_COMMIT_TREATED_AS_FAILURE",
-    "repair": "IDEMPOTENT_SECURITY_REPORT_PERSIST",
-    "security_threshold_change": false
+    "main_admission_commit": "6dde132f932704dee4563fc2ed3eb118e7dcb2b5",
+    "main_post_module_run_id": 34085602742,
+    "post_module_status": "PASS_G2_POST_MODULE_FULL_INTEGRITY_V1",
+    "active_capability_count": 31,
+    "active_runtime_sources": 39,
+    "expected_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+    "g3_genesis": false
   }
 }
