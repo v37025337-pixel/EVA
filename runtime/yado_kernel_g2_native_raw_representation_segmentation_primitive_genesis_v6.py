@@ -2,7 +2,8 @@ from __future__ import annotations
 from pathlib import Path
 from collections import Counter
 from bisect import bisect_left,bisect_right
-import hashlib,json,random,re,sys
+from functools import lru_cache
+import hashlib,json,random,re,sys,time
 
 ROOT=Path(__file__).resolve().parent
 REPO=ROOT.parent
@@ -50,6 +51,7 @@ raw=RawTaskRepresentationSpecV2(parent_model['family'],list(parent_model['labels
 v5rt=RawTaskRepresentationMultiscaleRuntimeV6(parent_model,v5['selected_spec'])
 labels=list(raw.labels)
 
+@lru_cache(maxsize=400000)
 def raw_scores(text):
     mode=raw.payload['mode'];dim=int(raw.payload['dim']);x=_features(text,mode,dim);rows=[]
     for label in labels:
@@ -222,7 +224,9 @@ for i in range(7000):
     z=wrap_c(x,i,0)
     for layer in range(1,1+(i%10)):z=wrap_c(z,i+31013*layer,layer)
     spent.append((z,y))
+print(json.dumps({'phase':'spent_reconstruction_ready','spent_count':len(spent),'ts':time.time()}),flush=True)
 spent_repro=acc(spent,v5rt.predict_capability)
+print(json.dumps({'phase':'spent_reproduction_done','spent_repro':spent_repro,'ts':time.time()}),flush=True)
 if abs(spent_repro-float(v6['admission_metrics']['multiscale']['sequential']))>1e-12:raise RuntimeError('V6_SPENT_REPRO_DRIFT')
 
 ordered=sorted(spent,key=lambda r:hashlib.sha256((r[0]+'|'+r[1]+'|SEG6').encode()).hexdigest())
@@ -235,6 +239,7 @@ def window_training_rows(docs):
             out.append((r['features'],'KEEP' if r['label']==expected else 'DROP'))
     return out
 fit=window_training_rows(fit_docs);val=window_training_rows(val_docs);blind=window_training_rows(blind_docs)
+print(json.dumps({'phase':'window_training_rows_done','fit':len(fit),'validation':len(val),'blind':len(blind),'cache':raw_scores.cache_info()._asdict(),'ts':time.time()}),flush=True)
 
 if DB.exists():DB.unlink()
 k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(DB))
@@ -252,6 +257,7 @@ finally:
     try:
         if DB.exists():DB.unlink()
     except Exception:pass
+print(json.dumps({'phase':'meta_evolution_done','selected_algorithm':meta.get('selected_algorithm'),'validation':meta.get('validation'),'fresh_blind':meta.get('fresh_blind'),'ts':time.time()}),flush=True)
 leaf={'op':'LEAF','algorithm':meta['selected_algorithm'],'model':meta['model']}
 seg_pred=lambda x:segmented_predict(x,leaf)
 
@@ -286,6 +292,7 @@ finally:
         if DB.exists():DB.unlink()
     except Exception:pass
 selected=(selection.get('selected_skill_ids') or [None])[0]
+print(json.dumps({'phase':'native_selection_done','selected':selected,'ts':time.time()}),flush=True)
 candidate_pred=seg_pred if selected=='SEGMENT_FILTER_GENESIS_V6' else v5rt.predict_capability
 
 # New untouched segmentation fresh.
@@ -343,6 +350,7 @@ pt,ct=pair_accuracy(fresh_traps,leaf,use_segmentation)
 pw,cw=pair_accuracy(fresh_wrapped,leaf,use_segmentation)
 ps,cs=pair_accuracy(fresh_seq,leaf,use_segmentation)
 pb,cb=pair_accuracy(base_rows,leaf,use_segmentation)
+print(json.dumps({'phase':'fresh_cases_ready','direct':len(fresh_direct),'traps':len(fresh_traps),'wrapped':len(fresh_wrapped),'sequential':len(fresh_seq),'ts':time.time()}),flush=True)
 fresh_metrics={
  'parent_direct':pd,'candidate_direct':cd,
  'parent_traps':pt,'candidate_traps':ct,
@@ -350,6 +358,7 @@ fresh_metrics={
  'parent_sequential':ps,'candidate_sequential':cs,
  'parent_base_regression':pb,'candidate_base_regression':cb,
 }
+print(json.dumps({'phase':'fresh_evaluation_done','metrics':{'parent_direct':pd,'candidate_direct':cd,'parent_traps':pt,'candidate_traps':ct,'parent_wrapped':pw,'candidate_wrapped':cw,'parent_sequential':ps,'candidate_sequential':cs,'parent_base_regression':pb,'candidate_base_regression':cb},'cache':raw_scores.cache_info()._asdict(),'ts':time.time()}),flush=True)
 checks={
  'v6_withhold_consumed':True,'v6_spent_exactly_reproduced':abs(spent_repro-float(v6['admission_metrics']['multiscale']['sequential']))<1e-12,
  'native_goal_created':bool(deficits),'native_meta_intelligence_generated_filter':bool(meta.get('model')),
