@@ -7,14 +7,15 @@
       "signature": "(node, annotate_fields=True, include_attributes=False, *, indent=None)",
       "skill_id": "PYTHON_AST_PRIMITIVE_DUMP",
       "study_evidence": {
-        "all_file_support": 1,
+        "all_file_support": 21,
+        "developer_resource_support": 0,
         "name": "dump",
         "python_doc_page_count": 1,
         "python_doc_pages": [
           "AST"
         ],
-        "source_history_ratio": 0.0,
-        "source_history_support": 0
+        "source_history_ratio": 0.11299435028248588,
+        "source_history_support": 20
       },
       "validation": 0.0
     },
@@ -25,14 +26,34 @@
       "signature": "(node)",
       "skill_id": "PYTHON_AST_PRIMITIVE_FIX_MISSING_LOCATIONS",
       "study_evidence": {
-        "all_file_support": 6,
+        "all_file_support": 25,
+        "developer_resource_support": 0,
         "name": "fix_missing_locations",
         "python_doc_page_count": 1,
         "python_doc_pages": [
           "AST"
         ],
-        "source_history_ratio": 0.0,
-        "source_history_support": 0
+        "source_history_ratio": 0.0847457627118644,
+        "source_history_support": 15
+      },
+      "validation": 0.0
+    },
+    {
+      "blind": 0.0,
+      "fit": 0.0,
+      "primitive": "iter_child_nodes",
+      "signature": "(node)",
+      "skill_id": "PYTHON_AST_PRIMITIVE_ITER_CHILD_NODES",
+      "study_evidence": {
+        "all_file_support": 10,
+        "developer_resource_support": 0,
+        "name": "iter_child_nodes",
+        "python_doc_page_count": 1,
+        "python_doc_pages": [
+          "AST"
+        ],
+        "source_history_ratio": 0.03954802259887006,
+        "source_history_support": 7
       },
       "validation": 0.0
     },
@@ -43,7 +64,8 @@
       "signature": "(source, filename='<unknown>', mode='exec', *, type_comments=False, feature_version=None)",
       "skill_id": "PYTHON_AST_PRIMITIVE_PARSE",
       "study_evidence": {
-        "all_file_support": 41,
+        "all_file_support": 93,
+        "developer_resource_support": 0,
         "name": "parse",
         "python_doc_page_count": 3,
         "python_doc_pages": [
@@ -51,8 +73,8 @@
           "BUILTINS",
           "TOKENIZE"
         ],
-        "source_history_ratio": 0.2767857142857143,
-        "source_history_support": 31
+        "source_history_ratio": 0.4350282485875706,
+        "source_history_support": 77
       },
       "validation": 0.0
     },
@@ -63,14 +85,15 @@
       "signature": "(ast_obj)",
       "skill_id": "PYTHON_AST_PRIMITIVE_UNPARSE",
       "study_evidence": {
-        "all_file_support": 6,
+        "all_file_support": 34,
+        "developer_resource_support": 0,
         "name": "unparse",
         "python_doc_page_count": 1,
         "python_doc_pages": [
           "AST"
         ],
-        "source_history_ratio": 0.0,
-        "source_history_support": 0
+        "source_history_ratio": 0.13559322033898305,
+        "source_history_support": 24
       },
       "validation": 1.0
     },
@@ -81,15 +104,16 @@
       "signature": "(node)",
       "skill_id": "PYTHON_AST_PRIMITIVE_WALK",
       "study_evidence": {
-        "all_file_support": 37,
+        "all_file_support": 90,
+        "developer_resource_support": 0,
         "name": "walk",
         "python_doc_page_count": 2,
         "python_doc_pages": [
           "AST",
           "PATHLIB"
         ],
-        "source_history_ratio": 0.23214285714285715,
-        "source_history_support": 26
+        "source_history_ratio": 0.3954802259887006,
+        "source_history_support": 70
       },
       "validation": 0.0
     }
@@ -197,12 +221,12 @@
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-05T21:17:33.772875+00:00",
-        "deficit_id": "D-d44b8d034a95",
+        "created_at": "2026-09-07T15:41:39.915436+00:00",
+        "deficit_id": "D-10429a5d40cf",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-fc7272367f4e",
+        "goal_id": "G-c037052d1743",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -210,11 +234,11 @@
         "target": "TARGET_SEMANTIC_SOURCE_CONSTRUCTOR_GENESIS_V5"
       }
     ],
-    "goal_id": "G-fc7272367f4e"
+    "goal_id": "G-c037052d1743"
   },
   "native_skill_selection": {
-    "candidate_count": 5,
-    "gate_digest": "69f7d71ce32a0dd0c4813779d8b6e74500ddf4f0bddf4a4907ed085e7debf7fe",
+    "candidate_count": 6,
+    "gate_digest": "82e80c93ae86d78036c3fd2a0710029005bf56732d3bfcbcb809e03feb1807df",
     "rejected": [
       {
         "admitted": false,
@@ -228,7 +252,7 @@
           "state_integrity": true,
           "structural": false
         },
-        "evidence_digest": "b4387b8db87662f9955b7356ad1bee60da8271f5d68df811c4f8eaf9d88fc52f",
+        "evidence_digest": "4ff10612e889523bd06a85ddc52ca12582fad111b2d790d4881b43348ec9999e",
         "failed_critics": [
           "fit_marginal_gain",
           "heldout_gain_floor",
@@ -252,7 +276,7 @@
           "state_integrity": true,
           "structural": false
         },
-        "evidence_digest": "90b627fa344e62c30667c98854433e391d4d2fbd086d33ff50fd12880cf60ec9",
+        "evidence_digest": "a59a6841bc8d95194b1d080a0e1ee863c94dadfa3b8f8e752aa90f10a5b4c159",
         "failed_critics": [
           "fit_marginal_gain",
           "heldout_gain_floor",
@@ -276,7 +300,31 @@
           "state_integrity": true,
           "structural": false
         },
-        "evidence_digest": "0b2039fe4c9002ec8244b9377864bc13962ef261d0dcdbe9c0e72149b63a011f",
+        "evidence_digest": "b9d3b753a7d294c6adb62b6fac214de5b4de8be8a60e9e1ebb8547c34ee58e38",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "PYTHON_AST_PRIMITIVE_ITER_CHILD_NODES",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": false
+        },
+        "evidence_digest": "f5ba1d8176cdf52c596f9df3b70019378c155ac7e9afaff039e2fa6271efaac9",
         "failed_critics": [
           "fit_marginal_gain",
           "heldout_gain_floor",
@@ -300,7 +348,7 @@
           "state_integrity": true,
           "structural": false
         },
-        "evidence_digest": "6e6ab3c7ec59859bfc77125e35b69fcb2f4ef18ed0fa8403fcfd3522e142883e",
+        "evidence_digest": "590c46bc008482cbbeb9cf201b52f1289d0aec480674285c6ecf85fde36a9b69",
         "failed_critics": [
           "fit_marginal_gain",
           "heldout_gain_floor",
@@ -326,7 +374,7 @@
           "state_integrity": true,
           "structural": true
         },
-        "evidence_digest": "cf1191ff9286d0fc156afb14b7eb5c36c297fdc4f5312ada66f96812bf05e9b0",
+        "evidence_digest": "31ff6746263f1d0695b0956b54dfe1322ddcd71fce88311530e5aaea24a6498f",
         "failed_critics": [],
         "fit_gain": 1.0,
         "heldout_gain": 1.0,
@@ -341,10 +389,10 @@
     "status": "SELECTED"
   },
   "next_required_capability": "NATIVE_SEMANTIC_EDIT_TO_AST_MATERIALIZATION_V6",
-  "parent_v4_receipt": "cb8a25b109463e064b4d64ab7caf9158eb62e62a7bce6a4ca56a0007f8ac0570",
+  "parent_v4_receipt": "a6cba159e7c21526717777140eea1bdc671998b83406d81242590bc9d3e90384",
   "promotion_applied": false,
-  "python_self_study_digest": "f90bcd6f99c3ed8c5f93e0b59381f54912a5fdc3b557caf8e92c07c1c1ff9f67",
-  "receipt_sha256": "8c19271b07dcc7700b17d6e1ef44e3ae50ae267b24a95fb788e43c4b639f754c",
+  "python_self_study_digest": "18443251b199ac8c627548af64328c8c3283ca3638da6e7cb13d0910ed406996",
+  "receipt_sha256": "a6750b6fbbb2efccced70cbe7f49ad21b4f9e3ff58df1f83babd0a7f31300a2b",
   "schema": "yado.g2.target_semantic_source_constructor_genesis.v5",
   "selected_metric": {
     "blind": 1.0,
@@ -353,14 +401,15 @@
     "signature": "(ast_obj)",
     "skill_id": "PYTHON_AST_PRIMITIVE_UNPARSE",
     "study_evidence": {
-      "all_file_support": 6,
+      "all_file_support": 34,
+      "developer_resource_support": 0,
       "name": "unparse",
       "python_doc_page_count": 1,
       "python_doc_pages": [
         "AST"
       ],
-      "source_history_ratio": 0.0,
-      "source_history_support": 0
+      "source_history_ratio": 0.13559322033898305,
+      "source_history_support": 24
     },
     "validation": 1.0
   },
