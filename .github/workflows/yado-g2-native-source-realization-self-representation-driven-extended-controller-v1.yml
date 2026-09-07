@@ -3,7 +3,7 @@ on:
   push:
     branches: [yado-architecture-shadow-search]
     paths:
-      - "architecture/yado-kernel-self-generated-primitive-algebra-genesis-v3-request.json"
+      - "architecture/yado-kernel-self-hosted-meta-language-family-constructor-v4-request.json"
 permissions:
   contents: write
 concurrency:
@@ -25,11 +25,11 @@ jobs:
       - name: Canonical guard before native source realization
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Compile strict observer
-        run: python -m py_compile runtime/yado_g2_self_generated_primitive_algebra_genesis_v3.py
+        run: python -m py_compile runtime/yado_g2_self_hosted_meta_language_family_constructor_v4.py
       - name: Let YADO realize its extended controller as source
         id: realize
         continue-on-error: true
-        run: python runtime/yado_g2_self_generated_primitive_algebra_genesis_v3.py
+        run: python runtime/yado_g2_self_hosted_meta_language_family_constructor_v4.py
       - name: Canonical guard after native source realization
         if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
@@ -38,8 +38,11 @@ jobs:
         run: |
           git config user.name "YADO Native Source Realization"
           git config user.email "actions@users.noreply.github.com"
-          git add candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json 2>/dev/null || true
-          git diff --cached --quiet || git commit -m "Persist YADO primitive algebra genesis V3 [skip ci]"
+          files=()
+          [ -f candidates/kernel-self-generated/g2-self-hosted-meta-language-family-constructor-v4.json ] && files+=(candidates/kernel-self-generated/g2-self-hosted-meta-language-family-constructor-v4.json)
+          [ -f candidates/g2-self-evolution/yado_self_hosted_meta_language_family_constructor_v4.py ] && files+=(candidates/g2-self-evolution/yado_self_hosted_meta_language_family_constructor_v4.py)
+          if [ ${#files[@]} -gt 0 ]; then git add "${files[@]}"; fi
+          git diff --cached --quiet || git commit -m "Persist YADO self-hosted family constructor V4 [skip ci]"
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
       - name: Enforce strict native source provenance verdict
@@ -47,22 +50,23 @@ jobs:
         run: |
           python - <<'PY'
           import json,pathlib
-          p=pathlib.Path("candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json")
-          if not p.exists(): raise SystemExit("MISSING_PRIMITIVE_ALGEBRA_V3")
+          p=pathlib.Path("candidates/kernel-self-generated/g2-self-hosted-meta-language-family-constructor-v4.json")
+          if not p.exists(): raise SystemExit("MISSING_SELF_HOSTED_FAMILY_CONSTRUCTOR_V4")
           r=json.loads(p.read_text());c=r["checks"]
-          for key in ("host_new_primitive_set_supplied","host_new_interpreter_supplied",
-                      "host_string_grammar_used","host_primitive_inventory_used",
-                      "host_interpreter_source_used","host_patch_used",
+          for key in ("host_constructor_source_supplied","host_constructor_skeleton_supplied",
+                      "host_target_patch_supplied","host_source_template_supplied",
                       "external_models_used","automatic_canonical_promotion"):
               assert c[key] is False,(key,r)
           assert c["canonical_unchanged"] is True,r
-          if r["status"] not in ("PASS_SHADOW_G2_SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3","WITHHOLD_G2_SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3"):
-              raise SystemExit("BAD_PRIMITIVE_ALGEBRA_STATUS:"+str(r["status"]))
-          print(r["status"],r.get("selected_candidate"),r.get("next_required_capability"))
+          if r["status"] not in ("PASS_SHADOW_G2_SELF_HOSTED_META_LANGUAGE_FAMILY_CONSTRUCTOR_V4","WITHHOLD_G2_SELF_HOSTED_META_LANGUAGE_FAMILY_CONSTRUCTOR_V4"):
+              raise SystemExit("BAD_SELF_HOSTED_CONSTRUCTOR_STATUS:"+str(r["status"]))
+          print(r["status"],r.get("selected_source_candidate"),r.get("next_required_capability"))
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: yado-g2-self-generated-primitive-algebra-genesis-v3-${{ github.run_id }}
-          path: candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json
+          name: yado-g2-self-hosted-meta-language-family-constructor-v4-${{ github.run_id }}
+          path: |
+            candidates/kernel-self-generated/g2-self-hosted-meta-language-family-constructor-v4.json
+            candidates/g2-self-evolution/yado_self_hosted_meta_language_family_constructor_v4.py
           if-no-files-found: warn
