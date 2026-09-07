@@ -20,13 +20,13 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertEqual(result["compatibility_fallback_count"], 5)
         self.assertEqual(result["layer_count"], 8)
         self.assertFalse(result["g3_genesis"])
-        self.assertEqual(result["training_source_count"], 126)
-        self.assertEqual(result["training_fetched_count"], 116)
+        self.assertEqual(result["training_source_count"], 141)
+        self.assertEqual(result["training_fetched_count"], 130)
         self.assertEqual(result["dynamic_memory_branch_count"], 20)
         self.assertEqual(result["dynamic_memory_raw_lineage_count"], 0)
         self.assertEqual(result["dynamic_memory_rederived_count"], 6)
-        self.assertEqual(result["latest_applied_experience_id"], "GCP_DIRECT_ENDPOINT_PROBE_V1")
-        self.assertEqual(result["latest_applied_experience_digest"], "b384270a67618cd007bef2aa3ff48f7c646d0d2269d024af5504ea86b897d37c")
+        self.assertEqual(result["latest_applied_experience_id"], "OPEN_DEVELOPER_RESOURCE_SELF_STUDY_V1")
+        self.assertEqual(result["latest_applied_experience_digest"], "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2")
         self.assertEqual(result["current_dns_preferred_provider"], "OpenDNS")
         self.assertTrue(result["current_dns_remeasure_before_reuse"])
 
@@ -98,6 +98,17 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertIn("GCP-DIRECT-002", snap["lesson_ids"])
         self.assertIn("GCP-DIRECT-003", snap["lesson_ids"])
         self.assertEqual(snap["future_task_guard"], "GCP_ENDPOINT_USE_REQUIRES_CONCRETE_HOST_LIVE_REPROBE_AND_SERVICE_PATH_CONTEXT")
+        self.assertFalse(snap["automatic_promotion"])
+
+    def test_open_developer_resource_self_study_is_applied_to_coding_priority(self):
+        snap = self.kernel.open_developer_resource_application_snapshot()
+        self.assertEqual(snap["status"], "ACTIVE_DEVELOPMENT_SHADOW_APPLIED")
+        self.assertEqual(snap["source_run_id"], 34128129602)
+        self.assertEqual(snap["target_priority"], "CODING_UNSUPPORTED_PROGRAM_FAMILIES")
+        self.assertEqual(snap["source_count"], 141)
+        self.assertEqual(snap["fetched_count"], 130)
+        self.assertIn("DEV-RESOURCE-001", snap["lesson_ids"])
+        self.assertIn("DEV-RESOURCE-004", snap["lesson_ids"])
         self.assertFalse(snap["automatic_promotion"])
 
     def test_unknown_contract_falls_back_without_self_promotion(self):
