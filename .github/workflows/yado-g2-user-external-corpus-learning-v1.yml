@@ -78,6 +78,8 @@ jobs:
               subprocess.check_call([sys.executable,"runtime/yado_g2_public_dns_direct_probe_v1.py"])
           elif task=="USER_20260907_GCP_DIRECT_ENDPOINT_PROBE_V1":
               subprocess.check_call([sys.executable,"runtime/yado_g2_gcp_direct_endpoint_probe_v1.py"])
+          elif task=="USER_20260907_AUTONOMOUS_FREE_COMPUTE_SELF_DEPLOYMENT_V1":
+              subprocess.check_call([sys.executable,"runtime/yado_g2_autonomous_free_compute_self_deployment_v1.py"])
           elif task=="USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1":
               subprocess.check_call([sys.executable,"runtime/yado_g2_four_domain_fresh_stress_v1.py"])
           elif task=="USER_20260906_TRI_ORGAN_ADMISSION_REVIEW_V2":
@@ -119,6 +121,8 @@ jobs:
           [ -f experience/yado-public-dns-direct-probe-v1.json ] && files+=(experience/yado-public-dns-direct-probe-v1.json)
           [ -f candidates/kernel-self-generated/g2-gcp-direct-endpoint-probe-v1.json ] && files+=(candidates/kernel-self-generated/g2-gcp-direct-endpoint-probe-v1.json)
           [ -f experience/yado-gcp-direct-endpoint-probe-v1.json ] && files+=(experience/yado-gcp-direct-endpoint-probe-v1.json)
+          [ -f candidates/kernel-self-generated/g2-autonomous-free-compute-self-deployment-v1.json ] && files+=(candidates/kernel-self-generated/g2-autonomous-free-compute-self-deployment-v1.json)
+          [ -f experience/yado-autonomous-free-compute-self-deployment-v1.json ] && files+=(experience/yado-autonomous-free-compute-self-deployment-v1.json)
           [ -f candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json ] && files+=(candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json)
           [ -f experience/yado-four-domain-fresh-stress-v1.json ] && files+=(experience/yado-four-domain-fresh-stress-v1.json)
           [ -f candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json ] && files+=(candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json)
@@ -202,6 +206,21 @@ jobs:
               assert r["checks"]["only_get_used"] is True,r
               assert r["canonical_mutation"] is False,r
               print(r["status"],r["aggregate"],r["next_required_capability"])
+          elif task=="USER_20260907_AUTONOMOUS_FREE_COMPUTE_SELF_DEPLOYMENT_V1":
+              p=pathlib.Path("candidates/kernel-self-generated/g2-autonomous-free-compute-self-deployment-v1.json")
+              if not p.exists(): raise SystemExit("MISSING_AUTONOMOUS_FREE_COMPUTE_SELF_DEPLOYMENT_REPORT")
+              r=json.loads(p.read_text())
+              if r.get("status") not in ("PASS_SHADOW_G2_AUTONOMOUS_FREE_COMPUTE_SELF_DEPLOYMENT_V1","WITHHOLD_G2_AUTONOMOUS_FREE_COMPUTE_SELF_DEPLOYMENT_V1"):
+                  raise SystemExit("BAD_SELF_DEPLOYMENT_STATUS:"+str(r.get("status")))
+              assert r["checks"]["public_catalog_fetched"] is True,r
+              assert r["checks"]["provider_candidates_discovered"] is True,r
+              assert r["checks"]["provider_selected_by_yado_evidence"] is True,r
+              assert r["checks"]["local_self_package_built"] is True,r
+              assert r["checks"]["local_fresh_boot_health_pass"] is True,r
+              assert r["checks"]["no_secret_values_logged"] is True,r
+              assert r["checks"]["no_account_or_captcha_bypass"] is True,r
+              assert r["canonical_mutation"] is False,r
+              print(r["status"],r["selected_provider"],r["next_required_capability"])
           elif task=="USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1":
               p=pathlib.Path("candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json")
               if not p.exists(): raise SystemExit("MISSING_FOUR_DOMAIN_STRESS_REPORT")
@@ -276,6 +295,8 @@ jobs:
             experience/yado-public-dns-direct-probe-v1.json
             candidates/kernel-self-generated/g2-gcp-direct-endpoint-probe-v1.json
             experience/yado-gcp-direct-endpoint-probe-v1.json
+            candidates/kernel-self-generated/g2-autonomous-free-compute-self-deployment-v1.json
+            experience/yado-autonomous-free-compute-self-deployment-v1.json
             candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json
             experience/yado-four-domain-fresh-stress-v1.json
             candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json
