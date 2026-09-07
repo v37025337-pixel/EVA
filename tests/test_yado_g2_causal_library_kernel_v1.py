@@ -22,6 +22,8 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertFalse(result["g3_genesis"])
         self.assertEqual(result["training_source_count"], 126)
         self.assertEqual(result["training_fetched_count"], 116)
+        self.assertEqual(result["dynamic_memory_branch_count"], 20)
+        self.assertEqual(result["dynamic_memory_raw_lineage_count"], 6)
 
     def test_tri_organ_contracts_have_single_owner(self):
         logic = self.kernel.route_contract("RELATION_START_TO_STATE")
@@ -46,6 +48,16 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertIn("LEGACY_EXPERIENCE_SUMMARY_PROVENANCE", snap["unresolved_deficits"])
         self.assertIn("CODING_UNSUPPORTED_PROGRAM_FAMILIES", snap["unresolved_deficits"])
         self.assertEqual(snap["latest_experience_digest"], "ef1e633fd19f530e465c2f497255d78443d5c51bcee0bb16b76a5da483a092bf")
+        self.assertFalse(snap["automatic_promotion"])
+
+    def test_dynamic_memory_applies_branch_inventory_without_semantic_overclaim(self):
+        snap = self.kernel.dynamic_memory_snapshot()
+        self.assertEqual(snap["status"], "PASS_SHADOW_G2_DYNAMIC_EXPERIENCE_MEMORY_V1")
+        self.assertEqual(snap["remote_branch_count"], 20)
+        self.assertEqual(snap["canonical_registry_branch_count"], 14)
+        self.assertEqual(snap["raw_lineage_count"], 6)
+        self.assertEqual(snap["next_required_capability"], "RAW_BRANCH_EVIDENCE_REDERIVATION")
+        self.assertTrue(snap["raw_branch_inventory_is_not_semantic_knowledge"])
         self.assertFalse(snap["automatic_promotion"])
 
     def test_unknown_contract_falls_back_without_self_promotion(self):
