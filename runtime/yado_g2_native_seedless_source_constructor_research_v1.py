@@ -16,6 +16,8 @@ from yado_unified_core_v1 import UnifiedYADOCoreV1
 TASK=REPO/'architecture/yado-kernel-native-seedless-source-constructor-research-v1-request.json'
 OUT=REPO/'candidates/kernel-self-generated/g2-native-seedless-source-constructor-research-v1.json'
 STUDY=REPO/'experience/yado-native-seedless-source-constructor-python-self-study-v1.json'
+DEV_EXP=REPO/'experience/yado-user-external-corpus-learning-v1.json'
+DEV_APP=REPO/'architecture/yado-g2-open-developer-resource-learning-application-v1.json'
 DB=ROOT/'yado_native_seedless_source_constructor_research_v1.sqlite'
 
 PYTHON_DOCS={
@@ -69,6 +71,19 @@ def source_generation_evidence(src,calls):
             'is_source_construction_history':score>=3}
 
 task=load(TASK)
+dev_exp=load(DEV_EXP)
+dev_app=load(DEV_APP)
+if dev_app.get('status')!='ACTIVE_DEVELOPMENT_SHADOW_APPLIED':
+    raise RuntimeError('OPEN_DEVELOPER_RESOURCE_APPLICATION_NOT_ACTIVE')
+if dev_app.get('target_priority')!='CODING_UNSUPPORTED_PROGRAM_FAMILIES':
+    raise RuntimeError('DEVELOPER_RESOURCE_PRIORITY_MISMATCH')
+developer_records=[r for r in (dev_exp.get('records') or [])
+                   if r.get('ok') and any(str(x).startswith('USER_20260907_') for x in (r.get('ids') or []))]
+if len(developer_records)<10:
+    raise RuntimeError('INSUFFICIENT_OPEN_DEVELOPER_RESOURCE_EVIDENCE:'+str(len(developer_records)))
+developer_term_sets=[]
+for r in developer_records:
+    developer_term_sets.append({str(x.get('token','')).lower() for x in (r.get('top_terms') or []) if x.get('token')})
 
 # 1) Study official Python material. No external coding model is used.
 docs={};doc_errors={}
@@ -116,6 +131,7 @@ for name,paths in sorted(primitive_file_presence.items()):
     primitive_rows.append({
       'name':name,'all_file_support':len(paths),'source_history_support':len(sg_paths),
       'python_doc_pages':pages,'python_doc_page_count':len(pages),
+      'developer_resource_support':sum(1 for terms in developer_term_sets if lname in terms),
       'source_history_ratio':len(sg_paths)/max(1,len(source_files)),
     })
 
@@ -135,6 +151,7 @@ def feat(r):
       'python_doc_page_count':int(r['python_doc_page_count']),
       'all_file_support':int(r['all_file_support']),
       'source_history_support':int(r['source_history_support']),
+      'developer_resource_support':int(r.get('developer_resource_support') or 0),
     }
 
 primitive_fit=[];primitive_blind=[]
@@ -244,7 +261,13 @@ study={
  'self_source_construction_history_count':len(source_files),
  'self_source_construction_history':[{'path':x['path'],'sha256':x['sha256'],'evidence':x['source_generation_evidence']} for x in source_files],
  'primitive_evidence':primitive_rows,
- 'semantic_boundary':'OFFICIAL PYTHON DOCUMENTATION PLUS YADO OWN SOURCE HISTORY ARE READ AS EVIDENCE. NO THIRD-PARTY CODE OR EXTERNAL CODING MODEL IS EXECUTED. SOURCE-CONSTRUCTION PRIMITIVES AND RECURRING PROCESS TRACES ARE DERIVED FROM DATA, NOT A HOST-WRITTEN TARGET PATCH.'
+ 'open_developer_resource_evidence':{
+   'application_digest':dev_app.get('source_experience_digest'),
+   'target_priority':dev_app.get('target_priority'),
+   'usable_record_count':len(developer_records),
+   'resource_ids':sorted({x for r in developer_records for x in (r.get('ids') or []) if str(x).startswith('USER_20260907_')}),
+ },
+ 'semantic_boundary':'OFFICIAL PYTHON DOCUMENTATION, THE USER-PROVIDED OPEN DEVELOPER RESOURCE CORPUS, AND YADO OWN SOURCE HISTORY ARE READ AS EVIDENCE. NO THIRD-PARTY CODE OR EXTERNAL CODING MODEL IS EXECUTED. SOURCE-CONSTRUCTION PRIMITIVES AND RECURRING PROCESS TRACES ARE DERIVED FROM DATA, NOT A HOST-WRITTEN TARGET PATCH.'
 }
 study['study_digest']=digest(study)
 STUDY.parent.mkdir(parents=True,exist_ok=True)
@@ -264,10 +287,15 @@ report={
  'primitive_mechanism':primitive_result,'construction_process_mechanism':planner_result,
  'native_code_evolution':{'selection':evo.get('selection'),'code_gene':code_gene,'run_digest':evo.get('run_digest')},
  'process_mechanism_born':process_born,
+ 'developer_resource_evidence_consumed':len(developer_records),
+ 'developer_resource_experience_digest':dev_app.get('source_experience_digest'),
+ 'target_priority':dev_app.get('target_priority'),
  'candidate_source_produced_by_yado':source_emission_proven,
  'next_required_capability':None if full_source_constructor else ('NATIVE_SOURCE_IR_EMITTER_BIRTH_V1' if process_born else 'NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2'),
  'checks':{
    'official_python_docs_studied':len(docs)>=5,
+   'open_developer_resources_studied':len(developer_records)>=10,
+   'developer_resource_priority_matches_current_deficit':dev_app.get('target_priority')=='CODING_UNSUPPORTED_PROGRAM_FAMILIES',
    'yado_self_source_studied':len(source_files)>=4,
    'external_coding_models_used':False,
    'host_patch_used':False,
