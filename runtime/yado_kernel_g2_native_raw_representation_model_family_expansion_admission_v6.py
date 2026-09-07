@@ -1,6 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 from collections import Counter
+from functools import lru_cache
 import ast,hashlib,json,random,re,sys
 
 ROOT=Path(__file__).resolve().parent
@@ -57,7 +58,7 @@ src=V5SRC.read_text(encoding='utf-8');tree=ast.parse(src)
 names={'raw_scores','token_windows','predict_family'}
 nodes=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names]
 if {n.name for n in nodes}!=names:raise RuntimeError('V5_REFERENCE_FUNCTIONS_MISSING')
-ns={'Counter':Counter,'hashlib':hashlib,'re':re,'parent_spec':parent,'labels':list(parent.labels),'_features':_features,'_dot':_dot}
+ns={'Counter':Counter,'hashlib':hashlib,'re':re,'lru_cache':lru_cache,'parent_spec':parent,'labels':list(parent.labels),'_features':_features,'_dot':_dot}
 mod=ast.Module(body=nodes,type_ignores=[]);ast.fix_missing_locations(mod);exec(compile(mod,'<v5-reference>','exec'),ns)
 ref_predict=lambda text:ns['predict_family'](text,v5['selected_spec'])
 
