@@ -1,0 +1,80 @@
+{
+  "schema": "yado.g2.gcp_direct_endpoint_probe.application.v1",
+  "status": "ACTIVE_DEVELOPMENT_SHADOW_APPLIED",
+  "kernel_id": "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1",
+  "source_run_id": 34120259476,
+  "source_experience": "experience/yado-gcp-direct-endpoint-probe-v1.json",
+  "source_experience_digest": "b384270a67618cd007bef2aa3ff48f7c646d0d2269d024af5504ea86b897d37c",
+  "source_research_artifact": "experience/yado-dns-gcp-cross-domain-research-stress-v1.json",
+  "observed_execution_context": "GITHUB_HOSTED_RUNNER",
+  "observed": {
+    "target_count": 16,
+    "dns_resolved": 15,
+    "tls_handshake_ok": 15,
+    "https_reachable": 15,
+    "concrete_live_endpoint_count": 15,
+    "unresolved_symbolic_template": "sqladmin.{region}.rep.googleapis.com",
+    "concrete_regional_examples_observed": [
+      "us-central1-aiplatform.googleapis.com",
+      "sqladmin.us-central1.rep.googleapis.com"
+    ],
+    "root_response_semantics": {
+      "status_404_count": 14,
+      "status_400_count": 1,
+      "rule": "HTTP_ERROR_AT_ROOT_CAN_STILL_BE_POSITIVE_HOST_TLS_AND_HTTP_REACHABILITY_EVIDENCE"
+    }
+  },
+  "causal_lessons": [
+    {
+      "id": "GCP-DIRECT-001",
+      "rule": "SERVICE_ENDPOINTS_ARE_CONCRETE_SERVICE_HOSTS_NOT_GENERIC_GOOGLEAPIS_BASE",
+      "future_behavior": "DERIVE_SERVICE_SPECIFIC_HOST_FROM_OFFICIAL_EVIDENCE_BEFORE_LIVE_USE"
+    },
+    {
+      "id": "GCP-DIRECT-002",
+      "rule": "REGIONAL_ENDPOINT_TEMPLATE_IS_NOT_A_RESOLVABLE_HOST_UNTIL_REGION_IS_BOUND",
+      "future_behavior": "SUBSTITUTE_AND_VALIDATE_A_CONCRETE_REGION_BEFORE_DNS_OR_TLS"
+    },
+    {
+      "id": "GCP-DIRECT-003",
+      "rule": "ROOT_404_OR_400_DOES_NOT_MEAN_ENDPOINT_IS_DEAD",
+      "future_behavior": "SEPARATE_INFRASTRUCTURE_REACHABILITY_FROM_API_RESOURCE_PATH_AND_AUTHORIZATION"
+    },
+    {
+      "id": "GCP-DIRECT-004",
+      "rule": "DNS_TLS_HTTP_REACHABILITY_DOES_NOT_PROVE_API_PERMISSION",
+      "future_behavior": "REQUIRE_SERVICE_SPECIFIC_READ_ONLY_REQUEST_AND_AUTH_CONTEXT_FOR_FUNCTIONAL_API_USE"
+    },
+    {
+      "id": "GCP-DIRECT-005",
+      "rule": "NETWORK_LATENCY_IS_EXECUTION_CONTEXT_DEPENDENT",
+      "future_behavior": "REPROBE_FROM_CURRENT_EXECUTION_CONTEXT_AND_DO_NOT_GENERALIZE_RUNNER_RANKING_TO_USER_NETWORK"
+    }
+  ],
+  "causal_binding": {
+    "source_layer": "L1_MEMORY_EXPERIENCE",
+    "conditioning_layer": "L2_EXPERIENCE_CONDITIONING",
+    "consumers": [
+      "L3_LOGIC_THINKING",
+      "L4_INTELLIGENCE_ROUTING",
+      "L5_EXECUTION_EVIDENCE",
+      "L6_SELF_AUDIT_EVOLUTION"
+    ],
+    "future_task_guard": "GCP_ENDPOINT_USE_REQUIRES_CONCRETE_HOST_LIVE_REPROBE_AND_SERVICE_PATH_CONTEXT"
+  },
+  "safety": {
+    "port_scope": [
+      443
+    ],
+    "http_methods": [
+      "GET"
+    ],
+    "no_credentials": true,
+    "no_port_scan": true,
+    "no_cloud_resource_mutation": true,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  },
+  "semantic_boundary": "APPLIED READ-ONLY DIRECT NETWORK OBSERVATIONS OF GOOGLE CLOUD API HOSTS DERIVED BY YADO FROM PRIOR OFFICIAL-SOURCE RESEARCH. HOST REACHABILITY IS NOT EQUIVALENT TO AUTHORIZED API FUNCTIONAL ACCESS, AND RUNNER LATENCY IS NOT A USER-LOCAL PERFORMANCE CLAIM."
+}
