@@ -10,6 +10,7 @@ TRAINING = ROOT / "architecture/yado-g2-causal-training-binding-v1.json"
 LEARNING_CYCLE = ROOT / "architecture/yado-g2-read-understand-apply-learn-cycle-v1.json"
 DYNAMIC_MEMORY = ROOT / "experience/yado-g2-dynamic-experience-memory-v1.json"
 DNS_SCREENSHOT_APPLICATION = ROOT / "architecture/yado-g2-dns-screenshot-learning-application-v1.json"
+PUBLIC_DNS_DIRECT_APPLICATION = ROOT / "architecture/yado-g2-public-dns-direct-probe-application-v1.json"
 
 class G2CausalLibraryKernelV1:
     COMPONENT_ID = "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1"
@@ -23,6 +24,7 @@ class G2CausalLibraryKernelV1:
         self.learning_cycle = self._load(self.root / LEARNING_CYCLE.relative_to(ROOT))
         self.dynamic_memory = self._load(self.root / DYNAMIC_MEMORY.relative_to(ROOT))
         self.dns_screenshot_application = self._load(self.root / DNS_SCREENSHOT_APPLICATION.relative_to(ROOT))
+        self.public_dns_direct_application = self._load(self.root / PUBLIC_DNS_DIRECT_APPLICATION.relative_to(ROOT))
 
     @staticmethod
     def _load(path: Path):
@@ -116,6 +118,20 @@ class G2CausalLibraryKernelV1:
             raise ValueError("DNS_SCREENSHOT_APPLICATION_SAFETY_VIOLATION")
         if not any(x.get("id") == "DNS-L1-PERF-005" for x in app.get("causal_lessons",[])):
             raise ValueError("DNS_SCREENSHOT_LOCAL_PERFORMANCE_GUARD_MISSING")
+        direct = self.public_dns_direct_application
+        if direct.get("status") != "ACTIVE_DEVELOPMENT_SHADOW_APPLIED":
+            raise ValueError("PUBLIC_DNS_DIRECT_APPLICATION_NOT_ACTIVE")
+        if direct.get("source_experience_digest") != "eedbe60d1f75a1da174dd23a6e6aa4dc31c7b7be16e429f3d1dc7fbaf6003dd9":
+            raise ValueError("PUBLIC_DNS_DIRECT_APPLICATION_DIGEST_MISMATCH")
+        applied = {x.get("id"):x for x in (self.training.get("applied_experiences") or [])}
+        d_bound = applied.get("PUBLIC_DNS_DIRECT_PROBE_V1") or {}
+        if d_bound.get("source_experience_digest") != direct.get("source_experience_digest"):
+            raise ValueError("PUBLIC_DNS_DIRECT_TRAINING_BINDING_MISMATCH")
+        pol = direct.get("current_execution_context_policy") or {}
+        if pol.get("remeasure_before_reuse") is not True or pol.get("do_not_apply_as_user_network_ranking") is not True:
+            raise ValueError("PUBLIC_DNS_DIRECT_CONTEXT_GUARD_MISSING")
+        if direct.get("safety",{}).get("canonical_mutation") is not False or direct.get("safety",{}).get("automatic_promotion") is not False:
+            raise ValueError("PUBLIC_DNS_DIRECT_APPLICATION_SAFETY_VIOLATION")
         cb = self.training.get("causal_binding") or {}
         if cb.get("source_layer") != "L1_MEMORY_EXPERIENCE" or cb.get("conditioning_layer") != "L2_EXPERIENCE_CONDITIONING":
             raise ValueError("TRAINING_CAUSAL_LAYER_BINDING_MISMATCH")
@@ -138,6 +154,8 @@ class G2CausalLibraryKernelV1:
             "dynamic_memory_rederived_count": int(self.dynamic_memory.get("dynamic_rederived_count", 0)),
             "latest_applied_experience_id": self.training.get("latest_applied_experience_id"),
             "latest_applied_experience_digest": self.training.get("latest_applied_experience_digest"),
+            "current_dns_preferred_provider": self.public_dns_direct_application["current_execution_context_policy"]["preferred_provider_for_direct_dns_if_no_other_requirement"],
+            "current_dns_remeasure_before_reuse": self.public_dns_direct_application["current_execution_context_policy"]["remeasure_before_reuse"],
             "g3_genesis": self.architecture["g3_genesis"],
         }
 
@@ -208,6 +226,20 @@ class G2CausalLibraryKernelV1:
             "automatic_promotion": False,
         }
 
+    def public_dns_direct_application_snapshot(self):
+        p = self.public_dns_direct_application
+        return {
+            "status": p["status"],
+            "source_run_id": p["source_run_id"],
+            "source_experience_digest": p["source_experience_digest"],
+            "preferred_provider_for_current_runner": p["current_execution_context_policy"]["preferred_provider_for_direct_dns_if_no_other_requirement"],
+            "fallbacks": list(p["current_execution_context_policy"]["fallbacks_in_observed_order"]),
+            "remeasure_before_reuse": p["current_execution_context_policy"]["remeasure_before_reuse"],
+            "do_not_apply_as_user_network_ranking": p["current_execution_context_policy"]["do_not_apply_as_user_network_ranking"],
+            "future_task_guard": p["causal_binding"]["future_task_guard"],
+            "automatic_promotion": False,
+        }
+
     def causal_trace(self, contract: str):
         route = self.route_contract(contract)
         return {
@@ -220,6 +252,7 @@ class G2CausalLibraryKernelV1:
             "learning_cycle": self.learning_cycle_snapshot(),
             "dynamic_memory": self.dynamic_memory_snapshot(),
             "dns_screenshot_application": self.dns_screenshot_application_snapshot(),
+            "public_dns_direct_application": self.public_dns_direct_application_snapshot(),
             "automatic_promotion": False,
         }
 
