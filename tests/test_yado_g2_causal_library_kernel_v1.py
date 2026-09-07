@@ -25,7 +25,7 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertEqual(result["dynamic_memory_branch_count"], 20)
         self.assertEqual(result["dynamic_memory_raw_lineage_count"], 0)
         self.assertEqual(result["dynamic_memory_rederived_count"], 6)
-        self.assertEqual(result["latest_applied_experience_id"], "DNS_SCREENSHOT_RESEARCH_V2")
+        self.assertEqual(result["latest_applied_experience_id"], "PUBLIC_DNS_DIRECT_PROBE_V1")
         self.assertEqual(result["latest_applied_experience_digest"], "eedbe60d1f75a1da174dd23a6e6aa4dc31c7b7be16e429f3d1dc7fbaf6003dd9")
         self.assertEqual(result["current_dns_preferred_provider"], "OpenDNS")
         self.assertTrue(result["current_dns_remeasure_before_reuse"])
