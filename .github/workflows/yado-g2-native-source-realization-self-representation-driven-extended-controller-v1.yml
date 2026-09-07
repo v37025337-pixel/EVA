@@ -3,7 +3,7 @@ on:
   push:
     branches: [yado-architecture-shadow-search]
     paths:
-      - "architecture/yado-kernel-self-extending-string-transducer-meta-language-genesis-v2-request.json"
+      - "architecture/yado-kernel-self-generated-primitive-algebra-genesis-v3-request.json"
 permissions:
   contents: write
 concurrency:
@@ -25,11 +25,11 @@ jobs:
       - name: Canonical guard before native source realization
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Compile strict observer
-        run: python -m py_compile runtime/yado_g2_self_extending_string_transducer_meta_language_genesis_v2.py
+        run: python -m py_compile runtime/yado_g2_self_generated_primitive_algebra_genesis_v3.py
       - name: Let YADO realize its extended controller as source
         id: realize
         continue-on-error: true
-        run: python runtime/yado_g2_self_extending_string_transducer_meta_language_genesis_v2.py
+        run: python runtime/yado_g2_self_generated_primitive_algebra_genesis_v3.py
       - name: Canonical guard after native source realization
         if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
@@ -38,8 +38,8 @@ jobs:
         run: |
           git config user.name "YADO Native Source Realization"
           git config user.email "actions@users.noreply.github.com"
-          git add candidates/kernel-self-generated/g2-self-extending-string-transducer-meta-language-genesis-v2.json 2>/dev/null || true
-          git diff --cached --quiet || git commit -m "Persist YADO self-extending string meta-language V2 [skip ci]"
+          git add candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Persist YADO primitive algebra genesis V3 [skip ci]"
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
       - name: Enforce strict native source provenance verdict
@@ -47,21 +47,22 @@ jobs:
         run: |
           python - <<'PY'
           import json,pathlib
-          p=pathlib.Path("candidates/kernel-self-generated/g2-self-extending-string-transducer-meta-language-genesis-v2.json")
-          if not p.exists(): raise SystemExit("MISSING_SELF_EXTENDING_STRING_META_V2")
+          p=pathlib.Path("candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json")
+          if not p.exists(): raise SystemExit("MISSING_PRIMITIVE_ALGEBRA_V3")
           r=json.loads(p.read_text());c=r["checks"]
-          for key in ("host_string_grammar_used","host_primitive_inventory_used","host_serializer_used",
-                      "host_ast_compiler_used","host_patch_used","external_models_used",
-                      "automatic_canonical_promotion"):
+          for key in ("host_new_primitive_set_supplied","host_new_interpreter_supplied",
+                      "host_string_grammar_used","host_primitive_inventory_used",
+                      "host_interpreter_source_used","host_patch_used",
+                      "external_models_used","automatic_canonical_promotion"):
               assert c[key] is False,(key,r)
           assert c["canonical_unchanged"] is True,r
-          if r["status"] not in ("PASS_SHADOW_G2_SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2","WITHHOLD_G2_SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2"):
-              raise SystemExit("BAD_SELF_EXTENDING_META_STATUS:"+str(r["status"]))
+          if r["status"] not in ("PASS_SHADOW_G2_SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3","WITHHOLD_G2_SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3"):
+              raise SystemExit("BAD_PRIMITIVE_ALGEBRA_STATUS:"+str(r["status"]))
           print(r["status"],r.get("selected_candidate"),r.get("next_required_capability"))
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: yado-g2-self-extending-string-transducer-meta-language-genesis-v2-${{ github.run_id }}
-          path: candidates/kernel-self-generated/g2-self-extending-string-transducer-meta-language-genesis-v2.json
+          name: yado-g2-self-generated-primitive-algebra-genesis-v3-${{ github.run_id }}
+          path: candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json
           if-no-files-found: warn
