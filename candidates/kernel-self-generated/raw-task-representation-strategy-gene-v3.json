@@ -1,0 +1,505 @@
+{
+  "automatic_promotion": false,
+  "candidate_digest": "cf9b99adbe22f08d0ec82fe66a33c1dd5f5224c4830173ea392eb4919475833c",
+  "canonical_active": false,
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_promotion": false,
+    "base_regression": true,
+    "canonical_unchanged": true,
+    "causal_ablation_drop": true,
+    "fresh_direct_accuracy": true,
+    "fresh_not_used_for_synthesis_or_selection": true,
+    "fresh_sequential_accuracy": false,
+    "fresh_sequential_gain_over_core_guarded": true,
+    "fresh_wrapped_accuracy": false,
+    "g3_not_started": true,
+    "host_selected_family": false,
+    "lexical_task_words_not_features": true,
+    "native_goal_created": true,
+    "native_selector_selected_one_family": true,
+    "selected_policy_validation_ge_0_95": true,
+    "two_native_families_attempted": true,
+    "v2_exact_withhold_consumed": true,
+    "v2_spent_evidence_exactly_reproduced": true
+  },
+  "fresh_metrics": {
+    "ablated_sequential": 0.2502,
+    "base_regression": 1.0,
+    "baseline_base_regression": 1.0,
+    "baseline_direct": 0.9875,
+    "baseline_sequential": 0.8864,
+    "baseline_wrapped": 0.9375,
+    "direct": 1.0,
+    "fresh_sequential": 0.9294,
+    "fresh_wrapped": 0.9625
+  },
+  "gene": {
+    "ablation_validation": 0.25663716814159293,
+    "canonical_active": false,
+    "family": "ROUTER",
+    "feature_contract": [
+      "bracketless",
+      "core",
+      "core_eq_edge",
+      "core_eq_long",
+      "core_norm",
+      "edge",
+      "long",
+      "majority",
+      "norm",
+      "p4",
+      "p4_eq_core",
+      "p4_eq_majority",
+      "raw",
+      "short_edge_signal",
+      "token_bucket",
+      "unique_predictions",
+      "wrapper_signal"
+    ],
+    "gene_digest": "392890fd4f60a61829d8b135e22df2eb4da6fda1b93567425f0a15bc948c8ced",
+    "gene_id": "GENE-G2-RAW-REP-STRATEGY-V3-6ab31984a301f296",
+    "origin": "YADO_NATIVE_LEARNER_SELECTION_OVER_SPENT_V2_FAILURE_EVIDENCE",
+    "program": {
+      "clauses": [
+        {
+          "atoms": [
+            {
+              "field": "long",
+              "op": "EQ",
+              "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+            },
+            {
+              "field": "norm",
+              "op": "EQ",
+              "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+          "support": 334
+        },
+        {
+          "atoms": [
+            {
+              "field": "long",
+              "op": "EQ",
+              "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+            },
+            {
+              "field": "norm",
+              "op": "EQ",
+              "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "support": 295
+        },
+        {
+          "atoms": [
+            {
+              "field": "bracketless",
+              "op": "EQ",
+              "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+            },
+            {
+              "field": "core_norm",
+              "op": "EQ",
+              "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "support": 49
+        },
+        {
+          "atoms": [
+            {
+              "field": "long",
+              "op": "EQ",
+              "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+            },
+            {
+              "field": "norm",
+              "op": "EQ",
+              "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+          "support": 26
+        },
+        {
+          "atoms": [
+            {
+              "field": "long",
+              "op": "EQ",
+              "value": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+          "support": 383
+        },
+        {
+          "atoms": [
+            {
+              "field": "core_norm",
+              "op": "EQ",
+              "value": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+            }
+          ],
+          "confidence": 1.0,
+          "output": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+          "support": 378
+        }
+      ],
+      "digest": "f604432b890945a3c9b18cf5e8dc4bee7d78e240c99fbc406975dfec16e185c3",
+      "fallback_output": "RESOURCE-PORTFOLIO-V1",
+      "schema": "yado.capability_router_program.v1",
+      "source_digest": "25be09bad007299dc02b7821657c4da7eed22432baf9b64511d2725eb72baafc"
+    },
+    "promotion_state": "SHADOW_ONLY",
+    "schema": "yado.g2.native_raw_representation_strategy_gene.v3",
+    "validation": 0.9882005899705014
+  },
+  "learners": [
+    {
+      "ablation": 0.25663716814159293,
+      "error": null,
+      "family": "ROUTER",
+      "program": {
+        "clauses": [
+          {
+            "atoms": [
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              },
+              {
+                "field": "norm",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+            "support": 334
+          },
+          {
+            "atoms": [
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              },
+              {
+                "field": "norm",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "support": 295
+          },
+          {
+            "atoms": [
+              {
+                "field": "bracketless",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              },
+              {
+                "field": "core_norm",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "support": 49
+          },
+          {
+            "atoms": [
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              },
+              {
+                "field": "norm",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "support": 26
+          },
+          {
+            "atoms": [
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+            "support": 383
+          },
+          {
+            "atoms": [
+              {
+                "field": "core_norm",
+                "op": "EQ",
+                "value": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+              }
+            ],
+            "confidence": 1.0,
+            "output": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+            "support": 378
+          }
+        ],
+        "digest": "f604432b890945a3c9b18cf5e8dc4bee7d78e240c99fbc406975dfec16e185c3",
+        "fallback_output": "RESOURCE-PORTFOLIO-V1",
+        "schema": "yado.capability_router_program.v1",
+        "source_digest": "25be09bad007299dc02b7821657c4da7eed22432baf9b64511d2725eb72baafc"
+      },
+      "skill_id": "RAW_STRATEGY_V3_ROUTER",
+      "train": 0.9924709103353867,
+      "validation": 0.9882005899705014
+    },
+    {
+      "ablation": 0.25663716814159293,
+      "error": null,
+      "family": "CONJUNCTIVE",
+      "program": {
+        "default_output": "RESOURCE-PORTFOLIO-V1",
+        "digest": "d65c4d1dd3194f585f3f55417b3dcb98781b3e170ec36113fd11c851dbf28613",
+        "program_id": "CJ-7bf3b8636fd8",
+        "rules": [
+          {
+            "confidence": 1.0,
+            "output": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+            "predicates": [
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+              }
+            ],
+            "support": 383
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
+            "predicates": [
+              {
+                "field": "core",
+                "op": "EQ",
+                "value": "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1"
+              }
+            ],
+            "support": 378
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
+            "predicates": [
+              {
+                "field": "bracketless",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              },
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              }
+            ],
+            "support": 334
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "predicates": [
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              },
+              {
+                "field": "edge",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              }
+            ],
+            "support": 295
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "predicates": [
+              {
+                "field": "core_eq_edge",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "token_bucket",
+                "op": "EQ",
+                "value": 2
+              },
+              {
+                "field": "core",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              }
+            ],
+            "support": 218
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "predicates": [
+              {
+                "field": "core",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              },
+              {
+                "field": "token_bucket",
+                "op": "EQ",
+                "value": 1
+              }
+            ],
+            "support": 89
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "predicates": [
+              {
+                "field": "raw",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              },
+              {
+                "field": "core",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              }
+            ],
+            "support": 58
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "predicates": [
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              },
+              {
+                "field": "bracketless",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              }
+            ],
+            "support": 26
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "predicates": [
+              {
+                "field": "bracketless",
+                "op": "EQ",
+                "value": "ALG-CONJUNCTIVE-RULE-INDUCER-V1"
+              },
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              },
+              {
+                "field": "token_bucket",
+                "op": "EQ",
+                "value": 1
+              }
+            ],
+            "support": 26
+          },
+          {
+            "confidence": 1.0,
+            "output": "ALG-BUDGETED-STAGE-POLICY-V1",
+            "predicates": [
+              {
+                "field": "core_eq_edge",
+                "op": "EQ",
+                "value": true
+              },
+              {
+                "field": "long",
+                "op": "EQ",
+                "value": "ALG-BUDGETED-STAGE-POLICY-V1"
+              },
+              {
+                "field": "token_bucket",
+                "op": "EQ",
+                "value": 3
+              }
+            ],
+            "support": 19
+          }
+        ],
+        "source_digest": "25be09bad007299dc02b7821657c4da7eed22432baf9b64511d2725eb72baafc",
+        "status": "SHADOW",
+        "target_capability": "RAW_REPRESENTATION_DYNAMIC_VIEW_POLICY_V3",
+        "target_organ": "INTELLIGENCE",
+        "training_count": 1461
+      },
+      "skill_id": "RAW_STRATEGY_V3_CONJUNCTIVE",
+      "train": 0.9972621492128679,
+      "validation": 0.9793510324483776
+    }
+  ],
+  "native_selection": {
+    "candidate_count": 2,
+    "gate_digest": "c3244ec52e6271f14528166b017c1d1e3671459dfc365ff51a23a75fb40288a9",
+    "rejected": [],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "35c7e114e9eb188ecdf05ce1b3e8bd599281a82b3c4ac7eea4d722f3eaff6a69",
+        "failed_critics": [],
+        "fit_gain": 0.0232717316906228,
+        "heldout_gain": 0.02654867256637161,
+        "skill_id": "RAW_STRATEGY_V3_ROUTER",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "RAW_STRATEGY_V3_ROUTER"
+    ],
+    "status": "SELECTED"
+  },
+  "schema": "yado.g2.native_raw_representation_strategy_genesis.candidate.v3",
+  "status": "WITHHOLD_G2_NATIVE_RAW_REPRESENTATION_STRATEGY_GENESIS_V3"
+}
