@@ -72,6 +72,15 @@ experience += [
 
 controller=core.evolutionary_genome_cls(parent['parent'],experience_sources=experience)
 
+# Snapshot Python files before native source/code calls so YADO-created files can be
+# distinguished from all pre-existing repository source.
+pre_python_files={}
+for p in REPO.rglob('*.py'):
+    try:
+        pre_python_files[str(p.relative_to(REPO)).replace('\\','/')]=hashlib.sha256(p.read_bytes()).hexdigest()
+    except Exception:
+        pass
+
 if DB.exists():DB.unlink()
 k=UnifiedYADOKernelV30RC8ExternalCognitive(db_path=str(DB))
 try:
@@ -106,28 +115,53 @@ if 'controller.evolve_once' not in native_calls:
     native_calls['controller.evolve_once']=controller.evolve_once()
 
 # A candidate must be actual parseable Python with at least one function/class and must not
-# already exist anywhere in the repository.
-existing_source_sha=set()
-for p in REPO.rglob('*.py'):
-    try:existing_source_sha.add(hashlib.sha256(p.read_bytes()).hexdigest())
-    except Exception:pass
+# already exist anywhere in the repository before the native calls.
+existing_source_sha=set(pre_python_files.values())
 
 source_candidates=[]
+def consider_source(x,path):
+    if isinstance(x,bytes):
+        try:x=x.decode('utf-8')
+        except Exception:return
+    if not isinstance(x,str) or len(x)<80:return
+    try:t=ast.parse(x)
+    except Exception:return
+    if not any(isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)) for n in ast.walk(t)):return
+    h=sha_text(x)
+    source_candidates.append({
+      'path':path,'sha256':h,'source':x,
+      'preexisting_repository_source':h in existing_source_sha,
+    })
+
 def walk(x,path='root'):
     if isinstance(x,dict):
         for kk,vv in x.items():walk(vv,path+'.'+str(kk))
-    elif isinstance(x,list):
+    elif isinstance(x,(list,tuple)):
         for i,vv in enumerate(x):walk(vv,path+f'[{i}]')
-    elif isinstance(x,str) and len(x)>=80:
-        try:t=ast.parse(x)
-        except Exception:return
-        if not any(isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)) for n in ast.walk(t)):return
-        h=sha_text(x)
-        source_candidates.append({
-          'path':path,'sha256':h,'source':x,
-          'preexisting_repository_source':h in existing_source_sha,
-        })
+    elif isinstance(x,(str,bytes)):
+        consider_source(x,path)
+    elif hasattr(x,'__dict__'):
+        try:walk(vars(x),path+'.__dict__')
+        except Exception:pass
 walk(native_calls)
+
+# Also detect Python files materialized directly by YADO native calls.
+post_python_files={}
+for p in REPO.rglob('*.py'):
+    try:
+        rel=str(p.relative_to(REPO)).replace('\\','/')
+        h=hashlib.sha256(p.read_bytes()).hexdigest()
+        post_python_files[rel]=h
+        if rel not in pre_python_files:
+            try:consider_source(p.read_text(encoding='utf-8'),'native_filesystem.new:'+rel)
+            except Exception:pass
+    except Exception:
+        pass
+changed_existing_python=[
+  {'path':rel,'before_sha256':pre_python_files[rel],'after_sha256':sha}
+  for rel,sha in post_python_files.items()
+  if rel in pre_python_files and pre_python_files[rel]!=sha
+]
 novel=[x for x in source_candidates if not x['preexisting_repository_source']]
 
 def feature_case(i,salt):
@@ -279,6 +313,8 @@ report={
  'native_goal':native_goal,
  'native_source_call_inventory':native_calls,
  'source_candidate_count':len(source_candidates),'novel_source_candidate_count':len(novel),
+ 'new_python_files_after_native_calls':[x for x in post_python_files if x not in pre_python_files],
+ 'changed_existing_python_files_after_native_calls':changed_existing_python,
  'evaluated_novel_source_candidates':evaluated,
  'selected_native_source_path':winner.get('path') if winner else None,
  'candidate_source_sha256':winner.get('sha256') if winner else None,
