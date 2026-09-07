@@ -35,12 +35,12 @@
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-06T09:51:08.273289+00:00",
-        "deficit_id": "D-dcd84189cea6",
+        "created_at": "2026-09-07T15:50:19.938444+00:00",
+        "deficit_id": "D-52e176ccd3ed",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-0d4c91b8741c",
+        "goal_id": "G-3137bb9b80c7",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -48,7 +48,7 @@
         "target": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_SOURCE_REALIZATION_V9"
       }
     ],
-    "goal_id": "G-0d4c91b8741c"
+    "goal_id": "G-3137bb9b80c7"
   },
   "native_internal_source_call_count": 2,
   "native_outputs": {
@@ -168,6 +168,60 @@
               "memory",
               "internet",
               "closed_loop"
+            ]
+          },
+          {
+            "branch": "main",
+            "claim_boundary": null,
+            "evidence": [
+              "experience/yado-global-historical-experience-corpus-v2.json",
+              "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+              "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+              "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+              "semantic_validation_by_rederivation": true,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+            },
+            "lessons": [
+              "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+              "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+              "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+              "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+            ],
+            "rederived_evidence": {
+              "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+              "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+              "cognitive_historical_fresh": 0.9583333333333334,
+              "observation_count": 138,
+              "old_corpus_regression": 0.972568578553616,
+              "pass_count": 81,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+              "terminal_historical_fresh": 0.8888888888888888,
+              "terminal_observation_count": 51,
+              "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+              "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+              "withhold_count": 57
+            },
+            "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+            "score": 4,
+            "tags": [
+              "experience",
+              "history",
+              "logic",
+              "thinking",
+              "intelligence",
+              "cognitive",
+              "meta",
+              "repair",
+              "representation",
+              "withhold",
+              "regression",
+              "transfer"
             ]
           },
           {
@@ -338,7 +392,7 @@
           },
           {
             "artifact": "candidates/kernel-self-generated/g2-target-semantic-source-constructor-genesis-v5.json",
-            "receipt_sha256": "8c19271b07dcc7700b17d6e1ef44e3ae50ae267b24a95fb788e43c4b639f754c",
+            "receipt_sha256": "a6750b6fbbb2efccced70cbe7f49ad21b4f9e3ff58df1f83babd0a7f31300a2b",
             "role": "YADO_AST_TO_SOURCE_TOOL_V5",
             "selected_primitive": "unparse"
           },
@@ -363,7 +417,7 @@
           {
             "artifact": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
             "learned_process": null,
-            "receipt_sha256": "3edfebeec0cbadfc6a0e3a0c1536a5db34ca44794071f82fd7a39054b7b52596",
+            "receipt_sha256": "2879c77500aebee3c97fbd91c930a1ec1cce21e47b4608e15f3b8f0bdb314f7a",
             "role": "YADO_NATIVE_SOURCE_PROCESS"
           },
           {
@@ -436,7 +490,7 @@
           },
           {
             "artifact": "candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json",
-            "gene_digest": "00b86ebd2afc186a0574ef5611dec74214d2a5e355d78160027e23539f69ed65",
+            "gene_digest": "98cf355018468dfff516f9b99379ba9f0715c155898263d455d280660546bfc4",
             "gene_id": "GENE-YADO-NATIVE-EVIDENCE-BINDER-2770cb3ce93139e5",
             "model": {
               "feature": "priority_match",
@@ -500,115 +554,284 @@
               "direct_priority_evidence": true,
               "result": {
                 "canonical_mutation": false,
-                "comprehension": {
-                  "cross_file_provider_mentions": 2,
-                  "no_key_provider_set_extracted": true,
-                  "package_identity_extracted": true,
-                  "provider_catalog_extracted": true,
-                  "readme_title_extracted": true,
-                  "repository_commit_identity_extracted": true
-                },
-                "conflict_resolution_pass": true,
-                "conflict_resolution_policy": "WHEN LIVE FETCH AND PARSE SUCCEED, CURRENT CONTENT-ADDRESSED LIVE EVIDENCE SUPERSEDES PRIOR MUTABLE CATALOG CLAIMS",
                 "direct_priority_evidence": true,
-                "evidence_digest": "e4050e29e6534d0242f29e6faf4a2c6080a82d1d24a100f92a08ea2dd8ccede2",
-                "fetch": {
-                  "commit": {
-                    "bytes": 5968,
-                    "http_status": 200,
-                    "ok": true,
-                    "sha256": "a9d8632ca0ae10b755d01ac1e1f35d6a9d1e989af59b9ebe4244dc445c41d826"
-                  },
-                  "files": {
-                    "README.md": {
-                      "bytes": 66628,
-                      "http_status": 200,
-                      "ok": true,
-                      "sha256": "458448ba5d5cf2ceddaa20c7692c2df55c80b8c55d9b7c857dbd125171b4fa97"
+                "rows": [
+                  {
+                    "branch": "yado-kernel-task-v37-repair",
+                    "claim_boundary": null,
+                    "evidence": [
+                      "runtime/yado_v37_integrity_self_repair_task.py",
+                      "receipts/yado-v37-integrity-self-repair-task-latest.json"
+                    ],
+                    "lesson_provenance": {
+                      "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                      "semantic_validation_by_rederivation": false,
+                      "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
                     },
-                    "package.json": {
-                      "bytes": 2974,
-                      "http_status": 200,
-                      "ok": true,
-                      "sha256": "0888e4598852864d6214278d501d4f57fb95584e4ba1b894d4f487bbbbb7bac2"
+                    "lessons": [
+                      "DO_NOT_WEAKEN_CONTENT_ADDRESSED_INTEGRITY_TO_MAKE_A_CANDIDATE_PASS",
+                      "PRESERVE_LAST_VERIFIED_LINEAGE_UNTIL_REPAIR_PASSES_FRESH_REGRESSION",
+                      "PREFER_SMALLEST_EVIDENCE_BACKED_REPAIR",
+                      "DIAGNOSIS_AND_REPAIR_SELECTION_CAN_BE_SEPARATE_FROM_REPAIR_APPLICATION"
+                    ],
+                    "rederived_evidence": {
+                      "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                      "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                      "observation_count": 29,
+                      "semantic_equivalence_to_host_lessons_claimed": false,
+                      "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
                     },
-                    "sources.js": {
-                      "bytes": 47835,
-                      "http_status": 200,
-                      "ok": true,
-                      "sha256": "0416494c69dd968fb9d58b33a0a715509a487e26de36b3fcb7aa6eb45db3ebf2"
-                    }
-                  }
-                },
-                "live_commit_sha": "fb1d80216ca186d674378119da49dd4bd5363847",
-                "live_semantic_extract": {
-                  "no_key_provider_keys": [
-                    "kilo",
-                    "llm7"
-                  ],
-                  "package_name": "free-coding-models",
-                  "package_version": "0.5.83",
-                  "provider_count": 23,
-                  "readme_title": "\ud83d\udca1 Why this tool?"
-                },
-                "prior_vs_live_conflicts": [
-                  {
-                    "field": "commit_sha",
-                    "live": "fb1d80216ca186d674378119da49dd4bd5363847",
-                    "prior": "f611aaed0026b850323c070959147a82e289910c",
-                    "resolution": "LIVE_SUPERSEDES_PRIOR_MUTABLE_STATE"
+                    "role": "FAIL_CLOSED_SELF_REPAIR_EXPERIENCE",
+                    "score": 3,
+                    "tags": [
+                      "self_repair",
+                      "integrity",
+                      "rollback",
+                      "diagnosis",
+                      "fail_closed"
+                    ]
                   },
                   {
-                    "field": "file_sha256:README.md",
-                    "live": "458448ba5d5cf2ceddaa20c7692c2df55c80b8c55d9b7c857dbd125171b4fa97",
-                    "prior": "8ad6ce99125ff66f0c21968b15753f5c2b130c88e6db344ea1e04abbd482c9bf",
-                    "resolution": "LIVE_SUPERSEDES_PRIOR_MUTABLE_STATE"
+                    "branch": "main",
+                    "claim_boundary": null,
+                    "evidence": [
+                      "experience/yado-global-historical-experience-corpus-v2.json",
+                      "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+                      "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+                      "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+                    ],
+                    "lesson_provenance": {
+                      "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+                      "semantic_validation_by_rederivation": true,
+                      "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+                    },
+                    "lessons": [
+                      "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+                      "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+                      "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+                      "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+                      "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+                      "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+                    ],
+                    "rederived_evidence": {
+                      "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+                      "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+                      "cognitive_historical_fresh": 0.9583333333333334,
+                      "observation_count": 138,
+                      "old_corpus_regression": 0.972568578553616,
+                      "pass_count": 81,
+                      "semantic_equivalence_to_host_lessons_claimed": false,
+                      "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+                      "terminal_historical_fresh": 0.8888888888888888,
+                      "terminal_observation_count": 51,
+                      "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+                      "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+                      "withhold_count": 57
+                    },
+                    "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+                    "score": 2,
+                    "tags": [
+                      "experience",
+                      "history",
+                      "logic",
+                      "thinking",
+                      "intelligence",
+                      "cognitive",
+                      "meta",
+                      "repair",
+                      "representation",
+                      "withhold",
+                      "regression",
+                      "transfer"
+                    ]
                   },
                   {
-                    "field": "file_sha256:sources.js",
-                    "live": "0416494c69dd968fb9d58b33a0a715509a487e26de36b3fcb7aa6eb45db3ebf2",
-                    "prior": "40a8bef06c2ae2b5d926634e50e034c3bd26fbe6b42eff6836d12091ae9a6606",
-                    "resolution": "LIVE_SUPERSEDES_PRIOR_MUTABLE_STATE"
+                    "branch": "yado-rc8-candidate",
+                    "claim_boundary": null,
+                    "evidence": [
+                      "runtime/rc8_candidate_cycle.py",
+                      "runtime/rc8_overlay/yado_rc8_migration_cycle1.py",
+                      "receipts/yado-rc8-candidate-latest.json"
+                    ],
+                    "lesson_provenance": {
+                      "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                      "semantic_validation_by_rederivation": false,
+                      "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+                    },
+                    "lessons": [
+                      "CANDIDATE_STATE_MUST_BE_SEPARATE_FROM_CANONICAL_STATE",
+                      "MIGRATION_REQUIRES_EXPLICIT_TESTS_AND_RECEIPTS"
+                    ],
+                    "rederived_evidence": {
+                      "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                      "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                      "observation_count": 13,
+                      "semantic_equivalence_to_host_lessons_claimed": false,
+                      "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+                    },
+                    "role": "RC8_MIGRATION_AND_CANDIDATE_EXPERIENCE",
+                    "score": 2,
+                    "tags": [
+                      "migration",
+                      "candidate",
+                      "overlay",
+                      "cognitive_cycle"
+                    ]
                   },
                   {
-                    "field": "file_sha256:package.json",
-                    "live": "0888e4598852864d6214278d501d4f57fb95584e4ba1b894d4f487bbbbb7bac2",
-                    "prior": "9c138c8a6435dd7bbd16d280a47c04a7af2998aa9c4a20b63adb0c9df623f67e",
-                    "resolution": "LIVE_SUPERSEDES_PRIOR_MUTABLE_STATE"
+                    "branch": "yado-rc8-digital-consciousness-v1",
+                    "claim_boundary": "FUNCTIONAL_DIGITAL_CONSCIOUSNESS_ARCHITECTURE_NOT_PROOF_OF_SUBJECTIVE_EXPERIENCE",
+                    "evidence": [
+                      "runtime/yado_rc8_digital_causal_workspace_v1.py",
+                      "receipts/yado-rc8-digital-consciousness-v1-latest.json"
+                    ],
+                    "lesson_provenance": {
+                      "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                      "semantic_validation_by_rederivation": false,
+                      "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+                    },
+                    "lessons": [
+                      "PROOF_CARRYING_BROADCAST",
+                      "EVIDENCE_LINEAGE_BEFORE_GLOBAL_ACCESS",
+                      "PREDICTED_EFFECT_VS_OBSERVED_EFFECT_RECEIPT",
+                      "SOURCE_MONITORING_EXTERNAL_VS_SIMULATED",
+                      "EVENT_DRIVEN_TEMPORAL_CONTINUITY",
+                      "FAIL_CLOSED_METACOGNITIVE_EXECUTION"
+                    ],
+                    "rederived_evidence": {
+                      "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                      "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                      "observation_count": 92,
+                      "semantic_equivalence_to_host_lessons_claimed": false,
+                      "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+                    },
+                    "role": "DIGITAL_CAUSAL_WORKSPACE_EXPERIENCE",
+                    "score": 1,
+                    "tags": [
+                      "consciousness",
+                      "causal_workspace",
+                      "broadcast",
+                      "attention_schema",
+                      "prediction_error",
+                      "source_monitoring",
+                      "temporal_continuity"
+                    ]
                   },
                   {
-                    "field": "provider_count",
-                    "live": 23,
-                    "prior": 22,
-                    "resolution": "LIVE_PARSED_CATALOG_SUPERSEDES_PRIOR"
+                    "branch": "yado-rc8-v30-runtime",
+                    "claim_boundary": null,
+                    "evidence": [
+                      "runtime/boot_rc8v30.py",
+                      "receipts/yado-rc8-v30-latest.json"
+                    ],
+                    "lesson_provenance": {
+                      "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                      "semantic_validation_by_rederivation": false,
+                      "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+                    },
+                    "lessons": [
+                      "EXACT_RECONSTRUCTION_BEFORE_EVALUATION"
+                    ],
+                    "rederived_evidence": {
+                      "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                      "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                      "observation_count": 6,
+                      "semantic_equivalence_to_host_lessons_claimed": false,
+                      "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+                    },
+                    "role": "EXACT_RUNTIME_RECONSTRUCTION",
+                    "score": 1,
+                    "tags": [
+                      "runtime",
+                      "reconstruction",
+                      "exact_execution"
+                    ]
+                  },
+                  {
+                    "branch": "yado-rc8-v33-evolution",
+                    "claim_boundary": null,
+                    "evidence": [
+                      "receipts/yado-rc8-v33-latest.json",
+                      "receipts/yado-rc8-v33-internet-latest.json"
+                    ],
+                    "lesson_provenance": {
+                      "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                      "semantic_validation_by_rederivation": false,
+                      "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+                    },
+                    "lessons": [
+                      "EXTERNAL_EVIDENCE_SHOULD_FEED_BOUNDED_EVOLUTION_NOT_DIRECT_CANONICAL_MUTATION"
+                    ],
+                    "rederived_evidence": {
+                      "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                      "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                      "observation_count": 5,
+                      "semantic_equivalence_to_host_lessons_claimed": false,
+                      "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+                    },
+                    "role": "EVOLUTION_AND_EXTERNAL_RESEARCH_EXPERIENCE",
+                    "score": 1,
+                    "tags": [
+                      "evolution",
+                      "internet",
+                      "research",
+                      "external_evidence"
+                    ]
+                  },
+                  {
+                    "branch": "yado-rc8-v35-training",
+                    "claim_boundary": null,
+                    "evidence": [
+                      "receipts/yado-rc8-v35-latest.json",
+                      "receipts/yado-rc8-v35-internet-latest.json"
+                    ],
+                    "lesson_provenance": {
+                      "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+                      "semantic_validation_by_rederivation": false,
+                      "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+                    },
+                    "lessons": [
+                      "TRAINING_RESULTS_REQUIRE_EXTERNAL_RECEIPTS",
+                      "INTERNET_ACCESS_IS_EVIDENCE_TRANSPORT_NOT_INTELLIGENCE_BY_ITSELF"
+                    ],
+                    "rederived_evidence": {
+                      "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+                      "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+                      "observation_count": 8,
+                      "semantic_equivalence_to_host_lessons_claimed": false,
+                      "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+                    },
+                    "role": "TRAINING_AND_INTERNET_EXPERIENCE",
+                    "score": 1,
+                    "tags": [
+                      "training",
+                      "internet",
+                      "development"
+                    ]
                   }
                 ],
-                "resource_repository": "vava-nessa/free-coding-models",
-                "status": "PASS_DIRECT_LIVE_RESOURCE_EVIDENCE_RECHECK"
+                "status": "PASS_DIRECT_EXPERIENCE_EVIDENCE_REVIEW"
               },
-              "selected_action": "LIVE_RESOURCE_EVIDENCE_RECHECK",
+              "selected_action": "EXPERIENCE_EVIDENCE_REVIEW",
               "selection": {
                 "ranking": [
                   {
-                    "action_id": "LIVE_RESOURCE_EVIDENCE_RECHECK",
+                    "action_id": "EXPERIENCE_EVIDENCE_REVIEW",
                     "matched_tokens": [
-                      "check",
-                      "comprehension",
-                      "conflict",
-                      "content",
                       "evidence",
-                      "live",
-                      "resolution",
-                      "resource"
+                      "experience",
+                      "legacy",
+                      "memory",
+                      "provenance"
                     ],
-                    "score": 19
+                    "score": 14
                   },
                   {
-                    "action_id": "EXPERIENCE_EVIDENCE_REVIEW",
+                    "action_id": "LIVE_RESOURCE_EVIDENCE_RECHECK",
                     "matched_tokens": [
                       "evidence"
                     ],
-                    "score": 5
+                    "score": 1
                   },
                   {
                     "action_id": "GENOME_EVOLUTION",
@@ -616,28 +839,28 @@
                     "score": 0
                   }
                 ],
-                "selected_action": "LIVE_RESOURCE_EVIDENCE_RECHECK",
+                "selected_action": "EXPERIENCE_EVIDENCE_REVIEW",
                 "status": "ACTION_SELECTED"
               },
               "semantic_boundary": "HOST-CREATED GENERIC GOAL-TO-ACTION BINDER ADDED ONLY AFTER THREE OBSERVED PRIORITY/ACTION MISMATCHES. ACTION CHOICE IS CONTRACT-SCORED; EVIDENCE EXECUTION REMAINS BOUNDED AND CANONICAL-IMMUTABLE."
             },
-            "receipt_sha256": "dbbf72a8e3f5170a95bfd023ec9656903f818dc3e9b7ca254854da5fb36b9475",
+            "receipt_sha256": "a4d2539d8abb115432db0a1b667850c6f878789773680919d0b1f7c97036f796",
             "role": "YADO_DIRECT_ACTION_EVIDENCE",
-            "selected_action": "LIVE_RESOURCE_EVIDENCE_RECHECK"
+            "selected_action": "EXPERIENCE_EVIDENCE_REVIEW"
           },
           {
             "path": "runtime/yado_unified_core_deep_self_audit_v1.py",
             "role": "KERNEL_PROVENANT_TARGET_SOURCE",
-            "sha256": "78f18e11d3a41fc316c0f015b433013e7ab779dbef7df497f8ff38b0177e6ad5",
-            "source": "from __future__ import annotations\nfrom pathlib import Path\nfrom typing import Any\nimport copy,hashlib,json,os,subprocess,sys\n\nROOT=Path(__file__).resolve().parent\nREPO=ROOT.parent\nPKG=ROOT/'yado_rc8_v36'\nsys.path.insert(0,str(ROOT));sys.path.insert(0,str(PKG))\n\nfrom yado_unified_core_v1 import UnifiedYADOCoreV1\nfrom yado_evolution_ledger_v2 import validate_ledger_v2,event_hash\n\nHEAD=REPO/'canonical'/'yado-main-head-g2.json'\nARCH=REPO/'canonical'/'yado-g2-architecture-v1.json'\nCORE=REPO/'canonical'/'yado-unified-core-v1.json'\nEXP=REPO/'canonical'/'yado-unified-experience-registry-v1.json'\nCAND_CORE=REPO/'candidates'/'unified-core-v1'/'manifest.json'\nCAND_EXP=REPO/'candidates'/'unified-core-v1'/'experience-registry.json'\nLEDGER=REPO/'architecture'/'evolution-ledger.json'\nSHADOW=REPO/'candidates'/'g2-development'/'contextual-stream-capability-adapter-v1.json'\nBURN=REPO/'architecture'/'g2-burnin-state-v1.json'\nWORK=REPO/'architecture'/'g2-applied-workload-state-v1.json'\nDEV=REPO/'architecture'/'g2-development-state-v1.json'\nREAL_LEGACY=REPO/'receipts'/'yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json'\nREAL_LATEST=REPO/'receipts'/'yado-g2-real-world-transfer-recheck-canonical-v1-latest.json'\nREAL=REAL_LATEST if REAL_LATEST.exists() else REAL_LEGACY\nREAL_NATIVE_V2=REPO/'architecture'/'yado-real-world-generalization-state-v2.json'\nPOST=REPO/'receipts'/'yado-g2-post-workload-capability-audit-v1-run-33363851997.json'\nCONSOL=REPO/'receipts'/'yado-unified-core-consolidation-gate-v1-run-33371375385.json'\nRECON=REPO/'receipts'/'yado-unified-core-ledger-reconciliation-v1-run-33371661769.json'\nRUNTIME=REPO/'runtime'/'yado_unified_core_v1.py'\nOUT=ROOT/'yado_unified_core_deep_self_audit_v1_receipt.json'\n\ndef canon(o:Any)->str:return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)\ndef h(o:Any)->str:return hashlib.sha256(canon(o).encode()).hexdigest()\ndef fsha(p:Path)->str:return hashlib.sha256(p.read_bytes()).hexdigest()\ndef load(p:Path)->dict[str,Any]:return json.loads(p.read_text(encoding='utf-8'))\n\ncore=UnifiedYADOCoreV1(REPO)\nhead=load(HEAD);arch=load(ARCH);ccore=load(CORE);cexp=load(EXP)\ncand_core=load(CAND_CORE);cand_exp=load(CAND_EXP);ledger=load(LEDGER);shadow=load(SHADOW)\nburn=load(BURN);work=load(WORK);dev=load(DEV);real=load(REAL);legacy_real=load(REAL_LEGACY);post=load(POST);consol=load(CONSOL);recon=load(RECON)\nnative_v2=load(REAL_NATIVE_V2) if REAL_NATIVE_V2.exists() else {}\nreal_evidence_source=str(REAL.relative_to(REPO)).replace('\\\\','/')\nvalidate_ledger_v2(ledger)\n\nfindings=[]\ndef add(code,area,severity,status,evidence,recommendation,blocking=False):\n    findings.append({\n      'code':code,'area':area,'severity':severity,'status':status,\n      'blocking':bool(blocking),'evidence':evidence,'recommendation':recommendation\n    })\n\n# ---------- self-integrity ----------\ntmp=copy.deepcopy(head);stored=tmp.pop('canonical_head_digest',None)\nhead_digest_ok=stored==h(tmp)\nadd('HEAD_CONTENT_DIGEST','IDENTITY_AND_LINEAGE','CRITICAL' if not head_digest_ok else 'INFO',\n    'PASS' if head_digest_ok else 'FAIL',\n    {'stored':stored,'computed':h(tmp)},\n    'Preserve content-addressed head integrity.' if head_digest_ok else 'Freeze development and rebuild the head from verified bytes.',not head_digest_ok)\n\ntmp=copy.deepcopy(ccore);stored_core=tmp.pop('core_digest',None)\ncore_digest_ok=stored_core==h(tmp)\nadd('UNIFIED_CORE_CONTENT_DIGEST','IDENTITY_AND_LINEAGE','CRITICAL' if not core_digest_ok else 'INFO',\n    'PASS' if core_digest_ok else 'FAIL',\n    {'stored':stored_core,'computed':h(tmp)},\n    'Keep core manifest content-addressed.' if core_digest_ok else 'Freeze development and reconstruct canonical core manifest.',not core_digest_ok)\n\ntmp=copy.deepcopy(cexp);stored_exp=tmp.pop('registry_digest',None)\nexp_digest_ok=stored_exp==h(tmp)\nadd('EXPERIENCE_REGISTRY_CONTENT_DIGEST','MEMORY_AND_EXPERIENCE','CRITICAL' if not exp_digest_ok else 'INFO',\n    'PASS' if exp_digest_ok else 'FAIL',\n    {'stored':stored_exp,'computed':h(tmp)},\n    'Keep experience registry content-addressed.' if exp_digest_ok else 'Rebuild registry from verified branch evidence.',not exp_digest_ok)\n\nruntime_sha=fsha(RUNTIME)\nruntime_bound_ok=(runtime_sha==ccore.get('runtime_sha256')==head.get('unified_core',{}).get('runtime_sha256'))\nadd('UNIFIED_RUNTIME_HASH_BINDING','IDENTITY_AND_LINEAGE','CRITICAL' if not runtime_bound_ok else 'INFO',\n    'PASS' if runtime_bound_ok else 'FAIL',\n    {'actual_runtime_sha256':runtime_sha,'core_manifest_sha256':ccore.get('runtime_sha256'),\n     'head_runtime_sha256':head.get('unified_core',{}).get('runtime_sha256')},\n    'Maintain exact runtime binding.' if runtime_bound_ok else 'Do not execute further development until runtime is re-admitted and canonical hashes are updated.',not runtime_bound_ok)\n\nledger_ok=(ledger.get('current_head')==head.get('generation_id') and ledger.get('current_head_digest')==head.get('canonical_head_digest'))\nadd('HEAD_LEDGER_COHERENCE','IDENTITY_AND_LINEAGE','CRITICAL' if not ledger_ok else 'INFO',\n    'PASS' if ledger_ok else 'FAIL',\n    {'ledger_generation':ledger.get('current_head'),'head_generation':head.get('generation_id'),\n     'ledger_digest':ledger.get('current_head_digest'),'head_digest':head.get('canonical_head_digest'),\n     'current_head_event_id':ledger.get('current_head_event_id')},\n    'Preserve reconciled single-head lineage.' if ledger_ok else 'Fail closed and reconcile head/ledger before any capability work.',not ledger_ok)\n\nrecon_ok=recon.get('status')=='PASS_UNIFIED_CORE_LEDGER_RECONCILIATION_V1' and all(recon.get('checks',{}).values())\nadd('LAST_SPLIT_BRAIN_REPAIR','SELF_AUDIT_AND_REPAIR','HIGH' if not recon_ok else 'INFO',\n    'PASS' if recon_ok else 'FAIL',\n    {'status':recon.get('status'),'checks':recon.get('checks')},\n    'Retain split-brain regression guard.' if recon_ok else 'Re-run reconciliation and independent readback.',not recon_ok)\n\n# ---------- runtime control-plane binding ----------\nruntime_manifest_scope='CANONICAL' if core.manifest==ccore else ('CANDIDATE' if core.manifest==cand_core else 'OTHER')\nruntime_experience_scope='CANONICAL' if core.experience==cexp else ('CANDIDATE' if core.experience==cand_exp else 'OTHER')\nbinding_ok=runtime_manifest_scope=='CANONICAL' and runtime_experience_scope=='CANONICAL'\nadd('RUNTIME_CONTROL_PLANE_BINDING','IDENTITY_AND_LINEAGE','HIGH' if not binding_ok else 'INFO',\n    'PASS' if binding_ok else 'FAIL',\n    {'manifest_scope':runtime_manifest_scope,'experience_scope':runtime_experience_scope,\n     'canonical_core_active':ccore.get('canonical_active'),'canonical_experience_active':cexp.get('canonical_active')},\n    'Runtime should read canonical unified-core manifest and canonical experience registry after consolidation.',\n    not binding_ok)\n\n# ---------- branch/experience audit ----------\nbranches=cexp.get('branches',[])\nactive=[x for x in branches if x.get('mode')=='ACTIVE_LINEAGE']\nlegacy=[x for x in branches if x.get('mode')=='EXPERIENCE_ONLY']\ninventory_ok=len(branches)==14 and len(active)==1 and len(legacy)==13\nadd('EXPERIENCE_BRANCH_MODE_INVARIANT','MEMORY_AND_EXPERIENCE','HIGH' if not inventory_ok else 'INFO',\n    'PASS' if inventory_ok else 'FAIL',\n    {'branch_count':len(branches),'active_count':len(active),'experience_only_count':len(legacy)},\n    'Keep exactly one active lineage and all legacy branches read-only.',not inventory_ok)\n\nremote_branches=[]\nremote_error=None\ntry:\n    cp=subprocess.run(['git','ls-remote','--heads','origin'],cwd=REPO,capture_output=True,text=True,timeout=20)\n    if cp.returncode==0:\n        for line in cp.stdout.splitlines():\n            parts=line.split()\n            if len(parts)==2 and parts[1].startswith('refs/heads/'):\n                remote_branches.append(parts[1][len('refs/heads/'):])\n    else: remote_error=cp.stderr[-500:]\nexcept Exception as exc:\n    remote_error=type(exc).__name__+':'+str(exc)\nregistered={x.get('branch') for x in branches}\nremote_set=set(remote_branches)\nremote_inventory_ok=bool(remote_branches) and registered==remote_set\nadd('REMOTE_BRANCH_INVENTORY_MATCH','MEMORY_AND_EXPERIENCE',\n    'MEDIUM' if remote_branches and not remote_inventory_ok else ('LOW' if not remote_branches else 'INFO'),\n    'PASS' if remote_inventory_ok else ('UNAVAILABLE' if not remote_branches else 'FAIL'),\n    {'registered_count':len(registered),'remote_count':len(remote_set),'missing_from_registry':sorted(remote_set-registered),\n     'registry_only':sorted(registered-remote_set),'error':remote_error},\n    'Keep experience registry synchronized with actual branch inventory.',\n    False)\n\n# Is the experience actually retrievable, or only summarized metadata?\n# Is the experience actually retrievable, or only summarized metadata?\nruntime_text=RUNTIME.read_text(encoding='utf-8')\nlegacy_missing_refs=[]\nfor entry in legacy:\n    for ep in entry.get('evidence',[]):\n        if not (REPO/ep).exists():\n            legacy_missing_refs.append({'branch':entry.get('branch'),'path':ep})\n\nmem_plane=next((x for x in ccore.get('planes',[]) if x.get('plane_id')=='MEMORY_AND_EXPERIENCE'),{})\nlegacy_component_bound='ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1' in mem_plane.get('active_components',[])\nlegacy_runtime_bound=hasattr(core,'experience_read_exact') and hasattr(core,'experience_search_verified')\nlegacy_probe_ok=False\nlegacy_probe_evidence=None\ntry:\n    probe_entry=next(x for x in core.experience.get('branches',[]) if x.get('mode')=='EXPERIENCE_ONLY' and x.get('evidence'))\n    probe_path=probe_entry['evidence'][0]\n    probe_item=core.experience_read_exact(probe_entry['branch'],probe_path)\n    legacy_probe_ok=(probe_item.get('branch')==probe_entry['branch']\n        and probe_item.get('registered_commit')==probe_entry['head_sha']\n        and probe_item.get('path')==probe_path\n        and probe_item.get('bytes',0)>0\n        and len(probe_item.get('sha256',''))==64)\n    legacy_probe_evidence={'branch':probe_entry['branch'],'commit':probe_entry['head_sha'],'path':probe_path,\n        'sha256':probe_item.get('sha256'),'bytes':probe_item.get('bytes'),'transport':probe_item.get('transport')}\nexcept Exception as exc:\n    legacy_probe_evidence={'error':type(exc).__name__+':'+str(exc)[:180]}\n\nfull_experience_retrieval=legacy_component_bound and legacy_runtime_bound and legacy_probe_ok\nadd('LEGACY_EXPERIENCE_CONTENT_RETRIEVAL','MEMORY_AND_EXPERIENCE','HIGH' if not full_experience_retrieval else 'INFO',\n    'PASS' if full_experience_retrieval else 'FAIL',\n    {'missing_current_branch_evidence_paths':legacy_missing_refs[:30],'missing_count':len(legacy_missing_refs),\n     'legacy_component_bound':legacy_component_bound,'legacy_runtime_bound':legacy_runtime_bound,\n     'legacy_probe_ok':legacy_probe_ok,'legacy_probe_evidence':legacy_probe_evidence,\n     'experience_search_returns_metadata_only':not full_experience_retrieval},\n    'Maintain bounded read-only exact legacy retrieval with canonical component binding and live provenance probe.',\n    not full_experience_retrieval)\n\n# ---------- legacy summary provenance separation ----------\nprov_cfg=ccore.get('legacy_experience_provenance',{}) if isinstance(ccore.get('legacy_experience_provenance',{}),dict) else {}\nprov_path=REPO/prov_cfg.get('artifact','__missing__')\nprov_art={}\nprov_error=None\ntry:\n    prov_art=load(prov_path)\nexcept Exception as exc:\n    prov_error=type(exc).__name__+':'+str(exc)[:180]\nprov_tmp=copy.deepcopy(prov_art) if isinstance(prov_art,dict) else {}\nprov_stored=prov_tmp.pop('artifact_digest',None) if isinstance(prov_tmp,dict) else None\nprov_digest_ok=bool(prov_stored) and prov_stored==h(prov_tmp) and prov_stored==prov_cfg.get('artifact_digest')\nlegacy_entries=[x for x in cexp.get('branches',[]) if x.get('mode')=='EXPERIENCE_ONLY']\nregistry_labels_ok=bool(legacy_entries) and all(\n    x.get('lesson_provenance',{}).get('source_class')=='HOST_CURATED_REGISTRY_SUMMARY'\n    and x.get('lesson_provenance',{}).get('semantic_validation_by_rederivation') is False\n    and x.get('rederived_evidence',{}).get('source_class')=='YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE'\n    and x.get('rederived_evidence',{}).get('semantic_equivalence_to_host_lessons_claimed') is False\n    for x in legacy_entries\n)\nprov_policy=prov_art.get('provenance_policy',{}) if isinstance(prov_art,dict) else {}\nprov_retrieval=prov_art.get('retrieval',{}) if isinstance(prov_art,dict) else {}\nprov_branch_coverage=prov_art.get('legacy_branch_count')==len(legacy_entries)==13\nprov_raw_coverage=(prov_retrieval.get('ratio')==1.0 and not prov_retrieval.get('failures'))\nprov_no_overclaim=(\n    prov_policy.get('host_curated_lessons')=='PRESERVED_UNCHANGED_AND_EXPLICITLY_LABELLED'\n    and prov_policy.get('yado_rederived_observations')=='DERIVED_ONLY_FROM_EXACT_REGISTERED_RAW_EVIDENCE'\n    and prov_policy.get('semantic_equivalence_claimed') is False\n    and prov_policy.get('legacy_code_execution') is False\n)\nruntime_provenance_exposed=('lesson_provenance' in runtime_text and 'rederived_evidence' in runtime_text)\nprovenance_ok=all([full_experience_retrieval,prov_digest_ok,registry_labels_ok,prov_branch_coverage,\n                   prov_raw_coverage,prov_no_overclaim,runtime_provenance_exposed])\nadd('LEGACY_EXPERIENCE_SUMMARY_PROVENANCE','MEMORY_AND_EXPERIENCE','INFO' if provenance_ok else 'MEDIUM',\n    'PASS' if provenance_ok else 'PARTIAL',\n    {'registry_lessons_are_precompiled_summaries':True,\n     'host_summaries_explicitly_labelled':registry_labels_ok,\n     'verified_raw_retrieval_available':full_experience_retrieval,\n     'rederived_artifact_path':prov_cfg.get('artifact'),\n     'rederived_artifact_digest_ok':prov_digest_ok,\n     'legacy_branch_coverage':prov_branch_coverage,\n     'registered_raw_path_coverage':prov_retrieval.get('ratio'),\n     'raw_retrieval_failures':prov_retrieval.get('failures'),\n     'semantic_equivalence_claimed':prov_policy.get('semantic_equivalence_claimed'),\n     'runtime_provenance_exposed':runtime_provenance_exposed,\n     'error':prov_error},\n    'Keep host-curated summaries separate from exact raw-evidence-derived observations; never silently promote lexical/structural observations into semantic validation.',\n    False)\n\n# ---------- capability/evidence scope ----------\nexplicit_active=head.get('active_capabilities')\nhead_caps=set(explicit_active if isinstance(explicit_active,list) and explicit_active else head.get('inherited_capabilities',[])+head.get('new_capabilities',[]))\nmanifest_active=set()\nfor plane in ccore.get('planes',[]):\n    manifest_active.update(plane.get('active_components',[]))\nunbound_caps=sorted(x for x in head_caps if x not in manifest_active and not x.startswith('RESOURCE-') and not x.startswith('RUNTIME-'))\n# Runtime is listed, resource is listed; counterexample memory is likely the notable gap.\nadd('HEAD_CAPABILITY_TO_CORE_BINDING','WORKSPACE_AND_INTEGRATION','MEDIUM' if unbound_caps else 'INFO',\n    'PASS' if not unbound_caps else 'PARTIAL',\n    {'head_capabilities':sorted(head_caps),'manifest_active_components':sorted(manifest_active),'unbound_capabilities':unbound_caps},\n    'Every claimed active capability should have an explicit runtime/component binding in the unified core manifest.',\n    False)\n\nshadow_active=shadow.get('canonical_active') is True\nburn_uses_context='BOUNDED_STREAM_CONTEXT_MAP' in (REPO/'runtime'/'yado_g2_burnin_stress_v1.py').read_text(encoding='utf-8')\nwork_uses_context='BOUNDED_STREAM_CONTEXT_MAP' in (REPO/'runtime'/'yado_g2_applied_workload_suite_v1.py').read_text(encoding='utf-8')\nshadow_dependency=(not shadow_active) and burn_uses_context and work_uses_context\nadd('SHADOW_CONTEXT_ADAPTER_DEPENDENCE','MEMORY_AND_EXPERIENCE','HIGH' if shadow_dependency else 'INFO',\n    'FAIL' if shadow_dependency else 'PASS',\n    {'adapter_canonical_active':shadow.get('canonical_active'),'adapter_state':shadow.get('state'),\n     'burnin_uses_adapter':burn_uses_context,'applied_workload_uses_adapter':work_uses_context,\n     'burnin_status':burn.get('status'),'workload_status':work.get('status')},\n    'Either admit the contextual stream adapter through an independent canonical gate or repeat key workload claims without it.',\n    shadow_dependency)\n\n# ---------- real-world transfer boundary ----------\nif 'canonical_raw_routing' in real:\n    raw=real.get('canonical_raw_routing',{}).get('accuracy')\n    raw_task_count=real.get('canonical_raw_routing',{}).get('task_count')\n    structured=legacy_real.get('structured_mirror_accuracy')\n    raw_evidence_mode='CANONICAL_RECHECK'\nelse:\n    raw=real.get('raw_unstructured',{}).get('accuracy')\n    raw_task_count=real.get('raw_unstructured',{}).get('task_count')\n    structured=real.get('structured_mirror_accuracy')\n    raw_evidence_mode='LEGACY_BASELINE'\nraw_block=(isinstance(raw,(int,float)) and raw<0.8 and isinstance(structured,(int,float)) and structured>=0.99)\nadd('SELF_AUDIT_EVIDENCE_FRESHNESS','SELF_AUDIT_AND_REPAIR','INFO',\n    'PASS',\n    {'selected_evidence_source':real_evidence_source,'mode':raw_evidence_mode,\n     'latest_canonical_recheck_available':REAL_LATEST.exists()},\n    'Always select the newest verified canonical evidence compatible with the audited capability.',\n    False)\nadd('RAW_TASK_REPRESENTATION_GAP','REPRESENTATION_AND_GROUNDING','CRITICAL' if raw_block else 'INFO',\n    'FAIL' if raw_block else 'PASS',\n    {'raw_unstructured_accuracy':raw,'structured_mirror_accuracy':structured,'task_count':raw_task_count,\n     'evidence_source':real_evidence_source,'evidence_mode':raw_evidence_mode,\n     'next_required_capability':real.get('next_required_capability')},\n    'Build or improve a bounded raw-task representation/grounding layer without secret host feature extraction, then repeat fresh real-world transfer.',\n    raw_block)\n\n# Current native-only transfer evidence supersedes stale pre-integration capability claims.\nnative_pass=native_v2.get('domain_pass',{}) if isinstance(native_v2,dict) else {}\nmath_bound=ccore.get('mathematical_reasoning',{}).get('mode')=='ACTIVE_BOUNDED_SEMANTIC_EXPRESSION_SYNTHESIS'\nprogram_cfg=ccore.get('program_execution',{}) if isinstance(ccore.get('program_execution',{}),dict) else {}\nprogram_bound=(program_cfg.get('component_id')=='ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11' and program_cfg.get('mode') in {'ACTIVE_AMBIGUITY_AWARE_BOUNDED_SINGLE_FUNCTION_REPAIR','ACTIVE_BOUNDED_SINGLE_FUNCTION_REPAIR'})\nraw_proven=native_pass.get('REAL_UNSTRUCTURED_INPUT_TRANSFER') is True\nmath_proven=(native_pass.get('REAL_MATHEMATICAL_REASONING_TRANSFER') is True and math_bound)\nprogram_proven=(program_bound and float(ccore.get('program_execution',{}).get('fresh_score',0.0))>=1.0)\nscience_binding=ccore.get('science_reasoning',{}) if isinstance(ccore.get('science_reasoning',{}),dict) else {}\nscience_bound=science_binding.get('mode')=='ACTIVE_BOUNDED_TABULAR_SCIENTIFIC_REASONING'\nscience_fresh_receipt=bool(science_binding.get('fresh_admission_receipt_sha256'))\nscience_fresh_datasets=set(science_binding.get('fresh_datasets',[]))\nscience_proven=(science_bound and science_fresh_receipt and {'PENGUINS','TIPS'}.issubset(science_fresh_datasets))\nremaining=[]\nif not raw_proven:remaining.append('REAL_UNSTRUCTURED_INPUT_TRANSFER')\nif not math_proven:remaining.append('REAL_MATHEMATICAL_REASONING_TRANSFER')\nif not program_proven:remaining.append('REAL_PROGRAM_EXECUTION_TRANSFER')\nif not science_proven:remaining.append('REAL_SCIENCE_DATA_TRANSFER')\nhost_scaffold_dependence=not science_proven\n\nadd('REAL_WORLD_GENERALIZATION_SCOPE','REPRESENTATION_AND_GROUNDING','MEDIUM' if remaining else 'INFO',\n    'PARTIAL' if remaining else 'PASS',\n    {'remaining_native_domains':remaining,'raw_proven':raw_proven,'math_proven':math_proven,\n     'program_proven':program_proven,'science_proven':science_proven,\n     'host_scaffold_dependence':host_scaffold_dependence,\n     'native_v2_state_source':str(REAL_NATIVE_V2.relative_to(REPO)).replace('\\\\','/')},\n    'Continue only on native capabilities still missing; do not reopen capabilities already admitted through canonical gates.',\n    False)\n\nadd('REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1','RESOURCE_AND_EVIDENCE','HIGH' if not science_proven else 'INFO',\n    'FAIL' if not science_proven else 'PASS',\n    {'public_data_download_seen':native_v2.get('domain_scores',{}).get('REAL_SCIENCE_DATA_TRANSFER') is not None,\n     'native_scientific_reasoning_present':science_proven,'science_canonical_bound':science_bound,'science_fresh_receipt_bound':science_fresh_receipt,'science_fresh_datasets':sorted(science_fresh_datasets),\n     'program_capability_now_canonical':program_bound,'mathematics_capability_now_canonical':math_bound},\n    'Create and independently admit a bounded native scientific-data reasoning capability over fresh public datasets.',\n    not science_proven)\n\n# ---------- self-audit and repair plane ----------\nself_audit_plane=next((x for x in ccore.get('planes',[]) if x.get('plane_id')=='SELF_AUDIT_AND_REPAIR'),{})\naudit_runtime_bound=any('SELF_AUDIT' in str(x) or 'AUDIT' in str(x) for x in self_audit_plane.get('active_components',[]))\nadd('SELF_AUDIT_RUNTIME_BINDING','SELF_AUDIT_AND_REPAIR','MEDIUM' if not audit_runtime_bound else 'INFO',\n    'PARTIAL' if not audit_runtime_bound else 'PASS',\n    {'active_components':self_audit_plane.get('active_components',[]),\n     'this_audit_runtime':'runtime/yado_unified_core_deep_self_audit_v1.py',\n     'canonical_self_audit_component_present':audit_runtime_bound},\n    'If this deep self-audit survives independent comparison, admit it as a bounded canonical self-audit capability.',\n    False)\n\n# ---------- workspace/consciousness boundaries ----------\nworkspace_plane=next((x for x in ccore.get('planes',[]) if x.get('plane_id')=='WORKSPACE_AND_INTEGRATION'),{})\nlegacy_consciousness_active=any('CONSCIOUS' in str(x).upper() for x in workspace_plane.get('active_components',[]))\nadd('CONSCIOUSNESS_CLAIM_BOUNDARY','WORKSPACE_AND_INTEGRATION','INFO',\n    'PASS',\n    {'active_consciousness_component':legacy_consciousness_active,\n     'legacy_experience_sources':workspace_plane.get('experience_sources',[]),\n     'semantic_boundary':ccore.get('semantic_boundary')},\n    'Keep legacy functional-consciousness experiments as experience until fresh admission; do not infer subjective consciousness.',\n    False)\n\n# ---------- resources ----------\nlive_score=real.get('live_resource_availability',{}).get('score')\nadd('LIVE_RESOURCE_EVIDENCE_SCOPE','RESOURCE_AND_EVIDENCE','LOW' if live_score==1.0 else 'MEDIUM',\n    'PARTIAL',\n    {'last_live_availability_score':live_score,'sample_size':real.get('live_resource_availability',{}).get('total'),\n     'note':'Availability is point-in-time infrastructure evidence; comprehension/integration was not proven.'},\n    'Re-check live resources on demand and separately test content comprehension/conflict resolution.',\n    False)\n\n# ---------- developmental priority synthesis ----------\nseverity_weight={'CRITICAL':5,'HIGH':4,'MEDIUM':3,'LOW':2,'INFO':0}\nactionable=[f for f in findings if f['status'] not in ('PASS',) and severity_weight.get(f['severity'],0)>0]\nactionable.sort(key=lambda f:(-int(f['blocking']),-severity_weight.get(f['severity'],0),f['code']))\npriority=[{\n  'rank':i+1,'code':f['code'],'area':f['area'],'severity':f['severity'],\n  'blocking':f['blocking'],'recommended_action':f['recommendation']\n} for i,f in enumerate(actionable)]\n\nsummary={\n 'finding_count':len(findings),\n 'critical_failures':sum(f['severity']=='CRITICAL' and f['status']=='FAIL' for f in findings),\n 'high_failures':sum(f['severity']=='HIGH' and f['status']=='FAIL' for f in findings),\n 'blocking_findings':sum(bool(f['blocking']) for f in findings),\n 'pass_findings':sum(f['status']=='PASS' for f in findings),\n 'partial_findings':sum(f['status']=='PARTIAL' for f in findings),\n}\n\n# Overall verdict: fail-closed if critical/blocking findings exist; otherwise bounded pass with limitations.\nverdict='WITHHOLD_FURTHER_GENERATION_ADVANCE' if summary['blocking_findings'] else 'PASS_WITH_LIMITATIONS'\nnext_step=priority[0]['code'] if priority else core.developmental_frontier().get('manifest_frontier')\n\n# Audit is observational: it may propose priorities but must not rewrite the developmental frontier.\naudit_blockers=[p['code'] for p in priority if p.get('blocking')]\nobserved_open_deficits=copy.deepcopy(ledger.get('open_deficits',[]))\n\nreceipt={\n 'schema':'yado.unified_core.deep_self_audit.receipt.v1',\n 'status':('WITHHOLD_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1' if summary['blocking_findings'] else 'PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1'),\n 'audit_actor':{\n   'core_id':core.CORE_ID,\n   'generation':head.get('generation_id'),\n   'execution_mode':'KERNEL_NATIVE_SELF_INSPECTION',\n   'host_role':'TRIGGER_TRANSPORT_PERSISTENCE_ONLY',\n },\n 'github_run_id':os.getenv('GITHUB_RUN_ID'),'github_sha':os.getenv('GITHUB_SHA'),\n 'core_snapshot':core.snapshot(),\n 'summary':summary,\n 'overall_verdict':verdict,\n 'findings':findings,\n 'self_selected_priority':priority,\n 'self_selected_next_step':next_step,\n 'audit_frontier_binding':{'observed_open_deficits':observed_open_deficits,'proposed_next_step':next_step,'blocking_backlog':audit_blockers,'frontier_mutated_by_audit':False},\n 'canonical_mutation':False,\n 'repair_applied':False,\n 'g3_genesis_performed':False,\n 'semantic_boundary':'THE UNIFIED YADO SOFTWARE KERNEL INSPECTED ITS OWN LOCAL CANONICAL STATE, RUNTIME BINDINGS, EVIDENCE, BRANCH EXPERIENCE REGISTRY, AND CAPABILITY BOUNDARIES. THIS IS A SOFTWARE SELF-AUDIT, NOT PROOF OF SUBJECTIVE SELF-AWARENESS.',\n}\nreceipt['receipt_sha256']=h(receipt)\nOUT.write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\\n')\n\n# Append audit evidence only; head/frontier/deficits remain unchanged.\nrun_id=str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')\ne={\n 'index':len(ledger['events']),\n 'event_id':f\"E{len(ledger['events'])+1:04d}_UNIFIED_CORE_DEEP_SELF_AUDIT\",\n 'event_type':'KERNEL_NATIVE_SELF_AUDIT',\n 'status':('WITHHOLD' if summary['blocking_findings'] else 'PASS'),\n 'generation':ledger['current_head'],\n 'deficit':'FULL_UNIFIED_CORE_SELF_AUDIT_V1',\n 'effect':f\"SELF_AUDIT_COMPLETE; VERDICT={verdict}; FINDINGS={len(findings)}; BLOCKING={summary['blocking_findings']}; NEXT={(ledger.get('open_deficits') or ['UNKNOWN'])[0]}\",\n 'source_path':f'receipts/yado-unified-core-deep-self-audit-v1-run-{run_id}.json',\n 'source_digest':receipt['receipt_sha256'],'run_id':run_id,\n 'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':False,'promotion_applied':False,\n}\ne['event_hash']=event_hash(e);ledger['events'].append(e);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=e['event_hash']\nledger['ledger_digest']=h({k:v for k,v in ledger.items() if k!='ledger_digest'})\nvalidate_ledger_v2(ledger)\nLEDGER.write_text(json.dumps(ledger,indent=2,sort_keys=True)+'\\n')\n\nprint(json.dumps({\n 'status':receipt['status'],'overall_verdict':verdict,'summary':summary,\n 'self_selected_priority':priority[:10],'self_selected_next_step':next_step,\n 'receipt_sha256':receipt['receipt_sha256']\n},indent=2,sort_keys=True))\n"
+            "sha256": "700d1a176560ba24d25e22ebab8b1aaf5725e53e8c1cf81d45aaeacd495dd422",
+            "source": "from __future__ import annotations\nfrom pathlib import Path\nfrom typing import Any\nimport copy, hashlib, json, os, subprocess, sys\nROOT = Path(__file__).resolve().parent\nREPO = ROOT.parent\nPKG = ROOT / 'yado_rc8_v36'\nsys.path.insert(0, str(ROOT))\nsys.path.insert(0, str(PKG))\nfrom yado_unified_core_v1 import UnifiedYADOCoreV1\nfrom yado_evolution_ledger_v2 import validate_ledger_v2, event_hash\nHEAD = REPO / 'canonical' / 'yado-main-head-g2.json'\nARCH = REPO / 'canonical' / 'yado-g2-architecture-v1.json'\nCORE = REPO / 'canonical' / 'yado-unified-core-v1.json'\nEXP = REPO / 'canonical' / 'yado-unified-experience-registry-v1.json'\nCAND_CORE = REPO / 'candidates' / 'unified-core-v1' / 'manifest.json'\nCAND_EXP = REPO / 'candidates' / 'unified-core-v1' / 'experience-registry.json'\nLEDGER = REPO / 'architecture' / 'evolution-ledger.json'\nSHADOW = REPO / 'candidates' / 'g2-development' / 'contextual-stream-capability-adapter-v1.json'\nBURN = REPO / 'architecture' / 'g2-burnin-state-v1.json'\nWORK = REPO / 'architecture' / 'g2-applied-workload-state-v1.json'\nDEV = REPO / 'architecture' / 'g2-development-state-v1.json'\nREAL_LEGACY = REPO / 'receipts' / 'yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json'\nREAL_LATEST = REPO / 'receipts' / 'yado-g2-real-world-transfer-recheck-canonical-v1-latest.json'\nREAL = REAL_LATEST if REAL_LATEST.exists() else REAL_LEGACY\nREAL_NATIVE_V2 = REPO / 'architecture' / 'yado-real-world-generalization-state-v2.json'\nPOST = REPO / 'receipts' / 'yado-g2-post-workload-capability-audit-v1-run-33363851997.json'\nCONSOL = REPO / 'receipts' / 'yado-unified-core-consolidation-gate-v1-run-33371375385.json'\nRECON = REPO / 'receipts' / 'yado-unified-core-ledger-reconciliation-v1-run-33371661769.json'\nRUNTIME = REPO / 'runtime' / 'yado_unified_core_v1.py'\nOUT = ROOT / 'yado_unified_core_deep_self_audit_v1_receipt.json'\n\ndef canon(o: Any) -> str:\n    return json.dumps(o, sort_keys=True, separators=(',', ':'), default=str)\n\ndef h(o: Any) -> str:\n    return hashlib.sha256(canon(o).encode()).hexdigest()\n\ndef fsha(p: Path) -> str:\n    return hashlib.sha256(p.read_bytes()).hexdigest()\n\ndef load(p: Path) -> dict[str, Any]:\n    return json.loads(p.read_text(encoding='utf-8'))\ncore = UnifiedYADOCoreV1(REPO)\nhead = load(HEAD)\narch = load(ARCH)\nccore = load(CORE)\ncexp = load(EXP)\ncand_core = load(CAND_CORE)\ncand_exp = load(CAND_EXP)\nledger = load(LEDGER)\nshadow = load(SHADOW)\nburn = load(BURN)\nwork = load(WORK)\ndev = load(DEV)\nreal = load(REAL)\nlegacy_real = load(REAL_LEGACY)\npost = load(POST)\nconsol = load(CONSOL)\nrecon = load(RECON)\nnative_v2 = load(REAL_NATIVE_V2) if REAL_NATIVE_V2.exists() else {}\nreal_evidence_source = str(REAL.relative_to(REPO)).replace('\\\\', '/')\nvalidate_ledger_v2(ledger)\nfindings = []\n\ndef add(code, area, severity, status, evidence, recommendation, blocking=False):\n    findings.append({'code': code, 'area': area, 'severity': severity, 'status': status, 'blocking': bool(blocking), 'evidence': evidence, 'recommendation': recommendation})\ntmp = copy.deepcopy(head)\nstored = tmp.pop('canonical_head_digest', None)\nhead_digest_ok = stored == h(tmp)\nadd('HEAD_CONTENT_DIGEST', 'IDENTITY_AND_LINEAGE', 'CRITICAL' if not head_digest_ok else 'INFO', 'PASS' if head_digest_ok else 'FAIL', {'stored': stored, 'computed': h(tmp)}, 'Preserve content-addressed head integrity.' if head_digest_ok else 'Freeze development and rebuild the head from verified bytes.', not head_digest_ok)\ntmp = copy.deepcopy(ccore)\nstored_core = tmp.pop('core_digest', None)\ncore_digest_ok = stored_core == h(tmp)\nadd('UNIFIED_CORE_CONTENT_DIGEST', 'IDENTITY_AND_LINEAGE', 'CRITICAL' if not core_digest_ok else 'INFO', 'PASS' if core_digest_ok else 'FAIL', {'stored': stored_core, 'computed': h(tmp)}, 'Keep core manifest content-addressed.' if core_digest_ok else 'Freeze development and reconstruct canonical core manifest.', not core_digest_ok)\ntmp = copy.deepcopy(cexp)\nstored_exp = tmp.pop('registry_digest', None)\nexp_digest_ok = stored_exp == h(tmp)\nadd('EXPERIENCE_REGISTRY_CONTENT_DIGEST', 'MEMORY_AND_EXPERIENCE', 'CRITICAL' if not exp_digest_ok else 'INFO', 'PASS' if exp_digest_ok else 'FAIL', {'stored': stored_exp, 'computed': h(tmp)}, 'Keep experience registry content-addressed.' if exp_digest_ok else 'Rebuild registry from verified branch evidence.', not exp_digest_ok)\nruntime_sha = fsha(RUNTIME)\nruntime_bound_ok = runtime_sha == ccore.get('runtime_sha256') == head.get('unified_core', {}).get('runtime_sha256')\nadd('UNIFIED_RUNTIME_HASH_BINDING', 'IDENTITY_AND_LINEAGE', 'CRITICAL' if not runtime_bound_ok else 'INFO', 'PASS' if runtime_bound_ok else 'FAIL', {'actual_runtime_sha256': runtime_sha, 'core_manifest_sha256': ccore.get('runtime_sha256'), 'head_runtime_sha256': head.get('unified_core', {}).get('runtime_sha256')}, 'Maintain exact runtime binding.' if runtime_bound_ok else 'Do not execute further development until runtime is re-admitted and canonical hashes are updated.', not runtime_bound_ok)\nledger_ok = ledger.get('current_head') == head.get('generation_id') and ledger.get('current_head_digest') == head.get('canonical_head_digest')\nadd('HEAD_LEDGER_COHERENCE', 'IDENTITY_AND_LINEAGE', 'CRITICAL' if not ledger_ok else 'INFO', 'PASS' if ledger_ok else 'FAIL', {'ledger_generation': ledger.get('current_head'), 'head_generation': head.get('generation_id'), 'ledger_digest': ledger.get('current_head_digest'), 'head_digest': head.get('canonical_head_digest'), 'current_head_event_id': ledger.get('current_head_event_id')}, 'Preserve reconciled single-head lineage.' if ledger_ok else 'Fail closed and reconcile head/ledger before any capability work.', not ledger_ok)\nrecon_ok = recon.get('status') == 'PASS_UNIFIED_CORE_LEDGER_RECONCILIATION_V1' and all(recon.get('checks', {}).values())\nadd('LAST_SPLIT_BRAIN_REPAIR', 'SELF_AUDIT_AND_REPAIR', 'HIGH' if not recon_ok else 'INFO', 'PASS' if recon_ok else 'FAIL', {'status': recon.get('status'), 'checks': recon.get('checks')}, 'Retain split-brain regression guard.' if recon_ok else 'Re-run reconciliation and independent readback.', not recon_ok)\nruntime_manifest_scope = 'CANONICAL' if core.manifest == ccore else 'CANDIDATE' if core.manifest == cand_core else 'OTHER'\nruntime_experience_scope = 'CANONICAL' if core.experience == cexp else 'CANDIDATE' if core.experience == cand_exp else 'OTHER'\nbinding_ok = runtime_manifest_scope == 'CANONICAL' and runtime_experience_scope == 'CANONICAL'\nadd('RUNTIME_CONTROL_PLANE_BINDING', 'IDENTITY_AND_LINEAGE', 'HIGH' if not binding_ok else 'INFO', 'PASS' if binding_ok else 'FAIL', {'manifest_scope': runtime_manifest_scope, 'experience_scope': runtime_experience_scope, 'canonical_core_active': ccore.get('canonical_active'), 'canonical_experience_active': cexp.get('canonical_active')}, 'Runtime should read canonical unified-core manifest and canonical experience registry after consolidation.', not binding_ok)\nbranches = cexp.get('branches', [])\nactive = [x for x in branches if x.get('mode') == 'ACTIVE_LINEAGE']\nlegacy = [x for x in branches if x.get('mode') == 'EXPERIENCE_ONLY']\ninventory_ok = len(branches) == 14 and len(active) == 1 and (len(legacy) == 13)\nadd('EXPERIENCE_BRANCH_MODE_INVARIANT', 'MEMORY_AND_EXPERIENCE', 'HIGH' if not inventory_ok else 'INFO', 'PASS' if inventory_ok else 'FAIL', {'branch_count': len(branches), 'active_count': len(active), 'experience_only_count': len(legacy)}, 'Keep exactly one active lineage and all legacy branches read-only.', not inventory_ok)\nremote_branches = []\nremote_error = None\ntry:\n    cp = subprocess.run(['git', 'ls-remote', '--heads', 'origin'], cwd=REPO, capture_output=True, text=True, timeout=20)\n    if cp.returncode == 0:\n        for line in cp.stdout.splitlines():\n            parts = line.split()\n            if len(parts) == 2 and parts[1].startswith('refs/heads/'):\n                remote_branches.append(parts[1][len('refs/heads/'):])\n    else:\n        remote_error = cp.stderr[-500:]\nexcept Exception as exc:\n    remote_error = type(exc).__name__ + ':' + str(exc)\nregistered = {x.get('branch') for x in branches}\nremote_set = set(remote_branches)\nremote_inventory_ok = bool(remote_branches) and registered == remote_set\nadd('REMOTE_BRANCH_INVENTORY_MATCH', 'MEMORY_AND_EXPERIENCE', 'MEDIUM' if remote_branches and (not remote_inventory_ok) else 'LOW' if not remote_branches else 'INFO', 'PASS' if remote_inventory_ok else 'UNAVAILABLE' if not remote_branches else 'FAIL', {'registered_count': len(registered), 'remote_count': len(remote_set), 'missing_from_registry': sorted(remote_set - registered), 'registry_only': sorted(registered - remote_set), 'error': remote_error}, 'Keep experience registry synchronized with actual branch inventory.', False)\nruntime_text = RUNTIME.read_text(encoding='utf-8')\nlegacy_missing_refs = []\nfor entry in legacy:\n    for ep in entry.get('evidence', []):\n        if not (REPO / ep).exists():\n            legacy_missing_refs.append({'branch': entry.get('branch'), 'path': ep})\nmem_plane = next((x for x in ccore.get('planes', []) if x.get('plane_id') == 'MEMORY_AND_EXPERIENCE'), {})\nlegacy_component_bound = 'ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1' in mem_plane.get('active_components', [])\nlegacy_runtime_bound = hasattr(core, 'experience_read_exact') and hasattr(core, 'experience_search_verified')\nlegacy_probe_ok = False\nlegacy_probe_evidence = None\ntry:\n    probe_entry = next((x for x in core.experience.get('branches', []) if x.get('mode') == 'EXPERIENCE_ONLY' and x.get('evidence')))\n    probe_path = probe_entry['evidence'][0]\n    probe_item = core.experience_read_exact(probe_entry['branch'], probe_path)\n    legacy_probe_ok = probe_item.get('branch') == probe_entry['branch'] and probe_item.get('registered_commit') == probe_entry['head_sha'] and (probe_item.get('path') == probe_path) and (probe_item.get('bytes', 0) > 0) and (len(probe_item.get('sha256', '')) == 64)\n    legacy_probe_evidence = {'branch': probe_entry['branch'], 'commit': probe_entry['head_sha'], 'path': probe_path, 'sha256': probe_item.get('sha256'), 'bytes': probe_item.get('bytes'), 'transport': probe_item.get('transport')}\nexcept Exception as exc:\n    legacy_probe_evidence = {'error': type(exc).__name__ + ':' + str(exc)[:180]}\nfull_experience_retrieval = legacy_component_bound and legacy_runtime_bound and legacy_probe_ok\nadd('LEGACY_EXPERIENCE_CONTENT_RETRIEVAL', 'MEMORY_AND_EXPERIENCE', 'HIGH' if not full_experience_retrieval else 'INFO', 'PASS' if full_experience_retrieval else 'FAIL', {'missing_current_branch_evidence_paths': legacy_missing_refs[:30], 'missing_count': len(legacy_missing_refs), 'legacy_component_bound': legacy_component_bound, 'legacy_runtime_bound': legacy_runtime_bound, 'legacy_probe_ok': legacy_probe_ok, 'legacy_probe_evidence': legacy_probe_evidence, 'experience_search_returns_metadata_only': not full_experience_retrieval}, 'Maintain bounded read-only exact legacy retrieval with canonical component binding and live provenance probe.', not full_experience_retrieval)\nprov_cfg = ccore.get('legacy_experience_provenance', {}) if isinstance(ccore.get('legacy_experience_provenance', {}), dict) else {}\nprov_path = REPO / prov_cfg.get('artifact', '__missing__')\nprov_art = {}\nprov_error = None\ntry:\n    prov_art = load(prov_path)\nexcept Exception as exc:\n    prov_error = type(exc).__name__ + ':' + str(exc)[:180]\nprov_tmp = copy.deepcopy(prov_art) if isinstance(prov_art, dict) else {}\nprov_stored = prov_tmp.pop('artifact_digest', None) if isinstance(prov_tmp, dict) else None\nprov_digest_ok = bool(prov_stored) and prov_stored == h(prov_tmp) and (prov_stored == prov_cfg.get('artifact_digest'))\nlegacy_entries = [x for x in cexp.get('branches', []) if x.get('mode') == 'EXPERIENCE_ONLY']\nregistry_labels_ok = bool(legacy_entries) and all((x.get('lesson_provenance', {}).get('source_class') == 'HOST_CURATED_REGISTRY_SUMMARY' and x.get('lesson_provenance', {}).get('semantic_validation_by_rederivation') is False and (x.get('rederived_evidence', {}).get('source_class') == 'YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE') and (x.get('rederived_evidence', {}).get('semantic_equivalence_to_host_lessons_claimed') is False) for x in legacy_entries))\nprov_policy = prov_art.get('provenance_policy', {}) if isinstance(prov_art, dict) else {}\nprov_retrieval = prov_art.get('retrieval', {}) if isinstance(prov_art, dict) else {}\nprov_branch_coverage = prov_art.get('legacy_branch_count') == len(legacy_entries) == 13\nprov_raw_coverage = prov_retrieval.get('ratio') == 1.0 and (not prov_retrieval.get('failures'))\nprov_no_overclaim = prov_policy.get('host_curated_lessons') == 'PRESERVED_UNCHANGED_AND_EXPLICITLY_LABELLED' and prov_policy.get('yado_rederived_observations') == 'DERIVED_ONLY_FROM_EXACT_REGISTERED_RAW_EVIDENCE' and (prov_policy.get('semantic_equivalence_claimed') is False) and (prov_policy.get('legacy_code_execution') is False)\nruntime_provenance_exposed = 'lesson_provenance' in runtime_text and 'rederived_evidence' in runtime_text\nprovenance_ok = all([full_experience_retrieval, prov_digest_ok, registry_labels_ok, prov_branch_coverage, prov_raw_coverage, prov_no_overclaim, runtime_provenance_exposed])\nadd('LEGACY_EXPERIENCE_SUMMARY_PROVENANCE', 'MEMORY_AND_EXPERIENCE', 'INFO' if provenance_ok else 'MEDIUM', 'PASS' if provenance_ok else 'PARTIAL', {'registry_lessons_are_precompiled_summaries': True, 'host_summaries_explicitly_labelled': registry_labels_ok, 'verified_raw_retrieval_available': full_experience_retrieval, 'rederived_artifact_path': prov_cfg.get('artifact'), 'rederived_artifact_digest_ok': prov_digest_ok, 'legacy_branch_coverage': prov_branch_coverage, 'registered_raw_path_coverage': prov_retrieval.get('ratio'), 'raw_retrieval_failures': prov_retrieval.get('failures'), 'semantic_equivalence_claimed': prov_policy.get('semantic_equivalence_claimed'), 'runtime_provenance_exposed': runtime_provenance_exposed, 'error': prov_error}, 'Keep host-curated summaries separate from exact raw-evidence-derived observations; never silently promote lexical/structural observations into semantic validation.', False)\nexplicit_active = head.get('active_capabilities')\nhead_caps = set(explicit_active if isinstance(explicit_active, list) and explicit_active else head.get('inherited_capabilities', []) + head.get('new_capabilities', []))\nmanifest_active = set()\nfor plane in ccore.get('planes', []):\n    manifest_active.update(plane.get('active_components', []))\nunbound_caps = sorted((x for x in head_caps if x not in manifest_active and (not x.startswith('RESOURCE-')) and (not x.startswith('RUNTIME-'))))\nadd('HEAD_CAPABILITY_TO_CORE_BINDING', 'WORKSPACE_AND_INTEGRATION', 'MEDIUM' if unbound_caps else 'INFO', 'PASS' if not unbound_caps else 'PARTIAL', {'head_capabilities': sorted(head_caps), 'manifest_active_components': sorted(manifest_active), 'unbound_capabilities': unbound_caps}, 'Every claimed active capability should have an explicit runtime/component binding in the unified core manifest.', False)\nshadow_active = shadow.get('canonical_active') is True\nburn_uses_context = 'BOUNDED_STREAM_CONTEXT_MAP' in (REPO / 'runtime' / 'yado_g2_burnin_stress_v1.py').read_text(encoding='utf-8')\nwork_uses_context = 'BOUNDED_STREAM_CONTEXT_MAP' in (REPO / 'runtime' / 'yado_g2_applied_workload_suite_v1.py').read_text(encoding='utf-8')\nshadow_dependency = not shadow_active and burn_uses_context and work_uses_context\nadd('SHADOW_CONTEXT_ADAPTER_DEPENDENCE', 'MEMORY_AND_EXPERIENCE', 'HIGH' if shadow_dependency else 'INFO', 'FAIL' if shadow_dependency else 'PASS', {'adapter_canonical_active': shadow.get('canonical_active'), 'adapter_state': shadow.get('state'), 'burnin_uses_adapter': burn_uses_context, 'applied_workload_uses_adapter': work_uses_context, 'burnin_status': burn.get('status'), 'workload_status': work.get('status')}, 'Either admit the contextual stream adapter through an independent canonical gate or repeat key workload claims without it.', shadow_dependency)\nif 'canonical_raw_routing' in real:\n    raw = real.get('canonical_raw_routing', {}).get('accuracy')\n    raw_task_count = real.get('canonical_raw_routing', {}).get('task_count')\n    structured = legacy_real.get('structured_mirror_accuracy')\n    raw_evidence_mode = 'CANONICAL_RECHECK'\nelse:\n    raw = real.get('raw_unstructured', {}).get('accuracy')\n    raw_task_count = real.get('raw_unstructured', {}).get('task_count')\n    structured = real.get('structured_mirror_accuracy')\n    raw_evidence_mode = 'LEGACY_BASELINE'\nraw_block = isinstance(raw, (int, float)) and raw < 0.8 and isinstance(structured, (int, float)) and (structured >= 0.99)\nadd('SELF_AUDIT_EVIDENCE_FRESHNESS', 'SELF_AUDIT_AND_REPAIR', 'INFO', 'PASS', {'selected_evidence_source': real_evidence_source, 'mode': raw_evidence_mode, 'latest_canonical_recheck_available': REAL_LATEST.exists()}, 'Always select the newest verified canonical evidence compatible with the audited capability.', False)\nadd('RAW_TASK_REPRESENTATION_GAP', 'REPRESENTATION_AND_GROUNDING', 'CRITICAL' if raw_block else 'INFO', 'FAIL' if raw_block else 'PASS', {'raw_unstructured_accuracy': raw, 'structured_mirror_accuracy': structured, 'task_count': raw_task_count, 'evidence_source': real_evidence_source, 'evidence_mode': raw_evidence_mode, 'next_required_capability': real.get('next_required_capability')}, 'Build or improve a bounded raw-task representation/grounding layer without secret host feature extraction, then repeat fresh real-world transfer.', raw_block)\nnative_pass = native_v2.get('domain_pass', {}) if isinstance(native_v2, dict) else {}\nmath_bound = ccore.get('mathematical_reasoning', {}).get('mode') == 'ACTIVE_BOUNDED_SEMANTIC_EXPRESSION_SYNTHESIS'\nprogram_cfg = ccore.get('program_execution', {}) if isinstance(ccore.get('program_execution', {}), dict) else {}\nprogram_bound = program_cfg.get('component_id') == 'ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11' and program_cfg.get('mode') in {'ACTIVE_AMBIGUITY_AWARE_BOUNDED_SINGLE_FUNCTION_REPAIR', 'ACTIVE_BOUNDED_SINGLE_FUNCTION_REPAIR'}\nraw_proven = native_pass.get('REAL_UNSTRUCTURED_INPUT_TRANSFER') is True\nmath_proven = native_pass.get('REAL_MATHEMATICAL_REASONING_TRANSFER') is True and math_bound\nprogram_proven = program_bound and float(ccore.get('program_execution', {}).get('fresh_score', 0.0)) >= 1.0\nscience_binding = ccore.get('science_reasoning', {}) if isinstance(ccore.get('science_reasoning', {}), dict) else {}\nscience_bound = science_binding.get('mode') == 'ACTIVE_BOUNDED_TABULAR_SCIENTIFIC_REASONING'\nscience_fresh_receipt = bool(science_binding.get('fresh_admission_receipt_sha256'))\nscience_fresh_datasets = set(science_binding.get('fresh_datasets', []))\nscience_proven = science_bound and science_fresh_receipt and {'PENGUINS', 'TIPS'}.issubset(science_fresh_datasets)\nremaining = []\nif not raw_proven:\n    remaining.append('REAL_UNSTRUCTURED_INPUT_TRANSFER')\nif not math_proven:\n    remaining.append('REAL_MATHEMATICAL_REASONING_TRANSFER')\nif not program_proven:\n    remaining.append('REAL_PROGRAM_EXECUTION_TRANSFER')\nif not science_proven:\n    remaining.append('REAL_SCIENCE_DATA_TRANSFER')\nhost_scaffold_dependence = not science_proven\nadd('REAL_WORLD_GENERALIZATION_SCOPE', 'REPRESENTATION_AND_GROUNDING', 'MEDIUM' if remaining else 'INFO', 'PARTIAL' if remaining else 'PASS', {'remaining_native_domains': remaining, 'raw_proven': raw_proven, 'math_proven': math_proven, 'program_proven': program_proven, 'science_proven': science_proven, 'host_scaffold_dependence': host_scaffold_dependence, 'native_v2_state_source': str(REAL_NATIVE_V2.relative_to(REPO)).replace('\\\\', '/')}, 'Continue only on native capabilities still missing; do not reopen capabilities already admitted through canonical gates.', False)\nadd('REAL_SCIENCE_DATA_TRANSFER_NATIVE_EVOLUTION_V1', 'RESOURCE_AND_EVIDENCE', 'HIGH' if not science_proven else 'INFO', 'FAIL' if not science_proven else 'PASS', {'public_data_download_seen': native_v2.get('domain_scores', {}).get('REAL_SCIENCE_DATA_TRANSFER') is not None, 'native_scientific_reasoning_present': science_proven, 'science_canonical_bound': science_bound, 'science_fresh_receipt_bound': science_fresh_receipt, 'science_fresh_datasets': sorted(science_fresh_datasets), 'program_capability_now_canonical': program_bound, 'mathematics_capability_now_canonical': math_bound}, 'Create and independently admit a bounded native scientific-data reasoning capability over fresh public datasets.', not science_proven)\nself_audit_plane = next((x for x in ccore.get('planes', []) if x.get('plane_id') == 'SELF_AUDIT_AND_REPAIR'), {})\naudit_runtime_bound = any(('SELF_AUDIT' in str(x) or 'AUDIT' in str(x) for x in self_audit_plane.get('active_components', [])))\nadd('SELF_AUDIT_RUNTIME_BINDING', 'SELF_AUDIT_AND_REPAIR', 'MEDIUM' if not audit_runtime_bound else 'INFO', 'PARTIAL' if not audit_runtime_bound else 'PASS', {'active_components': self_audit_plane.get('active_components', []), 'this_audit_runtime': 'runtime/yado_unified_core_deep_self_audit_v1.py', 'canonical_self_audit_component_present': audit_runtime_bound}, 'If this deep self-audit survives independent comparison, admit it as a bounded canonical self-audit capability.', False)\nworkspace_plane = next((x for x in ccore.get('planes', []) if x.get('plane_id') == 'WORKSPACE_AND_INTEGRATION'), {})\nlegacy_consciousness_active = any(('CONSCIOUS' in str(x).upper() for x in workspace_plane.get('active_components', [])))\nadd('CONSCIOUSNESS_CLAIM_BOUNDARY', 'WORKSPACE_AND_INTEGRATION', 'INFO', 'PASS', {'active_consciousness_component': legacy_consciousness_active, 'legacy_experience_sources': workspace_plane.get('experience_sources', []), 'semantic_boundary': ccore.get('semantic_boundary')}, 'Keep legacy functional-consciousness experiments as experience until fresh admission; do not infer subjective consciousness.', False)\nlive_score = real.get('live_resource_availability', {}).get('score')\nACTION = REPO / 'candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json'\nBINDER = REPO / 'candidates/kernel-self-generated/g2-native-self-created-evidence-binder-gene-v1.json'\naction = load(ACTION)\nbinder = load(BINDER)\npriority = str(action.get('kernel_selected_next_step') or '')\nresult = (action.get('goal_action_binding') or {}).get('result') or {}\nselected_action = str(action.get('selected_action') or '')\ntarget_code = 'LIVE_RESOURCE_EVIDENCE_SCOPE'\nfrom yado_organ_runtime_native_v1 import tree_predict\ncomp = result.get('comprehension') or {}\nfeat = {'priority_match': priority == target_code, 'comprehension_complete': all((bool(comp.get(k)) for k in ('repository_commit_identity_extracted', 'readme_title_extracted', 'package_identity_extracted', 'provider_catalog_extracted', 'no_key_provider_set_extracted'))), 'direct_priority_evidence': bool(action.get('direct_priority_evidence')) and bool(result.get('direct_priority_evidence')), 'canonical_immutable': action.get('canonical_head_unchanged') is True and result.get('canonical_mutation') is False, 'conflict_resolution_pass': result.get('conflict_resolution_pass') is True, 'action_status_pass': str(result.get('status', '')).startswith('PASS'), 'action_relevant': selected_action == 'LIVE_RESOURCE_EVIDENCE_RECHECK' and priority == target_code}\nadd('LIVE_RESOURCE_EVIDENCE_SCOPE', 'RESOURCE_AND_EVIDENCE', 'LOW' if live_score == 1.0 else 'MEDIUM', 'PASS' if tree_predict(binder['model'], feat) == 'ACCEPT_FRESH_EVIDENCE' else 'PARTIAL', {'last_live_availability_score': live_score, 'sample_size': real.get('live_resource_availability', {}).get('total'), 'note': 'Availability is point-in-time infrastructure evidence; comprehension/integration was not proven.'}, 'Re-check live resources on demand and separately test content comprehension/conflict resolution.', False)\nseverity_weight = {'CRITICAL': 5, 'HIGH': 4, 'MEDIUM': 3, 'LOW': 2, 'INFO': 0}\nactionable = [f for f in findings if f['status'] not in ('PASS',) and severity_weight.get(f['severity'], 0) > 0]\nactionable.sort(key=lambda f: (-int(f['blocking']), -severity_weight.get(f['severity'], 0), f['code']))\npriority = [{'rank': i + 1, 'code': f['code'], 'area': f['area'], 'severity': f['severity'], 'blocking': f['blocking'], 'recommended_action': f['recommendation']} for i, f in enumerate(actionable)]\nsummary = {'finding_count': len(findings), 'critical_failures': sum((f['severity'] == 'CRITICAL' and f['status'] == 'FAIL' for f in findings)), 'high_failures': sum((f['severity'] == 'HIGH' and f['status'] == 'FAIL' for f in findings)), 'blocking_findings': sum((bool(f['blocking']) for f in findings)), 'pass_findings': sum((f['status'] == 'PASS' for f in findings)), 'partial_findings': sum((f['status'] == 'PARTIAL' for f in findings))}\nverdict = 'WITHHOLD_FURTHER_GENERATION_ADVANCE' if summary['blocking_findings'] else 'PASS_WITH_LIMITATIONS'\nnext_step = priority[0]['code'] if priority else core.developmental_frontier().get('manifest_frontier')\naudit_blockers = [p['code'] for p in priority if p.get('blocking')]\nobserved_open_deficits = copy.deepcopy(ledger.get('open_deficits', []))\nreceipt = {'schema': 'yado.unified_core.deep_self_audit.receipt.v1', 'status': 'WITHHOLD_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1' if summary['blocking_findings'] else 'PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1', 'audit_actor': {'core_id': core.CORE_ID, 'generation': head.get('generation_id'), 'execution_mode': 'KERNEL_NATIVE_SELF_INSPECTION', 'host_role': 'TRIGGER_TRANSPORT_PERSISTENCE_ONLY'}, 'github_run_id': os.getenv('GITHUB_RUN_ID'), 'github_sha': os.getenv('GITHUB_SHA'), 'core_snapshot': core.snapshot(), 'summary': summary, 'overall_verdict': verdict, 'findings': findings, 'self_selected_priority': priority, 'self_selected_next_step': next_step, 'audit_frontier_binding': {'observed_open_deficits': observed_open_deficits, 'proposed_next_step': next_step, 'blocking_backlog': audit_blockers, 'frontier_mutated_by_audit': False}, 'canonical_mutation': False, 'repair_applied': False, 'g3_genesis_performed': False, 'semantic_boundary': 'THE UNIFIED YADO SOFTWARE KERNEL INSPECTED ITS OWN LOCAL CANONICAL STATE, RUNTIME BINDINGS, EVIDENCE, BRANCH EXPERIENCE REGISTRY, AND CAPABILITY BOUNDARIES. THIS IS A SOFTWARE SELF-AUDIT, NOT PROOF OF SUBJECTIVE SELF-AWARENESS.'}\nreceipt['receipt_sha256'] = h(receipt)\nOUT.write_text(json.dumps(receipt, indent=2, sort_keys=True) + '\\n')\nrun_id = str(os.getenv('GITHUB_RUN_ID') or 'LOCAL')\ne = {'index': len(ledger['events']), 'event_id': f\"E{len(ledger['events']) + 1:04d}_UNIFIED_CORE_DEEP_SELF_AUDIT\", 'event_type': 'KERNEL_NATIVE_SELF_AUDIT', 'status': 'WITHHOLD' if summary['blocking_findings'] else 'PASS', 'generation': ledger['current_head'], 'deficit': 'FULL_UNIFIED_CORE_SELF_AUDIT_V1', 'effect': f\"SELF_AUDIT_COMPLETE; VERDICT={verdict}; FINDINGS={len(findings)}; BLOCKING={summary['blocking_findings']}; NEXT={(ledger.get('open_deficits') or ['UNKNOWN'])[0]}\", 'source_path': f'receipts/yado-unified-core-deep-self-audit-v1-run-{run_id}.json', 'source_digest': receipt['receipt_sha256'], 'run_id': run_id, 'parent_event_hash': ledger['tail_event_hash'], 'canonical_mutation': False, 'promotion_applied': False}\ne['event_hash'] = event_hash(e)\nledger['events'].append(e)\nledger['event_count'] = len(ledger['events'])\nledger['tail_event_hash'] = e['event_hash']\nledger['ledger_digest'] = h({k: v for k, v in ledger.items() if k != 'ledger_digest'})\nvalidate_ledger_v2(ledger)\nLEDGER.write_text(json.dumps(ledger, indent=2, sort_keys=True) + '\\n')\nprint(json.dumps({'status': receipt['status'], 'overall_verdict': verdict, 'summary': summary, 'self_selected_priority': priority[:10], 'self_selected_next_step': next_step, 'receipt_sha256': receipt['receipt_sha256']}, indent=2, sort_keys=True))\n"
           }
         ],
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "3c8ac569f016ac8c959933938bca08717fe37b099bb181229bceba61a1e92289",
+        "genome_digest": "11e49a1f67525d365a5f5a17de3bcf33e53bf264a457fc5295d1edd66135feeb",
         "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
         "mutation_count": 4,
         "novel_gene_count": 3,
-        "parent_genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+        "parent_genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "promotion_state": "SHADOW_ONLY",
         "schema": "yado.g2.evolutionary_genome.v1"
       },
@@ -752,38 +975,65 @@
           "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
           "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
         },
-        "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+        "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+        "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "genome_id": "G2-PARENT-GENOME-V1",
-        "parent_head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
+        "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
         "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
         "schema": "yado.g2.evolutionary_genome.v1"
       },
       "promotion_authorized": false,
-      "run_digest": "d6045c037571c5303af8d03c156d73c4ce1e43fa73899e244bd85ca28b69a694",
+      "run_digest": "f2acc9788dd23047e88bccb17e252f92479ceeb70a14a3159314cf5dc56a4a89",
       "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
       "selection": "CHILD",
       "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
     },
-    "core.cognitive_experience_snapshot": {
+    "core.all_experience_tri_organ_snapshot": {
       "automatic_canonical_promotion": false,
-      "cognitive_gene_id": "GENE-G2-CODING-EXPERIENCE-COGNITIVE-LAYER-V3-c09e6c4c7c8abfa0",
-      "component_id": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
-      "fresh_gate_receipt_sha256": "a8948a24f98fbbc3405a13099239a78c24dbdc30c6428bfaa10f11a26a727e86",
-      "guard_gene_id": "GENE-G2-COGNITIVE-CONFLICT-ARBITER-V1-d1bffef06b4c5aae",
-      "organ_gene_ids": {
-        "INTELLIGENCE": "GENE-G2-CODING-EXPERIENCE-INTELLIGENCE-V2-2e8aff24dfeacd7a",
-        "LOGIC": "GENE-G2-CODING-EXPERIENCE-LOGIC-V2-481f40e6993138f6",
-        "THINKING": "GENE-G2-CODING-EXPERIENCE-THINKING-V2-1b8a2855f84c94c0"
+      "components": {
+        "INTELLIGENCE": "ALG-G2-ALL-EXPERIENCE-CAUSAL-GENE-PORTFOLIO-INTELLIGENCE-V1",
+        "LOGIC": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+        "THINKING": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1"
       },
-      "rollback_parent_capabilities": {
+      "contract_routes": {
+        "EVENT_SEQUENCE_TO_BOOLEAN": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+        "RELATION_START_TO_STATE": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1"
+      },
+      "genome_id": "GENOME-G2-ALL-EXPERIENCE-TRI-ORGAN-V1-9e3b058de601792a",
+      "rollback_parents": {
         "INTELLIGENCE": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
         "LOGIC": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
         "THINKING": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
       },
-      "schema": "yado.g2.experience_conditioned_cognitive_layer.snapshot.v3",
-      "semantic_boundary": "BOUNDED EXPERIENCE-CONDITIONED CONTROL LAYER WITH LEARNED FAIL-CLOSED CONFLICT ARBITRATION; NOT GENERAL INTELLIGENCE OR CONSCIOUSNESS.",
+      "schema": "yado.g2.all_experience_tri_organ.runtime_snapshot.v1",
+      "status": "CANONICAL_ACTIVE",
+      "v4_preserved": true,
+      "v7_preserved": true
+    },
+    "core.cognitive_experience_snapshot": {
+      "automatic_canonical_promotion": false,
+      "component_id": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+      "global_negative_evidence": {
+        "failed_checks": [
+          "commit_ge_0_70",
+          "terminal_overall_ge_0_75",
+          "terminal_pass_ge_0_70"
+        ],
+        "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V6-ba372863026459fa",
+        "stress_receipt_sha256": "b21cb29d8d5d406edaa01f981a4afe0158b28ca4f0de31a11cb8baffdac8ef9c",
+        "stress_status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3"
+      },
+      "multidomain_genome_id": "GENOME-G2-MULTIDOMAIN-COGNITIVE-V1-c273b8cdc70909d8",
+      "parent_component": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V3",
+      "real_data_portfolio_id": "PORT-G2-REAL-DATA-d8e4bd61e7855571",
+      "schema": "yado.g2.experience_conditioned_cognitive_layer.snapshot.v4",
+      "semantic_boundary": "V4 IS A SINGLE BOUNDED COGNITIVE LAYER WITH TASK-ID SPECIALISTS AND V3 FAIL-CLOSED FALLBACK. IT DOES NOT CLAIM SUBJECTIVE CONSCIOUSNESS OR GENERAL INTELLIGENCE.",
+      "specialist_task_counts": {
+        "INTELLIGENCE": 6,
+        "LOGIC": 6,
+        "THINKING": 6
+      },
       "status": "CANONICAL_ACTIVE"
     },
     "core.evolutionary_parent_genome": {
@@ -822,6 +1072,60 @@
             "memory",
             "internet",
             "closed_loop"
+          ]
+        },
+        {
+          "branch": "main",
+          "claim_boundary": null,
+          "evidence": [
+            "experience/yado-global-historical-experience-corpus-v2.json",
+            "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+            "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+            "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+          ],
+          "lesson_provenance": {
+            "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+            "semantic_validation_by_rederivation": true,
+            "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+          },
+          "lessons": [
+            "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+            "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+            "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+            "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+            "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+            "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+          ],
+          "rederived_evidence": {
+            "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+            "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+            "cognitive_historical_fresh": 0.9583333333333334,
+            "observation_count": 138,
+            "old_corpus_regression": 0.972568578553616,
+            "pass_count": 81,
+            "semantic_equivalence_to_host_lessons_claimed": false,
+            "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+            "terminal_historical_fresh": 0.8888888888888888,
+            "terminal_observation_count": 51,
+            "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+            "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+            "withhold_count": 57
+          },
+          "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+          "score": 4,
+          "tags": [
+            "experience",
+            "history",
+            "logic",
+            "thinking",
+            "intelligence",
+            "cognitive",
+            "meta",
+            "repair",
+            "representation",
+            "withhold",
+            "regression",
+            "transfer"
           ]
         },
         {
@@ -948,11 +1252,11 @@
           "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
           "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
         },
-        "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+        "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+        "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "genome_id": "G2-PARENT-GENOME-V1",
-        "parent_head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
+        "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
         "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
         "schema": "yado.g2.evolutionary_genome.v1"
       }
@@ -1050,6 +1354,60 @@
             ]
           },
           {
+            "branch": "main",
+            "claim_boundary": null,
+            "evidence": [
+              "experience/yado-global-historical-experience-corpus-v2.json",
+              "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+              "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+              "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+              "semantic_validation_by_rederivation": true,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+            },
+            "lessons": [
+              "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+              "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+              "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+              "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+            ],
+            "rederived_evidence": {
+              "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+              "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+              "cognitive_historical_fresh": 0.9583333333333334,
+              "observation_count": 138,
+              "old_corpus_regression": 0.972568578553616,
+              "pass_count": 81,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+              "terminal_historical_fresh": 0.8888888888888888,
+              "terminal_observation_count": 51,
+              "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+              "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+              "withhold_count": 57
+            },
+            "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+            "score": 4,
+            "tags": [
+              "experience",
+              "history",
+              "logic",
+              "thinking",
+              "intelligence",
+              "cognitive",
+              "meta",
+              "repair",
+              "representation",
+              "withhold",
+              "regression",
+              "transfer"
+            ]
+          },
+          {
             "branch": "yado-kernel-task-v37-repair",
             "claim_boundary": null,
             "evidence": [
@@ -1117,11 +1475,11 @@
           }
         ],
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "e7403ebda60e83d212e09560d6a47c75f76bed93dd03c5c129a5e0fc0431ec99",
+        "genome_digest": "d558575d57425bc6a3f1c5d454a6ca4085fd5e0b7c54d10f93ec89009577632a",
         "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
         "mutation_count": 4,
         "novel_gene_count": 3,
-        "parent_genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+        "parent_genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "promotion_state": "SHADOW_ONLY",
         "schema": "yado.g2.evolutionary_genome.v1"
       },
@@ -1236,19 +1594,35 @@
           "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
           "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
         },
-        "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+        "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
         "generation": "G2_CANDIDATE_TRCG_V1",
-        "genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+        "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
         "genome_id": "G2-PARENT-GENOME-V1",
-        "parent_head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
+        "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
         "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
         "schema": "yado.g2.evolutionary_genome.v1"
       },
       "promotion_authorized": false,
-      "run_digest": "e7ec38913f1de5c78a86d9bfd5db947584154c4fb77f78d9c595c89dc06301c8",
+      "run_digest": "c9d3eb8c7d00e6f298e7728140201fbb0f4d5b8a2b1ee047c6365baa2e1bd0c8",
       "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
       "selection": "CHILD",
       "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
+    },
+    "core.global_experience_meta_snapshot": {
+      "allowed_actions": [
+        "COMMIT",
+        "CONTINUE",
+        "REVISE",
+        "SEEK_EVIDENCE"
+      ],
+      "automatic_canonical_promotion": false,
+      "component_id": "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7",
+      "genome_digest": "f5be58219cc9b49abad4c5c89871e6bb450a807c3e236f8cf404aba0d0eeb174",
+      "genome_id": "GENOME-G2-GLOBAL-EXPERIENCE-COGNITIVE-V7-dd1cb791d312e0ff",
+      "rollback_parent_component": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+      "schema": "yado.g2.global_experience_meta_controller.snapshot.v7",
+      "semantic_boundary": "BOUNDED EXPERIENCE-DERIVED META-ACTION CONTROLLER. IT DOES NOT REPLACE THE V4 COGNITIVE TASK EXECUTOR AND CANNOT PROMOTE ITS OWN OUTPUT TO CANONICAL STATE.",
+      "status": "CANONICAL_ACTIVE"
     },
     "core.snapshot": {
       "architecture_id": "G2_ARCH_3bd5db0089f7a52f",
@@ -1283,7 +1657,7 @@
         "pass": true
       },
       "core_id": "UNIFIED_YADO_CORE_V1",
-      "experience_registry_digest": "462e2455ab722dc34347d55a033704e4da3c9350cf4ee777d114bc744d8f66fa",
+      "experience_registry_digest": "c1a0c40b1494827a2794371f544d8531e14168e96b7ecbc53a0548fed164be43",
       "frontier": {
         "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
         "frontier_source": "architecture/evolution-ledger.json:open_deficits",
@@ -1330,6 +1704,60 @@
               "source_monitoring",
               "metacognition",
               "ablation"
+            ]
+          },
+          {
+            "branch": "main",
+            "claim_boundary": null,
+            "evidence": [
+              "experience/yado-global-historical-experience-corpus-v2.json",
+              "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+              "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+              "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+              "semantic_validation_by_rederivation": true,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+            },
+            "lessons": [
+              "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+              "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+              "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+              "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+              "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+            ],
+            "rederived_evidence": {
+              "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+              "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+              "cognitive_historical_fresh": 0.9583333333333334,
+              "observation_count": 138,
+              "old_corpus_regression": 0.972568578553616,
+              "pass_count": 81,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+              "terminal_historical_fresh": 0.8888888888888888,
+              "terminal_observation_count": 51,
+              "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+              "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+              "withhold_count": 57
+            },
+            "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+            "score": 2,
+            "tags": [
+              "experience",
+              "history",
+              "logic",
+              "thinking",
+              "intelligence",
+              "cognitive",
+              "meta",
+              "repair",
+              "representation",
+              "withhold",
+              "regression",
+              "transfer"
             ]
           },
           {
@@ -1439,8 +1867,8 @@
         ]
       },
       "generation": "G2_CANDIDATE_TRCG_V1",
-      "head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
-      "manifest_digest": "062ca7dd3a675c53e0343e0629077eb0cb17b0f580c08f9f89726230854942e7",
+      "head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+      "manifest_digest": "0681c02118548b95f08954201eab1faedfd24f7a0313b6667e93348662b142fc",
       "schema": "yado.unified_core.snapshot.v1",
       "semantic_boundary": "ONE ACTIVE YADO SOFTWARE KERNEL WITH LEGACY BRANCHES AS READ-ONLY EXPERIENCE; NOT AGI OR SUBJECTIVE CONSCIOUSNESS."
     }
@@ -1473,7 +1901,7 @@
   "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONSTRUCTOR_PRIMITIVE_GENESIS_V10",
   "parent_v8_receipt": "257d8e3df365ad2afa5c08834bbd2e981cc7505e153a5b3876af413998f8d2cb",
   "promotion_applied": false,
-  "receipt_sha256": "2638deb6a360a7e672bb6f1c11f7c0ab84b48eb46b35e29bc2917d257ed73b7f",
+  "receipt_sha256": "8bb98ba9563f3075f891659f4d2617c7bce7ac3f3a5f2853ec82f8254a9f07a5",
   "schema": "yado.g2.native_contextual_ast_transformer_source_realization.v9",
   "selected_source_candidate": null,
   "semantic_boundary": "V9 IS A STRICT SOURCE-REALIZATION TEST OF THE YADO-CREATED V8 CONTEXTUAL AST-TRANSFORMER POLICY GENE. THE HOST BINDS ONLY YADO-OWN GENE/RECEIPT/SOURCE HISTORY AND THE KERNEL-PROVENANT TARGET INTO EXPERIENCE, OBSERVES NATIVE ZERO-ARG EVOLUTION/SOURCE OUTPUTS, AND RUNS A CANDIDATE ONLY IN AN ISOLATED COPY. NO AST SUBTREE, CONDITION, PATCH, SOURCE TEMPLATE OR EXTERNAL MODEL IS PROVIDED. PASS REQUIRES NEW TARGET-BOUND COMPILING SOURCE THAT CLOSES LIVE_RESOURCE_EVIDENCE_SCOPE ONLY FOR VALID REAL EVIDENCE AND FAILS CLOSED FOR A COUNTERFACTUAL.",
