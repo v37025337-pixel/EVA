@@ -1,6 +1,6 @@
 {
   "candidate_controller": {
-    "candidate_digest": "291c22dd16ce0ab633fc07fbbe7907ee22b63bd0f2e65ff25a6b5c12148c97db",
+    "candidate_digest": "7255bcb6987cb428db5d642ededee8605a0032d7dba272edcf53060e6a46f633",
     "candidate_dimensions": [
       "CODE",
       "INTELLIGENCE",
@@ -8,18 +8,18 @@
       "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
       "THINKING"
     ],
-    "candidate_id": "CTRL-SHADOW-40395caeb4ef639b",
+    "candidate_id": "CTRL-SHADOW-6e7da83e2a37ea1a",
     "development": {
       "ablation_score": 0.0,
       "blind_cases": 4,
       "candidate_score": 1.0,
-      "created_at": "2026-09-04T12:59:18.652101+00:00",
-      "experiment_id": "DEV22-991bb3781eb4",
+      "created_at": "2026-09-07T15:03:45.035014+00:00",
+      "experiment_id": "DEV22-704caa2c60e8",
       "mechanism_kind": "SEQUENCE_PLANNER",
       "min_ablation_drop": 0.2,
       "min_score": 1.0,
-      "program_digest": "cb17d9e033d2c7819864c5cb22aae26f11b60bf073d6d8b4b194d100f47d7ee5",
-      "program_id": "PL-11b41405903c",
+      "program_digest": "4fdccbdf18b2548893b16ab74ed6ab7026c7b2562e8311a956aab117e540ba65",
+      "program_id": "PL-a31c25671d59",
       "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
       "restore_score": 1.0,
       "stage_ablation_scores": {},
@@ -29,8 +29,8 @@
       "train_cases": 8,
       "verdict": "COMMIT"
     },
-    "dimension_set_program_digest": "cb17d9e033d2c7819864c5cb22aae26f11b60bf073d6d8b4b194d100f47d7ee5",
-    "dimension_set_program_id": "PL-11b41405903c",
+    "dimension_set_program_digest": "4fdccbdf18b2548893b16ab74ed6ab7026c7b2562e8311a956aab117e540ba65",
+    "dimension_set_program_id": "PL-a31c25671d59",
     "dimension_set_program_type": "SequencePlannerProgram",
     "fresh_outputs": [
       {
@@ -111,17 +111,17 @@
         {
           "complexity": 5,
           "kind": "SEQUENCE_PLANNER",
-          "program_id": "PL-11b41405903c",
+          "program_id": "PL-a31c25671d59",
           "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
           "selected": true,
           "training_score": 1.0
         }
       ],
-      "created_at": "2026-09-04T12:59:18.649805+00:00",
-      "deficit_id": "D-a40cc6670acc",
+      "created_at": "2026-09-07T15:03:45.032636+00:00",
+      "deficit_id": "D-7c14820777dd",
       "selected_kind": "SEQUENCE_PLANNER",
-      "selected_program_id": "PL-11b41405903c",
-      "selection_id": "SEL-035f3570ac79",
+      "selected_program_id": "PL-a31c25671d59",
+      "selection_id": "SEL-e9d76feca793",
       "source_digest": "e2537585aeb4051df7b9c7b3941c29a6a0e42713e9035e05eab7c4d7b53c8e85",
       "target_capability": "EXTENDED_EVOLUTION_CONTROLLER_DIMENSION_SET_V1",
       "target_organ": "GENERATIVE_EXECUTIVE"
@@ -136,9 +136,101 @@
     "promotion_state": "SHADOW_ONLY",
     "schema": "yado.g2.extended_evolution_controller.executable_shadow_candidate.v1",
     "selection_receipt": {
-      "candidate_count": 7,
-      "gate_digest": "fa474b94788b48293e407277d788219cf338ddcec1629a4dc4498c97fae07672",
+      "candidate_count": 49,
+      "gate_digest": "6d70bded967961705fc8b2c71032d7711d29dc6805429e6675874c2045be87ad",
       "rejected": [
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "a429d8447fe8f3b3ddc99b35dc564bd406d4c335988c6475e741433fc1014d16",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-0850731a3c12",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "ec382432feaf345b6fee6f81e7ea1603a827aa513b65397ca85c4dd12cc97f00",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-096d37800084",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "4faa5f61b7c3083ddae8a667e9c3e22cbd2868ed7268ebed24841f0b088fdaff",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-18616b378460",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "eaee3478b6123f0bb9301c5bdd2123ce59a63fe26894635b6c2c0fa0ff8fd6e9",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-1999b0f7f8e2",
+          "verdict": "REJECT_PRECOMMIT"
+        },
         {
           "admitted": false,
           "critics": {
@@ -160,6 +252,167 @@
           "fit_gain": 0.275,
           "heldout_gain": 0.275,
           "skill_id": "EXTDIM-1fe05a219133",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "960b0495678b3d6fa3028dae1e058b3f8686d7fb1c3df704b635296d499a9ad8",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-20a69c0c4c8f",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "5ee8f6aa583c328bd88029fb97e7eb6a4f0ca564da7f34cbb13d55ff6551b351",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-218867af124b",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "18c130c3f694a0b82374261f383c583c3e2fe36492ea57a23f089a636d740ec8",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-222384f11d6c",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "41602bcc256568d32ba2eda9c25a1b7177b632c1b81264bb2b10913f3b42bc9f",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-245cd14de40d",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "1a90681e7829243f99d895ae55f8ee0df915da8c604f44cf67a22ff77fdda864",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-25faff438d97",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "b43af47d769304f1dffd16fe2f3bfa2ba32d027e8334dd9f66fb9e47ff2486c8",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-2616f9bd2407",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "0ec4a9156b31da6fdd64fa46ef23aa009e97ed7e8bf9ad090d06686149e1df2d",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-34924d3e2066",
           "verdict": "REJECT_PRECOMMIT"
         },
         {
@@ -197,6 +450,305 @@
             "state_integrity": true,
             "structural": true
           },
+          "evidence_digest": "dc7dfa0f89176350217fb06ee3dddf47f2fd97d02259c7a7ca39dd8c5ac3ac2f",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-3ba6f429298b",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "864da4f4727ac37e7adaa98e3f24d4699cfe93e7cb3e9b487da3d9abe3984da5",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-4024893de07a",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "5eb2fb86077637a9df61352f741fa7d16b3600c295c336c7df73e849734d09e3",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-48176353b9f6",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "89a50054ca0eed42dc23177b2224ad997a87c73adbe0c584c1943fb82f8dde22",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-5322371d2897",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "65b45eb822b972db014a6d390938280338f1c0c965e1fb046ccfd20c15033629",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-5a36f5f5fcd5",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "99d008411b801fee03c207c1c8e400cca6028674dee759175db805e0b3ebf549",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-5c575f51d419",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "ff255fd58f6324ff3a3dab8e62028d0a66b7f46fd39465717073b0b0c1752843",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-5d6da5d2efc0",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "ba6bc6f5afb1eabdbfda9a59896ef2ee5ec805a277ad6bde2be0649d53b050ff",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-73d12563ce3a",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "7432a0c5247392553f83664d24c401a19026f16cea8dd98a9a2a23d2aa84ff50",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-748b26d0f4cb",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "a20874e3ae12e3a1d2dbeb3426f009d4e22776e38885fb4fdd5495ffcc0c3d85",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-887b5a171143",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "2b6b6750a1a2c617adb5ae123335c9ed5bea9aa895e33744ddd58e8a39b3ec59",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-88c400e18951",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "e3b74d4d684abc7be3e7cacd29603c6f96bb5daebd1fe9c2edbe5c30bd40538f",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-8cc0708bcba6",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "b59be233384936a47f4920d9412799f2b43260b7955e4a7924f4f35e4247d075",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-91e594049794",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
           "evidence_digest": "73b6c9284cf6995af049350176ed3ccc33bd4b17f274eb3e8aef3353b24960c2",
           "failed_critics": [
             "fit_marginal_gain",
@@ -206,6 +758,213 @@
           "fit_gain": 0.275,
           "heldout_gain": 0.275,
           "skill_id": "EXTDIM-9c70f8765327",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "17715803db605a6b36ea0c2de09b89e0a36f36468e775b6ca3b9934694c565ca",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-a122d6907f46",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "1e1f7a595e64b4056f0e33e557a1a22fe30d5ee14e1a821a69e9fcbc28e43025",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-a93201075282",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "fbafc83634c6f6a01b159fc600f8e866c265456a3c859f3e0b4961c1b3fb84a7",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-af6d8b0db64f",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "605bb7afc6c3f589eec284ba4f6bbc0b9cbfb8d75177d911715e6f7593f77fe3",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-b09781f7b322",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "54361169237a0b1c6cf79a75f2b77d5b85049932858c97be0caeec0a76333a3e",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-b62a125e345f",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "8a4a90e41a880231ba83bc608a7afb9d9c0becc4c63c988248930d8d02c09036",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-be23401a8175",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "962d6fad8e4fc1320c5edee8949af923d34453341df6028ba5c97c2470c5084d",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-c1fe20a643a1",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "f5884f13c3a34502261a890357e0dcd2a393c60d5cc1e307a0a2b824416c3d6e",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-c972b9d40176",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "a1cbdfdcd4c7031d0caf95388aa9cff8ca41b1746f00b60dec2baf18f50e9644",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-cf53aaad6e7b",
           "verdict": "REJECT_PRECOMMIT"
         },
         {
@@ -243,6 +1002,52 @@
             "state_integrity": true,
             "structural": true
           },
+          "evidence_digest": "745c4eb078efab604809eae56ec5f90e1a748183e33032fe49bc5218d2a44244",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-e0328c142d15",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "764ee8a33b466b28256f1a1fd3a12b521fa3160df2c867947a55358d7907fa89",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-e89d5ff73412",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
           "evidence_digest": "7981a426014f82de4f2373a56abec8d2a22cf4f33effafab7d16ac9028873245",
           "failed_critics": [
             "fit_marginal_gain",
@@ -266,6 +1071,52 @@
             "state_integrity": true,
             "structural": true
           },
+          "evidence_digest": "d66e5d056adafbe33ecac415f6dac0989ec9ddcb1fde6b91e8e6e68ad6ba2974",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-ebf74cd32d03",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "ecb87e1ff8adc77aff35a2999d56158db39e0000973b433ab09078b8401237b3",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-f3bbfd413f1b",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
           "evidence_digest": "84d50164c3fa74f6d60834a76c7705e9b5aa39c32597cd0497b9fbe60c63ee4b",
           "failed_critics": [
             "fit_marginal_gain",
@@ -275,6 +1126,75 @@
           "fit_gain": 0.275,
           "heldout_gain": 0.275,
           "skill_id": "EXTDIM-f7406c5a3f85",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "c1db4cec03cbe180b3fae9300ce626ca8ba1168944758f14a61d3042bf7e5de6",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-f769c6c7aba7",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "3be46d5a1ee0e19ca94339ac54d9a19eea7531bffe3fd1bf68bdc2b1c14102ce",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-f970b3af9c8a",
+          "verdict": "REJECT_PRECOMMIT"
+        },
+        {
+          "admitted": false,
+          "critics": {
+            "fit_marginal_gain": false,
+            "heldout_gain_floor": false,
+            "heldout_harmlessness": true,
+            "regression": true,
+            "rollback": true,
+            "semantic": false,
+            "state_integrity": true,
+            "structural": true
+          },
+          "evidence_digest": "0b2d2f4b86cf7441c814b278db61c18df19ffee4fa8e84aa5e75c6f864d71c7a",
+          "failed_critics": [
+            "fit_marginal_gain",
+            "heldout_gain_floor",
+            "semantic"
+          ],
+          "fit_gain": 0.275,
+          "heldout_gain": 0.275,
+          "skill_id": "EXTDIM-fa32cb61d677",
           "verdict": "REJECT_PRECOMMIT"
         }
       ],
@@ -310,6 +1230,409 @@
   },
   "candidate_skill_rows": [
     {
+      "artifact_digest": "a59e87c1dc0bf448e5cf8f7e67cd2c7b0801637469dd50195e1e3ba3f29c3612",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-88c400e18951",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "5c947a17a1f280fa5b5a603ee3a50e940e246cc9102cb92af17e6e8851f6df76",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-cf53aaad6e7b",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "e2df352adeb775151eb603573c91af6504c6ba9e4994c7ea7bedcb08027dfef0",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-c1fe20a643a1",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "2536ab0dd08bc0ce85e8bbc740055e5bb8346a035465557e58af1b9cc25a4e6f",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-fa32cb61d677",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "062a656a0eadc2ae643529be9fe2ad9ba5f1cfdd3e5f56a6dd2e2b34b3665a71",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-096d37800084",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "44e8b28de4718bd8a024cd2cb99ab65aa9b35c3a1f06a31b807fffcb73d5d7f0",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-a122d6907f46",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "7237ad222dec3be1a2ee71d249a08f8b553d54dedf081875ac71382f9c668277",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-5322371d2897",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "863e0a80d905c22a6c064b29a121905ea4468180443f581a84ad646bf4a32b23",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-e89d5ff73412",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "e2fc0769251f2a45438eeab52fd0be67c627c1e74b7ef497736db6960022c124",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-f769c6c7aba7",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "a69a5d10bd17443abc6258a6d54ca8dbb96e8cdbcbf9ae8400fea0b2bdea1c49",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-b62a125e345f",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "aa8fed398ce86da8aa478f7999a3be86ad1f4887ec37a3a6e108fb53de77e199",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-f3bbfd413f1b",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "ed8118b240f6a89108b3c58f4e45f4fe56c7fe896d38c759a5cc6de86de01f35",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-5d6da5d2efc0",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "c9b9d288848499909a3bba2e7579e96fdaf6faf6d1abda4e4386f92c41d93b68",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-2616f9bd2407",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "6e9f6d5439655f6739fa060f2d2adc2373553f958f82368ae34347b53bcb4273",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-887b5a171143",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "178d60686499bf18f1da166eeb86cc2ee0d457de35700318116e88876109b4c7",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-748b26d0f4cb",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "73b85821b5df81e2fe5c02205346643267142db12c1082c3e1dab829b6c47702",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-20a69c0c4c8f",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "083866bc27cbba1ab2fefd956c94bb6e06255ee0cfa54e873c1704959245c729",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-e0328c142d15",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "ce015a6c9bc471a98f5d471b3989c400c282fe7386570397e4414e20d7f6bc7f",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-c972b9d40176",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "05cf45eef19474d588205fe3bb68f6b3bb7b4a02b077d5a497a5478beb061d11",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-0850731a3c12",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "0cdf5b392f9eae5fca7951741d91e6ffdce48fd6e9b7eeaa05558f9bd2a42cd3",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-245cd14de40d",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "86ffb8fe0752039fc3ab81ef40a9b4e3db5da2c6400a5af1e930ab7456a59c86",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-4024893de07a",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "ecf5a07613d417e08b6831989198cb31df85a460a78831d64df7644fe52dccb7",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-5c575f51d419",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "82549f42352d3f70c0015375d5551c3e17bc99668247bf7ec85e9a5d79f7eec6",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.55,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.55,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.55,
+      "skill_id": "EXTDIM-40d9d71295ee",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "12a6bd3ce48902049059f24862de6ef6b64d5fd49d23d4a4f053335585c73f0d",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-f970b3af9c8a",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "541173212b7bd3dfe16a6cb7badb02fd0af2e1b82b663caf1e39b21d555789d0",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-218867af124b",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "43b98924152838b02c2158c526c3e53a291c41f015a97619b6de0f221431ed92",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-18616b378460",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "b622df8d4129d67544b8ad5630a5cf62af784a58e42c071be6ca7c37db885c52",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-5a36f5f5fcd5",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "c7ae410613154b343c1e1d9cd4b55f59a85777a9a69fec5d31b46c2d3ad47ecc",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-222384f11d6c",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "9d7a8e4d5499f27982e0983a4e123083f9170e1fdd1da42f4702e08bea82a35e",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-b09781f7b322",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "c37a35d2a7e8846b99569345200acd7198e939cd52b055d9f8a53dd1f09ea610",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-af6d8b0db64f",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "cf6281eb0b81e67a3339f4cce33e589cbf49efcf341259d762425c85519b1454",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-ebf74cd32d03",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
       "artifact_digest": "f2e2a1ca307ed5b5b5ee6192df60edc7509ca05f4fb0c91f9678530d1f8deff4",
       "fit_baseline": 0.0,
       "fit_candidate": 0.275,
@@ -319,6 +1642,19 @@
       "rollback_available": true,
       "semantic_consistency": 0.275,
       "skill_id": "EXTDIM-f7406c5a3f85",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "77b9ad90491a1b7c7183d13422da916c8adda9db414c66ec918f4682253b8b84",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-8cc0708bcba6",
       "state_integrity": true,
       "structural_valid": true
     },
@@ -375,6 +1711,32 @@
       "structural_valid": true
     },
     {
+      "artifact_digest": "e7baf0595187860dfc30a517a401ab22132747180c797fcd15abc93ac3b15071",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-91e594049794",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "0df3f0a05381cae7048f01a4119d8aef961472b1041ca26ce8dcf8e68dc9e117",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-3ba6f429298b",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
       "artifact_digest": "457a86f70bca74d6689898344be855f9bec83d2e3d706044d4d8a2927a774ccd",
       "fit_baseline": 0.0,
       "fit_candidate": 0.275,
@@ -388,6 +1750,32 @@
       "structural_valid": true
     },
     {
+      "artifact_digest": "f6895618483bb32ee8721bac1c98ce71432ff01a4559e738439f3667b6091729",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-25faff438d97",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "ac8cf909a7f24c9f150a289270d0ed5c079398d85f0eb85a006b9d2d3fbfbffa",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-a93201075282",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
       "artifact_digest": "64e2c67f08850cca7972ae29e050ca536a84699c86d9961e56976148f5cfb5eb",
       "fit_baseline": 0.0,
       "fit_candidate": 0.275,
@@ -397,6 +1785,84 @@
       "rollback_available": true,
       "semantic_consistency": 0.275,
       "skill_id": "EXTDIM-9c70f8765327",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "1f0cb1759bd8fd51e72670b39a0be396aaf3a74f5a621a62945c689661cbbe9b",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-34924d3e2066",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "36c7c6acb28b4f544c0cad06f16f437024680e714caf6276eb5a591061fc63c1",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-73d12563ce3a",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "7ba1c273c5e34a350fea09be92aeba766c11b70a3d9a239f256699baab8871d0",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-48176353b9f6",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "0797b39a6e33393ef178c70eed16eb87d7f2cecc5dbf541a0adcb64fb803891e",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-1999b0f7f8e2",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "972e0cc60a75975ec231034656cc180c3907f2c9e6ceec2de285cead89be50a9",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.55,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.55,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.55,
+      "skill_id": "EXTDIM-5ae7091841fa",
+      "state_integrity": true,
+      "structural_valid": true
+    },
+    {
+      "artifact_digest": "974698de269d34ad30cc0b371660199638d5fa5bdf796a01745dd79740b080f1",
+      "fit_baseline": 0.0,
+      "fit_candidate": 0.275,
+      "heldout_baseline": 0.0,
+      "heldout_candidate": 0.275,
+      "regression_pass": true,
+      "rollback_available": true,
+      "semantic_consistency": 0.275,
+      "skill_id": "EXTDIM-be23401a8175",
       "state_integrity": true,
       "structural_valid": true
     }
@@ -428,27 +1894,237 @@
   "controller_source_mutation": false,
   "failure_history": [
     {
+      "next_required_capability": "ANONYMOUS_REMOTE_EXECUTION_PROVIDER_WITH_EXPLICIT_NO_AUTH_EVIDENCE",
+      "path": "candidates/kernel-self-generated/g2-anonymous-compute-interface-discovery-v2.json",
+      "receipt_sha256": "64499a30973bb11caf25d1a04179b69a3c25ff307e41bc84d67fdd2eb676a180",
+      "status": "WITHHOLD_G2_ANONYMOUS_COMPUTE_INTERFACE_DISCOVERY_V2"
+    },
+    {
+      "next_required_capability": "AUTHORIZED_FREE_COMPUTE_PROVIDER_SESSION_OR_ANONYMOUS_DEPLOYMENT_INTERFACE",
+      "path": "candidates/kernel-self-generated/g2-autonomous-free-compute-self-deployment-v1.json",
+      "receipt_sha256": "90a1d87a49edce4185eb4ed3bdda7dd5d44ac7ec42e17607833a602fe80ade69",
+      "status": "WITHHOLD_G2_AUTONOMOUS_FREE_COMPUTE_SELF_DEPLOYMENT_V1"
+    },
+    {
+      "next_required_capability": "G2_CODING_APPRENTICESHIP_REPAIR_V2",
+      "path": "candidates/kernel-self-generated/g2-coding-cognitive-layer-v1.json",
+      "receipt_sha256": "278ab0a4f6936316e45d3c1d21e877bb3a94df330c8e398a648dc7c108791295",
+      "status": "WITHHOLD_G2_CODING_APPRENTICESHIP_V1"
+    },
+    {
+      "next_required_capability": "G2_CODING_EXPERIENCE_COGNITIVE_CONSOLIDATION_V2",
+      "path": "candidates/kernel-self-generated/g2-coding-experience-cognitive-consolidation-v1.json",
+      "receipt_sha256": "778e165803951cc0c7470a77c36236cd02bbbad71573ad65e6c6ffc221d614d6",
+      "status": "WITHHOLD_G2_CODING_EXPERIENCE_COGNITIVE_CONSOLIDATION_V1"
+    },
+    {
+      "next_required_capability": "G2_CODING_REASONING_WORKSPACE_V3",
+      "path": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v2.json",
+      "receipt_sha256": "4bb67f36212437fd6c4d69bddf492120b930aa5ea32f19616b770e4e24368286",
+      "status": "WITHHOLD_G2_CODING_REASONING_WORKSPACE_V2"
+    },
+    {
+      "next_required_capability": "G2_CODING_REASONING_WORKSPACE_V4",
+      "path": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v3.json",
+      "receipt_sha256": "7e531bc6d99921ccf9fc2440e05c6368b5cded77811ffbbcbe80409ed56283d7",
+      "status": "WITHHOLD_G2_CODING_REASONING_WORKSPACE_V3"
+    },
+    {
+      "next_required_capability": "G2_CODING_REASONING_WORKSPACE_V5",
+      "path": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v4.json",
+      "receipt_sha256": "244360027b70abb74a05b08ff895067e87b79bc9d7080cc63939e366caab7522",
+      "status": "WITHHOLD_G2_CODING_REASONING_WORKSPACE_V4"
+    },
+    {
+      "next_required_capability": "G2_CODING_REASONING_WORKSPACE_V6",
+      "path": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v5.json",
+      "receipt_sha256": "966a9cde46da83c77490113e683d7f20429d7f713f2207e7358edd38f0b625ac",
+      "status": "WITHHOLD_G2_CODING_REASONING_WORKSPACE_V5"
+    },
+    {
+      "next_required_capability": "G2_CODING_REASONING_WORKSPACE_V7",
+      "path": "candidates/kernel-self-generated/g2-coding-reasoning-workspace-v6.json",
+      "receipt_sha256": "982773d159501e39f0a4cc4e6f5e4bb19a4704d52d099308fb23398ffc3d520c",
+      "status": "WITHHOLD_G2_CODING_REASONING_WORKSPACE_V6"
+    },
+    {
+      "next_required_capability": "G2_CODING_SPEC_GENERALIZATION_AND_REAL_CODE_TRANSFER_V3",
+      "path": "candidates/kernel-self-generated/g2-coding-spec-generalization-real-code-transfer-v2.json",
+      "receipt_sha256": "32d663295445de0f3849da148e3cb0da7a2e5f4cf8938533185ca80eaedf8c9a",
+      "status": "WITHHOLD_G2_CODING_SPEC_GENERALIZATION_REAL_CODE_TRANSFER_V2"
+    },
+    {
+      "next_required_capability": "G2_CODING_WHOLE_FUNCTION_SUBSTRATE_EXPANSION_V3",
+      "path": "candidates/kernel-self-generated/g2-coding-whole-function-substrate-expansion-v2.json",
+      "receipt_sha256": "92f7ea436e54aaa9fa4e291f3f568495cf4fa7e222892aff66ddad4ded17fda8",
+      "status": "WITHHOLD_G2_CODING_WHOLE_FUNCTION_SUBSTRATE_EXPANSION_V2"
+    },
+    {
+      "next_required_capability": "G2_COGNITIVE_CONFLICT_ARBITRATION_REPAIR_V1",
+      "path": "candidates/kernel-self-generated/g2-cognitive-consolidation-stress-admission-v1.json",
+      "receipt_sha256": "b111fd8d0d28c57aa8ed052228bf76da989d192515b4c54cd5bb3fd15b66d956",
+      "status": "WITHHOLD_G2_COGNITIVE_CONSOLIDATION_STRESS_ADMISSION_V1"
+    },
+    {
+      "next_required_capability": "G2_COGNITIVE_CONFLICT_ARBITRATION_REPAIR_V2",
+      "path": "candidates/kernel-self-generated/g2-cognitive-consolidation-stress-admission-v2.json",
+      "receipt_sha256": "fe5e0a9a44cf730908e9f08b4f8ecd9248fc2ea955c6a666c69a90eaf1f269e4",
+      "status": "WITHHOLD_G2_COGNITIVE_CONSOLIDATION_STRESS_ADMISSION_V2"
+    },
+    {
+      "next_required_capability": "COGNITIVE_CONTINUITY_FILE_INTEGRITY_REPAIR_V3",
+      "path": "candidates/kernel-self-generated/g2-continuity-file-integrity-v2.json",
+      "receipt_sha256": "d93a7aa19fad8f1f38909f9435a18a398f43f2564e584e16390d44bfbed4b7b6",
+      "status": "WITHHOLD_G2_CONTINUITY_FILE_INTEGRITY_V2"
+    },
+    {
       "next_required_capability": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
       "path": "candidates/kernel-self-generated/g2-evolution-controller-self-study-and-repair-v1.json",
-      "receipt_sha256": "0aebc2174192fac6a7936ea62c0ef7891ac3f19c29bfca06c909b3c6277a44da",
+      "receipt_sha256": "c28fcc90411469965d99fde8c4366a4c086971625d855535dba5b2c1fa252b28",
       "status": "WITHHOLD_G2_EVOLUTION_CONTROLLER_SELF_STUDY_AND_REPAIR_V1"
+    },
+    {
+      "next_required_capability": "G2_EXPERIENCE_CONDITIONED_LTI_LAYER_REPAIR_V2",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-lti-layer-admission-v1.json",
+      "receipt_sha256": "aab02fe5a4c0d94c5f00b846b30d3d64c705d51bccbe69dc17a2b25d56718ecb",
+      "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_LTI_LAYER_ADMISSION_V1"
+    },
+    {
+      "next_required_capability": "TASK_CONDITIONED_SEMANTIC_SOURCE_EDIT_META_LANGUAGE_GENESIS_V5",
+      "path": "candidates/kernel-self-generated/g2-experience-conditioned-novel-gene-genesis-v4.json",
+      "receipt_sha256": "1715e549ca6a19da73090e7bd8ebb4a6a2dc093216ae2c484d3b3c3ab2276040",
+      "status": "WITHHOLD_G2_EXPERIENCE_CONDITIONED_NOVEL_GENE_GENESIS_V4"
+    },
+    {
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_REPAIR_V3",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v2.json",
+      "receipt_sha256": "460c5c4c94110397aae965f2f6c197a8a186da4d681783ee88280bfb882468f7",
+      "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_V2"
+    },
+    {
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_REPAIR_V4",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-genesis-v3.json",
+      "receipt_sha256": "17f1373c91544baea2dbfa0741448bfcc189dda2d718b5ed06f8b5d8b81fe3ae",
+      "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_GENESIS_V3"
+    },
+    {
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V2",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-stress-v1.json",
+      "receipt_sha256": "267fa5a9226d4dd15fa9827ad1c5163e55d26e5eff0f455996b31e0a1452b273",
+      "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V1"
+    },
+    {
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V3",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-stress-v2.json",
+      "receipt_sha256": "ef9a93819eda948b7e38826c8407bc540d56295967e4e9b1b66f2d94d075dcae",
+      "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V2"
+    },
+    {
+      "next_required_capability": "GLOBAL_EXPERIENCE_COGNITIVE_STRESS_REPAIR_V4",
+      "path": "candidates/kernel-self-generated/g2-global-experience-cognitive-stress-v3.json",
+      "receipt_sha256": "b21cb29d8d5d406edaa01f981a4afe0158b28ca4f0de31a11cb8baffdac8ef9c",
+      "status": "WITHHOLD_G2_GLOBAL_EXPERIENCE_COGNITIVE_STRESS_V3"
+    },
+    {
+      "next_required_capability": "TASK_CONDITIONED_NATIVE_SOURCE_EMISSION_V1+NATIVE_PERSISTENT_GOAL_LOOP_CONTROLLER_V1",
+      "path": "candidates/kernel-self-generated/g2-goal-autonomous-source-creation-readiness-v1.json",
+      "receipt_sha256": "346e7f9ea4d19addbe1801d3a7d744adbf5ba7286ccaf54b1f5a99dfd1bde3f9",
+      "status": "WITHHOLD_G2_GOAL_AUTONOMOUS_SOURCE_CREATION_READINESS_V1"
+    },
+    {
+      "next_required_capability": "TASK_CONDITIONED_NATIVE_SOURCE_EMISSION_V1+NATIVE_PERSISTENT_GOAL_LOOP_CONTROLLER_V1",
+      "path": "candidates/kernel-self-generated/g2-goal-autonomous-source-creation-readiness-v2.json",
+      "receipt_sha256": "610d5c21e9e6c40c3ff0101b071b6968af72f545887a33956b36ca4a7acc86be",
+      "status": "WITHHOLD_G2_GOAL_AUTONOMOUS_SOURCE_CREATION_READINESS_V2"
+    },
+    {
+      "next_required_capability": "NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1",
+      "path": "candidates/kernel-self-generated/g2-history-derived-semantic-source-edit-serialization-v6.json",
+      "receipt_sha256": "696e1c1604c20ff48566b6df92dce2b9fbb1e92c2955f8421018958b7fb9ec50",
+      "status": "WITHHOLD_G2_HISTORY_DERIVED_SEMANTIC_SOURCE_EDIT_SERIALIZATION_V6"
+    },
+    {
+      "next_required_capability": "MULTIDOMAIN_ORGAN_TRAINING_REPAIR_V2",
+      "path": "candidates/kernel-self-generated/g2-multidomain-organ-training-v1.json",
+      "receipt_sha256": "806b96c91746a103c06ef1986cbf29d13c8b07bb53791bbce4b51225886664ce",
+      "status": "WITHHOLD_G2_MULTIDOMAIN_ORGAN_TRAINING_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_GENERAL_BINDER_SOURCE_REALIZATION_OR_SOURCE_LANGUAGE_EXPANSION_V2",
+      "path": "candidates/kernel-self-generated/g2-native-action-evidence-binder-source-realization-v1.json",
+      "receipt_sha256": "3ba1f24f43f7e38c05830a186b32558dde464c4ff52cd2b66c4c172017a28d1a",
+      "status": "WITHHOLD_G2_NATIVE_ACTION_EVIDENCE_BINDER_SOURCE_REALIZATION_V1"
+    },
+    {
+      "next_required_capability": "SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2",
+      "path": "candidates/kernel-self-generated/g2-native-compositional-string-transducer-gene-genesis-v1.json",
+      "receipt_sha256": "b23aeb8f9b2b4a817467b5e433a9f613d253371bfda09358c7c1e0741e9ad5be",
+      "status": "WITHHOLD_G2_NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_REPAIR_V14",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-genesis-v13.json",
+      "receipt_sha256": "30667fc3b13629b03a3d2b8b9a1f67e2d44f64ce7535f86e4ee574ca2b626039",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_GENESIS_V13"
+    },
+    {
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_REPAIR_V15",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-binding-repair-v14.json",
+      "receipt_sha256": "d865e8015968531be5887bfb57413cdb29bd002b508f8db7bc5fdeff3bae7e97",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_BINDING_REPAIR_V14"
+    },
+    {
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_RUNTIME_BINDING_REPAIR_V17",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-composition-genesis-v16.json",
+      "receipt_sha256": "d01257ae344d42e5a69094f049d3aee7cec0aceeceea156df28c9c2dddcd6249",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_GENESIS_V16"
+    },
+    {
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_GENESIS_V16",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-context-composition-repair-v15.json",
+      "receipt_sha256": "3cb1c8f2647e5f1bc12f1e8c2bc574b856110b7dc4a64e1198c4ce28aeab1966",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_REPAIR_V15"
+    },
+    {
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_REPAIR_V8",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-transformer-gene-genesis-v7.json",
+      "receipt_sha256": "6729104971433d77d846f0e56b91b1da89b04e58b0410e1623482a28b93e5716",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_GENE_GENESIS_V7"
+    },
+    {
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONSTRUCTOR_PRIMITIVE_GENESIS_V10",
+      "path": "candidates/kernel-self-generated/g2-native-contextual-ast-transformer-source-realization-v9.json",
+      "receipt_sha256": "2638deb6a360a7e672bb6f1c11f7c0ab84b48eb46b35e29bc2917d257ed73b7f",
+      "status": "WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_SOURCE_REALIZATION_V9"
+    },
+    {
+      "next_required_capability": "NATIVE_CONTROLLER_STRUCTURAL_SOURCE_MUTATION_GENE_V1",
+      "path": "candidates/kernel-self-generated/g2-native-controller-source-emitter-binding-v5.json",
+      "receipt_sha256": "b64321cda259f6a51853aaa43277bfcd137e25ed2c2c103dcab991906280ce4e",
+      "status": "WITHHOLD_G2_NATIVE_CONTROLLER_SOURCE_EMITTER_BINDING_V5"
     },
     {
       "next_required_capability": "NATIVE_EVOLUTIONARY_CONTROLLER_SELF_REPRESENTATION_AND_MUTATION_V2",
       "path": "candidates/kernel-self-generated/g2-native-evolution-space-self-expansion-v1.json",
-      "receipt_sha256": "2a11a0b666944d41233b8f91047638702cdb856c8aad1e84cf89016a752fcf18",
+      "receipt_sha256": "8a8f8657fdf520d1c1be330a2e04f44054ca85f339f29defd93bf0309b3d51af",
       "status": "WITHHOLD_G2_NATIVE_EVOLUTION_SPACE_SELF_EXPANSION_V1"
     },
     {
       "next_required_capability": "NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2",
       "path": "candidates/kernel-self-generated/g2-native-seedless-source-constructor-research-v1.json",
-      "receipt_sha256": "9fb5558d0146f42b48686e943c5c75f69d4d94106e863542d3bbe6dee93a206d",
+      "receipt_sha256": "8bf170db505089557057d4c51c9e1c5afdc74c3568c6f85cde77376d6c252cc5",
       "status": "WITHHOLD_G2_NATIVE_SEEDLESS_SOURCE_CONSTRUCTOR_RESEARCH_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_CONTEXTUAL_AST_TRANSFORMER_GENE_GENESIS_V7",
+      "path": "candidates/kernel-self-generated/g2-native-semantic-edit-to-ast-materialization-v6.json",
+      "receipt_sha256": "fcacafc756b8364924c12b281634edf7eb8bca107109b3c5bfa5ea0b29ef6c4e",
+      "status": "WITHHOLD_G2_NATIVE_SEMANTIC_EDIT_TO_AST_MATERIALIZATION_V6"
     },
     {
       "next_required_capability": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
       "path": "candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json",
-      "receipt_sha256": "bd388f8bb84104e5626e325c6f879b3142ffd45bd38ae0a08d2634d1b89e35e6",
+      "receipt_sha256": "c2248f52b054f6973ed3a5582ab37fff2c592943fb127b8b40f4c639ad102c2e",
       "status": "WITHHOLD_G2_NATIVE_SEMANTIC_SELF_MUTATION_EVOLUTION_CONTROLLER_V1"
     },
     {
@@ -460,24 +2136,78 @@
     {
       "next_required_capability": "NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
       "path": "candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json",
-      "receipt_sha256": "e4700dba1f88b61d3c6288316c29c64f1f2796aff30d7bb82f4a8a48df089382",
+      "receipt_sha256": "c63f538a25262707253a443b03d6d74f454e38dbf1aa03260d3a75c38b279233",
       "status": "WITHHOLD_G2_NATIVE_SOURCE_IR_EMITTER_BIRTH_V1"
+    },
+    {
+      "next_required_capability": "EXPERIENCE_CONDITIONED_NATIVE_EMITTER_GENE_GENESIS_V3",
+      "path": "candidates/kernel-self-generated/g2-native-source-ir-emitter-meta-language-evolution-v2.json",
+      "receipt_sha256": "4144b3c775c8c6ddfbebdbdd3413db20d7a81d81cc6b92e90cb2b0a3c4836863",
+      "status": "WITHHOLD_G2_NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2"
+    },
+    {
+      "next_required_capability": "NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1",
+      "path": "candidates/kernel-self-generated/g2-native-source-primitive-execution-serialization-v1.json",
+      "receipt_sha256": "07b191d5ac6c911beb4a4cf5c752ea2bba24bf6b4d609fbfb5a6012713b67f84",
+      "status": "WITHHOLD_G2_NATIVE_SOURCE_PRIMITIVE_EXECUTION_SERIALIZATION_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_SOURCE_REALIZATION_OF_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V2",
+      "path": "candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v1.json",
+      "receipt_sha256": "9232d4ca53ebdb499f440cb4873cfad2d39dca17a7c1716b2b62fb7fc747c9a6",
+      "status": "WITHHOLD_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1"
+    },
+    {
+      "next_required_capability": "NATIVE_SOURCE_PRIMITIVE_EXECUTION_AND_SERIALIZATION_V1",
+      "path": "candidates/kernel-self-generated/g2-native-source-realization-self-representation-driven-extended-controller-v2.json",
+      "receipt_sha256": "b36318e9215518ec970849874426d0b769f17e6e4d333f1065100a92fa8d2a52",
+      "status": "WITHHOLD_G2_NATIVE_SOURCE_REALIZATION_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V2"
     },
     {
       "next_required_capability": "SELF_EVOLVING_META_LANGUAGE_V2",
       "path": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
-      "receipt_sha256": "ed77ae79340974efb708b6007d49f7d6ad45628b21120345bf6592d5b3af764a",
+      "receipt_sha256": "73c58fa7644d2e1fc44737a9e951cfddf163a948817f7fd683c40329d94432a2",
       "status": "WITHHOLD_G2_NATIVE_TASK_CONDITIONED_META_LANGUAGE_SELF_GENESIS_V2"
+    },
+    {
+      "next_required_capability": "REAL_YADO_RECOVERY_EVIDENCE_REPAIR_V3",
+      "path": "candidates/kernel-self-generated/g2-real-yado-recovery-cognitive-repair-v2.json",
+      "receipt_sha256": "d96db690b6802bebde8af33b2446781ef2bd6478d611889b7185d641ebe9174c",
+      "status": "WITHHOLD_G2_REAL_YADO_RECOVERY_COGNITIVE_REPAIR_V2"
+    },
+    {
+      "next_required_capability": "REAL_YADO_RECOVERY_COGNITIVE_REPAIR_V2",
+      "path": "candidates/kernel-self-generated/g2-real-yado-recovery-cognitive-task-v1.json",
+      "receipt_sha256": "c846b563a8b5099fc5c189845d69de189c16026c52385abbe7adfb03aacff5d7",
+      "status": "WITHHOLD_G2_REAL_YADO_RECOVERY_COGNITIVE_TASK_V1"
     },
     {
       "next_required_capability": "NATIVE_TASK_CONDITIONED_META_LANGUAGE_SELF_GENESIS_V2",
       "path": "candidates/kernel-self-generated/g2-self-evolving-meta-language-spontaneous-genesis-v1.json",
       "receipt_sha256": "285f0a42a9211070d829701b0adefff20d63bbd1e90d8ceaa0a645cf0c26b89b",
       "status": "WITHHOLD_G2_SELF_EVOLVING_META_LANGUAGE_SPONTANEOUS_GENESIS_V1"
+    },
+    {
+      "next_required_capability": "SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3",
+      "path": "candidates/kernel-self-generated/g2-self-extending-string-transducer-meta-language-genesis-v2.json",
+      "receipt_sha256": "ff27ea04d87b8894d8f6a18c8340e2508ea22fa23899a6ea697cf4cc425e40fb",
+      "status": "WITHHOLD_G2_SELF_EXTENDING_STRING_TRANSDUCER_META_LANGUAGE_GENESIS_V2"
+    },
+    {
+      "next_required_capability": "SELF_HOSTED_META_LANGUAGE_FAMILY_CONSTRUCTOR_V4",
+      "path": "candidates/kernel-self-generated/g2-self-generated-primitive-algebra-genesis-v3.json",
+      "receipt_sha256": "b91a89716d829c660466dfc0f4d723f4f2e8a73914b80a17e0d2a25053197b6c",
+      "status": "WITHHOLD_G2_SELF_GENERATED_PRIMITIVE_ALGEBRA_GENESIS_V3"
+    },
+    {
+      "next_required_capability": "TARGET_SEMANTIC_SOURCE_CONSTRUCTOR_GENESIS_V5",
+      "path": "candidates/kernel-self-generated/g2-self-hosted-meta-language-family-constructor-v4.json",
+      "receipt_sha256": "cb8a25b109463e064b4d64ab7caf9158eb62e62a7bce6a4ca56a0007f8ac0570",
+      "status": "WITHHOLD_G2_SELF_HOSTED_META_LANGUAGE_FAMILY_CONSTRUCTOR_V4"
     }
   ],
   "next_required_capability": "NATIVE_SOURCE_REALIZATION_OF_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_V1",
-  "receipt_sha256": "01baf48cc142bdc37a65dc34b95cabd3b72636c0c0f7212f7c46cd929d34861f",
+  "receipt_sha256": "a58823869bf83bd19af9173d95ea614ebb76604e4746a2a9528b5e9fd5ed87e4",
   "schema": "yado.g2.self_representation_driven_extended_controller_candidate.v1",
   "selected_target": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
   "self_representation_probe": {
@@ -492,7 +2222,7 @@
   "status": "PASS_SHADOW_G2_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_CANDIDATE_V1",
   "subsequent_native_evolution": {
     "candidate_visible_in_child_experience": true,
-    "run_digest": "3cae2ee56de342edf196cdfcf745d9b5a4867df5afeffd7484feaf148a4c4144",
+    "run_digest": "ff6178766081081d315c5698a33565a9c95977cc6f6c85a28a2f04e43388a25a",
     "selection": "CHILD"
   },
   "task": {
@@ -509,9 +2239,15 @@
       "shadow_only": true
     },
     "controller_self_study": "experience/yado-evolution-controller-self-study-v1.json",
+    "current_context": {
+      "anonymous_compute_deficit": "ANONYMOUS_REMOTE_EXECUTION_PROVIDER_WITH_EXPLICIT_NO_AUTH_EVIDENCE",
+      "current_priority": "CODING_UNSUPPORTED_PROGRAM_FAMILIES",
+      "self_deployment_deficit": "AUTHORIZED_FREE_COMPUTE_PROVIDER_SESSION_OR_ANONYMOUS_DEPLOYMENT_INTERFACE",
+      "semantic_controller_deficit": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER"
+    },
     "host_role": "FAILURE_HISTORY_TRANSPORT_MECHANICAL_SCORING_AND_STRICT_EVALUATION_ONLY",
-    "instruction": "Choose the extension target through YADO native selection using your own failure history. Then use YADO native developmental synthesis to create the executable candidate representation and validate it fresh with ablation/restore. Do not mutate canonical or the controller source in this stage.",
-    "objective": "YADO_USE_ITS_EXECUTABLE_SELF_REPRESENTATION_TO_CREATE_AN_EXTENDED_EVOLUTION_CONTROLLER_SHADOW_CANDIDATE",
+    "instruction": "Use the newest semantic-controller WITHHOLD plus all persisted YADO WITHHOLD history, including coding/meta-language and self-deployment/anonymous-compute deficits, as the candidate extension pool. Let YADO's own skill gate choose exactly one outside capability and let the developmental executive create an executable broader controller representation with fresh/ablation/restore. The host does not name the new dimension, patch the controller, provide a gene schema, or provide a source template.",
+    "objective": "YADO_USE_ACCUMULATED_FAILURE_HISTORY_AND_SELF_REPRESENTATION_TO_CREATE_A_BROADER_EXECUTABLE_EVOLUTION_CONTROLLER_CANDIDATE",
     "pass_only_if": [
       "the confirmed executable self-representation is consumed",
       "candidate extension targets come only from YADO own unresolved failure history",
@@ -529,14 +2265,106 @@
     "self_representation_artifact": "candidates/kernel-self-generated/g2-native-executable-evolution-controller-self-representation-v1.json",
     "stop_condition": "EXTENDED_CONTROLLER_EXECUTABLE_SHADOW_CANDIDATE_PASS_OR_EXPLICIT_WITHHOLD",
     "task": "Use your executable self-representation of the evolution-space boundary to decide which currently-outside capability should become the next evolutionary dimension, then create an executable shadow candidate of an extended evolutionary controller. The host must not name the new dimension or write a controller patch.",
-    "trigger": 2,
-    "trigger_reason": "START_SELF_REPRESENTATION_DRIVEN_EXTENDED_CONTROLLER_CANDIDATE_V1",
+    "trigger": 3,
+    "trigger_reason": "CONTINUE_AFTER_ACCUMULATED_EXPERIENCE_SEMANTIC_CONTROLLER_WITHHOLD",
     "unresolved_controller_failure": "candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json"
   },
   "yado_target_selection": {
-    "candidate_count": 7,
-    "gate_digest": "fa474b94788b48293e407277d788219cf338ddcec1629a4dc4498c97fae07672",
+    "candidate_count": 49,
+    "gate_digest": "6d70bded967961705fc8b2c71032d7711d29dc6805429e6675874c2045be87ad",
     "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "a429d8447fe8f3b3ddc99b35dc564bd406d4c335988c6475e741433fc1014d16",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-0850731a3c12",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "ec382432feaf345b6fee6f81e7ea1603a827aa513b65397ca85c4dd12cc97f00",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-096d37800084",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "4faa5f61b7c3083ddae8a667e9c3e22cbd2868ed7268ebed24841f0b088fdaff",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-18616b378460",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "eaee3478b6123f0bb9301c5bdd2123ce59a63fe26894635b6c2c0fa0ff8fd6e9",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-1999b0f7f8e2",
+        "verdict": "REJECT_PRECOMMIT"
+      },
       {
         "admitted": false,
         "critics": {
@@ -558,6 +2386,167 @@
         "fit_gain": 0.275,
         "heldout_gain": 0.275,
         "skill_id": "EXTDIM-1fe05a219133",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "960b0495678b3d6fa3028dae1e058b3f8686d7fb1c3df704b635296d499a9ad8",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-20a69c0c4c8f",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "5ee8f6aa583c328bd88029fb97e7eb6a4f0ca564da7f34cbb13d55ff6551b351",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-218867af124b",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "18c130c3f694a0b82374261f383c583c3e2fe36492ea57a23f089a636d740ec8",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-222384f11d6c",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "41602bcc256568d32ba2eda9c25a1b7177b632c1b81264bb2b10913f3b42bc9f",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-245cd14de40d",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "1a90681e7829243f99d895ae55f8ee0df915da8c604f44cf67a22ff77fdda864",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-25faff438d97",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "b43af47d769304f1dffd16fe2f3bfa2ba32d027e8334dd9f66fb9e47ff2486c8",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-2616f9bd2407",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "0ec4a9156b31da6fdd64fa46ef23aa009e97ed7e8bf9ad090d06686149e1df2d",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-34924d3e2066",
         "verdict": "REJECT_PRECOMMIT"
       },
       {
@@ -595,6 +2584,305 @@
           "state_integrity": true,
           "structural": true
         },
+        "evidence_digest": "dc7dfa0f89176350217fb06ee3dddf47f2fd97d02259c7a7ca39dd8c5ac3ac2f",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-3ba6f429298b",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "864da4f4727ac37e7adaa98e3f24d4699cfe93e7cb3e9b487da3d9abe3984da5",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-4024893de07a",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "5eb2fb86077637a9df61352f741fa7d16b3600c295c336c7df73e849734d09e3",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-48176353b9f6",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "89a50054ca0eed42dc23177b2224ad997a87c73adbe0c584c1943fb82f8dde22",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-5322371d2897",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "65b45eb822b972db014a6d390938280338f1c0c965e1fb046ccfd20c15033629",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-5a36f5f5fcd5",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "99d008411b801fee03c207c1c8e400cca6028674dee759175db805e0b3ebf549",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-5c575f51d419",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "ff255fd58f6324ff3a3dab8e62028d0a66b7f46fd39465717073b0b0c1752843",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-5d6da5d2efc0",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "ba6bc6f5afb1eabdbfda9a59896ef2ee5ec805a277ad6bde2be0649d53b050ff",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-73d12563ce3a",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "7432a0c5247392553f83664d24c401a19026f16cea8dd98a9a2a23d2aa84ff50",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-748b26d0f4cb",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "a20874e3ae12e3a1d2dbeb3426f009d4e22776e38885fb4fdd5495ffcc0c3d85",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-887b5a171143",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "2b6b6750a1a2c617adb5ae123335c9ed5bea9aa895e33744ddd58e8a39b3ec59",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-88c400e18951",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "e3b74d4d684abc7be3e7cacd29603c6f96bb5daebd1fe9c2edbe5c30bd40538f",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-8cc0708bcba6",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "b59be233384936a47f4920d9412799f2b43260b7955e4a7924f4f35e4247d075",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-91e594049794",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
         "evidence_digest": "73b6c9284cf6995af049350176ed3ccc33bd4b17f274eb3e8aef3353b24960c2",
         "failed_critics": [
           "fit_marginal_gain",
@@ -604,6 +2892,213 @@
         "fit_gain": 0.275,
         "heldout_gain": 0.275,
         "skill_id": "EXTDIM-9c70f8765327",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "17715803db605a6b36ea0c2de09b89e0a36f36468e775b6ca3b9934694c565ca",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-a122d6907f46",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "1e1f7a595e64b4056f0e33e557a1a22fe30d5ee14e1a821a69e9fcbc28e43025",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-a93201075282",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "fbafc83634c6f6a01b159fc600f8e866c265456a3c859f3e0b4961c1b3fb84a7",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-af6d8b0db64f",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "605bb7afc6c3f589eec284ba4f6bbc0b9cbfb8d75177d911715e6f7593f77fe3",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-b09781f7b322",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "54361169237a0b1c6cf79a75f2b77d5b85049932858c97be0caeec0a76333a3e",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-b62a125e345f",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "8a4a90e41a880231ba83bc608a7afb9d9c0becc4c63c988248930d8d02c09036",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-be23401a8175",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "962d6fad8e4fc1320c5edee8949af923d34453341df6028ba5c97c2470c5084d",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-c1fe20a643a1",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "f5884f13c3a34502261a890357e0dcd2a393c60d5cc1e307a0a2b824416c3d6e",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-c972b9d40176",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "a1cbdfdcd4c7031d0caf95388aa9cff8ca41b1746f00b60dec2baf18f50e9644",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-cf53aaad6e7b",
         "verdict": "REJECT_PRECOMMIT"
       },
       {
@@ -641,6 +3136,52 @@
           "state_integrity": true,
           "structural": true
         },
+        "evidence_digest": "745c4eb078efab604809eae56ec5f90e1a748183e33032fe49bc5218d2a44244",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-e0328c142d15",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "764ee8a33b466b28256f1a1fd3a12b521fa3160df2c867947a55358d7907fa89",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-e89d5ff73412",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
         "evidence_digest": "7981a426014f82de4f2373a56abec8d2a22cf4f33effafab7d16ac9028873245",
         "failed_critics": [
           "fit_marginal_gain",
@@ -664,6 +3205,52 @@
           "state_integrity": true,
           "structural": true
         },
+        "evidence_digest": "d66e5d056adafbe33ecac415f6dac0989ec9ddcb1fde6b91e8e6e68ad6ba2974",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-ebf74cd32d03",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "ecb87e1ff8adc77aff35a2999d56158db39e0000973b433ab09078b8401237b3",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-f3bbfd413f1b",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
         "evidence_digest": "84d50164c3fa74f6d60834a76c7705e9b5aa39c32597cd0497b9fbe60c63ee4b",
         "failed_critics": [
           "fit_marginal_gain",
@@ -673,6 +3260,75 @@
         "fit_gain": 0.275,
         "heldout_gain": 0.275,
         "skill_id": "EXTDIM-f7406c5a3f85",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "c1db4cec03cbe180b3fae9300ce626ca8ba1168944758f14a61d3042bf7e5de6",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-f769c6c7aba7",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "3be46d5a1ee0e19ca94339ac54d9a19eea7531bffe3fd1bf68bdc2b1c14102ce",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-f970b3af9c8a",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "0b2d2f4b86cf7441c814b278db61c18df19ffee4fa8e84aa5e75c6f864d71c7a",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "semantic"
+        ],
+        "fit_gain": 0.275,
+        "heldout_gain": 0.275,
+        "skill_id": "EXTDIM-fa32cb61d677",
         "verdict": "REJECT_PRECOMMIT"
       }
     ],
