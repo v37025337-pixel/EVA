@@ -1,0 +1,111 @@
+{
+  "schema": "yado.g2.public_dns_direct_probe.task.v1",
+  "task_id": "USER_20260907_PUBLIC_DNS_DIRECT_PROBE_V1",
+  "provenance": "user_screenshot_and_request_2026-09-07T11:40:01Z",
+  "objective": "DIRECTLY_USE_AND_RESEARCH_THE_PUBLIC_DNS_RESOLVERS_FROM_THE_USER_SCREENSHOT",
+  "providers": [
+    {
+      "id": "GOOGLE",
+      "name": "Google Public DNS",
+      "ipv4": [
+        "8.8.8.8",
+        "8.8.4.4"
+      ]
+    },
+    {
+      "id": "CLOUDFLARE",
+      "name": "Cloudflare 1.1.1.1",
+      "ipv4": [
+        "1.1.1.1",
+        "1.0.0.1"
+      ]
+    },
+    {
+      "id": "OPENDNS",
+      "name": "OpenDNS",
+      "ipv4": [
+        "208.67.222.222",
+        "208.67.220.220"
+      ]
+    },
+    {
+      "id": "QUAD9",
+      "name": "Quad9 Secure",
+      "ipv4": [
+        "9.9.9.9",
+        "149.112.112.112"
+      ]
+    },
+    {
+      "id": "NEXTDNS",
+      "name": "NextDNS Anycast",
+      "ipv4": [
+        "45.90.28.0",
+        "45.90.30.0"
+      ]
+    }
+  ],
+  "probes": [
+    {
+      "id": "UDP_A_REPEAT",
+      "transport": "UDP",
+      "qname": "example.com",
+      "qtype": "A",
+      "repeat": 3,
+      "purpose": "resolver_reachability_and_runner_relative_latency"
+    },
+    {
+      "id": "TCP_A",
+      "transport": "TCP",
+      "qname": "example.com",
+      "qtype": "A",
+      "repeat": 1,
+      "purpose": "tcp_53_support"
+    },
+    {
+      "id": "DNSSEC_FAIL",
+      "transport": "UDP",
+      "qname": "dnssec-failed.org",
+      "qtype": "A",
+      "repeat": 1,
+      "purpose": "observe_dnssec_validation_behavior"
+    },
+    {
+      "id": "NXDOMAIN",
+      "transport": "UDP",
+      "qname": "yado-direct-probe.invalid",
+      "qtype": "A",
+      "repeat": 1,
+      "purpose": "negative_answer_behavior"
+    },
+    {
+      "id": "CHAOS_ID",
+      "transport": "UDP",
+      "qname": "id.server",
+      "qtype": "TXT",
+      "qclass": "CH",
+      "repeat": 1,
+      "purpose": "optional_resolver_identity_or_pop_signal"
+    }
+  ],
+  "interpretation_rules": [
+    "LATENCY_IS_FROM_THE_GITHUB_RUNNER_NETWORK_ONLY_NOT_THE_USER_NETWORK",
+    "DNSSEC_FAILED_ORG_SERVFAIL_IS_EVIDENCE_CONSISTENT_WITH_DNSSEC_VALIDATION",
+    "CHAOS_ID_NONRESPONSE_IS_NOT_A_FAILURE",
+    "NEXTDNS_PERSONALIZED_FILTERING_IS_NOT_INFERRED_FROM_RAW_IP_REACHABILITY",
+    "NO_MALICIOUS_DOMAINS_OR_INTRUSIVE_SCANNING",
+    "ONLY_PUBLIC_RECURSIVE_DNS_QUERIES_TO_THE_LISTED_RESOLVER_IPS"
+  ],
+  "constraints": {
+    "direct_ip_queries": true,
+    "no_system_resolver_reconfiguration": true,
+    "no_credentials": true,
+    "no_port_scanning": true,
+    "allowed_ports": [
+      53
+    ],
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  }
+}
