@@ -1,6 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 from collections import Counter
+from functools import lru_cache
 import hashlib,json,math,random,re,sys
 
 ROOT=Path(__file__).resolve().parent
@@ -79,6 +80,7 @@ if parent_choice.get('action')!='SELECT_PARENT':raise RuntimeError('NATIVE_PAREN
 if parent_choice.get('variant_id')!='SHADOW_CHAR45_V4':raise RuntimeError('NATIVE_PARENT_NOT_SHADOW_CHAR45:'+canon(parent_choice))
 
 # Generic frozen char45 scoring primitive.
+@lru_cache(maxsize=250000)
 def raw_scores(text):
     mode=parent_spec.payload['mode'];dim=int(parent_spec.payload['dim']);x=_features(text,mode,dim)
     rows=[]
@@ -88,6 +90,7 @@ def raw_scores(text):
     rows.sort(key=lambda z:(-z[0],z[1]))
     return rows
 
+@lru_cache(maxsize=250000)
 def token_windows(text,width,stride):
     toks=re.findall(r"[a-zA-Z0-9_]+",str(text))
     if not toks:return [str(text)]
