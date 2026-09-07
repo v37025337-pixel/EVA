@@ -1,0 +1,72 @@
+name: YADO G2 Native Raw Representation Strategy Genesis Repair V4
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-g2-native-raw-representation-strategy-genesis-repair-v4-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-native-raw-representation-strategy-genesis-repair-v4
+  cancel-in-progress: true
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - name: Canonical guard before V4
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile V4 observer
+        run: python -m py_compile runtime/yado_kernel_g2_native_raw_representation_strategy_genesis_repair_v4.py
+      - name: Let YADO repair the raw representation strategy
+        id: repair
+        continue-on-error: true
+        run: timeout --signal=TERM --kill-after=30s 2100s python runtime/yado_kernel_g2_native_raw_representation_strategy_genesis_repair_v4.py
+      - name: Canonical guard after V4
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist V4 PASS or WITHHOLD
+        if: always()
+        run: |
+          git config user.name "YADO Raw Strategy Repair V4"
+          git config user.email "actions@users.noreply.github.com"
+          files=()
+          [ -f architecture/yado-kernel-g2-native-raw-representation-strategy-genesis-repair-v4.json ] && files+=(architecture/yado-kernel-g2-native-raw-representation-strategy-genesis-repair-v4.json)
+          [ -f candidates/kernel-self-generated/raw-task-representation-strategy-model-v4.json ] && files+=(candidates/kernel-self-generated/raw-task-representation-strategy-model-v4.json)
+          [ -f resources/yado-raw-task-representation-strategy-genesis-repair-v4-fresh.json ] && files+=(resources/yado-raw-task-representation-strategy-genesis-repair-v4-fresh.json)
+          if [ ${#files[@]} -gt 0 ]; then git add "${files[@]}"; fi
+          git diff --cached --quiet || git commit -m "Persist YADO raw strategy repair V4 evidence [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - name: Enforce honest V4 verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("architecture/yado-kernel-g2-native-raw-representation-strategy-genesis-repair-v4.json")
+          if not p.exists(): raise SystemExit("MISSING_RAW_STRATEGY_REPAIR_V4")
+          r=json.loads(p.read_text())
+          assert r["canonical_mutation"] is False,r
+          if r["status"]!="PASS_SHADOW_G2_NATIVE_RAW_REPRESENTATION_STRATEGY_GENESIS_REPAIR_V4":
+              raise SystemExit("SEMANTIC_WITHHOLD:"+str(r["status"]))
+          print(r["status"],r["selected_family"],r["fresh_metrics"],r["next_required_capability"])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-native-raw-strategy-repair-v4-${{ github.run_id }}
+          path: |
+            architecture/yado-kernel-g2-native-raw-representation-strategy-genesis-repair-v4.json
+            candidates/kernel-self-generated/raw-task-representation-strategy-model-v4.json
+            resources/yado-raw-task-representation-strategy-genesis-repair-v4-fresh.json
+          if-no-files-found: warn
