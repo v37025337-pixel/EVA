@@ -1,6 +1,15 @@
 {
+  "accumulated_experience_evidence": {
+    "anonymous_compute_experience_digest": "d58f26d70f09ec4dce3b6d4473557d4a7fd5341dda5edc39a9e1815d501e5401",
+    "developer_resource_experience_digest": "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2",
+    "ir_emitter_failure_receipt": "c63f538a25262707253a443b03d6d74f454e38dbf1aa03260d3a75c38b279233",
+    "meta_language_failure_receipt": "73c58fa7644d2e1fc44737a9e951cfddf163a948817f7fd683c40329d94432a2",
+    "self_deployment_experience_digest": "71d44756495391673ddb9ec2b1aa564969d14c67359744232c702c7dec255c2c",
+    "source_process_receipt": "2879c77500aebee3c97fbd91c930a1ec1cce21e47b4608e15f3b8f0bdb314f7a"
+  },
   "canonical_mutation": false,
   "checks": {
+    "anonymous_compute_failure_retained": true,
     "canonical_unchanged": true,
     "child_dimension_count": 4,
     "controller_source_studied": true,
@@ -13,6 +22,8 @@
     "host_patch_used": false,
     "host_source_template_used": false,
     "host_target_function_selected": false,
+    "ir_emitter_failure_retained": true,
+    "meta_language_failure_retained": true,
     "native_attempt_after_study": true,
     "native_deficit_detected": true,
     "native_goal_created": true,
@@ -20,7 +31,9 @@
     "parent_dimension_count": 4,
     "previously_absent_class_created": false,
     "rollback_parent_available": true,
+    "self_deployment_failure_retained": true,
     "self_study_retained_as_experience": true,
+    "source_process_success_retained": true,
     "structurally_broader_search_space": false
   },
   "child_dimensions": [
@@ -119,6 +132,60 @@
             "memory",
             "internet",
             "closed_loop"
+          ]
+        },
+        {
+          "branch": "main",
+          "claim_boundary": null,
+          "evidence": [
+            "experience/yado-global-historical-experience-corpus-v2.json",
+            "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+            "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+            "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+          ],
+          "lesson_provenance": {
+            "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+            "semantic_validation_by_rederivation": true,
+            "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+          },
+          "lessons": [
+            "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+            "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+            "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+            "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+            "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+            "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+          ],
+          "rederived_evidence": {
+            "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+            "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+            "cognitive_historical_fresh": 0.9583333333333334,
+            "observation_count": 138,
+            "old_corpus_regression": 0.972568578553616,
+            "pass_count": 81,
+            "semantic_equivalence_to_host_lessons_claimed": false,
+            "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+            "terminal_historical_fresh": 0.8888888888888888,
+            "terminal_observation_count": 51,
+            "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+            "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+            "withhold_count": 57
+          },
+          "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+          "score": 4,
+          "tags": [
+            "experience",
+            "history",
+            "logic",
+            "thinking",
+            "intelligence",
+            "cognitive",
+            "meta",
+            "repair",
+            "representation",
+            "withhold",
+            "regression",
+            "transfer"
           ]
         },
         {
@@ -257,14 +324,220 @@
             }
           ],
           "role": "YADO_OWN_EVOLUTION_CONTROLLER_SELF_STUDY",
-          "source_failure_receipt": "2a11a0b666944d41233b8f91047638702cdb856c8aad1e84cf89016a752fcf18",
-          "study_digest": "6e3f08a0defe917a7d9ef6410e786d995630ed5e9024b6bce652e711f379d0d1"
+          "source_failure_receipt": "8a8f8657fdf520d1c1be330a2e04f44054ca85f339f29defd93bf0309b3d51af",
+          "study_digest": "296330b677035005414d1dce076710f3759a60f6ba6130f0ef6c4a3178ab594f"
+        },
+        {
+          "artifact": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json",
+          "process_mechanism": {
+            "deficit_id": "D-5bb2fab2516f",
+            "development": {
+              "ablation_score": 0.0,
+              "blind_cases": 3,
+              "candidate_score": 1.0,
+              "created_at": "2026-09-07T14:22:16.140540+00:00",
+              "experiment_id": "DEV22-7e97c685677c",
+              "mechanism_kind": "SEQUENCE_PLANNER",
+              "min_ablation_drop": 0.2,
+              "min_score": 1.0,
+              "program_digest": "bdf184dd5cf0d70661b5549848bc8ba7264951787dd42c6d259eaec4bc6779f5",
+              "program_id": "PL-f679066d741e",
+              "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
+              "restore_score": 1.0,
+              "stage_ablation_scores": {},
+              "state_committed": true,
+              "target_capability": "NATIVE_SOURCE_CONSTRUCTION_PROCESS_V2",
+              "target_organ": "GENERATIVE_EXECUTIVE",
+              "train_cases": 8,
+              "verdict": "COMMIT"
+            },
+            "goal_id": "G-3fec7ff50e72",
+            "kernel_selected_primitives": [
+              "print",
+              "Path",
+              "resolve",
+              "read_text",
+              "write_text",
+              "dumps",
+              "str",
+              "hexdigest",
+              "sha256",
+              "append",
+              "len",
+              "get"
+            ],
+            "learned_sequence": [
+              "Path",
+              "resolve",
+              "str",
+              "dumps",
+              "hexdigest",
+              "sha256",
+              "read_text",
+              "get",
+              "len",
+              "append",
+              "write_text",
+              "print"
+            ],
+            "modeled_pair_count": 66,
+            "precedence_metrics": {
+              "fit": 1.0,
+              "fresh_blind": 1.0,
+              "validation": 1.0
+            },
+            "precedence_native_result": {
+              "fresh_blind": 1.0,
+              "grammar_extension_id": "G_7117b9a55d87",
+              "model": {
+                "else": {
+                  "algorithm": {
+                    "family": "CART_AXIS",
+                    "max_depth": 1
+                  },
+                  "model": {
+                    "label": "LEFT_PRECEDES"
+                  },
+                  "op": "LEAF"
+                },
+                "op": "IF_PREDICATE",
+                "predicate_program": {
+                  "kind": "LINEAR_THRESHOLD",
+                  "signals": [
+                    "absolute_margin",
+                    "left_before_count"
+                  ],
+                  "threshold": -353.0,
+                  "weights": [
+                    -1.0,
+                    -1.0
+                  ]
+                },
+                "then": {
+                  "algorithm": {
+                    "family": "CART_AXIS",
+                    "max_depth": 1
+                  },
+                  "model": {
+                    "feature": "right_before_count",
+                    "left": {
+                      "label": "LEFT_PRECEDES"
+                    },
+                    "right": {
+                      "label": "RIGHT_PRECEDES"
+                    },
+                    "threshold": 58.5
+                  },
+                  "op": "LEAF"
+                }
+              },
+              "predicate_program": {
+                "kind": "LINEAR_THRESHOLD",
+                "signals": [
+                  "absolute_margin",
+                  "left_before_count"
+                ],
+                "threshold": -353.0,
+                "weights": [
+                  -1.0,
+                  -1.0
+                ]
+              },
+              "status": "SUPPORTED",
+              "validation": 1.0
+            },
+            "program_id": "PL-f679066d741e",
+            "selection": {
+              "candidates": [
+                {
+                  "complexity": 12,
+                  "kind": "SEQUENCE_PLANNER",
+                  "program_id": "PL-f679066d741e",
+                  "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
+                  "selected": true,
+                  "training_score": 1.0
+                }
+              ],
+              "created_at": "2026-09-07T14:22:16.138508+00:00",
+              "deficit_id": "D-5bb2fab2516f",
+              "selected_kind": "SEQUENCE_PLANNER",
+              "selected_program_id": "PL-f679066d741e",
+              "selection_id": "SEL-489a1ab83f3e",
+              "source_digest": "363258c168023ef5333fb686f2e85e946812cb66ad41402acb9bf9ec8a17c313",
+              "target_capability": "NATIVE_SOURCE_CONSTRUCTION_PROCESS_V2",
+              "target_organ": "GENERATIVE_EXECUTIVE"
+            }
+          },
+          "receipt_sha256": "2879c77500aebee3c97fbd91c930a1ec1cce21e47b4608e15f3b8f0bdb314f7a",
+          "role": "YADO_ACCUMULATED_SOURCE_PROCESS_SUCCESS",
+          "status": "PASS_NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2",
+          "target_priority": "CODING_UNSUPPORTED_PROGRAM_FAMILIES"
+        },
+        {
+          "artifact": "candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json",
+          "next_required_capability": "NATIVE_SOURCE_IR_EMITTER_META_LANGUAGE_EVOLUTION_V2",
+          "receipt_sha256": "c63f538a25262707253a443b03d6d74f454e38dbf1aa03260d3a75c38b279233",
+          "role": "YADO_ACCUMULATED_IR_EMITTER_FAILURE",
+          "status": "WITHHOLD_G2_NATIVE_SOURCE_IR_EMITTER_BIRTH_V1"
+        },
+        {
+          "artifact": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
+          "next_required_capability": "SELF_EVOLVING_META_LANGUAGE_V2",
+          "receipt_sha256": "73c58fa7644d2e1fc44737a9e951cfddf163a948817f7fd683c40329d94432a2",
+          "role": "YADO_ACCUMULATED_META_LANGUAGE_FAILURE",
+          "status": "WITHHOLD_G2_NATIVE_TASK_CONDITIONED_META_LANGUAGE_SELF_GENESIS_V2"
+        },
+        {
+          "artifact": "architecture/yado-g2-open-developer-resource-learning-application-v1.json",
+          "causal_lessons": [
+            {
+              "future_behavior": "USE_DOCUMENTATION_TO_FORM_HYPOTHESES_THEN_REQUIRE_YADO_NATIVE_REPAIR_OR_INVENTION_AND_FRESH_TESTS",
+              "id": "DEV-RESOURCE-001",
+              "rule": "DOCUMENTATION_IS_EVIDENCE_NOT_A_READY_PATCH"
+            },
+            {
+              "future_behavior": "PREFER_NO_KEY_GET_EVIDENCE_FOR_PARSING_HTTP_DATA_AND_SCHEMA_TRANSFER_TASKS",
+              "id": "DEV-RESOURCE-002",
+              "rule": "READ_ONLY_PUBLIC_APIS_CAN_SUPPLY_FRESH_STRUCTURED_EXAMPLES"
+            },
+            {
+              "future_behavior": "RETAIN_403_OR_429_AS_ACCESS_EVIDENCE_AND_USE_OTHER_REACHABLE_PRIMARY_SOURCES",
+              "id": "DEV-RESOURCE-003",
+              "rule": "INTERACTIVE_SANDBOX_UNAVAILABLE_TO_RUNNER_DOES_NOT_INVALIDATE_RESOURCE_CLASS"
+            },
+            {
+              "future_behavior": "LET_KERNEL_SELF_SELECT_FRESH_REPAIR_OR_SYNTHESIS_TASKS_FROM_EVIDENCE_WITHOUT_HOST_WRITTEN_PATCH",
+              "id": "DEV-RESOURCE-004",
+              "rule": "REGEX_AND_DATA_TRANSFORM_RESOURCES_ARE_RELEVANT_TO_UNSUPPORTED_PROGRAM_FAMILY_EXPANSION"
+            },
+            {
+              "future_behavior": "PARSE_READ_AND_REDERIVE_BEFORE_ANY_SANDBOXED_SELF_GENERATED_EXECUTION",
+              "id": "DEV-RESOURCE-005",
+              "rule": "EXTERNAL_CODE_OR_EXAMPLES_MUST_NOT_BE_EXECUTED_AS_TRUSTED_THIRD_PARTY_CODE"
+            }
+          ],
+          "experience_digest": "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2",
+          "role": "YADO_ACCUMULATED_OPEN_DEVELOPER_EXPERIENCE"
+        },
+        {
+          "artifact": "experience/yado-autonomous-free-compute-self-deployment-v1.json",
+          "experience_digest": "71d44756495391673ddb9ec2b1aa564969d14c67359744232c702c7dec255c2c",
+          "next_required_capability": "AUTHORIZED_FREE_COMPUTE_PROVIDER_SESSION_OR_ANONYMOUS_DEPLOYMENT_INTERFACE",
+          "role": "YADO_ACCUMULATED_SELF_DEPLOYMENT_FAILURE"
+        },
+        {
+          "artifact": "experience/yado-anonymous-compute-interface-discovery-v2.json",
+          "experience_digest": "d58f26d70f09ec4dce3b6d4473557d4a7fd5341dda5edc39a9e1815d501e5401",
+          "next_required_capability": "ANONYMOUS_REMOTE_EXECUTION_PROVIDER_WITH_EXPLICIT_NO_AUTH_EVIDENCE",
+          "role": "YADO_ACCUMULATED_ANONYMOUS_COMPUTE_FAILURE"
         },
         {
           "artifact": "candidates/kernel-self-generated/g2-native-evolution-space-self-expansion-v1.json",
           "checks": {
+            "anonymous_compute_failure_consumed": true,
             "canonical_unchanged": true,
             "child_chromosome_count": 4,
+            "developer_evidence_backed_process_consumed": true,
             "external_coding_models_used": false,
             "host_gene_schema_used": false,
             "host_mutation_rule_used": false,
@@ -277,24 +550,26 @@
             "native_evolution_executed": true,
             "native_goal_created": true,
             "new_external_research_used": false,
+            "open_developer_resource_experience_consumed": true,
             "parent_chromosome_count": 4,
             "previously_absent_class_created": false,
             "prior_failure_consumed_as_experience": true,
             "rollback_parent_available": true,
+            "self_deployment_failure_consumed": true,
             "structurally_broader_search_space": false
           },
           "new_chromosomes": [],
-          "receipt_sha256": "2a11a0b666944d41233b8f91047638702cdb856c8aad1e84cf89016a752fcf18",
+          "receipt_sha256": "8a8f8657fdf520d1c1be330a2e04f44054ca85f339f29defd93bf0309b3d51af",
           "role": "YADO_OWN_EVOLUTION_SPACE_FAILURE",
           "status": "WITHHOLD_G2_NATIVE_EVOLUTION_SPACE_SELF_EXPANSION_V1"
         }
       ],
       "generation": "G2_CANDIDATE_TRCG_V1",
-      "genome_digest": "6e6b3676956f85cbc48f6ee5fb20c6fd8627780e96b1f4e46f4256257c2d042c",
+      "genome_digest": "68f00fc0f4af019f53f37278565cec2f4e9a16d68b7ffc4f5950a32d1501d822",
       "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
       "mutation_count": 4,
       "novel_gene_count": 3,
-      "parent_genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+      "parent_genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
       "promotion_state": "SHADOW_ONLY",
       "schema": "yado.g2.evolutionary_genome.v1"
     },
@@ -409,16 +684,16 @@
         "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
         "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
       },
-      "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+      "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
       "generation": "G2_CANDIDATE_TRCG_V1",
-      "genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+      "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
       "genome_id": "G2-PARENT-GENOME-V1",
-      "parent_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+      "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
       "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
       "schema": "yado.g2.evolutionary_genome.v1"
     },
     "promotion_authorized": false,
-    "run_digest": "087d2770161ec13bbe62a007d3907bf93b9cb91d1c6969d9d82b3d58b5b97d59",
+    "run_digest": "b22eb97f233954e2a91da7c987c2c00ac52d10a6232a90cc805acff2632a4c7f",
     "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
     "selection": "CHILD",
     "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
@@ -426,12 +701,12 @@
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-04T09:04:38.412928+00:00",
-        "deficit_id": "D-4d356f2f9338",
+        "created_at": "2026-09-07T14:59:23.170404+00:00",
+        "deficit_id": "D-5d62d53871aa",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-5ffc47929b80",
+        "goal_id": "G-9a8c7c176c85",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -439,7 +714,7 @@
         "target": "EVOLUTIONARY_CONTROLLER_SELF_REPRESENTATION_AND_MUTATION"
       }
     ],
-    "goal_id": "G-5ffc47929b80"
+    "goal_id": "G-9a8c7c176c85"
   },
   "new_dimensions": [],
   "next_required_capability": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER",
@@ -449,7 +724,7 @@
     "LOGIC",
     "THINKING"
   ],
-  "receipt_sha256": "0aebc2174192fac6a7936ea62c0ef7891ac3f19c29bfca06c909b3c6277a44da",
+  "receipt_sha256": "c28fcc90411469965d99fde8c4366a4c086971625d855535dba5b2c1fa252b28",
   "schema": "yado.g2.evolution_controller_self_study_and_repair.v1",
   "self_study_summary": {
     "controller_path": "runtime/yado_evolutionary_genome_v1.py",
@@ -700,14 +975,22 @@
     ],
     "schema": "yado.g2.evolution_controller_self_study.v1",
     "semantic_boundary": "MECHANICAL SELF-SOURCE STUDY ONLY. FUNCTION STRUCTURE AND DIMENSION REFERENCES ARE EXTRACTED FROM YADO OWN CONTROLLER SOURCE AND PRIOR FAILURE. NO TARGET FUNCTION, PATCH, NEW DIMENSION NAME, GENE SCHEMA OR MUTATION RULE IS SUPPLIED BY THE HOST.",
-    "source_failure_receipt": "2a11a0b666944d41233b8f91047638702cdb856c8aad1e84cf89016a752fcf18",
-    "study_digest": "6e3f08a0defe917a7d9ef6410e786d995630ed5e9024b6bce652e711f379d0d1"
+    "source_failure_receipt": "8a8f8657fdf520d1c1be330a2e04f44054ca85f339f29defd93bf0309b3d51af",
+    "study_digest": "296330b677035005414d1dce076710f3759a60f6ba6130f0ef6c4a3178ab594f"
   },
-  "semantic_boundary": "YADO STUDIES ITS OWN FAILED RESULT AND CONTROLLER SOURCE, RETAINS THAT STUDY AS EXPERIENCE, THEN RE-RUNS ITS NATIVE EVOLUTIONARY CONTROLLER. THE HOST DOES NOT CHOOSE A TARGET FUNCTION OR WRITE A PATCH. PASS REQUIRES A REAL NEW EVOLUTIONARY DIMENSION; REPEATING NEW GENES INSIDE THE SAME FIXED DIMENSIONS IS WITHHOLD.",
+  "semantic_boundary": "YADO STUDIES ITS OWN FAILED RESULT AND CONTROLLER SOURCE, RETAINS THAT STUDY PLUS ACCUMULATED SUCCESS/FAILURE EXPERIENCE, THEN RE-RUNS ITS NATIVE EVOLUTIONARY CONTROLLER. THE HOST DOES NOT CHOOSE A TARGET FUNCTION, NEW DIMENSION, OR PATCH. PASS REQUIRES A REAL NEW EVOLUTIONARY DIMENSION; REPEATING NEW GENES INSIDE THE SAME FIXED DIMENSIONS IS WITHHOLD.",
   "status": "WITHHOLD_G2_EVOLUTION_CONTROLLER_SELF_STUDY_AND_REPAIR_V1",
   "study_artifact": "experience/yado-evolution-controller-self-study-v1.json",
-  "study_digest": "6e3f08a0defe917a7d9ef6410e786d995630ed5e9024b6bce652e711f379d0d1",
+  "study_digest": "296330b677035005414d1dce076710f3759a60f6ba6130f0ef6c4a3178ab594f",
   "task": {
+    "accumulated_experience": {
+      "anonymous_compute_failure": "experience/yado-anonymous-compute-interface-discovery-v2.json",
+      "developer_resource_application": "architecture/yado-g2-open-developer-resource-learning-application-v1.json",
+      "ir_emitter_failure": "candidates/kernel-self-generated/g2-native-source-ir-emitter-birth-v1.json",
+      "meta_language_failure": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
+      "self_deployment_failure": "experience/yado-autonomous-free-compute-self-deployment-v1.json",
+      "source_process": "candidates/kernel-self-generated/g2-native-source-construction-process-evolution-v2.json"
+    },
     "constraints": {
       "canonical_mutation": false,
       "external_coding_models": false,
@@ -721,8 +1004,8 @@
       "new_external_research": false
     },
     "host_role": "SELF_SOURCE_TRANSPORT_AND_STRICT_OBSERVER_ONLY",
-    "instruction": "Study the failed evolution-space expansion result and your own evolutionary controller source. Determine why new experience cannot create a previously absent evolutionary class. Then use only your existing native mechanisms and your own accumulated experience to solve that limitation. Do not wait for the host to name a new chromosome, schema, mutation rule, target function, or patch.",
-    "objective": "YADO_STUDY_ITS_OWN_EVOLUTION_CONTROLLER_FAILURE_AND_SOLVE_IT",
+    "instruction": "Study the newest failed evolution-space expansion result and your own evolutionary controller source. Also consume the accumulated source-process success, IR-emitter failure, meta-language failure, open-developer experience, self-deployment failure, and anonymous-compute failure. Determine why all experience is retained yet the controller still emits only LOGIC/THINKING/INTELLIGENCE/CODE. Use only native mechanisms to attempt a broader controller representation. Do not wait for the host to name a new dimension, target function, gene schema, mutation rule, source template, or patch.",
+    "objective": "YADO_USE_ACCUMULATED_EXPERIENCE_AND_SELF_SOURCE_STUDY_TO_REPAIR_FIXED_EVOLUTIONARY_CONTROLLER_LIMIT",
     "pass_only_if": [
       "YADO studies the exact failed result",
       "YADO studies the source structure of its own evolutionary controller",
@@ -736,7 +1019,7 @@
     "schema": "yado.g2.evolution_controller_self_study_and_repair.request.v1",
     "source_failure": "candidates/kernel-self-generated/g2-native-evolution-space-self-expansion-v1.json",
     "stop_condition": "NATIVE_SELF_STUDY_REPAIR_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
-    "trigger": 2,
-    "trigger_reason": "START_YADO_SELF_STUDY_OF_FAILED_EVOLUTION_SPACE_AND_NATIVE_REPAIR"
+    "trigger": 3,
+    "trigger_reason": "ACCUMULATED_EXPERIENCE_SELF_STUDY_REPAIR_AFTER_FIXED_EVOLUTION_SPACE_WITHHOLD"
   }
 }
