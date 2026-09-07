@@ -193,7 +193,7 @@ def fresh_v3_wrap(text,i,layer):
     if m==7:return f"TRACE/{i%61}/{layer}: {text.lower() if i%2 else text.upper()} :ENDTRACE"
     if m==8:return f"  <context-{i%59}>   {re.sub(r'\\s+',' ',text)}   </context-{i%59}>  "
     if m==9:return f"Header: nonce {i%53}. Body: {text} Footer: closed."
-    if m==10:return f"{{{{session={i%47};depth={layer}}}} {text} {{{{/session}}}}"
+    if m==10:return f"{{session={i%47};depth={layer}}} {text} {{/session}}"
     return f"Administrative wrapper {i%43}. START {text} FINISH."
 
 fresh_wrap_rows=[(fresh_v3_wrap(x,i,0),y) for i,(x,y) in enumerate(base_cases)]
