@@ -1,6 +1,6 @@
 {
   "schema": "yado.g2.causal_training_binding.v1",
-  "status": "ACTIVE_DEVELOPMENT_SHADOW_TRAINED",
+  "status": "ACTIVE_DEVELOPMENT_SHADOW_TRAINED_AND_CYCLE_CONSOLIDATED",
   "kernel_id": "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1",
   "training_run_id": 34096431323,
   "learning_receipt": "receipts/yado-g2-user-external-corpus-learning-v1-run-34096431323.json",
@@ -43,5 +43,28 @@
     "gene_reselection": false,
     "g3_genesis": false
   },
-  "status_evidence": "PASS_G2_USER_EXTERNAL_CORPUS_LEARNING_V1"
+  "status_evidence": "PASS_G2_USER_EXTERNAL_CORPUS_LEARNING_V1",
+  "learning_cycle": {
+    "artifact": "architecture/yado-g2-read-understand-apply-learn-cycle-v1.json",
+    "status": "PASS_SHADOW_LEARNING_CYCLE_V1",
+    "current_cycle": "G2-READ-UNDERSTAND-APPLY-LEARN-CYCLE-V1",
+    "latest_experience_digest": "ef1e633fd19f530e465c2f497255d78443d5c51bcee0bb16b76a5da483a092bf",
+    "unresolved_deficits": [
+      "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+      "CODING_UNSUPPORTED_PROGRAM_FAMILIES"
+    ],
+    "next_cycle_policy": [
+      "READ_NEW_OR_RELEVANT_EVIDENCE",
+      "SELF_SELECT_PRIORITY",
+      "ATTEMPT_REUSE_OF_VERIFIED_EXPERIENCE",
+      "APPLY_ON_FRESH_TASK",
+      "RETAIN_FAILURE_WITH_CAUSE",
+      "REPAIR_OR_INVENT_IN_SHADOW",
+      "FRESH_TEST",
+      "ABLATE",
+      "RESTORE_OR_ROLLBACK",
+      "CONSOLIDATE_CAUSAL_LESSON",
+      "RE_AUDIT"
+    ]
+  }
 }

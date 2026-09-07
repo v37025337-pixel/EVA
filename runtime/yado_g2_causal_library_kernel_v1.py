@@ -7,6 +7,7 @@ LIB = ROOT / "architecture/yado-g2-kernel-component-library-v1.json"
 GEN = ROOT / "architecture/yado-g2-genetic-lineage-library-v1.json"
 ARCH = ROOT / "architecture/yado-g2-causal-library-kernel-architecture-v1.json"
 TRAINING = ROOT / "architecture/yado-g2-causal-training-binding-v1.json"
+LEARNING_CYCLE = ROOT / "architecture/yado-g2-read-understand-apply-learn-cycle-v1.json"
 
 class G2CausalLibraryKernelV1:
     COMPONENT_ID = "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1"
@@ -17,6 +18,7 @@ class G2CausalLibraryKernelV1:
         self.genetics = self._load(self.root / GEN.relative_to(ROOT))
         self.architecture = self._load(self.root / ARCH.relative_to(ROOT))
         self.training = self._load(self.root / TRAINING.relative_to(ROOT))
+        self.learning_cycle = self._load(self.root / LEARNING_CYCLE.relative_to(ROOT))
 
     @staticmethod
     def _load(path: Path):
@@ -68,7 +70,7 @@ class G2CausalLibraryKernelV1:
             raise ValueError("AUTO_PROMOTION_MUST_BE_FALSE")
 
         training_state = self.library.get("training_state") or {}
-        if self.training.get("status") != "ACTIVE_DEVELOPMENT_SHADOW_TRAINED":
+        if self.training.get("status") not in {"ACTIVE_DEVELOPMENT_SHADOW_TRAINED","ACTIVE_DEVELOPMENT_SHADOW_TRAINED_AND_CYCLE_CONSOLIDATED"}:
             raise ValueError("TRAINING_BINDING_NOT_ACTIVE")
         if training_state.get("experience_digest") != self.training.get("experience_digest"):
             raise ValueError("TRAINING_DIGEST_LIBRARY_BINDING_MISMATCH")
@@ -80,6 +82,14 @@ class G2CausalLibraryKernelV1:
             raise ValueError("TRAINING_AUTO_PROMOTION_FORBIDDEN")
         if self.training.get("safety", {}).get("g3_genesis") is not False:
             raise ValueError("TRAINING_G3_FORBIDDEN")
+        if self.learning_cycle.get("status") != "PASS_SHADOW_LEARNING_CYCLE_V1":
+            raise ValueError("LEARNING_CYCLE_NOT_PASS")
+        if self.learning_cycle.get("invariants", {}).get("canonical_mutation") is not False:
+            raise ValueError("LEARNING_CYCLE_CANONICAL_MUTATION_FORBIDDEN")
+        if self.learning_cycle.get("invariants", {}).get("automatic_promotion") is not False:
+            raise ValueError("LEARNING_CYCLE_AUTO_PROMOTION_FORBIDDEN")
+        if not self.learning_cycle.get("unresolved_deficits"):
+            raise ValueError("LEARNING_CYCLE_MUST_RETAIN_OPEN_DEFICITS")
         cb = self.training.get("causal_binding") or {}
         if cb.get("source_layer") != "L1_MEMORY_EXPERIENCE" or cb.get("conditioning_layer") != "L2_EXPERIENCE_CONDITIONING":
             raise ValueError("TRAINING_CAUSAL_LAYER_BINDING_MISMATCH")
@@ -94,6 +104,8 @@ class G2CausalLibraryKernelV1:
             "training_experience_digest": self.training["experience_digest"],
             "training_source_count": int(self.training["corpus"]["source_count"]),
             "training_fetched_count": int(self.training["corpus"]["fetched_count"]),
+            "learning_cycle_status": self.learning_cycle["status"],
+            "learning_cycle_latest_experience_digest": self.training["learning_cycle"]["latest_experience_digest"],
             "g3_genesis": self.architecture["g3_genesis"],
         }
 
@@ -125,6 +137,18 @@ class G2CausalLibraryKernelV1:
             "automatic_promotion": False,
         }
 
+    def learning_cycle_snapshot(self):
+        return {
+            "status": self.learning_cycle["status"],
+            "cycle_id": self.learning_cycle["cycle_id"],
+            "stage_count": len(self.learning_cycle["stages"]),
+            "causal_lesson_count": len(self.learning_cycle["causal_lessons"]),
+            "unresolved_deficits": [x["code"] for x in self.learning_cycle["unresolved_deficits"]],
+            "latest_experience_digest": self.training["learning_cycle"]["latest_experience_digest"],
+            "next_cycle_policy": list(self.learning_cycle["next_cycle_policy"]),
+            "automatic_promotion": False,
+        }
+
     def causal_trace(self, contract: str):
         route = self.route_contract(contract)
         return {
@@ -134,6 +158,7 @@ class G2CausalLibraryKernelV1:
             "layers": [x["id"] for x in sorted(self.architecture["layers"], key=lambda z: z["index"])],
             "feedback": [dict(x) for x in self.architecture["feedback_edges"]],
             "training": self.training_snapshot(),
+            "learning_cycle": self.learning_cycle_snapshot(),
             "automatic_promotion": False,
         }
 

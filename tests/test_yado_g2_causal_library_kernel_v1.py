@@ -38,6 +38,16 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertEqual(snap["causal_binding"]["conditioning_layer"], "L2_EXPERIENCE_CONDITIONING")
         self.assertFalse(snap["automatic_promotion"])
 
+    def test_learning_cycle_retains_failure_and_repair_causally(self):
+        snap = self.kernel.learning_cycle_snapshot()
+        self.assertEqual(snap["status"], "PASS_SHADOW_LEARNING_CYCLE_V1")
+        self.assertEqual(snap["stage_count"], 5)
+        self.assertGreaterEqual(snap["causal_lesson_count"], 4)
+        self.assertIn("LEGACY_EXPERIENCE_SUMMARY_PROVENANCE", snap["unresolved_deficits"])
+        self.assertIn("CODING_UNSUPPORTED_PROGRAM_FAMILIES", snap["unresolved_deficits"])
+        self.assertEqual(snap["latest_experience_digest"], "ef1e633fd19f530e465c2f497255d78443d5c51bcee0bb16b76a5da483a092bf")
+        self.assertFalse(snap["automatic_promotion"])
+
     def test_unknown_contract_falls_back_without_self_promotion(self):
         route = self.kernel.route_contract("UNKNOWN_CONTRACT")
         self.assertEqual(route["status"], "FALLBACK_REQUIRED")
