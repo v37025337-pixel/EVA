@@ -120,6 +120,7 @@ class G2CausalLibraryKernelV1:
             "dynamic_memory_experience_digest": self.dynamic_memory["experience_digest"],
             "dynamic_memory_branch_count": int(self.dynamic_memory["remote_branch_count"]),
             "dynamic_memory_raw_lineage_count": int(self.dynamic_memory["raw_lineage_count"]),
+            "dynamic_memory_rederived_count": int(self.dynamic_memory.get("dynamic_rederived_count", 0)),
             "g3_genesis": self.architecture["g3_genesis"],
         }
 
@@ -171,6 +172,8 @@ class G2CausalLibraryKernelV1:
             "canonical_registry_branch_count": self.dynamic_memory["canonical_registry_branch_count"],
             "raw_lineage_count": self.dynamic_memory["raw_lineage_count"],
             "raw_lineage_branches": list(self.dynamic_memory["raw_lineage_branches"]),
+            "dynamic_rederived_count": self.dynamic_memory.get("dynamic_rederived_count", 0),
+            "dynamic_rederived_branches": list(self.dynamic_memory.get("dynamic_rederived_branches", [])),
             "next_required_capability": self.dynamic_memory["next_required_capability"],
             "raw_branch_inventory_is_not_semantic_knowledge": self.dynamic_memory["policy"]["raw_branch_inventory_is_not_semantic_knowledge"],
             "automatic_promotion": False,
