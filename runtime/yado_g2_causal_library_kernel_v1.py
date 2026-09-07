@@ -9,6 +9,7 @@ ARCH = ROOT / "architecture/yado-g2-causal-library-kernel-architecture-v1.json"
 TRAINING = ROOT / "architecture/yado-g2-causal-training-binding-v1.json"
 LEARNING_CYCLE = ROOT / "architecture/yado-g2-read-understand-apply-learn-cycle-v1.json"
 DYNAMIC_MEMORY = ROOT / "experience/yado-g2-dynamic-experience-memory-v1.json"
+DNS_SCREENSHOT_APPLICATION = ROOT / "architecture/yado-g2-dns-screenshot-learning-application-v1.json"
 
 class G2CausalLibraryKernelV1:
     COMPONENT_ID = "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1"
@@ -21,6 +22,7 @@ class G2CausalLibraryKernelV1:
         self.training = self._load(self.root / TRAINING.relative_to(ROOT))
         self.learning_cycle = self._load(self.root / LEARNING_CYCLE.relative_to(ROOT))
         self.dynamic_memory = self._load(self.root / DYNAMIC_MEMORY.relative_to(ROOT))
+        self.dns_screenshot_application = self._load(self.root / DNS_SCREENSHOT_APPLICATION.relative_to(ROOT))
 
     @staticmethod
     def _load(path: Path):
@@ -101,6 +103,19 @@ class G2CausalLibraryKernelV1:
             if row.get("inventory_class") == "RAW_BRANCH_INVENTORY_ONLY":
                 if row.get("semantic_use_allowed") is not False or row.get("lessons"):
                     raise ValueError("RAW_BRANCH_SEMANTIC_LEAK:" + str(row.get("branch")))
+        app = self.dns_screenshot_application
+        if app.get("status") != "ACTIVE_DEVELOPMENT_SHADOW_APPLIED":
+            raise ValueError("DNS_SCREENSHOT_APPLICATION_NOT_ACTIVE")
+        if app.get("source_experience_digest") != "d2196db58bc2929691b83ea3770d29f007136da08b2a366418f8c820488ee3fc":
+            raise ValueError("DNS_SCREENSHOT_APPLICATION_DIGEST_MISMATCH")
+        applied = {x.get("id"):x for x in (self.training.get("applied_experiences") or [])}
+        bound = applied.get("DNS_SCREENSHOT_RESEARCH_V2") or {}
+        if bound.get("source_experience_digest") != app.get("source_experience_digest"):
+            raise ValueError("DNS_SCREENSHOT_TRAINING_BINDING_MISMATCH")
+        if app.get("safety",{}).get("canonical_mutation") is not False or app.get("safety",{}).get("automatic_promotion") is not False:
+            raise ValueError("DNS_SCREENSHOT_APPLICATION_SAFETY_VIOLATION")
+        if not any(x.get("id") == "DNS-L1-PERF-005" for x in app.get("causal_lessons",[])):
+            raise ValueError("DNS_SCREENSHOT_LOCAL_PERFORMANCE_GUARD_MISSING")
         cb = self.training.get("causal_binding") or {}
         if cb.get("source_layer") != "L1_MEMORY_EXPERIENCE" or cb.get("conditioning_layer") != "L2_EXPERIENCE_CONDITIONING":
             raise ValueError("TRAINING_CAUSAL_LAYER_BINDING_MISMATCH")
@@ -121,6 +136,8 @@ class G2CausalLibraryKernelV1:
             "dynamic_memory_branch_count": int(self.dynamic_memory["remote_branch_count"]),
             "dynamic_memory_raw_lineage_count": int(self.dynamic_memory["raw_lineage_count"]),
             "dynamic_memory_rederived_count": int(self.dynamic_memory.get("dynamic_rederived_count", 0)),
+            "latest_applied_experience_id": self.training.get("latest_applied_experience_id"),
+            "latest_applied_experience_digest": self.training.get("latest_applied_experience_digest"),
             "g3_genesis": self.architecture["g3_genesis"],
         }
 
@@ -179,6 +196,18 @@ class G2CausalLibraryKernelV1:
             "automatic_promotion": False,
         }
 
+    def dns_screenshot_application_snapshot(self):
+        return {
+            "status": self.dns_screenshot_application["status"],
+            "source_run_id": self.dns_screenshot_application["source_run_id"],
+            "source_experience_digest": self.dns_screenshot_application["source_experience_digest"],
+            "lesson_ids": [x["id"] for x in self.dns_screenshot_application["causal_lessons"]],
+            "future_task_guard": self.dns_screenshot_application["causal_binding"]["future_task_guard"],
+            "retained_first_withhold": self.dns_screenshot_application["retained_failure_history"]["first_status"],
+            "thresholds_lowered": self.dns_screenshot_application["retained_failure_history"]["thresholds_lowered"],
+            "automatic_promotion": False,
+        }
+
     def causal_trace(self, contract: str):
         route = self.route_contract(contract)
         return {
@@ -190,6 +219,7 @@ class G2CausalLibraryKernelV1:
             "training": self.training_snapshot(),
             "learning_cycle": self.learning_cycle_snapshot(),
             "dynamic_memory": self.dynamic_memory_snapshot(),
+            "dns_screenshot_application": self.dns_screenshot_application_snapshot(),
             "automatic_promotion": False,
         }
 
