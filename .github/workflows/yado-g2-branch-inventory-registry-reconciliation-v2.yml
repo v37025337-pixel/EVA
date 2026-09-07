@@ -69,5 +69,8 @@ jobs:
           git add "receipts/yado-g2-branch-inventory-registry-reconciliation-v2-run-${GITHUB_RUN_ID}.json"
           git add "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}-post-branch-registry-v2.json"
           git diff --cached --quiet || git commit -m "Reconcile all remote branches into G2 read-only memory [skip ci]"
+          git reset --hard HEAD
+          git clean -fd runtime/yado_rc8_v36
+          git clean -f runtime/yado_g2_branch_inventory_registry_reconciliation_v2_receipt.json runtime/yado_unified_core_deep_self_audit_v1_receipt.json
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
