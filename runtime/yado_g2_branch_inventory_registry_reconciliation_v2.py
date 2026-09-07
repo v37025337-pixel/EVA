@@ -260,7 +260,6 @@ if isinstance(transport, dict) and transport.get("candidate_source_sha256") == o
     transport["current_source_sha256"] = new_deep_audit_sha
 rim = core.setdefault("runtime_integrity_manifest", {})
 sources = rim.setdefault("sources", {})
-sources["runtime/yado_unified_core_v1.py"] = new_unified_sha
 sources["runtime/yado_unified_core_deep_self_audit_v1.py"] = new_deep_audit_sha
 rim["manifest_digest"] = h(sources)
 for plane in core.get("planes", []):
@@ -377,9 +376,13 @@ checks = {
     "canonical_guard": guard_payload.get("status") == "PASS_CANONICAL_INVARIANT_GUARD_V1",
     "unified_core_audit_runtime_repaired": fsha(UNIFIED_RUNTIME) == new_unified_sha,
     "deep_self_audit_runtime_repaired": fsha(DEEP_AUDIT_RUNTIME) == new_deep_audit_sha,
+    "unified_runtime_hash_rebound": (
+        core.get("runtime_sha256") == new_unified_sha
+        and head.get("unified_core", {}).get("runtime_sha256") == new_unified_sha
+    ),
     "runtime_integrity_manifest_rebound": (
-        core.get("runtime_integrity_manifest", {}).get("sources", {}).get("runtime/yado_unified_core_v1.py") == new_unified_sha
-        and core.get("runtime_integrity_manifest", {}).get("sources", {}).get("runtime/yado_unified_core_deep_self_audit_v1.py") == new_deep_audit_sha
+        core.get("runtime_integrity_manifest", {}).get("sources", {}).get("runtime/yado_unified_core_deep_self_audit_v1.py") == new_deep_audit_sha
+        and "runtime/yado_unified_core_v1.py" not in core.get("runtime_integrity_manifest", {}).get("sources", {})
     ),
 }
 if not all(checks.values()):
