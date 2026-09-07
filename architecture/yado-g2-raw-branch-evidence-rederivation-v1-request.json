@@ -1,0 +1,23 @@
+{
+  "schema": "yado.g2.raw_branch_evidence_rederivation.request.v1",
+  "objective": "APPLY_SELF_SELECTED_RAW_BRANCH_EVIDENCE_REDERIVATION",
+  "instruction": "Read each branch currently classified RAW_BRANCH_INVENTORY_ONLY from its exact Git object tree. Derive only content-addressed structural observations from branch head, ledger, candidate receipts and file inventory. Do not execute historical code and do not claim semantic equivalence to curated lessons.",
+  "parent_self_audit": {
+    "run_id": 34104867150,
+    "selected_next_step": "RAW_BRANCH_EVIDENCE_REDERIVATION",
+    "dynamic_memory_digest": "95bc770e752f0fdf92ed85719e23a84f4b10a00f5f72523a719e634b1cb9b13a"
+  },
+  "expected_target_count": 6,
+  "constraints": {
+    "exact_git_objects": true,
+    "historical_branch_code_execution": false,
+    "semantic_equivalence_claimed": false,
+    "preserve_provenance": true
+  },
+  "canonical_mutation": false,
+  "automatic_promotion": false,
+  "g3_genesis": false,
+  "trigger": 1,
+  "requested_at": "2026-09-07T09:08:05Z",
+  "host_role": "TRIGGER_TRANSPORT_AND_STRICT_VERIFICATION_ONLY"
+}
