@@ -1,0 +1,48 @@
+{
+  "artifact_consistency": true,
+  "candidate_digest": "03bf3624f16ddca433f02ce4f956258e2dee72046f65571fa4b226c65183ef6d",
+  "canonical_mutation": false,
+  "canonical_unchanged": true,
+  "evaluator_defect": {
+    "candidate_changed": false,
+    "description": "The original V4 observer used all(checks.values()) even though host_selected_family and automatic_promotion are safety invariants that must be false on success.",
+    "fresh_cases_regenerated_for_revalidation": false,
+    "kind": "BOOLEAN_POLARITY_ERROR",
+    "model_retrained_for_revalidation": false,
+    "thresholds_changed": false
+  },
+  "fresh_dataset_digest": "f3f504958c8c3126adaf12d91dc20efe0a56b74e65462c86119d7cecc8083ff5",
+  "fresh_metrics": {
+    "ablated_sequential": 0.244,
+    "base_regression": 1.0,
+    "direct": 1.0,
+    "fresh_sequential": 0.9993333333333333,
+    "fresh_wrapped": 1.0,
+    "v3_base_regression": 1.0,
+    "v3_direct": 1.0,
+    "v3_fresh_sequential": 0.8816666666666667,
+    "v3_fresh_wrapped": 0.9625
+  },
+  "g3_genesis_performed": false,
+  "metric_checks": {
+    "ablation_drop_ge_0_20": true,
+    "base_regression_ge_0_98": true,
+    "direct_ge_0_98": true,
+    "sequential_gain_ge_0_01": true,
+    "sequential_ge_0_98": true,
+    "wrapped_ge_0_98": true
+  },
+  "model_digest": "ec9ab1ecc29d45ee2d7c0d616e7e23fcf28d235348a0f5a270dffdeb4e0f7505",
+  "next_required_capability": "NATIVE_RAW_REPRESENTATION_STRATEGY_CANONICAL_ADMISSION_V5",
+  "promotion_applied": false,
+  "receipt_sha256": "2d4866f26c9601794e0815f3d48bfbce6abd2a42eb45b219da59cb7b7721404e",
+  "required_false_failures": [],
+  "required_true_failures": [],
+  "schema": "yado.g2.native_raw_representation_strategy_genesis_repair_v4.verdict_revalidation.v1",
+  "selected_family": "HASHED_CHAR45_PERCEPTRON",
+  "selection_consistent": true,
+  "semantic_boundary": "VERDICT-ONLY REVALIDATION OF IMMUTABLE V4 EVIDENCE. NO MODEL TRAINING, FRESH-DATA REGENERATION, THRESHOLD CHANGE, CANDIDATE CHANGE, OR CANONICAL MUTATION IS PERFORMED.",
+  "source_v4_receipt": "55bc5cf7633a47b13059dbd8f9de3ae47347a44cc1a0d47a68004b31f0b89922",
+  "source_v4_status": "WITHHOLD_G2_NATIVE_RAW_REPRESENTATION_STRATEGY_GENESIS_REPAIR_V4",
+  "status": "PASS_SHADOW_G2_NATIVE_RAW_REPRESENTATION_STRATEGY_GENESIS_REPAIR_V4_REVALIDATED"
+}
