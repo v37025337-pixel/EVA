@@ -1,0 +1,351 @@
+{
+  "application_rule": "SOURCE_DERIVED_VERDICTS_ENTER_L1_MEMORY_AS_CAUSAL_EVIDENCE; FUTURE SOURCE_SELECTION_MUST_DOWNRANK_ABSOLUTE_MARKETING_CLAIMS_THAT_CONFLICT_WITH_PROVIDER_DOCUMENTATION",
+  "automatic_promotion": false,
+  "canonical_mutation": false,
+  "checks": {
+    "all_address_claims_determined": true,
+    "canonical_mutation_false": true,
+    "cloudflare_default_filtering_exposed": true,
+    "g3_false": true,
+    "google_absolute_no_ip_logs_exposed": true,
+    "intelligence_event_exact": true,
+    "intelligence_relation_exact": true,
+    "logic_ablation_drop": true,
+    "logic_fresh_exact": true,
+    "nextdns_configuration_nuance_exposed": true,
+    "nextdns_logging_disable_supported": true,
+    "no_gene_reselection": true,
+    "official_source_fetch_ratio_ge_0_90": true,
+    "opendns_familyshield_address_separation_exposed": true,
+    "quad9_threat_blocking_supported": false,
+    "thinking_ablation_drop": false,
+    "thinking_fresh_exact": true
+  },
+  "claim_findings": [
+    {
+      "claim": null,
+      "claim_id": "GOOGLE_ADDR",
+      "claimed_ipv4": [
+        "8.8.8.8",
+        "8.8.4.4"
+      ],
+      "evidence_excerpt": " a DNS lookup. Complex pages often require multiple DNS lookups before they start loading, so your computer may be performing hundreds of lookups a day. Try it out Configure your network settings to use the IP addresses 8.8.8.8 and 8.8.4.4 as your DNS servers. Or, read our configuration instructions (IPv6 addresses supported too). If you decide to try Google Public DNS, your client programs will perform all DNS lookups using Google Publ",
+      "kind": "ADDRESS_PAIR",
+      "missing_claimed_ipv4": [],
+      "observed_ipv4": [
+        "8.8.4.4",
+        "8.8.8.8"
+      ],
+      "provider": "Google Public DNS",
+      "source_id": "GOOGLE_OFFICIAL",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "No logging of IP addresses",
+      "claim_id": "GOOGLE_NO_IP_LOGS",
+      "claimed_ipv4": null,
+      "evidence_excerpt": "lections Save and categorize content based on your preferences. Page Summary outlined_flag Google Public DNS follows the Google Privacy Policy and does not use personal data for ad targeting. Two types of logs are kept: temporary logs containing IP addresses and query details stored for 24-48 hours, and permanent logs with anonymized location data for aggregate analysis. Temporary logs are used for security, service improvement, and gen",
+      "kind": "NO_IP_LOGS",
+      "provider": "Google Public DNS",
+      "reason": "OFFICIAL_POLICY_DESCRIBES_TEMPORARY_IP_BEARING_LOGS",
+      "source_id": "GOOGLE_PRIVACY",
+      "verdict": "CONTRADICTED_ABSOLUTE_CLAIM"
+    },
+    {
+      "claim": null,
+      "claim_id": "CLOUDFLARE_ADDR",
+      "claimed_ipv4": [
+        "1.1.1.1",
+        "1.0.0.1"
+      ],
+      "evidence_excerpt": "IP addresses \u00b7 Cloudflare 1.1.1.1 docs Skip to content Documentation Index Fetch the complete documentation index at: https://developers.cloudflare.com/1.1.1.1/llms.txt Use this file to discover all available pages before exploring further. Docs ",
+      "kind": "ADDRESS_PAIR",
+      "missing_claimed_ipv4": [],
+      "observed_ipv4": [
+        "1.0.0.1",
+        "1.0.0.2",
+        "1.0.0.3",
+        "1.1.1.1",
+        "1.1.1.2",
+        "1.1.1.3"
+      ],
+      "provider": "Cloudflare 1.1.1.1",
+      "source_id": "CLOUDFLARE_IPS",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Privacy-focused (no logs)",
+      "claim_id": "CLOUDFLARE_NO_LOGS",
+      "claimed_ipv4": null,
+      "evidence_excerpt": "mits to the following: Cloudflare will not sell or share Public Resolver users' personal data with third parties or use personal data from the Public Resolver to target any user with advertisements. Cloudflare will only retain or use what is being asked, not information that will identify who is asking it. Except for randomly sampled network packets captured from at most 0.05% of all traffic sent to Cloudflare's network infrastructure, ",
+      "kind": "NO_LOGS_ABSOLUTE",
+      "provider": "Cloudflare 1.1.1.1",
+      "reason": "PRIVACY_FOCUSED_DOES_NOT_MEAN_LITERAL_ZERO_OPERATIONAL_DATA",
+      "source_id": "CLOUDFLARE_PRIVACY",
+      "verdict": "SUPPORTED_WITH_NUANCE"
+    },
+    {
+      "claim": "Blocks many threats by default",
+      "claim_id": "CLOUDFLARE_BLOCKS_BY_DEFAULT",
+      "claimed_ipv4": null,
+      "evidence_excerpt": "low to configure your device or router. Two addresses are provided for each resolver for redundancy. For step-by-step instructions, refer to Set up . 1.1.1.1 The standard resolver provides fast, private DNS lookups with no content filtering. IPv4 IPv6 1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001 Refer to Encryption to learn how to encrypt your DNS queries. 1.1.1.1 for Families 1.1.1.1 for Families adds automatic filtering t",
+      "kind": "DEFAULT_THREAT_FILTERING",
+      "provider": "Cloudflare 1.1.1.1",
+      "reason": "THREAT_FILTERING_USES_SEPARATE_FAMILIES_VARIANTS",
+      "source_id": "CLOUDFLARE_IPS",
+      "verdict": "CONTRADICTED_STANDARD_RESOLVER"
+    },
+    {
+      "claim": null,
+      "claim_id": "OPENDNS_ADDR",
+      "claimed_ipv4": [
+        "208.67.222.222",
+        "208.67.220.220"
+      ],
+      "evidence_excerpt": "one of the categories below. NOTE: When following the device instructions, be sure to use our FamilyShield nameservers instead. Our FamilyShield nameservers are: 208.67.222.123 208.67.220.123 Our nameservers are always: 208.67.222.222 208.67.220.220 Choose Your Device Home routers Recommended! Computer Workstations and Laptops Smart Devices Servers By using OpenDNS Family Shield, you agree to the OpenDNS Terms of Service and the Cisco O",
+      "kind": "ADDRESS_PAIR",
+      "missing_claimed_ipv4": [],
+      "observed_ipv4": [
+        "208.67.220.123",
+        "208.67.220.220",
+        "208.67.222.123",
+        "208.67.222.222"
+      ],
+      "provider": "OpenDNS",
+      "source_id": "OPENDNS_SETUP",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Offers FamilyShield on the listed pair",
+      "claim_id": "OPENDNS_FAMILYSHIELD_ON_PAIR",
+      "claimed_ipv4": null,
+      "evidence_excerpt": "ne or more of your devices to use OpenDNS\u2019s DNS nameservers. For instructions on how to do this, choose your device type from one of the categories below. NOTE: When following the device instructions, be sure to use our FamilyShield nameservers instead. Our FamilyShield nameservers are: 208.67.222.123 208.67.220.123 Our nameservers are always: 208.67.222.222 208.67.220.220 Choose Your Device Home routers Recommended! Computer Workstatio",
+      "kind": "FEATURE_ON_STANDARD_PAIR",
+      "provider": "OpenDNS",
+      "reason": "FAMILYSHIELD_HAS_DISTINCT_123_ADDRESSES",
+      "source_id": "OPENDNS_SETUP",
+      "verdict": "CONTRADICTED_SEPARATE_ADDRESSES"
+    },
+    {
+      "claim": null,
+      "claim_id": "QUAD9_ADDR",
+      "claimed_ipv4": [
+        "9.9.9.9",
+        "149.112.112.112"
+      ],
+      "evidence_excerpt": "Services - Quad9 Documentation Skip to content Quad9 Documentation Services English Fran\u00e7ais Espa\u00f1ol Rom\u00e2na Initializing search GitHub Quad9 Documentation GitHub Overview FAQs Services Services Table of contents 9.9.9.9 (Secure) 9.9.9.10 (No Threat Blocking) 9.9.9.11 (Secure + ECS) 9.9.9.12 (No Threat Blocking + ECS) Alternate Ports Quad9 For Organizations Quad9 For Organizations DNS Forwarder Best Practices Setup Guides Setup G",
+      "kind": "ADDRESS_PAIR",
+      "missing_claimed_ipv4": [],
+      "observed_ipv4": [
+        "9.9.9.9",
+        "9.9.9.10",
+        "9.9.9.11",
+        "9.9.9.12",
+        "149.112.112.10",
+        "149.112.112.11",
+        "149.112.112.12",
+        "149.112.112.112"
+      ],
+      "provider": "Quad9",
+      "source_id": "QUAD9_SERVICES",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Blocks malware, phishing and malicious sites",
+      "claim_id": "QUAD9_THREAT_BLOCKING",
+      "claimed_ipv4": null,
+      "evidence_excerpt": " (Encrypted) Windows Windows Windows 10 Windows 11 (Encrypted) iOS iOS iOS 14 and later (Encrypted) Services Quad9 offers several variations of our free, private DNS service. 9.9.9.9 (Secure) Our most-popular service. A threat-blocking, privacy-first recursive DNS service. IPv4 IPv6 DNS over TLS DNS over HTTPS 9.9.9.9 , 149.112.112.112 2620:fe::fe , 2620:fe::9 dns.quad9.net https://dns.quad9.net/dns-query 9.9.9.10 (No Threat Blocking) F",
+      "kind": "THREAT_BLOCKING",
+      "provider": "Quad9",
+      "reason": "NO_CLEAR_SIGNAL",
+      "source_id": "QUAD9_SERVICES",
+      "verdict": "UNDETERMINED"
+    },
+    {
+      "claim": "Privacy-focused",
+      "claim_id": "QUAD9_PRIVACY",
+      "claimed_ipv4": null,
+      "evidence_excerpt": "and most recent instances of queries for each query label, QTYPE, and Response Record, optionally with any of the above dimensions. Histogram-based latency profiles of calculated round-trip speeds of networks generating end user queries to each Quad9 POP, with maximum resolution for IPv4 at /24 prefix length, and IPv6 at /56 prefix length. These latency profiles do not contain any other cardinality expansions. In order to forecast need ",
+      "kind": "NO_ENDUSER_IP_LOGGING",
+      "provider": "Quad9",
+      "reason": "OFFICIAL_PRIVACY_POLICY_DENIES_ENDUSER_PERSONAL_DATA_COLLECTION",
+      "source_id": "QUAD9_PRIVACY",
+      "verdict": "SUPPORTED_WITH_POLICY_SCOPE"
+    },
+    {
+      "claim": null,
+      "claim_id": "NEXTDNS_ADDR",
+      "claimed_ipv4": [
+        "45.90.28.0",
+        "45.90.30.0"
+      ],
+      "evidence_excerpt": "v6() r.Test = test() r.ULLPrimary = pop(\"ultra low latency primary IPv4\", \"ipv4.dns1.nextdns.io\") r.ULLSecondary = pop(\"ultra low latency secondary IPv4\", \"ipv4.dns2.nextdns.io\") r.Primary = pop(\"anycast primary IPv4\", \"45.90.28.0\") r.Secondary = pop(\"anycast secondary IPv4\", \"45.90.30.0\") if r.HasV6 { r.ULLPrimary6 = pop(\"ultra low latency primary IPv6\", \"ipv6.dns1.nextdns.io\") r.ULLSecondary6 = pop(\"ultra low latency secondary IPv6\", ",
+      "kind": "ADDRESS_PAIR",
+      "missing_claimed_ipv4": [],
+      "observed_ipv4": [
+        "45.90.28.0",
+        "45.90.30.0"
+      ],
+      "provider": "NextDNS",
+      "source_id": "NEXTDNS_DIAG",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Parental controls and blocking",
+      "claim_id": "NEXTDNS_PARENTAL",
+      "claimed_ipv4": null,
+      "evidence_excerpt": "ide spectrum trackers that record your activity on a device at the operating system level. Detect and block third-party trackers disguising themselves as first-party to circumvent browsers' privacy protections like ITP. Parental Control Protect your kids and control what they can access online, and when. Block all websites containing porn, violence, piracy and more. Enforce SafeSearch \u2014 filter explicit results on all search engines, inc",
+      "kind": "PARENTAL_CONTROLS",
+      "provider": "NextDNS",
+      "reason": "OFFICIAL_SITE_DESCRIBES_PARENTAL_CONTROL",
+      "source_id": "NEXTDNS_SITE",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Logs can be disabled",
+      "claim_id": "NEXTDNS_LOGGING_DISABLE",
+      "claimed_ipv4": null,
+      "evidence_excerpt": "ening on your devices with in-depth analytics and real-time logs. Measure the efficiency of your security, privacy and parental control strategies. Decide how long your logs are kept \u2014 from one hour up to two years \u2014 or disable logging completely for a no-logs experience. Meet your data residency requirements by choosing where your logs are stored \u2014 United States, European Union, United Kingdom or Switzerland. With Tracker Insights, see",
+      "kind": "LOGGING_CAN_DISABLE",
+      "provider": "NextDNS",
+      "reason": "OFFICIAL_SITE_ALLOWS_LOGGING_TO_BE_DISABLED",
+      "source_id": "NEXTDNS_SITE",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "claim": "Listed raw IPs alone imply all personalized NextDNS features",
+      "claim_id": "NEXTDNS_CONFIG_NUANCE",
+      "claimed_ipv4": null,
+      "evidence_excerpt": "s page Feb 22, 2026 \u00b7 16 revisions Official (GUI) App Install our official app \u2192 https://nextdns.io/download/windows/stable . After installing, right-click on NextDNS icon in the Systray then open the Settings. Set your configuration ID as Configuration ID . Right-click on NextDNS icon in the Systray, then click on Enable . Manual (CLI) Install Click on the Start menu, and type \"cmd\" and select \"Run as administrator\" Execute: iwr https:",
+      "kind": "PROFILE_CONFIGURATION",
+      "provider": "NextDNS",
+      "reason": "PERSONALIZED_NEXTDNS_BEHAVIOR_REQUIRES_PROFILE_OR_CONFIGURATION_CONTEXT",
+      "source_id": "NEXTDNS_WINDOWS",
+      "verdict": "OVERGENERALIZED_REQUIRES_CONFIGURATION"
+    }
+  ],
+  "experience_digest": "a286d2e4a9fab921b9b6ae366a80111a36d34978c95ee524faf6ce5b616f25e7",
+  "fresh_logic": {
+    "accuracy": 1.0,
+    "best_ablation_accuracy": 0.0,
+    "case_count": 14,
+    "causal_drop": 1.0,
+    "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8"
+  },
+  "fresh_thinking": {
+    "accuracy": 1.0,
+    "best_ablation_accuracy": 1.0,
+    "case_count": 28,
+    "causal_drop": 0.0,
+    "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4"
+  },
+  "frozen_intelligence": {
+    "event_best_score": 1.0,
+    "gene_id": "GENE-G2-ALL-EXPERIENCE-INTELLIGENCE-TYPE-V1-594261c030db685e",
+    "relation_best_score": 1.0,
+    "reselection_performed": false
+  },
+  "g3_genesis": false,
+  "schema": "yado.g2.dns_screenshot_research.experience.v2",
+  "semantic_boundary": "BOUNDED FACT-CHECKING AND FRESH CAUSAL-REASONING STRESS OVER USER-SUPPLIED DNS INFOGRAPHIC CLAIMS. THIS DOES NOT MEASURE REAL-WORLD LATENCY FROM THE USER NETWORK.",
+  "source_results": {
+    "CLOUDFLARE_IPS": {
+      "bytes": 106878,
+      "content_type": "text/html",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://developers.cloudflare.com/1.1.1.1/ip-addresses/",
+      "resolved_url": "https://developers.cloudflare.com/1.1.1.1/ip-addresses/",
+      "sha256": "4cb510b71a23551bf3ce4391f353e004f96e2b97415e9aecf8ef931d7b09fc84"
+    },
+    "CLOUDFLARE_PRIVACY": {
+      "bytes": 107180,
+      "content_type": "text/html",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/",
+      "resolved_url": "https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/",
+      "sha256": "bbbe32d65b92fc367e366ed6fd5d286fb9d9d20cb055804f913d8020bc64072e"
+    },
+    "GOOGLE_OFFICIAL": {
+      "bytes": 68963,
+      "content_type": "text/html; charset=utf-8",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://developers.google.com/speed/public-dns/",
+      "resolved_url": "https://developers.google.com/speed/public-dns/",
+      "sha256": "a7cd587ff33f6207064cfe67e831c418e4fdd5e6c8848702f26e775e7682dedc"
+    },
+    "GOOGLE_PRIVACY": {
+      "bytes": 74005,
+      "content_type": "text/html; charset=utf-8",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://developers.google.com/speed/public-dns/privacy",
+      "resolved_url": "https://developers.google.com/speed/public-dns/privacy",
+      "sha256": "070cf0f963c4bb83d631304857a0f68d39f212bde4591f3470b31ba226b288e3"
+    },
+    "NEXTDNS_DIAG": {
+      "bytes": 9010,
+      "content_type": "text/plain; charset=utf-8",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://raw.githubusercontent.com/nextdns/diag/main/main.go",
+      "resolved_url": "https://raw.githubusercontent.com/nextdns/diag/main/main.go",
+      "sha256": "c79a67262c0fa040bdae07f132c22699799072a964e859f5ab7950a53a8ef0ab"
+    },
+    "NEXTDNS_SITE": {
+      "bytes": 62525,
+      "content_type": "text/html; charset=utf-8",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://nextdns.io/",
+      "resolved_url": "https://nextdns.io/",
+      "sha256": "06facad42e3c4660ef7cdea2e24be276d912363e1cc62d8f46381092978ce091"
+    },
+    "NEXTDNS_WINDOWS": {
+      "bytes": 262991,
+      "content_type": "text/html; charset=utf-8",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://github.com/nextdns/nextdns/wiki/Windows",
+      "resolved_url": "https://github.com/nextdns/nextdns/wiki/Windows",
+      "sha256": "b0dd7fa6c32bf41fc6924833248df64cac132d51f9806f020617f8720a20f59d"
+    },
+    "OPENDNS_SETUP": {
+      "bytes": 14594,
+      "content_type": "text/html",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://www.opendns.com/setupguide/",
+      "resolved_url": "https://www.opendns.com/setupguide/",
+      "sha256": "2ed5bb21aedfefc74e370575c22dc87be62ed1611a9e78d4ed01b610de8291cc"
+    },
+    "QUAD9_PRIVACY": {
+      "bytes": 42329,
+      "content_type": "text/html",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://www.quad9.net/privacy/policy/",
+      "resolved_url": "https://quad9.net/privacy/policy/",
+      "sha256": "77864bb56f9c592011d55c9f354e7d8361126266de7c3ef35bd7a02dcba6586e"
+    },
+    "QUAD9_SERVICES": {
+      "bytes": 41899,
+      "content_type": "text/html; charset=utf-8",
+      "http_status": 200,
+      "ok": true,
+      "requested_url": "https://docs.quad9.net/services/",
+      "resolved_url": "https://docs.quad9.net/services/",
+      "sha256": "fee48fe583c142e00475b8b8ed1c41d6f00c589032633da669e992289bda5822"
+    }
+  },
+  "status": "WITHHOLD_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2",
+  "summary": {
+    "contradicted_or_overgeneralized": 4,
+    "supported": 7,
+    "supported_with_nuance": 2,
+    "undetermined": 1
+  },
+  "task_id": "USER_20260907_DNS_SCREENSHOT_RESEARCH_V2"
+}
