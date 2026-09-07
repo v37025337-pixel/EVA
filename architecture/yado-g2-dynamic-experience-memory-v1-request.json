@@ -1,13 +1,15 @@
 {
   "schema": "yado.g2.dynamic_experience_memory.request.v1",
-  "objective": "APPLY_LEARNING_RESULT_BY_REPLACING_STATIC_14_13_BRANCH_ASSUMPTION_WITH_DYNAMIC_LINEAGE_MEMORY",
+  "objective": "APPLY_REDERIVED_BRANCH_EVIDENCE_INTO_DYNAMIC_EXPERIENCE_MEMORY",
   "active_branch": "yado-architecture-shadow-search",
-  "instruction": "Build the current branch inventory from live Git refs. Preserve registered experience metadata exactly, but classify any unregistered branch as RAW_BRANCH_INVENTORY_ONLY with no semantic lessons and no automatic reuse. Distinguish branch existence, host-curated summary, and YADO re-derived evidence. Do not mutate canonical state.",
+  "instruction": "Rebuild live branch memory after exact raw-branch rederivation. Branches with matching content-addressed observations become DYNAMIC_REDERIVED_EXPERIENCE: structural evidence may be used for causal history and hypothesis generation, but semantic lessons remain empty until separately validated.",
   "causal_parent": {
     "learning_cycle": "architecture/yado-g2-read-understand-apply-learn-cycle-v1.json",
     "post_cycle_self_audit_run_id": 34098191049,
     "selected_deficit": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
-    "observed_secondary_deficit": "REMOTE_BRANCH_INVENTORY_MATCH"
+    "observed_secondary_deficit": "REMOTE_BRANCH_INVENTORY_MATCH",
+    "rederivation_run_id": 34105078899,
+    "rederivation_digest": "7038e2cca08da0c1dbebd2e416054d1877831d931a1a5475a63cfbcd7502d2d4"
   },
   "constraints": {
     "live_git_inventory": true,
@@ -19,7 +21,7 @@
   "canonical_mutation": false,
   "automatic_promotion": false,
   "g3_genesis": false,
-  "trigger": 1,
+  "trigger": 2,
   "requested_at": "2026-09-07T09:08:05Z",
   "host_role": "TRIGGER_TRANSPORT_PERSISTENCE_AND_STRICT_VERIFICATION_ONLY"
 }
