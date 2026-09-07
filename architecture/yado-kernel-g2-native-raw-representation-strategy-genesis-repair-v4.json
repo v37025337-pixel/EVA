@@ -1,0 +1,129 @@
+{
+  "candidate_digest": "03bf3624f16ddca433f02ce4f956258e2dee72046f65571fa4b226c65183ef6d",
+  "canonical_mutation": false,
+  "checks": {
+    "automatic_promotion": false,
+    "base_regression": true,
+    "canonical_unchanged": true,
+    "causal_ablation_drop": true,
+    "class_specific_rules_absent": true,
+    "fresh_direct_accuracy": true,
+    "fresh_not_used_for_training_or_selection": true,
+    "fresh_sequential_accuracy": true,
+    "fresh_sequential_gain_over_v3": true,
+    "fresh_wrapped_accuracy": true,
+    "g3_not_started": true,
+    "generic_family_surface_discovered_from_yado_source": true,
+    "host_selected_family": false,
+    "native_goal_created": true,
+    "native_selector_selected_one_family": true,
+    "selected_validation_ge_0_95": true,
+    "v3_exact_withhold_consumed": true,
+    "v3_spent_sequential_exactly_reproduced": true
+  },
+  "discovered_families": [
+    "HASHED_CHAR45_PERCEPTRON",
+    "HASHED_HYBRID_PERCEPTRON",
+    "HASHED_WORD_BIGRAM_PERCEPTRON",
+    "TFIDF_HYBRID_CENTROID"
+  ],
+  "family_metrics": {
+    "HASHED_CHAR45_PERCEPTRON": {
+      "error": null,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "HASHED_HYBRID_PERCEPTRON": {
+      "error": null,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "HASHED_WORD_BIGRAM_PERCEPTRON": {
+      "error": null,
+      "train": 1.0,
+      "validation": 1.0
+    },
+    "TFIDF_HYBRID_CENTROID": {
+      "error": null,
+      "train": 0.9532237673830595,
+      "validation": 0.9330143540669856
+    }
+  },
+  "fresh_metrics": {
+    "ablated_sequential": 0.244,
+    "base_regression": 1.0,
+    "direct": 1.0,
+    "fresh_sequential": 0.9993333333333333,
+    "fresh_wrapped": 1.0,
+    "v3_base_regression": 1.0,
+    "v3_direct": 1.0,
+    "v3_fresh_sequential": 0.8816666666666667,
+    "v3_fresh_wrapped": 0.9625
+  },
+  "g3_genesis_performed": false,
+  "model_digest": "ec9ab1ecc29d45ee2d7c0d616e7e23fcf28d235348a0f5a270dffdeb4e0f7505",
+  "native_goal_deficits": [
+    "D-b21bec7a9ee7"
+  ],
+  "native_selection": {
+    "candidate_count": 4,
+    "gate_digest": "6ee9da7121b795a2349a4e37f061a0da65275f7f98adb0901696ab315bae8e56",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "b2ab4b49877e09f260733673ae6cf51dd6bbda4d2b64dfbb989fa0156304bbdf",
+        "failed_critics": [
+          "semantic"
+        ],
+        "fit_gain": 0.029077117572692823,
+        "heldout_gain": 0.028708133971291905,
+        "skill_id": "RAW_MODEL_V4_TFIDF_HYBRID_CENTROID",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "1adebfe3bc6a68eea4d4456e20a2d5026b8b15b40d52ec343250b7f4df58d695",
+        "failed_critics": [],
+        "fit_gain": 0.07585335018963335,
+        "heldout_gain": 0.09569377990430628,
+        "skill_id": "RAW_MODEL_V4_HASHED_CHAR45_PERCEPTRON",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "RAW_MODEL_V4_HASHED_CHAR45_PERCEPTRON"
+    ],
+    "status": "SELECTED"
+  },
+  "next_required_capability": "NATIVE_RAW_REPRESENTATION_MODEL_FAMILY_EXPANSION_V5",
+  "parent_v3_receipt": "b4bf36d865ba5dba575343a31ffed25bb1774c3b1ac4982e18f8132d213f0f4b",
+  "promotion_applied": false,
+  "receipt_sha256": "55bc5cf7633a47b13059dbd8f9de3ae47347a44cc1a0d47a68004b31f0b89922",
+  "schema": "yado.g2.native_raw_representation_strategy_genesis_repair.v4",
+  "selected_family": "HASHED_CHAR45_PERCEPTRON",
+  "semantic_boundary": "V4 CONSUMES THE EXACT SPENT V3 SEQUENTIAL FAILURE AND MECHANICALLY DISCOVERS GENERIC TEXT-REPRESENTATION MODEL FAMILIES FROM YADO OWN fit_family SOURCE. ALL CANDIDATES ARE TRAINED ONLY ON SPENT V3 FAILURE DATA; YADO NATIVE PRECOMMIT SELECTS ONE FAMILY BEFORE A NEW DEEP-WRAPPER FRESH STRESS IS REVEALED. HOST PROVIDES NO NORMALIZATION RULE, MODEL FAMILY CHOICE, CLASS-SPECIFIC RULE, LABEL HEURISTIC OR LOWERED GATE.",
+  "status": "WITHHOLD_G2_NATIVE_RAW_REPRESENTATION_STRATEGY_GENESIS_REPAIR_V4"
+}
