@@ -12,6 +12,7 @@ DYNAMIC_MEMORY = ROOT / "experience/yado-g2-dynamic-experience-memory-v1.json"
 DNS_SCREENSHOT_APPLICATION = ROOT / "architecture/yado-g2-dns-screenshot-learning-application-v1.json"
 PUBLIC_DNS_DIRECT_APPLICATION = ROOT / "architecture/yado-g2-public-dns-direct-probe-application-v1.json"
 GCP_DIRECT_ENDPOINT_APPLICATION = ROOT / "architecture/yado-g2-gcp-direct-endpoint-probe-application-v1.json"
+OPEN_DEVELOPER_RESOURCE_APPLICATION = ROOT / "architecture/yado-g2-open-developer-resource-learning-application-v1.json"
 
 class G2CausalLibraryKernelV1:
     COMPONENT_ID = "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1"
@@ -27,6 +28,7 @@ class G2CausalLibraryKernelV1:
         self.dns_screenshot_application = self._load(self.root / DNS_SCREENSHOT_APPLICATION.relative_to(ROOT))
         self.public_dns_direct_application = self._load(self.root / PUBLIC_DNS_DIRECT_APPLICATION.relative_to(ROOT))
         self.gcp_direct_endpoint_application = self._load(self.root / GCP_DIRECT_ENDPOINT_APPLICATION.relative_to(ROOT))
+        self.open_developer_resource_application = self._load(self.root / OPEN_DEVELOPER_RESOURCE_APPLICATION.relative_to(ROOT))
 
     @staticmethod
     def _load(path: Path):
@@ -148,6 +150,18 @@ class G2CausalLibraryKernelV1:
             raise ValueError("GCP_DIRECT_ENDPOINT_TEMPLATE_LESSON_MISSING")
         if gcp.get("safety",{}).get("canonical_mutation") is not False or gcp.get("safety",{}).get("automatic_promotion") is not False:
             raise ValueError("GCP_DIRECT_ENDPOINT_APPLICATION_SAFETY_VIOLATION")
+        dev = self.open_developer_resource_application
+        if dev.get("status") != "ACTIVE_DEVELOPMENT_SHADOW_APPLIED":
+            raise ValueError("OPEN_DEVELOPER_RESOURCE_APPLICATION_NOT_ACTIVE")
+        if dev.get("source_experience_digest") != "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2":
+            raise ValueError("OPEN_DEVELOPER_RESOURCE_APPLICATION_DIGEST_MISMATCH")
+        dev_bound = applied.get("OPEN_DEVELOPER_RESOURCE_SELF_STUDY_V1") or {}
+        if dev_bound.get("source_experience_digest") != dev.get("source_experience_digest"):
+            raise ValueError("OPEN_DEVELOPER_RESOURCE_TRAINING_BINDING_MISMATCH")
+        if dev.get("target_priority") != "CODING_UNSUPPORTED_PROGRAM_FAMILIES":
+            raise ValueError("OPEN_DEVELOPER_RESOURCE_PRIORITY_MISMATCH")
+        if dev.get("safety",{}).get("third_party_code_executed") is not False or dev.get("safety",{}).get("ready_patch_from_host") is not False:
+            raise ValueError("OPEN_DEVELOPER_RESOURCE_HOST_PATCH_OR_EXECUTION_VIOLATION")
         cb = self.training.get("causal_binding") or {}
         if cb.get("source_layer") != "L1_MEMORY_EXPERIENCE" or cb.get("conditioning_layer") != "L2_EXPERIENCE_CONDITIONING":
             raise ValueError("TRAINING_CAUSAL_LAYER_BINDING_MISMATCH")
@@ -174,6 +188,9 @@ class G2CausalLibraryKernelV1:
             "current_dns_remeasure_before_reuse": self.public_dns_direct_application["current_execution_context_policy"]["remeasure_before_reuse"],
             "gcp_direct_live_endpoint_count": self.gcp_direct_endpoint_application["observed"]["concrete_live_endpoint_count"],
             "gcp_direct_unresolved_template": self.gcp_direct_endpoint_application["observed"]["unresolved_symbolic_template"],
+            "developer_resource_target_priority": self.open_developer_resource_application["target_priority"],
+            "developer_resource_source_count": self.open_developer_resource_application["corpus_summary"]["source_count"],
+            "developer_resource_fetched_count": self.open_developer_resource_application["corpus_summary"]["fetched_count"],
             "g3_genesis": self.architecture["g3_genesis"],
         }
 
@@ -271,6 +288,21 @@ class G2CausalLibraryKernelV1:
             "automatic_promotion": False,
         }
 
+    def open_developer_resource_application_snapshot(self):
+        p = self.open_developer_resource_application
+        return {
+            "status": p["status"],
+            "source_run_id": p["source_run_id"],
+            "source_experience_digest": p["source_experience_digest"],
+            "target_priority": p["target_priority"],
+            "source_count": p["corpus_summary"]["source_count"],
+            "fetched_count": p["corpus_summary"]["fetched_count"],
+            "failed_count": p["corpus_summary"]["failed_count"],
+            "future_task_guard": p["causal_binding"]["future_task_guard"],
+            "lesson_ids": [x["id"] for x in p["causal_lessons"]],
+            "automatic_promotion": False,
+        }
+
     def causal_trace(self, contract: str):
         route = self.route_contract(contract)
         return {
@@ -285,6 +317,7 @@ class G2CausalLibraryKernelV1:
             "dns_screenshot_application": self.dns_screenshot_application_snapshot(),
             "public_dns_direct_application": self.public_dns_direct_application_snapshot(),
             "gcp_direct_endpoint_application": self.gcp_direct_endpoint_application_snapshot(),
+            "open_developer_resource_application": self.open_developer_resource_application_snapshot(),
             "automatic_promotion": False,
         }
 
