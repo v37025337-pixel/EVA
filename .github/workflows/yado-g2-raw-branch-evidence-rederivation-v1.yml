@@ -1,0 +1,61 @@
+name: YADO G2 Raw Branch Evidence Rederivation V1
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-g2-raw-branch-evidence-rederivation-v1-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-raw-branch-evidence-rederivation-v1
+  cancel-in-progress: true
+jobs:
+  rederive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - name: Fetch all branch objects
+        run: git fetch --all --prune
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Canonical guard before rederivation
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Compile rederivation
+        run: python -m py_compile runtime/yado_g2_raw_branch_evidence_rederivation_v1.py
+      - name: Read and rederive exact branch evidence
+        run: python runtime/yado_g2_raw_branch_evidence_rederivation_v1.py
+      - name: Require complete non-executing rederivation
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open("experience/yado-g2-raw-branch-evidence-rederivation-v1.json"))
+          assert r["status"]=="PASS_SHADOW_G2_RAW_BRANCH_EVIDENCE_REDERIVATION_V1",r
+          assert r["target_count"]==r["observation_count"],r
+          assert r["failure_count"]==0,r
+          assert not r["remaining_raw_lineage_branches"],r
+          assert all(x["branch_code_executed"] is False for x in r["observations"]),r
+          assert all(x["semantic_equivalence_claimed"] is False for x in r["observations"]),r
+          assert r["canonical_mutation"] is False,r
+          print(r["status"],r["observation_count"],r["next_required_capability"])
+          PY
+      - name: Canonical guard after rederivation
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Persist rederived branch experience
+        run: |
+          git config user.name "YADO Raw Branch Rederivation"
+          git config user.email "actions@users.noreply.github.com"
+          git add experience/yado-g2-raw-branch-evidence-rederivation-v1.json
+          git add candidates/kernel-self-generated/g2-raw-branch-evidence-rederivation-v1.json
+          git diff --cached --quiet || git commit -m "Persist raw branch evidence rederivation V1 [skip ci]"
+          git reset --hard HEAD
+          git clean -fd
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-g2-raw-branch-evidence-rederivation-v1-${{ github.run_id }}
+          path: |
+            experience/yado-g2-raw-branch-evidence-rederivation-v1.json
+            candidates/kernel-self-generated/g2-raw-branch-evidence-rederivation-v1.json
