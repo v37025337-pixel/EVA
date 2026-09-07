@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parent.parent
 LIB = ROOT / "architecture/yado-g2-kernel-component-library-v1.json"
 GEN = ROOT / "architecture/yado-g2-genetic-lineage-library-v1.json"
 ARCH = ROOT / "architecture/yado-g2-causal-library-kernel-architecture-v1.json"
+TRAINING = ROOT / "architecture/yado-g2-causal-training-binding-v1.json"
 
 class G2CausalLibraryKernelV1:
     COMPONENT_ID = "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1"
@@ -15,6 +16,7 @@ class G2CausalLibraryKernelV1:
         self.library = self._load(self.root / LIB.relative_to(ROOT))
         self.genetics = self._load(self.root / GEN.relative_to(ROOT))
         self.architecture = self._load(self.root / ARCH.relative_to(ROOT))
+        self.training = self._load(self.root / TRAINING.relative_to(ROOT))
 
     @staticmethod
     def _load(path: Path):
@@ -64,6 +66,23 @@ class G2CausalLibraryKernelV1:
                 raise ValueError("MISSING_ROLLBACK_PARENT:" + name)
         if self.genetics["tri_organ_genome"]["automatic_promotion"] is not False:
             raise ValueError("AUTO_PROMOTION_MUST_BE_FALSE")
+
+        training_state = self.library.get("training_state") or {}
+        if self.training.get("status") != "ACTIVE_DEVELOPMENT_SHADOW_TRAINED":
+            raise ValueError("TRAINING_BINDING_NOT_ACTIVE")
+        if training_state.get("experience_digest") != self.training.get("experience_digest"):
+            raise ValueError("TRAINING_DIGEST_LIBRARY_BINDING_MISMATCH")
+        if self.training.get("safety", {}).get("canonical_mutation") is not False:
+            raise ValueError("TRAINING_CANONICAL_MUTATION_FORBIDDEN")
+        if self.training.get("safety", {}).get("third_party_code_executed") is not False:
+            raise ValueError("TRAINING_THIRD_PARTY_EXECUTION_FORBIDDEN")
+        if self.training.get("safety", {}).get("automatic_promotion") is not False:
+            raise ValueError("TRAINING_AUTO_PROMOTION_FORBIDDEN")
+        if self.training.get("safety", {}).get("g3_genesis") is not False:
+            raise ValueError("TRAINING_G3_FORBIDDEN")
+        cb = self.training.get("causal_binding") or {}
+        if cb.get("source_layer") != "L1_MEMORY_EXPERIENCE" or cb.get("conditioning_layer") != "L2_EXPERIENCE_CONDITIONING":
+            raise ValueError("TRAINING_CAUSAL_LAYER_BINDING_MISMATCH")
         return {
             "status": "PASS_CAUSAL_LIBRARY_KERNEL_V1",
             "normal_dispatch_count": len(normal),
@@ -72,6 +91,9 @@ class G2CausalLibraryKernelV1:
             "forward_edge_count": len(self.architecture["forward_edges"]),
             "feedback_edge_count": len(self.architecture["feedback_edges"]),
             "canonical_head_digest": self.library["baseline"]["canonical_head_digest"],
+            "training_experience_digest": self.training["experience_digest"],
+            "training_source_count": int(self.training["corpus"]["source_count"]),
+            "training_fetched_count": int(self.training["corpus"]["fetched_count"]),
             "g3_genesis": self.architecture["g3_genesis"],
         }
 
@@ -90,6 +112,19 @@ class G2CausalLibraryKernelV1:
             "intelligence": owners["GENERAL_INTELLIGENCE_FALLBACK"],
         }
 
+    def training_snapshot(self):
+        return {
+            "status": self.training["status"],
+            "experience_digest": self.training["experience_digest"],
+            "training_run_id": self.training["training_run_id"],
+            "source_count": self.training["corpus"]["source_count"],
+            "fetched_count": self.training["corpus"]["fetched_count"],
+            "failed_count": self.training["corpus"]["failed_count"],
+            "curriculum": list(self.training["curriculum"]),
+            "causal_binding": dict(self.training["causal_binding"]),
+            "automatic_promotion": False,
+        }
+
     def causal_trace(self, contract: str):
         route = self.route_contract(contract)
         return {
@@ -98,6 +133,7 @@ class G2CausalLibraryKernelV1:
             "route": route,
             "layers": [x["id"] for x in sorted(self.architecture["layers"], key=lambda z: z["index"])],
             "feedback": [dict(x) for x in self.architecture["feedback_edges"]],
+            "training": self.training_snapshot(),
             "automatic_promotion": False,
         }
 
