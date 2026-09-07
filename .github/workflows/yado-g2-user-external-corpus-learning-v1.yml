@@ -74,6 +74,8 @@ jobs:
               subprocess.check_call([sys.executable,"runtime/yado_g2_dns_gcp_cross_domain_research_stress_v1.py"])
           elif task=="USER_20260907_DNS_SCREENSHOT_RESEARCH_V2":
               subprocess.check_call([sys.executable,"runtime/yado_g2_dns_screenshot_research_stress_v2.py"])
+          elif task=="USER_20260907_PUBLIC_DNS_DIRECT_PROBE_V1":
+              subprocess.check_call([sys.executable,"runtime/yado_g2_public_dns_direct_probe_v1.py"])
           elif task=="USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1":
               subprocess.check_call([sys.executable,"runtime/yado_g2_four_domain_fresh_stress_v1.py"])
           elif task=="USER_20260906_TRI_ORGAN_ADMISSION_REVIEW_V2":
@@ -111,6 +113,8 @@ jobs:
           [ -f experience/yado-dns-gcp-cross-domain-research-stress-v1.json ] && files+=(experience/yado-dns-gcp-cross-domain-research-stress-v1.json)
           [ -f candidates/kernel-self-generated/g2-dns-screenshot-research-stress-v2.json ] && files+=(candidates/kernel-self-generated/g2-dns-screenshot-research-stress-v2.json)
           [ -f experience/yado-dns-screenshot-research-stress-v2.json ] && files+=(experience/yado-dns-screenshot-research-stress-v2.json)
+          [ -f candidates/kernel-self-generated/g2-public-dns-direct-probe-v1.json ] && files+=(candidates/kernel-self-generated/g2-public-dns-direct-probe-v1.json)
+          [ -f experience/yado-public-dns-direct-probe-v1.json ] && files+=(experience/yado-public-dns-direct-probe-v1.json)
           [ -f candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json ] && files+=(candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json)
           [ -f experience/yado-four-domain-fresh-stress-v1.json ] && files+=(experience/yado-four-domain-fresh-stress-v1.json)
           [ -f candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json ] && files+=(candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json)
@@ -170,6 +174,17 @@ jobs:
               assert r["checks"]["nextdns_configuration_nuance_exposed"] is True,r
               assert r["canonical_mutation"] is False,r
               print(r["status"],r["summary"],r["next_required_capability"])
+          elif task=="USER_20260907_PUBLIC_DNS_DIRECT_PROBE_V1":
+              p=pathlib.Path("candidates/kernel-self-generated/g2-public-dns-direct-probe-v1.json")
+              if not p.exists(): raise SystemExit("MISSING_PUBLIC_DNS_DIRECT_PROBE_REPORT")
+              r=json.loads(p.read_text())
+              if r.get("status")!="PASS_SHADOW_G2_PUBLIC_DNS_DIRECT_PROBE_V1":
+                  raise SystemExit("SEMANTIC_WITHHOLD:"+str(r.get("status")))
+              assert r["checks"]["at_least_four_of_five_providers_udp_reachable"] is True,r
+              assert r["checks"]["at_least_four_of_five_providers_tcp_reachable"] is True,r
+              assert r["checks"]["at_least_eight_of_ten_addresses_udp_reachable"] is True,r
+              assert r["canonical_mutation"] is False,r
+              print(r["status"],r["aggregate"],r["next_required_capability"])
           elif task=="USER_20260906_FOUR_DOMAIN_FRESH_STRESS_V1":
               p=pathlib.Path("candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json")
               if not p.exists(): raise SystemExit("MISSING_FOUR_DOMAIN_STRESS_REPORT")
@@ -240,6 +255,8 @@ jobs:
             experience/yado-dns-gcp-cross-domain-research-stress-v1.json
             candidates/kernel-self-generated/g2-dns-screenshot-research-stress-v2.json
             experience/yado-dns-screenshot-research-stress-v2.json
+            candidates/kernel-self-generated/g2-public-dns-direct-probe-v1.json
+            experience/yado-public-dns-direct-probe-v1.json
             candidates/kernel-self-generated/g2-four-domain-fresh-stress-v1.json
             experience/yado-four-domain-fresh-stress-v1.json
             candidates/kernel-self-generated/g2-all-experience-tri-organ-canonical-admission-review-v2.json
