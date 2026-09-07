@@ -15,7 +15,7 @@
   "active_branch": "yado-architecture-shadow-search",
   "mutate_canonical_state": false,
   "persist_report_only": true,
-  "repair_rerun_revision": "2026-09-07-post-v6-v7-generated-artifact-contract-repair",
+  "repair_rerun_revision": "2026-09-07-post-generated-contract-and-49-workflow-control-plane-repair",
   "repair_focus": [
     "ALL_BRANCH_TIPS_CONTAINED_IN_ACTIVE_LINEAGE",
     "FULL_RUNTIME_COMPILE",
@@ -29,9 +29,11 @@
     "TOP_LEVEL_REGRESSION_TESTS",
     "CANONICAL_GUARD",
     "NO_CANONICAL_PROMOTION",
-    "NO_G3_TRANSITION"
+    "NO_G3_TRANSITION",
+    "ACTIVE_WORKFLOW_ALLOWLIST_49_OF_49",
+    "WRITE_AUTHORIZED_WORKFLOW_SET_49_OF_49"
   ],
-  "audit_trigger": 49,
+  "audit_trigger": 50,
   "prerequisite_evidence": {
     "previous_audited_commit": "86a00514694baf96df4e254018c34ff223180f82",
     "current_branch_tip_before_request": "6542cd1dfd67b30596f2e0682cf3eb87d18bd0d8",
@@ -42,6 +44,8 @@
     "g3_genesis": false,
     "generated_artifact_contract_repair_commit": "de37c103ecbd39641ee47c219b43734cf5b5a805",
     "v7_request_staging_commit": "d7dac854ae4a6d9194deb530dafb0e2f3c1a38d6",
-    "v7_request_status": "BLOCKED_PENDING_V6"
+    "v7_request_status": "BLOCKED_PENDING_V6",
+    "workflow_allowlist_repair_commit": "b4f171908559faeac5d336816c1b9516f9fc0061",
+    "expected_active_workflows": 49
   }
 }
