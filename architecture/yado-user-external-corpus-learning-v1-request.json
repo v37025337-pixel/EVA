@@ -8,16 +8,21 @@
   "no_third_party_code_execution": true,
   "no_canonical_mutation": true,
   "host_role": "SOURCE_TRANSPORT_PERSISTENCE_AND_VERIFICATION_ONLY",
-  "trigger": 20,
-  "trigger_reason": "USER_20260907_PUBLIC_DNS_DIRECT_PROBE_V1",
-  "requested_at": "2026-09-07T11:40:01Z",
+  "trigger": 21,
+  "trigger_reason": "USER_20260907_GCP_DIRECT_ENDPOINT_PROBE_V1",
+  "requested_at": "2026-09-07T12:05:49Z",
   "purpose": "FULL_RELEVANT_INTERNAL_PLUS_EXTERNAL_EVIDENCE_INGESTION_FOR_CAUSAL_LIBRARY_KERNEL",
   "canonical_mutation": false,
   "cross_domain_task": {
-    "id": "USER_20260907_PUBLIC_DNS_DIRECT_PROBE_V1",
-    "resource": "resources/yado-public-dns-direct-probe-task-v1.json",
-    "canonical_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
-    "direct_ip_queries": true,
+    "id": "USER_20260907_GCP_DIRECT_ENDPOINT_PROBE_V1",
+    "resource": "resources/yado-gcp-direct-endpoint-probe-task-v1.json",
+    "source_research_artifact": "experience/yado-dns-gcp-cross-domain-research-stress-v1.json",
+    "direct_dns_resolution": true,
+    "direct_tcp_443": true,
+    "direct_tls_handshake": true,
+    "direct_https_get": true,
+    "no_credentials": true,
+    "no_write_methods": true,
     "canonical_mutation": false,
     "gene_reselection": false,
     "resynthesis": false,
@@ -120,5 +125,13 @@
     ],
     "thresholds_changed": false,
     "genes_reselected": false
+  },
+  "previous_direct_dns_probe": {
+    "run_id": 34118066517,
+    "status": "PASS_SHADOW_G2_PUBLIC_DNS_DIRECT_PROBE_V1",
+    "addresses_udp_reachable": 10,
+    "providers_tcp_reachable": 5,
+    "providers_udp_reachable": 5,
+    "next_required_capability": "APPLY_DIRECT_DNS_OBSERVATIONS_TO_CAUSAL_MEMORY"
   }
 }
