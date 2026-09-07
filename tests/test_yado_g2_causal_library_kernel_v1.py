@@ -26,7 +26,9 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertEqual(result["dynamic_memory_raw_lineage_count"], 0)
         self.assertEqual(result["dynamic_memory_rederived_count"], 6)
         self.assertEqual(result["latest_applied_experience_id"], "DNS_SCREENSHOT_RESEARCH_V2")
-        self.assertEqual(result["latest_applied_experience_digest"], "d2196db58bc2929691b83ea3770d29f007136da08b2a366418f8c820488ee3fc")
+        self.assertEqual(result["latest_applied_experience_digest"], "eedbe60d1f75a1da174dd23a6e6aa4dc31c7b7be16e429f3d1dc7fbaf6003dd9")
+        self.assertEqual(result["current_dns_preferred_provider"], "OpenDNS")
+        self.assertTrue(result["current_dns_remeasure_before_reuse"])
 
     def test_tri_organ_contracts_have_single_owner(self):
         logic = self.kernel.route_contract("RELATION_START_TO_STATE")
@@ -74,6 +76,17 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertEqual(snap["future_task_guard"], "EXTERNAL_TECHNICAL_CLAIM_SOURCE_VARIANT_CONFIGURATION_AND_MEASUREMENT_GUARD")
         self.assertEqual(snap["retained_first_withhold"], "WITHHOLD_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2")
         self.assertFalse(snap["thresholds_lowered"])
+        self.assertFalse(snap["automatic_promotion"])
+
+    def test_direct_dns_probe_is_applied_as_contextual_execution_policy(self):
+        snap = self.kernel.public_dns_direct_application_snapshot()
+        self.assertEqual(snap["status"], "ACTIVE_DEVELOPMENT_SHADOW_APPLIED")
+        self.assertEqual(snap["source_run_id"], 34118066517)
+        self.assertEqual(snap["preferred_provider_for_current_runner"], "OpenDNS")
+        self.assertEqual(snap["fallbacks"][0], "Quad9 Secure")
+        self.assertTrue(snap["remeasure_before_reuse"])
+        self.assertTrue(snap["do_not_apply_as_user_network_ranking"])
+        self.assertEqual(snap["future_task_guard"], "LIVE_DNS_RESOLVER_SELECTION_REQUIRES_CONTEXTUAL_REPROBE_AND_FAILOVER")
         self.assertFalse(snap["automatic_promotion"])
 
     def test_unknown_contract_falls_back_without_self_promotion(self):
