@@ -1,0 +1,126 @@
+{
+  "admission_metrics": {
+    "canonical_v4": {
+      "base_regression": 1.0,
+      "direct": 0.9333333333333333,
+      "sequential": 0.503,
+      "traps": 1.0,
+      "wrapped": 0.8043478260869565
+    },
+    "multiscale": {
+      "base_regression": 1.0,
+      "direct": 0.9916666666666667,
+      "sequential": 0.9131428571428571,
+      "traps": 1.0,
+      "wrapped": 0.9836956521739131
+    },
+    "parent_char45": {
+      "base_regression": 1.0,
+      "direct": 0.9916666666666667,
+      "sequential": 0.8051428571428572,
+      "traps": 1.0,
+      "wrapped": 0.9728260869565217
+    }
+  },
+  "candidate_digest": "55bd61069b501dc09ab089f96ad139e70b11895f441258b14512f24e72950697",
+  "canonical_mutation": false,
+  "checks": {
+    "admission_direct_ge_0_98": true,
+    "admission_sequential_ge_0_98": false,
+    "admission_traps_ge_0_95": true,
+    "admission_wrapped_ge_0_98": true,
+    "base_regression_ge_0_98": true,
+    "candidate_fixed_by_digest": true,
+    "canonical_mutation": false,
+    "g3_not_started": true,
+    "native_gate_selects_multiscale": true,
+    "post_direct_ge_0_98": true,
+    "post_selection_fresh_not_used_by_gate": true,
+    "post_sequential_ge_0_98": false,
+    "post_traps_ge_0_95": true,
+    "post_wrapped_ge_0_98": false,
+    "runtime_equivalent_to_v5_reference": true,
+    "sequential_gain_over_parent_ge_0_01": true,
+    "v5_shadow_pass_consumed": true
+  },
+  "fresh_dataset_digest": "a3a3bed603eed1310ddf3887a0d0a9f0c326fd54c5b7e8ea6617b12968626764",
+  "g3_genesis_performed": false,
+  "native_selection": {
+    "candidate_count": 3,
+    "gate_digest": "fde8d66f9a500b8684d04c4822a3b222c87feb9a9a76a999bea3e421a0b1a98b",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "17004f15424db442c088f194e3432edc06feeaddf238dba0a13f1e9f1a8147b9",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "KEEP_CANONICAL_V4",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "6c85b1bac6f9b739e1bd920482c40862a584d8041f72c6a9aaa1ceb3708c20ed",
+        "failed_critics": [],
+        "fit_gain": 0.05833333333333335,
+        "heldout_gain": 0.41014285714285714,
+        "skill_id": "ADMIT_MULTISCALE_V6",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "ADMIT_MULTISCALE_V6"
+    ],
+    "status": "SELECTED"
+  },
+  "next_required_capability": "NATIVE_RAW_REPRESENTATION_SEGMENTATION_PRIMITIVE_GENESIS_V6",
+  "parent_v5_receipt": "0396838dc5b419c04c4ee5b3f0f0a5f2891c0ea2d8767016b08aecd7beb02a85",
+  "post_selection_fresh": {
+    "direct": 1.0,
+    "sequential": 0.87175,
+    "traps": 1.0,
+    "wrapped": 0.9732142857142857
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "6f16f97ab630c3964a66a6ebdd2d706f2c0a6895fd65f9f6d370ce59c9afeb8e",
+  "runtime_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-MULTISCALE-V6",
+  "runtime_equivalence": true,
+  "schema": "yado.g2.native_raw_representation_model_family_expansion_admission.v6",
+  "selected_spec": {
+    "aggregation": "MAX_MARGIN",
+    "stride_div": 3,
+    "topk": 3,
+    "widths": [
+      24,
+      48
+    ]
+  },
+  "semantic_boundary": "V6 FREEZES THE V5 MULTISCALE CANDIDATE, FIRST PROVES A REUSABLE RUNTIME IS OUTPUT-EQUIVALENT TO THE V5 REFERENCE IMPLEMENTATION, THEN COMPARES CANONICAL V4, THE CHAR45 PARENT AND MULTISCALE CHILD ON A NEW INDEPENDENT ADMISSION CORPUS. NATIVE YADO SELECTS BEFORE A SECOND UNTOUCHED POST-SELECTION FRESH CHALLENGE. NO TRAINING OR CANDIDATE CHANGE OCCURS.",
+  "status": "WITHHOLD_G2_NATIVE_RAW_REPRESENTATION_MODEL_FAMILY_EXPANSION_ADMISSION_V6"
+}
