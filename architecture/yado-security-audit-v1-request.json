@@ -7,20 +7,28 @@
     "action_pinning",
     "dependency_vulnerabilities"
   ],
-  "active_branch": "yado-architecture-shadow-search",
+  "active_branch": "main",
   "mutate_canonical_state": false,
-  "repair_rerun_revision": "2026-09-06-tri-organ-burnin-ab-security",
+  "repair_rerun_revision": "2026-09-07-main-post-tri-organ-security",
   "repair_focus": [
-    "TRI_ORGAN_BURNIN_RUNTIME",
-    "BOUNDED_WORKFLOW_REUSE",
+    "POST_MAIN_TRI_ORGAN_SELECTIVE_ADMISSION",
+    "31_ACTIVE_CAPABILITIES",
+    "39_ACTIVE_RUNTIME_SOURCES",
     "SECRET_SCAN",
     "DEPENDENCY_AUDIT",
-    "ACTIVE_WORKFLOW_COUNT_40",
-    "NO_THIRD_PARTY_ACTIONS"
+    "WORKFLOW_PERMISSION_ALLOWLIST",
+    "IMMUTABLE_ACTION_PINS",
+    "ACTIVE_RUNTIME_REVIEW",
+    "FAIL_CLOSED_SECURITY_EXIT"
   ],
-  "security_trigger": 13,
+  "security_trigger": 9,
   "prerequisite_evidence": {
-    "burnin_run_id": 34063449582,
-    "burnin_status": "PASS_G2_TRI_ORGAN_CANONICAL_BURNIN_OLD_PARENT_COMPARATIVE_AB_V1"
+    "main_admission_commit": "6dde132f932704dee4563fc2ed3eb118e7dcb2b5",
+    "main_post_module_run_id": 34085602742,
+    "post_module_status": "PASS_G2_POST_MODULE_FULL_INTEGRITY_V1",
+    "active_capability_count": 31,
+    "active_runtime_sources": 39,
+    "expected_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+    "g3_genesis": false
   }
 }
