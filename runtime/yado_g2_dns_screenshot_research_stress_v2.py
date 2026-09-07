@@ -134,9 +134,18 @@ for i,f in enumerate(findings):
     keys=[f'SRC_{token}',f'CLAIM_{token}',f'CHECK_{token}',f'VERDICT_{token}',f'APPLY_{token}']
     valid=tuple([('Q',k) for k in keys]+[('R',k) for k in reversed(keys)])
     crossed=tuple([('Q',k) for k in keys]+[('R',k) for k in keys])
+    underflow=(('R',keys[0]),('Q',keys[-1]),('R',keys[-1]))
+    unfinished=tuple(list(valid)[:-1])
+    wrong=list(valid); wrong[len(keys)]=('R','WRONG_'+token)
+    rep=keys[-1]
+    repeated=tuple([('Q',rep)]*len(keys)+[('R',rep)]*len(keys))
     evt_cases += [
       {'events':valid,'expected':True,'claim_id':f['claim_id'],'kind':'VALID_EVIDENCE_APPLICATION'},
-      {'events':crossed,'expected':False,'claim_id':f['claim_id'],'kind':'INVALID_CAUSAL_ORDER'}
+      {'events':crossed,'expected':False,'claim_id':f['claim_id'],'kind':'INVALID_CAUSAL_ORDER'},
+      {'events':underflow,'expected':False,'claim_id':f['claim_id'],'kind':'UNDERFLOW'},
+      {'events':unfinished,'expected':False,'claim_id':f['claim_id'],'kind':'UNFINISHED'},
+      {'events':tuple(wrong),'expected':False,'claim_id':f['claim_id'],'kind':'WRONG_KEY'},
+      {'events':repeated,'expected':True,'claim_id':f['claim_id'],'kind':'REPEATED_KEY_VALID'}
     ]
 
 lp=genes['LOGIC']['operator_program']; tp=genes['THINKING']['operator_program']
