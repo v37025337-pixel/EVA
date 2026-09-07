@@ -25,6 +25,8 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertEqual(result["dynamic_memory_branch_count"], 20)
         self.assertEqual(result["dynamic_memory_raw_lineage_count"], 0)
         self.assertEqual(result["dynamic_memory_rederived_count"], 6)
+        self.assertEqual(result["latest_applied_experience_id"], "DNS_SCREENSHOT_RESEARCH_V2")
+        self.assertEqual(result["latest_applied_experience_digest"], "d2196db58bc2929691b83ea3770d29f007136da08b2a366418f8c820488ee3fc")
 
     def test_tri_organ_contracts_have_single_owner(self):
         logic = self.kernel.route_contract("RELATION_START_TO_STATE")
@@ -60,6 +62,18 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertEqual(snap["dynamic_rederived_count"], 6)
         self.assertEqual(snap["next_required_capability"], None)
         self.assertTrue(snap["raw_branch_inventory_is_not_semantic_knowledge"])
+        self.assertFalse(snap["automatic_promotion"])
+
+    def test_dns_screenshot_result_is_applied_as_future_research_guard(self):
+        snap = self.kernel.dns_screenshot_application_snapshot()
+        self.assertEqual(snap["status"], "ACTIVE_DEVELOPMENT_SHADOW_APPLIED")
+        self.assertEqual(snap["source_run_id"], 34115677305)
+        self.assertIn("DNS-L1-SOURCE-001", snap["lesson_ids"])
+        self.assertIn("DNS-L1-VARIANT-002", snap["lesson_ids"])
+        self.assertIn("DNS-L1-PERF-005", snap["lesson_ids"])
+        self.assertEqual(snap["future_task_guard"], "EXTERNAL_TECHNICAL_CLAIM_SOURCE_VARIANT_CONFIGURATION_AND_MEASUREMENT_GUARD")
+        self.assertEqual(snap["retained_first_withhold"], "WITHHOLD_G2_DNS_SCREENSHOT_RESEARCH_STRESS_V2")
+        self.assertFalse(snap["thresholds_lowered"])
         self.assertFalse(snap["automatic_promotion"])
 
     def test_unknown_contract_falls_back_without_self_promotion(self):
