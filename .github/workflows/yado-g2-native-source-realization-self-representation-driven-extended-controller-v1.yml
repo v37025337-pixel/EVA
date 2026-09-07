@@ -3,7 +3,7 @@ on:
   push:
     branches: [yado-architecture-shadow-search]
     paths:
-      - "architecture/yado-kernel-native-contextual-ast-transformer-policy-repair-v8-request.json"
+      - "architecture/yado-kernel-native-contextual-ast-transformer-source-realization-v9-request.json"
 permissions:
   contents: write
 concurrency:
@@ -25,11 +25,11 @@ jobs:
       - name: Canonical guard before native source realization
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Compile strict observer
-        run: python -m py_compile runtime/yado_g2_native_contextual_ast_transformer_policy_repair_v8.py
+        run: python -m py_compile runtime/yado_g2_native_contextual_ast_transformer_source_realization_v9.py
       - name: Let YADO realize its extended controller as source
         id: realize
         continue-on-error: true
-        run: python runtime/yado_g2_native_contextual_ast_transformer_policy_repair_v8.py
+        run: python runtime/yado_g2_native_contextual_ast_transformer_source_realization_v9.py
       - name: Canonical guard after native source realization
         if: always()
         run: python runtime/yado_canonical_invariant_guard_v1.py
@@ -39,10 +39,10 @@ jobs:
           git config user.name "YADO Native Source Realization"
           git config user.email "actions@users.noreply.github.com"
           files=()
-          [ -f candidates/kernel-self-generated/g2-native-contextual-ast-transformer-policy-repair-v8.json ] && files+=(candidates/kernel-self-generated/g2-native-contextual-ast-transformer-policy-repair-v8.json)
-          [ -f candidates/kernel-self-generated/g2-native-contextual-ast-transformer-gene-v8.json ] && files+=(candidates/kernel-self-generated/g2-native-contextual-ast-transformer-gene-v8.json)
+          [ -f candidates/kernel-self-generated/g2-native-contextual-ast-transformer-source-realization-v9.json ] && files+=(candidates/kernel-self-generated/g2-native-contextual-ast-transformer-source-realization-v9.json)
+          [ -f candidates/g2-self-evolution/yado_native_contextual_ast_transformer_v9.py ] && files+=(candidates/g2-self-evolution/yado_native_contextual_ast_transformer_v9.py)
           if [ ${#files[@]} -gt 0 ]; then git add "${files[@]}"; fi
-          git diff --cached --quiet || git commit -m "Persist YADO contextual AST policy repair V8 [skip ci]"
+          git diff --cached --quiet || git commit -m "Persist YADO contextual AST source realization V9 [skip ci]"
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
       - name: Enforce strict native source provenance verdict
@@ -50,25 +50,22 @@ jobs:
         run: |
           python - <<'PY'
           import json,pathlib
-          p=pathlib.Path("candidates/kernel-self-generated/g2-native-contextual-ast-transformer-policy-repair-v8.json")
-          if not p.exists(): raise SystemExit("MISSING_CONTEXTUAL_AST_POLICY_V8")
+          p=pathlib.Path("candidates/kernel-self-generated/g2-native-contextual-ast-transformer-source-realization-v9.json")
+          if not p.exists(): raise SystemExit("MISSING_CONTEXTUAL_AST_SOURCE_V9")
           r=json.loads(p.read_text());c=r["checks"]
-          for key in ("host_authored_transition_action","host_authored_ast_subtree",
-                      "host_authored_transform_condition","external_models_used",
-                      "automatic_canonical_promotion"):
+          for key in ("host_authored_ast_subtree","host_authored_condition_expression","host_authored_patch",
+                      "host_source_template_used","external_models_used","automatic_canonical_promotion"):
               assert c[key] is False,(key,r)
-          assert c["threshold_not_lowered"] is True,r
-          assert c["blind_causal_classes_balanced"] is True,r
           assert c["canonical_unchanged"] is True,r
-          if r["status"] not in ("PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_REPAIR_V8","WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_POLICY_REPAIR_V8"):
-              raise SystemExit("BAD_CONTEXTUAL_AST_POLICY_STATUS:"+str(r["status"]))
-          print(r["status"],(r.get("gene") or {}).get("gene_id"),r.get("next_required_capability"))
+          if r["status"] not in ("PASS_SHADOW_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_SOURCE_REALIZATION_V9","WITHHOLD_G2_NATIVE_CONTEXTUAL_AST_TRANSFORMER_SOURCE_REALIZATION_V9"):
+              raise SystemExit("BAD_CONTEXTUAL_AST_SOURCE_STATUS:"+str(r["status"]))
+          print(r["status"],r.get("selected_source_candidate"),r.get("next_required_capability"))
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: yado-g2-contextual-ast-transformer-policy-v8-${{ github.run_id }}
+          name: yado-g2-contextual-ast-transformer-source-v9-${{ github.run_id }}
           path: |
-            candidates/kernel-self-generated/g2-native-contextual-ast-transformer-policy-repair-v8.json
-            candidates/kernel-self-generated/g2-native-contextual-ast-transformer-gene-v8.json
+            candidates/kernel-self-generated/g2-native-contextual-ast-transformer-source-realization-v9.json
+            candidates/g2-self-evolution/yado_native_contextual_ast_transformer_v9.py
           if-no-files-found: warn
