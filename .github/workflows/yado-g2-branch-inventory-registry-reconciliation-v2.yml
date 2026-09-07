@@ -60,6 +60,7 @@ jobs:
           cp runtime/yado_unified_core_deep_self_audit_v1_receipt.json "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}-post-branch-registry-v2.json"
           git config user.name "YADO G2 Branch Memory Reconciliation"
           git config user.email "actions@users.noreply.github.com"
+          git add runtime/yado_unified_core_v1.py runtime/yado_unified_core_deep_self_audit_v1.py
           git add canonical/yado-main-head-g2.json
           git add canonical/yado-unified-core-v1.json
           git add canonical/yado-unified-experience-registry-v1.json
