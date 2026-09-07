@@ -1,0 +1,183 @@
+{
+  "automatic_promotion": false,
+  "candidate_digest": "8f8377d686011988030021aa8be89bd06c20de6ae06592f0704f5ce0bb4c9ed3",
+  "canonical_active": false,
+  "canonical_mutation": false,
+  "checks": {
+    "base_regression": true,
+    "canonical_unchanged": true,
+    "class_specific_rules_absent": true,
+    "exact_failure_critic_regression": true,
+    "exact_v5_admission_failure_consumed": true,
+    "fresh_direct_accuracy": true,
+    "fresh_not_used_for_selection": true,
+    "fresh_sequential_accuracy": false,
+    "fresh_sequential_gain_over_parent": true,
+    "fresh_wrapped_accuracy": true,
+    "fresh_wrapped_gain_over_parent": true,
+    "g3_not_started": true,
+    "native_selector_selected_one": true,
+    "parent_v4_not_retrained": true,
+    "previous_failed_mode_not_reselected": true,
+    "runtime_modes_discovered_not_host_enumerated": true
+  },
+  "component": {
+    "canonical_active": false,
+    "class_specific_rules": false,
+    "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V5",
+    "generic_sequence_wrapper_robustness": true,
+    "mode": "CORE_GUARDED",
+    "parent_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
+    "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+    "parent_model_retrained": false,
+    "schema": "yado.g2.raw_task_representation_robustness_v5.component.v1"
+  },
+  "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V5",
+  "fresh_dataset_digest": "dbb28cf55313089a3917f74baa2e1ae960e02b7fdd3f2cdce3c2984209b2f407",
+  "fresh_metrics": {
+    "base_regression": 1.0,
+    "direct_accuracy": 0.9875,
+    "fresh_sequential_accuracy": 0.9695,
+    "fresh_wrapped_accuracy": 0.975,
+    "parent_base_regression": 1.0,
+    "parent_direct_accuracy": 0.9875,
+    "parent_fresh_sequential": 0.9325,
+    "parent_fresh_wrapped": 0.9375
+  },
+  "g3_genesis_performed": false,
+  "native_selection": {
+    "candidate_count": 5,
+    "gate_digest": "9c0db9a14a013547286a882c280f4fda002ecc1a89f1ad227d7f943e29c963bd",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "2954a9265b59d2807615fa0262a02c12a6075cb632c64bd1d9a816a88a71ed68",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5B_CONSENSUS_CORE",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "284ebc6d5effab3741296b5fbf48c4cb97c65e4c23f700b5a97ba21ca4bd7e91",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5B_DUAL_MAJORITY",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "3fabd42a0a8bdc5ced23cbd36ea3b7802defcad1ead54cf0af36c8ea600dfda1",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5B_PARENT_V4",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "a67fea7a55e9da65865ce900f1c63f876d4f440d72cc70b6d49b2d3863784579",
+        "failed_critics": [
+          "regression"
+        ],
+        "fit_gain": 0.02430555555555558,
+        "heldout_gain": 0.02083333333333326,
+        "skill_id": "RAW_V5B_V4_PLUS_CORE_VOTE",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "4fe61dfe5e670fc712bbd653ca69745f305ee21a8fbfdf966a5cf47e2a25f7da",
+        "failed_critics": [],
+        "fit_gain": 0.02083333333333326,
+        "heldout_gain": 0.02083333333333326,
+        "skill_id": "RAW_V5B_CORE_GUARDED",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "RAW_V5B_CORE_GUARDED"
+    ],
+    "status": "SELECTED"
+  },
+  "parent_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
+  "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+  "runtime_mode_surface": [
+    "CONSENSUS_CORE",
+    "CORE_GUARDED",
+    "DUAL_MAJORITY",
+    "PARENT_V4",
+    "V4_PLUS_CORE_VOTE"
+  ],
+  "runtime_sha256": "ba3db411f276df2a6bde3432c6fe9c87d2e48afdfe4750eaddbaa3127cc21a16",
+  "runtime_source": "runtime/yado_raw_task_representation_robustness_v5.py",
+  "schema": "yado.g2.raw_task_representation_v5_robustness.candidate.v2",
+  "selected_mode": "CORE_GUARDED",
+  "source_v1_candidate_digest": "a2b25703fb4efafc805f36b82c6560b0ed0ce6bda329fd7cc12979529dcfd063",
+  "source_v5_admission_failure_receipt": "bc3f54f0f72ac94310d85e1ded193544c9f68bfcd1048522a0a43cb0d917e646",
+  "state": "WITHHOLD"
+}

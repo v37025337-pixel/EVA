@@ -1,0 +1,218 @@
+{
+  "candidate_digest": "8f8377d686011988030021aa8be89bd06c20de6ae06592f0704f5ce0bb4c9ed3",
+  "canonical_mutation": false,
+  "checks": {
+    "base_regression": true,
+    "canonical_unchanged": true,
+    "class_specific_rules_absent": true,
+    "exact_failure_critic_regression": true,
+    "exact_v5_admission_failure_consumed": true,
+    "fresh_direct_accuracy": true,
+    "fresh_not_used_for_selection": true,
+    "fresh_sequential_accuracy": false,
+    "fresh_sequential_gain_over_parent": true,
+    "fresh_wrapped_accuracy": true,
+    "fresh_wrapped_gain_over_parent": true,
+    "g3_not_started": true,
+    "native_selector_selected_one": true,
+    "parent_v4_not_retrained": true,
+    "previous_failed_mode_not_reselected": true,
+    "runtime_modes_discovered_not_host_enumerated": true
+  },
+  "failed_critics": [
+    "regression"
+  ],
+  "failed_mode": "V4_PLUS_CORE_VOTE",
+  "fresh_metrics": {
+    "base_regression": 1.0,
+    "direct_accuracy": 0.9875,
+    "fresh_sequential_accuracy": 0.9695,
+    "fresh_wrapped_accuracy": 0.975,
+    "parent_base_regression": 1.0,
+    "parent_direct_accuracy": 0.9875,
+    "parent_fresh_sequential": 0.9325,
+    "parent_fresh_wrapped": 0.9375
+  },
+  "g3_genesis_performed": false,
+  "native_selection": {
+    "candidate_count": 5,
+    "gate_digest": "9c0db9a14a013547286a882c280f4fda002ecc1a89f1ad227d7f943e29c963bd",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "2954a9265b59d2807615fa0262a02c12a6075cb632c64bd1d9a816a88a71ed68",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5B_CONSENSUS_CORE",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "284ebc6d5effab3741296b5fbf48c4cb97c65e4c23f700b5a97ba21ca4bd7e91",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5B_DUAL_MAJORITY",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "3fabd42a0a8bdc5ced23cbd36ea3b7802defcad1ead54cf0af36c8ea600dfda1",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "RAW_V5B_PARENT_V4",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "a67fea7a55e9da65865ce900f1c63f876d4f440d72cc70b6d49b2d3863784579",
+        "failed_critics": [
+          "regression"
+        ],
+        "fit_gain": 0.02430555555555558,
+        "heldout_gain": 0.02083333333333326,
+        "skill_id": "RAW_V5B_V4_PLUS_CORE_VOTE",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [
+      {
+        "admitted": true,
+        "critics": {
+          "fit_marginal_gain": true,
+          "heldout_gain_floor": true,
+          "heldout_harmlessness": true,
+          "regression": true,
+          "rollback": true,
+          "semantic": true,
+          "state_integrity": true,
+          "structural": true
+        },
+        "evidence_digest": "4fe61dfe5e670fc712bbd653ca69745f305ee21a8fbfdf966a5cf47e2a25f7da",
+        "failed_critics": [],
+        "fit_gain": 0.02083333333333326,
+        "heldout_gain": 0.02083333333333326,
+        "skill_id": "RAW_V5B_CORE_GUARDED",
+        "verdict": "ADMIT"
+      }
+    ],
+    "selected_count": 1,
+    "selected_skill_ids": [
+      "RAW_V5B_CORE_GUARDED"
+    ],
+    "status": "SELECTED"
+  },
+  "next_required_capability": "NATIVE_RAW_REPRESENTATION_STRATEGY_GENESIS_V3",
+  "promotion_applied": false,
+  "receipt_sha256": "5a489eddec0b04dfdd5651771d4ba4efd52b7acd8b1f552c61dcadb227f959a2",
+  "runtime_mode_surface": [
+    "CONSENSUS_CORE",
+    "CORE_GUARDED",
+    "DUAL_MAJORITY",
+    "PARENT_V4",
+    "V4_PLUS_CORE_VOTE"
+  ],
+  "schema": "yado.g2.kernel_raw_representation_v4_robustness_self_evolution.v2",
+  "selected_mode": "CORE_GUARDED",
+  "semantic_boundary": "V2 REUSES ONLY THE EXISTING V5 RUNTIME STRATEGY SURFACE. THE PREVIOUS V5 ADMISSION REGRESSION FAILURE IS RETAINED AS NEGATIVE SPENT EVIDENCE. YADO NATIVE SKILL ADMISSION SELECTS A DIFFERENT EXISTING STRATEGY BEFORE NEW NESTED-WRAPPER FRESH STRESS IS REVEALED. THE HOST DOES NOT SELECT A MODE, LOWER A GATE, ADD CLASS-SPECIFIC RULES, OR MUTATE CANONICAL G2.",
+  "source_failure_receipt": "bc3f54f0f72ac94310d85e1ded193544c9f68bfcd1048522a0a43cb0d917e646",
+  "spent_mode_evidence": [
+    {
+      "mode": "CONSENSUS_CORE",
+      "regression_pass": true,
+      "v1_metrics": {
+        "direct_spent": 0.9861111111111112,
+        "fit_spent_sequence": 0.9618055555555556,
+        "hold_spent_sequence": 0.9583333333333334
+      }
+    },
+    {
+      "mode": "CORE_GUARDED",
+      "regression_pass": true,
+      "v1_metrics": {
+        "direct_spent": 0.9861111111111112,
+        "fit_spent_sequence": 0.9826388888888888,
+        "hold_spent_sequence": 0.9791666666666666
+      }
+    },
+    {
+      "mode": "DUAL_MAJORITY",
+      "regression_pass": true,
+      "v1_metrics": {
+        "direct_spent": 0.9861111111111112,
+        "fit_spent_sequence": 0.9618055555555556,
+        "hold_spent_sequence": 0.9583333333333334
+      }
+    },
+    {
+      "mode": "PARENT_V4",
+      "regression_pass": true,
+      "v1_metrics": {
+        "direct_spent": 0.9861111111111112,
+        "fit_spent_sequence": 0.9618055555555556,
+        "hold_spent_sequence": 0.9583333333333334
+      }
+    },
+    {
+      "mode": "V4_PLUS_CORE_VOTE",
+      "regression_pass": false,
+      "v1_metrics": {
+        "direct_spent": 0.9861111111111112,
+        "fit_spent_sequence": 0.9861111111111112,
+        "hold_spent_sequence": 0.9791666666666666
+      }
+    }
+  ],
+  "status": "WITHHOLD_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2"
+}
