@@ -1,0 +1,128 @@
+{
+  "schema": "yado.g2.public_dns_direct_probe.application.v1",
+  "status": "ACTIVE_DEVELOPMENT_SHADOW_APPLIED",
+  "kernel_id": "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1",
+  "source_run_id": 34118066517,
+  "source_experience": "experience/yado-public-dns-direct-probe-v1.json",
+  "source_experience_digest": "eedbe60d1f75a1da174dd23a6e6aa4dc31c7b7be16e429f3d1dc7fbaf6003dd9",
+  "observed_execution_context": "GITHUB_HOSTED_RUNNER",
+  "observed_provider_order_by_runner_median_ms": [
+    {
+      "rank": 1,
+      "provider": "OpenDNS",
+      "median_ms": 5.314,
+      "addresses": [
+        "208.67.222.222",
+        "208.67.220.220"
+      ]
+    },
+    {
+      "rank": 2,
+      "provider": "Quad9 Secure",
+      "median_ms": 5.466,
+      "addresses": [
+        "9.9.9.9",
+        "149.112.112.112"
+      ]
+    },
+    {
+      "rank": 3,
+      "provider": "NextDNS Anycast",
+      "median_ms": 5.468,
+      "addresses": [
+        "45.90.28.0",
+        "45.90.30.0"
+      ]
+    },
+    {
+      "rank": 4,
+      "provider": "Cloudflare 1.1.1.1",
+      "median_ms": 6.116,
+      "addresses": [
+        "1.1.1.1",
+        "1.0.0.1"
+      ]
+    },
+    {
+      "rank": 5,
+      "provider": "Google Public DNS",
+      "median_ms": 8.443,
+      "addresses": [
+        "8.8.8.8",
+        "8.8.4.4"
+      ]
+    }
+  ],
+  "current_execution_context_policy": {
+    "preferred_provider_for_direct_dns_if_no_other_requirement": "OpenDNS",
+    "selection_basis": "LOWEST_OBSERVED_GITHUB_RUNNER_MEDIAN_AMONG_RESPONSIVE_DNSSEC_VALIDATING_RESOLVERS",
+    "remeasure_before_reuse": true,
+    "fallbacks_in_observed_order": [
+      "Quad9 Secure",
+      "NextDNS Anycast",
+      "Cloudflare 1.1.1.1",
+      "Google Public DNS"
+    ],
+    "do_not_apply_as_user_network_ranking": true
+  },
+  "verified_capabilities": {
+    "all_ten_ipv4_udp_reachable": true,
+    "all_five_providers_tcp_53_reachable": true,
+    "all_five_dnssec_validation_consistent": true,
+    "all_five_nxdomain_behavior_observed": true,
+    "cloudflare_chaos_pop_hints": [
+      "iad19",
+      "iad17"
+    ],
+    "quad9_chaos_pop_hint": "res710.iad"
+  },
+  "causal_lessons": [
+    {
+      "id": "DNS-DIRECT-APPLY-001",
+      "rule": "DNS_RESOLVER_SELECTION_IS_CONTEXT_DEPENDENT",
+      "future_behavior": "PROBE_FROM_CURRENT_EXECUTION_LOCATION_BEFORE_CHOOSING_PRIMARY"
+    },
+    {
+      "id": "DNS-DIRECT-APPLY-002",
+      "rule": "RESPONSIVENESS_AND_DNSSEC_BEHAVIOR_ARE_SEPARATE_FROM_MARKETING_FEATURES",
+      "future_behavior": "REQUIRE_DIRECT_PROTOCOL_EVIDENCE_FOR_NETWORK_BEHAVIOR_AND_DOCUMENTATION_FOR_SERVICE_FEATURES"
+    },
+    {
+      "id": "DNS-DIRECT-APPLY-003",
+      "rule": "ONE_OBSERVED_FASTEST_RESULT_IS_NOT_PERMANENT",
+      "future_behavior": "REMEASURE_AND_ALLOW_PRIMARY_TO_CHANGE"
+    },
+    {
+      "id": "DNS-DIRECT-APPLY-004",
+      "rule": "NEXTDNS_RAW_IP_REACHABILITY_DOES_NOT_ENABLE_PROFILE_SPECIFIC_POLICY",
+      "future_behavior": "REQUIRE_CONFIGURATION_CONTEXT_FOR_PERSONALIZED_NEXTDNS_FEATURES"
+    },
+    {
+      "id": "DNS-DIRECT-APPLY-005",
+      "rule": "POP_IDENTITY_HINTS_ARE_ROUTING_EVIDENCE_NOT_EXACT_HOST_LOCATION",
+      "future_behavior": "USE_CHAOS_ID_ONLY_AS_OPTIONAL_NETWORK_TOPOLOGY_HINT"
+    }
+  ],
+  "causal_binding": {
+    "source_layer": "L1_MEMORY_EXPERIENCE",
+    "conditioning_layer": "L2_EXPERIENCE_CONDITIONING",
+    "consumers": [
+      "L3_LOGIC_THINKING",
+      "L4_INTELLIGENCE_ROUTING",
+      "L5_EXECUTION_EVIDENCE",
+      "L6_SELF_AUDIT_EVOLUTION"
+    ],
+    "future_task_guard": "LIVE_DNS_RESOLVER_SELECTION_REQUIRES_CONTEXTUAL_REPROBE_AND_FAILOVER"
+  },
+  "safety": {
+    "port_scope": [
+      53
+    ],
+    "no_port_scan": true,
+    "no_system_resolver_reconfiguration": true,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  },
+  "semantic_boundary": "APPLIED DIRECT DNS OBSERVATIONS FROM THE GITHUB RUNNER. OPEN DNS WAS LOWEST-LATENCY IN THIS SMALL RUNNER-SPECIFIC SAMPLE; THIS IS NOT A UNIVERSAL OR USER-LOCAL SPEED CLAIM."
+}
