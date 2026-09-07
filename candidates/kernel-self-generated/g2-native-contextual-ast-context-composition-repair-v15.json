@@ -7,7 +7,7 @@
     "binder_artifact_binding_found": true,
     "canonical_unchanged": true,
     "canonical_v5_continuity_active": true,
-    "current_binder_ground_accepts": true,
+    "current_binder_ground_accepts": false,
     "exact_feature_dict_preserved_unchanged": true,
     "external_models_used": false,
     "host_authored_artifact_values": false,
@@ -238,16 +238,16 @@
     "rhs_source": "{'priority_match': priority == target_code, 'comprehension_complete': all((bool(comp.get(k)) for k in ('repository_commit_identity_extracted', 'readme_title_extracted', 'package_identity_extracted', 'provider_catalog_extracted', 'no_key_provider_set_extracted'))), 'direct_priority_evidence': bool(action.get('direct_priority_evidence')) and bool(result.get('direct_priority_evidence')), 'canonical_immutable': action.get('canonical_head_unchanged') is True and result.get('canonical_mutation') is False, 'conflict_resolution_pass': result.get('conflict_resolution_pass') is True, 'action_status_pass': str(result.get('status', '')).startswith('PASS'), 'action_relevant': selected_action == 'LIVE_RESOURCE_EVIDENCE_RECHECK' and priority == target_code}"
   },
   "gene": null,
-  "ground_verdict": "ACCEPT_FRESH_EVIDENCE",
+  "ground_verdict": "WITHHOLD_FRESH_EVIDENCE",
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-06T10:19:54.337920+00:00",
-        "deficit_id": "D-dc36cba960ea",
+        "created_at": "2026-09-07T16:16:15.830954+00:00",
+        "deficit_id": "D-cb905c3bfdbb",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-d9cb9bb675d7",
+        "goal_id": "G-de53b95debd9",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -255,7 +255,7 @@
         "target": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_REPAIR_V15"
       }
     ],
-    "goal_id": "G-d9cb9bb675d7"
+    "goal_id": "G-de53b95debd9"
   },
   "native_skill_selection": {
     "candidate_count": 2,
@@ -316,9 +316,9 @@
     "status": "NO_ADMISSIBLE_SKILLS"
   },
   "next_required_capability": "NATIVE_CONTEXTUAL_AST_CONTEXT_COMPOSITION_GENESIS_V16",
-  "parent_v14_receipt": "d865e8015968531be5887bfb57413cdb29bd002b508f8db7bc5fdeff3bae7e97",
+  "parent_v14_receipt": "a39f288a3a0987a4b056907212ef7170feb24ca7b716c47599bbfab5420c02e7",
   "promotion_applied": false,
-  "receipt_sha256": "3cb1c8f2647e5f1bc12f1e8c2bc574b856110b7dc4a64e1198c4ce28aeab1966",
+  "receipt_sha256": "16f57e927aeb9e269aae1617923d1653c3c6fd746339d4cf66bc27405306d11a",
   "schema": "yado.g2.native_contextual_ast_context_composition_repair.v15",
   "selected_composition": null,
   "semantic_boundary": "V15 REPAIRS ONLY CONTEXT COMPOSITION. IT RECOGNIZES A GENERIC YADO-SOURCE PATTERN WHERE MULTIPLE ARTIFACT OBJECTS ARE CREATED BY DESTRUCTURING MAP(LOAD,[PATH_SYMBOLS...]) AND COMPOSES THAT WITH SIMPLE ASSIGNMENTS AND THE UNCHANGED SEVEN-FIELD FEATURE DICT. YADO NATIVE SKILL ADMISSION CHOOSES BETWEEN COMPOSITION STRATEGIES AT UNCHANGED THRESHOLDS. NO FEATURE SEMANTICS, ARTIFACT VALUES, AST PATCH OR TARGET SOURCE ARE AUTHORED BY THE HOST.",
