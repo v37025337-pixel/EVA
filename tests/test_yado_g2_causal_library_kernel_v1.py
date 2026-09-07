@@ -25,8 +25,8 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertEqual(result["dynamic_memory_branch_count"], 20)
         self.assertEqual(result["dynamic_memory_raw_lineage_count"], 0)
         self.assertEqual(result["dynamic_memory_rederived_count"], 6)
-        self.assertEqual(result["latest_applied_experience_id"], "PUBLIC_DNS_DIRECT_PROBE_V1")
-        self.assertEqual(result["latest_applied_experience_digest"], "eedbe60d1f75a1da174dd23a6e6aa4dc31c7b7be16e429f3d1dc7fbaf6003dd9")
+        self.assertEqual(result["latest_applied_experience_id"], "GCP_DIRECT_ENDPOINT_PROBE_V1")
+        self.assertEqual(result["latest_applied_experience_digest"], "b384270a67618cd007bef2aa3ff48f7c646d0d2269d024af5504ea86b897d37c")
         self.assertEqual(result["current_dns_preferred_provider"], "OpenDNS")
         self.assertTrue(result["current_dns_remeasure_before_reuse"])
 
@@ -87,6 +87,17 @@ class TestG2CausalLibraryKernelV1(unittest.TestCase):
         self.assertTrue(snap["remeasure_before_reuse"])
         self.assertTrue(snap["do_not_apply_as_user_network_ranking"])
         self.assertEqual(snap["future_task_guard"], "LIVE_DNS_RESOLVER_SELECTION_REQUIRES_CONTEXTUAL_REPROBE_AND_FAILOVER")
+        self.assertFalse(snap["automatic_promotion"])
+
+    def test_gcp_direct_endpoint_probe_is_applied_as_live_endpoint_guard(self):
+        snap = self.kernel.gcp_direct_endpoint_application_snapshot()
+        self.assertEqual(snap["status"], "ACTIVE_DEVELOPMENT_SHADOW_APPLIED")
+        self.assertEqual(snap["source_run_id"], 34120259476)
+        self.assertEqual(snap["concrete_live_endpoint_count"], 15)
+        self.assertEqual(snap["unresolved_symbolic_template"], "sqladmin.{region}.rep.googleapis.com")
+        self.assertIn("GCP-DIRECT-002", snap["lesson_ids"])
+        self.assertIn("GCP-DIRECT-003", snap["lesson_ids"])
+        self.assertEqual(snap["future_task_guard"], "GCP_ENDPOINT_USE_REQUIRES_CONCRETE_HOST_LIVE_REPROBE_AND_SERVICE_PATH_CONTEXT")
         self.assertFalse(snap["automatic_promotion"])
 
     def test_unknown_contract_falls_back_without_self_promotion(self):
