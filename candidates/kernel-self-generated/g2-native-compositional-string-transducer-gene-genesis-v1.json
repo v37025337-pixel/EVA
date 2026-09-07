@@ -30,12 +30,12 @@
   "native_goal": {
     "deficits": [
       {
-        "created_at": "2026-09-05T20:49:49.428560+00:00",
-        "deficit_id": "D-82b61afbf973",
+        "created_at": "2026-09-07T15:34:10.671195+00:00",
+        "deficit_id": "D-ae076ff0a083",
         "evidence": [
           "capability:not_registered"
         ],
-        "goal_id": "G-e204b6a4875a",
+        "goal_id": "G-eb796567beb2",
         "kind": "CAPABILITY_MISSING",
         "observed": 0.0,
         "required": 1.0,
@@ -43,7 +43,7 @@
         "target": "NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1"
       }
     ],
-    "goal_id": "G-e204b6a4875a"
+    "goal_id": "G-eb796567beb2"
   },
   "native_outputs": {
     "controller": {
@@ -137,6 +137,60 @@
                 "memory",
                 "internet",
                 "closed_loop"
+              ]
+            },
+            {
+              "branch": "main",
+              "claim_boundary": null,
+              "evidence": [
+                "experience/yado-global-historical-experience-corpus-v2.json",
+                "candidates/kernel-self-generated/g2-global-historical-experience-census-v2.json",
+                "experience/yado-global-experience-terminal-logic-historical-transfer-v1.json",
+                "candidates/kernel-self-generated/g2-global-experience-terminal-logic-historical-transfer-v1.json"
+              ],
+              "lesson_provenance": {
+                "allowed_use": "PRIORITIZATION_GUARDS_TEST_SELECTION_ONLY",
+                "semantic_validation_by_rederivation": true,
+                "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY"
+              },
+              "lessons": [
+                "DO_NOT_TREAT_WORKFLOW_POINTERS_AS_ACTIVE_KERNEL_STATE",
+                "CURRENT_HISTORY_CONTAINS_PASS_AND_WITHHOLD_CAUSAL_EVIDENCE",
+                "HISTORICAL_BLIND_TERMINAL_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+                "HISTORICAL_BLIND_COGNITIVE_TRANSFER_MUST_PASS_BEFORE_META_DECISION_REUSE",
+                "OLD_CORPUS_REGRESSION_MUST_REMAIN_ABOVE_ADMISSION_FLOOR",
+                "WITHHOLD_CLASS_RECALL_REMAINS_VISIBLE_AND_MUST_NOT_BE_ERASED"
+              ],
+              "rederived_evidence": {
+                "artifact": "experience/yado-global-historical-experience-corpus-v2.json",
+                "artifact_digest": "8dce2371bac38f2e19ded23ae471b830d8e2255c40d9937aa8e3d95ae81cfb3c",
+                "cognitive_historical_fresh": 0.9583333333333334,
+                "observation_count": 138,
+                "old_corpus_regression": 0.972568578553616,
+                "pass_count": 81,
+                "semantic_equivalence_to_host_lessons_claimed": false,
+                "source_class": "YADO_REDERIVED_FROM_CURRENT_REACHABLE_GIT_HISTORY",
+                "terminal_historical_fresh": 0.8888888888888888,
+                "terminal_observation_count": 51,
+                "transfer_experience_digest": "d8127c2d146e288ae2a08f7b6d51ef7fbe525da60f842083f2df4aea680ff8d2",
+                "transfer_receipt_sha256": "2a1b679ee5a10fad513820007f3fa246758118b7a2ce07f325b27ad39cb80378",
+                "withhold_count": 57
+              },
+              "role": "CURRENT_CANONICAL_ACCUMULATED_G2_EXPERIENCE",
+              "score": 4,
+              "tags": [
+                "experience",
+                "history",
+                "logic",
+                "thinking",
+                "intelligence",
+                "cognitive",
+                "meta",
+                "repair",
+                "representation",
+                "withhold",
+                "regression",
+                "transfer"
               ]
             },
             {
@@ -300,7 +354,7 @@
               "artifact": "candidates/kernel-self-generated/g2-native-source-primitive-execution-serialization-v1.json",
               "example_count": 1012,
               "next_required_capability": "NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1",
-              "receipt_sha256": "07b191d5ac6c911beb4a4cf5c752ea2bba24bf6b4d609fbfb5a6012713b67f84",
+              "receipt_sha256": "28d6ce53d243f192a462058ea1b3354ed4586ea99566f679b2b57c16e64e450d",
               "role": "YADO_OWN_PRIOR_SERIALIZER_FAMILY_FAILURE",
               "selector_error": "ValueError:no supported bounded mechanism family fits the training evidence",
               "status": "WITHHOLD_G2_NATIVE_SOURCE_PRIMITIVE_EXECUTION_SERIALIZATION_V1"
@@ -5253,11 +5307,11 @@
             }
           ],
           "generation": "G2_CANDIDATE_TRCG_V1",
-          "genome_digest": "c45847ad70b9b3c0e406fdb33cbebb4639452360d1c1e7f71d82538231b708da",
+          "genome_digest": "cf921a06d67c0ef1d58efb0f4038384e4472a7e1edd629282f26f093a50765f1",
           "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
           "mutation_count": 4,
           "novel_gene_count": 3,
-          "parent_genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+          "parent_genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
           "promotion_state": "SHADOW_ONLY",
           "schema": "yado.g2.evolutionary_genome.v1"
         },
@@ -5372,16 +5426,16 @@
             "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
             "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
           },
-          "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+          "experience_digest": "2fcba3f0fcabf73d1179082dbdb193b9a11e8e7357b392304a9048390f8fbc6e",
           "generation": "G2_CANDIDATE_TRCG_V1",
-          "genome_digest": "566813bf1a8abe03641852e8e5a11323898ea357ace690fea0bfe2fecd2ca1fd",
+          "genome_digest": "e66d9c80f8e908155fe3ac55b9c0dd2e61197afd2b59ad68d47c95d806500637",
           "genome_id": "G2-PARENT-GENOME-V1",
-          "parent_head_digest": "a007335ce2fc0d97760acef2766900e7cf3757ba60c88ed6a4f2a9a954618612",
+          "parent_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
           "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
           "schema": "yado.g2.evolutionary_genome.v1"
         },
         "promotion_authorized": false,
-        "run_digest": "0780ad70dc5e48db13ccbf61ded7b51fb54557101cf5990fac9f4a876bcd0308",
+        "run_digest": "ef30b28b4d7035dcded780158fd3ec53429ff00ed0444cbc10ef911b288799f9",
         "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
         "selection": "CHILD",
         "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
@@ -6031,9 +6085,9 @@
       "unrestricted_self_code_rewrite": false
     }
   },
-  "prior_serializer_receipt": "07b191d5ac6c911beb4a4cf5c752ea2bba24bf6b4d609fbfb5a6012713b67f84",
+  "prior_serializer_receipt": "28d6ce53d243f192a462058ea1b3354ed4586ea99566f679b2b57c16e64e450d",
   "promotion_applied": false,
-  "receipt_sha256": "b23aeb8f9b2b4a817467b5e433a9f613d253371bfda09358c7c1e0741e9ad5be",
+  "receipt_sha256": "6d2d560e1fca05138ae0fc1fb3d9f951759f1b555912dc515b803b10b6241a90",
   "schema": "yado.g2.native_compositional_string_transducer_gene_genesis.v1",
   "selected_candidate": null,
   "semantic_boundary": "TASK-CONDITIONED NATIVE LANGUAGE-FAMILY GENESIS PROBE. YADO RECEIVES ITS OWN V6 TRANSDUCER DEFICIT, V5 SEMANTIC-EDIT GENE, PRIOR 1012-EXAMPLE SERIALIZER FAILURE, AND MECHANICALLY RECONSTRUCTED YADO-OWN AST/SOURCE IO MEMORY. BLIND LABELS ARE NOT EXPOSED. HOST PROVIDES NO STRING GRAMMAR, OPERATOR INVENTORY, SERIALIZER, AST COMPILER, SOURCE TEMPLATE OR PATCH. PASS REQUIRES A NEW NATIVE OUTPUT WITH COMPOSITIONAL STRING/SOURCE-TRANSDUCER SEMANTICS AND NOVEL MECHANISM IDENTITY BOUND TO THE CURRENT FAILURE.",
@@ -6077,6 +6131,8 @@
       "host_string_grammar": false,
       "shadow_only": true
     },
+    "current_deficit": "NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_GENESIS_V1",
+    "current_serializer_receipt": "28d6ce53d243f192a462058ea1b3354ed4586ea99566f679b2b57c16e64e450d",
     "host_role": "MECHANICAL_SELF_SOURCE_EXAMPLE_EXTRACTION_FAILURE_MEMORY_TRANSPORT_AND_STRICT_NATIVE_OUTPUT_OBSERVATION_ONLY",
     "objective": "YADO_CREATE_A_NEW_NATIVE_COMPOSITIONAL_STRING_TRANSDUCER_GENE_FAMILY_FROM_ITS_OWN_SERIALIZATION_FAILURE_AND_SOURCE_MEMORY",
     "parents": {
@@ -6110,8 +6166,8 @@
       "rollback parent exists",
       "canonical G2 remains unchanged"
     ],
-    "task": "Consume the current V6 native transducer deficit, the passed V5 semantic source-edit meta-language gene, the prior 1012-example native serializer failure, and mechanically reconstructed AST-to-source examples from YADO own checked-in source. Run only existing native meta/evolution/genesis entrypoints. Do not call the old bounded mechanism selector again as the final solution. Do not provide a string grammar, token/operator inventory, serializer implementation, AST compiler, source template, patch, target implementation, external coding model or external research. Blind labels must remain outside native experience. Pass only if native YADO output contains a new compositional string/source transducer language gene with novel mechanism identity bound to the current V6 failure.",
-    "trigger": 1,
-    "trigger_reason": "CONTINUE_AFTER_V6_PROVED_NO_EXISTING_TARGET_BOUND_SERIALIZER_AND_USER_APPROVED_NEXT_STEP"
+    "task": "Consume the newest source-primitive serialization WITHHOLD together with the retained semantic-edit/source history and YADO-own AST/source memory. Attempt to create a new native compositional string/source transducer gene family using only YADO meta/evolution/genesis routes. Do not reuse the old bounded selector as the final answer. Host supplies no string grammar, operator inventory, serializer implementation, AST compiler, source template, patch, target implementation, external model, or blind labels.",
+    "trigger": 2,
+    "trigger_reason": "CONTINUE_AFTER_NATIVE_SOURCE_PRIMITIVE_SERIALIZATION_WITHHOLD_20260907"
   }
 }
