@@ -3,11 +3,13 @@
   "canonical_mutation": false,
   "checks": {
     "canonical_mutation": false,
+    "developer_resource_priority_matches_current_deficit": true,
     "external_coding_models_used": false,
     "host_patch_used": false,
     "host_target_file_selected": false,
     "native_precedence_blind_ge_0_90": true,
     "native_precedence_validation_ge_0_90": true,
+    "open_developer_resource_evidence_reused": true,
     "primitive_selector_native": true,
     "process_ablation_drop": true,
     "process_mechanism_committed": true,
@@ -15,6 +17,27 @@
     "process_order_inferred_by_yado_model": true,
     "process_restore_exact": true,
     "python_and_self_research_reused": true
+  },
+  "developer_resource_evidence": {
+    "application_digest": "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2",
+    "resource_ids": [
+      "USER_20260907_CODE_BASICS",
+      "USER_20260907_CYBERCHEF",
+      "USER_20260907_FAKERJS",
+      "USER_20260907_HACKER_NEWS_API",
+      "USER_20260907_JSONPLACEHOLDER",
+      "USER_20260907_MDN",
+      "USER_20260907_METANIT",
+      "USER_20260907_META_CODDY",
+      "USER_20260907_META_CODDY_RU",
+      "USER_20260907_META_DEVTO",
+      "USER_20260907_META_HABR",
+      "USER_20260907_META_SKILLFACTORY",
+      "USER_20260907_REGEX101",
+      "USER_20260907_W3SCHOOLS"
+    ],
+    "target_priority": "CODING_UNSUPPORTED_PROGRAM_FAMILIES",
+    "usable_record_count": 14
   },
   "native_code_evolution": {
     "code_gene": {
@@ -30,25 +53,25 @@
       "mutation_reason": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
       "novel_gene": true
     },
-    "run_digest": "c65aac78000c3176f8b868967157d2e20fa915842cfb136b37807aec9935f7f1",
+    "run_digest": "c9d3eb8c7d00e6f298e7728140201fbb0f4d5b8a2b1ee047c6365baa2e1bd0c8",
     "selection": "CHILD"
   },
   "next_required_capability": "NATIVE_SOURCE_IR_EMITTER_BIRTH_V1",
-  "parent_research_receipt": "9fb5558d0146f42b48686e943c5c75f69d4d94106e863542d3bbe6dee93a206d",
+  "parent_research_receipt": "8bf170db505089557057d4c51c9e1c5afdc74c3568c6f85cde77376d6c252cc5",
   "primitive_selector": {
     "development": {
-      "ablation_score": 0.38461538461538464,
+      "ablation_score": 0.46153846153846156,
       "blind_cases": 13,
-      "candidate_score": 0.9230769230769231,
-      "created_at": "2026-09-04T06:31:49.253778+00:00",
-      "experiment_id": "DEV22-8c847401dcdc",
+      "candidate_score": 1.0,
+      "created_at": "2026-09-07T14:22:09.831500+00:00",
+      "experiment_id": "DEV22-b129ceb97f11",
       "mechanism_kind": "RULE_PROGRAM",
       "min_ablation_drop": 0.2,
       "min_score": 0.9,
-      "program_digest": "235db8855b187367abdb394383aa4b305fc6683ce95dff7bd74f9ac5af57dee1",
-      "program_id": "P-99c57c1265ae",
+      "program_digest": "65fd526905a70144c0d9059c2e4eb4a77ffa6681d8318a741c761022304c6acf",
+      "program_id": "P-b890bcb42a79",
       "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
-      "restore_score": 0.9230769230769231,
+      "restore_score": 1.0,
       "stage_ablation_scores": {},
       "state_committed": true,
       "target_capability": "NATIVE_SOURCE_CONSTRUCTOR_PRIMITIVE_SELECTION_V2",
@@ -61,35 +84,35 @@
         {
           "complexity": 15,
           "kind": "RULE_PROGRAM",
-          "program_id": "P-99c57c1265ae",
+          "program_id": "P-b890bcb42a79",
           "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
           "selected": true,
           "training_score": 1.0
         }
       ],
-      "created_at": "2026-09-04T06:31:49.251328+00:00",
-      "deficit_id": "D-3add4dd4d9b2",
+      "created_at": "2026-09-07T14:22:09.829081+00:00",
+      "deficit_id": "D-dd22b2f911f5",
       "selected_kind": "RULE_PROGRAM",
-      "selected_program_id": "P-99c57c1265ae",
-      "selection_id": "SEL-e6741f3a2446",
-      "source_digest": "26ce71b1d5c4bedda115e5d33ed0b6646a12f280b09db6b558aed2b70fe96cc8",
+      "selected_program_id": "P-b890bcb42a79",
+      "selection_id": "SEL-b19f8d0d4d19",
+      "source_digest": "0d9878fc821645e48080d8055228c5ee5f40e82c1b588daf233a727b81df0d1d",
       "target_capability": "NATIVE_SOURCE_CONSTRUCTOR_PRIMITIVE_SELECTION_V2",
       "target_organ": "GENERATIVE_EXECUTIVE"
     }
   },
   "process_mechanism": {
-    "deficit_id": "D-e602dbedb3fb",
+    "deficit_id": "D-5bb2fab2516f",
     "development": {
       "ablation_score": 0.0,
       "blind_cases": 3,
       "candidate_score": 1.0,
-      "created_at": "2026-09-04T06:31:55.479427+00:00",
-      "experiment_id": "DEV22-6dd69da0200b",
+      "created_at": "2026-09-07T14:22:16.140540+00:00",
+      "experiment_id": "DEV22-7e97c685677c",
       "mechanism_kind": "SEQUENCE_PLANNER",
       "min_ablation_drop": 0.2,
       "min_score": 1.0,
-      "program_digest": "2bc8eea292aa32dc0bee960948d32c8eca8734f448345b6fb080367471cee69b",
-      "program_id": "PL-693eb96dd89e",
+      "program_digest": "bdf184dd5cf0d70661b5549848bc8ba7264951787dd42c6d259eaec4bc6779f5",
+      "program_id": "PL-f679066d741e",
       "reason": "blind target passed; causal ablation passed; restore reproduced the gain",
       "restore_score": 1.0,
       "stage_ablation_scores": {},
@@ -99,7 +122,7 @@
       "train_cases": 8,
       "verdict": "COMMIT"
     },
-    "goal_id": "G-d1ea819db577",
+    "goal_id": "G-3fec7ff50e72",
     "kernel_selected_primitives": [
       "print",
       "Path",
@@ -110,7 +133,7 @@
       "str",
       "hexdigest",
       "sha256",
-      "read_bytes",
+      "append",
       "len",
       "get"
     ],
@@ -121,10 +144,10 @@
       "dumps",
       "hexdigest",
       "sha256",
-      "read_bytes",
       "read_text",
       "get",
       "len",
+      "append",
       "write_text",
       "print"
     ],
@@ -136,7 +159,7 @@
     },
     "precedence_native_result": {
       "fresh_blind": 1.0,
-      "grammar_extension_id": "G_16926639f1d8",
+      "grammar_extension_id": "G_7117b9a55d87",
       "model": {
         "else": {
           "algorithm": {
@@ -155,7 +178,7 @@
             "absolute_margin",
             "left_before_count"
           ],
-          "threshold": -223.0,
+          "threshold": -353.0,
           "weights": [
             -1.0,
             -1.0
@@ -174,7 +197,7 @@
             "right": {
               "label": "RIGHT_PRECEDES"
             },
-            "threshold": 38.0
+            "threshold": 58.5
           },
           "op": "LEAF"
         }
@@ -185,7 +208,7 @@
           "absolute_margin",
           "left_before_count"
         ],
-        "threshold": -223.0,
+        "threshold": -353.0,
         "weights": [
           -1.0,
           -1.0
@@ -194,33 +217,34 @@
       "status": "SUPPORTED",
       "validation": 1.0
     },
-    "program_id": "PL-693eb96dd89e",
+    "program_id": "PL-f679066d741e",
     "selection": {
       "candidates": [
         {
           "complexity": 12,
           "kind": "SEQUENCE_PLANNER",
-          "program_id": "PL-693eb96dd89e",
+          "program_id": "PL-f679066d741e",
           "reason": "best training fit, then contract-specific structural family, then minimum bounded complexity",
           "selected": true,
           "training_score": 1.0
         }
       ],
-      "created_at": "2026-09-04T06:31:55.476932+00:00",
-      "deficit_id": "D-e602dbedb3fb",
+      "created_at": "2026-09-07T14:22:16.138508+00:00",
+      "deficit_id": "D-5bb2fab2516f",
       "selected_kind": "SEQUENCE_PLANNER",
-      "selected_program_id": "PL-693eb96dd89e",
-      "selection_id": "SEL-be4547644281",
-      "source_digest": "7f72eb0841b6e9e378587957d58d14c1fcfdab9499d9c2fb493e200d77caed15",
+      "selected_program_id": "PL-f679066d741e",
+      "selection_id": "SEL-489a1ab83f3e",
+      "source_digest": "363258c168023ef5333fb686f2e85e946812cb66ad41402acb9bf9ec8a17c313",
       "target_capability": "NATIVE_SOURCE_CONSTRUCTION_PROCESS_V2",
       "target_organ": "GENERATIVE_EXECUTIVE"
     }
   },
-  "receipt_sha256": "3edfebeec0cbadfc6a0e3a0c1536a5db34ca44794071f82fd7a39054b7b52596",
+  "receipt_sha256": "2879c77500aebee3c97fbd91c930a1ec1cce21e47b4608e15f3b8f0bdb314f7a",
   "schema": "yado.g2.native_source_construction_process_evolution.v2",
   "semantic_boundary": "YADO REUSES ITS PYTHON/SELF RESEARCH, NATIVELY RELEARNS A PRIMITIVE SELECTOR, NATIVELY LEARNS PAIRWISE PRECEDENCE FROM ITS OWN SOURCE HISTORY, DERIVES THE PROCESS ORDER FROM THAT MODEL, AND ITS DEVELOPMENTAL EXECUTIVE COMMITS AN EXECUTABLE PROCESS MECHANISM AFTER BLIND/ABLATION/RESTORE. THIS DOES NOT YET PROVE SEEDLESS SOURCE EMISSION.",
   "status": "PASS_NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2",
-  "study_digest": "f90bcd6f99c3ed8c5f93e0b59381f54912a5fdc3b557caf8e92c07c1c1ff9f67",
+  "study_digest": "18443251b199ac8c627548af64328c8c3283ca3638da6e7cb13d0910ed406996",
+  "target_priority": "CODING_UNSUPPORTED_PROGRAM_FAMILIES",
   "task": {
     "constraints": {
       "canonical_mutation": false,
@@ -231,13 +255,15 @@
       "host_solution_template": false,
       "host_target": false
     },
+    "current_self_selected_priority": "CODING_UNSUPPORTED_PROGRAM_FAMILIES",
     "deficit": "NATIVE_SOURCE_CONSTRUCTION_PROCESS_EVOLUTION_V2",
+    "developer_resource_experience_digest": "619e576184ee84b0a28d2fc14d6fc465ae36e9039320c1625c64996397fe14c2",
     "host_role": "EVIDENCE_TRANSPORT_GENERIC_PAIRWISE_REPRESENTATION_AND_STRICT_EVALUATION_ONLY",
-    "instruction": "Continue from YADO's own research result. Use the native primitive selector and YADO-native meta-grammar/developmental executive to infer an ordered source-construction process from self-history. Do not provide a host-authored process sequence, target source file, patch, or external coding model. If a native process can be learned, blind-tested, ablated and restored, persist it as a shadow mechanism. Do not claim seedless source emission unless actual source bytes are produced natively.",
+    "instruction": "Continue from YADO's new self-study result that consumed the user's open developer resources. Reuse the Python/self-history evidence plus the developer-resource support signals to evolve the native source-construction process for the current CODING_UNSUPPORTED_PROGRAM_FAMILIES priority. The process order must still be inferred by YADO from evidence, not supplied by the host. Require fresh blind, ablation, restore and rollback; canonical remains unchanged.",
     "objective": "YADO_EVOLVE_NATIVE_SOURCE_CONSTRUCTION_PROCESS_FROM_ITS_PYTHON_AND_SELF_RESEARCH",
     "schema": "yado.g2.native_source_construction_process_evolution_v2.request.v1",
     "source_research_artifact": "candidates/kernel-self-generated/g2-native-seedless-source-constructor-research-v1.json",
-    "source_research_run_id": 33844052124,
+    "source_research_run_id": 34132385130,
     "source_study": "experience/yado-native-seedless-source-constructor-python-self-study-v1.json",
     "stop_condition": "NATIVE_PROCESS_MECHANISM_BORN_OR_EXPLICIT_WITHHOLD",
     "success_conditions": [
@@ -252,7 +278,7 @@
       "no_host_patch_target_or_process_template",
       "canonical_unchanged"
     ],
-    "trigger": 2,
-    "trigger_reason": "START_NATIVE_PROCESS_EVOLUTION_AFTER_V1_WITHHOLD"
+    "trigger": 3,
+    "trigger_reason": "CONTINUE_AFTER_OPEN_DEVELOPER_SELF_STUDY_V1"
   }
 }
