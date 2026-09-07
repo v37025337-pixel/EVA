@@ -31,6 +31,7 @@ from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
 from yado_g2_experience_conditioned_cognitive_layer_v4 import G2ExperienceConditionedCognitiveLayerV4
 from yado_g2_global_experience_meta_controller_v7 import G2GlobalExperienceMetaControllerV7
+from yado_g2_all_experience_tri_organ_runtime_v1 import G2AllExperienceTriOrganRuntimeV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -69,6 +70,7 @@ class UnifiedYADOCoreV1:
         self.evolutionary_genome_cls=YADOEvolutionaryGenomeV1
         self.experience_cognitive_layer=G2ExperienceConditionedCognitiveLayerV4(self._load('canonical/yado-g2-experience-conditioned-cognitive-layer-v4.json'))
         self.global_experience_meta_controller=G2GlobalExperienceMetaControllerV7(self._load('canonical/yado-g2-global-experience-meta-controller-v7.json'))
+        self.all_experience_tri_organ=G2AllExperienceTriOrganRuntimeV1(self._load('canonical/yado-g2-all-experience-tri-organ-v1.json'))
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -335,6 +337,18 @@ class UnifiedYADOCoreV1:
 
     def global_experience_meta_snapshot(self)->dict[str,Any]:
         return self.global_experience_meta_controller.snapshot()
+
+    def all_experience_logic(self,relation,start)->dict[str,Any]:
+        return self.all_experience_tri_organ.logic(relation,start)
+
+    def all_experience_thinking(self,events)->dict[str,Any]:
+        return self.all_experience_tri_organ.thinking(events)
+
+    def all_experience_intelligence(self,task:dict[str,Any])->dict[str,Any]:
+        return self.all_experience_tri_organ.intelligence(task)
+
+    def all_experience_tri_organ_snapshot(self)->dict[str,Any]:
+        return self.all_experience_tri_organ.snapshot()
 
     def cognitive_experience_decide(self,organ:str,payload:dict[str,Any])->dict[str,Any]:
         return self.experience_cognitive_layer.decide(organ,payload)
