@@ -1,28 +1,24 @@
 {
   "schema": "yado.g2.user_external_corpus_learning.request.v1",
-  "objective": "LEARN_FROM_ALL_RELEVANT_USER_SUPPLIED_PUBLIC_LINKS_AND_SCREENSHOT_DERIVED_RESOURCES_BEFORE_NEW_CONSTRUCTION",
+  "objective": "TRAIN_CAUSAL_LIBRARY_KERNEL_FROM_ALL_RELEVANT_AVAILABLE_INTERNAL_PROJECT_EVIDENCE_AND_FRESH_PUBLIC_EXTERNAL_DATA",
   "corpus": "resources/yado-user-external-learning-corpus-v1.json",
-  "instruction": "Run 64 deterministic fresh burn-in cycles with eight kernel re-instantiations. Preserve the canonical head. Require exact old-parent native behavior, exact tri-organ relation/event behavior, fail-closed unsupported tri contracts, structural ablation drops, and a positive mixed-contract coverage gain versus a parent-only bypass. Do not mutate canonical state, do not reselect genes, and do not start G3.",
+  "instruction": "Fetch and index the expanded public corpus plus the listed repository-local project evidence. Sanitize secret-like literals, preserve source provenance, contradictions, negative outcomes, failed gates, rollback history, and causal links. Feed the resulting experience into the G2 memory/experience layer for later bounded selection. Do not execute third-party code, do not mutate canonical main, do not reselect genes, and do not start G3.",
   "include_internal_project_history": true,
   "exclude_private_or_sensitive_screenshots": true,
   "no_third_party_code_execution": true,
   "no_canonical_mutation": true,
-  "host_role": "SOURCE_TRANSPORT_AND_PERSISTENCE_ONLY",
-  "trigger": 16,
-  "trigger_reason": "USER_20260906_TRI_ORGAN_CANONICAL_BURNIN_PARENT_AB_V1",
-  "requested_at": "2026-09-06T21:51:23Z",
-  "purpose": "BURN_IN_CANONICAL_TRI_ORGAN_AND_COMPARE_ADDITIVE_SYSTEM_AGAINST_PARENT_ONLY_BYPASS",
+  "host_role": "SOURCE_TRANSPORT_PERSISTENCE_AND_VERIFICATION_ONLY",
+  "trigger": 17,
+  "trigger_reason": "USER_20260907_FULL_INTERNAL_EXTERNAL_CAUSAL_LIBRARY_TRAINING_V1",
+  "requested_at": "2026-09-07T07:34:52Z",
+  "purpose": "FULL_RELEVANT_INTERNAL_PLUS_EXTERNAL_EVIDENCE_INGESTION_FOR_CAUSAL_LIBRARY_KERNEL",
   "canonical_mutation": false,
   "cross_domain_task": {
-    "id": "USER_20260906_TRI_ORGAN_CANONICAL_BURNIN_AB_V1",
-    "script": "runtime/yado_g2_tri_organ_canonical_burnin_old_parent_comparative_ab_v1.py",
+    "id": "USER_20260907_FULL_INTERNAL_EXTERNAL_TRAINING_V1",
     "canonical_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
-    "binding_receipt_sha256": "3e0478dca15bad14b3b7e2866b37f8cf25cdc3f1733f95c3b5c85093dd93b4b7",
-    "cycles": 64,
-    "restart_instances": 8,
-    "parent_only_bypass": true,
-    "old_parent_native_parity_required": true,
-    "tri_contract_accuracy_required": 1,
+    "internal_evidence_ingestion": true,
+    "public_external_fetch": true,
+    "third_party_code_execution": false,
     "canonical_mutation": false,
     "gene_reselection": false,
     "resynthesis": false,
@@ -103,5 +99,17 @@
     "active_capabilities": 31,
     "active_runtime_sources": 39,
     "ledger_events": 294
+  },
+  "training_target": {
+    "branch": "yado-architecture-shadow-search",
+    "kernel_id": "YADO_G2_CAUSAL_LIBRARY_KERNEL_V1",
+    "memory_plane": "L1_MEMORY_EXPERIENCE",
+    "conditioning_plane": "L2_EXPERIENCE_CONDITIONING",
+    "downstream_planes": [
+      "L3_LOGIC_THINKING",
+      "L4_INTELLIGENCE_ROUTING",
+      "L6_SELF_AUDIT_EVOLUTION"
+    ],
+    "promotion_policy": "SHADOW_EVIDENCE_ONLY_UNTIL_FRESH_ABLATION_AND_REGRESSION"
   }
 }
