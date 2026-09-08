@@ -27,6 +27,7 @@ V5=REPO/'architecture/yado-kernel-g2-native-raw-representation-model-family-expa
 PARENT=REPO/'candidates/kernel-self-generated/raw-task-representation-strategy-model-v4.json'
 BASE=REPO/'receipts/yado-g2-real-world-transfer-benchmark-v1-run-33363995201.json'
 COMPUTE=REPO/'receipts/yado-g2-native-raw-segmentation-meta-compute-deficit-v1-run-34260882252.json'
+PROBE=REPO/'architecture/yado-kernel-g2-native-raw-representation-segmentation-meta-learner-v7-selection-probe.json'
 LEDGER=REPO/'architecture/evolution-ledger.json'
 OUT=REPO/'architecture/yado-kernel-g2-native-raw-representation-segmentation-meta-learner-expansion-v7.json'
 CAND=REPO/'candidates/kernel-self-generated/raw-task-representation-segmentation-meta-learner-v7.json'
@@ -46,7 +47,7 @@ def write(p,o):Path(p).parent.mkdir(parents=True,exist_ok=True);Path(p).write_te
 def acc(rows,pred):return sum(pred(x)==y for x,y in rows)/max(1,len(rows))
 def log(stage,**kw):print(json.dumps({'stage':stage,'ts':time.time(),**kw},sort_keys=True,default=str),flush=True)
 
-v6,v5,parent_art,base,compute,ledger=map(load,[V6,V5,PARENT,BASE,COMPUTE,LEDGER])
+v6,v5,parent_art,base,compute,probe,ledger=map(load,[V6,V5,PARENT,BASE,COMPUTE,PROBE,LEDGER])
 validate_ledger_v2(ledger)
 if ledger.get('open_deficits')!=[FRONT]:raise RuntimeError('UNEXPECTED_FRONTIER:'+canon(ledger.get('open_deficits')))
 if v6.get('status')!='WITHHOLD_G2_NATIVE_RAW_REPRESENTATION_MODEL_FAMILY_EXPANSION_ADMISSION_V6':raise RuntimeError('V6_ADMISSION_WITHHOLD_REQUIRED')
@@ -55,6 +56,10 @@ if v6.get('receipt_sha256')!='6f16f97ab630c3964a66a6ebdd2d706f2c0a6895fd65f9f6d3
 if v5.get('candidate_digest')!='55bd61069b501dc09ab089f96ad139e70b11895f441258b14512f24e72950697':raise RuntimeError('V5_PARENT_DRIFT')
 if compute.get('exact_blocker')!='EXACT_LINEAR_SCORE_SEARCH_STILL_SEMANTICALLY_REQUIRED':raise RuntimeError('COMPUTE_DEFICIT_EVIDENCE_REQUIRED')
 if float((compute.get('cart_evidence') or {}).get('best_validation',0))!=0.9167883211678832:raise RuntimeError('COMPUTE_CART_EVIDENCE_DRIFT')
+if probe.get('status')!='PASS_SELECTION_ONLY':raise RuntimeError('SELECTION_PROBE_PASS_REQUIRED')
+if probe.get('probe_digest')!='10f8bdbc058f2e95a80bf8a4f64dfdc74a7b51e80f250734ffa2ad1d2d3a704d':raise RuntimeError('SELECTION_PROBE_DIGEST_DRIFT')
+if probe.get('selected_skill_id')!='KNN_K1' or probe.get('selected_family')!='KNN':raise RuntimeError('SELECTION_PROBE_WINNER_DRIFT')
+if probe.get('fresh_consumed') is not False:raise RuntimeError('SELECTION_PROBE_FRESH_CONTAMINATED')
 
 parent_model=parent_art['model']
 raw=RawTaskRepresentationSpecV2(parent_model['family'],list(parent_model['labels']),parent_model['payload'])
@@ -372,7 +377,9 @@ finally:
 selected_id=(selection.get('selected_skill_ids') or [None])[0]
 selected=models.get(selected_id)
 if selected is None:raise RuntimeError('NO_NATIVE_META_LEARNER_SELECTED')
-log('native_meta_family_selected',selected_id=selected_id,selection=selection,metrics=metrics.get(selected_id))
+if selected_id!=probe.get('selected_skill_id'):raise RuntimeError('FULL_V7_SELECTION_DIFFERS_FROM_FROZEN_PROBE:'+str(selected_id))
+if (metrics.get(selected_id) or {}).get('family')!=probe.get('selected_family'):raise RuntimeError('FULL_V7_FAMILY_DIFFERS_FROM_FROZEN_PROBE')
+log('native_meta_family_selected',selected_id=selected_id,selection=selection,metrics=metrics.get(selected_id),probe_digest=probe.get('probe_digest'))
 
 if os.getenv('YADO_V7_SELECTION_ONLY')=='1':
     probe={
@@ -431,11 +438,11 @@ def segmented_from_rows(rows):
 def candidate_predict(text):return segmented_from_rows(segment_records(text))
 
 # Fresh V7 family is created only after native family selection.
-fresh_domains=['fusion maintenance','pathology exchange','autonomous harbor','identity federation','chip fabrication','pharmacovigilance','lunar logistics','distributed recovery','water permit','clinical registry','rail dispatch','research escrow']
+fresh_domains=['reactor inspection','genomic custody','orbital docking','federated credential recovery','wafer release','medicine signal review','deep-space cargo','multi-region failover','watershed authorization','trial archive release','metro control','scientific escrow']
 fresh_direct=[]
 for gi,label in enumerate([CAP_CONJ,CAP_REL,CAP_BUD,CAP_RES]):
     for i in range(24):
-        fresh_direct.append((f"Meta7 {70000+gi*100+i}. "+templates[label][(i*3+gi+1)%4].format(d=fresh_domains[(i*7+gi)%len(fresh_domains)]),label))
+        fresh_direct.append((f"Meta7B {81000+gi*100+i}. "+templates[label][(i*3+gi+1)%4].format(d=fresh_domains[(i*7+gi)%len(fresh_domains)]),label))
 fresh_traps=[
  ("Carrier metadata lists owner quota public source rollback and team, but the enclosed release still depends on every compulsory safeguard.",CAP_CONJ),
  ("Every safeguard is green and a quota is visible; the enclosed authorization still depends only on identity and membership relations.",CAP_REL),
@@ -443,31 +450,31 @@ fresh_traps=[
  ("Budget and membership are settled, but the enclosed task needs a missing current requirement from an authoritative outside source.",CAP_RES),
 ]*12
 def wrap_v7(text,i,layer):
-    m=(i*23+layer*11)%16;decoy='owner quota public source rollback group integrity budget relation checks'
-    if m==0:return f"<meta7 id='{i%401}' depth='{layer}'><payload>{text}</payload></meta7>"
-    if m==1:return f"BEGIN-M7 {i%409}/{layer} {decoy} START {text} END END-M7"
-    if m==2:return f"[m7:{i%419}:{layer}] {neutral[i%3]} {text} [/m7]"
-    if m==3:return f"Routing M7 {decoy}. PAYLOAD {text}. ROUTING END."
-    if m==4:return f"{{m7={i%421};d={layer}}} {neutral[(i+1)%3]} {text} {{/m7}}"
-    if m==5:return f"TRACE-M7 {i%431}: {text.lower() if i%2 else text.upper()} :ENDTRACE"
-    if m==6:return f"((M7 {layer})) [[decoy {decoy}]] [[{text}]] ((/M7))"
-    if m==7:return f"Audit M7 {i%433}. {re.sub(r'\s+',' ',text)} Complete."
+    m=(i*29+layer*13)%16;decoy='tenant credits external authority recovery cohort provenance latency membership mandatory'
+    if m==0:return f"<meta7b id='{i%463}' depth='{layer}'><payload>{text}</payload></meta7b>"
+    if m==1:return f"BEGIN-M7B {i%467}/{layer} {decoy} START {text} END END-M7B"
+    if m==2:return f"[m7:{i%479}:{layer}] {neutral[i%3]} {text} [/m7]"
+    if m==3:return f"Routing M7B {decoy}. PAYLOAD {text}. ROUTING END."
+    if m==4:return f"{{m7={i%487};d={layer}}} {neutral[(i+1)%3]} {text} {{/m7}}"
+    if m==5:return f"TRACE-M7B {i%491}: {text.lower() if i%2 else text.upper()} :ENDTRACE"
+    if m==6:return f"((M7B {layer})) [[decoy {decoy}]] [[{text}]] ((/M7B))"
+    if m==7:return f"Audit M7B {i%499}. {re.sub(r'\s+',' ',text)} Complete."
     if m==8:return f"{decoy}. {neutral[i%3]} CONTENT {text} END CONTENT."
     if m==9:return f"{neutral[i%3]} meta {decoy}; {text}; {neutral[(i+2)%3]}"
     if m==10:return f"<context-m7><meta>{decoy}</meta><content>{text}</content></context-m7>"
-    if m==11:return f"Journal M7 {i%439}: BEGIN {text} END. Metadata {decoy}."
+    if m==11:return f"Journal M7B {i%503}: BEGIN {text} END. Metadata {decoy}."
     if m==12:return f"prefix {decoy}; carrier start. {text}. carrier end; suffix {decoy}."
-    if m==13:return f"Administrative M7 {i%443}. {neutral[i%3]} PAYLOAD {text} FINISH."
-    if m==14:return f"Header M7 nonce={i%449}; {text}; Footer depth={layer}; {decoy}."
-    return f"Relay M7 {i%457}. Begin. {text}. Complete."
+    if m==13:return f"Administrative M7B {i%509}. {neutral[i%3]} PAYLOAD {text} FINISH."
+    if m==14:return f"Header M7B nonce={i%521}; {text}; Footer depth={layer}; {decoy}."
+    return f"Relay M7B {i%523}. Begin. {text}. Complete."
 
 fresh_pool=fresh_direct+fresh_traps
 fresh_wrapped=[(wrap_v7(x,i,0),y) for i,(x,y) in enumerate(fresh_pool)]
-rng2=random.Random(2026090817);fresh_seq=[]
+rng2=random.Random(2026090821);fresh_seq=[]
 for i in range(4000):
-    x,y=fresh_pool[(i*73+rng2.randrange(len(fresh_pool)))%len(fresh_pool)]
+    x,y=fresh_pool[(i*79+rng2.randrange(len(fresh_pool)))%len(fresh_pool)]
     z=wrap_v7(x,i,0)
-    for layer in range(1,1+(i%12)):z=wrap_v7(z,i+43003*layer,layer)
+    for layer in range(1,1+(i%12)):z=wrap_v7(z,i+47017*layer,layer)
     fresh_seq.append((z,y))
 base_rows=[(r['raw_text'],r['expected']) for r in base['raw_unstructured']['rows']]
 
@@ -487,6 +494,7 @@ log('fresh_evaluation_done',selected_id=selected_id,window_validation=window_val
 checks={
  'v6_admission_withhold_consumed':True,
  'meta_compute_deficit_consumed':compute.get('exact_blocker')=='EXACT_LINEAR_SCORE_SEARCH_STILL_SEMANTICALLY_REQUIRED',
+ 'selection_probe_bound':probe.get('probe_digest')=='10f8bdbc058f2e95a80bf8a4f64dfdc74a7b51e80f250734ffa2ad1d2d3a704d' and selected_id=='KNN_K1',
  'cart_baseline_exactly_reproduced':abs(cart_val-0.9167883211678832)<1e-12,
  'native_goal_created':bool(deficits),
  'native_family_menu_generic':all(x['metadata']['family'] in {'CART_AXIS','CENTROID','KNN'} for x in skills),
