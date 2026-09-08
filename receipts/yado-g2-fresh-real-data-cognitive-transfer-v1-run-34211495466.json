@@ -1,0 +1,234 @@
+{
+  "active_capability_count": 31,
+  "canonical_head_digest": "262afc5a825e4d6acd6a0ced3a694a494c64aab012fe4b800ee70beb93f4be33",
+  "canonical_mutation": false,
+  "checks": {
+    "active_capabilities_31": true,
+    "all_domain_intelligence_exact": true,
+    "all_domain_logic_causal_drop_ge_0_20": true,
+    "all_domain_logic_exact": true,
+    "all_domain_thinking_causal_drop_ge_0_10": true,
+    "all_domain_thinking_exact": true,
+    "automatic_canonical_promotion_false": true,
+    "canonical_core_unchanged": true,
+    "canonical_head_unchanged": true,
+    "cognitive_workspace_composition_pass": true,
+    "current_usgs_week_source_changed_since_prior_stress": true,
+    "four_new_domain_transfers": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "github_frozen_thinking_temporal_accuracy_ge_0_95": true,
+    "github_post_training_has_both_classes": true,
+    "github_post_training_runs_ge_12": true,
+    "legacy_usgs_raw_portability_gap_detected": true,
+    "openfda_endpoint_new": true,
+    "portable_usgs_candidate_shadow_ready": true,
+    "portable_usgs_gain_ge_0_25": true,
+    "portable_usgs_newer_blind_ge_0_90": true,
+    "portable_usgs_preprocessing_bound": true,
+    "worldbank_query_new": true
+  },
+  "cognitive_composition": [
+    {
+      "decision": "VERIFY",
+      "domain": "GEOSCIENCE_USGS_NEW",
+      "gate": "SPECIALIST_PASS_THROUGH",
+      "signals": {
+        "intelligence_robust": true,
+        "logic_accept": true,
+        "thinking_cautious": true
+      }
+    },
+    {
+      "decision": "VERIFY",
+      "domain": "ECONOMICS_WORLDBANK_NEW_QUERY",
+      "gate": "SPECIALIST_PASS_THROUGH",
+      "signals": {
+        "intelligence_robust": true,
+        "logic_accept": true,
+        "thinking_cautious": true
+      }
+    },
+    {
+      "decision": "VERIFY",
+      "domain": "CYBERSECURITY_CISA_HISTORICAL_SLICE",
+      "gate": "SPECIALIST_PASS_THROUGH",
+      "signals": {
+        "intelligence_robust": true,
+        "logic_accept": true,
+        "thinking_cautious": true
+      }
+    },
+    {
+      "decision": "VERIFY",
+      "domain": "MEDICINE_OPENFDA_ENFORCEMENT_NEW_ENDPOINT",
+      "gate": "SPECIALIST_PASS_THROUGH",
+      "signals": {
+        "intelligence_robust": true,
+        "logic_accept": true,
+        "thinking_cautious": true
+      }
+    }
+  ],
+  "domain_results": {
+    "CYBERSECURITY_CISA_HISTORICAL_SLICE": {
+      "event_cases": 48,
+      "intelligence_route_accuracy": 1.0,
+      "logic_accuracy": 1.0,
+      "logic_best_ablation": 0.0,
+      "logic_causal_drop": 1.0,
+      "record_count": 16,
+      "relation_cases": 12,
+      "sample_record_ids": [
+        "CVE-2026-45659",
+        "CVE-2026-48558",
+        "CVE-2026-20230",
+        "CVE-2026-12569"
+      ],
+      "thinking_accuracy": 1.0,
+      "thinking_best_ablation": 0.75,
+      "thinking_causal_drop": 0.25
+    },
+    "ECONOMICS_WORLDBANK_NEW_QUERY": {
+      "event_cases": 48,
+      "intelligence_route_accuracy": 1.0,
+      "logic_accuracy": 1.0,
+      "logic_best_ablation": 0.0,
+      "logic_causal_drop": 1.0,
+      "record_count": 12,
+      "relation_cases": 12,
+      "sample_record_ids": [
+        "BRA::2021",
+        "BRA::2022",
+        "BRA::2023",
+        "BRA::2024"
+      ],
+      "thinking_accuracy": 1.0,
+      "thinking_best_ablation": 0.75,
+      "thinking_causal_drop": 0.25
+    },
+    "GEOSCIENCE_USGS_NEW": {
+      "event_cases": 48,
+      "intelligence_route_accuracy": 1.0,
+      "logic_accuracy": 1.0,
+      "logic_best_ablation": 0.0,
+      "logic_causal_drop": 1.0,
+      "record_count": 20,
+      "relation_cases": 12,
+      "sample_record_ids": [
+        "nc75431637",
+        "aka2026rumtco",
+        "nc75431632",
+        "hv75030822"
+      ],
+      "thinking_accuracy": 1.0,
+      "thinking_best_ablation": 0.75,
+      "thinking_causal_drop": 0.25
+    },
+    "MEDICINE_OPENFDA_ENFORCEMENT_NEW_ENDPOINT": {
+      "event_cases": 48,
+      "intelligence_route_accuracy": 1.0,
+      "logic_accuracy": 1.0,
+      "logic_best_ablation": 0.0,
+      "logic_causal_drop": 1.0,
+      "record_count": 20,
+      "relation_cases": 12,
+      "sample_record_ids": [
+        "72241",
+        "86162",
+        "97808",
+        "85712"
+      ],
+      "thinking_accuracy": 1.0,
+      "thinking_best_ablation": 0.75,
+      "thinking_causal_drop": 0.25
+    }
+  },
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "frozen_usgs_portability": {
+    "current_source_sha256": "2264d300fcb5c366b1e708618dcaed2ae19065647bf289006bbe87a9ca87505e",
+    "model_feature": "mag_ge_q75",
+    "preprocessing_bound_in_canonical": false,
+    "prior_week_source_sha256": "75e00818ae2c95cd49636485d9f99fd00c90676016275ce90b26073249a18c43",
+    "raw_portability_status": "WITHHOLD_RAW_PORTABILITY_MISSING_PREPROCESSING_PROVENANCE",
+    "source_changed": true,
+    "task": "USGS_EARTHQUAKE_SIGNIFICANCE",
+    "training_source_sha256": "3f30a0ea8b15c68dcdf2c9061d68a06b51ea19e63234899c0a4e4ec55b5f1c55"
+  },
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "generation_transition": false,
+  "github_temporal_transfer": {
+    "accuracy": 1.0,
+    "class_counts": {
+      "failure": 29,
+      "success": 69
+    },
+    "post_training_run_count": 98,
+    "training_commit_time": "2026-09-06T11:45:30Z"
+  },
+  "limitations": [
+    "LEGACY_USGS_SPECIALIST_CANNOT_BE REPRODUCED FROM RAW USGS DATA BECAUSE TRAIN-DERIVED mag_q75 PREPROCESSING VALUE WAS NOT BOUND INTO ITS CANONICAL ARTIFACT.",
+    "GENERIC TRI-ORGAN REAL-DATA TRANSFER TESTS STRUCTURAL RELATION/EVENT REASONING OVER REAL RECORD CONTENT; IT DOES NOT CLAIM FULL SEMANTIC UNDERSTANDING OF EACH DOMAIN."
+  ],
+  "next_required_capability": "G2_PORTABLE_REAL_DATA_SPECIALIST_FRESH_READMISSION_V2",
+  "portable_usgs_shadow_repair": {
+    "ablation_balanced": 0.5,
+    "automatic_canonical_promotion": false,
+    "candidate_digest": "9b1eb32b600328a3130fdc8600457e5525b1d02aca02726fca46a88cf2481639",
+    "candidate_path": "candidates/kernel-self-generated/g2-portable-usgs-real-data-specialist-repair-v1.json",
+    "causal_gain": 0.5,
+    "feature_transform_bound": true,
+    "newer_blind_balanced": 1.0,
+    "validation_balanced": 1.0
+  },
+  "promotion_applied": false,
+  "receipt_sha256": "d4d4ef854dfeba0b88e5285b0dc8420411af41dc05e14de0db29b3aa61b83a65",
+  "retraining_of_canonical_components": false,
+  "schema": "yado.g2.fresh_real_data_cognitive_transfer.receipt.v1",
+  "semantic_boundary": "LIVE PUBLIC DATA TRANSFER TEST. FROZEN GITHUB THINKING IS TESTED ON POST-TRAINING RUNS. FOUR REAL DATA DOMAINS EXERCISE FROZEN TRI-ORGAN GENERIC MECHANISMS. A PORTABLE USGS SHADOW REPAIR BINDS TRAIN-DERIVED PREPROCESSING EXPLICITLY AND IS TESTED ON NEWER TEMPORAL HOLDOUT. NO CANONICAL PROMOTION OR G3 TRANSITION.",
+  "sources": {
+    "CISA_KEV": {
+      "bytes": 1696769,
+      "content_type": "application/json",
+      "http_status": 200,
+      "requested_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "resolved_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "sha256": "f92f4cef4bba9b8c69c1a34deeb825af3810ffb6a0447042d16df894751da2cf"
+    },
+    "GITHUB_ACTIONS": {
+      "bytes": 1242098,
+      "content_type": "application/json; charset=utf-8",
+      "http_status": 200,
+      "requested_url": "https://api.github.com/repos/v37025337-pixel/EVA/actions/runs?per_page=100",
+      "resolved_url": "https://api.github.com/repos/v37025337-pixel/EVA/actions/runs?per_page=100",
+      "sha256": "ecd50da85fc7c02bd7841a442552c63902ff9d070915fbc61c7b97905d2e25b4",
+      "training_commit_time": "2026-09-06T11:45:30Z"
+    },
+    "OPENFDA_ENFORCEMENT": {
+      "bytes": 34005,
+      "content_type": "application/json; charset=utf-8",
+      "http_status": 200,
+      "requested_url": "https://api.fda.gov/drug/enforcement.json?limit=20",
+      "resolved_url": "https://api.fda.gov/drug/enforcement.json?limit=20",
+      "sha256": "a25039e367bf88ecfb1f7fdb79a0309a6ebe3c2a1552bec8b6caf2b45249cbb2"
+    },
+    "USGS_WEEK": {
+      "bytes": 1368264,
+      "content_type": "application/json; charset=utf-8",
+      "http_status": 200,
+      "requested_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
+      "resolved_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
+      "sha256": "2264d300fcb5c366b1e708618dcaed2ae19065647bf289006bbe87a9ca87505e"
+    },
+    "WORLDBANK_GDP": {
+      "bytes": 2558,
+      "content_type": "application/json;charset=utf-8",
+      "http_status": 200,
+      "requested_url": "https://api.worldbank.org/v2/country/FRA;JPN;BRA/indicator/NY.GDP.MKTP.CD?format=json&per_page=100&date=2021:2024",
+      "resolved_url": "https://api.worldbank.org/v2/country/FRA;JPN;BRA/indicator/NY.GDP.MKTP.CD?format=json&per_page=100&date=2021:2024",
+      "sha256": "51a25bcabafdaa8108bc819b74ac537f1212499483aaa98178796c5237c48574"
+    }
+  },
+  "status": "PASS_WITH_LIMITATIONS_SHADOW_G2_FRESH_REAL_DATA_COGNITIVE_TRANSFER_V1"
+}
