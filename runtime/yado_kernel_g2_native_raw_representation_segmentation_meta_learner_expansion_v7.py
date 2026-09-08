@@ -197,7 +197,7 @@ def wrap_c(text,i,layer):
     if m==11:return f"Journal-A6 {i%277}: BEGIN-CONTENT {text} END-CONTENT."
     if m==12:return f"prefix tokens owner group quota public source all checks. {text}. suffix tokens."
     if m==13:return f"Transport record {i%281}. {neutral[i%3]} PAYLOAD {text} END PAYLOAD."
-    return f"Administrative relay {i%283}. Begin. {text} Complete."
+    return f"Administrative relay {i%283}. Begin {text} Complete."
 
 pool=direct+traps
 rng=random.Random(2026090708);spent=[]
