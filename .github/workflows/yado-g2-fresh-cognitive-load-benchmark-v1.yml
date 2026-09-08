@@ -23,7 +23,9 @@ jobs:
       - name: Reconstruct verified native YADO runtime
         run: python runtime/reconstruct_rc8v36.py
       - name: Install runtime dependencies
-        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+        run: |
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+          python -m pip install --disable-pip-version-check pytest
       - name: Pre-load canonical guard
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Compile fresh cognitive benchmark
