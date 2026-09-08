@@ -220,14 +220,68 @@ fit=window_training_rows(fit_docs);val=window_training_rows(val_docs);blind=wind
 if (len(fit),len(val),len(blind))!=(2394,685,880):raise RuntimeError('V6_WINDOW_SPLIT_DRIFT:'+str((len(fit),len(val),len(blind))))
 log('spent_window_evidence_ready',spent_repro=spent_repro,fit=len(fit),validation=len(val),blind=len(blind))
 
-# Existing CART family is the baseline; V7 expands only with already-native centroid/KNN.
+# Existing CART family is the baseline. Preserve the exact native greedy CART
+# semantics while computing depth 1..7 from one deepest row-aware prefix tree.
+def fit_tree_prefix_exact(cases,max_depth):
+    data=[(dict(x),y) for x,y in cases]
+    def majority(labels):
+        counts=Counter(labels)
+        return sorted(counts.items(),key=lambda kv:(kv[1],str(kv[0])),reverse=True)[0][0]
+    def gini(labels):
+        if not labels:return 0.0
+        counts=Counter(labels);n=len(labels)
+        return 1-sum((count/n)**2 for count in counts.values())
+    def thresholds(values):
+        uniq=sorted(set(float(v) for v in values))
+        return [] if len(uniq)<2 else [(a+b)/2 for a,b in zip(uniq,uniq[1:])]
+    def build(rows,depth):
+        ys=[y for _,y in rows]
+        maj=False if not rows else majority(ys)
+        if not rows:return {'label':False,'_majority':False}
+        if len(set(map(str,ys)))==1:return {'label':ys[0],'_majority':ys[0]}
+        if depth>=max_depth:return {'label':maj,'_majority':maj}
+        keys0=sorted({k for x,_ in rows for k in x});parent_imp=gini(ys);best=None
+        for key in keys0:
+            vals=[]
+            for x,_ in rows:
+                rv=x.get(key,0)
+                vals.append(float(bool(rv)) if isinstance(rv,bool) else float(rv if rv is not None else 0.0))
+            ths=thresholds(vals)
+            if not ths and set(vals)<=set([0.0,1.0]):ths=[0.5]
+            for th in ths:
+                left=[r for r,v in zip(rows,vals) if v<=th];right=[r for r,v in zip(rows,vals) if v>th]
+                if not left or not right:continue
+                impurity=(len(left)*gini([y for _,y in left])+len(right)*gini([y for _,y in right]))/len(rows)
+                cand=(parent_imp-impurity,-len(left)*len(right),key,-th,left,right,th)
+                if best is None or cand[:4]>best[:4]:best=cand
+        if best is None:return {'label':maj,'_majority':maj}
+        _,_,key,_,left,right,th=best
+        return {'feature':key,'threshold':th,'_majority':maj,
+                'left':build(left,depth+1),'right':build(right,depth+1)}
+    return build(data,0)
+
+def materialize_depth(tree,max_depth):
+    def rec(node,depth):
+        if 'label' in node:return {'label':node['label']}
+        if depth>=max_depth:return {'label':node['_majority']}
+        return {'feature':node['feature'],'threshold':node['threshold'],
+                'left':rec(node['left'],depth+1),'right':rec(node['right'],depth+1)}
+    return rec(tree,0)
+
+parity_rows=fit[:160]
+parity_full=fit_tree_prefix_exact(parity_rows,7)
+for depth in range(1,8):
+    if materialize_depth(parity_full,depth)!=fit_tree(parity_rows,depth):
+        raise RuntimeError('V7_CART_PREFIX_PARITY_DRIFT:'+str(depth))
+fit_full=fit_tree_prefix_exact(fit,7)
 cart_trials=[]
 for depth in range(1,8):
-    m=fit_tree(fit,depth);va=tree_acc(m,val);tr=tree_acc(m,fit)
+    m=materialize_depth(fit_full,depth);va=tree_acc(m,val);tr=tree_acc(m,fit)
     cart_trials.append((va,-depth,depth,m,tr))
 _,_,cart_depth,cart_model,cart_fit=max(cart_trials,key=lambda z:z[:2])
 cart_val=tree_acc(cart_model,val)
 if abs(cart_val-float(compute['cart_evidence']['best_validation']))>1e-12:raise RuntimeError('CART_BASELINE_DRIFT')
+log('v7_cart_prefix_ready',depth=cart_depth,validation=cart_val,parity_rows=len(parity_rows))
 
 skill_fit_probe=fit[:400]
 base_fit_probe=tree_acc(cart_model,skill_fit_probe)
