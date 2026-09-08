@@ -1,0 +1,45 @@
+name: YADO Context Compaction V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - yado-context-compaction-v1
+    paths:
+      - "runtime/yado_compact_context_checkpoint_v1.py"
+      - "canonical/yado-compact-context-checkpoint-v1.json"
+      - "tests/test_yado_compact_context_checkpoint_v1.py"
+      - "docs/yado-context-compaction-v1.md"
+      - ".github/workflows/yado-context-compaction-v1.yml"
+      - "canonical/yado-main-head-g2.json"
+      - "canonical/yado-unified-core-v1.json"
+      - "canonical/yado-unified-experience-registry-v1.json"
+      - "architecture/evolution-ledger.json"
+      - "audits/yado-g2-module-dependency-graph-v1.json"
+      - "audits/yado-full-kernel-audit-v1-report.json"
+
+permissions:
+  contents: read
+
+jobs:
+  compact-context:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild compact checkpoint
+        run: python runtime/yado_compact_context_checkpoint_v1.py > /tmp/yado-compact-context.json
+
+      - name: Verify checkpoint is deterministic
+        run: git diff --exit-code -- canonical/yado-compact-context-checkpoint-v1.json
+
+      - name: Run compact-context tests
+        run: python -m unittest tests.test_yado_compact_context_checkpoint_v1
+
+      - name: Verify compact output size
+        run: test "$(wc -c < canonical/yado-compact-context-checkpoint-v1.json)" -le 32768
