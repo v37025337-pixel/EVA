@@ -1,0 +1,80 @@
+{
+  "active_capability_count": 31,
+  "candidate_commit_time": "2026-09-08T09:43:21Z",
+  "candidate_digest": "9b1eb32b600328a3130fdc8600457e5525b1d02aca02726fca46a88cf2481639",
+  "candidate_path": "candidates/kernel-self-generated/g2-portable-usgs-real-data-specialist-repair-v1.json",
+  "candidate_retrained": false,
+  "canonical_head_digest": "262afc5a825e4d6acd6a0ced3a694a494c64aab012fe4b800ee70beb93f4be33",
+  "canonical_mutation": false,
+  "checks": {
+    "active_capabilities_31": true,
+    "automatic_promotion_forbidden": true,
+    "candidate_digest_verified": true,
+    "candidate_unchanged_from_v2": true,
+    "canonical_core_unchanged": true,
+    "canonical_head_unchanged": true,
+    "core_self_audit_pass": true,
+    "fresh_balanced_ge_0_90": true,
+    "fresh_causal_gain_ge_0_25": true,
+    "frontier_unchanged": true,
+    "g3_not_started": true,
+    "historical_holdout_both_classes_ge_10": true,
+    "historical_holdout_events_ge_100": true,
+    "historical_window_strictly_outside_candidate_week": true,
+    "legacy_portability_gap_still_visible": true,
+    "model_features_declared": true,
+    "preprocessing_causal_drop_ge_0_25": true,
+    "preprocessing_replay_exact": true,
+    "thresholds_frozen": true,
+    "v2_withhold_was_sample_only": true
+  },
+  "disjoint_holdout": {
+    "bytes": 777519,
+    "candidate_coverage_start": "2026-09-01T09:43:21+00:00",
+    "class_counts": {
+      "false": 921,
+      "true": 164
+    },
+    "content_type": "application/json; charset=utf-8",
+    "event_count": 1085,
+    "first_event_time": 1787910226110,
+    "http_status": 200,
+    "last_event_time": 1788169064070,
+    "query_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-08-28T09%3A43%3A21&endtime=2026-08-31T09%3A43%3A21&orderby=time-asc&limit=20000",
+    "resolved_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-08-28T09%3A43%3A21&endtime=2026-08-31T09%3A43%3A21&orderby=time-asc&limit=20000",
+    "sha256": "ff84bffcefabfc299da408366fe76ea8ca126b4de5652dba938e307fdcc8694d",
+    "strategy": "DETERMINISTIC_PRE_ROLLING_WEEK_WINDOW",
+    "strict_nonoverlap": true,
+    "window_end": "2026-08-31T09:43:21+00:00",
+    "window_start": "2026-08-28T09:43:21+00:00"
+  },
+  "frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "generation_transition": false,
+  "metrics": {
+    "causal_gain": 0.5,
+    "fresh_balanced": 1.0,
+    "majority_baseline_balanced": 0.5,
+    "preprocessing_ablation_balanced": 0.5,
+    "preprocessing_causal_drop": 0.5
+  },
+  "next_required_capability": "G2_PORTABLE_REAL_DATA_SPECIALIST_CANONICAL_INTEGRATION_V1",
+  "promotion_applied": false,
+  "receipt_sha256": "82b9c1867f0458f48146b750bb85b9844f7300fca21a506b4a1a9b24cebfe648",
+  "schema": "yado.g2.portable_real_data_specialist_readmission_repair.receipt.v3",
+  "semantic_boundary": "V3 PRESERVES THE V2 PROSPECTIVE WITHHOLD AND ADDS A DETERMINISTIC LARGE USGS HOLDOUT STRICTLY OUTSIDE THE ROLLING SEVEN-DAY SOURCE COVERAGE USED TO CONSTRUCT THE UNCHANGED CANDIDATE. THRESHOLDS AND MODEL ARE FROZEN. NO CANONICAL MUTATION OR PROMOTION.",
+  "status": "PASS_SHADOW_G2_PORTABLE_REAL_DATA_SPECIALIST_READMISSION_REPAIR_V3",
+  "thresholds_lowered": false,
+  "v2_prospective_evidence": {
+    "causal_gain": 0.5,
+    "class_counts": {
+      "false": 9,
+      "true": 1
+    },
+    "classification": "INSUFFICIENT_POST_CANDIDATE_SAMPLE_SIZE_AND_CLASS_SUPPORT; NOT A MODEL_ACCURACY_FAILURE",
+    "fresh_balanced": 1,
+    "post_candidate_event_count": 10
+  },
+  "v2_withhold_receipt": "receipts/yado-g2-portable-real-data-specialist-fresh-readmission-v2-run-34222746443-withhold.json"
+}
