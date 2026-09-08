@@ -9,7 +9,7 @@
   ],
   "frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
   "generation": "G2_CANDIDATE_TRCG_V1",
-  "graph_digest": "25c287d6d29784442f059f89f82afee8fb72d3dc038382ef9543d8feb706dcd4",
+  "graph_digest": "9dcf2f8fceecd3bc4a7238ccde664c3b493b480c7100a1c016cf605f3525311c",
   "inactive_superseded_policy": "SUPERSEDED MODULES ARE NOT ACTIVE BY PRESENCE; KEEP AS HISTORY/QUARANTINE UNLESS FRESHLY RE-ADMITTED.",
   "orphans": [],
   "quarantine_candidates_require_fresh_ablation": [],
@@ -55,7 +55,7 @@
     "CTRL-G2-EVOLUTIONARY-GENOME-V1": "CONTROL",
     "CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7": "CONTROL",
     "RESOURCE-PORTFOLIO-V1": "STATE",
-    "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4": "PRIMARY",
+    "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V5": "PRIMARY",
     "RUNTIME-G2-HIGH-SCALE-BINDING-V5": "PRIMARY",
     "RUNTIME-G2-TYPED-RECURRENT-CAPABILITY-GRAPH-V1": "COMPATIBILITY",
     "RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5": "PRIMARY"
@@ -269,19 +269,19 @@
       "to": "ALG-G2-BOUNDED-CAPABILITY-SET-COORDINATOR-V1"
     },
     {
-      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V5",
       "kind": "EXPERIENCE_CONDITIONED_ORGAN_CONTROL",
       "reason": "experience-conditioned cognitive layer provides bounded LOGIC decisions",
       "to": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
     },
     {
-      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V5",
       "kind": "EXPERIENCE_CONDITIONED_ORGAN_CONTROL",
       "reason": "experience-conditioned cognitive layer provides bounded THINKING decisions",
       "to": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
     },
     {
-      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4",
+      "from": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V5",
       "kind": "EXPERIENCE_CONDITIONED_ORGAN_CONTROL",
       "reason": "experience-conditioned cognitive layer provides bounded INTELLIGENCE decisions",
       "to": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
@@ -290,7 +290,7 @@
       "from": "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
       "kind": "EXPERIENCE_CONDITIONING",
       "reason": "historical experience provenance conditions the cognitive control layer",
-      "to": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4"
+      "to": "RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V5"
     },
     {
       "from": "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
@@ -347,7 +347,7 @@
       "to": "ALG-G2-ALL-EXPERIENCE-CAUSAL-GENE-PORTFOLIO-INTELLIGENCE-V1"
     }
   ],
-  "static_import_edge_count": 29,
+  "static_import_edge_count": 30,
   "static_import_edges": [
     {
       "from_source": "runtime/yado_canonical_invariant_guard_v1.py",
@@ -398,6 +398,11 @@
       "from_source": "runtime/yado_g2_experience_conditioned_cognitive_layer_v4.py",
       "kind": "PYTHON_IMPORT",
       "to_source": "runtime/yado_g2_experience_conditioned_cognitive_layer_v3.py"
+    },
+    {
+      "from_source": "runtime/yado_g2_experience_conditioned_cognitive_layer_v5.py",
+      "kind": "PYTHON_IMPORT",
+      "to_source": "runtime/yado_g2_experience_conditioned_cognitive_layer_v4.py"
     },
     {
       "from_source": "runtime/yado_g2_openapi_contract_capability_v1.py",

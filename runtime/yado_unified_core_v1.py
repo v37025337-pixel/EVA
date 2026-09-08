@@ -29,7 +29,7 @@ from yado_g2_unified_execution_fabric_v5 import G2UnifiedExecutionFabricV5
 from yado_g2_openapi_contract_capability_v1 import G2OpenAPIContractCapabilityV1
 from yado_g2_openapi_readonly_executor_v1 import G2OpenAPIReadOnlyExecutorV1
 from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
-from yado_g2_experience_conditioned_cognitive_layer_v4 import G2ExperienceConditionedCognitiveLayerV4
+from yado_g2_experience_conditioned_cognitive_layer_v5 import G2ExperienceConditionedCognitiveLayerV5
 from yado_g2_global_experience_meta_controller_v7 import G2GlobalExperienceMetaControllerV7
 from yado_g2_all_experience_tri_organ_runtime_v1 import G2AllExperienceTriOrganRuntimeV1
 
@@ -68,7 +68,7 @@ class UnifiedYADOCoreV1:
         self.openapi_contract_capability_cls=G2OpenAPIContractCapabilityV1
         self.openapi_readonly_executor_cls=G2OpenAPIReadOnlyExecutorV1
         self.evolutionary_genome_cls=YADOEvolutionaryGenomeV1
-        self.experience_cognitive_layer=G2ExperienceConditionedCognitiveLayerV4(self._load('canonical/yado-g2-experience-conditioned-cognitive-layer-v4.json'))
+        self.experience_cognitive_layer=G2ExperienceConditionedCognitiveLayerV5(self._load('canonical/yado-g2-experience-conditioned-cognitive-layer-v5.json'))
         self.global_experience_meta_controller=G2GlobalExperienceMetaControllerV7(self._load('canonical/yado-g2-global-experience-meta-controller-v7.json'))
         self.all_experience_tri_organ=G2AllExperienceTriOrganRuntimeV1(self._load('canonical/yado-g2-all-experience-tri-organ-v1.json'))
         validate_ledger_v2(self.ledger)

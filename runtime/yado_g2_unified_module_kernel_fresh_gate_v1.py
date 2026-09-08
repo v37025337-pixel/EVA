@@ -231,7 +231,7 @@ binding_checks={
  'canonical_openapi_readonly_executor_active':CAP_API_EXEC in active and core_manifest.get('openapi_readonly_executor_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('openapi_readonly_executor_v1',{}).get('read_only_only') is True,
  'canonical_evolutionary_genome_active':CAP_GENOME in active and core_manifest.get('evolutionary_genome_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('evolutionary_genome_v1',{}).get('automatic_canonical_promotion') is False,
  'canonical_temporal_kernel_embedded':core_manifest.get('cognitive_temporal_kernel_v1',{}).get('status')=='CANONICAL_EMBEDDED' and core_manifest.get('cognitive_temporal_kernel_v1',{}).get('separate_active_capability') is False,
- 'canonical_experience_cognitive_layer_active':CAP_COGNITIVE in active and core_manifest.get('experience_conditioned_cognitive_layer_v4',{}).get('status')=='CANONICAL_ACTIVE',
+ 'canonical_experience_cognitive_layer_active':CAP_COGNITIVE in active and core_manifest.get('experience_conditioned_cognitive_layer_v5',{}).get('status')=='CANONICAL_ACTIVE',
  'canonical_global_experience_meta_v7_active':CAP_META_V7 in active and core_manifest.get('global_experience_meta_controller_v7',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('global_experience_meta_controller_v7',{}).get('v4_replaced') is False,
  'canonical_all_experience_tri_organ_additive_active':all(x in active for x in [CAP_TRI_LOGIC,CAP_TRI_THINKING,CAP_TRI_INTELLIGENCE]) and core_manifest.get('all_experience_tri_organ_v1',{}).get('status')=='CANONICAL_ACTIVE' and core_manifest.get('all_experience_tri_organ_v1',{}).get('replace_existing_organs') is False,
  'api_network_execution_disabled':api_smoke.get('pass') is True,

@@ -39,7 +39,7 @@ CAP_FABRIC='RUNTIME-G2-UNIFIED-EXECUTION-FABRIC-V5'
 CAP_API=CAP_API_V1
 CAP_API_EXEC='ALG-G2-OPENAPI-READONLY-EXECUTOR-V1'
 CAP_GENOME='CTRL-G2-EVOLUTIONARY-GENOME-V1'
-CAP_COGNITIVE='RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4'
+CAP_COGNITIVE='RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V5'
 CAP_META_V7='CTRL-G2-GLOBAL-EXPERIENCE-META-CONTROLLER-V7'
 
 MODULE_REGISTRY={
@@ -69,7 +69,7 @@ MODULE_REGISTRY={
  CAP_API:('EXECUTOR','runtime/yado_g2_openapi_contract_capability_v1.py'),
  CAP_API_EXEC:('NETWORK_READONLY_EXECUTOR','runtime/yado_g2_openapi_readonly_executor_v1.py'),
  CAP_GENOME:('EVOLUTION_CONTROL','runtime/yado_evolutionary_genome_v1.py'),
- CAP_COGNITIVE:('COGNITIVE_COORDINATOR','runtime/yado_g2_experience_conditioned_cognitive_layer_v4.py'),
+ CAP_COGNITIVE:('COGNITIVE_COORDINATOR','runtime/yado_g2_experience_conditioned_cognitive_layer_v5.py'),
  CAP_META_V7:('META_CONTROLLER','runtime/yado_g2_global_experience_meta_controller_v7.py'),
  CAP_TRI_LOGIC:('EXECUTOR','runtime/yado_g2_all_experience_tri_organ_runtime_v1.py'),
  CAP_TRI_THINKING:('EXECUTOR','runtime/yado_g2_all_experience_tri_organ_runtime_v1.py'),
