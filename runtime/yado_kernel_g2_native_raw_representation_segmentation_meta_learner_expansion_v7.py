@@ -3,7 +3,7 @@ from pathlib import Path
 from collections import Counter
 from bisect import bisect_left,bisect_right
 from functools import lru_cache
-import hashlib,json,math,random,re,sys,time
+import hashlib,json,math,os,random,re,sys,time
 
 import numpy as np
 
@@ -319,6 +319,27 @@ selected_id=(selection.get('selected_skill_ids') or [None])[0]
 selected=models.get(selected_id)
 if selected is None:raise RuntimeError('NO_NATIVE_META_LEARNER_SELECTED')
 log('native_meta_family_selected',selected_id=selected_id,selection=selection,metrics=metrics.get(selected_id))
+
+if os.getenv('YADO_V7_SELECTION_ONLY')=='1':
+    probe={
+      'schema':'yado.g2.native_raw_representation_segmentation_meta_learner.selection_probe.v7',
+      'status':'PASS_SELECTION_ONLY',
+      'spent_repro':spent_repro,
+      'cart_baseline_validation':cart_val,
+      'family_candidate_count':len(skills),
+      'native_selection':selection,
+      'selected_skill_id':selected_id,
+      'selected_family':selected.get('family') if selected else None,
+      'selected_metrics':metrics.get(selected_id),
+      'fresh_consumed':False,
+      'canonical_mutation':False,
+      'g3_genesis_performed':False,
+    }
+    probe['probe_digest']=digest(probe)
+    pp=REPO/'architecture/yado-kernel-g2-native-raw-representation-segmentation-meta-learner-v7-selection-probe.json'
+    write(pp,probe)
+    print(json.dumps(probe,indent=2,sort_keys=True,default=str))
+    raise SystemExit(0)
 
 revealed=fit+val
 family=selected['family']
