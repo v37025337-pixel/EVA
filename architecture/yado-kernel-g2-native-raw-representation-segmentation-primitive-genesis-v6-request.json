@@ -12,8 +12,8 @@
     "canonical_mutation": false,
     "g3_genesis": false
   },
-  "trigger": 5,
-  "trigger_reason": "IDENTICAL_SEMANTIC_RETRY_AFTER_PROVABLY_IRRELEVANT_LINEAR_SEARCH_SHORT_CIRCUIT",
+  "trigger": 6,
+  "trigger_reason": "IDENTICAL_SEMANTIC_RETRY_AFTER_STALE_GITHUB_CONCURRENCY_LOCK_ISOLATION_ONLY",
   "observer_retry": {
     "prior_run_id": 34257165248,
     "prior_semantic_verdict": "NOT_REACHED",
@@ -24,6 +24,9 @@
     "changed_learner": false,
     "optimization": "EVALUATE_NATIVE_CART_BANK_FIRST; SKIP LINEAR_SCORE_SEARCH ONLY IF BEST_CART_VALIDATION_EQUALS_1_0, BECAUSE LINEAR_CANNOT_EXCEED_1_0_AND_EXISTING_NATIVE_TIE_BREAK_PREFERS_CART",
     "exactness_guard": "IF_BEST_CART_VALIDATION_LT_1_0_FAIL_FAST_WITH_EXACT_LINEAR_SCORE_SEARCH_STILL_SEMANTICALLY_REQUIRED",
-    "compute_budget_seconds": 3600
+    "compute_budget_seconds": 3600,
+    "prior_pending_run_id": 34260798522,
+    "stale_lock_run_id": 34257165248,
+    "infrastructure_change": "CONCURRENCY_GROUP_NAME_ONLY"
   }
 }
