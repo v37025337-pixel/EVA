@@ -1,0 +1,42 @@
+{
+  "schema": "yado.g2.portable_real_data_specialist_fresh_readmission.withhold.v2",
+  "run_id": "34222746443",
+  "status": "WITHHOLD_G2_PORTABLE_REAL_DATA_SPECIALIST_FRESH_READMISSION_V2",
+  "candidate_digest": "9b1eb32b600328a3130fdc8600457e5525b1d02aca02726fca46a88cf2481639",
+  "candidate_commit_time": "2026-09-08T09:43:21Z",
+  "fresh_source_sha256": "0b0fcb7e1cc5bdc7df5daeb13a033a36fa667a4447050c5b8c27c66fd498fbfc",
+  "fresh_temporal_evidence": {
+    "post_candidate_event_count": 10,
+    "class_counts": {
+      "false": 9,
+      "true": 1
+    },
+    "first_event_time": 1788860752070,
+    "last_event_time": 1788867929102
+  },
+  "metrics": {
+    "fresh_balanced": 1,
+    "majority_baseline_balanced": 0.5,
+    "causal_gain": 0.5,
+    "preprocessing_ablation_balanced": 0.5,
+    "preprocessing_causal_drop": 0.5
+  },
+  "failed_checks": [
+    "fresh_events_post_candidate_ge_12",
+    "fresh_both_classes_ge_2"
+  ],
+  "passed_quality_checks": [
+    "fresh_balanced_ge_0_90",
+    "fresh_causal_gain_ge_0_25",
+    "preprocessing_replay_exact",
+    "preprocessing_causal_drop_ge_0_25",
+    "candidate_digest_verified",
+    "candidate_unchanged_from_parent"
+  ],
+  "diagnosis": "INSUFFICIENT_POST_CANDIDATE_SAMPLE_SIZE_AND_CLASS_SUPPORT; NOT A MODEL_ACCURACY_FAILURE",
+  "thresholds_lowered": false,
+  "canonical_mutation": false,
+  "promotion_applied": false,
+  "g3_genesis_performed": false,
+  "next_required_capability": "G2_PORTABLE_REAL_DATA_SPECIALIST_READMISSION_REPAIR_V3"
+}
