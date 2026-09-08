@@ -1,0 +1,119 @@
+{
+  "schema": "yado.compact_context_checkpoint.v1",
+  "status": "PASS",
+  "purpose": "HOT_CONTEXT_FOR_FAST_SESSION_BOOTSTRAP_WITH_FULL_EVIDENCE_LAZY_HYDRATION",
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "active_lineage": "yado-architecture-shadow-search",
+  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "open_deficits": [
+    "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2"
+  ],
+  "canonical_head_digest": "aabd1c4334bb948b744b8dd620318053cbb967d6cfba76aed09b3a73fdbd9c2e",
+  "g3_genesis_performed": false,
+  "ledger": {
+    "event_count": 300,
+    "latest_event": {
+      "index": 299,
+      "event_id": "E0300_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "status": "PASS",
+      "run_id": "34223759840",
+      "event_hash": "7da4e1adb031b43e3dd4ec79bebf921815d4938ff71c42850787cbdd88ee27a7",
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "canonical_mutation": false
+    },
+    "recent_events": [
+      {
+        "index": 296,
+        "event_id": "E0297_G2_BRANCH_INVENTORY_REGISTRY_RECONCILIATION_V2",
+        "event_type": "G2_MEMORY_AND_EXPERIENCE_BRANCH_REGISTRY_RECONCILIATION",
+        "status": "PASS",
+        "run_id": "34161135084",
+        "event_hash": "27ad33495cc22b1ff809a7913b56913f14251a6d7bd19a94516d8511c71671a0",
+        "deficit": "REMOTE_BRANCH_INVENTORY_MATCH",
+        "canonical_mutation": true
+      },
+      {
+        "index": 297,
+        "event_id": "E0298_UNIFIED_CORE_DEEP_SELF_AUDIT",
+        "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+        "status": "PASS",
+        "run_id": "34161135084",
+        "event_hash": "1e3c193d0305a553eec3ccebe6ff9e8543efab6646e57af8f371897c1e8f9845",
+        "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+        "canonical_mutation": false
+      },
+      {
+        "index": 298,
+        "event_id": "E0299_G2_PORTABLE_REAL_DATA_SPECIALIST_CANONICAL_INTEGRATION_V1",
+        "event_type": "G2_PORTABLE_REAL_DATA_SPECIALIST_CANONICAL_INTEGRATION",
+        "status": "PASS_CANONICAL",
+        "run_id": "34223759840",
+        "event_hash": "3a8ae0819435ddbb2e659d7bc7a71c763679384ddf9f95a757e10183dc129db4",
+        "deficit": "G2_PORTABLE_REAL_DATA_SPECIALIST_CANONICAL_INTEGRATION_V1",
+        "canonical_mutation": true
+      },
+      {
+        "index": 299,
+        "event_id": "E0300_UNIFIED_CORE_DEEP_SELF_AUDIT",
+        "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+        "status": "PASS",
+        "run_id": "34223759840",
+        "event_hash": "7da4e1adb031b43e3dd4ec79bebf921815d4938ff71c42850787cbdd88ee27a7",
+        "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+        "canonical_mutation": false
+      }
+    ]
+  },
+  "active_graph": {
+    "active_module_count": 31,
+    "role_counts": {
+      "COMPATIBILITY": 5,
+      "CONTROL": 3,
+      "PRIMARY": 20,
+      "STATE": 3
+    },
+    "semantic_edge_count": 47,
+    "static_import_edge_count": 30,
+    "orphans": [],
+    "graph_digest": "9dcf2f8fceecd3bc4a7238ccde664c3b493b480c7100a1c016cf605f3525311c"
+  },
+  "branch_memory": {
+    "registered_branch_count": 20,
+    "historical_branch_count": 19,
+    "all_non_active_branches_history_only": true,
+    "all_remote_tips_in_active_ancestry": true,
+    "physical_branches_preserved": true
+  },
+  "full_audit": {
+    "status": "PASS",
+    "audited_commit": "51adaeb6a02384c06a65c5b7b376a4b4f460c44a",
+    "findings_count": 0,
+    "runtime_python_files": 607,
+    "json_files": 1206,
+    "workflow_files": 55,
+    "active_runtime_sources": 40,
+    "duplicate_python_groups": 0,
+    "module_stem_collisions": 0
+  },
+  "hydration": {
+    "normal_start": [
+      "canonical/yado-compact-context-checkpoint-v1.json"
+    ],
+    "hydrate_on_change_or_dispute": [
+      "canonical/yado-main-head-g2.json",
+      "canonical/yado-unified-core-v1.json",
+      "architecture/evolution-ledger.json",
+      "canonical/yado-unified-experience-registry-v1.json",
+      "audits/yado-g2-module-dependency-graph-v1.json",
+      "audits/yado-full-kernel-audit-v1-report.json"
+    ],
+    "cold_history_dirs": [
+      "candidates/",
+      "receipts/",
+      "experience/",
+      "quarantine/"
+    ],
+    "rule": "NORMAL SESSION CONTINUATION READS THE COMPACT CHECKPOINT FIRST. FULL HISTORY IS HYDRATED ONLY FOR A SPECIFIC EVIDENCE QUESTION, DIGEST MISMATCH, FRONTIER CHANGE, AUDIT FAILURE, OR BRANCH-LINEAGE CHANGE."
+  }
+}
