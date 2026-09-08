@@ -1,0 +1,43 @@
+{
+  "schema": "yado.g2.fresh_cognitive_load_benchmark.failure_evidence.v1",
+  "run_id": "34208331583",
+  "status": "WITHHOLD_G2_FRESH_COGNITIVE_LOAD_BENCHMARK_V1",
+  "canonical_head_digest": "262afc5a825e4d6acd6a0ced3a694a494c64aab012fe4b800ee70beb93f4be33",
+  "overall_score": 1,
+  "metrics": {
+    "LOGIC": {
+      "overall": 1,
+      "symmetric_fresh": 1,
+      "polynomial_fresh": 1
+    },
+    "THINKING": {
+      "overall": 1,
+      "plan_oracle": 1,
+      "replan_oracle": 1
+    },
+    "INTELLIGENCE": {
+      "overall": 1,
+      "router_fresh": 1,
+      "schema_alias_transfer": 1,
+      "budget_fail_closed": true
+    },
+    "TRI_ORGAN": {
+      "logic_fresh": 1,
+      "thinking_fresh": 1,
+      "intelligence_route": 1,
+      "logic_best_ablation": 1,
+      "logic_causal_drop": 0,
+      "thinking_best_ablation": 0.75,
+      "thinking_causal_drop": 0.25
+    },
+    "COGNITIVE_WORKSPACE": {
+      "composer_accuracy": 1
+    }
+  },
+  "failed_check": "tri_logic_causal_drop_ge_0_15",
+  "diagnosis": "BENCHMARK_TOPOLOGY_DEGENERACY: every relation node was reachable from START, so the seed=RELATION_LEFT_DOMAIN ablation produced the same closure as seed=START. This does not demonstrate absence of causal dependence on the canonical logic program.",
+  "repair": "ADD_DISCONNECTED_DISTRACTOR_RELATION_COMPONENTS; KEEP_THRESHOLDS_UNCHANGED",
+  "canonical_mutation": false,
+  "promotion_applied": false,
+  "g3_genesis_performed": false
+}
