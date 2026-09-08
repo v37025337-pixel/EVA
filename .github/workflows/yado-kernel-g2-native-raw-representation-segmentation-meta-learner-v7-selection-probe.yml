@@ -1,0 +1,35 @@
+name: YADO G2 Raw Segmentation Meta Learner V7 Selection Probe
+on:
+  push:
+    branches: [yado-architecture-shadow-search]
+    paths:
+      - "architecture/yado-kernel-g2-native-raw-representation-segmentation-meta-learner-v7-selection-probe-request.json"
+permissions:
+  contents: write
+concurrency:
+  group: yado-g2-raw-segmentation-meta-learner-v7-selection-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: python runtime/reconstruct_rc8v36.py
+      - run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+      - run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Selection only
+        env:
+          YADO_V7_SELECTION_ONLY: "1"
+        run: python runtime/yado_kernel_g2_native_raw_representation_segmentation_meta_learner_expansion_v7.py
+      - name: Persist selection probe
+        run: |
+          git config user.name "YADO V7 Selection Probe"
+          git config user.email "actions@users.noreply.github.com"
+          git add architecture/yado-kernel-g2-native-raw-representation-segmentation-meta-learner-v7-selection-probe.json
+          git diff --cached --quiet || git commit -m "Persist V7 segmentation learner selection probe [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
