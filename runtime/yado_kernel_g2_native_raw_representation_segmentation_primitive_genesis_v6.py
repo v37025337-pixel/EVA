@@ -12,6 +12,8 @@ sys.path[:0]=[str(ROOT),str(PKG)]
 
 from yado_core_v3_0_rc8_external_cognitive import UnifiedYADOKernelV30RC8ExternalCognitive
 from yado_algorithm_component_runtime_native_v1 import predict_intel_component
+from yado_organ_runtime_native_v1 import fit_tree,tree_acc
+from yado_evolution_runtime_native_v1 import fit_linear,linear_acc
 from yado_raw_task_representation_candidate_v2 import RawTaskRepresentationSpecV2,_features,_dot
 from yado_raw_task_representation_multiscale_v6 import RawTaskRepresentationMultiscaleRuntimeV6
 from yado_evolution_ledger_v2 import validate_ledger_v2
@@ -250,7 +252,118 @@ try:
       success_criteria={'fresh_sequential':.98,'no_class_rules':True,'rollback':True},
     )
     deficits=k.executive.detect_deficits(goal.goal_id)
-    meta=k.meta_evolve_intelligence(fit,val,fit+val,blind)
+    # Exact compute optimization only: greedy CART prefixes are invariant to the
+    # requested maximum depth. Build the deepest native CART once and truncate it
+    # for the shallower algorithm-bank entries instead of refitting depths 1..7.
+    # The learner family, algorithm bank, selection ordering, data and thresholds
+    # remain identical to UnifiedYADOKernelV30RC4MetaAutoEvolution.meta_evolve_intelligence.
+    def truncate_tree(tree,max_depth):
+        def rec(node,depth):
+            if not isinstance(node,dict) or 'label' in node:
+                return node
+            if depth>=max_depth:
+                # Reconstruct the exact majority label from the rows reaching this
+                # node is not possible from the tree alone, so parity-safe truncation
+                # is implemented below by fitting a single max-depth tree with row
+                # membership metadata.
+                raise RuntimeError('UNREACHABLE_PLAIN_TRUNCATION')
+            return {'feature':node['feature'],'threshold':node['threshold'],
+                    'left':rec(node['left'],depth+1),'right':rec(node['right'],depth+1)}
+        return rec(tree,0)
+
+    # Row-aware exact CART builder. It uses the same split search/tie ordering as
+    # yado_organ_runtime_native_v1.fit_tree, but stores each node's majority label
+    # so any shallower native max_depth can be materialized without another fit.
+    def fit_tree_prefix_exact(cases,max_depth):
+        from collections import Counter as _Counter
+        data=[(dict(x),y) for x,y in cases]
+        def _majority(labels):
+            counts=_Counter(labels)
+            return sorted(counts.items(),key=lambda kv:(kv[1],str(kv[0])),reverse=True)[0][0]
+        def _gini(labels):
+            if not labels:return 0.0
+            counts=_Counter(labels);n=len(labels)
+            return 1-sum((count/n)**2 for count in counts.values())
+        def _thresholds(values):
+            uniq=sorted(set(float(v) for v in values))
+            return [] if len(uniq)<2 else [(a+b)/2 for a,b in zip(uniq,uniq[1:])]
+        def build(rows,depth):
+            ys=[y for _,y in rows]
+            majority=False if not rows else _majority(ys)
+            if not rows:return {'label':False,'_majority':False}
+            if len(set(map(str,ys)))==1:return {'label':ys[0],'_majority':ys[0]}
+            if depth>=max_depth:return {'label':majority,'_majority':majority}
+            keys=sorted({k for x,_ in rows for k in x});parent_imp=_gini(ys);best=None
+            for key in keys:
+                vals=[]
+                for x,_ in rows:
+                    rawv=x.get(key,0)
+                    vals.append(float(bool(rawv)) if isinstance(rawv,bool) else float(rawv if rawv is not None else 0.0))
+                thresholds=_thresholds(vals)
+                if not thresholds and set(vals)<=set([0.0,1.0]):thresholds=[0.5]
+                for threshold in thresholds:
+                    left=[r for r,v in zip(rows,vals) if v<=threshold];right=[r for r,v in zip(rows,vals) if v>threshold]
+                    if not left or not right:continue
+                    impurity=(len(left)*_gini([y for _,y in left])+len(right)*_gini([y for _,y in right]))/len(rows)
+                    candidate=(parent_imp-impurity,-len(left)*len(right),key,-threshold,left,right,threshold)
+                    if best is None or candidate[:4]>best[:4]:best=candidate
+            if best is None:return {'label':majority,'_majority':majority}
+            _,_,key,_,left,right,threshold=best
+            return {'feature':key,'threshold':threshold,'_majority':majority,
+                    'left':build(left,depth+1),'right':build(right,depth+1)}
+        return build(data,0)
+
+    def materialize_depth(tree,max_depth):
+        def rec(node,depth):
+            if not isinstance(node,dict):return node
+            if 'label' in node:return {'label':node['label']}
+            if depth>=max_depth:return {'label':node['_majority']}
+            return {'feature':node['feature'],'threshold':node['threshold'],
+                    'left':rec(node['left'],depth+1),'right':rec(node['right'],depth+1)}
+        return rec(tree,0)
+
+    algs=list(k._algs('INTELLIGENCE'))
+    cart_depths=sorted({int(a['max_depth']) for a in algs if a.get('family')=='CART_AXIS'})
+    max_cart=max(cart_depths) if cart_depths else 0
+
+    # Parity on a bounded deterministic slice against the original native fit_tree.
+    parity_rows=fit[:min(160,len(fit))]
+    if max_cart:
+        parity_full=fit_tree_prefix_exact(parity_rows,max_cart)
+        for depth in cart_depths:
+            fast_tree=materialize_depth(parity_full,depth)
+            slow_tree=fit_tree(parity_rows,depth)
+            if fast_tree!=slow_tree:
+                raise RuntimeError('CART_DEPTH_PREFIX_PARITY_DRIFT:'+str(depth))
+    print(json.dumps({'phase':'cart_depth_prefix_parity_pass','depths':cart_depths,'rows':len(parity_rows),'ts':time.time()}),flush=True)
+
+    candidates=[]
+    fit_full=fit_tree_prefix_exact(fit,max_cart) if max_cart else None
+    linear_fit_model=None
+    for a in algs:
+        fam=a['family']
+        if fam=='CART_AXIS':
+            model=materialize_depth(fit_full,int(a['max_depth']))
+            score=tree_acc(model,val)
+        elif fam=='LINEAR_SCORE_SEARCH':
+            if linear_fit_model is None:linear_fit_model=fit_linear(fit)
+            model=linear_fit_model
+            score=0.0 if model is None else linear_acc(model,val)
+        else:
+            continue
+        candidates.append({'algorithm':a,'model':model,'validation':score})
+    if not candidates:raise RuntimeError('no INTELLIGENCE meta algorithms')
+    sel=max(candidates,key=lambda z:(z['validation'],z['algorithm']['family']=='CART_AXIS',-(z['algorithm'].get('max_depth') or 99)))
+    selected_alg=sel['algorithm']
+    revealed=fit+val
+    if selected_alg['family']=='CART_AXIS':
+        revealed_full=fit_tree_prefix_exact(revealed,max_cart)
+        selected_model=materialize_depth(revealed_full,int(selected_alg['max_depth']))
+        fresh_score=tree_acc(selected_model,blind)
+    else:
+        selected_model=fit_linear(revealed)
+        fresh_score=0.0 if selected_model is None else linear_acc(selected_model,blind)
+    meta={'organ':'INTELLIGENCE','selected_algorithm':selected_alg,'validation':sel['validation'],'model':selected_model,'fresh_blind':fresh_score}
 finally:
     try:k.close()
     except Exception:pass
