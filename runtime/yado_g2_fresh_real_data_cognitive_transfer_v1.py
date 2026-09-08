@@ -37,7 +37,7 @@ REQ=REPO/'architecture/yado-g2-fresh-real-data-cognitive-transfer-v1-request.jso
 OUT=ROOT/'yado_g2_fresh_real_data_cognitive_transfer_v1_receipt.json'
 CAND=REPO/'candidates/kernel-self-generated/g2-portable-usgs-real-data-specialist-repair-v1.json'
 
-USGS_MONTH='https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson'
+USGS_WEEK='https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson'
 WORLDBANK='https://api.worldbank.org/v2/country/FRA;JPN;BRA/indicator/NY.GDP.MKTP.CD?format=json&per_page=100&date=2021:2024'
 CISA='https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json'
 OPENFDA='https://api.fda.gov/drug/enforcement.json?limit=20'
@@ -85,7 +85,7 @@ if head.get('g3_genesis_performed') is not False:raise RuntimeError('G3_ALREADY_
 # Fetch current public data. No external ML model is used.
 # ---------------------------------------------------------------------------
 sources={}
-for name,url in [('USGS_MONTH',USGS_MONTH),('WORLDBANK_GDP',WORLDBANK),('CISA_KEV',CISA),('OPENFDA_ENFORCEMENT',OPENFDA)]:
+for name,url in [('USGS_WEEK',USGS_WEEK),('WORLDBANK_GDP',WORLDBANK),('CISA_KEV',CISA),('OPENFDA_ENFORCEMENT',OPENFDA)]:
     body,resolved,status,ctype=fetch(url)
     sources[name]={'requested_url':url,'resolved_url':resolved,'http_status':status,'content_type':ctype,'bytes':len(body),'sha256':hbytes(body)}
     sources[name]['json']=json.loads(body.decode('utf-8','replace'))
@@ -97,12 +97,14 @@ old_logic=(cog_art.get('real_data_genes') or {}).get('LOGIC') or {}
 model_feature=str((old_logic.get('model') or {}).get('feature') or '')
 raw_feature_contract=old_logic.get('feature_transform') or old_logic.get('preprocessing') or old_logic.get('input_contract')
 training_usgs=(old_real.get('sources') or {}).get('USGS') or {}
+prior_week_usgs=((old_four.get('source_meta') or {}).get('GEOSCIENCE_USGS') or {})
 frozen_usgs_portability={
   'task':old_logic.get('task'),
   'model_feature':model_feature,
   'training_source_sha256':training_usgs.get('sha256'),
-  'current_source_sha256':sources['USGS_MONTH']['sha256'],
-  'source_changed':sources['USGS_MONTH']['sha256']!=training_usgs.get('sha256'),
+  'current_source_sha256':sources['USGS_WEEK']['sha256'],
+  'source_changed':sources['USGS_WEEK']['sha256']!=prior_week_usgs.get('sha256'),
+  'prior_week_source_sha256':prior_week_usgs.get('sha256'),
   'preprocessing_bound_in_canonical':bool(raw_feature_contract),
   'raw_portability_status':'PASS' if raw_feature_contract else 'WITHHOLD_RAW_PORTABILITY_MISSING_PREPROCESSING_PROVENANCE',
 }
@@ -114,7 +116,7 @@ if model_feature=='mag_ge_q75' and raw_feature_contract:
 # 2. Shadow portable USGS repair: fit on older events, test on newer events.
 # Explicit train-derived thresholds are part of the candidate.
 # ---------------------------------------------------------------------------
-usgs=sources['USGS_MONTH']['json'];events=[]
+usgs=sources['USGS_WEEK']['json'];events=[]
 for f in usgs.get('features') or []:
     p=f.get('properties') or {};g=f.get('geometry') or {};coords=g.get('coordinates') or []
     try:
@@ -159,8 +161,8 @@ portable_candidate={
   'status':'SHADOW_READY' if portable_blind>=.90 and portable_drop>=.25 else 'WITHHOLD',
   'task':'USGS_EARTHQUAKE_SIGNIFICANCE_PORTABLE_V1',
   'parent_task':old_logic.get('task'),
-  'source_url':USGS_MONTH,
-  'source_sha256':sources['USGS_MONTH']['sha256'],
+  'source_url':USGS_WEEK,
+  'source_sha256':sources['USGS_WEEK']['sha256'],
   'temporal_split':{'fit':len(fit),'validation':len(val),'blind_newer':len(blind)},
   'feature_transform':{
     'schema':'yado.real_data.feature_transform.usgs.v1',
@@ -288,7 +290,7 @@ def extract_usgs_rows(obj):
     return rows
 
 real_rows={
-  'GEOSCIENCE_USGS_NEW':extract_usgs_rows(sources['USGS_MONTH']['json']),
+  'GEOSCIENCE_USGS_NEW':extract_usgs_rows(sources['USGS_WEEK']['json']),
   'ECONOMICS_WORLDBANK_NEW_QUERY':extract_worldbank(sources['WORLDBANK_GDP']['json']),
   'CYBERSECURITY_CISA_HISTORICAL_SLICE':extract_cisa(sources['CISA_KEV']['json']),
   'MEDICINE_OPENFDA_ENFORCEMENT_NEW_ENDPOINT':extract_fda(sources['OPENFDA_ENFORCEMENT']['json']),
@@ -359,7 +361,7 @@ composition_pass=all(x['gate']=='SPECIALIST_PASS_THROUGH' and x['decision'] in {
 old_worldbank=((old_four.get('source_meta') or {}).get('ECONOMICS_WORLDBANK') or {}).get('requested_url')
 old_fda=((old_four.get('source_meta') or {}).get('MEDICINE_OPENFDA') or {}).get('requested_url')
 checks={
-  'current_usgs_source_changed_since_training':frozen_usgs_portability['source_changed'],
+  'current_usgs_week_source_changed_since_prior_stress':frozen_usgs_portability['source_changed'],
   'legacy_usgs_raw_portability_gap_detected':frozen_usgs_portability['raw_portability_status'].startswith('WITHHOLD_RAW_PORTABILITY'),
   'portable_usgs_candidate_shadow_ready':portable_candidate['status']=='SHADOW_READY',
   'portable_usgs_newer_blind_ge_0_90':portable_blind>=.90,
