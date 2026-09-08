@@ -239,8 +239,13 @@ def closure_truth(edges,start):
 rel_cases=[]
 for i in range(12):
     nodes=[f'N{i}_{j}_{fresh_seed[j:j+6]}' for j in range(8)]
+    distract=[f'D{i}_{j}_{fresh_seed[j+12:j+18]}' for j in range(4)]
     edges=[(nodes[j],nodes[j+1]) for j in range(7)]
     edges += [(nodes[1],nodes[4]),(nodes[2],nodes[6])]
+    # Disconnected distractor component is intentionally present so that
+    # RELATION_LEFT_DOMAIN is no longer observationally equivalent to START.
+    # The canonical START/FORWARD/UNION/UNTIL_STABLE program must exclude it.
+    edges += [(distract[0],distract[1]),(distract[1],distract[2]),(distract[2],distract[3])]
     rel_cases.append({'relation':edges,'start':nodes[0],'expected':closure_truth(edges,nodes[0])})
 tri_logic_results=[tri.logic(c['relation'],c['start'])['result']==c['expected'] for c in rel_cases]
 tri_logic_accuracy=score_bool(tri_logic_results)
