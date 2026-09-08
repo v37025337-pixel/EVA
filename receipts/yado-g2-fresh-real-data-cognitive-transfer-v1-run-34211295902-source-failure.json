@@ -1,0 +1,15 @@
+{
+  "schema": "yado.g2.fresh_real_data_cognitive_transfer.source_failure.v1",
+  "run_id": "34211295902",
+  "workflow_conclusion": "failure",
+  "failed_step": "Execute fresh real-data cognitive transfer",
+  "failure_class": "LIVE_SOURCE_READ_TIMEOUT",
+  "source": "USGS_ALL_MONTH",
+  "requested_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
+  "observed_error": "TimeoutError: The read operation timed out",
+  "before_any_transfer_metrics": true,
+  "canonical_mutation": false,
+  "promotion_applied": false,
+  "g3_genesis_performed": false,
+  "repair": "USE_OFFICIAL_USGS_ALL_WEEK_FEED_WITH_SAME_TEMPORAL_SPLIT_AND_UNCHANGED_COGNITIVE_THRESHOLDS"
+}
