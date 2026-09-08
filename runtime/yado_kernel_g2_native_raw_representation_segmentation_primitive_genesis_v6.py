@@ -337,21 +337,42 @@ try:
                 raise RuntimeError('CART_DEPTH_PREFIX_PARITY_DRIFT:'+str(depth))
     print(json.dumps({'phase':'cart_depth_prefix_parity_pass','depths':cart_depths,'rows':len(parity_rows),'ts':time.time()}),flush=True)
 
+    # Preserve the native selection semantics exactly while avoiding an exhaustive
+    # LINEAR_SCORE_SEARCH when it is provably unable to affect the winner.
+    # CART candidates are evaluated first. If any CART reaches validation 1.0,
+    # no other family can exceed it, and the existing native tie-break explicitly
+    # prefers CART on an equal validation score.
     candidates=[]
     fit_full=fit_tree_prefix_exact(fit,max_cart) if max_cart else None
-    linear_fit_model=None
+    cart_candidates=[]
+    linear_specs=[]
     for a in algs:
         fam=a['family']
         if fam=='CART_AXIS':
             model=materialize_depth(fit_full,int(a['max_depth']))
             score=tree_acc(model,val)
+            row={'algorithm':a,'model':model,'validation':score}
+            candidates.append(row);cart_candidates.append(row)
         elif fam=='LINEAR_SCORE_SEARCH':
-            if linear_fit_model is None:linear_fit_model=fit_linear(fit)
-            model=linear_fit_model
-            score=0.0 if model is None else linear_acc(model,val)
-        else:
-            continue
-        candidates.append({'algorithm':a,'model':model,'validation':score})
+            linear_specs.append(a)
+    best_cart=max(cart_candidates,key=lambda z:(z['validation'],-(z['algorithm'].get('max_depth') or 99))) if cart_candidates else None
+    cart_proves_linear_irrelevant=bool(best_cart and abs(float(best_cart['validation'])-1.0)<=1e-15)
+    print(json.dumps({'phase':'cart_candidate_validation_done',
+                      'best_cart_validation':None if best_cart is None else best_cart['validation'],
+                      'best_cart_depth':None if best_cart is None else best_cart['algorithm'].get('max_depth'),
+                      'linear_search_provably_irrelevant':cart_proves_linear_irrelevant,
+                      'ts':time.time()}),flush=True)
+
+    if not cart_proves_linear_irrelevant:
+        # Do not silently alter the learner. The original exact linear family remains
+        # semantically required when CART is below 1.0. Fail fast as a compute verdict
+        # rather than spending another hour without reaching semantic evaluation.
+        raise RuntimeError('EXACT_LINEAR_SCORE_SEARCH_STILL_SEMANTICALLY_REQUIRED')
+    else:
+        # Exact native argmax is now determined entirely by CART candidates.
+        # Adding a hypothetical linear candidate with validation <=1.0 cannot change it.
+        pass
+
     if not candidates:raise RuntimeError('no INTELLIGENCE meta algorithms')
     sel=max(candidates,key=lambda z:(z['validation'],z['algorithm']['family']=='CART_AXIS',-(z['algorithm'].get('max_depth') or 99)))
     selected_alg=sel['algorithm']
@@ -361,8 +382,7 @@ try:
         selected_model=materialize_depth(revealed_full,int(selected_alg['max_depth']))
         fresh_score=tree_acc(selected_model,blind)
     else:
-        selected_model=fit_linear(revealed)
-        fresh_score=0.0 if selected_model is None else linear_acc(selected_model,blind)
+        raise RuntimeError('UNREACHABLE_LINEAR_AFTER_CART_PROOF')
     meta={'organ':'INTELLIGENCE','selected_algorithm':selected_alg,'validation':sel['validation'],'model':selected_model,'fresh_blind':fresh_score}
 finally:
     try:k.close()
