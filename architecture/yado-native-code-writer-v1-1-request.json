@@ -2,8 +2,8 @@
   "schema": "yado.g2.native_code_writer_v1_1.request.v1",
   "objective": "YADO_WRITE_NEW_PYTHON_SOURCE_FROM_A_FRESH_EXTERNAL_GOAL_WITHOUT_A_SOURCE_SEED_AFTER_FRAGMENT_FIX",
   "goal": "Create a bounded public-link traversal capability for the current free-for-dev learning task: from a parent public HTTP(S) page and its HTML, extract and normalize relevant HTTP(S) links with provenance, reject non-HTTP schemes, remove fragments and duplicates, and keep the result bounded. Produce a fresh Python module rather than editing an existing source seed.",
-  "parent_run": 34534917403,
-  "repair": "Capture the complete href including #fragment, then strip the fragment after URL parsing so deduplication operates on normalized URLs.",
+  "parent_runs": [34534917403, 34535133202],
+  "repair": "Capture the complete href including #fragment, then strip the fragment after URL parsing so deduplication operates on normalized URLs. The repair must tolerate ast.unparse quote/escape serialization.",
   "constraints": {
     "source_seed": false,
     "external_coding_models": false,
@@ -26,5 +26,5 @@
   ],
   "host_role": "AUTHOR_OF_BOUNDED_WRITER_BRIDGE_REPAIR_AND_STRICT_VALIDATOR",
   "claim_boundary": "Success proves the repaired host-authored bounded seedless writer can let YADO materialize a new supported Python module from a high-level goal. It does not prove open-ended arbitrary programming or that YADO invented the writer itself.",
-  "trigger": 2
+  "trigger": 3
 }
