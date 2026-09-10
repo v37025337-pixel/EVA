@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-from pathlib import Path
 import json
 
 from yado_native_code_writer_v1 import (
     YADONativeCodeWriterV1,
     REPO,
-    CANDIDATE,
     REPORT,
     digest,
     load,
@@ -23,11 +21,12 @@ class YADONativeCodeWriterV11(YADONativeCodeWriterV1):
     @classmethod
     def materialize(cls, ir: dict) -> str:
         source = super().materialize(ir)
-        old = r'''href\s*=\s*[\"']([^\"'#]+)[\"']'''
-        new = r'''href\s*=\s*[\"']([^\"']+)[\"']'''
-        if old not in source:
-            raise RuntimeError("V1_1_EXPECTED_HREF_PATTERN_NOT_FOUND")
-        source = source.replace(old, new, 1)
+        # ast.unparse is free to choose quote/escape spelling. The semantic defect
+        # is only the '#' exclusion inside the generated href character class.
+        marker = "#]+"
+        if marker not in source:
+            raise RuntimeError("V1_1_FRAGMENT_EXCLUSION_MARKER_NOT_FOUND")
+        source = source.replace(marker, "]+", 1)
         compile(source, "<yado-native-code-writer-v1-1>", "exec")
         return source
 
@@ -35,7 +34,7 @@ class YADONativeCodeWriterV11(YADONativeCodeWriterV1):
         report = super().run(request)
         report["component_id"] = self.COMPONENT_ID
         report["writer_revision"] = "V1_1_FRAGMENT_CAPTURE_FIX"
-        report["repair_reason"] = "V1 incorrectly excluded # inside href capture, preventing the later FRAGMENT_STRIP operation from running. V1.1 captures the full href and strips fragments after URL parsing."
+        report["repair_reason"] = "V1 excluded # inside href capture, preventing the later FRAGMENT_STRIP operation from running. V1.1 removes only that exclusion after AST source materialization, so the complete href is parsed and its fragment is stripped at the URL-normalization stage."
         report["receipt_sha256"] = digest({k: v for k, v in report.items() if k != "receipt_sha256"})
         return report
 
