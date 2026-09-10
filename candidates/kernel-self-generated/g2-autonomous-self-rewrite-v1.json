@@ -1,0 +1,211 @@
+{
+  "architecture_mutation": false,
+  "candidate_executed": false,
+  "candidate_path": null,
+  "candidate_sha256": null,
+  "canonical_head_unchanged": true,
+  "canonical_mutation": false,
+  "external_model_proposed_candidate_source": false,
+  "external_resources_used": [
+    {
+      "model_id": "minimax-m2.7",
+      "provider_key": "llm7",
+      "url": "https://api.llm7.io/v1/chat/completions"
+    },
+    {
+      "model_id": "kilo-auto/free",
+      "provider_key": "kilo",
+      "url": "https://api.kilo.ai/api/gateway/chat/completions"
+    }
+  ],
+  "g3_genesis_performed": false,
+  "generation_transition": false,
+  "host_selected_target": false,
+  "host_wrote_candidate_source": false,
+  "kernel_selected_next_step": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+  "kernel_selected_priority": {
+    "area": "MEMORY_AND_EXPERIENCE",
+    "blocking": false,
+    "code": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+    "rank": 1,
+    "recommended_action": "Keep host-curated summaries separate from exact raw-evidence-derived observations; never silently promote lexical/structural observations into semantic validation.",
+    "severity": "MEDIUM"
+  },
+  "kernel_skill_selection": {
+    "candidate_count": 2,
+    "gate_digest": "a074a2dc0f93a1d90a01fd86417b377b17654eac62d6647d9481afb4e40c9114",
+    "rejected": [
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": false,
+          "structural": false
+        },
+        "evidence_digest": "91b1b659ac195d7fba494e541f0a0c812d8f6b43e8a2e8fda174e38e93de1fb9",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "regression",
+          "semantic",
+          "state_integrity",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SELF_REWRITE_KILO_1",
+        "verdict": "REJECT_PRECOMMIT"
+      },
+      {
+        "admitted": false,
+        "critics": {
+          "fit_marginal_gain": false,
+          "heldout_gain_floor": false,
+          "heldout_harmlessness": true,
+          "regression": false,
+          "rollback": true,
+          "semantic": false,
+          "state_integrity": false,
+          "structural": false
+        },
+        "evidence_digest": "e4e28a7c62942c055486e12cf547a939ec1696f2c2257cf190951f1d088f36cd",
+        "failed_critics": [
+          "fit_marginal_gain",
+          "heldout_gain_floor",
+          "regression",
+          "semantic",
+          "state_integrity",
+          "structural"
+        ],
+        "fit_gain": 0.0,
+        "heldout_gain": 0.0,
+        "skill_id": "SELF_REWRITE_LLM7_0",
+        "verdict": "REJECT_PRECOMMIT"
+      }
+    ],
+    "selected": [],
+    "selected_count": 0,
+    "selected_skill_ids": [],
+    "status": "NO_ADMISSIBLE_SKILLS"
+  },
+  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-34161207066.json",
+  "proposals": [
+    {
+      "candidate_source_sha256": null,
+      "evaluation": {
+        "checks": {},
+        "score": 0.0
+      },
+      "model_id": "minimax-m2.7",
+      "parse_error": null,
+      "parsed": false,
+      "patch_count": null,
+      "provider_key": "llm7",
+      "rationale": null,
+      "response": {
+        "error": "HTTPError",
+        "http_status": 429,
+        "ok": false,
+        "response_digest": "16450d5b00e2c382118ebee7d4fd054bfebab5383d6530b616d3fecfc7c9e14a"
+      },
+      "skill_id": "SELF_REWRITE_LLM7_0"
+    },
+    {
+      "candidate_source_sha256": null,
+      "evaluation": {
+        "checks": {},
+        "score": 0.0
+      },
+      "model_id": "kilo-auto/free",
+      "parse_error": null,
+      "parsed": false,
+      "patch_count": null,
+      "provider_key": "kilo",
+      "rationale": null,
+      "response": {
+        "error": "TimeoutError:The read operation timed out",
+        "http_status": null,
+        "ok": false
+      },
+      "skill_id": "SELF_REWRITE_KILO_1"
+    }
+  ],
+  "receipt_sha256": "c41eb00aa092960b17aba78337c3674635085fd329714c15447ab31cf282760b",
+  "schema": "yado.g2.autonomous_self_rewrite.v1",
+  "selected_skill_id": null,
+  "semantic_boundary": "KERNEL-PRIORITY-CONDITIONED SHADOW SELF-REWRITE. YADO DERIVES A TARGET FROM ITS OWN AUDIT PRIORITY, USES APPROVED NO-KEY CODING MODELS AS EXTERNAL TOOLS, AND USES ITS BOUNDED SKILL-ADMISSION GATE TO SELECT A STATICALLY SAFE CANDIDATE. THE CANDIDATE IS COMPILED BUT NOT EXECUTED OR CANONICALLY ADMITTED IN THIS STAGE.",
+  "status": "WITHHOLD_G2_AUTONOMOUS_SELF_REWRITE_V1",
+  "target_selection": {
+    "selected_parent_sha256": "256e1c7d9e4178ed83a8882558d057b2221fe4e29e74ef223ed3c3be930fdb14",
+    "selected_path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+    "selected_score": 23,
+    "selection_policy": "KERNEL_PRIORITY_TOKEN_RELEVANCE_OVER_FUNCTIONAL_RUNTIME_FILES",
+    "top_runtime_candidates": [
+      {
+        "bytes": 13576,
+        "path": "runtime/yado_conjunctive_rule_inducer_v1.py",
+        "score": 23,
+        "sha256": "256e1c7d9e4178ed83a8882558d057b2221fe4e29e74ef223ed3c3be930fdb14"
+      },
+      {
+        "bytes": 3227,
+        "path": "runtime/yado_semantic_expression_synthesizer_v1.py",
+        "score": 18,
+        "sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7"
+      },
+      {
+        "bytes": 4759,
+        "path": "runtime/yado_raw_task_representation_candidate_v3.py",
+        "score": 9,
+        "sha256": "58ea02e73c9eb0e502eb3c16d39d73ca08b9cbe32485cf70e72dd89682aacfd7"
+      },
+      {
+        "bytes": 11542,
+        "path": "runtime/yado_ambiguity_aware_program_repair_v11.py",
+        "score": 8,
+        "sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32"
+      },
+      {
+        "bytes": 4747,
+        "path": "runtime/yado_bounded_capability_router_v1.py",
+        "score": 7,
+        "sha256": "442d53602f7a35aecc0ab7cfd9c7c5036cf7c5d00b4946d37f6fb08c93125206"
+      },
+      {
+        "bytes": 8467,
+        "path": "runtime/yado_core_audit_invariant_self_evolution_v1.py",
+        "score": 6,
+        "sha256": "3c8ad6fbdbe40645666f956e0bcc8447d5aa443a9a104243ce57fa418d3da809"
+      },
+      {
+        "bytes": 4540,
+        "path": "runtime/yado_g2_unified_execution_fabric_v2.py",
+        "score": 6,
+        "sha256": "828fd9ee89bfd21eac35da6d0986b8469117e004ab33c6091c74ec567ad6b7d3"
+      },
+      {
+        "bytes": 14061,
+        "path": "runtime/yado_g2_unified_execution_fabric_v5.py",
+        "score": 6,
+        "sha256": "a317c21e9ca569fc2ab0fda601e474044abc4ad013db6c04b054fd0ecd34cb07"
+      },
+      {
+        "bytes": 23440,
+        "path": "runtime/yado_evolutionary_genome_v1.py",
+        "score": 5,
+        "sha256": "186479a62f08662a767c47dffcf499f3294eaaecefd21327dbdccc012ed08531"
+      },
+      {
+        "bytes": 9446,
+        "path": "runtime/yado_bounded_dnf_relation_policy_inducer_v1.py",
+        "score": 4,
+        "sha256": "f18cf9a320623ff5bc70d1c70b47e263d70956b141a94b2758f5a24c1abcddea"
+      }
+    ]
+  }
+}
