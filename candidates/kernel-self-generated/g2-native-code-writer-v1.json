@@ -1,0 +1,107 @@
+{
+  "candidate_path": "candidates/kernel-self-generated/yado_native_public_link_traversal_v1.py",
+  "candidate_source_bytes": 939,
+  "candidate_source_produced_by_yado": true,
+  "candidate_source_sha256": "b304aecb6901231b9d5def10029347205163f1184d0ff7036e7cce066f31e5ac",
+  "canonical_mutation": false,
+  "checks": {
+    "candidate_source_compiles": true,
+    "candidate_source_nonempty_sha": true,
+    "candidate_source_produced_by_yado": true,
+    "canonical_unchanged": true,
+    "external_coding_models_used": false,
+    "fresh_tests_pass": false,
+    "goal_classified_by_writer": true,
+    "host_source_seed_used": false,
+    "semantic_ir_created": true,
+    "static_safety_gate_pass": true
+  },
+  "claim_boundary": "HOST-AUTHORED BOUNDED SEEDLESS WRITER; YADO MATERIALIZES FRESH PYTHON SOURCE FROM A HIGH-LEVEL GOAL THROUGH ITS INTERNAL CLASSIFICATION, IR, AND AST EMITTER. THIS DOES NOT YET PROVE OPEN-ENDED GENERAL PROGRAMMING OR SELF-INVENTION OF THE WRITER ITSELF.",
+  "classification": {
+    "family": "PUBLIC_LINK_TRAVERSAL",
+    "score": 5,
+    "scores": {
+      "PUBLIC_LINK_TRAVERSAL": 5
+    },
+    "status": "SELECTED"
+  },
+  "component_id": "CTRL-G2-NATIVE-CODE-WRITER-V1",
+  "fresh_tests": {
+    "case_count": 5,
+    "cases": [
+      {
+        "name": "relative_absolute_filter_dedup_fragment",
+        "pass": false
+      },
+      {
+        "name": "protocol_relative_and_non_http_rejection",
+        "pass": true
+      },
+      {
+        "name": "bounded_output",
+        "pass": true
+      },
+      {
+        "name": "type_guard",
+        "pass": true
+      },
+      {
+        "name": "provenance_shape",
+        "pass": true
+      }
+    ],
+    "pass": false
+  },
+  "goal": "Create a bounded public-link traversal capability for the current free-for-dev learning task: from a parent public HTTP(S) page and its HTML, extract and normalize relevant HTTP(S) links with provenance, reject non-HTTP schemes, remove fragments and duplicates, and keep the result bounded. Produce a fresh Python module rather than editing an existing source seed.",
+  "receipt_sha256": "8b25bb3d045e3e9bb1c5a8402f85ba09dc942355101b786d3d933eb61de78d98",
+  "safety": {
+    "imports": [
+      "re",
+      "urllib.parse"
+    ],
+    "pass": true
+  },
+  "schema": "yado.g2.native_code_writer.v1",
+  "semantic_ir": {
+    "family": "PUBLIC_LINK_TRAVERSAL",
+    "function": {
+      "args": [
+        "parent_url",
+        "html",
+        "max_links"
+      ],
+      "defaults": {
+        "max_links": 64
+      },
+      "name": "extract_public_links",
+      "operations": [
+        "TYPE_GUARD",
+        "HREF_EXTRACTION",
+        "URL_JOIN",
+        "PUBLIC_SCHEME_FILTER",
+        "FRAGMENT_STRIP",
+        "DEDUP",
+        "PROVENANCE_RECORD",
+        "BOUNDED_OUTPUT"
+      ]
+    },
+    "goal_digest": "35e58fd501d507df79c6fee97c440d1ae64cd025e1b64f0d40e4482785fe06f5",
+    "imports": [
+      {
+        "kind": "import",
+        "module": "re"
+      },
+      {
+        "kind": "from",
+        "module": "urllib.parse",
+        "names": [
+          "urljoin",
+          "urlparse"
+        ]
+      }
+    ],
+    "module": "yado_native_public_link_traversal_v1",
+    "status": "READY"
+  },
+  "status": "WITHHOLD_G2_NATIVE_CODE_WRITER_V1"
+}
