@@ -1,26 +1,29 @@
 {
   "schema": "yado.g2.native_action_evidence_binder_invention.request.v1",
-  "objective": "KERNEL_CREATE_ITS_OWN_ACTION_EVIDENCE_TO_SELF_AUDIT_BINDING_MECHANISM",
-  "problem": "The kernel can produce valid fresh direct evidence, but the deep self-audit does not yet consume that evidence and repeats LIVE_RESOURCE_EVIDENCE_SCOPE.",
-  "goal": "Using only YADO native mechanism synthesis, create a new shadow evidence-binding mechanism that decides when fresh self-generated evidence is admissible to self-audit.",
+  "objective": "KERNEL_NATIVE_NEW_GOAL_TO_NEW_ACTION_CAPABILITY_INVENTION",
+  "problem": "A fresh external user goal to independently discover compute, connect, deploy YADO, start runtime, and health-check has no adequate known action. The current generic goal-to-action binder incorrectly falls back to EXPERIENCE_EVIDENCE_REVIEW instead of recognizing missing action coverage and creating a new capability.",
+  "goal": "Using only YADO native mechanism synthesis, create a shadow mechanism that detects when a current external goal has no causally adequate existing action, represents that as an action-capability deficit, and self-synthesizes or selects a new candidate action/capability bound directly to the goal evidence. Validate that unrelated legacy actions are rejected. After PASS, the resulting capability must be suitable for a subsequent resource-discovery/deployment execution cycle without a host-selected provider or implementation.",
   "source_evidence": {
-    "action_receipt": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
-    "prior_self_study_runs": [
-      33833488285,
-      33833780135
-    ]
+    "failed_goal_binding_receipt": "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+    "failed_goal_binding_result_commit": "bbc4f565469de06c918ab2bcf4a56cfec47778bc",
+    "external_goal": "SELF_DISCOVER_CONNECT_DEPLOY_RUN_RUNTIME_AND_HEALTH_CHECK",
+    "observed_wrong_fallback": "EXPERIENCE_EVIDENCE_REVIEW"
   },
   "native_only": true,
   "external_models_allowed": false,
   "success_conditions": [
     "YADO_native_meta_grammar_creates_a_new_executable_mechanism",
+    "novel_external_goal_without_matching_action_is_detected_as_capability_deficit",
+    "unrelated_legacy_action_fallback_is_rejected",
+    "new_candidate_action_or_capability_is_self_synthesized_or_explicitly_withheld_with_direct_evidence",
+    "goal_to_action_provenance_is_direct_and_machine_verifiable",
     "validation_exact",
-    "fresh_blind_exact",
+    "fresh_blind_exact_on_unseen_external_goal_cases",
     "causal_ablation_drop",
-    "current_valid_direct_evidence_is_accepted",
-    "invalid_counterfactual_evidence_is_withheld",
+    "invalid_counterfactual_goal_action_binding_is_withheld",
     "no_external_model_used",
     "no_host_patch_or_target_file_supplied",
+    "no_host_selected_provider_gene_operator_or_action_implementation",
     "mechanism_remains_shadow"
   ],
   "constraints": {
@@ -28,11 +31,16 @@
     "no_host_solution_hint": true,
     "no_host_selected_target_file": true,
     "no_host_written_patch": true,
+    "no_host_selected_provider": true,
+    "no_host_selected_gene": true,
+    "no_host_selected_operator": true,
+    "no_host_selected_action_implementation": true,
     "no_canonical_mutation": true,
+    "require_rollback_path": true,
     "fail_closed": true
   },
   "host_role": "TASK_CONTRACT_COUNTERFACTUAL_EVALUATION_TRANSPORT_ONLY",
-  "stop_condition": "NATIVE_SELF_SYNTHESIZED_SHADOW_GENE_PASS_OR_WITHHOLD",
-  "trigger": 2,
-  "trigger_reason": "START_NATIVE_ONLY_SELF_SYNTHESIS"
+  "stop_condition": "NATIVE_SELF_SYNTHESIZED_NEW_GOAL_ACTION_CAPABILITY_PASS_OR_WITHHOLD",
+  "trigger": 3,
+  "trigger_reason": "REPAIR_OBSERVED_EXTERNAL_GOAL_TO_ACTION_COVERAGE_DEFICIT"
 }
