@@ -1,15 +1,37 @@
 {
   "schema": "yado.g2.autonomous_self_rewrite.request.v1",
-  "objective": "KERNEL_USE_ITS_SELF_SELECTED_PRIORITY_TO_PROPOSE_ITS_OWN_CODE_REWRITE",
-  "target_selection": "DERIVE_FROM_KERNEL_SELF_AUDIT_PRIORITY",
+  "objective": "KERNEL_SELF_REPAIR_FRESH_EXTERNAL_GOAL_TO_ACTION_CAPABILITY_DEFICIT",
+  "target_selection": "DERIVE_FROM_KERNEL_SELF_AUDIT_PRIORITY_AND_OBSERVED_FRESH_GOAL_ACTION_MISMATCH",
   "source_generation": "APPROVED_EXTERNAL_NO_KEY_CODING_MODELS_AS_TOOLS",
   "selection": "KERNEL_BOUNDED_SKILL_ADMISSION_GATE",
   "execute_untrusted_candidate": false,
   "canonical_mutation": false,
   "host_role": "TRIGGER_TRANSPORT_PERSISTENCE_ONLY",
-  "retry": 3,
-  "previous_run_id": 33790040609,
-  "retry_reason": "TRANSPORT_COMPILE_FIX_ONLY; no kernel target or mechanism hint",
+  "observed_failure": {
+    "workflow_run": 34512884500,
+    "wrong_selected_action": "EXPERIENCE_EVIDENCE_REVIEW",
+    "wrong_next_step": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+    "shadow_change_produced": false,
+    "fresh_external_goal": "SELF_DISCOVER_CONNECT_DEPLOY_RUN_RUNTIME_AND_HEALTH_CHECK"
+  },
+  "required_behavior": "WHEN_A_FRESH_EXTERNAL_GOAL_HAS_NO_CAUSALLY_ADEQUATE_KNOWN_ACTION_DETECT_CAPABILITY_DEFICIT_AND_PROPOSE_A_NEW_KERNEL_SELECTED_ACTION_OR_CAPABILITY_IN_SHADOW_INSTEAD_OF_STALE_LEGACY_FALLBACK",
+  "success_conditions": [
+    "kernel_selects_rewrite_target_without_host_target_path",
+    "kernel_proposes_own_candidate_source",
+    "fresh_external_goal_is_not_replaced_by_unrelated_legacy_priority",
+    "candidate_remains_unexecuted_until_admission",
+    "canonical_head_unchanged"
+  ],
+  "forbidden": [
+    "host_selected_target",
+    "host_written_candidate_source",
+    "host_selected_provider",
+    "lowering_validation_gates",
+    "canonical_mutation"
+  ],
+  "retry": 4,
+  "previous_run_id": 34512884500,
+  "retry_reason": "SEMANTIC_GOAL_ACTION_MISMATCH; route to kernel autonomous self-rewrite rather than repeat stale action selector",
   "host_solution_hint": null,
   "target_path": null
 }
