@@ -300,3 +300,4 @@ for b in branches:
     lines.append(f"- `{b['branch']}`: active-only {b['active_only_commits']}, branch-only {b['branch_only_commits']}, drift paths {len(b['drift_paths'])}, branch-only paths {len(b['branch_only_paths'])}.")
 SUMMARY.write_text('\n'.join(lines)+'\n',encoding='utf-8')
 print(json.dumps({'status':status,'findings':report['findings'],'counts':report['counts'],'canonical':report['canonical']},indent=2,default=str))
+raise SystemExit(0 if status == 'PASS' else 1)
