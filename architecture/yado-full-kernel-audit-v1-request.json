@@ -16,21 +16,25 @@
   "active_branch": "main",
   "mutate_canonical_state": false,
   "persist_report_only": true,
-  "repair_rerun_revision": "2026-09-10-successor-v2-main-code-layer",
+  "repair_rerun_revision": "2026-09-10-successor-v2-history-closure",
   "repair_focus": [
     "POST_SUCCESSOR_V2_MAIN_UPDATE",
     "SUCCESSOR_V2_CODE_LAYER_PRESENT",
+    "PHYSICAL_BRANCH_ANCESTRY_CLOSURE",
+    "UNCHANGED_MAIN_TREE_HISTORY_ONLY_MERGE",
     "TOP_LEVEL_REGRESSION_TESTS",
     "CANONICAL_GUARD",
     "EVOLUTION_LEDGER",
     "RUNTIME_IMPORT_GRAPH",
     "NO_G3_TRANSITION"
   ],
-  "audit_trigger": 27,
+  "audit_trigger": 28,
   "prerequisite_evidence": {
-    "previous_main_head": "94e70bd40d1ddc65e44b3434cfc0c59c9f252747",
+    "history_closure_commit": "69756de6e24d37e8532f4705f5675f6d2cc5417a",
+    "history_closure_tree": "bd82163962cb861a103d8536f3613c35102f957d",
+    "previous_failed_audit_commit": "5452d9bb0f52f1d0e08159e52d77359f72ba5b17",
+    "previous_failure_code": "PHYSICAL_BRANCH_DIVERGENCE",
     "successor_v2_main_head_before_audit": "ff2324df110869a33e3d30086a7831a719645268",
-    "previous_main_full_audit_run_id": 34085860395,
     "g3_genesis": false
   }
 }
