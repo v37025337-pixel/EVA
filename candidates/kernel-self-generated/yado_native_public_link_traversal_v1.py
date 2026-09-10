@@ -7,7 +7,7 @@ def extract_public_links(parent_url, html, max_links=64):
     seen = set()
     out = []
     limit = max(1, int(max_links))
-    for raw in re.findall('href\\s*=\\s*[\\"\']([^\\"\'#]+)[\\"\']', html, flags=re.I):
+    for raw in re.findall('href\\s*=\\s*[\\"\']([^\\"\']+)[\\"\']', html, flags=re.I):
         raw = raw.strip()
         if not raw:
             continue

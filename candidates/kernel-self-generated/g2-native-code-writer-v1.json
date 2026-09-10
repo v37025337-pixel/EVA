@@ -1,8 +1,8 @@
 {
   "candidate_path": "candidates/kernel-self-generated/yado_native_public_link_traversal_v1.py",
-  "candidate_source_bytes": 939,
+  "candidate_source_bytes": 938,
   "candidate_source_produced_by_yado": true,
-  "candidate_source_sha256": "b304aecb6901231b9d5def10029347205163f1184d0ff7036e7cce066f31e5ac",
+  "candidate_source_sha256": "6faedc49adee12547d642ad829221f02b00b403248fe8031edc430972340e4ef",
   "canonical_mutation": false,
   "checks": {
     "candidate_source_compiles": true,
@@ -10,7 +10,7 @@
     "candidate_source_produced_by_yado": true,
     "canonical_unchanged": true,
     "external_coding_models_used": false,
-    "fresh_tests_pass": false,
+    "fresh_tests_pass": true,
     "goal_classified_by_writer": true,
     "host_source_seed_used": false,
     "semantic_ir_created": true,
@@ -25,13 +25,13 @@
     },
     "status": "SELECTED"
   },
-  "component_id": "CTRL-G2-NATIVE-CODE-WRITER-V1",
+  "component_id": "CTRL-G2-NATIVE-CODE-WRITER-V1_1",
   "fresh_tests": {
     "case_count": 5,
     "cases": [
       {
         "name": "relative_absolute_filter_dedup_fragment",
-        "pass": false
+        "pass": true
       },
       {
         "name": "protocol_relative_and_non_http_rejection",
@@ -50,10 +50,11 @@
         "pass": true
       }
     ],
-    "pass": false
+    "pass": true
   },
   "goal": "Create a bounded public-link traversal capability for the current free-for-dev learning task: from a parent public HTTP(S) page and its HTML, extract and normalize relevant HTTP(S) links with provenance, reject non-HTTP schemes, remove fragments and duplicates, and keep the result bounded. Produce a fresh Python module rather than editing an existing source seed.",
-  "receipt_sha256": "8b25bb3d045e3e9bb1c5a8402f85ba09dc942355101b786d3d933eb61de78d98",
+  "receipt_sha256": "4f29ae12bb82f3fadd0c8f7223766b2166a2049e840cdc022fc6eb8f1deaa2bb",
+  "repair_reason": "V1 excluded # inside href capture, preventing the later FRAGMENT_STRIP operation from running. V1.1 removes only that exclusion after AST source materialization, so the complete href is parsed and its fragment is stripped at the URL-normalization stage.",
   "safety": {
     "imports": [
       "re",
@@ -103,5 +104,6 @@
     "module": "yado_native_public_link_traversal_v1",
     "status": "READY"
   },
-  "status": "WITHHOLD_G2_NATIVE_CODE_WRITER_V1"
+  "status": "PASS_SHADOW_G2_NATIVE_CODE_WRITER_V1",
+  "writer_revision": "V1_1_FRAGMENT_CAPTURE_FIX"
 }
