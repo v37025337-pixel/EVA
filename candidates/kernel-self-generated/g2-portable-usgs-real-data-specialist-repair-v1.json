@@ -1,9 +1,9 @@
 {
   "automatic_canonical_promotion": false,
-  "blind_newer_balanced": 1.0,
-  "candidate_digest": "9b1eb32b600328a3130fdc8600457e5525b1d02aca02726fca46a88cf2481639",
+  "blind_newer_balanced": 0.9925373134328358,
+  "candidate_digest": "6d59aa4415bc7fd4af2be153a084748280a1627f80c161e5d444809c2aa74aff",
   "canonical_mutation": false,
-  "causal_gain": 0.5,
+  "causal_gain": 0.4925373134328358,
   "feature_transform": {
     "boolean_fields": [
       "tsunami",
@@ -12,7 +12,7 @@
     ],
     "depth_shallow_lt": 70.0,
     "depth_very_shallow_lt": 20.0,
-    "mag_q75": 2.57,
+    "mag_q75": 2.37,
     "output_features": [
       "mag_ge_q75",
       "shallow",
@@ -38,20 +38,20 @@
   "parent_task": "USGS_EARTHQUAKE_SIGNIFICANCE",
   "schema": "yado.g2.portable_usgs_real_data_specialist_repair.v1",
   "selected_depth": 1,
-  "source_sha256": "2264d300fcb5c366b1e708618dcaed2ae19065647bf289006bbe87a9ca87505e",
+  "source_sha256": "8980965396e6147f2b75a97ac3aacf233802a8746831828b903fd17ddf7cb1db",
   "source_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
   "status": "SHADOW_READY",
   "target_contract": {
     "field": "sig",
     "operator": ">=",
-    "sig_q75": 102.0,
+    "sig_q75": 86.0,
     "threshold_source": "FIT_PARTITION_ONLY"
   },
   "task": "USGS_EARTHQUAKE_SIGNIFICANCE_PORTABLE_V1",
   "temporal_split": {
-    "blind_newer": 385,
-    "fit": 1152,
-    "validation": 384
+    "blind_newer": 433,
+    "fit": 1298,
+    "validation": 433
   },
-  "validation_balanced": 1.0
+  "validation_balanced": 0.9913793103448276
 }
