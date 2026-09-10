@@ -5,7 +5,7 @@ on:
     branches:
       - yado-architecture-shadow-search
     paths:
-      - architecture/yado-native-code-writer-v1-request.json
+      - architecture/yado-native-code-writer-v1-1-request.json
 
 permissions:
   contents: write
@@ -31,11 +31,13 @@ jobs:
       - name: Canonical guard before code writer
         run: python runtime/yado_canonical_invariant_guard_v1.py
 
-      - name: Compile code writer
-        run: python -m py_compile runtime/yado_native_code_writer_v1.py
+      - name: Compile repaired code writer
+        run: |
+          python -m py_compile runtime/yado_native_code_writer_v1.py
+          python -m py_compile runtime/yado_native_code_writer_v1_1.py
 
       - name: Let YADO materialize fresh candidate source
-        run: python runtime/yado_native_code_writer_v1.py
+        run: python runtime/yado_native_code_writer_v1_1.py
 
       - name: Compile generated candidate
         run: python -m py_compile candidates/kernel-self-generated/yado_native_public_link_traversal_v1.py
@@ -50,6 +52,7 @@ jobs:
           r=json.loads(p.read_text())
           c=r['checks']
           assert r['status']=='PASS_SHADOW_G2_NATIVE_CODE_WRITER_V1', r
+          assert r.get('writer_revision')=='V1_1_FRAGMENT_CAPTURE_FIX', r
           assert r['candidate_source_produced_by_yado'] is True, r
           assert r['candidate_source_sha256'], r
           assert c['candidate_source_compiles'] is True, r
@@ -58,7 +61,7 @@ jobs:
           assert c['host_source_seed_used'] is False, r
           assert c['external_coding_models_used'] is False, r
           assert c['canonical_unchanged'] is True, r
-          print(r['status'], r['candidate_source_sha256'])
+          print(r['status'], r['writer_revision'], r['candidate_source_sha256'])
           PY
 
       - name: Canonical guard after code writer
@@ -75,7 +78,7 @@ jobs:
           if [ -f candidates/kernel-self-generated/yado_native_public_link_traversal_v1.py ]; then
             git add candidates/kernel-self-generated/yado_native_public_link_traversal_v1.py
           fi
-          git diff --cached --quiet || git commit -m "Persist native code writer evidence [skip ci]"
+          git diff --cached --quiet || git commit -m "Persist repaired native code writer evidence [skip ci]"
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
 
