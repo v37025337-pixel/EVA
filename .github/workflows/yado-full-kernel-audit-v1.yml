@@ -1,5 +1,17 @@
 name: YADO Full Kernel Audit V1
 on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "runtime/**"
+      - "successor/**"
+      - "tests/**"
+      - "canonical/**"
+      - "architecture/**"
+      - ".github/workflows/yado-full-kernel-audit-v1.yml"
+      - "api/**"
+      - "vercel.json"
   push:
     branches: [main, yado-architecture-shadow-search, yado-main-selective-admission-v1, yado-main-experience-refresh-v1]
     paths:
@@ -21,29 +33,39 @@ jobs:
         run: python runtime/reconstruct_rc8v36.py
       - name: Install runtime and audit dependencies
         run: |
-          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
           python -m pip install --disable-pip-version-check pyyaml
+      - name: Clear reports from earlier revisions
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for name in ('yado-full-kernel-audit-v1-report.json', 'yado-full-kernel-audit-v1-summary.md',
+                       'yado-full-regression-v1-report.json', 'yado-full-regression-v1-report.log'):
+              (Path('audits') / name).unlink(missing_ok=True)
+          PY
       - name: Compile audit
         run: python -m py_compile runtime/yado_full_kernel_audit_v1.py
-      - name: Run top-level regression tests
-        run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Run full kernel audit
         run: python runtime/yado_full_kernel_audit_v1.py
-      - name: Persist audit report only
+      - name: Build a fresh Successor identity from complete Git history
+        run: python -m successor build --output "$RUNNER_TEMP/yado-successor-birth"
+      - name: Run complete inherited and Successor regression
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json"
+      - name: Persist verified reports on push only
+        if: github.event_name == 'push'
         run: |
           git config user.name "YADO Full Kernel Audit"
           git config user.email "actions@users.noreply.github.com"
-          git add audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md
-          git commit -m "Persist YADO full kernel audit V1 [skip ci]"
-          for attempt in 1 2 3; do
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            if git push origin HEAD:"${GITHUB_REF_NAME}"; then exit 0; fi
-            sleep 2
-          done
-          exit 1
+          git add audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json
+          git commit -m "Persist verified YADO audit and full regression [skip ci]"
+          # A concurrent source change requires a new audit, never a report-only rebase.
+          git push origin HEAD:"${GITHUB_REF_NAME}"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
           name: yado-full-kernel-audit-v1-${{ github.run_id }}
           path: |
             audits/yado-full-kernel-audit-v1-report.json
             audits/yado-full-kernel-audit-v1-summary.md
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
