@@ -550,7 +550,7 @@
   "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-34161207066.json",
   "native_evolution_result": null,
   "next_action": "RE_AUDIT_AFTER_DIRECT_PRIORITY_ACTION",
-  "receipt_sha256": "76bb992c94cd03a9fde7f98c57cc9b650c69fc7d86e7eee6cc67b11d9a265fd9",
+  "receipt_sha256": "e82979fdd78d0e1adfbc92c6f6e29984c33eba3d9d8c7c1641ba455d6f8c1f0b",
   "schema": "yado.g2.autonomous_self_improvement_task.v1",
   "selected_action": "EXPERIENCE_EVIDENCE_REVIEW",
   "selected_child_genome_digest": null,
@@ -576,8 +576,8 @@
       "self_selected_code_rewrite": true,
       "shadow_evolution_allowed": true
     },
-    "authorization_granted_at": "2026-09-10T13:36:38Z",
-    "authorization_note": "USER_EXPLICITLY_REQUESTED_EXECUTION_OF_GOAL: KERNEL SHOULD ACCEPT THE EXTERNAL GOAL, SELF_SELECT A RESOURCE, CONNECT, DEPLOY, START, AND VERIFY RUNTIME WHERE CURRENT PERMISSIONS ALLOW.",
+    "authorization_granted_at": "2026-09-10T18:11:41Z",
+    "authorization_note": "USER CONFIRMED CONTINUATION AFTER VERIFIED LIVE REAL-DATA TRANSFER PASS. KERNEL MAY SELF-SELECT A CURRENTLY REACHABLE AUTHORIZED RESOURCE, ATTEMPT CONNECTION, DEPLOY VERIFIED YADO RUNTIME, START IT, AND PERFORM A HEALTH CHECK. STOP ON AUTH, CAPTCHA, ACCOUNT CREATION, TERMS, BILLING, OR MISSING CREDENTIAL BARRIER.",
     "constraints": {
       "no_account_creation_without_user_authorization": true,
       "no_payment_or_billing_action": true,
@@ -592,61 +592,66 @@
       "stop_at_captcha_or_missing_credentials": true
     },
     "experiment_series": {
-      "max_runs": 2,
-      "phase": "KERNEL_NATIVE_GOAL_BINDING_AND_EXECUTION",
-      "run_index": 2,
-      "series_id": "G2-EXTERNAL-GOAL-INTAKE-TO-DEPLOYMENT-EXECUTION-V1"
+      "max_runs": 1,
+      "phase": "KERNEL_NATIVE_EXTERNAL_EXECUTION",
+      "run_index": 1,
+      "series_id": "G2-REAL-RESOURCE-CONNECTION-DEPLOYMENT-HEALTHCHECK-V1"
     },
     "host_role": "TRIGGER_TRANSPORT_OBSERVATION_ONLY",
     "host_selected_mechanism": null,
     "host_selected_target": null,
     "host_solution_hint": null,
-    "latest_self_selected_next_step": "REPAIR_EXTERNAL_GOAL_INTAKE_BINDING_THEN_EXECUTE_CURRENT_DEPLOYMENT_GOAL",
+    "latest_self_selected_next_step": "SELF_SELECT_REACHABLE_RESOURCE_AND_EXECUTE_CONNECTION_DEPLOYMENT_START_HEALTHCHECK_OR_WITHHOLD",
     "mechanism_selection": "KERNEL_SELF_SELECTED_NATIVE_OR_SELF_CREATED",
-    "objective": "KERNEL_SELF_REPAIR_EXTERNAL_GOAL_TO_ACTION_BINDING_AND_EXECUTE_DEPLOYMENT_GOAL",
+    "objective": "KERNEL_EXECUTE_EXTERNAL_RESOURCE_CONNECTION_DEPLOYMENT_AND_RUNTIME_HEALTHCHECK_AFTER_REAL_DATA_PASS",
     "previous_evidence": [
-      "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
-      "commit:a68bd7d018011dfa1e66ab9ef4688b3201fc9bed",
+      "run:34500977655",
+      "receipt:59b878df0e8e194be8f9b03aa386380ba2eba1119f0b99ad6cbe5d16ddbf0dba",
+      "shadow_commit:ffedbba",
       "main:68a8b284be97e588e7534064be371d41088733f0"
     ],
     "schema": "yado.g2.autonomous_self_improvement_request.v1",
-    "stop_condition": "EXTERNAL_USER_GOAL_IS_ACCEPTED_AS_CURRENT_GOAL_AND_BOUND_TO_A_VERIFIABLE_ACTION_SEQUENCE_OR_EXPLICIT_WITHHOLD",
-    "target_selection": "KERNEL_SELF_SELECTED_FROM_OBSERVED_EXTERNAL_GOAL_INTAKE_FAILURE",
+    "stop_condition": "DEPLOYMENT_RUNTIME_HEALTHCHECK_PASS_OR_EXPLICIT_EXTERNAL_WITHHOLD_WITH_MACHINE_VERIFIABLE_BARRIER",
+    "target_selection": "KERNEL_SELF_SELECTED_FROM_CURRENT_DEPLOYMENT_GOAL_AND_ACCUMULATED_REAL_DATA_EXPERIENCE",
     "task": {
       "evidence_to_consider": [
-        "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
-        "architecture/yado-kernel-autonomous-self-improvement-v1-request.json prior trigger 10",
+        "receipts/yado-g2-fresh-real-data-cognitive-transfer-v1-run-34500977655.json",
+        "candidates/kernel-self-generated/g2-portable-usgs-real-data-specialist-repair-v1.json",
         "deployment-vercel-runtime-v1 history",
         "canonical main integration/audit evidence",
-        "all accumulated deployment and external-resource experience reachable in git history"
+        "all accumulated resource and deployment experience reachable in git history"
       ],
       "forbidden": [
         "host_selected_provider",
         "host_selected_patch",
         "host_selected_gene",
         "host_selected_operator",
+        "host_selected_action_implementation",
         "forcing_pass",
         "lowering_integrity_gates",
         "inventing_external_access",
         "using_or_exposing_secrets",
-        "bypassing_authentication_or_access_controls"
+        "bypassing_authentication_or_access_controls",
+        "claiming_deployment_without_external_receipt_or_healthcheck_evidence"
       ],
-      "goal": "Accept the current external user goal as the active goal: independently discover a suitable currently reachable compute/runtime resource, select it without a host-selected provider, attempt connection using only already-authorized access, deploy the verified YADO runtime, start it, perform a health check, and record the result. If an external hard barrier such as missing credentials, account creation, terms acceptance, CAPTCHA, or billing is encountered, stop exactly there and record WITHHOLD plus the blocking evidence.",
-      "problem": "The previous autonomous cycle ignored the new user deployment goal and selected a stale EXPERIENCE_EVIDENCE_REVIEW action. Diagnose and repair this goal-intake/action-binding discontinuity using kernel-native selection and accumulated evidence.",
+      "goal": "Using accumulated YADO experience and the verified live real-data transfer evidence, independently identify a currently reachable authorized compute/runtime target; verify the connection method; attempt connection; transfer or bind the verified runtime by an allowed mechanism; start the runtime; perform a health check; record exact provider/target, request/response evidence, deployment identifier or URL if created, runtime-start evidence, health-check result, and any hard external barrier. Do not claim deployment if no external deployment receipt exists.",
+      "problem": "Live public-data transfer has now passed on current canonical state, including real HTTP/API acquisition and fresh transfer. The remaining user goal is to move from read-only external data interaction to an actual authorized runtime deployment lifecycle without host-selected provider or implementation.",
       "success_conditions": [
-        "kernel_recognizes_current_external_user_goal_as_active",
-        "kernel_does_not_fall_back_to_unrelated_stale_priority",
-        "kernel_self_selects_goal_binding_mechanism",
-        "kernel_self_selects_resource_or_explicitly_withholds",
-        "kernel_produces_verifiable_action_sequence",
-        "kernel_attempts_connection_deployment_start_and_health_check_when_current_permissions_allow",
-        "kernel_records_exact_external_barrier_if_execution_stops",
-        "host_does_not_select_provider_gene_operator_or_patch",
+        "kernel_recognizes_deployment_goal_as_active",
+        "kernel_does_not_fall_back_to_unrelated_legacy_experience_review",
+        "kernel_self_selects_provider_or_explicitly_withholds",
+        "kernel_verifies_connection_method",
+        "kernel_attempts_real_authorized_connection",
+        "kernel_attempts_runtime_transfer_or_binding",
+        "kernel_attempts_runtime_start",
+        "kernel_performs_health_check_if_start_succeeds",
+        "kernel_records_external_deployment_receipt_or_exact_hard_barrier",
+        "host_does_not_select_provider_gene_operator_patch_or_action_implementation",
         "canonical_integrity_preserved"
       ],
-      "task_id": "G2-EXTERNAL-GOAL-INTAKE-TO-DEPLOYMENT-EXECUTION-V1"
+      "task_id": "G2-REAL-RESOURCE-CONNECTION-DEPLOYMENT-HEALTHCHECK-V1"
     },
-    "trigger": 12,
+    "trigger": 13,
     "use_accumulated_experience": true
   }
 }
