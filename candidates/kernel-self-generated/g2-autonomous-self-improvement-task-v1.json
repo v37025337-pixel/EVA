@@ -538,19 +538,19 @@
       "severity": "MEDIUM"
     },
     {
-      "area": "MEMORY_AND_EXPERIENCE",
+      "area": "RESOURCE_AND_EVIDENCE",
       "blocking": false,
-      "code": "REMOTE_BRANCH_INVENTORY_MATCH",
+      "code": "LIVE_RESOURCE_EVIDENCE_SCOPE",
       "rank": 2,
-      "recommended_action": "Keep experience registry synchronized with actual branch inventory.",
-      "severity": "MEDIUM"
+      "recommended_action": "Re-check live resources on demand and separately test content comprehension/conflict resolution.",
+      "severity": "LOW"
     }
   ],
-  "latest_self_audit_receipt_sha256": "75dbbda9f7f4ab37029f9a406f3a5162e9771853d721df7d535f5933d6e08f2a",
-  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-34097332960.json",
+  "latest_self_audit_receipt_sha256": "1212fd9d27f14a9a9f0901d6555fc1b4f5d6cbd8f8e0571d4edac5b8ce975121",
+  "latest_self_audit_source": "receipts/yado-unified-core-deep-self-audit-v1-run-34161207066.json",
   "native_evolution_result": null,
   "next_action": "RE_AUDIT_AFTER_DIRECT_PRIORITY_ACTION",
-  "receipt_sha256": "a4d2539d8abb115432db0a1b667850c6f878789773680919d0b1f7c97036f796",
+  "receipt_sha256": "e5422794c4536fd6fe4af76152780dfeec69eddb0cf40df12b179ba753292b4a",
   "schema": "yado.g2.autonomous_self_improvement_task.v1",
   "selected_action": "EXPERIENCE_EVIDENCE_REVIEW",
   "selected_child_genome_digest": null,
@@ -562,21 +562,24 @@
     "allow_shadow_code_evolution": true,
     "authorization": {
       "accumulated_experience_allowed": true,
-      "canonical_mutation_allowed": true,
+      "canonical_mutation_allowed": false,
       "external_no_key_coding_models_allowed": true,
       "external_public_resources_allowed": true,
-      "generation_transition_allowed": true,
+      "generation_transition_allowed": false,
       "repository_read": true,
       "repository_write": true,
       "self_selected_architecture_rewrite": true,
       "self_selected_code_rewrite": true,
       "shadow_evolution_allowed": true
     },
-    "authorization_granted_at": "2026-09-03T17:53:24Z",
-    "authorization_note": "USER_AUTHORIZED_FULL_PROJECT_SELF_IMPROVEMENT_SCOPE; SAFETY/INTEGRITY_GATES_REMAIN_FAIL_CLOSED",
+    "authorization_granted_at": "2026-09-10T13:28:41Z",
+    "authorization_note": "USER_REQUESTED_KERNEL_TO_LEARN_HOW_TO_FIND_AND_SELECT_ITS_OWN_COMPUTE_RESOURCE; EXTERNAL_SIDE_EFFECTS_REMAIN_GATED",
     "constraints": {
+      "no_account_creation_without_user_authorization": true,
+      "no_payment_or_billing_action": true,
       "no_private_data_transmission": true,
       "no_secret_transmission": true,
+      "no_terms_acceptance_without_user_authorization": true,
       "no_unbounded_external_side_effects": true,
       "require_fresh_validation_before_canonical_change": true,
       "require_kernel_self_selected_target": true,
@@ -585,55 +588,57 @@
     },
     "experiment_series": {
       "max_runs": 1,
-      "phase": "POST_TRAINING_KERNEL_SELECTED_ACTION",
-      "preceded_by_self_audit_run": 34097332960,
-      "preceded_by_training_run": 34096431323,
+      "phase": "KERNEL_NATIVE_RESOURCE_LEARNING",
       "run_index": 1,
-      "series_id": "G2-READ-UNDERSTAND-APPLY-LEARN-CYCLE-V1"
+      "series_id": "G2-SELF-LEARN-RESOURCE-DISCOVERY-DEPLOYMENT-V1"
     },
     "host_role": "TRIGGER_TRANSPORT_OBSERVATION_ONLY",
     "host_selected_mechanism": null,
     "host_selected_target": null,
     "host_solution_hint": null,
-    "latest_audit_run_id": 34097332960,
-    "latest_self_selected_next_step": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+    "latest_self_selected_next_step": "EXTERNAL_RESOURCE_DISCOVERY_AND_DEPLOYMENT_TARGET_SELECTION",
     "mechanism_selection": "KERNEL_SELF_SELECTED_NATIVE_OR_SELF_CREATED",
-    "objective": "KERNEL_SELECTED_POST_TRAINING_SELF_IMPROVEMENT",
+    "objective": "KERNEL_SELF_LEARN_EXTERNAL_RESOURCE_DISCOVERY_AND_DEPLOYMENT_SELECTION",
     "previous_evidence": [
-      "candidates/kernel-self-generated/g2-native-meta-grammar-compile-repair-v1.json",
-      "candidates/kernel-self-generated/g2-self-rewrite-repaired-controller-fresh-regression-gate-v1.json",
-      "experience/yado-joint-real-code-cognitive-transfer-v1.json"
+      "candidates/kernel-self-generated/g2-autonomous-self-improvement-task-v1.json",
+      "deployment-vercel-runtime-v1",
+      "main:68a8b284be97e588e7534064be371d41088733f0"
     ],
     "schema": "yado.g2.autonomous_self_improvement_request.v1",
-    "stop_condition": "KERNEL_SELECTED_PRIORITY_ACTION_EXECUTED_OR_EXPLICIT_WITHHOLD",
-    "target_selection": "KERNEL_SELF_SELECTED_FROM_LATEST_DEEP_SELF_AUDIT",
+    "stop_condition": "KERNEL_PRODUCES_VERIFIABLE_RESOURCE_SELECTION_METHOD_AND_EVIDENCE_OR_EXPLICIT_WITHHOLD",
+    "target_selection": "KERNEL_SELF_SELECTED_FROM_CURRENT_DEPLOYMENT_DEFICIT_AND_ACCUMULATED_EXPERIENCE",
     "task": {
       "evidence_to_consider": [
-        "deep_self_audit_run:34097332960",
-        "training_run:34096431323",
-        "experience/yado-user-external-corpus-learning-v1.json",
-        "architecture/yado-g2-causal-training-binding-v1.json",
-        "canonical/yado-legacy-experience-derived-provenance-v1.json"
+        "canonical main integration/audit evidence",
+        "deployment-vercel-runtime-v1 history",
+        "experience and deployment receipts already present in repository",
+        "fresh public provider documentation reachable without secrets"
       ],
       "forbidden": [
+        "host_selected_provider",
         "host_selected_patch",
         "host_selected_gene",
         "host_selected_operator",
         "forcing_pass",
-        "lowering_integrity_gates"
+        "lowering_integrity_gates",
+        "inventing_external_access",
+        "creating_accounts_or_accepting_terms_without_user_authorization",
+        "using_or_exposing_secrets"
       ],
-      "goal": "Act on the kernel-selected LEGACY_EXPERIENCE_SUMMARY_PROVENANCE deficit using accumulated training evidence. Produce direct evidence, a shadow change if justified, or an explicit WITHHOLD that becomes new learning evidence.",
-      "problem": "Use the latest kernel-native deep self-audit priority without a host-selected solution. Distinguish host-curated legacy summaries from exact raw-evidence-derived observations and determine whether the current evidence/provenance path is sufficient or requires a new mechanism.",
+      "goal": "Using accumulated experience plus fresh public evidence, derive a reusable kernel-native method for resource discovery and deployment-target selection. Compare viable providers and execution environments, identify hard constraints such as Python/runtime support, persistence, idle shutdown, resource limits, account/auth requirements, network access, and cost, then self-select the best currently reachable target or explicitly WITHHOLD if no target is executable with current permissions. Preserve the learned selection criteria and evidence for future cycles.",
+      "problem": "The canonical YADO runtime passed integration and regression gates but deployment is blocked because the current Vercel workspace has no project. Learn how to independently discover, compare, and select an externally available compute/runtime resource suitable for YADO rather than relying on a host-selected provider.",
       "success_conditions": [
-        "kernel_uses_latest_self_selected_priority",
-        "kernel_consults_accumulated_experience",
-        "kernel_selected_action_has_direct_priority_evidence",
+        "kernel_derives_resource_selection_criteria_from_evidence",
+        "kernel_compares_multiple_current_resource_options",
+        "kernel_self_selects_target_or_explicitly_withholds",
+        "kernel_records_why_alternatives_were_rejected",
+        "kernel_preserves_reusable_learning_for_future_deployment_attempts",
         "host_does_not_select_target_gene_or_operator",
         "canonical_integrity_preserved"
       ],
-      "task_id": "G2-POST-TRAINING-KERNEL-SELECTED-SELF-IMPROVEMENT"
+      "task_id": "G2-SELF-LEARN-RESOURCE-DISCOVERY-DEPLOYMENT-V1"
     },
-    "trigger": 9,
+    "trigger": 10,
     "use_accumulated_experience": true
   }
 }
