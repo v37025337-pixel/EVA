@@ -1,0 +1,64 @@
+name: YADO Cognitive Tri Organ Evolution V2
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-cognitive-tri-organ-evolution-v2]
+    paths:
+      - 'runtime/yado_cognitive_tri_organ_evolution_v2.py'
+      - '.github/workflows/yado-cognitive-tri-organ-evolution-v2.yml'
+permissions:
+  contents: read
+jobs:
+  evolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime
+        run: python runtime/reconstruct_rc8v36.py
+      - name: Compile cognitive evolution controller
+        run: python -m py_compile runtime/yado_cognitive_tri_organ_evolution_v2.py
+      - name: Run logic thinking intelligence evolution
+        run: python runtime/yado_cognitive_tri_organ_evolution_v2.py
+      - name: Verify tri-organ evidence contract
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json')
+          r=json.load(open(p))
+          assert r['status']=='PASS_SHADOW_BOUNDED_TRI_ORGAN_COGNITIVE_EVOLUTION_V2', r
+          assert set(r['organs'])=={'LOGIC','THINKING','INTELLIGENCE'}
+          assert r['external_model_used'] is False
+          assert r['downloaded_code_executed'] is False
+          assert r['canonical_mutation'] is False
+          for organ in ('logic','thinking','intelligence'):
+              assert r['selected_hidden'][organ] >= r['baseline_hidden'][organ], (organ,r)
+          assert min(r['selected_hidden'].values()) >= 0.80, r
+          assert len(r['generations']) == 6, r
+          candidate=pathlib.Path(r['candidate_path'])
+          assert candidate.exists(), candidate
+          print('PASS_TRI_ORGAN_COGNITIVE_EVOLUTION_EVIDENCE_V2')
+          PY
+      - name: Compile generated candidate and checkout runtime
+        run: |
+          python -m py_compile candidates/cognitive/yado_cognitive_tri_organ_candidate_v2.py
+          python -m compileall -q runtime successor
+      - name: Regression gates
+        run: |
+          python -m unittest discover -s successor/tests -p 'test_*.py'
+          PYTHONPATH=runtime:runtime/yado_rc8_v36 python -m unittest \
+            runtime/yado_rc8_v36/test_yado_rc8_self_audit_consistency_v1.py \
+            runtime/yado_rc8_v36/test_yado_skill_admission_runtime_v1.py \
+            runtime/yado_rc8_v36/test_yado_transfer_evaluation_runtime_v1.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-cognitive-tri-organ-evolution-v2-${{ github.run_id }}
+          path: |
+            candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json
+            candidates/cognitive/yado_cognitive_tri_organ_candidate_v2.py
