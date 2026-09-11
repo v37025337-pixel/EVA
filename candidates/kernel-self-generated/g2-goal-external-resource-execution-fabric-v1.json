@@ -6,69 +6,88 @@
     "discovery": {
       "discovery_evaluation": {
         "negative_checks": {
-          "account_creation_attempted": null,
-          "credential_bypass_attempted": null,
-          "external_coding_models_used": null,
-          "host_selected_provider": null,
-          "host_source_seed_used": null,
-          "private_network_access": null
+          "account_creation_attempted": false,
+          "credential_bypass_attempted": false,
+          "external_coding_models_used": false,
+          "host_selected_provider": false,
+          "host_source_seed_used": false,
+          "private_network_access": false
         },
-        "pass": false,
+        "pass": true,
         "positive_checks": {
-          "adapter_compiles": null,
-          "authentication_requirement_determined": null,
-          "canonical_unchanged": null,
-          "catalog_fetched": null,
-          "fresh_adapter_source_created": null,
-          "fresh_tests_pass": null,
-          "json_parse_pass": null,
-          "openapi_contract_digest_recorded": null,
-          "openapi_contract_fetched": null,
-          "provenance_chain_recorded": null,
-          "provider_selected_by_kernel": null,
-          "real_live_http_2xx": null,
-          "required_parameters_absent": null,
-          "semantic_ir_created": null,
-          "shadow_registry_created": null,
-          "static_safety_gate_pass": null,
-          "unauthenticated_get_selected": null
+          "adapter_compiles": true,
+          "authentication_requirement_determined": true,
+          "canonical_unchanged": true,
+          "catalog_fetched": true,
+          "fresh_adapter_source_created": true,
+          "fresh_tests_pass": true,
+          "json_parse_pass": true,
+          "openapi_contract_digest_recorded": true,
+          "openapi_contract_fetched": true,
+          "provenance_chain_recorded": true,
+          "provider_selected_by_kernel": true,
+          "real_live_http_2xx": true,
+          "required_parameters_absent": true,
+          "semantic_ir_created": true,
+          "shadow_registry_created": true,
+          "static_safety_gate_pass": true,
+          "unauthenticated_get_selected": true
         }
       },
       "discovery_invoked": true,
-      "goal": "Retrieve a fresh public science and geographic data JSON payload from a suitable public API and summarize its top-level structure.",
+      "goal": "Discover and use a different public read-only API that is not already present in the verified integration registry, obtain one live JSON payload, and summarize its top-level structure.",
       "network_route_invoked": true,
       "novelty_filter": {
         "excluded_existing_api_ids": [
           "dnd5eapi.co"
         ],
+        "max_ranked_candidates": 128,
+        "max_spec_fetches": 64,
         "provider_host_selected": false,
-        "required_domain_tags": [
-          "location",
-          "science"
-        ],
-        "selected_domain_match": false,
-        "selected_domain_metadata": []
+        "required_domain_tags": [],
+        "selected_domain_match": true,
+        "selected_domain_metadata": [
+          "act",
+          "air",
+          "and",
+          "clean",
+          "compliance",
+          "echo",
+          "enforcement",
+          "epa",
+          "gov",
+          "history",
+          "online",
+          "open_data"
+        ]
       },
       "registry_reused": false,
       "result": {
-        "api_categories": null,
-        "api_id": null,
-        "api_title": null,
-        "candidate_source_sha256": null,
-        "endpoint": null,
-        "http_status": null,
-        "json_parsed": null,
-        "pass": false,
-        "provenance_digest": null,
-        "response_sha256": null,
-        "summary": null
+        "api_categories": [
+          "open_data"
+        ],
+        "api_id": "epa.gov:air",
+        "api_title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Act",
+        "candidate_source_sha256": "f806e20ca0cf6d03c8ee91d3a11c0220e091493de4579c6e1d752cf0f1d8adb0",
+        "endpoint": "https://echodata.epa.gov/echo/air_rest_services.metadata",
+        "http_status": 200,
+        "json_parsed": true,
+        "pass": true,
+        "provenance_digest": "ffba32a27698a949fc0bedd751445cc9eb7a2d5effac9df44c086c5e0a750a54",
+        "response_sha256": "90f70727ea445c406abbe795ae948c25893ee93a0cc57ccbce046ecb2fdb95cb",
+        "summary": {
+          "keys": [
+            "Results"
+          ],
+          "size": 1,
+          "type": "dict"
+        }
       },
       "route": "DISCOVER_NEW_API",
       "routing": {
         "decision": {
           "external_resource_needed": true,
           "matches": [
-            "public api",
             "api",
             "api"
           ],
@@ -77,16 +96,15 @@
         "goal_tags": [
           "developer_tools",
           "json",
-          "location",
           "open_data",
           "public",
-          "read_only",
-          "science"
+          "read_only"
         ],
-        "required_domain_tags": [
-          "location",
-          "science"
+        "novelty_matches": [
+          "not already"
         ],
+        "novelty_requested": true,
+        "required_domain_tags": [],
         "route": "DISCOVER_NEW_API"
       }
     },
@@ -105,10 +123,10 @@
         "json_parsed": true,
         "pass": true,
         "resolved_public_ips": [
-          "99.83.220.108",
           "75.2.60.68",
+          "13.248.244.96",
           "35.71.179.82",
-          "13.248.244.96"
+          "99.83.220.108"
         ],
         "response_sha256": "24616eb74db1cbed162d6e84f51267b0f3749f957546f8058fd430a0fad2c4b8",
         "summary": {
@@ -200,25 +218,25 @@
     "local_no_network": true,
     "local_result_ok": true,
     "local_routed_local_only": true,
-    "new_api_differs_from_existing": false,
+    "new_api_differs_from_existing": true,
     "new_goal_discovery_invoked": true,
-    "new_goal_full_discovery_gate": false,
-    "new_goal_json_parsed": false,
-    "new_goal_live_2xx": false,
+    "new_goal_full_discovery_gate": true,
+    "new_goal_json_parsed": true,
+    "new_goal_live_2xx": true,
     "new_goal_not_registry_reuse": true,
-    "new_goal_provenance_recorded": false,
-    "new_goal_provider_not_host_selected": false,
+    "new_goal_provenance_recorded": true,
+    "new_goal_provider_not_host_selected": true,
     "new_goal_routed_to_discovery": true
   },
   "claim_boundary": "HOST-AUTHORED SHADOW EXECUTION FABRIC OVER EXISTING YADO GOAL BINDING AND DISCOVERY COMPONENTS. IT TESTS ROUTE SELECTION AND REAL READ-ONLY EXECUTION; IT IS NOT EVIDENCE THAT YADO NATIVELY INVENTED THIS FABRIC. NEW PROVIDER/ENDPOINT SELECTION IS DELEGATED TO THE BOUNDED DISCOVERY CONTROLLER AND IS NOT HOST-SELECTED.",
   "component_id": "CTRL-G2-GOAL-EXTERNAL-RESOURCE-EXECUTION-FABRIC-V1",
-  "discovered_api_id": null,
+  "discovered_api_id": "epa.gov:air",
   "existing_api_ids_before": [
     "dnd5eapi.co"
   ],
-  "receipt_sha256": "7be1dc27f68fe03db314f533f23ecb436ce20f239886067185d049c731a09794",
-  "registry_digest": "b0a5b9f50f050da59bfd0d1787e0eeb0269bdb64bf49e9d9df3da7646f4b5155",
+  "receipt_sha256": "efe58090aff81e60c980016477e6a91f06830eb243ed971a77f16797e9f5849f",
+  "registry_digest": "7d3fc91ce53be5435aaeb1fc9bc7336571efe95f64fb272d27474bbe05362f30",
   "registry_path": "candidates/kernel-self-generated/g2-goal-external-resource-execution-fabric-registry-v1.json",
   "schema": "yado.g2.goal_external_resource_execution_fabric.v1",
-  "status": "WITHHOLD_G2_GOAL_EXTERNAL_RESOURCE_EXECUTION_FABRIC_V1"
+  "status": "PASS_SHADOW_G2_GOAL_EXTERNAL_RESOURCE_EXECUTION_FABRIC_V1"
 }
