@@ -1,0 +1,101 @@
+{
+  "adapter_source_materialized_by_kernel": true,
+  "candidate_path": "candidates/kernel-self-generated/yado_native_http_json_adapter_v1.py",
+  "candidate_source_bytes": 2013,
+  "candidate_source_sha256": "85a671b863126d99423691dfc87ca7fc2a45703b39310fcf33c3a7cfd8317a87",
+  "canonical_mutation": false,
+  "checks": {
+    "account_creation_attempted": false,
+    "adapter_reused_on_second_resource": false,
+    "adapter_source_compiles": true,
+    "adapter_source_materialized_by_kernel": true,
+    "canonical_unchanged": true,
+    "credential_bypass_attempted": false,
+    "external_coding_models_used": false,
+    "fresh_tests_pass": false,
+    "get_only": false,
+    "host_source_seed_used": false,
+    "live_json_parse_pass": false,
+    "resource_selected_by_broker": true,
+    "selected_live_connection_pass": false,
+    "semantic_ir_created": true,
+    "static_safety_gate_pass": false
+  },
+  "claim_boundary": "HOST-AUTHORED BOUNDED INTEGRATION BROKER. THE KERNEL SELECTS FROM A HOST-SUPPLIED PUBLIC READ-ONLY ALLOWLIST, MATERIALIZES A FRESH GET-ONLY JSON ADAPTER FROM SEMANTIC IR, CONNECTS, PARSES, REGISTERS, AND REUSES IT. THIS DOES NOT AUTHORIZE ACCOUNT CREATION, SECRET ACQUISITION, AUTH BYPASS, PAYMENT, CAPTCHA BYPASS, MUTATING REQUESTS, PORT SCANNING, OR UNBOUNDED NETWORK DISCOVERY.",
+  "component_id": "CTRL-G2-NATIVE-INTEGRATION-BROKER-V1",
+  "fresh_tests": {
+    "pass": false,
+    "reason": "SAFETY_GATE_FAILED"
+  },
+  "live_attempts": [],
+  "objective": "Autonomously connect, integrate, and use compatible public structured data services. Select a useful resource from the permitted read-only set, create a fresh reusable HTTP JSON adapter without a source seed, verify it, perform a real connection, parse and summarize returned data, register the verified adapter as a shadow capability, then reuse the same adapter on a second compatible service.",
+  "receipt_sha256": "7a1df56e8119b96f14cd89ac2ab238abd1e208cea7cec3901531188482e5ca24",
+  "registry_digest": "9e43be90b8ed7c307b37896cb3fb6ec7b6153881fef6dd5310c290b89a3e33c8",
+  "registry_path": "candidates/kernel-self-generated/g2-native-integration-registry-v1.json",
+  "reuse_pass": false,
+  "safety": {
+    "attribute": "__name__",
+    "pass": false,
+    "reason": "DUNDER_ATTRIBUTE_NOT_ALLOWED"
+  },
+  "schema": "yado.g2.native_integration_broker.v1",
+  "selection": {
+    "host_selected_provider": false,
+    "ranking": [
+      {
+        "id": "WORLD_BANK_GDP_JSON",
+        "score": 9
+      },
+      {
+        "id": "USGS_EARTHQUAKE_GEOJSON",
+        "score": 9
+      }
+    ],
+    "resource": {
+      "adapter_family": "HTTP_JSON_GET",
+      "id": "WORLD_BANK_GDP_JSON",
+      "name": "World Bank GDP public API",
+      "purpose": "public structured JSON data integration",
+      "read_only": true,
+      "tags": [
+        "public",
+        "api",
+        "json",
+        "data",
+        "economics",
+        "integration",
+        "structured"
+      ],
+      "url": "https://api.worldbank.org/v2/country/USA/indicator/NY.GDP.MKTP.CD?format=json&per_page=2"
+    },
+    "score": 9,
+    "selection_scope": "HOST_SUPPLIED_PUBLIC_READ_ONLY_ALLOWLIST",
+    "status": "SELECTED"
+  },
+  "semantic_ir": {
+    "allowed_hosts": [
+      "api.worldbank.org",
+      "earthquake.usgs.gov"
+    ],
+    "family": "HTTP_JSON_GET",
+    "goal_digest": "a7d3ea2c020632f520b3d0058cee9bde8659688e98f66d0391ccde855c925708",
+    "http_methods": [
+      "GET"
+    ],
+    "module": "yado_native_http_json_adapter_v1",
+    "network_mutation": false,
+    "operations": [
+      "URL_VALIDATE",
+      "EXACT_HOST_ALLOWLIST",
+      "BOUNDED_HTTP_GET",
+      "FINAL_REDIRECT_HOST_VALIDATE",
+      "BOUNDED_RESPONSE_READ",
+      "SHA256_PROVENANCE",
+      "JSON_PARSE",
+      "STRUCTURE_SUMMARY"
+    ],
+    "selected_resource_id": "WORLD_BANK_GDP_JSON",
+    "status": "READY"
+  },
+  "status": "WITHHOLD_G2_NATIVE_INTEGRATION_BROKER_V1"
+}
