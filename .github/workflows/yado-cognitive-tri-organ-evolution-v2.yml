@@ -20,7 +20,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Reconstruct runtime
-        run: python runtime/reconstruct_rc8v36.py
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
       - name: Compile cognitive evolution controller
         run: python -m py_compile runtime/yado_cognitive_tri_organ_evolution_v2.py
       - name: Run logic thinking intelligence evolution
