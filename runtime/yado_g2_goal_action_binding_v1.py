@@ -29,6 +29,38 @@ class YADOGoalActionBindingV1:
         self.repo=Path(repo_root)
 
     @staticmethod
+    def resolve_goal(request, audit):
+        """Bind the submitted task, retaining blocking findings ahead of it.
+
+        This is host-authored intake plumbing, not a YADO-invented priority gene.
+        Text similarity never establishes that an action can fulfil this contract.
+        """
+        prior=list(audit.get('self_selected_priority') or [])
+        task=request.get('task')
+        if 'task' not in request:
+            return {'status':'SELF_AUDIT_GOAL', 'priority':prior,
+                    'request_digest':digest(request), 'deferred_self_audit':[]}
+        if not isinstance(task,dict) or not all(
+            isinstance(task.get(k),str) and task[k].strip() for k in ('task_id','goal')
+        ):
+            return {'status':'WITHHOLD_INVALID_EXTERNAL_GOAL','priority':[],
+                    'request_digest':digest(request),'deferred_self_audit':prior}
+        blocking=[p for p in prior if p.get('blocking') is True]
+        for finding in audit.get('findings') or []:
+            if finding.get('blocking') is True and not any(p.get('code')==finding.get('code') for p in blocking):
+                blocking.append(dict(finding,recommended_action=finding.get('recommendation','')))
+        if blocking:
+            return {'status':'BLOCKING_SELF_AUDIT_FIRST','priority':blocking,
+                    'request_digest':digest(request),'deferred_external_goal':task,
+                    'deferred_self_audit':[p for p in prior if p not in blocking]}
+        goal={'code':task['task_id'],'area':'EXTERNAL_TASK','rank':1,
+              'recommended_action':task['goal'],'blocking':False,
+              'origin':'EXTERNAL_REQUEST','request_digest':digest(request),
+              'success_conditions':task.get('success_conditions',[])}
+        return {'status':'EXTERNAL_GOAL_BOUND','priority':[goal],
+                'request_digest':digest(request),'deferred_self_audit':prior}
+
+    @staticmethod
     def _tokens(text:str):
         return [x for x in re.findall(r'[a-z0-9]+',str(text).lower()) if len(x)>=3]
 
@@ -47,6 +79,14 @@ class YADOGoalActionBindingV1:
             score=sum(w for t,w in weighted.items() if t in contract)
             rows.append({'action_id':a['action_id'],'score':score,'matched_tokens':sorted(t for t in weighted if t in contract)})
         rows.sort(key=lambda x:(-x['score'],x['action_id']))
+        if priority.get('origin')=='EXTERNAL_REQUEST':
+            # Existing contracts are lexical topic lists, not executable proofs
+            # for an arbitrary external task. Preserve the goal as an open deficit.
+            return {'status':'WITHHOLD_EXTERNAL_GOAL_CAPABILITY_DEFICIT',
+                    'selected_action':None,'ranking':rows,
+                    'missing_capability':priority['code'],
+                    'request_digest':priority['request_digest'],
+                    'reason':'NO_CAUSALLY_VALIDATED_ACTION_FOR_EXTERNAL_CONTRACT'}
         if not rows or rows[0]['score']<=0:
             return {'status':'WITHHOLD_NO_RELEVANT_ACTION','selected_action':None,'ranking':rows}
         return {'status':'ACTION_SELECTED','selected_action':rows[0]['action_id'],'ranking':rows}
@@ -181,7 +221,11 @@ class YADOGoalActionBindingV1:
         sel=self.select_action(priority)
         action=sel.get('selected_action')
         if action is None:
-            return {'selection':sel,'status':'WITHHOLD_GOAL_ACTION_BINDING','direct_priority_evidence':False}
+            return {'selection':sel,'status':'WITHHOLD_GOAL_ACTION_BINDING',
+                    'selected_action':None,'direct_priority_evidence':False,
+                    'result':{'status':sel['status'],'direct_priority_evidence':False,
+                              'missing_capability':sel.get('missing_capability'),
+                              'canonical_mutation':False}}
         if action=='LIVE_RESOURCE_EVIDENCE_RECHECK':
             result=self._live_resource_evidence_recheck()
         elif action=='EXPERIENCE_EVIDENCE_REVIEW':
