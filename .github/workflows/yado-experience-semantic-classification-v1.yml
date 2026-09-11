@@ -1,0 +1,78 @@
+name: YADO Experience Semantic Classification V1
+on:
+  push:
+    branches: [yado-experience-semantic-classification-v1]
+permissions:
+  contents: write
+jobs:
+  classify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Pin main
+        run: |
+          git fetch origin main
+          echo "MAIN_SHA=$(git rev-parse origin/main)" >> "$GITHUB_ENV"
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare runtime
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+      - name: Classify recovered experience evidence
+        run: |
+          python -m py_compile runtime/yado_g2_experience_semantic_classification_v1.py
+          python runtime/yado_g2_experience_semantic_classification_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('canonical/yado-experience-semantic-classification-v1.json').read_text())
+          assert x['status']=='PASS_EVIDENCE_CHARACTER_CLASSIFICATION_COMPLETE'
+          assert x['candidate_count']==10
+          assert sum(x['classification_counts'].values())==10
+          assert x['policy']['branch_name_as_semantic_evidence'] is False
+          assert x['policy']['code_activation']=='FORBIDDEN_BY_THIS_ARTIFACT'
+          assert x['policy']['capability_promotion']=='FORBIDDEN_BY_THIS_ARTIFACT'
+          print(json.dumps({'status':x['status'],'counts':x['classification_counts'],'digest':x['artifact_digest']},sort_keys=True))
+          PY
+      - name: Full kernel audit
+        run: python runtime/yado_full_kernel_audit_v1.py
+      - name: Fresh Successor build and full regression
+        run: |
+          rm -rf "$RUNNER_TEMP/yado-successor-semantic-v1"
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-semantic-v1"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-semantic-v1/manifest.json"
+      - name: Verify gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('audits/yado-full-kernel-audit-v1-report.json').read_text())
+          r=json.loads(Path('audits/yado-full-regression-v1-report.json').read_text())
+          assert a['status']=='PASS' and not a.get('findings'),a
+          assert r['status']=='PASS' and r['tests_run']==r['expected_tests'],r
+          print(json.dumps({'audit':a['status'],'regression':r['status'],'tests':r['tests_run']},sort_keys=True))
+          PY
+      - name: Fail closed on concurrent main movement
+        run: |
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$MAIN_SHA"
+      - name: Persist verified classification into main
+        run: |
+          git config user.name "YADO Main Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          git add canonical/yado-experience-semantic-classification-v1.json audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json
+          git commit -m "YADO main evolution: classify recovered experience evidence [skip ci]"
+          git push origin HEAD:main
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-experience-semantic-classification-v1-${{ github.run_id }}
+          path: |
+            canonical/yado-experience-semantic-classification-v1.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
