@@ -1,0 +1,81 @@
+name: YADO Cognitive Tri Organ Admission V3
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-cognitive-tri-organ-admission-v3]
+    paths:
+      - 'runtime/yado_cognitive_tri_organ_evolution_v2.py'
+      - 'candidates/cognitive/yado_cognitive_tri_organ_candidate_v2.py'
+      - 'candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json'
+      - '.github/workflows/yado-cognitive-tri-organ-admission-v3.yml'
+permissions:
+  contents: read
+jobs:
+  gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+      - name: Verify staged evidence binding
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          r=json.load(open('candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json'))
+          p=pathlib.Path('candidates/cognitive/yado_cognitive_tri_organ_candidate_v2.py')
+          sha=hashlib.sha256(p.read_bytes()).hexdigest()
+          assert sha==r['candidate_sha256'], (sha,r['candidate_sha256'])
+          assert r['status']=='PASS_SHADOW_BOUNDED_TRI_ORGAN_COGNITIVE_EVOLUTION_V2'
+          assert r['source_run_id']==34652204178
+          assert min(r['selected_hidden'].values())>=0.80
+          print('PASS_STAGED_TRI_ORGAN_EVIDENCE_BINDING_V3')
+          PY
+      - name: Reproduce cognitive evolution exactly
+        run: |
+          python -m py_compile runtime/yado_cognitive_tri_organ_evolution_v2.py
+          before=$(sha256sum candidates/cognitive/yado_cognitive_tri_organ_candidate_v2.py | awk '{print $1}')
+          python runtime/yado_cognitive_tri_organ_evolution_v2.py
+          after=$(sha256sum candidates/cognitive/yado_cognitive_tri_organ_candidate_v2.py | awk '{print $1}')
+          test "$before" = "$after"
+          test "$after" = "8a87fa90bd8b2d8d028ef10a1c1dcf02a92a176e8b449a68115ca010830e1ddf"
+      - name: Counterfactual baseline must be worse
+        run: |
+          python - <<'PY'
+          import importlib.util, pathlib, sys
+          p=pathlib.Path('runtime/yado_cognitive_tri_organ_evolution_v2.py')
+          spec=importlib.util.spec_from_file_location('tri',p)
+          m=importlib.util.module_from_spec(spec)
+          sys.modules['tri']=m
+          spec.loader.exec_module(m)
+          tasks=m.build_tasks(m.SEED)
+          base=m.Genome(1,False,1,1,2)
+          evolved=m.Genome(3,False,4,2,6)
+          b=m.score(base,tasks,'hidden'); e=m.score(evolved,tasks,'hidden')
+          assert all(e[k]>=b[k] for k in e)
+          assert any(e[k]>b[k] for k in e)
+          assert min(e.values())>=0.80
+          print({'baseline':b,'evolved':e})
+          PY
+      - name: Compile and regression gates
+        run: |
+          python -m compileall -q runtime successor candidates/cognitive
+          python -m unittest discover -s successor/tests -p 'test_*.py'
+          PYTHONPATH=runtime:runtime/yado_rc8_v36 python -m unittest \
+            runtime/yado_rc8_v36/test_yado_rc8_self_audit_consistency_v1.py \
+            runtime/yado_rc8_v36/test_yado_skill_admission_runtime_v1.py \
+            runtime/yado_rc8_v36/test_yado_transfer_evaluation_runtime_v1.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-cognitive-tri-organ-admission-v3-${{ github.run_id }}
+          path: |
+            candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json
+            candidates/cognitive/yado_cognitive_tri_organ_candidate_v2.py
