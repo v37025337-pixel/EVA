@@ -56,7 +56,7 @@ jobs:
           assert all(c.values()), c
           assert x['cases']['external']['route']=='OPENAPI_DISCOVERY_INTEGRATION', x
           assert x['cases']['external']['discovery_invoked'] is True, x
-          assert x['cases']['external']['result']['http_status'] >= 200 and x['cases']['external']['result']['http_status'] < 300, x
+          assert 200 <= x['cases']['external']['result']['http_status'] < 300, x
           assert x['cases']['external']['result']['json_parsed'] is True, x
           assert x['cases']['local']['route']=='LOCAL_ONLY', x
           assert x['cases']['local']['discovery_invoked'] is False, x
@@ -82,6 +82,10 @@ jobs:
             if [ -f "$p" ]; then git add "$p"; fi
           done
           git diff --cached --quiet || git commit -m "Persist external resource goal binding evidence [skip ci]"
+          # The delegated discovery controller may refresh its own tracked shadow
+          # artifacts. They are not part of this binder admission and must not
+          # block rebase/persistence of the binder evidence.
+          git reset --hard HEAD
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
 
