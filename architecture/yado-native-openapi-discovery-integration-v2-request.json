@@ -1,0 +1,63 @@
+{
+  "schema": "yado.g2.native_openapi_discovery_integration.request.v2",
+  "objective": "Discover a useful public JSON API from a machine-readable public API directory without a host-selected provider, read and interpret its OpenAPI contract, determine whether an unauthenticated read-only GET operation is available, materialize a fresh bounded adapter, verify it, perform a real live request, parse returned data, and register the evidence-backed integration as a shadow capability.",
+  "discovery_source": {
+    "id": "APIS_GURU_DIRECTORY",
+    "catalog_url": "https://api.apis.guru/v2/list.json",
+    "kind": "PUBLIC_OPENAPI_DIRECTORY",
+    "read_only": true
+  },
+  "goal_tags": ["open_data", "developer_tools", "science", "public", "json", "read_only"],
+  "host_role": "supply the public catalog URL, safety policy, trigger, transport and verification only; do not select the provider, API, endpoint or adapter source",
+  "kernel_role": "rank catalog entries, fetch candidate OpenAPI contracts, reject authenticated or mutating operations, select a provider and endpoint, derive semantic IR, materialize adapter source, verify it, connect, parse and register evidence",
+  "limits": {
+    "catalog_max_bytes": 8388608,
+    "spec_max_bytes": 2097152,
+    "max_ranked_candidates": 48,
+    "max_spec_fetches": 32,
+    "live_response_max_bytes": 524288,
+    "live_timeout_seconds": 10
+  },
+  "constraints": {
+    "https_only": true,
+    "read_only": true,
+    "allowed_http_methods": ["GET"],
+    "unauthenticated_operations_only": true,
+    "required_parameters_allowed": false,
+    "host_selected_provider": false,
+    "host_selected_endpoint": false,
+    "source_seed": null,
+    "external_coding_models": false,
+    "account_creation": false,
+    "credential_acquisition": false,
+    "authentication_bypass": false,
+    "captcha_bypass": false,
+    "payment": false,
+    "port_scanning": false,
+    "arbitrary_network_scanning": false,
+    "private_network_access": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "fail_closed": true
+  },
+  "success_criteria": {
+    "catalog_fetched": true,
+    "provider_selected_by_kernel": true,
+    "openapi_contract_fetched": true,
+    "openapi_contract_digest_recorded": true,
+    "authentication_requirement_determined": true,
+    "unauthenticated_get_selected": true,
+    "semantic_ir_created": true,
+    "fresh_adapter_source_created": true,
+    "adapter_compiles": true,
+    "static_safety_gate_pass": true,
+    "fresh_tests_pass": true,
+    "real_live_http_2xx": true,
+    "json_parse_pass": true,
+    "provenance_chain_recorded": true,
+    "shadow_registry_created": true,
+    "canonical_unchanged": true
+  },
+  "trigger": 1,
+  "requested_at": "2026-09-11T03:19:00Z"
+}
