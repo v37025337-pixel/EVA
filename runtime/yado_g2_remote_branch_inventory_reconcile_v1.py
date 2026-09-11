@@ -1,7 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 from typing import Any
-import copy, hashlib, json, subprocess
+import hashlib, json, subprocess
 
 REPO = Path(__file__).resolve().parent.parent
 REGISTRY = REPO / 'canonical' / 'yado-unified-experience-registry-v1.json'
@@ -43,7 +43,7 @@ def classify(name: str, registered: set[str]) -> str:
         return 'TEMPORARY_HISTORY_REF'
     if name.startswith('deployment-'):
         return 'DEPLOYMENT_INFRASTRUCTURE_REF'
-    if 'integration' in name:
+    if any(token in name for token in ('integration', 'inventory', 'reconcile')):
         return 'INTEGRATION_VERIFICATION_REF'
     if name.startswith('yado-'):
         return 'EXPERIENCE_CANDIDATE_REF'
