@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import json
-
 from yado_goal_external_resource_execution_fabric_v1 import (
+    GENERIC_TAGS,
     YADOGoalExternalResourceExecutionFabricV1,
     main as base_main,
 )
@@ -12,14 +11,48 @@ from yado_native_openapi_discovery_integration_v2 import (
 )
 
 
-def execute_discovery_novel(self: YADOGoalExternalResourceExecutionFabricV1, goal: str) -> dict:
-    """Require DISCOVER_NEW_API to be both novel and domain-relevant.
+_ORIGINAL_ROUTE_GOAL = YADOGoalExternalResourceExecutionFabricV1.route_goal
+NOVELTY_HINTS = (
+    "new api",
+    "different api",
+    "different public api",
+    "new integration",
+    "not already",
+    "not in the verified integration registry",
+    "novel api",
+)
 
-    This repair does not name or select a provider. It excludes integrations
-    already present in the verified shadow registry and requires at least one
-    domain-specific goal tag to match the candidate API metadata when such tags
-    exist. Provider/endpoint selection within the remaining public catalog is
-    still performed by the existing bounded discovery controller.
+
+def route_goal_v12(self: YADOGoalExternalResourceExecutionFabricV1, goal: str) -> dict:
+    """Route an explicit novelty request to discovery without naming a provider."""
+    decision = self.binder.classify_goal(goal)
+    if decision.get("external_resource_needed") is False:
+        return _ORIGINAL_ROUTE_GOAL(self, goal)
+
+    text = " ".join(str(goal).lower().split())
+    novelty_matches = [hint for hint in NOVELTY_HINTS if hint in text]
+    if not novelty_matches:
+        return _ORIGINAL_ROUTE_GOAL(self, goal)
+
+    tags = set(self.binder.goal_tags(goal))
+    domain = sorted(tags - GENERIC_TAGS)
+    return {
+        "route": "DISCOVER_NEW_API",
+        "decision": decision,
+        "goal_tags": sorted(tags),
+        "required_domain_tags": domain,
+        "novelty_requested": True,
+        "novelty_matches": novelty_matches,
+    }
+
+
+def execute_discovery_novel(self: YADOGoalExternalResourceExecutionFabricV1, goal: str) -> dict:
+    """Require DISCOVER_NEW_API to exclude verified integrations.
+
+    If the goal also contains a domain-specific tag, candidates must match that
+    domain. For a pure novelty goal, the bounded discovery controller remains
+    free to select any new safe provider from the public catalog. The host does
+    not name or select a provider or endpoint.
     """
     existing_ids = {
         str(row.get("verified_external_api_id"))
@@ -32,9 +65,7 @@ def execute_discovery_novel(self: YADOGoalExternalResourceExecutionFabricV1, goa
     class NovelDomainDiscovery(YADONativeOpenAPIDiscoveryIntegrationV2):
         @classmethod
         def rank_catalog(cls, catalog: dict, goal_tags: list[str], limit: int) -> list[dict]:
-            # Ask the inherited scorer for a broad pool, then enforce novelty
-            # and domain relevance without choosing a concrete provider.
-            broad = super().rank_catalog(catalog, goal_tags, max(512, int(limit)))
+            broad = super().rank_catalog(catalog, goal_tags, max(768, int(limit)))
             filtered: list[dict] = []
             for row in broad:
                 api_id = str(row.get("api_id") or "")
@@ -50,6 +81,8 @@ def execute_discovery_novel(self: YADOGoalExternalResourceExecutionFabricV1, goa
             return filtered
 
     request = self.binder.build_discovery_request(goal)
+    request.setdefault("limits", {})["max_ranked_candidates"] = 128
+    request["limits"]["max_spec_fetches"] = 64
     discovery = NovelDomainDiscovery().run(request)
     evaluation = self.binder.evaluate_discovery(discovery)
     selected = discovery.get("selected") or {}
@@ -74,6 +107,8 @@ def execute_discovery_novel(self: YADOGoalExternalResourceExecutionFabricV1, goa
             "selected_domain_metadata": sorted(semantic),
             "selected_domain_match": domain_match,
             "provider_host_selected": False,
+            "max_ranked_candidates": 128,
+            "max_spec_fetches": 64,
         },
         "result": {
             "pass": evaluation.get("pass") is True and bool(selected_id) and str(selected_id) not in existing_ids and domain_match,
@@ -91,9 +126,9 @@ def execute_discovery_novel(self: YADOGoalExternalResourceExecutionFabricV1, goa
     }
 
 
-# V1.1 is a narrow repair of the shadow execution harness. The base report and
-# strict checks remain unchanged; only DISCOVER_NEW_API gains novelty/domain
-# filtering before provider selection.
+# V1.2 remains host-authored shadow routing scaffolding. It tests the existing
+# YADO discovery mechanisms; it is not evidence that YADO invented this fabric.
+YADOGoalExternalResourceExecutionFabricV1.route_goal = route_goal_v12
 YADOGoalExternalResourceExecutionFabricV1.execute_discovery = execute_discovery_novel
 
 
