@@ -1,0 +1,56 @@
+name: YADO Evolution Loop V1
+
+on:
+  push:
+    branches: [yado-evolution-loop-v1]
+    paths:
+      - 'runtime/yado_evolution_loop_v1.py'
+      - 'runtime/yado_g2_openapi_readonly_executor_v1.py'
+      - '.github/workflows/yado-evolution-loop-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evolution-loop:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile evolution path
+        run: |
+          python -m py_compile runtime/yado_g2_openapi_readonly_executor_v1.py runtime/yado_evolution_loop_v1.py
+      - name: Execute bounded causal evolution loop
+        run: |
+          python runtime/yado_evolution_loop_v1.py
+      - name: Verify causal receipt and generated candidate
+        run: |
+          python - <<'PY'
+          import importlib.util, json, pathlib
+          receipt = json.loads(pathlib.Path('receipts/yado-evolution-loop-v1.json').read_text())
+          assert receipt['status'] == 'PASS_SHADOW_YADO_EVOLUTION_LOOP_V1'
+          assert receipt['network']['network_executed'] is True
+          assert receipt['network']['read_only_enforced'] is True
+          assert receipt['network']['credentials_used'] is False
+          assert receipt['network']['http_status'] == 200
+          assert receipt['shadow_candidate']['compile_pass'] is True
+          assert receipt['external_coding_model_used'] is False
+          assert receipt['canonical_mutation'] is False
+          path = pathlib.Path(receipt['shadow_candidate']['path'])
+          spec = importlib.util.spec_from_file_location('candidate', path)
+          mod = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+          digest = mod.evidence_digest()
+          assert len(digest) == 64
+          print('PASS causal receipt; candidate digest:', digest)
+          PY
+      - name: Upload evolution evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-evolution-loop-v1-evidence
+          path: |
+            receipts/yado-evolution-loop-v1.json
+            candidates/g2-self-evolution/yado_evolution_bound_evidence_candidate_v1.py
