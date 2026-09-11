@@ -246,7 +246,7 @@
       "title": "TheTVDB API v3"
     }
   ],
-  "receipt_sha256": "ef85d1ed3a02d3eaa71c6e15208048e894d39047087a7de72d2af9db136e77c6",
+  "receipt_sha256": "5a7606c04c1c817ebed4a8969cbf623e34ce6c0c89e0da61eb2762a21f220338",
   "registry_digest": "515531fa2539a73ac1938defab3d4b4234d8f7c60785e4e647fa8f739d9a17c1",
   "registry_path": "candidates/kernel-self-generated/g2-native-openapi-integration-registry-v2.json",
   "schema": "yado.g2.native_openapi_discovery_integration.v2",
@@ -355,10 +355,10 @@
       "path": "/api",
       "required_parameter_count": 0,
       "resolved_public_ips": [
-        "35.71.179.82",
-        "75.2.60.68",
+        "99.83.220.108",
         "13.248.244.96",
-        "99.83.220.108"
+        "35.71.179.82",
+        "75.2.60.68"
       ],
       "response_codes": [
         "200"
@@ -403,5 +403,37 @@
       "status": "READY"
     }
   },
-  "status": "WITHHOLD_G2_NATIVE_OPENAPI_DISCOVERY_INTEGRATION_V2"
+  "status": "PASS_SHADOW_G2_NATIVE_OPENAPI_DISCOVERY_INTEGRATION_V2",
+  "verdict_evaluation": {
+    "negative_checks": {
+      "account_creation_attempted": false,
+      "credential_bypass_attempted": false,
+      "external_coding_models_used": false,
+      "host_selected_provider": false,
+      "host_source_seed_used": false,
+      "private_network_access": false
+    },
+    "negative_pass": true,
+    "positive_checks": {
+      "adapter_compiles": true,
+      "authentication_requirement_determined": true,
+      "canonical_unchanged": true,
+      "catalog_fetched": true,
+      "fresh_adapter_source_created": true,
+      "fresh_tests_pass": true,
+      "json_parse_pass": true,
+      "openapi_contract_digest_recorded": true,
+      "openapi_contract_fetched": true,
+      "provenance_chain_recorded": true,
+      "provider_selected_by_kernel": true,
+      "real_live_http_2xx": true,
+      "required_parameters_absent": true,
+      "semantic_ir_created": true,
+      "shadow_registry_created": true,
+      "static_safety_gate_pass": true,
+      "unauthenticated_get_selected": true
+    },
+    "positive_pass": true
+  },
+  "verdict_revision": "V2_1_EXPECTED_POLARITY_REPAIR"
 }
