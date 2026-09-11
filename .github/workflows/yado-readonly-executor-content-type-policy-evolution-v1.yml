@@ -1,0 +1,120 @@
+name: YADO Readonly Executor Content Type Policy Evolution V1
+
+on:
+  push:
+    branches: [yado-public-dns-research-v1]
+    paths:
+      - 'runtime/yado_readonly_executor_content_type_policy_evolution_v1.py'
+      - '.github/workflows/yado-readonly-executor-content-type-policy-evolution-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shadow:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare runtime
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+      - name: Reproduce YADO causal deficit
+        run: |
+          python -m py_compile runtime/yado_network_self_directed_repair_v2.py
+          PYTHONPATH=runtime:runtime/yado_rc8_v36 python runtime/yado_network_self_directed_repair_v2.py
+          python - <<'PY'
+          import json
+          x=json.load(open('candidates/network/yado-network-self-directed-repair-v2.json'))
+          assert x['status']=='WITHHOLD_EXPLICIT_NETWORK_CAPABILITY_DEFICIT_V2',x
+          assert x['diagnosis']=='LOCAL_EXECUTOR_POLICY_BLOCKS_VALID_DNS_MEDIA_TYPE',x
+          assert x['next_required_capability']=='READONLY_EXECUTOR_CONTENT_TYPE_POLICY_EVOLUTION_V1',x
+          print(x['diagnosis'])
+          PY
+      - name: Let YADO materialize bounded AST policy repair
+        run: |
+          python -m py_compile runtime/yado_readonly_executor_content_type_policy_evolution_v1.py
+          python runtime/yado_readonly_executor_content_type_policy_evolution_v1.py
+          python - <<'PY'
+          import json
+          x=json.load(open('candidates/network/yado-readonly-executor-content-type-policy-evolution-v1.json'))
+          assert x['status']=='PASS_SHADOW_NATIVE_POLICY_REPAIR_CANDIDATE_V1',x
+          assert x['derived_media_type']=='application/dns-json',x
+          assert x['external_model_used'] is False
+          assert x['canonical_mutation'] is False
+          assert x['safety_guards_preserved'] is True
+          print(x['candidate_sha256'])
+          PY
+      - name: Real Cloudflare fresh test and safety ablations
+        run: |
+          PYTHONPATH=runtime python - <<'PY'
+          import importlib.util,json
+          from pathlib import Path
+          p=Path('candidates/network/yado_g2_openapi_readonly_executor_content_type_candidate_v1.py')
+          spec=importlib.util.spec_from_file_location('candidate_executor',p)
+          m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          E=m.G2OpenAPIReadOnlyExecutorV1
+          ex=E(['cloudflare-dns.com'],max_bytes=262144,timeout=10)
+          plan={'action':'ALLOW','read_only_candidate':True,'method':'GET','network_execute':False,'path':'/dns-query','contract_id':'FRESH-CLOUDFLARE-V1','required_slots':{'query':[{'name':'name'},{'name':'type'}]}}
+          r=ex.execute(plan,'https://cloudflare-dns.com',query={'name':'example.net','type':'A'},headers={'Accept':'application/dns-json'})
+          body=json.loads(r.pop('body_text'))
+          assert r['status']==200,r
+          assert r['content_type']=='application/dns-json',r
+          assert body.get('Status')==0,body
+          assert body.get('Answer'),body
+          assert r['credentials_used'] is False and r['read_only_enforced'] is True
+          negatives={}
+          try: ex.execute(plan,'https://cloudflare-dns.com',query={'name':'example.net','type':'A'},headers={'Authorization':'x'})
+          except Exception as e: negatives['credential']=str(e)
+          post=dict(plan);post['method']='POST'
+          try: ex.execute(post,'https://cloudflare-dns.com',query={'name':'example.net','type':'A'})
+          except Exception as e: negatives['write_method']=str(e)
+          try: ex.execute(plan,'http://cloudflare-dns.com',query={'name':'example.net','type':'A'})
+          except Exception as e: negatives['https']=str(e)
+          assert 'CREDENTIAL_HEADER_REJECTED' in negatives.get('credential',''),negatives
+          assert 'METHOD_NOT_READ_ONLY' in negatives.get('write_method',''),negatives
+          assert 'HTTPS_REQUIRED' in negatives.get('https',''),negatives
+          out={'status':'PASS_FRESH_CLOUDFLARE_AND_SAFETY_ABLATIONS','dns_status':body.get('Status'),'answer_count':len(body.get('Answer',[]) or []),'content_type':r['content_type'],'negative_checks':negatives,'execution_digest':r['execution_digest']}
+          Path('candidates/network/yado-readonly-executor-content-type-policy-fresh-v1.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(out,sort_keys=True))
+          PY
+      - name: Full kernel audit
+        run: python runtime/yado_full_kernel_audit_v1.py
+      - name: Fresh Successor build and full regression
+        run: |
+          rm -rf "$RUNNER_TEMP/yado-successor-content-type-v1"
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-content-type-v1"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-content-type-v1/manifest.json"
+      - name: Verify all gates
+        run: |
+          python - <<'PY'
+          import json
+          a=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          f=json.load(open('candidates/network/yado-readonly-executor-content-type-policy-fresh-v1.json'))
+          c=json.load(open('candidates/network/yado-readonly-executor-content-type-policy-evolution-v1.json'))
+          assert a['status']=='PASS' and not a.get('findings'),a
+          assert r['status']=='PASS' and r['tests_run']==r['expected_tests']==170,r
+          assert f['status']=='PASS_FRESH_CLOUDFLARE_AND_SAFETY_ABLATIONS',f
+          assert c['status']=='PASS_SHADOW_NATIVE_POLICY_REPAIR_CANDIDATE_V1',c
+          print(json.dumps({'candidate':c['status'],'fresh':f['status'],'audit':a['status'],'regression':r['status'],'tests':r['tests_run']},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-readonly-executor-content-type-policy-evolution-v1-${{ github.run_id }}
+          path: |
+            candidates/network/yado-network-self-directed-repair-v2.json
+            candidates/network/yado-readonly-executor-content-type-policy-evolution-v1.json
+            candidates/network/yado_g2_openapi_readonly_executor_content_type_candidate_v1.py
+            candidates/network/yado-readonly-executor-content-type-policy-fresh-v1.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
