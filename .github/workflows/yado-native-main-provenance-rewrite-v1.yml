@@ -1,0 +1,127 @@
+name: YADO Native Main Provenance Rewrite V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "runtime/yado_g2_native_main_provenance_rewrite_v1.py"
+      - ".github/workflows/yado-native-main-provenance-rewrite-v1.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-native-main-provenance-rewrite-v1
+  cancel-in-progress: false
+
+jobs:
+  native-rewrite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - name: Pin starting main head
+        run: echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Prepare YADO runtime
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Compile native source realization machinery
+        run: |
+          python -m py_compile runtime/yado_g2_native_main_provenance_rewrite_v1.py
+          python -m py_compile runtime/yado_unified_core_deep_self_audit_v1.py
+          python -m py_compile runtime/yado_full_kernel_audit_v1.py
+          python -m py_compile runtime/yado_full_regression_v1.py
+
+      - name: Generate source candidate inside YADO native AST path
+        run: python runtime/yado_g2_native_main_provenance_rewrite_v1.py
+
+      - name: Verify native receipt before mutation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('candidates/kernel-self-generated/g2-native-main-provenance-rewrite-v1.json')
+          d=json.loads(p.read_text())
+          assert d['status']=='PASS_SHADOW_G2_NATIVE_MAIN_PROVENANCE_REWRITE_V1', d
+          assert d['external_model_used'] is False, d
+          assert d['native_ast_materialization'] is True, d
+          assert d['target_path']=='runtime/yado_unified_core_deep_self_audit_v1.py', d
+          assert Path(d['candidate_path']).exists(), d
+          print(json.dumps({'status':d['status'],'candidate_sha256':d['candidate_sha256'],'external_model_used':d['external_model_used']},sort_keys=True))
+          PY
+
+      - name: Install candidate into working main and verify causal effect
+        run: |
+          cp runtime/yado_unified_core_deep_self_audit_v1.py "$RUNNER_TEMP/parent-audit.py"
+          cp candidates/g2-self-evolution/yado_unified_core_deep_self_audit_native_provenance_candidate_v1.py runtime/yado_unified_core_deep_self_audit_v1.py
+          python -m py_compile runtime/yado_unified_core_deep_self_audit_v1.py
+          python runtime/yado_unified_core_deep_self_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
+          f=next(x for x in d['findings'] if x['code']=='LEGACY_EXPERIENCE_SUMMARY_PROVENANCE')
+          assert f['status']=='PASS', f
+          assert d.get('self_selected_next_step')!='LEGACY_EXPERIENCE_SUMMARY_PROVENANCE', d.get('self_selected_next_step')
+          out={'status':'PASS_NATIVE_PROVENANCE_CAUSAL_EFFECT','finding':f,'next_step':d.get('self_selected_next_step')}
+          Path('audits').mkdir(exist_ok=True)
+          Path('audits/yado-native-main-provenance-causal-effect-v1.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
+          print(json.dumps({'finding_status':f['status'],'next_step':d.get('self_selected_next_step')},sort_keys=True))
+          PY
+
+      - name: Full kernel audit and complete regression
+        run: |
+          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json audits/yado-full-regression-v1-report.log
+          python runtime/yado_full_kernel_audit_v1.py
+          rm -rf "$RUNNER_TEMP/yado-successor-birth-native"
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-birth-native"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth-native/manifest.json"
+
+      - name: Fail closed on concurrent main change
+        run: |
+          git fetch origin main
+          REMOTE_SHA=$(git rev-parse origin/main)
+          echo "base=$BASE_SHA remote=$REMOTE_SHA"
+          if [ "$REMOTE_SHA" != "$BASE_SHA" ]; then
+            echo "Remote main changed after evidence began; re-audit required."
+            exit 1
+          fi
+
+      - name: Admit verified native mutation to main
+        run: |
+          git config user.name "YADO Native Main Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          git add runtime/yado_unified_core_deep_self_audit_v1.py \
+                  candidates/g2-self-evolution/yado_unified_core_deep_self_audit_native_provenance_candidate_v1.py \
+                  candidates/kernel-self-generated/g2-native-main-provenance-rewrite-v1.json \
+                  audits/yado-native-main-provenance-causal-effect-v1.json \
+                  audits/yado-full-kernel-audit-v1-report.json \
+                  audits/yado-full-kernel-audit-v1-summary.md \
+                  audits/yado-full-regression-v1-report.json
+          git commit -m "YADO native main evolution: admit provenance AST self-repair [skip ci]"
+          git push origin HEAD:main
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-native-main-provenance-rewrite-v1-${{ github.run_id }}
+          path: |
+            candidates/kernel-self-generated/g2-native-main-provenance-rewrite-v1.json
+            candidates/g2-self-evolution/yado_unified_core_deep_self_audit_native_provenance_candidate_v1.py
+            audits/yado-native-main-provenance-causal-effect-v1.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-kernel-audit-v1-summary.md
+            audits/yado-full-regression-v1-report.json
+            runtime/yado_unified_core_deep_self_audit_v1_receipt.json
