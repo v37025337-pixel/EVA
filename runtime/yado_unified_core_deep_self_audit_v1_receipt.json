@@ -11,7 +11,7 @@
     "observed_open_deficits": [
       "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2"
     ],
-    "proposed_next_step": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE"
+    "proposed_next_step": "UNREGISTERED_EXPERIENCE_CANDIDATES"
   },
   "canonical_mutation": false,
   "core_snapshot": {
@@ -257,8 +257,8 @@
       ]
     },
     "generation": "G2_CANDIDATE_TRCG_V1",
-    "head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
-    "manifest_digest": "0681c02118548b95f08954201eab1faedfd24f7a0313b6667e93348662b142fc",
+    "head_digest": "3a8094134fb5a607588028dd6601f7560d8b6f986786840cacda8d4d40360edd",
+    "manifest_digest": "a8ee372ae45bc5c963605e5516ee9544d7498f72c1231d1b3eab0a70f47c4551",
     "schema": "yado.unified_core.snapshot.v1",
     "semantic_boundary": "ONE ACTIVE YADO SOFTWARE KERNEL WITH LEGACY BRANCHES AS READ-ONLY EXPERIENCE; NOT AGI OR SUBJECTIVE CONSCIOUSNESS."
   },
@@ -268,8 +268,8 @@
       "blocking": false,
       "code": "HEAD_CONTENT_DIGEST",
       "evidence": {
-        "computed": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
-        "stored": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07"
+        "computed": "3a8094134fb5a607588028dd6601f7560d8b6f986786840cacda8d4d40360edd",
+        "stored": "3a8094134fb5a607588028dd6601f7560d8b6f986786840cacda8d4d40360edd"
       },
       "recommendation": "Preserve content-addressed head integrity.",
       "severity": "INFO",
@@ -280,8 +280,8 @@
       "blocking": false,
       "code": "UNIFIED_CORE_CONTENT_DIGEST",
       "evidence": {
-        "computed": "f00d66ce6a4d5b9ac5658375556fb30a7edcfc7cf9ddb0013a4d8b743373c666",
-        "stored": "f00d66ce6a4d5b9ac5658375556fb30a7edcfc7cf9ddb0013a4d8b743373c666"
+        "computed": "60a23dc7dfde19dfe86b9fb378d9afa6f4fa80ddb9e8235879f4cc49b83e4d0e",
+        "stored": "60a23dc7dfde19dfe86b9fb378d9afa6f4fa80ddb9e8235879f4cc49b83e4d0e"
       },
       "recommendation": "Keep core manifest content-addressed.",
       "severity": "INFO",
@@ -318,9 +318,9 @@
       "code": "HEAD_LEDGER_COHERENCE",
       "evidence": {
         "current_head_event_id": "E0044_G2_PROMOTION",
-        "head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+        "head_digest": "3a8094134fb5a607588028dd6601f7560d8b6f986786840cacda8d4d40360edd",
         "head_generation": "G2_CANDIDATE_TRCG_V1",
-        "ledger_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+        "ledger_digest": "3a8094134fb5a607588028dd6601f7560d8b6f986786840cacda8d4d40360edd",
         "ledger_generation": "G2_CANDIDATE_TRCG_V1"
       },
       "recommendation": "Preserve reconciled single-head lineage.",
@@ -378,34 +378,53 @@
       "blocking": false,
       "code": "REMOTE_BRANCH_INVENTORY_MATCH",
       "evidence": {
+        "classified_count": 33,
         "error": null,
-        "missing_from_registry": [
-          "deployment-vercel-runtime-v1",
-          "pre-history-closure-backup-20260910",
-          "pre-main-evolution-backup-20260911",
-          "tmp-history-closure-20260910",
-          "tmp-history-closure-20260910b",
-          "tmp-history-closure-20260910c",
-          "tmp-history-closure-20260910d",
+        "experience_candidates": [
           "yado-all-experience-tri-organ-genesis-v1",
           "yado-architecture-shadow-pre-rebind-20260907",
           "yado-context-compaction-v1",
           "yado-evolution-loop-v1",
           "yado-g2-causal-library-kernel-v1",
-          "yado-integration-verify-20260910",
           "yado-main-experience-refresh-v1",
           "yado-main-selective-admission-v1",
           "yado-native-self-rewrite-20260910",
           "yado-real-connect-v1",
           "yado-v7-meta-admission-shadow-v1"
         ],
+        "inventory_artifact_digest": "60196afd14f0963ceee614febf7323806767cfdfc7c6cb434196e7c4d54a906d",
         "registered_count": 14,
         "registry_only": [],
-        "remote_count": 32
+        "remote_count": 33,
+        "unclassified_refs": []
       },
-      "recommendation": "Keep experience registry synchronized with actual branch inventory.",
+      "recommendation": "Keep every physical remote ref explicitly classified; only separately admitted evidence-bearing refs belong in cognitive experience.",
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "area": "MEMORY_AND_EXPERIENCE",
+      "blocking": false,
+      "code": "UNREGISTERED_EXPERIENCE_CANDIDATES",
+      "evidence": {
+        "candidate_count": 10,
+        "candidates": [
+          "yado-all-experience-tri-organ-genesis-v1",
+          "yado-architecture-shadow-pre-rebind-20260907",
+          "yado-context-compaction-v1",
+          "yado-evolution-loop-v1",
+          "yado-g2-causal-library-kernel-v1",
+          "yado-main-experience-refresh-v1",
+          "yado-main-selective-admission-v1",
+          "yado-native-self-rewrite-20260910",
+          "yado-real-connect-v1",
+          "yado-v7-meta-admission-shadow-v1"
+        ],
+        "inventory_artifact": "canonical/yado-remote-branch-inventory-v1.json"
+      },
+      "recommendation": "For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.",
       "severity": "MEDIUM",
-      "status": "FAIL"
+      "status": "PARTIAL"
     },
     {
       "area": "MEMORY_AND_EXPERIENCE",
@@ -530,7 +549,7 @@
       "code": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
       "evidence": {
         "error": null,
-        "host_summaries_explicitly_labelled": false,
+        "host_summaries_explicitly_labelled": true,
         "legacy_branch_coverage": true,
         "raw_retrieval_failures": [],
         "rederived_artifact_digest_ok": true,
@@ -542,8 +561,8 @@
         "verified_raw_retrieval_available": true
       },
       "recommendation": "Keep host-curated summaries separate from exact raw-evidence-derived observations; never silently promote lexical/structural observations into semantic validation.",
-      "severity": "MEDIUM",
-      "status": "PARTIAL"
+      "severity": "INFO",
+      "status": "PASS"
     },
     {
       "area": "WORKSPACE_AND_INTEGRATION",
@@ -760,28 +779,20 @@
     }
   ],
   "g3_genesis_performed": false,
-  "github_run_id": "34579999953",
-  "github_sha": "e8e95a25a1a87446878451b509c05e7f21709710",
+  "github_run_id": "34582028678",
+  "github_sha": "fed580d78e8b8e8ec1a64e63b7f3332592a8e399",
   "overall_verdict": "PASS_WITH_LIMITATIONS",
-  "receipt_sha256": "59af23e4cf5da19546bfd1d16be186e7e8f6dd4a8d8434859f4f27abe69fc020",
+  "receipt_sha256": "12a64b26a5f8d7d0edd68f859e32cac06ff42d24556be0d6da46bf1500177fcc",
   "repair_applied": false,
   "schema": "yado.unified_core.deep_self_audit.receipt.v1",
-  "self_selected_next_step": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+  "self_selected_next_step": "UNREGISTERED_EXPERIENCE_CANDIDATES",
   "self_selected_priority": [
     {
       "area": "MEMORY_AND_EXPERIENCE",
       "blocking": false,
-      "code": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+      "code": "UNREGISTERED_EXPERIENCE_CANDIDATES",
       "rank": 1,
-      "recommended_action": "Keep host-curated summaries separate from exact raw-evidence-derived observations; never silently promote lexical/structural observations into semantic validation.",
-      "severity": "MEDIUM"
-    },
-    {
-      "area": "MEMORY_AND_EXPERIENCE",
-      "blocking": false,
-      "code": "REMOTE_BRANCH_INVENTORY_MATCH",
-      "rank": 2,
-      "recommended_action": "Keep experience registry synchronized with actual branch inventory.",
+      "recommended_action": "For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.",
       "severity": "MEDIUM"
     }
   ],
@@ -790,9 +801,9 @@
   "summary": {
     "blocking_findings": 0,
     "critical_failures": 0,
-    "finding_count": 20,
+    "finding_count": 21,
     "high_failures": 0,
     "partial_findings": 1,
-    "pass_findings": 18
+    "pass_findings": 20
   }
 }

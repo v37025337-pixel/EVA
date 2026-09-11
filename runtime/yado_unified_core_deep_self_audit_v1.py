@@ -24,6 +24,7 @@ REAL_LEGACY = REPO / 'receipts' / 'yado-g2-real-world-transfer-benchmark-v1-run-
 REAL_LATEST = REPO / 'receipts' / 'yado-g2-real-world-transfer-recheck-canonical-v1-latest.json'
 REAL = REAL_LATEST if REAL_LATEST.exists() else REAL_LEGACY
 REAL_NATIVE_V2 = REPO / 'architecture' / 'yado-real-world-generalization-state-v2.json'
+BRANCH_INVENTORY = REPO / 'canonical' / 'yado-remote-branch-inventory-v1.json'
 POST = REPO / 'receipts' / 'yado-g2-post-workload-capability-audit-v1-run-33363851997.json'
 CONSOL = REPO / 'receipts' / 'yado-unified-core-consolidation-gate-v1-run-33371375385.json'
 RECON = REPO / 'receipts' / 'yado-unified-core-ledger-reconciliation-v1-run-33371661769.json'
@@ -108,8 +109,14 @@ except Exception as exc:
     remote_error = type(exc).__name__ + ':' + str(exc)
 registered = {x.get('branch') for x in branches}
 remote_set = set(remote_branches)
-remote_inventory_ok = bool(remote_branches) and registered == remote_set
-add('REMOTE_BRANCH_INVENTORY_MATCH', 'MEMORY_AND_EXPERIENCE', 'MEDIUM' if remote_branches and (not remote_inventory_ok) else 'LOW' if not remote_branches else 'INFO', 'PASS' if remote_inventory_ok else 'UNAVAILABLE' if not remote_branches else 'FAIL', {'registered_count': len(registered), 'remote_count': len(remote_set), 'missing_from_registry': sorted(remote_set - registered), 'registry_only': sorted(registered - remote_set), 'error': remote_error}, 'Keep experience registry synchronized with actual branch inventory.', False)
+branch_inventory = load(BRANCH_INVENTORY) if BRANCH_INVENTORY.exists() else {}
+inventory_rows = branch_inventory.get('rows', []) if isinstance(branch_inventory, dict) else []
+classified_names = {str(x.get('branch')) for x in inventory_rows if x.get('branch')}
+unclassified_refs = list(branch_inventory.get('unclassified_refs', [])) if isinstance(branch_inventory, dict) else []
+experience_candidates = list(branch_inventory.get('experience_candidates', [])) if isinstance(branch_inventory, dict) else []
+remote_inventory_ok = bool(remote_branches) and branch_inventory.get('status') == 'PASS_COMPLETE_REMOTE_REF_CLASSIFICATION' and branch_inventory.get('coverage_complete') is True and classified_names == remote_set and not unclassified_refs
+add('REMOTE_BRANCH_INVENTORY_MATCH', 'MEMORY_AND_EXPERIENCE', 'MEDIUM' if remote_branches and (not remote_inventory_ok) else 'LOW' if not remote_branches else 'INFO', 'PASS' if remote_inventory_ok else 'UNAVAILABLE' if not remote_branches else 'FAIL', {'registered_count': len(registered), 'remote_count': len(remote_set), 'classified_count': len(classified_names), 'registry_only': sorted(registered - remote_set), 'experience_candidates': experience_candidates, 'unclassified_refs': unclassified_refs, 'inventory_artifact_digest': branch_inventory.get('artifact_digest'), 'error': remote_error}, 'Keep every physical remote ref explicitly classified; only separately admitted evidence-bearing refs belong in cognitive experience.', False)
+add('UNREGISTERED_EXPERIENCE_CANDIDATES', 'MEMORY_AND_EXPERIENCE', 'MEDIUM' if experience_candidates else 'INFO', 'PARTIAL' if experience_candidates else 'PASS', {'candidate_count': len(experience_candidates), 'candidates': experience_candidates, 'inventory_artifact': 'canonical/yado-remote-branch-inventory-v1.json'}, 'For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.', False)
 runtime_text = RUNTIME.read_text(encoding='utf-8')
 legacy_missing_refs = []
 for entry in legacy:
