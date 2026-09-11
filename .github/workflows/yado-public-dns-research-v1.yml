@@ -1,0 +1,33 @@
+name: YADO Public DNS Research V1
+on:
+  push:
+    branches: [yado-public-dns-research-v1]
+  workflow_dispatch:
+jobs:
+  research:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Run YADO read-only DNS research
+        run: |
+          python -m py_compile runtime/yado_public_dns_research_v1.py
+          PYTHONPATH=runtime python runtime/yado_public_dns_research_v1.py
+      - name: Verify bounded contract
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('candidates/network/yado-public-dns-research-v1.json'))
+          assert x['credentials_used'] is False
+          assert x['mutation'] is False
+          assert x['status'] in {'PASS_READONLY_RESEARCH','WITHHOLD_NO_REACHABLE_DOH'}
+          print(x['status'])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-public-dns-research-v1-${{ github.run_id }}
+          path: candidates/network/yado-public-dns-research-v1.json
