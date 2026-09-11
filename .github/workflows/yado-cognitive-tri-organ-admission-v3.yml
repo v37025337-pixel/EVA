@@ -49,10 +49,12 @@ jobs:
       - name: Counterfactual baseline must be worse
         run: |
           python - <<'PY'
-          import importlib.util, pathlib
+          import importlib.util, pathlib, sys
           p=pathlib.Path('runtime/yado_cognitive_tri_organ_evolution_v2.py')
           spec=importlib.util.spec_from_file_location('tri',p)
-          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          m=importlib.util.module_from_spec(spec)
+          sys.modules['tri']=m
+          spec.loader.exec_module(m)
           tasks=m.build_tasks(m.SEED)
           base=m.Genome(1,False,1,1,2)
           evolved=m.Genome(3,False,4,2,6)
