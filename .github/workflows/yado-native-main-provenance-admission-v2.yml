@@ -76,9 +76,13 @@ jobs:
           assert v2['status']=='PASS_CANONICAL_PENDING_FULL_AUDIT_G2_NATIVE_MAIN_PROVENANCE_ADMISSION_V2'
           assert v2['provenance_finding']['status']=='PASS'
           assert v2['deep_audit_next_step']!='LEGACY_EXPERIENCE_SUMMARY_PROVENANCE'
-          assert audit['status']=='PASS_AUDIT', audit
-          assert reg['status'].startswith('PASS'), reg
-          print(json.dumps({'v1':v1['status'],'v2':v2['status'],'audit':audit['status'],'regression':reg['status'],'next_step':v2['deep_audit_next_step']},sort_keys=True))
+          assert audit['status']=='PASS', audit
+          assert not audit.get('findings'), audit
+          assert audit['canonical']['canonical_guard']=='PASS', audit['canonical']
+          assert audit['canonical']['ledger_validation']=='PASS', audit['canonical']
+          assert reg['status']=='PASS', reg
+          assert reg['tests_run']==reg['expected_tests']==170, reg
+          print(json.dumps({'v1':v1['status'],'v2':v2['status'],'audit':audit['status'],'regression':reg['status'],'tests':reg['tests_run'],'next_step':v2['deep_audit_next_step']},sort_keys=True))
           PY
 
       - name: Fail closed if main changed concurrently
