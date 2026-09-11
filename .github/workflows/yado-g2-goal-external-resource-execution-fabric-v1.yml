@@ -1,0 +1,97 @@
+name: YADO G2 Goal External Resource Execution Fabric V1
+
+on:
+  push:
+    branches:
+      - yado-architecture-shadow-search
+    paths:
+      - architecture/yado-goal-external-resource-execution-fabric-v1-request.json
+
+permissions:
+  contents: write
+
+jobs:
+  execute-fabric:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+
+      - name: Canonical guard before execution fabric
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Compile execution fabric and dependencies
+        run: |
+          python -m py_compile runtime/yado_native_integration_broker_v1.py
+          python -m py_compile runtime/yado_native_integration_broker_v1_1.py
+          python -m py_compile runtime/yado_native_openapi_discovery_integration_v2.py
+          python -m py_compile runtime/yado_external_resource_goal_binder_v1.py
+          python -m py_compile runtime/yado_goal_external_resource_execution_fabric_v1.py
+
+      - name: Execute three fresh goals through unified fabric
+        run: python runtime/yado_goal_external_resource_execution_fabric_v1.py
+
+      - name: Enforce strict three-route verdict
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('candidates/kernel-self-generated/g2-goal-external-resource-execution-fabric-v1.json')
+          r=pathlib.Path('candidates/kernel-self-generated/g2-goal-external-resource-execution-fabric-registry-v1.json')
+          if not p.exists(): raise SystemExit('MISSING_EXECUTION_FABRIC_REPORT')
+          if not r.exists(): raise SystemExit('MISSING_EXECUTION_FABRIC_REGISTRY')
+          x=json.loads(p.read_text())
+          g=json.loads(r.read_text())
+          c=x['checks']
+          assert x['status']=='PASS_SHADOW_G2_GOAL_EXTERNAL_RESOURCE_EXECUTION_FABRIC_V1', x
+          assert all(c.values()), c
+          assert x['cases']['local']['route']=='LOCAL_ONLY', x
+          assert x['cases']['local']['discovery_invoked'] is False, x
+          assert x['cases']['local']['network_route_invoked'] is False, x
+          assert x['cases']['existing']['route']=='USE_EXISTING_INTEGRATION', x
+          assert x['cases']['existing']['registry_reused'] is True, x
+          assert x['cases']['existing']['discovery_invoked'] is False, x
+          assert x['cases']['discovery']['route']=='DISCOVER_NEW_API', x
+          assert x['cases']['discovery']['discovery_invoked'] is True, x
+          assert x['cases']['discovery']['registry_reused'] is False, x
+          assert g['status']=='PASS_SHADOW', g
+          assert g['canonical_mutation'] is False, g
+          print(x['status'], x['cases']['existing']['selected_api_id'], x['discovered_api_id'], c['canonical_unchanged'])
+          PY
+
+      - name: Canonical guard after execution fabric
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Persist execution fabric evidence
+        if: always()
+        run: |
+          git config user.name "YADO Goal External Resource Execution Fabric"
+          git config user.email "actions@users.noreply.github.com"
+          for p in \
+            candidates/kernel-self-generated/g2-goal-external-resource-execution-fabric-v1.json \
+            candidates/kernel-self-generated/g2-goal-external-resource-execution-fabric-registry-v1.json; do
+            if [ -f "$p" ]; then git add "$p"; fi
+          done
+          git diff --cached --quiet || git commit -m "Persist three-route execution fabric evidence [skip ci]"
+          git reset --hard HEAD
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-goal-external-resource-execution-fabric-v1-${{ github.run_id }}
+          path: |
+            candidates/kernel-self-generated/g2-goal-external-resource-execution-fabric-v1.json
+            candidates/kernel-self-generated/g2-goal-external-resource-execution-fabric-registry-v1.json
+          if-no-files-found: warn
