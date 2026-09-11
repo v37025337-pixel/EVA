@@ -1,0 +1,60 @@
+name: YADO Autonomous Evolution Loop V3
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-autonomous-evolution-loop-v3]
+    paths:
+      - 'runtime/yado_autonomous_evolution_loop_v3.py'
+      - '.github/workflows/yado-autonomous-evolution-loop-v3.yml'
+permissions:
+  contents: read
+jobs:
+  evolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: yado-autonomous-evolution-loop-v3
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+      - name: Compile V3 controller
+        run: python -m py_compile runtime/yado_autonomous_evolution_loop_v3.py
+      - name: Run three-generation autonomous evolution lineage
+        run: python runtime/yado_autonomous_evolution_loop_v3.py
+      - name: Verify V3 evidence contract
+        run: |
+          python - <<'PY'
+          import json
+          p='candidates/autonomous/yado-autonomous-evolution-loop-v3.json'
+          r=json.load(open(p))
+          assert r['status']=='PASS_SHADOW_BOUNDED_MULTI_GENERATION_AUTONOMOUS_EVOLUTION_V3',r
+          assert r['generation_count']==3,r
+          assert r['chain_continuity'] is True,r
+          assert r['external_model_used_for_rewrite'] is False,r
+          assert r['credentials_used'] is False,r
+          assert r['external_writes'] is False,r
+          assert r['downloaded_code_executed'] is False,r
+          assert r['canonical_mutation'] is False,r
+          assert r['automatic_main_mutation'] is False,r
+          assert all(g['candidate_sha256'] != g['parent_sha256'] for g in r['generations']),r
+          assert all(g['successful_sources'] >= 1 for g in r['generations']),r
+          assert all(g['prior_success_ids'] and any(x in g['top_ranked_source_ids'] for x in g['prior_success_ids']) for g in r['generations']),r
+          print('PASS_SHADOW_BOUNDED_MULTI_GENERATION_AUTONOMOUS_EVOLUTION_V3')
+          PY
+      - name: Checkout-level compile regression
+        run: |
+          python -m compileall -q runtime successor
+          python -m unittest discover -s successor/tests -p 'test_*.py'
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-autonomous-evolution-loop-v3-${{ github.run_id }}
+          path: |
+            candidates/autonomous/yado-autonomous-evolution-loop-v3.json
