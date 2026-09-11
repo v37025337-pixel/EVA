@@ -1,0 +1,89 @@
+name: YADO Native Experience To Runtime Self Rewrite V2
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-bounded-autonomous-learning-v1]
+    paths:
+      - 'runtime/yado_native_experience_to_runtime_self_rewrite_v2.py'
+      - '.github/workflows/yado-native-experience-to-runtime-self-rewrite-v2.yml'
+permissions:
+  contents: read
+jobs:
+  shadow:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: yado-bounded-autonomous-learning-v1
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+      - name: Generate native experience-conditioned runtime candidate
+        run: |
+          python -m py_compile runtime/yado_native_experience_to_runtime_self_rewrite_v2.py
+          python runtime/yado_native_experience_to_runtime_self_rewrite_v2.py
+      - name: Execute candidate in isolated repository and verify changed behavior
+        run: |
+          python - <<'PY'
+          import json, pathlib, shutil, subprocess, sys, tempfile
+          root=pathlib.Path('.').resolve()
+          r=json.load(open('candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json'))
+          assert r['status']=='PASS_SHADOW_NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_CANDIDATE_V2',r
+          assert r['external_model_used'] is False
+          assert r['canonical_mutation'] is False
+          candidate=root/r['candidate_path']
+          with tempfile.TemporaryDirectory(prefix='yado-v2-shadow-') as td:
+              dst=pathlib.Path(td)/'repo'
+              shutil.copytree(root,dst,ignore=shutil.ignore_patterns('.git','__pycache__','*.pyc','*.sqlite'))
+              target=dst/r['target_path']
+              target.write_bytes(candidate.read_bytes())
+              cp=subprocess.run([sys.executable,str(target.relative_to(dst))],cwd=dst,env={**__import__('os').environ,'PYTHONPATH':f"{dst/'runtime'}:{dst/'runtime/yado_rc8_v36'}"},capture_output=True,text=True,timeout=180)
+              if cp.returncode!=0:
+                  raise SystemExit(cp.stdout+'\n'+cp.stderr)
+              exp=json.load(open(dst/'experience/autonomous/yado-autonomous-learning-latest.json'))
+              receipt=json.load(open(dst/'candidates/autonomous/yado-bounded-autonomous-learning-v1.json'))
+              learned=r['learned_binding']
+              ranking=exp.get('source_ranking') or []
+              top=[x.get('id') for x in ranking[:3]]
+              assert learned['successful_source_ids'], learned
+              assert any(x in top for x in learned['successful_source_ids']), (top,learned)
+              assert receipt['status']=='PASS_SHADOW_BOUNDED_AUTONOMOUS_EXTERNAL_LEARNING_V1',receipt
+              out={'status':'PASS_ISOLATED_EXPERIENCE_CONDITIONED_RUNTIME_EXECUTION_V2','top_ranked_source_ids':top,'prior_success_ids':learned['successful_source_ids'],'new_experience_digest':exp['experience_digest']}
+              (root/'candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2-isolated.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
+              print(json.dumps(out,sort_keys=True))
+          PY
+      - name: Regression and compile gates
+        run: |
+          python -m compileall -q runtime successor
+          python -m unittest discover -s successor/tests -p 'test_*.py'
+          PYTHONPATH=runtime:runtime/yado_rc8_v36 python -m unittest \
+            runtime/yado_rc8_v36/test_yado_rc8_self_audit_consistency_v1.py \
+            runtime/yado_rc8_v36/test_yado_external_runtime_contract_v1.py \
+            runtime/yado_rc8_v36/test_yado_skill_admission_runtime_v1.py \
+            runtime/yado_rc8_v36/test_yado_transfer_evaluation_runtime_v1.py
+      - name: Verify shadow admission contract
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json'))
+          x=json.load(open('candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2-isolated.json'))
+          assert x['status']=='PASS_ISOLATED_EXPERIENCE_CONDITIONED_RUNTIME_EXECUTION_V2'
+          assert r['candidate_sha256']!=r['parent_sha256']
+          assert r['downloaded_code_executed'] is False
+          assert r['credentials_used'] is False
+          assert r['external_writes'] is False
+          assert r['automatic_main_mutation'] is False
+          print('PASS_SHADOW_NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_AND_REGRESSION_GATE_V2')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-native-experience-to-runtime-self-rewrite-v2-${{ github.run_id }}
+          path: |
+            candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json
+            candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2-isolated.json
+            candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v2.py
