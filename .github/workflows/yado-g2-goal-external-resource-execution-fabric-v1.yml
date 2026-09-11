@@ -38,9 +38,10 @@ jobs:
           python -m py_compile runtime/yado_native_openapi_discovery_integration_v2.py
           python -m py_compile runtime/yado_external_resource_goal_binder_v1.py
           python -m py_compile runtime/yado_goal_external_resource_execution_fabric_v1.py
+          python -m py_compile runtime/yado_goal_external_resource_execution_fabric_v1_1.py
 
       - name: Execute three fresh goals through unified fabric
-        run: python runtime/yado_goal_external_resource_execution_fabric_v1.py
+        run: python runtime/yado_goal_external_resource_execution_fabric_v1_1.py
 
       - name: Enforce strict three-route verdict
         run: |
@@ -64,6 +65,7 @@ jobs:
           assert x['cases']['discovery']['route']=='DISCOVER_NEW_API', x
           assert x['cases']['discovery']['discovery_invoked'] is True, x
           assert x['cases']['discovery']['registry_reused'] is False, x
+          assert x['cases']['discovery']['novelty_filter']['selected_domain_match'] is True, x
           assert g['status']=='PASS_SHADOW', g
           assert g['canonical_mutation'] is False, g
           print(x['status'], x['cases']['existing']['selected_api_id'], x['discovered_api_id'], c['canonical_unchanged'])
