@@ -1,0 +1,249 @@
+name: YADO Main Evolution V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "architecture/yado-kernel-autonomous-self-improvement-v1-request.json"
+      - ".github/workflows/yado-main-evolution-v1.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-main-evolution-v1
+  cancel-in-progress: false
+
+jobs:
+  evolve-main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - name: Establish rollback point
+        run: |
+          echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          git tag -f "main-evolution-run-${GITHUB_RUN_ID}-base" HEAD
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct inherited runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Build all-experience evidence index
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, subprocess
+
+          roots=[Path('experience'),Path('receipts'),Path('candidates'),Path('canonical'),Path('audits')]
+          layer_tokens={
+            'CAUSAL_MEMORY':['memory','history','ledger','causal'],
+            'SELF_MODEL':['self_model','self-model','metacognitive','prediction_error'],
+            'CONSCIOUS_WORKSPACE':['workspace','attention','broadcast','conscious'],
+            'LOGIC':['logic','relation','rule','reason'],
+            'THINKING':['thinking','planner','hypothesis','recurrent'],
+            'INTELLIGENCE':['intelligence','selection','transfer','router'],
+            'COGNITIVE_CONTROL':['cognitive','controller','executive','meta_controller'],
+            'GOAL_SELECTION':['goal','priority','motive','frontier'],
+            'SOURCE_GENERATION':['source','ast','constructor','emitter','genesis'],
+            'SELF_REWRITE':['rewrite','mutation','repair','evolution'],
+            'EXECUTION_FABRIC':['execution','fabric','adapter','runtime'],
+            'NETWORK_EVIDENCE':['network','openapi','external','resource'],
+            'EVOLUTIONARY_GENOME':['genome','grammar','evolutionary'],
+            'INTEGRATION_AND_REGRESSION':['integration','audit','regression','canonical'],
+          }
+          files=[]; statuses={}; layer_hits={k:0 for k in layer_tokens}
+          for root in roots:
+            if not root.exists(): continue
+            for p in root.rglob('*'):
+              if not p.is_file(): continue
+              rel=p.as_posix()
+              b=p.read_bytes()
+              row={'path':rel,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+              text=''
+              if p.suffix.lower() in {'.json','.md','.txt','.py','.yml','.yaml'}:
+                text=b.decode('utf-8','replace')[:400000]
+              if p.suffix.lower()=='.json':
+                try:
+                  obj=json.loads(text)
+                  st=obj.get('status') if isinstance(obj,dict) else None
+                  if isinstance(st,str):
+                    statuses[st]=statuses.get(st,0)+1
+                    row['status']=st
+                except Exception:
+                  row['json_parse']='FAIL'
+              hay=(rel+'\n'+text[:50000]).lower()
+              for layer,toks in layer_tokens.items():
+                if any(t.lower() in hay for t in toks):
+                  layer_hits[layer]+=1
+              files.append(row)
+          git_count=int(subprocess.check_output(['git','rev-list','--count','HEAD'],text=True).strip())
+          branches=subprocess.check_output(['git','for-each-ref','--format=%(refname:short)','refs/remotes/origin'],text=True).splitlines()
+          out={
+            'schema':'yado.main_evolution.all_experience_index.v1',
+            'head_before':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+            'git_commit_count':git_count,
+            'remote_branch_count':len(branches),
+            'indexed_file_count':len(files),
+            'status_histogram':dict(sorted(statuses.items())),
+            'layer_evidence_hits':layer_hits,
+            'roots':[str(x) for x in roots],
+            'files':files,
+          }
+          Path('audits').mkdir(exist_ok=True)
+          Path('audits/yado-main-evolution-all-experience-index-v1.json').write_text(json.dumps(out,indent=2,sort_keys=True),encoding='utf-8')
+          print(json.dumps({k:out[k] for k in ('git_commit_count','remote_branch_count','indexed_file_count','layer_evidence_hits')},indent=2,sort_keys=True))
+          PY
+
+      - name: Compile evolution machinery
+        run: |
+          python -m py_compile runtime/yado_unified_core_deep_self_audit_v1.py
+          python -m py_compile runtime/yado_g2_autonomous_self_rewrite_v1.py
+          python -m py_compile runtime/yado_full_kernel_audit_v1.py
+          python -m py_compile runtime/yado_full_regression_v1.py
+
+      - name: Run bounded sequential main evolution
+        shell: bash
+        run: |
+          set -u
+          git config user.name "YADO Main Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p audits/main-evolution-epochs
+          accepted=0
+          attempted=0
+
+          for epoch in 1 2 3 4; do
+            echo "=== YADO MAIN EVOLUTION EPOCH ${epoch} ==="
+            attempted=$((attempted+1))
+
+            # The next target must come from YADO's latest self-audit, not from this workflow.
+            if ! python runtime/yado_unified_core_deep_self_audit_v1.py; then
+              echo '{"status":"WITHHOLD_DEEP_SELF_AUDIT_FAILED"}' > "audits/main-evolution-epochs/epoch-${epoch}.json"
+              break
+            fi
+
+            rm -f candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json
+            if ! python runtime/yado_g2_autonomous_self_rewrite_v1.py; then
+              echo '{"status":"WITHHOLD_REWRITE_CONTROLLER_FAILED"}' > "audits/main-evolution-epochs/epoch-${epoch}.json"
+              break
+            fi
+
+            readarray -t META < <(python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json')
+          if not p.exists():
+              print('MISSING'); print(''); print(''); raise SystemExit
+          d=json.loads(p.read_text(encoding='utf-8'))
+          print(d.get('status',''))
+          print((d.get('target_selection') or {}).get('selected_path',''))
+          print(d.get('candidate_path') or '')
+          PY
+            )
+            status="${META[0]:-}"
+            target="${META[1]:-}"
+            candidate="${META[2]:-}"
+            echo "rewrite status=${status} target=${target} candidate=${candidate}"
+
+            if [[ "$status" != PASS_SHADOW_* ]] || [[ -z "$target" ]] || [[ -z "$candidate" ]] || [[ ! -f "$candidate" ]]; then
+              python - <<PY
+          import json
+          from pathlib import Path
+          Path('audits/main-evolution-epochs/epoch-${epoch}.json').write_text(json.dumps({
+            'epoch':${epoch},'status':'WITHHOLD_NO_ADMISSIBLE_SOURCE_CANDIDATE',
+            'rewrite_status':'${status}','target':'${target}','candidate':'${candidate}'
+          },indent=2,sort_keys=True),encoding='utf-8')
+          PY
+              break
+            fi
+
+            cp "$target" "$RUNNER_TEMP/epoch-${epoch}-parent.py"
+            cp "$candidate" "$target"
+
+            if ! python -m py_compile "$target"; then
+              cp "$RUNNER_TEMP/epoch-${epoch}-parent.py" "$target"
+              echo '{"status":"ROLLBACK_COMPILE_FAILED"}' > "audits/main-evolution-epochs/epoch-${epoch}.json"
+              continue
+            fi
+
+            rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json audits/yado-full-regression-v1-report.log
+            gate=PASS
+            python runtime/yado_full_kernel_audit_v1.py || gate=FAIL
+            rm -rf "$RUNNER_TEMP/yado-successor-birth-${epoch}"
+            python -m successor build --output "$RUNNER_TEMP/yado-successor-birth-${epoch}" || gate=FAIL
+            if [[ "$gate" == PASS ]]; then
+              python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth-${epoch}/manifest.json" || gate=FAIL
+            fi
+
+            if [[ "$gate" != PASS ]]; then
+              cp "$RUNNER_TEMP/epoch-${epoch}-parent.py" "$target"
+              python - <<PY
+          import json
+          from pathlib import Path
+          Path('audits/main-evolution-epochs/epoch-${epoch}.json').write_text(json.dumps({
+            'epoch':${epoch},'status':'ROLLBACK_FULL_GATE_FAILED','target':'${target}',
+            'candidate':'${candidate}','rewrite_status':'${status}'
+          },indent=2,sort_keys=True),encoding='utf-8')
+          PY
+              continue
+            fi
+
+            accepted=$((accepted+1))
+            python - <<PY
+          import hashlib,json
+          from pathlib import Path
+          t=Path('${target}')
+          Path('audits/main-evolution-epochs/epoch-${epoch}.json').write_text(json.dumps({
+            'epoch':${epoch},'status':'PASS_ADMITTED_MAIN_SOURCE_MUTATION',
+            'target':'${target}','candidate':'${candidate}','rewrite_status':'${status}',
+            'target_sha256':hashlib.sha256(t.read_bytes()).hexdigest(),
+            'full_kernel_audit':'PASS','full_regression':'PASS'
+          },indent=2,sort_keys=True),encoding='utf-8')
+          PY
+
+            git add "$target" "$candidate" candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json audits receipts
+            git commit -m "YADO main evolution epoch ${epoch}: admit verified self-selected mutation [skip ci]" || true
+          done
+
+          python - <<PY
+          import json,subprocess
+          from pathlib import Path
+          out={
+            'schema':'yado.main_evolution.v1',
+            'status':'PASS_MAIN_EVOLUTION_EPOCH_SERIES' if ${accepted}>0 else 'WITHHOLD_MAIN_EVOLUTION_NO_ADMITTED_MUTATION',
+            'base_sha':'${BASE_SHA}',
+            'head_after_local_evolution':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+            'attempted_epochs':${attempted},
+            'accepted_epochs':${accepted},
+            'rollback_available':True,
+            'backup_ref':'pre-main-evolution-backup-20260911',
+            'claim_boundary':'This run may use external no-key coding models for source proposals through the pre-existing autonomous rewrite controller. Admission still requires current YADO self-selected target plus compile, full kernel audit and full regression. This is code evolution of main, not proof of consciousness or fully native source genesis.'
+          }
+          Path('audits/yado-main-evolution-v1-report.json').write_text(json.dumps(out,indent=2,sort_keys=True),encoding='utf-8')
+          PY
+
+          git add audits/yado-main-evolution-all-experience-index-v1.json audits/main-evolution-epochs audits/yado-main-evolution-v1-report.json architecture/yado-kernel-autonomous-self-improvement-v1-request.json
+          git commit -m "Persist YADO main evolution V1 evidence [skip ci]" || true
+          git push origin HEAD:main
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-main-evolution-v1-${{ github.run_id }}
+          path: |
+            audits/yado-main-evolution-all-experience-index-v1.json
+            audits/yado-main-evolution-v1-report.json
+            audits/main-evolution-epochs/
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
+            candidates/kernel-self-generated/g2-autonomous-self-rewrite-v1.json
