@@ -19,8 +19,16 @@ def _summarize(payload):
     if isinstance(payload, dict):
         return {'type': 'dict', 'size': len(payload), 'keys': sorted((str(k) for k in payload))[:32]}
     if isinstance(payload, list):
-        return {'type': 'list', 'size': len(payload), 'item_types': sorted({type(x).__name__ for x in payload})[:16]}
-    return {'type': type(payload).__name__, 'size': None}
+        return {'type': 'list', 'size': len(payload)}
+    if isinstance(payload, str):
+        return {'type': 'str', 'size': len(payload)}
+    if isinstance(payload, bool):
+        return {'type': 'bool', 'size': None}
+    if isinstance(payload, (int, float)):
+        return {'type': 'number', 'size': None}
+    if payload is None:
+        return {'type': 'null', 'size': None}
+    return {'type': 'other', 'size': None}
 
 def fetch_json(url, allowed_hosts, timeout=10.0, max_bytes=262144):
     _validate_url(url, allowed_hosts)
