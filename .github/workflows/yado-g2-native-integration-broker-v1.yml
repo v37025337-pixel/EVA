@@ -31,11 +31,13 @@ jobs:
       - name: Canonical guard before integration broker
         run: python runtime/yado_canonical_invariant_guard_v1.py
 
-      - name: Compile integration broker
-        run: python -m py_compile runtime/yado_native_integration_broker_v1.py
+      - name: Compile repaired integration broker
+        run: |
+          python -m py_compile runtime/yado_native_integration_broker_v1.py
+          python -m py_compile runtime/yado_native_integration_broker_v1_1.py
 
       - name: Let YADO select, materialize, connect, integrate, and reuse
-        run: python runtime/yado_native_integration_broker_v1.py
+        run: python runtime/yado_native_integration_broker_v1_1.py
 
       - name: Compile generated adapter
         run: python -m py_compile candidates/kernel-self-generated/yado_native_http_json_adapter_v1.py
@@ -52,6 +54,7 @@ jobs:
           g=json.loads(q.read_text())
           c=r['checks']
           assert r['status']=='PASS_SHADOW_G2_NATIVE_INTEGRATION_BROKER_V1', r
+          assert r.get('broker_revision')=='V1_1_DUNDER_FREE_SUMMARY', r
           assert r['adapter_source_materialized_by_kernel'] is True, r
           assert r['candidate_source_sha256'], r
           assert c['resource_selected_by_broker'] is True, r
@@ -73,7 +76,7 @@ jobs:
           assert g['status']=='PASS_SHADOW', g
           assert g['capabilities'][0]['state']=='SHADOW_VERIFIED', g
           assert g['capabilities'][0]['canonical_active'] is False, g
-          print(r['status'], r['candidate_source_sha256'], r['registry_digest'])
+          print(r['status'], r['broker_revision'], r['candidate_source_sha256'], r['registry_digest'])
           PY
 
       - name: Canonical guard after integration broker
@@ -90,7 +93,7 @@ jobs:
             candidates/kernel-self-generated/yado_native_http_json_adapter_v1.py; do
             if [ -f "$p" ]; then git add "$p"; fi
           done
-          git diff --cached --quiet || git commit -m "Persist native integration broker evidence [skip ci]"
+          git diff --cached --quiet || git commit -m "Persist repaired native integration broker evidence [skip ci]"
           git pull --rebase origin yado-architecture-shadow-search
           git push origin HEAD:yado-architecture-shadow-search
 
