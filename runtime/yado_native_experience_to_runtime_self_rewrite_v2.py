@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -55,8 +56,37 @@ def prior_learning_tokens(exp):
     return sorted(toks)
 
 
-def make_assignment(name, value):
-    return ast.Assign(targets=[ast.Name(id=name, ctx=ast.Store())], value=ast.Constant(value=value))
+def dangerous_call_counts(source):
+    tree = ast.parse(source)
+    names = Counter()
+    attrs = Counter()
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        if isinstance(node.func, ast.Name):
+            names[node.func.id] += 1
+        elif isinstance(node.func, ast.Attribute):
+            attrs[node.func.attr] += 1
+    return {
+        'eval': names['eval'],
+        'exec': names['exec'],
+        'compile': names['compile'],
+        'system': attrs['system'],
+        'Popen': attrs['Popen'],
+        'run': attrs['run'],
+        'call': attrs['call'],
+        'check_call': attrs['check_call'],
+        'check_output': attrs['check_output'],
+    }
+
+
+def assert_no_new_dangerous_constructs(parent_src, candidate_src):
+    before = dangerous_call_counts(parent_src)
+    after = dangerous_call_counts(candidate_src)
+    added = {k: after[k] - before[k] for k in after if after[k] > before[k]}
+    if added:
+        raise RuntimeError('UNSAFE_SOURCE_CONSTRUCT_ADDED:' + canon(added))
+    return {'parent': before, 'candidate': after, 'new_dangerous_calls': added}
 
 
 def synthesize_candidate(parent_src, exp):
@@ -96,7 +126,6 @@ def synthesize_candidate(parent_src, exp):
     if not changed_rank:
         raise RuntimeError('RANK_SOURCES_ANCHOR_NOT_FOUND')
 
-    # Add a small bonus to sources proven reachable in the previous experience.
     bonus_applied = False
     for node in ast.walk(tree):
         if isinstance(node, ast.FunctionDef) and node.name == 'rank_sources':
@@ -114,9 +143,8 @@ def synthesize_candidate(parent_src, exp):
     ast.fix_missing_locations(tree)
     out = ast.unparse(tree) + '\n'
     compile(out, '<yado-native-experience-runtime-v2>', 'exec')
-    if 'eval(' in out or 'exec(' in out or 'subprocess' in out:
-        raise RuntimeError('UNSAFE_SOURCE_CONSTRUCT_ADDED')
-    return out, learned
+    safety_delta = assert_no_new_dangerous_constructs(parent_src, out)
+    return out, learned, safety_delta
 
 
 def main():
@@ -128,7 +156,7 @@ def main():
         raise RuntimeError('UNSAFE_EXPERIENCE_POLICY')
     parent_src = TARGET.read_text(encoding='utf-8')
     parent_sha = sha_text(parent_src)
-    candidate_src, learned = synthesize_candidate(parent_src, exp)
+    candidate_src, learned, safety_delta = synthesize_candidate(parent_src, exp)
     candidate_sha = sha_text(candidate_src)
     if candidate_sha == parent_sha:
         raise RuntimeError('CANDIDATE_UNCHANGED')
@@ -143,6 +171,7 @@ def main():
         'candidate_sha256': candidate_sha,
         'experience_digest': exp.get('experience_digest'),
         'learned_binding': learned,
+        'safety_delta': safety_delta,
         'native_ast_materialization': True,
         'external_model_used': False,
         'downloaded_code_executed': False,
