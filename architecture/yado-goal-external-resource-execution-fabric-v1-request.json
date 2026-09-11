@@ -1,0 +1,44 @@
+{
+  "schema": "yado.g2.goal_external_resource_execution_fabric.request.v1",
+  "objective": "Test one unified shadow execution path across local-only execution, reuse of an already verified external integration, and bounded discovery of a genuinely new public API for a new domain-specific goal.",
+  "cases": {
+    "local_goal": "Without external data or network access, validate the local execution path and return the string LOCAL_ONLY_OK.",
+    "existing_integration_goal": "Retrieve one fresh read-only JSON payload from a public API and summarize its top-level structure.",
+    "new_api_goal": "Retrieve a fresh public science and geographic data JSON payload from a suitable public API and summarize its top-level structure."
+  },
+  "routing_expectations": {
+    "local_goal": "LOCAL_ONLY",
+    "existing_integration_goal": "USE_EXISTING_INTEGRATION",
+    "new_api_goal": "DISCOVER_NEW_API"
+  },
+  "constraints": {
+    "host_selected_provider_for_new_api": false,
+    "host_selected_endpoint_for_new_api": false,
+    "public_https_only": true,
+    "read_only": true,
+    "allowed_http_methods": ["GET"],
+    "authentication_bypass": false,
+    "account_creation": false,
+    "credential_acquisition": false,
+    "captcha_bypass": false,
+    "payment": false,
+    "private_network_access": false,
+    "arbitrary_network_scanning": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "fail_closed": true
+  },
+  "success_criteria": {
+    "all_three_routes_selected": true,
+    "local_goal_has_no_network": true,
+    "existing_integration_reused_without_discovery": true,
+    "existing_integration_live_2xx_json": true,
+    "new_api_discovered_without_host_provider_selection": true,
+    "new_api_differs_from_existing_registry": true,
+    "new_api_live_2xx_json": true,
+    "new_api_provenance_recorded": true,
+    "canonical_unchanged": true
+  },
+  "trigger": 1,
+  "requested_at": "2026-09-11T05:48:12Z"
+}
