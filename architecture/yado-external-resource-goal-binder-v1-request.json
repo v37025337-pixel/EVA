@@ -1,0 +1,35 @@
+{
+  "schema": "yado.g2.external_resource_goal_binder.request.v1",
+  "objective": "Route ordinary goals through either local execution or bounded external OpenAPI discovery according to whether external evidence is actually required.",
+  "cases": {
+    "external_goal": "Use a suitable safe public API to obtain public structured data and summarize its top-level JSON structure.",
+    "local_goal": "Without external data or network access, return the string LOCAL_ONLY_OK."
+  },
+  "constraints": {
+    "host_selected_provider": false,
+    "host_selected_endpoint": false,
+    "public_https_only": true,
+    "read_only": true,
+    "allowed_http_methods": ["GET"],
+    "authentication_bypass": false,
+    "account_creation": false,
+    "credential_acquisition": false,
+    "captcha_bypass": false,
+    "payment": false,
+    "private_network_access": false,
+    "arbitrary_network_scanning": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "fail_closed": true
+  },
+  "success_criteria": {
+    "external_goal_routes_to_discovery": true,
+    "external_goal_gets_live_2xx_json": true,
+    "provider_not_host_selected": true,
+    "local_goal_stays_local": true,
+    "local_goal_never_invokes_discovery": true,
+    "canonical_unchanged": true
+  },
+  "trigger": 1,
+  "requested_at": "2026-09-11T03:44:00Z"
+}
