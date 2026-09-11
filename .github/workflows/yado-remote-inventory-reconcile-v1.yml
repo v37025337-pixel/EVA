@@ -1,0 +1,198 @@
+name: YADO Remote Branch Inventory Reconcile V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-remote-inventory-reconcile-v1]
+    paths:
+      - "runtime/yado_g2_remote_branch_inventory_reconcile_v1.py"
+      - ".github/workflows/yado-remote-inventory-reconcile-v1.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-remote-inventory-reconcile-v1
+  cancel-in-progress: false
+
+jobs:
+  reconcile-and-admit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - name: Pin canonical main and prepare rollback
+        run: |
+          git fetch origin main
+          echo "BASE_MAIN_SHA=$(git rev-parse origin/main)" >> "$GITHUB_ENV"
+          echo "FEATURE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Prepare runtime
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Build complete classified remote inventory
+        run: |
+          python -m py_compile runtime/yado_g2_remote_branch_inventory_reconcile_v1.py
+          python runtime/yado_g2_remote_branch_inventory_reconcile_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('canonical/yado-remote-branch-inventory-v1.json').read_text())
+          assert d['status']=='PASS_COMPLETE_REMOTE_REF_CLASSIFICATION', d
+          assert d['coverage_complete'] is True, d
+          assert not d['unclassified_refs'], d
+          print(json.dumps({'remote':d['remote_branch_count'],'classes':d['classification_counts'],'experience_candidates':d['experience_candidates']},sort_keys=True))
+          PY
+
+      - name: Bind classified inventory into kernel self-audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('runtime/yado_unified_core_deep_self_audit_v1.py')
+          text=p.read_text(encoding='utf-8')
+          anchor="REAL_NATIVE_V2 = REPO / 'architecture' / 'yado-real-world-generalization-state-v2.json'\n"
+          inject=anchor+"BRANCH_INVENTORY = REPO / 'canonical' / 'yado-remote-branch-inventory-v1.json'\n"
+          if 'BRANCH_INVENTORY =' not in text:
+              if anchor not in text: raise SystemExit('BRANCH_INVENTORY_ANCHOR_MISSING')
+              text=text.replace(anchor,inject,1)
+          start=text.index("registered = {x.get('branch') for x in branches}")
+          end=text.index("runtime_text = RUNTIME.read_text",start)
+          replacement="""registered = {x.get('branch') for x in branches}\nremote_set = set(remote_branches)\nbranch_inventory = load(BRANCH_INVENTORY) if BRANCH_INVENTORY.exists() else {}\ninventory_rows = branch_inventory.get('rows', []) if isinstance(branch_inventory, dict) else []\nclassified_names = {str(x.get('branch')) for x in inventory_rows if x.get('branch')}\nunclassified_refs = list(branch_inventory.get('unclassified_refs', [])) if isinstance(branch_inventory, dict) else []\nexperience_candidates = list(branch_inventory.get('experience_candidates', [])) if isinstance(branch_inventory, dict) else []\nremote_inventory_ok = bool(remote_branches) and branch_inventory.get('status') == 'PASS_COMPLETE_REMOTE_REF_CLASSIFICATION' and branch_inventory.get('coverage_complete') is True and classified_names == remote_set and not unclassified_refs\nadd('REMOTE_BRANCH_INVENTORY_MATCH', 'MEMORY_AND_EXPERIENCE', 'MEDIUM' if remote_branches and (not remote_inventory_ok) else 'LOW' if not remote_branches else 'INFO', 'PASS' if remote_inventory_ok else 'UNAVAILABLE' if not remote_branches else 'FAIL', {'registered_count': len(registered), 'remote_count': len(remote_set), 'classified_count': len(classified_names), 'registry_only': sorted(registered - remote_set), 'experience_candidates': experience_candidates, 'unclassified_refs': unclassified_refs, 'inventory_artifact_digest': branch_inventory.get('artifact_digest'), 'error': remote_error}, 'Keep every physical remote ref explicitly classified; only separately admitted evidence-bearing refs belong in cognitive experience.', False)\nadd('UNREGISTERED_EXPERIENCE_CANDIDATES', 'MEMORY_AND_EXPERIENCE', 'MEDIUM' if experience_candidates else 'INFO', 'PARTIAL' if experience_candidates else 'PASS', {'candidate_count': len(experience_candidates), 'candidates': experience_candidates, 'inventory_artifact': 'canonical/yado-remote-branch-inventory-v1.json'}, 'For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.', False)\n"""
+          text=text[:start]+replacement+text[end:]
+          p.write_text(text,encoding='utf-8')
+          compile(text,str(p),'exec')
+          PY
+
+      - name: Rebind canonical hashes and causal ledger
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import copy, hashlib, json, os, sys
+          ROOT=Path('.')
+          sys.path.insert(0,'runtime')
+          from yado_evolution_ledger_v2 import validate_ledger_v2,event_hash
+          target='runtime/yado_unified_core_deep_self_audit_v1.py'
+          def canon(o): return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
+          def dig(o): return hashlib.sha256(canon(o).encode()).hexdigest()
+          def fsha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          def load(p): return json.loads(Path(p).read_text())
+          def write(p,o): Path(p).write_text(json.dumps(o,indent=2,sort_keys=True)+'\n')
+          def cdig(o,field):
+              x=copy.deepcopy(o);x.pop(field,None);return dig(x)
+          core=load('canonical/yado-unified-core-v1.json')
+          head=load('canonical/yado-main-head-g2.json')
+          ledger=load('architecture/evolution-ledger.json')
+          validate_ledger_v2(ledger)
+          parent=(core.get('deep_self_audit') or {}).get('source_sha256')
+          actual_parent=(head.get('unified_core') or {}).get('deep_self_audit_source_sha256')
+          if parent!=actual_parent: raise SystemExit('PARENT_BINDING_DRIFT')
+          new_sha=fsha(target)
+          if new_sha==parent: raise SystemExit('NO_SELF_AUDIT_MUTATION')
+          core.setdefault('deep_self_audit',{})['source_sha256']=new_sha
+          core['deep_self_audit']['implementation_version']=int(core['deep_self_audit'].get('implementation_version') or 0)+1
+          core['deep_self_audit']['remote_branch_inventory_reconcile_v1']={'status':'CANONICAL_ACTIVE_PENDING_FULL_GATE','inventory_artifact':'canonical/yado-remote-branch-inventory-v1.json','source_sha256':new_sha,'rollback_parent_source_sha256':parent,'external_model_used':False}
+          rim=core.setdefault('runtime_integrity_manifest',{})
+          rim['sources']={rel:fsha(rel) for rel in core.get('active_runtime_sources',[])}
+          rim['manifest_digest']=dig(rim['sources'])
+          core['core_digest']=cdig(core,'core_digest')
+          write('canonical/yado-unified-core-v1.json',core)
+          head.setdefault('unified_core',{})['deep_self_audit_source_sha256']=new_sha
+          head['unified_core']['runtime_integrity_manifest_digest']=rim['manifest_digest']
+          head['unified_core']['core_digest']=core['core_digest']
+          previous=head.get('canonical_head_digest')
+          head['canonical_head_digest']=cdig(head,'canonical_head_digest')
+          write('canonical/yado-main-head-g2.json',head)
+          run_id=os.getenv('GITHUB_RUN_ID','LOCAL')
+          ev={'index':len(ledger['events']),'event_id':f"E{len(ledger['events'])+1:04d}_G2_REMOTE_BRANCH_INVENTORY_RECONCILE_V1",'event_type':'G2_REMOTE_BRANCH_INVENTORY_RECONCILE','status':'PASS_CANONICAL_PENDING_FULL_GATE','generation':ledger['current_head'],'deficit':'REMOTE_BRANCH_INVENTORY_MATCH','effect':f"REMOTE_REF_CLASSIFICATION_BOUND=True;SOURCE={new_sha};FULL_GATE_REQUIRED=True",'source_path':'canonical/yado-remote-branch-inventory-v1.json','source_digest':load('canonical/yado-remote-branch-inventory-v1.json')['artifact_digest'],'run_id':run_id,'parent_event_hash':ledger['tail_event_hash'],'canonical_mutation':True,'canonical_mechanism_mutation':True,'architecture_mutation':False,'promotion_applied':False,'generation_transition':False,'previous_head_digest':previous,'new_head_digest':head['canonical_head_digest']}
+          ev['event_hash']=event_hash(ev)
+          ledger['events'].append(ev);ledger['event_count']=len(ledger['events']);ledger['tail_event_hash']=ev['event_hash'];ledger['current_head_digest']=head['canonical_head_digest'];ledger['ledger_digest']=dig({k:v for k,v in ledger.items() if k!='ledger_digest'})
+          validate_ledger_v2(ledger)
+          write('architecture/evolution-ledger.json',ledger)
+          print(json.dumps({'parent_source_sha256':parent,'new_source_sha256':new_sha,'new_head_digest':head['canonical_head_digest']},sort_keys=True))
+          PY
+          python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Execute repaired self-audit and verify causal movement
+        run: |
+          python runtime/yado_unified_core_deep_self_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
+          by={x['code']:x for x in d['findings']}
+          assert by['REMOTE_BRANCH_INVENTORY_MATCH']['status']=='PASS', by['REMOTE_BRANCH_INVENTORY_MATCH']
+          assert by['UNREGISTERED_EXPERIENCE_CANDIDATES']['status'] in {'PARTIAL','PASS'}
+          assert d['self_selected_next_step']!='REMOTE_BRANCH_INVENTORY_MATCH', d['self_selected_next_step']
+          print(json.dumps({'remote_inventory':by['REMOTE_BRANCH_INVENTORY_MATCH']['status'],'candidate_status':by['UNREGISTERED_EXPERIENCE_CANDIDATES']['status'],'next_step':d['self_selected_next_step']},sort_keys=True))
+          PY
+          python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Full kernel audit
+        run: |
+          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json audits/yado-full-regression-v1-report.log
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          d=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert d['status']=='PASS', d
+          assert not d['findings'], d['findings']
+          PY
+
+      - name: Fresh Successor build and full regression
+        run: |
+          rm -rf "$RUNNER_TEMP/yado-successor-remote-inventory-v1"
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-remote-inventory-v1"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-remote-inventory-v1/manifest.json"
+          python - <<'PY'
+          import json
+          d=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert d['status'].startswith('PASS'), d
+          assert d['tests_run']==d['expected_tests'], d
+          PY
+
+      - name: Fail closed on concurrent main movement
+        run: |
+          git fetch origin main
+          REMOTE_MAIN_SHA=$(git rev-parse origin/main)
+          echo "base=$BASE_MAIN_SHA remote=$REMOTE_MAIN_SHA feature=$FEATURE_SHA"
+          test "$REMOTE_MAIN_SHA" = "$BASE_MAIN_SHA"
+
+      - name: Persist verified inventory evolution into main
+        run: |
+          git config user.name "YADO Main Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          git add \
+            runtime/yado_g2_remote_branch_inventory_reconcile_v1.py \
+            .github/workflows/yado-remote-inventory-reconcile-v1.yml \
+            canonical/yado-remote-branch-inventory-v1.json \
+            runtime/yado_unified_core_deep_self_audit_v1.py \
+            runtime/yado_unified_core_deep_self_audit_v1_receipt.json \
+            canonical/yado-unified-core-v1.json \
+            canonical/yado-main-head-g2.json \
+            architecture/evolution-ledger.json \
+            audits/yado-full-kernel-audit-v1-report.json \
+            audits/yado-full-kernel-audit-v1-summary.md \
+            audits/yado-full-regression-v1-report.json \
+            receipts
+          git commit -m "YADO main evolution: classify remote refs and close inventory mismatch [skip ci]"
+          git push origin HEAD:main
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-remote-inventory-reconcile-v1-${{ github.run_id }}
+          path: |
+            canonical/yado-remote-branch-inventory-v1.json
+            runtime/yado_unified_core_deep_self_audit_v1_receipt.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
