@@ -1,10 +1,10 @@
 {
   "schema": "yado.g2.goal_external_resource_execution_fabric.request.v1",
-  "objective": "Test one unified shadow execution path across local-only execution, reuse of an already verified external integration, and bounded discovery of a genuinely new public API for a new domain-specific goal.",
+  "objective": "Test one unified shadow execution path across local-only execution, reuse of an already verified external integration, and bounded discovery of a genuinely new public API when novelty is explicitly required by the goal.",
   "cases": {
     "local_goal": "Without external data or network access, validate the local execution path and return the string LOCAL_ONLY_OK.",
     "existing_integration_goal": "Retrieve one fresh read-only JSON payload from a public API and summarize its top-level structure.",
-    "new_api_goal": "Retrieve a fresh public science and geographic data JSON payload from a suitable public API and summarize its top-level structure."
+    "new_api_goal": "Discover and use a different public read-only API that is not already present in the verified integration registry, obtain one live JSON payload, and summarize its top-level structure."
   },
   "routing_expectations": {
     "local_goal": "LOCAL_ONLY",
@@ -35,12 +35,11 @@
     "existing_integration_live_2xx_json": true,
     "new_api_discovered_without_host_provider_selection": true,
     "new_api_differs_from_existing_registry": true,
-    "new_api_domain_relevant": true,
     "new_api_live_2xx_json": true,
     "new_api_provenance_recorded": true,
     "canonical_unchanged": true
   },
-  "trigger": 2,
-  "retry_reason": "IDENTICAL_GOALS_AFTER_NOVELTY_AND_DOMAIN_RELEVANCE_REPAIR",
-  "requested_at": "2026-09-11T05:56:00Z"
+  "trigger": 3,
+  "retry_reason": "NOVELTY_INTENT_ROUTE_AFTER_DOMAIN_SPECIFIC_DISCOVERY_BOUND",
+  "requested_at": "2026-09-11T05:58:00Z"
 }
