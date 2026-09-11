@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+  "current_head_digest": "f11affdae8e0f1e96c82a7aabf9946a1bd453d94b782d342d95ffae172bc267f",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 294,
+  "event_count": 297,
   "events": [
     {
       "canonical_mutation": false,
@@ -5173,10 +5173,68 @@
       "source_digest": "3e0478dca15bad14b3b7e2866b37f8cf25cdc3f1733f95c3b5c85093dd93b4b7",
       "source_path": "receipts/yado-g2-all-experience-tri-organ-additive-canonical-binding-v2-run-34063197069.json",
       "status": "PASS_CANONICAL"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=20; BLOCKING=0; NEXT=KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+      "event_hash": "abb2cac1daedce200f4f4ec7ff1fe42b3eabf0b8d2e217a8e5e9c3f485560ff3",
+      "event_id": "E0295_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 294,
+      "parent_event_hash": "eb9ad30f6ce2e397ac51bdcbfc0798f4ea6ed25671101130ee17c4a509df96d8",
+      "promotion_applied": false,
+      "run_id": "34579999953",
+      "source_digest": "59af23e4cf5da19546bfd1d16be186e7e8f6dd4a8d8434859f4f27abe69fc020",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-34579999953.json",
+      "status": "PASS"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": true,
+      "canonical_mutation": true,
+      "deficit": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+      "effect": "NATIVE_AST_SOURCE=525cf13fc4ffdfc61301f6b734b96dd88e7e9cb327c1816f15fd0267336dd9e0;ROLLBACK=700d1a176560ba24d25e22ebab8b1aaf5725e53e8c1cf81d45aaeacd495dd422;FULL_GATE_REQUIRED=True",
+      "event_hash": "788ff1c56eb94a657efba4de5bc56cc5432ea5bd055db6a565d3327f127f0fbd",
+      "event_id": "E0296_G2_NATIVE_MAIN_PROVENANCE_AST_ADMISSION_V2",
+      "event_type": "G2_NATIVE_MAIN_PROVENANCE_AST_ADMISSION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 295,
+      "new_head_digest": "f11affdae8e0f1e96c82a7aabf9946a1bd453d94b782d342d95ffae172bc267f",
+      "parent_event_hash": "abb2cac1daedce200f4f4ec7ff1fe42b3eabf0b8d2e217a8e5e9c3f485560ff3",
+      "previous_head_digest": "7cdc0c70b20ef29ea862141a55365cda4e1fee218e7e66ec91004e0cb4218d07",
+      "promotion_applied": false,
+      "run_id": "34579999953",
+      "source_digest": "632ab7f203ecad2d44bcbd918ee5bbb1594f05a0f9c2eb17ab546e326942561e",
+      "source_path": "candidates/kernel-self-generated/g2-native-main-provenance-rewrite-v1.json",
+      "status": "PASS_CANONICAL_PENDING_FULL_VERIFICATION"
+    },
+    {
+      "architecture_mutation": false,
+      "canonical_mechanism_mutation": false,
+      "canonical_mutation": false,
+      "deficit": "LEGACY_EXPERIENCE_SUMMARY_PROVENANCE",
+      "effect": "PROVENANCE=PASS;OBSERVED_PRIORITY=REMOTE_BRANCH_INVENTORY_MATCH;CANDIDATE=525cf13fc4ffdfc61301f6b734b96dd88e7e9cb327c1816f15fd0267336dd9e0",
+      "event_hash": "9d92da6b523f634e87ced92f43c18ffa7da3e043a902c20649c35136e8aa3cf5",
+      "event_id": "E0297_G2_NATIVE_MAIN_PROVENANCE_AST_V2_VERIFIED",
+      "event_type": "G2_NATIVE_MAIN_PROVENANCE_AST_VERIFICATION",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 296,
+      "new_head_digest": "f11affdae8e0f1e96c82a7aabf9946a1bd453d94b782d342d95ffae172bc267f",
+      "parent_event_hash": "788ff1c56eb94a657efba4de5bc56cc5432ea5bd055db6a565d3327f127f0fbd",
+      "previous_head_digest": "f11affdae8e0f1e96c82a7aabf9946a1bd453d94b782d342d95ffae172bc267f",
+      "promotion_applied": false,
+      "run_id": "34579999953",
+      "source_digest": "df70e4e8f43f0755cc22345fd763aea78686b4d25cd3711553c733653b888054",
+      "source_path": "candidates/kernel-self-generated/g2-native-main-provenance-admission-v2.json",
+      "status": "PASS_VERIFIED_PENDING_FULL_REPOSITORY_GATE"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "206a009fdc168e765f203ccb69d3e582a1ea079c6d160bc30c9b296203c0e8da",
+  "ledger_digest": "6147cfda3e12bdafa0df259b60b3437d58a84afe319ce17f70da6538072c2ee2",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -5214,5 +5272,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "eb9ad30f6ce2e397ac51bdcbfc0798f4ea6ed25671101130ee17c4a509df96d8"
+  "tail_event_hash": "9d92da6b523f634e87ced92f43c18ffa7da3e043a902c20649c35136e8aa3cf5"
 }
