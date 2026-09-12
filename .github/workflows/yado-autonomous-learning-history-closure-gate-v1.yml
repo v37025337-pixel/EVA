@@ -1,0 +1,90 @@
+name: YADO Autonomous Learning History Closure Gate V1
+
+on:
+  push:
+    branches: [yado-autonomous-learning-history-closure-v1]
+    paths:
+      - '.github/workflows/yado-autonomous-learning-history-closure-gate-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  history-closure-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - name: Verify history-only closure and unchanged main tree
+        run: |
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "31f7b6db32218f99693abf7536671236ff5d5f50"
+          git merge-base --is-ancestor 85768583e1b8d7b5ab24a91682eb8a20b1283525 HEAD
+          git merge-base --is-ancestor 4de09cb26bdabba85a67dd8fd97165eb28c07498 HEAD
+          python - <<'PY'
+          import subprocess
+          changed=set(subprocess.check_output(['git','diff','--name-only','origin/main','HEAD'],text=True).splitlines())
+          expected={'.github/workflows/yado-autonomous-learning-history-closure-gate-v1.yml'}
+          assert changed==expected,(sorted(changed),sorted(expected))
+          print('PASS_HISTORY_ONLY_TREE_CLOSURE',sorted(changed))
+          PY
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Compile active and candidate sources
+        run: python -m compileall -q runtime successor candidates/g2-self-evolution candidates/autonomous
+
+      - name: Verify canonical invariants remain unchanged
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          git diff --exit-code origin/main HEAD -- canonical runtime/yado_unified_core_v1.py architecture/evolution-ledger.json
+          echo PASS_NO_CANONICAL_OR_ACTIVE_RUNTIME_MUTATION
+
+      - name: Run Full Kernel Audit after physical history closure
+        run: |
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audits/yado-full-kernel-audit-v1-report.json').read_text())
+          assert r['status']=='PASS',r
+          assert r['findings']==[],r['findings']
+          assert r['canonical']['canonical_guard']=='PASS'
+          assert r['canonical']['ledger_validation']=='PASS'
+          assert r['canonical']['g3_genesis_performed'] is False
+          print('PASS_PHYSICAL_HISTORY_CLOSURE_FULL_AUDIT',r['counts'])
+          PY
+
+      - name: Build fresh Successor and run exact 170 regression
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/yado-history-closure-successor"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-history-closure-successor/manifest.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audits/yado-full-regression-v1-report.json').read_text())
+          assert r['status']=='PASS',r
+          assert r['tests_run']==r['expected_tests']==170,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_HISTORY_CLOSURE_REGRESSION_170_OF_170',r['identity_digest'])
+          PY
+
+      - name: Final boundary check
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "31f7b6db32218f99693abf7536671236ff5d5f50"
+          echo PASS_HISTORY_ONLY_CLOSURE_READY_FOR_MAIN
