@@ -1,0 +1,50 @@
+{
+  "schema": "yado.autonomous_meta_grammar_evolution.v4.design",
+  "status": "SHADOW_ONLY",
+  "parent_stage": "PASS_SHADOW_G2_AUTONOMOUS_GRAMMAR_EXTENSION_V3",
+  "goal": "Select a fresh grammar deficit without a host-provided task target, change the V3 meta-controller search strategy, generate a new grammar route/operator from that changed meta-strategy, materialize a solver, freeze all candidate identities before sealed evaluation, and preserve prior capabilities.",
+  "external_source": {
+    "repository": "exercism/problem-specifications",
+    "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+    "fresh_pool": [
+      "reverse-string",
+      "armstrong-numbers"
+    ]
+  },
+  "selection_contract": {
+    "host_provided_selected_task": false,
+    "host_provided_target_path": false,
+    "fresh_pool_probe_before_selection": true,
+    "sealed_not_used_for_deficit_selection": true,
+    "sealed_not_used_for_meta_strategy_selection": true
+  },
+  "mutation_layers": [
+    "meta-controller source",
+    "generated grammar-controller source",
+    "generated solver source"
+  ],
+  "required_evidence": [
+    "one fresh pool member remains supported by the inherited V3 grammar",
+    "another fresh pool member exposes an unsupported typed signature",
+    "the selected deficit is derived from runtime grammar failure",
+    "the selected mutation target is derived from meta-generator provenance",
+    "the candidate meta-controller source changes",
+    "the meta search strategy is absent in the parent and present in the candidate",
+    "the changed meta-controller generates a new grammar operator absent in the parent grammar",
+    "the generated grammar compiles and selects that operator from training score",
+    "the generated solver compiles",
+    "meta-controller, grammar and solver SHAs freeze before sealed evaluation",
+    "fresh sealed UUID leakage is zero",
+    "fresh sealed candidate score is 1.0 with positive gain",
+    "V1, V2 and V3 sealed retention are 1.0",
+    "full kernel audit passes",
+    "fresh Successor identity builds",
+    "complete inherited plus Successor regression passes"
+  ],
+  "admission": {
+    "canonical_mutation": false,
+    "automatic_main_admission": false,
+    "requires_explicit_followup_admission": true
+  },
+  "claim_boundary": "The experiment remains bounded because the low-level meta-program vocabulary and all admission gates are host-authored. A PASS demonstrates self-selected deficit handling plus bounded source-level evolution of the meta search strategy; it does not demonstrate unrestricted self-rewrite, general intelligence, consciousness, or G3."
+}
