@@ -1,0 +1,80 @@
+name: YADO Multi-Domain Curriculum V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - yado-multidomain-curriculum-v1
+    paths:
+      - 'runtime/yado_multidomain_curriculum_v1.py'
+      - 'architecture/yado-multidomain-curriculum-v1.json'
+      - '.github/workflows/yado-multidomain-curriculum-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  curriculum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout kernel
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Compile curriculum runtime
+        run: python -m py_compile runtime/yado_multidomain_curriculum_v1.py
+
+      - name: Run deterministic curriculum self-test
+        run: python runtime/yado_multidomain_curriculum_v1.py --self-test
+
+      - name: Run staged multi-domain learning and sealed OOD evaluation
+        run: |
+          python runtime/yado_multidomain_curriculum_v1.py \
+            --out artifacts/yado-multidomain-curriculum-v1.json \
+            --train-seed 2026091201 \
+            --ood-seed 2026091202 \
+            --per-cell 30
+
+      - name: Verify curriculum evidence and anti-leakage gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          r = json.loads(Path('artifacts/yado-multidomain-curriculum-v1.json').read_text())
+          assert r['status'] == 'PASS_SHADOW_MULTIDOMAIN_CURRICULUM_V1'
+          c = r['curriculum']
+          assert c['train_task_count'] == 720
+          assert len(c['learning']['learned_skills']) == 20
+          assert c['learning']['final_train']['score'] >= 0.95
+          assert set(c['domains']) == {'logic','thinking','mathematics','physics','informatics','code'}
+          assert any(x.get('selection_mode') == 'synergy_pair' for x in c['learning']['history'])
+
+          o = r['sealed_ood']
+          assert o['task_count'] == 360
+          assert o['candidate']['score'] >= 0.90
+          assert o['absolute_gain'] >= 0.50
+          assert all(v >= 0.90 for v in o['candidate']['domain_accuracy'].values())
+
+          b = r['real_benchmark_intake']
+          assert sum(1 for x in b.values() if x['status'] == 'PASS') >= 3
+          assert all(x.get('item_count', 0) > 0 for x in b.values() if x['status'] == 'PASS')
+          assert r['claims']['benchmark_questions_used_for_skill_selection'] is False
+          assert r['claims']['real_benchmark_answer_leakage'] is False
+          assert r['claims']['real_benchmark_solved_claimed'] is False
+          assert r['claims']['general_intelligence_claimed'] is False
+          print('PASS_MULTIDOMAIN_CURRICULUM_EVIDENCE_GATES')
+          PY
+
+      - name: Upload curriculum evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-multidomain-curriculum-v1
+          path: artifacts/yado-multidomain-curriculum-v1.json
+          if-no-files-found: error
