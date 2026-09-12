@@ -1,0 +1,36 @@
+{
+  "answer_separation": {
+    "prepare_job": "downloads public sources and emits separate challenge and sealed-ground-truth artifacts",
+    "respond_job": "downloads challenge artifact only",
+    "training_on_exam_answers": false,
+    "verify_job": "downloads sealed ground truth only after response artifact exists"
+  },
+  "benchmarks": {
+    "gsm8k": {
+      "count": 40,
+      "domain": "natural_language_multistep_mathematics"
+    },
+    "humaneval": {
+      "count": 20,
+      "domain": "open_ended_python_code_generation"
+    },
+    "openbookqa": {
+      "count": 40,
+      "domain": "open_book_science_multiple_choice"
+    }
+  },
+  "claim_boundary": {
+    "general_intelligence_proven": false,
+    "high_accuracy_assumed": false,
+    "low_accuracy_is_valid_evidence": true,
+    "phenomenal_consciousness_proven": false
+  },
+  "goal": "Measure YADO on real benchmark tasks with answer keys physically withheld until YADO responses are fixed.",
+  "response_policy": {
+    "canonical_direct_write": false,
+    "external_llm_answers": false,
+    "openbookqa_public_science_facts_allowed": true,
+    "unsupported_task": "UNRESOLVED"
+  },
+  "schema": "yado.blind_real_benchmark_exam.v1"
+}
