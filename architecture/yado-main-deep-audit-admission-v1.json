@@ -1,6 +1,6 @@
 {
   "schema": "yado.main_deep_audit_admission.v1",
-  "status": "CANDIDATE_REQUIRES_DEEP_VALIDATION",
+  "status": "PASS_MAIN_DEEP_AUDIT_ADMISSION_V1",
   "generation": "G2_CANDIDATE_TRCG_V1",
   "base_main_sha": "b27cfcfdc7c34e0fb6973fb5ee1827f8f59cc4d9",
   "verified_stack_head_before_admission": "99eab9e5aeea7dda8b6209f0620dffacdde6e61a",
@@ -24,6 +24,73 @@
     "connection_depth": 3,
     "artifact_sha256": "ce7422c0febd8825aca4f7fa1bd4cf2bd9a146c0371482fa8be2df6c179a9f3d",
     "frozen_bundle_sha256": "bc84029af8402ed101d5ac83b2aa0702bade7f2dc8fb801f192823b43f7f8f44"
+  },
+  "deep_validation": {
+    "verified_run": 34703878484,
+    "tested_synthetic_pr_merge_commit": "6a7b3d4f73ea051a48c46e79f6b42afa57d89926",
+    "json_documents_parsed": 812,
+    "native_unified_core_audit": "PASS",
+    "deep_self_audit": {
+      "status": "PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1",
+      "overall_verdict": "PASS_WITH_LIMITATIONS",
+      "receipt_sha256": "c5b5334af76ca4f785f7c0efa4e062a972960b2c0fcc71cd955722c213e88a14",
+      "finding_count": 21,
+      "blocking_findings": 0,
+      "critical_failures": 0,
+      "high_failures": 0,
+      "partial_findings": 1,
+      "pass_findings": 19,
+      "nonblocking_priorities": [
+        "REMOTE_BRANCH_INVENTORY_MATCH",
+        "UNREGISTERED_EXPERIENCE_CANDIDATES"
+      ],
+      "ledger_side_effect_reverted_before_canonical_verification": true
+    },
+    "full_kernel_audit": {
+      "status": "PASS",
+      "findings": [],
+      "runtime_python_files": 601,
+      "json_files": 1130,
+      "workflow_files": 68,
+      "active_runtime_sources": 39,
+      "active_capabilities": 31,
+      "architecture_planes": 9,
+      "ledger_events": 299,
+      "duplicate_python_groups": 0,
+      "module_stem_collisions": 0,
+      "local_import_edges": 1533,
+      "historical_branches_audited": 64,
+      "canonical_guard": "PASS",
+      "ledger_validation": "PASS",
+      "g3_genesis_performed": false,
+      "canonical_head_digest": "3a8094134fb5a607588028dd6601f7560d8b6f986786840cacda8d4d40360edd"
+    },
+    "successor": {
+      "status": "BUILT_REQUIRES_VALIDATION",
+      "identity_digest": "8c04471075668f82be339e5859cad3e227abb3196131c76348297598b2678040",
+      "blob": 4848,
+      "commit": 3342,
+      "tree": 8508,
+      "unique_payloads": 16698,
+      "indexed_documents": 4744,
+      "remote_branches": 66
+    },
+    "regression": {
+      "status": "PASS",
+      "manifest_sha256": "cc934ac2e22f1b41b98ecc61c8d9d4dda506b26a19b606c74be52d2ed2b8626b",
+      "expected_tests": 170,
+      "tests_run": 170,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "source_unchanged": true
+    },
+    "evidence_artifact": {
+      "name": "yado-main-deep-audit-admission-v1-34703878484",
+      "artifact_id": 10301361894,
+      "zip_sha256": "c87d1892c3dba65e40f7c356c698c8a5cb7c593f6922bb97625a56dbf38202f8"
+    },
+    "final_canonical_immutability_check": "PASS"
   },
   "admission_scope": {
     "update_main_with_verified_v1_v6_code_layers": true,
