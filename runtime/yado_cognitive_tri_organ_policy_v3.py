@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-COGNNITIVE_POLICY_VERSION = "10x10-admitted-v1"
+COGNITIVE_POLICY_VERSION = "10x10-admitted-v1"
 COGNITIVE_POLICY = {
     'abstraction_families': 8,
     'contradiction_check': True,
@@ -21,6 +21,13 @@ VERIFIED_10X10_EVIDENCE = {
     'evidence_digest': '0cce6c75bb7352748ccf73703b537f0438699e75380730223ce531e694501f43',
     'source_main': '5ae8e522426c667ce408d45dc2103c28dcd01991',
 }
+PRIOR_VERIFIED_HIDDEN_SCORES = {
+    'intelligence': 1.0,
+    'logic': 0.8333333333333334,
+    'thinking': 0.95,
+}
+# Compatibility alias only; these hidden scores belong to the parent policy, not the 10x10-admitted policy.
+VERIFIED_HIDDEN_SCORES = PRIOR_VERIFIED_HIDDEN_SCORES
 POLICY_LINEAGE = {
     'parent_policy': {
         'abstraction_families': 6,
@@ -36,9 +43,10 @@ POLICY_LINEAGE = {
 def component():
     return {
         'schema': 'yado.cognitive_tri_organ_policy.v3',
-        'policy_version': COGNNITIVE_POLICY_VERSION,
+        'policy_version': COGNITIVE_POLICY_VERSION,
         'policy': COGNITIVE_POLICY,
         'verified_10x10_evidence': VERIFIED_10X10_EVIDENCE,
+        'prior_verified_hidden_scores': PRIOR_VERIFIED_HIDDEN_SCORES,
         'policy_lineage': POLICY_LINEAGE,
         'canonical_active': True,
         'consciousness_claimed': False,
