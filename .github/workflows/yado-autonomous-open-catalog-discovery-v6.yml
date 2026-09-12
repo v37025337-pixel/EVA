@@ -1,0 +1,133 @@
+name: YADO Autonomous Open Catalog Discovery V6
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - yado-autonomous-open-catalog-discovery-v6
+    paths:
+      - 'runtime/yado_autonomous_open_catalog_discovery_v6.py'
+      - 'architecture/yado-autonomous-open-catalog-discovery-v6.json'
+      - '.github/workflows/yado-autonomous-open-catalog-discovery-v6.yml'
+  pull_request:
+    branches:
+      - yado-autonomous-external-library-discovery-v5
+    paths:
+      - 'runtime/yado_autonomous_open_catalog_discovery_v6.py'
+      - 'architecture/yado-autonomous-open-catalog-discovery-v6.json'
+      - '.github/workflows/yado-autonomous-open-catalog-discovery-v6.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  autonomous-open-catalog-discovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Compile inherited controllers and V6
+        run: python -m py_compile runtime/yado_external_source_evolution_v1.py runtime/yado_autonomous_meta_source_evolution_v2.py runtime/yado_autonomous_grammar_extension_v3.py runtime/yado_autonomous_meta_grammar_evolution_v4.py runtime/yado_autonomous_external_library_discovery_v5.py runtime/yado_autonomous_open_catalog_discovery_v6.py
+
+      - name: Re-run inherited V1 through V5 shadow proofs
+        run: |
+          python runtime/yado_external_source_evolution_v1.py
+          python runtime/yado_autonomous_meta_source_evolution_v2.py
+          python runtime/yado_autonomous_grammar_extension_v3.py
+          python runtime/yado_autonomous_meta_grammar_evolution_v4.py
+          python runtime/yado_autonomous_external_library_discovery_v5.py
+
+      - name: Run autonomous open catalog discovery
+        run: python runtime/yado_autonomous_open_catalog_discovery_v6.py
+
+      - name: Verify frozen V6 open catalog evidence gate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('receipts/yado-autonomous-open-catalog-discovery-v6.json').read_text())
+          assert report['status'] == 'PASS_SHADOW_G2_AUTONOMOUS_OPEN_CATALOG_DISCOVERY_V6', report['status']
+          d = report['discovery']
+          assert d['candidate_names_host_provided'] is False
+          assert d['catalog_project_count'] > 1000
+          assert len(d['discovered_candidates']) > 0
+          selected = report['selected_library']['name']
+          discovered = {row['name'] for row in d['discovered_candidates']}
+          assert selected in discovered
+          assert report['selection']['host_provided_selected_package'] is False
+          artifact = report['artifact_connection']
+          assert artifact['expected_sha256'] == artifact['actual_sha256']
+          assert artifact['fetch']['method'] == 'GET'
+          assert artifact['fetch']['read_only'] is True
+          assert artifact['wheel_metadata']['host_provided_dependency_name'] is False
+          dep = report['second_hop_library_connection']
+          assert dep['host_provided_dependency_name'] is False
+          assert dep['source']['read_only'] is True
+          assert report['application']['external_catalog_applied'] is True
+          assert report['application']['externally_discovered_candidate_names_applied'] is True
+          assert report['application']['externally_discovered_dependency_applied'] is True
+          assert report['application']['connection_depth'] == 3
+          assert report['sealed_validation']['matched'] is True
+          assert report['sealed_validation']['selection_data_used'] is False
+          g = report['gates']
+          assert g['open_catalog_read_only'] is True
+          assert g['candidate_names_host_provided'] is False
+          assert g['selected_from_discovered_catalog'] is True
+          assert g['selected_package_host_provided'] is False
+          assert g['selected_metadata_relevance_positive'] is True
+          assert g['selected_has_external_dependency'] is True
+          assert g['artifact_digest_verified'] is True
+          assert g['dependency_discovered_from_external_artifact'] is True
+          assert g['second_hop_registry_connection_succeeded'] is True
+          assert g['bundle_frozen_before_sealed_validation'] is True
+          assert g['sealed_independent_registry_surface_verified'] is True
+          assert g['external_write_methods_used'] is False
+          assert g['credentials_used'] is False
+          assert g['external_models_used'] is False
+          assert g['canonical_mutation'] is False
+          assert all(value.startswith('PASS_SHADOW_') for value in report['inherited_shadow_retention'].values())
+          print('PASS_AUTONOMOUS_OPEN_CATALOG_DISCOVERY_V6_EVIDENCE_GATE')
+          PY
+
+      - name: Reconstruct inherited runtime and install audit dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Compile complete runtime and generated shadow sources
+        run: python -m compileall -q runtime successor candidates/g2-self-evolution
+
+      - name: Run full kernel audit
+        run: python runtime/yado_full_kernel_audit_v1.py
+
+      - name: Build fresh Successor identity
+        run: python -m successor build --output "$RUNNER_TEMP/yado-successor-birth"
+
+      - name: Run complete inherited and Successor regression
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json"
+
+      - name: Upload V6 evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-autonomous-open-catalog-discovery-v6-${{ github.run_id }}
+          path: |
+            architecture/yado-autonomous-open-catalog-discovery-v6.json
+            receipts/yado-autonomous-open-catalog-discovery-v6.json
+            receipts/yado-external-source-evolution-v1.json
+            receipts/yado-autonomous-meta-source-evolution-v2.json
+            receipts/yado-autonomous-grammar-extension-v3.json
+            receipts/yado-autonomous-meta-grammar-evolution-v4.json
+            receipts/yado-autonomous-external-library-discovery-v5.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-kernel-audit-v1-summary.md
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
