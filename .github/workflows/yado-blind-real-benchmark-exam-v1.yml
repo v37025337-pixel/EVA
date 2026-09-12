@@ -1,0 +1,170 @@
+name: YADO Blind Real Benchmark Exam V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - yado-blind-real-benchmark-exam-v1
+    paths:
+      - 'runtime/yado_blind_real_benchmark_exam_v1.py'
+      - 'architecture/yado-blind-real-benchmark-exam-v1.json'
+      - '.github/workflows/yado-blind-real-benchmark-exam-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout kernel
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Compile and self-test blind exam
+        run: |
+          python -m py_compile runtime/yado_blind_real_benchmark_exam_v1.py
+          python runtime/yado_blind_real_benchmark_exam_v1.py self-test
+
+      - name: Prepare real benchmark questions and physically separate answer key
+        run: |
+          rm -rf artifacts/blind-real-exam-v1
+          python runtime/yado_blind_real_benchmark_exam_v1.py prepare \
+            --out-dir artifacts/blind-real-exam-v1 \
+            --seed 20260912-real-blind-v1b \
+            --gsm8k 40 \
+            --openbook 40 \
+            --humaneval 20
+          test -s artifacts/blind-real-exam-v1/challenges.jsonl
+          test -s artifacts/blind-real-exam-v1/sealed_ground_truth.jsonl
+          test -s artifacts/blind-real-exam-v1/openbook_facts.txt
+
+      - name: Upload challenge artifact without answers
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-blind-real-exam-challenges-v1
+          path: |
+            artifacts/blind-real-exam-v1/challenges.jsonl
+            artifacts/blind-real-exam-v1/openbook_facts.txt
+            artifacts/blind-real-exam-v1/prepare_manifest.json
+          if-no-files-found: error
+
+      - name: Upload sealed ground truth separately
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-blind-real-exam-sealed-ground-truth-v1
+          path: artifacts/blind-real-exam-v1/sealed_ground_truth.jsonl
+          if-no-files-found: error
+
+  respond:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout kernel
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Download questions only
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-blind-real-exam-challenges-v1
+          path: artifacts/blind-real-exam-v1
+
+      - name: Assert sealed answers are absent from YADO response environment
+        run: |
+          test ! -e artifacts/blind-real-exam-v1/sealed_ground_truth.jsonl
+          find artifacts/blind-real-exam-v1 -maxdepth 1 -type f -print
+
+      - name: Let YADO answer before ground truth is available
+        run: |
+          python runtime/yado_blind_real_benchmark_exam_v1.py respond \
+            --challenges artifacts/blind-real-exam-v1/challenges.jsonl \
+            --facts artifacts/blind-real-exam-v1/openbook_facts.txt \
+            --out artifacts/blind-real-exam-v1/yado_responses.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('artifacts/blind-real-exam-v1/yado_responses.json').read_text())
+          assert p['ground_truth_accessed'] is False
+          assert p['external_llm_used'] is False
+          assert p['response_count'] == 100
+          assert p['response_digest']
+          print('YADO_RESPONSE_DIGEST', p['response_digest'])
+          PY
+
+      - name: Upload immutable YADO responses
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-blind-real-exam-responses-v1
+          path: artifacts/blind-real-exam-v1/yado_responses.json
+          if-no-files-found: error
+
+  verify:
+    needs: [prepare, respond]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout kernel
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Download challenge
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-blind-real-exam-challenges-v1
+          path: artifacts/blind-real-exam-v1
+
+      - name: Download already-fixed YADO responses
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-blind-real-exam-responses-v1
+          path: artifacts/blind-real-exam-v1
+
+      - name: Reveal sealed ground truth only after YADO response artifact exists
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-blind-real-exam-sealed-ground-truth-v1
+          path: artifacts/blind-real-exam-v1
+
+      - name: Compare YADO answers with real benchmark answers
+        run: |
+          python runtime/yado_blind_real_benchmark_exam_v1.py verify \
+            --challenges artifacts/blind-real-exam-v1/challenges.jsonl \
+            --sealed artifacts/blind-real-exam-v1/sealed_ground_truth.jsonl \
+            --responses artifacts/blind-real-exam-v1/yado_responses.json \
+            --out artifacts/blind-real-exam-v1/verification.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('artifacts/blind-real-exam-v1/verification.json').read_text())
+          assert r['status'] == 'PASS_MEASURED_BLIND_REAL_BENCHMARK_V1'
+          assert r['ground_truth_revealed_after_response_fixation'] is True
+          assert r['external_llm_used_for_answers'] is False
+          assert r['training_on_exam_answers'] is False
+          print(json.dumps({'overall':r['overall'],'per_benchmark':r['per_benchmark'],'evidence_digest':r['evidence_digest']}, indent=2))
+          PY
+
+      - name: Upload verified blind-exam evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-blind-real-benchmark-exam-v1
+          path: |
+            artifacts/blind-real-exam-v1/prepare_manifest.json
+            artifacts/blind-real-exam-v1/yado_responses.json
+            artifacts/blind-real-exam-v1/verification.json
+          if-no-files-found: error
