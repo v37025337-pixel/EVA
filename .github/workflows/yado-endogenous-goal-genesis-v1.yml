@@ -1,0 +1,98 @@
+name: YADO Endogenous Goal Genesis V1
+
+on:
+  push:
+    branches: [yado-endogenous-goal-genesis-v1]
+    paths:
+      - 'runtime/yado_endogenous_goal_genesis_v1.py'
+      - '.github/workflows/yado-endogenous-goal-genesis-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prove-goal-genesis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Compile endogenous goal genesis
+        run: python -m py_compile runtime/yado_endogenous_goal_genesis_v1.py
+
+      - name: Generate goal twice from identical canonical evidence
+        run: |
+          python runtime/yado_endogenous_goal_genesis_v1.py --out "$RUNNER_TEMP/goal-a.json"
+          python runtime/yado_endogenous_goal_genesis_v1.py --out "$RUNNER_TEMP/goal-b.json"
+          cmp "$RUNNER_TEMP/goal-a.json" "$RUNNER_TEMP/goal-b.json"
+          cp "$RUNNER_TEMP/goal-a.json" candidates/autonomous/yado-endogenous-goal-genesis-v1.json
+
+      - name: Verify endogenous developmental-goal contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('candidates/autonomous/yado-endogenous-goal-genesis-v1.json')
+          r=json.loads(p.read_text())
+          audit=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
+          frontier=(audit.get('core_snapshot') or {}).get('frontier') or {}
+          assert r['status']=='PASS_SHADOW_ENDOGENOUS_DEVELOPMENTAL_GOAL_GENESIS_V1',r
+          assert r['trigger']['repair_queue_empty'] is True,r
+          assert r['trigger']['all_current_audit_findings_pass'] is True,r
+          assert r['host_supplied_goal'] is False,r
+          assert r['host_selected_goal'] is False,r
+          assert r['selected_goal'] in (frontier.get('open_deficits') or []), (r['selected_goal'],frontier)
+          assert r['selected_goal_provenance']['source_class']=='CANONICAL_DEVELOPMENTAL_FRONTIER',r
+          assert r['selected_action']['canonical_write'] is False,r
+          assert r['execution_contract']['mode']=='BOUNDED_SHADOW_ONLY',r
+          assert r['execution_contract']['canonical_direct_write'] is False,r
+          assert r['execution_contract']['automatic_main_mutation'] is False,r
+          assert r['execution_contract']['external_write'] is False,r
+          assert r['execution_contract']['credentials_allowed'] is False,r
+          assert r['execution_contract']['rollback_required'] is True,r
+          assert r['execution_contract']['fresh_counterexample_required'] is True,r
+          assert r['execution_contract']['causal_ablation_required_before_admission'] is True,r
+          assert r['canonical_mutation'] is False,r
+          assert r['g3_genesis_performed'] is False,r
+          assert r['consciousness_claimed'] is False,r
+          print(json.dumps({
+            'selected_goal':r['selected_goal'],
+            'selected_action':r['selected_action']['action'],
+            'candidate_goals':[x['goal'] for x in r['candidate_goals']],
+            'next':r['next_required_capability'],
+            'receipt_sha256':r['receipt_sha256'],
+          },sort_keys=True))
+          PY
+
+      - name: Counterfactual trigger guard
+        run: |
+          python - <<'PY'
+          import json,tempfile
+          from pathlib import Path
+          src=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
+          fake=json.loads(json.dumps(src))
+          fake['self_selected_next_step']='SYNTHETIC_REPAIR_DEFICIT'
+          with tempfile.TemporaryDirectory() as td:
+              p=Path(td)/'audit.json'; p.write_text(json.dumps(fake))
+              import subprocess,sys
+              cp=subprocess.run([sys.executable,'runtime/yado_endogenous_goal_genesis_v1.py','--audit',str(p),'--out',str(Path(td)/'out.json')],capture_output=True,text=True)
+              assert cp.returncode != 0, cp.stdout+cp.stderr
+              assert 'REPAIR_QUEUE_NOT_EMPTY' in cp.stderr, cp.stderr
+          print('PASS_COUNTERFACTUAL_REPAIR_QUEUE_BLOCKS_DEVELOPMENTAL_GOAL_GENESIS')
+          PY
+
+      - name: Checkout-level compile regression
+        run: python -m compileall -q runtime successor
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-endogenous-goal-genesis-v1-${{ github.run_id }}
+          path: candidates/autonomous/yado-endogenous-goal-genesis-v1.json
