@@ -343,10 +343,27 @@ def main() -> int:
         "canonical_mutation": False,
     }
 
+    positive_gate_names = (
+        "all_registry_connections_read_only",
+        "selected_by_external_metadata",
+        "selected_package_relevance_positive",
+        "selected_package_relevance_margin_positive",
+        "artifact_digest_verified",
+        "wheel_metadata_identity_verified",
+        "dependency_discovered_from_external_artifact",
+        "second_hop_registry_connection_succeeded",
+        "connection_bundle_frozen_before_sealed_validation",
+        "sealed_independent_registry_surface_verified",
+    )
     pass_gate = (
         selected_package == "beautifulsoup4"
         and normalize_name(dependency) == "soupsieve"
-        and all(bool(v) for k, v in gates.items() if not k.endswith("_size"))
+        and gates["candidate_pool_size"] == len(CANDIDATE_PACKAGES)
+        and all(gates[name] is True for name in positive_gate_names)
+        and gates["external_write_methods_used"] is False
+        and gates["credentials_used"] is False
+        and gates["external_models_used"] is False
+        and gates["canonical_mutation"] is False
         and all(value.startswith("PASS_SHADOW_") for value in prior_statuses.values())
     )
     status = (
