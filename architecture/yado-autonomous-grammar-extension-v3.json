@@ -1,0 +1,41 @@
+{
+  "schema": "yado.autonomous_grammar_extension.contract.v3",
+  "stage": "G2_SHADOW",
+  "objective": "Detect a missing mutation-grammar capability, select the failing mutation builder from its own runtime failure, AST-materialize a previously absent operator route, use that operator on fresh external data, and retain all verified prior behavior.",
+  "parent_stage": "PASS_SHADOW_G2_AUTONOMOUS_META_SOURCE_EVOLUTION_V2",
+  "external_source": {
+    "repository": "exercism/problem-specifications",
+    "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+    "exercise": "run-length-encoding",
+    "property": "encode"
+  },
+  "required_evidence": [
+    "parent_meta_grammar_rejects_fresh_str_to_str_signature",
+    "mutation_builder_target_selected_from_runtime_failure_trace",
+    "new_operator_absent_in_parent_grammar",
+    "candidate_grammar_source_changed",
+    "candidate_grammar_compiles",
+    "candidate_solver_uses_new_operator",
+    "grammar_and_solver_frozen_before_sealed_evaluation",
+    "zero_sealed_uuid_leakage",
+    "fresh_sealed_improvement",
+    "V1_and_V2_external_sealed_retention",
+    "full_kernel_audit_pass",
+    "fresh_successor_identity",
+    "complete_regression_pass"
+  ],
+  "safety": {
+    "canonical_mutation": false,
+    "automatic_main_admission": false,
+    "candidate_shell_access": false,
+    "candidate_secret_access": false,
+    "candidate_network_access": false,
+    "external_models": false
+  },
+  "claim_boundary": {
+    "unrestricted_self_rewrite_claimed": false,
+    "general_intelligence_claimed": false,
+    "consciousness_claimed": false,
+    "bounded_host_authored_meta_grammar": true
+  }
+}
