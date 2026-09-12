@@ -1,0 +1,62 @@
+{
+  "schema": "yado.thinking_native_source_arm_spec.v1",
+  "capability_id": "YADO_G2_NATIVE_THINKING_SOURCE_ARM_V1",
+  "target_deficit": "THINKING_BOUNDARY_REASONING",
+  "objective": "Convert a measured adaptive THINKING repair policy into a new executable Python source candidate without an external LLM candidate, then compile, import and test it on fresh tasks before any canonical admission.",
+  "upstream_requirements": [
+    "PASS_SHADOW_THINKING_BOUNDARY_ADAPTIVE_REPAIR_V1",
+    "fresh real-internet cross-disciplinary experience",
+    "measured development-driven primitive selection"
+  ],
+  "source_materialization": {
+    "mode": "YADO_BOUNDED_NATIVE_AST_COMPOSITION",
+    "external_llm_candidate_used": false,
+    "candidate_is_generated_at_runtime": true,
+    "candidate_must_differ_from_baseline_source": true,
+    "candidate_source_sha256_required": true,
+    "compile_required": true,
+    "dynamic_import_required": true,
+    "ast_safety_gate_required": true
+  },
+  "fresh_execution_gate": {
+    "seed": 20260914,
+    "per_family": 24,
+    "minimum_candidate_score": 0.85,
+    "minimum_absolute_gain": 0.20,
+    "critical_families": [
+      "multi_hop",
+      "contradiction",
+      "representation"
+    ],
+    "minimum_critical_family_score": 0.80,
+    "critical_family_regression_allowed": false
+  },
+  "expected_receipt_fields": [
+    "native_source_candidate_count",
+    "changed_native_source_candidate_count",
+    "candidate_source_sha256",
+    "compile_status",
+    "import_status",
+    "fresh_execution"
+  ],
+  "mutation_boundary": {
+    "canonical_direct_write": false,
+    "generated_candidate_persisted_as_workflow_artifact": true,
+    "main_admission_requires_explicit_merge": true
+  },
+  "admission_route": [
+    "adaptive_repair",
+    "native_ast_materialization",
+    "compile_import",
+    "fresh_execution",
+    "full_kernel_audit",
+    "complete_regression",
+    "explicit_main_admission"
+  ],
+  "claim_boundary": {
+    "bounded_native_source_materialization_may_be_claimed_after_gate": true,
+    "open_ended_source_invention_claimed": false,
+    "general_intelligence_claimed": false,
+    "phenomenal_consciousness_claimed": false
+  }
+}
