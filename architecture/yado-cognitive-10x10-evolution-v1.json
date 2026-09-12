@@ -1,0 +1,68 @@
+{
+  "schema": "yado.cognitive_10x10_evolution.contract.v1",
+  "name": "YADO Cognitive 10x10 Evolution V1",
+  "goal": "Evolve bounded cognitive policy parameters from measured task deficits across ten domains, then verify on sealed tasks before any canonical admission.",
+  "domains": [
+    "logic",
+    "thinking",
+    "mathematics",
+    "physics",
+    "informatics",
+    "code",
+    "causal_reasoning",
+    "planning",
+    "memory",
+    "abstraction"
+  ],
+  "tasks_per_domain": 10,
+  "total_tasks": 100,
+  "selection_split": {
+    "evolve": 60,
+    "sealed": 40,
+    "sealed_used_for_selection": false
+  },
+  "mutable_policy_fields": [
+    "logic_depth",
+    "contradiction_check",
+    "thinking_depth",
+    "thinking_beam",
+    "abstraction_families"
+  ],
+  "admission_gates": {
+    "candidate_changed": true,
+    "sealed_score_min": 0.90,
+    "sealed_absolute_gain_min": 0.15,
+    "sealed_per_domain_min": 0.75,
+    "full_kernel_audit_required": true,
+    "complete_regression_required": true,
+    "fresh_successor_identity_required": true
+  },
+  "ancestry_closure": {
+    "method": "same-tree merge ancestry closure; no historical branch content copied into the active tree",
+    "closed_branch_tips": {
+      "yado-blind-real-benchmark-v1": "2d6b3c2996f3b3c6df0c8c0f1ae9c95240da36a9",
+      "yado-staged-kernel-evolution-v1": "eae2fee3b7ab1e34271aa9f4e83610b123cec19a"
+    },
+    "closure_commit": "1e769513ca02f45490d280024a38aa7ff14f5812"
+  },
+  "claim_boundary": {
+    "bounded_synthetic_cognitive_evolution": true,
+    "general_intelligence_claimed": false,
+    "phenomenal_consciousness_claimed": false,
+    "canonical_direct_write": false
+  },
+  "limitations": [
+    "task generators and mutation grammar are externally authored",
+    "sealed tasks are held out from selection but share generator families with evolution tasks",
+    "PASS is evidence of bounded policy improvement, not proof of autonomous general intelligence or consciousness"
+  ],
+  "admission_route": [
+    "shadow_10x10_evolution",
+    "sealed_transfer_gate",
+    "physical_ancestry_closure",
+    "full_kernel_audit",
+    "fresh_successor_identity",
+    "complete_regression",
+    "explicit_main_admission"
+  ]
+}
