@@ -1,0 +1,55 @@
+{
+  "schema": "yado.autonomous_meta_source_evolution.v2",
+  "title": "YADO Autonomous Meta Source Evolution V2",
+  "base_shadow_stage": "PASS_SHADOW_G2_EXTERNAL_SOURCE_EVOLUTION_V1",
+  "goal": "Test whether YADO can diagnose a failure in its own generated source, select that source as the causal mutation target, synthesize a new mutation composition from generic typed Python primitives, materialize changed Python source, freeze it, and generalize to sealed external tasks without losing the previous external capability.",
+  "external_benchmark": {
+    "repository": "exercism/problem-specifications",
+    "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+    "fresh_exercises": [
+      "hamming",
+      "isogram",
+      "raindrops"
+    ],
+    "selection_partition": "training only",
+    "sealed_partition": "opened only after candidate source compile and SHA-256 freeze"
+  },
+  "causal_loop": [
+    "reconstruct prior self-generated solver",
+    "run fresh external training tasks",
+    "capture runtime failure trace",
+    "select failing generated source as target",
+    "infer typed input/output signatures",
+    "search generic primitive compositions",
+    "generate new helper AST and dispatch AST",
+    "materialize changed Python source",
+    "compile and freeze candidate SHA-256",
+    "evaluate fresh sealed tasks",
+    "replay prior sealed external tasks",
+    "run full kernel audit",
+    "build fresh Successor identity",
+    "run complete regression"
+  ],
+  "admission_gates": {
+    "parent_fresh_training_score": 0.0,
+    "candidate_fresh_training_score": 1.0,
+    "candidate_fresh_sealed_min": 0.9,
+    "fresh_sealed_absolute_gain_min": 0.75,
+    "previous_external_sealed_retention": 1.0,
+    "source_changed": true,
+    "generated_ast_roots_novel": true,
+    "sealed_uuid_leak_count": 0,
+    "full_kernel_audit": "PASS",
+    "fresh_successor_identity": "REQUIRED",
+    "complete_regression": "PASS"
+  },
+  "safety_boundary": {
+    "canonical_mutation": false,
+    "external_models": false,
+    "candidate_network_access": false,
+    "candidate_shell_access": false,
+    "candidate_secret_access": false,
+    "primitive_vocabulary": "bounded host-authored Python primitives",
+    "claim": "No claim of unrestricted self-rewrite, general intelligence, or consciousness."
+  }
+}
