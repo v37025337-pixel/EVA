@@ -19,22 +19,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: '3.12'
-
       - name: Fetch all physical refs
         run: git fetch origin '+refs/heads/*:refs/remotes/origin/*'
 
-      - name: Prepare runtime
+      - name: Prove canonical kernel selected this deficit
         run: |
-          python runtime/reconstruct_rc8v36.py
-          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
-          python -m pip install --disable-pip-version-check pyyaml
-
-      - name: Prove kernel selected this deficit
-        run: |
-          python runtime/yado_unified_core_deep_self_audit_v1.py
           python - <<'PY'
           import json
           from pathlib import Path
@@ -42,10 +31,10 @@ jobs:
           assert d['self_selected_next_step']=='UNREGISTERED_EXPERIENCE_CANDIDATES', d['self_selected_next_step']
           f={x['code']:x for x in d['findings']}['UNREGISTERED_EXPERIENCE_CANDIDATES']
           assert f['status']=='PARTIAL' and f['evidence']['candidate_count']>0, f
-          print(json.dumps({'selected_next_step':d['self_selected_next_step'],'candidate_count':f['evidence']['candidate_count']},sort_keys=True))
+          print(json.dumps({'canonical_selected_next_step':d['self_selected_next_step'],'canonical_candidate_count':f['evidence']['candidate_count']},sort_keys=True))
           PY
 
-      - name: Resolve candidate topology without semantic promotion
+      - name: Resolve canonical candidate topology without semantic promotion
         run: |
           python - <<'PY'
           import hashlib,json,subprocess
