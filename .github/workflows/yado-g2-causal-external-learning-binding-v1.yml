@@ -1,0 +1,224 @@
+name: YADO G2 Causal External Learning Binding V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - yado-g2-causal-external-learning-binding-v1
+    paths:
+      - 'runtime/**'
+      - 'canonical/**'
+      - 'architecture/**'
+      - '.github/workflows/yado-g2-causal-external-learning-binding-v1.yml'
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  causal-binding-admission:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Verify admission contract
+        run: |
+          git merge-base --is-ancestor origin/main HEAD
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('architecture/yado-g2-causal-external-learning-binding-v1.json').read_text())
+          c=json.loads(Path('canonical/yado-g2-causal-external-learning-binding-v1.json').read_text())
+          assert a['generation']=='G2_CANDIDATE_TRCG_V1'
+          assert a['promotion_rule']=='UPDATE_MAIN_ONLY_AFTER_ALL_CAUSAL_BINDING_GATES_PASS'
+          assert c['status']=='CANONICAL_ACTIVE'
+          assert c['safety']['read_only_external'] is True
+          assert c['safety']['credentials_allowed'] is False
+          assert c['safety']['external_writes_allowed'] is False
+          assert c['g3_genesis_performed'] is False
+          print('PASS_CAUSAL_BINDING_ADMISSION_CONTRACT')
+          PY
+
+      - name: Compile binding and V1-V6
+        run: |
+          python -m py_compile runtime/yado_g2_causal_external_learning_binding_v1.py runtime/yado_unified_core_v1.py
+          python -m py_compile \
+            runtime/yado_external_source_evolution_v1.py \
+            runtime/yado_autonomous_meta_source_evolution_v2.py \
+            runtime/yado_autonomous_grammar_extension_v3.py \
+            runtime/yado_autonomous_meta_grammar_evolution_v4.py \
+            runtime/yado_autonomous_external_library_discovery_v5.py \
+            runtime/yado_autonomous_open_catalog_discovery_v6.py
+
+      - name: Re-derive V1-V6 evidence
+        run: |
+          python runtime/yado_external_source_evolution_v1.py
+          python runtime/yado_autonomous_meta_source_evolution_v2.py
+          python runtime/yado_autonomous_grammar_extension_v3.py
+          python runtime/yado_autonomous_meta_grammar_evolution_v4.py
+          python runtime/yado_autonomous_external_library_discovery_v5.py
+          python runtime/yado_autonomous_open_catalog_discovery_v6.py
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Parse and compile all core layers
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          count=0
+          for root in (Path('canonical'),Path('architecture'),Path('receipts')):
+              for p in root.rglob('*.json'):
+                  json.loads(p.read_text(encoding='utf-8')); count+=1
+          assert count>500,count
+          print('PASS_JSON_PARSE_COUNT',count)
+          PY
+          python -m compileall -q runtime successor candidates/g2-self-evolution candidates/autonomous
+
+      - name: Run UnifiedYADOCoreV1 audit with active binding
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,str(Path('runtime').resolve()))
+          from yado_unified_core_v1 import UnifiedYADOCoreV1
+          core=UnifiedYADOCoreV1(Path('.'))
+          report=core.audit()
+          assert report['pass'] is True,report
+          assert report['checks']['causal_external_learning_binding_active'] is True
+          snap=core.causal_external_learning_snapshot()
+          assert snap['status']=='CANONICAL_ACTIVE'
+          assert snap['read_only_external'] is True
+          assert snap['g3_genesis_performed'] is False
+          print('PASS_UNIFIED_CORE_CAUSAL_BINDING_ACTIVE')
+          PY
+
+      - name: Prove live causal loop and memory feedback after restart
+        run: |
+          python - <<'PY'
+          import json,os,subprocess,sys
+          from pathlib import Path
+          sys.path.insert(0,str(Path('runtime').resolve()))
+          from yado_unified_core_v1 import UnifiedYADOCoreV1
+          objective='find and connect to a Python library for parsing HTML/XML/markup content'
+          core=UnifiedYADOCoreV1(Path('.'))
+          prepared=core.prepare_causal_external_learning(objective)
+          assert prepared['status']=='PASS_CAUSAL_PREPARE',prepared
+          assert all(prepared['action_plan']['gates'].values()),prepared['action_plan']['gates']
+          assert prepared['thinking']['result'] is True
+          assert 'ACTION_READ_ONLY_EXTERNAL' in prepared['logic']['result']
+          assert 'MEMORY_FEEDBACK' in prepared['intelligence']['result']
+          subprocess.run([sys.executable,'runtime/yado_autonomous_open_catalog_discovery_v6.py'],check=True)
+          result=json.loads(Path('receipts/yado-autonomous-open-catalog-discovery-v6.json').read_text())
+          cycle1=core.apply_causal_external_result(prepared,result)
+          assert cycle1['status']=='PASS_G2_CAUSAL_EXTERNAL_LEARNING_BINDING_V1',cycle1
+          assert cycle1['result_verified'] is True
+          assert cycle1['memory_after']['episode_count']==1
+          state=core.export_causal_external_learning_state()
+          assert len(state['episodes'])==1 and state['executable_objects'] is False
+          first_digest=cycle1['memory_after']['event_digest']
+          core2=UnifiedYADOCoreV1(Path('.'))
+          restored=core2.restore_causal_external_learning_state(state)
+          assert restored['episode_count']==1
+          prepared2=core2.prepare_causal_external_learning(objective)
+          assert prepared2['status']=='PASS_CAUSAL_PREPARE'
+          assert prepared2['memory']['prior_event_digest']==first_digest
+          cycle2=core2.apply_causal_external_result(prepared2,result)
+          assert cycle2['status']=='PASS_G2_CAUSAL_EXTERNAL_LEARNING_BINDING_V1'
+          assert cycle2['memory_after']['episode_count']==2
+          event2=cycle2['memory_after']['event']
+          assert event2['memory_feedback_used'] is True
+          assert event2['prior_event_digest']==first_digest
+          receipt={
+            'schema':'yado.g2.causal_external_learning_binding.admission_receipt.v1',
+            'status':'PASS_G2_CAUSAL_EXTERNAL_LEARNING_BINDING_V1',
+            'github_sha':os.getenv('GITHUB_SHA'),
+            'first_cycle':cycle1,
+            'restart_restore_snapshot':restored,
+            'second_cycle':cycle2,
+            'external_selected_package':(result.get('selected_library') or {}).get('name'),
+            'external_discovered_dependency':(result.get('second_hop_library_connection') or {}).get('name'),
+            'connection_depth':(result.get('application') or {}).get('connection_depth'),
+            'g3_genesis_performed':False,
+          }
+          out=Path(os.environ['RUNNER_TEMP'])/'yado-g2-causal-external-learning-binding-v1-receipt.json'
+          out.write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          print('PASS_LIVE_CAUSAL_LOOP_RESTART_MEMORY_FEEDBACK',first_digest)
+          PY
+          git checkout -- receipts/yado-autonomous-open-catalog-discovery-v6.json
+
+      - name: Run deepest unified-core self audit
+        run: |
+          python runtime/yado_unified_core_deep_self_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
+          assert r['status']=='PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1',r
+          assert r['summary']['blocking_findings']==0,r['summary']
+          assert r['g3_genesis_performed'] is False
+          print('PASS_DEEP_SELF_AUDIT',r['summary'])
+          PY
+          git checkout -- architecture/evolution-ledger.json
+
+      - name: Run full kernel audit
+        run: |
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audits/yado-full-kernel-audit-v1-report.json').read_text())
+          assert r['status']=='PASS',r
+          assert r['findings']==[],r['findings']
+          assert r['canonical']['canonical_guard']=='PASS'
+          assert r['canonical']['ledger_validation']=='PASS'
+          assert r['canonical']['g3_genesis_performed'] is False
+          print('PASS_FULL_KERNEL_AUDIT')
+          PY
+
+      - name: Build fresh Successor identity
+        run: python -m successor build --output "$RUNNER_TEMP/yado-successor-birth"
+
+      - name: Run complete inherited and Successor regression
+        run: |
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audits/yado-full-regression-v1-report.json').read_text())
+          assert r['status']=='PASS',r
+          assert r['tests_run']==r['expected_tests']==170,r
+          assert not r['failures'] and not r['errors'] and not r['skipped']
+          assert r['source_unchanged'] is True
+          print('PASS_COMPLETE_REGRESSION_170_OF_170')
+          PY
+
+      - name: Final source and canonical integrity check
+        run: |
+          git diff --exit-code -- canonical architecture/evolution-ledger.json runtime/yado_unified_core_v1.py runtime/yado_g2_causal_external_learning_binding_v1.py
+          echo PASS_FINAL_CAUSAL_BINDING_INTEGRITY
+
+      - name: Upload causal binding evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-causal-external-learning-binding-v1-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/yado-g2-causal-external-learning-binding-v1-receipt.json
+            canonical/yado-g2-causal-external-learning-binding-v1.json
+            architecture/yado-g2-causal-external-learning-binding-v1.json
+            runtime/yado_unified_core_deep_self_audit_v1_receipt.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
