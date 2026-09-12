@@ -1,0 +1,38 @@
+name: YADO G2 Causal External Learning Hash Rebind V1
+
+on:
+  push:
+    branches:
+      - yado-g2-causal-external-learning-binding-v1
+    paths:
+      - 'runtime/yado_g2_causal_external_learning_hash_rebind_v1.py'
+      - '.github/workflows/yado-g2-causal-external-learning-hash-rebind-v1.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  canonical-hash-rebind:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          ref: yado-g2-causal-external-learning-binding-v1
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Rebind runtime identity and canonical manifest
+        run: python runtime/yado_g2_causal_external_learning_hash_rebind_v1.py
+
+      - name: Commit only validated canonical rebind outputs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json architecture/evolution-ledger.json
+          git diff --cached --quiet && { echo 'NO_REBIND_CHANGE'; exit 1; }
+          git commit -m 'YADO: rebind causal external learning runtime identity'
+          git push origin HEAD:yado-g2-causal-external-learning-binding-v1
