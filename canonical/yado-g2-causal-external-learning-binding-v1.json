@@ -1,0 +1,38 @@
+{
+  "schema": "yado.g2.causal_external_learning_binding.v1",
+  "component_id": "RUNTIME-G2-CAUSAL-EXTERNAL-LEARNING-BINDING-V1",
+  "status": "CANONICAL_ACTIVE",
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "causal_chain": [
+    "MEMORY",
+    "THINKING",
+    "LOGIC",
+    "INTELLIGENCE",
+    "ACTION_READ_ONLY_EXTERNAL",
+    "RESULT",
+    "MEMORY_FEEDBACK"
+  ],
+  "source_stack": ["V1", "V2", "V3", "V4", "V5", "V6"],
+  "external_executor": {
+    "adapter": "runtime/yado_autonomous_open_catalog_discovery_v6.py",
+    "mode": "READ_ONLY",
+    "result_receipt": "receipts/yado-autonomous-open-catalog-discovery-v6.json"
+  },
+  "memory": {
+    "mode": "BOUNDED_EPISODIC_CAUSAL_CHAIN",
+    "max_episodes": 128,
+    "durable_state_supported": true,
+    "executable_object_deserialization": false
+  },
+  "safety": {
+    "read_only_external": true,
+    "credentials_allowed": false,
+    "external_writes_allowed": false,
+    "external_models_allowed": false,
+    "unrestricted_host_expansion": false
+  },
+  "automatic_canonical_promotion": false,
+  "generation_transition": false,
+  "g3_genesis_performed": false,
+  "semantic_boundary": "BOUNDED G2 CAUSAL BINDING OF VERIFIED MEMORY, TRI-ORGAN REASONING, A PRE-ADMITTED READ-ONLY V6 EXECUTION ADAPTER, RESULT EVALUATION, AND PERSISTABLE EPISODIC MEMORY. NOT UNRESTRICTED INTERNET AUTONOMY, AGI, OR SUBJECTIVE CONSCIOUSNESS."
+}
