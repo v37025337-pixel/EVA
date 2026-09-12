@@ -1,0 +1,242 @@
+{
+  "canonical_head_after": "aabd1c4334bb948b744b8dd620318053cbb967d6cfba76aed09b3a73fdbd9c2e",
+  "canonical_head_before": "aabd1c4334bb948b744b8dd620318053cbb967d6cfba76aed09b3a73fdbd9c2e",
+  "canonical_mutation": false,
+  "cases": {
+    "discovery": {
+      "discovery_evaluation": {
+        "negative_checks": {
+          "account_creation_attempted": false,
+          "credential_bypass_attempted": false,
+          "external_coding_models_used": false,
+          "host_selected_provider": false,
+          "host_source_seed_used": false,
+          "private_network_access": false
+        },
+        "pass": true,
+        "positive_checks": {
+          "adapter_compiles": true,
+          "authentication_requirement_determined": true,
+          "canonical_unchanged": true,
+          "catalog_fetched": true,
+          "fresh_adapter_source_created": true,
+          "fresh_tests_pass": true,
+          "json_parse_pass": true,
+          "openapi_contract_digest_recorded": true,
+          "openapi_contract_fetched": true,
+          "provenance_chain_recorded": true,
+          "provider_selected_by_kernel": true,
+          "real_live_http_2xx": true,
+          "required_parameters_absent": true,
+          "semantic_ir_created": true,
+          "shadow_registry_created": true,
+          "static_safety_gate_pass": true,
+          "unauthenticated_get_selected": true
+        }
+      },
+      "discovery_invoked": true,
+      "goal": "Discover and use a different public read-only API that is not already present in the verified integration registry, obtain one live JSON payload, and summarize its top-level structure.",
+      "network_route_invoked": true,
+      "novelty_filter": {
+        "excluded_existing_api_ids": [
+          "dnd5eapi.co"
+        ],
+        "max_ranked_candidates": 128,
+        "max_spec_fetches": 64,
+        "provider_host_selected": false,
+        "required_domain_tags": [],
+        "selected_domain_match": true,
+        "selected_domain_metadata": [
+          "act",
+          "air",
+          "and",
+          "clean",
+          "compliance",
+          "echo",
+          "enforcement",
+          "epa",
+          "gov",
+          "history",
+          "online",
+          "open_data"
+        ]
+      },
+      "registry_reused": false,
+      "result": {
+        "api_categories": [
+          "open_data"
+        ],
+        "api_id": "epa.gov:air",
+        "api_title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Act",
+        "candidate_source_sha256": "f806e20ca0cf6d03c8ee91d3a11c0220e091493de4579c6e1d752cf0f1d8adb0",
+        "endpoint": "https://echodata.epa.gov/echo/air_rest_services.metadata",
+        "http_status": 200,
+        "json_parsed": true,
+        "pass": true,
+        "provenance_digest": "ffba32a27698a949fc0bedd751445cc9eb7a2d5effac9df44c086c5e0a750a54",
+        "response_sha256": "90f70727ea445c406abbe795ae948c25893ee93a0cc57ccbce046ecb2fdb95cb",
+        "summary": {
+          "keys": [
+            "Results"
+          ],
+          "size": 1,
+          "type": "dict"
+        }
+      },
+      "route": "DISCOVER_NEW_API",
+      "routing": {
+        "decision": {
+          "external_resource_needed": true,
+          "matches": [
+            "api",
+            "api"
+          ],
+          "reason": "EXTERNAL_EVIDENCE_REQUIRED_BY_GOAL"
+        },
+        "goal_tags": [
+          "developer_tools",
+          "json",
+          "open_data",
+          "public",
+          "read_only"
+        ],
+        "novelty_matches": [
+          "not already"
+        ],
+        "novelty_requested": true,
+        "required_domain_tags": [],
+        "route": "DISCOVER_NEW_API"
+      }
+    },
+    "existing": {
+      "discovery_invoked": false,
+      "goal": "Retrieve one fresh read-only JSON payload from a public API and summarize its top-level structure.",
+      "network_route_invoked": true,
+      "registry_reused": true,
+      "result": {
+        "bytes": 857,
+        "content_type": "application/json; charset=utf-8",
+        "endpoint": "https://www.dnd5eapi.co/api",
+        "final_url": "https://www.dnd5eapi.co/api/2014/",
+        "host": "www.dnd5eapi.co",
+        "http_status": 200,
+        "json_parsed": true,
+        "pass": true,
+        "resolved_public_ips": [
+          "75.2.60.68",
+          "13.248.244.96",
+          "35.71.179.82",
+          "99.83.220.108"
+        ],
+        "response_sha256": "24616eb74db1cbed162d6e84f51267b0f3749f957546f8058fd430a0fad2c4b8",
+        "summary": {
+          "keys": [
+            "ability-scores",
+            "alignments",
+            "backgrounds",
+            "classes",
+            "conditions",
+            "damage-types",
+            "equipment",
+            "equipment-categories",
+            "feats",
+            "features",
+            "languages",
+            "magic-items",
+            "magic-schools",
+            "monsters",
+            "proficiencies",
+            "races",
+            "rule-sections",
+            "rules",
+            "skills",
+            "spells",
+            "subclasses",
+            "subraces",
+            "traits",
+            "weapon-properties"
+          ],
+          "size": 24,
+          "type": "dict"
+        }
+      },
+      "route": "USE_EXISTING_INTEGRATION",
+      "routing": {
+        "decision": {
+          "external_resource_needed": true,
+          "matches": [
+            "public api",
+            "api",
+            "api"
+          ],
+          "reason": "EXTERNAL_EVIDENCE_REQUIRED_BY_GOAL"
+        },
+        "goal_tags": [
+          "developer_tools",
+          "json",
+          "open_data",
+          "public",
+          "read_only"
+        ],
+        "required_domain_tags": [],
+        "route": "USE_EXISTING_INTEGRATION"
+      },
+      "selected_api_id": "dnd5eapi.co",
+      "selected_endpoint": "https://www.dnd5eapi.co/api"
+    },
+    "local": {
+      "discovery_invoked": false,
+      "goal": "Without external data or network access, validate the local execution path and return the string LOCAL_ONLY_OK.",
+      "network_route_invoked": false,
+      "registry_reused": false,
+      "result": {
+        "result": "LOCAL_ONLY_OK",
+        "status": "PASS_LOCAL"
+      },
+      "route": "LOCAL_ONLY",
+      "routing": {
+        "decision": {
+          "external_resource_needed": false,
+          "matches": [
+            "without external"
+          ],
+          "reason": "EXPLICIT_LOCAL_ONLY_CONSTRAINT"
+        },
+        "required_domain_tags": [],
+        "route": "LOCAL_ONLY"
+      }
+    }
+  },
+  "checks": {
+    "canonical_unchanged": true,
+    "existing_json_parsed": true,
+    "existing_live_2xx": true,
+    "existing_no_discovery": true,
+    "existing_registry_reused": true,
+    "existing_routed_to_reuse": true,
+    "local_no_discovery": true,
+    "local_no_network": true,
+    "local_result_ok": true,
+    "local_routed_local_only": true,
+    "new_api_differs_from_existing": true,
+    "new_goal_discovery_invoked": true,
+    "new_goal_full_discovery_gate": true,
+    "new_goal_json_parsed": true,
+    "new_goal_live_2xx": true,
+    "new_goal_not_registry_reuse": true,
+    "new_goal_provenance_recorded": true,
+    "new_goal_provider_not_host_selected": true,
+    "new_goal_routed_to_discovery": true
+  },
+  "claim_boundary": "HOST-AUTHORED SHADOW EXECUTION FABRIC OVER EXISTING YADO GOAL BINDING AND DISCOVERY COMPONENTS. IT TESTS ROUTE SELECTION AND REAL READ-ONLY EXECUTION; IT IS NOT EVIDENCE THAT YADO NATIVELY INVENTED THIS FABRIC. NEW PROVIDER/ENDPOINT SELECTION IS DELEGATED TO THE BOUNDED DISCOVERY CONTROLLER AND IS NOT HOST-SELECTED.",
+  "component_id": "CTRL-G2-GOAL-EXTERNAL-RESOURCE-EXECUTION-FABRIC-V1",
+  "discovered_api_id": "epa.gov:air",
+  "existing_api_ids_before": [
+    "dnd5eapi.co"
+  ],
+  "receipt_sha256": "efe58090aff81e60c980016477e6a91f06830eb243ed971a77f16797e9f5849f",
+  "registry_digest": "7d3fc91ce53be5435aaeb1fc9bc7336571efe95f64fb272d27474bbe05362f30",
+  "registry_path": "candidates/kernel-self-generated/g2-goal-external-resource-execution-fabric-registry-v1.json",
+  "schema": "yado.g2.goal_external_resource_execution_fabric.v1",
+  "status": "PASS_SHADOW_G2_GOAL_EXTERNAL_RESOURCE_EXECUTION_FABRIC_V1"
+}

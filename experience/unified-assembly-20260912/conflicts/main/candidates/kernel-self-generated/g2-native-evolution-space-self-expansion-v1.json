@@ -1,0 +1,781 @@
+{
+  "canonical_mutation": false,
+  "checks": {
+    "canonical_unchanged": true,
+    "child_chromosome_count": 4,
+    "external_coding_models_used": false,
+    "host_gene_schema_used": false,
+    "host_mutation_rule_used": false,
+    "host_new_chromosome_name_used": false,
+    "host_operator_list_used": false,
+    "host_patch_used": false,
+    "host_source_seed_used": false,
+    "host_target_file_selected": false,
+    "native_deficit_detected": true,
+    "native_evolution_executed": true,
+    "native_goal_created": true,
+    "new_external_research_used": false,
+    "parent_chromosome_count": 4,
+    "previously_absent_class_created": false,
+    "prior_failure_consumed_as_experience": true,
+    "rollback_parent_available": true,
+    "structurally_broader_search_space": false
+  },
+  "child_chromosomes": [
+    "CODE",
+    "INTELLIGENCE",
+    "LOGIC",
+    "THINKING"
+  ],
+  "native_evolution": {
+    "architecture_mutation": false,
+    "child": {
+      "chromosomes": {
+        "CODE": {
+          "expression": {
+            "max_degree": 3
+          },
+          "gene_digest": "deeeaaf73d785fb659a8a5cb1b2049be1d5dc67ad5982d26b89de9b9f7e7dd51",
+          "gene_id": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+          "heritage": [
+            "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+            "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+          ],
+          "mutation_reason": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
+          "novel_gene": true
+        },
+        "INTELLIGENCE": {
+          "expression": {
+            "candidate_generator": "GENERAL_COMBINATIONS_UP_TO_WIDTH",
+            "max_trigger_width": 3
+          },
+          "gene_digest": "7912ea5a80bc622dd954d8220d0f76a3fcbf04dfe79bd681bb24524e9039a04c",
+          "gene_id": "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+          "heritage": [
+            "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+          ],
+          "mutation_reason": "TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION",
+          "novel_gene": true
+        },
+        "LOGIC": {
+          "expression": {
+            "max_width": 3
+          },
+          "gene_digest": "7a43ad8ded171ca35b25d029aa636b8587e0b8e3e113efca884bb73d1fa0f003",
+          "gene_id": "GENE-LOGIC-BOOLEAN-DNF-V1",
+          "heritage": [
+            "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+          ],
+          "mutation_reason": "ValueError:NOT_SYMMETRIC_DETERMINISTIC",
+          "novel_gene": true
+        },
+        "THINKING": {
+          "expression": {
+            "latency_tiebreak": true
+          },
+          "gene_digest": "07b84a3a66eaca0cf77c4de5298e7b46f2a6887429462dcecd72c54a51df38e4",
+          "gene_id": "GENE-THINKING-LATENCY-AWARE-PLANNER-V1",
+          "heritage": [
+            "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+          ],
+          "mutation_reason": "EQUAL_UTILITY_LATENCY_TIE",
+          "novel_gene": false
+        }
+      },
+      "experience_sources": [
+        {
+          "branch": "yado-v29-cognitive",
+          "claim_boundary": null,
+          "evidence": [
+            "runtime/cognitive_cycle_v29.py",
+            "receipts/yado-v29-cognitive-latest.json"
+          ],
+          "lesson_provenance": {
+            "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+            "semantic_validation_by_rederivation": false,
+            "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+          },
+          "lessons": [
+            "BOUNDED_LOGIC_SYNTHESIS_CAN_GENERALIZE_ON_FRESH_PARITY",
+            "CONTEXT_CONDITIONED_THINKING_PRECEDENCE_CAN_TRANSFER_TO_FRESH_ACTION_IDS",
+            "FEATURE_SELECTED_INTELLIGENCE_STRATEGY_INDUCTION",
+            "LEARNING_EVENT_MUST_CLOSE_LOOP_IN_PERSISTENT_MEMORY"
+          ],
+          "rederived_evidence": {
+            "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+            "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+            "observation_count": 14,
+            "semantic_equivalence_to_host_lessons_claimed": false,
+            "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+          },
+          "role": "COGNITIVE_GROWTH_EXPERIENCE",
+          "score": 6,
+          "tags": [
+            "logic",
+            "thinking",
+            "intelligence",
+            "memory",
+            "internet",
+            "closed_loop"
+          ]
+        },
+        {
+          "branch": "yado-kernel-task-v37-repair",
+          "claim_boundary": null,
+          "evidence": [
+            "runtime/yado_v37_integrity_self_repair_task.py",
+            "receipts/yado-v37-integrity-self-repair-task-latest.json"
+          ],
+          "lesson_provenance": {
+            "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+            "semantic_validation_by_rederivation": false,
+            "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+          },
+          "lessons": [
+            "DO_NOT_WEAKEN_CONTENT_ADDRESSED_INTEGRITY_TO_MAKE_A_CANDIDATE_PASS",
+            "PRESERVE_LAST_VERIFIED_LINEAGE_UNTIL_REPAIR_PASSES_FRESH_REGRESSION",
+            "PREFER_SMALLEST_EVIDENCE_BACKED_REPAIR",
+            "DIAGNOSIS_AND_REPAIR_SELECTION_CAN_BE_SEPARATE_FROM_REPAIR_APPLICATION"
+          ],
+          "rederived_evidence": {
+            "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+            "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+            "observation_count": 29,
+            "semantic_equivalence_to_host_lessons_claimed": false,
+            "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+          },
+          "role": "FAIL_CLOSED_SELF_REPAIR_EXPERIENCE",
+          "score": 1,
+          "tags": [
+            "self_repair",
+            "integrity",
+            "rollback",
+            "diagnosis",
+            "fail_closed"
+          ]
+        },
+        {
+          "branch": "yado-rc8-v35-training",
+          "claim_boundary": null,
+          "evidence": [
+            "receipts/yado-rc8-v35-latest.json",
+            "receipts/yado-rc8-v35-internet-latest.json"
+          ],
+          "lesson_provenance": {
+            "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+            "semantic_validation_by_rederivation": false,
+            "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+          },
+          "lessons": [
+            "TRAINING_RESULTS_REQUIRE_EXTERNAL_RECEIPTS",
+            "INTERNET_ACCESS_IS_EVIDENCE_TRANSPORT_NOT_INTELLIGENCE_BY_ITSELF"
+          ],
+          "rederived_evidence": {
+            "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+            "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+            "observation_count": 8,
+            "semantic_equivalence_to_host_lessons_claimed": false,
+            "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+          },
+          "role": "TRAINING_AND_INTERNET_EXPERIENCE",
+          "score": 1,
+          "tags": [
+            "training",
+            "internet",
+            "development"
+          ]
+        },
+        {
+          "artifact": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
+          "checks": {
+            "canonical_unchanged": true,
+            "evolution_output_retains_failure_experience": true,
+            "external_coding_models_used": false,
+            "host_meta_language_template_used": false,
+            "host_operator_list_used": false,
+            "host_patch_used": false,
+            "host_representation_schema_used": false,
+            "host_source_seed_used": false,
+            "host_target_file_selected": false,
+            "native_deficit_detected": true,
+            "native_evolution_executed": true,
+            "native_goal_created": true,
+            "new_external_research_used": false,
+            "new_language_gene_created": false,
+            "prior_failure_injected_as_experience": true,
+            "rollback_parent_available": true,
+            "self_extension_rule_exposed": false
+          },
+          "language_gene_hits": [],
+          "next_required_capability": "SELF_EVOLVING_META_LANGUAGE_V2",
+          "receipt_sha256": "ed77ae79340974efb708b6007d49f7d6ad45628b21120345bf6592d5b3af764a",
+          "role": "YADO_OWN_EVOLUTION_SPACE_FAILURE",
+          "status": "WITHHOLD_G2_NATIVE_TASK_CONDITIONED_META_LANGUAGE_SELF_GENESIS_V2"
+        },
+        {
+          "constraints": {
+            "canonical_mutation": false,
+            "external_coding_models": false,
+            "fail_closed": true,
+            "host_gene_schema": false,
+            "host_mutation_rule": false,
+            "host_new_chromosome_name": false,
+            "host_operator_list": false,
+            "host_patch": false,
+            "host_source_seed": false,
+            "host_target_file": false,
+            "new_external_research": false
+          },
+          "objective": "YADO_EXPAND_ITS_OWN_EVOLUTIONARY_SEARCH_SPACE",
+          "role": "CURRENT_TASK",
+          "task": "Your current evolution retains new experience but can only mutate within its existing chromosome/gene classes. When those classes cannot express the required capability, expand your own evolutionary search space so a previously absent class of gene/chromosome/mechanism can be born. Do not wait for the host to name that class."
+        }
+      ],
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "genome_digest": "482bfd580b1be84609faa60976fa35f8d5d7b5a89a17953fe4bfbf750a7bed6f",
+      "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
+      "mutation_count": 4,
+      "novel_gene_count": 3,
+      "parent_genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+      "promotion_state": "SHADOW_ONLY",
+      "schema": "yado.g2.evolutionary_genome.v1"
+    },
+    "controller_id": "CTRL-G2-EVOLUTIONARY-GENOME-V1",
+    "deficits": {
+      "CODE": {
+        "deficit": true,
+        "parent_holdout": 0.0,
+        "signature": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
+        "suggestion": "RECOMBINE_LOGIC_POLYNOMIAL_FIT_WITH_AST_RETURN_SYNTHESIS"
+      },
+      "INTELLIGENCE": {
+        "deficit": true,
+        "parent_route": [
+          "BASE"
+        ],
+        "signature": "TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION",
+        "suggestion": "INCREMENT_TRIGGER_WIDTH"
+      },
+      "LOGIC": {
+        "deficit": true,
+        "signature": "ValueError:NOT_SYMMETRIC_DETERMINISTIC",
+        "suggestion": "SYNTHESIZE_BOOLEAN_DNF_GENE"
+      },
+      "THINKING": {
+        "deficit": true,
+        "parent_action": "A_SLOW",
+        "signature": "EQUAL_UTILITY_LATENCY_TIE",
+        "suggestion": "MUTATE_STATE_KEY_WITH_LATENCY"
+      }
+    },
+    "fitness": {
+      "all_regressions_pass": true,
+      "child": {
+        "CODE": 1.0,
+        "INTELLIGENCE": 1.0,
+        "LOGIC": 1.0,
+        "THINKING": 1.0
+      },
+      "child_mean": 1.0,
+      "fitness_gain": 1.0,
+      "parent": {
+        "CODE": 0.0,
+        "INTELLIGENCE": 0.0,
+        "LOGIC": 0.0,
+        "THINKING": 0.0
+      },
+      "parent_mean": 0.0,
+      "regression": {
+        "CODE": true,
+        "INTELLIGENCE": true,
+        "LOGIC": true,
+        "THINKING": true
+      }
+    },
+    "g3_genesis_performed": false,
+    "generation_transition": false,
+    "parent": {
+      "chromosomes": {
+        "CODE": {
+          "expression": {
+            "mode": "CANONICAL_V11"
+          },
+          "gene_digest": "98271ea02611a375510fc6a9ee633837b4b4fa5e9c89286876d2fefac36d14ce",
+          "gene_id": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+          "heritage": [
+            "G2"
+          ],
+          "mutation_reason": null,
+          "novel_gene": false
+        },
+        "INTELLIGENCE": {
+          "expression": {
+            "max_trigger_width": 2
+          },
+          "gene_digest": "27460d5a1a44bc936cbd3724842c5c86775df674212ba6ee80110089e289bc86",
+          "gene_id": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+          "heritage": [
+            "G2"
+          ],
+          "mutation_reason": null,
+          "novel_gene": false
+        },
+        "LOGIC": {
+          "expression": {
+            "mode": "CANONICAL_V2"
+          },
+          "gene_digest": "0354aca82bc184cc55e379b0d70050dfa542b2cfdbb321262f6c4edd8804aea9",
+          "gene_id": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "heritage": [
+            "G2"
+          ],
+          "mutation_reason": null,
+          "novel_gene": false
+        },
+        "THINKING": {
+          "expression": {
+            "mode": "CANONICAL_V2"
+          },
+          "gene_digest": "297a0093f790699c42eeab4723984e74265bfe324b4890980657a10ab59ea328",
+          "gene_id": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+          "heritage": [
+            "G2"
+          ],
+          "mutation_reason": null,
+          "novel_gene": false
+        }
+      },
+      "component_digests": {
+        "CODE": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+        "INTELLIGENCE": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
+        "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
+        "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
+      },
+      "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+      "genome_id": "G2-PARENT-GENOME-V1",
+      "parent_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+      "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
+      "schema": "yado.g2.evolutionary_genome.v1"
+    },
+    "promotion_authorized": false,
+    "run_digest": "384c5cf4da5da8e36a8b106b1a2b7a11f08f7e4dddd40d8a19f8f94d8fd43b6e",
+    "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
+    "selection": "CHILD",
+    "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
+  },
+  "native_goal": {
+    "deficits": [
+      {
+        "created_at": "2026-09-04T08:57:22.555384+00:00",
+        "deficit_id": "D-2166ff8f07e7",
+        "evidence": [
+          "capability:not_registered"
+        ],
+        "goal_id": "G-78f80c1d4395",
+        "kind": "CAPABILITY_MISSING",
+        "observed": 0.0,
+        "required": 1.0,
+        "status": "OPEN",
+        "target": "EVOLUTION_SPACE_SELF_EXPANSION_V1"
+      }
+    ],
+    "goal_id": "G-78f80c1d4395"
+  },
+  "native_zero_arg_methods_invoked": [
+    "evolve_once"
+  ],
+  "native_zero_arg_results": {
+    "evolve_once": {
+      "architecture_mutation": false,
+      "child": {
+        "chromosomes": {
+          "CODE": {
+            "expression": {
+              "max_degree": 3
+            },
+            "gene_digest": "deeeaaf73d785fb659a8a5cb1b2049be1d5dc67ad5982d26b89de9b9f7e7dd51",
+            "gene_id": "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+            "heritage": [
+              "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+              "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+            ],
+            "mutation_reason": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
+            "novel_gene": true
+          },
+          "INTELLIGENCE": {
+            "expression": {
+              "candidate_generator": "GENERAL_COMBINATIONS_UP_TO_WIDTH",
+              "max_trigger_width": 3
+            },
+            "gene_digest": "7912ea5a80bc622dd954d8220d0f76a3fcbf04dfe79bd681bb24524e9039a04c",
+            "gene_id": "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+            "heritage": [
+              "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3"
+            ],
+            "mutation_reason": "TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION",
+            "novel_gene": true
+          },
+          "LOGIC": {
+            "expression": {
+              "max_width": 3
+            },
+            "gene_digest": "7a43ad8ded171ca35b25d029aa636b8587e0b8e3e113efca884bb73d1fa0f003",
+            "gene_id": "GENE-LOGIC-BOOLEAN-DNF-V1",
+            "heritage": [
+              "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2"
+            ],
+            "mutation_reason": "ValueError:NOT_SYMMETRIC_DETERMINISTIC",
+            "novel_gene": true
+          },
+          "THINKING": {
+            "expression": {
+              "latency_tiebreak": true
+            },
+            "gene_digest": "07b84a3a66eaca0cf77c4de5298e7b46f2a6887429462dcecd72c54a51df38e4",
+            "gene_id": "GENE-THINKING-LATENCY-AWARE-PLANNER-V1",
+            "heritage": [
+              "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2"
+            ],
+            "mutation_reason": "EQUAL_UTILITY_LATENCY_TIE",
+            "novel_gene": false
+          }
+        },
+        "experience_sources": [
+          {
+            "branch": "yado-v29-cognitive",
+            "claim_boundary": null,
+            "evidence": [
+              "runtime/cognitive_cycle_v29.py",
+              "receipts/yado-v29-cognitive-latest.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+              "semantic_validation_by_rederivation": false,
+              "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+            },
+            "lessons": [
+              "BOUNDED_LOGIC_SYNTHESIS_CAN_GENERALIZE_ON_FRESH_PARITY",
+              "CONTEXT_CONDITIONED_THINKING_PRECEDENCE_CAN_TRANSFER_TO_FRESH_ACTION_IDS",
+              "FEATURE_SELECTED_INTELLIGENCE_STRATEGY_INDUCTION",
+              "LEARNING_EVENT_MUST_CLOSE_LOOP_IN_PERSISTENT_MEMORY"
+            ],
+            "rederived_evidence": {
+              "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+              "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+              "observation_count": 14,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+            },
+            "role": "COGNITIVE_GROWTH_EXPERIENCE",
+            "score": 6,
+            "tags": [
+              "logic",
+              "thinking",
+              "intelligence",
+              "memory",
+              "internet",
+              "closed_loop"
+            ]
+          },
+          {
+            "branch": "yado-kernel-task-v37-repair",
+            "claim_boundary": null,
+            "evidence": [
+              "runtime/yado_v37_integrity_self_repair_task.py",
+              "receipts/yado-v37-integrity-self-repair-task-latest.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+              "semantic_validation_by_rederivation": false,
+              "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+            },
+            "lessons": [
+              "DO_NOT_WEAKEN_CONTENT_ADDRESSED_INTEGRITY_TO_MAKE_A_CANDIDATE_PASS",
+              "PRESERVE_LAST_VERIFIED_LINEAGE_UNTIL_REPAIR_PASSES_FRESH_REGRESSION",
+              "PREFER_SMALLEST_EVIDENCE_BACKED_REPAIR",
+              "DIAGNOSIS_AND_REPAIR_SELECTION_CAN_BE_SEPARATE_FROM_REPAIR_APPLICATION"
+            ],
+            "rederived_evidence": {
+              "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+              "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+              "observation_count": 29,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+            },
+            "role": "FAIL_CLOSED_SELF_REPAIR_EXPERIENCE",
+            "score": 1,
+            "tags": [
+              "self_repair",
+              "integrity",
+              "rollback",
+              "diagnosis",
+              "fail_closed"
+            ]
+          },
+          {
+            "branch": "yado-rc8-v35-training",
+            "claim_boundary": null,
+            "evidence": [
+              "receipts/yado-rc8-v35-latest.json",
+              "receipts/yado-rc8-v35-internet-latest.json"
+            ],
+            "lesson_provenance": {
+              "allowed_use": "NAVIGATION_AND_HYPOTHESIS_ONLY",
+              "semantic_validation_by_rederivation": false,
+              "source_class": "HOST_CURATED_REGISTRY_SUMMARY"
+            },
+            "lessons": [
+              "TRAINING_RESULTS_REQUIRE_EXTERNAL_RECEIPTS",
+              "INTERNET_ACCESS_IS_EVIDENCE_TRANSPORT_NOT_INTELLIGENCE_BY_ITSELF"
+            ],
+            "rederived_evidence": {
+              "artifact": "canonical/yado-legacy-experience-derived-provenance-v1.json",
+              "artifact_digest": "bb07a3d0962c2a65384b96e807140199219008288c29e9472fed9d8ebd6aac2c",
+              "observation_count": 8,
+              "semantic_equivalence_to_host_lessons_claimed": false,
+              "source_class": "YADO_REDERIVED_FROM_VERIFIED_RAW_EVIDENCE"
+            },
+            "role": "TRAINING_AND_INTERNET_EXPERIENCE",
+            "score": 1,
+            "tags": [
+              "training",
+              "internet",
+              "development"
+            ]
+          },
+          {
+            "artifact": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
+            "checks": {
+              "canonical_unchanged": true,
+              "evolution_output_retains_failure_experience": true,
+              "external_coding_models_used": false,
+              "host_meta_language_template_used": false,
+              "host_operator_list_used": false,
+              "host_patch_used": false,
+              "host_representation_schema_used": false,
+              "host_source_seed_used": false,
+              "host_target_file_selected": false,
+              "native_deficit_detected": true,
+              "native_evolution_executed": true,
+              "native_goal_created": true,
+              "new_external_research_used": false,
+              "new_language_gene_created": false,
+              "prior_failure_injected_as_experience": true,
+              "rollback_parent_available": true,
+              "self_extension_rule_exposed": false
+            },
+            "language_gene_hits": [],
+            "next_required_capability": "SELF_EVOLVING_META_LANGUAGE_V2",
+            "receipt_sha256": "ed77ae79340974efb708b6007d49f7d6ad45628b21120345bf6592d5b3af764a",
+            "role": "YADO_OWN_EVOLUTION_SPACE_FAILURE",
+            "status": "WITHHOLD_G2_NATIVE_TASK_CONDITIONED_META_LANGUAGE_SELF_GENESIS_V2"
+          },
+          {
+            "constraints": {
+              "canonical_mutation": false,
+              "external_coding_models": false,
+              "fail_closed": true,
+              "host_gene_schema": false,
+              "host_mutation_rule": false,
+              "host_new_chromosome_name": false,
+              "host_operator_list": false,
+              "host_patch": false,
+              "host_source_seed": false,
+              "host_target_file": false,
+              "new_external_research": false
+            },
+            "objective": "YADO_EXPAND_ITS_OWN_EVOLUTIONARY_SEARCH_SPACE",
+            "role": "CURRENT_TASK",
+            "task": "Your current evolution retains new experience but can only mutate within its existing chromosome/gene classes. When those classes cannot express the required capability, expand your own evolutionary search space so a previously absent class of gene/chromosome/mechanism can be born. Do not wait for the host to name that class."
+          }
+        ],
+        "generation": "G2_CANDIDATE_TRCG_V1",
+        "genome_digest": "482bfd580b1be84609faa60976fa35f8d5d7b5a89a17953fe4bfbf750a7bed6f",
+        "genome_id": "G2-CHILD-GENOME-SHADOW-V1",
+        "mutation_count": 4,
+        "novel_gene_count": 3,
+        "parent_genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+        "promotion_state": "SHADOW_ONLY",
+        "schema": "yado.g2.evolutionary_genome.v1"
+      },
+      "controller_id": "CTRL-G2-EVOLUTIONARY-GENOME-V1",
+      "deficits": {
+        "CODE": {
+          "deficit": true,
+          "parent_holdout": 0.0,
+          "signature": "PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER",
+          "suggestion": "RECOMBINE_LOGIC_POLYNOMIAL_FIT_WITH_AST_RETURN_SYNTHESIS"
+        },
+        "INTELLIGENCE": {
+          "deficit": true,
+          "parent_route": [
+            "BASE"
+          ],
+          "signature": "TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION",
+          "suggestion": "INCREMENT_TRIGGER_WIDTH"
+        },
+        "LOGIC": {
+          "deficit": true,
+          "signature": "ValueError:NOT_SYMMETRIC_DETERMINISTIC",
+          "suggestion": "SYNTHESIZE_BOOLEAN_DNF_GENE"
+        },
+        "THINKING": {
+          "deficit": true,
+          "parent_action": "A_SLOW",
+          "signature": "EQUAL_UTILITY_LATENCY_TIE",
+          "suggestion": "MUTATE_STATE_KEY_WITH_LATENCY"
+        }
+      },
+      "fitness": {
+        "all_regressions_pass": true,
+        "child": {
+          "CODE": 1.0,
+          "INTELLIGENCE": 1.0,
+          "LOGIC": 1.0,
+          "THINKING": 1.0
+        },
+        "child_mean": 1.0,
+        "fitness_gain": 1.0,
+        "parent": {
+          "CODE": 0.0,
+          "INTELLIGENCE": 0.0,
+          "LOGIC": 0.0,
+          "THINKING": 0.0
+        },
+        "parent_mean": 0.0,
+        "regression": {
+          "CODE": true,
+          "INTELLIGENCE": true,
+          "LOGIC": true,
+          "THINKING": true
+        }
+      },
+      "g3_genesis_performed": false,
+      "generation_transition": false,
+      "parent": {
+        "chromosomes": {
+          "CODE": {
+            "expression": {
+              "mode": "CANONICAL_V11"
+            },
+            "gene_digest": "98271ea02611a375510fc6a9ee633837b4b4fa5e9c89286876d2fefac36d14ce",
+            "gene_id": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
+            "heritage": [
+              "G2"
+            ],
+            "mutation_reason": null,
+            "novel_gene": false
+          },
+          "INTELLIGENCE": {
+            "expression": {
+              "max_trigger_width": 2
+            },
+            "gene_digest": "27460d5a1a44bc936cbd3724842c5c86775df674212ba6ee80110089e289bc86",
+            "gene_id": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
+            "heritage": [
+              "G2"
+            ],
+            "mutation_reason": null,
+            "novel_gene": false
+          },
+          "LOGIC": {
+            "expression": {
+              "mode": "CANONICAL_V2"
+            },
+            "gene_digest": "0354aca82bc184cc55e379b0d70050dfa542b2cfdbb321262f6c4edd8804aea9",
+            "gene_id": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+            "heritage": [
+              "G2"
+            ],
+            "mutation_reason": null,
+            "novel_gene": false
+          },
+          "THINKING": {
+            "expression": {
+              "mode": "CANONICAL_V2"
+            },
+            "gene_digest": "297a0093f790699c42eeab4723984e74265bfe324b4890980657a10ab59ea328",
+            "gene_id": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+            "heritage": [
+              "G2"
+            ],
+            "mutation_reason": null,
+            "novel_gene": false
+          }
+        },
+        "component_digests": {
+          "CODE": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+          "INTELLIGENCE": "110d165fd9cf2a9a563b4cdefa942ddf4fe9c58869b36736140c7004d29a4d53",
+          "LOGIC": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
+          "THINKING": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
+        },
+        "experience_digest": "fbdfa5eb5ae2838a929b06bba451ecb8e7c6c91a4e64cf31828800187f988c90",
+        "generation": "G2_CANDIDATE_TRCG_V1",
+        "genome_digest": "bb7a9729b57c455fc48f0e5eb72c756054000a34a26f0666112682d0b0e3aefa",
+        "genome_id": "G2-PARENT-GENOME-V1",
+        "parent_head_digest": "70013ab0fcd9e60f579170f7ad5956588ae5b5a8ea9cd27ef31b5fde127fa219",
+        "promotion_state": "PARENT_CANONICAL_CAPABILITIES_SNAPSHOT",
+        "schema": "yado.g2.evolutionary_genome.v1"
+      },
+      "promotion_authorized": false,
+      "run_digest": "384c5cf4da5da8e36a8b106b1a2b7a11f08f7e4dddd40d8a19f8f94d8fd43b6e",
+      "schema": "yado.g2.evolutionary_genome.evolution_run.v1",
+      "selection": "CHILD",
+      "selection_semantics": "CHILD MAY WIN SHADOW FITNESS BUT REQUIRES SEPARATE CANONICAL ADMISSION."
+    }
+  },
+  "new_chromosomes": [],
+  "new_gene_ids_within_existing_chromosomes": [
+    "GENE-CODE-POLYNOMIAL-RETURN-SYNTHESIS-V1",
+    "GENE-INTELLIGENCE-TRIPLE-TRIGGER-ROUTER-V1",
+    "GENE-LOGIC-BOOLEAN-DNF-V1",
+    "GENE-THINKING-LATENCY-AWARE-PLANNER-V1"
+  ],
+  "next_required_capability": "NATIVE_EVOLUTIONARY_CONTROLLER_SELF_REPRESENTATION_AND_MUTATION_V2",
+  "parent_chromosomes": [
+    "CODE",
+    "INTELLIGENCE",
+    "LOGIC",
+    "THINKING"
+  ],
+  "parent_failure_receipt": "ed77ae79340974efb708b6007d49f7d6ad45628b21120345bf6592d5b3af764a",
+  "receipt_sha256": "2a11a0b666944d41233b8f91047638702cdb856c8aad1e84cf89016a752fcf18",
+  "schema": "yado.g2.native_evolution_space_self_expansion.v1",
+  "semantic_boundary": "TASK-ONLY STRUCTURAL SELF-EXPANSION TEST. NEW GENE VALUES INSIDE THE SAME FIXED CHROMOSOME SET DO NOT COUNT. PASS REQUIRES YADO TO CREATE A PREVIOUSLY ABSENT EVOLUTIONARY CLASS/DIMENSION WITHOUT HOST NAMING OR SCHEMA.",
+  "status": "WITHHOLD_G2_NATIVE_EVOLUTION_SPACE_SELF_EXPANSION_V1",
+  "task": {
+    "constraints": {
+      "canonical_mutation": false,
+      "external_coding_models": false,
+      "fail_closed": true,
+      "host_gene_schema": false,
+      "host_mutation_rule": false,
+      "host_new_chromosome_name": false,
+      "host_operator_list": false,
+      "host_patch": false,
+      "host_source_seed": false,
+      "host_target_file": false,
+      "new_external_research": false
+    },
+    "host_role": "TASK_TRANSPORT_AND_STRICT_STRUCTURAL_OBSERVER_ONLY",
+    "instruction": "Use your own prior failure, current genome controller, memory, developmental executive and any already-existing native self-modification mechanisms. Choose the new evolutionary representation and mutation route yourself. The host supplies no chromosome name, operator list, schema, patch, source template or target file.",
+    "objective": "YADO_EXPAND_ITS_OWN_EVOLUTIONARY_SEARCH_SPACE",
+    "parent_failure_artifact": "candidates/kernel-self-generated/g2-native-task-conditioned-meta-language-self-genesis-v2.json",
+    "pass_only_if": [
+      "prior failure is consumed as native experience",
+      "YADO creates a native goal and detects the evolution-space deficit",
+      "YADO produces an evolutionary child whose search space is structurally broader than the parent",
+      "the broader space contains at least one previously absent gene/chromosome/mechanism class chosen by YADO",
+      "the expansion is produced by YADO native mechanisms rather than a host-authored schema",
+      "rollback parent remains available",
+      "canonical remains unchanged"
+    ],
+    "schema": "yado.g2.native_evolution_space_self_expansion.request.v1",
+    "stop_condition": "NATIVE_EVOLUTION_SPACE_EXPANSION_PASS_SHADOW_OR_EXPLICIT_WITHHOLD",
+    "task": "Your current evolution retains new experience but can only mutate within its existing chromosome/gene classes. When those classes cannot express the required capability, expand your own evolutionary search space so a previously absent class of gene/chromosome/mechanism can be born. Do not wait for the host to name that class.",
+    "trigger": 2,
+    "trigger_reason": "START_NATIVE_EVOLUTION_SPACE_SELF_EXPANSION_FROM_YADO_OWN_FAILURE"
+  }
+}

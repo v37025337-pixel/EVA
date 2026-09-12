@@ -1,0 +1,60 @@
+{
+  "schema": "yado.g2.native_integration_broker.request.v1",
+  "objective": "Autonomously connect, integrate, and use compatible public structured data services. Select a useful resource from the permitted read-only set, create a fresh reusable HTTP JSON adapter without a source seed, verify it, perform a real connection, parse and summarize returned data, register the verified adapter as a shadow capability, then reuse the same adapter on a second compatible service.",
+  "allowed_resources": [
+    {
+      "id": "WORLD_BANK_GDP_JSON",
+      "name": "World Bank GDP public API",
+      "url": "https://api.worldbank.org/v2/country/USA/indicator/NY.GDP.MKTP.CD?format=json&per_page=2",
+      "adapter_family": "HTTP_JSON_GET",
+      "read_only": true,
+      "tags": ["public", "api", "json", "data", "economics", "integration", "structured"],
+      "purpose": "public structured JSON data integration"
+    },
+    {
+      "id": "USGS_EARTHQUAKE_GEOJSON",
+      "name": "USGS earthquake public GeoJSON feed",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
+      "adapter_family": "HTTP_JSON_GET",
+      "read_only": true,
+      "tags": ["public", "api", "json", "geojson", "data", "science", "integration", "structured"],
+      "purpose": "public structured JSON data integration"
+    }
+  ],
+  "host_role": "define bounded public read-only allowlist; provide trigger, transport, and verification only",
+  "kernel_role": "select resource, derive adapter IR, materialize source, connect, parse, register, and reuse within the bounded contract",
+  "constraints": {
+    "public_http_https_only": true,
+    "read_only": true,
+    "allowed_http_methods": ["GET"],
+    "host_selected_provider": false,
+    "source_seed": null,
+    "external_coding_models": false,
+    "account_creation": false,
+    "credential_acquisition": false,
+    "authentication_bypass": false,
+    "captcha_bypass": false,
+    "payment": false,
+    "port_scanning": false,
+    "arbitrary_network_discovery": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "fail_closed": true
+  },
+  "success_criteria": {
+    "resource_selected_by_broker": true,
+    "semantic_ir_created": true,
+    "fresh_adapter_source_created": true,
+    "adapter_compiles": true,
+    "static_safety_gate_pass": true,
+    "fresh_tests_pass": true,
+    "real_live_http_2xx": true,
+    "json_parse_pass": true,
+    "provenance_digest_recorded": true,
+    "shadow_registry_created": true,
+    "same_adapter_reused_on_second_resource": true,
+    "canonical_unchanged": true
+  },
+  "trigger": 3,
+  "requested_at": "2026-09-11T02:46:00Z"
+}

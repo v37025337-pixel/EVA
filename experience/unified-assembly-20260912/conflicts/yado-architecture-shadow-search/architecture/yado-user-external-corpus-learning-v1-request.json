@@ -1,0 +1,68 @@
+{
+  "schema": "yado.g2.user_external_corpus_learning.request.v1",
+  "objective": "YADO_LEARN_FREE_RESOURCE_DISCOVERY_BY_TRAVERSING_FREE_FOR_DEV_TO_OFFICIAL_PROVIDER_DOCS",
+  "corpus": "resources/yado-user-external-learning-corpus-v1.json",
+  "instruction": "Use ripienaar/free-for-dev as a public catalog seed. Do not stop at the catalog entry text: for deployment-relevant entries, follow the public outbound links to each provider's official documentation or product pages, read the linked content, and verify operational attributes from the destination. Extract service category, free-tier limits, registration/auth requirements, supported runtime/languages, persistence, network access, sleep/idle behavior, deployment interface, API/CLI availability, and restrictions. Record the exact source chain catalog_entry -> outbound_link -> official_page -> extracted_claim. Prefer official documentation over catalog summaries. If a link redirects, follow only normal public HTTPS redirects. Do not log in, create accounts, accept terms, solve CAPTCHA, bypass access controls, submit forms that create resources, transmit secrets, execute third-party code, or pay. Limit traversal to deployment-relevant candidates and stop on inaccessible/private/authenticated pages with explicit WITHHOLD evidence. Use the learned link-traversal and evidence-validation procedure as reusable experience for later autonomous resource discovery and deployment selection.",
+  "primary_user_source": {
+    "id": "SCREEN_FREE_FOR_DEV_20260910",
+    "url": "https://github.com/ripienaar/free-for-dev",
+    "kind": "free_service_catalog",
+    "provenance": "user_screenshot_2026-09-10",
+    "purpose": "TRAIN_RESOURCE_DISCOVERY_SELECTION_LINK_TRAVERSAL_AND_OFFICIAL_DOC_VALIDATION"
+  },
+  "include_internal_project_history": true,
+  "exclude_private_or_sensitive_screenshots": true,
+  "no_third_party_code_execution": true,
+  "no_canonical_mutation": true,
+  "host_role": "SOURCE_TRANSPORT_PERSISTENCE_AND_VERIFICATION_ONLY",
+  "trigger": 26,
+  "trigger_reason": "USER_20260910_FREE_FOR_DEV_FOLLOW_LINKS_AND_VERIFY_OFFICIAL_DOCS",
+  "requested_at": "2026-09-10T19:38:21Z",
+  "purpose": "TRAIN_PUBLIC_LINK_TRAVERSAL_RESOURCE_RESEARCH_AND_EVIDENCE_VALIDATION",
+  "canonical_mutation": false,
+  "traversal_policy": {
+    "follow_catalog_outbound_links": true,
+    "follow_public_https_redirects": true,
+    "prefer_official_provider_domains": true,
+    "max_hops_from_catalog": 2,
+    "deployment_relevant_only": true,
+    "login": false,
+    "account_creation": false,
+    "credentials": false,
+    "forms_that_create_resources": false,
+    "captcha_bypass": false,
+    "payment": false,
+    "network_scanning": false,
+    "third_party_code_execution": false
+  },
+  "cross_domain_task": {
+    "id": "USER_20260910_FREE_FOR_DEV_LINK_TRAVERSAL_TRAINING_V2",
+    "resource": "https://github.com/ripienaar/free-for-dev",
+    "host_selected_provider": false,
+    "public_read_only": true,
+    "follow_outbound_links": true,
+    "official_documentation_cross_check": true,
+    "deployment_attempt": false,
+    "canonical_mutation": false,
+    "automatic_promotion": false,
+    "g3_genesis": false
+  },
+  "training_target": {
+    "branch": "yado-architecture-shadow-search",
+    "memory_plane": "L1_MEMORY_EXPERIENCE",
+    "conditioning_plane": "L2_EXPERIENCE_CONDITIONING",
+    "downstream_planes": ["L3_LOGIC_THINKING", "L4_INTELLIGENCE_ROUTING", "L6_SELF_AUDIT_EVOLUTION"],
+    "promotion_policy": "SHADOW_EVIDENCE_ONLY_UNTIL_FRESH_ABLATION_AND_REGRESSION"
+  },
+  "success_conditions": [
+    "free_for_dev_source_fetched_and_indexed",
+    "deployment_relevant_outbound_links_discovered",
+    "public_links_followed_to_official_provider_pages",
+    "source_chain_provenance_preserved",
+    "operational_claims_cross_checked_against_destination_content",
+    "unsupported_or_inaccessible_attributes_withheld",
+    "no_provider_forced_by_host",
+    "no_account_or_resource_created",
+    "no_canonical_mutation"
+  ]
+}

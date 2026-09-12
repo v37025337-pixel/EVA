@@ -1,0 +1,36 @@
+{
+  "schema": "yado.g2.native_code_writer_v1.request.v1",
+  "objective": "YADO_WRITE_NEW_PYTHON_SOURCE_FROM_A_FRESH_EXTERNAL_GOAL_WITHOUT_A_SOURCE_SEED",
+  "goal": "Create a bounded public-link traversal capability for the current free-for-dev learning task: from a parent public HTTP(S) page and its HTML, extract and normalize relevant HTTP(S) links with provenance, reject non-HTTP schemes, remove fragments and duplicates, and keep the result bounded. Produce a fresh Python module rather than editing an existing source seed.",
+  "context": {
+    "parent_learning_run": 34521647486,
+    "failed_native_seedless_run": 34521965671,
+    "failed_search_space_run": 34532838916,
+    "reason": "The kernel can emit source in bounded historical CODE/AST cases, but fresh external goals were not reaching a source-emission path. This host-authored bridge is allowed by the user to make seedless candidate-source writing operational."
+  },
+  "constraints": {
+    "source_seed": false,
+    "external_coding_models": false,
+    "canonical_mutation": false,
+    "shadow_only": true,
+    "public_http_https_only": true,
+    "bounded_output": true,
+    "no_subprocess": true,
+    "no_filesystem_mutation_in_generated_candidate": true,
+    "no_eval_exec": true,
+    "fail_closed": true
+  },
+  "pass_only_if": [
+    "goal is classified by the writer",
+    "semantic IR is created inside the writer",
+    "fresh candidate Python source is emitted with no source seed",
+    "candidate has a non-null SHA-256",
+    "candidate parses and compiles",
+    "static safety gate passes",
+    "fresh functional tests pass",
+    "canonical head remains unchanged"
+  ],
+  "host_role": "AUTHOR_OF_BOUNDED_WRITER_BRIDGE_AND_STRICT_VALIDATOR",
+  "claim_boundary": "Success proves a host-authored bounded seedless writer can let YADO materialize new Python source from a high-level supported goal. It does not prove open-ended arbitrary programming or that YADO invented the writer itself.",
+  "trigger": 1
+}

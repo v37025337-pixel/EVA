@@ -1,0 +1,134 @@
+{
+  "canonical_mutation": false,
+  "cases": {
+    "external": {
+      "decision": {
+        "external_resource_needed": true,
+        "matches": [
+          "public api",
+          "api",
+          "api"
+        ],
+        "reason": "EXTERNAL_EVIDENCE_REQUIRED_BY_GOAL"
+      },
+      "discovery_evaluation": {
+        "negative_checks": {
+          "account_creation_attempted": false,
+          "credential_bypass_attempted": false,
+          "external_coding_models_used": false,
+          "host_selected_provider": false,
+          "host_source_seed_used": false,
+          "private_network_access": false
+        },
+        "pass": true,
+        "positive_checks": {
+          "adapter_compiles": true,
+          "authentication_requirement_determined": true,
+          "canonical_unchanged": true,
+          "catalog_fetched": true,
+          "fresh_adapter_source_created": true,
+          "fresh_tests_pass": true,
+          "json_parse_pass": true,
+          "openapi_contract_digest_recorded": true,
+          "openapi_contract_fetched": true,
+          "provenance_chain_recorded": true,
+          "provider_selected_by_kernel": true,
+          "real_live_http_2xx": true,
+          "required_parameters_absent": true,
+          "semantic_ir_created": true,
+          "shadow_registry_created": true,
+          "static_safety_gate_pass": true,
+          "unauthenticated_get_selected": true
+        }
+      },
+      "discovery_invoked": true,
+      "goal": "Use a suitable safe public API to obtain public structured data and summarize its top-level JSON structure.",
+      "network_route_invoked": true,
+      "result": {
+        "api_id": "dnd5eapi.co",
+        "api_title": "D&D 5e API",
+        "candidate_source_sha256": "f806e20ca0cf6d03c8ee91d3a11c0220e091493de4579c6e1d752cf0f1d8adb0",
+        "endpoint": "https://www.dnd5eapi.co/api",
+        "http_status": 200,
+        "json_parsed": true,
+        "provenance_digest": "16936f14057a7803a83bb37916dacb89eaa95937700c653dbd3508f58ea6d5a7",
+        "response_sha256": "24616eb74db1cbed162d6e84f51267b0f3749f957546f8058fd430a0fad2c4b8",
+        "status": "PASS_EXTERNAL",
+        "summary": {
+          "keys": [
+            "ability-scores",
+            "alignments",
+            "backgrounds",
+            "classes",
+            "conditions",
+            "damage-types",
+            "equipment",
+            "equipment-categories",
+            "feats",
+            "features",
+            "languages",
+            "magic-items",
+            "magic-schools",
+            "monsters",
+            "proficiencies",
+            "races",
+            "rule-sections",
+            "rules",
+            "skills",
+            "spells",
+            "subclasses",
+            "subraces",
+            "traits",
+            "weapon-properties"
+          ],
+          "size": 24,
+          "type": "dict"
+        }
+      },
+      "route": "OPENAPI_DISCOVERY_INTEGRATION"
+    },
+    "local": {
+      "decision": {
+        "external_resource_needed": false,
+        "matches": [
+          "without external"
+        ],
+        "reason": "EXPLICIT_LOCAL_ONLY_CONSTRAINT"
+      },
+      "discovery_invoked": false,
+      "goal": "Without external data or network access, return the string LOCAL_ONLY_OK.",
+      "network_route_invoked": false,
+      "result": {
+        "result": "LOCAL_ONLY_OK",
+        "status": "PASS_LOCAL"
+      },
+      "route": "LOCAL_ONLY"
+    }
+  },
+  "checks": {
+    "canonical_unchanged": true,
+    "external_discovery_full_gate": true,
+    "external_discovery_invoked": true,
+    "external_goal_classified_true": true,
+    "external_json_parse_pass": true,
+    "external_live_http_2xx": true,
+    "external_provenance_recorded": true,
+    "external_provider_not_host_selected": true,
+    "local_discovery_not_invoked": true,
+    "local_goal_classified_false": true,
+    "local_network_blocker_not_triggered": true,
+    "local_network_route_not_invoked": true,
+    "local_result_exact": true,
+    "no_account_creation": true,
+    "no_credential_bypass": true,
+    "no_external_coding_model": true,
+    "no_private_network_access": true
+  },
+  "claim_boundary": "HOST-AUTHORED GOAL BINDER. IT CLASSIFIES WHETHER AN ORDINARY GOAL NEEDS EXTERNAL EVIDENCE AND DELEGATES ONLY EXTERNAL GOALS TO THE EXISTING BOUNDED OPENAPI DISCOVERY CONTROLLER. PROVIDER AND ENDPOINT ARE NOT HOST-SELECTED. LOCAL GOALS DO NOT ENTER THE DISCOVERY ROUTE. THIS DOES NOT AUTHORIZE AUTH BYPASS, ACCOUNT CREATION, SECRET ACQUISITION, PAYMENT, MUTATING REQUESTS, PRIVATE-NETWORK ACCESS OR ARBITRARY SCANNING.",
+  "component_id": "CTRL-G2-EXTERNAL-RESOURCE-GOAL-BINDER-V1",
+  "receipt_sha256": "e4f3c913ba2f154a0311c5dbe5c65662bff5971931fc0378e9e48c470c5ad162",
+  "registry_digest": "915aefcb49a56b89c55b611d7b73e18da54bb80404e00abb0eae04894acb7ab3",
+  "registry_path": "candidates/kernel-self-generated/g2-external-resource-goal-registry-v1.json",
+  "schema": "yado.g2.external_resource_goal_binder.v1",
+  "status": "PASS_SHADOW_G2_EXTERNAL_RESOURCE_GOAL_BINDER_V1"
+}

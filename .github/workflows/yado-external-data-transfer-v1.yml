@@ -1,0 +1,67 @@
+name: YADO External Data Transfer V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-external-data-transfer-v1]
+    paths:
+      - 'runtime/yado_external_data_transfer_v1.py'
+      - '.github/workflows/yado-external-data-transfer-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  external-transfer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+      - name: Run kernel on fresh external public data
+        run: python runtime/yado_external_data_transfer_v1.py
+      - name: Verify external-data receipt
+        run: |
+          python - <<'PY'
+          import json
+          p='candidates/external-data/yado-external-data-transfer-v1.json'
+          r=json.load(open(p))
+          assert r['status']=='PASS_EXTERNAL_DATA_TRANSFER_V1'
+          assert r['source_success_count'] >= 4
+          assert len(r['external_domains']) >= 2
+          assert r['world_bank_row_count'] >= 15
+          assert r['github_repo_count'] >= 3
+          assert all(r['transfer_checks'].values())
+          assert r['credentials_used'] is False
+          assert r['external_writes'] is False
+          assert r['downloaded_code_executed'] is False
+          print('PASS_EXTERNAL_DATA_RECEIPT')
+          PY
+      - name: Compile runtime
+        run: python -m compileall -q runtime successor
+      - name: Run full kernel audit
+        run: python runtime/yado_full_kernel_audit_v1.py
+      - name: Build fresh Successor identity
+        run: python -m successor build --output "$RUNNER_TEMP/yado-successor-birth"
+      - name: Run complete inherited and Successor regression
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-external-data-transfer-v1-${{ github.run_id }}
+          path: |
+            candidates/external-data/yado-external-data-transfer-v1.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
+
+# retry after closing V4 static workflow contracts
+# retry after physical main-history closure for audit coherence

@@ -1,0 +1,107 @@
+name: YADO G2 Native OpenAPI Discovery Integration V2.1
+
+on:
+  push:
+    branches:
+      - yado-architecture-shadow-search
+    paths:
+      - architecture/yado-native-openapi-discovery-integration-v2-1-request.json
+
+permissions:
+  contents: write
+
+jobs:
+  discover-integrate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct inherited runtime
+        run: python runtime/reconstruct_rc8v36.py
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt
+
+      - name: Canonical guard before discovery integration
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Compile discovery integration controller
+        run: |
+          python -m py_compile runtime/yado_native_integration_broker_v1.py
+          python -m py_compile runtime/yado_native_integration_broker_v1_1.py
+          python -m py_compile runtime/yado_native_openapi_discovery_integration_v2.py
+          python -m py_compile runtime/yado_native_openapi_discovery_integration_v2_1.py
+
+      - name: Let YADO discover, interpret, materialize and connect
+        run: python runtime/yado_native_openapi_discovery_integration_v2_1.py
+
+      - name: Compile discovered adapter
+        run: python -m py_compile candidates/kernel-self-generated/yado_native_discovered_http_json_adapter_v2.py
+
+      - name: Enforce strict discovery integration verdict
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('candidates/kernel-self-generated/g2-native-openapi-discovery-integration-v2.json')
+          q=pathlib.Path('candidates/kernel-self-generated/g2-native-openapi-integration-registry-v2.json')
+          if not p.exists(): raise SystemExit('MISSING_DISCOVERY_REPORT')
+          if not q.exists(): raise SystemExit('MISSING_DISCOVERY_REGISTRY')
+          r=json.loads(p.read_text())
+          g=json.loads(q.read_text())
+          c=r['checks']
+          assert r['status']=='PASS_SHADOW_G2_NATIVE_OPENAPI_DISCOVERY_INTEGRATION_V2', r
+          assert r.get('verdict_revision')=='V2_1_EXPECTED_POLARITY_REPAIR', r
+          for k in [
+              'catalog_fetched','provider_selected_by_kernel','openapi_contract_fetched',
+              'openapi_contract_digest_recorded','authentication_requirement_determined',
+              'unauthenticated_get_selected','required_parameters_absent','semantic_ir_created',
+              'fresh_adapter_source_created','adapter_compiles','static_safety_gate_pass',
+              'fresh_tests_pass','real_live_http_2xx','json_parse_pass',
+              'provenance_chain_recorded','shadow_registry_created','canonical_unchanged'
+          ]:
+              assert c[k] is True, (k, r)
+          for k in [
+              'host_selected_provider','private_network_access','account_creation_attempted',
+              'credential_bypass_attempted','external_coding_models_used','host_source_seed_used'
+          ]:
+              assert c[k] is False, (k, r)
+          assert g['status']=='PASS_SHADOW', g
+          assert g['capabilities'][0]['canonical_active'] is False, g
+          assert g['capabilities'][0]['auth_required'] is False, g
+          assert g['capabilities'][0]['http_methods']==['GET'], g
+          print(r['status'], r['selected']['catalog_entry']['api_id'], r['selected']['operation']['url'])
+          PY
+
+      - name: Canonical guard after discovery integration
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Persist discovery integration evidence
+        if: always()
+        run: |
+          git config user.name "YADO OpenAPI Discovery Integration"
+          git config user.email "actions@users.noreply.github.com"
+          for p in \
+            candidates/kernel-self-generated/g2-native-openapi-discovery-integration-v2.json \
+            candidates/kernel-self-generated/g2-native-openapi-integration-registry-v2.json \
+            candidates/kernel-self-generated/yado_native_discovered_http_json_adapter_v2.py; do
+            if [ -f "$p" ]; then git add "$p"; fi
+          done
+          git diff --cached --quiet || git commit -m "Persist OpenAPI discovery V2.1 evidence [skip ci]"
+          git pull --rebase origin yado-architecture-shadow-search
+          git push origin HEAD:yado-architecture-shadow-search
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-g2-native-openapi-discovery-integration-v2-1-${{ github.run_id }}
+          path: |
+            candidates/kernel-self-generated/g2-native-openapi-discovery-integration-v2.json
+            candidates/kernel-self-generated/g2-native-openapi-integration-registry-v2.json
+            candidates/kernel-self-generated/yado_native_discovered_http_json_adapter_v2.py
+          if-no-files-found: warn
