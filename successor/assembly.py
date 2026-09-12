@@ -152,7 +152,7 @@ def source_catalog(path, manifest):
         aliases = {}
         for name in current:
             module = name.removesuffix('.py').replace('/', '.')
-            for alias in (module, Path(name).stem, module.removeprefix('runtime.'), module.removeprefix('runtime.yado_rc8_v36.')):
+            for alias in {module, Path(name).stem, module.removeprefix('runtime.'), module.removeprefix('runtime.yado_rc8_v36.')}:
                 aliases.setdefault(alias, []).append(name)
         edges, unresolved = [], []
         for name, digest in current.items():
@@ -166,6 +166,7 @@ def source_catalog(path, manifest):
                     edges.extend({'from': name, 'to': target, 'import': module} for target in targets if target != name)
                 elif module.startswith(('yado_', 'successor.')):
                     unresolved.append({'from': name, 'import': module})
+        edges = [dict(zip(('from', 'to', 'import'), edge)) for edge in sorted({(e['from'], e['to'], e['import']) for e in edges})]
         branches = []
         for ref, tip in archive.summary['refs'].items():
             if ref.startswith('refs/remotes/'):
