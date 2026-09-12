@@ -1,0 +1,195 @@
+name: YADO V6 Clean Admission Gate V1
+
+on:
+  push:
+    branches: [yado-v6-clean-admission-v1, main]
+    paths:
+      - '.github/workflows/yado-v6-clean-admission-gate-v1.yml'
+      - 'runtime/yado_raw_task_representation_residual_repair_v3.py'
+      - 'runtime/yado_raw_task_representation_canonical_v6.py'
+      - 'runtime/yado_unified_core_v1.py'
+      - 'canonical/yado-raw-task-representation-v6.json'
+      - 'canonical/yado-unified-core-v1.json'
+      - 'canonical/yado-main-head-g2.json'
+      - 'canonical/yado-algorithm-provenance-registry-v1.json'
+      - 'architecture/evolution-ledger.json'
+      - 'receipts/yado-g2-raw-representation-v6-integration-v1.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clean-admission-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Verify clean admission tree and V6 canonical state
+        run: |
+          git fetch origin main
+          python - <<'PY'
+          import json,os,subprocess
+          from pathlib import Path
+          expected={
+            '.github/workflows/yado-v6-clean-admission-gate-v1.yml',
+            'architecture/evolution-ledger.json',
+            'canonical/yado-algorithm-provenance-registry-v1.json',
+            'canonical/yado-main-head-g2.json',
+            'canonical/yado-raw-task-representation-v6.json',
+            'canonical/yado-unified-core-v1.json',
+            'receipts/yado-g2-raw-representation-v6-integration-v1.json',
+            'runtime/yado_raw_task_representation_canonical_v6.py',
+            'runtime/yado_raw_task_representation_residual_repair_v3.py',
+            'runtime/yado_unified_core_v1.py',
+          }
+          if os.environ.get('GITHUB_REF_NAME')!='main':
+              changed=set(subprocess.check_output(['git','diff','--name-only','origin/main...HEAD'],text=True).splitlines())
+              assert changed==expected,(sorted(changed-expected),sorted(expected-changed))
+          h=json.loads(Path('canonical/yado-main-head-g2.json').read_text())
+          c=json.loads(Path('canonical/yado-unified-core-v1.json').read_text())
+          v6=json.loads(Path('canonical/yado-raw-task-representation-v6.json').read_text())
+          l=json.loads(Path('architecture/evolution-ledger.json').read_text())
+          assert h['generation_id']=='G2_CANDIDATE_TRCG_V1'
+          assert h['g3_genesis_performed'] is False
+          assert 'ALG-G2-RAW-TASK-REPRESENTATION-V6' in h['active_capabilities']
+          assert 'ALG-G2-RAW-TASK-REPRESENTATION-V4' not in h['active_capabilities']
+          assert c['raw_task_representation']['component_id']=='ALG-G2-RAW-TASK-REPRESENTATION-V6'
+          assert v6['selected_policy']=='CLEAN_PLURALITY_TIE_CORE'
+          assert v6['selection_receipt_sha256']=='ab16a2e21bc2df656db0ba88f129fff239264b1971f869c32cd05482cab58320'
+          assert v6['deep_admission_receipt_sha256']=='3e5e78136072be7f93c194a12a569da762adfbe161b4be7bf1f25091c23c643b'
+          assert l['open_deficits']==['KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1']
+          print('PASS_CLEAN_V6_TREE_AND_STATE',os.environ.get('GITHUB_REF_NAME'))
+          PY
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Compile active runtime
+        run: python -m compileall -q runtime successor candidates/g2-self-evolution candidates/autonomous
+
+      - name: Reconfirm V6 causal gain against V4
+        run: |
+          python - <<'PY'
+          import hashlib,json,re,sys
+          from pathlib import Path
+          sys.path.insert(0,str(Path('runtime').resolve()))
+          from yado_raw_task_representation_robustness_v4 import RobustRawTaskRepresentationRuntimeV4
+          from yado_raw_task_representation_canonical_v6 import CanonicalRawTaskRepresentationRuntimeV6
+          root=Path('.')
+          def collect(v):
+              out=[]
+              if isinstance(v,dict):
+                  if isinstance(v.get('text'),str) and isinstance(v.get('expected'),str): out.append({'text':v['text'],'expected':v['expected']})
+                  for x in v.values():
+                      if isinstance(x,(dict,list)): out.extend(collect(x))
+              elif isinstance(v,list):
+                  for x in v:
+                      if isinstance(x,(dict,list)): out.extend(collect(x))
+              seen=set(); uniq=[]
+              for r in out:
+                  k=(r['text'],r['expected'])
+                  if k not in seen: seen.add(k); uniq.append(r)
+              return uniq
+          def sh(s): return hashlib.sha256(s.encode()).hexdigest()
+          def fresh(rows):
+              fam={k:[] for k in ('nested_wrapper','sequential_envelope','punctuation_frame','mixed_edge_noise')}
+              for idx,r in enumerate(rows):
+                  t,y=r['text'],r['expected']; token=sh(t+'|'+y+'|deep-admission-v1')[:12]
+                  fam['nested_wrapper'].append({'text':f'((audit:{token})) [[ {t} ]] ((/audit:{token}))','expected':y})
+                  fam['sequential_envelope'].append({'text':f'Stage {idx%19}. Context {token}. {t} Final {idx%23}.','expected':y})
+                  fam['punctuation_frame'].append({'text':f'<<<{token}>>> ::: {t} ::: <<</{token}>>>','expected':y})
+                  fam['mixed_edge_noise'].append({'text':f'[meta-{idx%11}] {{{token}}} -- {t} -- {{{token[::-1]}}} [/meta-{idx%11}]','expected':y})
+              return fam
+          def score(rt,rows): return sum(rt.predict_capability(r['text'])==r['expected'] for r in rows)
+          v3=json.loads((root/'canonical/yado-raw-task-representation-v3.json').read_text())
+          v4meta=json.loads((root/'canonical/yado-raw-task-representation-v4.json').read_text())
+          v4=RobustRawTaskRepresentationRuntimeV4(v3,v4meta['selected_mode'])
+          v6=CanonicalRawTaskRepresentationRuntimeV6(v3)
+          seed=collect(json.loads((root/'resources/yado-raw-task-representation-v4-canonical-admission-fresh-v1.json').read_text()))
+          fam=fresh(seed); c=t=n=improved=0
+          for name,rows in fam.items():
+              a=score(v4,rows); b=score(v6,rows)
+              assert b>=a,(name,a,b)
+              improved+=int(b>a); c+=a; t+=b; n+=len(rows)
+          delta=t/n-c/n
+          assert abs(delta-0.078125)<1e-12,delta
+          assert improved==3,improved
+          print('PASS_CLEAN_V6_CAUSAL_GAIN',{'delta':delta,'improved_families':improved,'n':n})
+          PY
+
+      - name: Run canonical invariant and native core audits
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,str(Path('runtime').resolve()))
+          from yado_unified_core_v1 import UnifiedYADOCoreV1
+          core=UnifiedYADOCoreV1(Path('.'))
+          r=core.audit()
+          assert r['pass'] is True,r
+          assert core.raw_representation.COMPONENT_ID=='ALG-G2-RAW-TASK-REPRESENTATION-V6'
+          print('PASS_CLEAN_NATIVE_V6',r['current_frontier'])
+          PY
+
+      - name: Run deepest self audit
+        run: |
+          python runtime/yado_unified_core_deep_self_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
+          assert r['status']=='PASS_YADO_UNIFIED_CORE_DEEP_SELF_AUDIT_V1',r
+          assert r['summary']['blocking_findings']==0
+          assert r['summary']['critical_failures']==0
+          assert r['summary']['high_failures']==0
+          assert r['g3_genesis_performed'] is False
+          print('PASS_CLEAN_DEEP_SELF_AUDIT',r['summary'])
+          PY
+          git checkout -- architecture/evolution-ledger.json
+
+      - name: Run Full Kernel Audit
+        run: |
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audits/yado-full-kernel-audit-v1-report.json').read_text())
+          assert r['status']=='PASS',r
+          assert r['findings']==[],r['findings']
+          assert r['canonical']['canonical_guard']=='PASS'
+          assert r['canonical']['ledger_validation']=='PASS'
+          assert r['canonical']['g3_genesis_performed'] is False
+          print('PASS_CLEAN_FULL_KERNEL_AUDIT',r['counts'])
+          PY
+
+      - name: Build fresh Successor and run 170 regression tests
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/yado-v6-clean-successor"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-v6-clean-successor/manifest.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audits/yado-full-regression-v1-report.json').read_text())
+          assert r['status']=='PASS',r
+          assert r['tests_run']==r['expected_tests']==170,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_CLEAN_V6_REGRESSION_170_OF_170',r['identity_digest'])
+          PY
+
+      - name: Final clean admission verdict
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          echo PASS_V6_CLEAN_TREE_READY_OR_ACTIVE_ON_MAIN
