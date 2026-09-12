@@ -1,0 +1,127 @@
+name: YADO Autonomous Meta Grammar Evolution V4
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - yado-autonomous-meta-grammar-evolution-v4
+    paths:
+      - 'runtime/yado_autonomous_meta_grammar_evolution_v4.py'
+      - 'architecture/yado-autonomous-meta-grammar-evolution-v4.json'
+      - '.github/workflows/yado-autonomous-meta-grammar-evolution-v4.yml'
+  pull_request:
+    branches:
+      - yado-autonomous-grammar-extension-v3
+    paths:
+      - 'runtime/yado_autonomous_meta_grammar_evolution_v4.py'
+      - 'architecture/yado-autonomous-meta-grammar-evolution-v4.json'
+      - '.github/workflows/yado-autonomous-meta-grammar-evolution-v4.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  autonomous-meta-grammar-evolution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Compile inherited controllers and V4
+        run: python -m py_compile runtime/yado_external_source_evolution_v1.py runtime/yado_autonomous_meta_source_evolution_v2.py runtime/yado_autonomous_grammar_extension_v3.py runtime/yado_autonomous_meta_grammar_evolution_v4.py
+
+      - name: Run autonomous meta-grammar evolution
+        run: python runtime/yado_autonomous_meta_grammar_evolution_v4.py
+
+      - name: Verify frozen V4 meta-grammar evidence gate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('receipts/yado-autonomous-meta-grammar-evolution-v4.json').read_text())
+          assert report['status'] == 'PASS_SHADOW_G2_AUTONOMOUS_META_GRAMMAR_EVOLUTION_V4', report['status']
+          assert set(report['fresh_pool']['exercises']) == {'reverse-string', 'armstrong-numbers'}
+          assert report['fresh_pool']['training_cases']['reverse-string'] == 4
+          assert report['fresh_pool']['sealed_cases']['reverse-string'] == 2
+          assert report['fresh_pool']['training_cases']['armstrong-numbers'] == 7
+          assert report['fresh_pool']['sealed_cases']['armstrong-numbers'] == 2
+          assert report['fresh_pool']['sealed_not_used_for_deficit_selection'] is True
+          assert report['fresh_pool']['sealed_not_used_for_meta_strategy_selection'] is True
+          assert report['current_grammar_probes']['reverse-string']['status'] == 'SUPPORTED'
+          assert report['current_grammar_probes']['reverse-string']['training_score'] == 1.0
+          assert report['deficit_selection']['selected_exercise'] == 'armstrong-numbers'
+          assert report['deficit_selection']['selected_signature'] == [['int'], 'bool']
+          assert report['deficit_selection']['host_provided_selected_task'] is False
+          assert report['meta_target_selection']['selected_path'] == 'runtime/yado_autonomous_grammar_extension_v3.py'
+          assert report['meta_target_selection']['host_provided_target_path'] is False
+          assert report['meta_strategy_evolution']['strategy_name'] == 'signature_conditioned_enumerative_composition'
+          assert report['meta_strategy_evolution']['strategy_absent_in_parent'] is True
+          assert report['meta_strategy_evolution']['strategy_present_in_candidate'] is True
+          assert report['meta_strategy_evolution']['generated_root_novel'] is True
+          assert report['meta_strategy_evolution']['selected_rule']['selected_operator'] == 'digit_power_sum_equality_dynamic'
+          assert report['meta_strategy_evolution']['selected_rule']['training_score'] == 1.0
+          assert report['grammar_extension']['operator_absent_in_parent'] is True
+          assert report['grammar_extension']['operator_present_in_candidate'] is True
+          assert report['grammar_extension']['all_generated_roots_novel'] is True
+          assert report['metrics']['parent_training']['score'] == 0.0
+          assert report['metrics']['candidate_training']['score'] == 1.0
+          assert report['metrics']['sealed_parent']['score'] == 0.0
+          assert report['metrics']['sealed_candidate']['score'] == 1.0
+          assert report['metrics']['sealed_absolute_gain'] == 1.0
+          assert report['metrics']['v1_external_sealed_retention']['score'] == 1.0
+          assert report['metrics']['v2_external_sealed_retention']['score'] == 1.0
+          assert report['metrics']['v3_run_length_sealed_retention']['score'] == 1.0
+          assert report['gates']['meta_controller_source_changed'] is True
+          assert report['gates']['meta_search_strategy_changed'] is True
+          assert report['gates']['candidate_grammar_source_changed'] is True
+          assert report['gates']['candidate_solver_source_changed'] is True
+          assert report['gates']['candidate_meta_frozen_before_sealed_eval'] is True
+          assert report['gates']['candidate_grammar_frozen_before_sealed_eval'] is True
+          assert report['gates']['candidate_solver_frozen_before_sealed_eval'] is True
+          assert report['gates']['fresh_sealed_uuid_leak_count'] == 0
+          assert report['gates']['external_models_used'] is False
+          assert report['gates']['canonical_mutation'] is False
+          assert report['gates']['bounded_meta_program_vocabulary'] is True
+          for key in ('candidate_meta_controller', 'candidate_grammar', 'candidate_solver'):
+              path = Path(report[key]['path'])
+              compile(path.read_text(), str(path), 'exec')
+          print('PASS_AUTONOMOUS_META_GRAMMAR_EVOLUTION_V4_EVIDENCE_GATE')
+          PY
+
+      - name: Reconstruct inherited runtime and install audit dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Compile complete runtime and generated shadow sources
+        run: python -m compileall -q runtime successor candidates/g2-self-evolution
+
+      - name: Run full kernel audit
+        run: python runtime/yado_full_kernel_audit_v1.py
+
+      - name: Build fresh Successor identity
+        run: python -m successor build --output "$RUNNER_TEMP/yado-successor-birth"
+
+      - name: Run complete inherited and Successor regression
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json"
+
+      - name: Upload V4 evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-autonomous-meta-grammar-evolution-v4-${{ github.run_id }}
+          path: |
+            architecture/yado-autonomous-meta-grammar-evolution-v4.json
+            receipts/yado-autonomous-meta-grammar-evolution-v4.json
+            candidates/g2-self-evolution/yado_autonomous_meta_grammar_*_v4.py
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-kernel-audit-v1-summary.md
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
