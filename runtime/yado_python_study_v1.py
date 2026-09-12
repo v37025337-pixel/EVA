@@ -68,13 +68,15 @@ def interpreter_checks():
     checks["ast_parse_function"] = isinstance(tree.body[0], ast.FunctionDef)
     code = compile(tree, "<yado-python-study>", "exec")
     ns = {}
-    exec(code, {"__builtins__": {}} , ns)
+    exec(code, {"__builtins__": {}}, ns)
     checks["compile_exec_local_generated_only"] = ns["f"](4) == 9
 
     def probe(a: int, b: int = 2) -> int:
         return a + b
 
-    sig = inspect.signature(probe)
+    # The module uses postponed annotations, so inspect may otherwise expose strings.
+    # Resolve them through inspect's documented eval_str path before checking identity.
+    sig = inspect.signature(probe, eval_str=True)
     checks["inspect_signature"] = list(sig.parameters) == ["a", "b"] and sig.return_annotation is int
     checks["importlib_find_spec"] = importlib.util.find_spec("json") is not None
 
