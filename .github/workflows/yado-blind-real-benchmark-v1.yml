@@ -40,9 +40,11 @@ jobs:
           assert p['claim_boundary']['answers_present'] is False
           assert p['claim_boundary']['tests_present'] is False
           assert p['claim_boundary']['canonical_solutions_present'] is False
-          text=open('sealed/prompts/yado-blind-prompts-v1.json').read()
-          assert 'canonical_solution' not in text
-          assert 'official_answer' not in text
+          forbidden={'answer','answer_text','official_answer','test','canonical_solution'}
+          for t in p['benchmarks']['gsm8k']:
+              assert not (forbidden & set(t))
+          for t in p['benchmarks']['humaneval']:
+              assert not (forbidden & set(t))
           print('PASS_PROMPTS_ONLY')
           PY
       - name: Upload prompts-only exam
