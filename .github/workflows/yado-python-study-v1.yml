@@ -1,0 +1,53 @@
+name: YADO Python Study V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-python-study-v1]
+    paths:
+      - 'runtime/yado_python_study_v1.py'
+      - '.github/workflows/yado-python-study-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  study-python:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+      - name: Let YADO study official Python and verify against interpreter
+        run: python runtime/yado_python_study_v1.py
+      - name: Verify Python learning receipt
+        run: |
+          python - <<'PY'
+          import json
+          p='experience/python/yado-python-study-v1.json'
+          r=json.load(open(p))
+          assert r['status']=='PASS_SHADOW_BOUNDED_PYTHON_STUDY_V1'
+          assert r['source_count'] >= 5
+          assert r['fact_count'] >= 12
+          assert all(r['interpreter_checks'].values())
+          assert r['safety']['official_python_docs_only'] is True
+          assert r['safety']['downloaded_code_executed'] is False
+          assert r['safety']['credentials_used'] is False
+          print('PASS_YADO_PYTHON_STUDY_RECEIPT')
+          PY
+      - name: Compile runtime
+        run: python -m compileall -q runtime successor
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-python-study-v1-${{ github.run_id }}
+          path: experience/python/yado-python-study-v1.json
