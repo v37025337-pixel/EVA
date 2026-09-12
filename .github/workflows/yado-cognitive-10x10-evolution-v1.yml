@@ -1,0 +1,108 @@
+name: YADO Cognitive 10x10 Evolution V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - yado-cognitive-10x10-evolution-v1
+    paths:
+      - 'runtime/yado_cognitive_10x10_evolution_v1.py'
+      - 'architecture/yado-cognitive-10x10-evolution-v1.json'
+      - '.github/workflows/yado-cognitive-10x10-evolution-v1.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'runtime/yado_cognitive_10x10_evolution_v1.py'
+      - 'architecture/yado-cognitive-10x10-evolution-v1.json'
+      - '.github/workflows/yado-cognitive-10x10-evolution-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  evolve-and-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Compile 10x10 evolution runtime
+        run: python -m py_compile runtime/yado_cognitive_10x10_evolution_v1.py
+
+      - name: Run deterministic self-test
+        run: python runtime/yado_cognitive_10x10_evolution_v1.py --self-test
+
+      - name: Run fresh 10 domains x 10 tasks cognitive evolution
+        run: python runtime/yado_cognitive_10x10_evolution_v1.py --seed 202609121502
+
+      - name: Verify 10x10 evidence and sealed gates
+        run: |
+          python - <<'PY'
+          import hashlib, importlib.util, json
+          from pathlib import Path
+
+          report = json.loads(Path('artifacts/yado-cognitive-10x10-evolution-v1.json').read_text())
+          assert report['status'] == 'PASS_SHADOW_COGNITIVE_10X10_EVOLUTION_V1'
+          assert report['task_count'] == 100
+          assert len(report['domains']) == 10
+          assert report['tasks_per_domain'] == 10
+          assert report['split'] == {'evolve': 60, 'sealed': 40, 'sealed_used_for_selection': False}
+          assert report['selected_policy'] != report['baseline_policy']
+          sealed = report['candidate']['sealed']
+          assert sealed['total'] == 40
+          assert sealed['score'] >= 0.90
+          assert report['sealed_absolute_gain'] >= 0.15
+          assert set(sealed['domain_accuracy']) == set(report['domains'])
+          assert all(v >= 0.75 for v in sealed['domain_accuracy'].values())
+          assert report['claims']['general_intelligence_claimed'] is False
+          assert report['claims']['phenomenal_consciousness_claimed'] is False
+          assert report['claims']['canonical_direct_write'] is False
+
+          candidate = Path('candidates') / 'cognitive' / 'yado_cognitive_10x10_policy_candidate_v1.py'
+          assert candidate.exists()
+          assert hashlib.sha256(candidate.read_bytes()).hexdigest() == report['candidate_sha256']
+          compile(candidate.read_text(), str(candidate), 'exec')
+          spec = importlib.util.spec_from_file_location('candidate', candidate)
+          mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+          component = mod.component()
+          assert component['canonical_active'] is False
+          assert component['consciousness_claimed'] is False
+          print('PASS_COGNITIVE_10X10_SEALED_GATE')
+          PY
+
+      - name: Reconstruct inherited runtime and install audit dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Compile runtime, successor, and generated candidate
+        run: python -m compileall -q runtime successor candidates/cognitive
+
+      - name: Run full kernel audit
+        run: python runtime/yado_full_kernel_audit_v1.py
+
+      - name: Build fresh Successor identity
+        run: python -m successor build --output "$RUNNER_TEMP/yado-successor-birth"
+
+      - name: Run complete inherited and Successor regression
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json"
+
+      - name: Upload 10x10 evolution evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-cognitive-10x10-evolution-v1-${{ github.run_id }}
+          path: |
+            artifacts/yado-cognitive-10x10-evolution-v1.json
+            candidates/cognitive/*.py
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-kernel-audit-v1-summary.md
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
