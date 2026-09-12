@@ -1,0 +1,107 @@
+name: YADO Staged Kernel Evolution V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - yado-staged-kernel-evolution-v1
+    paths:
+      - 'runtime/yado_staged_kernel_evolution_v1.py'
+      - 'architecture/yado-staged-kernel-evolution-v1.json'
+      - '.github/workflows/yado-staged-evolution-stage-v1.yml'
+      - '.github/workflows/yado-staged-kernel-evolution-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  code:
+    uses: ./.github/workflows/yado-staged-evolution-stage-v1.yml
+    with:
+      stage: CODE
+      parent_artifact: NONE
+
+  logic:
+    needs: code
+    uses: ./.github/workflows/yado-staged-evolution-stage-v1.yml
+    with:
+      stage: LOGIC
+      parent_artifact: yado-evolution-stage-CODE-v1
+
+  thinking:
+    needs: logic
+    uses: ./.github/workflows/yado-staged-evolution-stage-v1.yml
+    with:
+      stage: THINKING
+      parent_artifact: yado-evolution-stage-LOGIC-v1
+
+  intelligence:
+    needs: thinking
+    uses: ./.github/workflows/yado-staged-evolution-stage-v1.yml
+    with:
+      stage: INTELLIGENCE
+      parent_artifact: yado-evolution-stage-THINKING-v1
+
+  cognition:
+    needs: intelligence
+    uses: ./.github/workflows/yado-staged-evolution-stage-v1.yml
+    with:
+      stage: COGNITION
+      parent_artifact: yado-evolution-stage-INTELLIGENCE-v1
+
+  reason:
+    needs: cognition
+    uses: ./.github/workflows/yado-staged-evolution-stage-v1.yml
+    with:
+      stage: REASON
+      parent_artifact: yado-evolution-stage-COGNITION-v1
+
+  finalize:
+    needs: reason
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download all measured stage states
+        uses: actions/download-artifact@v4
+        with:
+          pattern: yado-evolution-stage-*-v1
+          path: artifacts/stages
+          merge-multiple: false
+      - name: Build one lineage-preserving cycle receipt
+        run: |
+          POLICY=artifacts/stages/yado-evolution-stage-REASON-v1/policy_out.json
+          test -s "$POLICY"
+          ARGS=""
+          for S in CODE LOGIC THINKING INTELLIGENCE COGNITION REASON; do
+            V="artifacts/stages/yado-evolution-stage-${S}-v1/stage_verdict.json"
+            test -s "$V"
+            ARGS="$ARGS --verdict $V"
+          done
+          python runtime/yado_staged_kernel_evolution_v1.py finalize \
+            --policy "$POLICY" $ARGS \
+            --out artifacts/yado-staged-kernel-evolution-v1.json
+          python - <<'PY'
+          import json, pathlib
+          r=json.loads(pathlib.Path('artifacts/yado-staged-kernel-evolution-v1.json').read_text())
+          assert r['status']=='PASS_STAGED_EVOLUTION_CYCLE_MEASURED_V1'
+          assert len(r['stages_attempted'])==6
+          assert r['canonical_direct_write'] is False
+          assert r['claim_boundary']['stable_autonomous_reason_proven'] is False
+          print(json.dumps({
+            'stages_attempted':r['stages_attempted'],
+            'stages_promoted_shadow':r['stages_promoted_shadow'],
+            'final_generation':r['final_generation'],
+            'final_enabled_mutations':r['final_enabled_mutations'],
+            'evidence_digest':r['evidence_digest']
+          },indent=2))
+          PY
+      - name: Upload complete staged evolution evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-staged-kernel-evolution-v1
+          path: artifacts/yado-staged-kernel-evolution-v1.json
+          if-no-files-found: error
