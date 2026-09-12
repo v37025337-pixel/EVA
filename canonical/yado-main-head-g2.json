@@ -18,7 +18,7 @@
     "ALG-G2-LEGACY-EXPERIENCE-RETRIEVER-V1",
     "ALG-G2-OPENAPI-CONTRACT-CAPABILITY-V1",
     "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
-    "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+    "ALG-G2-RAW-TASK-REPRESENTATION-V6",
     "ALG-G2-SCALE-ROUTE-SEMANTICS-V5",
     "ALG-G2-SEMANTIC-EXPRESSION-SYNTHESIZER-V1",
     "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
@@ -38,9 +38,9 @@
     "status": "CANONICAL_ACTIVE"
   },
   "algorithm_provenance_registry": {
-    "current_execution_label": "G2_COGNITIVE_CONTINUITY_V5_PLUS_GLOBAL_EXPERIENCE_META_V7_PLUS_TRI_ORGAN_V1_CANONICAL",
+    "current_execution_label": "G2_RAW_TASK_REPRESENTATION_V6_RESIDUAL_REPAIR_CANONICAL",
     "registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-    "registry_digest": "7c78695c98d7554ab138b69e822ae208e8914acf8b2477789e49a34e571ce63e",
+    "registry_digest": "0acb1c7f686373d9c1b7ffca59443e3d3918a9172b299ff7c9e72c70f02c8e94",
     "registry_id": "YADO_G2_ALGORITHM_PROVENANCE_REGISTRY_V1"
   },
   "all_experience_tri_organ_v1": {
@@ -176,7 +176,7 @@
   },
   "candidate_architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
   "candidate_digest": "b292c7ed0bd9e060a2ce736a33ac30e92403ca8d57c94a8f2d354538f584eaa0",
-  "canonical_head_digest": "aa2f7ba22647e3192ff73c795701b4c1f769c4212484f9bea47aebb5e6d31878",
+  "canonical_head_digest": "65c27aeab6932e45fadb767e0d914d10f3a4705ca0dfa1315442b4a753b4569b",
   "capability_scores": {
     "integrity": 1,
     "intelligence": 1,
@@ -254,7 +254,7 @@
     "fresh_score": 1.0,
     "source_sha256": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b"
   },
-  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2",
+  "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
   "evolutionary_genome_v1": {
     "automatic_canonical_promotion": false,
     "canonical_component_digest": "67ef6a7675a128ba58626ff6bbf1c435654f73372a1b9f7813caf4a4420b6546",
@@ -761,6 +761,25 @@
     "status": "CANONICAL_ACTIVE",
     "supersedes": "ALG-G2-RAW-TASK-REPRESENTATION-V3"
   },
+  "raw_task_representation_v6": {
+    "admission_metrics": {
+      "full_regression_failures": 0,
+      "full_regression_tests": 170,
+      "post_freeze_holdout_gain": 0.078125,
+      "post_freeze_improved_family_count": 3,
+      "post_selection_holdout_gain": 0.05208333333333337,
+      "residual_all_experience_gain": 0.04166666666666674,
+      "validation_gain": 0.04878048780487798
+    },
+    "component_digest": "64bb15e3a9b53f75a9f5eec51d3571c5bb4a3de38f7760db3348b4c2da68894d",
+    "component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V6",
+    "parent_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
+    "parent_component_id": "ALG-G2-RAW-TASK-REPRESENTATION-V4",
+    "runtime_sha256": "075d33c2003f46e0087d1d346720f962e1514f8066f27bec31eead5c13d39fe2",
+    "selected_policy": "CLEAN_PLURALITY_TIE_CORE",
+    "status": "CANONICAL_ACTIVE",
+    "supersedes": "ALG-G2-RAW-TASK-REPRESENTATION-V4"
+  },
   "runtime_component": {
     "architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
     "component_digest": "9c94bb9f529fd6cb18ea5691f3d958a39e510ca418fefb861d88fb49163c9dfa",
@@ -784,7 +803,7 @@
     "single_active_context": true
   },
   "unified_core": {
-    "algorithm_provenance_registry_digest": "7c78695c98d7554ab138b69e822ae208e8914acf8b2477789e49a34e571ce63e",
+    "algorithm_provenance_registry_digest": "0acb1c7f686373d9c1b7ffca59443e3d3918a9172b299ff7c9e72c70f02c8e94",
     "audit_invariant": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
     "bounded_program_repair_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
     "canonical_write_guard_source_sha256": "a200096ea63d74426a12e1ebe4fa1e5c6e3facee29215eb355ff6106fa321e9d",
@@ -801,7 +820,7 @@
     "contextual_stream_adapter_source_sha256": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52",
     "control_plane_binding": "CANONICAL",
     "control_plane_binding_gate_run_id": "33391800337",
-    "core_digest": "3e43b3b2e197e96236ecddc5a3c42d6a404af983e33c2794764945f8ea75729e",
+    "core_digest": "02ba37c3a1c85a761a69cb1d1b903e63c892c36653f74eeabf3e695945ee6d56",
     "core_id": "UNIFIED_YADO_CORE_V1",
     "counterexample_lineage_memory_binding": "architecture/evolution-ledger.json+receipts/",
     "deep_self_audit_source_sha256": "4e093e1acea7db1809fa7c0e7b5c68c4506d0683a3e1ef3ac55007c52471bf59",
@@ -821,9 +840,10 @@
       "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1"
     ],
     "logic_ceiling_source_sha256": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
-    "raw_task_representation_component_digest": "7c770fc8db7ae82db08196e5e12f98daeacb2d7081f8e6965203d8caec2ac801",
-    "runtime_integrity_manifest_digest": "cd4e2bcdb2926a90c410c57f3d5a6bf530826b12734c5909aaa3f37ef894bf5e",
-    "runtime_sha256": "ccb9bc15d26220c3ecd96b05e69f4b2e8df014288e18c3aa7fff447432efe884",
+    "raw_task_representation_component_digest": "64bb15e3a9b53f75a9f5eec51d3571c5bb4a3de38f7760db3348b4c2da68894d",
+    "raw_task_representation_runtime_sha256": "075d33c2003f46e0087d1d346720f962e1514f8066f27bec31eead5c13d39fe2",
+    "runtime_integrity_manifest_digest": "217d502401dd64f147af1967cb9eef582e677fce2af2671f2591e57f335e5d3d",
+    "runtime_sha256": "fe3d7ffaea0142e7707c08d5b3928e7559a1d375b862175dba311f0ccbb2f8eb",
     "scientific_data_reasoner_source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b",
     "semantic_expression_synthesizer_source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
     "single_active_lineage": true,
