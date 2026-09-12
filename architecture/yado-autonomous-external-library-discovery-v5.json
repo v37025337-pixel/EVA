@@ -1,0 +1,49 @@
+{
+  "schema": "yado.architecture.autonomous_external_library_discovery.v5",
+  "stage": "G2_SHADOW",
+  "goal": "Autonomously search a bounded public library candidate pool, establish verified read-only external connections, use external metadata to select a library, inspect a cryptographically verified distribution artifact, discover an unprovided dependency, and follow that dependency through a second external registry connection.",
+  "base_stage": "PASS_SHADOW_G2_AUTONOMOUS_META_GRAMMAR_EVOLUTION_V4",
+  "external_surfaces": [
+    "PyPI JSON API",
+    "PyPI distribution artifacts on files.pythonhosted.org",
+    "PyPI Simple JSON API"
+  ],
+  "safety_boundary": {
+    "https_only": true,
+    "allowed_hosts": ["pypi.org", "files.pythonhosted.org"],
+    "read_only_http_get": true,
+    "credentials": false,
+    "external_writes": false,
+    "package_execution": false,
+    "package_installation": false,
+    "payload_size_caps": true,
+    "zip_path_validation": true
+  },
+  "search_protocol": {
+    "objective": "select a Python library for parsing HTML/XML/markup content",
+    "candidate_pool_host_authored": true,
+    "selection_by_live_external_metadata": true,
+    "selected_package_host_provided": false
+  },
+  "connection_protocol": {
+    "verify_registry_provenance": true,
+    "verify_download_sha256_against_registry": true,
+    "inspect_wheel_metadata_without_execution": true,
+    "discover_dependency_from_requires_dist": true,
+    "dependency_name_host_provided": false,
+    "perform_second_hop_registry_connection": true,
+    "freeze_connection_bundle_before_sealed_validation": true,
+    "sealed_validation_surface": "PyPI Simple JSON API"
+  },
+  "retention": {
+    "rerun_v1": true,
+    "rerun_v2": true,
+    "rerun_v3": true,
+    "rerun_v4": true,
+    "full_kernel_audit": true,
+    "fresh_successor": true,
+    "full_regression": true
+  },
+  "canonical_mutation": false,
+  "claim_boundary": "Bounded autonomous public read-only library discovery and verified second-hop connection only. Candidate pool, objective, host allowlist, safety caps, and admission gates remain host-authored. No unrestricted internet autonomy, general intelligence, consciousness, or G3 claim."
+}
