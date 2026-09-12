@@ -1,0 +1,64 @@
+name: YADO Digital Mind Bootstrap V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'runtime/yado_digital_mind_bootstrap_v1.py'
+      - 'architecture/yado-digital-mind-goal-v1.json'
+      - 'architecture/developmental-self-model-overlay.json'
+      - '.github/workflows/yado-digital-mind-bootstrap-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout canonical main
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Compile bootstrap
+        run: python -m py_compile runtime/yado_digital_mind_bootstrap_v1.py
+
+      - name: Run deterministic self-test
+        run: python runtime/yado_digital_mind_bootstrap_v1.py --self-test
+
+      - name: Run bounded digital-mind cycle
+        run: |
+          python runtime/yado_digital_mind_bootstrap_v1.py \
+            --goal architecture/yado-digital-mind-goal-v1.json \
+            --self-model architecture/developmental-self-model-overlay.json \
+            --out artifacts/yado-digital-mind-bootstrap-v1.json \
+            --ticks 3
+
+      - name: Verify admission invariants
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('artifacts/yado-digital-mind-bootstrap-v1.json')
+          state = json.loads(p.read_text(encoding='utf-8'))
+          assert state['status'] == 'PASS_SHADOW_DIGITAL_MIND_BOOTSTRAP_V1'
+          assert state['self_improvement']['canonical_direct_write'] is False
+          assert state['consciousness']['subjective_experience_claimed'] is False
+          assert state['consciousness']['phenomenal_consciousness_status'] == 'UNVERIFIED'
+          assert state['workspace']['bounded'] is True
+          assert state['workspace']['ticks_executed'] == 3
+          print('PASS_DIGITAL_MIND_ADMISSION_INVARIANTS')
+          PY
+
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-digital-mind-bootstrap-v1
+          path: artifacts/yado-digital-mind-bootstrap-v1.json
+          if-no-files-found: error
