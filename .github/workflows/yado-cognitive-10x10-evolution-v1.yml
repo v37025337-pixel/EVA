@@ -64,7 +64,7 @@ jobs:
           assert report['claims']['phenomenal_consciousness_claimed'] is False
           assert report['claims']['canonical_direct_write'] is False
 
-          candidate = Path('candidates/cognitive/yado_cognitive_10x10_policy_candidate_v1.py')
+          candidate = Path('candidates') / 'cognitive' / 'yado_cognitive_10x10_policy_candidate_v1.py'
           assert candidate.exists()
           assert hashlib.sha256(candidate.read_bytes()).hexdigest() == report['candidate_sha256']
           compile(candidate.read_text(), str(candidate), 'exec')
@@ -101,7 +101,7 @@ jobs:
           name: yado-cognitive-10x10-evolution-v1-${{ github.run_id }}
           path: |
             artifacts/yado-cognitive-10x10-evolution-v1.json
-            candidates/cognitive/yado_cognitive_10x10_policy_candidate_v1.py
+            candidates/cognitive/*.py
             audits/yado-full-kernel-audit-v1-report.json
             audits/yado-full-kernel-audit-v1-summary.md
             audits/yado-full-regression-v1-report.json
