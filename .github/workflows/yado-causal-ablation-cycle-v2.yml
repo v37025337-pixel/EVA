@@ -1,0 +1,112 @@
+name: YADO Causal Ablation Cycle V2
+
+on:
+  push:
+    branches: [yado-causal-ablation-cycle-v1]
+    paths:
+      - 'runtime/yado_raw_task_representation_experience_repair_v2.py'
+      - 'runtime/yado_causal_ablation_cycle_v2.py'
+      - '.github/workflows/yado-causal-ablation-cycle-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  self-correct-and-ablate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Compile current mechanism and corrected cycle
+        run: |
+          python -m py_compile runtime/yado_raw_task_representation_candidate_v3.py
+          python -m py_compile runtime/yado_raw_task_representation_robustness_v4.py
+          python -m py_compile runtime/yado_raw_task_representation_experience_repair_v2.py
+          python -m py_compile runtime/yado_causal_ablation_cycle_v2.py
+          python -m py_compile runtime/yado_endogenous_goal_genesis_v1.py
+
+      - name: Rebuild endogenous developmental goal
+        run: |
+          python runtime/yado_endogenous_goal_genesis_v1.py \
+            --out candidates/autonomous/yado-endogenous-goal-genesis-v1.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('candidates/autonomous/yado-endogenous-goal-genesis-v1.json').read_text())
+          assert r['selected_goal']=='KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2',r
+          assert r['selected_action']['action']=='CAUSAL_ABLATION_OF_CANDIDATE_IMPROVEMENT',r
+          assert r['host_supplied_goal'] is False and r['host_selected_goal'] is False,r
+          print('PASS_ENDOGENOUS_GOAL_REBUILT')
+          PY
+
+      - name: Execute self-study correction and causal V2 ablation
+        run: |
+          python runtime/yado_causal_ablation_cycle_v2.py \
+            --out candidates/autonomous/yado-causal-ablation-cycle-v2.json
+
+      - name: Verify learned errors corrections and bounded next action
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('candidates/autonomous/yado-causal-ablation-cycle-v2.json').read_text())
+          assert r['status'] in {
+            'PASS_SHADOW_CAUSAL_ABLATION_CYCLE_V2',
+            'WITHHOLD_SHADOW_CAUSAL_ABLATION_CYCLE_V2',
+          },r
+          errors={x['error_id']:x for x in r['self_correction']['learned_errors']}
+          assert errors['V1_STALE_HARDCODED_PROVENANCE']['observed'] is True,r
+          assert errors['V1_WRONG_PHYSICAL_RUNTIME_BINDING']['observed'] is True,r
+          assert r['self_correction']['active_component']=='ALG-G2-RAW-TASK-REPRESENTATION-V4',r
+          assert r['self_correction']['active_runtime_source']=='runtime/yado_raw_task_representation_robustness_v4.py',r
+          assert r['self_correction']['active_mode']=='MULTIVIEW_EDGE_TIE_CORE',r
+          assert r['candidate']['fixed_before_generated_holdout'] is True,r
+          assert r['canonical_mutation'] is False,r
+          assert r['automatic_main_mutation'] is False,r
+          assert r['causal_evaluation']['admit_candidate'] is False,r
+          assert r['next_action_constraints']['canonical_direct_write'] is False,r
+          assert r['consciousness_claimed'] is False,r
+          print(json.dumps({
+            'status':r['status'],
+            'verdict':r['causal_evaluation']['verdict'],
+            'history_delta':r['experience_replay']['delta'],
+            'fresh_delta':r['generated_holdout']['delta'],
+            'regression_preserved':r['causal_evaluation']['regression_preserved'],
+            'next_action':r['self_selected_next_action'],
+            'receipt_sha256':r['receipt_sha256'],
+          },sort_keys=True))
+          PY
+
+      - name: Repeat decision for deterministic self-correction
+        run: |
+          cp candidates/autonomous/yado-causal-ablation-cycle-v2.json "$RUNNER_TEMP/first.json"
+          python runtime/yado_causal_ablation_cycle_v2.py --out "$RUNNER_TEMP/second.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          a=json.loads((Path(os.environ['RUNNER_TEMP'])/'first.json').read_text())
+          b=json.loads((Path(os.environ['RUNNER_TEMP'])/'second.json').read_text())
+          for key in ['status','self_selected_next_action','receipt_sha256']:
+              assert a[key]==b[key],(key,a[key],b[key])
+          assert a['causal_evaluation']==b['causal_evaluation']
+          assert a['experience_replay']['delta']==b['experience_replay']['delta']
+          assert a['generated_holdout']['delta']==b['generated_holdout']['delta']
+          print('PASS_REPRODUCIBLE_SELF_CORRECTION_AND_DECISION')
+          PY
+
+      - name: Prove shadow experiment did not mutate tracked canonical files
+        run: git diff --exit-code
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-causal-ablation-cycle-v2-${{ github.run_id }}
+          path: candidates/autonomous/yado-causal-ablation-cycle-v2.json
