@@ -1,0 +1,63 @@
+{
+  "schema": "yado.multidomain_curriculum.config.v1",
+  "name": "YADO Multi-Domain Curriculum V1",
+  "goal": "Train and stress-test YADO from primitive operations to composed reasoning across logic, thinking, mathematics, physics, informatics, and code before further self-modification.",
+  "domains": [
+    "logic",
+    "thinking",
+    "mathematics",
+    "physics",
+    "informatics",
+    "code"
+  ],
+  "levels": {
+    "0": "primitive operations",
+    "1": "single-step structured reasoning",
+    "2": "multi-step/domain mechanisms",
+    "3": "composed and cross-skill reasoning"
+  },
+  "training_policy": {
+    "selection": "measured_gain_only",
+    "allow_single_skill": true,
+    "allow_synergy_pair": true,
+    "reject_nonpositive_gain": true,
+    "sealed_ood_used_for_selection": false
+  },
+  "real_benchmark_sources": [
+    {
+      "name": "GSM8K",
+      "role": "sealed natural-language mathematics challenge provenance",
+      "training_answers_used": false
+    },
+    {
+      "name": "HumanEval",
+      "role": "sealed open-ended code challenge provenance",
+      "training_answers_used": false
+    },
+    {
+      "name": "miniF2F",
+      "role": "sealed formal-mathematics challenge provenance",
+      "training_answers_used": false
+    },
+    {
+      "name": "MMLU",
+      "role": "broad subject taxonomy and future sealed challenge routing",
+      "training_answers_used": false
+    }
+  ],
+  "claim_boundary": {
+    "bounded_skill_acquisition_can_be_measured": true,
+    "real_benchmark_solved_claimed": false,
+    "general_intelligence_claimed": false,
+    "phenomenal_consciousness_claimed": false
+  },
+  "canonical_direct_write": false,
+  "admission_route": [
+    "shadow_curriculum",
+    "sealed_ood_transfer",
+    "real_benchmark_intake",
+    "full_kernel_audit",
+    "complete_regression",
+    "explicit_main_admission"
+  ]
+}
