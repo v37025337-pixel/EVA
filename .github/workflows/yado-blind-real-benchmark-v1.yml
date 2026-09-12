@@ -1,0 +1,151 @@
+name: YADO Blind Real Benchmark V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - yado-blind-real-benchmark-v1
+    paths:
+      - 'runtime/yado_blind_real_benchmark_v1.py'
+      - '.github/workflows/yado-blind-real-benchmark-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-sealed-exam:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout kernel
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile blind benchmark runtime
+        run: python -m py_compile runtime/yado_blind_real_benchmark_v1.py
+      - name: Download official benchmarks and split prompts from keys
+        run: |
+          python runtime/yado_blind_real_benchmark_v1.py prepare \
+            --prompts sealed/prompts/yado-blind-prompts-v1.json \
+            --key sealed/key/yado-blind-key-v1.json \
+            --gsm-n 80 --he-n 24
+      - name: Verify prompt artifact contains no answer fields
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('sealed/prompts/yado-blind-prompts-v1.json'))
+          assert p['mode']=='PROMPTS_ONLY_NO_ANSWERS'
+          assert p['claim_boundary']['answers_present'] is False
+          assert p['claim_boundary']['tests_present'] is False
+          assert p['claim_boundary']['canonical_solutions_present'] is False
+          text=open('sealed/prompts/yado-blind-prompts-v1.json').read()
+          assert 'canonical_solution' not in text
+          assert 'official_answer' not in text
+          print('PASS_PROMPTS_ONLY')
+          PY
+      - name: Upload prompts-only exam
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-blind-prompts-v1
+          path: sealed/prompts/yado-blind-prompts-v1.json
+          if-no-files-found: error
+      - name: Upload sealed official key separately
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-blind-official-key-v1
+          path: sealed/key/yado-blind-key-v1.json
+          if-no-files-found: error
+
+  blind-solve:
+    needs: prepare-sealed-exam
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout kernel
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download prompts only
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-blind-prompts-v1
+          path: blind-input
+      - name: Assert no key artifact is present in solver workspace
+        run: |
+          test ! -e blind-input/yado-blind-key-v1.json
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('blind-input/yado-blind-prompts-v1.json')
+          d=json.loads(p.read_text())
+          assert d['claim_boundary']['answers_present'] is False
+          assert d['claim_boundary']['tests_present'] is False
+          print('PASS_SOLVER_HAS_PROMPTS_ONLY')
+          PY
+      - name: Freeze YADO blind predictions
+        run: |
+          python runtime/yado_blind_real_benchmark_v1.py solve \
+            --prompts blind-input/yado-blind-prompts-v1.json \
+            --out blind-output/yado-blind-predictions-v1.json
+      - name: Upload frozen predictions
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-blind-predictions-v1
+          path: blind-output/yado-blind-predictions-v1.json
+          if-no-files-found: error
+
+  score-after-freeze:
+    needs: [prepare-sealed-exam, blind-solve]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout kernel
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download prompts
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-blind-prompts-v1
+          path: score/prompts
+      - name: Download frozen predictions
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-blind-predictions-v1
+          path: score/predictions
+      - name: Open official key only after predictions exist
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-blind-official-key-v1
+          path: score/key
+      - name: Compare frozen YADO answers to official answers/tests
+        run: |
+          python runtime/yado_blind_real_benchmark_v1.py score \
+            --prompts score/prompts/yado-blind-prompts-v1.json \
+            --predictions score/predictions/yado-blind-predictions-v1.json \
+            --key score/key/yado-blind-key-v1.json \
+            --out score/report/yado-blind-real-benchmark-v1.json
+      - name: Verify anti-leakage protocol and print measured result
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('score/report/yado-blind-real-benchmark-v1.json'))
+          assert r['status']=='COMPLETED_BLIND_REAL_BENCHMARK_V1'
+          assert r['protocol']['solver_received_answer_key'] is False
+          assert r['protocol']['solver_received_official_tests'] is False
+          assert r['protocol']['predictions_frozen_before_scoring'] is True
+          print(json.dumps(r['results'], indent=2))
+          PY
+      - name: Upload scored blind evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-blind-real-benchmark-v1
+          path: |
+            score/report/yado-blind-real-benchmark-v1.json
+            score/predictions/yado-blind-predictions-v1.json
+          if-no-files-found: error
