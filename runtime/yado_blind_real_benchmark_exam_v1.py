@@ -133,8 +133,10 @@ def openbook_answer(prompt: str, choices: List[Dict[str, str]], facts: List[str]
         choice_scores.append((best, c["label"]))
     choice_scores.sort(key=lambda x: (-x[0], x[1]))
     if not choice_scores or choice_scores[0][0] <= 0:
-        return "UNRESOLVED", {"method": "lexical_openbook_retrieval", "confidence": 0.0}
+        return "UNRESOLVED", {"method": "lexical_openbook_retrieval", "confidence": 0.0, "reason": "no_support"}
     margin = choice_scores[0][0] - (choice_scores[1][0] if len(choice_scores) > 1 else 0)
+    if margin <= 0:
+        return "UNRESOLVED", {"method": "lexical_openbook_retrieval", "confidence": 0.0, "reason": "tied_best_score"}
     return choice_scores[0][1], {"method": "lexical_openbook_retrieval", "confidence": round(margin / max(choice_scores[0][0], 1e-9), 4)}
 
 NUM_RE = re.compile(r"(?<![\w.])-?\$?\d+(?:,\d{3})*(?:\.\d+)?%?")
