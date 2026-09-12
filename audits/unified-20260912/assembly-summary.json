@@ -1,0 +1,149 @@
+{
+  "schema": "yado.unified.delivery.verification.v1",
+  "status": "PASS_BOUNDED_UNIFIED_ARCHITECTURE",
+  "tested_source_commit": "895866023b84f68fa164f967177b338be524b054",
+  "base_main_commit": "6c39f489078713c4cf9b304dc3951dff2874f000",
+  "identity_digest": "95aef276b45a559650f13ae5aeefc1bbaf3035ed47bdb6174f688b2ceada1c70",
+  "archive_sha256": "9e3ec3b5039b11e0082b92039a5dfa578ac99de7451a59d8f546b04f637fc445",
+  "archive_counts": {
+    "blob": 4770,
+    "commit": 3256,
+    "external_files": 7,
+    "external_sources_and_members": 6516,
+    "indexed_documents": 5155,
+    "remote_branches": 48,
+    "tree": 8334,
+    "unique_payloads": 17036,
+    "historical_snapshot_refs": 23
+  },
+  "source_catalog": {
+    "remote_branches": 48,
+    "all_frozen_branches_integrated": true,
+    "unique_python_versions": 855,
+    "current_python_files": 610,
+    "local_import_edges": 1551,
+    "unresolved_local_imports": 0,
+    "historical_parse_failures": 0
+  },
+  "regression": {
+    "status": "PASS",
+    "tests_run": 184,
+    "expected_tests": 184,
+    "source_unchanged": true,
+    "suite_counts": {
+      "runtime/yado_rc8_v36": 120,
+      "successor/tests": 51,
+      "tests": 13
+    },
+    "elapsed_seconds": 70.18259859085083
+  },
+  "focused_tests": {
+    "passed": 14,
+    "included_in_full_regression": true
+  },
+  "acceptance": {
+    "status": "PASS_BOUNDED_UNIFIED_ARCHITECTURE",
+    "checks_passed": 68,
+    "checks_total": 68,
+    "rehearsal": {
+      "count": 12,
+      "statuses": {
+        "VALIDATED_ON_HOLDOUT": 3,
+        "VERIFIED": 9
+      },
+      "self_model": {
+        "numeric/polynomial_1": {
+          "successes": 0,
+          "failures": 1,
+          "cost": 1
+        },
+        "numeric/polynomial_2": {
+          "successes": 0,
+          "failures": 1,
+          "cost": 2
+        },
+        "numeric/polynomial_3": {
+          "successes": 3,
+          "failures": 0,
+          "cost": 9
+        },
+        "relation/native_logic": {
+          "successes": 8,
+          "failures": 0,
+          "cost": 8
+        },
+        "events/native_thinking": {
+          "successes": 1,
+          "failures": 0,
+          "cost": 1
+        }
+      },
+      "fresh_external_test": false
+    },
+    "model_survives_restart": true,
+    "final_goal_statuses": {
+      "VALIDATED_ON_HOLDOUT": 11,
+      "VERIFIED": 11
+    },
+    "integrity": {
+      "status": "PASS",
+      "tick": 188,
+      "event_hash": "175aabc9563d71d92949cabd1ec3792bc6e17ac6fc07c8d0ac859563dc05be6f"
+    },
+    "learned_capability_ids": [
+      "898d6073b9ea0f3867f5ee2cb371d089e27ad2021b223eb356b9f02fdac78176",
+      "ae9cf5519972bca6d388cfd4edfc0b278ecc1d3a9c8ff08c6dbe98ec12596f0b"
+    ],
+    "elapsed_seconds": 27.844665733000056
+  },
+  "archive_verification": {
+    "status": "PASS",
+    "payloads_verified": 17036,
+    "git_objects_verified": 16360,
+    "elapsed_seconds": 3.6396662709998964
+  },
+  "parent_audit": {
+    "status": "PASS",
+    "counts": {
+      "active_capabilities": 31,
+      "active_runtime_sources": 39,
+      "architecture_planes": 9,
+      "duplicate_python_groups": 0,
+      "historical_branches_audited": 48,
+      "json_files": 1145,
+      "ledger_events": 299,
+      "local_import_edges": 1543,
+      "module_stem_collisions": 0,
+      "runtime_python_files": 601,
+      "workflow_files": 63
+    }
+  },
+  "authorship": {
+    "controller": "ASSISTANT",
+    "native_solvers": "INHERITED_YADO",
+    "generated_arithmetic_modules": "YADO_NATIVE_SEMANTIC_SYNTHESIS"
+  },
+  "verification_history": [
+    {
+      "stage": "initial_large_snapshot_import",
+      "result": "SQLITE_SELF_LOCK",
+      "resolution": "Use same connection for container reads and import writes; complete build subsequently passed"
+    },
+    {
+      "stage": "first_catalog_deduplicated_build",
+      "result": "SQLITE_READONLY_ERROR",
+      "resolution": "Not reproduced in isolated diagnostic and sequential complete rebuild; exact environmental cause not established"
+    },
+    {
+      "stage": "final_frozen_source_verification",
+      "result": "PASS",
+      "source_unchanged": true
+    }
+  ],
+  "limits": [
+    "All available frozen refs, not unavailable or unreachable deleted refs",
+    "Acceptance covers bounded relation, Q/R nesting, polynomial and arithmetic source tasks",
+    "Historical report verdicts are not fresh tests",
+    "No automatic canonical G3 promotion or consciousness claim"
+  ]
+}
