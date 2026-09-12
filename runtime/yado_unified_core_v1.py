@@ -32,6 +32,7 @@ from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
 from yado_g2_experience_conditioned_cognitive_layer_v4 import G2ExperienceConditionedCognitiveLayerV4
 from yado_g2_global_experience_meta_controller_v7 import G2GlobalExperienceMetaControllerV7
 from yado_g2_all_experience_tri_organ_runtime_v1 import G2AllExperienceTriOrganRuntimeV1
+from yado_g2_causal_external_learning_binding_v1 import G2CausalExternalLearningBindingV1
 
 def canon(o:Any)->str:
     return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
@@ -71,6 +72,15 @@ class UnifiedYADOCoreV1:
         self.experience_cognitive_layer=G2ExperienceConditionedCognitiveLayerV4(self._load('canonical/yado-g2-experience-conditioned-cognitive-layer-v4.json'))
         self.global_experience_meta_controller=G2GlobalExperienceMetaControllerV7(self._load('canonical/yado-g2-global-experience-meta-controller-v7.json'))
         self.all_experience_tri_organ=G2AllExperienceTriOrganRuntimeV1(self._load('canonical/yado-g2-all-experience-tri-organ-v1.json'))
+        self.causal_external_learning_binding=G2CausalExternalLearningBindingV1(
+            self.repo,
+            self._load('canonical/yado-g2-causal-external-learning-binding-v1.json'),
+            self.experience_search,
+            self.all_experience_thinking,
+            self.all_experience_logic,
+            self.all_experience_intelligence,
+            self.global_experience_meta_decide_evidence,
+        )
         validate_ledger_v2(self.ledger)
 
     def _load(self,rel:str)->dict[str,Any]:
@@ -99,6 +109,7 @@ class UnifiedYADOCoreV1:
             'developmental_frontier_coherent':bool(ledger_frontier) and self.manifest.get('current_frontier')==ledger_frontier and self.head.get('current_frontier')==ledger_frontier,
             'g3_blocked':self.manifest.get('g3_genesis_performed') is False and self.experience.get('policy',{}).get('g3_genesis_blocked') is True,
             'context_adapter_binding_coherent':(('ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1' in active_components)==(self.shadow_context.get('canonical_active') is True)),
+            'causal_external_learning_binding_active':self.causal_external_learning_binding.snapshot().get('status')=='CANONICAL_ACTIVE',
             'required_active_families_present':all(x in active_components for x in [
                 'ALG-CONJUNCTIVE-RULE-INDUCER-V1',
                 'ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1',
@@ -350,6 +361,21 @@ class UnifiedYADOCoreV1:
     def all_experience_tri_organ_snapshot(self)->dict[str,Any]:
         return self.all_experience_tri_organ.snapshot()
 
+    def prepare_causal_external_learning(self,objective:str)->dict[str,Any]:
+        return self.causal_external_learning_binding.prepare_cycle(objective)
+
+    def apply_causal_external_result(self,prepared:dict[str,Any],external_result:dict[str,Any])->dict[str,Any]:
+        return self.causal_external_learning_binding.apply_result(prepared,external_result)
+
+    def export_causal_external_learning_state(self)->dict[str,Any]:
+        return self.causal_external_learning_binding.export_state()
+
+    def restore_causal_external_learning_state(self,state:dict[str,Any])->dict[str,Any]:
+        return self.causal_external_learning_binding.import_state(state)
+
+    def causal_external_learning_snapshot(self)->dict[str,Any]:
+        return self.causal_external_learning_binding.snapshot()
+
     def cognitive_experience_decide(self,organ:str,payload:dict[str,Any])->dict[str,Any]:
         return self.experience_cognitive_layer.decide(organ,payload)
 
@@ -368,7 +394,8 @@ class UnifiedYADOCoreV1:
             'manifest_digest':digest(self.manifest),
             'audit':audit,
             'frontier':self.developmental_frontier(),
-            'semantic_boundary':'ONE ACTIVE YADO SOFTWARE KERNEL WITH LEGACY BRANCHES AS READ-ONLY EXPERIENCE; NOT AGI OR SUBJECTIVE CONSCIOUSNESS.'
+            'causal_external_learning':self.causal_external_learning_snapshot(),
+            'semantic_boundary':'ONE ACTIVE YADO SOFTWARE KERNEL WITH LEGACY BRANCHES AS READ-ONLY EXPERIENCE AND A BOUNDED CAUSAL READ-ONLY EXTERNAL LEARNING BINDING; NOT AGI OR SUBJECTIVE CONSCIOUSNESS.'
         }
 
 __all__=['UnifiedYADOCoreV1','digest']
