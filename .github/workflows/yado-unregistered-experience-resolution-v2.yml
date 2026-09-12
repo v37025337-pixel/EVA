@@ -1,0 +1,79 @@
+name: YADO Unregistered Experience Resolution V2
+
+on:
+  push:
+    branches: [yado-unregistered-experience-resolution-v2]
+    paths:
+      - '.github/workflows/yado-unregistered-experience-resolution-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  topology-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - name: Fetch all physical refs
+        run: git fetch origin '+refs/heads/*:refs/remotes/origin/*'
+
+      - name: Prove kernel selected this deficit
+        run: |
+          python runtime/yado_unified_core_deep_self_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
+          assert d['self_selected_next_step']=='UNREGISTERED_EXPERIENCE_CANDIDATES', d['self_selected_next_step']
+          f={x['code']:x for x in d['findings']}['UNREGISTERED_EXPERIENCE_CANDIDATES']
+          assert f['status']=='PARTIAL' and f['evidence']['candidate_count']>0, f
+          print(json.dumps({'selected_next_step':d['self_selected_next_step'],'candidate_count':f['evidence']['candidate_count']},sort_keys=True))
+          PY
+
+      - name: Resolve candidate topology without semantic promotion
+        run: |
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          root=Path('.')
+          inv=json.loads((root/'canonical/yado-remote-branch-inventory-v1.json').read_text())
+          rows={x['branch']:x for x in inv['rows']}
+          candidates=list(inv['experience_candidates'])
+          main=subprocess.check_output(['git','rev-parse','origin/main'],text=True).strip()
+          def ok(*args): return subprocess.run(['git',*args],capture_output=True,text=True).returncode==0
+          def out(*args): return subprocess.check_output(['git',*args],text=True).strip()
+          rec=[]
+          for b in candidates:
+              tip=rows[b]['head_sha']
+              tip_in_main=ok('merge-base','--is-ancestor',tip,main)
+              main_in_tip=ok('merge-base','--is-ancestor',main,tip)
+              merge_base=out('merge-base',main,tip)
+              exclusive=int(out('rev-list','--count',f'{main}..{tip}') or '0')
+              if tip_in_main:
+                  cls='ABSORBED_IN_CANONICAL_MAIN_HISTORY'
+              elif main_in_tip:
+                  cls='BRANCH_EXCLUSIVE_DESCENDANT_REQUIRES_FRESH_REVALIDATION'
+              else:
+                  cls='DIVERGED_BRANCH_EXCLUSIVE_REQUIRES_FRESH_REVALIDATION'
+              rec.append({'branch':b,'tip_sha':tip,'main_sha':main,'merge_base':merge_base,'tip_is_ancestor_of_main':tip_in_main,'main_is_ancestor_of_tip':main_in_tip,'branch_exclusive_commit_count':exclusive,'classification':cls})
+          counts={}
+          for r in rec: counts[r['classification']]=counts.get(r['classification'],0)+1
+          art={'schema':'yado.unregistered_experience_resolution_probe.v2','source_inventory_digest':inv['artifact_digest'],'candidate_count':len(candidates),'classification_counts':dict(sorted(counts.items())),'records':rec,'policy':{'branch_name_as_evidence':False,'semantic_promotion':False,'code_activation':False,'absorbed_tip_rule':'TIP_IS_ANCESTOR_OF_CURRENT_MAIN','exclusive_tip_rule':'REQUIRES_FRESH_REVALIDATION_BEFORE_ANY_ADMISSION'},'claim_boundary':'This probe resolves Git topology only. It neither validates historical branch claims nor admits code/capabilities/experience.'}
+          art['artifact_digest']=hashlib.sha256(json.dumps(art,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+          p=root/'canonical/yado-unregistered-experience-resolution-probe-v2.json'
+          p.write_text(json.dumps(art,indent=2,sort_keys=True)+'\n')
+          assert len(rec)==len(candidates)>0
+          assert sum(counts.values())==len(candidates)
+          print('YADO_RESOLUTION_SUMMARY='+json.dumps({'candidate_count':len(candidates),'classification_counts':counts,'artifact_digest':art['artifact_digest']},sort_keys=True))
+          print('YADO_EXCLUSIVE_BRANCHES='+json.dumps([r['branch'] for r in rec if r['branch_exclusive_commit_count']>0],sort_keys=True))
+          PY
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-unregistered-experience-resolution-v2-${{ github.run_id }}
+          path: canonical/yado-unregistered-experience-resolution-probe-v2.json
