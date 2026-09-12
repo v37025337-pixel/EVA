@@ -32,7 +32,14 @@ def import_snapshots(path):
                     continue
                 seen.add(digest)
                 target = Path(tmp) / (digest + '.sqlite')
-                target.write_bytes(archive.read(digest))
+                # Read through the importing connection: large transactions can
+                # spill SQLite's cache and hold an exclusive rollback-journal
+                # lock, so a second reader would wait on our own transaction.
+                payload = db.execute('SELECT size,payload FROM blobs WHERE digest=?', (digest,)).fetchone()
+                raw = zlib.decompress(payload[1])
+                if len(raw) != payload[0] or store.sha(raw) != digest:
+                    raise ValueError('HISTORICAL_CONTAINER_INTEGRITY')
+                target.write_bytes(raw)
                 old = sqlite3.connect(target.as_uri() + '?mode=ro', uri=True)
                 old.row_factory = sqlite3.Row
                 try:
