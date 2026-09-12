@@ -1,0 +1,75 @@
+name: YADO Experience Conditioned Cognitive Evolution V4
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-experience-conditioned-cognitive-evolution-v4]
+    paths:
+      - 'runtime/yado_experience_conditioned_cognitive_evolution_v4.py'
+      - '.github/workflows/yado-experience-conditioned-cognitive-evolution-v4.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  evolve-cognition:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+      - name: Refresh bounded real-world experience
+        run: python runtime/yado_bounded_autonomous_learning_v1.py
+      - name: Verify active V3 cognitive policy
+        run: |
+          python - <<'PY'
+          import importlib.util
+          p='runtime/yado_cognitive_tri_organ_policy_v3.py'
+          s=importlib.util.spec_from_file_location('p',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)
+          c=m.component()
+          assert c['canonical_active'] is True
+          assert c['schema']=='yado.cognitive_tri_organ_policy.v3'
+          assert min(c['verified_hidden_scores'].values()) >= 0.80
+          print('PASS_ACTIVE_V3_POLICY')
+          PY
+      - name: Run experience-conditioned cognitive evolution
+        run: python runtime/yado_experience_conditioned_cognitive_evolution_v4.py
+      - name: Verify causal experience ablation and candidate
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          r=json.load(open('candidates/cognitive/yado-experience-conditioned-cognitive-evolution-v4.json'))
+          assert r['status']=='PASS_SHADOW_EXPERIENCE_CONDITIONED_COGNITIVE_EVOLUTION_V4'
+          assert r['no_experience_ablation']['causal_effect_observed'] is True
+          assert sum(r['selected_hidden'].values()) > sum(r['baseline_hidden'].values())
+          assert sum(r['selected_hidden'].values()) > sum(r['no_experience_ablation']['hidden_scores'].values())
+          p=pathlib.Path(r['candidate_path'])
+          assert hashlib.sha256(p.read_bytes()).hexdigest()==r['candidate_sha256']
+          compile(p.read_text(),str(p),'exec')
+          print('PASS_CAUSAL_EXPERIENCE_TO_COGNITIVE_MUTATION_GATE')
+          PY
+      - name: Compile runtime and successor
+        run: python -m compileall -q runtime successor candidates/cognitive
+      - name: Run Successor regression
+        run: python -m unittest discover -s successor/tests -p 'test_*.py'
+      - name: Run selected inherited cognitive regressions
+        run: |
+          python -m unittest runtime.test_yado_cognitive_continuity_v5
+          python -m unittest runtime.test_yado_all_experience_tri_organ_genesis_v1
+          python -m unittest runtime.test_yado_unified_core_v1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-experience-conditioned-cognitive-evolution-v4-${{ github.run_id }}
+          path: |
+            candidates/cognitive/yado-experience-conditioned-cognitive-evolution-v4.json
+            candidates/cognitive/yado_cognitive_policy_candidate_v4.py
+            experience/autonomous/yado-autonomous-learning-latest.json
