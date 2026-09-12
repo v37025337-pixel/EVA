@@ -102,7 +102,8 @@ def _index(db, digest, raw, path):
     db.execute("INSERT INTO search_index(rowid,path,body) VALUES(?,?,?)", (row.lastrowid, path, indexed))
 
 
-def _external(db, source, raw, metadata, *, expand_zip=True):
+def _external(db, source, raw, metadata, *, expand_zip=True,
+              max_expanded_bytes=128 * 1024 * 1024, max_member_bytes=32 * 1024 * 1024):
     digest = _put(db, raw)
     db.execute("INSERT INTO external_sources VALUES(?,?,?)", (source, digest, canonical(metadata)))
     _index(db, digest, raw, source)
@@ -110,10 +111,10 @@ def _external(db, source, raw, metadata, *, expand_zip=True):
         # Read members as bytes; never extract paths or run reconstruction scripts.
         with zipfile.ZipFile(io.BytesIO(raw)) as bundle:
             infos = [x for x in bundle.infolist() if not x.is_dir()]
-            if sum(x.file_size for x in infos) > 128 * 1024 * 1024:
+            if sum(x.file_size for x in infos) > max_expanded_bytes:
                 raise ValueError("EXTERNAL_ARCHIVE_EXPANSION_LIMIT:" + source)
             for index, member in enumerate(infos):
-                if member.file_size > 32 * 1024 * 1024:
+                if member.file_size > max_member_bytes:
                     raise ValueError("EXTERNAL_MEMBER_SIZE_LIMIT:" + member.filename)
                 _external(db, source + "!/" + str(index) + "/" + member.filename,
                           bundle.read(member), {"container_digest": digest,
@@ -190,7 +191,11 @@ def build_archive(repo, target, *, external_root=None, catalog=None):
                     raw = local.read_bytes()
                     if item.get("size_bytes") is not None and len(raw) != item["size_bytes"]:
                         raise ValueError("EXTERNAL_SOURCE_SIZE_MISMATCH:" + item["path"])
-                    _external(db, item["library_file_id"] + ":" + item["path"], raw, item)
+                    limits = {key: item.get(key, default) for key, default in (
+                        ("max_expanded_bytes", 128 * 1024 * 1024), ("max_member_bytes", 32 * 1024 * 1024))}
+                    if any(type(v) is not int or not 1 <= v <= 512 * 1024 * 1024 for v in limits.values()):
+                        raise ValueError("INVALID_EXTERNAL_SIZE_LIMIT")
+                    _external(db, item["library_file_id"] + ":" + item["path"], raw, item, **limits)
             counts = {kind: count for kind, count in db.execute("SELECT kind,count(*) FROM git_objects GROUP BY kind")}
             counts.update({"unique_payloads": db.execute("SELECT count(*) FROM blobs").fetchone()[0],
                            "indexed_documents": db.execute("SELECT count(*) FROM documents").fetchone()[0],

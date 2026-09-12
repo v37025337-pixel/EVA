@@ -11,6 +11,7 @@ from .archive import ExperienceArchive, canonical, file_sha, sha
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "runtime"))
+sys.path.insert(0, str(ROOT / "runtime" / "yado_rc8_v36"))
 
 
 def encode(obj):
@@ -64,7 +65,15 @@ class SuccessorKernel:
             raise ValueError("SUCCESSOR_MANIFEST_DIGEST_MISMATCH")
         self.identity = claimed
         self._check_sources()
-        archive_path = self.manifest_path.parent / self.manifest["archive_file"]
+        archive_path = (self.manifest_path.parent / self.manifest["archive_file"]).resolve()
+        if not archive_path.is_relative_to(self.manifest_path.parent):
+            raise ValueError("ARCHIVE_OUTSIDE_BIRTH")
+        for name in ("source_catalog", "rehearsal_goals"):
+            if name in self.manifest:
+                binding = self.manifest[name]
+                artifact = (self.manifest_path.parent / binding["file"]).resolve()
+                if not artifact.is_relative_to(self.manifest_path.parent) or file_sha(artifact) != binding["sha256"]:
+                    raise ValueError("BIRTH_ARTIFACT_INTEGRITY:" + name)
         if file_sha(archive_path) != self.manifest["archive_sha256"]:
             raise ValueError("SUCCESSOR_ARCHIVE_DIGEST_MISMATCH")
         self.archive = ExperienceArchive(archive_path)
@@ -116,7 +125,7 @@ class SuccessorKernel:
 
     def verify_state(self):
         previous, tick = "0" * 64, 0
-        submissions, completions, cognitive_records = [], {}, []
+        submissions, completions, cognitive_records, graph_records = [], {}, [], []
         for row in self.db.execute("SELECT * FROM events ORDER BY tick"):
             tick += 1
             digest = sha((previous + "\n" + str(tick) + "\n" + row["body"]).encode())
@@ -125,6 +134,8 @@ class SuccessorKernel:
             body = decode(row["body"])
             if str(body.get("kind", "")).startswith("COG_"):
                 cognitive_records.append({**body, "tick": tick, "event_hash": digest})
+            if str(body.get("kind", "")).startswith("GRAPH_"):
+                graph_records.append({**body, "tick": tick, "event_hash": digest})
             if body.get("kind") == "GOAL_SUBMITTED":
                 submissions.append(body)
             if body.get("job_id") is not None:
@@ -160,6 +171,9 @@ class SuccessorKernel:
         if cognitive_records:
             from .cognitive import replay
             replay(cognitive_records)
+        if graph_records:
+            from .graph import replay as replay_graph
+            replay_graph(graph_records)
         return {"status": "PASS", "tick": tick, "event_hash": previous}
 
     def _append(self, body):
