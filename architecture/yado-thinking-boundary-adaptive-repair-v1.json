@@ -1,0 +1,43 @@
+{
+  "schema": "yado.thinking_boundary_adaptive_repair_spec.v1",
+  "target_deficit": "THINKING_BOUNDARY_REASONING",
+  "mode": "EVIDENCE_GATED_SHADOW_ADAPTATION",
+  "development_suite": {
+    "seed": 20260912,
+    "families": ["direct", "negative", "multi_hop", "contradiction", "representation"],
+    "per_family": 18,
+    "used_for_selection": true
+  },
+  "fresh_ood_suite": {
+    "seed": 20260913,
+    "families": ["direct", "negative", "multi_hop", "contradiction", "representation"],
+    "per_family": 18,
+    "used_for_selection": false
+  },
+  "primitive_library": [
+    "forward_chain",
+    "contradiction_guard",
+    "representation_normalization"
+  ],
+  "selection_rule": "At each development iteration, evaluate every not-yet-selected primitive, accept only the highest measured score gain with zero family regression, then freeze the resulting policy before fresh/OOD evaluation.",
+  "admission_gates": {
+    "fresh_ood_candidate_min": 0.85,
+    "fresh_ood_absolute_gain_min": 0.20,
+    "critical_family_floor_min": 0.80,
+    "critical_family_regression_allowed": false,
+    "real_internet_experience_required": true,
+    "minimum_internet_disciplines": 5,
+    "full_kernel_audit_required": true,
+    "complete_regression_required": true
+  },
+  "claims_boundary": {
+    "bounded_benchmark_improvement_may_be_claimed_after_gate": true,
+    "general_intelligence_improvement_claimed": false,
+    "phenomenal_consciousness_claimed": false
+  },
+  "mutation_boundary": {
+    "canonical_direct_write": false,
+    "remote_content_executed": false,
+    "admission_requires_explicit_main_merge": true
+  }
+}
