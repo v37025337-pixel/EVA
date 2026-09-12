@@ -157,7 +157,6 @@ jobs:
           out.write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
           print('PASS_LIVE_CAUSAL_LOOP_RESTART_MEMORY_FEEDBACK',first_digest)
           PY
-          git checkout -- receipts/yado-autonomous-open-catalog-discovery-v6.json
 
       - name: Run deepest unified-core self audit
         run: |
