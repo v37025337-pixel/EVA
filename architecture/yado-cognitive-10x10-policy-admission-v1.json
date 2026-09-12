@@ -1,0 +1,33 @@
+{
+  "schema": "yado.cognitive_10x10_policy_admission.v1",
+  "policy_file": "runtime/yado_cognitive_tri_organ_policy_v3.py",
+  "source_evolution": {
+    "schema": "yado.cognitive_10x10_evolution.v1",
+    "seed": 202609121502,
+    "evidence_digest": "0cce6c75bb7352748ccf73703b537f0438699e75380730223ce531e694501f43",
+    "baseline_sealed_score": 0.5,
+    "candidate_sealed_score": 1.0,
+    "sealed_absolute_gain": 0.5
+  },
+  "admitted_policy": {
+    "abstraction_families": 8,
+    "contradiction_check": true,
+    "logic_depth": 4,
+    "thinking_beam": 3,
+    "thinking_depth": 6
+  },
+  "activation_gates": [
+    "active policy imports and compiles",
+    "exact admitted genome matches source evidence",
+    "fresh reconstruction of 100-task suite",
+    "40 sealed tasks score 1.0 across all ten domains",
+    "full kernel audit PASS",
+    "fresh Successor identity PASS",
+    "complete inherited and Successor regression PASS"
+  ],
+  "claim_boundary": {
+    "bounded_policy_admission": true,
+    "general_intelligence_claimed": false,
+    "phenomenal_consciousness_claimed": false
+  }
+}
