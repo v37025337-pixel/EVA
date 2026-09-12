@@ -1,12 +1,12 @@
 name: YADO Remote Branch Inventory Refresh V2
-# Retry after closing the temporary reconcile-branch physical divergence.
+# Fresh topology-aware refresh against the current canonical main.
 
 on:
   push:
     branches: [yado-remote-inventory-refresh-v2]
     paths:
       - '.github/workflows/yado-remote-inventory-refresh-v2.yml'
-      - 'runtime/yado_g2_remote_branch_inventory_reconcile_v1.py'
+      - 'runtime/yado_g2_remote_branch_inventory_reconcile_v2.py'
   workflow_dispatch:
 
 permissions:
@@ -62,19 +62,21 @@ jobs:
           PY
           python runtime/yado_canonical_invariant_guard_v1.py
 
-      - name: Execute bounded inventory action chosen by the deficit
+      - name: Execute topology-aware bounded inventory action
         run: |
-          python -m py_compile runtime/yado_g2_remote_branch_inventory_reconcile_v1.py
-          python runtime/yado_g2_remote_branch_inventory_reconcile_v1.py
+          python -m py_compile runtime/yado_g2_remote_branch_inventory_reconcile_v2.py
+          python runtime/yado_g2_remote_branch_inventory_reconcile_v2.py
           python - <<'PY'
-          import json
+          import json, os
           from pathlib import Path
           d=json.loads(Path('canonical/yado-remote-branch-inventory-v1.json').read_text())
+          assert d['schema']=='yado.remote_branch_inventory.v2', d.get('schema')
           assert d['status']=='PASS_COMPLETE_REMOTE_REF_CLASSIFICATION', d
           assert d['coverage_complete'] is True, d
           assert not d['unclassified_refs'], d
           assert d['remote_branch_count']==len(d['rows'])
-          print(json.dumps({'remote_branch_count':d['remote_branch_count'],'classification_counts':d['classification_counts'],'experience_candidate_count':len(d['experience_candidates']),'artifact_digest':d['artifact_digest']},sort_keys=True))
+          assert d['canonical_main_sha']==os.environ['BASE_MAIN_SHA'], (d['canonical_main_sha'],os.environ['BASE_MAIN_SHA'])
+          print(json.dumps({'remote_branch_count':d['remote_branch_count'],'classification_counts':d['classification_counts'],'experience_candidate_count':len(d['experience_candidates']),'absorbed_count':len(d['absorbed_canonical_history_refs']),'artifact_digest':d['artifact_digest']},sort_keys=True))
           PY
 
       - name: Prove causal deficit closure and autonomous next-step movement
@@ -88,6 +90,8 @@ jobs:
           assert by['REMOTE_BRANCH_INVENTORY_MATCH']['status']=='PASS', by['REMOTE_BRANCH_INVENTORY_MATCH']
           assert d['self_selected_next_step']!='REMOTE_BRANCH_INVENTORY_MATCH', d['self_selected_next_step']
           assert d['summary']['blocking_findings']==0, d['summary']
+          assert d['summary']['critical_failures']==0, d['summary']
+          assert d['summary']['high_failures']==0, d['summary']
           assert d['canonical_mutation'] is False
           assert d['repair_applied'] is False
           print(json.dumps({'closed_deficit':'REMOTE_BRANCH_INVENTORY_MATCH','closed_status':by['REMOTE_BRANCH_INVENTORY_MATCH']['status'],'next_step':d['self_selected_next_step'],'priority':d['self_selected_priority'][:3]},sort_keys=True))
@@ -113,7 +117,7 @@ jobs:
           assert d['canonical']['canonical_guard']=='PASS'
           assert d['canonical']['ledger_validation']=='PASS'
           assert d['canonical']['g3_genesis_performed'] is False
-          print('PASS_FULL_KERNEL_AUDIT')
+          print('PASS_FULL_KERNEL_AUDIT',d['counts'])
           PY
 
       - name: Fresh Successor build and complete regression
@@ -125,10 +129,10 @@ jobs:
           import json
           d=json.load(open('audits/yado-full-regression-v1-report.json'))
           assert d['status']=='PASS', d
-          assert d['tests_run']==d['expected_tests'], d
+          assert d['tests_run']==d['expected_tests']==170, d
           assert not d['failures'] and not d['errors'] and not d['skipped']
           assert d['source_unchanged'] is True
-          print('PASS_COMPLETE_REGRESSION',d['tests_run'],d['expected_tests'])
+          print('PASS_COMPLETE_REGRESSION',d['tests_run'],d['expected_tests'],d['identity_digest'])
           PY
 
       - name: Fail closed on concurrent main movement
@@ -151,7 +155,7 @@ jobs:
             audits/yado-full-kernel-audit-v1-summary.md \
             audits/yado-full-regression-v1-report.json
           git diff --cached --quiet && { echo NO_VERIFIED_REFRESH_DELTA; exit 1; }
-          git commit -m "YADO main evolution: close kernel-selected remote inventory deficit [skip ci]"
+          git commit -m "YADO main evolution: refresh topology-aware remote inventory [skip ci]"
           git push origin HEAD:main
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
