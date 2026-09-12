@@ -26,7 +26,10 @@ STOPWORDS = {
     "being", "between", "both", "could", "does", "each", "from", "have", "having", "into",
     "more", "most", "other", "over", "same", "some", "such", "than", "that", "their", "there",
     "these", "they", "this", "those", "through", "under", "using", "very", "what", "when", "where",
-    "which", "while", "with", "would", "your", "page", "site", "http", "https", "www"
+    "which", "while", "with", "would", "your", "page", "site", "http", "https", "www",
+    "will", "contact", "resource", "resources", "news", "help", "search", "read", "view",
+    "specific", "basic", "materials", "gallery", "video", "official", "home", "menu", "privacy",
+    "terms", "support", "previous", "next", "only", "like", "please", "learn", "learning"
 }
 
 
@@ -118,7 +121,7 @@ def fetch_public_https(url: str, max_bytes: int, timeout: int) -> Dict[str, Any]
             }
     except urllib.error.HTTPError as exc:
         return {"status": "HTTP_ERROR", "url": url, "http_status": exc.code, "error": str(exc)}
-    except Exception as exc:  # network/SSL/DNS are evidence, not fatal to whole corpus
+    except Exception as exc:
         return {"status": "FETCH_ERROR", "url": url, "error": f"{type(exc).__name__}: {exc}"}
 
 
@@ -220,6 +223,7 @@ def run(config: Dict[str, Any], self_model: Dict[str, Any]) -> Dict[str, Any]:
         "derived_experience": {
             "domain_profiles": domain_profiles,
             "cross_domain": cross,
+            "boilerplate_filter_version": 2,
         },
         "self_development_binding": {
             "self_model_status": self_model.get("status", "MISSING"),
@@ -244,6 +248,7 @@ def run(config: Dict[str, Any], self_model: Dict[str, Any]) -> Dict[str, Any]:
 def self_test() -> None:
     sample = "Causal systems use evidence, models, feedback and uncertainty across science and engineering."
     assert "causal" in tokens(sample)
+    assert "will" not in tokens("The system will provide contact resources and news")
     a = {"model", "evidence", "risk"}
     b = {"model", "evidence", "system"}
     assert 0 < jaccard(a, b) < 1
