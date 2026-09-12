@@ -1,0 +1,39 @@
+{
+  "schema": "yado.staged_kernel_evolution.v1",
+  "goal": "Run evidence-gated progressive evolution from code substrate through logic, thinking, intelligence, cognition and unified reason, using each verified stage as the parent of the next.",
+  "stages": [
+    "CODE",
+    "LOGIC",
+    "THINKING",
+    "INTELLIGENCE",
+    "COGNITION",
+    "REASON"
+  ],
+  "generation_contract": {
+    "parent_and_child_answer_same_fresh_shard": true,
+    "current_ground_truth_hidden_until_both_response_digests_fixed": true,
+    "previous_verified_failures_may_inform_next_mutation": true,
+    "previous_revealed_exam_items_excluded_from_fresh_shards": true,
+    "canonical_direct_write": false,
+    "promotion": "PROMOTE_SHADOW only on measured improvement without per-benchmark correct regression; otherwise WITHHOLD",
+    "next_parent": "promoted child or unchanged parent"
+  },
+  "mutation_boundary": {
+    "grammar_is_engineered": true,
+    "selection_is_evidence_conditioned": true,
+    "external_llm_answers": false,
+    "claim_that_yado_invented_mutation_primitives_from_nothing": false
+  },
+  "fresh_measurement": {
+    "benchmarks": ["GSM8K", "OpenBookQA", "HumanEval"],
+    "per_stage_counts": {"gsm8k": 20, "openbookqa": 20, "humaneval": 10},
+    "historical_blind_runs_excluded": ["20260912-real-blind-v1", "20260912-real-blind-v1b"],
+    "stage_shards_are_mutually_disjoint": true
+  },
+  "claim_boundary": {
+    "single_successful_stage_proves_stable_reason": false,
+    "single_full_cycle_proves_stable_reason": false,
+    "phenomenal_consciousness_proven": false,
+    "stable_reason_requires_repeated_independent_autonomous_cycles": true
+  }
+}
