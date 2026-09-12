@@ -1,0 +1,49 @@
+{
+  "schema": "yado.architecture.autonomous_open_catalog_discovery.v6",
+  "status": "SHADOW_REQUIRES_VALIDATION",
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "objective": "find and connect to a Python library for parsing HTML/XML/markup content",
+  "parent": "AUTONOMOUS_EXTERNAL_LIBRARY_DISCOVERY_V5",
+  "frontier": "AUTONOMOUS_OPEN_CATALOG_CANDIDATE_DISCOVERY_V6",
+  "mechanism": [
+    "fetch live PyPI Simple root catalog read-only",
+    "derive candidate package names from the external catalog using generic objective anchors",
+    "fetch live metadata only for externally discovered candidates",
+    "rank viable candidates by objective relevance without host-provided package names",
+    "download the selected distribution artifact read-only and verify registry SHA-256",
+    "inspect wheel METADATA without package installation or execution",
+    "discover a dependency name from external artifact metadata",
+    "perform a second-hop registry connection using the discovered dependency",
+    "freeze the complete connection bundle before independent PyPI Simple validation",
+    "retain V1 through V5 shadow proofs and run full audit, Successor build, and regression"
+  ],
+  "proof_requirements": {
+    "host_authored_candidate_names": false,
+    "host_authored_selected_package": false,
+    "host_authored_dependency_name": false,
+    "catalog_read_only": true,
+    "artifact_digest_verified": true,
+    "sealed_validation_after_freeze": true,
+    "canonical_mutation": false
+  },
+  "safety_boundary": {
+    "https_get_only": true,
+    "allowed_hosts": ["pypi.org", "files.pythonhosted.org"],
+    "credentials": false,
+    "external_writes": false,
+    "package_installation_by_v6": false,
+    "package_execution_by_v6": false,
+    "external_models": false,
+    "resource_caps": true
+  },
+  "boundedness": {
+    "host_authored_objective": true,
+    "host_authored_discovery_anchors": true,
+    "host_authored_registry_allowlist": true,
+    "host_authored_resource_caps": true,
+    "unrestricted_internet_autonomy_claimed": false,
+    "general_intelligence_claimed": false,
+    "consciousness_claimed": false,
+    "g3_genesis_performed": false
+  }
+}
