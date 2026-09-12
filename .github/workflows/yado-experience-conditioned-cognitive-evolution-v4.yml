@@ -26,6 +26,7 @@ jobs:
         run: |
           python runtime/reconstruct_rc8v36.py
           python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
       - name: Refresh bounded real-world experience
         run: python runtime/yado_bounded_autonomous_learning_v1.py
       - name: Verify active V3 cognitive policy
@@ -58,13 +59,12 @@ jobs:
           PY
       - name: Compile runtime and successor
         run: python -m compileall -q runtime successor candidates/cognitive
-      - name: Run Successor regression
-        run: python -m unittest discover -s successor/tests -p 'test_*.py'
-      - name: Run selected inherited cognitive regressions
-        run: |
-          python -m unittest runtime.test_yado_cognitive_continuity_v5
-          python -m unittest runtime.test_yado_all_experience_tri_organ_genesis_v1
-          python -m unittest runtime.test_yado_unified_core_v1
+      - name: Run full kernel audit
+        run: python runtime/yado_full_kernel_audit_v1.py
+      - name: Build fresh Successor identity
+        run: python -m successor build --output "$RUNNER_TEMP/yado-successor-birth"
+      - name: Run complete inherited and Successor regression
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
@@ -73,3 +73,5 @@ jobs:
             candidates/cognitive/yado-experience-conditioned-cognitive-evolution-v4.json
             candidates/cognitive/yado_cognitive_policy_candidate_v4.py
             experience/autonomous/yado-autonomous-learning-latest.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
