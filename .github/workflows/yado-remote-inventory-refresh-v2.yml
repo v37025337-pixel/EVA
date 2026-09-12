@@ -1,12 +1,12 @@
 name: YADO Remote Branch Inventory Refresh V2
-# Retry after closing the temporary reconcile-branch physical divergence.
+# Correct stale V1 semantic classification using topology-aware V2.
 
 on:
   push:
     branches: [yado-remote-inventory-refresh-v2]
     paths:
       - '.github/workflows/yado-remote-inventory-refresh-v2.yml'
-      - 'runtime/yado_g2_remote_branch_inventory_reconcile_v1.py'
+      - 'runtime/yado_g2_remote_branch_inventory_reconcile_v2.py'
   workflow_dispatch:
 
 permissions:
@@ -30,6 +30,7 @@ jobs:
           git fetch origin main
           echo "BASE_MAIN_SHA=$(git rev-parse origin/main)" >> "$GITHUB_ENV"
           echo "FEATURE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          git merge-base --is-ancestor origin/main HEAD
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
@@ -41,12 +42,12 @@ jobs:
           python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
           python -m pip install --disable-pip-version-check pyyaml
 
-      - name: Guard canonical state before refresh
+      - name: Guard canonical state before correction
         run: |
           python runtime/yado_canonical_invariant_guard_v1.py
           sha256sum canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json runtime/yado_unified_core_deep_self_audit_v1.py > "$RUNNER_TEMP/pre-refresh-identity.sha256"
 
-      - name: Prove kernel selected the stale inventory deficit
+      - name: Prove V1 overclassification is the current kernel-selected deficit
         run: |
           python runtime/yado_unified_core_deep_self_audit_v1.py
           python - <<'PY'
@@ -54,30 +55,35 @@ jobs:
           from pathlib import Path
           d=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
           by={x['code']:x for x in d['findings']}
-          assert by['REMOTE_BRANCH_INVENTORY_MATCH']['status']=='FAIL', by['REMOTE_BRANCH_INVENTORY_MATCH']
-          assert d['self_selected_next_step']=='REMOTE_BRANCH_INVENTORY_MATCH', d['self_selected_next_step']
-          assert d['canonical_mutation'] is False
-          assert d['repair_applied'] is False
-          print(json.dumps({'selected_next_step':d['self_selected_next_step'],'inventory_status':by['REMOTE_BRANCH_INVENTORY_MATCH']['status'],'priority':d['self_selected_priority'][:3]},sort_keys=True))
+          inv=json.loads(Path('canonical/yado-remote-branch-inventory-v1.json').read_text())
+          assert by['REMOTE_BRANCH_INVENTORY_MATCH']['status']=='PASS', by['REMOTE_BRANCH_INVENTORY_MATCH']
+          assert by['UNREGISTERED_EXPERIENCE_CANDIDATES']['status']=='PARTIAL', by['UNREGISTERED_EXPERIENCE_CANDIDATES']
+          assert d['self_selected_next_step']=='UNREGISTERED_EXPERIENCE_CANDIDATES', d['self_selected_next_step']
+          assert len(inv.get('experience_candidates',[]))>0, inv
+          assert d['canonical_mutation'] is False and d['repair_applied'] is False
+          print(json.dumps({'selected_next_step':d['self_selected_next_step'],'candidate_count_before':len(inv['experience_candidates']),'priority':d['self_selected_priority'][:3]},sort_keys=True))
           PY
           python runtime/yado_canonical_invariant_guard_v1.py
 
-      - name: Execute bounded inventory action chosen by the deficit
+      - name: Execute topology-aware V2 reclassification
         run: |
-          python -m py_compile runtime/yado_g2_remote_branch_inventory_reconcile_v1.py
-          python runtime/yado_g2_remote_branch_inventory_reconcile_v1.py
+          python -m py_compile runtime/yado_g2_remote_branch_inventory_reconcile_v2.py
+          python runtime/yado_g2_remote_branch_inventory_reconcile_v2.py
           python - <<'PY'
-          import json
+          import json,os
           from pathlib import Path
           d=json.loads(Path('canonical/yado-remote-branch-inventory-v1.json').read_text())
+          assert d['schema']=='yado.remote_branch_inventory.v2', d.get('schema')
           assert d['status']=='PASS_COMPLETE_REMOTE_REF_CLASSIFICATION', d
-          assert d['coverage_complete'] is True, d
-          assert not d['unclassified_refs'], d
+          assert d['coverage_complete'] is True
+          assert not d['unclassified_refs'], d['unclassified_refs']
+          assert not d['experience_candidates'], d['experience_candidates']
           assert d['remote_branch_count']==len(d['rows'])
-          print(json.dumps({'remote_branch_count':d['remote_branch_count'],'classification_counts':d['classification_counts'],'experience_candidate_count':len(d['experience_candidates']),'artifact_digest':d['artifact_digest']},sort_keys=True))
+          assert d['canonical_main_sha']==os.environ['BASE_MAIN_SHA'],(d['canonical_main_sha'],os.environ['BASE_MAIN_SHA'])
+          print(json.dumps({'remote_branch_count':d['remote_branch_count'],'absorbed_count':len(d['absorbed_canonical_history_refs']),'experience_candidate_count':0,'classification_counts':d['classification_counts'],'artifact_digest':d['artifact_digest']},sort_keys=True))
           PY
 
-      - name: Prove causal deficit closure and autonomous next-step movement
+      - name: Prove memory frontier is fully clean after V2
         run: |
           python runtime/yado_unified_core_deep_self_audit_v1.py
           python - <<'PY'
@@ -85,21 +91,26 @@ jobs:
           from pathlib import Path
           d=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
           by={x['code']:x for x in d['findings']}
-          assert by['REMOTE_BRANCH_INVENTORY_MATCH']['status']=='PASS', by['REMOTE_BRANCH_INVENTORY_MATCH']
-          assert d['self_selected_next_step']!='REMOTE_BRANCH_INVENTORY_MATCH', d['self_selected_next_step']
-          assert d['summary']['blocking_findings']==0, d['summary']
-          assert d['canonical_mutation'] is False
-          assert d['repair_applied'] is False
-          print(json.dumps({'closed_deficit':'REMOTE_BRANCH_INVENTORY_MATCH','closed_status':by['REMOTE_BRANCH_INVENTORY_MATCH']['status'],'next_step':d['self_selected_next_step'],'priority':d['self_selected_priority'][:3]},sort_keys=True))
+          assert by['REMOTE_BRANCH_INVENTORY_MATCH']['status']=='PASS',by['REMOTE_BRANCH_INVENTORY_MATCH']
+          assert by['UNREGISTERED_EXPERIENCE_CANDIDATES']['status']=='PASS',by['UNREGISTERED_EXPERIENCE_CANDIDATES']
+          assert d['summary']['blocking_findings']==0,d['summary']
+          assert d['summary']['critical_failures']==0,d['summary']
+          assert d['summary']['high_failures']==0,d['summary']
+          assert d['summary']['partial_findings']==0,d['summary']
+          assert d['summary']['pass_findings']==21,d['summary']
+          assert d['self_selected_next_step'] is None,d['self_selected_next_step']
+          assert d['self_selected_priority']==[],d['self_selected_priority']
+          assert d['canonical_mutation'] is False and d['repair_applied'] is False
+          print('PASS_ALL_21_DEEP_AUDIT_FINDINGS',d['summary'])
           PY
           python runtime/yado_canonical_invariant_guard_v1.py
 
-      - name: Require source identity unchanged by data refresh
+      - name: Require active source identity unchanged
         run: |
           sha256sum canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json runtime/yado_unified_core_deep_self_audit_v1.py > "$RUNNER_TEMP/post-refresh-identity.sha256"
           diff -u "$RUNNER_TEMP/pre-refresh-identity.sha256" "$RUNNER_TEMP/post-refresh-identity.sha256"
           git diff --exit-code -- canonical/yado-main-head-g2.json canonical/yado-unified-core-v1.json runtime/yado_unified_core_deep_self_audit_v1.py
-          echo PASS_REFRESH_WITHOUT_FAKE_SOURCE_MUTATION
+          echo PASS_V2_RECLASSIFICATION_WITHOUT_ACTIVE_SOURCE_MUTATION
 
       - name: Full kernel audit
         run: |
@@ -108,15 +119,15 @@ jobs:
           python - <<'PY'
           import json
           d=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
-          assert d['status']=='PASS', d
-          assert not d['findings'], d['findings']
+          assert d['status']=='PASS',d
+          assert d['findings']==[],d['findings']
           assert d['canonical']['canonical_guard']=='PASS'
           assert d['canonical']['ledger_validation']=='PASS'
           assert d['canonical']['g3_genesis_performed'] is False
-          print('PASS_FULL_KERNEL_AUDIT')
+          print('PASS_FULL_KERNEL_AUDIT',d['counts'])
           PY
 
-      - name: Fresh Successor build and complete regression
+      - name: Fresh Successor and exact 170 regression
         run: |
           rm -rf "$RUNNER_TEMP/yado-successor-inventory-refresh-v2"
           python -m successor build --output "$RUNNER_TEMP/yado-successor-inventory-refresh-v2"
@@ -124,11 +135,11 @@ jobs:
           python - <<'PY'
           import json
           d=json.load(open('audits/yado-full-regression-v1-report.json'))
-          assert d['status']=='PASS', d
-          assert d['tests_run']==d['expected_tests'], d
-          assert not d['failures'] and not d['errors'] and not d['skipped']
-          assert d['source_unchanged'] is True
-          print('PASS_COMPLETE_REGRESSION',d['tests_run'],d['expected_tests'])
+          assert d['status']=='PASS',d
+          assert d['tests_run']==d['expected_tests']==170,d
+          assert not d['failures'] and not d['errors'] and not d['skipped'],d
+          assert d['source_unchanged'] is True,d
+          print('PASS_COMPLETE_REGRESSION_170_OF_170',d['identity_digest'])
           PY
 
       - name: Fail closed on concurrent main movement
@@ -138,7 +149,7 @@ jobs:
           echo "base=$BASE_MAIN_SHA remote=$REMOTE_MAIN_SHA feature=$FEATURE_SHA"
           test "$REMOTE_MAIN_SHA" = "$BASE_MAIN_SHA"
 
-      - name: Persist verified kernel-selected refresh into main
+      - name: Persist verified topology V2 correction into main
         run: |
           git config user.name "YADO Main Evolution"
           git config user.email "actions@users.noreply.github.com"
@@ -150,8 +161,8 @@ jobs:
             audits/yado-full-kernel-audit-v1-report.json \
             audits/yado-full-kernel-audit-v1-summary.md \
             audits/yado-full-regression-v1-report.json
-          git diff --cached --quiet && { echo NO_VERIFIED_REFRESH_DELTA; exit 1; }
-          git commit -m "YADO main evolution: close kernel-selected remote inventory deficit [skip ci]"
+          git diff --cached --quiet && { echo NO_VERIFIED_TOPOLOGY_V2_DELTA; exit 1; }
+          git commit -m "YADO main evolution: admit topology-aware remote inventory V2 [skip ci]"
           git push origin HEAD:main
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
