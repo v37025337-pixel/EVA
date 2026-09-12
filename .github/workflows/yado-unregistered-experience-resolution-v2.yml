@@ -5,74 +5,148 @@ on:
     branches: [yado-unregistered-experience-resolution-v2]
     paths:
       - '.github/workflows/yado-unregistered-experience-resolution-v2.yml'
+      - 'runtime/yado_g2_remote_branch_inventory_reconcile_v2.py'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: yado-unregistered-experience-resolution-v2
+  cancel-in-progress: false
 
 jobs:
-  topology-probe:
+  resolve-prove-and-admit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           fetch-depth: 0
 
-      - name: Fetch all physical refs
-        run: git fetch origin '+refs/heads/*:refs/remotes/origin/*'
-
-      - name: Prove canonical kernel selected this deficit
+      - name: Pin canonical main and fetch all physical refs
         run: |
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*'
+          echo "BASE_MAIN_SHA=$(git rev-parse origin/main)" >> "$GITHUB_ENV"
+          echo "FEATURE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Prepare runtime
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Prove persisted canonical kernel decision
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
           python - <<'PY'
           import json
           from pathlib import Path
           d=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
-          assert d['self_selected_next_step']=='UNREGISTERED_EXPERIENCE_CANDIDATES', d['self_selected_next_step']
           f={x['code']:x for x in d['findings']}['UNREGISTERED_EXPERIENCE_CANDIDATES']
-          assert f['status']=='PARTIAL' and f['evidence']['candidate_count']>0, f
-          print(json.dumps({'canonical_selected_next_step':d['self_selected_next_step'],'canonical_candidate_count':f['evidence']['candidate_count']},sort_keys=True))
+          assert d['self_selected_next_step']=='UNREGISTERED_EXPERIENCE_CANDIDATES', d['self_selected_next_step']
+          assert f['status']=='PARTIAL' and f['evidence']['candidate_count']==42, f
+          print(json.dumps({'selected_next_step':d['self_selected_next_step'],'candidate_count':f['evidence']['candidate_count']},sort_keys=True))
           PY
 
-      - name: Resolve canonical candidate topology without semantic promotion
+      - name: Reclassify live inventory by canonical Git ancestry
         run: |
+          python -m py_compile runtime/yado_g2_remote_branch_inventory_reconcile_v2.py
+          python runtime/yado_g2_remote_branch_inventory_reconcile_v2.py
           python - <<'PY'
-          import hashlib,json,subprocess
+          import json
           from pathlib import Path
-          root=Path('.')
-          inv=json.loads((root/'canonical/yado-remote-branch-inventory-v1.json').read_text())
-          rows={x['branch']:x for x in inv['rows']}
-          candidates=list(inv['experience_candidates'])
-          main=subprocess.check_output(['git','rev-parse','origin/main'],text=True).strip()
-          def ok(*args): return subprocess.run(['git',*args],capture_output=True,text=True).returncode==0
-          def out(*args): return subprocess.check_output(['git',*args],text=True).strip()
-          rec=[]
-          for b in candidates:
-              tip=rows[b]['head_sha']
-              tip_in_main=ok('merge-base','--is-ancestor',tip,main)
-              main_in_tip=ok('merge-base','--is-ancestor',main,tip)
-              merge_base=out('merge-base',main,tip)
-              exclusive=int(out('rev-list','--count',f'{main}..{tip}') or '0')
-              if tip_in_main:
-                  cls='ABSORBED_IN_CANONICAL_MAIN_HISTORY'
-              elif main_in_tip:
-                  cls='BRANCH_EXCLUSIVE_DESCENDANT_REQUIRES_FRESH_REVALIDATION'
-              else:
-                  cls='DIVERGED_BRANCH_EXCLUSIVE_REQUIRES_FRESH_REVALIDATION'
-              rec.append({'branch':b,'tip_sha':tip,'main_sha':main,'merge_base':merge_base,'tip_is_ancestor_of_main':tip_in_main,'main_is_ancestor_of_tip':main_in_tip,'branch_exclusive_commit_count':exclusive,'classification':cls})
-          counts={}
-          for r in rec: counts[r['classification']]=counts.get(r['classification'],0)+1
-          art={'schema':'yado.unregistered_experience_resolution_probe.v2','source_inventory_digest':inv['artifact_digest'],'candidate_count':len(candidates),'classification_counts':dict(sorted(counts.items())),'records':rec,'policy':{'branch_name_as_evidence':False,'semantic_promotion':False,'code_activation':False,'absorbed_tip_rule':'TIP_IS_ANCESTOR_OF_CURRENT_MAIN','exclusive_tip_rule':'REQUIRES_FRESH_REVALIDATION_BEFORE_ANY_ADMISSION'},'claim_boundary':'This probe resolves Git topology only. It neither validates historical branch claims nor admits code/capabilities/experience.'}
-          art['artifact_digest']=hashlib.sha256(json.dumps(art,sort_keys=True,separators=(',',':')).encode()).hexdigest()
-          p=root/'canonical/yado-unregistered-experience-resolution-probe-v2.json'
-          p.write_text(json.dumps(art,indent=2,sort_keys=True)+'\n')
-          assert len(rec)==len(candidates)>0
-          assert sum(counts.values())==len(candidates)
-          print('YADO_RESOLUTION_SUMMARY='+json.dumps({'candidate_count':len(candidates),'classification_counts':counts,'artifact_digest':art['artifact_digest']},sort_keys=True))
-          print('YADO_EXCLUSIVE_BRANCHES='+json.dumps([r['branch'] for r in rec if r['branch_exclusive_commit_count']>0],sort_keys=True))
+          d=json.loads(Path('canonical/yado-remote-branch-inventory-v1.json').read_text())
+          assert d['schema']=='yado.remote_branch_inventory.v2', d.get('schema')
+          assert d['status']=='PASS_COMPLETE_REMOTE_REF_CLASSIFICATION', d
+          assert d['coverage_complete'] is True, d
+          assert not d['unclassified_refs'], d
+          assert len(d['experience_candidates'])==0, d['experience_candidates']
+          assert len(d['absorbed_canonical_history_refs'])>=42, len(d['absorbed_canonical_history_refs'])
+          assert d['policy']['semantic_promotion_by_ancestry'] is False
+          print(json.dumps({'remote_branch_count':d['remote_branch_count'],'absorbed_count':len(d['absorbed_canonical_history_refs']),'experience_candidate_count':len(d['experience_candidates']),'classification_counts':d['classification_counts'],'artifact_digest':d['artifact_digest']},sort_keys=True))
           PY
+
+      - name: Prove selected deficit is closed and next step moves
+        run: |
+          python runtime/yado_unified_core_deep_self_audit_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('runtime/yado_unified_core_deep_self_audit_v1_receipt.json').read_text())
+          by={x['code']:x for x in d['findings']}
+          assert by['REMOTE_BRANCH_INVENTORY_MATCH']['status']=='PASS', by['REMOTE_BRANCH_INVENTORY_MATCH']
+          assert by['UNREGISTERED_EXPERIENCE_CANDIDATES']['status']=='PASS', by['UNREGISTERED_EXPERIENCE_CANDIDATES']
+          assert d['self_selected_next_step']!='UNREGISTERED_EXPERIENCE_CANDIDATES', d['self_selected_next_step']
+          assert d['summary']['blocking_findings']==0, d['summary']
+          assert d['canonical_mutation'] is False
+          assert d['repair_applied'] is False
+          print(json.dumps({'closed_deficit':'UNREGISTERED_EXPERIENCE_CANDIDATES','inventory_status':by['REMOTE_BRANCH_INVENTORY_MATCH']['status'],'candidate_status':by['UNREGISTERED_EXPERIENCE_CANDIDATES']['status'],'next_step':d['self_selected_next_step'],'priority':d['self_selected_priority'][:3]},sort_keys=True))
+          PY
+          python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Full kernel audit
+        run: |
+          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json audits/yado-full-regression-v1-report.log
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          d=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert d['status']=='PASS', d
+          assert not d['findings'], d['findings']
+          assert d['canonical']['canonical_guard']=='PASS'
+          assert d['canonical']['ledger_validation']=='PASS'
+          assert d['canonical']['g3_genesis_performed'] is False
+          print('PASS_FULL_KERNEL_AUDIT')
+          PY
+
+      - name: Fresh Successor build and complete regression
+        run: |
+          rm -rf "$RUNNER_TEMP/yado-successor-experience-resolution-v2"
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-experience-resolution-v2"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-experience-resolution-v2/manifest.json"
+          python - <<'PY'
+          import json
+          d=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert d['status']=='PASS', d
+          assert d['tests_run']==d['expected_tests'], d
+          assert not d['failures'] and not d['errors'] and not d['skipped']
+          assert d['source_unchanged'] is True
+          print('PASS_COMPLETE_REGRESSION',d['tests_run'],d['expected_tests'])
+          PY
+
+      - name: Fail closed on concurrent main movement
+        run: |
+          git fetch origin main
+          REMOTE_MAIN_SHA=$(git rev-parse origin/main)
+          echo "base=$BASE_MAIN_SHA remote=$REMOTE_MAIN_SHA feature=$FEATURE_SHA"
+          test "$REMOTE_MAIN_SHA" = "$BASE_MAIN_SHA"
+
+      - name: Persist verified self-selected deficit closure into main
+        run: |
+          git config user.name "YADO Main Evolution"
+          git config user.email "actions@users.noreply.github.com"
+          git add \
+            canonical/yado-remote-branch-inventory-v1.json \
+            runtime/yado_unified_core_deep_self_audit_v1_receipt.json \
+            architecture/evolution-ledger.json \
+            audits/yado-full-kernel-audit-v1-report.json \
+            audits/yado-full-kernel-audit-v1-summary.md \
+            audits/yado-full-regression-v1-report.json
+          git diff --cached --quiet && { echo NO_VERIFIED_RESOLUTION_DELTA; exit 1; }
+          git commit -m "YADO main evolution: close kernel-selected unregistered experience deficit [skip ci]"
+          git push origin HEAD:main
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
           name: yado-unregistered-experience-resolution-v2-${{ github.run_id }}
-          path: canonical/yado-unregistered-experience-resolution-probe-v2.json
+          path: |
+            canonical/yado-remote-branch-inventory-v1.json
+            runtime/yado_unified_core_deep_self_audit_v1_receipt.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
