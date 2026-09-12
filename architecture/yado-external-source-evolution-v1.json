@@ -1,0 +1,51 @@
+{
+  "schema": "yado.external_source_evolution_contract.v1",
+  "status": "SHADOW_ONLY_UNTIL_EVIDENCE",
+  "base_main": "b27cfcfdc7c34e0fb6973fb5ee1827f8f59cc4d9",
+  "objective": "Test whether YADO can use independent external problem specifications to select and materialize a changed Python source candidate, freeze its identity, and improve on sealed external cases without using sealed expected values for mutation selection.",
+  "external_source": {
+    "repository": "exercism/problem-specifications",
+    "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+    "exercises": [
+      "leap",
+      "grains",
+      "difference-of-squares"
+    ]
+  },
+  "evaluation": {
+    "training_cases": 18,
+    "sealed_cases": 7,
+    "sealed_excluded_from_selection": true,
+    "candidate_source_frozen_before_sealed_evaluation": true,
+    "minimum_sealed_score": 0.85,
+    "minimum_absolute_gain_over_seed": 0.50
+  },
+  "mutation": {
+    "level": "PYTHON_SOURCE",
+    "mode": "bounded_program_synthesis",
+    "canonical_mutation": false,
+    "grammar_is_externally_authored": true,
+    "generated_candidate_path": "candidates/g2-self-evolution/yado_external_synth_candidate_v1.py"
+  },
+  "system_gates": [
+    "candidate compiles",
+    "training score is 1.0",
+    "sealed score >= 0.85",
+    "sealed gain >= 0.50",
+    "candidate source differs from seed",
+    "full kernel audit PASS",
+    "fresh Successor identity builds",
+    "complete regression PASS"
+  ],
+  "admission": {
+    "automatic_main_admission": false,
+    "requires_explicit_followup_admission": true,
+    "reason": "The first run is an evidence-producing shadow experiment. Passing it does not by itself make the synthesized solver a canonical cognitive mechanism."
+  },
+  "claim_boundary": {
+    "general_intelligence_claimed": false,
+    "consciousness_claimed": false,
+    "unbounded_self_rewrite_claimed": false,
+    "interpretation": "A PASS demonstrates bounded source-level adaptation on independent external cases under a predefined synthesis grammar, not unrestricted autonomous software evolution."
+  }
+}
