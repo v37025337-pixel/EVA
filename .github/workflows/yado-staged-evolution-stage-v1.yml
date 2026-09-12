@@ -1,0 +1,153 @@
+name: YADO Staged Evolution Stage V1
+
+on:
+  workflow_call:
+    inputs:
+      stage:
+        required: true
+        type: string
+      parent_artifact:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile and self-test evolution runtime
+        run: |
+          python -m py_compile runtime/yado_staged_kernel_evolution_v1.py runtime/yado_blind_real_benchmark_exam_v1.py
+          python runtime/yado_staged_kernel_evolution_v1.py self-test
+      - name: Prepare disjoint fresh benchmark shard
+        run: |
+          OUT="artifacts/evolution/${{ inputs.stage }}"
+          rm -rf "$OUT"
+          python runtime/yado_staged_kernel_evolution_v1.py prepare --stage "${{ inputs.stage }}" --out-dir "$OUT"
+          test -s "$OUT/challenges.jsonl"
+          test -s "$OUT/sealed_ground_truth.jsonl"
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('artifacts/evolution/${{ inputs.stage }}/prepare_manifest.json')
+          x=json.loads(p.read_text())
+          assert x['overlap_with_prior_exams_or_stages']=={'gsm8k':0,'humaneval':0,'openbookqa':0}
+          assert x['challenge_digest'] and x['sealed_ground_truth_digest']
+          PY
+      - name: Upload questions without answers
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-evolution-challenge-${{ inputs.stage }}-v1
+          path: |
+            artifacts/evolution/${{ inputs.stage }}/challenges.jsonl
+            artifacts/evolution/${{ inputs.stage }}/openbook_facts.txt
+            artifacts/evolution/${{ inputs.stage }}/prepare_manifest.json
+          if-no-files-found: error
+      - name: Upload sealed ground truth separately
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-evolution-sealed-${{ inputs.stage }}-v1
+          path: artifacts/evolution/${{ inputs.stage }}/sealed_ground_truth.jsonl
+          if-no-files-found: error
+
+  respond:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download current questions only
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-evolution-challenge-${{ inputs.stage }}-v1
+          path: artifacts/current
+      - name: Download verified parent policy when present
+        if: ${{ inputs.parent_artifact != 'NONE' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.parent_artifact }}
+          path: artifacts/parent
+      - name: Assert current ground truth is absent and fix parent-child answers
+        run: |
+          test ! -e artifacts/current/sealed_ground_truth.jsonl
+          ARGS=""
+          if [ -f artifacts/parent/policy_out.json ]; then ARGS="--policy-in artifacts/parent/policy_out.json"; fi
+          python runtime/yado_staged_kernel_evolution_v1.py respond \
+            --stage "${{ inputs.stage }}" \
+            --challenges artifacts/current/challenges.jsonl \
+            --facts artifacts/current/openbook_facts.txt \
+            --out-dir artifacts/responses $ARGS
+          python - <<'PY'
+          import json, pathlib
+          r=json.loads(pathlib.Path('artifacts/responses/mutation_receipt.json').read_text())
+          assert r['ground_truth_accessed'] is False
+          assert r['external_llm_used'] is False
+          assert r['parent_response_digest'] and r['child_response_digest']
+          print('PARENT_RESPONSE_DIGEST',r['parent_response_digest'])
+          print('CHILD_RESPONSE_DIGEST',r['child_response_digest'])
+          PY
+      - name: Upload immutable parent-child response pair
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-evolution-responses-${{ inputs.stage }}-v1
+          path: artifacts/responses
+          if-no-files-found: error
+
+  verify:
+    needs: [prepare, respond]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download current questions
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-evolution-challenge-${{ inputs.stage }}-v1
+          path: artifacts/current
+      - name: Download already-fixed parent-child responses
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-evolution-responses-${{ inputs.stage }}-v1
+          path: artifacts/responses
+      - name: Reveal current sealed truth only now
+        uses: actions/download-artifact@v4
+        with:
+          name: yado-evolution-sealed-${{ inputs.stage }}-v1
+          path: artifacts/current
+      - name: Measure child against its parent and select next parent
+        run: |
+          python runtime/yado_staged_kernel_evolution_v1.py verify \
+            --stage "${{ inputs.stage }}" \
+            --challenges artifacts/current/challenges.jsonl \
+            --sealed artifacts/current/sealed_ground_truth.jsonl \
+            --response-dir artifacts/responses \
+            --out-dir artifacts/verdict
+          python - <<'PY'
+          import json, pathlib
+          v=json.loads(pathlib.Path('artifacts/verdict/stage_verdict.json').read_text())
+          assert v['status']=='PASS_MEASURED_STAGED_EVOLUTION_STAGE_V1'
+          assert v['decision'] in ('PROMOTE_SHADOW','WITHHOLD')
+          print(json.dumps(v['verdict'],indent=2))
+          PY
+      - name: Upload verified next-parent state
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-evolution-stage-${{ inputs.stage }}-v1
+          path: |
+            artifacts/verdict/policy_out.json
+            artifacts/verdict/stage_verdict.json
+            artifacts/verdict/parent_verification.json
+            artifacts/verdict/child_verification.json
+          if-no-files-found: error
