@@ -1,80 +1,84 @@
 # YADO Full Kernel Audit V1
 
 - Status: **PASS**
-- Commit: `3b0986d36bd4c234a65deaaa6e3920ec43eba69f`
+- Commit: `c47e40495f561c24ed99ca584152fb0f77e0d8f7`
 - Generation: `G2_CANDIDATE_TRCG_V1`; G3 started: `False`
-- Frontier: `KERNEL_G2_RAW_REPRESENTATION_V4_ROBUSTNESS_SELF_EVOLUTION_V2`
-- Runtime Python: 604; workflows: 72; JSON artifacts: 1126; ledger events: 303
+- Frontier: `KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1`
+- Runtime Python: 606; workflows: 73; JSON artifacts: 1128; ledger events: 306
 - Canonical guard: PASS; ledger: PASS
 
 ## Findings
 - No audit findings.
 
 ## Branches
-- `deployment-vercel-runtime-v1`: active-only 326, branch-only 0, drift paths 0, branch-only paths 0.
-- `main`: active-only 5, branch-only 0, drift paths 0, branch-only paths 0.
-- `pre-autonomous-learning-admission-backup-20260911`: active-only 242, branch-only 0, drift paths 0, branch-only paths 0.
-- `pre-history-closure-backup-20260910`: active-only 813, branch-only 0, drift paths 0, branch-only paths 0.
-- `pre-main-evolution-backup-20260911`: active-only 325, branch-only 0, drift paths 0, branch-only paths 0.
-- `tmp-history-closure-20260910`: active-only 813, branch-only 0, drift paths 0, branch-only paths 0.
-- `tmp-history-closure-20260910b`: active-only 813, branch-only 0, drift paths 0, branch-only paths 0.
-- `tmp-history-closure-20260910c`: active-only 813, branch-only 0, drift paths 0, branch-only paths 0.
-- `tmp-history-closure-20260910d`: active-only 813, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-all-experience-cognitive-genesis-v2`: active-only 174, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-all-experience-tri-organ-genesis-v1`: active-only 843, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-architecture-shadow-pre-rebind-20260907`: active-only 763, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-autonomous-evolution-loop-v3`: active-only 213, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-autonomous-external-library-discovery-v5`: active-only 27, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-autonomous-grammar-extension-v3`: active-only 34, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-autonomous-meta-grammar-evolution-v4`: active-only 31, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-autonomous-meta-source-evolution-v2`: active-only 37, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-autonomous-open-catalog-discovery-v6`: active-only 21, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-blind-real-benchmark-exam-v1`: active-only 70, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-blind-real-benchmark-v1`: active-only 72, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-bounded-autonomous-learning-v1`: active-only 231, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-cognitive-10x10-evolution-v1`: active-only 56, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-cognitive-10x10-policy-admission-v1`: active-only 45, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-cognitive-tri-organ-admission-v3`: active-only 210, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-cognitive-tri-organ-evolution-v2`: active-only 212, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-context-compaction-v1`: active-only 342, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-cross-disciplinary-internet-learning-v1`: active-only 92, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-digital-mind-bootstrap-v1-20260912`: active-only 99, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-evolution-loop-v1`: active-only 320, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-experience-candidate-admission-v1`: active-only 259, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-experience-conditioned-cognitive-evolution-v4`: active-only 195, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-experience-semantic-classification-v1`: active-only 244, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-external-data-transfer-v1`: active-only 180, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-external-source-evolution-v1`: active-only 40, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-g2-causal-external-learning-binding-v1`: active-only 8, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-g2-causal-library-kernel-v1`: active-only 721, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-historical-evidence-recovery-v1`: active-only 254, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-integration-verify-20260910`: active-only 327, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-kernel-task-v37-repair`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-main-deep-audit-admission-v1`: active-only 18, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-main-experience-refresh-v1`: active-only 934, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-main-selective-admission-v1`: active-only 829, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-multidomain-curriculum-v1`: active-only 76, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-native-grammar-extension-v1`: active-only 238, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-native-self-rewrite-20260910`: active-only 306, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-public-dns-research-v1`: active-only 235, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-python-study-v1`: active-only 172, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-candidate`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-consciousness-ab`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-consciousness-audit`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-digital-consciousness-v1`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-v30-runtime`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-v33-evolution`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-v35-training`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-v36-digital-consciousness`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-rc8-v37-digital-consciousness`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-real-connect-v1`: active-only 322, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-remote-inventory-reconcile-v1`: active-only 8, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-remote-inventory-refresh-v2`: active-only 6, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-staged-kernel-evolution-v1`: active-only 52, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-thinking-boundary-adaptive-repair-v1`: active-only 87, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-thinking-native-source-arm-v1`: active-only 80, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-unified-successor-architecture-20260912`: active-only 103, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-unregistered-experience-resolution-v2`: active-only 0, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-v28-runtime`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-v29-cognitive`: active-only 978, branch-only 0, drift paths 0, branch-only paths 0.
-- `yado-v7-meta-admission-shadow-v1`: active-only 914, branch-only 0, drift paths 0, branch-only paths 0.
+- `deployment-vercel-runtime-v1`: active-only 360, branch-only 0, drift paths 0, branch-only paths 0.
+- `main`: active-only 0, branch-only 0, drift paths 0, branch-only paths 0.
+- `pre-autonomous-learning-admission-backup-20260911`: active-only 276, branch-only 0, drift paths 0, branch-only paths 0.
+- `pre-history-closure-backup-20260910`: active-only 847, branch-only 0, drift paths 0, branch-only paths 0.
+- `pre-main-evolution-backup-20260911`: active-only 359, branch-only 0, drift paths 0, branch-only paths 0.
+- `tmp-history-closure-20260910`: active-only 847, branch-only 0, drift paths 0, branch-only paths 0.
+- `tmp-history-closure-20260910b`: active-only 847, branch-only 0, drift paths 0, branch-only paths 0.
+- `tmp-history-closure-20260910c`: active-only 847, branch-only 0, drift paths 0, branch-only paths 0.
+- `tmp-history-closure-20260910d`: active-only 847, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-all-experience-cognitive-genesis-v2`: active-only 208, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-all-experience-tri-organ-genesis-v1`: active-only 877, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-architecture-shadow-pre-rebind-20260907`: active-only 797, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-autonomous-evolution-loop-v3`: active-only 247, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-autonomous-external-library-discovery-v5`: active-only 61, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-autonomous-grammar-extension-v3`: active-only 68, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-autonomous-learning-history-closure-v1`: active-only 1, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-autonomous-meta-grammar-evolution-v4`: active-only 65, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-autonomous-meta-source-evolution-v2`: active-only 71, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-autonomous-open-catalog-discovery-v6`: active-only 55, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-blind-real-benchmark-exam-v1`: active-only 104, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-blind-real-benchmark-v1`: active-only 106, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-bounded-autonomous-learning-v1`: active-only 264, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-causal-ablation-cycle-v1`: active-only 7, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-cognitive-10x10-evolution-v1`: active-only 90, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-cognitive-10x10-policy-admission-v1`: active-only 79, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-cognitive-tri-organ-admission-v3`: active-only 244, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-cognitive-tri-organ-evolution-v2`: active-only 246, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-context-compaction-v1`: active-only 376, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-cross-disciplinary-internet-learning-v1`: active-only 126, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-digital-mind-bootstrap-v1-20260912`: active-only 133, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-endogenous-goal-genesis-v1`: active-only 31, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-evolution-loop-v1`: active-only 354, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-experience-candidate-admission-v1`: active-only 293, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-experience-conditioned-cognitive-evolution-v4`: active-only 229, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-experience-semantic-classification-v1`: active-only 278, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-external-data-transfer-v1`: active-only 214, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-external-source-evolution-v1`: active-only 74, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-g2-causal-external-learning-binding-v1`: active-only 42, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-g2-causal-library-kernel-v1`: active-only 755, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-historical-evidence-recovery-v1`: active-only 288, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-integration-verify-20260910`: active-only 361, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-kernel-task-v37-repair`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-main-deep-audit-admission-v1`: active-only 52, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-main-experience-refresh-v1`: active-only 968, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-main-selective-admission-v1`: active-only 863, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-multidomain-curriculum-v1`: active-only 110, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-native-grammar-extension-v1`: active-only 272, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-native-self-rewrite-20260910`: active-only 340, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-public-dns-research-v1`: active-only 269, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-python-study-v1`: active-only 206, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-candidate`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-consciousness-ab`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-consciousness-audit`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-digital-consciousness-v1`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-v30-runtime`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-v33-evolution`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-v35-training`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-v36-digital-consciousness`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-rc8-v37-digital-consciousness`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-real-connect-v1`: active-only 356, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-remote-inventory-reconcile-v1`: active-only 42, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-remote-inventory-refresh-v2`: active-only 0, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-staged-kernel-evolution-v1`: active-only 86, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-thinking-boundary-adaptive-repair-v1`: active-only 121, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-thinking-native-source-arm-v1`: active-only 114, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-unified-successor-architecture-20260912`: active-only 137, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-unregistered-experience-resolution-v2`: active-only 34, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-v28-runtime`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-v29-cognitive`: active-only 1012, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-v6-clean-admission-v1`: active-only 6, branch-only 0, drift paths 0, branch-only paths 0.
+- `yado-v7-meta-admission-shadow-v1`: active-only 948, branch-only 0, drift paths 0, branch-only paths 0.
