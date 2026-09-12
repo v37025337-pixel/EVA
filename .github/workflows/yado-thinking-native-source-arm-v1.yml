@@ -1,0 +1,121 @@
+name: YADO Native THINKING Source Arm V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - yado-thinking-native-source-arm-v1
+    paths:
+      - 'runtime/yado_thinking_native_source_materializer_v1.py'
+      - 'runtime/yado_thinking_boundary_adaptive_repair_v1.py'
+      - 'runtime/yado_cross_disciplinary_internet_learning_v1.py'
+      - 'architecture/yado-thinking-native-source-arm-v1.json'
+      - 'architecture/yado-thinking-boundary-adaptive-repair-v1.json'
+      - 'architecture/yado-cross-disciplinary-internet-learning-v1.json'
+      - 'architecture/developmental-self-model-overlay.json'
+      - '.github/workflows/yado-thinking-native-source-arm-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  native-source-arm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout kernel
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Compile source-arm runtimes
+        run: |
+          python -m py_compile runtime/yado_cross_disciplinary_internet_learning_v1.py
+          python -m py_compile runtime/yado_thinking_boundary_adaptive_repair_v1.py
+          python -m py_compile runtime/yado_thinking_native_source_materializer_v1.py
+
+      - name: Run native materializer self-test
+        run: python runtime/yado_thinking_native_source_materializer_v1.py --self-test
+
+      - name: Acquire fresh real-internet experience
+        run: |
+          python runtime/yado_cross_disciplinary_internet_learning_v1.py \
+            --config architecture/yado-cross-disciplinary-internet-learning-v1.json \
+            --self-model architecture/developmental-self-model-overlay.json \
+            --out artifacts/yado-native-arm-internet-experience-v1.json
+
+      - name: Let YADO select THINKING repair policy from measured errors
+        run: |
+          python runtime/yado_thinking_boundary_adaptive_repair_v1.py \
+            --self-model architecture/developmental-self-model-overlay.json \
+            --experience artifacts/yado-native-arm-internet-experience-v1.json \
+            --out artifacts/yado-native-arm-adaptive-repair-v1.json \
+            --dev-seed 20260912 \
+            --ood-seed 20260913
+
+      - name: Materialize selected policy into new native Python source
+        run: |
+          python runtime/yado_thinking_native_source_materializer_v1.py \
+            --repair-evidence artifacts/yado-native-arm-adaptive-repair-v1.json \
+            --candidate-out artifacts/generated/yado_thinking_boundary_policy_candidate_v1.py \
+            --out artifacts/yado-thinking-native-source-materializer-v1.json \
+            --fresh-seed 20260914 \
+            --per-family 24
+
+      - name: Verify native source candidate and fresh execution gates
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(Path('artifacts/yado-thinking-native-source-materializer-v1.json').read_text())
+          repair = json.loads(Path('artifacts/yado-native-arm-adaptive-repair-v1.json').read_text())
+          candidate = Path('artifacts/generated/yado_thinking_boundary_policy_candidate_v1.py')
+
+          assert repair['status'] == 'PASS_SHADOW_THINKING_BOUNDARY_ADAPTIVE_REPAIR_V1'
+          assert receipt['status'] == 'PASS_SHADOW_NATIVE_THINKING_SOURCE_MATERIALIZATION_V1'
+          assert receipt['source_origin'] == 'YADO_BOUNDED_NATIVE_AST_COMPOSITION'
+          assert receipt['external_llm_candidate_used'] is False
+          assert receipt['canonical_direct_write'] is False
+          assert receipt['adaptive_repair_evidence_digest'] == repair['evidence_digest']
+
+          native = receipt['native_source']
+          assert native['native_source_candidate_count'] == 1
+          assert native['changed_native_source_candidate_count'] == 1
+          assert native['candidate_source_sha256']
+          assert native['compile_status'] == 'PASS'
+          assert native['import_status'] == 'PASS'
+          assert native['ast_safety']['safe'] is True
+          assert candidate.is_file()
+          assert hashlib.sha256(candidate.read_bytes()).hexdigest() == native['candidate_source_sha256']
+
+          fresh = receipt['fresh_execution']
+          assert fresh['task_count'] == 120
+          assert fresh['materialized_candidate']['score'] >= 0.85
+          assert fresh['absolute_gain'] >= 0.20
+          assert fresh['no_critical_regression'] is True
+          assert fresh['critical_family_floor_pass'] is True
+          assert receipt['claim_boundary']['native_source_materialization_proven'] is True
+          assert receipt['claim_boundary']['open_ended_source_invention_proven'] is False
+
+          print('PASS_NATIVE_THINKING_SOURCE_ARM_V1')
+          PY
+
+      - name: Compile emitted candidate independently
+        run: python -m py_compile artifacts/generated/yado_thinking_boundary_policy_candidate_v1.py
+
+      - name: Upload native source arm evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: yado-thinking-native-source-arm-v1
+          path: |
+            artifacts/yado-native-arm-internet-experience-v1.json
+            artifacts/yado-native-arm-adaptive-repair-v1.json
+            artifacts/yado-thinking-native-source-materializer-v1.json
+            artifacts/generated/yado_thinking_boundary_policy_candidate_v1.py
+          if-no-files-found: error
