@@ -1,14 +1,17 @@
 """Bounded second-cycle source grammar derived from frozen V2 deficits.
 
-The baseline was frozen before this module existed.  This extension deliberately
-covers only families that are identifiable from the supplied TRAINING examples:
-bitwise integer programs and small one-variable integer polynomials.  It does not
-add a conditional/compare grammar for the frozen ``not_gate`` deficit because that
-training split contains no positive example and therefore does not identify the
-hidden x == 0 branch.
+The original second-cycle baseline was frozen before this module existed.  The
+first V2 candidate closed identifiable bitwise/polynomial deficits but was then
+WITHHOLD on fresh transfer because it could not compose a bitwise expression with
+an independently selected relational predicate.  This revision adds that generic
+relational closure.
+
+The grammar still does NOT add a conditional/if-expression family for the frozen
+``not_gate`` deficit: its training split contains no positive example, so the
+hidden x == 0 branch is not identifiable from supplied training behavior.
 
 This remains host-authored bounded grammar.  YADO selects a concrete program from
-training behavior only; validation/holdout labels are never accepted here.
+TRAINING behavior only; validation/holdout labels are never accepted here.
 """
 from __future__ import annotations
 
@@ -94,19 +97,21 @@ def _target_matches(values: tuple[Any, ...] | None, rows: list[dict[str, Any]]) 
     )
 
 
-def _bitwise_templates(keys: list[str]) -> list[dict[str, str]]:
+def _integer_bitwise_bases(keys: list[str]) -> list[dict[str, str]]:
+    """Generate bounded integer-valued bitwise building blocks without target access."""
     q = {key: f"inputs[{key!r}]" for key in keys}
     out: list[dict[str, str]] = []
     for key in keys:
         x = q[key]
         out.extend((
-            {"template": "CLEAR_LSB", "expression": f"({x} & ({x} - 1))"},
-            {"template": "LOW_BIT", "expression": f"({x} & 1)"},
-            {"template": "OR_ONE", "expression": f"({x} | 1)"},
-            {"template": "XOR_ONE", "expression": f"({x} ^ 1)"},
-            {"template": "SHIFT_LEFT_ONE", "expression": f"({x} << 1)"},
-            {"template": "SHIFT_RIGHT_ONE", "expression": f"({x} >> 1)"},
-            {"template": "INVERT", "expression": f"(~{x})"},
+            {"template": f"CLEAR_LSB:{key}", "expression": f"({x} & ({x} - 1))"},
+            {"template": f"LOW_BIT:{key}", "expression": f"({x} & 1)"},
+            {"template": f"OR_ONE:{key}", "expression": f"({x} | 1)"},
+            {"template": f"XOR_ONE:{key}", "expression": f"({x} ^ 1)"},
+            {"template": f"SHIFT_LEFT_ONE:{key}", "expression": f"({x} << 1)"},
+            {"template": f"SHIFT_RIGHT_ONE:{key}", "expression": f"({x} >> 1)"},
+            {"template": f"SHIFT_CLEAR_LOW:{key}", "expression": f"(({x} >> 1) << 1)"},
+            {"template": f"INVERT:{key}", "expression": f"(~{x})"},
         ))
     for left_key in keys:
         for right_key in keys:
@@ -124,12 +129,41 @@ def _bitwise_templates(keys: list[str]) -> list[dict[str, str]]:
                 {"template": f"FLIP_BIT:{prefix}", "expression": f"({left} ^ (1 << {right}))"},
                 {"template": f"CLEAR_BIT:{prefix}", "expression": f"({left} & ~(1 << {right}))"},
                 {"template": f"EXTRACT_BIT:{prefix}", "expression": f"(({left} >> {right}) & 1)"},
-                {"template": f"BIT_IS_ONE:{prefix}", "expression": f"((({left} >> {right}) & 1) == 1)"},
-                {"template": f"BIT_IS_ZERO:{prefix}", "expression": f"((({left} >> {right}) & 1) == 0)"},
             ))
-    # Stable, complexity-biased order independent of target/holdout behavior.
-    out.sort(key=lambda row: (len(row["expression"]), row["template"], row["expression"]))
-    return out
+    unique = {(row["template"], row["expression"]): row for row in out}
+    return sorted(unique.values(), key=lambda row: (len(row["expression"]), row["template"], row["expression"]))
+
+
+def _bitwise_templates(keys: list[str]) -> list[dict[str, str]]:
+    """Close integer bitwise expressions under a small generic relation family."""
+    q = {key: f"inputs[{key!r}]" for key in keys}
+    bases = _integer_bitwise_bases(keys)
+    out = list(bases)
+
+    targets: list[tuple[str, str]] = [
+        ("CONST_-1", "-1"),
+        ("CONST_0", "0"),
+        ("CONST_1", "1"),
+    ]
+    targets.extend((f"INPUT_{key}", q[key]) for key in keys)
+    operators = (
+        ("EQ", "=="),
+        ("NE", "!="),
+        ("LT", "<"),
+        ("LE", "<="),
+        ("GT", ">"),
+        ("GE", ">="),
+    )
+    for base in bases:
+        for target_name, target in targets:
+            for operator_name, operator in operators:
+                out.append({
+                    "template": f"REL_{operator_name}:{base['template']}:{target_name}",
+                    "expression": f"({base['expression']} {operator} {target})",
+                })
+
+    unique = {(row["template"], row["expression"]): row for row in out}
+    return sorted(unique.values(), key=lambda row: (len(row["expression"]), row["template"], row["expression"]))
 
 
 def _select_bitwise(rows: list[dict[str, Any]], keys: list[str]) -> dict[str, Any] | None:
@@ -139,7 +173,7 @@ def _select_bitwise(rows: list[dict[str, Any]], keys: list[str]) -> dict[str, An
         behavior = _expression_behavior(template["expression"], rows)
         if _target_matches(behavior, rows):
             return {
-                "profile": "BITWISE_TEMPLATE_V2",
+                "profile": "BITWISE_RELATIONAL_CLOSURE_V2",
                 "template": template["template"],
                 "expression": template["expression"],
                 "search_states": attempts,
@@ -213,7 +247,7 @@ def select_expression_v2(training: Iterable[dict[str, Any]]) -> dict[str, Any]:
     attempts: list[dict[str, Any]] = []
 
     bitwise = _select_bitwise(rows, keys)
-    attempts.append({"profile": "BITWISE_TEMPLATE_V2", "matched": bitwise is not None})
+    attempts.append({"profile": "BITWISE_RELATIONAL_CLOSURE_V2", "matched": bitwise is not None})
     if bitwise is not None:
         selected = bitwise
     else:
@@ -250,7 +284,7 @@ def synthesize_candidate_v2(training: Iterable[dict[str, Any]]) -> dict[str, Any
         "compiled": True,
         "selected": program,
         "profile_attempts": selected["attempts"],
-        "grammar_stage": "SUCCESSOR_GENERALIZED_SOURCE_V2",
+        "grammar_stage": "SUCCESSOR_GENERALIZED_SOURCE_V2_RELATIONAL_CLOSURE",
         "training_digest": _sha(frozen_training),
         "synthesis_inputs": "TRAINING_ONLY",
         "origin": "YADO_SELECTION_FROM_HOST_BOUNDED_SECOND_CYCLE_GRAMMAR",
