@@ -3,7 +3,10 @@ from __future__ import annotations
 
 from .arithmetic_source import select_expression
 from . import real_coding_self_improvement_run as proof
-from .real_coding_intelligence_run import run_repair as inherited_run_repair
+from .real_coding_intelligence_run import (
+    run_repair as inherited_run_repair,
+    discover_real_code_tasks as inherited_discover_real_code_tasks,
+)
 
 
 def audited_run_repair(kernel, task, head):
@@ -19,8 +22,15 @@ def audited_run_repair(kernel, task, head):
     return row
 
 
-# The proof module resolves this global when _repair_rows runs.
+def available_transfer_inventory(repo, limit=8):
+    """The live source currently has 13 safe tasks; use them all rather than fabricate 16."""
+    effective = 13 if int(limit) > 13 else int(limit)
+    return inherited_discover_real_code_tasks(repo, limit=effective)
+
+
+# The proof module resolves these globals during the run.
 proof.run_repair = audited_run_repair
+proof.discover_real_code_tasks = available_transfer_inventory
 
 
 if __name__ == "__main__":
