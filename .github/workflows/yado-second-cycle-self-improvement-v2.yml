@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'successor/generalized_source_v2.py'
+      - 'successor/generalized_boolean_v2.py'
       - 'successor/evolved_kernel_v2.py'
       - 'successor/second_cycle_self_improvement_v2.py'
       - 'successor/evidence/second_cycle_baseline_v2.json'
@@ -53,6 +54,7 @@ jobs:
         run: |
           python -m py_compile \
             successor/generalized_source_v2.py \
+            successor/generalized_boolean_v2.py \
             successor/evolved_kernel_v2.py \
             successor/second_cycle_self_improvement_v2.py
       - name: Reproduce frozen baseline and prove V2 improvement
