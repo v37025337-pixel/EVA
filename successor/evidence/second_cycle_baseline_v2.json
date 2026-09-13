@@ -1,0 +1,44 @@
+{
+  "schema": "yado.second_cycle_independent_baseline.evidence.v2",
+  "source_branch": "yado-second-cycle-baseline-v2",
+  "workflow_run_id": 34766604142,
+  "artifact_id": 10320413362,
+  "artifact_sha256": "20a3533ac49ca6ce949fe0572beccfa968d57536165ce01fd4bd7fc357a7e2b7",
+  "candidate_under_test": "YADO_SUCCESSOR_DEFICIT_DRIVEN_PROGRAMMING_V1",
+  "algorithms_repository": "https://github.com/TheAlgorithms/Python.git",
+  "algorithms_head_sha": "4379c6368c7c3decc25ef9cd1b33fba5b5234ab2",
+  "first_cycle_inventory_excluded": 13,
+  "coding_task_count": 8,
+  "coding_probe_count": 16,
+  "coding_pass_count": 9,
+  "reasoning_probe_count": 6,
+  "reasoning_pass_count": 6,
+  "deficit_count": 7,
+  "deficit_ids": [
+    "repair:boolean_algebra/not_gate.py:not_gate",
+    "synthesis:bit_manipulation/single_bit_manipulation_operations.py:flip_bit",
+    "synthesis:boolean_algebra/not_gate.py:not_gate",
+    "synthesis:bit_manipulation/single_bit_manipulation_operations.py:is_bit_set",
+    "synthesis:maths/numerical_analysis/bisection.py:f",
+    "synthesis:bit_manipulation/single_bit_manipulation_operations.py:set_bit",
+    "synthesis:bit_manipulation/single_bit_manipulation_operations.py:clear_least_significant_set_bit"
+  ],
+  "families": {
+    "SECOND_CYCLE_REAL_CODE_REPAIR": {"pass": 7, "deficit": 1, "total": 8},
+    "SECOND_CYCLE_REAL_CODE_SYNTHESIS": {"pass": 2, "deficit": 6, "total": 8},
+    "SECOND_CYCLE_FRESH_REASONING": {"pass": 6, "deficit": 0, "total": 6}
+  },
+  "measured_boundaries": [
+    "bitwise source synthesis",
+    "comparison/conditional generalization for not_gate",
+    "wider polynomial source synthesis"
+  ],
+  "pre_measurement_regression": {"tests_run": 181, "status": "PASS"},
+  "full_kernel_audit": {"status": "PASS", "findings": []},
+  "canonical_invariant_guard": "PASS_CANONICAL_INVARIANT_GUARD_V1",
+  "canonical_mutation": false,
+  "g2_runtime_mutation": false,
+  "self_improvement_applied": false,
+  "general_intelligence_established": false,
+  "consciousness_established": false
+}
