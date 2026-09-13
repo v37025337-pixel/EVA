@@ -1,0 +1,101 @@
+name: YADO Real Coding Self Improvement V1
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'successor/**'
+      - 'runtime/**'
+      - 'canonical/**'
+      - 'architecture/evolution-ledger.json'
+      - '.github/workflows/yado-real-coding-self-improvement-v1.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: real-coding-self-improvement-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  prove-improvement:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install declared dependencies
+        run: python -m pip install -r successor/requirements.txt -r runtime/yado_rc8_v36/requirements-github.txt pyyaml
+      - name: Freeze inherited state and run complete regression
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m successor build --output "$RUNNER_TEMP/self-improvement-birth"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/self-improvement-birth/manifest.json"
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status']=='PASS',r
+          assert r['tests_run']==r['expected_tests']==181,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_PRE_EVOLUTION_REGRESSION_181_OF_181')
+          PY
+      - name: Reproduce baseline then prove bounded deficit-driven improvement
+        run: |
+          python -m successor.real_coding_self_improvement_entry \
+            --manifest "$RUNNER_TEMP/self-improvement-birth/manifest.json" \
+            --output "$RUNNER_TEMP/self-improvement-proof"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          r=json.loads((Path(os.environ['RUNNER_TEMP'])/'self-improvement-proof'/'self-improvement.json').read_text())
+          assert r['status']=='PASS_SHADOW_REAL_CODING_SELF_IMPROVEMENT_V1',r
+          assert r['predecessor_scores_reproduced']=={'repair':7,'synthesis':0},r
+          assert r['evolved_scores']=={'repair':8,'synthesis':4},r
+          assert r['improvement_delta']=={'repair':1,'synthesis':4,'closed_deficits':5},r
+          assert r['predecessor_state']['status']=='PASS',r
+          assert r['evolved_state']['status']=='PASS',r
+          assert r['fresh_transfer']['task_count']>=2,r
+          assert r['fresh_transfer']['pass_count']>=1,r
+          assert r['causal_grammar_evidence']['depth2_needed_on_at_least_one_real_task'] is True,r
+          assert r['causal_grammar_evidence']['floordiv_profile_needed_on_at_least_one_real_task'] is True,r
+          assert r['canonical_mutation'] is False and r['g2_runtime_mutation'] is False,r
+          assert r['grammar_authorship']=='HOST_BOUNDED',r
+          assert r['concrete_program_selection']=='KERNEL_TRAINING_ONLY',r
+          assert r['general_intelligence_established'] is False,r
+          assert r['consciousness_established'] is False,r
+          print(json.dumps({
+            'status':r['status'],
+            'before':r['predecessor_scores_reproduced'],
+            'after':r['evolved_scores'],
+            'closed_deficits':r['improvement_delta']['closed_deficits'],
+            'transfer':f"{r['fresh_transfer']['pass_count']}/{r['fresh_transfer']['task_count']}",
+            'transfer_head':r['fresh_transfer']['latest_head_sha'],
+          },sort_keys=True))
+          PY
+      - name: Audit unchanged canonical G2 after shadow improvement
+        run: |
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status']=='PASS' and r['findings']==[],r
+          PY
+          python runtime/yado_canonical_invariant_guard_v1.py
+          git diff --exit-code -- canonical architecture/evolution-ledger.json
+      - name: Preserve self-improvement evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-real-coding-self-improvement-v1-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/self-improvement-birth/
+            ${{ runner.temp }}/self-improvement-proof/
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
+            audits/yado-full-kernel-audit-v1-report.json
