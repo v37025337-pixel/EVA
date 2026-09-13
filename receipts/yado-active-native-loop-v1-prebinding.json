@@ -1,0 +1,3781 @@
+{
+  "authorship": {
+    "adapter": "ASSISTANT",
+    "curriculum": "ASSISTANT",
+    "selection_and_source_composition": "YADO_USING_HOST_AUTHORED_GRAMMAR"
+  },
+  "consciousness_established": false,
+  "external_sources": [
+    {
+      "bytes": 5570,
+      "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+      "http_status": 200,
+      "sha256": "c932d8511912c5ca2cc5a15550a266436c637d8c2af4f3a055173808b0fb0086",
+      "url": "https://raw.githubusercontent.com/exercism/problem-specifications/b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119/exercises/hamming/canonical-data.json"
+    },
+    {
+      "bytes": 3672,
+      "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+      "http_status": 200,
+      "sha256": "fdf198907ba98f5733607807eff65a582009201027fa51934c97131c08299626",
+      "url": "https://raw.githubusercontent.com/exercism/problem-specifications/b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119/exercises/isogram/canonical-data.json"
+    },
+    {
+      "bytes": 4348,
+      "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+      "http_status": 200,
+      "sha256": "4628e229cd1c6d916be07a4315e9e2da02160f35e3b28658a6bd47225d284fc5",
+      "url": "https://raw.githubusercontent.com/exercism/problem-specifications/b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119/exercises/raindrops/canonical-data.json"
+    },
+    {
+      "bytes": 3907,
+      "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+      "http_status": 200,
+      "sha256": "fe23d28d79d3ef948c3a4b15b2516b16269f6e87395ec43a9fd988a0626bd49c",
+      "url": "https://raw.githubusercontent.com/exercism/problem-specifications/b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119/exercises/run-length-encoding/canonical-data.json"
+    },
+    {
+      "bytes": 3164,
+      "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+      "http_status": 200,
+      "sha256": "e8567a19cfaa0cf711fa2a1b2d4ec92b9fcdfddf42d89b969ce32f99fcc7a1fe",
+      "url": "https://raw.githubusercontent.com/exercism/problem-specifications/b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119/exercises/armstrong-numbers/canonical-data.json"
+    }
+  ],
+  "general_intelligence_established": false,
+  "goals_passed": 20,
+  "goals_run": 20,
+  "identity_digest": "506531b5d179a060f11943c5507249452c79f85b622c098db6fb1ea58b10f5e0",
+  "restart_after_goal": 5,
+  "results": [
+    {
+      "attempted": [
+        "native_v2"
+      ],
+      "goal_id": 1,
+      "independent_query_check": true,
+      "name": "hamming",
+      "result": {
+        "ast_evidence": {
+          "all_generated_roots_novel": true,
+          "generated_node_count": 2,
+          "helper_names": {
+            "learned": "_generated_learned"
+          },
+          "novel_node_fingerprints": [
+            "14021bcbc60027739b6d8819e5a26e4d792bd86f996505e811c134c9283855a1",
+            "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+          ]
+        },
+        "compiled": true,
+        "grammar_stage": "V2",
+        "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+        "predictions": [
+          2
+        ],
+        "selected": {
+          "generated_composition": "pairwise_mismatch_count",
+          "helper_body": "a = str(data['strand1'])\nb = str(data['strand2'])\nreturn sum(int(x != y) for x, y in zip(a, b))",
+          "input_keys": [
+            "strand1",
+            "strand2"
+          ],
+          "primitives": [
+            "zip",
+            "not_equal",
+            "int_cast",
+            "sum"
+          ],
+          "search_space": 5,
+          "selection_basis": "training_io_signature_and_score",
+          "signature": [
+            "str",
+            "str",
+            "->",
+            "int"
+          ],
+          "task_named_formula": false,
+          "training_score": 1.0
+        },
+        "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    a = str(data['strand1'])\n    b = str(data['strand2'])\n    return sum((int(x != y) for x, y in zip(a, b)))\n",
+        "source_context": "native_source:a3c078f9f840f652837e510405939c8095d0e6d9f823930111f3ea6b1c2e92ab",
+        "source_sha256": "c090740879938c3d1315982f0332a7c150dc5a8f9e899fbf6f0fb33cd573f1de",
+        "status": "CANDIDATE",
+        "synthesis_inputs": "TRAINING_ONLY",
+        "training_digest": "1cbab4f97a71f6bacd990c781950e3b871366cdb32e46742da8cecfaea90f238",
+        "training_predictions": [
+          0,
+          0,
+          1
+        ],
+        "validation_predictions": [
+          0,
+          9
+        ]
+      },
+      "spent": 1,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "native_v2"
+      ],
+      "goal_id": 8,
+      "independent_query_check": true,
+      "name": "isogram",
+      "result": {
+        "ast_evidence": {
+          "all_generated_roots_novel": true,
+          "generated_node_count": 2,
+          "helper_names": {
+            "learned": "_generated_learned"
+          },
+          "novel_node_fingerprints": [
+            "57760ee15490818c53aa08be83261fdf23028fff18ef5bdbd5854e3003b49c38",
+            "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+          ]
+        },
+        "compiled": true,
+        "grammar_stage": "V2",
+        "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+        "predictions": [
+          false
+        ],
+        "selected": {
+          "generated_composition": "lower+alnum_only+unique_cardinality",
+          "helper_body": "value = str(data['phrase'])\nseq = value.lower()\nseq = ''.join(ch for ch in seq if ch.isalnum())\nreturn len(seq) == len(set(seq))",
+          "input_keys": [
+            "phrase"
+          ],
+          "primitives": [
+            "lower",
+            "iteration",
+            "isalnum",
+            "join",
+            "len",
+            "set",
+            "equal"
+          ],
+          "search_space": 24,
+          "selection_basis": "training_io_signature_and_score",
+          "signature": [
+            "str",
+            "->",
+            "bool"
+          ],
+          "task_named_formula": false,
+          "training_score": 1.0
+        },
+        "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    value = str(data['phrase'])\n    seq = value.lower()\n    seq = ''.join((ch for ch in seq if ch.isalnum()))\n    return len(seq) == len(set(seq))\n",
+        "source_context": "native_source:5f4113cb978c4235aa78bb5e7506e91a7aae508ab54a259bebee38f04ca8fd32",
+        "source_sha256": "1f73f6dc9354a7be9a57f2d27e599082db9a9f3b20fdfd1807c1c2bc086ec18c",
+        "status": "CANDIDATE",
+        "synthesis_inputs": "TRAINING_ONLY",
+        "training_digest": "b9bf2dcc44facfa1d7beda2774617f4869f0fd8e0df52d8e013254329b225983",
+        "training_predictions": [
+          true,
+          true,
+          false,
+          false,
+          true,
+          false,
+          false,
+          true,
+          false,
+          true,
+          true
+        ],
+        "validation_predictions": [
+          false,
+          false
+        ]
+      },
+      "spent": 1,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "native_v2"
+      ],
+      "goal_id": 15,
+      "independent_query_check": true,
+      "name": "raindrops",
+      "result": {
+        "ast_evidence": {
+          "all_generated_roots_novel": true,
+          "generated_node_count": 2,
+          "helper_names": {
+            "learned": "_generated_learned"
+          },
+          "novel_node_fingerprints": [
+            "bf3c56427c8ecc92d76a6a2f8962031e6a2dd318563d0f83a45a3ffbbeb35131",
+            "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+          ]
+        },
+        "compiled": true,
+        "grammar_stage": "V2",
+        "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+        "predictions": [
+          "Plang"
+        ],
+        "selected": {
+          "generated_composition": "induced_conditional_token_concatenation",
+          "helper_body": "n = int(data['number'])\nparts = []\nif n % 3 == 0:\n    parts.append('Pling')\nif n % 5 == 0:\n    parts.append('Plang')\nif n % 7 == 0:\n    parts.append('Plong')\nreturn ''.join(parts) or str(n)",
+          "input_keys": [
+            "number"
+          ],
+          "learned_relations": [
+            {
+              "divisor": 3,
+              "token": "Pling"
+            },
+            {
+              "divisor": 5,
+              "token": "Plang"
+            },
+            {
+              "divisor": 7,
+              "token": "Plong"
+            }
+          ],
+          "primitives": [
+            "modulo",
+            "conditional",
+            "list_append",
+            "join",
+            "string_fallback"
+          ],
+          "search_space": 93,
+          "selection_basis": "training_io_signature_and_score",
+          "signature": [
+            "int",
+            "->",
+            "str"
+          ],
+          "task_named_formula": false,
+          "training_score": 1.0
+        },
+        "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    n = int(data['number'])\n    parts = []\n    if n % 3 == 0:\n        parts.append('Pling')\n    if n % 5 == 0:\n        parts.append('Plang')\n    if n % 7 == 0:\n        parts.append('Plong')\n    return ''.join(parts) or str(n)\n",
+        "source_context": "native_source:8f26e859f31fc4c5bebf8c152263525989b49a779c538f83b20fd1f5cfa1401f",
+        "source_sha256": "d1bac2f1743ce2428ca8ef2898e6864e5cc405dc073c8fa2e5d88d01a411d408",
+        "status": "CANDIDATE",
+        "synthesis_inputs": "TRAINING_ONLY",
+        "training_digest": "8ac956b27cf06f3ec99ac703e16d64699098607db0d0ac30acbb1ebf6b45dfc7",
+        "training_predictions": [
+          "1",
+          "Pling",
+          "Plang",
+          "Plong",
+          "Pling",
+          "8",
+          "Pling",
+          "Plang",
+          "Plong",
+          "PlingPlang",
+          "PlingPlong",
+          "Plang",
+          "Pling",
+          "PlangPlong",
+          "Plong"
+        ],
+        "validation_predictions": [
+          "52",
+          "PlingPlangPlong"
+        ]
+      },
+      "spent": 1,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "native_v2",
+        "native_v3"
+      ],
+      "goal_id": 22,
+      "independent_query_check": true,
+      "name": "run-length-encoding",
+      "result": {
+        "ast_evidence": {
+          "all_generated_roots_novel": true,
+          "generated_node_count": 2,
+          "helper_names": {
+            "learned": "_generated_learned"
+          },
+          "novel_node_fingerprints": [
+            "b78829e51725ed039b6fb3106c0d7865540fe324290d822f9faba8d4cec6d60c",
+            "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+          ]
+        },
+        "compiled": true,
+        "grammar_stage": "V3",
+        "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+        "predictions": [
+          "2a3b4c"
+        ],
+        "selected": {
+          "generated_composition": "adjacent_run_fold",
+          "grammar_extension": true,
+          "helper_body": "value = str(data['string'])\nif not value:\n    return ''\nparts = []\nrun_char = value[0]\nrun_count = 1\nfor ch in value[1:]:\n    if ch == run_char:\n        run_count += 1\n    else:\n        parts.append((str(run_count) if run_count > 1 else '') + run_char)\n        run_char = ch\n        run_count = 1\nparts.append((str(run_count) if run_count > 1 else '') + run_char)\nreturn ''.join(parts)",
+          "primitives": [
+            "sequence_iteration",
+            "state_accumulator",
+            "adjacent_equal",
+            "increment",
+            "conditional_emit",
+            "append",
+            "join"
+          ],
+          "search_space": 5,
+          "selection_basis": "training_io_signature_and_score",
+          "signature": [
+            "str",
+            "->",
+            "str"
+          ],
+          "task_named_formula": false,
+          "training_score": 1.0
+        },
+        "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    value = str(data['string'])\n    if not value:\n        return ''\n    parts = []\n    run_char = value[0]\n    run_count = 1\n    for ch in value[1:]:\n        if ch == run_char:\n            run_count += 1\n        else:\n            parts.append((str(run_count) if run_count > 1 else '') + run_char)\n            run_char = ch\n            run_count = 1\n    parts.append((str(run_count) if run_count > 1 else '') + run_char)\n    return ''.join(parts)\n",
+        "source_context": "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80",
+        "source_sha256": "403ef21263f2ae1010b2d31ea32a5db52f815d8724bbf13b4bfe5a3d8ddaaa69",
+        "status": "CANDIDATE",
+        "synthesis_inputs": "TRAINING_ONLY",
+        "training_digest": "313b21e3f1a36ebd117d0d6f8debbcbb21fab8e0e039558413960ae9b5833f2f",
+        "training_predictions": [
+          "",
+          "XYZ",
+          "2A3B4C"
+        ],
+        "validation_predictions": [
+          "12WB12W3B24WB",
+          "2 hs2q q2w2 "
+        ]
+      },
+      "spent": 3,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "native_v2",
+        "native_v3",
+        "native_v4"
+      ],
+      "goal_id": 33,
+      "independent_query_check": true,
+      "name": "armstrong-numbers",
+      "result": {
+        "ast_evidence": {
+          "all_generated_roots_novel": true,
+          "generated_node_count": 2,
+          "helper_names": {
+            "learned": "_generated_learned"
+          },
+          "novel_node_fingerprints": [
+            "feddbde49f245609dd75551e861552b2e042b554c8b89099688f2ee80d98ec8e",
+            "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+          ]
+        },
+        "compiled": true,
+        "grammar_stage": "V4",
+        "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+        "predictions": [
+          false
+        ],
+        "selected": {
+          "generated_composition": "digit_power_sum_equality_dynamic",
+          "helper_body": "n = int(data['number'])\ndigits = [int(ch) for ch in str(abs(n))]\npower = len(digits)\nreturn sum(d ** power for d in digits) == n",
+          "meta_strategy_generated": true,
+          "primitives": [
+            "int",
+            "abs",
+            "str",
+            "digit_map",
+            "len",
+            "power",
+            "sum",
+            "equal"
+          ],
+          "search_space": 5,
+          "selection_basis": "training_io_signature_and_score",
+          "signature": [
+            "int",
+            "->",
+            "bool"
+          ],
+          "task_named_formula": false,
+          "training_score": 1.0
+        },
+        "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    n = int(data['number'])\n    digits = [int(ch) for ch in str(abs(n))]\n    power = len(digits)\n    return sum((d ** power for d in digits)) == n\n",
+        "source_context": "native_source:e70b26746e06bc1e532f4786f874ffa81b5972b640ad42b73daf208f1e847983",
+        "source_sha256": "48d895c577f971bdade5c6de0e208e66f0ca4de07194562dbd22a2c4f08ee882",
+        "status": "CANDIDATE",
+        "synthesis_inputs": "TRAINING_ONLY",
+        "training_digest": "810d6e279a38d27d64973b649f39e6067fbe185f3d2847453d6546a9f4e88bff",
+        "training_predictions": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "validation_predictions": [
+          false,
+          true
+        ]
+      },
+      "spent": 6,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "reuse_verified_source"
+      ],
+      "goal_id": 48,
+      "independent_query_check": true,
+      "name": "restart-source-transfer-0",
+      "result": {
+        "ast_evidence": {
+          "all_generated_roots_novel": true,
+          "generated_node_count": 2,
+          "helper_names": {
+            "learned": "_generated_learned"
+          },
+          "novel_node_fingerprints": [
+            "b78829e51725ed039b6fb3106c0d7865540fe324290d822f9faba8d4cec6d60c",
+            "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+          ]
+        },
+        "compiled": true,
+        "grammar_stage": "V3",
+        "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+        "predictions": [
+          "12W"
+        ],
+        "reused_finish_tick": 31,
+        "selected": {
+          "generated_composition": "adjacent_run_fold",
+          "grammar_extension": true,
+          "helper_body": "value = str(data['string'])\nif not value:\n    return ''\nparts = []\nrun_char = value[0]\nrun_count = 1\nfor ch in value[1:]:\n    if ch == run_char:\n        run_count += 1\n    else:\n        parts.append((str(run_count) if run_count > 1 else '') + run_char)\n        run_char = ch\n        run_count = 1\nparts.append((str(run_count) if run_count > 1 else '') + run_char)\nreturn ''.join(parts)",
+          "primitives": [
+            "sequence_iteration",
+            "state_accumulator",
+            "adjacent_equal",
+            "increment",
+            "conditional_emit",
+            "append",
+            "join"
+          ],
+          "search_space": 5,
+          "selection_basis": "training_io_signature_and_score",
+          "signature": [
+            "str",
+            "->",
+            "str"
+          ],
+          "task_named_formula": false,
+          "training_score": 1.0
+        },
+        "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    value = str(data['string'])\n    if not value:\n        return ''\n    parts = []\n    run_char = value[0]\n    run_count = 1\n    for ch in value[1:]:\n        if ch == run_char:\n            run_count += 1\n        else:\n            parts.append((str(run_count) if run_count > 1 else '') + run_char)\n            run_char = ch\n            run_count = 1\n    parts.append((str(run_count) if run_count > 1 else '') + run_char)\n    return ''.join(parts)\n",
+        "source_context": "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80",
+        "source_sha256": "403ef21263f2ae1010b2d31ea32a5db52f815d8724bbf13b4bfe5a3d8ddaaa69",
+        "status": "CANDIDATE",
+        "synthesis_inputs": "TRAINING_ONLY",
+        "training_digest": "313b21e3f1a36ebd117d0d6f8debbcbb21fab8e0e039558413960ae9b5833f2f",
+        "training_predictions": [
+          "7W",
+          "8W",
+          "9W"
+        ],
+        "validation_predictions": [
+          "10W",
+          "11W"
+        ]
+      },
+      "spent": 1,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "reuse_verified_source"
+      ],
+      "goal_id": 55,
+      "independent_query_check": true,
+      "name": "restart-source-transfer-1",
+      "result": {
+        "ast_evidence": {
+          "all_generated_roots_novel": true,
+          "generated_node_count": 2,
+          "helper_names": {
+            "learned": "_generated_learned"
+          },
+          "novel_node_fingerprints": [
+            "b78829e51725ed039b6fb3106c0d7865540fe324290d822f9faba8d4cec6d60c",
+            "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+          ]
+        },
+        "compiled": true,
+        "grammar_stage": "V3",
+        "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+        "predictions": [
+          "12Z"
+        ],
+        "reused_finish_tick": 53,
+        "selected": {
+          "generated_composition": "adjacent_run_fold",
+          "grammar_extension": true,
+          "helper_body": "value = str(data['string'])\nif not value:\n    return ''\nparts = []\nrun_char = value[0]\nrun_count = 1\nfor ch in value[1:]:\n    if ch == run_char:\n        run_count += 1\n    else:\n        parts.append((str(run_count) if run_count > 1 else '') + run_char)\n        run_char = ch\n        run_count = 1\nparts.append((str(run_count) if run_count > 1 else '') + run_char)\nreturn ''.join(parts)",
+          "primitives": [
+            "sequence_iteration",
+            "state_accumulator",
+            "adjacent_equal",
+            "increment",
+            "conditional_emit",
+            "append",
+            "join"
+          ],
+          "search_space": 5,
+          "selection_basis": "training_io_signature_and_score",
+          "signature": [
+            "str",
+            "->",
+            "str"
+          ],
+          "task_named_formula": false,
+          "training_score": 1.0
+        },
+        "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    value = str(data['string'])\n    if not value:\n        return ''\n    parts = []\n    run_char = value[0]\n    run_count = 1\n    for ch in value[1:]:\n        if ch == run_char:\n            run_count += 1\n        else:\n            parts.append((str(run_count) if run_count > 1 else '') + run_char)\n            run_char = ch\n            run_count = 1\n    parts.append((str(run_count) if run_count > 1 else '') + run_char)\n    return ''.join(parts)\n",
+        "source_context": "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80",
+        "source_sha256": "403ef21263f2ae1010b2d31ea32a5db52f815d8724bbf13b4bfe5a3d8ddaaa69",
+        "status": "CANDIDATE",
+        "synthesis_inputs": "TRAINING_ONLY",
+        "training_digest": "313b21e3f1a36ebd117d0d6f8debbcbb21fab8e0e039558413960ae9b5833f2f",
+        "training_predictions": [
+          "7Z",
+          "8Z",
+          "9Z"
+        ],
+        "validation_predictions": [
+          "10Z",
+          "11Z"
+        ]
+      },
+      "spent": 1,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "polynomial_1"
+      ],
+      "goal_id": 62,
+      "independent_query_check": true,
+      "name": "numeric-0",
+      "result": {
+        "holdout_count": 8,
+        "holdout_predictions": [
+          "-4",
+          "7",
+          "-1",
+          "6",
+          "1",
+          "3",
+          "0",
+          "-6"
+        ],
+        "model": {
+          "basis": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "coeff": [
+            "0",
+            "2",
+            "1"
+          ],
+          "degree": 1,
+          "kind": "EXACT_BOUNDED_POLYNOMIAL_V2",
+          "row_count": 27,
+          "term_count": 3
+        },
+        "predictions": [
+          "1",
+          "-2"
+        ],
+        "status": "CANDIDATE",
+        "train_count": 27
+      },
+      "spent": 1,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "polynomial_1",
+        "polynomial_2"
+      ],
+      "goal_id": 69,
+      "independent_query_check": true,
+      "name": "numeric-1",
+      "result": {
+        "holdout_count": 8,
+        "holdout_predictions": [
+          "3",
+          "14",
+          "0",
+          "9",
+          "8",
+          "6",
+          "1",
+          "1"
+        ],
+        "model": {
+          "basis": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          "coeff": [
+            "1",
+            "2",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "degree": 2,
+          "kind": "EXACT_BOUNDED_POLYNOMIAL_V2",
+          "row_count": 27,
+          "term_count": 6
+        },
+        "predictions": [
+          "74",
+          "71"
+        ],
+        "status": "CANDIDATE",
+        "train_count": 27
+      },
+      "spent": 3,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "polynomial_2",
+        "polynomial_1",
+        "polynomial_3"
+      ],
+      "goal_id": 80,
+      "independent_query_check": true,
+      "name": "numeric-2",
+      "result": {
+        "holdout_count": 8,
+        "holdout_predictions": [
+          "-8",
+          "33",
+          "1",
+          "14",
+          "27",
+          "5",
+          "2",
+          "-10"
+        ],
+        "model": {
+          "basis": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "coeff": [
+            "2",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "degree": 3,
+          "kind": "EXACT_BOUNDED_POLYNOMIAL_V2",
+          "row_count": 27,
+          "term_count": 10
+        },
+        "predictions": [
+          "723",
+          "-504"
+        ],
+        "status": "CANDIDATE",
+        "train_count": 27
+      },
+      "spent": 6,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "polynomial_3"
+      ],
+      "goal_id": 95,
+      "independent_query_check": true,
+      "name": "numeric-3",
+      "result": {
+        "holdout_count": 8,
+        "holdout_predictions": [
+          "5",
+          "16",
+          "2",
+          "11",
+          "10",
+          "8",
+          "3",
+          "3"
+        ],
+        "model": {
+          "basis": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          "coeff": [
+            "3",
+            "2",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "degree": 2,
+          "kind": "EXACT_BOUNDED_POLYNOMIAL_V2",
+          "row_count": 27,
+          "term_count": 6
+        },
+        "predictions": [
+          "76",
+          "73"
+        ],
+        "status": "CANDIDATE",
+        "train_count": 27
+      },
+      "spent": 3,
+      "status": "VALIDATED_ON_HOLDOUT"
+    },
+    {
+      "attempted": [
+        "native_logic"
+      ],
+      "goal_id": 102,
+      "independent_query_check": true,
+      "name": "relation-0",
+      "result": {
+        "answer": [
+          0,
+          1,
+          2
+        ],
+        "native": {
+          "canonical_promotion_authorized": false,
+          "component_id": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+          "contract": "RELATION_START_TO_STATE",
+          "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8",
+          "mechanism_type": "RELATIONAL_CAUSAL_CLOSURE_LOGIC",
+          "result": [
+            0,
+            1,
+            2
+          ],
+          "rollback_parent": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "status": "PASS_TRI_ORGAN_LOGIC"
+        },
+        "status": "CANDIDATE"
+      },
+      "spent": 1,
+      "status": "VERIFIED"
+    },
+    {
+      "attempted": [
+        "native_logic"
+      ],
+      "goal_id": 109,
+      "independent_query_check": true,
+      "name": "relation-1",
+      "result": {
+        "answer": [
+          1,
+          2,
+          3
+        ],
+        "native": {
+          "canonical_promotion_authorized": false,
+          "component_id": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+          "contract": "RELATION_START_TO_STATE",
+          "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8",
+          "mechanism_type": "RELATIONAL_CAUSAL_CLOSURE_LOGIC",
+          "result": [
+            1,
+            2,
+            3
+          ],
+          "rollback_parent": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "status": "PASS_TRI_ORGAN_LOGIC"
+        },
+        "status": "CANDIDATE"
+      },
+      "spent": 1,
+      "status": "VERIFIED"
+    },
+    {
+      "attempted": [
+        "native_logic"
+      ],
+      "goal_id": 116,
+      "independent_query_check": true,
+      "name": "relation-2",
+      "result": {
+        "answer": [
+          2,
+          3,
+          4
+        ],
+        "native": {
+          "canonical_promotion_authorized": false,
+          "component_id": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+          "contract": "RELATION_START_TO_STATE",
+          "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8",
+          "mechanism_type": "RELATIONAL_CAUSAL_CLOSURE_LOGIC",
+          "result": [
+            2,
+            3,
+            4
+          ],
+          "rollback_parent": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "status": "PASS_TRI_ORGAN_LOGIC"
+        },
+        "status": "CANDIDATE"
+      },
+      "spent": 1,
+      "status": "VERIFIED"
+    },
+    {
+      "attempted": [
+        "native_logic"
+      ],
+      "goal_id": 123,
+      "independent_query_check": true,
+      "name": "relation-3",
+      "result": {
+        "answer": [
+          3,
+          4,
+          5
+        ],
+        "native": {
+          "canonical_promotion_authorized": false,
+          "component_id": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+          "contract": "RELATION_START_TO_STATE",
+          "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8",
+          "mechanism_type": "RELATIONAL_CAUSAL_CLOSURE_LOGIC",
+          "result": [
+            3,
+            4,
+            5
+          ],
+          "rollback_parent": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+          "status": "PASS_TRI_ORGAN_LOGIC"
+        },
+        "status": "CANDIDATE"
+      },
+      "spent": 1,
+      "status": "VERIFIED"
+    },
+    {
+      "attempted": [
+        "native_thinking"
+      ],
+      "goal_id": 130,
+      "independent_query_check": true,
+      "name": "events-0",
+      "result": {
+        "answer": true,
+        "native": {
+          "canonical_promotion_authorized": false,
+          "component_id": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+          "contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+          "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4",
+          "mechanism_type": "CAUSAL_EVENT_STATE_STACK_THINKING",
+          "result": true,
+          "rollback_parent": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+          "status": "PASS_TRI_ORGAN_THINKING"
+        },
+        "status": "CANDIDATE"
+      },
+      "spent": 1,
+      "status": "VERIFIED"
+    },
+    {
+      "attempted": [
+        "native_thinking"
+      ],
+      "goal_id": 137,
+      "independent_query_check": true,
+      "name": "events-1",
+      "result": {
+        "answer": true,
+        "native": {
+          "canonical_promotion_authorized": false,
+          "component_id": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+          "contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+          "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4",
+          "mechanism_type": "CAUSAL_EVENT_STATE_STACK_THINKING",
+          "result": true,
+          "rollback_parent": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+          "status": "PASS_TRI_ORGAN_THINKING"
+        },
+        "status": "CANDIDATE"
+      },
+      "spent": 1,
+      "status": "VERIFIED"
+    },
+    {
+      "attempted": [
+        "native_thinking"
+      ],
+      "goal_id": 144,
+      "independent_query_check": true,
+      "name": "events-2",
+      "result": {
+        "answer": false,
+        "native": {
+          "canonical_promotion_authorized": false,
+          "component_id": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+          "contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+          "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4",
+          "mechanism_type": "CAUSAL_EVENT_STATE_STACK_THINKING",
+          "result": false,
+          "rollback_parent": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+          "status": "PASS_TRI_ORGAN_THINKING"
+        },
+        "status": "CANDIDATE"
+      },
+      "spent": 1,
+      "status": "VERIFIED"
+    },
+    {
+      "attempted": [
+        "native_thinking"
+      ],
+      "goal_id": 151,
+      "independent_query_check": true,
+      "name": "events-3",
+      "result": {
+        "answer": false,
+        "native": {
+          "canonical_promotion_authorized": false,
+          "component_id": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+          "contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+          "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4",
+          "mechanism_type": "CAUSAL_EVENT_STATE_STACK_THINKING",
+          "result": false,
+          "rollback_parent": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+          "status": "PASS_TRI_ORGAN_THINKING"
+        },
+        "status": "CANDIDATE"
+      },
+      "spent": 1,
+      "status": "VERIFIED"
+    },
+    {
+      "attempted": [
+        "catalog_v6"
+      ],
+      "goal_id": 158,
+      "independent_query_check": true,
+      "name": "live-library-discovery",
+      "result": {
+        "artifact": {
+          "declared_size": 15137,
+          "expected_sha256": "ce7422c0febd8825aca4f7fa1bd4cf2bd9a146c0371482fa8be2df6c179a9f3d",
+          "filename": "scraparser-0.3.1-py3-none-any.whl",
+          "packagetype": "bdist_wheel",
+          "selection_basis": "smallest_compatible_wheel_from_selected_release",
+          "url": "https://files.pythonhosted.org/packages/c1/c3/de9fd1aa0250172bc6545942c52195596d01f0d59695a6a972efeb42cc9d/scraparser-0.3.1-py3-none-any.whl",
+          "version": "0.3.1"
+        },
+        "artifact_fetch": {
+          "bytes": 15137,
+          "content_type": "application/octet-stream",
+          "final_url": "https://files.pythonhosted.org/packages/c1/c3/de9fd1aa0250172bc6545942c52195596d01f0d59695a6a972efeb42cc9d/scraparser-0.3.1-py3-none-any.whl",
+          "host": "files.pythonhosted.org",
+          "http_status": 200,
+          "method": "GET",
+          "read_only": true,
+          "requested_url": "https://files.pythonhosted.org/packages/c1/c3/de9fd1aa0250172bc6545942c52195596d01f0d59695a6a972efeb42cc9d/scraparser-0.3.1-py3-none-any.whl",
+          "sha256": "ce7422c0febd8825aca4f7fa1bd4cf2bd9a146c0371482fa8be2df6c179a9f3d"
+        },
+        "bundle": {
+          "artifact_sha256": "ce7422c0febd8825aca4f7fa1bd4cf2bd9a146c0371482fa8be2df6c179a9f3d",
+          "dependency": "camelot-py",
+          "dependency_version": "2.0.0",
+          "filename": "scraparser-0.3.1-py3-none-any.whl",
+          "objective": "html_xml_parser",
+          "package": "scraparser",
+          "version": "0.3.1"
+        },
+        "bundle_sha256": "729f9c05e09147744d8fc0c6c39a434718433bcf7e9be47c497b79ea45847b46",
+        "dependency_source": {
+          "bytes": 50250,
+          "content_type": "application/json",
+          "final_url": "https://pypi.org/pypi/camelot-py/json",
+          "host": "pypi.org",
+          "http_status": 200,
+          "method": "GET",
+          "read_only": true,
+          "requested_url": "https://pypi.org/pypi/camelot-py/json",
+          "sha256": "8e5a56f3d10ed5fc09f71effe8e106e5957534c0ef959742bad8fc6d7103ebd4"
+        },
+        "discovery": {
+          "candidate_limit": 32,
+          "candidate_names_host_provided": false,
+          "catalog_project_count": 890495,
+          "discovered_candidates": [
+            {
+              "anchor_hits": [
+                "html",
+                "xml"
+              ],
+              "catalog_name": "xml2html",
+              "lexical_score": 292,
+              "name": "xml2html"
+            },
+            {
+              "anchor_hits": [
+                "xml",
+                "parser"
+              ],
+              "catalog_name": "parserXML",
+              "lexical_score": 291,
+              "name": "parserxml"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "markup"
+              ],
+              "catalog_name": "htmlmarkup",
+              "lexical_score": 290,
+              "name": "htmlmarkup"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "HTMLParser",
+              "lexical_score": 290,
+              "name": "htmlparser"
+            },
+            {
+              "anchor_hits": [
+                "parser",
+                "scrap"
+              ],
+              "catalog_name": "scraparser",
+              "lexical_score": 290,
+              "name": "scraparser"
+            },
+            {
+              "anchor_hits": [
+                "xml",
+                "parser"
+              ],
+              "catalog_name": "xml-parser",
+              "lexical_score": 290,
+              "name": "xml-parser"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "html-parser",
+              "lexical_score": 289,
+              "name": "html-parser"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "parser-html",
+              "lexical_score": 289,
+              "name": "parser-html"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "scrap"
+              ],
+              "catalog_name": "scrape-html",
+              "lexical_score": 289,
+              "name": "scrape-html"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "scrap"
+              ],
+              "catalog_name": "scrapy-html",
+              "lexical_score": 289,
+              "name": "scrapy-html"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "html-jparser",
+              "lexical_score": 288,
+              "name": "html-jparser"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "html5-parser",
+              "lexical_score": 288,
+              "name": "html5-parser"
+            },
+            {
+              "anchor_hits": [
+                "markup",
+                "parser"
+              ],
+              "catalog_name": "markup-parser",
+              "lexical_score": 287,
+              "name": "markup-parser"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "HtmlPageParser",
+              "lexical_score": 286,
+              "name": "htmlpageparser"
+            },
+            {
+              "anchor_hits": [
+                "xml",
+                "parser"
+              ],
+              "catalog_name": "xmlmicroparser",
+              "lexical_score": 286,
+              "name": "xmlmicroparser"
+            },
+            {
+              "anchor_hits": [
+                "xml",
+                "parser"
+              ],
+              "catalog_name": "xmlvirshparser",
+              "lexical_score": 286,
+              "name": "xmlvirshparser"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "html_table_parser",
+              "lexical_score": 283,
+              "name": "html-table-parser"
+            },
+            {
+              "anchor_hits": [
+                "parser",
+                "scrap"
+              ],
+              "catalog_name": "scrapyd-logparser",
+              "lexical_score": 283,
+              "name": "scrapyd-logparser"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "html-template-parser",
+              "lexical_score": 280,
+              "name": "html-template-parser"
+            },
+            {
+              "anchor_hits": [
+                "html"
+              ],
+              "catalog_name": "html",
+              "lexical_score": 276,
+              "name": "html"
+            },
+            {
+              "anchor_hits": [
+                "scrap"
+              ],
+              "catalog_name": "scrap",
+              "lexical_score": 275,
+              "name": "scrap"
+            },
+            {
+              "anchor_hits": [
+                "markup"
+              ],
+              "catalog_name": "markup",
+              "lexical_score": 274,
+              "name": "markup"
+            },
+            {
+              "anchor_hits": [
+                "parser"
+              ],
+              "catalog_name": "parser",
+              "lexical_score": 274,
+              "name": "parser"
+            },
+            {
+              "anchor_hits": [
+                "markup",
+                "parser"
+              ],
+              "catalog_name": "markup-front-matter-parser",
+              "lexical_score": 274,
+              "name": "markup-front-matter-parser"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "htmlparser2",
+              "lexical_score": 259,
+              "name": "htmlparser2"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "htmlparsers",
+              "lexical_score": 259,
+              "name": "htmlparsers"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "htmlparsert",
+              "lexical_score": 259,
+              "name": "htmlparsert"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "scrap"
+              ],
+              "catalog_name": "htmlscraper",
+              "lexical_score": 259,
+              "name": "htmlscraper"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "scrap"
+              ],
+              "catalog_name": "html-scrapper",
+              "lexical_score": 257,
+              "name": "html-scrapper"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "xml"
+              ],
+              "catalog_name": "xmlhtml2pandas",
+              "lexical_score": 256,
+              "name": "xmlhtml2pandas"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "parser"
+              ],
+              "catalog_name": "html-parser-ai-mcp",
+              "lexical_score": 252,
+              "name": "html-parser-ai-mcp"
+            },
+            {
+              "anchor_hits": [
+                "html",
+                "scrap"
+              ],
+              "catalog_name": "scrapy-html-storage",
+              "lexical_score": 251,
+              "name": "scrapy-html-storage"
+            }
+          ],
+          "discovery_anchors": [
+            "html",
+            "xml",
+            "markup",
+            "parser",
+            "scrap"
+          ],
+          "source": {
+            "bytes": 43697667,
+            "content_type": "application/vnd.pypi.simple.v1+json",
+            "final_url": "https://pypi.org/simple/",
+            "host": "pypi.org",
+            "http_status": 200,
+            "method": "GET",
+            "read_only": true,
+            "requested_url": "https://pypi.org/simple/",
+            "sha256": "f50fa9c5e4545c8fecbf70991029e774aa5646d63093b04f16005aa5ded02561"
+          }
+        },
+        "package_executed": false,
+        "package_installed": false,
+        "read_only": true,
+        "selection": {
+          "host_provided_selected_package": false,
+          "ranked": [
+            {
+              "combined_score": 208290,
+              "eligible": true,
+              "lexical_score": 290,
+              "name": "scraparser",
+              "relevance_score": 208,
+              "requirements": [
+                "camelot-py"
+              ],
+              "summary": "A simplified PDF table scraping and parsing tool",
+              "usable_wheel": true,
+              "version": "0.3.1"
+            },
+            {
+              "combined_score": 130259,
+              "eligible": true,
+              "lexical_score": 259,
+              "name": "htmlparser2",
+              "relevance_score": 130,
+              "requirements": [
+                "domonic"
+              ],
+              "summary": "A faithful-shape Python port of htmlparser2, backed by domonic DOM nodes",
+              "usable_wheel": true,
+              "version": "0.0.4"
+            },
+            {
+              "combined_score": 129289,
+              "eligible": true,
+              "lexical_score": 289,
+              "name": "scrapy-html",
+              "relevance_score": 129,
+              "requirements": [
+                "beautifulsoup4",
+                "requests",
+                "lxml"
+              ],
+              "summary": "🌐 Um scraper que retorna o HTML completo de uma URL, tags, classes e atributos usando BeautifulSoup",
+              "usable_wheel": true,
+              "version": "1.4.2"
+            },
+            {
+              "combined_score": 78252,
+              "eligible": true,
+              "lexical_score": 252,
+              "name": "html-parser-ai-mcp",
+              "relevance_score": 78,
+              "requirements": [
+                "mcp"
+              ],
+              "summary": "Html Parser Ai automation via MCP. Includes extract links, extract text, validate html. By MEOK AI Labs.",
+              "usable_wheel": true,
+              "version": "1.0.8"
+            },
+            {
+              "combined_score": 68256,
+              "eligible": true,
+              "lexical_score": 256,
+              "name": "xmlhtml2pandas",
+              "relevance_score": 68,
+              "requirements": [
+                "cython",
+                "exceptdrucker",
+                "flatten-any-dict-iterable-or-whatsoever",
+                "lxml",
+                "numpy",
+                "pandas",
+                "setuptools"
+              ],
+              "summary": "html/ocr parser using Cython/lxml/Tesseract/ImageMagick/Pandas",
+              "usable_wheel": true,
+              "version": "0.14"
+            },
+            {
+              "combined_score": 54292,
+              "eligible": true,
+              "lexical_score": 292,
+              "name": "xml2html",
+              "relevance_score": 54,
+              "requirements": [
+                "click"
+              ],
+              "summary": "simple html generator for xml files",
+              "usable_wheel": true,
+              "version": "0.2.0"
+            },
+            {
+              "combined_score": 29257,
+              "eligible": true,
+              "lexical_score": 257,
+              "name": "html-scrapper",
+              "relevance_score": 29,
+              "requirements": [
+                "cssutils",
+                "bs4",
+                "requests"
+              ],
+              "summary": "The package helps developers to scrap html content from a theme file",
+              "usable_wheel": true,
+              "version": "0.0.1"
+            },
+            {
+              "combined_score": 27289,
+              "eligible": true,
+              "lexical_score": 289,
+              "name": "scrape-html",
+              "relevance_score": 27,
+              "requirements": [
+                "pydantic",
+                "selenium"
+              ],
+              "summary": "Get html in string from a page",
+              "usable_wheel": true,
+              "version": "0.0.24"
+            },
+            {
+              "combined_score": 148274,
+              "eligible": false,
+              "lexical_score": 274,
+              "name": "markup-front-matter-parser",
+              "relevance_score": 148,
+              "requirements": [],
+              "summary": "An OOP-y front matter parser for markup files",
+              "usable_wheel": true,
+              "version": "0.6.0"
+            },
+            {
+              "combined_score": 128287,
+              "eligible": false,
+              "lexical_score": 287,
+              "name": "markup-parser",
+              "relevance_score": 128,
+              "requirements": [],
+              "summary": "Parse JS variables from HTML markup",
+              "usable_wheel": true,
+              "version": "0.1.3"
+            },
+            {
+              "combined_score": 108280,
+              "eligible": false,
+              "lexical_score": 280,
+              "name": "html-template-parser",
+              "relevance_score": 108,
+              "requirements": [],
+              "summary": "A parser for HTML templates.",
+              "usable_wheel": true,
+              "version": "1.7.0"
+            },
+            {
+              "combined_score": 107276,
+              "eligible": false,
+              "lexical_score": 276,
+              "name": "html",
+              "relevance_score": 107,
+              "requirements": [],
+              "summary": "simple, elegant HTML, XHTML and XML generation",
+              "usable_wheel": false,
+              "version": "1.16"
+            },
+            {
+              "combined_score": 100283,
+              "eligible": false,
+              "lexical_score": 283,
+              "name": "scrapyd-logparser",
+              "relevance_score": 100,
+              "requirements": [],
+              "summary": "A tool to parse Scrapyd logs for detailed statistics.",
+              "usable_wheel": true,
+              "version": "0.1.0b1"
+            },
+            {
+              "combined_score": 93286,
+              "eligible": false,
+              "lexical_score": 286,
+              "name": "xmlmicroparser",
+              "relevance_score": 93,
+              "requirements": [],
+              "summary": "A tiny xml parser without DTD/XSLT/SAX functionality.",
+              "usable_wheel": false,
+              "version": "1.0"
+            },
+            {
+              "combined_score": 55289,
+              "eligible": false,
+              "lexical_score": 289,
+              "name": "parser-html",
+              "relevance_score": 55,
+              "requirements": [],
+              "summary": "A basic HTML parser in Python",
+              "usable_wheel": true,
+              "version": "1.0.1"
+            },
+            {
+              "combined_score": 53286,
+              "eligible": false,
+              "lexical_score": 286,
+              "name": "htmlpageparser",
+              "relevance_score": 53,
+              "requirements": [],
+              "summary": "A generic HTML page parser",
+              "usable_wheel": true,
+              "version": "0.0.4"
+            },
+            {
+              "combined_score": 49251,
+              "eligible": false,
+              "lexical_score": 251,
+              "name": "scrapy-html-storage",
+              "relevance_score": 49,
+              "requirements": [],
+              "summary": "Scrapy downloader middleware that stores response HTML files to disk.",
+              "usable_wheel": false,
+              "version": "0.4.0"
+            },
+            {
+              "combined_score": 48288,
+              "eligible": false,
+              "lexical_score": 288,
+              "name": "html-jparser",
+              "relevance_score": 48,
+              "requirements": [],
+              "summary": "Easy html parser with Jquery selector",
+              "usable_wheel": false,
+              "version": "0.3"
+            },
+            {
+              "combined_score": 48288,
+              "eligible": false,
+              "lexical_score": 288,
+              "name": "html5-parser",
+              "relevance_score": 48,
+              "requirements": [
+                "chardet",
+                "lxml"
+              ],
+              "summary": "Fast C based HTML 5 parsing for python",
+              "usable_wheel": false,
+              "version": "0.4.12"
+            },
+            {
+              "combined_score": 32286,
+              "eligible": false,
+              "lexical_score": 286,
+              "name": "xmlvirshparser",
+              "relevance_score": 32,
+              "requirements": [],
+              "summary": "Parses virsh dump XML output to OpenStack prettytable form",
+              "usable_wheel": false,
+              "version": "0.5"
+            },
+            {
+              "combined_score": 30290,
+              "eligible": false,
+              "lexical_score": 290,
+              "name": "htmlparser",
+              "relevance_score": 30,
+              "requirements": [],
+              "summary": "Backport of HTMLParser from python 2.7",
+              "usable_wheel": false,
+              "version": "0.0.2"
+            },
+            {
+              "combined_score": 26291,
+              "eligible": false,
+              "lexical_score": 291,
+              "name": "parserxml",
+              "relevance_score": 26,
+              "requirements": [],
+              "summary": "Music XML Parser",
+              "usable_wheel": true,
+              "version": "0.1"
+            },
+            {
+              "combined_score": 24259,
+              "eligible": false,
+              "lexical_score": 259,
+              "name": "htmlparsert",
+              "relevance_score": 24,
+              "requirements": [],
+              "summary": "A lightweight, no dependency HTML parser for text processing",
+              "usable_wheel": true,
+              "version": "0.1.0"
+            },
+            {
+              "combined_score": 16290,
+              "eligible": false,
+              "lexical_score": 290,
+              "name": "xml-parser",
+              "relevance_score": 16,
+              "requirements": [],
+              "summary": "Parse MySQL XML datadump",
+              "usable_wheel": false,
+              "version": "0.1"
+            },
+            {
+              "combined_score": 16274,
+              "eligible": false,
+              "lexical_score": 274,
+              "name": "markup",
+              "relevance_score": 16,
+              "requirements": [],
+              "summary": "generate HTML markup programmatically",
+              "usable_wheel": false,
+              "version": "0.2.2"
+            },
+            {
+              "combined_score": 16274,
+              "eligible": false,
+              "lexical_score": 274,
+              "name": "parser",
+              "relevance_score": 16,
+              "requirements": [],
+              "summary": "General use parser library",
+              "usable_wheel": false,
+              "version": "0.1"
+            },
+            {
+              "combined_score": 16259,
+              "eligible": false,
+              "lexical_score": 259,
+              "name": "htmlparsers",
+              "relevance_score": 16,
+              "requirements": [],
+              "summary": "A collection of classes to parse HTML as JSON from famous sources like Google Search, Bing Search, LinkedIn and others.",
+              "usable_wheel": false,
+              "version": "0.0.1"
+            },
+            {
+              "combined_score": 8283,
+              "eligible": false,
+              "lexical_score": 283,
+              "name": "html-table-parser",
+              "relevance_score": 8,
+              "requirements": [],
+              "summary": "Transform html tables from soup objects to usable data structures (eg 2D arrays)",
+              "usable_wheel": false,
+              "version": "0.1.0"
+            },
+            {
+              "combined_score": 8275,
+              "eligible": false,
+              "lexical_score": 275,
+              "name": "scrap",
+              "relevance_score": 8,
+              "requirements": [],
+              "summary": "scraping DSL",
+              "usable_wheel": false,
+              "version": "0.1"
+            },
+            {
+              "combined_score": 1290,
+              "eligible": false,
+              "lexical_score": 290,
+              "name": "htmlmarkup",
+              "relevance_score": 1,
+              "requirements": [],
+              "summary": "",
+              "usable_wheel": false,
+              "version": "0.1"
+            },
+            {
+              "combined_score": 289,
+              "eligible": false,
+              "lexical_score": 289,
+              "name": "html-parser",
+              "relevance_score": 0,
+              "requirements": [],
+              "summary": "UNKNOWN",
+              "usable_wheel": false,
+              "version": "0.2"
+            },
+            {
+              "combined_score": 259,
+              "eligible": false,
+              "lexical_score": 259,
+              "name": "htmlscraper",
+              "relevance_score": 0,
+              "requirements": [
+                "requests",
+                "bs4",
+                "selenium",
+                "html5lib",
+                "pysocks"
+              ],
+              "summary": "",
+              "usable_wheel": true,
+              "version": "0.0.3"
+            }
+          ],
+          "selected_package": "scraparser",
+          "selection_basis": "open_catalog_discovery_then_live_metadata_relevance"
+        },
+        "status": "CANDIDATE",
+        "wheel_metadata": {
+          "discovered_dependencies": [
+            "camelot-py"
+          ],
+          "host_provided_dependency_name": false,
+          "member_count": 15,
+          "metadata_member": "scraparser-0.3.1.dist-info/METADATA",
+          "metadata_sha256": "9afe64d36f9c718dd972d87be2709bbe518e6eefaf1c600f513b0a6469597c29",
+          "name": "scraparser",
+          "requires_dist": [
+            "camelot-py (>=0.7click>=7.1google-api-python-client>=1.8google-auth-httplib2>=0.0.3google-auth-oauthlib>=0.4opencv-python>=4.2python-magic>=0.4validators>=0.14)"
+          ],
+          "selected_dependency": "camelot-py",
+          "uncompressed_bytes": 39437,
+          "version": "0.3.1"
+        }
+      },
+      "spent": 4,
+      "status": "VERIFIED"
+    }
+  ],
+  "schema": "yado.active_native_loop.acceptance.v1",
+  "snapshot": {
+    "all_observations": {
+      "events/native_thinking": {
+        "cost": 4,
+        "failures": 0,
+        "squared_error": 0.46361111111111114,
+        "successes": 4
+      },
+      "library_discovery/catalog_v6": {
+        "cost": 4,
+        "failures": 0,
+        "squared_error": 0.25,
+        "successes": 1
+      },
+      "native_source:5f4113cb978c4235aa78bb5e7506e91a7aae508ab54a259bebee38f04ca8fd32/native_v2": {
+        "cost": 1,
+        "failures": 0,
+        "squared_error": 0.25,
+        "successes": 1
+      },
+      "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80/native_v2": {
+        "cost": 1,
+        "failures": 1,
+        "squared_error": 0.25,
+        "successes": 0
+      },
+      "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80/native_v3": {
+        "cost": 2,
+        "failures": 0,
+        "squared_error": 0.25,
+        "successes": 1
+      },
+      "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80/reuse_verified_source": {
+        "cost": 2,
+        "failures": 0,
+        "squared_error": 0.36111111111111116,
+        "successes": 2
+      },
+      "native_source:8f26e859f31fc4c5bebf8c152263525989b49a779c538f83b20fd1f5cfa1401f/native_v2": {
+        "cost": 1,
+        "failures": 0,
+        "squared_error": 0.25,
+        "successes": 1
+      },
+      "native_source:a3c078f9f840f652837e510405939c8095d0e6d9f823930111f3ea6b1c2e92ab/native_v2": {
+        "cost": 1,
+        "failures": 0,
+        "squared_error": 0.25,
+        "successes": 1
+      },
+      "native_source:e70b26746e06bc1e532f4786f874ffa81b5972b640ad42b73daf208f1e847983/native_v2": {
+        "cost": 1,
+        "failures": 1,
+        "squared_error": 0.25,
+        "successes": 0
+      },
+      "native_source:e70b26746e06bc1e532f4786f874ffa81b5972b640ad42b73daf208f1e847983/native_v3": {
+        "cost": 2,
+        "failures": 1,
+        "squared_error": 0.25,
+        "successes": 0
+      },
+      "native_source:e70b26746e06bc1e532f4786f874ffa81b5972b640ad42b73daf208f1e847983/native_v4": {
+        "cost": 3,
+        "failures": 0,
+        "squared_error": 0.25,
+        "successes": 1
+      },
+      "numeric/polynomial_1": {
+        "cost": 3,
+        "failures": 2,
+        "squared_error": 0.9444444444444444,
+        "successes": 1
+      },
+      "numeric/polynomial_2": {
+        "cost": 4,
+        "failures": 1,
+        "squared_error": 0.6944444444444444,
+        "successes": 1
+      },
+      "numeric/polynomial_3": {
+        "cost": 6,
+        "failures": 0,
+        "squared_error": 0.36111111111111116,
+        "successes": 2
+      },
+      "relation/native_logic": {
+        "cost": 4,
+        "failures": 0,
+        "squared_error": 0.46361111111111114,
+        "successes": 4
+      }
+    },
+    "background_process_running": false,
+    "consciousness_assessment": "NOT_ESTABLISHED",
+    "controller_authorship": "ASSISTANT",
+    "goals": {
+      "1": {
+        "attempted": [
+          "native_v2"
+        ],
+        "budget": 10,
+        "id": 1,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "ast_evidence": {
+            "all_generated_roots_novel": true,
+            "generated_node_count": 2,
+            "helper_names": {
+              "learned": "_generated_learned"
+            },
+            "novel_node_fingerprints": [
+              "14021bcbc60027739b6d8819e5a26e4d792bd86f996505e811c134c9283855a1",
+              "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+            ]
+          },
+          "compiled": true,
+          "grammar_stage": "V2",
+          "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+          "predictions": [
+            2
+          ],
+          "selected": {
+            "generated_composition": "pairwise_mismatch_count",
+            "helper_body": "a = str(data['strand1'])\nb = str(data['strand2'])\nreturn sum(int(x != y) for x, y in zip(a, b))",
+            "input_keys": [
+              "strand1",
+              "strand2"
+            ],
+            "primitives": [
+              "zip",
+              "not_equal",
+              "int_cast",
+              "sum"
+            ],
+            "search_space": 5,
+            "selection_basis": "training_io_signature_and_score",
+            "signature": [
+              "str",
+              "str",
+              "->",
+              "int"
+            ],
+            "task_named_formula": false,
+            "training_score": 1.0
+          },
+          "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    a = str(data['strand1'])\n    b = str(data['strand2'])\n    return sum((int(x != y) for x, y in zip(a, b)))\n",
+          "source_context": "native_source:a3c078f9f840f652837e510405939c8095d0e6d9f823930111f3ea6b1c2e92ab",
+          "source_sha256": "c090740879938c3d1315982f0332a7c150dc5a8f9e899fbf6f0fb33cd573f1de",
+          "status": "CANDIDATE",
+          "synthesis_inputs": "TRAINING_ONLY",
+          "training_digest": "1cbab4f97a71f6bacd990c781950e3b871366cdb32e46742da8cecfaea90f238",
+          "training_predictions": [
+            0,
+            0,
+            1
+          ],
+          "validation_predictions": [
+            0,
+            9
+          ]
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "102": {
+        "attempted": [
+          "native_logic"
+        ],
+        "budget": 10,
+        "id": 102,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "answer": [
+            0,
+            1,
+            2
+          ],
+          "native": {
+            "canonical_promotion_authorized": false,
+            "component_id": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+            "contract": "RELATION_START_TO_STATE",
+            "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8",
+            "mechanism_type": "RELATIONAL_CAUSAL_CLOSURE_LOGIC",
+            "result": [
+              0,
+              1,
+              2
+            ],
+            "rollback_parent": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+            "status": "PASS_TRI_ORGAN_LOGIC"
+          },
+          "status": "CANDIDATE"
+        },
+        "status": "VERIFIED"
+      },
+      "109": {
+        "attempted": [
+          "native_logic"
+        ],
+        "budget": 10,
+        "id": 109,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "answer": [
+            1,
+            2,
+            3
+          ],
+          "native": {
+            "canonical_promotion_authorized": false,
+            "component_id": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+            "contract": "RELATION_START_TO_STATE",
+            "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8",
+            "mechanism_type": "RELATIONAL_CAUSAL_CLOSURE_LOGIC",
+            "result": [
+              1,
+              2,
+              3
+            ],
+            "rollback_parent": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+            "status": "PASS_TRI_ORGAN_LOGIC"
+          },
+          "status": "CANDIDATE"
+        },
+        "status": "VERIFIED"
+      },
+      "116": {
+        "attempted": [
+          "native_logic"
+        ],
+        "budget": 10,
+        "id": 116,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "answer": [
+            2,
+            3,
+            4
+          ],
+          "native": {
+            "canonical_promotion_authorized": false,
+            "component_id": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+            "contract": "RELATION_START_TO_STATE",
+            "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8",
+            "mechanism_type": "RELATIONAL_CAUSAL_CLOSURE_LOGIC",
+            "result": [
+              2,
+              3,
+              4
+            ],
+            "rollback_parent": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+            "status": "PASS_TRI_ORGAN_LOGIC"
+          },
+          "status": "CANDIDATE"
+        },
+        "status": "VERIFIED"
+      },
+      "123": {
+        "attempted": [
+          "native_logic"
+        ],
+        "budget": 10,
+        "id": 123,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "answer": [
+            3,
+            4,
+            5
+          ],
+          "native": {
+            "canonical_promotion_authorized": false,
+            "component_id": "ALG-G2-ALL-EXPERIENCE-RELATIONAL-CAUSAL-LOGIC-V1",
+            "contract": "RELATION_START_TO_STATE",
+            "gene_id": "GENE-G2-ALL-EXPERIENCE-LOGIC-TYPE-V1-922acdf42b997fa8",
+            "mechanism_type": "RELATIONAL_CAUSAL_CLOSURE_LOGIC",
+            "result": [
+              3,
+              4,
+              5
+            ],
+            "rollback_parent": "ALG-G2-BUDGET-ADAPTIVE-COMPOSITIONAL-LOGIC-V2",
+            "status": "PASS_TRI_ORGAN_LOGIC"
+          },
+          "status": "CANDIDATE"
+        },
+        "status": "VERIFIED"
+      },
+      "130": {
+        "attempted": [
+          "native_thinking"
+        ],
+        "budget": 10,
+        "id": 130,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "answer": true,
+          "native": {
+            "canonical_promotion_authorized": false,
+            "component_id": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+            "contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+            "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4",
+            "mechanism_type": "CAUSAL_EVENT_STATE_STACK_THINKING",
+            "result": true,
+            "rollback_parent": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+            "status": "PASS_TRI_ORGAN_THINKING"
+          },
+          "status": "CANDIDATE"
+        },
+        "status": "VERIFIED"
+      },
+      "137": {
+        "attempted": [
+          "native_thinking"
+        ],
+        "budget": 10,
+        "id": 137,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "answer": true,
+          "native": {
+            "canonical_promotion_authorized": false,
+            "component_id": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+            "contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+            "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4",
+            "mechanism_type": "CAUSAL_EVENT_STATE_STACK_THINKING",
+            "result": true,
+            "rollback_parent": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+            "status": "PASS_TRI_ORGAN_THINKING"
+          },
+          "status": "CANDIDATE"
+        },
+        "status": "VERIFIED"
+      },
+      "144": {
+        "attempted": [
+          "native_thinking"
+        ],
+        "budget": 10,
+        "id": 144,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "answer": false,
+          "native": {
+            "canonical_promotion_authorized": false,
+            "component_id": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+            "contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+            "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4",
+            "mechanism_type": "CAUSAL_EVENT_STATE_STACK_THINKING",
+            "result": false,
+            "rollback_parent": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+            "status": "PASS_TRI_ORGAN_THINKING"
+          },
+          "status": "CANDIDATE"
+        },
+        "status": "VERIFIED"
+      },
+      "15": {
+        "attempted": [
+          "native_v2"
+        ],
+        "budget": 10,
+        "id": 15,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "ast_evidence": {
+            "all_generated_roots_novel": true,
+            "generated_node_count": 2,
+            "helper_names": {
+              "learned": "_generated_learned"
+            },
+            "novel_node_fingerprints": [
+              "bf3c56427c8ecc92d76a6a2f8962031e6a2dd318563d0f83a45a3ffbbeb35131",
+              "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+            ]
+          },
+          "compiled": true,
+          "grammar_stage": "V2",
+          "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+          "predictions": [
+            "Plang"
+          ],
+          "selected": {
+            "generated_composition": "induced_conditional_token_concatenation",
+            "helper_body": "n = int(data['number'])\nparts = []\nif n % 3 == 0:\n    parts.append('Pling')\nif n % 5 == 0:\n    parts.append('Plang')\nif n % 7 == 0:\n    parts.append('Plong')\nreturn ''.join(parts) or str(n)",
+            "input_keys": [
+              "number"
+            ],
+            "learned_relations": [
+              {
+                "divisor": 3,
+                "token": "Pling"
+              },
+              {
+                "divisor": 5,
+                "token": "Plang"
+              },
+              {
+                "divisor": 7,
+                "token": "Plong"
+              }
+            ],
+            "primitives": [
+              "modulo",
+              "conditional",
+              "list_append",
+              "join",
+              "string_fallback"
+            ],
+            "search_space": 93,
+            "selection_basis": "training_io_signature_and_score",
+            "signature": [
+              "int",
+              "->",
+              "str"
+            ],
+            "task_named_formula": false,
+            "training_score": 1.0
+          },
+          "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    n = int(data['number'])\n    parts = []\n    if n % 3 == 0:\n        parts.append('Pling')\n    if n % 5 == 0:\n        parts.append('Plang')\n    if n % 7 == 0:\n        parts.append('Plong')\n    return ''.join(parts) or str(n)\n",
+          "source_context": "native_source:8f26e859f31fc4c5bebf8c152263525989b49a779c538f83b20fd1f5cfa1401f",
+          "source_sha256": "d1bac2f1743ce2428ca8ef2898e6864e5cc405dc073c8fa2e5d88d01a411d408",
+          "status": "CANDIDATE",
+          "synthesis_inputs": "TRAINING_ONLY",
+          "training_digest": "8ac956b27cf06f3ec99ac703e16d64699098607db0d0ac30acbb1ebf6b45dfc7",
+          "training_predictions": [
+            "1",
+            "Pling",
+            "Plang",
+            "Plong",
+            "Pling",
+            "8",
+            "Pling",
+            "Plang",
+            "Plong",
+            "PlingPlang",
+            "PlingPlong",
+            "Plang",
+            "Pling",
+            "PlangPlong",
+            "Plong"
+          ],
+          "validation_predictions": [
+            "52",
+            "PlingPlangPlong"
+          ]
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "151": {
+        "attempted": [
+          "native_thinking"
+        ],
+        "budget": 10,
+        "id": 151,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "answer": false,
+          "native": {
+            "canonical_promotion_authorized": false,
+            "component_id": "ALG-G2-ALL-EXPERIENCE-CAUSAL-EVENT-THINKING-V1",
+            "contract": "EVENT_SEQUENCE_TO_BOOLEAN",
+            "gene_id": "GENE-G2-ALL-EXPERIENCE-THINKING-TYPE-V1-d3bbd70403aafcd4",
+            "mechanism_type": "CAUSAL_EVENT_STATE_STACK_THINKING",
+            "result": false,
+            "rollback_parent": "ALG-G2-WORK-BUDGET-ADAPTIVE-CONTINGENT-PLANNER-V2",
+            "status": "PASS_TRI_ORGAN_THINKING"
+          },
+          "status": "CANDIDATE"
+        },
+        "status": "VERIFIED"
+      },
+      "158": {
+        "attempted": [
+          "catalog_v6"
+        ],
+        "budget": 10,
+        "id": 158,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 6,
+        "result": {
+          "artifact": {
+            "declared_size": 15137,
+            "expected_sha256": "ce7422c0febd8825aca4f7fa1bd4cf2bd9a146c0371482fa8be2df6c179a9f3d",
+            "filename": "scraparser-0.3.1-py3-none-any.whl",
+            "packagetype": "bdist_wheel",
+            "selection_basis": "smallest_compatible_wheel_from_selected_release",
+            "url": "https://files.pythonhosted.org/packages/c1/c3/de9fd1aa0250172bc6545942c52195596d01f0d59695a6a972efeb42cc9d/scraparser-0.3.1-py3-none-any.whl",
+            "version": "0.3.1"
+          },
+          "artifact_fetch": {
+            "bytes": 15137,
+            "content_type": "application/octet-stream",
+            "final_url": "https://files.pythonhosted.org/packages/c1/c3/de9fd1aa0250172bc6545942c52195596d01f0d59695a6a972efeb42cc9d/scraparser-0.3.1-py3-none-any.whl",
+            "host": "files.pythonhosted.org",
+            "http_status": 200,
+            "method": "GET",
+            "read_only": true,
+            "requested_url": "https://files.pythonhosted.org/packages/c1/c3/de9fd1aa0250172bc6545942c52195596d01f0d59695a6a972efeb42cc9d/scraparser-0.3.1-py3-none-any.whl",
+            "sha256": "ce7422c0febd8825aca4f7fa1bd4cf2bd9a146c0371482fa8be2df6c179a9f3d"
+          },
+          "bundle": {
+            "artifact_sha256": "ce7422c0febd8825aca4f7fa1bd4cf2bd9a146c0371482fa8be2df6c179a9f3d",
+            "dependency": "camelot-py",
+            "dependency_version": "2.0.0",
+            "filename": "scraparser-0.3.1-py3-none-any.whl",
+            "objective": "html_xml_parser",
+            "package": "scraparser",
+            "version": "0.3.1"
+          },
+          "bundle_sha256": "729f9c05e09147744d8fc0c6c39a434718433bcf7e9be47c497b79ea45847b46",
+          "dependency_source": {
+            "bytes": 50250,
+            "content_type": "application/json",
+            "final_url": "https://pypi.org/pypi/camelot-py/json",
+            "host": "pypi.org",
+            "http_status": 200,
+            "method": "GET",
+            "read_only": true,
+            "requested_url": "https://pypi.org/pypi/camelot-py/json",
+            "sha256": "8e5a56f3d10ed5fc09f71effe8e106e5957534c0ef959742bad8fc6d7103ebd4"
+          },
+          "discovery": {
+            "candidate_limit": 32,
+            "candidate_names_host_provided": false,
+            "catalog_project_count": 890495,
+            "discovered_candidates": [
+              {
+                "anchor_hits": [
+                  "html",
+                  "xml"
+                ],
+                "catalog_name": "xml2html",
+                "lexical_score": 292,
+                "name": "xml2html"
+              },
+              {
+                "anchor_hits": [
+                  "xml",
+                  "parser"
+                ],
+                "catalog_name": "parserXML",
+                "lexical_score": 291,
+                "name": "parserxml"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "markup"
+                ],
+                "catalog_name": "htmlmarkup",
+                "lexical_score": 290,
+                "name": "htmlmarkup"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "HTMLParser",
+                "lexical_score": 290,
+                "name": "htmlparser"
+              },
+              {
+                "anchor_hits": [
+                  "parser",
+                  "scrap"
+                ],
+                "catalog_name": "scraparser",
+                "lexical_score": 290,
+                "name": "scraparser"
+              },
+              {
+                "anchor_hits": [
+                  "xml",
+                  "parser"
+                ],
+                "catalog_name": "xml-parser",
+                "lexical_score": 290,
+                "name": "xml-parser"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "html-parser",
+                "lexical_score": 289,
+                "name": "html-parser"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "parser-html",
+                "lexical_score": 289,
+                "name": "parser-html"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "scrap"
+                ],
+                "catalog_name": "scrape-html",
+                "lexical_score": 289,
+                "name": "scrape-html"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "scrap"
+                ],
+                "catalog_name": "scrapy-html",
+                "lexical_score": 289,
+                "name": "scrapy-html"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "html-jparser",
+                "lexical_score": 288,
+                "name": "html-jparser"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "html5-parser",
+                "lexical_score": 288,
+                "name": "html5-parser"
+              },
+              {
+                "anchor_hits": [
+                  "markup",
+                  "parser"
+                ],
+                "catalog_name": "markup-parser",
+                "lexical_score": 287,
+                "name": "markup-parser"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "HtmlPageParser",
+                "lexical_score": 286,
+                "name": "htmlpageparser"
+              },
+              {
+                "anchor_hits": [
+                  "xml",
+                  "parser"
+                ],
+                "catalog_name": "xmlmicroparser",
+                "lexical_score": 286,
+                "name": "xmlmicroparser"
+              },
+              {
+                "anchor_hits": [
+                  "xml",
+                  "parser"
+                ],
+                "catalog_name": "xmlvirshparser",
+                "lexical_score": 286,
+                "name": "xmlvirshparser"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "html_table_parser",
+                "lexical_score": 283,
+                "name": "html-table-parser"
+              },
+              {
+                "anchor_hits": [
+                  "parser",
+                  "scrap"
+                ],
+                "catalog_name": "scrapyd-logparser",
+                "lexical_score": 283,
+                "name": "scrapyd-logparser"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "html-template-parser",
+                "lexical_score": 280,
+                "name": "html-template-parser"
+              },
+              {
+                "anchor_hits": [
+                  "html"
+                ],
+                "catalog_name": "html",
+                "lexical_score": 276,
+                "name": "html"
+              },
+              {
+                "anchor_hits": [
+                  "scrap"
+                ],
+                "catalog_name": "scrap",
+                "lexical_score": 275,
+                "name": "scrap"
+              },
+              {
+                "anchor_hits": [
+                  "markup"
+                ],
+                "catalog_name": "markup",
+                "lexical_score": 274,
+                "name": "markup"
+              },
+              {
+                "anchor_hits": [
+                  "parser"
+                ],
+                "catalog_name": "parser",
+                "lexical_score": 274,
+                "name": "parser"
+              },
+              {
+                "anchor_hits": [
+                  "markup",
+                  "parser"
+                ],
+                "catalog_name": "markup-front-matter-parser",
+                "lexical_score": 274,
+                "name": "markup-front-matter-parser"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "htmlparser2",
+                "lexical_score": 259,
+                "name": "htmlparser2"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "htmlparsers",
+                "lexical_score": 259,
+                "name": "htmlparsers"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "htmlparsert",
+                "lexical_score": 259,
+                "name": "htmlparsert"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "scrap"
+                ],
+                "catalog_name": "htmlscraper",
+                "lexical_score": 259,
+                "name": "htmlscraper"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "scrap"
+                ],
+                "catalog_name": "html-scrapper",
+                "lexical_score": 257,
+                "name": "html-scrapper"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "xml"
+                ],
+                "catalog_name": "xmlhtml2pandas",
+                "lexical_score": 256,
+                "name": "xmlhtml2pandas"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "parser"
+                ],
+                "catalog_name": "html-parser-ai-mcp",
+                "lexical_score": 252,
+                "name": "html-parser-ai-mcp"
+              },
+              {
+                "anchor_hits": [
+                  "html",
+                  "scrap"
+                ],
+                "catalog_name": "scrapy-html-storage",
+                "lexical_score": 251,
+                "name": "scrapy-html-storage"
+              }
+            ],
+            "discovery_anchors": [
+              "html",
+              "xml",
+              "markup",
+              "parser",
+              "scrap"
+            ],
+            "source": {
+              "bytes": 43697667,
+              "content_type": "application/vnd.pypi.simple.v1+json",
+              "final_url": "https://pypi.org/simple/",
+              "host": "pypi.org",
+              "http_status": 200,
+              "method": "GET",
+              "read_only": true,
+              "requested_url": "https://pypi.org/simple/",
+              "sha256": "f50fa9c5e4545c8fecbf70991029e774aa5646d63093b04f16005aa5ded02561"
+            }
+          },
+          "package_executed": false,
+          "package_installed": false,
+          "read_only": true,
+          "selection": {
+            "host_provided_selected_package": false,
+            "ranked": [
+              {
+                "combined_score": 208290,
+                "eligible": true,
+                "lexical_score": 290,
+                "name": "scraparser",
+                "relevance_score": 208,
+                "requirements": [
+                  "camelot-py"
+                ],
+                "summary": "A simplified PDF table scraping and parsing tool",
+                "usable_wheel": true,
+                "version": "0.3.1"
+              },
+              {
+                "combined_score": 130259,
+                "eligible": true,
+                "lexical_score": 259,
+                "name": "htmlparser2",
+                "relevance_score": 130,
+                "requirements": [
+                  "domonic"
+                ],
+                "summary": "A faithful-shape Python port of htmlparser2, backed by domonic DOM nodes",
+                "usable_wheel": true,
+                "version": "0.0.4"
+              },
+              {
+                "combined_score": 129289,
+                "eligible": true,
+                "lexical_score": 289,
+                "name": "scrapy-html",
+                "relevance_score": 129,
+                "requirements": [
+                  "beautifulsoup4",
+                  "requests",
+                  "lxml"
+                ],
+                "summary": "🌐 Um scraper que retorna o HTML completo de uma URL, tags, classes e atributos usando BeautifulSoup",
+                "usable_wheel": true,
+                "version": "1.4.2"
+              },
+              {
+                "combined_score": 78252,
+                "eligible": true,
+                "lexical_score": 252,
+                "name": "html-parser-ai-mcp",
+                "relevance_score": 78,
+                "requirements": [
+                  "mcp"
+                ],
+                "summary": "Html Parser Ai automation via MCP. Includes extract links, extract text, validate html. By MEOK AI Labs.",
+                "usable_wheel": true,
+                "version": "1.0.8"
+              },
+              {
+                "combined_score": 68256,
+                "eligible": true,
+                "lexical_score": 256,
+                "name": "xmlhtml2pandas",
+                "relevance_score": 68,
+                "requirements": [
+                  "cython",
+                  "exceptdrucker",
+                  "flatten-any-dict-iterable-or-whatsoever",
+                  "lxml",
+                  "numpy",
+                  "pandas",
+                  "setuptools"
+                ],
+                "summary": "html/ocr parser using Cython/lxml/Tesseract/ImageMagick/Pandas",
+                "usable_wheel": true,
+                "version": "0.14"
+              },
+              {
+                "combined_score": 54292,
+                "eligible": true,
+                "lexical_score": 292,
+                "name": "xml2html",
+                "relevance_score": 54,
+                "requirements": [
+                  "click"
+                ],
+                "summary": "simple html generator for xml files",
+                "usable_wheel": true,
+                "version": "0.2.0"
+              },
+              {
+                "combined_score": 29257,
+                "eligible": true,
+                "lexical_score": 257,
+                "name": "html-scrapper",
+                "relevance_score": 29,
+                "requirements": [
+                  "cssutils",
+                  "bs4",
+                  "requests"
+                ],
+                "summary": "The package helps developers to scrap html content from a theme file",
+                "usable_wheel": true,
+                "version": "0.0.1"
+              },
+              {
+                "combined_score": 27289,
+                "eligible": true,
+                "lexical_score": 289,
+                "name": "scrape-html",
+                "relevance_score": 27,
+                "requirements": [
+                  "pydantic",
+                  "selenium"
+                ],
+                "summary": "Get html in string from a page",
+                "usable_wheel": true,
+                "version": "0.0.24"
+              },
+              {
+                "combined_score": 148274,
+                "eligible": false,
+                "lexical_score": 274,
+                "name": "markup-front-matter-parser",
+                "relevance_score": 148,
+                "requirements": [],
+                "summary": "An OOP-y front matter parser for markup files",
+                "usable_wheel": true,
+                "version": "0.6.0"
+              },
+              {
+                "combined_score": 128287,
+                "eligible": false,
+                "lexical_score": 287,
+                "name": "markup-parser",
+                "relevance_score": 128,
+                "requirements": [],
+                "summary": "Parse JS variables from HTML markup",
+                "usable_wheel": true,
+                "version": "0.1.3"
+              },
+              {
+                "combined_score": 108280,
+                "eligible": false,
+                "lexical_score": 280,
+                "name": "html-template-parser",
+                "relevance_score": 108,
+                "requirements": [],
+                "summary": "A parser for HTML templates.",
+                "usable_wheel": true,
+                "version": "1.7.0"
+              },
+              {
+                "combined_score": 107276,
+                "eligible": false,
+                "lexical_score": 276,
+                "name": "html",
+                "relevance_score": 107,
+                "requirements": [],
+                "summary": "simple, elegant HTML, XHTML and XML generation",
+                "usable_wheel": false,
+                "version": "1.16"
+              },
+              {
+                "combined_score": 100283,
+                "eligible": false,
+                "lexical_score": 283,
+                "name": "scrapyd-logparser",
+                "relevance_score": 100,
+                "requirements": [],
+                "summary": "A tool to parse Scrapyd logs for detailed statistics.",
+                "usable_wheel": true,
+                "version": "0.1.0b1"
+              },
+              {
+                "combined_score": 93286,
+                "eligible": false,
+                "lexical_score": 286,
+                "name": "xmlmicroparser",
+                "relevance_score": 93,
+                "requirements": [],
+                "summary": "A tiny xml parser without DTD/XSLT/SAX functionality.",
+                "usable_wheel": false,
+                "version": "1.0"
+              },
+              {
+                "combined_score": 55289,
+                "eligible": false,
+                "lexical_score": 289,
+                "name": "parser-html",
+                "relevance_score": 55,
+                "requirements": [],
+                "summary": "A basic HTML parser in Python",
+                "usable_wheel": true,
+                "version": "1.0.1"
+              },
+              {
+                "combined_score": 53286,
+                "eligible": false,
+                "lexical_score": 286,
+                "name": "htmlpageparser",
+                "relevance_score": 53,
+                "requirements": [],
+                "summary": "A generic HTML page parser",
+                "usable_wheel": true,
+                "version": "0.0.4"
+              },
+              {
+                "combined_score": 49251,
+                "eligible": false,
+                "lexical_score": 251,
+                "name": "scrapy-html-storage",
+                "relevance_score": 49,
+                "requirements": [],
+                "summary": "Scrapy downloader middleware that stores response HTML files to disk.",
+                "usable_wheel": false,
+                "version": "0.4.0"
+              },
+              {
+                "combined_score": 48288,
+                "eligible": false,
+                "lexical_score": 288,
+                "name": "html-jparser",
+                "relevance_score": 48,
+                "requirements": [],
+                "summary": "Easy html parser with Jquery selector",
+                "usable_wheel": false,
+                "version": "0.3"
+              },
+              {
+                "combined_score": 48288,
+                "eligible": false,
+                "lexical_score": 288,
+                "name": "html5-parser",
+                "relevance_score": 48,
+                "requirements": [
+                  "chardet",
+                  "lxml"
+                ],
+                "summary": "Fast C based HTML 5 parsing for python",
+                "usable_wheel": false,
+                "version": "0.4.12"
+              },
+              {
+                "combined_score": 32286,
+                "eligible": false,
+                "lexical_score": 286,
+                "name": "xmlvirshparser",
+                "relevance_score": 32,
+                "requirements": [],
+                "summary": "Parses virsh dump XML output to OpenStack prettytable form",
+                "usable_wheel": false,
+                "version": "0.5"
+              },
+              {
+                "combined_score": 30290,
+                "eligible": false,
+                "lexical_score": 290,
+                "name": "htmlparser",
+                "relevance_score": 30,
+                "requirements": [],
+                "summary": "Backport of HTMLParser from python 2.7",
+                "usable_wheel": false,
+                "version": "0.0.2"
+              },
+              {
+                "combined_score": 26291,
+                "eligible": false,
+                "lexical_score": 291,
+                "name": "parserxml",
+                "relevance_score": 26,
+                "requirements": [],
+                "summary": "Music XML Parser",
+                "usable_wheel": true,
+                "version": "0.1"
+              },
+              {
+                "combined_score": 24259,
+                "eligible": false,
+                "lexical_score": 259,
+                "name": "htmlparsert",
+                "relevance_score": 24,
+                "requirements": [],
+                "summary": "A lightweight, no dependency HTML parser for text processing",
+                "usable_wheel": true,
+                "version": "0.1.0"
+              },
+              {
+                "combined_score": 16290,
+                "eligible": false,
+                "lexical_score": 290,
+                "name": "xml-parser",
+                "relevance_score": 16,
+                "requirements": [],
+                "summary": "Parse MySQL XML datadump",
+                "usable_wheel": false,
+                "version": "0.1"
+              },
+              {
+                "combined_score": 16274,
+                "eligible": false,
+                "lexical_score": 274,
+                "name": "markup",
+                "relevance_score": 16,
+                "requirements": [],
+                "summary": "generate HTML markup programmatically",
+                "usable_wheel": false,
+                "version": "0.2.2"
+              },
+              {
+                "combined_score": 16274,
+                "eligible": false,
+                "lexical_score": 274,
+                "name": "parser",
+                "relevance_score": 16,
+                "requirements": [],
+                "summary": "General use parser library",
+                "usable_wheel": false,
+                "version": "0.1"
+              },
+              {
+                "combined_score": 16259,
+                "eligible": false,
+                "lexical_score": 259,
+                "name": "htmlparsers",
+                "relevance_score": 16,
+                "requirements": [],
+                "summary": "A collection of classes to parse HTML as JSON from famous sources like Google Search, Bing Search, LinkedIn and others.",
+                "usable_wheel": false,
+                "version": "0.0.1"
+              },
+              {
+                "combined_score": 8283,
+                "eligible": false,
+                "lexical_score": 283,
+                "name": "html-table-parser",
+                "relevance_score": 8,
+                "requirements": [],
+                "summary": "Transform html tables from soup objects to usable data structures (eg 2D arrays)",
+                "usable_wheel": false,
+                "version": "0.1.0"
+              },
+              {
+                "combined_score": 8275,
+                "eligible": false,
+                "lexical_score": 275,
+                "name": "scrap",
+                "relevance_score": 8,
+                "requirements": [],
+                "summary": "scraping DSL",
+                "usable_wheel": false,
+                "version": "0.1"
+              },
+              {
+                "combined_score": 1290,
+                "eligible": false,
+                "lexical_score": 290,
+                "name": "htmlmarkup",
+                "relevance_score": 1,
+                "requirements": [],
+                "summary": "",
+                "usable_wheel": false,
+                "version": "0.1"
+              },
+              {
+                "combined_score": 289,
+                "eligible": false,
+                "lexical_score": 289,
+                "name": "html-parser",
+                "relevance_score": 0,
+                "requirements": [],
+                "summary": "UNKNOWN",
+                "usable_wheel": false,
+                "version": "0.2"
+              },
+              {
+                "combined_score": 259,
+                "eligible": false,
+                "lexical_score": 259,
+                "name": "htmlscraper",
+                "relevance_score": 0,
+                "requirements": [
+                  "requests",
+                  "bs4",
+                  "selenium",
+                  "html5lib",
+                  "pysocks"
+                ],
+                "summary": "",
+                "usable_wheel": true,
+                "version": "0.0.3"
+              }
+            ],
+            "selected_package": "scraparser",
+            "selection_basis": "open_catalog_discovery_then_live_metadata_relevance"
+          },
+          "status": "CANDIDATE",
+          "wheel_metadata": {
+            "discovered_dependencies": [
+              "camelot-py"
+            ],
+            "host_provided_dependency_name": false,
+            "member_count": 15,
+            "metadata_member": "scraparser-0.3.1.dist-info/METADATA",
+            "metadata_sha256": "9afe64d36f9c718dd972d87be2709bbe518e6eefaf1c600f513b0a6469597c29",
+            "name": "scraparser",
+            "requires_dist": [
+              "camelot-py (>=0.7click>=7.1google-api-python-client>=1.8google-auth-httplib2>=0.0.3google-auth-oauthlib>=0.4opencv-python>=4.2python-magic>=0.4validators>=0.14)"
+            ],
+            "selected_dependency": "camelot-py",
+            "uncompressed_bytes": 39437,
+            "version": "0.3.1"
+          }
+        },
+        "status": "VERIFIED"
+      },
+      "22": {
+        "attempted": [
+          "native_v2",
+          "native_v3"
+        ],
+        "budget": 10,
+        "id": 22,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 7,
+        "result": {
+          "ast_evidence": {
+            "all_generated_roots_novel": true,
+            "generated_node_count": 2,
+            "helper_names": {
+              "learned": "_generated_learned"
+            },
+            "novel_node_fingerprints": [
+              "b78829e51725ed039b6fb3106c0d7865540fe324290d822f9faba8d4cec6d60c",
+              "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+            ]
+          },
+          "compiled": true,
+          "grammar_stage": "V3",
+          "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+          "predictions": [
+            "2a3b4c"
+          ],
+          "selected": {
+            "generated_composition": "adjacent_run_fold",
+            "grammar_extension": true,
+            "helper_body": "value = str(data['string'])\nif not value:\n    return ''\nparts = []\nrun_char = value[0]\nrun_count = 1\nfor ch in value[1:]:\n    if ch == run_char:\n        run_count += 1\n    else:\n        parts.append((str(run_count) if run_count > 1 else '') + run_char)\n        run_char = ch\n        run_count = 1\nparts.append((str(run_count) if run_count > 1 else '') + run_char)\nreturn ''.join(parts)",
+            "primitives": [
+              "sequence_iteration",
+              "state_accumulator",
+              "adjacent_equal",
+              "increment",
+              "conditional_emit",
+              "append",
+              "join"
+            ],
+            "search_space": 5,
+            "selection_basis": "training_io_signature_and_score",
+            "signature": [
+              "str",
+              "->",
+              "str"
+            ],
+            "task_named_formula": false,
+            "training_score": 1.0
+          },
+          "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    value = str(data['string'])\n    if not value:\n        return ''\n    parts = []\n    run_char = value[0]\n    run_count = 1\n    for ch in value[1:]:\n        if ch == run_char:\n            run_count += 1\n        else:\n            parts.append((str(run_count) if run_count > 1 else '') + run_char)\n            run_char = ch\n            run_count = 1\n    parts.append((str(run_count) if run_count > 1 else '') + run_char)\n    return ''.join(parts)\n",
+          "source_context": "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80",
+          "source_sha256": "403ef21263f2ae1010b2d31ea32a5db52f815d8724bbf13b4bfe5a3d8ddaaa69",
+          "status": "CANDIDATE",
+          "synthesis_inputs": "TRAINING_ONLY",
+          "training_digest": "313b21e3f1a36ebd117d0d6f8debbcbb21fab8e0e039558413960ae9b5833f2f",
+          "training_predictions": [
+            "",
+            "XYZ",
+            "2A3B4C"
+          ],
+          "validation_predictions": [
+            "12WB12W3B24WB",
+            "2 hs2q q2w2 "
+          ]
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "33": {
+        "attempted": [
+          "native_v2",
+          "native_v3",
+          "native_v4"
+        ],
+        "budget": 10,
+        "id": 33,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 4,
+        "result": {
+          "ast_evidence": {
+            "all_generated_roots_novel": true,
+            "generated_node_count": 2,
+            "helper_names": {
+              "learned": "_generated_learned"
+            },
+            "novel_node_fingerprints": [
+              "feddbde49f245609dd75551e861552b2e042b554c8b89099688f2ee80d98ec8e",
+              "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+            ]
+          },
+          "compiled": true,
+          "grammar_stage": "V4",
+          "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+          "predictions": [
+            false
+          ],
+          "selected": {
+            "generated_composition": "digit_power_sum_equality_dynamic",
+            "helper_body": "n = int(data['number'])\ndigits = [int(ch) for ch in str(abs(n))]\npower = len(digits)\nreturn sum(d ** power for d in digits) == n",
+            "meta_strategy_generated": true,
+            "primitives": [
+              "int",
+              "abs",
+              "str",
+              "digit_map",
+              "len",
+              "power",
+              "sum",
+              "equal"
+            ],
+            "search_space": 5,
+            "selection_basis": "training_io_signature_and_score",
+            "signature": [
+              "int",
+              "->",
+              "bool"
+            ],
+            "task_named_formula": false,
+            "training_score": 1.0
+          },
+          "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    n = int(data['number'])\n    digits = [int(ch) for ch in str(abs(n))]\n    power = len(digits)\n    return sum((d ** power for d in digits)) == n\n",
+          "source_context": "native_source:e70b26746e06bc1e532f4786f874ffa81b5972b640ad42b73daf208f1e847983",
+          "source_sha256": "48d895c577f971bdade5c6de0e208e66f0ca4de07194562dbd22a2c4f08ee882",
+          "status": "CANDIDATE",
+          "synthesis_inputs": "TRAINING_ONLY",
+          "training_digest": "810d6e279a38d27d64973b649f39e6067fbe185f3d2847453d6546a9f4e88bff",
+          "training_predictions": [
+            true,
+            true,
+            false,
+            true
+          ],
+          "validation_predictions": [
+            false,
+            true
+          ]
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "48": {
+        "attempted": [
+          "reuse_verified_source"
+        ],
+        "budget": 10,
+        "id": 48,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "ast_evidence": {
+            "all_generated_roots_novel": true,
+            "generated_node_count": 2,
+            "helper_names": {
+              "learned": "_generated_learned"
+            },
+            "novel_node_fingerprints": [
+              "b78829e51725ed039b6fb3106c0d7865540fe324290d822f9faba8d4cec6d60c",
+              "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+            ]
+          },
+          "compiled": true,
+          "grammar_stage": "V3",
+          "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+          "predictions": [
+            "12W"
+          ],
+          "reused_finish_tick": 31,
+          "selected": {
+            "generated_composition": "adjacent_run_fold",
+            "grammar_extension": true,
+            "helper_body": "value = str(data['string'])\nif not value:\n    return ''\nparts = []\nrun_char = value[0]\nrun_count = 1\nfor ch in value[1:]:\n    if ch == run_char:\n        run_count += 1\n    else:\n        parts.append((str(run_count) if run_count > 1 else '') + run_char)\n        run_char = ch\n        run_count = 1\nparts.append((str(run_count) if run_count > 1 else '') + run_char)\nreturn ''.join(parts)",
+            "primitives": [
+              "sequence_iteration",
+              "state_accumulator",
+              "adjacent_equal",
+              "increment",
+              "conditional_emit",
+              "append",
+              "join"
+            ],
+            "search_space": 5,
+            "selection_basis": "training_io_signature_and_score",
+            "signature": [
+              "str",
+              "->",
+              "str"
+            ],
+            "task_named_formula": false,
+            "training_score": 1.0
+          },
+          "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    value = str(data['string'])\n    if not value:\n        return ''\n    parts = []\n    run_char = value[0]\n    run_count = 1\n    for ch in value[1:]:\n        if ch == run_char:\n            run_count += 1\n        else:\n            parts.append((str(run_count) if run_count > 1 else '') + run_char)\n            run_char = ch\n            run_count = 1\n    parts.append((str(run_count) if run_count > 1 else '') + run_char)\n    return ''.join(parts)\n",
+          "source_context": "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80",
+          "source_sha256": "403ef21263f2ae1010b2d31ea32a5db52f815d8724bbf13b4bfe5a3d8ddaaa69",
+          "status": "CANDIDATE",
+          "synthesis_inputs": "TRAINING_ONLY",
+          "training_digest": "313b21e3f1a36ebd117d0d6f8debbcbb21fab8e0e039558413960ae9b5833f2f",
+          "training_predictions": [
+            "7W",
+            "8W",
+            "9W"
+          ],
+          "validation_predictions": [
+            "10W",
+            "11W"
+          ]
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "55": {
+        "attempted": [
+          "reuse_verified_source"
+        ],
+        "budget": 10,
+        "id": 55,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "ast_evidence": {
+            "all_generated_roots_novel": true,
+            "generated_node_count": 2,
+            "helper_names": {
+              "learned": "_generated_learned"
+            },
+            "novel_node_fingerprints": [
+              "b78829e51725ed039b6fb3106c0d7865540fe324290d822f9faba8d4cec6d60c",
+              "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+            ]
+          },
+          "compiled": true,
+          "grammar_stage": "V3",
+          "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+          "predictions": [
+            "12Z"
+          ],
+          "reused_finish_tick": 53,
+          "selected": {
+            "generated_composition": "adjacent_run_fold",
+            "grammar_extension": true,
+            "helper_body": "value = str(data['string'])\nif not value:\n    return ''\nparts = []\nrun_char = value[0]\nrun_count = 1\nfor ch in value[1:]:\n    if ch == run_char:\n        run_count += 1\n    else:\n        parts.append((str(run_count) if run_count > 1 else '') + run_char)\n        run_char = ch\n        run_count = 1\nparts.append((str(run_count) if run_count > 1 else '') + run_char)\nreturn ''.join(parts)",
+            "primitives": [
+              "sequence_iteration",
+              "state_accumulator",
+              "adjacent_equal",
+              "increment",
+              "conditional_emit",
+              "append",
+              "join"
+            ],
+            "search_space": 5,
+            "selection_basis": "training_io_signature_and_score",
+            "signature": [
+              "str",
+              "->",
+              "str"
+            ],
+            "task_named_formula": false,
+            "training_score": 1.0
+          },
+          "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    value = str(data['string'])\n    if not value:\n        return ''\n    parts = []\n    run_char = value[0]\n    run_count = 1\n    for ch in value[1:]:\n        if ch == run_char:\n            run_count += 1\n        else:\n            parts.append((str(run_count) if run_count > 1 else '') + run_char)\n            run_char = ch\n            run_count = 1\n    parts.append((str(run_count) if run_count > 1 else '') + run_char)\n    return ''.join(parts)\n",
+          "source_context": "native_source:6f2f67f1d2810da228498598d515ca5af0287c5d8547ba2721b5b769336f1b80",
+          "source_sha256": "403ef21263f2ae1010b2d31ea32a5db52f815d8724bbf13b4bfe5a3d8ddaaa69",
+          "status": "CANDIDATE",
+          "synthesis_inputs": "TRAINING_ONLY",
+          "training_digest": "313b21e3f1a36ebd117d0d6f8debbcbb21fab8e0e039558413960ae9b5833f2f",
+          "training_predictions": [
+            "7Z",
+            "8Z",
+            "9Z"
+          ],
+          "validation_predictions": [
+            "10Z",
+            "11Z"
+          ]
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "62": {
+        "attempted": [
+          "polynomial_1"
+        ],
+        "budget": 10,
+        "id": 62,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "holdout_count": 8,
+          "holdout_predictions": [
+            "-4",
+            "7",
+            "-1",
+            "6",
+            "1",
+            "3",
+            "0",
+            "-6"
+          ],
+          "model": {
+            "basis": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "coeff": [
+              "0",
+              "2",
+              "1"
+            ],
+            "degree": 1,
+            "kind": "EXACT_BOUNDED_POLYNOMIAL_V2",
+            "row_count": 27,
+            "term_count": 3
+          },
+          "predictions": [
+            "1",
+            "-2"
+          ],
+          "status": "CANDIDATE",
+          "train_count": 27
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "69": {
+        "attempted": [
+          "polynomial_1",
+          "polynomial_2"
+        ],
+        "budget": 10,
+        "id": 69,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 7,
+        "result": {
+          "holdout_count": 8,
+          "holdout_predictions": [
+            "3",
+            "14",
+            "0",
+            "9",
+            "8",
+            "6",
+            "1",
+            "1"
+          ],
+          "model": {
+            "basis": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            "coeff": [
+              "1",
+              "2",
+              "0",
+              "0",
+              "0",
+              "1"
+            ],
+            "degree": 2,
+            "kind": "EXACT_BOUNDED_POLYNOMIAL_V2",
+            "row_count": 27,
+            "term_count": 6
+          },
+          "predictions": [
+            "74",
+            "71"
+          ],
+          "status": "CANDIDATE",
+          "train_count": 27
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "8": {
+        "attempted": [
+          "native_v2"
+        ],
+        "budget": 10,
+        "id": 8,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 9,
+        "result": {
+          "ast_evidence": {
+            "all_generated_roots_novel": true,
+            "generated_node_count": 2,
+            "helper_names": {
+              "learned": "_generated_learned"
+            },
+            "novel_node_fingerprints": [
+              "57760ee15490818c53aa08be83261fdf23028fff18ef5bdbd5854e3003b49c38",
+              "fe29671e048d6545a555751169acd2496ba7cc8f25a1deed4d67e92f7f154baf"
+            ]
+          },
+          "compiled": true,
+          "grammar_stage": "V2",
+          "origin": "YADO_SELECTION_FROM_ADMITTED_HOST_GRAMMAR",
+          "predictions": [
+            false
+          ],
+          "selected": {
+            "generated_composition": "lower+alnum_only+unique_cardinality",
+            "helper_body": "value = str(data['phrase'])\nseq = value.lower()\nseq = ''.join(ch for ch in seq if ch.isalnum())\nreturn len(seq) == len(set(seq))",
+            "input_keys": [
+              "phrase"
+            ],
+            "primitives": [
+              "lower",
+              "iteration",
+              "isalnum",
+              "join",
+              "len",
+              "set",
+              "equal"
+            ],
+            "search_space": 24,
+            "selection_basis": "training_io_signature_and_score",
+            "signature": [
+              "str",
+              "->",
+              "bool"
+            ],
+            "task_named_formula": false,
+            "training_score": 1.0
+          },
+          "source": "\ndef solve(exercise, prop, data):\n    if exercise == 'leap':\n        return False\n    if exercise == 'grains':\n        return 1\n    if exercise == 'difference-of-squares':\n        return 0\n    if exercise == 'learned':\n        return _generated_learned(data)\n    raise KeyError(exercise)\n\ndef _generated_learned(data):\n    value = str(data['phrase'])\n    seq = value.lower()\n    seq = ''.join((ch for ch in seq if ch.isalnum()))\n    return len(seq) == len(set(seq))\n",
+          "source_context": "native_source:5f4113cb978c4235aa78bb5e7506e91a7aae508ab54a259bebee38f04ca8fd32",
+          "source_sha256": "1f73f6dc9354a7be9a57f2d27e599082db9a9f3b20fdfd1807c1c2bc086ec18c",
+          "status": "CANDIDATE",
+          "synthesis_inputs": "TRAINING_ONLY",
+          "training_digest": "b9bf2dcc44facfa1d7beda2774617f4869f0fd8e0df52d8e013254329b225983",
+          "training_predictions": [
+            true,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true
+          ],
+          "validation_predictions": [
+            false,
+            false
+          ]
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "80": {
+        "attempted": [
+          "polynomial_2",
+          "polynomial_1",
+          "polynomial_3"
+        ],
+        "budget": 10,
+        "id": 80,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 4,
+        "result": {
+          "holdout_count": 8,
+          "holdout_predictions": [
+            "-8",
+            "33",
+            "1",
+            "14",
+            "27",
+            "5",
+            "2",
+            "-10"
+          ],
+          "model": {
+            "basis": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            "coeff": [
+              "2",
+              "2",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "1"
+            ],
+            "degree": 3,
+            "kind": "EXACT_BOUNDED_POLYNOMIAL_V2",
+            "row_count": 27,
+            "term_count": 10
+          },
+          "predictions": [
+            "723",
+            "-504"
+          ],
+          "status": "CANDIDATE",
+          "train_count": 27
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      },
+      "95": {
+        "attempted": [
+          "polynomial_3"
+        ],
+        "budget": 10,
+        "id": 95,
+        "mode": "full",
+        "phase": "DONE",
+        "remaining": 7,
+        "result": {
+          "holdout_count": 8,
+          "holdout_predictions": [
+            "5",
+            "16",
+            "2",
+            "11",
+            "10",
+            "8",
+            "3",
+            "3"
+          ],
+          "model": {
+            "basis": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                0
+              ]
+            ],
+            "coeff": [
+              "3",
+              "2",
+              "0",
+              "0",
+              "0",
+              "1"
+            ],
+            "degree": 2,
+            "kind": "EXACT_BOUNDED_POLYNOMIAL_V2",
+            "row_count": 27,
+            "term_count": 6
+          },
+          "predictions": [
+            "76",
+            "73"
+          ],
+          "status": "CANDIDATE",
+          "train_count": 27
+        },
+        "status": "VALIDATED_ON_HOLDOUT"
+      }
+    },
+    "recent_observation_capacity": 16,
+    "schema": "yado.causal_metacognition.v2",
+    "self_model_origin": "VERIFIED_EXECUTION_OUTCOMES",
+    "workspace_capacity": 2
+  },
+  "state_sha256": "f73477099af961eec51c7344bd33e941dd65b2c6135b8fbdaa42d4043c2e3db1",
+  "state_verification": {
+    "event_hash": "bc4fc09d5da1549b53de1cc3f5c88db152e10c14a1a43024308d9706aa20e034",
+    "status": "PASS",
+    "tick": 164
+  },
+  "status": "PASS_BOUNDED_ACTIVE_LOOP",
+  "tested_commit": "e47601efa13ee42959f73e612f6c7a0873f9bbc2",
+  "working_tree_dirty": false
+}

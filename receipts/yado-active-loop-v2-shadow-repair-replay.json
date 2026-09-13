@@ -1,0 +1,136 @@
+{
+  "architecture_mutation": false,
+  "canonical_mutation": false,
+  "causal_ablation": {
+    "ablation": "DISABLE_SELECTED_PREPROCESSING_AND_REVERT_TO_CANONICAL_V6",
+    "baseline_cross_error_rate": 0.7741935483870968,
+    "baseline_same_error_rate": 0.056451612903225756,
+    "candidate_cross_error_rate": 0.048387096774193505,
+    "candidate_same_error_rate": 0.048387096774193505,
+    "causal_cross_error_reduction": 0.7258064516129032,
+    "gates": {
+      "causal_ablation_positive": true,
+      "fresh_candidate_cross_accuracy_ge_0_90": true,
+      "fresh_cross_metadata_error_reduction_ge_0_50": true,
+      "fresh_cross_metadata_improves": true,
+      "fresh_identity_preserved": true,
+      "fresh_same_label_not_worse": true,
+      "selected_beats_baseline_on_discovery_selection": true
+    }
+  },
+  "consciousness_claimed": false,
+  "decision": {
+    "admit_candidate_to_canonical_gate": true,
+    "automatic_main_mutation": false,
+    "canonical_direct_write": false,
+    "next_selected_step": "CANONICAL_ADMISSION_GATE_FOR_ENDOGENOUS_REPAIR_CANDIDATE_V1",
+    "rollback_required": true
+  },
+  "fresh_holdout": {
+    "baseline": {
+      "cross": {
+        "accuracy": 0.22580645161290322,
+        "correct": 28,
+        "mode": "BASELINE_V6",
+        "total": 124
+      },
+      "identity": {
+        "accuracy": 1.0,
+        "correct": 31,
+        "mode": "BASELINE_V6",
+        "total": 31
+      },
+      "same": {
+        "accuracy": 0.9435483870967742,
+        "correct": 117,
+        "mode": "BASELINE_V6",
+        "total": 124
+      }
+    },
+    "candidate": {
+      "cross": {
+        "accuracy": 0.9516129032258065,
+        "correct": 118,
+        "mode": "BOUNDARY_PLUS_SUFFIX",
+        "total": 124
+      },
+      "identity": {
+        "accuracy": 1.0,
+        "correct": 31,
+        "mode": "BOUNDARY_PLUS_SUFFIX",
+        "total": 31
+      },
+      "same": {
+        "accuracy": 0.9516129032258065,
+        "correct": 118,
+        "mode": "BOUNDARY_PLUS_SUFFIX",
+        "total": 124
+      }
+    },
+    "cross_label_cases": 124,
+    "families": [
+      "XML_BOUNDARY",
+      "HASH_BOUNDARY",
+      "TASK_TRAILER",
+      "BRACE_BOUNDARY"
+    ],
+    "identity_cases": 31,
+    "same_label_cases": 124
+  },
+  "g3_genesis_performed": false,
+  "goal": {
+    "goal": "REPAIR_ENDOGENOUS-DEFICIT-652D19F60F3A1E11",
+    "host_supplied": false,
+    "source_class": "ENDOGENOUS_FRESH_COUNTEREXAMPLE"
+  },
+  "hypothesis_search": {
+    "candidate_digest_fixed_before_fresh_holdout": "eebae39f580a14fa5e655b17b91ab8f66dd69ec95d03ad9a5934049f480b2f02",
+    "host_bounded_family": true,
+    "host_selected_hypothesis": false,
+    "hypothesis_family": [
+      "BASELINE_V6",
+      "EXPLICIT_TASK_BOUNDARY_EXTRACTION",
+      "METADATA_SUFFIX_CUTOFF",
+      "BOUNDARY_PLUS_SUFFIX"
+    ],
+    "scores": [
+      {
+        "accuracy": 0.0,
+        "correct": 0,
+        "mode": "BASELINE_V6",
+        "total": 32
+      },
+      {
+        "accuracy": 0.75,
+        "correct": 24,
+        "mode": "EXPLICIT_TASK_BOUNDARY_EXTRACTION",
+        "total": 32
+      },
+      {
+        "accuracy": 0.3125,
+        "correct": 10,
+        "mode": "METADATA_SUFFIX_CUTOFF",
+        "total": 32
+      },
+      {
+        "accuracy": 1.0,
+        "correct": 32,
+        "mode": "BOUNDARY_PLUS_SUFFIX",
+        "total": 32
+      }
+    ],
+    "selected_mode": "BOUNDARY_PLUS_SUFFIX",
+    "selection_rows": 32
+  },
+  "receipt_sha256": "3f4944c715aa900209008fb3e4a33da6ed2673983a4dee8dd0f74e8a8c123dfe",
+  "schema": "yado.endogenous_deficit_repair_experiment.v1",
+  "semantic_boundary": "This is a bounded host-scaffolded hypothesis family. YADO selects the repair candidate from deficit evidence and validates it on fresh holdout with causal ablation. It does not prove open-ended native program synthesis, AGI, reason, or subjective consciousness.",
+  "source_discovery": {
+    "deficit_id": "ENDOGENOUS-DEFICIT-652D19F60F3A1E11",
+    "dimension": "SEMANTICALLY_IRRELEVANT_METADATA_CAN_CHANGE_CAPABILITY_ROUTING",
+    "discovery_receipt_sha256": "fe3d2bae34700b8054d503b6defafbc6fcbb50e90e41d306237e9a9c1f034fc9",
+    "host_supplied_goal": false,
+    "selected_from_fixed_checklist": false
+  },
+  "status": "PASS_SHADOW_ENDOGENOUS_DEFICIT_BOUNDED_REPAIR_EXPERIMENT_V1"
+}

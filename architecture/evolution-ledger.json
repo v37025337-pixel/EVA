@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "65c27aeab6932e45fadb767e0d914d10f3a4705ca0dfa1315442b4a753b4569b",
+  "current_head_digest": "3f16a2e60692d5996fdc74feb3c3d1071f2332d08912af89734f87192ae54095",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 308,
+  "event_count": 310,
   "events": [
     {
       "canonical_mutation": false,
@@ -5420,10 +5420,43 @@
       "source_digest": "bcc1e77a8c4de6cbfdbfde6f5572f9cf230d5d4b66c1e2433f4907fc087aabe8",
       "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-34719177930.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": true,
+      "effect": "ACTIVE_NATIVE_SOURCE_AND_READONLY_LIBRARY_GOALS_BOUND; NEXT=KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
+      "event_hash": "836f2fd72fdc11e75b4ab41a977d89ad270f15c7b24beea65dba688e729c29d7",
+      "event_id": "E0309_ACTIVE_NATIVE_LOOP_V1",
+      "event_type": "G2_ACTIVE_RUNTIME_BINDING",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 308,
+      "new_head_digest": "3f16a2e60692d5996fdc74feb3c3d1071f2332d08912af89734f87192ae54095",
+      "parent_event_hash": "887e75a7b12256458e01826ff24998aad5a98c7552da799538b50b51f3436b37",
+      "previous_head_digest": "65c27aeab6932e45fadb767e0d914d10f3a4705ca0dfa1315442b4a753b4569b",
+      "promotion_applied": false,
+      "source_digest": "f80fbc5b94cec1ab5a1b177c8a4f33dd35da7cc9fa732313b5fc2eaf80368ae9",
+      "source_path": "receipts/yado-active-native-loop-v1-prebinding.json",
+      "status": "PASS_BOUNDED_ADMISSION"
+    },
+    {
+      "canonical_mutation": false,
+      "deficit": "FULL_UNIFIED_CORE_SELF_AUDIT_V1",
+      "effect": "SELF_AUDIT_COMPLETE; VERDICT=PASS_WITH_LIMITATIONS; FINDINGS=21; BLOCKING=0; NEXT=KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
+      "event_hash": "88cb427ac98546effc00545b03a6ab9c5839ec6b660329085eced20ba0a550b3",
+      "event_id": "E0310_UNIFIED_CORE_DEEP_SELF_AUDIT",
+      "event_type": "KERNEL_NATIVE_SELF_AUDIT",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "index": 309,
+      "parent_event_hash": "836f2fd72fdc11e75b4ab41a977d89ad270f15c7b24beea65dba688e729c29d7",
+      "promotion_applied": false,
+      "run_id": "LOCAL",
+      "source_digest": "57a630554b7b647ee1f548c3c387706c3797061e3fd76347f50ffa6ff2282a46",
+      "source_path": "receipts/yado-unified-core-deep-self-audit-v1-run-LOCAL.json",
+      "status": "PASS"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "b0eda7a5087b834c81524e530db0332d9b4cfade49fc5ea31f01ff16f32485c0",
+  "ledger_digest": "96bd601324f6b4fe316fb3cc50fa35c578acbac20651cd8f410c6c95692e73f3",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -5462,5 +5495,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "887e75a7b12256458e01826ff24998aad5a98c7552da799538b50b51f3436b37"
+  "tail_event_hash": "88cb427ac98546effc00545b03a6ab9c5839ec6b660329085eced20ba0a550b3"
 }

@@ -382,6 +382,22 @@ class UnifiedYADOCoreV1:
     def cognitive_experience_snapshot(self)->dict[str,Any]:
         return self.experience_cognitive_layer.snapshot()
 
+    def native_source_candidate(self, training, strategy):
+        from yado_active_native_learning_v1 import synthesize_source
+        return synthesize_source(training, strategy)
+
+    def execute_native_source(self, candidate, inputs):
+        from yado_active_native_learning_v1 import execute_source
+        return execute_source(candidate, inputs)
+
+    def native_library_candidate(self):
+        from yado_active_native_learning_v1 import connect_library
+        return connect_library()
+
+    def verify_native_library(self, candidate):
+        from yado_active_native_learning_v1 import verify_library
+        return verify_library(candidate)
+
     def snapshot(self)->dict[str,Any]:
         audit=self.audit()
         return {

@@ -12,12 +12,15 @@ import time
 
 from .archive import canonical, sha
 from .kernel import decode, encode, equivalent, fingerprint
+from yado_active_native_learning_v1 import validate_source_goal, source_sha
 
 MODES = ('full', 'no_memory', 'no_self_model', 'no_consolidation', 'fixed_max')
 STRATEGIES = {
     'numeric': (('polynomial_1', 1), ('polynomial_2', 2), ('polynomial_3', 3)),
     'relation': (('native_logic', 1), ('native_router', 2)),
     'events': (('native_thinking', 1), ('native_router', 2)),
+    'native_source': (('reuse_verified_source', 1), ('native_v2', 1), ('native_v3', 2), ('native_v4', 3)),
+    'library_discovery': (('catalog_v6', 4),),
 }
 RECENT_OBSERVATIONS = 16
 WORKSPACE_CAPACITY = 2
@@ -29,9 +32,15 @@ def _integer(value, bound):
 
 def validate_goal(spec):
     if not isinstance(spec, dict) or spec.get('domain') not in STRATEGIES:
-        raise ValueError('SUPPORTED_GOAL_DOMAINS: numeric, relation, events')
+        raise ValueError('SUPPORTED_GOAL_DOMAINS: ' + ', '.join(STRATEGIES))
     spec = copy.deepcopy(spec)
     domain = spec['domain']
+    if domain == 'native_source':
+        return validate_source_goal(spec)
+    if domain == 'library_discovery':
+        if spec != {'domain': 'library_discovery', 'objective': 'html_xml_parser'}:
+            raise ValueError('LIBRARY_GOAL_SUPPORTS_HTML_XML_PARSER_ONLY')
+        return spec
     if domain == 'numeric':
         if set(spec) != {'domain', 'rows', 'queries'}:
             raise ValueError('NUMERIC_GOAL_REQUIRES_ROWS_AND_UNLABELLED_QUERIES')
@@ -81,7 +90,7 @@ def split_examples(rows):
 
 
 def _update(stats, observation):
-    key = observation['domain'] + '/' + observation['strategy']
+    key = observation.get('context', observation['domain']) + '/' + observation['strategy']
     item = stats.setdefault(key, {'successes': 0, 'failures': 0, 'cost': 0, 'squared_error': 0.0})
     item['successes' if observation['success'] else 'failures'] += 1
     item['cost'] += observation['cost']
@@ -94,6 +103,31 @@ def consolidated_stats(records):
         if r['kind'] == 'COG_REFLECT':
             _update(stats, r)
     return stats
+
+
+def goal_context(spec):
+    if spec['domain'] != 'native_source':
+        return spec['domain']
+    row = spec['training'][0]
+    signature = [[k, type(v).__name__] for k, v in sorted(row['input'].items())]
+    return 'native_source:' + fingerprint([signature, type(row['expected']).__name__])
+
+
+def learned_source(records, goal):
+    if goal['mode'] == 'no_memory' or goal['spec']['domain'] != 'native_source':
+        return None
+    context = goal_context(goal['spec'])
+    for record in reversed(records):
+        result = record.get('result') or {}
+        if (record['kind'] == 'COG_FINISH' and record['status'] == 'VALIDATED_ON_HOLDOUT'
+                and result.get('source_context') == context and 'source' in result):
+            return record
+    return None
+
+
+def available_strategies(goal, records):
+    return [(s, c) for s, c in STRATEGIES[goal['spec']['domain']]
+            if s != 'reuse_verified_source' or learned_source(records, goal) is not None]
 
 
 def replay(records):
@@ -122,7 +156,7 @@ def replay(records):
                 raise ValueError('COGNITIVE_GOAL_CAUSAL_LINK')
             if kind == 'COG_DECIDE':
                 choice = r['choice']
-                allowed = dict(STRATEGIES[g['spec']['domain']])
+                allowed = dict(available_strategies(g, past))
                 if (g['phase'] != 'SELECT' or choice['strategy'] in g['attempted']
                         or allowed.get(choice['strategy']) != choice['cost']
                         or choice['cost'] > g['remaining']
@@ -137,6 +171,16 @@ def replay(records):
                 if (g['phase'] != 'EXECUTE' or r['decision_tick'] != g['decision']['tick']
                         or r['workspace_digest'] != g['decision']['workspace_digest']):
                     raise ValueError('COGNITIVE_EXECUTION_CAUSAL_LINK')
+                result = r['result']
+                if g['spec']['domain'] == 'native_source' and result['status'] == 'CANDIDATE':
+                    if (source_sha(result['source']) != result['source_sha256']
+                            or result['source_context'] != goal_context(g['spec'])):
+                        raise ValueError('COGNITIVE_NATIVE_SOURCE_INTEGRITY')
+                    if g['decision']['choice']['strategy'] == 'reuse_verified_source':
+                        prior = learned_source(past, g)
+                        if (prior is None or result.get('reused_finish_tick') != prior['tick']
+                                or result['source_sha256'] != prior['result']['source_sha256']):
+                            raise ValueError('COGNITIVE_NATIVE_SOURCE_REUSE_PROVENANCE')
                 g['remaining'] -= g['decision']['choice']['cost']
                 g['attempted'].append(g['decision']['choice']['strategy'])
                 g.update(phase='VERIFY', execution=r)
@@ -155,14 +199,16 @@ def replay(records):
                         or r['brier_error'] != (int(r['success']) - choice['probability']) ** 2
                         or r['workspace_digest'] != g['decision']['workspace_digest']):
                     raise ValueError('COGNITIVE_REFLECTION_CAUSAL_LINK')
+                if r.get('context', r['domain']) != goal_context(g['spec']):
+                    raise ValueError('COGNITIVE_REFLECTION_CONTEXT')
                 g['phase'] = 'FINISH' if r['success'] else 'SELECT'
             elif kind == 'COG_FINISH':
                 if g['phase'] not in {'FINISH', 'SELECT'}:
                     raise ValueError('COGNITIVE_PREMATURE_FINISH')
                 if g['phase'] == 'FINISH':
-                    expected_status = 'VALIDATED_ON_HOLDOUT' if g['spec']['domain'] == 'numeric' else 'VERIFIED'
+                    expected_status = 'VALIDATED_ON_HOLDOUT' if g['spec']['domain'] in {'numeric', 'native_source'} else 'VERIFIED'
                 else:
-                    affordable = [(s, c) for s, c in STRATEGIES[g['spec']['domain']]
+                    affordable = [(s, c) for s, c in available_strategies(g, past)
                                   if s not in g['attempted'] and c <= g['remaining']]
                     if affordable:
                         raise ValueError('COGNITIVE_FINISH_WITH_AVAILABLE_ACTION')
@@ -243,14 +289,18 @@ class CognitiveLoop:
     def _select(self, g, records):
         stats, evidence = empirical_model(records, g)
         proposals = []
-        for strategy, cost in STRATEGIES[g['spec']['domain']]:
+        for strategy, cost in available_strategies(g, records):
             if strategy in g['attempted'] or cost > g['remaining']:
                 continue
-            item = stats.get(g['spec']['domain'] + '/' + strategy, {})
+            item = stats.get(goal_context(g['spec']) + '/' + strategy, {})
             n = item.get('successes', 0) + item.get('failures', 0)
             probability = (item.get('successes', 0) + 1) / (n + 2)
             uncertainty = math.sqrt(probability * (1 - probability) / (n + 3))
             score = probability + .1 * uncertainty - .04 * cost
+            if strategy == 'reuse_verified_source':
+                # Reusing an admitted program avoids regeneration, but it must
+                # still pass this goal's independent examples before acceptance.
+                score += .15
             if g['mode'] == 'no_self_model':
                 score = -cost
             elif g['mode'] == 'fixed_max':
@@ -275,7 +325,22 @@ class CognitiveLoop:
         parent = self.kernel.parent
         start = time.perf_counter()
         try:
-            if spec['domain'] == 'numeric':
+            if spec['domain'] == 'native_source':
+                if choice['strategy'] == 'reuse_verified_source':
+                    prior = learned_source(self._records(), g)
+                    candidate = copy.deepcopy(prior['result'])
+                    candidate['reused_finish_tick'] = prior['tick']
+                else:
+                    candidate = parent.native_source_candidate(spec['training'], choice['strategy'])
+                def predict(rows):
+                    return parent.execute_native_source(candidate, [r['input'] for r in rows])
+                result = {**candidate, 'status': 'CANDIDATE', 'source_context': goal_context(spec),
+                          'training_predictions': predict(spec['training']),
+                          'validation_predictions': predict(spec['validation']),
+                          'predictions': predict(spec['queries'])}
+            elif spec['domain'] == 'library_discovery':
+                result = {**parent.native_library_candidate(), 'status': 'CANDIDATE'}
+            elif spec['domain'] == 'numeric':
                 train, holdout = split_examples(spec['rows'])
                 model = parent.fit_polynomial_logic(train, max_degree=int(choice['strategy'][-1]))
                 if model.get('kind') == 'WITHHOLD':
@@ -310,8 +375,25 @@ class CognitiveLoop:
     def _verify(self, g):
         spec, result = g['spec'], g['execution']['result']
         passed, checks, scope = False, 0, 'NO_CANDIDATE'
+        evidence = {}
         if result['status'] == 'CANDIDATE':
-            if spec['domain'] == 'numeric':
+            if spec['domain'] == 'native_source':
+                checks = len(spec['validation'])
+                scope = 'INDEPENDENT_VALIDATION_LABELS_AFTER_SOURCE_FREEZE'
+                passed = source_sha(result['source']) == result['source_sha256']
+                for name in ('training', 'validation'):
+                    predictions = result[name + '_predictions']
+                    passed = passed and len(predictions) == len(spec[name]) and all(
+                        equivalent(a, row['expected']) for a, row in zip(predictions, spec[name]))
+                evidence = {'source_sha256': result['source_sha256']}
+            elif spec['domain'] == 'library_discovery':
+                try:
+                    evidence = self.kernel.parent.verify_native_library(result)
+                    passed, checks, scope = evidence['passed'], evidence['checks'], evidence['scope']
+                except Exception as error:
+                    evidence = {'error_type': type(error).__name__, 'error': str(error)}
+                    scope = 'LIBRARY_VALIDATION_ERROR'
+            elif spec['domain'] == 'numeric':
                 _, holdout = split_examples(spec['rows'])
                 answers = result['holdout_predictions']
                 checks, scope = len(holdout), 'INDEPENDENT_HELD_OUT_LABELS'
@@ -343,7 +425,7 @@ class CognitiveLoop:
                 checks, scope = 1, 'INDEPENDENT_Q_R_NESTING_CONTRACT'
         return {'kind': 'COG_VERIFY', 'goal_id': g['id'], 'execution_tick': g['execution']['tick'],
                 'workspace_digest': g['decision']['workspace_digest'], 'passed': bool(passed),
-                'checks': checks, 'scope': scope}
+                'checks': checks, 'scope': scope, 'evidence': evidence}
 
     def _reflect(self, g):
         choice, success = g['decision']['choice'], g['verification']['passed']
@@ -351,12 +433,13 @@ class CognitiveLoop:
         return {'kind': 'COG_REFLECT', 'goal_id': g['id'], 'verification_tick': g['verification']['tick'],
                 'workspace_digest': g['decision']['workspace_digest'], 'domain': g['spec']['domain'],
                 'strategy': choice['strategy'], 'success': success, 'cost': choice['cost'],
+                'context': goal_context(g['spec']),
                 'predicted_success': choice['probability'], 'prediction_error': error, 'brier_error': error ** 2,
                 'update_basis': 'CHECKED_EXECUTION', 'next_phase': 'FINISH' if success else 'SELECT'}
 
     @staticmethod
     def _finish(g, success):
-        status = ('VALIDATED_ON_HOLDOUT' if g['spec']['domain'] == 'numeric' else 'VERIFIED') if success else 'WITHHOLD'
+        status = ('VALIDATED_ON_HOLDOUT' if g['spec']['domain'] in {'numeric', 'native_source'} else 'VERIFIED') if success else 'WITHHOLD'
         result = copy.deepcopy(g['execution']['result']) if success else None
         return {'kind': 'COG_FINISH', 'goal_id': g['id'], 'status': status, 'result': result,
                 'reason': 'CHECK_PASSED' if success else 'BUDGET_OR_STRATEGIES_EXHAUSTED',

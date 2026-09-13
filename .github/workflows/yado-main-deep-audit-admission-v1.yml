@@ -181,10 +181,10 @@ jobs:
           from pathlib import Path
           r=json.loads(Path('audits/yado-full-regression-v1-report.json').read_text())
           assert r['status']=='PASS',r
-          assert r['tests_run']==r['expected_tests']==170,r
+          assert r['tests_run']==r['expected_tests'] and r['tests_run']>=178,r
           assert not r['failures'] and not r['errors'] and not r['skipped']
           assert r['source_unchanged'] is True
-          print('PASS_COMPLETE_REGRESSION_170_OF_170')
+          print('PASS_COMPLETE_REGRESSION',r['tests_run'],r['expected_tests'])
           PY
 
       - name: Final canonical immutability check

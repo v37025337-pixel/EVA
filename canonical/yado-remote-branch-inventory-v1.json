@@ -12,7 +12,6 @@
     "yado-autonomous-open-catalog-discovery-v6",
     "yado-blind-real-benchmark-exam-v1",
     "yado-blind-real-benchmark-v1",
-    "yado-bounded-autonomous-learning-v1",
     "yado-causal-ablation-cycle-v1",
     "yado-cognitive-10x10-evolution-v1",
     "yado-cognitive-10x10-policy-admission-v1",
@@ -21,7 +20,6 @@
     "yado-context-compaction-v1",
     "yado-cross-disciplinary-internet-learning-v1",
     "yado-digital-mind-bootstrap-v1-20260912",
-    "yado-endogenous-goal-genesis-v1",
     "yado-evolution-loop-v1",
     "yado-experience-candidate-admission-v1",
     "yado-experience-conditioned-cognitive-evolution-v4",
@@ -47,19 +45,24 @@
     "yado-v6-clean-admission-v1",
     "yado-v7-meta-admission-shadow-v1"
   ],
-  "artifact_digest": "d21da0bddd20c137904e342a4726285c786af9ee09e30275e25e247feb9febab",
-  "canonical_main_sha": "a23489f29f82758fae39f049dc9699aa8011a1f7",
+  "artifact_digest": "496888c43fffba5b9916706a7cea1fb41671706f28227fb5c86d98821ae99c81",
+  "canonical_main_sha": "0746d2cf1d56ffd4fad7c7da2ef452525576b7ce",
   "claim_boundary": "Git ancestry may prove that branch history is already physically absorbed into canonical main. It does not validate broad semantic claims, activate code, or prove intelligence/consciousness.",
   "classification_counts": {
-    "ABSORBED_CANONICAL_HISTORY_REF": 46,
+    "ABSORBED_CANONICAL_HISTORY_REF": 44,
     "DEPLOYMENT_INFRASTRUCTURE_REF": 1,
+    "EXPERIENCE_CANDIDATE_REF": 3,
     "INTEGRATION_VERIFICATION_REF": 4,
     "REGISTERED_EXPERIENCE_REF": 14,
     "SAFETY_BACKUP_REF": 3,
     "TEMPORARY_HISTORY_REF": 4
   },
   "coverage_complete": true,
-  "experience_candidates": [],
+  "experience_candidates": [
+    "yado-bounded-autonomous-learning-v1",
+    "yado-endogenous-goal-genesis-v1",
+    "yado-endogenous-repair-experiment-v1"
+  ],
   "policy": {
     "absorbed_canonical_history_refs": "DO_NOT_DOUBLE_ADMIT; HISTORY_ALREADY_REACHABLE_FROM_CANONICAL_MAIN",
     "branch_name_as_evidence": false,
@@ -75,7 +78,7 @@
   "registered_branch_count": 14,
   "registered_remote_count": 14,
   "registry_only": [],
-  "remote_branch_count": 72,
+  "remote_branch_count": 73,
   "rows": [
     {
       "branch": "deployment-vercel-runtime-v1",
@@ -90,7 +93,7 @@
       "branch": "main",
       "classification": "REGISTERED_EXPERIENCE_REF",
       "classification_reason": "REGISTERED_IN_CANONICAL_EXPERIENCE",
-      "head_sha": "a23489f29f82758fae39f049dc9699aa8011a1f7",
+      "head_sha": "0746d2cf1d56ffd4fad7c7da2ef452525576b7ce",
       "registered_in_experience_registry": true,
       "runtime_active": false,
       "tip_is_ancestor_of_main": true
@@ -277,12 +280,12 @@
     },
     {
       "branch": "yado-bounded-autonomous-learning-v1",
-      "classification": "ABSORBED_CANONICAL_HISTORY_REF",
-      "classification_reason": "TIP_IS_ANCESTOR_OF_CANONICAL_MAIN",
-      "head_sha": "85768583e1b8d7b5ab24a91682eb8a20b1283525",
+      "classification": "EXPERIENCE_CANDIDATE_REF",
+      "classification_reason": "DIVERGED_FROM_CANONICAL_MAIN",
+      "head_sha": "81daf5549ce58b798b77eb1a834a9d993dfa025d",
       "registered_in_experience_registry": false,
       "runtime_active": false,
-      "tip_is_ancestor_of_main": true
+      "tip_is_ancestor_of_main": false
     },
     {
       "branch": "yado-causal-ablation-cycle-v1",
@@ -358,12 +361,21 @@
     },
     {
       "branch": "yado-endogenous-goal-genesis-v1",
-      "classification": "ABSORBED_CANONICAL_HISTORY_REF",
-      "classification_reason": "TIP_IS_ANCESTOR_OF_CANONICAL_MAIN",
-      "head_sha": "546abcc1251e0d4bff81f7049b0f028d514c40ef",
+      "classification": "EXPERIENCE_CANDIDATE_REF",
+      "classification_reason": "BRANCH_EXCLUSIVE_DESCENDANT_OF_MAIN",
+      "head_sha": "8989ba539fdf601fb5ee46134a226e20d2b90e4b",
       "registered_in_experience_registry": false,
       "runtime_active": false,
-      "tip_is_ancestor_of_main": true
+      "tip_is_ancestor_of_main": false
+    },
+    {
+      "branch": "yado-endogenous-repair-experiment-v1",
+      "classification": "EXPERIENCE_CANDIDATE_REF",
+      "classification_reason": "BRANCH_EXCLUSIVE_DESCENDANT_OF_MAIN",
+      "head_sha": "44499924d7a8fcbde1ab426eb6be1bb29cbb2474",
+      "registered_in_experience_registry": false,
+      "runtime_active": false,
+      "tip_is_ancestor_of_main": false
     },
     {
       "branch": "yado-evolution-loop-v1",
@@ -642,7 +654,7 @@
       "head_sha": "fcd03e40afc50a611a5ca53b6e0068affe6eb9f2",
       "registered_in_experience_registry": false,
       "runtime_active": false,
-      "tip_is_ancestor_of_main": false
+      "tip_is_ancestor_of_main": true
     },
     {
       "branch": "yado-staged-kernel-evolution-v1",
