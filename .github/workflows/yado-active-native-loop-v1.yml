@@ -3,7 +3,7 @@ name: YADO Active Native Loop V1
 on:
   workflow_dispatch:
   push:
-    branches: [yado-active-native-loop-v1, yado-active-native-loop-v2]
+    branches: [yado-active-native-loop-v1, yado-active-native-loop-v2, yado-experience-development-v1]
   pull_request:
     branches: [main]
     paths:
@@ -43,6 +43,9 @@ jobs:
       - name: Real external data and 20 autonomous goal cycles
         run: |
           python -m successor.active_run --manifest "$RUNNER_TEMP/native-birth/manifest.json" --output "$RUNNER_TEMP/native-run"
+      - name: Experience-selected retry goals and causal memory transfer
+        run: |
+          python -m successor.development_run --manifest "$RUNNER_TEMP/native-birth/manifest.json" --output "$RUNNER_TEMP/development-run"
       - name: 20 endogenous continuation cycles from accumulated cognitive state
         run: |
           cp "$RUNNER_TEMP/native-run/kernel.sqlite" "$RUNNER_TEMP/endogenous.sqlite"
@@ -92,6 +95,7 @@ jobs:
           path: |
             ${{ runner.temp }}/native-birth/
             ${{ runner.temp }}/native-run/
+            ${{ runner.temp }}/development-run/
             ${{ runner.temp }}/endogenous.sqlite
             ${{ runner.temp }}/endogenous-run.json
             audits/yado-full-regression-v1-report.json

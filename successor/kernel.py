@@ -116,7 +116,7 @@ class SuccessorKernel:
 
     def verify_state(self):
         previous, tick = "0" * 64, 0
-        submissions, completions, cognitive_records = [], {}, []
+        submissions, completions, cognitive_records, developmental_records = [], {}, [], []
         for row in self.db.execute("SELECT * FROM events ORDER BY tick"):
             tick += 1
             digest = sha((previous + "\n" + str(tick) + "\n" + row["body"]).encode())
@@ -125,6 +125,8 @@ class SuccessorKernel:
             body = decode(row["body"])
             if str(body.get("kind", "")).startswith("COG_"):
                 cognitive_records.append({**body, "tick": tick, "event_hash": digest})
+            if str(body.get("kind", "")).startswith(("COG_", "DEV_")):
+                developmental_records.append({**body, "tick": tick, "event_hash": digest})
             if body.get("kind") == "GOAL_SUBMITTED":
                 submissions.append(body)
             if body.get("job_id") is not None:
@@ -160,6 +162,9 @@ class SuccessorKernel:
         if cognitive_records:
             from .cognitive import replay
             replay(cognitive_records)
+        if any(r['kind'].startswith('DEV_') or 'development_id' in r for r in developmental_records):
+            from .development import replay as replay_development
+            replay_development(developmental_records)
         return {"status": "PASS", "tick": tick, "event_hash": previous}
 
     def _append(self, body):
@@ -364,3 +369,19 @@ class SuccessorKernel:
     def stop_goal(self, goal_id):
         from .cognitive import CognitiveLoop
         return CognitiveLoop(self).stop(goal_id)
+
+    def start_development(self, *, budget=12, max_goals=2):
+        from .development import DevelopmentLoop
+        return DevelopmentLoop(self).start(budget, max_goals)
+
+    def develop(self, max_steps=20):
+        from .development import DevelopmentLoop
+        return DevelopmentLoop(self).run(max_steps)
+
+    def development_snapshot(self):
+        from .development import DevelopmentLoop
+        return DevelopmentLoop(self).snapshot()
+
+    def stop_development(self, session_id):
+        from .development import DevelopmentLoop
+        return DevelopmentLoop(self).stop(session_id)
