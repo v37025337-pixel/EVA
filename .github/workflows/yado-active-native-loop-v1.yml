@@ -43,6 +43,36 @@ jobs:
       - name: Real external data and 20 autonomous goal cycles
         run: |
           python -m successor.active_run --manifest "$RUNNER_TEMP/native-birth/manifest.json" --output "$RUNNER_TEMP/native-run"
+      - name: 20 endogenous continuation cycles from accumulated cognitive state
+        run: |
+          cp "$RUNNER_TEMP/native-run/kernel.sqlite" "$RUNNER_TEMP/endogenous.sqlite"
+          python -m successor.endogenous_run \
+            --manifest "$RUNNER_TEMP/native-birth/manifest.json" \
+            --state "$RUNNER_TEMP/endogenous.sqlite" \
+            --output "$RUNNER_TEMP/endogenous-run.json" \
+            --cycles 20 \
+            --budget 3
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          report = json.loads((Path(os.environ['RUNNER_TEMP']) / 'endogenous-run.json').read_text())
+          assert report['status'] == 'PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1', report
+          assert report['cycles_completed'] == 20, report
+          assert report['cycles_verified'] == 20, report
+          assert report['host_goal_count'] == 0, report
+          assert len({row['seed'] for row in report['results']}) == 20, report
+          assert all(row['status'] == 'VERIFIED' for row in report['results']), report
+          assert report['state_verification']['status'] == 'PASS', report
+          assert report['consciousness_established'] is False, report
+          print(json.dumps({
+              'status': report['status'],
+              'cycles_completed': report['cycles_completed'],
+              'cycles_verified': report['cycles_verified'],
+              'host_goal_count': report['host_goal_count'],
+              'domains': [row['selected_domain'] for row in report['results']],
+          }))
+          PY
       - name: Full kernel audit and final source guard
         run: |
           python runtime/yado_full_kernel_audit_v1.py
@@ -62,6 +92,8 @@ jobs:
           path: |
             ${{ runner.temp }}/native-birth/
             ${{ runner.temp }}/native-run/
+            ${{ runner.temp }}/endogenous.sqlite
+            ${{ runner.temp }}/endogenous-run.json
             audits/yado-full-regression-v1-report.json
             audits/yado-full-regression-v1-report.log
             audits/yado-full-kernel-audit-v1-report.json
