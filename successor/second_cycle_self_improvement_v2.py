@@ -1,10 +1,13 @@
 """Prove the second bounded deficit-driven improvement after baseline V2 was frozen.
 
-The frozen baseline is rerun first with EvolvedSuccessorKernelV1.  Only then is the
-V2 candidate evaluated on the identical real-code tasks.  Candidate selection sees
-TRAINING labels only.  The known not_gate split is reported as underdetermined rather
-than special-cased: both repair and synthesis training partitions contain only the
-zero-output class while the hidden partition contains the unseen positive class.
+The frozen baseline is rerun first with EvolvedSuccessorKernelV1.  The V2 candidate
+is then evaluated on identical real-code tasks.  The first V2 transfer failure is
+also frozen as evidence: two learnable bitwise->relation composition deficits became
+adaptation data.  A distinct public repository is used only after that repair as a
+third, unseen transfer set.
+
+Candidate selection always sees TRAINING labels only.  The known not_gate split is
+reported as underdetermined rather than special-cased.
 """
 from __future__ import annotations
 
@@ -29,6 +32,10 @@ from .second_cycle_baseline_v2 import (
 )
 
 FROZEN_EVIDENCE = Path(__file__).with_name("evidence") / "second_cycle_baseline_v2.json"
+INITIAL_WITHHOLD_EVIDENCE = (
+    Path(__file__).with_name("evidence") / "second_cycle_v2_initial_withhold.json"
+)
+FRESH_TRANSFER_URL = "https://github.com/ishtiaqmahmood/python-algorithms.git"
 
 
 def _labelled(task: dict[str, Any], row) -> dict[str, Any]:
@@ -36,7 +43,14 @@ def _labelled(task: dict[str, Any], row) -> dict[str, Any]:
     return {"input": dict(zip(task["args"], args)), "expected": expected}
 
 
-def synthesis_probe(kernel, task: dict[str, Any], head: str, *, training_count: int = 8) -> dict[str, Any]:
+def synthesis_probe(
+    kernel,
+    task: dict[str, Any],
+    head: str,
+    *,
+    repository: str = ALGORITHMS_URL,
+    training_count: int = 8,
+) -> dict[str, Any]:
     rows = task["rows"]
     if len(rows) <= training_count:
         raise ValueError("V2_SYNTHESIS_HOLDOUT_REQUIRED")
@@ -58,7 +72,6 @@ def synthesis_probe(kernel, task: dict[str, Any], head: str, *, training_count: 
         candidate = None
         failure_reason = f"{type(exc).__name__}:{exc}"
 
-    # Candidate digest is frozen before any hidden expected value is used below.
     frozen_digest = result.get("source_sha256") if candidate else None
     checks: list[bool] = []
     if candidate:
@@ -81,11 +94,13 @@ def synthesis_probe(kernel, task: dict[str, Any], head: str, *, training_count: 
         "candidate_source_sha256_frozen_before_holdout": frozen_digest,
         "holdout_passed": sum(checks),
         "holdout_total": len(hidden),
-        "failure_reason": None if passed else (failure_reason or result.get("reason", "NO_GENERALIZING_SOURCE")),
+        "failure_reason": None if passed else (
+            failure_reason or result.get("reason", "NO_GENERALIZING_SOURCE")
+        ),
         "training_labels_only_for_selection": True,
         "holdout_labels_consumed_during_selection": False,
         "provenance": {
-            "repository": ALGORITHMS_URL,
+            "repository": repository,
             "head_sha": head,
             "path": task["path"],
             "function": task["function"],
@@ -121,8 +136,7 @@ def _task_map(tasks: list[dict[str, Any]]) -> dict[tuple[str, str], dict[str, An
 
 
 def _not_gate_identifiability(tasks: list[dict[str, Any]]) -> dict[str, Any]:
-    mapping = _task_map(tasks)
-    task = mapping.get(("boolean_algebra/not_gate.py", "not_gate"))
+    task = _task_map(tasks).get(("boolean_algebra/not_gate.py", "not_gate"))
     if task is None:
         return {"present": False}
     synthesis_training = task["rows"][:8]
@@ -139,8 +153,12 @@ def _not_gate_identifiability(tasks: list[dict[str, Any]]) -> dict[str, Any]:
         "synthesis_hidden_output_classes": syn_hidden_outputs,
         "repair_training_output_classes": rep_train_outputs,
         "repair_hidden_output_classes": rep_hidden_outputs,
-        "positive_class_absent_from_synthesis_training": 1 not in syn_train_outputs and 1 in syn_hidden_outputs,
-        "positive_class_absent_from_repair_training": 1 not in rep_train_outputs and 1 in rep_hidden_outputs,
+        "positive_class_absent_from_synthesis_training": (
+            1 not in syn_train_outputs and 1 in syn_hidden_outputs
+        ),
+        "positive_class_absent_from_repair_training": (
+            1 not in rep_train_outputs and 1 in rep_hidden_outputs
+        ),
         "policy": "DO_NOT_SPECIAL_CASE_HIDDEN_BRANCH",
     }
 
@@ -149,8 +167,20 @@ def run(manifest: Path, output: Path) -> int:
     output = output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     frozen = json.loads(FROZEN_EVIDENCE.read_text())
+    initial_withhold = json.loads(INITIAL_WITHHOLD_EVIDENCE.read_text())
     if frozen["algorithms_head_sha"] != ALGORITHMS_V2_SHA:
         raise RuntimeError("FROZEN_SECOND_CYCLE_SOURCE_MISMATCH")
+    if initial_withhold["fresh_transfer"] != {
+        "pass": 0,
+        "total": 2,
+        "source_head": ALGORITHMS_V2_SHA,
+        "deficits": [
+            "synthesis:bit_manipulation/numbers_different_signs.py:different_signs",
+            "synthesis:bit_manipulation/is_even.py:is_even_using_shift_operator",
+        ],
+        "measured_missing_composition": "BITWISE_EXPRESSION_TO_RELATIONAL_PREDICATE",
+    }:
+        raise RuntimeError("INITIAL_WITHHOLD_EVIDENCE_DRIFT")
     started = time.time()
 
     predecessor = EvolvedSuccessorKernelV1(manifest, output / "predecessor-v1.sqlite")
@@ -158,48 +188,69 @@ def run(manifest: Path, output: Path) -> int:
     try:
         with tempfile.TemporaryDirectory(prefix="yado-second-cycle-improvement-") as temp:
             root = Path(temp)
-            pinned = checkout_exact(root, ALGORITHMS_URL, ALGORITHMS_V2_SHA, "frozen-v2-source")
+            pinned = checkout_exact(
+                root, ALGORITHMS_URL, ALGORITHMS_V2_SHA, "frozen-v2-source"
+            )
             old_inventory = discover_real_code_tasks(pinned, limit=13)
             excluded = {(task["path"], task["function"]) for task in old_inventory}
             tasks = discover_extended_tasks(pinned, excluded, limit=8)
 
-            predecessor_repairs = [repair_probe(predecessor, task, ALGORITHMS_V2_SHA) for task in tasks]
-            predecessor_synthesis = [synthesis_probe(predecessor, task, ALGORITHMS_V2_SHA) for task in tasks]
+            predecessor_repairs = [
+                repair_probe(predecessor, task, ALGORITHMS_V2_SHA) for task in tasks
+            ]
+            predecessor_synthesis = [
+                synthesis_probe(predecessor, task, ALGORITHMS_V2_SHA) for task in tasks
+            ]
             reproduced = {
                 "repair": _score(predecessor_repairs),
                 "synthesis": _score(predecessor_synthesis),
             }
 
-            evolved_repairs = [repair_probe(evolved, task, ALGORITHMS_V2_SHA) for task in tasks]
-            evolved_synthesis = [synthesis_probe(evolved, task, ALGORITHMS_V2_SHA) for task in tasks]
+            evolved_repairs = [
+                repair_probe(evolved, task, ALGORITHMS_V2_SHA) for task in tasks
+            ]
+            evolved_synthesis = [
+                synthesis_probe(evolved, task, ALGORITHMS_V2_SHA) for task in tasks
+            ]
             evolved_scores = {
                 "repair": _score(evolved_repairs),
                 "synthesis": _score(evolved_synthesis),
             }
-
             identifiability = _not_gate_identifiability(tasks)
 
-            # Reasoning preservation uses fresh clones of the two V2 repositories.
+            expanded = discover_extended_tasks(pinned, excluded, limit=16)
+            frozen_pairs = {(task["path"], task["function"]) for task in tasks}
+            adaptation_tasks = [
+                task for task in expanded
+                if (task["path"], task["function"]) not in frozen_pairs
+            ]
+            adaptation_rows = [
+                synthesis_probe(evolved, task, ALGORITHMS_V2_SHA)
+                for task in adaptation_tasks
+            ]
+            adaptation_ids = {row["task_id"] for row in adaptation_rows}
+            expected_adaptation_ids = set(initial_withhold["fresh_transfer"]["deficits"])
+            adaptation_pass = _score(adaptation_rows)
+
             reasoning_rows = _reasoning_probes(evolved, root)
             reasoning_pass = sum(
                 row.get("status") == "VERIFIED" and row.get("independent_check")
                 for row in reasoning_rows
             )
 
-            # Fresh transfer is selected after candidate code is frozen.  It uses the
-            # current public Algorithms head and excludes every frozen baseline task.
-            latest = clone_latest(root, ALGORITHMS_URL, "fresh-v2-transfer")
-            latest_sha = _git(latest, "rev-parse", "HEAD")
-            latest_old = discover_real_code_tasks(latest, limit=13)
-            latest_excluded = {(task["path"], task["function"]) for task in latest_old}
-            latest_extended = discover_extended_tasks(latest, latest_excluded, limit=16)
-            frozen_pairs = {(task["path"], task["function"]) for task in tasks}
-            transfer_tasks = [
-                task for task in latest_extended
-                if (task["path"], task["function"]) not in frozen_pairs
-            ][:6]
-            transfer_rows = [synthesis_probe(evolved, task, latest_sha) for task in transfer_tasks]
-            transfer_pass = _score(transfer_rows)
+            fresh_repo = clone_latest(root, FRESH_TRANSFER_URL, "third-transfer-external")
+            fresh_sha = _git(fresh_repo, "rev-parse", "HEAD")
+            fresh_tasks = discover_extended_tasks(fresh_repo, set(), limit=8)
+            fresh_rows = [
+                synthesis_probe(
+                    evolved,
+                    task,
+                    fresh_sha,
+                    repository=FRESH_TRANSFER_URL,
+                )
+                for task in fresh_tasks
+            ]
+            fresh_pass = _score(fresh_rows)
 
             predecessor_state = predecessor.verify_state()
             evolved_state = evolved.verify_state()
@@ -219,7 +270,7 @@ def run(manifest: Path, output: Path) -> int:
         "synthesis:boolean_algebra/not_gate.py:not_gate",
     }
     profiles_used = sorted({
-        row.get("selected_profile") for row in evolved_synthesis
+        row.get("selected_profile") for row in evolved_synthesis + adaptation_rows + fresh_rows
         if row.get("selected_profile")
     })
 
@@ -231,15 +282,22 @@ def run(manifest: Path, output: Path) -> int:
         and set(remaining) == expected_ambiguous
         and identifiability.get("positive_class_absent_from_synthesis_training") is True
         and identifiability.get("positive_class_absent_from_repair_training") is True
+        and adaptation_ids == expected_adaptation_ids
+        and adaptation_pass == len(adaptation_rows) == 2
         and reasoning_pass == len(REASONING_TARGETS_V2) * 3 == 6
-        and len(transfer_rows) >= 2 and transfer_pass >= 1
+        and len(fresh_rows) >= 6 and fresh_pass >= 1
         and predecessor_state["status"] == evolved_state["status"] == "PASS"
     )
 
     report = {
         "schema": "yado.second_cycle_deficit_driven_self_improvement.v2",
-        "status": "PASS_SHADOW_SECOND_CYCLE_SELF_IMPROVEMENT_V2" if strict_pass else "WITHHOLD_SHADOW_SECOND_CYCLE_SELF_IMPROVEMENT_V2",
+        "status": (
+            "PASS_SHADOW_SECOND_CYCLE_SELF_IMPROVEMENT_V2"
+            if strict_pass
+            else "WITHHOLD_SHADOW_SECOND_CYCLE_SELF_IMPROVEMENT_V2"
+        ),
         "frozen_baseline_evidence": frozen,
+        "initial_v2_withhold_evidence": initial_withhold,
         "pinned_source_sha": ALGORITHMS_V2_SHA,
         "predecessor_scores_reproduced": reproduced,
         "predecessor_total": predecessor_total,
@@ -254,18 +312,28 @@ def run(manifest: Path, output: Path) -> int:
         "evolved_repairs": evolved_repairs,
         "evolved_synthesis": evolved_synthesis,
         "profiles_used": profiles_used,
+        "adaptation_retest": {
+            "source_repository": ALGORITHMS_URL,
+            "source_head": ALGORITHMS_V2_SHA,
+            "task_count": len(adaptation_rows),
+            "pass_count": adaptation_pass,
+            "expected_task_ids": sorted(expected_adaptation_ids),
+            "results": adaptation_rows,
+            "role": "LEARNED_FROM_INITIAL_WITHHOLD_NOT_FRESH_TRANSFER",
+        },
         "reasoning_preservation": {
             "pass_count": reasoning_pass,
             "task_count": len(reasoning_rows),
             "results": reasoning_rows,
         },
         "fresh_transfer": {
-            "latest_head_sha": latest_sha,
-            "task_count": len(transfer_rows),
-            "pass_count": transfer_pass,
-            "results": transfer_rows,
+            "repository": FRESH_TRANSFER_URL,
+            "latest_head_sha": fresh_sha,
+            "task_count": len(fresh_rows),
+            "pass_count": fresh_pass,
+            "results": fresh_rows,
             "selection_after_candidate_freeze": True,
-            "frozen_baseline_pairs_excluded": True,
+            "different_repository_from_adaptation_source": True,
         },
         "predecessor_state": predecessor_state,
         "evolved_state": evolved_state,
@@ -290,9 +358,10 @@ def run(manifest: Path, output: Path) -> int:
         "repair": f"{evolved_scores['repair']}/8",
         "synthesis": f"{evolved_scores['synthesis']}/8",
         "remaining": len(remaining),
+        "adaptation": f"{adaptation_pass}/{len(adaptation_rows)}",
         "reasoning": f"{reasoning_pass}/{len(reasoning_rows)}",
-        "transfer": f"{transfer_pass}/{len(transfer_rows)}",
-        "transfer_head": latest_sha,
+        "fresh_transfer": f"{fresh_pass}/{len(fresh_rows)}",
+        "fresh_transfer_head": fresh_sha,
     }, sort_keys=True), flush=True)
     return 0 if strict_pass else 1
 
