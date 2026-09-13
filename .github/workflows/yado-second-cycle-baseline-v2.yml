@@ -1,0 +1,101 @@
+name: YADO Second Cycle Independent Baseline V2
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'successor/second_cycle_baseline_v2.py'
+      - '.github/workflows/yado-second-cycle-baseline-v2.yml'
+      - 'successor/**'
+      - 'runtime/**'
+      - 'canonical/**'
+      - 'architecture/evolution-ledger.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: second-cycle-baseline-v2-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  measure-second-cycle:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install declared dependencies
+        run: python -m pip install -r successor/requirements.txt -r runtime/yado_rc8_v36/requirements-github.txt pyyaml
+      - name: Freeze inherited state and regression before measurement
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m successor build --output "$RUNNER_TEMP/second-cycle-birth"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/second-cycle-birth/manifest.json"
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status']=='PASS',r
+          assert r['tests_run']==r['expected_tests']==181,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_PRE_SECOND_CYCLE_REGRESSION_181_OF_181')
+          PY
+      - name: Measure independent second-cycle baseline
+        run: |
+          python -m successor.second_cycle_baseline_v2 \
+            --manifest "$RUNNER_TEMP/second-cycle-birth/manifest.json" \
+            --output "$RUNNER_TEMP/second-cycle-baseline-v2"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ['RUNNER_TEMP'])/'second-cycle-baseline-v2'/'second-cycle-baseline-v2.json'
+          r=json.loads(p.read_text())
+          assert r['status']=='MEASURED_SECOND_CYCLE_BASELINE_V2',r
+          assert r['baseline_only'] is True,r
+          assert r['self_improvement_applied'] is False,r
+          assert r['canonical_mutation'] is False,r
+          assert r['g2_runtime_mutation'] is False,r
+          assert r['architecture_ledger_mutation'] is False,r
+          assert r['automatic_main_mutation'] is False,r
+          assert r['coding_task_count']>=6,r
+          assert r['coding_probe_count']==r['coding_task_count']*2,r
+          assert r['reasoning_probe_count']==6,r
+          assert r['state_verification']['status']=='PASS',r
+          assert r['general_intelligence_established'] is False,r
+          assert r['consciousness_established'] is False,r
+          print(json.dumps({
+            'status':r['status'],
+            'coding':f"{r['coding_pass_count']}/{r['coding_probe_count']}",
+            'reasoning':f"{r['reasoning_pass_count']}/{r['reasoning_probe_count']}",
+            'deficits':r['deficit_count'],
+            'task_count':r['coding_task_count'],
+            'source_head':r['algorithms_head_sha'],
+          },sort_keys=True))
+          PY
+      - name: Prove canonical and kernel remain unchanged
+        run: |
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status']=='PASS' and r['findings']==[],r
+          PY
+          python runtime/yado_canonical_invariant_guard_v1.py
+          git diff --exit-code -- canonical architecture/evolution-ledger.json
+      - name: Preserve second-cycle baseline evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-second-cycle-baseline-v2-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/second-cycle-birth/
+            ${{ runner.temp }}/second-cycle-baseline-v2/
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
+            audits/yado-full-kernel-audit-v1-report.json
