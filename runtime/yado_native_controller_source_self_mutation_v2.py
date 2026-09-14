@@ -24,7 +24,7 @@ def sha256_text(text: str) -> str:
 
 def _method_node() -> ast.FunctionDef:
     src = '''
-def generate_native_controller_source_candidate(self):
+def native_self_mutation_source_candidate(self):
     source = open(__file__, encoding="utf-8").read()
     parent_sha256 = hashlib.sha256(source.encode("utf-8")).hexdigest()
     tree = ast.parse(source)
@@ -112,7 +112,7 @@ def arm_controller_source(source: str) -> str:
             break
     if target_class is None:
         raise RuntimeError("CONTROLLER_CLASS_NOT_FOUND")
-    if any(isinstance(n, ast.FunctionDef) and n.name == "generate_native_controller_source_candidate" for n in target_class.body):
+    if any(isinstance(n, ast.FunctionDef) and n.name == "native_self_mutation_source_candidate" for n in target_class.body):
         return source
     target_class.body.append(_method_node())
     ast.fix_missing_locations(tree)
@@ -196,7 +196,7 @@ def main() -> int:
             {"role": "PRIOR_CONTROLLER_WITHHOLD", "next_required_capability": "NATIVE_SEMANTIC_SELF_MUTATION_OF_EVOLUTIONARY_CONTROLLER"},
         ],
     )
-    emitted = armed_controller.generate_native_controller_source_candidate()
+    emitted = armed_controller.native_self_mutation_source_candidate()
     self_source = emitted.get("candidate_source")
     if not isinstance(self_source, str) or not self_source.strip():
         raise RuntimeError("CONTROLLER_DID_NOT_EMIT_SOURCE")
@@ -241,7 +241,7 @@ def main() -> int:
         "parent_normal": parent_normal,
         "self_candidate_normal": self_normal,
         "checks": checks,
-        "host_role": "BOOTSTRAP_ONLY: INSTALL A ZERO-ARG NATIVE SOURCE-EMISSION ARM. THE SECOND-GENERATION SEMANTIC SOURCE MUTATION IS EMITTED BY THE ARMED CONTROLLER ITSELF.",
+        "host_role": "BOOTSTRAP_ONLY: INSTALL A ZERO-ARG NATIVE SELF-MUTATION SOURCE-EMISSION ARM. THE SECOND-GENERATION SEMANTIC SOURCE MUTATION IS EMITTED BY THE ARMED CONTROLLER ITSELF.",
         "semantic_boundary": "DEVELOPMENT-BRANCH SOURCE SELF-MUTATION ONLY. NO CANONICAL MAIN WRITE, NO EXTERNAL MODEL, NO DOWNLOADED CODE EXECUTION. THIS CLOSES SOURCE EMISSION, NOT NEW-DIMENSION GENESIS.",
         "next_required_capability": "NATIVE_CONTROLLER_NEW_DIMENSION_GENESIS" if passed else "NATIVE_CONTROLLER_SOURCE_SELF_MUTATION_V2_REPAIR",
     }
