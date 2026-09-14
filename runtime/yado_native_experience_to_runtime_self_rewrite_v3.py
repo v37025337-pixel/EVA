@@ -13,6 +13,9 @@ TARGET = ROOT / 'yado_bounded_autonomous_learning_v1.py'
 CANDIDATE = REPO / 'candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v3.py'
 RECEIPT = REPO / 'candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v3.json'
 
+# The architecture cycle record is registered before execution so static-reference audits
+# can verify the full workflow graph before this mutator is admitted.
+
 
 def canon(x):
     return json.dumps(x, sort_keys=True, separators=(',', ':'), ensure_ascii=False, default=str)
