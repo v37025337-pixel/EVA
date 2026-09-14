@@ -1,0 +1,207 @@
+name: YADO Native Controller Source Self Mutation V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-deep-development-20260914]
+    paths:
+      - '.github/workflows/yado-native-controller-source-self-mutation-v2.yml'
+      - 'runtime/yado_native_controller_source_self_mutation_v2.py'
+      - 'architecture/yado-native-controller-source-self-mutation-v2.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-native-controller-source-self-mutation-v2
+  cancel-in-progress: true
+
+jobs:
+  controller-source-self-mutation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Require prior internet evolution admission
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m compileall -q runtime successor candidates
+          python - <<'PY'
+          import json
+          r=json.load(open('architecture/yado-internet-evolution-cycle-v1.json'))
+          assert r['status']=='PASS_INTERNET_LEARN_APPLY_MUTATE_INVENT_EVOLVE_V1',r
+          assert r['regression_status']=='PASS' and r['regression_tests']>=197,r
+          assert r['canonical_main_mutation'] is False,r
+          print('PASS_PRIOR_INTERNET_EVOLUTION_CONSUMED',r['internet_evidence_digest'])
+          PY
+
+      - name: Bootstrap native source-emission arm and let controller emit semantic mutation
+        run: |
+          python -m py_compile runtime/yado_native_controller_source_self_mutation_v2.py
+          python runtime/yado_native_controller_source_self_mutation_v2.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.load(open('candidates/g2-self-evolution/yado-native-controller-source-self-mutation-v2.json'))
+          assert r['status']=='PASS_SHADOW_NATIVE_CONTROLLER_SOURCE_SELF_MUTATION_V2',r
+          assert r['checks']['controller_self_emitted_candidate_source'] is True,r
+          assert r['checks']['self_emitted_source_changed'] is True,r
+          assert r['checks']['self_emitted_source_compiles'] is True,r
+          assert r['checks']['semantic_behavior_changed_on_noop_child'] is True,r
+          assert r['checks']['normal_evolution_still_selects_child'] is True,r
+          assert r['checks']['normal_evolution_regressions_pass'] is True,r
+          src=Path(r['self_emitted_candidate'])
+          target=Path(r['target'])
+          target.write_bytes(src.read_bytes())
+          compile(target.read_text(encoding='utf-8'),str(target),'exec')
+          print('PASS_APPLIED_CONTROLLER_SELF_EMITTED_SOURCE_V2',r['self_emitted_sha256'])
+          PY
+
+      - name: Re-run strict native controller probe and capture residual frontier
+        run: |
+          mkdir -p artifacts
+          set +e
+          python runtime/yado_g2_native_semantic_self_mutation_evolution_controller_v1.py | tee artifacts/yado-native-controller-strict-probe-after-v2.log
+          echo $? > /tmp/strict_probe_exit
+          set -e
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.load(open('candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json'))
+          assert r['native_source_candidate_count'] >= 1,r
+          assert r['checks']['candidate_source_compiles'] is True,r
+          out=r['native_outputs'].get('controller.generate_native_controller_source_candidate')
+          assert isinstance(out,dict),r
+          src=out.get('candidate_source') or out.get('source')
+          assert isinstance(src,str) and src.strip(),out
+          compile(src,'<yado-second-native-controller-self-mutation>','exec')
+          p=Path('candidates/g2-self-evolution/yado_evolutionary_genome_self_candidate_v2b.py')
+          p.parent.mkdir(parents=True,exist_ok=True)
+          p.write_text(src,encoding='utf-8')
+          target=Path('runtime/yado_evolutionary_genome_v1.py')
+          before=target.read_text(encoding='utf-8')
+          assert src != before
+          target.write_text(src,encoding='utf-8')
+          print('PASS_STRICT_PROBE_OBSERVED_NATIVE_SOURCE',r['candidate_source_sha256'])
+          print('RESIDUAL_NEW_DIMENSIONS',r['new_dimensions'])
+          PY
+
+      - name: Verify applied second-generation controller mutation
+        run: |
+          python -m py_compile runtime/yado_evolutionary_genome_v1.py
+          python - <<'PY'
+          import sys
+          sys.path.insert(0,'runtime')
+          from yado_evolutionary_genome_v1 import YADOEvolutionaryGenomeV1
+          p=YADOEvolutionaryGenomeV1.parent_genome('0'*64,{'LOGIC':'l','THINKING':'t','INTELLIGENCE':'i','CODE':'c'},'post-internet-cycle')
+          c=YADOEvolutionaryGenomeV1(p,experience_sources=[{'role':'POST_INTERNET_EVOLUTION'}])
+          r=c.evolve_once()
+          assert r['selection']=='CHILD',r
+          assert r['fitness']['all_regressions_pass'] is True,r
+          assert (r['child'] or {}).get('mutation_count',0)>0,r
+          assert (r['child'] or {}).get('novel_gene_count',0)>0,r
+          nxt=c.generate_native_controller_source_candidate()
+          assert nxt.get('candidate_source') is None,nxt
+          assert nxt.get('reason')=='SELF_MUTATION_GUARDS_EXHAUSTED',nxt
+          print('PASS_APPLIED_SECOND_GENERATION_CONTROLLER_MUTATION')
+          PY
+
+      - name: Compile all layers and audit whole kernel
+        run: |
+          python -m compileall -q runtime successor candidates
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status']=='PASS' and r['findings']==[],r
+          assert r['canonical']['canonical_guard']=='PASS',r
+          assert r['canonical']['ledger_validation']=='PASS',r
+          assert r['canonical']['g3_genesis_performed'] is False,r
+          print('PASS_CONTROLLER_SELF_MUTATION_KERNEL_AUDIT')
+          PY
+
+      - name: Fresh Successor build and full regression
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-controller-self-mutation-v2"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-controller-self-mutation-v2/manifest.json"
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status']=='PASS',r
+          assert r['tests_run']==r['expected_tests'] and r['tests_run']>=197,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_CONTROLLER_SELF_MUTATION_FULL_REGRESSION',r['tests_run'])
+          PY
+
+      - name: Finalize controller self-mutation receipt
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          bootstrap=json.load(open('candidates/g2-self-evolution/yado-native-controller-source-self-mutation-v2.json'))
+          strict=json.load(open('candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json'))
+          audit=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          reg=json.load(open('audits/yado-full-regression-v1-report.json'))
+          src=pathlib.Path('runtime/yado_evolutionary_genome_v1.py').read_bytes()
+          residual='NATIVE_CONTROLLER_NEW_DIMENSION_GENESIS' if not strict.get('new_dimensions') else None
+          out={
+            'schema':'yado.native_controller_source_self_mutation.v2',
+            'status':'PASS_NATIVE_CONTROLLER_SOURCE_SELF_MUTATION_V2',
+            'prior_internet_cycle':'PASS_INTERNET_LEARN_APPLY_MUTATE_INVENT_EVOLVE_V1',
+            'bootstrap_arm_status':bootstrap['status'],
+            'first_self_emitted_semantic_change':bootstrap['self_emitted_semantic_change'],
+            'strict_probe_native_source_candidate_count':strict['native_source_candidate_count'],
+            'strict_probe_new_dimensions':strict['new_dimensions'],
+            'applied_controller_sha256':hashlib.sha256(src).hexdigest(),
+            'kernel_audit':audit['status'],
+            'regression_status':reg['status'],
+            'regression_tests':reg['tests_run'],
+            'canonical_main_mutation':False,
+            'development_branch_only':True,
+            'g3_genesis_performed':False,
+            'consciousness_claimed':False,
+            'residual_frontier':residual,
+            'next_step': residual or 'REPEAT_NATIVE_CONTROLLER_EVOLUTION_ON_FRESH_DEFICIT'
+          }
+          p=pathlib.Path('architecture/yado-native-controller-source-self-mutation-v2.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          print(json.dumps(out,sort_keys=True))
+          PY
+
+      - name: Persist only fully gated development result
+        run: |
+          git config user.name 'YADO Native Controller Evolution'
+          git config user.email 'actions@users.noreply.github.com'
+          git add runtime/yado_evolutionary_genome_v1.py \
+            candidates/g2-self-evolution \
+            candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json \
+            architecture/yado-native-controller-source-self-mutation-v2.json \
+            audits/yado-full-kernel-audit-v1-report.json audits/yado-full-regression-v1-report.json
+          git diff --cached --quiet || git commit -m 'YADO controller: gated native source self-mutation v2 [skip ci]'
+          git push origin HEAD:yado-deep-development-20260914
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-native-controller-source-self-mutation-v2-${{ github.run_id }}
+          path: |
+            architecture/yado-native-controller-source-self-mutation-v2.json
+            candidates/g2-self-evolution/yado-native-controller-source-self-mutation-v2.json
+            candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json
+            artifacts/yado-native-controller-strict-probe-after-v2.log
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
