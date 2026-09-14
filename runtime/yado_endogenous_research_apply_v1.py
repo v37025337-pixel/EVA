@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# Static-audit repair retrigger: semantic behavior intentionally unchanged.
 import hashlib
 import json
 import urllib.parse
