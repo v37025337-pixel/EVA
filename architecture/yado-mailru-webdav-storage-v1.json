@@ -1,0 +1,24 @@
+{
+  "schema": "yado.mailru_webdav_storage.v1",
+  "provider": "cloud.mail.ru",
+  "protocol": "WebDAV",
+  "endpoint": "https://webdav.cloud.mail.ru",
+  "root": "/YADO",
+  "role": "EXTERNAL_PERSISTENT_STORAGE_ONLY",
+  "allowed_payload_classes": [
+    "experience",
+    "receipts",
+    "audit_reports",
+    "candidate_sources",
+    "build_manifests"
+  ],
+  "credentials": {
+    "user_env": "YADO_MAILRU_USER",
+    "app_password_env": "YADO_MAILRU_APP_PASSWORD",
+    "committed_to_repository": false
+  },
+  "remote_code_execution": false,
+  "automatic_external_execution": false,
+  "canonical_mutation": false,
+  "status": "READY_REQUIRES_PROTECTED_CREDENTIALS_FOR_LIVE_WRITE"
+}
