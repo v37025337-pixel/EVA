@@ -1,0 +1,258 @@
+name: YADO Endogenous Research Search Apply V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-deep-development-20260914]
+    paths:
+      - '.github/workflows/yado-endogenous-research-search-apply-v2.yml'
+      - 'runtime/yado_endogenous_research_cognitive_evolution_v5.py'
+      - 'runtime/yado_endogenous_research_apply_v1.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-endogenous-research-search-apply-v2
+  cancel-in-progress: true
+
+jobs:
+  research-process-mutate-apply-regress:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    env:
+      PYTHONPATH: runtime
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Prepare verified kernel
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m compileall -q runtime successor candidates
+          python - <<'PY'
+          import json
+          r=json.load(open('architecture/yado-native-controller-dimension-fresh-transfer-v1.json'))
+          assert r['status']=='PASS_NATIVE_CONTROLLER_DIMENSION_FRESH_TRANSFER_AND_ABLATION_V1',r
+          assert r['regression_status']=='PASS' and r['regression_tests']==197,r
+          assert r['all_ablations_remove_dimension'] is True,r
+          print('PASS_PRIOR_ENDOGENOUS_FRONTIER',r['next_step'])
+          PY
+
+      - name: Search and process fresh public cross-disciplinary data
+        run: |
+          mkdir -p artifacts
+          python runtime/yado_cross_disciplinary_internet_learning_v1.py --self-test
+          python runtime/yado_cross_disciplinary_internet_learning_v1.py \
+            --config architecture/yado-cross-disciplinary-internet-learning-v1.json \
+            --self-model architecture/developmental-self-model-overlay.json \
+            --out artifacts/yado-cross-disciplinary-internet-learning-v2.json
+          python - <<'PY'
+          import json
+          r=json.load(open('artifacts/yado-cross-disciplinary-internet-learning-v2.json'))
+          assert r['status']=='PASS_REAL_INTERNET_CROSS_DISCIPLINARY_EXPERIENCE',r
+          assert r['internet_access_verified'] is True,r
+          assert r['acquisition']['fetched_sources']>=5,r
+          assert r['acquisition']['discipline_count']>=5,r
+          assert r['acquisition']['raw_page_text_persisted'] is False,r
+          assert r['safety_boundary']['authenticated_access'] is False,r
+          assert r['safety_boundary']['remote_code_execution'] is False,r
+          print('PASS_FRESH_PUBLIC_RESEARCH',r['acquisition']['fetched_sources'],r['acquisition']['disciplines_covered'],r['evidence_digest'])
+          PY
+          cp artifacts/yado-cross-disciplinary-internet-learning-v2.json artifacts/yado-cross-disciplinary-internet-learning-v1.json
+
+      - name: Process research into endogenous experience
+        run: |
+          python runtime/yado_endogenous_research_apply_v1.py | tee artifacts/yado-endogenous-research-apply-v2.log
+          python - <<'PY'
+          import json
+          r=json.load(open('candidates/cognitive/yado-endogenous-research-apply-v1.json'))
+          assert r['status']=='PASS_ENDOGENOUS_RESEARCH_EXPERIENCE_BINDING_V1',r
+          assert r['discipline_count']>=5 and r['fact_count']>=16,r
+          assert r['credentials_used'] is False and r['external_writes'] is False,r
+          print('PASS_ENDOGENOUS_PROCESSING',r['target_deficit'],r['fact_count'],r['experience_digest'])
+          PY
+
+      - name: Convert grounded deficit into a new controller dimension
+        run: |
+          python - <<'PY'
+          import importlib.util,json,pathlib,hashlib
+          p=pathlib.Path('candidates/g2-self-evolution/yado_evolutionary_genome_new_dimension_candidate_v1.py')
+          spec=importlib.util.spec_from_file_location('yado_research_dim_v2',p)
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          C=m.YADOEvolutionaryGenomeV1
+          exp=json.load(open('experience/autonomous/yado-autonomous-learning-latest.json'))
+          bind=json.load(open('candidates/cognitive/yado-endogenous-research-apply-v1.json'))
+          parent=C.parent_genome('0'*64,{'LOGIC':'l','THINKING':'t','INTELLIGENCE':'i','CODE':'c'},exp['experience_digest'])
+          evidence=[
+            {'deficit':exp['priority']['code'],'objective':exp['priority']['recommended_action'],'next_required_capability':bind['next_required_capability']},
+            {'signature':'CROSS_DISCIPLINARY_EVIDENCE_'+exp['experience_digest'][:16],'task':'PROCESS_COMPARE_AND_APPLY_VERIFIED_PUBLIC_EVIDENCE'}
+          ]
+          run=C(parent,experience_sources=evidence).evolve_once()
+          child=run.get('child') or {}
+          dims=sorted(set((child.get('chromosomes') or {}))-set(parent.get('chromosomes',{})))
+          assert run.get('selection')=='CHILD' and dims,run
+          assert (run.get('fitness') or {}).get('all_regressions_pass') is True,run
+          out={'schema':'yado.endogenous_research_dimension.v2','status':'PASS_ENDOGENOUS_RESEARCH_DEFICIT_TO_DIMENSION_V2','experience_digest':exp['experience_digest'],'derived_new_dimensions':dims,'selection':run['selection'],'canonical_mutation':False}
+          out['receipt_sha256']=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+          pathlib.Path('candidates/g2-self-evolution/yado-endogenous-research-dimension-v2.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
+          print('PASS_GROUNDED_DEFICIT_TO_DIMENSION',dims)
+          PY
+
+      - name: Evolve cognitive policy from cross-domain evidence V5
+        run: |
+          python runtime/yado_endogenous_research_cognitive_evolution_v5.py | tee artifacts/yado-endogenous-research-cognitive-evolution-v5.log
+          python - <<'PY'
+          import json
+          r=json.load(open('candidates/cognitive/yado-endogenous-research-cognitive-evolution-v5.json'))
+          assert r['status']=='PASS_SHADOW_ENDOGENOUS_RESEARCH_COGNITIVE_EVOLUTION_V5',r
+          assert r['selected_policy']!=r['baseline_policy'],r
+          assert min(r['selected_hidden'].values())>=0.75,r
+          assert r['contradiction_data_derived'] is True,r
+          assert r['experience_signal']['discipline_count']>=5,r
+          assert r['experience_signal']['bridge_fact_count']>=4,r
+          assert r['experience_signal']['failure_count']==0,r
+          assert r['no_experience_ablation']['causal_effect_observed'] is True,r
+          assert r['no_experience_ablation']['blocks_cross_domain_contradiction_enablement'] is True,r
+          print('PASS_CROSS_DOMAIN_COGNITIVE_MUTATION',r['selected_policy'],r['selected_hidden'])
+          PY
+
+      - name: Apply candidate policy to runtime and prove regression
+        run: |
+          cp runtime/yado_cognitive_tri_organ_policy_v3.py "$RUNNER_TEMP/yado_cognitive_tri_organ_policy_v3.canonical.py"
+          cp candidates/cognitive/yado_cognitive_policy_candidate_v5.py runtime/yado_cognitive_tri_organ_policy_v3.py
+          python -m py_compile runtime/yado_cognitive_tri_organ_policy_v3.py
+          python - <<'PY'
+          import importlib.util,json,pathlib
+          p=pathlib.Path('runtime/yado_cognitive_tri_organ_policy_v3.py')
+          spec=importlib.util.spec_from_file_location('research_policy_candidate_v5',p)
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          exp=json.load(open('experience/autonomous/yado-autonomous-learning-latest.json'))
+          assert m.EXPERIENCE_BINDING['experience_digest']==exp['experience_digest']
+          assert m.EXPERIENCE_BINDING['discipline_count']>=5
+          assert m.EXPERIENCE_BINDING['bridge_fact_count']>=4
+          assert m.COGNITIVE_POLICY['contradiction_check'] is True
+          assert min(m.VERIFIED_HIDDEN_SCORES.values())>=0.75
+          print('PASS_ACTIVE_RESEARCH_POLICY_BINDING',m.COGNITIVE_POLICY,m.VERIFIED_HIDDEN_SCORES)
+          PY
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-research-v5-candidate"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-research-v5-candidate/manifest.json"
+          cp audits/yado-full-regression-v1-report.json artifacts/yado-research-v5-candidate-full-regression.json
+          python - <<'PY'
+          import json
+          r=json.load(open('artifacts/yado-research-v5-candidate-full-regression.json'))
+          assert r['status']=='PASS' and r['tests_run']==r['expected_tests']==197,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_ACTIVE_CANDIDATE_REGRESSION',r['tests_run'])
+          PY
+
+      - name: Restore canonical runtime and prove kernel integrity
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/yado_cognitive_tri_organ_policy_v3.canonical.py" ]; then
+            cp "$RUNNER_TEMP/yado_cognitive_tri_organ_policy_v3.canonical.py" runtime/yado_cognitive_tri_organ_policy_v3.py
+          fi
+          python -m py_compile runtime/yado_cognitive_tri_organ_policy_v3.py
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python runtime/yado_full_kernel_audit_v1.py
+
+      - name: Fresh post-restore Successor and full regression
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status']=='PASS' and r['findings']==[],r
+          assert r['canonical']['canonical_guard']=='PASS',r
+          assert r['canonical']['ledger_validation']=='PASS',r
+          assert r['canonical']['g3_genesis_performed'] is False,r
+          print('PASS_POST_RESTORE_KERNEL_AUDIT')
+          PY
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-research-v5-post-restore"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-research-v5-post-restore/manifest.json"
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status']=='PASS' and r['tests_run']==r['expected_tests']==197,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_POST_RESTORE_REGRESSION',r['tests_run'])
+          PY
+
+      - name: Finalize and persist fully gated development result
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          cross=json.load(open('artifacts/yado-cross-disciplinary-internet-learning-v2.json'))
+          bind=json.load(open('candidates/cognitive/yado-endogenous-research-apply-v1.json'))
+          dim=json.load(open('candidates/g2-self-evolution/yado-endogenous-research-dimension-v2.json'))
+          cog=json.load(open('candidates/cognitive/yado-endogenous-research-cognitive-evolution-v5.json'))
+          cand_reg=json.load(open('artifacts/yado-research-v5-candidate-full-regression.json'))
+          audit=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          reg=json.load(open('audits/yado-full-regression-v1-report.json'))
+          candidate=pathlib.Path('candidates/cognitive/yado_cognitive_policy_candidate_v5.py').read_bytes()
+          out={
+            'schema':'yado.endogenous_research_search_apply.v2',
+            'status':'PASS_ENDOGENOUS_RESEARCH_SEARCH_PROCESS_APPLY_V2',
+            'public_internet_evidence_digest':cross['evidence_digest'],
+            'fetched_sources':cross['acquisition']['fetched_sources'],
+            'disciplines':cross['acquisition']['disciplines_covered'],
+            'bound_fact_count':bind['fact_count'],
+            'target_deficit':bind['target_deficit'],
+            'derived_new_dimensions':dim['derived_new_dimensions'],
+            'selected_policy':cog['selected_policy'],
+            'selected_hidden':cog['selected_hidden'],
+            'contradiction_data_derived':cog['contradiction_data_derived'],
+            'causal_ablation_pass':cog['no_experience_ablation']['causal_effect_observed'],
+            'cognitive_candidate_sha256':hashlib.sha256(candidate).hexdigest(),
+            'candidate_runtime_regression':cand_reg['status'],
+            'candidate_runtime_regression_tests':cand_reg['tests_run'],
+            'kernel_audit':audit['status'],
+            'post_restore_regression':reg['status'],
+            'post_restore_regression_tests':reg['tests_run'],
+            'canonical_main_mutation':False,
+            'development_candidate_only':True,
+            'g3_genesis_performed':False,
+            'consciousness_claimed':False,
+            'next_step':'ENDOGENOUS_RESEARCH_REPEAT_WITH_FRESH_SOURCES_AND_SELF_SELECTED_DEFICIT_V3'
+          }
+          pathlib.Path('architecture/yado-endogenous-research-search-apply-v2.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(out,sort_keys=True))
+          PY
+          git config user.name 'YADO Endogenous Research Development'
+          git config user.email 'actions@users.noreply.github.com'
+          git add architecture/yado-endogenous-research-search-apply-v2.json \
+            candidates/cognitive/yado-endogenous-research-apply-v1.json \
+            candidates/cognitive/yado-endogenous-research-cognitive-evolution-v5.json \
+            candidates/cognitive/yado_cognitive_policy_candidate_v5.py \
+            candidates/g2-self-evolution/yado-endogenous-research-dimension-v2.json \
+            experience/autonomous/yado-autonomous-learning-latest.json \
+            audits/yado-full-kernel-audit-v1-report.json audits/yado-full-regression-v1-report.json
+          git diff --cached --quiet || git commit -m 'YADO: gated endogenous research search-process-apply v2 [skip ci]'
+          git push origin HEAD:yado-deep-development-20260914
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-endogenous-research-search-apply-v2-${{ github.run_id }}
+          path: |
+            architecture/yado-endogenous-research-search-apply-v2.json
+            candidates/cognitive/yado-endogenous-research-apply-v1.json
+            candidates/cognitive/yado-endogenous-research-cognitive-evolution-v5.json
+            candidates/cognitive/yado_cognitive_policy_candidate_v5.py
+            candidates/g2-self-evolution/yado-endogenous-research-dimension-v2.json
+            experience/autonomous/yado-autonomous-learning-latest.json
+            artifacts/yado-cross-disciplinary-internet-learning-v2.json
+            artifacts/yado-endogenous-research-apply-v2.log
+            artifacts/yado-endogenous-research-cognitive-evolution-v5.log
+            artifacts/yado-research-v5-candidate-full-regression.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
