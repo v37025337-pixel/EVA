@@ -1,0 +1,38 @@
+{
+  "schema": "yado.authorized_access_inventory.v1",
+  "role": "AUTHORIZED_ACCESS_DISCOVERY_ONLY",
+  "objective": "Inventory public no-auth resources and authorized credential references required by YADO without reading, storing, guessing, bypassing, or exposing secret values.",
+  "allowed": [
+    "discover_public_no_auth_endpoints",
+    "discover_credential_reference_names",
+    "check_if_expected_environment_variables_are_present",
+    "map_access_requirements_to_runtime_capabilities",
+    "report_missing_authorized_access"
+  ],
+  "forbidden": [
+    "read_secret_values",
+    "print_secret_values",
+    "export_secret_values",
+    "credential_guessing",
+    "credential_stuffing",
+    "authentication_bypass",
+    "session_theft",
+    "unauthorized_account_access"
+  ],
+  "verified_public_execution_resources": [
+    "https://ce.judge0.com",
+    "https://runlet.codealong.live"
+  ],
+  "protected_profiles": [
+    {
+      "id": "mailru_webdav",
+      "endpoint": "https://webdav.cloud.mail.ru",
+      "required_env": [
+        "YADO_MAILRU_USER",
+        "YADO_MAILRU_APP_PASSWORD"
+      ]
+    }
+  ],
+  "canonical_mutation": false,
+  "status": "DEVELOPMENT_BRANCH_ACTIVE"
+}
