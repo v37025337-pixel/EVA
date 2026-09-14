@@ -32,6 +32,7 @@ jobs:
         run: |
           python runtime/reconstruct_rc8v36.py
           python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
       - name: Compile and test Mail.ru WebDAV adapter
         run: |
           python -m py_compile runtime/yado_mailru_webdav_store_v1.py runtime/test_yado_mailru_webdav_store_v1.py
