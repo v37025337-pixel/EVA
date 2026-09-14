@@ -1,10 +1,15 @@
 """Bounded endogenous continuation for the YADO Successor.
 
 This module removes one narrow host dependency from the active acceptance loop:
-the host supplies only a cycle budget.  Each concrete goal instance is selected
+the host supplies only a cycle budget. Each concrete goal instance is selected
 from the kernel's verified causal state and generated without labelled answers.
 
-The goal grammar and controller remain assistant-authored and bounded.  This is
+Verified endogenous outcomes from earlier admitted development runs can also be
+used as bounded historical evidence. They never bypass Successor identity/state
+checks: only compact PASS receipts already present in the immutable Git archive
+are read, and their accepted cycle counts influence pressure/seed selection.
+
+The goal grammar and controller remain assistant-authored and bounded. This is
 evidence for endogenous goal continuation inside that grammar, not evidence of
 general intelligence, agency outside the process, or phenomenal consciousness.
 """
@@ -18,13 +23,92 @@ from .archive import canonical, sha
 from .kernel import SuccessorKernel, fingerprint
 
 DOMAINS = ("relation", "events")
+HISTORY_SCHEMA = "yado.active_native_loop.applied_experience.v1"
+HISTORY_STATUS = "PASS_APPLIED_VERIFIED_ENDOGENOUS_EXPERIENCE_V1"
+ENDOGENOUS_PASS = "PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1"
 
 
-def _pressure(snapshot, domain):
+def _verified_endogenous_history(kernel):
+    """Return bounded, digest-addressed PASS history from admitted receipts.
+
+    Cross-run sqlite state is deliberately not reused because it is bound to a
+    particular Successor identity. Instead we consume only compact Git-archived
+    receipts whose top-level admission, regression, audit and nested endogenous
+    result all say PASS. Archive contents are treated as historical evidence,
+    not as a replacement for the current run's fresh verification.
+    """
+    rows = kernel.archive.search(
+        "PASS_APPLIED_VERIFIED_ENDOGENOUS_EXPERIENCE_V1 PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1",
+        40,
+    )
+    accepted = []
+    seen = set()
+    for source in rows:
+        digest = source.get("digest")
+        path = str(source.get("path", ""))
+        if not digest or digest in seen or not path.startswith("receipts/yado-active-native-loop-"):
+            continue
+        seen.add(digest)
+        try:
+            data = json.loads(kernel.archive.read(digest))
+        except Exception:
+            continue
+        if not isinstance(data, dict):
+            continue
+        endogenous = data.get("endogenous")
+        regression = data.get("regression")
+        audit = data.get("kernel_audit")
+        if not (
+            data.get("schema") == HISTORY_SCHEMA
+            and data.get("status") == HISTORY_STATUS
+            and isinstance(endogenous, dict)
+            and endogenous.get("status") == ENDOGENOUS_PASS
+            and endogenous.get("host_goal_count") == 0
+            and endogenous.get("cycles_completed") == endogenous.get("cycles_verified")
+            and int(endogenous.get("cycles_verified", 0)) > 0
+            and isinstance(regression, dict)
+            and regression.get("status") == "PASS"
+            and int(regression.get("tests_run", 0)) >= 197
+            and isinstance(audit, dict)
+            and audit.get("status") == "PASS"
+            and audit.get("findings") == []
+            and data.get("canonical_mutation") is False
+        ):
+            continue
+        counts = endogenous.get("domain_counts", {})
+        normalized = {domain: max(0, int(counts.get(domain, 0))) for domain in DOMAINS}
+        if sum(normalized.values()) != int(endogenous["cycles_verified"]):
+            continue
+        accepted.append({
+            "digest": digest,
+            "path": path,
+            "source_run_id": data.get("source_run_id"),
+            "cycles_verified": int(endogenous["cycles_verified"]),
+            "domain_counts": normalized,
+        })
+
+    # A content digest may be reachable through several historical refs. The
+    # digest dedupe above makes the transfer depend on evidence, not ref count.
+    domain_counts = {domain: 0 for domain in DOMAINS}
+    for item in accepted:
+        for domain in DOMAINS:
+            domain_counts[domain] += item["domain_counts"][domain]
+    return {
+        "accepted_receipt_count": len(accepted),
+        "verified_cycles": sum(item["cycles_verified"] for item in accepted),
+        "domain_counts": domain_counts,
+        "receipt_digests": sorted(item["digest"] for item in accepted),
+        "source_run_ids": sorted(
+            {item["source_run_id"] for item in accepted if item["source_run_id"] is not None}
+        ),
+    }
+
+
+def _pressure(snapshot, domain, historical_successes=0):
     """Prefer the domain with weaker or less certain verified experience."""
     stats = snapshot.get("all_observations", {})
     items = [value for key, value in stats.items() if key.startswith(domain + "/")]
-    successes = sum(int(item.get("successes", 0)) for item in items)
+    successes = sum(int(item.get("successes", 0)) for item in items) + int(historical_successes)
     failures = sum(int(item.get("failures", 0)) for item in items)
     count = successes + failures
     squared_error = sum(float(item.get("squared_error", 0.0)) for item in items)
@@ -73,33 +157,40 @@ def propose_endogenous_goal(kernel):
     if active:
         raise ValueError("ENDOGENOUS_PROPOSAL_REQUIRES_IDLE_COGNITIVE_LOOP")
 
+    history = _verified_endogenous_history(kernel)
     ordinal = len(snapshot["goals"])
     seed = sha(canonical({
         "identity": kernel.identity,
         "causal_event_hash": verification["event_hash"],
         "goal_ordinal": ordinal,
+        "historical_verified_endogenous_cycles": history["verified_cycles"],
+        "historical_receipt_digests": history["receipt_digests"],
     }).encode())
-    pressures = {domain: _pressure(snapshot, domain) for domain in DOMAINS}
+    pressures = {
+        domain: _pressure(snapshot, domain, history["domain_counts"][domain])
+        for domain in DOMAINS
+    }
     maximum = max(pressures.values())
     candidates = [domain for domain in DOMAINS if pressures[domain] == maximum]
     selected = candidates[int(seed[:8], 16) % len(candidates)]
     spec = _relation_spec(seed) if selected == "relation" else _events_spec(seed)
 
     return {
-        "schema": "yado.endogenous_goal_proposal.v1",
+        "schema": "yado.endogenous_goal_proposal.v2",
         "status": "PROPOSED_BOUNDED_ENDOGENOUS_GOAL",
         "host_supplied_goal": False,
         "selected_from_fixed_goal_list": False,
-        "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE",
+        "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE_PLUS_VERIFIED_HISTORY",
         "source_event_hash": verification["event_hash"],
         "goal_ordinal": ordinal,
         "pressures": pressures,
+        "accepted_history": history,
         "selected_domain": selected,
         "seed": seed,
         "spec": spec,
         "spec_digest": fingerprint(spec),
         "goal_grammar_authorship": "ASSISTANT_AUTHORED_BOUNDED_GRAMMAR",
-        "goal_instance_authorship": "YADO_STATE_DERIVED",
+        "goal_instance_authorship": "YADO_STATE_AND_VERIFIED_HISTORY_DERIVED",
         "consciousness_claimed": False,
     }
 
@@ -133,6 +224,7 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
         raise ValueError("ACTIVE_GOAL_DID_NOT_SETTLE")
 
     rows = []
+    history_at_start = _verified_endogenous_history(kernel)
     for _ in range(cycles):
         proposal = propose_endogenous_goal(kernel)
         proposal_event = _append_event(kernel, {
@@ -144,6 +236,7 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
             "source_event_hash": proposal["source_event_hash"],
             "goal_ordinal": proposal["goal_ordinal"],
             "pressures": proposal["pressures"],
+            "accepted_history": proposal["accepted_history"],
             "selected_domain": proposal["selected_domain"],
             "seed": proposal["seed"],
             "spec": proposal["spec"],
@@ -176,15 +269,16 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
 
     passed = all(row["status"] == "VERIFIED" for row in rows)
     return {
-        "schema": "yado.bounded_endogenous_continuation.v1",
-        "status": "PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1" if passed else "WITHHOLD_BOUNDED_ENDOGENOUS_CONTINUATION_V1",
+        "schema": "yado.bounded_endogenous_continuation.v2",
+        "status": ENDOGENOUS_PASS if passed else "WITHHOLD_BOUNDED_ENDOGENOUS_CONTINUATION_V2",
         "cycles_requested": cycles,
         "cycles_completed": len(rows),
         "cycles_verified": sum(row["status"] == "VERIFIED" for row in rows),
         "host_goal_count": 0,
-        "goal_instance_authorship": "YADO_STATE_DERIVED",
+        "accepted_history_at_start": history_at_start,
+        "goal_instance_authorship": "YADO_STATE_AND_VERIFIED_HISTORY_DERIVED",
         "goal_grammar_authorship": "ASSISTANT_AUTHORED_BOUNDED_GRAMMAR",
-        "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE",
+        "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE_PLUS_VERIFIED_HISTORY",
         "results": rows,
         "state_verification": kernel.verify_state(),
         "automatic_canonical_promotion": False,
