@@ -50,6 +50,7 @@ jobs:
 
       - name: Bootstrap native source-emission arm and let controller emit semantic mutation
         run: |
+          cp runtime/yado_evolutionary_genome_v1.py "$RUNNER_TEMP/yado_evolutionary_genome_parent_v2.py"
           python -m py_compile runtime/yado_native_controller_source_self_mutation_v2.py
           python runtime/yado_native_controller_source_self_mutation_v2.py
           python - <<'PY'
@@ -119,6 +120,20 @@ jobs:
           print('PASS_APPLIED_SECOND_GENERATION_CONTROLLER_MUTATION')
           PY
 
+      - name: Restore canonical controller before invariant audit
+        run: |
+          cp "$RUNNER_TEMP/yado_evolutionary_genome_parent_v2.py" runtime/yado_evolutionary_genome_v1.py
+          python -m py_compile runtime/yado_evolutionary_genome_v1.py
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python - <<'PY'
+          import hashlib,pathlib
+          parent=pathlib.Path('runtime/yado_evolutionary_genome_v1.py').read_bytes()
+          candidate=pathlib.Path('candidates/g2-self-evolution/yado_evolutionary_genome_self_candidate_v2b.py').read_bytes()
+          assert parent != candidate
+          print('PASS_CANONICAL_CONTROLLER_RESTORED',hashlib.sha256(parent).hexdigest())
+          print('VALIDATED_SELF_MUTATED_CANDIDATE',hashlib.sha256(candidate).hexdigest())
+          PY
+
       - name: Compile all layers and audit whole kernel
         run: |
           python -m compileall -q runtime successor candidates
@@ -156,7 +171,8 @@ jobs:
           strict=json.load(open('candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json'))
           audit=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
           reg=json.load(open('audits/yado-full-regression-v1-report.json'))
-          src=pathlib.Path('runtime/yado_evolutionary_genome_v1.py').read_bytes()
+          candidate=pathlib.Path('candidates/g2-self-evolution/yado_evolutionary_genome_self_candidate_v2b.py').read_bytes()
+          canonical=pathlib.Path('runtime/yado_evolutionary_genome_v1.py').read_bytes()
           residual='NATIVE_CONTROLLER_NEW_DIMENSION_GENESIS' if not strict.get('new_dimensions') else None
           out={
             'schema':'yado.native_controller_source_self_mutation.v2',
@@ -166,12 +182,13 @@ jobs:
             'first_self_emitted_semantic_change':bootstrap['self_emitted_semantic_change'],
             'strict_probe_native_source_candidate_count':strict['native_source_candidate_count'],
             'strict_probe_new_dimensions':strict['new_dimensions'],
-            'applied_controller_sha256':hashlib.sha256(src).hexdigest(),
+            'validated_second_generation_candidate_sha256':hashlib.sha256(candidate).hexdigest(),
+            'canonical_controller_restored_sha256':hashlib.sha256(canonical).hexdigest(),
             'kernel_audit':audit['status'],
             'regression_status':reg['status'],
             'regression_tests':reg['tests_run'],
             'canonical_main_mutation':False,
-            'development_branch_only':True,
+            'development_candidate_only':True,
             'g3_genesis_performed':False,
             'consciousness_claimed':False,
             'residual_frontier':residual,
@@ -186,8 +203,7 @@ jobs:
         run: |
           git config user.name 'YADO Native Controller Evolution'
           git config user.email 'actions@users.noreply.github.com'
-          git add runtime/yado_evolutionary_genome_v1.py \
-            candidates/g2-self-evolution \
+          git add candidates/g2-self-evolution \
             candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json \
             architecture/yado-native-controller-source-self-mutation-v2.json \
             audits/yado-full-kernel-audit-v1-report.json audits/yado-full-regression-v1-report.json
