@@ -87,8 +87,6 @@ def _verified_endogenous_history(kernel):
             "domain_counts": normalized,
         })
 
-    # A content digest may be reachable through several historical refs. The
-    # digest dedupe above makes the transfer depend on evidence, not ref count.
     domain_counts = {domain: 0 for domain in DOMAINS}
     for item in accepted:
         for domain in DOMAINS:
@@ -185,12 +183,14 @@ def propose_endogenous_goal(kernel):
         "goal_ordinal": ordinal,
         "pressures": pressures,
         "accepted_history": history,
+        "verified_history_bound": history["verified_cycles"] > 0,
+        "verified_history_cycles": history["verified_cycles"],
         "selected_domain": selected,
         "seed": seed,
         "spec": spec,
         "spec_digest": fingerprint(spec),
         "goal_grammar_authorship": "ASSISTANT_AUTHORED_BOUNDED_GRAMMAR",
-        "goal_instance_authorship": "YADO_STATE_AND_VERIFIED_HISTORY_DERIVED",
+        "goal_instance_authorship": "YADO_STATE_DERIVED",
         "consciousness_claimed": False,
     }
 
@@ -217,7 +217,6 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
     if type(budget) is not int or not 1 <= budget <= 30:
         raise ValueError("ENDOGENOUS_GOAL_BUDGET")
 
-    # Resume any interrupted work before creating a new goal instance.
     kernel.think(200)
     snapshot = kernel.cognitive_snapshot()
     if any(goal["status"] == "ACTIVE" for goal in snapshot["goals"].values()):
@@ -237,6 +236,8 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
             "goal_ordinal": proposal["goal_ordinal"],
             "pressures": proposal["pressures"],
             "accepted_history": proposal["accepted_history"],
+            "verified_history_bound": proposal["verified_history_bound"],
+            "verified_history_cycles": proposal["verified_history_cycles"],
             "selected_domain": proposal["selected_domain"],
             "seed": proposal["seed"],
             "spec": proposal["spec"],
@@ -276,7 +277,9 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
         "cycles_verified": sum(row["status"] == "VERIFIED" for row in rows),
         "host_goal_count": 0,
         "accepted_history_at_start": history_at_start,
-        "goal_instance_authorship": "YADO_STATE_AND_VERIFIED_HISTORY_DERIVED",
+        "verified_history_bound": history_at_start["verified_cycles"] > 0,
+        "verified_history_cycles": history_at_start["verified_cycles"],
+        "goal_instance_authorship": "YADO_STATE_DERIVED",
         "goal_grammar_authorship": "ASSISTANT_AUTHORED_BOUNDED_GRAMMAR",
         "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE_PLUS_VERIFIED_HISTORY",
         "results": rows,
