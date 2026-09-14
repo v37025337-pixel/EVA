@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Bounded real-internet, cross-disciplinary experience acquisition for YADO.
 
-Reads only public HTTPS pages, stores provenance/derived features rather than raw
-page text, and produces evidence for later gated cognitive mutation.
+Reads only public HTTPS pages or JSON/GeoJSON endpoints, stores provenance and
+derived features rather than raw remote payload text, and produces evidence for
+later gated cognitive mutation.
 """
 from __future__ import annotations
 
@@ -20,7 +21,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
 
 SCHEMA = "yado.cross_disciplinary_internet_learning.v1"
-USER_AGENT = "YADO-Public-Research/1.0"
+USER_AGENT = "YADO-Public-Research/1.1"
 STOPWORDS = {
     "about", "after", "again", "against", "also", "another", "because", "been", "before",
     "being", "between", "both", "could", "does", "each", "from", "have", "having", "into",
@@ -71,6 +72,68 @@ def top_terms(items: Iterable[str], n: int = 30) -> List[Tuple[str, int]]:
     return Counter(items).most_common(n)
 
 
+def structured_json_features(value: Any, max_scalars: int = 6000) -> Dict[str, Any]:
+    """Derive bounded semantic tokens and shape statistics from untrusted JSON.
+
+    Raw JSON is never persisted in the learning receipt. Keys and string scalar
+    values contribute tokens; numeric scalars contribute only aggregate counts
+    and finite min/max values so live data can influence evidence diversity
+    without turning remote payloads into executable instructions.
+    """
+    extracted: List[str] = []
+    numeric_values: List[float] = []
+    stats = {"scalar_count": 0, "string_count": 0, "numeric_count": 0, "boolean_count": 0,
+             "null_count": 0, "object_count": 0, "array_count": 0, "key_count": 0,
+             "max_depth": 0, "truncated_scalars": False}
+
+    def walk(node: Any, depth: int = 0) -> None:
+        stats["max_depth"] = max(stats["max_depth"], depth)
+        if stats["scalar_count"] >= max_scalars:
+            stats["truncated_scalars"] = True
+            return
+        if isinstance(node, dict):
+            stats["object_count"] += 1
+            for key, child in node.items():
+                if stats["scalar_count"] >= max_scalars:
+                    stats["truncated_scalars"] = True
+                    break
+                stats["key_count"] += 1
+                extracted.extend(tokens(str(key)))
+                walk(child, depth + 1)
+            return
+        if isinstance(node, list):
+            stats["array_count"] += 1
+            for child in node:
+                if stats["scalar_count"] >= max_scalars:
+                    stats["truncated_scalars"] = True
+                    break
+                walk(child, depth + 1)
+            return
+        stats["scalar_count"] += 1
+        if node is None:
+            stats["null_count"] += 1
+        elif isinstance(node, bool):
+            stats["boolean_count"] += 1
+        elif isinstance(node, (int, float)):
+            stats["numeric_count"] += 1
+            try:
+                number = float(node)
+                if number == number and abs(number) != float("inf"):
+                    numeric_values.append(number)
+            except (TypeError, ValueError, OverflowError):
+                pass
+        else:
+            stats["string_count"] += 1
+            extracted.extend(tokens(str(node)))
+
+    walk(value)
+    stats["numeric_min"] = min(numeric_values) if numeric_values else None
+    stats["numeric_max"] = max(numeric_values) if numeric_values else None
+    stats["semantic_token_count"] = len(extracted)
+    stats["_tokens"] = extracted
+    return stats
+
+
 def fetch_public_https(url: str, max_bytes: int, timeout: int) -> Dict[str, Any]:
     parsed = urllib.parse.urlparse(url)
     if parsed.scheme != "https" or not parsed.hostname:
@@ -79,7 +142,7 @@ def fetch_public_https(url: str, max_bytes: int, timeout: int) -> Dict[str, Any]
         url,
         headers={
             "User-Agent": USER_AGENT,
-            "Accept": "text/html,text/plain;q=0.9,*/*;q=0.1",
+            "Accept": "application/json,application/geo+json,text/html,text/plain;q=0.9,*/*;q=0.1",
         },
         method="GET",
     )
@@ -91,21 +154,51 @@ def fetch_public_https(url: str, max_bytes: int, timeout: int) -> Dict[str, Any]
             if final.scheme != "https":
                 return {"status": "BLOCKED_REDIRECT_NON_HTTPS", "url": url, "final_url": final_url}
             content_type = (resp.headers.get("Content-Type") or "").lower()
-            if not ("text/html" in content_type or "text/plain" in content_type or not content_type):
+            accepted = (
+                "text/html" in content_type
+                or "text/plain" in content_type
+                or "json" in content_type
+                or not content_type
+            )
+            if not accepted:
                 return {"status": "BLOCKED_CONTENT_TYPE", "url": url, "final_url": final_url, "content_type": content_type}
             data = resp.read(max_bytes + 1)
             truncated = len(data) > max_bytes
             data = data[:max_bytes]
             charset = resp.headers.get_content_charset() or "utf-8"
             text_raw = data.decode(charset, errors="replace")
-            if "html" in content_type or "<html" in text_raw[:500].lower():
+
+            looks_json = "json" in content_type or text_raw.lstrip()[:1] in {"{", "["}
+            structured = None
+            if looks_json:
+                try:
+                    structured = structured_json_features(json.loads(text_raw))
+                    ts = structured.pop("_tokens", [])
+                    text = ""
+                except (json.JSONDecodeError, RecursionError, ValueError):
+                    if "json" in content_type:
+                        return {
+                            "status": "JSON_PARSE_ERROR",
+                            "url": url,
+                            "final_url": final_url,
+                            "content_type": content_type,
+                            "sha256": digest_bytes(data),
+                            "bytes": len(data),
+                            "truncated": truncated,
+                        }
+                    structured = None
+                    ts = tokens(text_raw)
+                    text = text_raw
+            elif "html" in content_type or "<html" in text_raw[:500].lower():
                 parser = TextExtractor()
                 parser.feed(text_raw)
                 text = parser.text()
+                ts = tokens(text)
             else:
                 text = re.sub(r"\s+", " ", text_raw).strip()
-            ts = tokens(text)
-            return {
+                ts = tokens(text)
+
+            result: Dict[str, Any] = {
                 "status": "FETCHED",
                 "url": url,
                 "final_url": final_url,
@@ -114,11 +207,15 @@ def fetch_public_https(url: str, max_bytes: int, timeout: int) -> Dict[str, Any]
                 "sha256": digest_bytes(data),
                 "bytes": len(data),
                 "truncated": truncated,
-                "word_count": len(text.split()),
+                "word_count": len(ts) if structured is not None else len(text.split()),
                 "token_count": len(ts),
                 "top_terms": top_terms(ts, 35),
+                "structured_json": structured is not None,
                 "_tokens": ts,
             }
+            if structured is not None:
+                result["structured_shape"] = structured
+            return result
     except urllib.error.HTTPError as exc:
         return {"status": "HTTP_ERROR", "url": url, "http_status": exc.code, "error": str(exc)}
     except Exception as exc:
@@ -196,6 +293,7 @@ def run(config: Dict[str, Any], self_model: Dict[str, Any]) -> Dict[str, Any]:
     fetched = [r for r in records if r.get("status") == "FETCHED"]
     disciplines = sorted({r["discipline"] for r in fetched})
     total_words = sum(int(r.get("word_count", 0)) for r in fetched)
+    structured_sources = [r for r in fetched if r.get("structured_json") is True]
     cross = derive_cross_domain(domain_terms)
     target = choose_self_development_target(self_model)
 
@@ -214,16 +312,20 @@ def run(config: Dict[str, Any], self_model: Dict[str, Any]) -> Dict[str, Any]:
         "acquisition": {
             "configured_sources": len(sources),
             "fetched_sources": len(fetched),
+            "structured_sources_fetched": len(structured_sources),
+            "structured_disciplines": sorted({r["discipline"] for r in structured_sources}),
             "disciplines_covered": disciplines,
             "discipline_count": len(disciplines),
             "total_words_observed": total_words,
             "raw_page_text_persisted": False,
+            "raw_json_payload_persisted": False,
             "records": records,
         },
         "derived_experience": {
             "domain_profiles": domain_profiles,
             "cross_domain": cross,
-            "boilerplate_filter_version": 2,
+            "boilerplate_filter_version": 3,
+            "structured_json_feature_version": 1,
         },
         "self_development_binding": {
             "self_model_status": self_model.get("status", "MISSING"),
@@ -238,6 +340,7 @@ def run(config: Dict[str, Any], self_model: Dict[str, Any]) -> Dict[str, Any]:
             "authenticated_access": False,
             "remote_code_execution": False,
             "remote_content_treated_as_untrusted_data": True,
+            "structured_remote_payload_executed": False,
         },
     }
     encoded = json.dumps(result, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
@@ -252,6 +355,14 @@ def self_test() -> None:
     a = {"model", "evidence", "risk"}
     b = {"model", "evidence", "system"}
     assert 0 < jaccard(a, b) < 1
+    structured = structured_json_features({
+        "metadata": {"title": "Earthquake observations"},
+        "values": [{"magnitude": 4.2, "place": "Pacific region"}, {"magnitude": 2.1, "reviewed": True}],
+    })
+    assert structured["numeric_count"] == 2
+    assert structured["boolean_count"] == 1
+    assert structured["object_count"] >= 3
+    assert "earthquake" in structured["_tokens"]
     target = choose_self_development_target({"generation_deficits": [{"deficit_id": "THINKING_BOUNDARY_REASONING", "priority": 1}]})
     assert target["deficit_id"] == "THINKING_BOUNDARY_REASONING"
     print("PASS_CROSS_DISCIPLINARY_INTERNET_LEARNING_SELF_TEST")
@@ -277,6 +388,7 @@ def main() -> int:
         "status": result["status"],
         "internet_access_verified": result["internet_access_verified"],
         "fetched_sources": result["acquisition"]["fetched_sources"],
+        "structured_sources_fetched": result["acquisition"]["structured_sources_fetched"],
         "discipline_count": result["acquisition"]["discipline_count"],
         "disciplines": result["acquisition"]["disciplines_covered"],
         "cross_domain_edges": len(result["derived_experience"]["cross_domain"]["edges"]),
