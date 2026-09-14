@@ -83,7 +83,7 @@ jobs:
           r=json.load(open('candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json'))
           assert r['native_source_candidate_count'] >= 1,r
           assert r['checks']['candidate_source_compiles'] is True,r
-          out=r['native_outputs'].get('controller.generate_native_controller_source_candidate')
+          out=r['native_outputs'].get('controller.native_self_mutation_source_candidate')
           assert isinstance(out,dict),r
           src=out.get('candidate_source') or out.get('source')
           assert isinstance(src,str) and src.strip(),out
@@ -113,7 +113,7 @@ jobs:
           assert r['fitness']['all_regressions_pass'] is True,r
           assert (r['child'] or {}).get('mutation_count',0)>0,r
           assert (r['child'] or {}).get('novel_gene_count',0)>0,r
-          nxt=c.generate_native_controller_source_candidate()
+          nxt=c.native_self_mutation_source_candidate()
           assert nxt.get('candidate_source') is None,nxt
           assert nxt.get('reason')=='SELF_MUTATION_GUARDS_EXHAUSTED',nxt
           print('PASS_APPLIED_SECOND_GENERATION_CONTROLLER_MUTATION')
