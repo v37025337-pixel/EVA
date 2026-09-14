@@ -2,7 +2,7 @@
   "automatic_main_mutation": false,
   "canonical_mutation": false,
   "consciousness_claimed": false,
-  "experience_digest": "0ad2b9b7a9302fd6a6bf87c1ef2fb5aef8a1faaaee137306e7d61e2e041e6cb1",
+  "experience_digest": "e32df5ce0f5acf6476cf36fa2206f5353f7c9e47063b64be95cf5b8486f98cdf",
   "failures": [
     {
       "error": "RuntimeError:HTTP_ERROR:301",
@@ -29,12 +29,12 @@
   "priority": {
     "area": "MEMORY_AND_EXPERIENCE",
     "blocking": false,
-    "code": "UNREGISTERED_EXPERIENCE_CANDIDATES",
+    "code": "REMOTE_BRANCH_INVENTORY_MATCH",
     "rank": 1,
-    "recommended_action": "For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.",
+    "recommended_action": "Keep every physical remote ref explicitly classified; only separately admitted evidence-bearing refs belong in cognitive experience.",
     "severity": "MEDIUM"
   },
-  "run_id": "34846360238",
+  "run_id": "34876185619",
   "schema": "yado.bounded_autonomous_learning.v1",
   "self_model_effect": "EXTERNAL_EVIDENCE_AVAILABLE_FOR_FUTURE_SELECTION",
   "source_ranking": [
@@ -43,9 +43,10 @@
       "overlap": [
         "code",
         "python",
-        "source"
+        "source",
+        "syntax"
       ],
-      "score": 3,
+      "score": 6,
       "tags": [
         "python",
         "ast",
@@ -54,6 +55,22 @@
         "compile",
         "code",
         "syntax"
+      ]
+    },
+    {
+      "id": "PYTHON_HTMLPARSER",
+      "overlap": [
+        "learning",
+        "web"
+      ],
+      "score": 4,
+      "tags": [
+        "html",
+        "parser",
+        "document",
+        "web",
+        "learning",
+        "external"
       ]
     },
     {
@@ -70,22 +87,6 @@
         "network",
         "protocol",
         "internet"
-      ]
-    },
-    {
-      "id": "PYTHON_HTMLPARSER",
-      "overlap": [
-        "learning",
-        "web"
-      ],
-      "score": 2,
-      "tags": [
-        "html",
-        "parser",
-        "document",
-        "web",
-        "learning",
-        "external"
       ]
     },
     {
@@ -142,34 +143,34 @@
         "ast — Abstract syntax trees — Python 3.14.7 documentation",
         "module helps Python applications to process trees of the Python abstract syntax grammar. The abstract syntax itself might change with each Python release; this module helps to find out programmatically what the current grammar looks like.",
         ". An abstract syntax tree can be compiled into a Python code object using the built-in",
-        "-- need sequences for compare to distinguish between",
-        "-- keyword arguments supplied to call (NULL identifier for **kwargs)",
-        "-- The optional \"rest\" MatchMapping parameter handles capturing extra mapping keys",
-        "There is one class defined for each left-hand side symbol in the abstract grammar (for example,",
-        "). In addition, there is one class defined for each constructor on the right-hand side; these classes inherit from the classes for the left-hand side trees. For example,",
         ". For production rules with alternatives (aka “sums”), the left-hand side class is abstract: only instances of specific constructor nodes are ever created.",
-        "which gives the names of all child nodes.",
-        "Each instance of a concrete class has one attribute for each child node, of the type as defined in the grammar. For example,",
         ". If the attributes can have zero-or-more values (marked with an asterisk), the values are represented as Python lists. All possible attributes must be present and have valid values when compiling an AST with",
-        "attribute on each concrete class is a dictionary mapping field names (as also listed in",
         "are the first and last line numbers of source text span (1-indexed so the first line is line 1) and the",
-        "are the corresponding UTF-8 byte offsets of the first and last tokens that generated the node. The UTF-8 offset is recorded because the parser uses UTF-8 internally.",
         "Note that the end positions are not required by the compiler and are therefore optional. The end offset is",
         "the last symbol, for example one can get the source segment of a one-line expression node using",
-        "; they will be assigned as attributes of these names.",
-        "If there are keyword arguments, they will set the attributes of the same names to the given values.",
         "is raised and the AST node will not have this field. In Python 3.15, this condition will raise an error.",
-        "AST node constructors were changed to provide sensible defaults for omitted fields: optional fields now default to",
-        ", list fields default to an empty list, and fields of type",
         "Previous versions of Python provided the AST classes",
-        ", which were deprecated in Python 3.8. These classes were removed in Python 3.14, and their functionality has been replaced with"
+        ", which were deprecated in Python 3.8. These classes were removed in Python 3.14, and their functionality has been replaced with",
+        "are still available, but they will be removed in future Python releases. In the meantime, instantiating them will return an instance of a different class.",
+        "Previous versions of Python allowed the creation of AST nodes that were missing required fields. Similarly, AST node constructors allowed arbitrary keyword arguments that were set as attributes of the AST node, even if they did not match any of the fields of the AST node. This behavior is deprecated and will be removed in Python 3.15.",
+        "A representation of an old-style type comments for functions, as Python versions prior to 3.5 didn’t support",
+        "literal contains the Python object it represents. The values represented can be instances of",
+        ". This no longer guarantees that the generated code is identical to the original and is intended for code generation.",
+        "Variable references can be used to load the value of a variable, to assign a new value to it, or to delete it. Variable references are given a context to distinguish these cases.",
+        "is the reference to use for each element - typically a",
+        "node that does not appear between parentheses; all other targets are considered complex. Only simple targets appear in the",
+        "Other statements which are only applicable inside functions or loops are described in other sections.",
+        "is a list of default values for keyword-only arguments. If one is",
+        "is a list of nodes for explicitly specified base classes.",
+        "is a list of nodes representing the code within the class definition.",
+        "is what it waits for. Only valid in the body of an"
       ],
       "network": {
         "bytes": 361144,
         "content_type": "text/html",
         "credentials_used": false,
         "host": "docs.python.org",
-        "latency_ms": 83.58,
+        "latency_ms": 22.79,
         "network_executed": true,
         "read_only": true,
         "redirects_followed": false,
@@ -183,53 +184,45 @@
           "2a04:4e42:600::223",
           "2a04:4e42::223"
         ],
-        "sha256": "cb2823442ad3e78d47fe69da5cf3b84109983d28b117b28c5f6c7f16a3b1f023",
+        "sha256": "02c4e04d4b9dfbe54cc5b90f6102aa33f3e4605fe5fbc3eb6d08f3583a851ee7",
         "status": 200,
         "url": "https://docs.python.org/3/library/ast.html"
       },
       "selection_overlap": [
         "code",
         "python",
-        "source"
+        "source",
+        "syntax"
       ],
-      "selection_score": 3,
+      "selection_score": 6,
       "source_id": "PYTHON_AST",
       "url": "https://docs.python.org/3/library/ast.html"
     },
     {
-      "fact_count": 24,
+      "fact_count": 15,
       "facts": [
         "html.parser — Simple HTML and XHTML parser — Python 3.14.7 documentation",
-        "which serves as the basis for parsing text files formatted in HTML (HyperText Mark-up Language) and XHTML.",
+        "is true (the default), all character references (except the ones in elements like",
         ") are automatically converted to the corresponding Unicode characters.",
-        "instance is fed HTML data and calls handler methods when start tags, end tags, text, comments, and other markup elements are encountered. The user should subclass",
-        "and override its methods to implement the desired behavior.",
-        "This parser does not check that end tags match start tags or call the end-tag handler for elements which are closed implicitly by closing an outer element.",
-        "class to print out start tags, end tags, and data as they are encountered:",
         "'<html><head><title>Test</title></head>'",
         "Encountered a start tag: html Encountered a start tag: head Encountered a start tag: title Encountered some data : Test Encountered an end tag : title Encountered an end tag : head Encountered a start tag: body Encountered a start tag: h1 Encountered some data : Parse me! Encountered an end tag : h1 Encountered an end tag : body Encountered an end tag : html",
-        "Force processing of all buffered data as if it were followed by an end-of-file mark. This method may be redefined by a derived class to define additional processing at the end of the input, but the redefined version should always call the",
-        "Return the text of the most recently opened start tag. This should not normally be needed for structured processing, but may be useful in dealing with HTML “as deployed” or for re-generating input with minimal changes (whitespace between attributes can be preserved, etc.).",
-        "The following methods are called when data or markup elements are encountered and they are meant to be overridden in a subclass. The base class implementations do nothing (except for",
-        "This method is called to handle the start tag of an element (e.g.",
-        "will be translated to lower case, and quotes in the",
         "have been removed, and character and entity references have been replaced. For empty attributes,",
-        "This method is called to handle the end tag of an element (e.g.",
-        "). This method may be overridden by subclasses which require this particular lexical information; the default implementation simply calls",
-        "This method is called to process arbitrary data (e.g. text nodes and the content of elements like",
         "This method is called to process a named character reference of the form",
         "This method is called to process decimal and hexadecimal numeric character references of the form",
-        ". For example, the decimal equivalent for",
-        "The content of Internet Explorer conditional comments (condcoms) will also be sent to this method, so, for",
-        "This method is called to handle an HTML doctype declaration (e.g.",
-        "parameter will contain the entire processing instruction. For example, for the processing instruction"
+        "'<img src=\"python-logo.png\" alt=\"The Python logo\">'",
+        "'<style type=\"text/css\">#python { color: green }</style>'",
+        "Parsing named and numeric character references and converting them to the correct char (note: these 3 references are all equivalent to",
+        "'<p><a class=link href=#main>tag soup</p ></a>'",
+        "This page is licensed under the Python Software Foundation License Version 2.",
+        "Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.",
+        "The Python Software Foundation is a non-profit corporation."
       ],
       "network": {
         "bytes": 55224,
         "content_type": "text/html",
         "credentials_used": false,
         "host": "docs.python.org",
-        "latency_ms": 66.74,
+        "latency_ms": 11.34,
         "network_executed": true,
         "read_only": true,
         "redirects_followed": false,
@@ -243,7 +236,7 @@
           "2a04:4e42:600::223",
           "2a04:4e42::223"
         ],
-        "sha256": "2ee3aeb8821be46085cc2bdd4abe3b6ca2005541b682269794ccc2e82be86faa",
+        "sha256": "0763abe138572112a0965fbf34f70a87ca9fef796ff05662faf6e670ec521dfe",
         "status": 200,
         "url": "https://docs.python.org/3/library/html.parser.html"
       },
@@ -251,7 +244,7 @@
         "learning",
         "web"
       ],
-      "selection_score": 2,
+      "selection_score": 4,
       "source_id": "PYTHON_HTMLPARSER",
       "url": "https://docs.python.org/3/library/html.parser.html"
     }
