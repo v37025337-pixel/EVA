@@ -40,7 +40,7 @@ def build_candidate(base_source: str) -> str:
     if not renamed:
         raise RuntimeError("BASE_CONTROLLER_CLASS_NOT_FOUND")
     ast.fix_missing_locations(tree)
-    prefix = ast.unparse(tree) + "\n\n"
+    prefix = ast.unparse(tree) + "\n\nimport re\nimport hashlib\n\n"
     extension = r'''
 class YADOEvolutionaryGenomeV1(_YADOEvolutionaryGenomeV1Base):
     _DIMENSION_STOP = {
