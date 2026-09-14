@@ -50,6 +50,21 @@ jobs:
           assert any(x['executed'] for x in r['results']), r
           print('PASS_YADO_REAL_PUBLIC_SANDBOX_EXECUTION_V1', r['selected_provider'])
           PY
+      - name: Independent Runlet execution probe
+        run: |
+          set -o pipefail
+          PYTHONPATH=runtime python runtime/yado_public_sandbox_connect_v1.py --provider runlet | tee reports/yado-public-sandbox-runlet-v1.json
+          python - <<'PY'
+          import json
+          r=json.load(open('reports/yado-public-sandbox-runlet-v1.json'))
+          x=r['results'][0]
+          assert x['provider']=='runlet', r
+          assert x['connected'] is True, r
+          assert x['executed'] is True, r
+          assert x['status']=='PASS_PUBLIC_SANDBOX_EXECUTION', r
+          assert 'YADO_SANDBOX_OK 140' in x['stdout'], r
+          print('PASS_YADO_REAL_RUNLET_EXECUTION_V1')
+          PY
       - name: Compile all Python layers
         run: python -m compileall -q runtime successor candidates
       - name: Full kernel audit after external execution
@@ -70,4 +85,5 @@ jobs:
           path: |
             architecture/yado-public-sandbox-connect-v1.json
             reports/yado-public-sandbox-connect-v1.json
+            reports/yado-public-sandbox-runlet-v1.json
             audits/yado-full-kernel-audit-v1-report.json
