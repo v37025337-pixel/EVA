@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-# Static-audit repair retrigger: semantic behavior intentionally unchanged.
 import hashlib
 import json
 import urllib.parse
@@ -64,6 +63,8 @@ def convert(cross: dict[str, Any]) -> dict[str, Any]:
                 'sha256': rec.get('sha256'),
                 'bytes': rec.get('bytes'),
                 'word_count': rec.get('word_count'),
+                'structured_json': bool(rec.get('structured_json')),
+                'structured_shape': rec.get('structured_shape') if rec.get('structured_json') else None,
             })
         if facts:
             sources.append({
@@ -105,6 +106,8 @@ def convert(cross: dict[str, Any]) -> dict[str, Any]:
         'area': 'CROSS_DISCIPLINARY_PUBLIC_EVIDENCE',
         'recommended_action': str(binding.get('action') or 'USE_VERIFIED_PUBLIC_EVIDENCE_FOR_GATED_SELF_DEVELOPMENT'),
     }
+    structured_sources_fetched = int(acquisition.get('structured_sources_fetched') or 0)
+    structured_disciplines = list(acquisition.get('structured_disciplines') or [])
     exp: dict[str, Any] = {
         'schema': 'yado.bounded_autonomous_learning.v1',
         'status': 'PASS_SHADOW_BOUNDED_AUTONOMOUS_EXTERNAL_LEARNING_V1',
@@ -113,6 +116,12 @@ def convert(cross: dict[str, Any]) -> dict[str, Any]:
         'failures': failures,
         'cross_disciplinary_evidence_digest': cross.get('evidence_digest'),
         'disciplines_covered': acquisition.get('disciplines_covered') or [],
+        'structured_public_data': {
+            'sources_fetched': structured_sources_fetched,
+            'disciplines': structured_disciplines,
+            'raw_payload_persisted': bool(acquisition.get('raw_json_payload_persisted', False)),
+            'used_as_untrusted_evidence': structured_sources_fetched > 0,
+        },
         'network_policy': {
             'https_only': True,
             'credentials_allowed': False,
@@ -135,6 +144,7 @@ def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(exp, indent=2, sort_keys=True, ensure_ascii=False) + '\n', encoding='utf-8')
     fact_count = sum(len(x.get('facts') or []) for x in exp.get('sources') or [])
+    structured = exp.get('structured_public_data') or {}
     receipt = {
         'schema': SCHEMA,
         'status': 'PASS_ENDOGENOUS_RESEARCH_EXPERIENCE_BINDING_V1',
@@ -143,6 +153,9 @@ def main() -> int:
         'discipline_count': len(exp.get('disciplines_covered') or []),
         'source_count': len(exp.get('sources') or []),
         'fact_count': fact_count,
+        'structured_sources_fetched': int(structured.get('sources_fetched') or 0),
+        'structured_disciplines': list(structured.get('disciplines') or []),
+        'structured_raw_payload_persisted': bool(structured.get('raw_payload_persisted')),
         'target_deficit': exp['priority']['code'],
         'credentials_used': False,
         'external_writes': False,
@@ -156,6 +169,10 @@ def main() -> int:
     print(json.dumps(receipt, indent=2, sort_keys=True))
     if receipt['discipline_count'] < 5 or receipt['fact_count'] < 16:
         raise RuntimeError('INSUFFICIENT_CROSS_DOMAIN_EVIDENCE_FOR_APPLICATION')
+    if receipt['structured_sources_fetched'] < 2 or len(receipt['structured_disciplines']) < 2:
+        raise RuntimeError('INSUFFICIENT_STRUCTURED_PUBLIC_DATA_FOR_APPLICATION')
+    if receipt['structured_raw_payload_persisted'] is True:
+        raise RuntimeError('RAW_STRUCTURED_REMOTE_PAYLOAD_MUST_NOT_BE_PERSISTED')
     return 0
 
 
