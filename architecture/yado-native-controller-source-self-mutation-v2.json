@@ -1,0 +1,25 @@
+{
+  "schema": "yado.native_controller_source_self_mutation.v2",
+  "status": "REGISTERED_AWAITING_GATED_EXECUTION",
+  "target": "runtime/yado_evolutionary_genome_v1.py",
+  "bootstrap": {
+    "module": "runtime/yado_native_controller_source_self_mutation_v2.py",
+    "role": "install a zero-argument native source-emission arm into a development candidate only",
+    "host_selects_second_generation_patch": false,
+    "host_writes_canonical_main": false
+  },
+  "required_proof": [
+    "armed controller emits a changed Python source candidate itself",
+    "emitted source compiles",
+    "emitted source changes controller selection semantics on a no-op child probe",
+    "normal evolutionary run still passes its internal regressions",
+    "existing strict controller probe observes at least one native source candidate",
+    "whole-kernel audit passes",
+    "full regression passes before persistence"
+  ],
+  "residual_frontier": "NATIVE_CONTROLLER_NEW_DIMENSION_GENESIS",
+  "canonical_mutation": false,
+  "g3_genesis_performed": false,
+  "consciousness_claimed": false,
+  "semantic_boundary": "This experiment closes native controller source emission separately from new-dimension genesis. Development-branch mutation only; canonical admission remains separate."
+}
