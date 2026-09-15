@@ -28,6 +28,34 @@
     "workflow_false_negative_cause": "legacy assertion expected PASS_REGRESSION while yado_full_regression_v1 emitted PASS",
     "gate_repaired": true
   },
+  "transfer": {
+    "run_id": 34931039964,
+    "tested_commit": "6259f2eb1537db42addf282560095cd04669fdd1",
+    "artifact_id": 10381562673,
+    "artifact_sha256": "6ef3199514a48ecb1668511d6adb1a2f391e03c2874ed9e45207612e1b282cbe",
+    "status": "PASS_DATABASE_API_TRANSFER_REPAIR_V1",
+    "baseline_defect_detected": true,
+    "train_unique_count": 20,
+    "fresh_holdout_count": 10,
+    "fresh_holdout_pass": true,
+    "expected_unique_count_after_holdout": 30,
+    "row_count_after_holdout": 30,
+    "group_counts_match_external_data": true,
+    "index_used_for_bounded_query": true,
+    "learned_candidate_query_correct": true,
+    "rollback_preserved_state": true,
+    "repair_strategy": [
+      "PRIMARY_KEY_EXTERNAL_IDENTITY",
+      "PARAMETERIZED_UPSERT",
+      "COMPOSITE_QUERY_INDEX",
+      "CHECK_CONSTRAINT_BOOLEAN_DOMAIN",
+      "TRANSACTION_ROLLBACK_VERIFICATION"
+    ],
+    "initial_post_transfer_audit": "BLOCKED_BY_PARALLEL_PHYSICAL_BRANCH_DIVERGENCE",
+    "audit_blocker_branch": "yado-bounded-autonomous-learning-v1",
+    "audit_blocker_commit": "89da4bc32ae3752b13c94cc36175ccd9931c8e82",
+    "ancestry_closure_commit": "c72c4fa7bffd4b33277b1e806271318881b66f98"
+  },
   "transfer_targets": [
     "DESIGN_DATABASE_SCHEMA_FROM_EXTERNAL_JSON",
     "LOAD_READ_ONLY_PUBLIC_API_DATA",
