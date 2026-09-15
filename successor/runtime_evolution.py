@@ -187,10 +187,14 @@ def verify_implementations(records, current_implementation):
     implementation = upgrades[0]['predecessor_implementation_digest'] if upgrades else current_implementation
     for record in records:
         if record.get('kind') == 'IMPLEMENTATION_UPGRADE':
+            if record.get('predecessor_implementation_digest') != implementation:
+                raise ValueError('RUNTIME_EVOLUTION_IMPLEMENTATION_PROVENANCE')
             implementation = record['implementation_digest']
         elif record.get('kind') in {'COG_RUNTIME_PROPOSE', 'COG_RUNTIME_EVALUATE', 'COG_RUNTIME_ADMIT'}:
             if record.get('implementation_identity') != implementation:
                 raise ValueError('RUNTIME_EVOLUTION_IMPLEMENTATION_PROVENANCE')
+    if implementation != current_implementation:
+        raise ValueError('RUNTIME_EVOLUTION_IMPLEMENTATION_PROVENANCE')
 
 
 def trial_report(kernel, proposal, seed):

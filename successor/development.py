@@ -13,6 +13,8 @@ from .cognitive import (CognitiveLoop, available_strategies, consolidated_stats,
                         goal_context, replay as cognitive_replay)
 from .kernel import decode, fingerprint
 
+RETRY_POLICY = 'untried_strategies_v2'
+
 
 def limits(budget, max_goals):
     if (type(budget) is not int or not 1 <= budget <= 30
@@ -22,7 +24,13 @@ def limits(budget, max_goals):
 
 def candidates(cognitive, sessions, session):
     goals = cognitive_replay(cognitive)
+    current_policy = session.get('retry_policy') == RETRY_POLICY
     used = {choice['spec_digest'] for s in sessions.values() for choice in s['selections']}
+    attempted = {}
+    if current_policy:
+        for goal in goals.values():
+            if goal['mode'] == 'full':
+                attempted.setdefault(fingerprint(goal['spec']), set()).update(goal['attempted'])
     solved = {fingerprint(g['spec']) for g in goals.values()
               if g['status'] == 'VALIDATED_ON_HOLDOUT'}
     generated = {r['tick'] for r in cognitive
@@ -32,14 +40,16 @@ def candidates(cognitive, sessions, session):
         spec_digest = fingerprint(g['spec'])
         if (g['id'] >= session['id'] or g['id'] in generated or g['status'] != 'WITHHOLD'
                 or g['mode'] != 'full' or g['spec']['domain'] not in {'native_source', 'numeric'}
-                or spec_digest in used or spec_digest in solved):
+                or not current_policy and spec_digest in used or spec_digest in solved):
             continue
         allowed = available_strategies(g, cognitive)
-        untried = [(s, c) for s, c in allowed if s not in g['attempted']]
+        tried = attempted.get(spec_digest, set()) if current_policy else g['attempted']
+        untried = [(s, c) for s, c in allowed if s not in tried]
         budget = sum(c for _, c in allowed)
         failures = [r['tick'] for r in cognitive if r['kind'] == 'COG_VERIFY'
                     and r['goal_id'] == g['id'] and not r['passed']]
-        if not failures or not untried or not g['budget'] < budget <= session['remaining']:
+        if (not failures or not untried or budget > session['remaining']
+                or not current_policy and budget <= g['budget']):
             continue
         estimates = []
         for strategy, cost in untried:
@@ -105,7 +115,10 @@ def replay(records):
             continue
         if kind == 'DEV_START':
             limits(r['budget'], r['max_goals'])
-            if (set(r) != {'kind', 'budget', 'max_goals'}
+            fields = {'kind', 'budget', 'max_goals'}
+            if 'retry_policy' in r:
+                fields.add('retry_policy')
+            if (set(r) != fields or 'retry_policy' in r and r['retry_policy'] != RETRY_POLICY
                     or any(s['status'] == 'ACTIVE' for s in sessions.values())
                     or any(g['status'] == 'ACTIVE' for g in cognitive_replay(cognitive).values())):
                 raise ValueError('DEVELOPMENT_START_CONTRACT')
@@ -113,6 +126,8 @@ def replay(records):
                               'remaining': r['budget'], 'max_goals': r['max_goals'],
                               'selections': [], 'outcomes': [], 'child_goal_id': None,
                               'awaiting_goal': False, 'selection_tick': None}
+            if 'retry_policy' in r:
+                sessions[tick]['retry_policy'] = r['retry_policy']
             continue
         s = sessions.get(r.get('development_id'))
         if s is None or s['status'] != 'ACTIVE':
@@ -168,7 +183,8 @@ class DevelopmentLoop:
                     or any(g['status'] == 'ACTIVE' for g in cognitive_replay(
                         [r for r in records if r['kind'].startswith('COG_')]).values())):
                 raise ValueError('DEVELOPMENT_REQUIRES_IDLE_KERNEL')
-            return self.kernel._append({'kind': 'DEV_START', 'budget': budget, 'max_goals': max_goals})['tick']
+            return self.kernel._append({'kind': 'DEV_START', 'budget': budget,
+                                        'max_goals': max_goals, 'retry_policy': RETRY_POLICY})['tick']
         return self.cognitive._transaction(begin)
 
     def _step(self):

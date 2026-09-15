@@ -9,7 +9,7 @@ from __future__ import annotations
 import copy
 
 from .cognitive import CognitiveLoop, consolidated_stats, replay as cognitive_replay
-from .development import candidates as retry_candidates, replay as development_replay
+from .development import RETRY_POLICY, candidates as retry_candidates, replay as development_replay
 from .endogenous_run import _events_spec, _pressure, _relation_spec
 from .kernel import decode, fingerprint
 
@@ -55,8 +55,10 @@ def choose(records, sessions, session, identity):
     used = {**development, 'autonomy': {'selections': [
         {'spec_digest': c['spec_digest']} for s in sessions.values() for c in s['selections']
         if c['route'] == 'RETRY_FAILURE']}}
-    proposals = retry_candidates(cognitive, used,
-                                 {'id': records[-1]['tick'] + 1, 'remaining': session['remaining']})
+    retry_session = {'id': records[-1]['tick'] + 1, 'remaining': session['remaining']}
+    if 'retry_policy' in session:
+        retry_session['retry_policy'] = session['retry_policy']
+    proposals = retry_candidates(cognitive, used, retry_session)
     if proposals:
         choice = proposals[0]
         return {'route': 'RETRY_FAILURE', 'budget': choice['budget'],
@@ -113,7 +115,10 @@ def replay(records, identity):
             s.update(awaiting_goal=False, child_goal_id=tick)
         elif kind == 'AUTO_START':
             limits(r['budget'], r['max_cycles'])
-            if (r != {'kind': kind, 'budget': r['budget'], 'max_cycles': r['max_cycles'], 'objective': OBJECTIVE}
+            expected = {'kind': kind, 'budget': r['budget'], 'max_cycles': r['max_cycles'], 'objective': OBJECTIVE}
+            if 'retry_policy' in r:
+                expected['retry_policy'] = RETRY_POLICY
+            if (r != expected
                     or any(s['status'] == 'ACTIVE' for s in sessions.values())
                     or any(g['status'] == 'ACTIVE' for g in cognitive_replay(_cognitive(past)).values())
                     or any(s['status'] == 'ACTIVE' for s in _development(past).values())):
@@ -122,6 +127,8 @@ def replay(records, identity):
                               'remaining': r['budget'], 'max_cycles': r['max_cycles'],
                               'selections': [], 'outcomes': [], 'awaiting_goal': False,
                               'selection_tick': None, 'child_goal_id': None}
+            if 'retry_policy' in r:
+                sessions[tick]['retry_policy'] = r['retry_policy']
         elif kind.startswith('AUTO_'):
             s = sessions.get(r.get('autonomy_id'))
             if s is None or s['status'] != 'ACTIVE':
@@ -174,7 +181,8 @@ class AutonomousLoop:
                     or any(s['status'] == 'ACTIVE' for s in _development(records).values())):
                 raise ValueError('AUTONOMY_REQUIRES_IDLE_KERNEL')
             return self.kernel._append({'kind': 'AUTO_START', 'budget': budget,
-                                        'max_cycles': max_cycles, 'objective': OBJECTIVE})['tick']
+                                        'max_cycles': max_cycles, 'objective': OBJECTIVE,
+                                        'retry_policy': RETRY_POLICY})['tick']
         return self.cognitive._transaction(begin)
 
     def _step(self):

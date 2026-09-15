@@ -17,7 +17,8 @@ def _digest(obj: Any) -> str:
 
 class G2CausalExternalLearningBindingV1:
     COMPONENT_ID = "RUNTIME-G2-CAUSAL-EXTERNAL-LEARNING-BINDING-V1"
-    STATE_SCHEMA = "yado.g2.causal_external_learning_binding.state.v1"
+    STATE_SCHEMA = "yado.g2.causal_external_learning_binding.state.v2"
+    LEGACY_STATE_SCHEMA = "yado.g2.causal_external_learning_binding.state.v1"
     MAX_EPISODES = 128
     CAUSAL_RELATION = (
         ("MEMORY", "THINKING"),
@@ -54,6 +55,10 @@ class G2CausalExternalLearningBindingV1:
         self.intelligence = intelligence
         self.meta_decide_evidence = meta_decide_evidence
         self._episodes: list[dict[str, Any]] = []
+        # The retained window starts immediately after this immutable anchor.
+        # Dropping old episode bodies must not reset sequence or causal lineage.
+        self._base_sequence = 0
+        self._base_event_digest = None
         if self.artifact.get("component_id") != self.COMPONENT_ID or self.artifact.get("status") != "CANONICAL_ACTIVE":
             raise ValueError("CAUSAL_EXTERNAL_BINDING_ARTIFACT_NOT_ACTIVE")
         safety = self.artifact.get("safety") or {}
@@ -87,6 +92,7 @@ class G2CausalExternalLearningBindingV1:
             "v1_v6": self._verified_memory(),
             "legacy": self.memory_search(["external", "resource", "evidence", "library", "thinking"], limit=6),
             "prior_episode_count": len(self._episodes),
+            "prior_total_episode_count": self._base_sequence + len(self._episodes),
             "prior_event_digest": self._episodes[-1]["event_digest"] if self._episodes else None,
         }
         key = "EXTERNAL_EVIDENCE_WITH_MEMORY" if self._episodes else "EXTERNAL_EVIDENCE_FIRST_PASS"
@@ -122,11 +128,14 @@ class G2CausalExternalLearningBindingV1:
             raise ValueError("CAUSAL_EXTERNAL_BINDING_PLAN_DIGEST_MISMATCH")
         if prepared.get("status") != "PASS_CAUSAL_PREPARE":
             return {"status": "WITHHOLD_G2_CAUSAL_EXTERNAL_LEARNING_BINDING_V1", "reason": "PREPARE_WITHHOLD", "memory_appended": False}
+        current_tail = self._episodes[-1]["event_digest"] if self._episodes else self._base_event_digest
+        if plan.get("prior_event_digest") != current_tail:
+            raise ValueError("CAUSAL_EXTERNAL_BINDING_STALE_PLAN")
         verified = self.verify_v6_result(external_result)
         evidence = {"outcome": "PASS" if verified else "WITHHOLD", "domain": "EXECUTION", "next_required_capability": "MEMORY_FEEDBACK" if verified else "BOUNDED_EXTERNAL_EVIDENCE_REPAIR", "next_domain": "MEMORY" if verified else "EXECUTION", "source_class": "RECEIPT", "artifact": external_result}
         meta = self.meta_decide_evidence(evidence)
         event = {
-            "sequence": len(self._episodes) + 1,
+            "sequence": self._base_sequence + len(self._episodes) + 1,
             "objective": plan["objective"],
             "prior_event_digest": plan.get("prior_event_digest"),
             "memory_feedback_used": bool(plan.get("prior_event_digest")),
@@ -143,29 +152,61 @@ class G2CausalExternalLearningBindingV1:
         }
         event["event_digest"] = _digest(event)
         self._episodes.append(deepcopy(event))
-        self._episodes = self._episodes[-self.MAX_EPISODES:]
-        return {"schema": "yado.g2.causal_external_learning_cycle.v1", "status": "PASS_G2_CAUSAL_EXTERNAL_LEARNING_BINDING_V1" if verified else "WITHHOLD_G2_CAUSAL_EXTERNAL_LEARNING_BINDING_V1", "prepared": prepared, "result_verified": verified, "meta_decision": meta, "memory_after": {"episode_count": len(self._episodes), "event": event, "event_digest": event["event_digest"]}, "g3_genesis_performed": False}
+        if len(self._episodes) > self.MAX_EPISODES:
+            evicted = self._episodes.pop(0)
+            self._base_sequence = evicted["sequence"]
+            self._base_event_digest = evicted["event_digest"]
+        return {"schema": "yado.g2.causal_external_learning_cycle.v1", "status": "PASS_G2_CAUSAL_EXTERNAL_LEARNING_BINDING_V1" if verified else "WITHHOLD_G2_CAUSAL_EXTERNAL_LEARNING_BINDING_V1", "prepared": prepared, "result_verified": verified, "meta_decision": meta, "memory_after": {"episode_count": len(self._episodes), "total_episode_count": self._base_sequence + len(self._episodes), "event": event, "event_digest": event["event_digest"]}, "g3_genesis_performed": False}
 
     def export_state(self) -> dict[str, Any]:
-        state = {"schema": self.STATE_SCHEMA, "component_id": self.COMPONENT_ID, "episodes": deepcopy(self._episodes), "executable_objects": False}
+        state = {"schema": self.STATE_SCHEMA, "component_id": self.COMPONENT_ID,
+                 "episodes": deepcopy(self._episodes), "executable_objects": False,
+                 "base_sequence": self._base_sequence, "base_event_digest": self._base_event_digest}
         state["state_digest"] = _digest(state)
         return state
 
     def import_state(self, state: dict[str, Any]) -> dict[str, Any]:
-        x = deepcopy(dict(state or {})); expected = x.pop("state_digest", None)
-        if x.get("schema") != self.STATE_SCHEMA or x.get("component_id") != self.COMPONENT_ID or x.get("executable_objects") is not False or not isinstance(x.get("episodes"), list) or len(x["episodes"]) > self.MAX_EPISODES or expected != _digest(x):
+        if not isinstance(state, dict):
             raise ValueError("CAUSAL_EXTERNAL_BINDING_STATE_INVALID")
-        previous = None
-        for i, row in enumerate(x["episodes"], start=1):
-            check = deepcopy(row); event_digest = check.pop("event_digest", None)
-            if event_digest != _digest(check) or row.get("sequence") != i or row.get("prior_event_digest") != previous:
+        x = deepcopy(state)
+        expected = x.pop("state_digest", None)
+        if (x.get("schema") not in {self.STATE_SCHEMA, self.LEGACY_STATE_SCHEMA}
+                or x.get("component_id") != self.COMPONENT_ID or x.get("executable_objects") is not False
+                or not isinstance(x.get("episodes"), list) or len(x["episodes"]) > self.MAX_EPISODES
+                or expected != _digest(x)):
+            raise ValueError("CAUSAL_EXTERNAL_BINDING_STATE_INVALID")
+        if x["schema"] == self.LEGACY_STATE_SCHEMA:
+            # V1 never carried an eviction anchor. Only a complete valid history
+            # can be imported; truncated or damaged legacy windows are ambiguous.
+            base_sequence, base_digest = 0, None
+        else:
+            base_sequence = x.get("base_sequence")
+            base_digest = x.get("base_event_digest")
+            if (type(base_sequence) is not int or base_sequence < 0
+                    or "base_event_digest" not in x
+                    or base_sequence == 0 and base_digest is not None
+                    or base_sequence > 0 and (not isinstance(base_digest, str) or len(base_digest) != 64
+                        or any(c not in "0123456789abcdef" for c in base_digest))
+                    or base_sequence > 0 and not x["episodes"]):
+                raise ValueError("CAUSAL_EXTERNAL_BINDING_STATE_INVALID")
+        previous = base_digest
+        for i, row in enumerate(x["episodes"], start=base_sequence + 1):
+            if not isinstance(row, dict):
+                raise ValueError("CAUSAL_EXTERNAL_BINDING_EVENT_CHAIN_INVALID")
+            check = dict(row)
+            event_digest = check.pop("event_digest", None)
+            if (event_digest != _digest(check) or type(row.get("sequence")) is not int
+                    or row["sequence"] != i or row.get("prior_event_digest") != previous):
                 raise ValueError("CAUSAL_EXTERNAL_BINDING_EVENT_CHAIN_INVALID")
             previous = event_digest
+        # Commit only after the complete envelope and causal chain validate.
         self._episodes = deepcopy(x["episodes"])
+        self._base_sequence = base_sequence
+        self._base_event_digest = base_digest
         return self.snapshot()
 
     def snapshot(self) -> dict[str, Any]:
-        return {"schema": "yado.g2.causal_external_learning_binding.snapshot.v1", "component_id": self.COMPONENT_ID, "status": self.artifact.get("status"), "episode_count": len(self._episodes), "durable_state_supported": True, "read_only_external": True, "automatic_canonical_promotion": False, "g3_genesis_performed": False}
+        return {"schema": "yado.g2.causal_external_learning_binding.snapshot.v1", "component_id": self.COMPONENT_ID, "status": self.artifact.get("status"), "episode_count": len(self._episodes), "total_episode_count": self._base_sequence + len(self._episodes), "durable_state_supported": True, "read_only_external": True, "automatic_canonical_promotion": False, "g3_genesis_performed": False}
 
 
 __all__ = ["G2CausalExternalLearningBindingV1"]
