@@ -183,12 +183,12 @@ def replay_event(record, past, goals):
 
 
 def verify_implementations(records, current_implementation):
-    upgrades = [r for r in records if r['kind'] == 'IMPLEMENTATION_UPGRADE']
+    upgrades = [r for r in records if r.get('kind') == 'IMPLEMENTATION_UPGRADE']
     implementation = upgrades[0]['predecessor_implementation_digest'] if upgrades else current_implementation
     for record in records:
-        if record['kind'] == 'IMPLEMENTATION_UPGRADE':
+        if record.get('kind') == 'IMPLEMENTATION_UPGRADE':
             implementation = record['implementation_digest']
-        elif record['kind'] in {'COG_RUNTIME_PROPOSE', 'COG_RUNTIME_EVALUATE', 'COG_RUNTIME_ADMIT'}:
+        elif record.get('kind') in {'COG_RUNTIME_PROPOSE', 'COG_RUNTIME_EVALUATE', 'COG_RUNTIME_ADMIT'}:
             if record.get('implementation_identity') != implementation:
                 raise ValueError('RUNTIME_EVOLUTION_IMPLEMENTATION_PROVENANCE')
 

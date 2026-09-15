@@ -62,6 +62,16 @@ class RuntimeEvolutionContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'IMPLEMENTATION_PROVENANCE'):
             verify_implementations(records, 'new')
 
+    def test_legacy_execution_records_without_kind_keep_their_history(self):
+        from successor.runtime_evolution import verify_implementations
+        records = [{'task': {'kind': 'logic'}, 'status': 'PASS', 'execution_attempted': True},
+                   {'kind': 'IMPLEMENTATION_UPGRADE', 'predecessor_implementation_digest': 'old',
+                    'implementation_digest': 'new'},
+                   {'kind': 'COG_RUNTIME_PROPOSE', 'implementation_identity': 'new'}]
+        before = copy.deepcopy(records)
+        verify_implementations(records, 'new')
+        self.assertEqual(records, before)
+
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = Path(os.environ.get('YADO_SUCCESSOR_TEST_MANIFEST', ROOT / 'successor/state/birth-v2/manifest.json'))
