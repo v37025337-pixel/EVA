@@ -31,6 +31,16 @@ def _manifest(path):
     return value
 
 
+def verify_source_transition(manifest, parent):
+    before, after = parent['inherited_files'], manifest['inherited_files']
+    if set(before) != set(after):
+        raise ValueError('CONTINUITY_INHERITED_SOURCE_SET_CHANGED')
+    expected = {name: {'previous_sha256': digest, 'current_sha256': after[name]}
+                for name, digest in before.items() if digest != after[name]}
+    if manifest.get('inherited_source_updates', {}) != expected:
+        raise ValueError('CONTINUITY_SOURCE_UPDATE_BINDING')
+
+
 def operational_identity(manifest, directory):
     continuity = manifest.get('continuity')
     if continuity is None:
@@ -46,6 +56,7 @@ def operational_identity(manifest, directory):
     if file_sha(path) != continuity['predecessor_manifest_sha256']:
         raise ValueError('CONTINUITY_PREDECESSOR_MANIFEST_CHANGED')
     parent = _manifest(path)
+    verify_source_transition(manifest, parent)
     expected = parent.get('continuity', {}).get('identity_digest', parent['identity_digest'])
     if (continuity['identity_digest'] != expected
             or continuity['predecessor_implementation_digest'] != parent['identity_digest']
@@ -56,11 +67,14 @@ def operational_identity(manifest, directory):
 
 def upgrade_event(manifest):
     c = manifest['continuity']
-    return {'kind': 'IMPLEMENTATION_UPGRADE', 'identity_digest': c['identity_digest'],
+    event = {'kind': 'IMPLEMENTATION_UPGRADE', 'identity_digest': c['identity_digest'],
             'predecessor_implementation_digest': c['predecessor_implementation_digest'],
             'implementation_digest': manifest['identity_digest'],
             'predecessor_tick': c['predecessor_tick'],
             'predecessor_event_hash': c['predecessor_event_hash']}
+    if manifest.get('inherited_source_updates'):
+        event['source_updates_digest'] = sha(canonical(manifest['inherited_source_updates']).encode())
+    return event
 
 
 def verify_prefix(kernel):
@@ -92,7 +106,7 @@ def verify_prefix(kernel):
         raise ValueError('CONTINUITY_UPGRADE_EVENT_MISSING_OR_CHANGED')
 
 
-def prepare_upgrade(parent_manifest, parent_state, output):
+def prepare_upgrade(parent_manifest, parent_state, output, *, source_updates=None):
     from .__main__ import derive
     from .kernel import ROOT, decode, encode
     # The CLI can decode a checkpoint before any UnifiedYADOCore is constructed.
@@ -105,7 +119,7 @@ def prepare_upgrade(parent_manifest, parent_state, output):
     identity = operational_identity(parent, parent_path.parent)
     if not state_path.is_file():
         raise ValueError('CONTINUITY_PREDECESSOR_STATE_MISSING')
-    derive(parent_path, output)
+    derive(parent_path, output, source_updates=source_updates)
     snapshot = output / 'predecessor-state.sqlite'
     with closing(sqlite3.connect(state_path.as_uri() + '?mode=ro', uri=True)) as old:
         with closing(sqlite3.connect(snapshot)) as destination:
@@ -163,8 +177,11 @@ def main():
     p.add_argument('--parent-manifest', required=True)
     p.add_argument('--parent-state', required=True)
     p.add_argument('--output', required=True)
+    p.add_argument('--source-updates', help='Exact predecessor/current SHA-256 map for an audited runtime repair')
     a = p.parse_args()
-    print(json.dumps(prepare_upgrade(a.parent_manifest, a.parent_state, a.output), indent=2))
+    updates = json.loads(Path(a.source_updates).read_text()) if a.source_updates else None
+    print(json.dumps(prepare_upgrade(a.parent_manifest, a.parent_state, a.output,
+                                    source_updates=updates), indent=2))
 
 
 if __name__ == '__main__':

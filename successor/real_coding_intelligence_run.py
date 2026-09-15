@@ -149,7 +149,8 @@ def _rows_for(target_source: str, damaged_source: str, argc: int) -> list[tuple[
             continue
         changed += int(not equivalent(before, expected))
         rows.append((args, expected))
-    if len(rows) < 14 or len({json.dumps(v) for _, v in rows}) < 3 or changed < 4:
+    minimum_outputs = 2 if rows and all(type(value) is bool for _, value in rows) else 3
+    if len(rows) < 14 or len({json.dumps(v) for _, v in rows}) < minimum_outputs or changed < 4:
         return []
     # Input order is fixed independently of YADO output.
     rows.sort(key=lambda row: hashlib.sha256(repr(row[0]).encode()).hexdigest())

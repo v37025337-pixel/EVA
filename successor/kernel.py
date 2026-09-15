@@ -176,7 +176,8 @@ class SuccessorKernel:
         if any(r.get('kind') == 'HIVEMIND_INTAKE' for r in autonomous_records):
             from .hivemind import verify_links
             verify_links(autonomous_records)
-        if any(r.get('kind', '').startswith('COG_RUNTIME_') for r in autonomous_records):
+        if any(r.get('kind') == 'IMPLEMENTATION_UPGRADE'
+               or r.get('kind', '').startswith('COG_RUNTIME_') for r in autonomous_records):
             from .runtime_evolution import verify_implementations
             verify_implementations(autonomous_records, self.implementation_identity)
         return {"status": "PASS", "tick": tick, "event_hash": previous}
@@ -322,6 +323,9 @@ class SuccessorKernel:
         tasks = list(tasks)
         if not tasks or len(tasks) > 1000:
             raise ValueError("GOAL_REQUIRES_1_TO_1000_TASKS")
+        if any(not isinstance(task, dict) or not isinstance(task.get("payload", {}), dict)
+               for task in tasks):
+            raise ValueError("TASK_AND_PAYLOAD_MUST_BE_OBJECTS")
         encoded = [encode(task) for task in tasks]
         self.db.execute("BEGIN IMMEDIATE")
         try:

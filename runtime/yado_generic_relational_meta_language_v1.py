@@ -12,18 +12,20 @@ class GenericRelationalMetaLanguageV1:
     MERGES=('REPLACE','UNION','INTERSECT')
     ITERATIONS=('ONCE','TWICE','THRICE','UNTIL_STABLE')
     SEEDS=('START','RELATION_LEFT_DOMAIN','RELATION_RIGHT_DOMAIN')
-    MAX_STABLE_STEPS=64
+    # A supported 128-node chain needs 127 expansions and one stability check.
+    MAX_STABLE_STEPS=128
+    MAX_RELATION_EDGES=1024
     MAX_CANDIDATES=96
 
-    @staticmethod
-    def _norm_relation(relation):
+    @classmethod
+    def _norm_relation(cls,relation):
         out=[]
         for e in relation:
             if not isinstance(e,(list,tuple)) or len(e)!=2:raise ValueError('RELATION_EDGE_ARITY')
             a,b=e
             if not isinstance(a,(str,int)) or not isinstance(b,(str,int)):raise ValueError('RELATION_ATOM_TYPE')
             out.append((a,b))
-        if len(out)>256:raise ValueError('RELATION_EDGE_BUDGET')
+        if len(out)>cls.MAX_RELATION_EDGES:raise ValueError('RELATION_EDGE_BUDGET')
         return tuple(out)
 
     @staticmethod

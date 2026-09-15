@@ -15,7 +15,7 @@ def assembly_sources():
     return {str(p.relative_to(ROOT)): file_sha(p) for p in sorted((ROOT / 'successor').glob('*.py'))}
 
 
-def derive(parent_manifest, output):
+def derive(parent_manifest, output, *, source_updates=None):
     """Create a new identity over verified inherited bytes; never rewrite a birth."""
     parent_path = Path(parent_manifest).resolve()
     parent = json.loads(parent_path.read_text())
@@ -25,20 +25,37 @@ def derive(parent_manifest, output):
     archive = (parent_path.parent / parent['archive_file']).resolve()
     if not archive.is_relative_to(parent_path.parent) or file_sha(archive) != parent['archive_sha256']:
         raise ValueError('PARENT_ARCHIVE_DIGEST_MISMATCH')
-    for name, digest in parent['inherited_files'].items():
+    inherited, drift = dict(parent['inherited_files']), {}
+    for name, digest in inherited.items():
         source = (ROOT / name).resolve()
-        if not source.is_relative_to(ROOT) or file_sha(source) != digest:
+        if not source.is_relative_to(ROOT) or not source.is_file():
             raise ValueError('PARENT_SOURCE_DRIFT:' + name)
+        current = file_sha(source)
+        if current != digest:
+            drift[name] = {'previous_sha256': digest, 'current_sha256': current}
+    # A runtime repair is an explicit implementation transition. Unlisted drift
+    # still fails closed; neither old bytes nor their manifest are rewritten.
+    if source_updates is None:
+        if drift:
+            raise ValueError('PARENT_SOURCE_DRIFT:' + next(iter(drift)))
+    elif not isinstance(source_updates, dict) or source_updates != drift:
+        raise ValueError('INHERITED_SOURCE_UPDATE_SET_MISMATCH')
+    for name, change in drift.items():
+        inherited[name] = change['current_sha256']
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     shutil.copyfile(archive, output / 'experience.sqlite')
     shutil.copyfile(parent_path, output / 'predecessor-manifest.json')
     manifest = {**parent, 'schema': 'yado.successor.birth.v2', 'kernel_id': KERNEL_ID,
                 'predecessor_identity_digest': identity, 'archive_file': 'experience.sqlite',
+                'inherited_files': inherited,
                 'assembly_sources': assembly_sources(),
                 'new_capability': 'BOUNDED_CAUSAL_METACOGNITION',
                 'self_model_origin': 'CHECKED_LOCAL_EXECUTIONS',
                 'consciousness_assessment': 'NOT_ESTABLISHED'}
+    manifest.pop('inherited_source_updates', None)
+    if drift:
+        manifest['inherited_source_updates'] = drift
     manifest['identity_digest'] = sha(canonical(manifest).encode())
     path = output / 'manifest.json'
     path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
