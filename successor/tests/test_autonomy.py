@@ -52,6 +52,24 @@ class AutonomyTests(unittest.TestCase):
         self.run_goal({'domain': 'relation', 'relation': [[1, 2]], 'start': 1})
         self.run_goal({'domain': 'events', 'events': [['Q', 'a'], ['R', 'a']]})
 
+    def test_legacy_task_and_queue_records_coexist_with_autonomy_after_restart(self):
+        task = {'kind': 'logic', 'payload': {'relation': [[1, 2]], 'start': 1},
+                'expect': {'path': ['result'], 'equals': [1, 2]}}
+        self.assertEqual(self.kernel.execute(task)['status'], 'VERIFIED')
+        self.kernel.submit('legacy queue', [task])
+        self.assertEqual(self.kernel.resume(1)[0]['status'], 'VERIFIED')
+        sid = self.kernel.start_autonomy(max_cycles=1)
+        self.kernel.run_autonomy(100)
+        self.assertEqual(self.session(sid)['status'], 'COMPLETE')
+        self.assertEqual(self.kernel.execute(task)['status'], 'VERIFIED')
+        before = self.kernel.verify_state()
+        self.kernel.close()
+        self.kernel = SuccessorKernel(MANIFEST, self.state)
+        self.assertEqual(self.kernel.verify_state(), before)
+        next_session = self.kernel.start_autonomy(max_cycles=1)
+        self.kernel.run_autonomy(100)
+        self.assertEqual(self.session(next_session)['status'], 'COMPLETE')
+
     def test_self_generated_failure_drives_retry_then_fresh_transfer(self):
         self.seed_simple_experience()
         sid = self.kernel.start_autonomy(budget=60, max_cycles=8)

@@ -166,7 +166,7 @@ class SuccessorKernel:
         if any(r['kind'].startswith('DEV_') or 'development_id' in r for r in developmental_records):
             from .development import replay as replay_development
             replay_development(developmental_records)
-        if any(r['kind'].startswith('AUTO_') or 'autonomy_id' in r for r in autonomous_records):
+        if any(str(r.get('kind', '')).startswith('AUTO_') or 'autonomy_id' in r for r in autonomous_records):
             from .autonomy import replay as replay_autonomy
             replay_autonomy(autonomous_records, self.identity)
         return {"status": "PASS", "tick": tick, "event_hash": previous}

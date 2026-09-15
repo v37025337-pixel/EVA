@@ -25,11 +25,11 @@ def limits(budget, max_cycles):
 
 
 def _cognitive(records):
-    return [r for r in records if r['kind'].startswith('COG_')]
+    return [r for r in records if str(r.get('kind', '')).startswith('COG_')]
 
 
 def _development(records):
-    relevant = [r for r in records if r['kind'].startswith(('COG_', 'DEV_'))]
+    relevant = [r for r in records if str(r.get('kind', '')).startswith(('COG_', 'DEV_'))]
     return development_replay(relevant) if any(r['kind'].startswith('DEV_') for r in relevant) else {}
 
 
@@ -97,7 +97,7 @@ def replay(records, identity):
     sessions, past = {}, []
     for record in records:
         r = {k: v for k, v in record.items() if k not in {'tick', 'event_hash'}}
-        kind, tick = r['kind'], record['tick']
+        kind, tick = str(r.get('kind', '')), record['tick']
         pending = next((s for s in sessions.values() if s['awaiting_goal']), None)
         if pending and not (kind == 'COG_GOAL' and r.get('autonomy_id') == pending['id']):
             raise ValueError('AUTONOMY_MISSING_GOAL')
