@@ -86,7 +86,8 @@ def main():
     successor.add_argument('--parent-manifest', required=True)
     successor.add_argument('--output', required=True)
     for command in ("status", "run", "submit", "resume", "verify", "search", "goal", "think", "cognitive-status", "stop",
-                    "development-start", "develop", "development-status", "development-stop"):
+                    "development-start", "develop", "development-status", "development-stop",
+                    "autonomy-start", "autonomy-run", "autonomy-status", "autonomy-stop"):
         item = sub.add_parser(command)
         item.add_argument("--manifest", required=True)
         item.add_argument("--state", required=True)
@@ -94,7 +95,7 @@ def main():
             item.add_argument("--input", required=True)
         if command == "run":
             item.add_argument("--retry", action="store_true")
-        if command in {"resume", "think", "develop"}:
+        if command in {"resume", "think", "develop", "autonomy-run"}:
             item.add_argument("--max-steps", type=int, default=20)
         if command == 'goal':
             item.add_argument('--budget', type=int, default=6)
@@ -105,6 +106,11 @@ def main():
             item.add_argument('--budget', type=int, default=12)
             item.add_argument('--max-goals', type=int, default=2)
         if command == 'development-stop':
+            item.add_argument('--session-id', type=int, required=True)
+        if command == 'autonomy-start':
+            item.add_argument('--budget', type=int, default=120)
+            item.add_argument('--max-cycles', type=int, default=20)
+        if command == 'autonomy-stop':
             item.add_argument('--session-id', type=int, required=True)
         if command == "search":
             item.add_argument("query")
@@ -142,6 +148,15 @@ def main():
                 output = kernel.development_snapshot()
             elif args.command == 'development-stop':
                 output = kernel.stop_development(args.session_id)
+            elif args.command == 'autonomy-start':
+                output = {'autonomy_id': kernel.start_autonomy(budget=args.budget, max_cycles=args.max_cycles)}
+            elif args.command == 'autonomy-run':
+                events = kernel.run_autonomy(args.max_steps)
+                output = {'events_emitted': len(events), **kernel.autonomy_snapshot()}
+            elif args.command == 'autonomy-status':
+                output = kernel.autonomy_snapshot()
+            elif args.command == 'autonomy-stop':
+                output = kernel.stop_autonomy(args.session_id)
             elif args.command == "search":
                 output = kernel.archive.search(args.query)
             else:
