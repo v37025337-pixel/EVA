@@ -198,7 +198,11 @@ def replay_recalled_source(records, goal, result):
 
 
 def available_strategies(goal, records):
-    return [(s, c) for s, c in STRATEGIES[goal['spec']['domain']]
+    from .native_binding import STRATEGY, COST, active
+    strategies = STRATEGIES[goal['spec']['domain']]
+    if goal['spec']['domain'] == 'native_source' and active(records):
+        strategies += ((STRATEGY, COST),)
+    return [(s, c) for s, c in strategies
             if s != 'reuse_verified_source' or learned_source(records, goal) is not None]
 
 
@@ -207,7 +211,13 @@ def replay(records):
     goals, past = {}, []
     for r in records:
         kind = r['kind']
-        if kind == 'COG_GOAL':
+        if kind == 'COG_ACTIVATE_NATIVE_SYNTHESIS':
+            from .native_binding import activation, active
+            body = {k: v for k, v in r.items() if k not in {'tick', 'event_hash'}}
+            if (body != activation() or active(past)
+                    or any(g['status'] == 'ACTIVE' for g in goals.values())):
+                raise ValueError('COGNITIVE_NATIVE_BINDING_PROVENANCE')
+        elif kind == 'COG_GOAL':
             validate_goal(r['spec'])
             if (r['mode'] not in MODES or type(r['budget']) is not int or not 1 <= r['budget'] <= 30
                     or r['spec_digest'] != fingerprint(r['spec'])):
@@ -325,6 +335,20 @@ class CognitiveLoop:
                 records.append({**body, 'tick': row['tick'], 'event_hash': row['event_hash']})
         return records
 
+    def activate_native_synthesis(self):
+        from .native_binding import activation
+        def admit():
+            records = self._records()
+            previous = next((r for r in records if r['kind'] == 'COG_ACTIVATE_NATIVE_SYNTHESIS'), None)
+            if previous is not None:
+                return previous
+            if (any(g['status'] == 'ACTIVE' for g in replay(records).values())
+                    or any(s['status'] == 'ACTIVE' for s in self.kernel.development_snapshot()['sessions'].values())
+                    or any(s['status'] == 'ACTIVE' for s in self.kernel.autonomy_snapshot()['sessions'].values())):
+                raise ValueError('NATIVE_BINDING_REQUIRES_IDLE_KERNEL')
+            return self.kernel._append(activation())
+        return self._transaction(admit)
+
     def _transaction(self, operation):
         self.kernel._check_sources()
         self.kernel.db.execute('BEGIN IMMEDIATE')
@@ -404,6 +428,9 @@ class CognitiveLoop:
                     candidate = copy.deepcopy(prior['result'])
                     candidate['reused_finish_tick'] = prior['tick']
                     candidate['memory_retrieval'] = retrieval
+                elif choice['strategy'] == 'native_evolved_v2':
+                    from .native_binding import synthesize
+                    candidate = synthesize(spec['training'])
                 else:
                     candidate = parent.native_source_candidate(spec['training'], choice['strategy'])
                 def predict(rows):

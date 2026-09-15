@@ -11,12 +11,54 @@ from __future__ import annotations
 
 import copy
 
-from .evolved_kernel import EvolvedSuccessorKernelV1
+from .evolved_kernel import EvolvedSuccessorKernelV1, synthesize_program_v1
 from .generalized_source_v2 import synthesize_candidate_v2, synthesize_repair_v2
 from .generalized_boolean_v2 import (
     synthesize_boolean_candidate_v2,
     synthesize_boolean_repair_v2,
 )
+
+
+def synthesize_program_v2(training):
+    """The existing V1→V2 fallbacks, accepting training examples only."""
+    try:
+        inherited = synthesize_program_v1(training)
+        if isinstance(inherited, dict) and inherited.get("source"):
+            inherited = copy.deepcopy(inherited)
+            inherited["v2_fallback_attempted"] = False
+            return inherited
+    except Exception as exc:
+        inherited = {
+            "status": "WITHHOLD_V1_PROGRAM_SYNTHESIS",
+            "reason": type(exc).__name__,
+        }
+
+    training = copy.deepcopy(training)
+    generalized_error = None
+    try:
+        candidate = synthesize_candidate_v2(training)
+    except Exception as exc:
+        generalized_error = type(exc).__name__
+        try:
+            candidate = synthesize_boolean_candidate_v2(training)
+        except Exception as boolean_exc:
+            result = copy.deepcopy(inherited) if isinstance(inherited, dict) else {}
+            result.update({
+                "v2_fallback_attempted": True,
+                "v2_fallback_status": "WITHHOLD",
+                "v2_fallback_error_type": type(boolean_exc).__name__,
+                "v2_generalized_error_type": generalized_error,
+                "automatic_canonical_promotion": False,
+            })
+            return result
+    return {
+        **candidate,
+        "status": "PASS_PROGRAM_SYNTHESIS_CANDIDATE_V2",
+        "capability": "BOUNDED_SECOND_CYCLE_PROGRAM_SYNTHESIS_V2",
+        "validation_labels_consumed": False,
+        "v2_fallback_attempted": True,
+        "automatic_canonical_promotion": False,
+    }
 
 
 class EvolvedSuccessorKernelV2(EvolvedSuccessorKernelV1):
@@ -25,44 +67,7 @@ class EvolvedSuccessorKernelV2(EvolvedSuccessorKernelV1):
     def _dispatch(self, task):
         kind, payload = task.get("kind"), task.get("payload", {})
         if kind == "program_synthesis":
-            try:
-                inherited = super()._dispatch(task)
-                if isinstance(inherited, dict) and inherited.get("source"):
-                    inherited = copy.deepcopy(inherited)
-                    inherited["v2_fallback_attempted"] = False
-                    return inherited
-            except Exception as exc:
-                inherited = {
-                    "status": "WITHHOLD_V1_PROGRAM_SYNTHESIS",
-                    "reason": type(exc).__name__,
-                }
-
-            training = copy.deepcopy(payload.get("training", []))
-            generalized_error = None
-            try:
-                candidate = synthesize_candidate_v2(training)
-            except Exception as exc:
-                generalized_error = type(exc).__name__
-                try:
-                    candidate = synthesize_boolean_candidate_v2(training)
-                except Exception as boolean_exc:
-                    result = copy.deepcopy(inherited) if isinstance(inherited, dict) else {}
-                    result.update({
-                        "v2_fallback_attempted": True,
-                        "v2_fallback_status": "WITHHOLD",
-                        "v2_fallback_error_type": type(boolean_exc).__name__,
-                        "v2_generalized_error_type": generalized_error,
-                        "automatic_canonical_promotion": False,
-                    })
-                    return result
-            return {
-                **candidate,
-                "status": "PASS_PROGRAM_SYNTHESIS_CANDIDATE_V2",
-                "capability": "BOUNDED_SECOND_CYCLE_PROGRAM_SYNTHESIS_V2",
-                "validation_labels_consumed": False,
-                "v2_fallback_attempted": True,
-                "automatic_canonical_promotion": False,
-            }
+            return synthesize_program_v2(payload.get("training", []))
 
         if kind == "repair":
             try:
