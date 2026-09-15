@@ -149,7 +149,7 @@ jobs:
           python - <<'PY'
           import json
           r=json.load(open('artifacts/yado-research-v5-candidate-full-regression.json'))
-          assert r['status']=='PASS' and r['tests_run']==r['expected_tests']==197,r
+          assert r['status']=='PASS' and r['tests_run']==r['expected_tests'] and r['tests_run']>=197,r
           assert not r['failures'] and not r['errors'] and not r['skipped'],r
           assert r['source_unchanged'] is True,r
           print('PASS_ACTIVE_CANDIDATE_REGRESSION',r['tests_run'])
@@ -181,7 +181,7 @@ jobs:
           python - <<'PY'
           import json
           r=json.load(open('audits/yado-full-regression-v1-report.json'))
-          assert r['status']=='PASS' and r['tests_run']==r['expected_tests']==197,r
+          assert r['status']=='PASS' and r['tests_run']==r['expected_tests'] and r['tests_run']>=197,r
           assert not r['failures'] and not r['errors'] and not r['skipped'],r
           assert r['source_unchanged'] is True,r
           print('PASS_POST_RESTORE_REGRESSION',r['tests_run'])

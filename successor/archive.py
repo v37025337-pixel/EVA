@@ -253,6 +253,14 @@ class ExperienceArchive:
             ORDER BY rank,d.digest LIMIT ?""", (match, max(1, min(int(limit), 40))))
         return [{**dict(row), "evidence_level": "ARCHIVED_SOURCE_ASSERTION"} for row in rows]
 
+    def files_at_ref(self, ref, prefix, limit=40):
+        """Return exact files in a frozen branch tree, excluding other history."""
+        rows = self.db.execute("""SELECT b.path, o.digest FROM branch_files b
+            JOIN git_objects o ON o.oid=b.oid
+            WHERE b.ref=? AND substr(b.path,1,length(?))=? AND o.kind='blob'
+            ORDER BY b.path LIMIT ?""", (ref, prefix, prefix, max(1, min(int(limit), 40))))
+        return [{**dict(row), "evidence_level": "ARCHIVED_SOURCE_ASSERTION"} for row in rows]
+
     def verify(self):
         checked = 0
         for row in self.db.execute("SELECT digest FROM blobs ORDER BY digest"):

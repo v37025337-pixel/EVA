@@ -4,10 +4,10 @@ This module removes one narrow host dependency from the active acceptance loop:
 the host supplies only a cycle budget. Each concrete goal instance is selected
 from the kernel's verified causal state and generated without labelled answers.
 
-Verified endogenous outcomes from earlier admitted development runs can also be
-used as bounded historical evidence. They never bypass Successor identity/state
-checks: only compact PASS receipts already present in the immutable Git archive
-are read, and their accepted cycle counts influence pressure/seed selection.
+Reported endogenous outcomes from earlier runs admitted into the pinned main
+tree can also supply bounded historical hints. Their bytes and branch membership
+are checked; their historical claims are not freshly reverified. Accepted cycle
+counts influence pressure/seed selection but never bypass current state checks.
 
 The goal grammar and controller remain assistant-authored and bounded. This is
 evidence for endogenous goal continuation inside that grammar, not evidence of
@@ -29,20 +29,20 @@ ENDOGENOUS_PASS = "PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1"
 
 
 def _verified_endogenous_history(kernel):
-    """Return bounded, digest-addressed PASS history from admitted receipts.
+    """Return bounded reported history from receipts in the pinned main tree.
 
     Cross-run sqlite state is deliberately not reused because it is bound to a
-    particular Successor identity. Instead we consume only compact Git-archived
-    receipts whose top-level admission, regression, audit and nested endogenous
-    result all say PASS. Archive contents are treated as historical evidence,
-    not as a replacement for the current run's fresh verification.
+    particular Successor identity. Candidate branches and deleted history are
+    excluded even when they claim PASS. Main membership and consistent receipt
+    fields establish provenance, not fresh proof of the historical outcomes.
     """
-    rows = kernel.archive.search(
-        "PASS_APPLIED_VERIFIED_ENDOGENOUS_EXPERIENCE_V1 PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1",
-        40,
-    )
+    main_ref = "refs/remotes/origin/main"
+    main_commit = kernel.manifest.get("parent_main_commit")
+    pinned_main = bool(main_commit and kernel.archive.summary["refs"].get(main_ref) == main_commit)
+    rows = kernel.archive.files_at_ref(main_ref, "receipts/yado-active-native-loop-", 40) if pinned_main else []
     accepted = []
     seen = set()
+    seen_runs = set()
     for source in rows:
         digest = source.get("digest")
         path = str(source.get("path", ""))
@@ -58,32 +58,48 @@ def _verified_endogenous_history(kernel):
         endogenous = data.get("endogenous")
         regression = data.get("regression")
         audit = data.get("kernel_audit")
+        run_id = data.get("source_run_id")
         if not (
             data.get("schema") == HISTORY_SCHEMA
             and data.get("status") == HISTORY_STATUS
+            and type(run_id) is int and run_id > 0 and run_id not in seen_runs
             and isinstance(endogenous, dict)
             and endogenous.get("status") == ENDOGENOUS_PASS
+            and type(endogenous.get("host_goal_count")) is int
             and endogenous.get("host_goal_count") == 0
+            and type(endogenous.get("cycles_completed")) is int
+            and type(endogenous.get("cycles_verified")) is int
             and endogenous.get("cycles_completed") == endogenous.get("cycles_verified")
-            and int(endogenous.get("cycles_verified", 0)) > 0
+            and endogenous["cycles_verified"] > 0
             and isinstance(regression, dict)
             and regression.get("status") == "PASS"
-            and int(regression.get("tests_run", 0)) >= 197
+            and type(regression.get("tests_run")) is int
+            and regression["tests_run"] >= 197
+            and type(regression.get("expected_tests")) is int
+            and regression["expected_tests"] == regression["tests_run"]
+            and all(type(regression.get(key)) is int and regression[key] == 0
+                    for key in ("failures", "errors", "skipped"))
+            and regression.get("source_unchanged") is True
             and isinstance(audit, dict)
             and audit.get("status") == "PASS"
             and audit.get("findings") == []
             and data.get("canonical_mutation") is False
         ):
             continue
-        counts = endogenous.get("domain_counts", {})
-        normalized = {domain: max(0, int(counts.get(domain, 0))) for domain in DOMAINS}
-        if sum(normalized.values()) != int(endogenous["cycles_verified"]):
+        counts = endogenous.get("domain_counts")
+        if not isinstance(counts, dict) or set(counts) != set(DOMAINS):
             continue
+        if not all(type(counts[domain]) is int and counts[domain] >= 0 for domain in DOMAINS):
+            continue
+        normalized = {domain: counts[domain] for domain in DOMAINS}
+        if sum(normalized.values()) != endogenous["cycles_verified"]:
+            continue
+        seen_runs.add(run_id)
         accepted.append({
             "digest": digest,
             "path": path,
-            "source_run_id": data.get("source_run_id"),
-            "cycles_verified": int(endogenous["cycles_verified"]),
+            "source_run_id": run_id,
+            "cycles_verified": endogenous["cycles_verified"],
             "domain_counts": normalized,
         })
 
@@ -92,6 +108,9 @@ def _verified_endogenous_history(kernel):
         for domain in DOMAINS:
             domain_counts[domain] += item["domain_counts"][domain]
     return {
+        "evidence_level": "ARCHIVED_MAIN_RECEIPT_ASSERTION",
+        "historical_claims_reverified": False,
+        "admitted_main_commit": main_commit if pinned_main else None,
         "accepted_receipt_count": len(accepted),
         "verified_cycles": sum(item["cycles_verified"] for item in accepted),
         "domain_counts": domain_counts,

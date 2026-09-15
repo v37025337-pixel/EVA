@@ -8,7 +8,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ROOT = Path(__file__).resolve().parent.parent
 ALLOWED_HOSTS = {
@@ -19,6 +19,11 @@ ALLOWED_HOSTS = {
 }
 MAX_BYTES = 1_500_000
 USER_AGENT = "YADO-Multi-Resource-Self-Directed-Data-Task-Loop/1.0"
+
+
+class _NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -61,10 +66,12 @@ def verify_history(receipts: list[dict[str, Any]]) -> dict[str, Any]:
 
 def fetch_json(url: str, timeout: int = 25) -> tuple[Any, dict[str, Any]]:
     parsed = urlparse(url)
-    if parsed.scheme != "https" or parsed.hostname not in ALLOWED_HOSTS:
+    if (parsed.scheme != "https" or parsed.hostname not in ALLOWED_HOSTS
+            or parsed.username is not None or parsed.password is not None
+            or parsed.port not in (None, 443)):
         raise ValueError("endpoint outside bounded public read-only allowlist")
     req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"}, method="GET")
-    with urlopen(req, timeout=timeout) as response:
+    with build_opener(_NoRedirect()).open(req, timeout=timeout) as response:
         raw = response.read(MAX_BYTES + 1)
         if len(raw) > MAX_BYTES:
             raise ValueError("response exceeds bounded size")

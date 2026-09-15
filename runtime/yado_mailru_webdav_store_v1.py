@@ -23,7 +23,8 @@ class MailRuWebDAVError(RuntimeError):
     pass
 
 
-def normalize_remote_path(path: str) -> str:
+def _normalize_path(path: str) -> str:
+    """Normalize a decoded application path; percent signs remain literal."""
     if not path:
         return "/"
     raw = path.replace("\\", "/")
@@ -32,8 +33,18 @@ def normalize_remote_path(path: str) -> str:
     parts = [p for p in raw.split("/") if p not in ("", ".")]
     if any(p == ".." for p in parts):
         raise ValueError("parent traversal is not allowed")
-    encoded = "/".join(urllib.parse.quote(p, safe="@._-()[]{}") for p in parts)
-    return "/" + encoded if encoded else "/"
+    return "/" + "/".join(parts)
+
+
+def normalize_remote_path(path: str) -> str:
+    """Encode a decoded remote path for transport, exactly once."""
+    return "/".join(urllib.parse.quote(p, safe="@._-()[]{}") for p in _normalize_path(path).split("/"))
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        # Authenticated WebDAV requests must never forward credentials to a redirect.
+        return None
 
 
 def basic_auth_header(user: str, password: str) -> str:
@@ -61,11 +72,25 @@ class MailRuConfig:
     app_password: str | None = None
     timeout: int = 30
 
+    def __post_init__(self):
+        endpoint = self.endpoint
+        if any(ord(ch) <= 32 or ord(ch) == 127 for ch in endpoint):
+            raise ValueError("control characters and whitespace are not allowed in WebDAV endpoints")
+        parsed = urllib.parse.urlsplit(endpoint)
+        if (parsed.scheme != "https" or not parsed.hostname
+                or parsed.username is not None or parsed.password is not None
+                or "?" in endpoint or "#" in endpoint):
+            raise ValueError("WebDAV endpoint must use HTTPS without credentials, query or fragment")
+        if parsed.port is not None and parsed.port == 0:
+            raise ValueError("invalid WebDAV endpoint port")
+        object.__setattr__(self, "endpoint", endpoint.rstrip("/"))
+        object.__setattr__(self, "root", _normalize_path(self.root))
+
     @classmethod
     def from_env(cls) -> "MailRuConfig":
         return cls(
             endpoint=os.environ.get("YADO_MAILRU_WEBDAV_ENDPOINT", DEFAULT_ENDPOINT).rstrip("/"),
-            root=normalize_remote_path(os.environ.get("YADO_MAILRU_ROOT", DEFAULT_ROOT)),
+            root=os.environ.get("YADO_MAILRU_ROOT", DEFAULT_ROOT),
             user=os.environ.get(USER_ENV),
             app_password=os.environ.get(PASSWORD_ENV),
             timeout=int(os.environ.get("YADO_MAILRU_TIMEOUT", "30")),
@@ -79,8 +104,7 @@ class MailRuConfig:
 class MailRuWebDAVStore:
     def __init__(self, config: MailRuConfig | None = None):
         self.config = config or MailRuConfig.from_env()
-        if not self.config.endpoint.startswith("https://"):
-            raise ValueError("Mail.ru WebDAV endpoint must use HTTPS")
+        self._opener = urllib.request.build_opener(_NoRedirect())
 
     def _url(self, remote_path: str) -> str:
         path = normalize_remote_path(remote_path)
@@ -109,7 +133,7 @@ class MailRuWebDAVStore:
             self._url(remote_path), data=data, method=method, headers=request_headers
         )
         try:
-            with urllib.request.urlopen(req, timeout=self.config.timeout) as response:
+            with self._opener.open(req, timeout=self.config.timeout) as response:
                 body = response.read()
                 status = int(response.status)
         except urllib.error.HTTPError as exc:
@@ -124,14 +148,14 @@ class MailRuWebDAVStore:
         return status, body
 
     def ensure_directory(self, remote_dir: str) -> None:
-        path = normalize_remote_path(remote_dir)
+        path = _normalize_path(remote_dir)
         current = ""
         for part in [p for p in path.split("/") if p]:
             current += "/" + part
             self._request("MKCOL", current, accepted=(201, 405))
 
     def upload_bytes(self, data: bytes, remote_path: str, *, content_type: str = "application/octet-stream") -> dict:
-        target = normalize_remote_path(remote_path)
+        target = _normalize_path(remote_path)
         parent = posixpath.dirname(target) or "/"
         self.ensure_directory(parent)
         status, _ = self._request(

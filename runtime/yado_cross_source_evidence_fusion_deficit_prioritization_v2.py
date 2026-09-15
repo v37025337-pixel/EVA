@@ -204,11 +204,11 @@ def self_test() -> None:
     resolved = {
         "label": "OLD_FINISHED_FRONTIER",
         "examples": [],
-        "occurrences": 20,
-        "kinds": {"next": 20},
+        "occurrences": 30,
+        "kinds": {"next": 30},
         "paths": ["a"],
-        "statuses": {"PASS": 20},
-        "status_pressure": 10.0,
+        "statuses": {"PASS": 30},
+        "status_pressure": 15.0,
     }
     unresolved = {
         "label": "REAL_EXTERNAL_CAUSAL_REASONING_REPAIR",
@@ -224,6 +224,9 @@ def self_test() -> None:
     assert ok_resolved is False and rf_resolved["all_resolved_pass"] is True
     assert ok_unresolved is True and rf_unresolved["negative_evidence"] == 3
     evidence = {"families": ["adaptation", "evidence", "reasoning"]}
+    # Establish the regression fixture: frequency alone gives v1 a resolved
+    # winner. V2 must reject it without lowering the evidence requirement.
+    assert v1.rank_candidates([resolved, unresolved], evidence)[0]["label"] == resolved["label"]
     result = prioritize([resolved, unresolved], evidence)
     assert result["selected"]["label"] == "REAL_EXTERNAL_CAUSAL_REASONING_REPAIR", result
     assert result["v1_top_rejected_as_unresolved"] is True, result

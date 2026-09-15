@@ -123,6 +123,17 @@ jobs:
       - name: Compile all active and candidate Python layers
         run: python -m compileall -q runtime successor candidates/g2-self-evolution candidates/autonomous
 
+      - name: Check development data repair and prioritization mechanisms
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python runtime/yado_database_api_transfer_repair_v1.py --self-test
+          python runtime/yado_endogenous_data_invariant_repair_v1.py --self-test
+          python runtime/yado_cross_structure_invariant_repair_transfer_v1.py --self-test
+          python runtime/yado_multi_resource_self_directed_data_task_loop_v1.py --self-test
+          python runtime/yado_cross_source_evidence_fusion_deficit_prioritization_v1.py --self-test
+          python runtime/yado_cross_source_evidence_fusion_deficit_prioritization_v2.py --self-test
+
       - name: Run native UnifiedYADOCoreV1 audit
         run: |
           python - <<'PY'

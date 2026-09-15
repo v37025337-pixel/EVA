@@ -2,6 +2,18 @@ name: YADO MailRu WebDAV Storage V1
 
 on:
   workflow_dispatch:
+    inputs:
+      live_probe:
+        description: 'Upload one configuration probe to Mail.ru Cloud using protected credentials'
+        type: boolean
+        default: false
+  pull_request:
+    branches: [main]
+    paths:
+      - 'runtime/yado_mailru_webdav_store_v1.py'
+      - 'runtime/test_yado_mailru_webdav_store_v1.py'
+      - 'architecture/yado-mailru-webdav-storage-v1.json'
+      - '.github/workflows/yado-mailru-webdav-storage-v1.yml'
   push:
     branches: [yado-deep-development-20260914]
     paths:
@@ -17,10 +29,6 @@ jobs:
   validate-storage-layer:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
-    env:
-      YADO_MAILRU_USER: ${{ secrets.YADO_MAILRU_USER }}
-      YADO_MAILRU_APP_PASSWORD: ${{ secrets.YADO_MAILRU_APP_PASSWORD }}
-      YADO_MAILRU_ROOT: /YADO
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -41,12 +49,27 @@ jobs:
       - name: Validate canonical invariants before optional external write
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Optional live Mail.ru Cloud write probe
+        if: github.event_name == 'workflow_dispatch' && inputs.live_probe
+        env:
+          YADO_MAILRU_USER: ${{ secrets.YADO_MAILRU_USER }}
+          YADO_MAILRU_APP_PASSWORD: ${{ secrets.YADO_MAILRU_APP_PASSWORD }}
+          YADO_MAILRU_ROOT: /YADO
         run: |
           if [ -n "$YADO_MAILRU_USER" ] && [ -n "$YADO_MAILRU_APP_PASSWORD" ]; then
-            PYTHONPATH=runtime python runtime/yado_mailru_webdav_store_v1.py \
-              --upload architecture/yado-mailru-webdav-storage-v1.json \
-              --remote "/YADO/probes/yado-mailru-webdav-storage-v1-${GITHUB_RUN_ID}.json"
-            echo "PASS_LIVE_MAILRU_WEBDAV_WRITE_V1"
+            PYTHONPATH=runtime python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from yado_mailru_webdav_store_v1 import MailRuWebDAVStore, sha256_bytes
+          store = MailRuWebDAVStore()
+          local = Path('architecture/yado-mailru-webdav-storage-v1.json')
+          remote = '/YADO/probes/yado-mailru-webdav-storage-v1-' + os.environ['GITHUB_RUN_ID'] + '.json'
+          result = store.upload_file(local, remote)
+          assert sha256_bytes(store.download_bytes(remote)) == result['sha256'], 'WEBDAV_READBACK_MISMATCH'
+          result['read_back_matches'] = True
+          result['status'] = 'PASS_LIVE_MAILRU_WEBDAV_WRITE_READBACK_V1'
+          print(json.dumps(result))
+          PY
           else
             echo "SKIP_LIVE_MAILRU_WEBDAV_WRITE_NO_PROTECTED_CREDENTIALS"
           fi

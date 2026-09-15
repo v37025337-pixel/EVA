@@ -18,7 +18,7 @@ import time
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-SUITES = ("tests", "runtime/yado_rc8_v36", "successor/tests")
+SUITES = ("tests", "runtime/yado_rc8_v36", "successor/tests", "runtime")
 
 
 class FunctionTest(unittest.TestCase):
@@ -61,7 +61,13 @@ def collect():
         if not path.is_dir():
             raise FileNotFoundError("MISSING_REGRESSION_SUITE:" + directory)
         loader = unittest.TestLoader()
-        suite = loader.discover(str(path), pattern="test_*.py")
+        if directory == "runtime":
+            # Include the top-level adapters without collecting the inherited
+            # runtime subtree a second time.
+            suite = unittest.TestSuite(loader.loadTestsFromName(source.stem)
+                                       for source in sorted(path.glob("test_*.py")))
+        else:
+            suite = loader.discover(str(path), pattern="test_*.py")
         if loader.errors:
             raise RuntimeError("REGRESSION_COLLECTION_FAILED:\n" + "\n".join(loader.errors))
         for source in sorted(path.glob("test_*.py")):
