@@ -1,0 +1,20 @@
+{
+  "schema": "yado.cross_source_evidence_fusion_deficit_prioritization.config.v1",
+  "verified_multi_resource_experience": "experience/yado-multi-resource-self-directed-data-task-loop-v1.json",
+  "minimum_candidate_pool": 5,
+  "minimum_evidence_family_overlap": 2,
+  "minimum_evidence_score_lift": 20.0,
+  "admission_criteria": {
+    "verified_multi_resource_experience_required": true,
+    "minimum_domains": 3,
+    "minimum_task_classes": 3,
+    "historical_causal_candidate_scan_required": true,
+    "host_preselected_deficit": false,
+    "evidence_ablation_required": true,
+    "case_order_permutation_stability_required": true,
+    "full_kernel_audit_required": true,
+    "full_regression_required": true,
+    "canonical_mutation": false
+  },
+  "next_step_if_pass": "PRIORITIZED_DEFICIT_TO_COGNITIVE_REPAIR_V1"
+}
