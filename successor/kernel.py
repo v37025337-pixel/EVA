@@ -176,6 +176,9 @@ class SuccessorKernel:
         if any(r.get('kind') == 'HIVEMIND_INTAKE' for r in autonomous_records):
             from .hivemind import verify_links
             verify_links(autonomous_records)
+        if any(r.get('kind', '').startswith('COG_RUNTIME_') for r in autonomous_records):
+            from .runtime_evolution import verify_implementations
+            verify_implementations(autonomous_records, self.implementation_identity)
         return {"status": "PASS", "tick": tick, "event_hash": previous}
 
     def _append(self, body):
