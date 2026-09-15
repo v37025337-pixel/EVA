@@ -1,0 +1,105 @@
+name: YADO Database API Transfer Repair V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-deep-development-20260914]
+    paths:
+      - 'runtime/yado_database_api_transfer_repair_v1.py'
+      - 'architecture/yado-database-api-transfer-repair-v1.json'
+      - 'experience/yado-database-programming-study-v1.json'
+      - 'candidates/cognitive/yado_database_web_usage_candidate_v1.py'
+      - '.github/workflows/yado-database-api-transfer-repair-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  learned-db-api-transfer-repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      PYTHONPATH: runtime
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Prepare verified development kernel
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt pyyaml
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m compileall -q runtime successor candidates
+
+      - name: Self-test transfer repair mechanism
+        run: |
+          python runtime/yado_database_api_transfer_repair_v1.py --self-test
+
+      - name: Apply learned DB Web candidate to fresh public data
+        run: |
+          mkdir -p artifacts
+          python runtime/yado_database_api_transfer_repair_v1.py \
+            --config architecture/yado-database-api-transfer-repair-v1.json \
+            --out artifacts/yado-database-api-transfer-repair-v1.json
+          python - <<'PY'
+          import json
+          r=json.load(open('artifacts/yado-database-api-transfer-repair-v1.json'))
+          assert r['status']=='PASS_DATABASE_API_TRANSFER_REPAIR_V1',r
+          assert r['used_study_digest']=='8cef87947637c9d64c7665edbe3090a4b56ff999d5e813a39e4990fb52d536cd',r
+          assert r['candidate_skill_count']>=29,r
+          assert r['baseline']['defect_detected'] is True,r
+          assert r['repair']['status']=='PASS',r
+          assert r['repair']['train_idempotent'] is True,r
+          assert r['repair']['group_counts_match_external_data'] is True,r
+          assert r['repair']['index_used_for_bounded_query'] is True,r
+          assert r['repair']['learned_candidate_query_correct'] is True,r
+          assert r['repair']['rollback_preserved_state'] is True,r
+          assert r['repair']['fresh_holdout_pass'] is True,r
+          s=r['safety_boundary']
+          assert s['credentials_used'] is False and s['external_writes'] is False,r
+          assert s['remote_code_execution'] is False and s['canonical_mutation'] is False,r
+          print('PASS_LEARNED_DATABASE_TRANSFER_REPAIR',r['repair'])
+          PY
+
+      - name: Full kernel audit
+        run: |
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status']=='PASS' and r['findings']==[],r
+          print('PASS_FULL_KERNEL_AUDIT',r['counts'])
+          PY
+          python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Fresh Successor and complete regression
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/database-api-transfer-successor"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/database-api-transfer-successor/manifest.json"
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status']=='PASS',r
+          assert r['failures']==[] and r['errors']==[],r
+          assert r['tests_run']>=200,r
+          assert r['source_unchanged'] is True,r
+          print('PASS_FULL_REGRESSION',r['tests_run'])
+          PY
+
+      - name: Upload transfer evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-database-api-transfer-repair-v1-${{ github.run_id }}
+          path: |
+            architecture/yado-database-api-transfer-repair-v1.json
+            experience/yado-database-programming-study-v1.json
+            artifacts/yado-database-api-transfer-repair-v1.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
