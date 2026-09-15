@@ -1,0 +1,81 @@
+{
+  "schema": "yado.multi_resource_self_directed_data_task_loop.experience.v1",
+  "status": "PASS_VERIFIED_MULTI_RESOURCE_SELF_DIRECTED_DATA_TASK_LOOP_V1",
+  "source_commit": "8a164aaf6cde386ec563d427ce044b68c07fdeea",
+  "workflow_run_id": 34958025154,
+  "artifact_id": 10392585380,
+  "selection": {
+    "host_preselected_resource": false,
+    "host_preselected_task_class": false,
+    "bounded_source_catalog_provided": true,
+    "bounded_task_and_repair_catalog_provided": true,
+    "selected_source_ids": [
+      "USGS_EARTHQUAKES_DAY",
+      "WORLDBANK_HRV_POPULATION",
+      "OPENMETEO_HOURLY_TEMPERATURE"
+    ],
+    "task_classes": [
+      "GEO_EVENT_STREAM",
+      "INDICATOR_SERIES",
+      "TIME_SERIES"
+    ],
+    "domains": [
+      "geophysics",
+      "economics_demography",
+      "weather"
+    ]
+  },
+  "cases": [
+    {
+      "source_id": "USGS_EARTHQUAKES_DAY",
+      "domain": "geophysics",
+      "task_class": "GEO_EVENT_STREAM",
+      "derived_stressors": ["REPEAT_INGESTION", "OUT_OF_RANGE_LONGITUDE"],
+      "selected_repairs": ["DEDUPLICATE_BY_ID", "REJECT_COORDINATE_OUT_OF_RANGE", "SORT_BY_TIME"],
+      "heldout_pass": true
+    },
+    {
+      "source_id": "WORLDBANK_HRV_POPULATION",
+      "domain": "economics_demography",
+      "task_class": "INDICATOR_SERIES",
+      "derived_stressors": ["REPEAT_PERIOD", "NULL_NUMERIC_VALUE"],
+      "selected_repairs": ["UPSERT_BY_PERIOD", "REJECT_NULL_VALUE"],
+      "heldout_pass": true
+    },
+    {
+      "source_id": "OPENMETEO_HOURLY_TEMPERATURE",
+      "domain": "weather",
+      "task_class": "TIME_SERIES",
+      "derived_stressors": ["REPEAT_TIMESTAMP", "NULL_NUMERIC_VALUE", "REVERSE_ORDER"],
+      "selected_repairs": ["DEDUPLICATE_BY_TIME", "REJECT_NULL_VALUE", "SORT_BY_TIME"],
+      "heldout_pass": true
+    }
+  ],
+  "successful_cases": 3,
+  "all_heldout_pass": true,
+  "source_failures": [],
+  "full_kernel_audit": {
+    "status": "PASS",
+    "findings": [],
+    "runtime_python_files": 627,
+    "json_files": 1176,
+    "workflow_files": 96,
+    "active_runtime_sources": 49,
+    "active_capabilities": 34,
+    "duplicate_python_groups": 0,
+    "module_stem_collisions": 0,
+    "ledger_events": 310
+  },
+  "full_regression": {
+    "status": "PASS",
+    "tests_run": 200,
+    "failures": [],
+    "errors": [],
+    "source_unchanged": true,
+    "identity_digest": "955b7075aac337593643dea4e3d9e1e5822c9fa7702e522307732c52b331ac3b"
+  },
+  "canonical_mutation": false,
+  "g3_genesis_performed": false,
+  "consciousness_claimed": false,
+  "next_step": "CROSS_SOURCE_EVIDENCE_FUSION_AND_DEFICIT_PRIORITIZATION_V1"
+}
