@@ -73,3 +73,48 @@ bridge accepts typed native goals, not general prose or shell commands. It does
 not launch external model agents or enable autonomous writes to other projects.
 Activation is an assistant-authored binding of existing mechanisms; it does not
 promote the canonical G2 control plane or establish consciousness.
+
+## Runtime evolution through Hivemind
+
+A separate issue contract requests one finite evolution cycle:
+
+```json
+{"schema":"yado.hivemind.runtime-evolution.v1","objective":"repair_native_source_failures"}
+```
+
+The acceptance criteria must be exactly:
+
+- `Kernel emitted a reusable runtime mechanism`
+- `Fresh transfer, memory retention and complete regression passed`
+- `Mechanism admitted to durable native cognition`
+
+Run it with `python -m successor.hivemind_evolution` and the same `--manifest`,
+`--state`, `--tracker-root`, `--workspace-id`, `--issue`, and `--hive` arguments
+as above, plus `--output /path/to/evolution-evidence`. Use the dependency-complete
+Python environment used for the repository regression. Keep one writer per
+kernel and tracker. A checkpoint from an older implementation requires the
+explicit continuity upgrade above before opening it with changed sources.
+
+The kernel chooses an unresolved native-source failure from its journal. For
+supported one-variable integer polynomials it infers the smallest fitting degree
+(0–3), transplants the pinned `PolynomialCodeLineageGene.fit` AST, and emits a
+reusable `synthesize(training)` module. The module computes new coefficients on
+every invocation. It contains no labels or hardcoded solution from the triggering
+task. The inherited exact fitter and the host-authored adapter are recorded as
+separate origins; this is bounded recombination, not invention of the algorithm.
+
+Module bytes are frozen before fresh transfer cases. The runner invokes the
+complete repository regression in a separate process, passing the actual frozen
+module to its integration test, rechecks retained cognitive results, and runs
+both native and full kernel audits. Only successful gates permit a durable
+`COG_RUNTIME_ADMIT` event. Normal native cognition can then select the new
+strategy; unsupported types, fractional coefficients, insufficient examples,
+or degree overflow produce WITHHOLD. Existing failures remain unchanged.
+
+An issue retry reuses the durable proposal and completed gate result. A failed
+gate stays in review. Cancellation observed before admission prevents activation.
+Interrupted gate attempts remain in separate evidence directories. Use
+`RuntimeEvolution(kernel).rollback(proposal_tick)` to revoke a module while
+retaining its history. Admission adds a journal-pinned Successor runtime strategy;
+it does not alter canonical G2 sources, automatically merge GitHub branches, or
+start a permanent background service.

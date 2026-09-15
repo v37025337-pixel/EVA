@@ -199,9 +199,14 @@ def replay_recalled_source(records, goal, result):
 
 def available_strategies(goal, records):
     from .native_binding import STRATEGY, COST, active
+    from .runtime_evolution import active_candidates, COST as runtime_cost
     strategies = STRATEGIES[goal['spec']['domain']]
     if goal['spec']['domain'] == 'native_source' and active(records):
         strategies += ((STRATEGY, COST),)
+    if goal['spec']['domain'] == 'native_source':
+        row = goal['spec']['training'][0]
+        if len(row['input']) == 1 and type(next(iter(row['input'].values()))) is int and type(row['expected']) is int:
+            strategies += tuple((name, runtime_cost) for name in active_candidates(records))
     return [(s, c) for s, c in strategies
             if s != 'reuse_verified_source' or learned_source(records, goal) is not None]
 
@@ -211,7 +216,10 @@ def replay(records):
     goals, past = {}, []
     for r in records:
         kind = r['kind']
-        if kind == 'COG_ACTIVATE_NATIVE_SYNTHESIS':
+        if kind.startswith('COG_RUNTIME_'):
+            from .runtime_evolution import replay_event
+            replay_event(r, past, goals)
+        elif kind == 'COG_ACTIVATE_NATIVE_SYNTHESIS':
             from .native_binding import activation, active
             body = {k: v for k, v in r.items() if k not in {'tick', 'event_hash'}}
             if (body != activation() or active(past)
@@ -258,6 +266,12 @@ def replay(records):
                     if (source_sha(result['source']) != result['source_sha256']
                             or result['source_context'] != goal_context(g['spec'])):
                         raise ValueError('COGNITIVE_NATIVE_SOURCE_INTEGRITY')
+                    if g['decision']['choice']['strategy'].startswith('native_materialized_'):
+                        from .runtime_evolution import strategy_candidate
+                        generated = strategy_candidate(past, g['decision']['choice']['strategy'], g['spec']['training'])
+                        if (result['source'] != generated['source'] or result.get('runtime_mechanism_sha256')
+                                != generated['runtime_mechanism_sha256']):
+                            raise ValueError('COGNITIVE_RUNTIME_MECHANISM_EXECUTION_PROVENANCE')
                     if g['decision']['choice']['strategy'] == 'reuse_verified_source':
                         prior = replay_recalled_source(past, g, result)
                         if (prior is None or result.get('reused_finish_tick') != prior['tick']
@@ -431,6 +445,12 @@ class CognitiveLoop:
                 elif choice['strategy'] == 'native_evolved_v2':
                     from .native_binding import synthesize
                     candidate = synthesize(spec['training'])
+                elif choice['strategy'].startswith('native_materialized_'):
+                    from .runtime_evolution import strategy_candidate
+                    # Historical retention replays the mechanism available at
+                    # this decision, including after an explicit rollback.
+                    history = [r for r in self._records() if r['tick'] < g['decision']['tick']]
+                    candidate = strategy_candidate(history, choice['strategy'], spec['training'])
                 else:
                     candidate = parent.native_source_candidate(spec['training'], choice['strategy'])
                 def predict(rows):
