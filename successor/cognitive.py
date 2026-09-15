@@ -24,6 +24,7 @@ STRATEGIES = {
 }
 RECENT_OBSERVATIONS = 16
 WORKSPACE_CAPACITY = 2
+SOURCE_MEMORY_CAPACITY = 16
 
 
 def _integer(value, bound):
@@ -114,15 +115,86 @@ def goal_context(spec):
 
 
 def learned_source(records, goal):
+    """Legacy newest-source rule, retained for existing journal provenance."""
+    return next(iter(learned_sources(records, goal, limit=1)), None)
+
+
+def learned_sources(records, goal, limit=SOURCE_MEMORY_CAPACITY):
+    """Bounded, newest-first distinct programs admitted in this type context."""
     if goal['mode'] == 'no_memory' or goal['spec']['domain'] != 'native_source':
-        return None
+        return []
     context = goal_context(goal['spec'])
+    sources, seen = [], set()
     for record in reversed(records):
         result = record.get('result') or {}
         if (record['kind'] == 'COG_FINISH' and record['status'] == 'VALIDATED_ON_HOLDOUT'
-                and result.get('source_context') == context and 'source' in result):
-            return record
-    return None
+                and result.get('source_context') == context and 'source' in result
+                and result['source_sha256'] not in seen):
+            sources.append(record)
+            seen.add(result['source_sha256'])
+            if len(sources) == limit:
+                break
+    return sources
+
+
+def _fits_training(predictions, training):
+    return (isinstance(predictions, list) and len(predictions) == len(training)
+            and all(equivalent(value, row['expected']) for value, row in zip(predictions, training)))
+
+
+def recall_source(sources, training, execute):
+    """Select on training only; neither holdout rows nor query inputs enter here.
+
+    One strategy unit permits at most SOURCE_MEMORY_CAPACITY program probes.
+    Probe evidence records the actual search work separately from that unit.
+    """
+    if not sources:
+        raise ValueError('NO_ADMITTED_SOURCE_MEMORY')
+    evidence = {'version': 2, 'selection_inputs': 'TRAINING_ONLY',
+                'training_digest': fingerprint(training), 'candidate_limit': SOURCE_MEMORY_CAPACITY,
+                'probes': []}
+    for prior in sources:
+        probe = {'finish_tick': prior['tick'], 'source_sha256': prior['result']['source_sha256']}
+        try:
+            probe['predictions'] = execute(prior['result'], [row['input'] for row in training])
+        except Exception as error:
+            probe['error_type'] = type(error).__name__
+        evidence['probes'].append(probe)
+        if _fits_training(probe.get('predictions'), training):
+            return prior, evidence
+    # Preserve the previous failed-reuse path so the loop can reflect on the
+    # failure and try a grammar extension within its remaining budget.
+    return sources[0], evidence
+
+
+def replay_recalled_source(records, goal, result):
+    evidence = result.get('memory_retrieval')
+    if evidence is None:
+        return learned_source(records, goal)
+    invalid = 'COGNITIVE_NATIVE_SOURCE_REUSE_PROVENANCE'
+    if (not isinstance(evidence, dict) or type(evidence.get('version')) is not int
+            or evidence['version'] != 2 or evidence.get('selection_inputs') != 'TRAINING_ONLY'
+            or evidence.get('training_digest') != fingerprint(goal['spec']['training'])
+            or evidence.get('candidate_limit') != SOURCE_MEMORY_CAPACITY):
+        raise ValueError(invalid)
+    sources, probes = learned_sources(records, goal), evidence.get('probes')
+    if not isinstance(probes, list) or not 1 <= len(probes) <= len(sources):
+        raise ValueError(invalid)
+    for index, probe in enumerate(probes):
+        prior = sources[index]
+        if (not isinstance(probe, dict) or probe.get('finish_tick') != prior['tick']
+                or probe.get('source_sha256') != prior['result']['source_sha256']
+                or set(probe) not in ({'finish_tick', 'source_sha256', 'predictions'},
+                                      {'finish_tick', 'source_sha256', 'error_type'})
+                or 'error_type' in probe and not isinstance(probe['error_type'], str)):
+            raise ValueError(invalid)
+        if _fits_training(probe.get('predictions'), goal['spec']['training']):
+            if index != len(probes) - 1:
+                raise ValueError(invalid)
+            return prior
+    if len(probes) != len(sources):
+        raise ValueError(invalid)
+    return sources[0]
 
 
 def available_strategies(goal, records):
@@ -177,7 +249,7 @@ def replay(records):
                             or result['source_context'] != goal_context(g['spec'])):
                         raise ValueError('COGNITIVE_NATIVE_SOURCE_INTEGRITY')
                     if g['decision']['choice']['strategy'] == 'reuse_verified_source':
-                        prior = learned_source(past, g)
+                        prior = replay_recalled_source(past, g, result)
                         if (prior is None or result.get('reused_finish_tick') != prior['tick']
                                 or result['source_sha256'] != prior['result']['source_sha256']):
                             raise ValueError('COGNITIVE_NATIVE_SOURCE_REUSE_PROVENANCE')
@@ -327,9 +399,11 @@ class CognitiveLoop:
         try:
             if spec['domain'] == 'native_source':
                 if choice['strategy'] == 'reuse_verified_source':
-                    prior = learned_source(self._records(), g)
+                    prior, retrieval = recall_source(learned_sources(self._records(), g),
+                                                     spec['training'], parent.execute_native_source)
                     candidate = copy.deepcopy(prior['result'])
                     candidate['reused_finish_tick'] = prior['tick']
+                    candidate['memory_retrieval'] = retrieval
                 else:
                     candidate = parent.native_source_candidate(spec['training'], choice['strategy'])
                 def predict(rows):
