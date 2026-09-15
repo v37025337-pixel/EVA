@@ -116,13 +116,14 @@ class SuccessorKernel:
 
     def verify_state(self):
         previous, tick = "0" * 64, 0
-        submissions, completions, cognitive_records, developmental_records = [], {}, [], []
+        submissions, completions, cognitive_records, developmental_records, autonomous_records = [], {}, [], [], []
         for row in self.db.execute("SELECT * FROM events ORDER BY tick"):
             tick += 1
             digest = sha((previous + "\n" + str(tick) + "\n" + row["body"]).encode())
             if row["tick"] != tick or row["previous_hash"] != previous or row["event_hash"] != digest:
                 raise ValueError("CAUSAL_HISTORY_INTEGRITY_FAILURE")
             body = decode(row["body"])
+            autonomous_records.append({**body, "tick": tick, "event_hash": digest})
             if str(body.get("kind", "")).startswith("COG_"):
                 cognitive_records.append({**body, "tick": tick, "event_hash": digest})
             if str(body.get("kind", "")).startswith(("COG_", "DEV_")):
@@ -165,6 +166,9 @@ class SuccessorKernel:
         if any(r['kind'].startswith('DEV_') or 'development_id' in r for r in developmental_records):
             from .development import replay as replay_development
             replay_development(developmental_records)
+        if any(str(r.get('kind', '')).startswith('AUTO_') or 'autonomy_id' in r for r in autonomous_records):
+            from .autonomy import replay as replay_autonomy
+            replay_autonomy(autonomous_records, self.identity)
         return {"status": "PASS", "tick": tick, "event_hash": previous}
 
     def _append(self, body):
@@ -385,3 +389,19 @@ class SuccessorKernel:
     def stop_development(self, session_id):
         from .development import DevelopmentLoop
         return DevelopmentLoop(self).stop(session_id)
+
+    def start_autonomy(self, *, budget=120, max_cycles=20):
+        from .autonomy import AutonomousLoop
+        return AutonomousLoop(self).start(budget, max_cycles)
+
+    def run_autonomy(self, max_steps=200):
+        from .autonomy import AutonomousLoop
+        return AutonomousLoop(self).run(max_steps)
+
+    def autonomy_snapshot(self):
+        from .autonomy import AutonomousLoop
+        return AutonomousLoop(self).snapshot()
+
+    def stop_autonomy(self, session_id):
+        from .autonomy import AutonomousLoop
+        return AutonomousLoop(self).stop(session_id)
