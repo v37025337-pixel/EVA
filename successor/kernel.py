@@ -62,7 +62,9 @@ class SuccessorKernel:
         claimed = identity.pop("identity_digest")
         if sha(canonical(identity).encode()) != claimed:
             raise ValueError("SUCCESSOR_MANIFEST_DIGEST_MISMATCH")
-        self.identity = claimed
+        from .continuity import operational_identity
+        self.implementation_identity = claimed
+        self.identity = operational_identity(self.manifest, self.manifest_path.parent)
         self._check_sources()
         archive_path = self.manifest_path.parent / self.manifest["archive_file"]
         if file_sha(archive_path) != self.manifest["archive_sha256"]:
@@ -115,6 +117,8 @@ class SuccessorKernel:
         self.archive.close()
 
     def verify_state(self):
+        from .continuity import verify_prefix
+        verify_prefix(self)
         previous, tick = "0" * 64, 0
         submissions, completions, cognitive_records, developmental_records, autonomous_records = [], {}, [], [], []
         for row in self.db.execute("SELECT * FROM events ORDER BY tick"):
@@ -169,6 +173,9 @@ class SuccessorKernel:
         if any(str(r.get('kind', '')).startswith('AUTO_') or 'autonomy_id' in r for r in autonomous_records):
             from .autonomy import replay as replay_autonomy
             replay_autonomy(autonomous_records, self.identity)
+        if any(r.get('kind') == 'HIVEMIND_INTAKE' for r in autonomous_records):
+            from .hivemind import verify_links
+            verify_links(autonomous_records)
         return {"status": "PASS", "tick": tick, "event_hash": previous}
 
     def _append(self, body):
@@ -350,6 +357,7 @@ class SuccessorKernel:
     def snapshot(self):
         last = self.recent(1)
         return {"kernel_id": self.KERNEL_ID, "identity_digest": self.identity,
+                "implementation_identity_digest": self.implementation_identity,
                 "parent_generation": self.parent.head["generation_id"],
                 "inherited_capabilities": len(self.parent.head["active_capabilities"]),
                 "task_kinds": list(self.TASK_KINDS), "archive": self.archive.summary["counts"],
@@ -361,6 +369,10 @@ class SuccessorKernel:
     def open_goal(self, spec, *, budget=6, mode="full"):
         from .cognitive import CognitiveLoop
         return CognitiveLoop(self).open_goal(spec, budget, mode)
+
+    def activate_native_synthesis(self):
+        from .cognitive import CognitiveLoop
+        return CognitiveLoop(self).activate_native_synthesis()
 
     def think(self, max_steps=20):
         from .cognitive import CognitiveLoop

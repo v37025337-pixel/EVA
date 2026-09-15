@@ -85,7 +85,7 @@ def main():
     successor = sub.add_parser('derive')
     successor.add_argument('--parent-manifest', required=True)
     successor.add_argument('--output', required=True)
-    for command in ("status", "run", "submit", "resume", "verify", "search", "goal", "think", "cognitive-status", "stop",
+    for command in ("status", "run", "submit", "resume", "verify", "search", "goal", "think", "cognitive-status", "stop", "native-synthesis-activate",
                     "development-start", "develop", "development-status", "development-stop",
                     "autonomy-start", "autonomy-run", "autonomy-status", "autonomy-stop"):
         item = sub.add_parser(command)
@@ -134,6 +134,8 @@ def main():
                 output = kernel.resume(args.max_steps)
             elif args.command == 'goal':
                 output = {'goal_id': kernel.open_goal(json.loads(Path(args.input).read_text()), budget=args.budget, mode=args.mode)}
+            elif args.command == 'native-synthesis-activate':
+                output = kernel.activate_native_synthesis()
             elif args.command == 'think':
                 output = kernel.think(args.max_steps)
             elif args.command == 'cognitive-status':

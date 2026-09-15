@@ -17,6 +17,13 @@ from .arithmetic_source import synthesize_candidate, synthesize_repair
 from .kernel import SuccessorKernel
 
 
+def synthesize_program_v1(training):
+    candidate = synthesize_candidate(copy.deepcopy(training))
+    return {**candidate, 'status': 'PASS_PROGRAM_SYNTHESIS_CANDIDATE',
+            'capability': 'BOUNDED_ARITHMETIC_EXPRESSION_SYNTHESIS_V1',
+            'validation_labels_consumed': False, 'automatic_canonical_promotion': False}
+
+
 class EvolvedSuccessorKernelV1(SuccessorKernel):
     KERNEL_ID = "YADO_SUCCESSOR_DEFICIT_DRIVEN_PROGRAMMING_V1"
     TASK_KINDS = SuccessorKernel.TASK_KINDS + ("program_synthesis",)
@@ -24,15 +31,7 @@ class EvolvedSuccessorKernelV1(SuccessorKernel):
     def _dispatch(self, task):
         kind, payload = task.get("kind"), task.get("payload", {})
         if kind == "program_synthesis":
-            training = copy.deepcopy(payload.get("training", []))
-            candidate = synthesize_candidate(training)
-            return {
-                **candidate,
-                "status": "PASS_PROGRAM_SYNTHESIS_CANDIDATE",
-                "capability": "BOUNDED_ARITHMETIC_EXPRESSION_SYNTHESIS_V1",
-                "validation_labels_consumed": False,
-                "automatic_canonical_promotion": False,
-            }
+            return synthesize_program_v1(payload.get("training", []))
         if kind == "repair":
             inherited = super()._dispatch(task)
             if isinstance(inherited, dict) and inherited.get("source"):
