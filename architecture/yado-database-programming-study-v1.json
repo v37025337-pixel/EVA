@@ -1,0 +1,68 @@
+{
+  "schema": "yado.database_programming_study.v1",
+  "mode": "PUBLIC_READ_ONLY_DOCUMENTATION_AND_LOCAL_PRACTICE",
+  "goal": "Study public database/programming documentation and code examples, derive database/web usage skills, then prove those skills with isolated SQLite practice and a read-only public JSON API.",
+  "limits": {
+    "max_total_pages": 8,
+    "max_bytes_per_page": 650000,
+    "timeout_seconds": 15,
+    "persist_raw_remote_text": false,
+    "persist_raw_remote_code": false,
+    "execute_remote_code": false,
+    "authenticated_access": false,
+    "external_writes": false,
+    "canonical_direct_write": false
+  },
+  "gates": {
+    "min_fetched_sources": 5,
+    "min_database_sources": 3,
+    "min_programming_sources": 2,
+    "min_sql_skills": 8,
+    "min_web_skills": 4
+  },
+  "sources": [
+    {
+      "source_id": "POSTGRES_QUERY_OVERVIEW",
+      "category": "database",
+      "url": "https://www.postgresql.org/docs/current/queries-overview.html"
+    },
+    {
+      "source_id": "SQLITE_SELECT",
+      "category": "database",
+      "url": "https://www.sqlite.org/lang_select.html"
+    },
+    {
+      "source_id": "PYTHON_SQLITE3",
+      "category": "database",
+      "url": "https://docs.python.org/3/library/sqlite3.html"
+    },
+    {
+      "source_id": "DUCKDB_SQL",
+      "category": "database",
+      "url": "https://duckdb.org/docs/stable/sql/introduction"
+    },
+    {
+      "source_id": "PYTHON_URLLIB",
+      "category": "programming",
+      "url": "https://docs.python.org/3/library/urllib.request.html"
+    },
+    {
+      "source_id": "REQUESTS_QUICKSTART",
+      "category": "programming",
+      "url": "https://requests.readthedocs.io/en/latest/user/quickstart/"
+    },
+    {
+      "source_id": "MDN_FETCH",
+      "category": "web_programming",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"
+    },
+    {
+      "source_id": "JSONPLACEHOLDER_GUIDE",
+      "category": "web_programming",
+      "url": "https://jsonplaceholder.typicode.com/guide/"
+    }
+  ],
+  "public_api_lab": {
+    "url": "https://jsonplaceholder.typicode.com/todos/1"
+  }
+}

@@ -1,0 +1,223 @@
+name: YADO Native Controller New Dimension Genesis V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-deep-development-20260914]
+    paths:
+      - '.github/workflows/yado-native-controller-new-dimension-genesis-v1.yml'
+      - 'runtime/yado_native_controller_new_dimension_genesis_v1.py'
+      - 'architecture/yado-native-controller-new-dimension-genesis-v1.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-native-controller-new-dimension-genesis-v1
+  cancel-in-progress: true
+
+jobs:
+  deficit-derived-dimension-genesis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Require verified controller source-self-mutation result
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m compileall -q runtime successor candidates
+          python - <<'PY'
+          import hashlib,json,pathlib
+          r=json.load(open('architecture/yado-native-controller-source-self-mutation-v2.json'))
+          assert r['status']=='PASS_NATIVE_CONTROLLER_SOURCE_SELF_MUTATION_V2',r
+          assert r['regression_status']=='PASS' and r['regression_tests']==197,r
+          assert r['strict_probe_native_source_candidate_count']>=1,r
+          assert r['strict_probe_new_dimensions']==[],r
+          p=pathlib.Path('candidates/g2-self-evolution/yado_evolutionary_genome_self_candidate_v2b.py')
+          sha=hashlib.sha256(p.read_bytes()).hexdigest()
+          assert sha==r['validated_second_generation_candidate_sha256'],(sha,r)
+          print('PASS_PRIOR_CONTROLLER_SOURCE_SELF_MUTATION_CONSUMED',sha)
+          PY
+
+      - name: Derive and materialize a previously absent dimension from causal deficit evidence
+        run: |
+          mkdir -p artifacts
+          python -m py_compile runtime/yado_native_controller_new_dimension_genesis_v1.py
+          python runtime/yado_native_controller_new_dimension_genesis_v1.py | tee artifacts/yado-native-controller-new-dimension-genesis-v1.log
+          python - <<'PY'
+          import json
+          r=json.load(open('candidates/g2-self-evolution/yado-native-controller-new-dimension-genesis-v1.json'))
+          assert r['status']=='PASS_SHADOW_NATIVE_CONTROLLER_NEW_DIMENSION_GENESIS_V1',r
+          assert r['empty_evidence_new_dimensions']==[],r
+          assert len(r['derived_new_dimensions'])>=1,r
+          assert r['checks']['dimension_name_not_predeclared_by_host'] is True,r
+          assert r['checks']['rollback_anchor_bound'] is True,r
+          assert r['checks']['causal_evolution_selects_child'] is True,r
+          assert r['checks']['all_regressions_pass'] is True,r
+          assert r['checks']['host_preselected_dimension_name'] is False,r
+          print('PASS_DEFICIT_DERIVED_DIMENSION_GENESIS',r['derived_new_dimensions'])
+          PY
+
+      - name: Test candidate as controller under the old strict native probe
+        run: |
+          cp runtime/yado_evolutionary_genome_v1.py "$RUNNER_TEMP/yado_evolutionary_genome_canonical_v1.py"
+          cp candidates/g2-self-evolution/yado_evolutionary_genome_new_dimension_candidate_v1.py runtime/yado_evolutionary_genome_v1.py
+          python -m py_compile runtime/yado_evolutionary_genome_v1.py
+          set +e
+          python runtime/yado_g2_native_semantic_self_mutation_evolution_controller_v1.py | tee artifacts/yado-native-controller-strict-probe-new-dimension-v1.log
+          code=$?
+          set -e
+          python - <<'PY'
+          import json
+          r=json.load(open('candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json'))
+          assert r['status']=='PASS_SHADOW_G2_NATIVE_SEMANTIC_SELF_MUTATION_EVOLUTION_CONTROLLER_V1',r
+          assert len(r['new_dimensions'])>=1,r
+          assert r['checks']['structurally_broader_search_space'] is True,r
+          assert r['checks']['previously_absent_class_created'] is True,r
+          assert r['checks']['rollback_parent_available'] is True,r
+          assert r['checks']['canonical_unchanged'] is True,r
+          assert r['native_controller_representation_candidate_count']>=1,r
+          print('PASS_OLD_STRICT_PROBE_NEW_DIMENSION',r['new_dimensions'])
+          PY
+          test "$code" -eq 0
+
+      - name: Fresh ablation proves the dimension depends on causal deficit evidence
+        run: |
+          python - <<'PY'
+          import importlib.util,json,pathlib,sys
+          sys.path.insert(0,'runtime')
+          p=pathlib.Path('runtime/yado_evolutionary_genome_v1.py')
+          spec=importlib.util.spec_from_file_location('yado_dim_ablation',p)
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          C=m.YADOEvolutionaryGenomeV1
+          parent=C.parent_genome('0'*64,{'LOGIC':'l','THINKING':'t','INTELLIGENCE':'i','CODE':'c'},'fresh-ablation')
+          base=set(parent['chromosomes'])
+          no_ev=C(parent,experience_sources=[]).evolve_once()
+          no_new=set((no_ev.get('child') or {}).get('chromosomes',{}))-base
+          receipt=json.load(open('architecture/yado-native-controller-source-self-mutation-v2.json'))
+          ev=[{'residual_frontier':receipt['residual_frontier'],'next_required_capability':receipt['next_step']},
+              {'failure_next_required_capability':'NATIVE_EVOLUTIONARY_CONTROLLER_SELF_REPRESENTATION_AND_MUTATION_V2','deficit':'STRUCTURAL_SEARCH_SPACE_DID_NOT_EXPAND'}]
+          with_ev=C(parent,experience_sources=ev).evolve_once()
+          yes_new=set((with_ev.get('child') or {}).get('chromosomes',{}))-base
+          assert no_new==set(),no_new
+          assert yes_new,yes_new
+          assert with_ev['selection']=='CHILD',with_ev
+          assert with_ev['fitness']['all_regressions_pass'] is True,with_ev
+          print('PASS_FRESH_CAUSAL_DIMENSION_ABLATION',sorted(yes_new))
+          PY
+
+      - name: Restore canonical controller before canonical audit
+        run: |
+          cp "$RUNNER_TEMP/yado_evolutionary_genome_canonical_v1.py" runtime/yado_evolutionary_genome_v1.py
+          python -m py_compile runtime/yado_evolutionary_genome_v1.py
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python - <<'PY'
+          import hashlib,pathlib
+          canonical=pathlib.Path('runtime/yado_evolutionary_genome_v1.py').read_bytes()
+          candidate=pathlib.Path('candidates/g2-self-evolution/yado_evolutionary_genome_new_dimension_candidate_v1.py').read_bytes()
+          assert canonical!=candidate
+          print('PASS_CANONICAL_CONTROLLER_RESTORED',hashlib.sha256(canonical).hexdigest())
+          print('VALIDATED_NEW_DIMENSION_CANDIDATE',hashlib.sha256(candidate).hexdigest())
+          PY
+
+      - name: Compile all layers and audit whole kernel
+        run: |
+          python -m compileall -q runtime successor candidates
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status']=='PASS' and r['findings']==[],r
+          assert r['canonical']['canonical_guard']=='PASS',r
+          assert r['canonical']['ledger_validation']=='PASS',r
+          assert r['canonical']['g3_genesis_performed'] is False,r
+          print('PASS_NEW_DIMENSION_KERNEL_AUDIT')
+          PY
+
+      - name: Fresh Successor build and full regression
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-new-dimension-v1"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-new-dimension-v1/manifest.json"
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status']=='PASS',r
+          assert r['tests_run']==r['expected_tests'] and r['tests_run']>=197,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_NEW_DIMENSION_FULL_REGRESSION',r['tests_run'])
+          PY
+
+      - name: Finalize dimension-genesis receipt
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          genesis=json.load(open('candidates/g2-self-evolution/yado-native-controller-new-dimension-genesis-v1.json'))
+          strict=json.load(open('candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json'))
+          audit=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          reg=json.load(open('audits/yado-full-regression-v1-report.json'))
+          cand=pathlib.Path('candidates/g2-self-evolution/yado_evolutionary_genome_new_dimension_candidate_v1.py').read_bytes()
+          out={
+            'schema':'yado.native_controller_new_dimension_genesis.v1',
+            'status':'PASS_NATIVE_CONTROLLER_NEW_DIMENSION_GENESIS_V1',
+            'prior_source_self_mutation':'PASS_NATIVE_CONTROLLER_SOURCE_SELF_MUTATION_V2',
+            'derived_new_dimensions':strict['new_dimensions'],
+            'host_preselected_dimension_name':False,
+            'ablation_no_evidence_creates_no_dimension':True,
+            'strict_probe_status':strict['status'],
+            'strict_probe_structurally_broader':strict['checks']['structurally_broader_search_space'],
+            'strict_probe_previous_absent_class_created':strict['checks']['previously_absent_class_created'],
+            'candidate_sha256':hashlib.sha256(cand).hexdigest(),
+            'kernel_audit':audit['status'],
+            'regression_status':reg['status'],
+            'regression_tests':reg['tests_run'],
+            'canonical_main_mutation':False,
+            'development_candidate_only':True,
+            'g3_genesis_performed':False,
+            'consciousness_claimed':False,
+            'next_step':'NATIVE_CONTROLLER_DIMENSION_FRESH_TRANSFER_AND_ABLATION'
+          }
+          p=pathlib.Path('architecture/yado-native-controller-new-dimension-genesis-v1.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          print(json.dumps(out,sort_keys=True))
+          PY
+
+      - name: Persist only fully gated development result
+        run: |
+          git config user.name 'YADO Native Dimension Genesis'
+          git config user.email 'actions@users.noreply.github.com'
+          git add candidates/g2-self-evolution/yado-native-controller-new-dimension-genesis-v1.json \
+            candidates/g2-self-evolution/yado_evolutionary_genome_new_dimension_candidate_v1.py \
+            candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json \
+            architecture/yado-native-controller-new-dimension-genesis-v1.json \
+            audits/yado-full-kernel-audit-v1-report.json audits/yado-full-regression-v1-report.json
+          git diff --cached --quiet || git commit -m 'YADO controller: gated deficit-derived dimension genesis v1 [skip ci]'
+          git push origin HEAD:yado-deep-development-20260914
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-native-controller-new-dimension-genesis-v1-${{ github.run_id }}
+          path: |
+            architecture/yado-native-controller-new-dimension-genesis-v1.json
+            candidates/g2-self-evolution/yado-native-controller-new-dimension-genesis-v1.json
+            candidates/g2-self-evolution/yado_evolutionary_genome_new_dimension_candidate_v1.py
+            candidates/kernel-self-generated/g2-native-semantic-self-mutation-evolution-controller-v1.json
+            artifacts/yado-native-controller-new-dimension-genesis-v1.log
+            artifacts/yado-native-controller-strict-probe-new-dimension-v1.log
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json

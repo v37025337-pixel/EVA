@@ -1,0 +1,123 @@
+{
+  "base_candidate": "candidates/g2-self-evolution/yado_evolutionary_genome_self_candidate_v2b.py",
+  "base_candidate_sha256": "3590fcf65228a32258b4b3ef6a9a893110527b8f594baeaa53daa9502aec6529",
+  "candidate_path": "candidates/g2-self-evolution/yado_evolutionary_genome_new_dimension_candidate_v1.py",
+  "candidate_sha256": "e69174e2f0cbbb70aacc976c4e3217f325894a1b2d7c98e8b6742191bc0933b5",
+  "canonical_mutation": false,
+  "causal_evidence_digest": "ee56443342bf11d2bc26cd8117d1536b2401765e7189c4edaf0c2539de8a1a37",
+  "checks": {
+    "all_regressions_pass": true,
+    "candidate_source_changed": true,
+    "candidate_source_compiles": true,
+    "canonical_mutation": false,
+    "causal_evolution_selects_child": true,
+    "controller_representation_emitted": true,
+    "derived_dimension_not_parent_dimension": true,
+    "derived_gene_is_novel": true,
+    "dimension_created_with_causal_deficit_evidence": true,
+    "dimension_name_not_predeclared_by_host": true,
+    "external_model_used": false,
+    "host_preselected_dimension_name": false,
+    "no_dimension_without_causal_deficit_evidence": true,
+    "prior_candidate_sha_bound": true,
+    "prior_source_self_mutation_admitted": true,
+    "rollback_anchor_bound": true
+  },
+  "controller_representation": {
+    "canonical_mutation": false,
+    "controller_representation": "evolvable_controller",
+    "derived_dimension": "REPRESENTATION_MUTATION",
+    "evidence": {
+      "derived_dimension": "REPRESENTATION_MUTATION",
+      "evidence_count": 4,
+      "evidence_digest": "a08b6f6d812c23624bb5e8ef268fd2634ef1971aa4cab5cc2257eacc471e3a65",
+      "existing_dimensions": [
+        "CODE",
+        "INTELLIGENCE",
+        "LOGIC",
+        "THINKING"
+      ],
+      "ranked_novel_tokens": [
+        "REPRESENTATION",
+        "MUTATION",
+        "STRUCTURAL",
+        "SEARCH",
+        "SPACE",
+        "DID",
+        "NOT",
+        "EXPAND"
+      ]
+    },
+    "gene_schema": {
+      "evidence_digest": "sha256",
+      "mode": "DEFICIT_DERIVED_DIMENSION_V1",
+      "rollback_anchor": "parent_genome_digest"
+    },
+    "genesis_kind": "DEFICIT_DERIVED_DIMENSION_V1",
+    "host_preselected_dimension_name": false
+  },
+  "derived_dimension_meta": {
+    "derived_dimension": "REPRESENTATION_MUTATION",
+    "evidence_count": 4,
+    "evidence_digest": "a08b6f6d812c23624bb5e8ef268fd2634ef1971aa4cab5cc2257eacc471e3a65",
+    "existing_dimensions": [
+      "CODE",
+      "INTELLIGENCE",
+      "LOGIC",
+      "THINKING"
+    ],
+    "ranked_novel_tokens": [
+      "REPRESENTATION",
+      "MUTATION",
+      "STRUCTURAL",
+      "SEARCH",
+      "SPACE",
+      "DID",
+      "NOT",
+      "EXPAND"
+    ]
+  },
+  "derived_new_dimensions": [
+    "REPRESENTATION_MUTATION"
+  ],
+  "empty_evidence_new_dimensions": [],
+  "fitness": {
+    "all_regressions_pass": true,
+    "child": {
+      "CODE": 1.0,
+      "INTELLIGENCE": 1.0,
+      "LOGIC": 1.0,
+      "REPRESENTATION_MUTATION": 1.0,
+      "THINKING": 1.0
+    },
+    "child_mean": 1.0,
+    "fitness_gain": 1.0,
+    "parent": {
+      "CODE": 0.0,
+      "INTELLIGENCE": 0.0,
+      "LOGIC": 0.0,
+      "REPRESENTATION_MUTATION": 0.0,
+      "THINKING": 0.0
+    },
+    "parent_mean": 0.0,
+    "regression": {
+      "CODE": true,
+      "INTELLIGENCE": true,
+      "LOGIC": true,
+      "REPRESENTATION_MUTATION": true,
+      "THINKING": true
+    }
+  },
+  "next_required_capability": "NATIVE_CONTROLLER_DIMENSION_FRESH_TRANSFER_AND_ABLATION",
+  "parent_dimensions": [
+    "CODE",
+    "INTELLIGENCE",
+    "LOGIC",
+    "THINKING"
+  ],
+  "receipt_sha256": "86ef66452b94046578bf9b7e0f037232a7e7a7c04774ffd7d8b1b999bc1b5d3f",
+  "schema": "yado.native_controller_new_dimension_genesis.v1",
+  "selection": "CHILD",
+  "semantic_boundary": "HOST PROVIDES A GENERIC DEFICIT-TO-DIMENSION GENESIS OPERATOR, NOT A FIFTH DIMENSION NAME. THE RUNNING CONTROLLER DERIVES THE ACTUAL DIMENSION LABEL FROM UNRESOLVED CAUSAL EXPERIENCE, CREATES ITS CHROMOSOME/GENE, BINDS ROLLBACK TO THE PARENT, AND MUST PASS A/B + REGRESSION. DEVELOPMENT CANDIDATE ONLY.",
+  "status": "PASS_SHADOW_NATIVE_CONTROLLER_NEW_DIMENSION_GENESIS_V1"
+}

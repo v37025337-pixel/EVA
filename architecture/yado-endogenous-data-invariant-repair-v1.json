@@ -1,0 +1,70 @@
+{
+  "schema": "yado.endogenous_data_invariant_repair.config.v1",
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
+  "purpose": "Select an unfamiliar public JSON structure from bounded candidates, infer data invariants from observations, detect violations after repeated ingestion, choose a repair from a bounded catalog, and verify on fresh holdout data.",
+  "learned_candidate_path": "candidates/cognitive/yado_database_web_usage_candidate_v1.py",
+  "required_study_digest": "8cef87947637c9d64c7665edbe3090a4b56ff999d5e813a39e4990fb52d536cd",
+  "resources": [
+    {
+      "id": "JSONPLACEHOLDER_POSTS",
+      "probe_url": "https://jsonplaceholder.typicode.com/posts?_start=0&_limit=8",
+      "train_url": "https://jsonplaceholder.typicode.com/posts?_start=0&_limit=24",
+      "holdout_url": "https://jsonplaceholder.typicode.com/posts?_start=24&_limit=12",
+      "probe_rows": 8,
+      "max_train_rows": 24,
+      "max_holdout_rows": 12
+    },
+    {
+      "id": "JSONPLACEHOLDER_COMMENTS",
+      "probe_url": "https://jsonplaceholder.typicode.com/comments?_start=0&_limit=8",
+      "train_url": "https://jsonplaceholder.typicode.com/comments?_start=0&_limit=24",
+      "holdout_url": "https://jsonplaceholder.typicode.com/comments?_start=24&_limit=12",
+      "probe_rows": 8,
+      "max_train_rows": 24,
+      "max_holdout_rows": 12
+    },
+    {
+      "id": "JSONPLACEHOLDER_ALBUMS",
+      "probe_url": "https://jsonplaceholder.typicode.com/albums?_start=0&_limit=8",
+      "train_url": "https://jsonplaceholder.typicode.com/albums?_start=0&_limit=24",
+      "holdout_url": "https://jsonplaceholder.typicode.com/albums?_start=24&_limit=12",
+      "probe_rows": 8,
+      "max_train_rows": 24,
+      "max_holdout_rows": 12
+    }
+  ],
+  "selection_rule": "Choose the resource with the highest observed structural score: field count, relational-id fields, SQL-type diversity, and nested-value complexity; ties are deterministic.",
+  "invariant_derivation": [
+    "Infer a unique identity field from observed non-null unique values, preferring conventional id only when it is actually unique in the sample.",
+    "Infer required-field invariants only when every observed row contains a non-null value.",
+    "Infer boolean-domain invariants only when all observed values are boolean.",
+    "Infer a relational/grouping field from non-identity *Id numeric fields when present."
+  ],
+  "repair_catalog": [
+    "PRIMARY_KEY_AND_UPSERT",
+    "NOT_NULL_CONSTRAINT",
+    "BOOLEAN_CHECK_CONSTRAINT",
+    "QUERY_INDEX"
+  ],
+  "repair_selection_rule": "Select repairs from the bounded catalog only when justified by an observed invariant violation or an inferred bounded query need.",
+  "verification": [
+    "repeat ingestion becomes idempotent",
+    "derived invariants have no remaining violations",
+    "fresh holdout identities are disjoint from training and are present after loading",
+    "the previously learned parameterized select_where helper remains correct on the inferred schema",
+    "an inferred query index is used when a grouping field exists",
+    "transaction rollback preserves state"
+  ],
+  "network_policy": {
+    "allowed_hosts": ["jsonplaceholder.typicode.com"],
+    "https_only": true,
+    "methods": ["GET"],
+    "credentials_allowed": false,
+    "external_writes": false,
+    "downloaded_code_executed": false,
+    "max_bytes_per_response": 500000
+  },
+  "canonical_mutation": false,
+  "development_branch_only": true,
+  "consciousness_claimed": false
+}

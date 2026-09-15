@@ -1,0 +1,154 @@
+name: YADO Native Controller Dimension Fresh Transfer V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-deep-development-20260914]
+    paths:
+      - '.github/workflows/yado-native-controller-dimension-fresh-transfer-v1.yml'
+      - 'runtime/yado_native_controller_dimension_fresh_transfer_v1.py'
+      - 'architecture/yado-native-controller-dimension-fresh-transfer-v1.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-native-controller-dimension-fresh-transfer-v1
+  cancel-in-progress: true
+
+jobs:
+  fresh-transfer-and-ablation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Require admitted new-dimension genesis and canonical invariants
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m compileall -q runtime successor candidates
+          python - <<'PY'
+          import hashlib,json,pathlib
+          r=json.load(open('architecture/yado-native-controller-new-dimension-genesis-v1.json'))
+          assert r['status']=='PASS_NATIVE_CONTROLLER_NEW_DIMENSION_GENESIS_V1',r
+          assert r['regression_status']=='PASS' and r['regression_tests']==197,r
+          assert r['kernel_audit']=='PASS',r
+          assert r['canonical_main_mutation'] is False,r
+          p=pathlib.Path('candidates/g2-self-evolution/yado_evolutionary_genome_new_dimension_candidate_v1.py')
+          sha=hashlib.sha256(p.read_bytes()).hexdigest()
+          assert sha==r['candidate_sha256'],(sha,r)
+          print('PASS_GENESIS_CANDIDATE_BOUND',sha,r['derived_new_dimensions'])
+          PY
+
+      - name: Run fresh historical transfer and causal ablation
+        run: |
+          mkdir -p artifacts
+          python -m py_compile runtime/yado_native_controller_dimension_fresh_transfer_v1.py
+          python runtime/yado_native_controller_dimension_fresh_transfer_v1.py | tee artifacts/yado-native-controller-dimension-fresh-transfer-v1.log
+          python - <<'PY'
+          import json
+          r=json.load(open('candidates/g2-self-evolution/yado-native-controller-dimension-fresh-transfer-v1.json'))
+          assert r['status']=='PASS_NATIVE_CONTROLLER_DIMENSION_FRESH_TRANSFER_AND_ABLATION_V1',r
+          assert r['case_count']>=5,r
+          assert len(r['unique_derived_dimensions'])>=5,r
+          c=r['checks']
+          assert c['all_cases_select_child'] is True,r
+          assert c['all_cases_regressions_pass'] is True,r
+          assert c['all_cases_rollback_bound'] is True,r
+          assert c['all_ablations_remove_dimension'] is True,r
+          assert c['all_irrelevant_perturbations_stable'] is True,r
+          assert c['fresh_dimensions_extend_prior'] is True,r
+          print('PASS_FRESH_HISTORICAL_DIMENSION_TRANSFER',r['case_count'],r['unique_derived_dimensions'])
+          PY
+
+      - name: Compile all layers and audit whole kernel
+        run: |
+          python -m compileall -q runtime successor candidates
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status']=='PASS' and r['findings']==[],r
+          assert r['canonical']['canonical_guard']=='PASS',r
+          assert r['canonical']['ledger_validation']=='PASS',r
+          assert r['canonical']['g3_genesis_performed'] is False,r
+          print('PASS_FRESH_TRANSFER_KERNEL_AUDIT')
+          PY
+
+      - name: Fresh Successor build and full regression
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-dimension-fresh-transfer-v1"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-dimension-fresh-transfer-v1/manifest.json"
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status']=='PASS',r
+          assert r['tests_run']==r['expected_tests'] and r['tests_run']>=197,r
+          assert not r['failures'] and not r['errors'] and not r['skipped'],r
+          assert r['source_unchanged'] is True,r
+          print('PASS_FRESH_TRANSFER_FULL_REGRESSION',r['tests_run'])
+          PY
+
+      - name: Finalize transfer receipt
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          transfer=json.load(open('candidates/g2-self-evolution/yado-native-controller-dimension-fresh-transfer-v1.json'))
+          audit=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          reg=json.load(open('audits/yado-full-regression-v1-report.json'))
+          out={
+            'schema':'yado.native_controller_dimension_fresh_transfer.v1',
+            'status':'PASS_NATIVE_CONTROLLER_DIMENSION_FRESH_TRANSFER_AND_ABLATION_V1',
+            'genesis_candidate_sha256':transfer['genesis_candidate_sha256'],
+            'historical_pool_size':transfer['historical_pool_size'],
+            'case_count':transfer['case_count'],
+            'unique_derived_dimensions':transfer['unique_derived_dimensions'],
+            'all_ablations_remove_dimension':transfer['checks']['all_ablations_remove_dimension'],
+            'all_irrelevant_perturbations_stable':transfer['checks']['all_irrelevant_perturbations_stable'],
+            'kernel_audit':audit['status'],
+            'regression_status':reg['status'],
+            'regression_tests':reg['tests_run'],
+            'canonical_main_mutation':False,
+            'development_candidate_only':True,
+            'g3_genesis_performed':False,
+            'consciousness_claimed':False,
+            'next_step':'NATIVE_CONTROLLER_ENDOGENOUS_DEFICIT_TO_DIMENSION_LOOP_V1'
+          }
+          p=pathlib.Path('architecture/yado-native-controller-dimension-fresh-transfer-v1.json')
+          p.write_text(json.dumps(out,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          print(json.dumps(out,sort_keys=True))
+          PY
+
+      - name: Persist only fully gated transfer evidence
+        run: |
+          git config user.name 'YADO Native Dimension Transfer'
+          git config user.email 'actions@users.noreply.github.com'
+          git add candidates/g2-self-evolution/yado-native-controller-dimension-fresh-transfer-v1.json \
+            architecture/yado-native-controller-dimension-fresh-transfer-v1.json \
+            audits/yado-full-kernel-audit-v1-report.json audits/yado-full-regression-v1-report.json
+          git diff --cached --quiet || git commit -m 'YADO controller: gated fresh dimension transfer v1 [skip ci]'
+          git push origin HEAD:yado-deep-development-20260914
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-native-controller-dimension-fresh-transfer-v1-${{ github.run_id }}
+          path: |
+            architecture/yado-native-controller-dimension-fresh-transfer-v1.json
+            candidates/g2-self-evolution/yado-native-controller-dimension-fresh-transfer-v1.json
+            artifacts/yado-native-controller-dimension-fresh-transfer-v1.log
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json

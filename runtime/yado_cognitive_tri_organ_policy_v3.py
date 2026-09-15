@@ -1,54 +1,60 @@
 from __future__ import annotations
 
-COGNITIVE_POLICY_VERSION = "10x10-admitted-v1"
 COGNITIVE_POLICY = {
-    'abstraction_families': 8,
+    'logic_depth': 5,
     'contradiction_check': True,
-    'logic_depth': 4,
-    'thinking_beam': 3,
     'thinking_depth': 6,
+    'thinking_beam': 3,
+    'abstraction_families': 8,
 }
-VERIFIED_10X10_EVIDENCE = {
-    'schema': 'yado.cognitive_10x10_evolution.v1',
-    'seed': 202609121502,
-    'task_count': 100,
-    'domains': 10,
-    'evolve_tasks': 60,
-    'sealed_tasks': 40,
-    'baseline_sealed_score': 0.5,
-    'candidate_sealed_score': 1.0,
-    'sealed_absolute_gain': 0.5,
-    'evidence_digest': '0cce6c75bb7352748ccf73703b537f0438699e75380730223ce531e694501f43',
-    'source_main': '5ae8e522426c667ce408d45dc2103c28dcd01991',
-}
-PRIOR_VERIFIED_HIDDEN_SCORES = {
+
+VERIFIED_HIDDEN_SCORES = {
+    'logic': 1.0,
+    'thinking': 1.0,
     'intelligence': 1.0,
-    'logic': 0.8333333333333334,
-    'thinking': 0.95,
 }
-# Compatibility alias only; these hidden scores belong to the parent policy, not the 10x10-admitted policy.
-VERIFIED_HIDDEN_SCORES = PRIOR_VERIFIED_HIDDEN_SCORES
-POLICY_LINEAGE = {
-    'parent_policy': {
-        'abstraction_families': 6,
-        'contradiction_check': False,
-        'logic_depth': 3,
-        'thinking_beam': 2,
-        'thinking_depth': 4,
-    },
-    'admission_reason': 'fresh 10-domain x 10-task evolution with sealed transfer gate, followed by full kernel audit and complete regression',
+
+EXPERIENCE_BINDING = {
+    'experience_digest': '8ccb9950543bc323e5adf76f945711eefb41c28431f1de8bacc40074f0e04c21',
+    'source_ids': [
+        'CROSS_AI_RISK',
+        'CROSS_CLIMATE_SYSTEMS',
+        'CROSS_CYBERSECURITY',
+        'CROSS_MATHEMATICS',
+        'CROSS_MEDICINE_BIOLOGY',
+        'CROSS_PHILOSOPHY_COGNITION',
+        'CROSS_PHYSICS_ASTRONOMY',
+        'CROSS_PROGRAMMING',
+        'CROSS_WEB_SYSTEMS',
+        'CROSS_DOMAIN_BRIDGES',
+    ],
+    'fact_count': 56,
+    'discipline_count': 9,
+    'bridge_fact_count': 20,
+}
+
+SOURCE_EVIDENCE = {
+    'schema': 'yado.endogenous_research_search_apply.v2',
+    'status': 'PASS_ENDOGENOUS_RESEARCH_SEARCH_PROCESS_APPLY_V2',
+    'candidate_sha256': '52cd373232ba6e5a80f5a19368e107d52f5ac641855e494380529170cbe481df',
+    'candidate_runtime_regression': 'PASS',
+    'candidate_runtime_regression_tests': 197,
+    'post_restore_regression': 'PASS',
+    'post_restore_regression_tests': 197,
+    'kernel_audit': 'PASS',
+    'causal_ablation_pass': True,
+    'derived_new_dimensions': ['EVIDENCE_CROSS'],
 }
 
 
 def component():
     return {
-        'schema': 'yado.cognitive_tri_organ_policy.v3',
-        'policy_version': COGNITIVE_POLICY_VERSION,
+        'schema': 'yado.cognitive_tri_organ_policy.v5-development',
         'policy': COGNITIVE_POLICY,
-        'verified_10x10_evidence': VERIFIED_10X10_EVIDENCE,
-        'prior_verified_hidden_scores': PRIOR_VERIFIED_HIDDEN_SCORES,
-        'policy_lineage': POLICY_LINEAGE,
-        'canonical_active': True,
+        'verified_hidden_scores': VERIFIED_HIDDEN_SCORES,
+        'experience_binding': EXPERIENCE_BINDING,
+        'source_evidence': SOURCE_EVIDENCE,
+        'canonical_active': False,
+        'development_branch_active': True,
         'consciousness_claimed': False,
-        'general_intelligence_claimed': False,
     }

@@ -55,6 +55,17 @@ class ArchiveTests(unittest.TestCase):
             build_archive(self.repo, self.target, external_root=self.root, catalog=catalog)
         self.assertFalse(self.target.exists())
 
+    def test_ref_membership_excludes_deleted_history_and_other_branches(self):
+        build_archive(self.repo, self.target)
+        archive = ExperienceArchive(self.target)
+        self.addCleanup(archive.close)
+        self.assertEqual(archive.files_at_ref("refs/heads/main", "experience/"), [])
+        rows = archive.files_at_ref("refs/heads/repair", "experience/")
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["path"], "experience/run.json")
+        self.assertEqual(json.loads(archive.read(rows[0]["digest"]))["status"], "PASS_SHADOW")
+        self.assertEqual(archive.files_at_ref("refs/heads/missing", "experience/"), [])
+
     def test_tampered_bytes_are_detected(self):
         build_archive(self.repo, self.target)
         with sqlite3.connect(self.target) as db:

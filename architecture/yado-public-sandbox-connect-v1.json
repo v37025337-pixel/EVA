@@ -1,0 +1,28 @@
+{
+  "schema": "yado.public_sandbox_connect.v1",
+  "role": "BOUNDED_EXTERNAL_CODE_EXECUTION",
+  "providers": [
+    {
+      "name": "judge0",
+      "endpoint": "https://ce.judge0.com",
+      "authentication_required_by_adapter": false,
+      "fallback_priority": 1
+    },
+    {
+      "name": "runlet",
+      "endpoint": "https://runlet.codealong.live",
+      "authentication_required_by_adapter": false,
+      "fallback_priority": 2
+    }
+  ],
+  "goal": "discover usable public execution resource, execute deterministic probe, verify result, fall back on provider failure",
+  "constraints": {
+    "https_only": true,
+    "endpoint_allowlist": true,
+    "embedded_credentials": false,
+    "credential_discovery": false,
+    "canonical_mutation": false,
+    "persistent_remote_installation": false
+  },
+  "admission": "DEVELOPMENT_BRANCH_REQUIRES_REAL_NETWORK_PROBE_AND_KERNEL_AUDIT"
+}

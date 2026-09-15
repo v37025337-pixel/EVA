@@ -1,0 +1,47 @@
+{
+  "schema": "yado.cross_structure_invariant_repair_transfer.config.v1",
+  "prior_experience_path": "experience/yado-endogenous-data-invariant-repair-v1.json",
+  "learned_candidate_path": "candidates/cognitive/yado_database_web_usage_candidate_v1.py",
+  "required_study_digest": "8cef87947637c9d64c7665edbe3090a4b56ff999d5e813a39e4990fb52d536cd",
+  "min_schema_distance": 0.25,
+  "resources": [
+    {
+      "id": "JSONPLACEHOLDER_POSTS",
+      "probe_url": "https://jsonplaceholder.typicode.com/posts?_start=0&_limit=8",
+      "train_url": "https://jsonplaceholder.typicode.com/posts?_start=0&_limit=24",
+      "holdout_url": "https://jsonplaceholder.typicode.com/posts?_start=60&_limit=12",
+      "probe_rows": 8,
+      "train_rows": 24,
+      "holdout_rows": 12
+    },
+    {
+      "id": "JSONPLACEHOLDER_COMMENTS",
+      "probe_url": "https://jsonplaceholder.typicode.com/comments?_start=0&_limit=8",
+      "train_url": "https://jsonplaceholder.typicode.com/comments?_start=0&_limit=24",
+      "holdout_url": "https://jsonplaceholder.typicode.com/comments?_start=60&_limit=12",
+      "probe_rows": 8,
+      "train_rows": 24,
+      "holdout_rows": 12
+    },
+    {
+      "id": "JSONPLACEHOLDER_ALBUMS",
+      "probe_url": "https://jsonplaceholder.typicode.com/albums?_start=0&_limit=8",
+      "train_url": "https://jsonplaceholder.typicode.com/albums?_start=0&_limit=24",
+      "holdout_url": "https://jsonplaceholder.typicode.com/albums?_start=60&_limit=12",
+      "probe_rows": 8,
+      "train_rows": 24,
+      "holdout_rows": 12
+    }
+  ],
+  "admission_criteria": {
+    "must_exclude_prior_selected_resource": true,
+    "must_independently_derive_new_profile": true,
+    "minimum_derived_stressors": 2,
+    "repair_must_be_selected_from_observed_violations": true,
+    "fresh_holdout_required": true,
+    "full_kernel_audit_required": true,
+    "full_regression_required": true,
+    "canonical_mutation": false
+  },
+  "next_step_if_pass": "MULTI_RESOURCE_SELF_DIRECTED_DATA_TASK_LOOP_V1"
+}

@@ -1,0 +1,122 @@
+name: YADO Multi Resource Self Directed Data Task Loop V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-deep-development-20260914]
+    paths:
+      - 'runtime/yado_multi_resource_self_directed_data_task_loop_v1.py'
+      - 'architecture/yado-multi-resource-self-directed-data-task-loop-v1.json'
+      - 'experience/yado-endogenous-data-invariant-repair-v1.json'
+      - 'experience/yado-cross-structure-invariant-repair-transfer-v1.json'
+      - '.github/workflows/yado-multi-resource-self-directed-data-task-loop-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  multi-resource-self-directed-loop:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    env:
+      PYTHONPATH: runtime
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Prepare verified development kernel and compile new loop
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt pyyaml
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m compileall -q runtime successor candidates
+
+      - name: Self-test multi-resource task derivation and repair
+        run: |
+          python runtime/yado_multi_resource_self_directed_data_task_loop_v1.py --self-test
+
+      - name: Run self-directed tasks on live public multi-domain data
+        run: |
+          mkdir -p artifacts
+          python runtime/yado_multi_resource_self_directed_data_task_loop_v1.py \
+            --config architecture/yado-multi-resource-self-directed-data-task-loop-v1.json \
+            --out artifacts/yado-multi-resource-self-directed-data-task-loop-v1.json
+          python - <<'PY'
+          import json
+          r=json.load(open('artifacts/yado-multi-resource-self-directed-data-task-loop-v1.json'))
+          assert r['status']=='PASS_MULTI_RESOURCE_SELF_DIRECTED_DATA_TASK_LOOP_V1',r
+          s=r['selection']
+          assert s['host_preselected_resource'] is False,r
+          assert s['host_preselected_task_class'] is False,r
+          assert len(s['selected_source_ids'])>=3,r
+          q=r['summary']
+          assert q['successful_cases']>=3,r
+          assert len(q['unique_task_classes'])>=3,r
+          assert len(q['unique_domains'])>=3,r
+          assert q['all_heldout_pass'] is True,r
+          for case in r['cases']:
+            v=case['verification']
+            assert v['status']=='PASS',case
+            assert len(v['derived_invariants'])>=2,case
+            assert len(v['derived_stressors'])>=2,case
+            assert len(v['baseline_violations'])>=2,case
+            assert len(v['selected_repairs'])>=2,case
+            assert v['post_repair_violations']==[],case
+            assert v['heldout_post_repair_violations']==[],case
+            assert v['heldout_pass'] is True,case
+            assert case['provenance_sha256'],case
+          b=r['safety_boundary']
+          assert b['public_read_only_sources_only'] is True,r
+          assert b['credentials_used'] is False and b['external_writes'] is False,r
+          assert b['remote_code_execution'] is False and b['canonical_mutation'] is False,r
+          print('PASS_MULTI_RESOURCE_SELF_DIRECTED_LOOP', {
+            'sources':s['selected_source_ids'],
+            'task_classes':q['unique_task_classes'],
+            'domains':q['unique_domains'],
+            'successful_cases':q['successful_cases'],
+          })
+          PY
+
+      - name: Full kernel audit
+        run: |
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status']=='PASS' and r['findings']==[],r
+          print('PASS_FULL_KERNEL_AUDIT',r['counts'])
+          PY
+          python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Fresh Successor and complete regression
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/multi-resource-self-directed-successor"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/multi-resource-self-directed-successor/manifest.json"
+          python - <<'PY'
+          import json
+          r=json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status']=='PASS',r
+          assert r['failures']==[] and r['errors']==[],r
+          assert r['tests_run']>=200,r
+          assert r['source_unchanged'] is True,r
+          print('PASS_FULL_REGRESSION',r['tests_run'])
+          PY
+
+      - name: Upload multi-resource evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-multi-resource-self-directed-data-task-loop-v1-${{ github.run_id }}
+          path: |
+            architecture/yado-multi-resource-self-directed-data-task-loop-v1.json
+            experience/yado-endogenous-data-invariant-repair-v1.json
+            experience/yado-cross-structure-invariant-repair-transfer-v1.json
+            artifacts/yado-multi-resource-self-directed-data-task-loop-v1.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log

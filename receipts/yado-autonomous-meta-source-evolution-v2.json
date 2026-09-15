@@ -1,0 +1,257 @@
+{
+  "ast_evidence": {
+    "all_generated_roots_novel": true,
+    "generated_node_count": 6,
+    "helper_names": {
+      "hamming": "_generated_hamming",
+      "isogram": "_generated_isogram",
+      "raindrops": "_generated_raindrops"
+    },
+    "novel_node_fingerprints": [
+      "cd01212c6396721b3182ded22f61e4ef7949116a41a817da810708a3ffd97c8b",
+      "5067301e0eb0e95d3450e32202c6ffee385746507aa673fc5f7c05b25508be50",
+      "b37357fb0fe2b0e5a3e67a1c78a3a2ebcbbf22388668a89abf6e9bbff2992ee4",
+      "55df4e220b982d1126c97d877d7ac39e72945d44d08e987e316c267ae20c9c30",
+      "54e91d86e130e759d5dbe6445051afba7c6cd2b3b780b233fbbe037e6ea85469",
+      "9d2b76944348fa1fe56bad19838d3f16c822ada0568b195682b60950472a74c0"
+    ]
+  },
+  "candidate_source": {
+    "path": "candidates/g2-self-evolution/yado_autonomous_meta_source_candidate_v2.py",
+    "sha256": "92f40b361394ed2e2cb623e77ca215762c974e33b8bbf6da785a8b9012f93a76"
+  },
+  "claim_boundary": "The controller autonomously selected its failing self-generated source from runtime traceback evidence and composed new AST source from generic typed primitives. The primitive vocabulary and admission gates remain host-authored; this does not prove unrestricted self-rewrite, general intelligence, or consciousness.",
+  "external_provenance": [
+    {
+      "bytes": 5570,
+      "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+      "exercise": "hamming",
+      "http_status": 200,
+      "sha256": "c932d8511912c5ca2cc5a15550a266436c637d8c2af4f3a055173808b0fb0086",
+      "url": "https://raw.githubusercontent.com/exercism/problem-specifications/b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119/exercises/hamming/canonical-data.json"
+    },
+    {
+      "bytes": 3672,
+      "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+      "exercise": "isogram",
+      "http_status": 200,
+      "sha256": "fdf198907ba98f5733607807eff65a582009201027fa51934c97131c08299626",
+      "url": "https://raw.githubusercontent.com/exercism/problem-specifications/b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119/exercises/isogram/canonical-data.json"
+    },
+    {
+      "bytes": 4348,
+      "commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+      "exercise": "raindrops",
+      "http_status": 200,
+      "sha256": "4628e229cd1c6d916be07a4315e9e2da02160f35e3b28658a6bd47225d284fc5",
+      "url": "https://raw.githubusercontent.com/exercism/problem-specifications/b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119/exercises/raindrops/canonical-data.json"
+    }
+  ],
+  "external_source_commit": "b69f0d5b8d13625ac8f0bd3e177cc2d9ec3c2119",
+  "fresh_scope": {
+    "exercises": [
+      "hamming",
+      "isogram",
+      "raindrops"
+    ],
+    "sealed_cases": 12,
+    "sealed_not_used_for_selection": true,
+    "training_cases": 25
+  },
+  "gates": {
+    "bounded_python_primitive_vocabulary": true,
+    "candidate_frozen_before_sealed_eval": true,
+    "canonical_mutation": false,
+    "external_models_used": false,
+    "fresh_sealed_uuid_leak_count": 0,
+    "fresh_sealed_uuid_leaks": [],
+    "generated_ast_roots_novel": true,
+    "source_changed": true,
+    "task_named_formulas_used": false
+  },
+  "generated_mutation_specs": {
+    "hamming": {
+      "generated_composition": "pairwise_mismatch_count",
+      "helper_body": "a = str(data['strand1'])\nb = str(data['strand2'])\nreturn sum(int(x != y) for x, y in zip(a, b))",
+      "input_keys": [
+        "strand1",
+        "strand2"
+      ],
+      "primitives": [
+        "zip",
+        "not_equal",
+        "int_cast",
+        "sum"
+      ],
+      "search_space": 5,
+      "selection_basis": "training_io_signature_and_score",
+      "signature": [
+        "str",
+        "str",
+        "->",
+        "int"
+      ],
+      "task_named_formula": false,
+      "training_score": 1.0
+    },
+    "isogram": {
+      "generated_composition": "lower+alnum_only+unique_cardinality",
+      "helper_body": "value = str(data['phrase'])\nseq = value.lower()\nseq = ''.join(ch for ch in seq if ch.isalnum())\nreturn len(seq) == len(set(seq))",
+      "input_keys": [
+        "phrase"
+      ],
+      "primitives": [
+        "lower",
+        "iteration",
+        "isalnum",
+        "join",
+        "len",
+        "set",
+        "equal"
+      ],
+      "search_space": 24,
+      "selection_basis": "training_io_signature_and_score",
+      "signature": [
+        "str",
+        "->",
+        "bool"
+      ],
+      "task_named_formula": false,
+      "training_score": 1.0
+    },
+    "raindrops": {
+      "generated_composition": "induced_conditional_token_concatenation",
+      "helper_body": "n = int(data['number'])\nparts = []\nif n % 3 == 0:\n    parts.append('Pling')\nif n % 5 == 0:\n    parts.append('Plang')\nif n % 7 == 0:\n    parts.append('Plong')\nreturn ''.join(parts) or str(n)",
+      "input_keys": [
+        "number"
+      ],
+      "learned_relations": [
+        {
+          "divisor": 3,
+          "token": "Pling"
+        },
+        {
+          "divisor": 5,
+          "token": "Plang"
+        },
+        {
+          "divisor": 7,
+          "token": "Plong"
+        }
+      ],
+      "primitives": [
+        "modulo",
+        "conditional",
+        "list_append",
+        "join",
+        "string_fallback"
+      ],
+      "search_space": 93,
+      "selection_basis": "training_io_signature_and_score",
+      "signature": [
+        "int",
+        "->",
+        "str"
+      ],
+      "task_named_formula": false,
+      "training_score": 1.0
+    }
+  },
+  "metrics": {
+    "parent_training": {
+      "correct": 0,
+      "score": 0.0,
+      "total": 25
+    },
+    "previous_external_sealed_retention": {
+      "correct": 7,
+      "score": 1.0,
+      "total": 7
+    },
+    "sealed_absolute_gain": 1.0,
+    "sealed_candidate": {
+      "correct": 12,
+      "score": 1.0,
+      "total": 12
+    },
+    "sealed_parent": {
+      "correct": 0,
+      "score": 0.0,
+      "total": 12
+    },
+    "training_candidate": {
+      "correct": 25,
+      "score": 1.0,
+      "total": 25
+    }
+  },
+  "parent_source": {
+    "path": "candidates/g2-self-evolution/yado_autonomous_meta_source_parent_v2.py",
+    "sha256": "11605fd4fe05616096f4b1508424f33219fe4558a1ff63aba656eb9ec8effcbc"
+  },
+  "receipt_sha256": "9276af2c6aaf0d6a6d8292dae332a172cb8fef5379d60f2a2f7f20e961dd3f2e",
+  "schema": "yado.autonomous_meta_source_evolution.v2",
+  "sealed_case_fingerprints": {
+    "hamming": [
+      "1aabf6c954dc814f0660a109ed45668a963b61e69e967bbc83e0b8d01610b390",
+      "3e9c96788e2845934b8f663a1a69592ff7b1e5b7bcc2a39951243ee113676bb5"
+    ],
+    "isogram": [
+      "45acdd574554a29c4d5ebf6aff67475197bc8dac56bee406ac93d673195536b8",
+      "740a596cc9439ddb985f296d363664a40f0e52cba9db0f12653942bea5f14bd7",
+      "843b957792000983ab7e46835224429db307ff109a3a231e7fe03e4225d5fa95",
+      "d43255ebf85ec7f5ce5afbed0e2ff7667ef5aa4acd327482808575e9d053762b"
+    ],
+    "raindrops": [
+      "87f75e2efb5d98b01d2e63fe876c04847db12b14ccb94756632d949a01607dd8",
+      "85d8d09c89d239a1553145d37e721f3619091ffd2c795a58f1408baa38706772",
+      "35278abbbb3d8ce5c2b575d40dd4a3fef5e4b362005eb7231cf2718d0f4faac4",
+      "9ea6fd8a933cd09481cf260a41f2175b6422faeaa93a1c38be52ba99de163885",
+      "9934cf7eb99f7779bef469ded2e38bf962635908afac60c0d3f0f3a0df5ca171",
+      "478bc1eb1e46db1f5a83bfeb3c7634bb39b0d23ca9ca297e6147d0289628723f"
+    ]
+  },
+  "status": "PASS_SHADOW_G2_AUTONOMOUS_META_SOURCE_EVOLUTION_V2",
+  "target_selection": {
+    "failure_count": 25,
+    "failure_types": [
+      "KeyError"
+    ],
+    "host_provided_target_path": false,
+    "origin": "RUNTIME_FAILURE_TRACE",
+    "selected_path": "candidates/g2-self-evolution/yado_autonomous_meta_source_parent_v2.py"
+  },
+  "training_case_fingerprints": {
+    "hamming": [
+      "8cd889781aa3cd140e38cac29e0d0f6db09f8466109a55b83b6b995f0154c8d0",
+      "564c074cd98447be882d7dc07ce511238d282816fe98046b3a82d4cdf8de63e9",
+      "a5365c5a9c93a75a8e9dcdc3684231d4dc58650ae2aea94fa1bf1d14ad66e281"
+    ],
+    "isogram": [
+      "204246bc48b9e397c6beb7a70f76a8023acc68a2c6665e0ca0a795331fd31c8e",
+      "1f17fe6fd392d1d670bccb9674174e6f703881fcbd0ed99b875803e53bff92d7",
+      "46012c3239a883298508bec035b3db264e8ca24f37dfb58f235dcf32a590730e",
+      "e2cfbfb97313eedf7d1a3e2dde94b23895acf9e8c4a97074b7d3d887a7015431",
+      "19c0a910be497a1171f40952caa941472412c2107e2b70b5164263c31a4b4de2",
+      "57a9a7f922e22be4158609720199d741e4c61251d275866f8b6b172713b77cb5",
+      "983f218105ca8c2572ce37018d18912b39eb3ae9d8d847bd108f561862cefa9e",
+      "077663c2e6e5a1be17a8ea1acd3d02268cc66e586a9d424a3747f29fe388414d",
+      "a1e9e8e3c136539676633e890af356a4056a50bc27cc375af28017d9e47565bd",
+      "2cfdef1b60b553dd39a0e9ac4b431f11dc65e7bbb5b2119114e711a1e92720b9"
+    ],
+    "raindrops": [
+      "ba3d37d824de3935c22428286d6016a7182325458a41d040eefb72fea5ec5fc9",
+      "aa2ad060079f44b58b05f585e4631cb4b7bfe30d7c665ade45851c013492d8b6",
+      "8f6d294aeefcab7da6a13b2bda03c64e3747c5fb4abce3eaf2302c2fbf22bef5",
+      "c771dab3016649f505b086c596796d677eb9e923e64f7dd774aeeec24821e8a2",
+      "8594135aa3a23601fd6d3fe851a2ff38daf8b0761e1a9362b1fbe956af4fca66",
+      "d4c2c9cb86e9079d7b5e09661c0641c79f0b893bba838f8dd27db02a31f5441e",
+      "cde376c0dd01ec005f7277a580fd476c4ff93778b8ab22ec36267e78f1c3920f",
+      "edea160fb631c818ca903c48a38253befcc8be9e498f306b08c0469065dae27a",
+      "8dd2c74a066ccb1f03835a3c9b28e996ea9a91aa35f7309b0d7be36c514fed18",
+      "0cdf646fcfc872835d32f932b32fc1778b0b4d213756bf8b876ecc19e0efea9f",
+      "68a0ff2730f1648f991c5116921c379d0d2bc0b8e65fb0c1fd88e155099073bf",
+      "b284678cc26165f46c3bfb91ee94d013c493276fb4d00f3acc8f6f76e6ac0f77"
+    ]
+  }
+}

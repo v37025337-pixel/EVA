@@ -1,0 +1,78 @@
+{
+  "schema": "yado.database_programming_applied_experience.v1",
+  "status": "VERIFIED_DEVELOPMENT_EXPERIENCE",
+  "source_workflow": {
+    "run_id": 34902546531,
+    "tested_commit": "9b41a85c2bd241978d60e91d817f2890d767dd94",
+    "artifact_id": 10371750079,
+    "artifact_sha256": "8904e92e0dcde1e9382332ca7a77cd947728992091adf9dbf6dec941161d07f7"
+  },
+  "study": {
+    "study_digest": "8cef87947637c9d64c7665edbe3090a4b56ff999d5e813a39e4990fb52d536cd",
+    "fetched_sources": 8,
+    "database_sources": 4,
+    "programming_sources": 4,
+    "learned_skill_count": 29,
+    "candidate_path": "candidates/cognitive/yado_database_web_usage_candidate_v1.py",
+    "candidate_sha256": "c71792f5aeb9dad66eb0dddda6f3754c60ce0215f9367bd2b1bfd24d32d40c84",
+    "candidate_replay": "PASS",
+    "sqlite_lab": "PASS",
+    "public_api_lab": "PASS"
+  },
+  "regression": {
+    "raw_report_status": "PASS",
+    "tests_run": 200,
+    "failures": [],
+    "errors": [],
+    "source_unchanged": true,
+    "workflow_false_negative_cause": "legacy assertion expected PASS_REGRESSION while yado_full_regression_v1 emitted PASS",
+    "gate_repaired": true
+  },
+  "transfer": {
+    "run_id": 34931039964,
+    "tested_commit": "6259f2eb1537db42addf282560095cd04669fdd1",
+    "artifact_id": 10381562673,
+    "artifact_sha256": "6ef3199514a48ecb1668511d6adb1a2f391e03c2874ed9e45207612e1b282cbe",
+    "status": "PASS_DATABASE_API_TRANSFER_REPAIR_V1",
+    "baseline_defect_detected": true,
+    "train_unique_count": 20,
+    "fresh_holdout_count": 10,
+    "fresh_holdout_pass": true,
+    "expected_unique_count_after_holdout": 30,
+    "row_count_after_holdout": 30,
+    "group_counts_match_external_data": true,
+    "index_used_for_bounded_query": true,
+    "learned_candidate_query_correct": true,
+    "rollback_preserved_state": true,
+    "repair_strategy": [
+      "PRIMARY_KEY_EXTERNAL_IDENTITY",
+      "PARAMETERIZED_UPSERT",
+      "COMPOSITE_QUERY_INDEX",
+      "CHECK_CONSTRAINT_BOOLEAN_DOMAIN",
+      "TRANSACTION_ROLLBACK_VERIFICATION"
+    ],
+    "initial_post_transfer_audit": "BLOCKED_BY_PARALLEL_PHYSICAL_BRANCH_DIVERGENCE",
+    "audit_blocker_branch": "yado-bounded-autonomous-learning-v1",
+    "audit_blocker_commit": "89da4bc32ae3752b13c94cc36175ccd9931c8e82",
+    "ancestry_closure_commit": "c72c4fa7bffd4b33277b1e806271318881b66f98"
+  },
+  "transfer_targets": [
+    "DESIGN_DATABASE_SCHEMA_FROM_EXTERNAL_JSON",
+    "LOAD_READ_ONLY_PUBLIC_API_DATA",
+    "DETECT_SCHEMA_OR_DATA_INVARIANT_FAILURE",
+    "REPAIR_DATABASE_SCHEMA_OR_QUERY",
+    "VERIFY_REPAIR_ON_FRESH_HOLDOUT",
+    "RETAIN_CAUSAL_FAILURE_TO_REPAIR_EVIDENCE"
+  ],
+  "safety_boundary": {
+    "public_read_only_sources": true,
+    "authenticated_access": false,
+    "external_writes": false,
+    "credential_use": false,
+    "remote_code_execution": false,
+    "raw_remote_code_execution": false
+  },
+  "canonical_mutation": false,
+  "development_branch_active": true,
+  "consciousness_claimed": false
+}

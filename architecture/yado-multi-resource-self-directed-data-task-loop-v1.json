@@ -1,0 +1,47 @@
+{
+  "schema": "yado.multi_resource_self_directed_data_task_loop.config.v1",
+  "verified_experience_paths": [
+    "experience/yado-endogenous-data-invariant-repair-v1.json",
+    "experience/yado-cross-structure-invariant-repair-transfer-v1.json"
+  ],
+  "minimum_records_per_source": 8,
+  "target_case_count": 3,
+  "minimum_successful_cases": 3,
+  "minimum_task_classes": 3,
+  "minimum_domains": 3,
+  "sources": [
+    {
+      "id": "JSONPLACEHOLDER_TODOS",
+      "domain": "software_web_records",
+      "url": "https://jsonplaceholder.typicode.com/todos?_limit=80"
+    },
+    {
+      "id": "USGS_EARTHQUAKES_DAY",
+      "domain": "geophysics",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+    },
+    {
+      "id": "WORLDBANK_HRV_POPULATION",
+      "domain": "economics_demography",
+      "url": "https://api.worldbank.org/v2/country/HRV/indicator/SP.POP.TOTL?format=json&date=1990:2025&per_page=100"
+    },
+    {
+      "id": "OPENMETEO_HOURLY_TEMPERATURE",
+      "domain": "weather",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=50.0&longitude=10.0&hourly=temperature_2m&forecast_days=4&timezone=UTC"
+    }
+  ],
+  "admission_criteria": {
+    "host_preselected_resource": false,
+    "host_preselected_task_class": false,
+    "minimum_successful_cases": 3,
+    "minimum_task_classes": 3,
+    "minimum_domains": 3,
+    "heldout_validation_required": true,
+    "provenance_hash_required": true,
+    "full_kernel_audit_required": true,
+    "full_regression_required": true,
+    "canonical_mutation": false
+  },
+  "next_step_if_pass": "CROSS_SOURCE_EVIDENCE_FUSION_AND_DEFICIT_PRIORITIZATION_V1"
+}

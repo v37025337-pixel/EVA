@@ -1,14 +1,15 @@
 {
   "schema": "yado.cross_disciplinary_internet_learning.v1",
   "mode": "PUBLIC_READ_ONLY_BOUNDED_RESEARCH",
-  "run_generation": 2,
-  "goal": "Acquire real public internet evidence across independent disciplines and convert it into provenance-preserving cross-domain experience for YADO cognitive development.",
+  "run_generation": 3,
+  "goal": "Acquire real public internet evidence across independent disciplines, including structured live public APIs, and convert it into provenance-preserving cross-domain experience for YADO cognitive development.",
   "limits": {
     "max_total_pages": 18,
     "max_follow_links_per_seed": 1,
     "max_bytes_per_page": 700000,
     "timeout_seconds": 15,
     "persist_raw_page_text": false,
+    "persist_raw_json_payload": false,
     "execute_remote_code": false,
     "authenticated_access": false,
     "canonical_direct_write": false
@@ -53,6 +54,18 @@
     {
       "discipline": "climate_systems",
       "url": "https://science.nasa.gov/climate-change/"
+    },
+    {
+      "discipline": "geophysics",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+    },
+    {
+      "discipline": "economics_demography",
+      "url": "https://api.worldbank.org/v2/country/usa;deu;jpn/indicator/SP.POP.TOTL?format=json&mrnev=1&per_page=100"
+    },
+    {
+      "discipline": "weather_systems",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=52.52,35.68,40.71&longitude=13.41,139.69,-74.01&daily=temperature_2m_max,temperature_2m_min&forecast_days=3&timezone=UTC"
     }
   ]
 }

@@ -1,0 +1,36 @@
+{
+  "schema": "yado.database_api_transfer_repair.config.v1",
+  "role": "DATABASE_PROGRAMMING_TRANSFER_AND_CAUSAL_REPAIR",
+  "learned_candidate_path": "candidates/cognitive/yado_database_web_usage_candidate_v1.py",
+  "required_study_digest": "8cef87947637c9d64c7665edbe3090a4b56ff999d5e813a39e4990fb52d536cd",
+  "experience_source": "experience/yado-database-programming-study-v1.json",
+  "train_url": "https://jsonplaceholder.typicode.com/todos?_start=0&_limit=20",
+  "holdout_url": "https://jsonplaceholder.typicode.com/todos?_start=20&_limit=10",
+  "max_train_rows": 20,
+  "max_holdout_rows": 10,
+  "required_checks": [
+    "PREVIOUS_LEARNED_CANDIDATE_USED",
+    "BASELINE_DEFECT_DETECTED",
+    "CAUSAL_DIAGNOSIS_RECORDED",
+    "SCHEMA_REPAIR_APPLIED",
+    "PARAMETERIZED_UPSERT_IDEMPOTENT",
+    "COMPOSITE_INDEX_USED",
+    "TRANSACTION_ROLLBACK_PRESERVES_STATE",
+    "FRESH_HOLDOUT_PASS",
+    "FULL_KERNEL_AUDIT_PASS",
+    "FULL_REGRESSION_PASS"
+  ],
+  "safety_boundary": {
+    "https_only": true,
+    "allowed_hosts": ["jsonplaceholder.typicode.com"],
+    "public_read_only": true,
+    "credentials_allowed": false,
+    "authenticated_access": false,
+    "external_writes": false,
+    "remote_code_execution": false,
+    "downloaded_code_execution": false
+  },
+  "canonical_mutation": false,
+  "development_branch_only": true,
+  "consciousness_claimed": false
+}

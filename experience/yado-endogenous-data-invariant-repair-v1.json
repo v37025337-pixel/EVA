@@ -1,0 +1,41 @@
+{
+  "schema": "yado.endogenous_data_invariant_repair.experience.v1",
+  "status": "PASS_VERIFIED_ENDOGENOUS_DATA_INVARIANT_REPAIR_V1",
+  "source_commit": "939c38ddac3e5bbbaf4fd9f92acae187152ac8d9",
+  "workflow_run_id": 34931629773,
+  "artifact_id": 10382181458,
+  "selected_resource_id": "JSONPLACEHOLDER_COMMENTS",
+  "derived_invariant_count": 6,
+  "observed_violations": [
+    {
+      "kind": "IDENTITY_UNIQUENESS",
+      "field": "id",
+      "total": 48,
+      "distinct": 24
+    }
+  ],
+  "selected_repairs": [
+    {
+      "strategy": "PRIMARY_KEY_AND_UPSERT",
+      "field": "id"
+    },
+    {
+      "strategy": "QUERY_INDEX",
+      "field": "postId"
+    }
+  ],
+  "fresh_holdout_count": 12,
+  "fresh_holdout_pass": true,
+  "full_kernel_audit": "PASS",
+  "full_regression": {
+    "status": "PASS",
+    "tests_run": 200,
+    "failures": [],
+    "errors": [],
+    "source_unchanged": true
+  },
+  "canonical_mutation": false,
+  "g3_genesis_performed": false,
+  "consciousness_claimed": false,
+  "next_step": "CROSS_STRUCTURE_INVARIANT_REPAIR_TRANSFER_V1"
+}

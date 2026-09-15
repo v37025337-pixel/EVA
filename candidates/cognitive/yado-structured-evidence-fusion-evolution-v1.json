@@ -1,0 +1,73 @@
+{
+  "automatic_main_mutation": false,
+  "baseline_held_out": {
+    "details": [
+      {"checks":{"divergent_sources":false,"mean":false,"median":false,"range":false,"status":false},"passed":false,"result":{"independent_sources":3,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}},
+      {"checks":{"divergent_sources":false,"median":false,"status":false},"passed":false,"result":{"independent_sources":3,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}},
+      {"checks":{"independent_sources":true,"status":true},"passed":true,"result":{"independent_sources":2,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}},
+      {"checks":{"count":false,"maximum":false,"mean":false,"median":false,"minimum":false,"status":false},"passed":false,"result":{"independent_sources":3,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}}
+    ],
+    "passed": 1,
+    "score": 0.25,
+    "total": 4
+  },
+  "baseline_policy": {"contradiction_scan":false,"min_independent_sources":1,"numeric_summary":false,"provenance_crosscheck":false},
+  "candidate_path": "candidates/cognitive/yado_structured_evidence_fusion_candidate_v1.py",
+  "candidate_sha256": "a0405366207a45872761de3b22afae82a07fee861dd1cbc06040c7c7fbb9f1d7",
+  "canonical_mutation": false,
+  "consciousness_claimed": false,
+  "experience_signal": {
+    "experience_digest": "e65749b52803e1b1aa88e461063751d5a14dd5681ce3fee0188216eabbdfeaf4",
+    "numeric_structured_sources": 3,
+    "raw_payload_persisted": false,
+    "shapes": [
+      {"array_count":2,"max_depth":4,"numeric_count":10,"object_count":10,"string_count":22},
+      {"array_count":188,"max_depth":5,"numeric_count":2274,"object_count":565,"string_count":2816},
+      {"array_count":10,"max_depth":4,"numeric_count":35,"object_count":9,"string_count":24}
+    ],
+    "structured_disciplines": ["economics_demography","geophysics","weather_systems"],
+    "structured_provenance_host_count": 3,
+    "structured_provenance_hosts": ["api.open-meteo.com","api.worldbank.org","earthquake.usgs.gov"],
+    "structured_sources_fetched": 3
+  },
+  "external_model_used": false,
+  "limitations": [
+    "assistant-authored bounded mutation grammar and held-out fusion benchmark",
+    "live public API evidence gates capability genesis but does not supply held-out answers",
+    "development candidate only until full runtime regression and kernel audit pass"
+  ],
+  "mutation_reason": "VERIFIED_MULTI_SOURCE_STRUCTURED_EVIDENCE",
+  "new_capability": "MULTI_SOURCE_STRUCTURED_EVIDENCE_FUSION_V1",
+  "no_experience_ablation": {
+    "causal_effect_observed": true,
+    "held_out": {
+      "details": [
+        {"checks":{"divergent_sources":false,"mean":false,"median":false,"range":false,"status":false},"passed":false,"result":{"independent_sources":3,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}},
+        {"checks":{"divergent_sources":false,"median":false,"status":false},"passed":false,"result":{"independent_sources":3,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}},
+        {"checks":{"independent_sources":true,"status":true},"passed":true,"result":{"independent_sources":2,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}},
+        {"checks":{"count":false,"maximum":false,"mean":false,"median":false,"minimum":false,"status":false},"passed":false,"result":{"independent_sources":3,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}}
+      ],
+      "passed": 1,
+      "score": 0.25,
+      "total": 4
+    },
+    "policy": {"contradiction_scan":false,"min_independent_sources":1,"numeric_summary":false,"provenance_crosscheck":false},
+    "reason": "INSUFFICIENT_VERIFIED_STRUCTURED_EVIDENCE"
+  },
+  "raw_remote_payload_persisted": false,
+  "remote_payload_executed": false,
+  "schema": "yado.structured_evidence_fusion_evolution.v1",
+  "selected_held_out": {
+    "details": [
+      {"checks":{"divergent_sources":true,"mean":true,"median":true,"range":true,"status":true},"passed":true,"result":{"count":3,"divergent_sources":[],"independent_sources":3,"maximum":12.0,"mean":11.0,"median":11.0,"minimum":10.0,"range":2.0,"status":"FUSED"}},
+      {"checks":{"divergent_sources":true,"median":true,"status":true},"passed":true,"result":{"count":3,"divergent_sources":["outlier"],"independent_sources":3,"maximum":35.0,"mean":25.333333,"median":21.0,"minimum":20.0,"range":15.0,"status":"FUSED"}},
+      {"checks":{"independent_sources":true,"status":true},"passed":true,"result":{"independent_sources":2,"status":"WITHHOLD_INSUFFICIENT_FUSION_CAPABILITY"}},
+      {"checks":{"count":true,"maximum":true,"mean":true,"median":true,"minimum":true,"status":true},"passed":true,"result":{"count":3,"divergent_sources":[],"independent_sources":3,"maximum":2.0,"mean":0.0,"median":0.0,"minimum":-2.0,"range":4.0,"status":"FUSED"}}
+    ],
+    "passed": 4,
+    "score": 1.0,
+    "total": 4
+  },
+  "selected_policy": {"contradiction_scan":true,"min_independent_sources":3,"numeric_summary":true,"provenance_crosscheck":true},
+  "status": "PASS_SHADOW_STRUCTURED_EVIDENCE_FUSION_EVOLUTION_V1"
+}

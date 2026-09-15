@@ -1,10 +1,15 @@
 """Bounded endogenous continuation for the YADO Successor.
 
 This module removes one narrow host dependency from the active acceptance loop:
-the host supplies only a cycle budget.  Each concrete goal instance is selected
+the host supplies only a cycle budget. Each concrete goal instance is selected
 from the kernel's verified causal state and generated without labelled answers.
 
-The goal grammar and controller remain assistant-authored and bounded.  This is
+Reported endogenous outcomes from earlier runs admitted into the pinned main
+tree can also supply bounded historical hints. Their bytes and branch membership
+are checked; their historical claims are not freshly reverified. Accepted cycle
+counts influence pressure/seed selection but never bypass current state checks.
+
+The goal grammar and controller remain assistant-authored and bounded. This is
 evidence for endogenous goal continuation inside that grammar, not evidence of
 general intelligence, agency outside the process, or phenomenal consciousness.
 """
@@ -18,13 +23,109 @@ from .archive import canonical, sha
 from .kernel import SuccessorKernel, fingerprint
 
 DOMAINS = ("relation", "events")
+HISTORY_SCHEMA = "yado.active_native_loop.applied_experience.v1"
+HISTORY_STATUS = "PASS_APPLIED_VERIFIED_ENDOGENOUS_EXPERIENCE_V1"
+ENDOGENOUS_PASS = "PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1"
 
 
-def _pressure(snapshot, domain):
+def _verified_endogenous_history(kernel):
+    """Return bounded reported history from receipts in the pinned main tree.
+
+    Cross-run sqlite state is deliberately not reused because it is bound to a
+    particular Successor identity. Candidate branches and deleted history are
+    excluded even when they claim PASS. Main membership and consistent receipt
+    fields establish provenance, not fresh proof of the historical outcomes.
+    """
+    main_ref = "refs/remotes/origin/main"
+    main_commit = kernel.manifest.get("parent_main_commit")
+    pinned_main = bool(main_commit and kernel.archive.summary["refs"].get(main_ref) == main_commit)
+    rows = kernel.archive.files_at_ref(main_ref, "receipts/yado-active-native-loop-", 40) if pinned_main else []
+    accepted = []
+    seen = set()
+    seen_runs = set()
+    for source in rows:
+        digest = source.get("digest")
+        path = str(source.get("path", ""))
+        if not digest or digest in seen or not path.startswith("receipts/yado-active-native-loop-"):
+            continue
+        seen.add(digest)
+        try:
+            data = json.loads(kernel.archive.read(digest))
+        except Exception:
+            continue
+        if not isinstance(data, dict):
+            continue
+        endogenous = data.get("endogenous")
+        regression = data.get("regression")
+        audit = data.get("kernel_audit")
+        run_id = data.get("source_run_id")
+        if not (
+            data.get("schema") == HISTORY_SCHEMA
+            and data.get("status") == HISTORY_STATUS
+            and type(run_id) is int and run_id > 0 and run_id not in seen_runs
+            and isinstance(endogenous, dict)
+            and endogenous.get("status") == ENDOGENOUS_PASS
+            and type(endogenous.get("host_goal_count")) is int
+            and endogenous.get("host_goal_count") == 0
+            and type(endogenous.get("cycles_completed")) is int
+            and type(endogenous.get("cycles_verified")) is int
+            and endogenous.get("cycles_completed") == endogenous.get("cycles_verified")
+            and endogenous["cycles_verified"] > 0
+            and isinstance(regression, dict)
+            and regression.get("status") == "PASS"
+            and type(regression.get("tests_run")) is int
+            and regression["tests_run"] >= 197
+            and type(regression.get("expected_tests")) is int
+            and regression["expected_tests"] == regression["tests_run"]
+            and all(type(regression.get(key)) is int and regression[key] == 0
+                    for key in ("failures", "errors", "skipped"))
+            and regression.get("source_unchanged") is True
+            and isinstance(audit, dict)
+            and audit.get("status") == "PASS"
+            and audit.get("findings") == []
+            and data.get("canonical_mutation") is False
+        ):
+            continue
+        counts = endogenous.get("domain_counts")
+        if not isinstance(counts, dict) or set(counts) != set(DOMAINS):
+            continue
+        if not all(type(counts[domain]) is int and counts[domain] >= 0 for domain in DOMAINS):
+            continue
+        normalized = {domain: counts[domain] for domain in DOMAINS}
+        if sum(normalized.values()) != endogenous["cycles_verified"]:
+            continue
+        seen_runs.add(run_id)
+        accepted.append({
+            "digest": digest,
+            "path": path,
+            "source_run_id": run_id,
+            "cycles_verified": endogenous["cycles_verified"],
+            "domain_counts": normalized,
+        })
+
+    domain_counts = {domain: 0 for domain in DOMAINS}
+    for item in accepted:
+        for domain in DOMAINS:
+            domain_counts[domain] += item["domain_counts"][domain]
+    return {
+        "evidence_level": "ARCHIVED_MAIN_RECEIPT_ASSERTION",
+        "historical_claims_reverified": False,
+        "admitted_main_commit": main_commit if pinned_main else None,
+        "accepted_receipt_count": len(accepted),
+        "verified_cycles": sum(item["cycles_verified"] for item in accepted),
+        "domain_counts": domain_counts,
+        "receipt_digests": sorted(item["digest"] for item in accepted),
+        "source_run_ids": sorted(
+            {item["source_run_id"] for item in accepted if item["source_run_id"] is not None}
+        ),
+    }
+
+
+def _pressure(snapshot, domain, historical_successes=0):
     """Prefer the domain with weaker or less certain verified experience."""
     stats = snapshot.get("all_observations", {})
     items = [value for key, value in stats.items() if key.startswith(domain + "/")]
-    successes = sum(int(item.get("successes", 0)) for item in items)
+    successes = sum(int(item.get("successes", 0)) for item in items) + int(historical_successes)
     failures = sum(int(item.get("failures", 0)) for item in items)
     count = successes + failures
     squared_error = sum(float(item.get("squared_error", 0.0)) for item in items)
@@ -73,27 +174,36 @@ def propose_endogenous_goal(kernel):
     if active:
         raise ValueError("ENDOGENOUS_PROPOSAL_REQUIRES_IDLE_COGNITIVE_LOOP")
 
+    history = _verified_endogenous_history(kernel)
     ordinal = len(snapshot["goals"])
     seed = sha(canonical({
         "identity": kernel.identity,
         "causal_event_hash": verification["event_hash"],
         "goal_ordinal": ordinal,
+        "historical_verified_endogenous_cycles": history["verified_cycles"],
+        "historical_receipt_digests": history["receipt_digests"],
     }).encode())
-    pressures = {domain: _pressure(snapshot, domain) for domain in DOMAINS}
+    pressures = {
+        domain: _pressure(snapshot, domain, history["domain_counts"][domain])
+        for domain in DOMAINS
+    }
     maximum = max(pressures.values())
     candidates = [domain for domain in DOMAINS if pressures[domain] == maximum]
     selected = candidates[int(seed[:8], 16) % len(candidates)]
     spec = _relation_spec(seed) if selected == "relation" else _events_spec(seed)
 
     return {
-        "schema": "yado.endogenous_goal_proposal.v1",
+        "schema": "yado.endogenous_goal_proposal.v2",
         "status": "PROPOSED_BOUNDED_ENDOGENOUS_GOAL",
         "host_supplied_goal": False,
         "selected_from_fixed_goal_list": False,
-        "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE",
+        "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE_PLUS_VERIFIED_HISTORY",
         "source_event_hash": verification["event_hash"],
         "goal_ordinal": ordinal,
         "pressures": pressures,
+        "accepted_history": history,
+        "verified_history_bound": history["verified_cycles"] > 0,
+        "verified_history_cycles": history["verified_cycles"],
         "selected_domain": selected,
         "seed": seed,
         "spec": spec,
@@ -126,13 +236,13 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
     if type(budget) is not int or not 1 <= budget <= 30:
         raise ValueError("ENDOGENOUS_GOAL_BUDGET")
 
-    # Resume any interrupted work before creating a new goal instance.
     kernel.think(200)
     snapshot = kernel.cognitive_snapshot()
     if any(goal["status"] == "ACTIVE" for goal in snapshot["goals"].values()):
         raise ValueError("ACTIVE_GOAL_DID_NOT_SETTLE")
 
     rows = []
+    history_at_start = _verified_endogenous_history(kernel)
     for _ in range(cycles):
         proposal = propose_endogenous_goal(kernel)
         proposal_event = _append_event(kernel, {
@@ -144,6 +254,9 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
             "source_event_hash": proposal["source_event_hash"],
             "goal_ordinal": proposal["goal_ordinal"],
             "pressures": proposal["pressures"],
+            "accepted_history": proposal["accepted_history"],
+            "verified_history_bound": proposal["verified_history_bound"],
+            "verified_history_cycles": proposal["verified_history_cycles"],
             "selected_domain": proposal["selected_domain"],
             "seed": proposal["seed"],
             "spec": proposal["spec"],
@@ -176,15 +289,18 @@ def run_endogenous_cycles(kernel, cycles=4, budget=3):
 
     passed = all(row["status"] == "VERIFIED" for row in rows)
     return {
-        "schema": "yado.bounded_endogenous_continuation.v1",
-        "status": "PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1" if passed else "WITHHOLD_BOUNDED_ENDOGENOUS_CONTINUATION_V1",
+        "schema": "yado.bounded_endogenous_continuation.v2",
+        "status": ENDOGENOUS_PASS if passed else "WITHHOLD_BOUNDED_ENDOGENOUS_CONTINUATION_V2",
         "cycles_requested": cycles,
         "cycles_completed": len(rows),
         "cycles_verified": sum(row["status"] == "VERIFIED" for row in rows),
         "host_goal_count": 0,
+        "accepted_history_at_start": history_at_start,
+        "verified_history_bound": history_at_start["verified_cycles"] > 0,
+        "verified_history_cycles": history_at_start["verified_cycles"],
         "goal_instance_authorship": "YADO_STATE_DERIVED",
         "goal_grammar_authorship": "ASSISTANT_AUTHORED_BOUNDED_GRAMMAR",
-        "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE",
+        "selection_basis": "EMPIRICAL_DEFICIT_PRESSURE_PLUS_CAUSAL_STATE_PLUS_VERIFIED_HISTORY",
         "results": rows,
         "state_verification": kernel.verify_state(),
         "automatic_canonical_promotion": False,

@@ -1,0 +1,42 @@
+{
+  "schema": "yado.cross_structure_invariant_repair_transfer.experience.v1",
+  "status": "PASS_VERIFIED_CROSS_STRUCTURE_INVARIANT_REPAIR_TRANSFER_V1",
+  "source_commit": "7eb8efa39b88e6085a299812ef04e66102520225",
+  "workflow_run_id": 34957294020,
+  "artifact_id": 10392300956,
+  "prior_resource_id": "JSONPLACEHOLDER_COMMENTS",
+  "selected_resource_id": "JSONPLACEHOLDER_ALBUMS",
+  "schema_distance_from_prior": 0.8571428571428572,
+  "derived_invariant_count": 4,
+  "derived_stressors": [
+    "REPEAT_INGESTION",
+    "NULL_REQUIRED_FIELD"
+  ],
+  "selected_repairs": [
+    "NOT_NULL_CONSTRAINT",
+    "PRIMARY_KEY_AND_UPSERT",
+    "QUERY_INDEX"
+  ],
+  "fresh_holdout_count": 12,
+  "fresh_holdout_pass": true,
+  "full_kernel_audit": {
+    "status": "PASS",
+    "findings": [],
+    "active_runtime_sources": 49,
+    "active_capabilities": 34,
+    "duplicate_python_groups": 0,
+    "module_stem_collisions": 0
+  },
+  "full_regression": {
+    "status": "PASS",
+    "tests_run": 200,
+    "failures": [],
+    "errors": [],
+    "source_unchanged": true,
+    "identity_digest": "9955d648d6455194e3adb74269afd4c945fcb4124248e7e5fc807d755b19ee36"
+  },
+  "canonical_mutation": false,
+  "g3_genesis_performed": false,
+  "consciousness_claimed": false,
+  "next_step": "MULTI_RESOURCE_SELF_DIRECTED_DATA_TASK_LOOP_V1"
+}
