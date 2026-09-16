@@ -174,7 +174,7 @@ jobs:
           print('PASS_CLEAN_FULL_KERNEL_AUDIT',r['counts'])
           PY
 
-      - name: Build fresh Successor and run 170 regression tests
+      - name: Build fresh Successor and run complete regression suite
         run: |
           python -m successor build --output "$RUNNER_TEMP/yado-v6-clean-successor"
           python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-v6-clean-successor/manifest.json"
@@ -182,11 +182,15 @@ jobs:
           import json
           from pathlib import Path
           r=json.loads(Path('audits/yado-full-regression-v1-report.json').read_text())
+          minimum_suite_counts={'tests':13,'runtime/yado_rc8_v36':120,'successor/tests':185,'runtime':28}
           assert r['status']=='PASS',r
-          assert r['tests_run']==r['expected_tests']==170,r
+          assert r['tests_run']==r['expected_tests'],r
+          assert r['expected_tests']>=sum(minimum_suite_counts.values()),r
+          for suite,minimum in minimum_suite_counts.items():
+              assert r['suite_counts'].get(suite,0)>=minimum,(suite,r['suite_counts'])
           assert not r['failures'] and not r['errors'] and not r['skipped'],r
           assert r['source_unchanged'] is True,r
-          print('PASS_CLEAN_V6_REGRESSION_170_OF_170',r['identity_digest'])
+          print('PASS_CLEAN_V6_REGRESSION_COMPLETE',{'tests_run':r['tests_run'],'suite_counts':r['suite_counts'],'identity_digest':r['identity_digest']})
           PY
 
       - name: Final clean admission verdict
