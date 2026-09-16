@@ -1,0 +1,98 @@
+name: YADO External Dev Capability Pack V1
+
+on:
+  push:
+    branches: [codex/yado-external-dev-capability-pack-v1-20260916]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  prove-external-dev-capability-pack:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+      - name: Compile capability layers
+        run: |
+          python -m py_compile runtime/yado_external_dev_capability_pack_v1.py
+          python -m py_compile runtime/yado_unified_core_external_dev_capability_pack_v1.py
+      - name: Run focused regression
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: |
+          python -m unittest runtime.test_yado_external_dev_capability_pack_v1 -v
+          python -m unittest runtime.test_yado_unified_core_external_dev_capability_pack_v1 -v
+          python -m unittest runtime.test_yado_unified_core_self_directed_web_research_v1 -v
+          python -m unittest runtime.test_yado_unified_core_personal_web_v2 -v
+      - name: Exercise all five sources through the real public-web core
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from yado_unified_core_external_dev_capability_pack_v1 import UnifiedYADOCoreExternalDevCapabilityPackV1
+
+          core = UnifiedYADOCoreExternalDevCapabilityPackV1()
+          audit = core.audit()
+          assert audit['pass'] is True, audit
+          refresh = core.refresh_external_dev_capabilities(timeout=25)
+          assert refresh['status'] == 'PASS_EXTERNAL_DEV_CAPABILITY_PACK_V1', refresh
+          assert refresh['source_count'] == 5
+          assert all(x['read_only'] and not x['code_copy_performed'] and not x['code_execution_performed'] for x in refresh['sources'])
+          assert 'src/pro' in next(x for x in refresh['sources'] if x['key'] == 'dyad')['restricted_paths']
+
+          task = core.external_dev_task_contract(
+              'Use isolated work to extend YADO safely',
+              ['keep canonical unchanged during experiment', 'run regression before admission'],
+          )
+          api = core.external_dev_api_probe('https://api.github.com/repos/hoppscotch/hoppscotch', must_contain='hoppscotch', timeout=25)
+          app = core.external_dev_app_build_plan('Generate and verify a local application candidate', 'Python + web UI', ['compile', 'unit', 'regression'])
+          utility = core.external_dev_utility('json_minify', '{"kernel":"YADO","safe":true}')
+          resources = core.external_dev_free_resource_candidates(['cloud', 'serverless', 'compute'], limit=8, timeout=25)
+
+          assert task['source_pattern'] == 'dip497/hivemind'
+          assert api['status'] == 'PASS_READ_ONLY_API_ASSERTION'
+          assert app['source_pattern'] == 'dyad-sh/dyad' and app['automatic_deploy'] is False
+          assert utility['network_used'] is False
+          assert resources['status'] == 'PASS_FREE_TIER_RESOURCE_DISCOVERY' and resources['result_count'] >= 1
+
+          evidence = {
+              'schema': 'yado.external_dev_capability_pack.real_run.v1',
+              'status': 'PASS_SHADOW_EXTERNAL_DEV_CAPABILITY_PACK_V1',
+              'commit': os.environ.get('GITHUB_SHA'),
+              'source_repositories': [x['repo'] for x in refresh['sources']],
+              'capabilities': refresh['capabilities'],
+              'source_readme_hashes': {x['repo']: x['readme_sha256'] for x in refresh['sources']},
+              'dyad_restricted_paths': next(x for x in refresh['sources'] if x['key'] == 'dyad')['restricted_paths'],
+              'api_probe_status': api['status'],
+              'free_resource_candidate_count': resources['result_count'],
+              'third_party_code_executed': False,
+              'third_party_code_copied': False,
+              'credentials_used': False,
+              'external_writes': False,
+              'automatic_canonical_mutation': False,
+              'g3_genesis_performed': False,
+          }
+          path = Path(os.environ['RUNNER_TEMP']) / 'yado-external-dev-capability-pack-v1.json'
+          path.write_text(json.dumps(evidence, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          print(json.dumps(evidence, sort_keys=True))
+          PY
+      - name: Preserve evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-external-dev-capability-pack-v1-${{ github.run_id }}
+          path: ${{ runner.temp }}/yado-external-dev-capability-pack-v1.json
+          if-no-files-found: error
