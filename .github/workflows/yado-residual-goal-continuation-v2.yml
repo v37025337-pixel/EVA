@@ -1,0 +1,134 @@
+name: YADO Residual Goal Continuation V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/yado-residual-goal-continuation-v2-20260916]
+    paths:
+      - '.github/workflows/yado-residual-goal-continuation-v2.yml'
+      - 'runtime/yado_external_dev_residual_continuation_v2.py'
+      - 'runtime/yado_unified_core_external_dev_residual_continuation_v2.py'
+      - 'runtime/test_yado_external_dev_residual_continuation_v2.py'
+      - 'architecture/yado-external-dev-residual-continuation-v2.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-residual-goal-continuation-v2
+  cancel-in-progress: false
+
+jobs:
+  continuation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+      - name: Compile residual continuation layers
+        run: |
+          python -m py_compile runtime/yado_external_dev_residual_continuation_v2.py
+          python -m py_compile runtime/yado_unified_core_external_dev_residual_continuation_v2.py
+      - name: Run focused residual continuation regression
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: python -m unittest runtime.test_yado_external_dev_residual_continuation_v2 -v
+      - name: Run admitted five-goal campaign and preserve state
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from yado_unified_core_external_dev_residual_continuation_v2 import UnifiedYADOCoreExternalDevResidualContinuationV2
+
+          objective = 'Improve the reliability and continuity of YADO external developer self-development without naming a preferred tool'
+          core = UnifiedYADOCoreExternalDevResidualContinuationV2()
+          out = core.external_dev_campaign_advance(objective, steps=5, timeout=25)
+          assert out['goal_count'] == 5, out
+          assert out['residual_goal_count'] == 0, out
+          assert out['status'] == 'IN_PROGRESS_EXTERNAL_DEV_RESIDUAL_CONTINUATION_V2', out
+          assert out['next_goal'], out
+          assert out['resource_candidate']['name'].lower() in out['next_goal'].lower(), out
+          state = core.external_dev_campaign_export_state()
+          path = Path(os.environ['RUNNER_TEMP']) / 'yado-residual-after-five.json'
+          path.write_text(json.dumps(state, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          print(json.dumps(out, indent=2, sort_keys=True))
+          PY
+      - name: Restart process and execute two residual goals
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from yado_unified_core_external_dev_residual_continuation_v2 import UnifiedYADOCoreExternalDevResidualContinuationV2
+
+          objective = 'Improve the reliability and continuity of YADO external developer self-development without naming a preferred tool'
+          state_path = Path(os.environ['RUNNER_TEMP']) / 'yado-residual-after-five.json'
+          state = json.loads(state_path.read_text(encoding='utf-8'))
+          core = UnifiedYADOCoreExternalDevResidualContinuationV2(campaign_state=state)
+          out = core.external_dev_campaign_advance(objective, steps=2, timeout=25)
+          receipt = core.external_dev_campaign_receipt()
+          assert receipt['status'] == 'PASS_SHADOW_EXTERNAL_DEV_RESIDUAL_CONTINUATION_V2', receipt
+          assert receipt['goal_count'] == 7, receipt
+          assert receipt['base_goal_count'] == 5, receipt
+          assert receipt['residual_goal_count'] == 2, receipt
+          assert receipt['restart_count'] == 1, receipt
+          assert receipt['post_fixed_goal_derived_from_live_state'] is True, receipt
+          assert receipt['events'][5]['selected_capability'] == 'LOCAL_APP_BUILD_ADMISSION_LOOP', receipt
+          assert receipt['events'][6]['selected_capability'] == 'PURE_LOCAL_DEV_UTILITY_LIBRARY', receipt
+          assert receipt['chain_verification']['status'] == 'PASS', receipt
+          assert receipt['unknown_withhold'] is True, receipt
+          assert receipt['third_party_code_executed'] is False, receipt
+          assert receipt['credentials_used'] is False, receipt
+          assert receipt['external_writes_to_third_parties'] is False, receipt
+          assert receipt['automatic_main_mutation'] is False, receipt
+          assert receipt['g3_genesis_performed'] is False, receipt
+          dest = Path('candidates/autonomous/yado-external-dev-residual-continuation-v2.json')
+          dest.write_text(json.dumps(receipt, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          final_state = core.external_dev_campaign_export_state()
+          (Path(os.environ['RUNNER_TEMP']) / 'yado-residual-final-state.json').write_text(
+              json.dumps(final_state, indent=2, sort_keys=True) + '\n',
+              encoding='utf-8',
+          )
+          print(json.dumps(out, indent=2, sort_keys=True))
+          PY
+      - name: Run full kernel audit before persistence
+        run: python runtime/yado_full_kernel_audit_v1.py
+      - name: Build fresh Successor identity for regression
+        run: python -m successor build --output "$RUNNER_TEMP/yado-residual-successor-birth"
+      - name: Run complete inherited and Successor regression
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-residual-successor-birth/manifest.json"
+      - name: Persist verified residual continuation receipt in shadow branch
+        run: |
+          git config user.name 'YADO Residual Goal Continuation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add candidates/autonomous/yado-external-dev-residual-continuation-v2.json
+          if git diff --cached --quiet; then
+            echo 'No residual continuation receipt change to persist'
+          else
+            git commit -m 'YADO campaign: persist residual-goal continuation proof [skip ci]'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - name: Preserve residual continuation evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-residual-goal-continuation-v2-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            candidates/autonomous/yado-external-dev-residual-continuation-v2.json
+            ${{ runner.temp }}/yado-residual-after-five.json
+            ${{ runner.temp }}/yado-residual-final-state.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
