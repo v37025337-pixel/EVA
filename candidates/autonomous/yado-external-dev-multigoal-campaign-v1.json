@@ -1,0 +1,131 @@
+{
+  "automatic_main_mutation": false,
+  "chain_verification": {
+    "event_count": 5,
+    "head_event_sha256": "f7ee2807bafb87885713e2938298f322a8b59b3a1b8796fbd3ca212fbc03cfae",
+    "status": "PASS"
+  },
+  "component_id": "RUNTIME-G2-EXTERNAL-DEV-MULTIGOAL-CAMPAIGN-V1",
+  "core_route": "UNIFIED_YADO_CORE_EXTERNAL_DEV_MULTIGOAL_CAMPAIGN_V1",
+  "credentials_used": false,
+  "distinct_capability_count": 5,
+  "events": [
+    {
+      "cycle": 1,
+      "event_sha256": "7b82107ea911b21f1d755a725c99e4350654a8e01327ba2e191ee161dab49c73",
+      "goal": "Turn the broad development objective 'Improve the reliability and continuity of YADO external developer self-development without naming a preferred tool' into an isolated work plan with explicit review criteria before any change.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "and",
+        "criteria",
+        "review"
+      ],
+      "previous_event_sha256": null,
+      "result_status": "PASS_TASK_CONTRACT",
+      "result_summary": {
+        "criteria": 4
+      },
+      "router_score": 3,
+      "selected_capability": "TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN"
+    },
+    {
+      "cycle": 2,
+      "event_sha256": "ff7f8e4af40a0e7d565cc276661b44ee7bca188a10030f5972d7a1b14b1be46b",
+      "goal": "The work plan now has 4 acceptance checks, but current upstream repository identity has not been independently confirmed through a public endpoint response.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "endpoint",
+        "response"
+      ],
+      "previous_event_sha256": "7b82107ea911b21f1d755a725c99e4350654a8e01327ba2e191ee161dab49c73",
+      "result_status": "PASS_READ_ONLY_API_ASSERTION",
+      "result_summary": {
+        "http_status": 200,
+        "sha256": "9e1595b68c6913a0c7d9f97d4efad792237aa0e08e97d62d40a8d8f72594ffa8"
+      },
+      "router_score": 2,
+      "selected_capability": "READ_ONLY_API_ASSERTION_WORKBENCH"
+    },
+    {
+      "cycle": 3,
+      "event_sha256": "22feb03e3007c3030a1a66572e0062f815e12b2943c6ab9bfdfbc5e3f5c157bc",
+      "goal": "Upstream evidence returned PASS_READ_ONLY_API_ASSERTION; prepare a local candidate preview with compile, tests, regression and an admission gate before any integration.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "admission",
+        "candidate",
+        "compile",
+        "preview",
+        "regression"
+      ],
+      "previous_event_sha256": "ff7f8e4af40a0e7d565cc276661b44ee7bca188a10030f5972d7a1b14b1be46b",
+      "result_status": "PASS_BUILD_PLAN",
+      "result_summary": {
+        "phases": 7
+      },
+      "router_score": 5,
+      "selected_capability": "LOCAL_APP_BUILD_ADMISSION_LOOP"
+    },
+    {
+      "cycle": 4,
+      "event_sha256": "f9a54f930a12b6de2bd9753ad760bda10cbf4d286b4d7cd897b0fe2dad6901bc",
+      "goal": "The candidate plan contains 7 phases; canonicalize the campaign evidence and freeze an offline digest so continuation can detect drift.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "digest",
+        "offline"
+      ],
+      "previous_event_sha256": "22feb03e3007c3030a1a66572e0062f815e12b2943c6ab9bfdfbc5e3f5c157bc",
+      "result_status": "PASS_LOCAL_EVIDENCE_DIGEST",
+      "result_summary": {
+        "digest": "e13ad1aacba26d74040f3f4075f13b490516a7e7fff1f251429fceff650af0ff"
+      },
+      "router_score": 2,
+      "selected_capability": "PURE_LOCAL_DEV_UTILITY_LIBRARY"
+    },
+    {
+      "cycle": 5,
+      "event_sha256": "f7ee2807bafb87885713e2938298f322a8b59b3a1b8796fbd3ca212fbc03cfae",
+      "goal": "Evidence identity e13ad1aacba2 is frozen; find a free serverless or compute option for a disposable future validation run without creating an account or changing an external service.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "compute",
+        "for",
+        "free",
+        "serverless"
+      ],
+      "previous_event_sha256": "f9a54f930a12b6de2bd9753ad760bda10cbf4d286b4d7cd897b0fe2dad6901bc",
+      "result_status": "PASS_FREE_TIER_RESOURCE_DISCOVERY",
+      "result_summary": {
+        "catalog_sha256": "1b50e094718dbca9f4ee2258a454ef1d39668cc5fae826801a76394d17a6e4ba",
+        "result_count": 8
+      },
+      "router_score": 4,
+      "selected_capability": "FREE_TIER_RESOURCE_DISCOVERY"
+    }
+  ],
+  "external_writes_to_third_parties": false,
+  "g3_genesis_performed": false,
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "goal_count": 5,
+  "next_goal": null,
+  "objective": "Improve the reliability and continuity of YADO external developer self-development without naming a preferred tool",
+  "private_network_access": false,
+  "receipt_sha256": "fac940484f49106c0e672a31ee0844aa071f19b07e42141500d24c407db2a6a6",
+  "restart_count": 1,
+  "router_policy_sha256": "05f488e43ac584903d784607588194e700a0c52e3e0bd0f9a70392cb03a9d26a",
+  "router_source_sha256": "15dfa3369bc64427a33acd4480ad763c51fb869942d1489e438a76a03b1a337d",
+  "schema": "yado.external_dev_multigoal_campaign.v1",
+  "selected_capabilities": [
+    "TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN",
+    "READ_ONLY_API_ASSERTION_WORKBENCH",
+    "LOCAL_APP_BUILD_ADMISSION_LOOP",
+    "PURE_LOCAL_DEV_UTILITY_LIBRARY",
+    "FREE_TIER_RESOURCE_DISCOVERY"
+  ],
+  "state_sha256": "5b6b0cbf32c454b9c31cbb50c4f7370677ca54c7868f7b879d283b70d02848f5",
+  "status": "PASS_SHADOW_EXTERNAL_DEV_MULTIGOAL_CAMPAIGN_V1",
+  "third_party_code_copied": false,
+  "third_party_code_executed": false,
+  "unknown_withhold": true
+}
