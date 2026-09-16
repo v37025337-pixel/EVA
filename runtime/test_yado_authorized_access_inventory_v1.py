@@ -40,6 +40,13 @@ class AuthorizedAccessInventoryTests(unittest.TestCase):
         self.assertIn('judge0_ce', ids)
         self.assertIn('runlet', ids)
 
+    def test_broad_personal_public_read_channel_registered_without_credentials_or_writes(self):
+        profile = next(x for x in inv.PUBLIC_ACCESS if x['id'] == 'personal_public_web_v2')
+        self.assertEqual(profile['mode'], 'DYNAMIC_PUBLIC_HTTPS_READ_ONLY_DNS_PINNED')
+        self.assertFalse(profile['credentials_required'])
+        self.assertFalse(profile['external_write'])
+        self.assertFalse(profile['private_network_access'])
+
     def test_mailru_profile_uses_names_only(self):
         profile = next(x for x in inv.KNOWN_PROTECTED_ACCESS if x['id'] == 'mailru_webdav')
         self.assertEqual(profile['required_env'], ['YADO_MAILRU_USER', 'YADO_MAILRU_APP_PASSWORD'])

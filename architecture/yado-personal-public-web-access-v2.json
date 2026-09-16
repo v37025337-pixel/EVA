@@ -1,0 +1,40 @@
+{
+  "schema": "yado.personal_public_web_access.v2",
+  "status": "CANDIDATE_BROAD_PUBLIC_HTTPS_READ_ONLY_V2",
+  "capability_id": "RUNTIME-PERSONAL-PUBLIC-WEB-ACCESS-V2",
+  "runtime": "runtime/yado_personal_public_web_access_v2.py",
+  "purpose": "Give YADO a kernel-owned broad public web discovery/read channel without a fixed hostname allowlist.",
+  "authority": {
+    "schemes": ["https"],
+    "methods": ["GET", "HEAD"],
+    "port": 443,
+    "domain_allowlist_required": false,
+    "credentials": false,
+    "cookies": false,
+    "proxies": false,
+    "external_writes": false,
+    "private_networks": false,
+    "downloaded_code_execution": false,
+    "automatic_canonical_mutation": false
+  },
+  "network_guards": [
+    "DNS resolution before every request",
+    "reject any non-global resolved IPv4 or IPv6 answer",
+    "reject mixed public/private DNS answers",
+    "pin TLS socket to a validated public IP",
+    "retain original hostname for TLS SNI and Host",
+    "revalidate every redirect target before transport",
+    "reject URL credentials and non-443 ports",
+    "bound redirects, response bytes, timeouts, and discovered links",
+    "accept text, JSON, and XML-family response bodies only"
+  ],
+  "discovery": {
+    "bounded_link_extraction": true,
+    "relative_link_resolution": true,
+    "unsafe_link_filtering": true,
+    "cross_domain_public_https_discovery": true
+  },
+  "semantic_boundary": "BROAD PUBLIC HTTPS READ/DISCOVERY ONLY. NO PRIVATE NETWORK ACCESS, AUTHENTICATION BYPASS, CREDENTIAL USE, EXTERNAL WRITE, DOWNLOADED-CODE EXECUTION, OR UNBOUNDED AUTONOMOUS CRAWLING.",
+  "canonical_active": false,
+  "g3_genesis_performed": false
+}

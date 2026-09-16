@@ -1,0 +1,107 @@
+name: YADO Personal Public Web Access V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/yado-personal-public-web-access-v2-20260916]
+    paths:
+      - 'runtime/yado_personal_public_web_access_v2.py'
+      - 'runtime/test_yado_personal_public_web_access_v2.py'
+      - 'runtime/yado_authorized_access_inventory_v1.py'
+      - 'runtime/test_yado_authorized_access_inventory_v1.py'
+      - 'architecture/yado-personal-public-web-access-v2.json'
+      - '.github/workflows/yado-personal-public-web-access-v2.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'runtime/yado_personal_public_web_access_v2.py'
+      - 'runtime/test_yado_personal_public_web_access_v2.py'
+      - 'runtime/yado_authorized_access_inventory_v1.py'
+      - 'runtime/test_yado_authorized_access_inventory_v1.py'
+      - 'architecture/yado-personal-public-web-access-v2.json'
+      - '.github/workflows/yado-personal-public-web-access-v2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prove-broad-public-readonly-channel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Compile new transport
+        run: python -m py_compile runtime/yado_personal_public_web_access_v2.py
+      - name: Run focused security and inventory regression
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python -m unittest runtime.test_yado_personal_public_web_access_v2 -v
+          python -m unittest runtime.test_yado_authorized_access_inventory_v1 -v
+          python -m unittest runtime.test_yado_public_data_transport_v1 -v
+          python -m unittest runtime.test_yado_public_sandbox_connect_v1 -v
+      - name: Exercise broad public HTTPS using YADO transport itself
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          import yado_personal_public_web_access_v2 as web
+
+          targets = [
+              'https://example.com/',
+              'https://www.iana.org/help/example-domains',
+              'https://docs.python.org/3/library/http.client.html',
+          ]
+          pages = []
+          for url in targets:
+              result = web.fetch_public(url, timeout=20)
+              receipt = result['receipt']
+              assert receipt['status'] == 'PASS_PERSONAL_PUBLIC_WEB_ACCESS_V2', receipt
+              assert receipt['read_only'] is True
+              assert receipt['credentials_used'] is False
+              assert receipt['external_write'] is False
+              assert receipt['downloaded_code_executed'] is False
+              assert receipt['private_network_access'] is False
+              assert result['content'].strip(), url
+              pages.append({'receipt': receipt, 'text_sample': result['content'][:160]})
+
+          docs = web.fetch_public(targets[-1], timeout=20)
+          links = web.discover_links(docs['content'], docs['receipt']['final_url'], limit=12)
+          assert len(links) >= 3, links
+          same_host = next(x for x in links if urlsplit(x['url']).hostname == 'docs.python.org')
+          follow = web.fetch_public(same_host['url'], timeout=20)
+          assert follow['receipt']['final_host'] == 'docs.python.org'
+
+          evidence = {
+              'schema': 'yado.personal_public_web_access.real_run.v2',
+              'status': 'PASS_SHADOW_BROAD_PUBLIC_HTTPS_READ_ONLY_V2',
+              'commit': os.environ.get('GITHUB_SHA'),
+              'independent_hosts_read': sorted({p['receipt']['final_host'] for p in pages}),
+              'host_count': len({p['receipt']['final_host'] for p in pages}),
+              'pages': pages,
+              'discovered_link_count': len(links),
+              'followed_discovered_url': follow['receipt']['final_url'],
+              'channel': web.channel_snapshot(),
+              'semantic_boundary': 'public HTTPS read/discovery only; no credentials, private networks, writes, proxies, or downloaded-code execution',
+          }
+          assert evidence['host_count'] >= 3, evidence
+          path = Path(os.environ['RUNNER_TEMP']) / 'yado-personal-public-web-access-v2.json'
+          path.write_text(json.dumps(evidence, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          print(json.dumps(evidence, sort_keys=True))
+          PY
+      - name: Preserve real-network evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-personal-public-web-access-v2-${{ github.run_id }}
+          if-no-files-found: error
+          path: ${{ runner.temp }}/yado-personal-public-web-access-v2.json
