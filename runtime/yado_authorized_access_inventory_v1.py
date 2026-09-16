@@ -38,6 +38,15 @@ PUBLIC_ACCESS = [
         "mode": "PUBLIC_NO_AUTH_EXECUTION_SANDBOX",
         "verified_by": "runtime/yado_public_sandbox_connect_v1.py",
     },
+    {
+        "id": "personal_public_web_v2",
+        "endpoint": "https://<dynamically-validated-public-host>:443",
+        "mode": "DYNAMIC_PUBLIC_HTTPS_READ_ONLY_DNS_PINNED",
+        "verified_by": "runtime/yado_personal_public_web_access_v2.py",
+        "credentials_required": False,
+        "external_write": False,
+        "private_network_access": False,
+    },
 ]
 
 KNOWN_PROTECTED_ACCESS = [
@@ -103,6 +112,7 @@ def build_report(root: Path = ROOT) -> dict[str, Any]:
             "credential_bypass": False,
             "secret_values_exposed": False,
             "authorized_reference_discovery_only": True,
+            "broad_public_https_read_only": True,
         },
         "public_no_auth_access": PUBLIC_ACCESS,
         "protected_access": protected,
