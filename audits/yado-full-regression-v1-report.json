@@ -1,11 +1,11 @@
 {
-  "elapsed_seconds": 285.66683197021484,
+  "elapsed_seconds": 349.8779046535492,
   "errors": [],
   "expected_failures": [],
-  "expected_tests": 375,
+  "expected_tests": 382,
   "failures": [],
-  "identity_digest": "cca5949f1a39cbc3f55f86e98cc24e66e2da37059d0a673f013ed357d396703a",
-  "manifest_sha256": "26cff95d40b63e0d9f043ab9fceda1678aeb116a4bc91f5449f94059e61da2d7",
+  "identity_digest": "29bfd0672f5524890d7388d55878e4c6d2e318765d8230b0851547276384e46e",
+  "manifest_sha256": "34ec1c95ee5dda509f7b80ebd9516ae14eecfa38afe5a5b6ddb989f304a56e84",
   "passed_ids": [
     "test_g2_continuity_file_integrity.TestG2ContinuityFileIntegrity.test_bounded_memory_survives_file_roundtrip",
     "test_g2_continuity_file_integrity.TestG2ContinuityFileIntegrity.test_corruption_and_cross_layer_forgery_fail_before_base_mutation",
@@ -378,10 +378,17 @@
     "test_yado_public_sandbox_connect_v1.PublicSandboxTests.test_judge0_success",
     "test_yado_public_sandbox_connect_v1.PublicSandboxTests.test_no_provider_is_blocked",
     "test_yado_public_sandbox_connect_v1.PublicSandboxTests.test_runlet_success",
+    "test_yado_self_directed_web_research_v1.SelfDirectedWebResearchTests.test_state_roundtrip_and_tamper_detection",
+    "test_yado_self_directed_web_research_v1.SelfDirectedWebResearchTests.test_two_generations_use_memory_to_avoid_old_hosts_and_close_goal",
+    "test_yado_self_directed_web_research_v1.SelfDirectedWebResearchTests.test_two_independent_sources_are_compared_and_memory_is_written",
+    "test_yado_self_directed_web_research_v1.SelfDirectedWebResearchTests.test_verified_deficit_creates_next_goal",
     "test_yado_unified_core_personal_web_v2.UnifiedCorePersonalWebV2Tests.test_core_audit_binds_broad_readonly_channel",
     "test_yado_unified_core_personal_web_v2.UnifiedCorePersonalWebV2Tests.test_core_bounded_explore_follows_public_discovery_only",
     "test_yado_unified_core_personal_web_v2.UnifiedCorePersonalWebV2Tests.test_core_fetch_routes_through_new_transport_without_allowlist",
-    "test_yado_unified_core_personal_web_v2.UnifiedCorePersonalWebV2Tests.test_snapshot_preserves_g2_and_exposes_access_layer"
+    "test_yado_unified_core_personal_web_v2.UnifiedCorePersonalWebV2Tests.test_snapshot_preserves_g2_and_exposes_access_layer",
+    "test_yado_unified_core_self_directed_web_research_v1.UnifiedCoreSelfDirectedResearchTests.test_audit_binds_research_without_changing_generation",
+    "test_yado_unified_core_self_directed_web_research_v1.UnifiedCoreSelfDirectedResearchTests.test_core_runs_causal_prepare_then_reads_two_independent_hosts",
+    "test_yado_unified_core_self_directed_web_research_v1.UnifiedCoreSelfDirectedResearchTests.test_research_memory_survives_export_restore"
   ],
   "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
   "schema": "yado.full_regression.v1",
@@ -483,6 +490,7 @@
     ".github/workflows/yado-second-cycle-baseline-v2.yml": "7e3e38bda122bd68445330e2df4b5afa0a2c14d672fbbdc04a351523f0751377",
     ".github/workflows/yado-second-cycle-self-improvement-v2.yml": "58183a81d300eb02ea5970c1ae9aa7ac4c4684847fab6a7a9ff98ca843befa8c",
     ".github/workflows/yado-security-audit-v1.yml": "f23cb659e23632a23e256930e640c02e7ba38bfe81f573206a408773455ad361",
+    ".github/workflows/yado-self-directed-web-research-v1.yml": "b77f319e8b935e5b07e25d411abd5280826cf8938b2cc8190dcc9e9c473954be",
     ".github/workflows/yado-structured-evidence-fusion-evolution-v1.yml": "ba71c15e719475cf667f2b9b7cd21b3beb6bdf520c6c2ed54e2f83e6c6e7b9ef",
     ".github/workflows/yado-thinking-boundary-adaptive-repair-v1.yml": "a75a9734b1ebffaa70a0b8ec4319152c7ce8f73aae093da3e2607d732005b7b2",
     ".github/workflows/yado-thinking-native-source-arm-v1.yml": "21300e35976e4e0d09d0fcb0e0feba35dacf1cc4262f4e97e6a55dbb8dc0d033",
@@ -570,7 +578,9 @@
     "runtime/test_yado_personal_public_web_access_v2.py": "2e7160a014e6f317439a26462b633f8197f993d9fe4243bbb5f66287bd53f698",
     "runtime/test_yado_public_data_transport_v1.py": "012cd4a88e38b6e42dd6c1ec06891f9aa6317651253297d95e2c20bc07c5ccd3",
     "runtime/test_yado_public_sandbox_connect_v1.py": "268f21ff6f42f402b4cc8871baf10dd2d92ec53d13d32e053ca136c38bd9ac23",
+    "runtime/test_yado_self_directed_web_research_v1.py": "d8c41f9c8e9d5b095c4474924fcb452323db451f13cac2786ff637191b91eb31",
     "runtime/test_yado_unified_core_personal_web_v2.py": "b08643a6d39bb9a116beb0fc6195f069eb02febf16c211c65f7f4f907b372291",
+    "runtime/test_yado_unified_core_self_directed_web_research_v1.py": "edddbb2b08bbef7363c29f55e04205b3c5072dc2b6a59d6af4fd971b57b12e68",
     "runtime/yado_active_native_learning_v1.py": "50bf47b8720bd7fc0af45ffd4df11c63e9a1fa2cfd7e23459d96d14da162da53",
     "runtime/yado_active_workflow_exec_audit_v1.py": "d2cf2523044d1347a1e2c1fc2974210b76bb9ed7e324f71912b1022e636c6f56",
     "runtime/yado_advanced_stem_benchmark_v1.py": "05e468a43419184eefb551112c2c55955c9c4926de10b68e7a7626f0b5e95a0d",
@@ -1255,6 +1265,7 @@
     "runtime/yado_science_evidence_audit_self_evolution_v1.py": "8ed0e4972ba37f02a130a4cc2b0ba72e949281226a90b2127851182973ede62b",
     "runtime/yado_security_audit_v1.py": "6901eafd30d44657658001c72b4b0bea81879231c8bc9e8ed2fb5f9d47c8948f",
     "runtime/yado_self_defined_consciousness_architecture_question_v1.py": "9ce4c7c493b24349df36426881308a9dc00ce654349bea38b2ba011737cca3ea",
+    "runtime/yado_self_directed_web_research_v1.py": "f1c34bb7310cec92b945351eb6d52c8169ce0fd074c45e9e8f0f19811b5a5eac",
     "runtime/yado_semantic_expression_synthesizer_v1.py": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
     "runtime/yado_shadow_algorithm_bank_admission_v1.py": "176e61f3d9f6ec501226399fbf4f4b0b5bebd33bdadc558139caf8265971ff97",
     "runtime/yado_shadow_meta_architecture_study_v1.py": "4d2af896e82bb9d6317db6da3a00cb9769a9dc0af48e82ec589eb043d096e689",
@@ -1275,6 +1286,7 @@
     "runtime/yado_unified_core_deep_self_audit_v1_receipt.json": "9b4520830f38645ff68b2137c6f8289cfe20f23f561b318dd9b4e3aaf66d8ed7",
     "runtime/yado_unified_core_ledger_reconciliation_v1.py": "380c5b8355946200a7c70e52582fc32417a5d87693fcdf5657d1867f9d5cd59b",
     "runtime/yado_unified_core_personal_web_v2.py": "3206645f64fdffafc60433ae53807551dc51c57d9af3913deb2714972870c9df",
+    "runtime/yado_unified_core_self_directed_web_research_v1.py": "e09a8100b6875c81e97382e99d7474c5977cd00458381290d51f6571ad1e875e",
     "runtime/yado_unified_core_self_repair_cycle_v1.py": "b02409911fd5c75b3b21a664b3d88adb477f7e63f9d869373c0deaaff1ec259c",
     "runtime/yado_unified_core_v1.py": "4154f08e801aa3c91934aa78bbe2ee0e957737d27e4a3aa4082dd25ce6068a62",
     "runtime/yado_unified_external_resource_portfolio_v1.py": "15ecd6362170938944ecae0068b05aa606fad7142e41c7d24cf35095c1e48894",
@@ -1350,7 +1362,7 @@
   "source_unchanged": true,
   "status": "PASS",
   "suite_counts": {
-    "runtime": 44,
+    "runtime": 51,
     "runtime/yado_rc8_v36": 120,
     "successor/tests": 198,
     "tests": 13
@@ -1361,7 +1373,7 @@
     "successor/tests",
     "runtime"
   ],
-  "tested_commit": "359b546626b083fdf92740da9def4fc174cb48d3",
-  "tests_run": 375,
+  "tested_commit": "1ecf4e41d13cdbef5a03d07677f597239839a775",
+  "tests_run": 382,
   "unexpected_successes": []
 }
