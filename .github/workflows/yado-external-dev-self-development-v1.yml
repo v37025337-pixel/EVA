@@ -93,8 +93,10 @@ jobs:
           PY
       - name: Run full kernel audit before persistence
         run: python runtime/yado_full_kernel_audit_v1.py
+      - name: Build fresh Successor identity for regression
+        run: python -m successor build --output "$RUNNER_TEMP/yado-self-dev-successor"
       - name: Run complete inherited and Successor regression
-        run: python runtime/yado_full_regression_v1.py
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-self-dev-successor/manifest.json"
       - name: Persist YADO-generated shadow candidate and receipt
         run: |
           git config user.name 'YADO External Dev Self Development'
