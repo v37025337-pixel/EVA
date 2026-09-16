@@ -2,11 +2,10 @@ from __future__ import annotations
 
 """Bounded YADO self-development using the admitted external dev capability pack.
 
-The controller refreshes the five public capability sources, uses every admitted
-pattern in a causal development chain, derives a deterministic routing policy,
-materializes a YADO-authored Python candidate, and validates it on fresh deficits.
-It never executes or copies third-party source code and never mutates canonical
-main automatically.
+The controller refreshes five verified public capability sources, uses each one in
+a causal development chain, derives a deterministic routing policy, materializes
+a YADO-authored Python candidate, and validates it on fresh deficits. Third-party
+source code is never copied or executed and canonical main is never auto-mutated.
 """
 
 import hashlib
@@ -20,32 +19,14 @@ COMPONENT_ID = "RUNTIME-G2-EXTERNAL-DEV-SELF-DEVELOPMENT-V1"
 SCHEMA = "yado.external_dev_self_development.v1"
 
 SEMANTIC_ANCHORS = {
-    "hivemind": [
-        "coordinate", "task", "issue", "acceptance", "criteria", "branch",
-        "worktree", "agent", "supervise", "review", "parallel", "isolate",
-    ],
-    "hoppscotch": [
-        "api", "endpoint", "http", "graphql", "websocket", "request",
-        "response", "schema", "assert", "protocol", "status",
-    ],
-    "dyad": [
-        "app", "application", "build", "candidate", "preview", "compile",
-        "test", "regression", "local", "stack", "admission",
-    ],
-    "nexustools": [
-        "json", "base64", "url", "hash", "digest", "format", "minify",
-        "transform", "utility", "offline", "encode", "decode",
-    ],
-    "free_for_dev": [
-        "free", "cloud", "compute", "hosting", "serverless", "storage",
-        "database", "resource", "deploy", "paas", "iaas", "ci", "cd",
-    ],
+    "hivemind": ["coordinate", "task", "issue", "acceptance", "criteria", "branch", "worktree", "agent", "supervise", "review", "parallel", "isolate"],
+    "hoppscotch": ["api", "endpoint", "http", "graphql", "websocket", "request", "response", "schema", "assert", "protocol", "status"],
+    "dyad": ["app", "application", "build", "candidate", "preview", "compile", "test", "regression", "local", "stack", "admission"],
+    "nexustools": ["json", "base64", "url", "hash", "digest", "format", "minify", "transform", "utility", "offline", "encode", "decode"],
+    "free_for_dev": ["free", "cloud", "compute", "hosting", "serverless", "storage", "database", "resource", "deploy", "paas", "iaas", "ci", "cd"],
 }
 
-GENERIC_TOKENS = {
-    "external", "developer", "development", "capability", "pattern", "library",
-    "workbench", "local", "read", "only", "source", "public", "native",
-}
+GENERIC_TOKENS = {"external", "developer", "development", "capability", "pattern", "library", "workbench", "local", "read", "only", "source", "public", "native"}
 
 FRESH_CASES = (
     ("coordinate two isolated branches with review criteria", "TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN"),
@@ -145,23 +126,14 @@ class ExternalDevSelfDevelopmentV1:
     def render_router_source(policy: dict) -> str:
         if not isinstance(policy, dict) or not policy.get("policy_sha256"):
             raise ValueError("ROUTER_POLICY_REQUIRED")
-        rules = repr(policy["rules"])
-        priority = repr(policy["priority"])
-        pack_digest = repr(policy.get("pack_digest"))
-        policy_sha = repr(policy["policy_sha256"])
-        source = f'''from __future__ import annotations\n\nPACK_DIGEST = {pack_digest}\nPOLICY_SHA256 = {policy_sha}\nRULES = {rules}\nPRIORITY = {priority}\n\ndef _tokens(text):\n    cleaned = ''.join(ch.lower() if ch.isalnum() else ' ' for ch in str(text))\n    return set(x for x in cleaned.split() if x)\n\ndef route(deficit):\n    tokens = _tokens(deficit)\n    ranked = []\n    for index, capability in enumerate(PRIORITY):\n        matched = [word for word in RULES[capability] if word in tokens]\n        ranked.append((len(matched), -index, capability, matched))\n    ranked.sort(reverse=True)\n    if not ranked or ranked[0][0] <= 0:\n        return {{'status': 'WITHHOLD_ROUTER_NO_MATCH', 'capability': None, 'matched': [], 'pack_digest': PACK_DIGEST, 'policy_sha256': POLICY_SHA256}}\n    top = ranked[0]\n    return {{'status': 'PASS_ROUTER_SELECTION', 'capability': top[2], 'matched': top[3], 'score': top[0], 'pack_digest': PACK_DIGEST, 'policy_sha256': POLICY_SHA256}}\n\ndef snapshot():\n    return {{'schema': 'yado.external_dev_capability_router_candidate.v1', 'pack_digest': PACK_DIGEST, 'policy_sha256': POLICY_SHA256, 'capability_count': len(PRIORITY), 'automatic_main_mutation': False, 'g3_genesis_performed': False}}\n'''
+        source = f'''PACK_DIGEST = {repr(policy.get("pack_digest"))}\nPOLICY_SHA256 = {repr(policy["policy_sha256"])}\nRULES = {repr(policy["rules"])}\nPRIORITY = {repr(policy["priority"])}\n\ndef _tokens(text):\n    cleaned = ''.join(ch.lower() if ch.isalnum() else ' ' for ch in str(text))\n    return set(x for x in cleaned.split() if x)\n\ndef route(deficit):\n    tokens = _tokens(deficit)\n    ranked = []\n    for index, capability in enumerate(PRIORITY):\n        matched = [word for word in RULES[capability] if word in tokens]\n        ranked.append((len(matched), -index, capability, matched))\n    ranked.sort(reverse=True)\n    if not ranked or ranked[0][0] <= 0:\n        return {{'status': 'WITHHOLD_ROUTER_NO_MATCH', 'capability': None, 'matched': [], 'pack_digest': PACK_DIGEST, 'policy_sha256': POLICY_SHA256}}\n    top = ranked[0]\n    return {{'status': 'PASS_ROUTER_SELECTION', 'capability': top[2], 'matched': top[3], 'score': top[0], 'pack_digest': PACK_DIGEST, 'policy_sha256': POLICY_SHA256}}\n\ndef snapshot():\n    return {{'schema': 'yado.external_dev_capability_router_candidate.v1', 'pack_digest': PACK_DIGEST, 'policy_sha256': POLICY_SHA256, 'capability_count': len(PRIORITY), 'automatic_main_mutation': False, 'g3_genesis_performed': False}}\n'''
         compile(source, "<yado-external-dev-router-candidate>", "exec")
         return source
 
     @staticmethod
     def load_router(source: str):
-        allowed = {
-            "str": str,
-            "set": set,
-            "len": len,
-            "enumerate": enumerate,
-            "list": list,
-        }
+        # Deliberately no __import__, open, eval, exec, compile, OS or network APIs.
+        allowed = {"str": str, "set": set, "len": len, "enumerate": enumerate, "list": list}
         scope = {"__builtins__": allowed}
         exec(compile(source, "<yado-external-dev-router-eval>", "exec"), scope, scope)
         if not callable(scope.get("route")) or not callable(scope.get("snapshot")):
@@ -171,11 +143,10 @@ class ExternalDevSelfDevelopmentV1:
     @classmethod
     def evaluate_router_source(cls, source: str, cases=FRESH_CASES) -> dict:
         route, snapshot = cls.load_router(source)
+        if snapshot().get("capability_count") != 5:
+            raise RuntimeError("ROUTER_CAPABILITY_COUNT_MISMATCH")
         rows = []
         passed = 0
-        priority = snapshot().get("capability_count")
-        if priority != 5:
-            raise RuntimeError("ROUTER_CAPABILITY_COUNT_MISMATCH")
         for deficit, expected in cases:
             result = route(deficit)
             ok = result.get("status") == "PASS_ROUTER_SELECTION" and result.get("capability") == expected
@@ -198,25 +169,12 @@ class ExternalDevSelfDevelopmentV1:
             "unknown_withhold": unknown.get("status") == "WITHHOLD_ROUTER_NO_MATCH",
         }
 
-    def run(
-        self,
-        core,
-        objective: str,
-        *,
-        candidate_path: str | Path | None = None,
-        receipt_path: str | Path | None = None,
-        timeout: float = 25.0,
-        resolver=None,
-        transport=None,
-        fetch_override=None,
-    ) -> dict:
+    def run(self, core, objective: str, *, candidate_path: str | Path | None = None, receipt_path: str | Path | None = None, timeout: float = 25.0, resolver=None, transport=None, fetch_override=None) -> dict:
         goal = " ".join(str(objective or "").split()).strip()
         if not goal:
             raise ValueError("SELF_DEVELOPMENT_OBJECTIVE_REQUIRED")
 
-        refresh = core.refresh_external_dev_capabilities(
-            timeout=timeout, resolver=resolver, transport=transport, fetch_override=fetch_override
-        )
+        refresh = core.refresh_external_dev_capabilities(timeout=timeout, resolver=resolver, transport=transport, fetch_override=fetch_override)
         _safe_refresh(refresh)
 
         task = core.external_dev_task_contract(goal, [
@@ -228,12 +186,8 @@ class ExternalDevSelfDevelopmentV1:
         ])
 
         api = core.external_dev_api_probe(
-            SOURCES["hoppscotch"]["metadata"],
-            must_contain="hoppscotch",
-            timeout=timeout,
-            resolver=resolver,
-            transport=transport,
-            fetch_override=fetch_override,
+            SOURCES["hoppscotch"]["metadata"], must_contain="hoppscotch", timeout=timeout,
+            resolver=resolver, transport=transport, fetch_override=fetch_override,
         )
         if api.get("status") != "PASS_READ_ONLY_API_ASSERTION":
             raise RuntimeError("EXTERNAL_DEV_SOURCE_API_ASSERTION_FAILED")
@@ -250,12 +204,8 @@ class ExternalDevSelfDevelopmentV1:
             raise RuntimeError("LOCAL_POLICY_DIGEST_FAILED")
 
         resources = core.external_dev_free_resource_candidates(
-            ["cloud", "compute", "serverless"],
-            limit=8,
-            timeout=timeout,
-            resolver=resolver,
-            transport=transport,
-            fetch_override=fetch_override,
+            ["cloud", "compute", "serverless"], limit=8, timeout=timeout,
+            resolver=resolver, transport=transport, fetch_override=fetch_override,
         )
         if resources.get("status") not in {"PASS_FREE_TIER_RESOURCE_DISCOVERY", "WITHHOLD_NO_MATCH"}:
             raise RuntimeError("FREE_RESOURCE_DISCOVERY_INVALID")
@@ -263,53 +213,14 @@ class ExternalDevSelfDevelopmentV1:
         candidate_source = self.render_router_source(policy)
         evaluation = self.evaluate_router_source(candidate_source)
         candidate_sha = _sha_text(candidate_source)
-        pass_gate = (
-            evaluation.get("status") == "PASS_FRESH_ROUTER_TRANSFER"
-            and evaluation.get("gain", 0.0) > 0.0
-            and evaluation.get("unknown_withhold") is True
-        )
+        pass_gate = evaluation.get("status") == "PASS_FRESH_ROUTER_TRANSFER" and evaluation.get("gain", 0.0) > 0.0 and evaluation.get("unknown_withhold") is True
 
         generations = [
-            {
-                "generation": 1,
-                "deficit": "NO_AUTONOMOUS_EXTERNAL_DEV_CAPABILITY_ROUTER",
-                "selected_capability": "TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN",
-                "source_pattern": task["source_pattern"],
-                "result": "PASS_TASK_CONTRACT",
-                "next_goal": "VERIFY_EXTERNAL_CAPABILITY_SOURCE_ACCESS",
-            },
-            {
-                "generation": 2,
-                "deficit": "EXTERNAL_SOURCE_ACCESS_NOT_REVALIDATED_FOR_DEVELOPMENT",
-                "selected_capability": "READ_ONLY_API_ASSERTION_WORKBENCH",
-                "source_pattern": api["source_pattern"],
-                "result": api["status"],
-                "next_goal": "PLAN_ISOLATED_ROUTER_BUILD_AND_ADMISSION",
-            },
-            {
-                "generation": 3,
-                "deficit": "ROUTER_CANDIDATE_NOT_MATERIALIZED",
-                "selected_capability": "LOCAL_APP_BUILD_ADMISSION_LOOP",
-                "source_pattern": build["source_pattern"],
-                "result": "PASS_BUILD_PLAN",
-                "next_goal": "FREEZE_ROUTER_POLICY_IDENTITY",
-            },
-            {
-                "generation": 4,
-                "deficit": "ROUTER_POLICY_IDENTITY_NOT_FROZEN",
-                "selected_capability": "PURE_LOCAL_DEV_UTILITY_LIBRARY",
-                "source_pattern": policy_digest["source_pattern"],
-                "result": "PASS_LOCAL_POLICY_DIGEST",
-                "next_goal": "CHECK_FUTURE_ISOLATED_RESOURCE_OPTIONS",
-            },
-            {
-                "generation": 5,
-                "deficit": "FUTURE_EXTERNAL_DEVELOPMENT_RESOURCE_OPTIONS_UNKNOWN",
-                "selected_capability": "FREE_TIER_RESOURCE_DISCOVERY",
-                "source_pattern": resources["source_pattern"],
-                "result": resources["status"],
-                "next_goal": "VALIDATE_ROUTER_ON_FRESH_DEFICITS_AND_WITHHOLD_UNKNOWN",
-            },
+            {"generation": 1, "deficit": "NO_AUTONOMOUS_EXTERNAL_DEV_CAPABILITY_ROUTER", "selected_capability": "TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN", "source_pattern": task["source_pattern"], "result": "PASS_TASK_CONTRACT", "next_goal": "VERIFY_EXTERNAL_CAPABILITY_SOURCE_ACCESS"},
+            {"generation": 2, "deficit": "EXTERNAL_SOURCE_ACCESS_NOT_REVALIDATED_FOR_DEVELOPMENT", "selected_capability": "READ_ONLY_API_ASSERTION_WORKBENCH", "source_pattern": api["source_pattern"], "result": api["status"], "next_goal": "PLAN_ISOLATED_ROUTER_BUILD_AND_ADMISSION"},
+            {"generation": 3, "deficit": "ROUTER_CANDIDATE_NOT_MATERIALIZED", "selected_capability": "LOCAL_APP_BUILD_ADMISSION_LOOP", "source_pattern": build["source_pattern"], "result": "PASS_BUILD_PLAN", "next_goal": "FREEZE_ROUTER_POLICY_IDENTITY"},
+            {"generation": 4, "deficit": "ROUTER_POLICY_IDENTITY_NOT_FROZEN", "selected_capability": "PURE_LOCAL_DEV_UTILITY_LIBRARY", "source_pattern": policy_digest["source_pattern"], "result": "PASS_LOCAL_POLICY_DIGEST", "next_goal": "CHECK_FUTURE_ISOLATED_RESOURCE_OPTIONS"},
+            {"generation": 5, "deficit": "FUTURE_EXTERNAL_DEVELOPMENT_RESOURCE_OPTIONS_UNKNOWN", "selected_capability": "FREE_TIER_RESOURCE_DISCOVERY", "source_pattern": resources["source_pattern"], "result": resources["status"], "next_goal": "VALIDATE_ROUTER_ON_FRESH_DEFICITS_AND_WITHHOLD_UNKNOWN"},
         ]
 
         receipt = {
@@ -319,13 +230,7 @@ class ExternalDevSelfDevelopmentV1:
             "objective": goal,
             "source_pack_digest": refresh.get("pack_digest"),
             "source_count": refresh.get("source_count"),
-            "used_source_patterns": [
-                "dip497/hivemind",
-                "hoppscotch/hoppscotch",
-                "dyad-sh/dyad",
-                "nexustools-dev/nexus-tools",
-                "ripienaar/free-for-dev",
-            ],
+            "used_source_patterns": ["dip497/hivemind", "hoppscotch/hoppscotch", "dyad-sh/dyad", "nexustools-dev/nexus-tools", "ripienaar/free-for-dev"],
             "development_generations": generations,
             "policy_sha256": policy["policy_sha256"],
             "local_policy_digest_sha256": policy_digest["output"],
@@ -359,8 +264,4 @@ class ExternalDevSelfDevelopmentV1:
         return json.loads(json.dumps(receipt))
 
 
-__all__ = [
-    "ExternalDevSelfDevelopmentV1",
-    "FRESH_CASES",
-    "SEMANTIC_ANCHORS",
-]
+__all__ = ["ExternalDevSelfDevelopmentV1", "FRESH_CASES", "SEMANTIC_ANCHORS"]
