@@ -28,13 +28,15 @@ class NativeMechanismTests(unittest.TestCase):
         functions = [(0, lambda x: 41), (0, lambda x: -73), (0, lambda x: 199),
                      (1, lambda x: 23 * x - 117),
                      (2, lambda x: 13 * x * x + 37 * x - 53),
-                     (3, lambda x: 11 * x ** 3 + 17 * x * x - 83 * x + 101)]
+                     (3, lambda x: 11 * x ** 3 + 17 * x * x - 83 * x + 101),
+                     (4, lambda x: 13 * x ** 4 - 19 * x ** 3 + 7 * x - 31),
+                     (5, lambda x: 17 * x ** 5 + 11 * x ** 4 - 23 * x * x + 43)]
         for index, (degree, function) in enumerate(functions):
             if degree > candidate['profile']['max_degree']:
                 continue
             with self.subTest(degree=degree, function=index):
                 key = 'Fresh_Parameter_' + str(index)
-                result = mechanism.synthesize(candidate, rows(function, key=key))
+                result = mechanism.synthesize(candidate, rows(function, xs=range(-3, 4), key=key))
                 self.assertEqual(result['selected']['degree'], degree)
                 self.assertEqual(result['mechanism_source_sha256'], candidate['source_sha256'])
                 self.assertEqual(execute_source(result, [{key: -9}, {key: 13}]),
@@ -94,13 +96,66 @@ class NativeMechanismTests(unittest.TestCase):
         self.assertEqual(emitted.decorator_list, [])
 
     def test_profile_is_bounded_and_changes_the_runtime_budget(self):
-        for invalid in (-1, 4, True, '2', 2.0, None):
+        for invalid in (-1, 6, True, '2', 2.0, None):
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
                 mechanism.build_candidate(invalid)
         constant = mechanism.synthesize(mechanism.build_candidate(0), rows(lambda x: 37))
         self.assertEqual(constant['selected']['degree'], 0)
         self.assertEqual(execute_source(constant, [{'x': -1000}]), [37])
         self.assert_withheld(mechanism.build_candidate(1), rows(lambda x: 10 - x * x))
+
+    def test_legacy_profiles_and_emitted_bytes_remain_exact(self):
+        digests = (
+            'da185d7db9ec0353e08c6f7ca0dc656c99501a79db9066354b5a4170e0aecf1d',
+            '89d0c060f565dc3c063410455dfd2e40996db67863be2dae52260e2d9585a81d',
+            '5367323ff7ea1c3a659ed781328aca5f19c345ea6cf42ec945f42294164ca6f8',
+            '5e26fac2063df650695cae0726cda483216c25c3d9bb7f4191d76ddecaf8d01f',
+        )
+        for degree, digest in enumerate(digests):
+            with self.subTest(degree=degree):
+                candidate = mechanism.build_candidate(degree)
+                self.assertEqual(candidate['schema'], 'yado.native_mechanism.v1')
+                self.assertEqual(candidate['profile'], {
+                    'grammar_version': 'YADO_EXACT_POLYNOMIAL_NATIVE_MECHANISM_V1',
+                    'donor': {'path': 'runtime/yado_evolutionary_multigeneration_lineage_v1.py',
+                        'sha256': 'a471c4a4c53044db94f482ad7d6f2c4758bad3f9d60c68f2252b88759b7a1cc3'},
+                    'max_degree': degree})
+                self.assertEqual(candidate['source_sha256'], digest)
+                self.assertEqual(hashlib.sha256(candidate['source'].encode()).hexdigest(), digest)
+                mechanism.validate_candidate(candidate)
+
+    def test_new_version_supports_four_and_five_without_extending_legacy_inference(self):
+        for degree in (4, 5):
+            with self.subTest(degree=degree):
+                function = lambda x: 7 * x ** degree - 11 * x + 23
+                training = rows(function, xs=range(-3, 4), key='NewInput')
+                candidate = mechanism.build_candidate(degree)
+                self.assertEqual(candidate['profile']['grammar_version'],
+                                 'YADO_EXACT_POLYNOMIAL_NATIVE_MECHANISM_V2')
+                self.assertIsNone(mechanism.inferred_degree(training))
+                self.assertEqual(mechanism.inferred_degree(training, max_degree=5), degree)
+                result = mechanism.synthesize(candidate, training)
+                self.assertEqual(result['selected']['degree'], degree)
+                self.assertEqual(result['grammar_stage'], 'EMITTED_EXACT_POLYNOMIAL_NATIVE_MECHANISM_V2')
+                self.assertEqual(execute_source(result, [{'NewInput': -9}, {'NewInput': 11}]),
+                                 [function(-9), function(11)])
+                old_profile = copy.deepcopy(candidate)
+                old_profile['profile']['grammar_version'] = 'YADO_EXACT_POLYNOMIAL_NATIVE_MECHANISM_V1'
+                with self.assertRaisesRegex(ValueError, 'PROFILE_MISMATCH'):
+                    mechanism.validate_candidate(old_profile)
+
+    def test_new_degree_limit_and_training_evidence_remain_bounded(self):
+        candidate = mechanism.build_candidate(5)
+        overdegree = rows(lambda x: x ** 6, xs=range(-4, 5))
+        self.assert_withheld(candidate, overdegree)
+        self.assertIsNone(mechanism.inferred_degree(overdegree, max_degree=5))
+        for degree in (4, 5):
+            with self.subTest(degree=degree):
+                training = rows(lambda x: x ** degree, xs=range(degree + 1))
+                self.assert_withheld(mechanism.build_candidate(degree), training)
+        for invalid in (-1, 6, True, '5', 5.0, None):
+            with self.subTest(bound=invalid), self.assertRaises(ValueError):
+                mechanism.inferred_degree(rows(lambda x: x), max_degree=invalid)
 
     def assert_withheld(self, candidate, training):
         result = mechanism.synthesize(candidate, training)

@@ -23,6 +23,7 @@ SCHEMA = 'yado.hivemind.runtime-evolution.v1'
 REQUEST = {'schema': SCHEMA, 'objective': 'repair_native_source_failures'}
 PREFIX = 'native_materialized_'
 COST = 4
+SELECTION_POLICY = 'bounded_polynomial_degree5_v2'
 
 
 def normalize_request(value):
@@ -31,8 +32,17 @@ def normalize_request(value):
     return dict(REQUEST)
 
 
-def select_candidate(goals, excluded=(), parents=()):
+def _selection_bound(policy):
+    if policy is None:
+        return 3
+    if type(policy) is not str or policy != SELECTION_POLICY:
+        raise ValueError('RUNTIME_EVOLUTION_SELECTION_POLICY')
+    return 5
+
+
+def select_candidate(goals, excluded=(), parents=(), *, policy=None):
     from .native_mechanism import build_candidate, inferred_degree, synthesize
+    max_degree = _selection_bound(policy)
     solved = {fingerprint(g['spec']['training']) for g in goals.values()
               if g['status'] == 'VALIDATED_ON_HOLDOUT' and g['spec']['domain'] == 'native_source'}
     options = []
@@ -46,7 +56,7 @@ def select_candidate(goals, excluded=(), parents=()):
             continue
         if any(synthesize(parent, training).get('source') for parent in parents):
             continue
-        degree = inferred_degree(training)
+        degree = inferred_degree(training, max_degree=max_degree)
         if degree is None:
             continue
         candidate = build_candidate(degree)
@@ -61,9 +71,9 @@ def states(records):
     """Projection only; causal validation is performed by cognitive replay."""
     result = {}
     for r in records:
-        if r['kind'] == 'COG_RUNTIME_PROPOSE':
+        if r.get('kind') == 'COG_RUNTIME_PROPOSE':
             result[r['tick']] = {'proposal': r, 'evaluation': None, 'admission': None, 'revoked': False}
-        elif r['kind'] in {'COG_RUNTIME_EVALUATE', 'COG_RUNTIME_ADMIT', 'COG_RUNTIME_REVOKE'}:
+        elif r.get('kind') in {'COG_RUNTIME_EVALUATE', 'COG_RUNTIME_ADMIT', 'COG_RUNTIME_REVOKE'}:
             item = result.get(r.get('proposal_tick'))
             if item is None:
                 raise ValueError('RUNTIME_EVOLUTION_UNKNOWN_PROPOSAL')
@@ -130,6 +140,13 @@ def replay_event(record, past, goals):
     if body['kind'] == 'COG_RUNTIME_PROPOSE':
         required = {'kind', 'workspace_id', 'issue_id', 'request', 'implementation_identity',
                     'selection', 'parents', 'memory_digest', 'generator_authorship', 'algorithm_origin'}
+        policy = None
+        if 'selection_policy' in body:
+            required.add('selection_policy')
+            policy = body['selection_policy']
+            if policy is None:
+                raise ValueError('RUNTIME_EVOLUTION_SELECTION_POLICY')
+            _selection_bound(policy)
         key = _key(body['workspace_id'], body['issue_id'])
         normalize_request(body['request'])
         if set(body) != required or any((s['proposal']['workspace_id'], s['proposal']['issue_id']) == key
@@ -137,7 +154,8 @@ def replay_event(record, past, goals):
             raise ValueError('RUNTIME_EVOLUTION_PROPOSAL_CONTRACT')
         parents = list(active_candidates(past).values())
         excluded = [x['source_sha256'] for x in parents]
-        if (body['parents'] != parents or body['selection'] != select_candidate(goals, excluded, parents)
+        if (body['parents'] != parents
+                or body['selection'] != select_candidate(goals, excluded, parents, policy=policy)
                 or body['memory_digest'] != fingerprint(goals)
                 or body['generator_authorship'] != 'ASSISTANT_AUTHORIZED_BY_USER'
                 or body['algorithm_origin'] != 'INHERITED_FITTER_KERNEL_SELECTED_AST_MATERIALIZATION'):
@@ -197,6 +215,12 @@ def verify_implementations(records, current_implementation):
         raise ValueError('RUNTIME_EVOLUTION_IMPLEMENTATION_PROVENANCE')
 
 
+def _checked_trial_seed(seed):
+    if type(seed) is not str or len(seed) != 48 or any(c not in '0123456789abcdef' for c in seed):
+        raise ValueError('RUNTIME_EVOLUTION_FRESH_SEED_CONTRACT')
+    return seed
+
+
 def trial_report(kernel, proposal, seed):
     """New coefficients and held-out inputs are drawn only after module freeze."""
     from .cognitive import CognitiveLoop, replay
@@ -212,8 +236,7 @@ def _expected_trial(candidate_json, spec_json, goal_id, seed, parents_json):
     from .native_binding import synthesize as parent_synthesize
     from yado_active_native_learning_v1 import execute_source
     candidate, old_spec = json.loads(candidate_json), json.loads(spec_json)
-    if type(seed) is not str or len(seed) != 48 or any(c not in '0123456789abcdef' for c in seed):
-        raise ValueError('RUNTIME_EVOLUTION_FRESH_SEED_CONTRACT')
+    _checked_trial_seed(seed)
     validate_candidate(candidate)
     rng = random.Random(seed)
     degree = candidate['profile']['max_degree']
@@ -296,20 +319,25 @@ class RuntimeEvolution:
             return self.kernel._append({'kind': 'COG_RUNTIME_PROPOSE',
                 'workspace_id': workspace_id, 'issue_id': issue_id, 'request': request,
                 'implementation_identity': self.kernel.implementation_identity,
-                'selection': select_candidate(goals, excluded, parents), 'parents': parents,
+                'selection': select_candidate(goals, excluded, parents, policy=SELECTION_POLICY),
+                'selection_policy': SELECTION_POLICY, 'parents': parents,
                 'memory_digest': fingerprint(goals),
                 'generator_authorship': 'ASSISTANT_AUTHORIZED_BY_USER',
                 'algorithm_origin': 'INHERITED_FITTER_KERNEL_SELECTED_AST_MATERIALIZATION'})
         return self.loop._transaction(operation)
 
-    def evaluate(self, proposal_tick, output):
+    def evaluate(self, proposal_tick, output, *, trial_seed=None):
         """Run fixed commands locally; no imported verdict or arbitrary command."""
         from .cognitive import replay
         from .generation import retained_memory
+        if trial_seed is not None:
+            _checked_trial_seed(trial_seed)
         self.kernel.verify_state()
         self._idle()
         item = states(self.loop._records())[proposal_tick]
         if item['evaluation']:
+            if trial_seed is not None and item['evaluation']['trial']['fresh_seed'] != trial_seed:
+                raise ValueError('RUNTIME_EVOLUTION_TRIAL_SEED_CHANGED')
             return item['evaluation']
         proposal = item['proposal']
         if proposal['selection'] is None:
@@ -322,7 +350,8 @@ class RuntimeEvolution:
         candidate_path = output / 'candidate.json'
         candidate_path.write_text(json.dumps(candidate, sort_keys=True, indent=2) + '\n')
         (output / 'candidate.py').write_text(candidate['source'])
-        trial = trial_report(self.kernel, proposal, secrets.token_hex(24))
+        trial = trial_report(self.kernel, proposal,
+                             secrets.token_hex(24) if trial_seed is None else trial_seed)
         (output / 'trial.typed.json').write_text(encode(trial) + '\n')
         birth = output / 'regression-birth'
         with (output / 'build.log').open('w') as log:

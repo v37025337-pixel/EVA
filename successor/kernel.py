@@ -180,6 +180,11 @@ class SuccessorKernel:
                or r.get('kind', '').startswith('COG_RUNTIME_') for r in autonomous_records):
             from .runtime_evolution import verify_implementations
             verify_implementations(autonomous_records, self.implementation_identity)
+        self._lineage_present = any(r.get('kind', '').startswith('LINEAGE_') or 'lineage_id' in r
+                                    for r in autonomous_records)
+        if self._lineage_present:
+            from .lineage import replay as replay_lineage
+            replay_lineage(autonomous_records, self.identity, self.implementation_identity)
         return {"status": "PASS", "tick": tick, "event_hash": previous}
 
     def _append(self, body):
@@ -187,7 +192,19 @@ class SuccessorKernel:
         tick, previous = (last["tick"] + 1, last["event_hash"]) if last else (1, "0" * 64)
         text = encode(body)
         digest = sha((previous + "\n" + str(tick) + "\n" + text).encode())
+        # Validate prospective lineage writes before INSERT, including unrelated
+        # concurrent actions. A rejected action cannot poison the durable journal.
+        if (body.get('kind', '').startswith('LINEAGE_') or 'lineage_id' in body
+                or getattr(self, '_lineage_present', False)):
+            from .lineage import goals_at, records, replay as replay_lineage
+            prospective = records(self) + [{**body, 'tick': tick, 'event_hash': digest}]
+            if body.get('kind', '').startswith('COG_'):
+                goals_at(prospective)
+            replay_lineage(prospective,
+                           self.identity, self.implementation_identity)
         self.db.execute("INSERT INTO events VALUES(?,?,?,?)", (tick, previous, text, digest))
+        if body.get('kind', '').startswith('LINEAGE_'):
+            self._lineage_present = True
         return {"tick": tick, "event_hash": digest, **body}
 
     def recent(self, limit=5):

@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = 'yado.native_mechanism.v1'
 GRAMMAR_VERSION = 'YADO_EXACT_POLYNOMIAL_NATIVE_MECHANISM_V1'
+GRAMMAR_VERSION_V2 = 'YADO_EXACT_POLYNOMIAL_NATIVE_MECHANISM_V2'
 DONOR_PATH = 'runtime/yado_evolutionary_multigeneration_lineage_v1.py'
 DONOR_SHA256 = 'a471c4a4c53044db94f482ad7d6f2c4758bad3f9d60c68f2252b88759b7a1cc3'
 
@@ -112,10 +113,10 @@ def _read_donor() -> bytes:
 
 def profile(max_degree: int) -> dict:
     """Describe a bounded emitter; no task examples are accepted here."""
-    if type(max_degree) is not int or not 0 <= max_degree <= 3:
+    if type(max_degree) is not int or not 0 <= max_degree <= 5:
         raise ValueError('NATIVE_MECHANISM_MAX_DEGREE')
     _read_donor()
-    return {'grammar_version': GRAMMAR_VERSION,
+    return {'grammar_version': GRAMMAR_VERSION if max_degree <= 3 else GRAMMAR_VERSION_V2,
             'donor': {'path': DONOR_PATH, 'sha256': DONOR_SHA256},
             'max_degree': max_degree}
 
@@ -151,7 +152,13 @@ def _donor_fit() -> ast.FunctionDef:
 def emit(candidate_profile: dict) -> str:
     """Return the exact reusable module for the supported, pinned profile."""
     checked = _checked_profile(candidate_profile)
-    tree = ast.parse(_ADAPTER_SOURCE)
+    # Preserve the original module byte-for-byte for every V1 degree. V2
+    # expands the bound within the same inherited polynomial fitting family.
+    adapter = _ADAPTER_SOURCE
+    if checked['grammar_version'] == GRAMMAR_VERSION_V2:
+        adapter = adapter.replace('EMITTED_EXACT_POLYNOMIAL_NATIVE_MECHANISM_V1',
+                                  'EMITTED_EXACT_POLYNOMIAL_NATIVE_MECHANISM_V2')
+    tree = ast.parse(adapter)
     for node in tree.body:
         if (isinstance(node, ast.Assign) and len(node.targets) == 1
                 and isinstance(node.targets[0], ast.Name) and node.targets[0].id == '_MAX_DEGREE'):
@@ -200,9 +207,9 @@ def synthesize(candidate: dict, training: list) -> dict:
     return {**result, 'mechanism_source_sha256': hashlib.sha256(source.encode('utf-8')).hexdigest()}
 
 
-def inferred_degree(training: list) -> int | None:
+def inferred_degree(training: list, max_degree: int = 3) -> int | None:
     """Find the smallest supported degree using training only, or no proposal."""
-    result = synthesize(build_candidate(3), training)
+    result = synthesize(build_candidate(max_degree), training)
     if not result.get('source'):
         return None
     return result['selected']['degree']
