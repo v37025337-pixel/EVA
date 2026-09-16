@@ -1,8 +1,11 @@
 {
   "schema": "yado.personal_public_web_access.v2",
-  "status": "CANDIDATE_BROAD_PUBLIC_HTTPS_READ_ONLY_V2",
+  "status": "CANDIDATE_CORE_BOUND_BROAD_PUBLIC_HTTPS_READ_ONLY_V2",
   "capability_id": "RUNTIME-PERSONAL-PUBLIC-WEB-ACCESS-V2",
   "runtime": "runtime/yado_personal_public_web_access_v2.py",
+  "core_binding_runtime": "runtime/yado_unified_core_personal_web_v2.py",
+  "core_entrypoint": "UnifiedYADOCorePersonalWebV2",
+  "base_core": "UnifiedYADOCoreV1",
   "purpose": "Give YADO a kernel-owned broad public web discovery/read channel without a fixed hostname allowlist.",
   "authority": {
     "schemes": ["https"],
@@ -25,16 +28,24 @@
     "retain original hostname for TLS SNI and Host",
     "revalidate every redirect target before transport",
     "reject URL credentials and non-443 ports",
-    "bound redirects, response bytes, timeouts, and discovered links",
+    "bound redirects, response bytes, timeouts, discovered links, and explored pages",
     "accept text, JSON, and XML-family response bodies only"
+  ],
+  "core_operations": [
+    "public_web_fetch",
+    "public_web_discover",
+    "public_web_explore",
+    "public_web_channel_snapshot"
   ],
   "discovery": {
     "bounded_link_extraction": true,
+    "bounded_breadth_first_exploration": true,
     "relative_link_resolution": true,
     "unsafe_link_filtering": true,
-    "cross_domain_public_https_discovery": true
+    "cross_domain_public_https_discovery": true,
+    "max_pages_per_explore": 5
   },
-  "semantic_boundary": "BROAD PUBLIC HTTPS READ/DISCOVERY ONLY. NO PRIVATE NETWORK ACCESS, AUTHENTICATION BYPASS, CREDENTIAL USE, EXTERNAL WRITE, DOWNLOADED-CODE EXECUTION, OR UNBOUNDED AUTONOMOUS CRAWLING.",
+  "semantic_boundary": "BROAD PUBLIC HTTPS READ/DISCOVERY ONLY. NO PRIVATE NETWORK ACCESS, AUTHENTICATION BYPASS, CREDENTIAL USE, EXTERNAL WRITE, DOWNLOADED-CODE EXECUTION, UNBOUNDED AUTONOMOUS CRAWLING, OR G3 CLAIM.",
   "canonical_active": false,
   "g3_genesis_performed": false
 }
