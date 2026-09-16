@@ -1,11 +1,23 @@
 import unittest
 
 from successor.native_binding import STRATEGY, synthesize
-from yado_active_native_learning_v1 import execute_source
 
 
 def rows(function, xs=range(-5, 6)):
     return [{'input': {'x': x}, 'expected': function(x)} for x in xs]
+
+
+def execute_source(result, inputs):
+    """Execute a synthesized source candidate in a minimal isolated namespace."""
+    source = result.get('source')
+    if not isinstance(source, str):
+        raise AssertionError('synthesis result has no source')
+    scope = {'__builtins__': {}}
+    exec(compile(source, '<inductive-native-binding-test>', 'exec'), scope, scope)
+    solve = scope.get('solve')
+    if not callable(solve):
+        raise AssertionError('synthesized source does not expose solve')
+    return [solve('test-component', 'test-program', dict(inputs_row)) for inputs_row in inputs]
 
 
 class InductiveNativeBindingTests(unittest.TestCase):
