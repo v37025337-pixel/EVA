@@ -1,0 +1,100 @@
+{
+  "schema": "yado.consecutive-runtime-lineage.canonical-receipt.v1",
+  "evidence_origin": "GitHub Actions run logs plus immutable workflow artifact metadata",
+  "workflow": {
+    "name": "YADO Consecutive Runtime Lineage Real Run V1",
+    "path": ".github/workflows/yado-consecutive-runtime-lineage-real-run-v1.yml",
+    "run_id": 35077139787,
+    "run_number": 2,
+    "event": "push",
+    "conclusion": "success",
+    "head_branch": "codex/yado-multigeneration-20260916",
+    "head_commit": "4b0efe3683c0f83aaab47f08542d0bc83994ef38",
+    "started_at": "2026-09-16T09:02:37Z",
+    "completed_at": "2026-09-16T09:25:55Z"
+  },
+  "tested_source": {
+    "commit": "4b0efe3683c0f83aaab47f08542d0bc83994ef38",
+    "tree": "8af68fa764763ca1a44b73f348db249578ad67c4"
+  },
+  "pr45_canonical_merge": {
+    "commit": "51b7446a614c0d5deb5eff79932b02cfd8972892",
+    "tree": "8af68fa764763ca1a44b73f348db249578ad67c4",
+    "same_tested_tree": true
+  },
+  "initial_deficit": {
+    "goal_id": 2,
+    "status": "WITHHOLD",
+    "budget": 30,
+    "remaining": 20,
+    "attempted_strategies": [
+      "native_v2",
+      "native_v3",
+      "native_v4",
+      "native_evolved_v2"
+    ],
+    "selected_candidate_sha256": "5e26fac2063df650695cae0726cda483216c25c3d9bb7f4191d76ddecaf8d01f",
+    "state_verification": {
+      "status": "PASS",
+      "tick": 20,
+      "event_hash": "5cade0fe7a1356ccb9f4c758bfd690b3c5b304e26f83580b86ad93f6bbd29f58"
+    }
+  },
+  "terminal_lineage": {
+    "lineage_id": 21,
+    "status": "COMPLETE",
+    "phase": "DONE",
+    "generation_count": 3,
+    "generation_candidate_sha256": [
+      "5e26fac2063df650695cae0726cda483216c25c3d9bb7f4191d76ddecaf8d01f",
+      "d51a05dfa628fdb73be333bac907333a30cd9c9be1c887833750fd10fc766a76",
+      "62f651ce497345ecceadabd99f5cf81b7d664d1c33940267857b6a073fd11c9a"
+    ],
+    "generation_program_sha256": [
+      "6c6db4bb03353e872063b0445f57207cacce45f9a0eb5484f8dcfae5e939735e",
+      "3b811172f07fd78e1395796dee38ace1760a3eede42f27b232008f2554ae3d7e",
+      "6a9705ab0507e4a6932707399dba06ab2e5660cc0cf36b9dba23303de3f5bbef"
+    ],
+    "finish": {
+      "kind": "LINEAGE_FINISH",
+      "reason": "TARGET_REACHED",
+      "generations": 3,
+      "status": "COMPLETE",
+      "tick": 130,
+      "event_hash": "aeef13e79510a6c70b25664bfe23f7be0ac4032040917e3d1937f57253a46253"
+    },
+    "reopen_state_verification": {
+      "status": "PASS",
+      "tick": 130,
+      "event_hash": "aeef13e79510a6c70b25664bfe23f7be0ac4032040917e3d1937f57253a46253"
+    }
+  },
+  "artifact": {
+    "id": 10438909904,
+    "name": "yado-consecutive-runtime-lineage-real-run-v1-35077139787",
+    "size_in_bytes": 368392474,
+    "sha256": "8132582353ae05baeb1a3f3dd63a2533d440d2617115981921e74813c9664757",
+    "expires_at": "2026-12-15T09:02:35Z"
+  },
+  "semantic_boundary": {
+    "classification": "BOUNDED_POLYNOMIAL_RUNTIME_CAPACITY_EXTENSIONS",
+    "host_authored": [
+      "lineage controller",
+      "finite polynomial composition grammar",
+      "bounded runtime adapter and gates"
+    ],
+    "kernel_selected_or_derived": [
+      "recorded native-source deficit",
+      "concrete candidate materialization within the supported grammar",
+      "subsequent composition challenges from verified predecessor programs"
+    ],
+    "inherited_algorithm": "exact polynomial fitter",
+    "does_not_establish": [
+      "open-ended architecture invention",
+      "unrestricted algorithm invention",
+      "G3",
+      "general intelligence",
+      "consciousness"
+    ]
+  }
+}
