@@ -68,9 +68,8 @@ class ExternalDevResidualContinuationV2(ExternalDevMultiGoalCampaignV1):
         if 'continuation_digest' not in artifacts:
             phases = len((artifacts['resource_validation_plan'] or {}).get('phases') or [])
             return (
-                f"The state-derived resource validation plan for '{first['name']}' contains {phases} "
-                "phases; freeze an offline digest of the post-discovery continuation state so a later "
-                "restart can detect drift before any execution."
+                f"The state-derived validation plan contains {phases} phases; freeze an offline digest "
+                "and hash of its continuation evidence so a later restart can detect drift before execution."
             )
 
         return None
