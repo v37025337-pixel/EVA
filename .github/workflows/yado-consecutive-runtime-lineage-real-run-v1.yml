@@ -75,12 +75,13 @@ jobs:
           PY
       - name: Run three consecutive runtime capacity generations
         run: |
+          set -o pipefail
           mkdir -p "$RUNNER_TEMP/lineage-gates"
           python -m successor.lineage \
             --manifest "$RUNNER_TEMP/lineage-birth/manifest.json" \
             --state "$RUNNER_TEMP/lineage.sqlite" \
             --workspace-id github-actions-real-lineage \
-            --issue-id YADO-PR45-REAL-3GEN \
+            --issue-id YADO-45 \
             --output "$RUNNER_TEMP/lineage-gates" \
             --generations 3 | tee "$RUNNER_TEMP/lineage-run.log"
       - name: Reopen and independently verify terminal lineage state
