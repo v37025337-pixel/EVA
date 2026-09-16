@@ -1,0 +1,163 @@
+name: YADO Inductive Family Genesis Real Run V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/yado-inductive-family-genesis-20260916]
+    paths:
+      - '.github/workflows/yado-inductive-family-genesis-real-run-v1.yml'
+      - 'successor/inductive_mechanism.py'
+      - 'successor/tests/test_inductive_mechanism.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yado-inductive-family-genesis-real-run-v1
+  cancel-in-progress: false
+
+jobs:
+  exhausted-deficit-to-derived-family:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install declared dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r successor/requirements.txt -r runtime/yado_rc8_v36/requirements-github.txt
+          python -m pip install --disable-pip-version-check pyyaml
+      - name: Run focused inductive mechanism tests
+        run: python -m unittest successor.tests.test_inductive_mechanism -v
+      - name: Build pinned Successor
+        run: python -m successor build --output "$RUNNER_TEMP/inductive-birth"
+      - name: Run real exhausted deficit then derive a new primitive family
+        run: |
+          python - <<'PY'
+          import copy
+          import json
+          import os
+          from pathlib import Path
+
+          from successor.inductive_mechanism import build_candidate, synthesize
+          from successor.kernel import SuccessorKernel
+          from successor.native_mechanism import inferred_degree
+
+          root = Path(os.environ['RUNNER_TEMP'])
+          manifest = root / 'inductive-birth' / 'manifest.json'
+          state = root / 'inductive.sqlite'
+          evidence_path = root / 'inductive-family-genesis.json'
+
+          def row(function, x, key='x'):
+              return {'input': {key: x}, 'expected': function(x)}
+
+          training_x = tuple(range(-5, 6))
+          target = abs
+          spec = {
+              'domain': 'native_source',
+              'training': [row(target, x) for x in training_x],
+              'validation': [row(target, -13), row(target, 12), row(target, 19)],
+              'queries': [{'input': {'x': -21}}, {'input': {'x': 23}}],
+          }
+          kernel = SuccessorKernel(manifest, state)
+          try:
+              kernel.activate_native_synthesis()
+              goal_id = kernel.open_goal(copy.deepcopy(spec), budget=30)
+              kernel.think(100)
+              old = kernel.cognitive_snapshot()['goals'][str(goal_id)]
+              assert old['status'] == 'WITHHOLD', old
+              assert set(('native_v2', 'native_v3', 'native_v4', 'native_evolved_v2')) <= set(old['attempted']), old
+              assert inferred_degree(spec['training'], max_degree=5) is None
+              before = kernel.verify_state()
+
+              candidate = build_candidate(copy.deepcopy(spec['training']))
+              assert candidate is not None
+              assert candidate['profile']['grammar_version'] == 'YADO_TYPED_SEMANTIC_PROGRAM_INDUCTION_V1'
+              assert candidate['profile']['primitive_set'] == ['var', 'const', 'neg', 'lt', 'if']
+              assert candidate['profile']['max_nodes'] == 7
+              result = synthesize(candidate, copy.deepcopy(spec['training']))
+              assert result['status'] == 'SOURCE_CANDIDATE', result
+              validation = kernel.parent.execute_native_source(result, [r['input'] for r in spec['validation']])
+              expected_validation = [r['expected'] for r in spec['validation']]
+              assert validation == expected_validation, (validation, expected_validation)
+              query_predictions = kernel.parent.execute_native_source(result, copy.deepcopy(spec['queries']))
+              assert query_predictions == [21, 23], query_predictions
+
+              transfers = []
+              transfer_functions = (
+                  ('negative_abs', lambda x: -abs(x)),
+                  ('threshold_reflect', lambda x: -x if x < -1 else x),
+                  ('negative_floor_else_identity', lambda x: 2 if x < 0 else x),
+              )
+              probes = (-17, -8, -2, -1, 0, 1, 9, 14)
+              for index, (name, function) in enumerate(transfer_functions):
+                  key = 'fresh_value_' + str(index)
+                  fresh_training = [row(function, x, key) for x in training_x]
+                  fresh = synthesize(candidate, fresh_training)
+                  assert fresh['status'] == 'SOURCE_CANDIDATE', (name, fresh)
+                  predictions = kernel.parent.execute_native_source(fresh, [{key: x} for x in probes])
+                  expected = [function(x) for x in probes]
+                  assert predictions == expected, (name, predictions, expected)
+                  transfers.append({
+                      'name': name,
+                      'program_sha256': fresh['source_sha256'],
+                      'selected': fresh['selected'],
+                      'probe_inputs': list(probes),
+                      'predictions': predictions,
+                  })
+
+              parity_training = [row(lambda x: x % 2 == 0, x, 'parity_x') for x in training_x]
+              parity_from_conditional = synthesize(candidate, parity_training)
+              assert parity_from_conditional['status'] == 'WITHHOLD', parity_from_conditional
+              parity_candidate = build_candidate(parity_training)
+              assert parity_candidate is not None
+              assert parity_candidate['profile']['primitive_set'] == ['var', 'const', 'mod', 'eq']
+              assert parity_candidate['profile'] != candidate['profile']
+
+              after = kernel.verify_state()
+              assert after == before
+              evidence = {
+                  'schema': 'yado.inductive-family-genesis.real-run.v1',
+                  'status': 'PASS_SHADOW_INDUCTIVE_FAMILY_GENESIS_V1',
+                  'commit': os.environ.get('GITHUB_SHA'),
+                  'goal_id': goal_id,
+                  'preexisting_goal_status': old['status'],
+                  'preexisting_attempted': old['attempted'],
+                  'polynomial_degree5_fit': False,
+                  'derived_candidate_sha256': candidate['source_sha256'],
+                  'derived_profile': candidate['profile'],
+                  'derived_program_sha256': result['source_sha256'],
+                  'derived_program': result['selected'],
+                  'heldout_validation_predictions': validation,
+                  'query_predictions': query_predictions,
+                  'fresh_transfer_count': len(transfers),
+                  'fresh_transfers': transfers,
+                  'out_of_profile_parity_withheld': True,
+                  'independently_derived_parity_profile': parity_candidate['profile'],
+                  'state_verification': after,
+                  'semantic_boundary': {
+                      'host_authored': ['safe primitive universe', 'semantic enumerator', 'resource limits', 'verifier'],
+                      'kernel_or_training_derived': ['primitive subset', 'expression structure', 'concrete program'],
+                      'does_not_establish': ['unrestricted program invention', 'self-created primitive semantics', 'G3', 'general intelligence', 'consciousness'],
+                  },
+              }
+              evidence_path.write_text(json.dumps(evidence, indent=2, sort_keys=True) + '\n')
+              print(json.dumps(evidence, sort_keys=True))
+          finally:
+              kernel.close()
+          PY
+      - name: Preserve real-run evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-inductive-family-genesis-real-run-v1-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/inductive-family-genesis.json
+            ${{ runner.temp }}/inductive.sqlite
+            ${{ runner.temp }}/inductive-birth/
