@@ -1,0 +1,125 @@
+name: YADO Inductive Kernel Binding Real Run V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/yado-inductive-family-genesis-20260916]
+    paths:
+      - '.github/workflows/yado-inductive-kernel-binding-real-run-v1.yml'
+      - 'successor/native_binding.py'
+      - 'successor/inductive_mechanism.py'
+      - 'successor/tests/test_inductive_native_binding.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yado-inductive-kernel-binding-real-run-v1
+  cancel-in-progress: false
+
+jobs:
+  exhausted-deficit-to-kernel-selected-induction:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install declared dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r successor/requirements.txt -r runtime/yado_rc8_v36/requirements-github.txt
+          python -m pip install --disable-pip-version-check pyyaml
+      - name: Run binding regression
+        run: python -m unittest successor.tests.test_inductive_native_binding -v
+      - name: Build pinned Successor
+        run: python -m successor build --output "$RUNNER_TEMP/inductive-kernel-binding-birth"
+      - name: Let the kernel cross the exhausted deficit without a host synthesis call
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          from successor.kernel import SuccessorKernel
+
+          root = Path(os.environ['RUNNER_TEMP'])
+          manifest = root / 'inductive-kernel-binding-birth' / 'manifest.json'
+          state = root / 'inductive-kernel-binding.sqlite'
+          evidence_path = root / 'inductive-kernel-binding-real-run.json'
+
+          def row(function, x):
+              return {'input': {'x': x}, 'expected': function(x)}
+
+          spec = {
+              'domain': 'native_source',
+              'training': [row(abs, x) for x in range(-5, 6)],
+              'validation': [row(abs, x) for x in (-13, 12, 19)],
+              'queries': [{'input': {'x': -21}}, {'input': {'x': 23}}],
+          }
+
+          kernel = SuccessorKernel(manifest, state)
+          try:
+              activation = kernel.activate_native_synthesis()
+              goal_id = kernel.open_goal(spec, budget=30)
+              emitted = kernel.think(100)
+              goal = kernel.cognitive_snapshot()['goals'][str(goal_id)]
+              verification = kernel.verify_state()
+              assert goal['status'] == 'VALIDATED_ON_HOLDOUT', goal
+              assert goal['attempted'][-1] == 'native_evolved_v2', goal['attempted']
+              assert goal['result']['binding_route'] == 'INDUCTIVE_V1', goal['result']
+              assert goal['result']['predictions'] == [21, 23], goal['result']['predictions']
+              assert goal['result']['validation_predictions'] == [13, 12, 19]
+              assert goal['result']['inductive_profile']['primitive_set'] == ['var', 'const', 'neg', 'lt', 'if']
+              assert goal['result']['automatic_canonical_promotion'] is False
+              evidence = {
+                  'schema': 'yado.inductive-kernel-binding.real-run.v1',
+                  'status': 'PASS_SHADOW_KERNEL_SELECTED_INDUCTIVE_BINDING_V1',
+                  'commit': os.environ.get('GITHUB_SHA'),
+                  'goal_id': goal_id,
+                  'activation_tick': activation['tick'],
+                  'attempted': goal['attempted'],
+                  'final_status': goal['status'],
+                  'binding_route': goal['result']['binding_route'],
+                  'derived_profile': goal['result']['inductive_profile'],
+                  'program_sha256': goal['result']['source_sha256'],
+                  'mechanism_sha256': goal['result']['inductive_mechanism_sha256'],
+                  'validation_predictions': goal['result']['validation_predictions'],
+                  'query_predictions': goal['result']['predictions'],
+                  'event_count_emitted': len(emitted),
+                  'state_verification': verification,
+                  'host_called_inductive_builder_directly': False,
+                  'automatic_canonical_promotion': False,
+                  'semantic_boundary': {
+                      'host_authored': ['safe primitive universe', 'semantic enumerator', 'resource limits', 'binding code', 'verifier'],
+                      'kernel_selected': ['strategy after measured failures', 'derived primitive profile', 'concrete source program'],
+                      'does_not_establish': ['unrestricted algorithm invention', 'self-created primitive semantics', 'G3', 'general intelligence', 'consciousness'],
+                  },
+              }
+              evidence_path.write_text(json.dumps(evidence, indent=2, sort_keys=True) + '\n')
+              print(json.dumps(evidence, sort_keys=True))
+          finally:
+              kernel.close()
+
+          reopened = SuccessorKernel(manifest, state)
+          try:
+              restored = reopened.cognitive_snapshot()['goals'][str(goal_id)]
+              assert restored['status'] == 'VALIDATED_ON_HOLDOUT'
+              assert restored['result']['binding_route'] == 'INDUCTIVE_V1'
+              assert reopened.verify_state()['status'] == 'PASS'
+          finally:
+              reopened.close()
+          PY
+      - name: Preserve kernel-binding evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-inductive-kernel-binding-real-run-v1-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/inductive-kernel-binding-real-run.json
+            ${{ runner.temp }}/inductive-kernel-binding.sqlite
+            ${{ runner.temp }}/inductive-kernel-binding-birth/
