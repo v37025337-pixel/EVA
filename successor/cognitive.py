@@ -6,8 +6,12 @@ checked executions. Nothing here measures or asserts phenomenal consciousness.
 from __future__ import annotations
 
 import copy
+from collections import OrderedDict
 from fractions import Fraction
+import marshal
 import math
+import sys
+from threading import RLock
 import time
 
 from .archive import canonical, sha
@@ -25,6 +29,130 @@ STRATEGIES = {
 RECENT_OBSERVATIONS = 16
 WORKSPACE_CAPACITY = 2
 SOURCE_MEMORY_CAPACITY = 16
+
+
+class _UncacheableReplay(Exception):
+    pass
+
+
+def _cache_normalize(value):
+    """Snapshot exact supported types, without TypedJSON's whole-value node cap.
+
+    Every input tuple is tagged, so its contents cannot impersonate Fraction's
+    tag. marshal is used only to encode these builtins, never to load code/data.
+    """
+    kind = type(value)
+    if value is None or kind in (str, int, bool):
+        return value
+    if kind is float:
+        if not math.isfinite(value):
+            raise _UncacheableReplay
+        return value
+    if kind is Fraction:
+        return ('fraction', value.numerator, value.denominator)
+    if kind is tuple:
+        return ('tuple', tuple(_cache_normalize(v) for v in value))
+    if kind is list:
+        return [_cache_normalize(v) for v in value]
+    if kind is dict:
+        return {_cache_normalize(k): _cache_normalize(v) for k, v in value.items()}
+    raise _UncacheableReplay
+
+
+def _cache_restore(value):
+    if type(value) is list:
+        return [_cache_restore(v) for v in value]
+    if type(value) is dict:
+        return {_cache_restore(k): _cache_restore(v) for k, v in value.items()}
+    if type(value) is tuple:
+        if value[0] == 'fraction':
+            return Fraction(value[1], value[2])
+        return tuple(_cache_restore(v) for v in value[1])
+    return value
+
+
+def _replay_context(snapshot):
+    records = snapshot[1] if type(snapshot) is tuple else snapshot
+    if any(type(r) is not dict or type(r.get('kind')) is not str for r in records):
+        raise _UncacheableReplay
+    kinds = {r['kind'] for r in records}
+    context = [MODES, STRATEGIES, WORKSPACE_CAPACITY, SOURCE_MEMORY_CAPACITY]
+    # replay's two filesystem-dependent proofs must remain live on cache hits.
+    if 'COG_ACTIVATE_NATIVE_SYNTHESIS' in kinds:
+        from .native_binding import activation
+        context.append(activation())
+    if any(kind.startswith('COG_RUNTIME_') for kind in kinds):
+        from .archive import file_sha
+        from .native_mechanism import ROOT, DONOR_PATH
+        context.append(file_sha(ROOT / DONOR_PATH))
+    return _cache_normalize(context)
+
+
+def _retained_size(value):
+    """Conservative retained object size; shared objects count once per entry."""
+    pending, seen, total = [value], set(), 0
+    while pending:
+        item = pending.pop()
+        if id(item) in seen:
+            continue
+        seen.add(id(item))
+        total += sys.getsizeof(item)
+        if type(item) is dict:
+            pending.extend(item.keys())
+            pending.extend(item.values())
+        elif type(item) in (list, tuple):
+            pending.extend(item)
+        elif type(item) is Fraction:
+            pending.extend((item.numerator, item.denominator))
+    return total
+
+
+class _ReplayCache:
+    """Disposable, process-local LRU; never an admission or persistence source."""
+    def __init__(self, max_entries=128, max_bytes=256 * 1024 * 1024):
+        self.max_entries, self.max_bytes = max_entries, max_bytes
+        self.enabled = True
+        self._lock = RLock()
+        self.clear()
+
+    def clear(self):
+        with self._lock:
+            self._entries = OrderedDict()
+            self._bytes = self.hits = self.misses = 0
+
+    def get(self, key):
+        with self._lock:
+            entry = self._entries.get(key)
+            if entry is None:
+                self.misses += 1
+                return None
+            self._entries.move_to_end(key)
+            self.hits += 1
+            return entry[0]
+
+    def put(self, key, value):
+        size = sys.getsizeof(key) + _retained_size(value) + 512
+        if self.max_entries < 1 or size > self.max_bytes:
+            return
+        with self._lock:
+            previous = self._entries.pop(key, None)
+            if previous is not None:
+                self._bytes -= previous[1]
+            while self._entries and (len(self._entries) >= self.max_entries
+                                     or self._bytes + size > self.max_bytes):
+                _, (_, removed_size) = self._entries.popitem(last=False)
+                self._bytes -= removed_size
+            self._entries[key] = (value, size)
+            self._bytes += size
+
+    def info(self):
+        with self._lock:
+            return {'entries': len(self._entries), 'bytes': self._bytes,
+                    'hits': self.hits, 'misses': self.misses,
+                    'max_entries': self.max_entries, 'max_bytes': self.max_bytes}
+
+
+_REPLAY_CACHE = _ReplayCache()
 
 
 def _integer(value, bound):
@@ -212,6 +340,40 @@ def available_strategies(goal, records):
 
 
 def replay(records):
+    """Memoize successful replay by a complete typed, immutable content key.
+
+    Claimed event hashes are only fields in that key, never a substitute for
+    bodies. Unsupported, cyclic or oversized values use the original validator.
+    """
+    if not _REPLAY_CACHE.enabled or type(records) not in (list, tuple):
+        return _replay_uncached(records)
+    try:
+        snapshot = _cache_normalize(records)
+        context = _replay_context(snapshot)
+        # Version 2 has no object-reference memoization: equal content has equal
+        # bytes regardless of alias sharing between separately decoded records.
+        key = marshal.dumps((snapshot, context), 2)
+        if len(key) > _REPLAY_CACHE.max_bytes:
+            return _replay_uncached(records)
+        cached = _REPLAY_CACHE.get(key)
+        if cached is not None:
+            return copy.deepcopy(cached)
+        private_records = _cache_restore(snapshot)
+    except (_UncacheableReplay, RecursionError, ValueError, OSError):
+        return _replay_uncached(records)
+    # Failures propagate and are never cached. The private snapshot also keeps
+    # subsequent caller mutations out of both the proof and its stored result.
+    result = _replay_uncached(private_records)
+    try:
+        unchanged = marshal.dumps(_replay_context(snapshot), 2) == marshal.dumps(context, 2)
+    except (_UncacheableReplay, RecursionError, ValueError, OSError):
+        unchanged = False
+    if unchanged:
+        _REPLAY_CACHE.put(key, result)
+    return copy.deepcopy(result)
+
+
+def _replay_uncached(records):
     """Validate cross-event causal links while rebuilding disposable projections."""
     goals, past = {}, []
     for r in records:

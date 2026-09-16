@@ -4,9 +4,10 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from successor.kernel import SuccessorKernel
-from successor.runtime_evolution import (REQUEST, RuntimeEvolution, active_candidates,
+from successor.runtime_evolution import (REQUEST, SELECTION_POLICY, RuntimeEvolution, active_candidates,
                                          evaluation_passed, normalize_request, select_candidate)
 
 
@@ -139,6 +140,7 @@ class RuntimeEvolutionIntegrationTests(unittest.TestCase):
         self.assertEqual(old['status'], 'WITHHOLD')
         self.assertIn('native_evolved_v2', old['attempted'])
         proposal = self.evolution.propose('evolution-test', 'YADO-4', REQUEST)
+        self.assertEqual(proposal['selection_policy'], SELECTION_POLICY)
         self.assertEqual(proposal['selection']['goal_id'], goal_id)
         self.assertEqual(proposal['selection']['max_degree'], 2)
         candidate = proposal['selection']['candidate']
@@ -157,6 +159,34 @@ class RuntimeEvolutionIntegrationTests(unittest.TestCase):
             'strategy': 'native_materialized_' + candidate['source_sha256'][:16], 'cost': 4})
         with self.assertRaisesRegex(ValueError, 'WITHOUT_GATES'):
             self.kernel.verify_state()
+
+    def test_interrupted_evaluation_preserves_explicit_seed_and_frozen_candidate(self):
+        self.kernel.activate_native_synthesis()
+        row = lambda x: {'input': {'x': x}, 'expected': 10 - x * x}
+        goal = {'domain': 'native_source', 'training': [row(x) for x in range(-3, 4)],
+                'validation': [row(-8), row(9)], 'queries': [{'input': {'x': 17}}]}
+        self.kernel.open_goal(goal, budget=10)
+        self.kernel.think(40)
+        proposal = self.evolution.propose('seed-test', 'YADO-1', REQUEST)
+        before = self.kernel.verify_state()
+        seed = 'a1' * 24
+        for attempt in range(2):
+            output = Path(self.tmp.name) / ('interrupted-' + str(attempt))
+            # Interrupt at the trial boundary; no trial/regression/admission PASS
+            # is imported or fabricated by this transport-contract test.
+            with patch('successor.runtime_evolution.trial_report',
+                       side_effect=InterruptedError('before trials')) as trial:
+                with self.assertRaisesRegex(InterruptedError, 'before trials'):
+                    self.evolution.evaluate(proposal['tick'], output, trial_seed=seed)
+                trial.assert_called_once_with(self.kernel, proposal, seed)
+            self.assertEqual(json.loads((output / 'candidate.json').read_text()),
+                             proposal['selection']['candidate'])
+            self.assertEqual(self.kernel.verify_state(), before)
+        invalid_output = Path(self.tmp.name) / 'invalid-seed'
+        with self.assertRaisesRegex(ValueError, 'FRESH_SEED_CONTRACT'):
+            self.evolution.evaluate(proposal['tick'], invalid_output, trial_seed='invalid')
+        self.assertFalse(invalid_output.exists())
+        self.assertEqual(self.kernel.verify_state(), before)
 
 
 if __name__ == '__main__':

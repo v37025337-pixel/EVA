@@ -114,6 +114,7 @@ def prepare_upgrade(parent_manifest, parent_state, output, *, source_updates=Non
     from .cognitive import replay as replay_cognitive
     from .development import replay as replay_development
     from .autonomy import replay as replay_autonomy
+    from .lineage import replay as replay_lineage
     parent_path, state_path, output = map(lambda p: Path(p).resolve(), (parent_manifest, parent_state, output))
     parent = _manifest(parent_path)
     identity = operational_identity(parent, parent_path.parent)
@@ -144,6 +145,7 @@ def prepare_upgrade(parent_manifest, parent_state, output, *, source_updates=Non
     development = [r for r in records if str(r.get('kind', '')).startswith(('COG_', 'DEV_'))]
     goals = replay_cognitive(cognitive)
     sessions = list(replay_development(development).values()) + list(replay_autonomy(records, identity).values())
+    sessions += list(replay_lineage(records, identity, parent['identity_digest']).values())
     if any(v['status'] == 'ACTIVE' for v in list(goals.values()) + sessions):
         raise ValueError('CONTINUITY_REQUIRES_IDLE_PREDECESSOR')
     manifest_path = output / 'manifest.json'
