@@ -1,0 +1,142 @@
+name: YADO Consecutive Runtime Lineage Real Run V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/yado-multigeneration-20260916]
+    paths:
+      - '.github/workflows/yado-consecutive-runtime-lineage-real-run-v1.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yado-consecutive-runtime-lineage-real-run-v1
+  cancel-in-progress: false
+
+jobs:
+  real-three-generation-lineage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install declared dependencies
+        run: python -m pip install -r successor/requirements.txt -r runtime/yado_rc8_v36/requirements-github.txt pyyaml
+      - name: Build pinned runtime
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m successor build --output "$RUNNER_TEMP/lineage-birth"
+      - name: Create a genuine exhausted native-source deficit
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from successor.kernel import SuccessorKernel
+          from successor.lineage import BUDGET, records, selection
+
+          root = Path(os.environ['RUNNER_TEMP'])
+          manifest = root / 'lineage-birth' / 'manifest.json'
+          state = root / 'lineage.sqlite'
+          row = lambda x: {'input': {'x': x}, 'expected': 17 * x ** 3 - 2 * x - 5}
+          spec = {
+              'domain': 'native_source',
+              'training': [row(x) for x in range(-3, 4)],
+              'validation': [row(-6), row(7)],
+              'queries': [{'input': {'x': -9}}, {'input': {'x': 11}}],
+          }
+          kernel = SuccessorKernel(manifest, state)
+          try:
+              kernel.activate_native_synthesis()
+              goal_id = kernel.open_goal(spec, budget=BUDGET)
+              kernel.think(100)
+              goal = kernel.cognitive_snapshot()['goals'][str(goal_id)]
+              chosen = selection(records(kernel))
+              evidence = {
+                  'goal_id': goal_id,
+                  'status': goal['status'],
+                  'attempted': goal['attempted'],
+                  'budget': goal['budget'],
+                  'remaining': goal['remaining'],
+                  'selection': chosen,
+                  'state_verification': kernel.verify_state(),
+              }
+              (root / 'initial-deficit.json').write_text(json.dumps(evidence, indent=2, default=str) + '\n')
+              assert goal['status'] == 'WITHHOLD', evidence
+              assert chosen is not None and chosen['goal_id'] == goal_id, evidence
+          finally:
+              kernel.close()
+          print(json.dumps(evidence, default=str))
+          PY
+      - name: Run three consecutive runtime capacity generations
+        run: |
+          mkdir -p "$RUNNER_TEMP/lineage-gates"
+          python -m successor.lineage \
+            --manifest "$RUNNER_TEMP/lineage-birth/manifest.json" \
+            --state "$RUNNER_TEMP/lineage.sqlite" \
+            --workspace-id github-actions-real-lineage \
+            --issue-id YADO-PR45-REAL-3GEN \
+            --output "$RUNNER_TEMP/lineage-gates" \
+            --generations 3 | tee "$RUNNER_TEMP/lineage-run.log"
+      - name: Reopen and independently verify terminal lineage state
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from successor.kernel import SuccessorKernel
+          from successor.lineage import ConsecutiveLineage
+
+          root = Path(os.environ['RUNNER_TEMP'])
+          manifest = root / 'lineage-birth' / 'manifest.json'
+          state = root / 'lineage.sqlite'
+          kernel = SuccessorKernel(manifest, state)
+          try:
+              verified = kernel.verify_state()
+              sessions = ConsecutiveLineage(kernel).snapshot()
+              assert len(sessions) == 1, sessions
+              sid, session = next(iter(sessions.items()))
+              summary = {
+                  'schema': 'yado.consecutive-runtime-lineage.real-run.v1',
+                  'commit': os.environ.get('GITHUB_SHA'),
+                  'lineage_id': sid,
+                  'status': session['status'],
+                  'phase': session['phase'],
+                  'generation_count': len(session['generations']),
+                  'generation_candidate_sha256': [g['candidate_sha256'] for g in session['generations']],
+                  'generation_program_sha256': [g['program_sha256'] for g in session['generations']],
+                  'finish': session.get('finish'),
+                  'state_verification': verified,
+              }
+              (root / 'lineage-final.json').write_text(json.dumps(summary, indent=2, default=str) + '\n')
+              assert session['status'] == 'COMPLETE', summary
+              assert session['phase'] == 'DONE', summary
+              assert len(session['generations']) == 3, summary
+              assert session['finish']['reason'] == 'TARGET_REACHED', summary
+              assert session['finish']['generations'] == 3, summary
+              assert verified['status'] == 'PASS', summary
+          finally:
+              kernel.close()
+          print(json.dumps(summary, default=str))
+          PY
+      - name: Preserve complete real-run evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-consecutive-runtime-lineage-real-run-v1-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/lineage-birth/
+            ${{ runner.temp }}/lineage.sqlite
+            ${{ runner.temp }}/initial-deficit.json
+            ${{ runner.temp }}/lineage-gates/
+            ${{ runner.temp }}/lineage-run.log
+            ${{ runner.temp }}/lineage-final.json
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
+            audits/yado-full-kernel-audit-v1-report.json
