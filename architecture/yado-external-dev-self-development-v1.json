@@ -1,0 +1,50 @@
+{
+  "schema": "yado.external_dev_self_development.admission.v1",
+  "component_id": "RUNTIME-G2-EXTERNAL-DEV-SELF-DEVELOPMENT-V1",
+  "generation": "G2_CANDIDATE_TRCG_V1",
+  "status": "PASS_SHADOW_AWAITING_MAIN_ADMISSION",
+  "objective": "Improve YADO by autonomously selecting and orchestrating admitted external developer capabilities from measured deficits",
+  "source_repositories": [
+    "dip497/hivemind",
+    "hoppscotch/hoppscotch",
+    "dyad-sh/dyad",
+    "nexustools-dev/nexus-tools",
+    "ripienaar/free-for-dev"
+  ],
+  "persisted_candidate": "candidates/autonomous/yado_external_dev_capability_router_candidate_v1.py",
+  "persisted_receipt": "candidates/autonomous/yado-external-dev-self-development-v1.json",
+  "yado_generated_commit": "67e9eb979bb53204665c10c970b886224caff15b",
+  "candidate_sha256": "15dfa3369bc64427a33acd4480ad763c51fb869942d1489e438a76a03b1a337d",
+  "policy_sha256": "05f488e43ac584903d784607588194e700a0c52e3e0bd0f9a70392cb03a9d26a",
+  "source_pack_digest": "3668cb47e84c0d008e7171e3aafde1c2407e2b44274e938e874cb827a803882c",
+  "self_development_run_id": 35134964703,
+  "self_development_run_status": "SUCCESS",
+  "fresh_transfer": {
+    "tests_run": 5,
+    "tests_passed": 5,
+    "accuracy": 1.0,
+    "fixed_baseline_accuracy": 0.2,
+    "gain": 0.8,
+    "unknown_deficit_withhold": true
+  },
+  "pre_persistence_gates": {
+    "focused_regression": "PASS",
+    "live_five_source_self_development": "PASS",
+    "generated_candidate_compile": "PASS",
+    "independent_fresh_transfer": "PASS",
+    "full_kernel_audit": "PASS",
+    "fresh_successor_build": "PASS",
+    "full_inherited_successor_regression": "PASS"
+  },
+  "semantic_boundary": {
+    "third_party_code_executed": false,
+    "third_party_code_copied": false,
+    "credentials_used": false,
+    "private_network_access": false,
+    "third_party_external_writes": false,
+    "automatic_main_mutation": false,
+    "g3_genesis_performed": false,
+    "consciousness_claimed": false
+  },
+  "admission_requirement": "Run the complete PR matrix on the persisted candidate plus this manifest. Admit only if all gates pass on the exact head."
+}
