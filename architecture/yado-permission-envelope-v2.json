@@ -1,0 +1,91 @@
+{
+  "schema": "yado.permission_envelope.v2",
+  "status": "SHADOW_CANDIDATE",
+  "purpose": "Расширить чтение проверяемых публичных источников и оставить условную возможность безопасного самостоятельного развёртывания без обязательного запуска.",
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
+  "allowed_sources": [
+    {
+      "host": "docs.python.org",
+      "purpose": "официальная документация Python"
+    },
+    {
+      "host": "developer.mozilla.org",
+      "purpose": "веб-стандарты и API"
+    },
+    {
+      "host": "www.w3.org",
+      "purpose": "веб-стандарты"
+    },
+    {
+      "host": "github.com",
+      "purpose": "публичные репозитории и документация"
+    },
+    {
+      "host": "api.github.com",
+      "purpose": "метаданные публичных репозиториев, commits, PR и checks"
+    },
+    {
+      "host": "raw.githubusercontent.com",
+      "purpose": "чтение версионированных публичных исходников"
+    }
+  ],
+  "network_policy": {
+    "methods": [
+      "GET"
+    ],
+    "https_only": true,
+    "max_bytes": 1048576,
+    "redirects_followed": false,
+    "credentials_allowed": false,
+    "external_writes": false,
+    "downloaded_code_executed": false,
+    "public_sources_only": true
+  },
+  "permitted_operations": [
+    "read_public_documentation",
+    "read_public_repository_metadata",
+    "read_public_source_as_untrusted_data",
+    "compare_commits_and_provenance",
+    "derive_shadow_candidate",
+    "run_compile_and_regression_gates",
+    "discover_optional_sandbox_deployment_if_available"
+  ],
+  "optional_autonomous_deployment": {
+    "required": false,
+    "allowed_only_if": [
+      "a verified sandbox adapter exists",
+      "the target is public or explicitly authorized",
+      "no credentials or secrets are requested",
+      "no downloaded code is executed without an independent gate",
+      "no destructive or persistent external write is performed",
+      "the deployment remains a shadow candidate and is rollbackable"
+    ],
+    "otherwise": "record NO_CAPABILITY and continue without deployment"
+  },
+  "prohibited_operations": [
+    "arbitrary_host_access",
+    "POST_PUT_PATCH_DELETE",
+    "credential_or_secret_access",
+    "downloaded_code_execution",
+    "production_deployment_without_explicit_adapter_and_gate",
+    "automatic_main_mutation",
+    "automatic_canonical_promotion",
+    "claim_consciousness_or_independent_agency"
+  ],
+  "admission_gates": [
+    "host_allowlist",
+    "https_and_get_only",
+    "size_limit",
+    "provenance_hash",
+    "compile_check",
+    "fresh_regression",
+    "full_kernel_audit",
+    "human_approved_merge"
+  ],
+  "rollback": {
+    "supported": true,
+    "trigger": "любое нарушение policy или провал обязательного gate",
+    "action": "отклонить candidate и не изменять canonical"
+  },
+  "semantic_boundary": "Самостоятельное развёртывание не запрещается как условная capability, но не требуется и не считается доступным без реального безопасного адаптера. Это не расширение системных прав и не доказательство сознания."
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "yado.causal_learning_chain.v1",
+  "status": "PASS_SHADOW_CAUSAL_LEARNING_CHAIN",
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
+  "run_id": "20260917-causal-chain-01",
+  "network_policy": {
+    "read_only": true,
+    "https_only": true,
+    "credentials_used": false,
+    "external_writes": false,
+    "downloaded_code_executed": false
+  },
+  "sources": [
+    {
+      "source_id": "NIST_AI_RMF",
+      "domain": "ai_risk",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "evidence": "trustworthiness considerations should be incorporated into design, development, use and evaluation"
+    },
+    {
+      "source_id": "NASA_CLIMATE",
+      "domain": "science_environment",
+      "url": "https://science.nasa.gov/climate-change/",
+      "evidence": "public scientific information and data context"
+    },
+    {
+      "source_id": "GITHUB_ACTIONS",
+      "domain": "verification_automation",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
+      "evidence": "workflow syntax defines reproducible automation structure"
+    }
+  ],
+  "chain": {
+    "observation": "external learning needs trust, domain context and reproducible checks",
+    "deficit": "CAUSE_TO_MUTATION_TRACEABILITY",
+    "hypothesis": "a mutation is admissible only when its originating evidence and verification are linked",
+    "mutation": "CAUSAL_LEARNING_CHAIN_V1",
+    "verification": "complete chain PASS; missing or mismatched links WITHHOLD"
+  },
+  "mutation": {
+    "path": "candidates/autonomous/yado_causal_learning_chain_v1.py",
+    "kind": "shadow_capability",
+    "canonical_active": false
+  },
+  "semantic_boundary": "Causal traceability improves engineering evidence; it does not prove consciousness, independent agency or self-directed deployment."
+}
