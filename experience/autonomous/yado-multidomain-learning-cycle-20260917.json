@@ -1,0 +1,86 @@
+{
+  "schema": "yado.multidomain_learning_cycle.v1",
+  "status": "PASS_SHADOW_MULTIDOMAIN_EXTERNAL_LEARNING",
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
+  "run_id": "20260917-multidomain-01",
+  "network_policy": {
+    "read_only": true,
+    "https_only": true,
+    "credentials_used": false,
+    "external_writes": false,
+    "downloaded_code_executed": false
+  },
+  "domains": [
+    "programming_ast",
+    "web_protocols",
+    "repository_api",
+    "web_architecture"
+  ],
+  "sources": [
+    {
+      "source_id": "PYTHON_AST",
+      "domain": "programming_ast",
+      "url": "https://docs.python.org/3/library/ast.html",
+      "claims": [
+        "parse source into AST",
+        "compile AST into code object",
+        "fields must be valid for compile"
+      ],
+      "provenance": "turn5view0"
+    },
+    {
+      "source_id": "MDN_HTTP",
+      "domain": "web_protocols",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
+      "claims": [
+        "HTTP is a protocol for fetching resources",
+        "request/response interaction",
+        "web communication constraints"
+      ],
+      "provenance": "turn5view1"
+    },
+    {
+      "source_id": "GITHUB_REST",
+      "domain": "repository_api",
+      "url": "https://docs.github.com/en/rest",
+      "claims": [
+        "REST API documentation",
+        "repository and automation interfaces",
+        "resource operations require explicit endpoints"
+      ],
+      "provenance": "turn5view2"
+    },
+    {
+      "source_id": "W3C_WEBARCH",
+      "domain": "web_architecture",
+      "url": "https://www.w3.org/TR/webarch/",
+      "claims": [
+        "web architecture principles",
+        "resource identification and interaction",
+        "interoperability constraints"
+      ],
+      "provenance": "turn5view3"
+    }
+  ],
+  "extracted_rules": [
+    "source data must remain distinguishable from executable code",
+    "a candidate mutation needs a deterministic transformation and provenance",
+    "cross-domain links should be explicit rather than inferred from source names",
+    "compile/regression/audit gates remain part of learning"
+  ],
+  "deficit": {
+    "area": "THINKING_AND_MEMORY",
+    "code": "DOMAIN_ISOLATION_IN_RECALL",
+    "severity": "MEDIUM",
+    "evidence": "previous recall capability ranked facts but did not expose cross-domain bridges",
+    "target_capability": "MULTIDOMAIN_EVIDENCE_TRIAGE_V1"
+  },
+  "mutation": {
+    "path": "candidates/autonomous/yado_multidomain_evidence_triage_v1.py",
+    "kind": "shadow_capability",
+    "canonical_active": false,
+    "external_code_executed": false
+  },
+  "next_action": "run fresh compile, deterministic ranking, bridge extraction, regression and full kernel audit",
+  "semantic_boundary": "External reading and evidence organization do not prove consciousness, agency or autonomous deployment."
+}
