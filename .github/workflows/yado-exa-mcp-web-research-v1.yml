@@ -29,6 +29,8 @@ jobs:
           python -m py_compile runtime/yado_exa_mcp_web_research_v1.py
           python -m unittest runtime.test_yado_exa_mcp_web_research_v1 -v
       - name: Emit shadow admission evidence
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
         run: |
           python - <<'PY'
           import json
