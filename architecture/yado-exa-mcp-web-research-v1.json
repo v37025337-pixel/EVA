@@ -1,0 +1,39 @@
+{
+  "schema": "yado.exa_mcp_web_research.v1",
+  "status": "SHADOW_CANDIDATE",
+  "capability_id": "RUNTIME-EXA-MCP-WEB-RESEARCH-V1",
+  "runtime": "runtime/yado_exa_mcp_web_research_v1.py",
+  "test": "runtime/test_yado_exa_mcp_web_research_v1.py",
+  "endpoint": "https://mcp.exa.ai/mcp",
+  "tools": [
+    "web_search_exa",
+    "web_fetch_exa"
+  ],
+  "purpose": "Bind Exa hosted MCP search and page fetching to YADO's bounded external-research path.",
+  "integration": "transport_injected_then_bound_to_existing_public_https_policy",
+  "authority": {
+    "schemes": [
+      "https"
+    ],
+    "methods": [
+      "POST through approved MCP transport"
+    ],
+    "external_writes": false,
+    "private_networks": false,
+    "downloaded_code_execution": false,
+    "automatic_canonical_mutation": false,
+    "credentials": "environment-only, never persisted"
+  },
+  "admission_requirements": [
+    "focused protocol and safety regression",
+    "MCP initialize/tools/call receipt",
+    "independent-source and provenance checks",
+    "full kernel audit and regression",
+    "PR review before canonical admission"
+  ],
+  "limitations": [
+    "Exa MCP access is a web-research connector, not model-weight training",
+    "keyless mode is rate-limited; API-key/OAuth setup remains deployment responsibility",
+    "returned content remains evidence until YADO's existing comparison and admission gates accept it"
+  ]
+}\n
