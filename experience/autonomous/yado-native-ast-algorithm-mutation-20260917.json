@@ -1,0 +1,27 @@
+{
+  "schema": "yado.native_ast_algorithm_mutation_cycle.v1",
+  "status": "PASS_SHADOW_NATIVE_SOURCE_EMISSION",
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
+  "parent_deficit": "NATIVE_SOURCE_EMISSION_AND_SELF_REWRITE_NOT_PROVEN",
+  "learned_rule": "AST nodes can be generated, unparsed to source and compiled only when fields are valid",
+  "source_basis": {
+    "url": "https://docs.python.org/3/library/ast.html",
+    "read_only": true,
+    "credentials_used": false
+  },
+  "allowlist": [
+    "weighted_hypothesis_score"
+  ],
+  "generated_capability": "candidates/autonomous/yado_native_ast_algorithm_mutator_v1.py",
+  "gates": {
+    "allowlist": true,
+    "ast_materialization": true,
+    "compile": true,
+    "hash": true,
+    "local_behavior": true,
+    "external_code_executed": false
+  },
+  "canonical_active": false,
+  "rollback_supported": true,
+  "semantic_boundary": "Это bounded native source emission: алгоритм создаётся из разрешённого AST-шаблона и проходит проверки. Произвольное самопереписывание и сознание не заявляются."
+}
