@@ -1,0 +1,20 @@
+{
+  "schema": "yado.native_capability_shadow_admission_cycle.v1",
+  "status": "PASS_SHADOW_NATIVE_CAPABILITY_ADMISSION",
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
+  "parent_capability": "yado_native_ast_algorithm_mutator_v1",
+  "deficit": "GENERATED_SOURCE_TO_RUNTIME_REGISTRY_DISCONNECT",
+  "solution": "validate source hash, AST allowlist, compile, behavior and register shadow capability",
+  "target": "candidates/autonomous/yado_native_capability_shadow_admission_v1.py",
+  "gates": {
+    "hash": true,
+    "ast_allowlist": true,
+    "compile": true,
+    "behavior": true,
+    "rollback": true
+  },
+  "result": "SHADOW_REGISTERED",
+  "canonical_active": false,
+  "external_code_executed": false,
+  "semantic_boundary": "Регистрация shadow-capability не активирует её в каноне и не является неограниченным самопереписыванием."
+}
