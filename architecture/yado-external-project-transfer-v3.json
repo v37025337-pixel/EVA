@@ -1,0 +1,20 @@
+{
+  "schema": "yado.architecture.external_project_transfer.v3",
+  "component_id": "RUNTIME-G2-G4-EXTERNAL-PROJECT-TRANSFER-V3",
+  "generation": "G2",
+  "purpose": "Transfer G3 profiles to new cross-source formulations and guard ambiguous multi-capability routing.",
+  "parent": "RUNTIME-G2-THREE-STATE-DERIVED-EVOLUTION-V2",
+  "required_proof": [
+    "three new transfer tasks pass",
+    "baseline ambiguous task selects a route",
+    "guarded ambiguous task WITHHOLDs",
+    "unknown semantics WITHHOLD",
+    "parent G3 receipt verifies"
+  ],
+  "boundary": {
+    "third_party_code_executed": false,
+    "external_writes": false,
+    "automatic_main_mutation": false,
+    "g5_genesis_performed": false
+  }
+}
