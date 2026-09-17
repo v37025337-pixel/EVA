@@ -1,0 +1,26 @@
+{
+  "schema": "yado.hypothesis_branch_planner_cycle.v1",
+  "status": "PASS_SHADOW_HYPOTHESIS_BRANCH_PLANNER",
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
+  "parent_deficit": "COUNTERFACTUAL_ALTERNATIVE_GENERATION",
+  "target_capability": "HYPOTHESIS_BRANCH_PLANNER_V1",
+  "alternatives_generated": 3,
+  "selection_policy": "maximize evidence coverage, then minimize risk, then deterministic id order",
+  "evidence_inputs": [
+    "prior_success",
+    "same_layer",
+    "fresh_test",
+    "rollback"
+  ],
+  "selected_expected": "REUSE_VERIFIED_PATTERN",
+  "gates": {
+    "compile": true,
+    "regression": true,
+    "audit": true
+  },
+  "canonical_active": false,
+  "external_code_executed": false,
+  "rollback_supported": true,
+  "semantic_boundary": "Планировщик формирует и сравнивает проверяемые варианты. Он не создаёт субъективный опыт и не выполняет произвольные действия.",
+  "correction": "initial expected selection conflicted with deterministic risk-minimizing policy; corrected after fresh verification"
+}
