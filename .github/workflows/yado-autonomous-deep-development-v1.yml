@@ -1,0 +1,191 @@
+name: YADO Autonomous Deep Development V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "runtime/**"
+      - "successor/**"
+      - "candidates/**"
+      - "architecture/**"
+      - "canonical/**"
+      - "experience/**"
+      - "receipts/**"
+      - ".github/workflows/yado-autonomous-deep-development-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "runtime/**"
+      - "successor/**"
+      - "candidates/**"
+      - "architecture/**"
+      - "canonical/**"
+      - "experience/**"
+      - "receipts/**"
+      - ".github/workflows/yado-autonomous-deep-development-v1.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yado-autonomous-deep-development-v1
+  cancel-in-progress: true
+
+jobs:
+  deep-development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Let the kernel select the next development deficit
+        run: |
+          python -m py_compile runtime/yado_autonomous_deep_development_v1.py runtime/test_yado_autonomous_deep_development_v1.py
+          PYTHONPATH=runtime python -m unittest runtime.test_yado_autonomous_deep_development_v1
+          python runtime/yado_autonomous_deep_development_v1.py
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/yado-autonomous-deep-development-v1.json"))
+          assert r["status"]=="PASS_SHADOW_AUTONOMOUS_DEEP_DEVELOPMENT_PLAN_V1",r
+          assert len(r["development_sequence"])==7,r
+          assert all(row["file_count"]>0 for row in r["layers"].values()),r
+          assert r["boundaries"]["automatic_main_mutation"] is False,r
+          print(r["selected_target"],r["selected_action"])
+          PY
+
+      - name: Baseline canonical and compilation gates
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python -m compileall -q runtime successor candidates
+
+      - name: Generate bounded native source candidate
+        run: |
+          python runtime/yado_native_experience_to_runtime_self_rewrite_v2.py
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          root=Path(".")
+          receipt=json.loads(Path("candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json").read_text())
+          assert receipt["status"]=="PASS_SHADOW_NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_CANDIDATE_V2",receipt
+          target=root/receipt["target_path"]
+          candidate=root/receipt["candidate_path"]
+          before=hashlib.sha256(target.read_bytes()).hexdigest()
+          target.write_bytes(candidate.read_bytes())
+          compile(target.read_text(encoding="utf-8"),str(target),"exec")
+          after=hashlib.sha256(target.read_bytes()).hexdigest()
+          assert before != after == receipt["candidate_sha256"],(before,after,receipt)
+          print("PASS_NATIVE_SHADOW_MATERIALIZATION",target,before,after)
+          PY
+
+      - name: Evolve logic thinking intelligence candidate
+        run: |
+          python runtime/yado_cognitive_tri_organ_evolution_v2.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt=json.loads(Path("candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json").read_text())
+          assert receipt["status"]=="PASS_SHADOW_BOUNDED_TRI_ORGAN_COGNITIVE_EVOLUTION_V2",receipt
+          assert min(receipt["selected_hidden"].values()) >= 0.80,receipt
+          destination=Path("runtime/yado_cognitive_tri_organ_policy_v3.py")
+          source=(
+              "from __future__ import annotations\n\n"
+              f"COGNITIVE_POLICY = {receipt['selected_genome']!r}\n"
+              f"VERIFIED_HIDDEN_SCORES = {receipt['selected_hidden']!r}\n"
+              f"SOURCE_EVIDENCE = {{'schema':'yado.cognitive_tri_organ_evolution.v2','candidate_sha256':{receipt['candidate_sha256']!r}}}\n\n"
+              "def component():\n"
+              "    return {'schema':'yado.cognitive_tri_organ_policy.v3','policy':COGNITIVE_POLICY,'verified_hidden_scores':VERIFIED_HIDDEN_SCORES,'source_evidence':SOURCE_EVIDENCE,'canonical_active':False,'development_branch_active':True,'consciousness_claimed':False}\n"
+          )
+          compile(source,str(destination),"exec")
+          destination.write_text(source,encoding="utf-8")
+          print("PASS_COGNITIVE_SHADOW_MATERIALIZATION",destination)
+          PY
+          python -m compileall -q runtime successor candidates
+
+      - name: Audit mutated shadow runtime
+        run: |
+          python runtime/yado_canonical_invariant_guard_v1.py
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          report=json.load(open("audits/yado-full-kernel-audit-v1-report.json"))
+          assert report["status"]=="PASS",report
+          assert report["findings"]==[],report
+          assert report["canonical"]["canonical_guard"]=="PASS",report
+          assert report["canonical"]["ledger_validation"]=="PASS",report
+          assert report["canonical"]["g3_genesis_performed"] is False,report
+          print("PASS_SHADOW_ALL_LAYER_KERNEL_AUDIT")
+          PY
+
+      - name: Build Successor identity and complete regression
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-birth"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json"
+          python - <<'PY'
+          import json
+          report=json.load(open("audits/yado-full-regression-v1-report.json"))
+          assert report["status"]=="PASS",report
+          assert report["tests_run"]==report["expected_tests"],report
+          assert not report["failures"] and not report["errors"] and not report["skipped"],report
+          assert report["source_unchanged"] is True,report
+          print("PASS_DEEP_DEVELOPMENT_REGRESSION",report["tests_run"])
+          PY
+
+      - name: Run autonomous successor development and 20 endogenous cycles
+        run: |
+          python -m successor.active_run --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json" --output "$RUNNER_TEMP/yado-native-run"
+          python -m successor.development_run --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json" --output "$RUNNER_TEMP/yado-development-run"
+          cp "$RUNNER_TEMP/yado-native-run/kernel.sqlite" "$RUNNER_TEMP/yado-endogenous.sqlite"
+          python -m successor.endogenous_run \
+            --manifest "$RUNNER_TEMP/yado-successor-birth/manifest.json" \
+            --state "$RUNNER_TEMP/yado-endogenous.sqlite" \
+            --output "$RUNNER_TEMP/yado-endogenous-run.json" \
+            --cycles 20 \
+            --budget 3
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          report=json.loads((Path(os.environ["RUNNER_TEMP"]) / "yado-endogenous-run.json").read_text())
+          assert report["status"]=="PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1",report
+          assert report["cycles_completed"]==20 and report["cycles_verified"]==20,report
+          assert report["host_goal_count"]==0,report
+          assert all(row["status"]=="VERIFIED" for row in report["results"]),report
+          assert report["state_verification"]["status"]=="PASS",report
+          assert report["consciousness_established"] is False,report
+          print("PASS_AUTONOMOUS_DEEP_DEVELOPMENT_20_CYCLES")
+          PY
+
+      - name: Final canonical immutability check
+        run: |
+          git diff --exit-code -- canonical architecture/evolution-ledger.json
+          python runtime/yado_canonical_invariant_guard_v1.py
+
+      - name: Upload deep-development evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-autonomous-deep-development-v1
+          path: |
+            candidates/kernel-self-generated/yado-autonomous-deep-development-v1.json
+            candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json
+            candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v2.py
+            candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json
+            runtime/yado_cognitive_tri_organ_policy_v3.py
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-kernel-audit-v1-summary.md
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1.log
