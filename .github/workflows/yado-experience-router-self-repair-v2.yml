@@ -1,0 +1,100 @@
+name: YADO Experience Router Self Repair V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/yado-experience-router-self-repair-v2-20260917]
+    paths:
+      - '.github/workflows/yado-experience-router-self-repair-v2.yml'
+      - 'runtime/yado_external_dev_experience_router_self_repair_v2.py'
+      - 'runtime/test_yado_external_dev_experience_router_self_repair_v2.py'
+      - 'architecture/yado-experience-router-self-repair-v2.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yado-experience-router-self-repair-v2
+  cancel-in-progress: false
+
+jobs:
+  self-repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+      - name: Compile self-repair layer
+        run: python -m py_compile runtime/yado_external_dev_experience_router_self_repair_v2.py
+      - name: Run focused self-repair regression
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: python -m unittest runtime.test_yado_external_dev_experience_router_self_repair_v2 -v
+      - name: Materialize experience-derived router candidate
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from yado_external_dev_experience_router_self_repair_v2 import ExternalDevExperienceRouterSelfRepairV2
+
+          candidate = Path('candidates/autonomous/yado_external_dev_experience_router_candidate_v2.py')
+          receipt = Path('candidates/autonomous/yado-experience-router-self-repair-v2.json')
+          out = ExternalDevExperienceRouterSelfRepairV2().run(
+              candidate_path=candidate,
+              receipt_path=receipt,
+          )
+          assert out['status'] == 'PASS_SHADOW_EXPERIENCE_ROUTER_SELF_REPAIR_V2', out
+          assert out['history_event_count'] == 7, out
+          assert all(row['pass'] for row in out['retained_history_replay']), out
+          assert all(row['pass'] for row in out['bootstrap_retention']), out
+          assert out['reproduced_defect']['base_failed'] is True, out
+          assert out['reproduced_defect']['candidate_passed'] is True, out
+          assert out['fresh_contamination_holdout']['base_failed'] is True, out
+          assert out['fresh_contamination_holdout']['candidate_passed'] is True, out
+          assert out['fresh_contamination_holdout']['gain_over_base'] == 1, out
+          assert out['unknown_withhold'] is True, out
+          assert out['candidate_source_sha256'] != out['base_router_source_sha256'], out
+          assert out['automatic_main_mutation'] is False, out
+          assert out['g3_genesis_performed'] is False, out
+          print(json.dumps(out, indent=2, sort_keys=True))
+          PY
+      - name: Run full kernel audit before persistence
+        run: python runtime/yado_full_kernel_audit_v1.py
+      - name: Build fresh Successor identity for regression
+        run: python -m successor build --output "$RUNNER_TEMP/yado-experience-router-v2-successor-birth"
+      - name: Run complete inherited and Successor regression
+        run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-experience-router-v2-successor-birth/manifest.json"
+      - name: Persist verified self-repair candidate and receipt in shadow branch
+        run: |
+          git config user.name 'YADO Experience Router Self Repair'
+          git config user.email 'actions@users.noreply.github.com'
+          git add candidates/autonomous/yado_external_dev_experience_router_candidate_v2.py
+          git add candidates/autonomous/yado-experience-router-self-repair-v2.json
+          if git diff --cached --quiet; then
+            echo 'No experience-router artifacts changed'
+          else
+            git commit -m 'YADO router: persist experience-derived self-repair proof [skip ci]'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - name: Preserve self-repair evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-experience-router-self-repair-v2-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            candidates/autonomous/yado_external_dev_experience_router_candidate_v2.py
+            candidates/autonomous/yado-experience-router-self-repair-v2.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
