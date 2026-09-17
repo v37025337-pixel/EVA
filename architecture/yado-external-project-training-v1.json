@@ -1,0 +1,29 @@
+{
+  "schema": "yado.architecture.external_project_training.v1",
+  "component_id": "RUNTIME-G2-EXTERNAL-PROJECT-TRAINING-V1",
+  "generation": "G2",
+  "purpose": "Train bounded LOGIC, THINKING, and INTELLIGENCE capability profiles from provenance-preserving observations of two public repositories.",
+  "sources": [
+    {"repository": "ripienaar/free-for-dev", "ref": "master", "mode": "README_OBSERVATIONS_ONLY"},
+    {"repository": "dip497/hivemind", "ref": "main", "mode": "README_AND_ARCHITECTURE_OBSERVATIONS_ONLY"}
+  ],
+  "training": {
+    "representation": "normalized paraphrased observations",
+    "learning": "provenance weighted capability profiles",
+    "outputs": ["LOGIC", "THINKING", "INTELLIGENCE"],
+    "unknown_policy": "WITHHOLD"
+  },
+  "boundary": {
+    "network_fetch_at_runtime": false,
+    "third_party_code_copied": false,
+    "third_party_code_executed": false,
+    "external_writes": false,
+    "automatic_main_mutation": false
+  },
+  "admission": {
+    "candidate_branch_only": true,
+    "focused_tests_required": true,
+    "full_kernel_audit_required": true,
+    "full_regression_required": true
+  }
+}

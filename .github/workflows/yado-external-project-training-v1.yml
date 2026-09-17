@@ -1,0 +1,44 @@
+name: YADO External Project Training V1
+
+on:
+  pull_request:
+    paths:
+      - "runtime/yado_external_project_training_v1.py"
+      - "runtime/test_yado_external_project_training_v1.py"
+      - "architecture/yado-external-project-training-v1.json"
+      - "candidates/yado_external_project_training_candidate_v1.py"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m py_compile runtime/yado_external_project_training_v1.py runtime/test_yado_external_project_training_v1.py candidates/yado_external_project_training_candidate_v1.py
+      - run: |
+          PYTHONPATH=runtime:. python - <<'PY'
+          import importlib.util
+          spec = importlib.util.spec_from_file_location("training_tests", "runtime/test_yado_external_project_training_v1.py")
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          for name in sorted(name for name in dir(module) if name.startswith("test_")):
+              getattr(module, name)()
+              print("PASS", name)
+          PY
+      - run: |
+          PYTHONPATH=runtime:. python - <<'PY'
+          from yado_external_project_training_v1 import route, train
+          trained = train()
+          print({"status": trained["status"], "row_count": trained["row_count"], "training_digest": trained["training_digest"]})
+          for task in (
+              "validate security criteria and review state",
+              "preserve context across workflow architecture events",
+              "coordinate agents and supervise resource adaptation",
+          ):
+              print(route(task, trained))
+          PY
