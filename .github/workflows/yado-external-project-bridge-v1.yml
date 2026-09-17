@@ -20,4 +20,13 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m py_compile runtime/yado_external_project_bridge_v1.py runtime/test_yado_external_project_bridge_v1.py candidates/yado_external_project_bridge_candidate_v1.py
-      - run: python -m pytest -q runtime/test_yado_external_project_bridge_v1.py
+      - run: |
+          PYTHONPATH=runtime:. python - <<'PY'
+          import importlib.util
+          spec = importlib.util.spec_from_file_location("bridge_tests", "runtime/test_yado_external_project_bridge_v1.py")
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          for name in sorted(name for name in dir(module) if name.startswith("test_")):
+              getattr(module, name)()
+              print("PASS", name)
+          PY
