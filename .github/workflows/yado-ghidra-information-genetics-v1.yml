@@ -1,0 +1,111 @@
+name: YADO Ghidra Information Genetics Learning V1
+
+on:
+  push:
+    branches: [codex/yado-ghidra-information-genetics-v1-20260917]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  ghidra-information-genetics-learning:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install core dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+      - name: Compile and test bounded research route
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: |
+          python -m py_compile runtime/yado_self_directed_web_research_v1.py
+          python -m py_compile runtime/yado_unified_core_self_directed_web_research_v1.py
+          python -m unittest runtime.test_yado_self_directed_web_research_v1 -v
+          python -m unittest runtime.test_yado_unified_core_self_directed_web_research_v1 -v
+      - name: Study Ghidra and information genetics on public web
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from yado_unified_core_self_directed_web_research_v1 import UnifiedYADOCoreSelfDirectedWebResearchV1
+
+          request = json.loads(Path('architecture/yado-ghidra-information-genetics-v1.json').read_text(encoding='utf-8'))
+          candidate = json.loads(Path('candidates/kernel-self-generated/yado-ghidra-information-genetics-v1.json').read_text(encoding='utf-8'))
+          core = UnifiedYADOCoreSelfDirectedWebResearchV1()
+          audit = core.audit()
+          assert audit['pass'] is True, audit
+          result = core.self_directed_web_research_generations(
+              request['objective'],
+              seed_urls=request['seed_urls'],
+              max_generations=request['max_generations'],
+              max_sources_per_generation=request['max_sources_per_generation'],
+              closure_source_target=request['closure_source_target'],
+              max_search_results=request['max_search_results'],
+              timeout=20,
+          )
+          assert result['status'] == 'PASS_BOUNDED_SELF_DIRECTED_WEB_RESEARCH_GENERATIONS_V1', result
+          assert result['generation_count'] >= 1, result
+          assert len(result['independent_hosts_accumulated']) >= 2, result
+          for generation in result['generations']:
+              assert generation['causal_prepare']['status'] == 'PASS_CAUSAL_PREPARE', generation
+              assert generation['read_only'] is True
+              assert generation['credentials_used'] is False
+              assert generation['private_network_access'] is False
+              assert generation['external_write'] is False
+              assert generation['downloaded_code_executed'] is False
+              for source in generation.get('sources', []):
+                  assert source['read_only'] is True
+                  assert source['credentials_used'] is False
+                  assert source['external_write'] is False
+                  assert source['private_network_access'] is False
+          assert candidate['status'] == 'SHADOW_CANDIDATE'
+          assert candidate['safe_boundary']['binary_execution'] is False
+          assert candidate['safe_boundary']['canonical_mutation'] is False
+          assert set(candidate['genetic_information_model']) == {'storage', 'transmission', 'processing', 'mutation', 'integrity'}
+          evidence = {
+              'schema': 'yado.ghidra_information_genetics.real_run.v1',
+              'status': 'PASS_GHIDRA_INFORMATION_GENETICS_BOUNDED_LEARNING_V1',
+              'commit': os.environ.get('GITHUB_SHA'),
+              'external_project': request['external_project'],
+              'selected_capability_gap': request['selected_capability_gap'],
+              'objective': request['objective'],
+              'generation_count': result['generation_count'],
+              'goal_closed': result['goal_closed'],
+              'independent_hosts_accumulated': result['independent_hosts_accumulated'],
+              'generation_statuses': [x['status'] for x in result['generations']],
+              'deficits': [x['deficits'] for x in result['generations']],
+              'next_goals': [x['next_goal'] for x in result['generations']],
+              'candidate_capabilities': candidate['proposed_capabilities'],
+              'genetic_information_model': candidate['genetic_information_model'],
+              'core_audit_pass': audit['pass'],
+              'read_only': True,
+              'credentials_used': False,
+              'private_network_access': False,
+              'external_write': False,
+              'downloaded_code_executed': False,
+              'binary_execution': False,
+              'automatic_canonical_mutation': False,
+              'candidate_admission': 'SHADOW_ONLY_UNTIL_INDEPENDENT_VALIDATION',
+          }
+          out = Path(os.environ['RUNNER_TEMP']) / 'yado-ghidra-information-genetics-v1.json'
+          out.write_text(json.dumps(evidence, indent=2, sort_keys=True) + '\\n', encoding='utf-8')
+          print(json.dumps(evidence, sort_keys=True))
+          PY
+      - name: Preserve Ghidra and information genetics evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-ghidra-information-genetics-v1-${{ github.run_id }}
+          path: ${{ runner.temp }}/yado-ghidra-information-genetics-v1.json
+          if-no-files-found: error
