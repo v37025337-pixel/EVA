@@ -6,18 +6,9 @@
     "verify_job": "downloads sealed ground truth only after response artifact exists"
   },
   "benchmarks": {
-    "gsm8k": {
-      "count": 40,
-      "domain": "natural_language_multistep_mathematics"
-    },
-    "humaneval": {
-      "count": 20,
-      "domain": "open_ended_python_code_generation"
-    },
-    "openbookqa": {
-      "count": 40,
-      "domain": "open_book_science_multiple_choice"
-    }
+    "gsm8k": {"count": 40, "domain": "natural_language_multistep_mathematics"},
+    "humaneval": {"count": 20, "domain": "open_ended_python_code_generation"},
+    "openbookqa": {"count": 40, "domain": "open_book_science_multiple_choice"}
   },
   "claim_boundary": {
     "general_intelligence_proven": false,
@@ -31,6 +22,13 @@
     "external_llm_answers": false,
     "openbookqa_public_science_facts_allowed": true,
     "unsupported_task": "UNRESOLVED"
+  },
+  "self_diagnostic_launch": {
+    "request_id": "YADO-BLIND-SELF-DIAGNOSTIC-20260917-01",
+    "controller_must_select_deficit_before_response": true,
+    "answers_available_before_response": false,
+    "external_llm_used_for_answers": false,
+    "canonical_mutation": false
   },
   "schema": "yado.blind_real_benchmark_exam.v1"
 }
