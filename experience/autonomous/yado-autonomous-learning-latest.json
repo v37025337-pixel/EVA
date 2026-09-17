@@ -2,289 +2,315 @@
   "automatic_main_mutation": false,
   "canonical_mutation": false,
   "consciousness_claimed": false,
-  "cross_disciplinary_evidence_digest": "21cafc70f51cf91d8795ac1284847a0b70f2528403b854d3591666a128efe6f3",
-  "disciplines_covered": [
-    "ai_risk",
-    "climate_systems",
-    "cybersecurity",
-    "mathematics",
-    "medicine_biology",
-    "philosophy_cognition",
-    "physics_astronomy",
-    "programming",
-    "web_systems"
-  ],
-  "experience_digest": "8ccb9950543bc323e5adf76f945711eefb41c28431f1de8bacc40074f0e04c21",
+  "experience_digest": "8873360a1e2d7841829e71d80d92aebe54f4537eb91592c591a08a0976a096c6",
   "failures": [],
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
   "network_policy": {
+    "allowed_hosts": [
+      "developer.mozilla.org",
+      "docs.python.org",
+      "www.w3.org"
+    ],
     "credentials_allowed": false,
     "downloaded_code_executed": false,
     "external_writes": false,
     "https_only": true,
-    "remote_content_treated_as_untrusted_data": true
+    "max_bytes": 524288,
+    "methods": [
+      "GET"
+    ],
+    "redirects_followed": false
   },
   "priority": {
-    "area": "CROSS_DISCIPLINARY_PUBLIC_EVIDENCE",
-    "code": "THINKING_BOUNDARY_REASONING",
-    "recommended_action": "USE_REAL_CROSS_DISCIPLINARY_EVIDENCE_TO_FORM_AND_TEST_REPAIR_HYPOTHESES"
+    "area": "MEMORY_AND_EXPERIENCE",
+    "blocking": false,
+    "code": "UNREGISTERED_EXPERIENCE_CANDIDATES",
+    "rank": 1,
+    "recommended_action": "For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.",
+    "severity": "MEDIUM"
   },
+  "run_id": "35262881729",
   "schema": "yado.bounded_autonomous_learning.v1",
-  "self_model_effect": "VERIFIED_CROSS_DOMAIN_EVIDENCE_AVAILABLE_FOR_CAUSAL_COGNITIVE_MUTATION",
+  "self_model_effect": "EXTERNAL_EVIDENCE_AVAILABLE_FOR_FUTURE_SELECTION",
+  "source_ranking": [
+    {
+      "id": "PYTHON_AST",
+      "overlap": [
+        "code",
+        "python",
+        "source",
+        "syntax"
+      ],
+      "score": 7,
+      "tags": [
+        "python",
+        "ast",
+        "source",
+        "rewrite",
+        "compile",
+        "code",
+        "syntax"
+      ]
+    },
+    {
+      "id": "PYTHON_HTMLPARSER",
+      "overlap": [
+        "learning",
+        "parser",
+        "web"
+      ],
+      "score": 6,
+      "tags": [
+        "html",
+        "parser",
+        "document",
+        "web",
+        "learning",
+        "external"
+      ]
+    },
+    {
+      "id": "PYTHON_UNITTEST",
+      "overlap": [
+        "test"
+      ],
+      "score": 2,
+      "tags": [
+        "test",
+        "regression",
+        "verification",
+        "rollback",
+        "software",
+        "quality"
+      ]
+    },
+    {
+      "id": "PYTHON_URLOPEN",
+      "overlap": [
+        "network"
+      ],
+      "score": 2,
+      "tags": [
+        "network",
+        "http",
+        "https",
+        "request",
+        "url",
+        "internet",
+        "read-only"
+      ]
+    },
+    {
+      "id": "MDN_HTTP",
+      "overlap": [
+        "network",
+        "web"
+      ],
+      "score": 1,
+      "tags": [
+        "http",
+        "https",
+        "web",
+        "network",
+        "protocol",
+        "internet"
+      ]
+    },
+    {
+      "id": "W3C_WEBARCH",
+      "overlap": [
+        "web"
+      ],
+      "score": 1,
+      "tags": [
+        "web",
+        "architecture",
+        "uri",
+        "resource",
+        "protocol",
+        "internet"
+      ]
+    }
+  ],
   "sources": [
     {
-      "discipline": "ai_risk",
-      "fact_count": 4,
+      "fact_count": 24,
       "facts": [
-        "ai_risk verified public evidence profile terms nist:32, risk:20, management:18, framework:16, information:10",
-        "ai_risk verified public evidence profile terms artificial:9, intelligence:8, laboratory:8, profile:7, technology:6",
-        "ai_risk verified public evidence profile terms infrastructure:6, draft:6, research:5, development:5, critical:5",
-        "ai_risk verified public evidence profile terms released:5, comments:5, manufacturing:4, public:4, standards:4"
+        "ast — Abstract syntax trees — Python 3.14.7 documentation",
+        "module helps Python applications to process trees of the Python abstract syntax grammar. The abstract syntax itself might change with each Python release; this module helps to find out programmatically what the current grammar looks like.",
+        ". An abstract syntax tree can be compiled into a Python code object using the built-in",
+        "-- need sequences for compare to distinguish between",
+        "-- keyword arguments supplied to call (NULL identifier for **kwargs)",
+        "-- The optional \"rest\" MatchMapping parameter handles capturing extra mapping keys",
+        "There is one class defined for each left-hand side symbol in the abstract grammar (for example,",
+        "). In addition, there is one class defined for each constructor on the right-hand side; these classes inherit from the classes for the left-hand side trees. For example,",
+        ". For production rules with alternatives (aka “sums”), the left-hand side class is abstract: only instances of specific constructor nodes are ever created.",
+        "which gives the names of all child nodes.",
+        "Each instance of a concrete class has one attribute for each child node, of the type as defined in the grammar. For example,",
+        ". If the attributes can have zero-or-more values (marked with an asterisk), the values are represented as Python lists. All possible attributes must be present and have valid values when compiling an AST with",
+        "attribute on each concrete class is a dictionary mapping field names (as also listed in",
+        "are the first and last line numbers of source text span (1-indexed so the first line is line 1) and the",
+        "are the corresponding UTF-8 byte offsets of the first and last tokens that generated the node. The UTF-8 offset is recorded because the parser uses UTF-8 internally.",
+        "Note that the end positions are not required by the compiler and are therefore optional. The end offset is",
+        "the last symbol, for example one can get the source segment of a one-line expression node using",
+        "; they will be assigned as attributes of these names.",
+        "If there are keyword arguments, they will set the attributes of the same names to the given values.",
+        "is raised and the AST node will not have this field. In Python 3.15, this condition will raise an error.",
+        "AST node constructors were changed to provide sensible defaults for omitted fields: optional fields now default to",
+        ", list fields default to an empty list, and fields of type",
+        "Previous versions of Python provided the AST classes",
+        ", which were deprecated in Python 3.8. These classes were removed in Python 3.14, and their functionality has been replaced with"
       ],
       "network": {
+        "bytes": 361144,
+        "content_type": "text/html",
         "credentials_used": false,
-        "read_only": true
+        "host": "docs.python.org",
+        "latency_ms": 28.81,
+        "network_executed": true,
+        "read_only": true,
+        "redirects_followed": false,
+        "resolved_ips": [
+          "151.101.0.223",
+          "151.101.128.223",
+          "151.101.192.223",
+          "151.101.64.223",
+          "2a04:4e42:200::223",
+          "2a04:4e42:400::223",
+          "2a04:4e42:600::223",
+          "2a04:4e42::223"
+        ],
+        "sha256": "217bc897aacf40eb42d1f2c29289cccf14db545c58b0fba58ff4da4ec02329ab",
+        "status": 200,
+        "url": "https://docs.python.org/3/library/ast.html"
       },
-      "provenance": [
-        {
-          "bytes": 93782,
-          "host": "www.nist.gov",
-          "sha256": "5c5a6b61d8cdb1848bdcea2903acebce22592364433bf1e828663aa7a22d7aba",
-          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
-          "word_count": 1031
-        }
+      "selection_overlap": [
+        "code",
+        "python",
+        "source",
+        "syntax"
       ],
-      "source_id": "CROSS_AI_RISK"
+      "selection_score": 7,
+      "source_id": "PYTHON_AST",
+      "url": "https://docs.python.org/3/library/ast.html"
     },
     {
-      "discipline": "climate_systems",
-      "fact_count": 4,
+      "fact_count": 24,
       "facts": [
-        "climate_systems verified public evidence profile terms nasa:66, article:40, science:26, earth:24, climate:23",
-        "climate_systems verified public evidence profile terms space:22, days:22, change:20, highlights:12, multimedia:10",
-        "climate_systems verified public evidence profile terms data:10, global:10, artemis:7, missions:7, system:7",
-        "climate_systems verified public evidence profile terms technology:7, temperature:7, explore:6, solar:6, espa:6"
+        "html.parser — Simple HTML and XHTML parser — Python 3.14.7 documentation",
+        "which serves as the basis for parsing text files formatted in HTML (HyperText Mark-up Language) and XHTML.",
+        ") are automatically converted to the corresponding Unicode characters.",
+        "instance is fed HTML data and calls handler methods when start tags, end tags, text, comments, and other markup elements are encountered. The user should subclass",
+        "and override its methods to implement the desired behavior.",
+        "This parser does not check that end tags match start tags or call the end-tag handler for elements which are closed implicitly by closing an outer element.",
+        "class to print out start tags, end tags, and data as they are encountered:",
+        "'<html><head><title>Test</title></head>'",
+        "Encountered a start tag: html Encountered a start tag: head Encountered a start tag: title Encountered some data : Test Encountered an end tag : title Encountered an end tag : head Encountered a start tag: body Encountered a start tag: h1 Encountered some data : Parse me! Encountered an end tag : h1 Encountered an end tag : body Encountered an end tag : html",
+        "Force processing of all buffered data as if it were followed by an end-of-file mark. This method may be redefined by a derived class to define additional processing at the end of the input, but the redefined version should always call the",
+        "Return the text of the most recently opened start tag. This should not normally be needed for structured processing, but may be useful in dealing with HTML “as deployed” or for re-generating input with minimal changes (whitespace between attributes can be preserved, etc.).",
+        "The following methods are called when data or markup elements are encountered and they are meant to be overridden in a subclass. The base class implementations do nothing (except for",
+        "This method is called to handle the start tag of an element (e.g.",
+        "will be translated to lower case, and quotes in the",
+        "have been removed, and character and entity references have been replaced. For empty attributes,",
+        "This method is called to handle the end tag of an element (e.g.",
+        "). This method may be overridden by subclasses which require this particular lexical information; the default implementation simply calls",
+        "This method is called to process arbitrary data (e.g. text nodes and the content of elements like",
+        "This method is called to process a named character reference of the form",
+        "This method is called to process decimal and hexadecimal numeric character references of the form",
+        ". For example, the decimal equivalent for",
+        "The content of Internet Explorer conditional comments (condcoms) will also be sent to this method, so, for",
+        "This method is called to handle an HTML doctype declaration (e.g.",
+        "parameter will contain the entire processing instruction. For example, for the processing instruction"
       ],
       "network": {
+        "bytes": 55224,
+        "content_type": "text/html",
         "credentials_used": false,
-        "read_only": true
+        "host": "docs.python.org",
+        "latency_ms": 22.18,
+        "network_executed": true,
+        "read_only": true,
+        "redirects_followed": false,
+        "resolved_ips": [
+          "151.101.0.223",
+          "151.101.128.223",
+          "151.101.192.223",
+          "151.101.64.223",
+          "2a04:4e42:200::223",
+          "2a04:4e42:400::223",
+          "2a04:4e42:600::223",
+          "2a04:4e42::223"
+        ],
+        "sha256": "7647c0649cccf9445f1488ec0ce530f40b001c1449ccbebb62ede59d9ad990a8",
+        "status": 200,
+        "url": "https://docs.python.org/3/library/html.parser.html"
       },
-      "provenance": [
-        {
-          "bytes": 335351,
-          "host": "science.nasa.gov",
-          "sha256": "5ec8936a6c8c09599c926653310b5f75ece70cb971631121afe9e31a955d02b7",
-          "url": "https://science.nasa.gov/climate-change/",
-          "word_count": 1946
-        }
+      "selection_overlap": [
+        "learning",
+        "parser",
+        "web"
       ],
-      "source_id": "CROSS_CLIMATE_SYSTEMS"
+      "selection_score": 6,
+      "source_id": "PYTHON_HTMLPARSER",
+      "url": "https://docs.python.org/3/library/html.parser.html"
     },
     {
-      "discipline": "cybersecurity",
-      "fact_count": 4,
+      "fact_count": 24,
       "facts": [
-        "cybersecurity verified public evidence profile terms owasp:109, gmail:37, data:28, nist:18, security:11",
-        "cybersecurity verified public evidence profile terms cybersecurity:11, information:10, applications:10, translated:10, analysis:10",
-        "cybersecurity verified public evidence profile terms top10:9, translations:9, project:9, version:8, german:8",
-        "cybersecurity verified public evidence profile terms plan:8, translation:7, chinese:7, french:7, hebrew:7"
+        "unittest — Unit testing framework — Python 3.14.7 documentation",
+        "Distinguishing test iterations using subtests",
+        "(If you are already familiar with the basic concepts of testing, you might want to skip to",
+        "unit testing framework was originally inspired by JUnit and has a similar flavor as major unit testing frameworks in other languages. It supports test automation, sharing of setup and shutdown code for tests, aggregation of tests into collections, and independence of the tests from the reporting framework.",
+        "represents the preparation needed to perform one or more tests, and any associated cleanup actions. This may involve, for example, creating temporary or proxy databases, directories, or starting a server process.",
+        "is the individual unit of testing. It checks for a specific response to a particular set of inputs.",
+        ", which may be used to create new test cases.",
+        "is a collection of test cases, test suites, or both. It is used to aggregate tests that should be executed together.",
+        "is a component which orchestrates the execution of tests and provides the outcome to the user. The runner may use a graphical interface, a textual interface, or return a special value to indicate the results of executing the tests.",
+        "Another test-support module with a very different flavor.",
+        "Kent Beck’s original paper on testing frameworks using the pattern shared by",
+        "Third-party unittest framework with a lighter-weight syntax for writing tests. For example,",
+        "An extensive list of Python testing tools including functional testing frameworks and mock object libraries.",
+        "A special-interest-group for discussion of testing, and testing tools, in Python.",
+        "in the Python source distribution is a GUI tool for test discovery and execution. This is intended largely for ease of use for those new to unit testing. For production environments it is recommended that tests be driven by a continuous integration system such as",
+        "module provides a rich set of tools for constructing and running tests. This section demonstrates that a small subset of the tools suffice to meet the needs of most users.",
+        "Here is a short script to test three string methods:",
+        ". The three individual tests are defined with methods whose names start with the letters",
+        ". This naming convention informs the test runner about which methods represent tests.",
+        "statement so the test runner can accumulate all test results and produce a report.",
+        "methods allow you to define instructions that will be executed before and after each test method. They are covered in more detail in the section",
+        "The final block shows a simple way to run the tests.",
+        "provides a command-line interface to the test script. When run from the command line, the above script produces an output that looks like this:",
+        "option to your test script will instruct"
       ],
       "network": {
+        "bytes": 334193,
+        "content_type": "text/html",
         "credentials_used": false,
-        "read_only": true
+        "host": "docs.python.org",
+        "latency_ms": 24.64,
+        "network_executed": true,
+        "read_only": true,
+        "redirects_followed": false,
+        "resolved_ips": [
+          "151.101.0.223",
+          "151.101.128.223",
+          "151.101.192.223",
+          "151.101.64.223",
+          "2a04:4e42:200::223",
+          "2a04:4e42:400::223",
+          "2a04:4e42:600::223",
+          "2a04:4e42::223"
+        ],
+        "sha256": "e57771c02383930d6da54de5a7ff5500fd676ed6abcc4ba09c77c8616ab9b255",
+        "status": 200,
+        "url": "https://docs.python.org/3/library/unittest.html"
       },
-      "provenance": [
-        {
-          "bytes": 56078,
-          "host": "owasp.github.io",
-          "sha256": "e80eb9e34c074a179cfcdaa96e497a079cb786a2f6c86b3132a0ffd80ebc0e3a",
-          "url": "https://owasp.github.io/www-project-top-ten/",
-          "word_count": 2402
-        },
-        {
-          "bytes": 91022,
-          "host": "www.nist.gov",
-          "sha256": "a0588da061eadb83527292f06ab6b1315900226fee7d5799e837c96fc2ac981f",
-          "url": "https://www.nist.gov/cyberframework",
-          "word_count": 733
-        }
+      "selection_overlap": [
+        "test"
       ],
-      "source_id": "CROSS_CYBERSECURITY"
-    },
-    {
-      "discipline": "mathematics",
-      "fact_count": 4,
-      "facts": [
-        "mathematics verified public evidence profile terms course:6, instructor:6, linear:5, algebra:5, mathematics:5",
-        "mathematics verified public evidence profile terms insights:4, lecture:4, exams:4, grading:4, solutions:4",
-        "mathematics verified public evidence profile terms problem:4, topics:3, sites:3, opencourseware:2, syllabus:2",
-        "mathematics verified public evidence profile terms calendar:2, lectures:2, final:2, readings:2, assignments:2"
-      ],
-      "network": {
-        "credentials_used": false,
-        "read_only": true
-      },
-      "provenance": [
-        {
-          "bytes": 47884,
-          "host": "ocw.mit.edu",
-          "sha256": "be5be1308115c38c6edee339a88e5598c650bfe276200a81e2150e0479a399ca",
-          "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
-          "word_count": 295
-        }
-      ],
-      "source_id": "CROSS_MATHEMATICS"
-    },
-    {
-      "discipline": "medicine_biology",
-      "fact_count": 4,
-      "facts": [
-        "medicine_biology verified public evidence profile terms resistance:38, health:26, antimicrobial:23, infections:21, global:15",
-        "medicine_biology verified public evidence profile terms medicines:9, bacterial:9, drug-resistant:9, drug:9, treat:8",
-        "medicine_biology verified public evidence profile terms antibiotics:8, countries:7, world:7, bacteria:7, across:7",
-        "medicine_biology verified public evidence profile terms emergence:7, access:7, resistant:7, treatment:7, country:6"
-      ],
-      "network": {
-        "credentials_used": false,
-        "read_only": true
-      },
-      "provenance": [
-        {
-          "bytes": 129313,
-          "host": "www.who.int",
-          "sha256": "e92d1054a366c722e366632e1f01c3ab0343fc250b9455c406179e11510bb3cc",
-          "url": "https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance",
-          "word_count": 2030
-        }
-      ],
-      "source_id": "CROSS_MEDICINE_BIOLOGY"
-    },
-    {
-      "discipline": "philosophy_cognition",
-      "fact_count": 4,
-      "facts": [
-        "philosophy_cognition verified public evidence profile terms consciousness:403, conscious:208, theories:106, states:89, mental:82",
-        "philosophy_cognition verified public evidence profile terms experience:78, press:78, properties:69, phenomenal:68, might:67",
-        "philosophy_cognition verified public evidence profile terms oxford:67, physical:59, qualia:56, state:55, relevant:51",
-        "philosophy_cognition verified public evidence profile terms university:51, mind:50, cambridge:49, theory:47, qualitative:46"
-      ],
-      "network": {
-        "credentials_used": false,
-        "read_only": true
-      },
-      "provenance": [
-        {
-          "bytes": 181378,
-          "host": "plato.stanford.edu",
-          "sha256": "9e814583974e4f217fa4957dbea263e49385abb554a9ce1abffcfbb86038476a",
-          "url": "https://plato.stanford.edu/entries/consciousness/",
-          "word_count": 23631
-        }
-      ],
-      "source_id": "CROSS_PHILOSOPHY_COGNITION"
-    },
-    {
-      "discipline": "physics_astronomy",
-      "fact_count": 4,
-      "facts": [
-        "physics_astronomy verified public evidence profile terms nasa:77, article:41, space:32, days:22, science:20",
-        "physics_astronomy verified public evidence profile terms universe:16, telescope:14, hubble:13, earth:12, highlights:12",
-        "physics_astronomy verified public evidence profile terms webb:10, dark:10, roman:10, multimedia:8, x-ray:8",
-        "physics_astronomy verified public evidence profile terms energy:8, explore:7, artemis:7, solar:7, technology:7"
-      ],
-      "network": {
-        "credentials_used": false,
-        "read_only": true
-      },
-      "provenance": [
-        {
-          "bytes": 372273,
-          "host": "science.nasa.gov",
-          "sha256": "0ed83d0a6ff08bba8d085d4223f7668574202d32f9575dfaa12f7dcbf2c207da",
-          "url": "https://science.nasa.gov/universe/",
-          "word_count": 1824
-        }
-      ],
-      "source_id": "CROSS_PHYSICS_ASTRONOMY"
-    },
-    {
-      "discipline": "programming",
-      "fact_count": 4,
-      "facts": [
-        "programming verified public evidence profile terms python:37, modules:11, tutorial:8, language:8, interpreter:8",
-        "programming verified public evidence profile terms standard:7, lists:7, exceptions:7, documentation:6, data:6",
-        "programming verified public evidence profile terms library:6, objects:6, programming:5, interactive:5, statements:5",
-        "programming verified public evidence profile terms string:5, topic:4, source:4, argument:4, function:4"
-      ],
-      "network": {
-        "credentials_used": false,
-        "read_only": true
-      },
-      "provenance": [
-        {
-          "bytes": 37097,
-          "host": "docs.python.org",
-          "sha256": "73e3749552a18488b279f61a8ef81e844eb4a7cc87a1484f2226032685b6fd2f",
-          "url": "https://docs.python.org/3/tutorial/",
-          "word_count": 1053
-        }
-      ],
-      "source_id": "CROSS_PROGRAMMING"
-    },
-    {
-      "discipline": "web_systems",
-      "fact_count": 4,
-      "facts": [
-        "web_systems verified public evidence profile terms server:26, requests:22, messages:21, request:20, connection:18",
-        "web_systems verified public evidence profile terms cors:18, protocol:17, client:16, content:15, header:15",
-        "web_systems verified public evidence profile terms reason:15, html:14, browser:14, fetch:12, sent:10",
-        "web_systems verified public evidence profile terms transport:10, proxies:10, servers:9, example:9, guides:8"
-      ],
-      "network": {
-        "credentials_used": false,
-        "read_only": true
-      },
-      "provenance": [
-        {
-          "bytes": 227986,
-          "host": "developer.mozilla.org",
-          "sha256": "31b80b1d3631b38781fa7d4cd94047ab061e6ec8b7dfcfe449609a806a6e749d",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
-          "word_count": 3352
-        }
-      ],
-      "source_id": "CROSS_WEB_SYSTEMS"
-    },
-    {
-      "discipline": "cross_domain",
-      "fact_count": 20,
-      "facts": [
-        "cross-domain bridge term data disciplines ai_risk,climate_systems,cybersecurity,medicine_biology,physics_astronomy,programming",
-        "cross-domain bridge term research disciplines ai_risk,climate_systems,cybersecurity,medicine_biology,physics_astronomy",
-        "cross-domain bridge term events disciplines ai_risk,climate_systems,cybersecurity,physics_astronomy",
-        "cross-domain bridge term information disciplines ai_risk,cybersecurity,philosophy_cognition,web_systems",
-        "cross-domain bridge term reference disciplines ai_risk,cybersecurity,programming,web_systems",
-        "cross-domain bridge term technology disciplines ai_risk,climate_systems,mathematics,physics_astronomy",
-        "cross-domain bridge term world disciplines climate_systems,medicine_biology,philosophy_cognition,physics_astronomy",
-        "cross-domain bridge term content disciplines mathematics,philosophy_cognition,web_systems",
-        "cross-domain bridge term human disciplines climate_systems,cybersecurity,medicine_biology",
-        "cross-domain bridge term images disciplines climate_systems,physics_astronomy,web_systems",
-        "cross-domain bridge term language disciplines cybersecurity,programming,web_systems",
-        "cross-domain bridge term level disciplines climate_systems,mathematics,philosophy_cognition",
-        "cross-domain bridge term many disciplines climate_systems,philosophy_cognition,programming",
-        "cross-domain bridge term objects disciplines climate_systems,physics_astronomy,programming",
-        "cross-domain bridge term organization disciplines ai_risk,cybersecurity,philosophy_cognition",
-        "cross-domain bridge term plan disciplines ai_risk,cybersecurity,medicine_biology",
-        "cross-domain bridge term required disciplines climate_systems,physics_astronomy,web_systems",
-        "cross-domain bridge term science disciplines ai_risk,climate_systems,physics_astronomy",
-        "cross-domain bridge term standard disciplines ai_risk,cybersecurity,programming",
-        "cross-domain bridge term system disciplines climate_systems,physics_astronomy,programming"
-      ],
-      "network": {
-        "credentials_used": false,
-        "read_only": true
-      },
-      "provenance": [],
-      "source_id": "CROSS_DOMAIN_BRIDGES"
+      "selection_score": 2,
+      "source_id": "PYTHON_UNITTEST",
+      "url": "https://docs.python.org/3/library/unittest.html"
     }
   ],
   "status": "PASS_SHADOW_BOUNDED_AUTONOMOUS_EXTERNAL_LEARNING_V1"
