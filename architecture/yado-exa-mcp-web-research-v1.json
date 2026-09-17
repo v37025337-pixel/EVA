@@ -12,12 +12,8 @@
   "purpose": "Bind Exa hosted MCP search and page fetching to YADO's bounded external-research path.",
   "integration": "transport_injected_then_bound_to_existing_public_https_policy",
   "authority": {
-    "schemes": [
-      "https"
-    ],
-    "methods": [
-      "POST through approved MCP transport"
-    ],
+    "schemes": ["https"],
+    "methods": ["POST through approved MCP transport"],
     "external_writes": false,
     "private_networks": false,
     "downloaded_code_execution": false,
@@ -36,4 +32,4 @@
     "keyless mode is rate-limited; API-key/OAuth setup remains deployment responsibility",
     "returned content remains evidence until YADO's existing comparison and admission gates accept it"
   ]
-}\n
+}
