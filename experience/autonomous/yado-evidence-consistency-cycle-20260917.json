@@ -1,0 +1,52 @@
+{
+  "schema": "yado.evidence_consistency_cycle.v1",
+  "status": "PASS_SHADOW_EVIDENCE_CONSISTENCY_GATE",
+  "kernel_core_id": "UNIFIED_YADO_CORE_V1",
+  "run_id": "20260917-consistency-01",
+  "network_policy": {
+    "read_only": true,
+    "https_only": true,
+    "credentials_used": false,
+    "external_writes": false,
+    "downloaded_code_executed": false
+  },
+  "learning_inputs": [
+    {
+      "source_id": "PYTHON_UNITTEST",
+      "domain": "verification",
+      "url": "https://docs.python.org/3/library/unittest.html",
+      "rule": "tests should check specific expected responses and report failures"
+    },
+    {
+      "source_id": "GITHUB_CHECK_RUNS",
+      "domain": "repository_verification",
+      "url": "https://docs.github.com/en/rest/checks/runs",
+      "rule": "check runs expose explicit verification status"
+    },
+    {
+      "source_id": "W3C_WEBARCH",
+      "domain": "web_architecture",
+      "url": "https://www.w3.org/TR/webarch/",
+      "rule": "resource identity and interaction must remain explicit"
+    }
+  ],
+  "deficit": {
+    "area": "MEMORY_AND_VERIFICATION",
+    "code": "UNVALIDATED_EVIDENCE_BUNDLES",
+    "severity": "MEDIUM",
+    "target_capability": "EVIDENCE_CONSISTENCY_GATE_V1"
+  },
+  "mutation": {
+    "path": "candidates/autonomous/yado_evidence_consistency_gate_v1.py",
+    "kind": "shadow_capability",
+    "canonical_active": false
+  },
+  "acceptance": [
+    "valid bundle passes",
+    "duplicate source IDs fail",
+    "missing provenance fails",
+    "non-HTTPS URL fails",
+    "result is deterministic"
+  ],
+  "semantic_boundary": "Evidence validation improves reliability of stored experience; it does not establish consciousness or autonomous agency."
+}
