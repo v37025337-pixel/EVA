@@ -1,0 +1,45 @@
+name: YADO Blind Deficit Analysis V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "architecture/yado-blind-deficit-analysis-v1-input.json"
+      - "runtime/yado_blind_deficit_analysis_v1.py"
+      - "runtime/test_yado_blind_deficit_analysis_v1.py"
+      - ".github/workflows/yado-blind-deficit-analysis-v1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "architecture/yado-blind-deficit-analysis-v1-input.json"
+      - "runtime/yado_blind_deficit_analysis_v1.py"
+      - "runtime/test_yado_blind_deficit_analysis_v1.py"
+      - ".github/workflows/yado-blind-deficit-analysis-v1.yml"
+permissions:
+  contents: read
+jobs:
+  analyze:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Run kernel-derived deficit analysis
+        run: |
+          PYTHONPATH=runtime python -m unittest runtime.test_yado_blind_deficit_analysis_v1
+          python runtime/yado_blind_deficit_analysis_v1.py             architecture/yado-blind-deficit-analysis-v1-input.json             candidates/kernel-self-generated/yado-blind-deficit-analysis-v1.json
+          python - <<'PY'
+          import json
+          r=json.load(open("candidates/kernel-self-generated/yado-blind-deficit-analysis-v1.json"))
+          assert r["status"]=="PASS_KERNEL_DERIVED_BLIND_DEFICIT_ANALYSIS_V1",r
+          assert r["repeat_consistency"] is True,r
+          assert r["boundaries"]["canonical_mutation"] is False,r
+          print(r["selected_deficit"],r["selected_domain"])
+          print(r["ranking"])
+          PY
+      - name: Upload kernel deficit report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-blind-deficit-analysis-v1
+          path: candidates/kernel-self-generated/yado-blind-deficit-analysis-v1.json
