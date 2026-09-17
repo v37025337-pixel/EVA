@@ -1,0 +1,25 @@
+{
+  "schema": "yado.architecture.external_project_bridge.v1",
+  "component_id": "RUNTIME-G2-EXTERNAL-PROJECT-BRIDGE-V1",
+  "generation": "G2",
+  "purpose": "Admit read-only observations from free-for-dev and Hivemind as bounded training and routing signals.",
+  "sources": [
+    {"repository": "ripienaar/free-for-dev", "branch": "master", "mode": "READ_ONLY_CATALOG"},
+    {"repository": "dip497/hivemind", "branch": "main", "mode": "READ_ONLY_ORCHESTRATOR_REFERENCE"}
+  ],
+  "boundary": {
+    "third_party_code_copied": false,
+    "third_party_code_executed": false,
+    "external_writes": false,
+    "credentials_used": false,
+    "automatic_main_mutation": false,
+    "unknown_withhold": true
+  },
+  "admission": {
+    "compile_required": true,
+    "focused_tests_required": true,
+    "full_kernel_audit_required": true,
+    "full_regression_required": true,
+    "candidate_branch_only": true
+  }
+}
