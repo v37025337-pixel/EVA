@@ -1,0 +1,99 @@
+name: YADO Relational Causal Logic Holdout V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "runtime/yado_relational_causal_logic_holdout_v1.py"
+      - "runtime/test_yado_relational_causal_logic_holdout_v1.py"
+      - "architecture/yado-relational-causal-logic-holdout-v1.json"
+      - ".github/workflows/yado-relational-causal-logic-holdout-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  relational-causal-logic-holdout:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Compile and focused LOGIC tests
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python -m py_compile runtime/yado_relational_causal_logic_holdout_v1.py runtime/test_yado_relational_causal_logic_holdout_v1.py
+          python -m unittest runtime.test_yado_relational_causal_logic_holdout_v1 -v
+
+      - name: Execute hidden and fresh holdout
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python runtime/yado_relational_causal_logic_holdout_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("candidates/cognitive/yado-relational-causal-logic-holdout-v1.json").read_text())
+          assert d["status"]=="PASS_SHADOW_RELATIONAL_CAUSAL_LOGIC_HOLDOUT_V1", d
+          assert d["selected_scores"]["hidden"]["accuracy"] >= 0.95, d
+          assert d["selected_scores"]["fresh"]["accuracy"] >= 0.95, d
+          assert d["selected_scores"]["fresh"]["accuracy"] > d["baseline_scores"]["fresh"]["accuracy"], d
+          assert all(v >= 0.90 for v in d["selected_scores"]["fresh"]["by_kind"].values()), d
+          assert d["canonical_mutation"] is False
+          assert d["automatic_main_mutation"] is False
+          print(json.dumps({
+              "baseline_fresh":d["baseline_scores"]["fresh"]["accuracy"],
+              "selected_fresh":d["selected_scores"]["fresh"]["accuracy"],
+              "selected_policy":d["selected_policy"]
+          },sort_keys=True))
+          PY
+
+      - name: Full kernel audit
+        run: |
+          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json audits/yado-full-regression-v1-report.log
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          d=json.load(open("audits/yado-full-kernel-audit-v1-report.json"))
+          assert d["status"]=="PASS", d
+          assert d["findings"]==[], d["findings"]
+          PY
+
+      - name: Fresh Successor regression
+        run: |
+          rm -rf "$RUNNER_TEMP/yado-successor-logic-holdout-v1"
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-logic-holdout-v1"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-logic-holdout-v1/manifest.json"
+          python - <<'PY'
+          import json
+          d=json.load(open("audits/yado-full-regression-v1-report.json"))
+          assert d["status"].startswith("PASS"), d
+          assert d["tests_run"]==d["expected_tests"], d
+          assert not d["failures"] and not d["errors"] and not d["skipped"], d
+          assert d["source_unchanged"] is True, d
+          PY
+
+      - name: Preserve holdout evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-relational-causal-logic-holdout-v1-${{ github.run_id }}
+          path: |
+            candidates/cognitive/yado-relational-causal-logic-holdout-v1.json
+            candidates/cognitive/yado_relational_causal_logic_policy_v1.py
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
+          if-no-files-found: warn
