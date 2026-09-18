@@ -4,20 +4,18 @@ import unittest
 
 from yado_cognitive_integration_holdout_v1 import (
     GATES,
-    POLICIES,
+    VERIFIED_PARENT_POLICIES,
     build_g3,
     build_split,
     load_corpus,
     run,
 )
-from yado_intelligence_transfer_policy_v1 import INTELLIGENCE_TRANSFER_STRATEGY
-from yado_thinking_contextual_policy_v1 import THINKING_CONTEXT_STRATEGY
 
 
 class CognitiveIntegrationHoldoutV1Tests(unittest.TestCase):
     def test_verified_parent_policies_are_loaded(self):
-        self.assertEqual(THINKING_CONTEXT_STRATEGY, "BOUNDED_STREAM_CONTEXT_MAP")
-        self.assertEqual(INTELLIGENCE_TRANSFER_STRATEGY, "G4_TRANSFER_AMBIGUITY_GUARD")
+        self.assertEqual(VERIFIED_PARENT_POLICIES["thinking"], "BOUNDED_STREAM_CONTEXT_MAP")
+        self.assertEqual(VERIFIED_PARENT_POLICIES["intelligence"], "G4_TRANSFER_AMBIGUITY_GUARD")
         self.assertEqual(set(GATES), {"MEMORY_EXPERIENCE", "LOGIC", "THINKING", "INTELLIGENCE"})
 
     def test_all_pass_family_activates_all_four_real_signals(self):
