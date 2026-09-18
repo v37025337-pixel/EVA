@@ -1,7 +1,7 @@
 {
   "schema": "yado.deep_self_audit_branch_lifecycle.request.v1",
   "date": "2026-09-18",
-  "status": "FINAL_ADMISSION_RECHECK",
+  "status": "FINAL_PERSISTED_STATE_RECHECK",
   "objective": "Run a deep self-audit over the current YADO kernel and all remote branches, classify each branch as active, memory, history, or withheld, refresh canonical branch lifecycle state, pass full audit and regression, then start the next bounded development cycle.",
   "required_sequence": [
     "refresh complete remote refs",
@@ -42,5 +42,8 @@
     "withheld_count": 0,
     "full_regression": "PASS_426_OF_426",
     "kernel_selected_next_target": "LOGIC"
-  }
+  },
+  "final_persisted_state_recheck": true,
+  "expected_persisted_lifecycle_digest": "aa2c75bbe00b9c245f379b7979732cb766d205d1a3121e111b5a4032a1372f24",
+  "expected_memory_index_digest": "d685918c03c6a5b3e65aefb1583910a2f5bc8976f7db8d5ca436a1dd5f2e30ab"
 }
