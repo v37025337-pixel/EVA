@@ -7,12 +7,18 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 class RuntimeSelfRewriteAdmissionV4Tests(unittest.TestCase):
-    def test_probe_accepts_outer_or_isolated_state(self):
+    def test_probe_handles_parent_v4_or_unrelated_shadow_state(self):
         d=analyze()
-        self.assertEqual(d["status"],"PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE")
-        self.assertIn(d["runtime_state"],{"PARENT_RUNTIME_PENDING_SHADOW_APPLY","V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE"})
-        self.assertTrue(d["checks"]["candidate_sha_matches_v4_receipt"])
-        self.assertTrue(d["checks"]["candidate_ranking_matches_v4_receipt"])
+        recognized={"PARENT_RUNTIME_PENDING_SHADOW_APPLY","V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE"}
+        if d["runtime_state"] in recognized:
+            self.assertEqual(d["status"],"PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE")
+            self.assertTrue(d["checks"]["runtime_state_recognized"])
+            self.assertTrue(d["checks"]["candidate_sha_matches_v4_receipt"])
+            self.assertTrue(d["checks"]["candidate_ranking_matches_v4_receipt"])
+        else:
+            self.assertEqual(d["runtime_state"],"UNEXPECTED_RUNTIME_STATE")
+            self.assertEqual(d["status"],"WITHHOLD_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE")
+            self.assertFalse(d["checks"]["runtime_state_recognized"])
 
     def test_probe_does_not_mutate_target(self):
         target=ROOT/TARGET
