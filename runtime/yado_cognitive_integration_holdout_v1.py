@@ -300,7 +300,7 @@ def _intelligence_signal(
         expected_status=STATUS_AMBIGUOUS,
         expected_capability=None,
     )
-    result = intelligence_execute(INTELLIGENCE_TRANSFER_STRATEGY, task, trained)
+    result = intelligence_execute(INTELLIGENCE_STRATEGY, task, trained)
     # Ambiguity is handled correctly by withholding, but the integration gate
     # is intentionally non-actionable in this case.
     signal = result.get("status") == STATUS_PASS and result.get("capability") is not None
