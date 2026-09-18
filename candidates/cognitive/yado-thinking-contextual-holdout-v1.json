@@ -1,0 +1,123 @@
+{
+  "schema": "yado.thinking_contextual_holdout.v1",
+  "status": "PASS_SHADOW_THINKING_CONTEXTUAL_HOLDOUT_V1",
+  "selected_target": "THINKING",
+  "selected_action": "derive and test a contextual reasoning holdout",
+  "real_yado_component": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+  "adapter_path": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
+  "adapter_sha256": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b",
+  "adapter_limits": {
+    "max_lookback": 128,
+    "max_stream_contexts": 1024
+  },
+  "seeds": {
+    "fresh": 2026091823,
+    "hidden": 2026091822,
+    "train": 2026091821
+  },
+  "scenario_counts": {
+    "fresh": 32,
+    "hidden": 32,
+    "train": 32
+  },
+  "baseline_strategy": "BASE_ROUTER_ONLY",
+  "baseline_scores": {
+    "fresh": {
+      "accuracy": 0,
+      "by_family": {
+        "context_update": 0,
+        "cross_stream_isolation": 0,
+        "long_gap": 0,
+        "short_interleave": 0
+      },
+      "correct": 0,
+      "total": 32
+    },
+    "hidden": {
+      "accuracy": 0,
+      "by_family": {
+        "context_update": 0,
+        "cross_stream_isolation": 0,
+        "long_gap": 0,
+        "short_interleave": 0
+      },
+      "correct": 0,
+      "total": 32
+    },
+    "train": {
+      "accuracy": 0,
+      "by_family": {
+        "context_update": 0,
+        "cross_stream_isolation": 0,
+        "long_gap": 0,
+        "short_interleave": 0
+      },
+      "correct": 0,
+      "total": 32
+    }
+  },
+  "selected_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+  "selected_strategy_metadata": {
+    "complexity": 0.3,
+    "novelty": 0.95,
+    "risk": 0.05,
+    "strategy_id": "BOUNDED_STREAM_CONTEXT_MAP"
+  },
+  "selected_scores": {
+    "fresh": {
+      "accuracy": 1,
+      "by_family": {
+        "context_update": 1,
+        "cross_stream_isolation": 1,
+        "long_gap": 1,
+        "short_interleave": 1
+      },
+      "correct": 32,
+      "total": 32
+    },
+    "hidden": {
+      "accuracy": 1,
+      "by_family": {
+        "context_update": 1,
+        "cross_stream_isolation": 1,
+        "long_gap": 1,
+        "short_interleave": 1
+      },
+      "correct": 32,
+      "total": 32
+    },
+    "train": {
+      "accuracy": 1,
+      "by_family": {
+        "context_update": 1,
+        "cross_stream_isolation": 1,
+        "long_gap": 1,
+        "short_interleave": 1
+      },
+      "correct": 32,
+      "total": 32
+    }
+  },
+  "candidate_path": "candidates/cognitive/yado_thinking_contextual_policy_v1.py",
+  "candidate_sha256": "b6a6d4233416313d21046a8d8080d633ebdcd457851f0b8b2a4d9aa964071b8d",
+  "real_yado_context_adapter_used": true,
+  "external_model_used": false,
+  "downloaded_code_executed": false,
+  "canonical_mutation": false,
+  "automatic_main_mutation": false,
+  "consciousness_claimed": false,
+  "limitations": [
+    "bounded contextual routing benchmark",
+    "scenario generator and strategy selection objective are externally authored",
+    "passing demonstrates stream-context handling only, not general reasoning"
+  ],
+  "verification": {
+    "workflow_run_id": 35352452700,
+    "workflow_name": "YADO Thinking Contextual Holdout V1",
+    "artifact_id": 10551076531,
+    "artifact_digest": "sha256:d865468de9eb111657e5dc889fbd871bad08ccd668952323cc6716aca09cee5d",
+    "tested_head_sha": "a48b40c1315309da51e9bc5d2fd7307df298ce7f",
+    "full_kernel_audit": "PASS",
+    "successor_regression_tests": 443
+  }
+}

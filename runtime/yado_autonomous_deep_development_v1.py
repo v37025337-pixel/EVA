@@ -53,6 +53,7 @@ SEQUENCE = (
 
 LOGIC_HOLDOUT = "candidates/cognitive/yado-relational-causal-logic-holdout-v1.json"
 TRI_ORGAN = "candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json"
+THINKING_HOLDOUT = "candidates/cognitive/yado-thinking-contextual-holdout-v1.json"
 MEMORY_HOLDOUT = "candidates/cognitive/yado-memory-experience-holdout-v1.json"
 MEMORY_INDEX = "experience/branch-lifecycle/yado-branch-memory-index-v1.json"
 
@@ -154,6 +155,18 @@ def _cognitive_evidence(root: Path) -> dict[str, dict[str, Any]]:
                     "source": TRI_ORGAN,
                     "status": tri.get("status"),
                 }
+
+    thinking = _read_json(root, THINKING_HOLDOUT)
+    if thinking and str(thinking.get("status", "")).startswith("PASS_"):
+        score = _number(((thinking.get("selected_scores") or {}).get("fresh") or {}).get("accuracy"))
+        if score is not None:
+            evidence["THINKING"] = {
+                "score": score,
+                "evidence_level": 3,
+                "evidence_kind": "FRESH_HOLDOUT",
+                "source": THINKING_HOLDOUT,
+                "status": thinking.get("status"),
+            }
 
     memory = _read_json(root, MEMORY_HOLDOUT)
     if memory and str(memory.get("status", "")).startswith("PASS_"):

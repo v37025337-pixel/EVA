@@ -1,0 +1,27 @@
+{
+  "schema": "yado.thinking_contextual_holdout.request.v1",
+  "date": "2026-09-18",
+  "status": "REQUESTED_BY_EVIDENCE_AWARE_SELECTOR_V2",
+  "base_main_sha": "5631c206529279d6f216db35618c5c092c456211",
+  "selected_target": "THINKING",
+  "selected_action": "derive and test a contextual reasoning holdout",
+  "objective": "Measure YADO's existing contextual stream adapter on stream-specific context retention, long-gap retention, explicit context updates and cross-stream isolation.",
+  "real_component": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
+  "admission": [
+    "focused unit tests PASS",
+    "selected strategy is BOUNDED_STREAM_CONTEXT_MAP",
+    "hidden accuracy >= 0.95",
+    "fresh accuracy >= 0.95",
+    "fresh accuracy improves over BASE_ROUTER_ONLY",
+    "every fresh scenario family >= 0.90",
+    "Full Kernel Audit PASS",
+    "fresh Successor regression PASS"
+  ],
+  "boundaries": {
+    "canonical_active": false,
+    "automatic_main_mutation": false,
+    "downloaded_code_executed": false,
+    "external_model_used": false,
+    "consciousness_claimed": false
+  }
+}
