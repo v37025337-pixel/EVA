@@ -1,0 +1,28 @@
+{
+  "schema": "yado.autonomous_continuation_request.v1",
+  "status": "REQUEST",
+  "base_sha": "640c918b4eb892b4ee4f110d0842395eff63d198",
+  "objective": "Continue kernel evolution from the newly admitted unified state. Select the next development deficit from current measured evidence; do not use a host-preferred target.",
+  "sequence": [
+    "measure_current_state",
+    "select_weakest_supported_deficit",
+    "derive_or_generate_candidate",
+    "compile_and_isolated_validation",
+    "full_kernel_audit",
+    "full_regression",
+    "20_endogenous_cycles",
+    "retain_or_withhold",
+    "derive_next_goal_from_result"
+  ],
+  "required_properties": {
+    "target_state_derived": true,
+    "preserve_provenance": true,
+    "rollback_on_failure": true,
+    "automatic_main_mutation": false,
+    "canonical_mutation": false,
+    "credentials": false,
+    "external_writes": false,
+    "downloaded_code_execution": false,
+    "consciousness_claim": false
+  }
+}
