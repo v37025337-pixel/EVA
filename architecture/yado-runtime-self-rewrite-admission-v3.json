@@ -1,0 +1,30 @@
+{
+  "schema": "yado.runtime_self_rewrite_admission_v3.request.v1",
+  "date": "2026-09-18",
+  "status": "REQUESTED_BY_POST_INTEGRATION_FRONTIER",
+  "base_main_sha": "c084aa99b63d9574d86b7db10a09527872984e6d",
+  "objective": "Admit the already-physically-present native experience-conditioned runtime self-rewrite V3 without rewriting the runtime again.",
+  "source_receipt": "candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v3.json",
+  "target": "runtime/yado_bounded_autonomous_learning_v1.py",
+  "candidate": "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v3.py",
+  "required_proof": [
+    "candidate bytes equal current runtime bytes",
+    "candidate SHA256 matches the original V3 receipt",
+    "current runtime differs from the recorded pre-mutation parent SHA256",
+    "candidate and runtime both compile and are AST-identical",
+    "verified learned evidence is embedded exactly",
+    "learned evidence has observable deterministic ranking effect",
+    "no new dangerous calls were introduced",
+    "canonical head remains unchanged during the admission probe",
+    "Full Kernel Audit PASS",
+    "fresh Successor regression PASS"
+  ],
+  "boundaries": {
+    "rewrite_runtime_during_gate": false,
+    "automatic_main_mutation": false,
+    "external_writes": false,
+    "credentials_used": false,
+    "downloaded_code_executed": false,
+    "consciousness_claimed": false
+  }
+}

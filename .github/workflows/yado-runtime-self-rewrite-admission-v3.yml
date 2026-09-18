@@ -1,0 +1,112 @@
+name: YADO Runtime Self Rewrite Admission V3
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "runtime/yado_runtime_self_rewrite_admission_v3.py"
+      - "runtime/test_yado_runtime_self_rewrite_admission_v3.py"
+      - "architecture/yado-runtime-self-rewrite-admission-v3.json"
+      - "candidates/autonomous/yado-runtime-self-rewrite-admission-v3.json"
+      - ".github/workflows/yado-runtime-self-rewrite-admission-v3.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  runtime-self-rewrite-admission-v3:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Compile and focused admission tests
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python -m py_compile \
+            runtime/yado_runtime_self_rewrite_admission_v3.py \
+            runtime/test_yado_runtime_self_rewrite_admission_v3.py \
+            runtime/yado_bounded_autonomous_learning_v1.py \
+            candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v3.py
+          python -m unittest runtime.test_yado_runtime_self_rewrite_admission_v3 -v
+
+      - name: Execute physical runtime admission probe
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python runtime/yado_runtime_self_rewrite_admission_v3.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("candidates/autonomous/yado-runtime-self-rewrite-admission-v3.json")
+          d=json.loads(p.read_text())
+          assert d["status"]=="PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V3", d
+          assert d["admission_mode"]=="ALREADY_PHYSICALLY_PRESENT_IDENTICAL_BYTES", d
+          assert d["checks"]["target_sha_matches_candidate"] is True, d
+          assert d["checks"]["target_differs_from_recorded_parent"] is True, d
+          assert d["checks"]["runtime_learned_binding_exact"] is True, d
+          assert d["checks"]["successful_source_affinity_observed"] is True, d
+          assert d["checks"]["successful_host_affinity_observed"] is True, d
+          assert d["checks"]["runtime_rewrite_performed_by_gate"] is False, d
+          assert d["next_required_capability"]=="NEXT_GENERATION_NATIVE_SELF_REWRITE_FROM_FRESH_EXPERIENCE_V1", d
+          print(json.dumps({
+              "status":d["status"],
+              "target_sha256":d["target_sha256"],
+              "candidate_sha256":d["candidate_sha256"],
+              "next":d["next_required_capability"],
+              "ranking_effect":d["ranking_effect"]
+          },sort_keys=True))
+          PY
+
+      - name: Full kernel audit
+        run: |
+          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json audits/yado-full-regression-v1-report.log
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          d=json.load(open("audits/yado-full-kernel-audit-v1-report.json"))
+          assert d["status"]=="PASS", d
+          assert d["findings"]==[], d["findings"]
+          assert d["canonical"]["canonical_guard"]=="PASS"
+          assert d["canonical"]["ledger_validation"]=="PASS"
+          PY
+
+      - name: Fresh Successor regression
+        run: |
+          rm -rf "$RUNNER_TEMP/yado-successor-runtime-self-rewrite-admission-v3"
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-runtime-self-rewrite-admission-v3"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-runtime-self-rewrite-admission-v3/manifest.json"
+          python - <<'PY'
+          import json
+          d=json.load(open("audits/yado-full-regression-v1-report.json"))
+          assert d["status"].startswith("PASS"), d
+          assert d["tests_run"]==d["expected_tests"], d
+          assert not d["failures"] and not d["errors"] and not d["skipped"], d
+          assert d["source_unchanged"] is True, d
+          print("PASS_RUNTIME_SELF_REWRITE_ADMISSION_REGRESSION",d["tests_run"])
+          PY
+
+      - name: Preserve admission evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-runtime-self-rewrite-admission-v3-${{ github.run_id }}
+          path: |
+            candidates/autonomous/yado-runtime-self-rewrite-admission-v3.json
+            audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
+          if-no-files-found: warn
