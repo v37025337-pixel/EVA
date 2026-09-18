@@ -39,6 +39,7 @@ ACTION_BY_TARGET = {
     "LOGIC": "derive and test a new relational/causal logic holdout",
     "THINKING": "derive and test a contextual reasoning holdout",
     "INTELLIGENCE": "derive and test a capability-transfer holdout",
+    "COGNITIVE_INTEGRATION": "derive and test a cross-cognitive integration holdout",
 }
 
 SEQUENCE = (
@@ -54,6 +55,7 @@ SEQUENCE = (
 LOGIC_HOLDOUT = "candidates/cognitive/yado-relational-causal-logic-holdout-v1.json"
 TRI_ORGAN = "candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json"
 THINKING_HOLDOUT = "candidates/cognitive/yado-thinking-contextual-holdout-v1.json"
+INTELLIGENCE_HOLDOUT = "candidates/cognitive/yado-intelligence-transfer-holdout-v1.json"
 MEMORY_HOLDOUT = "candidates/cognitive/yado-memory-experience-holdout-v1.json"
 MEMORY_INDEX = "experience/branch-lifecycle/yado-branch-memory-index-v1.json"
 
@@ -168,6 +170,18 @@ def _cognitive_evidence(root: Path) -> dict[str, dict[str, Any]]:
                 "status": thinking.get("status"),
             }
 
+    intelligence = _read_json(root, INTELLIGENCE_HOLDOUT)
+    if intelligence and str(intelligence.get("status", "")).startswith("PASS_"):
+        score = _number(((intelligence.get("selected_scores") or {}).get("fresh") or {}).get("accuracy"))
+        if score is not None:
+            evidence["INTELLIGENCE"] = {
+                "score": score,
+                "evidence_level": 3,
+                "evidence_kind": "FRESH_HOLDOUT",
+                "source": INTELLIGENCE_HOLDOUT,
+                "status": intelligence.get("status"),
+            }
+
     memory = _read_json(root, MEMORY_HOLDOUT)
     if memory and str(memory.get("status", "")).startswith("PASS_"):
         score = _number(((memory.get("selected_scores") or {}).get("fresh") or {}).get("accuracy"))
@@ -216,6 +230,18 @@ def _priority(
             key=lambda name: (evidence[name]["evidence_level"], TARGET_ORDER[name]),
         )
         return target, "cognitive target lacks measured holdout evidence"
+
+    fresh_saturated = all(
+        evidence[name]["score"] is not None
+        and evidence[name]["evidence_level"] >= 3
+        and float(evidence[name]["score"]) >= 0.99
+        for name in COGNITIVE_TARGETS
+    )
+    if fresh_saturated:
+        return (
+            "COGNITIVE_INTEGRATION",
+            "all core cognitive targets have fresh holdout score >=0.99; move to cross-cognitive integration",
+        )
 
     target = min(
         COGNITIVE_TARGETS,

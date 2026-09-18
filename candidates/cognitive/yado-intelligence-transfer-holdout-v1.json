@@ -1,0 +1,149 @@
+{
+  "schema": "yado.intelligence_transfer_holdout.v1",
+  "status": "PASS_SHADOW_INTELLIGENCE_TRANSFER_HOLDOUT_V1",
+  "selected_target": "INTELLIGENCE",
+  "selected_action": "derive and test a capability-transfer holdout",
+  "real_yado_component": "yado.external_project_transfer.v3",
+  "component_path": "runtime/yado_external_project_transfer_v3.py",
+  "component_sha256": "3ae5523d5277725a94a6022fa99056616139a1240de26c56f59cc863871b36cd",
+  "parent_status": "PASS_SHADOW_THREE_STATE_DERIVED_GENERATIONS_V2",
+  "training_digest": "c10720e19e9d2187d65fad4acdeb23d6eebdaa7d6ec0339f09b5ca694707d857",
+  "profile_digest": "bf1d9759863af07c08ddcebb30572bc91f92a6dbe358b2ca77ba71c69e0dd99a",
+  "profile_tokens": {
+    "INTELLIGENCE": [
+      "agent",
+      "catalog",
+      "coordinate",
+      "resource",
+      "supervise"
+    ],
+    "LOGIC": [
+      "admission",
+      "criteria",
+      "explicit",
+      "review",
+      "security",
+      "state"
+    ],
+    "THINKING": [
+      "architecture",
+      "context",
+      "persistence",
+      "sequence",
+      "workflow",
+      "workspace"
+    ]
+  },
+  "source_repositories": [
+    "derived/yado-experience",
+    "dip497/hivemind",
+    "ripienaar/free-for-dev"
+  ],
+  "seeds": {
+    "fresh": 2026091833,
+    "hidden": 2026091832,
+    "train": 2026091831
+  },
+  "task_counts": {
+    "fresh": 56,
+    "hidden": 56,
+    "train": 56
+  },
+  "baseline_strategy": "BASE_ROUTE",
+  "baseline_scores": {
+    "fresh": {
+      "accuracy": 0.5714285714285714,
+      "correct": 32,
+      "total": 56,
+      "by_family": {
+        "ambiguous_logic_intelligence": 0,
+        "ambiguous_logic_thinking": 0,
+        "ambiguous_thinking_intelligence": 0,
+        "single_intelligence": 1,
+        "single_logic": 1,
+        "single_thinking": 1,
+        "unknown_domain": 1
+      }
+    },
+    "hidden": {
+      "accuracy": 0.5714285714285714,
+      "correct": 32,
+      "total": 56
+    },
+    "train": {
+      "accuracy": 0.5714285714285714,
+      "correct": 32,
+      "total": 56
+    }
+  },
+  "selected_strategy": "G4_TRANSFER_AMBIGUITY_GUARD",
+  "selected_scores": {
+    "fresh": {
+      "accuracy": 1,
+      "correct": 56,
+      "total": 56,
+      "by_family": {
+        "ambiguous_logic_intelligence": 1,
+        "ambiguous_logic_thinking": 1,
+        "ambiguous_thinking_intelligence": 1,
+        "single_intelligence": 1,
+        "single_logic": 1,
+        "single_thinking": 1,
+        "unknown_domain": 1
+      }
+    },
+    "hidden": {
+      "accuracy": 1,
+      "correct": 56,
+      "total": 56,
+      "by_family": {
+        "ambiguous_logic_intelligence": 1,
+        "ambiguous_logic_thinking": 1,
+        "ambiguous_thinking_intelligence": 1,
+        "single_intelligence": 1,
+        "single_logic": 1,
+        "single_thinking": 1,
+        "unknown_domain": 1
+      }
+    },
+    "train": {
+      "accuracy": 1,
+      "correct": 56,
+      "total": 56,
+      "by_family": {
+        "ambiguous_logic_intelligence": 1,
+        "ambiguous_logic_thinking": 1,
+        "ambiguous_thinking_intelligence": 1,
+        "single_intelligence": 1,
+        "single_logic": 1,
+        "single_thinking": 1,
+        "unknown_domain": 1
+      }
+    }
+  },
+  "fresh_absolute_gain": 0.42857142857142855,
+  "candidate_path": "candidates/cognitive/yado_intelligence_transfer_policy_v1.py",
+  "candidate_sha256": "96ab781b6d0c14c14c5087f9cc214f58255ce890fad3b222448270712e4ef831",
+  "real_yado_transfer_router_used": true,
+  "third_party_code_executed": false,
+  "external_writes": false,
+  "external_model_used": false,
+  "canonical_mutation": false,
+  "automatic_main_mutation": false,
+  "consciousness_claimed": false,
+  "limitations": [
+    "bounded learned-vocabulary transfer benchmark",
+    "fresh splits use new token combinations and surface noise, not unseen semantic vocabulary",
+    "task generator and candidate strategy set are externally authored",
+    "passing demonstrates capability routing/ambiguity discipline, not general intelligence"
+  ],
+  "verification": {
+    "workflow_run_id": 35356186122,
+    "workflow_name": "YADO Intelligence Transfer Holdout V1",
+    "artifact_id": 10551589588,
+    "artifact_digest": "sha256:a8ee0413de8f64a825b3949db70b2791c26ed002c7dc86acc0daa5692e394f04",
+    "tested_head_sha": "3448aaf9a8d77400e0af7e59b0526e0f915fcba0",
+    "full_kernel_audit": "PASS",
+    "successor_regression_tests": 449
+  }
+}
