@@ -7,6 +7,7 @@ import unittest
 from yado_external_tool_ecosystem_learning_v1 import (
     ExternalToolEcosystemLearningV1,
     SOURCES,
+    existing_component_bindings,
     validate_evidence_records,
 )
 
@@ -29,7 +30,6 @@ def fake_fetch(url: str):
                 {
                     "full_name": spec["repo"],
                     "default_branch": spec["branch"],
-                    "license": {"spdx_id": "TEST"},
                 }
             )
             return {"content": content, "receipt": safe_receipt(content)}
@@ -37,27 +37,47 @@ def fake_fetch(url: str):
             f"https://raw.githubusercontent.com/"
             f"{spec['repo']}/{spec['branch']}/README.md"
         ):
-            content = " ".join(spec["markers"] + spec["focus"])
+            content = " ".join(spec["markers"])
             return {"content": content, "receipt": safe_receipt(content)}
     raise AssertionError(url)
 
 
 class ExternalToolEcosystemLearningV1Tests(unittest.TestCase):
-    def test_complete_verified_bundle_passes(self):
-        result = ExternalToolEcosystemLearningV1().study(fake_fetch)
+    def test_existing_components_are_reused(self):
+        bindings = existing_component_bindings(".")
+        self.assertEqual(bindings["status"], "PASS")
+        self.assertEqual(bindings["new_third_party_adapter_count"], 0)
+        self.assertEqual(
+            bindings["bindings"]["hivemind"]["capability"],
+            "TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN",
+        )
+        self.assertEqual(
+            bindings["bindings"]["free_for_dev"]["capability"],
+            "FREE_TIER_RESOURCE_DISCOVERY",
+        )
+        self.assertIn(
+            "web_search_exa",
+            bindings["bindings"]["exa_mcp"]["tools"],
+        )
+        self.assertIn(
+            "artifact_structure_extraction",
+            bindings["bindings"]["ghidra"]["capabilities"],
+        )
+
+    def test_complete_aggregate_passes(self):
+        result = ExternalToolEcosystemLearningV1().study(fake_fetch, repo_root=".")
         self.assertEqual(
             result["status"],
-            "PASS_SHADOW_EXTERNAL_TOOL_ECOSYSTEM_LEARNING_V1",
+            "PASS_SHADOW_EXTERNAL_TOOL_ECOSYSTEM_AGGREGATION_V1",
         )
-        self.assertEqual(result["verified_source_count"], len(SOURCES))
+        self.assertEqual(result["verified_source_count"], 4)
         self.assertEqual(result["evidence_gate"]["status"], "PASS")
+        self.assertTrue(result["reuses_existing_components"])
+        self.assertEqual(result["new_third_party_adapter_count"], 0)
         self.assertFalse(result["third_party_code_executed"])
-        self.assertFalse(result["third_party_code_copied"])
-        self.assertFalse(result["automatic_install"])
         self.assertFalse(result["automatic_canonical_mutation"])
-        self.assertTrue(result["capability_cards"])
 
-    def test_weak_source_is_withheld(self):
+    def test_weak_source_withholds_aggregate(self):
         target = SOURCES["ghidra"]
 
         def weak_fetch(url: str):
@@ -69,14 +89,14 @@ class ExternalToolEcosystemLearningV1Tests(unittest.TestCase):
                 return {"content": content, "receipt": safe_receipt(content)}
             return fake_fetch(url)
 
-        result = ExternalToolEcosystemLearningV1().study(weak_fetch)
+        result = ExternalToolEcosystemLearningV1().study(weak_fetch, repo_root=".")
         self.assertEqual(
             result["status"],
-            "WITHHOLD_EXTERNAL_TOOL_ECOSYSTEM_LEARNING_V1",
+            "WITHHOLD_EXTERNAL_TOOL_ECOSYSTEM_AGGREGATION_V1",
         )
         self.assertIn("ghidra", result["withheld_sources"])
 
-    def test_unsafe_receipt_is_withheld(self):
+    def test_unsafe_receipt_withholds_aggregate(self):
         target = SOURCES["exa_mcp"]
 
         def unsafe_fetch(url: str):
@@ -85,10 +105,10 @@ class ExternalToolEcosystemLearningV1Tests(unittest.TestCase):
                 result["receipt"]["external_write"] = True
             return result
 
-        result = ExternalToolEcosystemLearningV1().study(unsafe_fetch)
+        result = ExternalToolEcosystemLearningV1().study(unsafe_fetch, repo_root=".")
         self.assertEqual(
             result["status"],
-            "WITHHOLD_EXTERNAL_TOOL_ECOSYSTEM_LEARNING_V1",
+            "WITHHOLD_EXTERNAL_TOOL_ECOSYSTEM_AGGREGATION_V1",
         )
         self.assertIn("exa_mcp", result["withheld_sources"])
 
@@ -115,8 +135,8 @@ class ExternalToolEcosystemLearningV1Tests(unittest.TestCase):
         self.assertTrue(any("https_url_required" in item for item in gate["errors"]))
 
     def test_digest_is_deterministic(self):
-        first = ExternalToolEcosystemLearningV1().study(fake_fetch)
-        second = ExternalToolEcosystemLearningV1().study(fake_fetch)
+        first = ExternalToolEcosystemLearningV1().study(fake_fetch, repo_root=".")
+        second = ExternalToolEcosystemLearningV1().study(fake_fetch, repo_root=".")
         self.assertEqual(first["study_digest"], second["study_digest"])
 
 
