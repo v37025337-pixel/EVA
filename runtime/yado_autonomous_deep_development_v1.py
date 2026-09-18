@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-"""Bounded controller for autonomous deep development across YADO layers."""
+"""Bounded controller for autonomous deep development across YADO layers.
+
+V2 selection keeps the existing admission surface but chooses cognitive deficits
+from measured evidence when available instead of using file counts as a proxy
+for capability quality.
+"""
 
 import hashlib
 import json
@@ -22,17 +27,20 @@ LAYER_RULES = {
 }
 
 COGNITIVE_TARGETS = ("LOGIC", "THINKING", "INTELLIGENCE", "MEMORY_EXPERIENCE")
+TARGET_ORDER = {name: index for index, name in enumerate(COGNITIVE_TARGETS)}
+
 ACTION_BY_TARGET = {
     "INTEGRITY": "reconcile canonical identity, ancestry, and layer bindings",
     "VERIFICATION": "re-run fresh compile, regression, audit, and counterfactual gates",
     "CODE": "generate and execute a bounded native source candidate",
     "LAYERS": "repair cross-layer bindings and re-check architecture receipts",
     "MODULES": "test module connectivity and isolate duplicate or orphan behavior",
-    "MEMORY_EXPERIENCE": "consolidate verified experience and preserve provenance",
+    "MEMORY_EXPERIENCE": "derive and test a fresh memory/provenance recall holdout",
     "LOGIC": "derive and test a new relational/causal logic holdout",
     "THINKING": "derive and test a contextual reasoning holdout",
     "INTELLIGENCE": "derive and test a capability-transfer holdout",
 }
+
 SEQUENCE = (
     ("CODE", "native candidate -> compile -> isolated execution"),
     ("LAYERS", "architecture binding -> canonical guard -> audit"),
@@ -43,25 +51,37 @@ SEQUENCE = (
     ("INTELLIGENCE", "transfer holdout -> ambiguity guard"),
 )
 
+LOGIC_HOLDOUT = "candidates/cognitive/yado-relational-causal-logic-holdout-v1.json"
+TRI_ORGAN = "candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json"
+MEMORY_HOLDOUT = "candidates/cognitive/yado-memory-experience-holdout-v1.json"
+MEMORY_INDEX = "experience/branch-lifecycle/yado-branch-memory-index-v1.json"
+
 
 def _digest(value: Any) -> str:
     encoded = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
-def _load_status(root: Path, relative: str) -> dict[str, Any]:
+def _read_json(root: Path, relative: str) -> dict[str, Any] | None:
     path = root / relative
     if not path.exists():
-        return {"status": "MISSING", "path": relative}
+        return None
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        return {"status": "UNREADABLE", "path": relative, "error": type(exc).__name__}
+    except (OSError, json.JSONDecodeError):
+        return None
+    return value if isinstance(value, dict) else None
+
+
+def _load_status(root: Path, relative: str) -> dict[str, Any]:
+    value = _read_json(root, relative)
+    if value is None:
+        return {"status": "MISSING", "path": relative}
     return {
         "status": value.get("status", "UNKNOWN"),
         "path": relative,
-        "findings": len(value.get("findings", [])) if isinstance(value, dict) else None,
-        "failures": len(value.get("failures", [])) if isinstance(value, dict) else None,
+        "findings": len(value.get("findings", [])),
+        "failures": len(value.get("failures", [])),
     }
 
 
@@ -87,17 +107,116 @@ def _layer_snapshot(root: Path) -> dict[str, dict[str, Any]]:
     return snapshot
 
 
-def _priority(snapshot: dict[str, dict[str, Any]], audit: dict[str, Any],
-              regression: dict[str, Any]) -> tuple[str, str]:
+def _number(value: Any) -> float | None:
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, (int, float)):
+        out = float(value)
+        if 0.0 <= out <= 1.0:
+            return out
+    return None
+
+
+def _cognitive_evidence(root: Path) -> dict[str, dict[str, Any]]:
+    evidence: dict[str, dict[str, Any]] = {
+        name: {
+            "score": None,
+            "evidence_level": 0,
+            "evidence_kind": "UNMEASURED",
+            "source": None,
+            "status": "MISSING_MEASURED_EVIDENCE",
+        }
+        for name in COGNITIVE_TARGETS
+    }
+
+    logic = _read_json(root, LOGIC_HOLDOUT)
+    if logic and str(logic.get("status", "")).startswith("PASS_"):
+        score = _number(((logic.get("selected_scores") or {}).get("fresh") or {}).get("accuracy"))
+        if score is not None:
+            evidence["LOGIC"] = {
+                "score": score,
+                "evidence_level": 3,
+                "evidence_kind": "FRESH_HOLDOUT",
+                "source": LOGIC_HOLDOUT,
+                "status": logic.get("status"),
+            }
+
+    tri = _read_json(root, TRI_ORGAN)
+    if tri and str(tri.get("status", "")).startswith("PASS_"):
+        hidden = tri.get("selected_hidden") or {}
+        for target, key in (("THINKING", "thinking"), ("INTELLIGENCE", "intelligence")):
+            score = _number(hidden.get(key))
+            if score is not None:
+                evidence[target] = {
+                    "score": score,
+                    "evidence_level": 2,
+                    "evidence_kind": "HIDDEN_HOLDOUT",
+                    "source": TRI_ORGAN,
+                    "status": tri.get("status"),
+                }
+
+    memory = _read_json(root, MEMORY_HOLDOUT)
+    if memory and str(memory.get("status", "")).startswith("PASS_"):
+        score = _number(((memory.get("selected_scores") or {}).get("fresh") or {}).get("accuracy"))
+        if score is not None:
+            evidence["MEMORY_EXPERIENCE"] = {
+                "score": score,
+                "evidence_level": 3,
+                "evidence_kind": "FRESH_HOLDOUT",
+                "source": MEMORY_HOLDOUT,
+                "status": memory.get("status"),
+            }
+    else:
+        memory_index = _read_json(root, MEMORY_INDEX)
+        if memory_index and str(memory_index.get("status", "")).startswith("PASS_"):
+            evidence["MEMORY_EXPERIENCE"] = {
+                "score": None,
+                "evidence_level": 1,
+                "evidence_kind": "STRUCTURAL_ONLY",
+                "source": MEMORY_INDEX,
+                "status": memory_index.get("status"),
+                "memory_ref_count": memory_index.get("memory_ref_count"),
+            }
+
+    return evidence
+
+
+def _priority(
+    snapshot: dict[str, dict[str, Any]],
+    audit: dict[str, Any],
+    regression: dict[str, Any],
+    evidence: dict[str, dict[str, Any]],
+) -> tuple[str, str]:
     if audit["status"] != "PASS" or (audit.get("findings") or 0):
         return "INTEGRITY", "canonical audit is not clean"
     if regression["status"] != "PASS" or (regression.get("failures") or 0):
         return "VERIFICATION", "regression evidence is not clean"
+
     missing = [name for name, row in snapshot.items() if row["file_count"] == 0]
     if missing:
         return missing[0], "layer coverage is incomplete"
-    weakest = min(COGNITIVE_TARGETS, key=lambda name: (snapshot[name]["file_count"], name))
-    return weakest, "weakest covered cognitive layer selected for the next holdout"
+
+    unmeasured = [name for name in COGNITIVE_TARGETS if evidence[name]["score"] is None]
+    if unmeasured:
+        target = min(
+            unmeasured,
+            key=lambda name: (evidence[name]["evidence_level"], TARGET_ORDER[name]),
+        )
+        return target, "cognitive target lacks measured holdout evidence"
+
+    target = min(
+        COGNITIVE_TARGETS,
+        key=lambda name: (
+            evidence[name]["score"],
+            evidence[name]["evidence_level"],
+            TARGET_ORDER[name],
+        ),
+    )
+    return (
+        target,
+        f"lowest measured cognitive evidence score={evidence[target]['score']:.6f}; "
+        f"kind={evidence[target]['evidence_kind']}",
+    )
 
 
 def build_plan(root: Path = ROOT) -> dict[str, Any]:
@@ -105,8 +224,10 @@ def build_plan(root: Path = ROOT) -> dict[str, Any]:
     snapshot = _layer_snapshot(root)
     audit = _load_status(root, "audits/yado-full-kernel-audit-v1-report.json")
     regression = _load_status(root, "audits/yado-full-regression-v1-report.json")
-    selected_target, selection_reason = _priority(snapshot, audit, regression)
+    evidence = _cognitive_evidence(root)
+    selected_target, selection_reason = _priority(snapshot, audit, regression, evidence)
     all_layer_coverage = all(row["file_count"] > 0 for row in snapshot.values())
+
     stages = [
         {
             "stage": index,
@@ -122,8 +243,10 @@ def build_plan(root: Path = ROOT) -> dict[str, Any]:
         }
         for index, (layer, action) in enumerate(SEQUENCE, start=1)
     ]
+
     return {
         "schema": "yado.autonomous_deep_development.v1",
+        "selector_version": "EVIDENCE_AWARE_DEFICIT_SELECTOR_V2",
         "status": (
             "PASS_SHADOW_AUTONOMOUS_DEEP_DEVELOPMENT_PLAN_V1"
             if all_layer_coverage else
@@ -135,6 +258,7 @@ def build_plan(root: Path = ROOT) -> dict[str, Any]:
         "selection_reason": selection_reason,
         "development_sequence": stages,
         "layers": snapshot,
+        "cognitive_evidence": evidence,
         "preexisting_evidence": {
             "full_kernel_audit": audit,
             "full_regression": regression,
