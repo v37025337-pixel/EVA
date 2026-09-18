@@ -42,7 +42,9 @@ jobs:
           PYTHONPATH: runtime
         run: |
           python -m py_compile runtime/yado_bounded_autonomous_learning_v1.py runtime/yado_runtime_self_rewrite_admission_v4.py
+          cp candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json "$RUNNER_TEMP/yado-runtime-self-rewrite-admission-v4-verified.json"
           python -m unittest runtime.test_yado_runtime_self_rewrite_admission_v4 -v
+          cp "$RUNNER_TEMP/yado-runtime-self-rewrite-admission-v4-verified.json" candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json
           python - <<'PY'
           import hashlib, json
           from pathlib import Path
