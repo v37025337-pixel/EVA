@@ -8,9 +8,6 @@ from yado_g2_contextual_stream_capability_adapter_v1 import (
     ContextualStreamCapabilityAdapterV1,
 )
 from yado_thinking_contextual_holdout_v1 import (
-    Policy if False else object,
-)
-from yado_thinking_contextual_holdout_v1 import (
     build_split,
     run,
     run_scenario,
