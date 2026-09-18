@@ -211,6 +211,57 @@ class TestAutonomousDeepDevelopmentController(unittest.TestCase):
             self.assertIn("fresh holdout score >=0.99", plan["selection_reason"])
             self.assertEqual(plan["cognitive_evidence"]["INTELLIGENCE"]["evidence_kind"], "FRESH_HOLDOUT")
 
+    def test_verified_integration_advances_to_runtime_self_rewrite_admission(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _complete_layers(root)
+            _clean_gates(root)
+            _json(
+                root,
+                "candidates/cognitive/yado-relational-causal-logic-holdout-v1.json",
+                {"status": "PASS_SHADOW_RELATIONAL_CAUSAL_LOGIC_HOLDOUT_V1", "selected_scores": {"fresh": {"accuracy": 1.0}}},
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-thinking-contextual-holdout-v1.json",
+                {"status": "PASS_SHADOW_THINKING_CONTEXTUAL_HOLDOUT_V1", "selected_scores": {"fresh": {"accuracy": 1.0}}},
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-intelligence-transfer-holdout-v1.json",
+                {"status": "PASS_SHADOW_INTELLIGENCE_TRANSFER_HOLDOUT_V1", "selected_scores": {"fresh": {"accuracy": 1.0}}},
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-memory-experience-holdout-v1.json",
+                {"status": "PASS_SHADOW_MEMORY_EXPERIENCE_HOLDOUT_V1", "selected_scores": {"fresh": {"accuracy": 1.0}}},
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-cognitive-integration-holdout-v1.json",
+                {
+                    "status": "PASS_SHADOW_COGNITIVE_INTEGRATION_HOLDOUT_V1",
+                    "selected_scores": {"fresh": {"accuracy": 1.0}},
+                    "fresh_ablation_drops": {
+                        "MEMORY_EXPERIENCE": 0.2,
+                        "LOGIC": 0.2,
+                        "THINKING": 0.2,
+                        "INTELLIGENCE": 0.2,
+                    },
+                },
+            )
+            _json(
+                root,
+                "candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v3.json",
+                {
+                    "status": "PASS_SHADOW_NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_CANDIDATE_V3",
+                    "next_required_capability": "ISOLATED_RUNTIME_EXECUTION_AND_REGRESSION_ADMISSION_V3",
+                },
+            )
+            plan = build_plan(root)
+            self.assertEqual(plan["selected_target"], "RUNTIME_SELF_REWRITE_ADMISSION")
+            self.assertIn("self-rewrite V3", plan["selection_reason"])
+
 
 if __name__ == "__main__":
     unittest.main()
