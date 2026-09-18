@@ -127,6 +127,48 @@ class TestAutonomousDeepDevelopmentController(unittest.TestCase):
             self.assertEqual(plan["selected_target"], "THINKING")
             self.assertIn("0.950000", plan["selection_reason"])
 
+    def test_after_fresh_thinking_measurement_selects_intelligence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _complete_layers(root)
+            _clean_gates(root)
+            _json(
+                root,
+                "candidates/cognitive/yado-relational-causal-logic-holdout-v1.json",
+                {
+                    "status": "PASS_SHADOW_RELATIONAL_CAUSAL_LOGIC_HOLDOUT_V1",
+                    "selected_scores": {"fresh": {"accuracy": 1.0}},
+                },
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json",
+                {
+                    "status": "PASS_SHADOW_BOUNDED_TRI_ORGAN_COGNITIVE_EVOLUTION_V2",
+                    "selected_hidden": {"thinking": 0.95, "intelligence": 1.0},
+                },
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-memory-experience-holdout-v1.json",
+                {
+                    "status": "PASS_SHADOW_MEMORY_EXPERIENCE_HOLDOUT_V1",
+                    "selected_scores": {"fresh": {"accuracy": 1.0}},
+                },
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-thinking-contextual-holdout-v1.json",
+                {
+                    "status": "PASS_SHADOW_THINKING_CONTEXTUAL_HOLDOUT_V1",
+                    "selected_scores": {"fresh": {"accuracy": 1.0}},
+                },
+            )
+            plan = build_plan(root)
+            self.assertEqual(plan["selected_target"], "INTELLIGENCE")
+            self.assertEqual(plan["cognitive_evidence"]["THINKING"]["evidence_kind"], "FRESH_HOLDOUT")
+            self.assertEqual(plan["cognitive_evidence"]["INTELLIGENCE"]["evidence_kind"], "HIDDEN_HOLDOUT")
+
 
 if __name__ == "__main__":
     unittest.main()
