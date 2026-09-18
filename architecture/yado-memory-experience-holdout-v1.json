@@ -1,0 +1,32 @@
+{
+  "schema": "yado.memory_experience_holdout.request.v1",
+  "date": "2026-09-18",
+  "status": "REQUESTED_BY_EVIDENCE_AWARE_SELECTOR_V2",
+  "base_main_sha": "9883664215ee2905ab96ebbceb954f2ae5d7761e",
+  "selected_target": "MEMORY_EXPERIENCE",
+  "selected_action": "derive and test a fresh memory/provenance recall holdout",
+  "objective": "Measure whether YADO can retrieve real stored experience while preserving record identity, memory type, provenance and ambiguity rejection.",
+  "real_sources": [
+    "experience/branch-lifecycle/yado-branch-memory-index-v1.json",
+    "experience/autonomous/yado-autonomous-learning-latest.json"
+  ],
+  "admission": [
+    "focused unit tests PASS",
+    "hidden accuracy >= 0.95",
+    "fresh accuracy >= 0.95",
+    "fresh accuracy improves over baseline",
+    "every fresh task family >= 0.90",
+    "selected policy requires provenance",
+    "selected policy isolates memory kind",
+    "selected policy rejects ambiguous recall",
+    "Full Kernel Audit PASS",
+    "fresh Successor regression PASS"
+  ],
+  "boundaries": {
+    "canonical_active": false,
+    "automatic_main_mutation": false,
+    "downloaded_code_executed": false,
+    "external_model_used": false,
+    "consciousness_claimed": false
+  }
+}
