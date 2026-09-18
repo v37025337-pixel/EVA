@@ -1,0 +1,39 @@
+{
+  "schema": "yado.external_tool_ecosystem_learning.request.v1",
+  "status": "REQUESTED_SHADOW_INTEGRATION",
+  "date": "2026-09-18",
+  "objective": "Learn bounded reusable mechanisms from four user-selected public repositories and expose clean-room shadow capability cards to YADO.",
+  "sources": [
+    {
+      "repo": "exa-labs/exa-mcp-server",
+      "role": "web research transport and MCP search/fetch boundary",
+      "license_mode": "MIT_REFERENCE"
+    },
+    {
+      "repo": "dip497/hivemind",
+      "role": "multi-agent worktree isolation, persistent task state, supervised approvals",
+      "license_mode": "MIT_REFERENCE"
+    },
+    {
+      "repo": "ripienaar/free-for-dev",
+      "role": "resource discovery and free-tier candidate catalog",
+      "license_mode": "REFERENCE_ONLY"
+    },
+    {
+      "repo": "NationalSecurityAgency/ghidra",
+      "role": "headless static analysis and non-executing program understanding",
+      "license_mode": "APACHE_2_REFERENCE"
+    }
+  ],
+  "safety_boundary": {
+    "read_only_external": true,
+    "third_party_code_execution": false,
+    "third_party_code_copy": false,
+    "credentials_used": false,
+    "external_writes": false,
+    "automatic_install": false,
+    "automatic_canonical_mutation": false
+  },
+  "admission_rule": "All four sources must verify by repository identity, HTTPS provenance, evidence claims and marker evidence; otherwise WITHHOLD.",
+  "next": "Run fresh public-read workflow, then map passing capability cards to measured YADO deficits before any canonical admission."
+}
