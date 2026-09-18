@@ -169,6 +169,48 @@ class TestAutonomousDeepDevelopmentController(unittest.TestCase):
             self.assertEqual(plan["cognitive_evidence"]["THINKING"]["evidence_kind"], "FRESH_HOLDOUT")
             self.assertEqual(plan["cognitive_evidence"]["INTELLIGENCE"]["evidence_kind"], "HIDDEN_HOLDOUT")
 
+    def test_all_fresh_cognitive_targets_advance_to_integration(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _complete_layers(root)
+            _clean_gates(root)
+            _json(
+                root,
+                "candidates/cognitive/yado-relational-causal-logic-holdout-v1.json",
+                {
+                    "status": "PASS_SHADOW_RELATIONAL_CAUSAL_LOGIC_HOLDOUT_V1",
+                    "selected_scores": {"fresh": {"accuracy": 1.0}},
+                },
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-thinking-contextual-holdout-v1.json",
+                {
+                    "status": "PASS_SHADOW_THINKING_CONTEXTUAL_HOLDOUT_V1",
+                    "selected_scores": {"fresh": {"accuracy": 1.0}},
+                },
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-intelligence-transfer-holdout-v1.json",
+                {
+                    "status": "PASS_SHADOW_INTELLIGENCE_TRANSFER_HOLDOUT_V1",
+                    "selected_scores": {"fresh": {"accuracy": 1.0}},
+                },
+            )
+            _json(
+                root,
+                "candidates/cognitive/yado-memory-experience-holdout-v1.json",
+                {
+                    "status": "PASS_SHADOW_MEMORY_EXPERIENCE_HOLDOUT_V1",
+                    "selected_scores": {"fresh": {"accuracy": 1.0}},
+                },
+            )
+            plan = build_plan(root)
+            self.assertEqual(plan["selected_target"], "COGNITIVE_INTEGRATION")
+            self.assertIn("fresh holdout score >=0.99", plan["selection_reason"])
+            self.assertEqual(plan["cognitive_evidence"]["INTELLIGENCE"]["evidence_kind"], "FRESH_HOLDOUT")
+
 
 if __name__ == "__main__":
     unittest.main()
