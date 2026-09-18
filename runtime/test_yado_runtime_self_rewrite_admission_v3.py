@@ -10,7 +10,7 @@ from yado_runtime_self_rewrite_admission_v3 import (
     TARGET,
     analyze_committed,
 )
-from yado_runtime_self_rewrite_admission_v4 import analyze as analyze_v4
+from yado_runtime_self_rewrite_admission_v4 import analyze_committed as analyze_v4_committed
 
 V4_CANDIDATE = Path("candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py")
 
@@ -44,7 +44,7 @@ class RuntimeSelfRewriteAdmissionV3Tests(unittest.TestCase):
         else:
             self.assertFalse(result["checks"]["target_sha_matches_candidate"])
             self.assertEqual(result["status"], "WITHHOLD_RUNTIME_SELF_REWRITE_ADMISSION_V3")
-            successor = analyze_v4()
+            successor = analyze_v4_committed()
             self.assertEqual(successor["status"], "PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE")
             self.assertEqual(successor["runtime_state"], "V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE")
             self.assertTrue(successor["checks"]["target_matches_candidate_when_shadow_applied"])
@@ -58,7 +58,7 @@ class RuntimeSelfRewriteAdmissionV3Tests(unittest.TestCase):
             self.assertTrue(result["checks"]["successful_host_affinity_observed"])
         else:
             self.assertFalse(result["checks"]["runtime_learned_binding_exact"])
-            successor = analyze_v4()
+            successor = analyze_v4_committed()
             self.assertTrue(successor["checks"]["candidate_binding_matches_v4_receipt"])
             self.assertTrue(successor["checks"]["candidate_binds_latest_experience"])
             self.assertTrue(successor["checks"]["candidate_ranking_matches_v4_receipt"])
@@ -92,7 +92,7 @@ class RuntimeSelfRewriteAdmissionV3Tests(unittest.TestCase):
             )
         else:
             self.assertEqual(result["next_required_capability"], "REPAIR_RUNTIME_SELF_REWRITE_ADMISSION_V3")
-            successor = analyze_v4()
+            successor = analyze_v4_committed()
             self.assertEqual(
                 successor["next_required_capability"],
                 "PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_GATE",
