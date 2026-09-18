@@ -7,6 +7,12 @@ on:
       - "runtime/yado_branch_lifecycle_audit_v1.py"
       - "architecture/yado-deep-self-audit-branch-lifecycle-request-20260918.json"
       - ".github/workflows/yado-deep-self-audit-branch-lifecycle-v1.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "runtime/yado_branch_lifecycle_audit_v1.py"
+      - "architecture/yado-deep-self-audit-branch-lifecycle-request-20260918.json"
+      - ".github/workflows/yado-deep-self-audit-branch-lifecycle-v1.yml"
   workflow_dispatch:
 
 permissions:
