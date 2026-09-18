@@ -1,0 +1,23 @@
+{
+  "schema": "yado.kernel_run.request.v1",
+  "date": "2026-09-18",
+  "status": "REQUESTED",
+  "base_main_sha": "3faac208f6e7adfe15bc95205def3376d9fc2fef",
+  "objective": "Run YADO from current main through the existing verified development and audit pipeline.",
+  "sequence": [
+    "deep self audit",
+    "full kernel audit",
+    "fresh Successor build",
+    "complete regression",
+    "external data and repository checks",
+    "bounded autonomous development cycle",
+    "persist evidence only; no automatic canonical promotion without gates"
+  ],
+  "boundaries": {
+    "automatic_main_mutation": false,
+    "automatic_canonical_promotion": false,
+    "third_party_code_execution": false,
+    "credentials_persisted": false,
+    "g3_claim": false
+  }
+}
