@@ -1,20 +1,29 @@
 from __future__ import annotations
 
-"""Read-only learning layer for external developer tool ecosystems.
+"""Aggregate already-admitted external tool integrations behind one evidence gate.
 
-The layer treats third-party repositories as untrusted evidence. It reads only
-public metadata and README text, verifies provenance and source identity, and
-produces bounded clean-room capability cards. It never installs or executes
-third-party code and never mutates canonical state.
+This layer does not reimplement Exa, Hivemind, free-for-dev, or Ghidra support.
+It verifies that the existing YADO components are present and bounded, refreshes
+public provenance for the four repositories, and emits one shared decision
+surface for later deficit-to-capability selection.
 """
 
 import hashlib
 import json
+from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
-SCHEMA = "yado.external_tool_ecosystem_learning.v1"
-COMPONENT_ID = "RUNTIME-G2-EXTERNAL-TOOL-ECOSYSTEM-LEARNING-V1"
+from yado_exa_mcp_web_research_v1 import ALLOWED_TOOLS, ExaMCPConfig
+from yado_external_project_bridge_v1 import (
+    PROJECTS,
+    STATUS_PASS as EXTERNAL_PROJECT_BRIDGE_PASS,
+    route_task,
+    snapshot as external_project_snapshot,
+)
+
+SCHEMA = "yado.external_tool_ecosystem_aggregation.v1"
+COMPONENT_ID = "RUNTIME-G2-EXTERNAL-TOOL-ECOSYSTEM-AGGREGATION-V1"
 
 SOURCES = {
     "exa_mcp": {
@@ -22,57 +31,36 @@ SOURCES = {
         "repo": "exa-labs/exa-mcp-server",
         "branch": "main",
         "domain": "web_research",
-        "license_mode": "MIT_REFERENCE",
         "markers": ["web search", "content fetching", "multi-step research"],
         "min_marker_hits": 2,
-        "focus": [
-            "WEB_SEARCH_AND_FETCH_TRANSPORT",
-            "MCP_TOOL_BOUNDARY",
-            "SEARCH_THEN_FETCH_RESEARCH_LOOP",
-        ],
+        "binding": "runtime/yado_exa_mcp_web_research_v1.py",
     },
     "hivemind": {
         "source_id": "HIVEMIND",
         "repo": "dip497/hivemind",
         "branch": "main",
         "domain": "agent_orchestration",
-        "license_mode": "MIT_REFERENCE",
         "markers": ["worktree", "control plane", "human review", "mcp"],
         "min_marker_hits": 2,
-        "focus": [
-            "MULTI_AGENT_TASK_ISOLATION",
-            "WORKTREE_BRANCH_ISOLATION",
-            "SUPERVISED_TOOL_APPROVAL",
-            "PERSISTENT_TASK_STATE",
-        ],
+        "binding": "runtime/yado_external_project_bridge_v1.py",
     },
     "free_for_dev": {
         "source_id": "FREE_FOR_DEV",
         "repo": "ripienaar/free-for-dev",
         "branch": "master",
         "domain": "resource_discovery",
-        "license_mode": "REFERENCE_ONLY",
         "markers": ["major cloud providers", "web hosting", "search", "free"],
         "min_marker_hits": 2,
-        "focus": [
-            "RESOURCE_CANDIDATE_DISCOVERY",
-            "COST_AWARE_CAPABILITY_DISCOVERY",
-            "FREE_TIER_REVALIDATION",
-        ],
+        "binding": "runtime/yado_external_project_bridge_v1.py",
     },
     "ghidra": {
         "source_id": "GHIDRA",
         "repo": "NationalSecurityAgency/ghidra",
         "branch": "master",
         "domain": "static_analysis",
-        "license_mode": "APACHE_2_REFERENCE",
         "markers": ["reverse engineering", "headless", "decompilation", "scripting"],
         "min_marker_hits": 2,
-        "focus": [
-            "HEADLESS_STATIC_ANALYSIS",
-            "PROGRAM_STRUCTURE_RECOVERY",
-            "NON_EXECUTING_CODE_INSPECTION",
-        ],
+        "binding": "candidates/kernel-self-generated/yado-ghidra-information-genetics-v1.json",
     },
 }
 
@@ -127,13 +115,95 @@ def validate_evidence_records(records: list[dict[str, Any]]) -> dict[str, Any]:
             errors.append(f"record[{index}]:missing_claims")
 
     return {
-        "schema": "yado.external_tool_evidence_gate.v1",
+        "schema": "yado.external_tool_ecosystem_shared_gate.v1",
         "status": "PASS" if not errors else "WITHHOLD",
         "record_count": len(records),
         "unique_source_count": len(seen),
         "errors": tuple(errors),
         "canonical_active": False,
         "external_code_executed": False,
+    }
+
+
+def existing_component_bindings(repo_root: str | Path | None = None) -> dict[str, Any]:
+    root = Path(repo_root or ".").resolve()
+
+    exa = ExaMCPConfig().validated()
+    exa_ok = (
+        exa.endpoint == "https://mcp.exa.ai/mcp"
+        and {"web_search_exa", "web_fetch_exa"}.issubset(ALLOWED_TOOLS)
+    )
+
+    bridge = external_project_snapshot()
+    projects = {project.repository: project for project in PROJECTS}
+    hive_route = route_task("dip497/hivemind", "use MCP worktree agent orchestrator")
+    free_route = route_task("ripienaar/free-for-dev", "find free resource tier")
+    bridge_ok = (
+        bridge.get("status") == EXTERNAL_PROJECT_BRIDGE_PASS
+        and "dip497/hivemind" in projects
+        and "ripienaar/free-for-dev" in projects
+        and hive_route.get("capability") == "TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN"
+        and free_route.get("capability") == "FREE_TIER_RESOURCE_DISCOVERY"
+        and hive_route.get("execution") == "PLAN_ONLY"
+        and free_route.get("execution") == "PLAN_ONLY"
+    )
+
+    ghidra_arch_path = root / "architecture" / "yado-ghidra-information-genetics-v1.json"
+    ghidra_candidate_path = (
+        root
+        / "candidates"
+        / "kernel-self-generated"
+        / "yado-ghidra-information-genetics-v1.json"
+    )
+    ghidra_arch = json.loads(ghidra_arch_path.read_text(encoding="utf-8"))
+    ghidra_candidate = json.loads(ghidra_candidate_path.read_text(encoding="utf-8"))
+    ghidra_boundary = dict(ghidra_candidate.get("safe_boundary") or {})
+    ghidra_ok = (
+        ghidra_arch.get("mode") == "READ_ONLY_PUBLIC_WEB_RESEARCH"
+        and ghidra_arch.get("binary_execution") is False
+        and ghidra_arch.get("automatic_canonical_mutation") is False
+        and ghidra_candidate.get("status") == "SHADOW_CANDIDATE"
+        and ghidra_candidate.get("source_project") == "NationalSecurityAgency/ghidra"
+        and ghidra_boundary.get("binary_execution") is False
+        and ghidra_boundary.get("canonical_mutation") is False
+    )
+
+    bindings = {
+        "exa_mcp": {
+            "status": "BOUND" if exa_ok else "WITHHOLD",
+            "component": "runtime/yado_exa_mcp_web_research_v1.py",
+            "endpoint": exa.endpoint,
+            "tools": sorted(ALLOWED_TOOLS),
+            "capabilities": ["WEB_SEARCH_AND_FETCH_TRANSPORT"],
+        },
+        "hivemind": {
+            "status": "BOUND" if bridge_ok else "WITHHOLD",
+            "component": "runtime/yado_external_project_bridge_v1.py",
+            "capability": hive_route.get("capability"),
+            "execution": hive_route.get("execution"),
+        },
+        "free_for_dev": {
+            "status": "BOUND" if bridge_ok else "WITHHOLD",
+            "component": "runtime/yado_external_project_bridge_v1.py",
+            "capability": free_route.get("capability"),
+            "execution": free_route.get("execution"),
+        },
+        "ghidra": {
+            "status": "BOUND" if ghidra_ok else "WITHHOLD",
+            "component": str(
+                Path("candidates")
+                / "kernel-self-generated"
+                / "yado-ghidra-information-genetics-v1.json"
+            ),
+            "capabilities": list(ghidra_candidate.get("proposed_capabilities") or []),
+            "candidate_admission": ghidra_arch.get("candidate_admission"),
+        },
+    }
+    return {
+        "status": "PASS" if all(item["status"] == "BOUND" for item in bindings.values()) else "WITHHOLD",
+        "bindings": bindings,
+        "reused_component_count": 4,
+        "new_third_party_adapter_count": 0,
     }
 
 
@@ -147,6 +217,8 @@ class ExternalToolEcosystemLearningV1:
             "component_id": COMPONENT_ID,
             "status": "BOUND" if self._last else "BOUND_UNREFRESHED",
             "source_count": len(SOURCES),
+            "reuses_existing_components": True,
+            "new_third_party_adapter_count": 0,
             "read_only_external": True,
             "third_party_code_executed": False,
             "third_party_code_copied": False,
@@ -155,7 +227,8 @@ class ExternalToolEcosystemLearningV1:
             "last_digest": (self._last or {}).get("study_digest"),
         }
 
-    def study(self, fetch) -> dict[str, Any]:
+    def study(self, fetch, *, repo_root: str | Path | None = None) -> dict[str, Any]:
+        component_bindings = existing_component_bindings(repo_root)
         rows: list[dict[str, Any]] = []
         evidence_records: list[dict[str, Any]] = []
         withheld: list[str] = []
@@ -176,45 +249,54 @@ class ExternalToolEcosystemLearningV1:
 
                 lower = readme_text.lower()
                 hits = [marker for marker in spec["markers"] if marker in lower]
+                binding = component_bindings["bindings"][key]
                 enough_markers = len(hits) >= int(spec["min_marker_hits"])
-                status = "VERIFIED" if enough_markers else "WITHHOLD_WEAK_MECHANISM_EVIDENCE"
+                status = (
+                    "VERIFIED"
+                    if enough_markers and binding["status"] == "BOUND"
+                    else "WITHHOLD_SOURCE_OR_BINDING"
+                )
 
+                claims = (
+                    list(binding.get("capabilities") or [])
+                    or [str(binding.get("capability") or "")]
+                )
+                claims = [claim for claim in claims if claim]
                 provenance = {
                     "repository": full_name,
                     "branch": spec["branch"],
+                    "binding": spec["binding"],
                     "metadata_sha256": _sha(metadata_text),
                     "readme_sha256": _sha(readme_text),
                     "metadata_receipt_sha256": metadata_receipt.get("sha256"),
                     "readme_receipt_sha256": readme_receipt.get("sha256"),
                 }
-                claims = list(spec["focus"])
-                evidence_record = {
-                    "source_id": spec["source_id"],
-                    "domain": spec["domain"],
-                    "url": readme_url,
-                    "provenance": provenance,
-                    "claims": claims,
-                }
-                evidence_records.append(evidence_record)
-
-                row = {
-                    "key": key,
-                    "source_id": spec["source_id"],
-                    "repo": full_name,
-                    "default_branch": metadata.get("default_branch"),
-                    "license_spdx": (metadata.get("license") or {}).get("spdx_id"),
-                    "license_mode": spec["license_mode"],
-                    "domain": spec["domain"],
-                    "status": status,
-                    "focus": claims,
-                    "marker_hits": hits,
-                    "metadata_sha256": provenance["metadata_sha256"],
-                    "readme_sha256": provenance["readme_sha256"],
-                    "read_only": True,
-                    "code_copy_performed": False,
-                    "code_execution_performed": False,
-                }
-                rows.append(row)
+                evidence_records.append(
+                    {
+                        "source_id": spec["source_id"],
+                        "domain": spec["domain"],
+                        "url": readme_url,
+                        "provenance": provenance,
+                        "claims": claims,
+                    }
+                )
+                rows.append(
+                    {
+                        "key": key,
+                        "source_id": spec["source_id"],
+                        "repo": full_name,
+                        "default_branch": metadata.get("default_branch"),
+                        "domain": spec["domain"],
+                        "binding": spec["binding"],
+                        "binding_status": binding["status"],
+                        "status": status,
+                        "claims": claims,
+                        "marker_hits": hits,
+                        "read_only": True,
+                        "code_copy_performed": False,
+                        "code_execution_performed": False,
+                    }
+                )
                 if status != "VERIFIED":
                     withheld.append(key)
             except Exception as exc:
@@ -225,9 +307,9 @@ class ExternalToolEcosystemLearningV1:
                         "source_id": spec["source_id"],
                         "repo": spec["repo"],
                         "domain": spec["domain"],
+                        "binding": spec["binding"],
                         "status": "WITHHOLD_SOURCE_UNVERIFIED",
                         "reason": f"{type(exc).__name__}:{str(exc)[:160]}",
-                        "focus": list(spec["focus"]),
                         "read_only": True,
                         "code_copy_performed": False,
                         "code_execution_performed": False,
@@ -236,40 +318,32 @@ class ExternalToolEcosystemLearningV1:
 
         verified = [row for row in rows if row["status"] == "VERIFIED"]
         gate = validate_evidence_records(evidence_records)
+        pass_all = (
+            component_bindings["status"] == "PASS"
+            and len(verified) == len(SOURCES)
+            and gate["status"] == "PASS"
+        )
 
-        capability_cards: list[dict[str, Any]] = []
-        for row in verified:
-            for mechanism in row["focus"]:
-                capability_cards.append(
-                    {
-                        "mechanism": mechanism,
-                        "evidence_source_id": row["source_id"],
-                        "domain": row["domain"],
-                        "mode": "SHADOW_CLEAN_ROOM",
-                        "requires_fresh_regression": True,
-                        "canonical_active": False,
-                    }
-                )
-
-        pass_all = len(verified) == len(SOURCES) and gate["status"] == "PASS"
         body = {
             "schema": SCHEMA,
             "component_id": COMPONENT_ID,
             "status": (
-                "PASS_SHADOW_EXTERNAL_TOOL_ECOSYSTEM_LEARNING_V1"
+                "PASS_SHADOW_EXTERNAL_TOOL_ECOSYSTEM_AGGREGATION_V1"
                 if pass_all
-                else "WITHHOLD_EXTERNAL_TOOL_ECOSYSTEM_LEARNING_V1"
+                else "WITHHOLD_EXTERNAL_TOOL_ECOSYSTEM_AGGREGATION_V1"
             ),
+            "component_bindings": component_bindings,
             "sources": rows,
             "evidence_records": evidence_records,
             "evidence_gate": gate,
             "verified_source_count": len(verified),
             "withheld_sources": withheld,
-            "capability_cards": capability_cards,
             "next": (
-                "BUILD_AND_TEST_CLEAN_ROOM_SHADOW_ADAPTERS_FOR_WEB_RESEARCH_"
-                "MULTI_AGENT_ORCHESTRATION_RESOURCE_DISCOVERY_AND_STATIC_ANALYSIS"
+                "MEASURE_WHETHER_SHARED_GATED_OUTPUT_CHANGES_DOWNSTREAM_YADO_"
+                "DECISIONS_BEFORE_ANY_NEW_CANONICAL_ADMISSION"
             ),
+            "reuses_existing_components": True,
+            "new_third_party_adapter_count": 0,
             "read_only_external": True,
             "third_party_code_executed": False,
             "third_party_code_copied": False,
@@ -289,5 +363,6 @@ class ExternalToolEcosystemLearningV1:
 __all__ = [
     "ExternalToolEcosystemLearningV1",
     "SOURCES",
+    "existing_component_bindings",
     "validate_evidence_records",
 ]
