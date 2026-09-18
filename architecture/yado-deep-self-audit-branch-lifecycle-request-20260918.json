@@ -1,0 +1,36 @@
+{
+  "schema": "yado.deep_self_audit_branch_lifecycle.request.v1",
+  "date": "2026-09-18",
+  "status": "REQUESTED",
+  "objective": "Run a deep self-audit over the current YADO kernel and all remote branches, classify each branch as active, memory, history, or withheld, refresh canonical branch lifecycle state, pass full audit and regression, then start the next bounded development cycle.",
+  "required_sequence": [
+    "refresh complete remote refs",
+    "classify all branches by ancestry, registered experience and changed paths",
+    "run unified-core deep self-audit",
+    "run full kernel audit",
+    "build fresh Successor identity",
+    "run complete regression",
+    "select next development deficit and generate bounded development plan",
+    "persist deterministic branch lifecycle and memory index",
+    "merge to main only after all gates pass"
+  ],
+  "branch_policy": {
+    "active": "main plus verified divergent candidates that still require admission",
+    "memory": "registered experience with provenance",
+    "history": "absorbed or infrastructure refs preserved in Git history",
+    "delete_remote_branches_automatically": false,
+    "unknown": "WITHHOLD"
+  },
+  "canonical_policy": {
+    "update_canonical_branch_lifecycle": true,
+    "automatic_runtime_promotion": false,
+    "canonical_head_mutation_without_regression": false
+  },
+  "development_policy": {
+    "run_after_audit": true,
+    "bounded": true,
+    "preserve_existing_gates": true,
+    "consciousness_claimed": false
+  },
+  "final_admission_recheck": false
+}
