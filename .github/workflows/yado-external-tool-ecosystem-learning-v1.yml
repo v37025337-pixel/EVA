@@ -1,4 +1,4 @@
-name: YADO External Tool Ecosystem Learning V1
+name: YADO External Tool Ecosystem Aggregation V1
 
 on:
   pull_request:
@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  external-tool-ecosystem-learning:
+  external-tool-ecosystem-aggregation:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -24,17 +24,37 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Compile and focused tests
+      - name: Compile aggregate and existing bindings
         env:
           PYTHONPATH: runtime
         run: |
           python -m py_compile \
             runtime/yado_external_tool_ecosystem_learning_v1.py \
             runtime/yado_unified_core_external_tool_ecosystem_learning_v1.py \
-            runtime/test_yado_external_tool_ecosystem_learning_v1.py
-          python -m unittest runtime.test_yado_external_tool_ecosystem_learning_v1 -v
+            runtime/test_yado_external_tool_ecosystem_learning_v1.py \
+            runtime/yado_exa_mcp_web_research_v1.py \
+            runtime/yado_external_project_bridge_v1.py
 
-      - name: Read real public repositories without executing them
+      - name: Run aggregate and existing focused tests
+        env:
+          PYTHONPATH: runtime:.
+        run: |
+          python -m unittest runtime.test_yado_external_tool_ecosystem_learning_v1 -v
+          python -m unittest runtime.test_yado_exa_mcp_web_research_v1 -v
+          python - <<'PY'
+          import importlib.util
+          spec = importlib.util.spec_from_file_location(
+              "bridge_tests",
+              "runtime/test_yado_external_project_bridge_v1.py",
+          )
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          for name in sorted(name for name in dir(module) if name.startswith("test_")):
+              getattr(module, name)()
+              print("PASS", name)
+          PY
+
+      - name: Fresh read of four public repositories
         env:
           PYTHONPATH: runtime
         run: |
@@ -69,8 +89,10 @@ jobs:
                   },
               }
 
-          result = ExternalToolEcosystemLearningV1().study(fetch)
-          assert result["status"] == "PASS_SHADOW_EXTERNAL_TOOL_ECOSYSTEM_LEARNING_V1", result
+          result = ExternalToolEcosystemLearningV1().study(fetch, repo_root=".")
+          assert result["status"] == "PASS_SHADOW_EXTERNAL_TOOL_ECOSYSTEM_AGGREGATION_V1", result
+          assert result["component_bindings"]["status"] == "PASS", result
+          assert result["component_bindings"]["new_third_party_adapter_count"] == 0, result
           assert result["verified_source_count"] == 4, result
           assert result["evidence_gate"]["status"] == "PASS", result
           assert result["third_party_code_executed"] is False
@@ -79,30 +101,31 @@ jobs:
           assert result["automatic_canonical_mutation"] is False
 
           evidence = {
-              "schema": "yado.external_tool_ecosystem_learning.real_run.v1",
+              "schema": "yado.external_tool_ecosystem_aggregation.real_run.v1",
               "status": result["status"],
               "commit": os.environ.get("GITHUB_SHA"),
               "verified_source_count": result["verified_source_count"],
               "withheld_sources": result["withheld_sources"],
+              "component_bindings": result["component_bindings"],
               "evidence_gate": result["evidence_gate"],
-              "source_repositories": [row["repo"] for row in result["sources"] if row["status"] == "VERIFIED"],
-              "capability_cards": result["capability_cards"],
               "study_digest": result["study_digest"],
+              "reuses_existing_components": result["reuses_existing_components"],
+              "new_third_party_adapter_count": result["new_third_party_adapter_count"],
               "third_party_code_executed": False,
               "third_party_code_copied": False,
               "credentials_used": False,
               "external_writes": False,
               "automatic_install": False,
-              "automatic_canonical_mutation": False,
+              "automatic_canonical_mutation": False
           }
-          out = Path(os.environ["RUNNER_TEMP"]) / "yado-external-tool-ecosystem-learning-v1.json"
+          out = Path(os.environ["RUNNER_TEMP"]) / "yado-external-tool-ecosystem-aggregation-v1.json"
           out.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8")
           print(json.dumps(evidence, sort_keys=True))
           PY
 
-      - name: Preserve evidence
+      - name: Preserve aggregate evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: yado-external-tool-ecosystem-learning-v1-${{ github.run_id }}
-          path: ${{ runner.temp }}/yado-external-tool-ecosystem-learning-v1.json
+          name: yado-external-tool-ecosystem-aggregation-v1-${{ github.run_id }}
+          path: ${{ runner.temp }}/yado-external-tool-ecosystem-aggregation-v1.json
           if-no-files-found: error
