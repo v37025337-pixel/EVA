@@ -1,0 +1,108 @@
+name: YADO Main Checkpoint Resume V1
+
+'on':
+  push:
+    branches: [main]
+    paths:
+      - 'transport/yado-main-resume-20260918/**'
+      - '.github/workflows/yado-main-checkpoint-resume-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yado-main-checkpoint-resume-v1
+  cancel-in-progress: false
+
+jobs:
+  resume-main-core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct unchanged main runtime
+        run: |
+          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-regression-v1-report.json
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+          python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Restore iteration 10 and continue the native unified core
+        env:
+          PYTHONPATH: runtime:runtime/yado_rc8_v36
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python transport/yado-main-resume-20260918/resume_observer.py
+      - name: Persist next checkpoint before long verification
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-main-resume-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/yado-main-resume/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Full kernel audit without relaxing gates
+        run: |
+          python runtime/yado_full_kernel_audit_v1.py
+          python - <<'PY'
+          import json
+          r = json.load(open('audits/yado-full-kernel-audit-v1-report.json'))
+          assert r['status'] == 'PASS' and r['findings'] == [], r
+          assert r['canonical']['canonical_guard'] == 'PASS', r
+          assert r['canonical']['ledger_validation'] == 'PASS', r
+          PY
+      - name: Full regression of the unchanged main runtime
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/yado-main-resume-birth"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-main-resume-birth/manifest.json"
+          python - <<'PY'
+          import json
+          r = json.load(open('audits/yado-full-regression-v1-report.json'))
+          assert r['status'] == 'PASS', r
+          assert r['tests_run'] == r['expected_tests'], r
+          assert not r['failures'] and not r['errors'] and not r['skipped'], r
+          assert r['source_unchanged'] is True, r
+          PY
+      - name: Final canonical and source immutability
+        run: |
+          git diff --exit-code -- runtime successor canonical architecture
+          python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Attach verification to continuation result
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os, shutil
+          from pathlib import Path
+          out = Path(os.environ['RUNNER_TEMP']) / 'yado-main-resume'
+          out.mkdir(exist_ok=True)
+          for name in ['yado-full-kernel-audit-v1-report.json', 'yado-full-regression-v1-report.json']:
+              source = Path('audits') / name
+              if source.exists():
+                  shutil.copyfile(source, out / name)
+          result_file = out / 'result.json'
+          if result_file.exists():
+              result = json.loads(result_file.read_text())
+              for key, name in [('full_audit', 'yado-full-kernel-audit-v1-report.json'), ('full_regression', 'yado-full-regression-v1-report.json')]:
+                  path = out / name
+                  result[key] = json.loads(path.read_text()) if path.exists() else {'status': 'NOT_COMPLETED'}
+              result_file.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+                  summary.write('## Restored main-core continuation\n\n')
+                  summary.write('Input: iteration 10; output: iteration 11.\n\n')
+                  summary.write('Observed verdict: **' + result['continuation_verdict'] + '**.\n\n')
+                  summary.write('A successful job proves execution/verification, not autonomous self-repair. No canonical admission.\n')
+          PY
+      - name: Preserve final evidence and resumable state in GitHub
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-main-resume-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/yado-main-resume/
+          if-no-files-found: error
+          retention-days: 30
