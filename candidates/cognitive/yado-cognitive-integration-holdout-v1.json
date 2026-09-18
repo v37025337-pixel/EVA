@@ -1,11 +1,135 @@
 {
   "schema": "yado.cognitive_integration_holdout.v1",
-  "status": "WITHHOLD_UNEXECUTED",
+  "status": "PASS_SHADOW_COGNITIVE_INTEGRATION_HOLDOUT_V1",
   "selected_target": "COGNITIVE_INTEGRATION",
   "selected_action": "derive and test a cross-cognitive integration holdout",
-  "candidate_path": "candidates/cognitive/yado_cognitive_integration_policy_v1.py",
+  "selected_policy": "ALL_FOUR",
+  "selected_required_gates": [
+    "MEMORY_EXPERIENCE",
+    "LOGIC",
+    "THINKING",
+    "INTELLIGENCE"
+  ],
+  "selected_scores": {
+    "train": {
+      "accuracy": 1,
+      "correct": 50,
+      "total": 50,
+      "by_family": {
+        "all_pass": 1,
+        "intelligence_fail": 1,
+        "logic_fail": 1,
+        "memory_fail": 1,
+        "thinking_fail": 1
+      }
+    },
+    "hidden": {
+      "accuracy": 1,
+      "correct": 50,
+      "total": 50,
+      "by_family": {
+        "all_pass": 1,
+        "intelligence_fail": 1,
+        "logic_fail": 1,
+        "memory_fail": 1,
+        "thinking_fail": 1
+      }
+    },
+    "fresh": {
+      "accuracy": 1,
+      "correct": 50,
+      "total": 50,
+      "by_family": {
+        "all_pass": 1,
+        "intelligence_fail": 1,
+        "logic_fail": 1,
+        "memory_fail": 1,
+        "thinking_fail": 1
+      }
+    }
+  },
+  "baseline_policy": "NO_MEMORY",
+  "baseline_scores": {
+    "train": {
+      "accuracy": 0.8,
+      "correct": 40,
+      "total": 50,
+      "by_family": {
+        "all_pass": 1,
+        "intelligence_fail": 1,
+        "logic_fail": 1,
+        "memory_fail": 0,
+        "thinking_fail": 1
+      }
+    },
+    "hidden": {
+      "accuracy": 0.8,
+      "correct": 40,
+      "total": 50,
+      "by_family": {
+        "all_pass": 1,
+        "intelligence_fail": 1,
+        "logic_fail": 1,
+        "memory_fail": 0,
+        "thinking_fail": 1
+      }
+    },
+    "fresh": {
+      "accuracy": 0.8,
+      "correct": 40,
+      "total": 50,
+      "by_family": {
+        "all_pass": 1,
+        "intelligence_fail": 1,
+        "logic_fail": 1,
+        "memory_fail": 0,
+        "thinking_fail": 1
+      }
+    }
+  },
+  "fresh_ablation_drops": {
+    "INTELLIGENCE": 0.2,
+    "LOGIC": 0.2,
+    "MEMORY_EXPERIENCE": 0.2,
+    "THINKING": 0.2
+  },
+  "task_counts": {
+    "train": 50,
+    "hidden": 50,
+    "fresh": 50
+  },
+  "verified_parent_policies": {
+    "memory": {
+      "exact_kind": true,
+      "reject_ambiguous": true,
+      "require_provenance": true
+    },
+    "logic": {
+      "causal_only": true,
+      "max_depth": 6,
+      "reject_feedback_cycles": true
+    },
+    "thinking": "BOUNDED_STREAM_CONTEXT_MAP",
+    "intelligence": "G4_TRANSFER_AMBIGUITY_GUARD"
+  },
+  "real_yado_components_used": true,
+  "external_model_used": false,
+  "downloaded_code_executed": false,
   "canonical_mutation": false,
   "automatic_main_mutation": false,
   "consciousness_claimed": false,
-  "claim_boundary": "Static fail-closed placeholder. CI must replace this with fresh four-layer integration evidence before admission."
+  "limitations": [
+    "bounded externally authored cross-cognitive benchmark grammar",
+    "component signals come from verified YADO mechanisms but final ACT/WITHHOLD semantics are benchmark-defined",
+    "passing demonstrates causal composition on this benchmark, not general intelligence or subjective consciousness"
+  ],
+  "verification": {
+    "workflow_run_id": 35359420663,
+    "workflow_name": "YADO Cognitive Integration Holdout V1",
+    "artifact_id": 10553498198,
+    "artifact_digest": "sha256:16f002f214ca6d08141a17cce4f99a116a027a89ad0231cd725f3845e83b9a98",
+    "tested_head_sha": "b68e7e326f757bdbb47c2fe304fbbf09b461705c",
+    "full_kernel_audit": "PASS",
+    "successor_regression_tests": 455
+  }
 }
