@@ -1,6 +1,18 @@
 name: YADO Native Self Rewrite V4 Fresh Experience
 
 on:
+  push:
+    branches: [yado-native-self-rewrite-v4-fresh-experience-20260918]
+    paths:
+      - "runtime/yado_native_self_rewrite_v4_fresh_experience.py"
+      - "runtime/test_yado_native_self_rewrite_v4_fresh_experience.py"
+      - "runtime/yado_full_kernel_audit_v1.py"
+      - "architecture/yado-native-self-rewrite-v4-fresh-experience.json"
+      - "architecture/yado-active-managed-branch-policy-v1.json"
+      - "candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json"
+      - "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py"
+      - "candidates/autonomous/yado-runtime-self-rewrite-admission-v3.json"
+      - ".github/workflows/yado-native-self-rewrite-v4-fresh-experience.yml"
   pull_request:
     branches: [main]
     paths:
@@ -105,3 +117,51 @@ jobs:
             audits/yado-full-kernel-audit-v1-report.json
             audits/yado-full-regression-v1-report.json
           if-no-files-found: warn
+
+
+  persist-v4-evidence:
+    if: github.event_name == 'push'
+    needs: native-self-rewrite-v4
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: yado-native-self-rewrite-v4-fresh-experience-20260918
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Regenerate exact deterministic V4 evidence
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python runtime/yado_native_self_rewrite_v4_fresh_experience.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json").read_text())
+          assert d["status"]=="PASS_SHADOW_NATIVE_SELF_REWRITE_V4_FRESH_EXPERIENCE", d
+          assert d["next_required_capability"]=="ISOLATED_RUNTIME_EXECUTION_AND_REGRESSION_ADMISSION_V4", d
+          PY
+
+      - name: Persist exact V4 candidate and receipt
+        run: |
+          git config user.name "YADO Native Self Rewrite V4"
+          git config user.email "actions@users.noreply.github.com"
+          git add             candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json             candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py
+          if git diff --cached --quiet; then
+            echo "V4 evidence already persisted exactly"
+          else
+            git commit -m "YADO V4: persist verified fresh-experience self-rewrite evidence"
+            git push origin HEAD:yado-native-self-rewrite-v4-fresh-experience-20260918
+          fi
