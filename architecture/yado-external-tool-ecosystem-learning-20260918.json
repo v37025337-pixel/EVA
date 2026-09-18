@@ -1,28 +1,24 @@
 {
-  "schema": "yado.external_tool_ecosystem_learning.request.v1",
-  "status": "REQUESTED_SHADOW_INTEGRATION",
+  "schema": "yado.external_tool_ecosystem_aggregation.request.v1",
+  "status": "REQUESTED_SHADOW_AGGREGATION",
   "date": "2026-09-18",
-  "objective": "Learn bounded reusable mechanisms from four user-selected public repositories and expose clean-room shadow capability cards to YADO.",
-  "sources": [
+  "objective": "Unify the already-existing Exa, Hivemind, free-for-dev and Ghidra YADO integrations behind one provenance/evidence gate without duplicating adapters.",
+  "existing_bindings": [
     {
       "repo": "exa-labs/exa-mcp-server",
-      "role": "web research transport and MCP search/fetch boundary",
-      "license_mode": "MIT_REFERENCE"
+      "binding": "runtime/yado_exa_mcp_web_research_v1.py"
     },
     {
       "repo": "dip497/hivemind",
-      "role": "multi-agent worktree isolation, persistent task state, supervised approvals",
-      "license_mode": "MIT_REFERENCE"
+      "binding": "runtime/yado_external_project_bridge_v1.py"
     },
     {
       "repo": "ripienaar/free-for-dev",
-      "role": "resource discovery and free-tier candidate catalog",
-      "license_mode": "REFERENCE_ONLY"
+      "binding": "runtime/yado_external_project_bridge_v1.py"
     },
     {
       "repo": "NationalSecurityAgency/ghidra",
-      "role": "headless static analysis and non-executing program understanding",
-      "license_mode": "APACHE_2_REFERENCE"
+      "binding": "candidates/kernel-self-generated/yado-ghidra-information-genetics-v1.json"
     }
   ],
   "safety_boundary": {
@@ -32,8 +28,9 @@
     "credentials_used": false,
     "external_writes": false,
     "automatic_install": false,
-    "automatic_canonical_mutation": false
+    "automatic_canonical_mutation": false,
+    "new_third_party_adapter_count": 0
   },
-  "admission_rule": "All four sources must verify by repository identity, HTTPS provenance, evidence claims and marker evidence; otherwise WITHHOLD.",
-  "next": "Run fresh public-read workflow, then map passing capability cards to measured YADO deficits before any canonical admission."
+  "admission_rule": "Existing bindings must remain valid and all four public sources must independently re-verify by repository identity, HTTPS provenance, evidence claims and marker evidence; otherwise WITHHOLD.",
+  "next": "Measure whether the shared gated aggregate changes downstream YADO decisions before any further canonical admission."
 }
