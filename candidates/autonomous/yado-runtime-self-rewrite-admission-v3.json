@@ -1,9 +1,60 @@
 {
-  "schema": "yado.runtime_self_rewrite_admission.v3",
-  "status": "WITHHOLD_UNEXECUTED",
+  "schema": "yado.runtime_self_rewrite_admission.v3.persisted.v1",
+  "status": "PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V3",
   "admission_mode": "ALREADY_PHYSICALLY_PRESENT_IDENTICAL_BYTES",
-  "next_required_capability": "ISOLATED_RUNTIME_EXECUTION_AND_REGRESSION_ADMISSION_V3",
+  "source_receipt": "candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v3.json",
+  "source_receipt_sha256": "7255d0c5b32196bc70c0fb59fdbc3b6b5c701ada60d3aadef26ef8a312378198",
+  "target_path": "runtime/yado_bounded_autonomous_learning_v1.py",
+  "target_sha256": "38b7e76da64e3828a866ffe044ab55c3f4d70a77e28ee2fe3f54e7e61e8b9c6b",
+  "candidate_path": "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v3.py",
+  "candidate_sha256": "38b7e76da64e3828a866ffe044ab55c3f4d70a77e28ee2fe3f54e7e61e8b9c6b",
+  "recorded_parent_sha256": "0fc389998db47ea35ed5f613dff6c00544e293a19036ee58c4e2ca1224d39e2a",
+  "candidate_ast_digest": "2d35c32a5e963aa41aa8bc94ddf8857c46de8a56a9d0e57f7e2a02bb3c61ea73",
+  "target_ast_digest": "2d35c32a5e963aa41aa8bc94ddf8857c46de8a56a9d0e57f7e2a02bb3c61ea73",
+  "experience_digest": "c68e10fc632cc81a82fdb270dcd7a124fc857b087365cc9f990825630157b4a3",
+  "ranking_effect": {
+    "successful_source_score_deltas": {
+      "PYTHON_AST": 4,
+      "PYTHON_HTMLPARSER": 4
+    },
+    "successful_host_only_score_deltas": {
+      "PYTHON_UNITTEST": 1,
+      "PYTHON_URLOPEN": 1
+    }
+  },
+  "checks": {
+    "source_receipt_pass": true,
+    "frontier_matches_admission_v3": true,
+    "candidate_sha_matches_receipt": true,
+    "target_sha_matches_candidate": true,
+    "target_differs_from_recorded_parent": true,
+    "candidate_compiles": true,
+    "target_compiles": true,
+    "candidate_target_ast_identical": true,
+    "runtime_learned_binding_exact": true,
+    "experience_digest_bound": true,
+    "successful_source_affinity_observed": true,
+    "successful_host_affinity_observed": true,
+    "no_new_dangerous_calls_in_source_receipt": true,
+    "no_eval_exec_or_subprocess_added_to_target": true,
+    "canonical_head_unchanged_during_admission_probe": true,
+    "runtime_rewrite_performed_by_gate": false,
+    "automatic_main_mutation": false,
+    "external_writes": false,
+    "credentials_used": false,
+    "downloaded_code_executed": false
+  },
+  "verification": {
+    "workflow_run_id": 35365175581,
+    "workflow_name": "YADO Runtime Self Rewrite Admission V3",
+    "tested_head_sha": "1aef2dc4cea005c97a7bff7ccf441ce0404f0ed0",
+    "focused_admission": "PASS",
+    "full_kernel_audit": "PASS",
+    "successor_regression_tests": 460,
+    "all_pr_gates": "PASS"
+  },
+  "next_required_capability": "NEXT_GENERATION_NATIVE_SELF_REWRITE_FROM_FRESH_EXPERIENCE_V1",
   "automatic_main_mutation": false,
   "canonical_mutation": false,
-  "claim_boundary": "Fail-closed placeholder. CI must execute the physical-runtime identity, behavior, audit and regression gates before admission."
+  "consciousness_claimed": false
 }
