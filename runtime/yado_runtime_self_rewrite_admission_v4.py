@@ -4,6 +4,8 @@ import ast
 import hashlib
 import importlib.util
 import json
+import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -123,6 +125,39 @@ def analyze(root: Path = ROOT) -> dict[str, Any]:
         "checks":checks,
         "next_required_capability":"ISOLATED_FULL_REGRESSION_V4" if state=="PARENT_RUNTIME_PENDING_SHADOW_APPLY" else "PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_GATE",
     }
+
+
+def analyze_committed(root: Path = ROOT) -> dict[str, Any]:
+    """Analyze committed Git HEAD, insulated from transient shadow mutations."""
+    root=Path(root).resolve()
+    if not (root/".git").exists():
+        result=analyze(root)
+        result["repository_view"]="WORKTREE_FALLBACK_NO_GIT"
+        return result
+
+    required=(V4_RECEIPT,CANDIDATE,TARGET)
+    with tempfile.TemporaryDirectory(prefix="yado-v4-admission-head-") as directory:
+        shadow=Path(directory)
+        for relative in required:
+            cp=subprocess.run(
+                ["git","show","HEAD:"+relative.as_posix()],
+                cwd=root,
+                capture_output=True,
+                timeout=30,
+            )
+            if cp.returncode != 0:
+                raise RuntimeError(
+                    "COMMITTED_ARTIFACT_READ_FAILED:"
+                    +relative.as_posix()
+                    +":"
+                    +cp.stderr.decode("utf-8","replace")[-500:]
+                )
+            out=shadow/relative
+            out.parent.mkdir(parents=True,exist_ok=True)
+            out.write_bytes(cp.stdout)
+        result=analyze(shadow)
+        result["repository_view"]="COMMITTED_HEAD"
+        return result
 
 
 def run(root: Path = ROOT) -> dict[str, Any]:
