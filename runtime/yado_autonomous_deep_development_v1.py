@@ -212,6 +212,7 @@ def _cognitive_evidence(root: Path) -> dict[str, dict[str, Any]]:
 
 
 def _priority(
+    root: Path,
     snapshot: dict[str, dict[str, Any]],
     audit: dict[str, Any],
     regression: dict[str, Any],
@@ -241,7 +242,7 @@ def _priority(
         for name in COGNITIVE_TARGETS
     )
     if fresh_saturated:
-        integration = _read_json(ROOT, INTEGRATION_HOLDOUT)
+        integration = _read_json(root, INTEGRATION_HOLDOUT)
         integration_pass = bool(
             integration
             and str(integration.get("status", "")).startswith("PASS_SHADOW_COGNITIVE_INTEGRATION_HOLDOUT")
@@ -256,7 +257,7 @@ def _priority(
                 "all core cognitive targets have fresh holdout score >=0.99; move to cross-cognitive integration",
             )
 
-        self_rewrite = _read_json(ROOT, SELF_REWRITE_V3)
+        self_rewrite = _read_json(root, SELF_REWRITE_V3)
         if (
             self_rewrite
             and str(self_rewrite.get("status", "")).startswith("PASS_SHADOW_NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_CANDIDATE_V3")
@@ -293,7 +294,7 @@ def build_plan(root: Path = ROOT) -> dict[str, Any]:
     audit = _load_status(root, "audits/yado-full-kernel-audit-v1-report.json")
     regression = _load_status(root, "audits/yado-full-regression-v1-report.json")
     evidence = _cognitive_evidence(root)
-    selected_target, selection_reason = _priority(snapshot, audit, regression, evidence)
+    selected_target, selection_reason = _priority(root, snapshot, audit, regression, evidence)
     all_layer_coverage = all(row["file_count"] > 0 for row in snapshot.values())
 
     stages = [
