@@ -232,6 +232,39 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     return result
 
 
+def build_committed(root: Path = ROOT) -> dict[str, Any]:
+    """Build V4 against committed Git HEAD, insulated from transient shadow mutations."""
+    root = Path(root).resolve()
+    if not (root / ".git").exists():
+        result = build(root)
+        result["repository_view"] = "WORKTREE_FALLBACK_NO_GIT"
+        return result
+
+    required = (EXPERIENCE, TARGET, V3_ADMISSION)
+    with tempfile.TemporaryDirectory(prefix="yado-v4-committed-head-") as directory:
+        shadow = Path(directory)
+        for relative in required:
+            cp = subprocess.run(
+                ["git", "show", "HEAD:" + relative.as_posix()],
+                cwd=root,
+                capture_output=True,
+                timeout=30,
+            )
+            if cp.returncode != 0:
+                raise RuntimeError(
+                    "COMMITTED_ARTIFACT_READ_FAILED:"
+                    + relative.as_posix()
+                    + ":"
+                    + cp.stderr.decode("utf-8", "replace")[-500:]
+                )
+            out = shadow / relative
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_bytes(cp.stdout)
+        result = build(shadow)
+        result["repository_view"] = "COMMITTED_HEAD"
+        return result
+
+
 def main() -> int:
     result = build()
     print(json.dumps(result, sort_keys=True))
