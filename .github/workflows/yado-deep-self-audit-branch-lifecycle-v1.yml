@@ -19,7 +19,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: yado-deep-self-audit-branch-lifecycle-v1
+  group: yado-deep-self-audit-branch-lifecycle-v1-${{ github.event_name }}
   cancel-in-progress: false
 
 jobs:
@@ -142,6 +142,7 @@ jobs:
           PY
 
       - name: Persist deterministic canonical lifecycle artifacts
+        if: github.event_name == 'push'
         run: |
           git checkout -- canonical/yado-remote-branch-inventory-v1.json || true
           git config user.name "YADO Branch Lifecycle Audit"
