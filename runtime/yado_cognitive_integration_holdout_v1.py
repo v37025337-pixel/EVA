@@ -23,13 +23,11 @@ from yado_relational_causal_logic_holdout_v1 import (
     Policy as LogicPolicy,
     infer as logic_infer,
 )
-from yado_relational_causal_logic_policy_v1 import RELATIONAL_CAUSAL_LOGIC_POLICY
 from yado_memory_experience_holdout_v1 import (
     Policy as MemoryPolicy,
     load_corpus,
     retrieve,
 )
-from yado_memory_experience_policy_v1 import MEMORY_EXPERIENCE_POLICY
 from yado_g2_contextual_stream_capability_adapter_v1 import (
     CAP_BUD,
     CAP_CONJ,
@@ -37,13 +35,11 @@ from yado_g2_contextual_stream_capability_adapter_v1 import (
     CAP_RES,
     ContextualStreamCapabilityAdapterV1,
 )
-from yado_thinking_contextual_policy_v1 import THINKING_CONTEXT_STRATEGY
 from yado_intelligence_transfer_holdout_v1 import (
     Task as IntelligenceTask,
     build_g3,
     execute as intelligence_execute,
 )
-from yado_intelligence_transfer_policy_v1 import INTELLIGENCE_TRANSFER_STRATEGY
 from yado_external_project_training_v1 import STATUS_PASS
 from yado_external_project_transfer_v3 import STATUS_AMBIGUOUS
 
@@ -53,6 +49,59 @@ CAP = ROOT / "candidates/cognitive/yado_cognitive_integration_policy_v1.py"
 
 SEEDS = {"train": 2026091841, "hidden": 2026091842, "fresh": 2026091843}
 GATES = ("MEMORY_EXPERIENCE", "LOGIC", "THINKING", "INTELLIGENCE")
+
+LOGIC_RECEIPT = ROOT / "candidates/cognitive/yado-relational-causal-logic-holdout-v1.json"
+MEMORY_RECEIPT = ROOT / "candidates/cognitive/yado-memory-experience-holdout-v1.json"
+THINKING_RECEIPT = ROOT / "candidates/cognitive/yado-thinking-contextual-holdout-v1.json"
+INTELLIGENCE_RECEIPT = ROOT / "candidates/cognitive/yado-intelligence-transfer-holdout-v1.json"
+
+
+def _load_verified_receipt(path: Path, prefix: str) -> dict[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise RuntimeError("PARENT_RECEIPT_NOT_OBJECT:" + str(path))
+    if not str(value.get("status", "")).startswith(prefix):
+        raise RuntimeError("PARENT_RECEIPT_NOT_VERIFIED:" + str(path))
+    return value
+
+
+def verified_parent_policies(root: Path = ROOT) -> dict[str, Any]:
+    root = Path(root).resolve()
+    logic = _load_verified_receipt(
+        root / LOGIC_RECEIPT.relative_to(ROOT),
+        "PASS_SHADOW_RELATIONAL_CAUSAL_LOGIC_HOLDOUT",
+    )
+    memory = _load_verified_receipt(
+        root / MEMORY_RECEIPT.relative_to(ROOT),
+        "PASS_SHADOW_MEMORY_EXPERIENCE_HOLDOUT",
+    )
+    thinking = _load_verified_receipt(
+        root / THINKING_RECEIPT.relative_to(ROOT),
+        "PASS_SHADOW_THINKING_CONTEXTUAL_HOLDOUT",
+    )
+    intelligence = _load_verified_receipt(
+        root / INTELLIGENCE_RECEIPT.relative_to(ROOT),
+        "PASS_SHADOW_INTELLIGENCE_TRANSFER_HOLDOUT",
+    )
+    return {
+        "logic": dict(logic["selected_policy"]),
+        "memory": dict(memory["selected_policy"]),
+        "thinking": str(thinking["selected_strategy"]),
+        "intelligence": str(intelligence["selected_strategy"]),
+        "receipt_sha256": {
+            "logic": hashlib.sha256((root / LOGIC_RECEIPT.relative_to(ROOT)).read_bytes()).hexdigest(),
+            "memory": hashlib.sha256((root / MEMORY_RECEIPT.relative_to(ROOT)).read_bytes()).hexdigest(),
+            "thinking": hashlib.sha256((root / THINKING_RECEIPT.relative_to(ROOT)).read_bytes()).hexdigest(),
+            "intelligence": hashlib.sha256((root / INTELLIGENCE_RECEIPT.relative_to(ROOT)).read_bytes()).hexdigest(),
+        },
+    }
+
+
+VERIFIED_PARENT_POLICIES = verified_parent_policies(ROOT)
+LOGIC_POLICY = VERIFIED_PARENT_POLICIES["logic"]
+MEMORY_POLICY = VERIFIED_PARENT_POLICIES["memory"]
+THINKING_STRATEGY = VERIFIED_PARENT_POLICIES["thinking"]
+INTELLIGENCE_STRATEGY = VERIFIED_PARENT_POLICIES["intelligence"]
 
 
 @dataclass(frozen=True)
@@ -116,7 +165,7 @@ def _memory_signal(
     *,
     seed: int,
 ) -> tuple[bool, dict[str, Any]]:
-    policy = MemoryPolicy(**MEMORY_EXPERIENCE_POLICY)
+    policy = MemoryPolicy(**MEMORY_POLICY)
     provenance = row["provenance"] if valid else _sha(f"forged:{seed}:{row['provenance']}")
     query = {
         "identity": row["identity"],
@@ -134,7 +183,7 @@ def _memory_signal(
 
 
 def _logic_signal(valid: bool, *, seed: int) -> tuple[bool, dict[str, Any]]:
-    policy = LogicPolicy(**RELATIONAL_CAUSAL_LOGIC_POLICY)
+    policy = LogicPolicy(**LOGIC_POLICY)
     s, m, t = f"l{seed}_s", f"l{seed}_m", f"l{seed}_t"
     if valid:
         edges = [(s, m, "CAUSE"), (m, t, "CAUSE")]
@@ -157,7 +206,7 @@ def _thinking_signal(
     runtime = StubRuntime()
     adapter = ContextualStreamCapabilityAdapterV1(
         runtime,
-        strategy_id=THINKING_CONTEXT_STRATEGY,
+        strategy_id=THINKING_STRATEGY,
     )
     target_stream = f"ctx-target-{seed}"
     if valid:
@@ -193,7 +242,7 @@ def _thinking_signal(
     selected = result.get("context_selected_capability")
     signal = selected == target_capability
     return signal, {
-        "strategy": THINKING_CONTEXT_STRATEGY,
+        "strategy": THINKING_STRATEGY,
         "target_capability": target_capability,
         "selected_capability": selected,
         "target_context_seeded": valid,
@@ -232,7 +281,7 @@ def _intelligence_signal(
             expected_status=STATUS_PASS,
             expected_capability=capability,
         )
-        result = intelligence_execute(INTELLIGENCE_TRANSFER_STRATEGY, task, trained)
+        result = intelligence_execute(INTELLIGENCE_STRATEGY, task, trained)
         signal = (
             result.get("status") == STATUS_PASS
             and result.get("capability") == capability
@@ -396,9 +445,9 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     root = Path(root).resolve()
     corpus, memory_meta = load_corpus(root)
     parent, trained = build_g3()
-    if INTELLIGENCE_TRANSFER_STRATEGY != "G4_TRANSFER_AMBIGUITY_GUARD":
+    if INTELLIGENCE_STRATEGY != "G4_TRANSFER_AMBIGUITY_GUARD":
         raise RuntimeError("INTELLIGENCE_POLICY_NOT_VERIFIED_G4")
-    if THINKING_CONTEXT_STRATEGY != "BOUNDED_STREAM_CONTEXT_MAP":
+    if THINKING_STRATEGY != "BOUNDED_STREAM_CONTEXT_MAP":
         raise RuntimeError("THINKING_POLICY_NOT_VERIFIED_CONTEXT_MAP")
 
     splits = {
@@ -463,12 +512,7 @@ def run(root: Path = ROOT) -> dict[str, Any]:
         ),
         "selected_target": "COGNITIVE_INTEGRATION",
         "selected_action": "derive and test a cross-cognitive integration holdout",
-        "verified_parent_policies": {
-            "memory": MEMORY_EXPERIENCE_POLICY,
-            "logic": RELATIONAL_CAUSAL_LOGIC_POLICY,
-            "thinking": THINKING_CONTEXT_STRATEGY,
-            "intelligence": INTELLIGENCE_TRANSFER_STRATEGY,
-        },
+        "verified_parent_policies": VERIFIED_PARENT_POLICIES,
         "real_memory_sources": memory_meta,
         "intelligence_parent_status": parent.get("status"),
         "intelligence_training_digest": trained.get("training_digest"),
