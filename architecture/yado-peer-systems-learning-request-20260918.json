@@ -1,0 +1,193 @@
+{
+  "schema": "yado.peer_systems_learning_request.v1",
+  "status": "REQUEST",
+  "base_sha": "640c918b4eb892b4ee4f110d0842395eff63d198",
+  "objective": "Study leading agent/self-evolution systems as read-only external evidence, connect to their public repositories/docs as learning sources, extract transferable mechanisms, and adapt only mechanisms that causally improve YADO under fresh gates.",
+  "source_policy": {
+    "public_read_only": true,
+    "allowed_transports": [
+      "HTTPS_GET",
+      "GITHUB_PUBLIC_READ",
+      "EXA_READ_ONLY"
+    ],
+    "external_writes": false,
+    "credentials": false,
+    "downloaded_code_execution": false,
+    "arbitrary_clone_execution": false,
+    "license_and_provenance_required": true,
+    "default_reuse_mode": "CLEAN_ROOM_PRINCIPLE_TRANSFER",
+    "direct_code_copy": "WITHHOLD_UNLESS_LICENSE_PROVENANCE_AND_EXPLICIT_ADMISSION",
+    "unknown_semantics": "WITHHOLD"
+  },
+  "systems": [
+    {
+      "name": "Darwin Godel Machine",
+      "source": "https://github.com/jennyzzt/dgm",
+      "focus": [
+        "open_ended_archive",
+        "self_modification_selection",
+        "benchmark_conditioned_admission",
+        "attempt_history"
+      ]
+    },
+    {
+      "name": "ADAS",
+      "source": "https://github.com/ShengranHu/ADAS",
+      "focus": [
+        "meta_agent_search",
+        "agent_design_generation",
+        "population_feedback"
+      ]
+    },
+    {
+      "name": "RSIAgent",
+      "source": "https://github.com/AetherLabsAI/RSIAgent",
+      "focus": [
+        "broad_then_deep_exploration",
+        "curriculum_actor_verifier",
+        "causal_memory",
+        "frozen_reusable_experience"
+      ]
+    },
+    {
+      "name": "Agent libOS",
+      "source": "https://github.com/yingqi-z20/Agent-libOS",
+      "focus": [
+        "capability_authority_separation",
+        "process_identity",
+        "checkpoint_lineage",
+        "audit_primitives"
+      ]
+    },
+    {
+      "name": "Aider",
+      "source": "https://github.com/Aider-AI/aider",
+      "focus": [
+        "repository_map",
+        "edit_test_loop",
+        "context_selection",
+        "git_native_workflow"
+      ]
+    },
+    {
+      "name": "OpenHands Agent SDK",
+      "source": "https://github.com/OpenHands/software-agent-sdk",
+      "focus": [
+        "agent_runtime_abstractions",
+        "tool_execution_loop",
+        "event_stream",
+        "sandbox_boundary"
+      ]
+    },
+    {
+      "name": "Voyager",
+      "source": "https://github.com/MineDojo/Voyager",
+      "focus": [
+        "automatic_curriculum",
+        "skill_library",
+        "iterative_feedback",
+        "self_verification"
+      ]
+    },
+    {
+      "name": "GenericAgent",
+      "source": "https://github.com/lsdefine/GenericAgent",
+      "focus": [
+        "hierarchical_memory",
+        "context_information_density",
+        "skill_sop_extraction",
+        "long_horizon_compaction"
+      ]
+    },
+    {
+      "name": "Reflexion",
+      "source": "https://github.com/noahshinn/reflexion",
+      "focus": [
+        "verbal_reinforcement",
+        "reflection_memory",
+        "failure_to_future_policy"
+      ]
+    },
+    {
+      "name": "DSPy",
+      "source": "https://github.com/stanfordnlp/dspy",
+      "focus": [
+        "modular_programming",
+        "metric_driven_optimization",
+        "program_level_compilation"
+      ]
+    },
+    {
+      "name": "TextGrad",
+      "source": "https://github.com/zou-group/textgrad",
+      "focus": [
+        "textual_feedback_gradient",
+        "credit_assignment",
+        "iterative_optimization"
+      ]
+    },
+    {
+      "name": "EvoAgentX",
+      "source": "https://github.com/EvoAgentX/EvoAgentX",
+      "focus": [
+        "workflow_evolution",
+        "optimizer_composition",
+        "multi_agent_graph_search"
+      ]
+    },
+    {
+      "name": "Claude Code",
+      "source": "https://github.com/anthropics/claude-code",
+      "focus": [
+        "codebase_navigation",
+        "tool_loop",
+        "git_workflow",
+        "context_management"
+      ]
+    }
+  ],
+  "learning_protocol": [
+    "verify upstream identity and license",
+    "read README docs papers architecture and selected source modules as untrusted data",
+    "extract mechanism -> assumptions -> inputs -> state -> outputs -> failure modes -> safety boundary",
+    "map each mechanism to a measured YADO deficit",
+    "rank mechanisms by expected causal value and integration cost",
+    "select at most three mechanisms per generation",
+    "implement clean-room YADO-native shadow candidates",
+    "compile and isolated behavior tests",
+    "fresh holdout and ablation against unchanged baseline",
+    "full kernel audit and full regression",
+    "run 20 endogenous cycles only after audit/regression PASS",
+    "retain only measured improvements; otherwise WITHHOLD/rollback",
+    "derive the next learning target from residual measured deficits"
+  ],
+  "candidate_families": [
+    "OPEN_ENDED_ARCHIVE_SELECTION",
+    "BROAD_DEEP_CAUSAL_EXPLORATION",
+    "CAPABILITY_AUTHORITY_RUNTIME_BOUNDARY",
+    "HIERARCHICAL_MEMORY_AND_CONTEXT_COMPACTION",
+    "AUTOMATED_AGENT_DESIGN_SEARCH",
+    "REFLECTION_TO_POLICY_UPDATE",
+    "METRIC_DRIVEN_WORKFLOW_OPTIMIZATION",
+    "REPOSITORY_EDIT_TEST_CONTEXT_LOOP"
+  ],
+  "required_evidence": {
+    "independent_sources_per_mechanism": 2,
+    "provenance_digest": true,
+    "baseline_comparison": true,
+    "fresh_holdout": true,
+    "ablation": true,
+    "regression": true,
+    "rollback": true,
+    "canonical_immutability": true
+  },
+  "boundaries": {
+    "automatic_main_mutation": false,
+    "canonical_mutation": false,
+    "external_code_executed": false,
+    "external_project_write_access": false,
+    "join_external_communities_or_submit_prs": false,
+    "self_weight_update": false,
+    "consciousness_claim": false
+  }
+}
