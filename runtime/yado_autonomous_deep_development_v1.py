@@ -40,6 +40,7 @@ ACTION_BY_TARGET = {
     "THINKING": "derive and test a contextual reasoning holdout",
     "INTELLIGENCE": "derive and test a capability-transfer holdout",
     "COGNITIVE_INTEGRATION": "derive and test a cross-cognitive integration holdout",
+    "RUNTIME_SELF_REWRITE_ADMISSION": "execute the verified native runtime self-rewrite candidate in isolation and require full regression admission",
 }
 
 SEQUENCE = (
@@ -58,6 +59,8 @@ THINKING_HOLDOUT = "candidates/cognitive/yado-thinking-contextual-holdout-v1.jso
 INTELLIGENCE_HOLDOUT = "candidates/cognitive/yado-intelligence-transfer-holdout-v1.json"
 MEMORY_HOLDOUT = "candidates/cognitive/yado-memory-experience-holdout-v1.json"
 MEMORY_INDEX = "experience/branch-lifecycle/yado-branch-memory-index-v1.json"
+INTEGRATION_HOLDOUT = "candidates/cognitive/yado-cognitive-integration-holdout-v1.json"
+SELF_REWRITE_V3 = "candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v3.json"
 
 
 def _digest(value: Any) -> str:
@@ -209,6 +212,7 @@ def _cognitive_evidence(root: Path) -> dict[str, dict[str, Any]]:
 
 
 def _priority(
+    root: Path,
     snapshot: dict[str, dict[str, Any]],
     audit: dict[str, Any],
     regression: dict[str, Any],
@@ -238,9 +242,35 @@ def _priority(
         for name in COGNITIVE_TARGETS
     )
     if fresh_saturated:
+        integration = _read_json(root, INTEGRATION_HOLDOUT)
+        integration_pass = bool(
+            integration
+            and str(integration.get("status", "")).startswith("PASS_SHADOW_COGNITIVE_INTEGRATION_HOLDOUT")
+            and _number(((integration.get("selected_scores") or {}).get("fresh") or {}).get("accuracy")) is not None
+            and float(integration["selected_scores"]["fresh"]["accuracy"]) >= 0.99
+            and all(float(v) >= 0.15 for v in (integration.get("fresh_ablation_drops") or {}).values())
+            and len(integration.get("fresh_ablation_drops") or {}) == 4
+        )
+        if not integration_pass:
+            return (
+                "COGNITIVE_INTEGRATION",
+                "all core cognitive targets have fresh holdout score >=0.99; move to cross-cognitive integration",
+            )
+
+        self_rewrite = _read_json(root, SELF_REWRITE_V3)
+        if (
+            self_rewrite
+            and str(self_rewrite.get("status", "")).startswith("PASS_SHADOW_NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_CANDIDATE_V3")
+            and self_rewrite.get("next_required_capability") == "ISOLATED_RUNTIME_EXECUTION_AND_REGRESSION_ADMISSION_V3"
+        ):
+            return (
+                "RUNTIME_SELF_REWRITE_ADMISSION",
+                "cross-cognitive integration passed and native runtime self-rewrite V3 is waiting for isolated execution/regression admission",
+            )
+
         return (
-            "COGNITIVE_INTEGRATION",
-            "all core cognitive targets have fresh holdout score >=0.99; move to cross-cognitive integration",
+            "RUNTIME_SELF_REWRITE_ADMISSION",
+            "cross-cognitive integration passed; advance to bounded native runtime self-modification admission",
         )
 
     target = min(
@@ -264,7 +294,7 @@ def build_plan(root: Path = ROOT) -> dict[str, Any]:
     audit = _load_status(root, "audits/yado-full-kernel-audit-v1-report.json")
     regression = _load_status(root, "audits/yado-full-regression-v1-report.json")
     evidence = _cognitive_evidence(root)
-    selected_target, selection_reason = _priority(snapshot, audit, regression, evidence)
+    selected_target, selection_reason = _priority(root, snapshot, audit, regression, evidence)
     all_layer_coverage = all(row["file_count"] > 0 for row in snapshot.values())
 
     stages = [
