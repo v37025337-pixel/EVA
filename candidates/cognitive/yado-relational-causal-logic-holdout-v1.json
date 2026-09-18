@@ -1,11 +1,117 @@
 {
   "schema": "yado.relational_causal_logic_holdout.v1",
-  "status": "WITHHOLD_UNEXECUTED",
+  "status": "PASS_SHADOW_RELATIONAL_CAUSAL_LOGIC_HOLDOUT_V1",
   "selected_target": "LOGIC",
   "selected_action": "derive and test a new relational/causal logic holdout",
+  "seeds": {
+    "fresh": 2026091803,
+    "hidden": 2026091802,
+    "train": 2026091801
+  },
+  "task_counts": {
+    "fresh": 40,
+    "hidden": 40,
+    "train": 40
+  },
+  "baseline_policy": {
+    "causal_only": false,
+    "max_depth": 1,
+    "reject_feedback_cycles": false
+  },
+  "baseline_scores": {
+    "fresh": {
+      "accuracy": 0.5,
+      "by_kind": {
+        "association_not_cause": 1,
+        "causal_chain": 0,
+        "feedback_contradiction": 1,
+        "wrong_direction": 0
+      },
+      "correct": 20,
+      "total": 40
+    },
+    "hidden": {
+      "accuracy": 0.5,
+      "by_kind": {
+        "association_not_cause": 1,
+        "causal_chain": 0,
+        "feedback_contradiction": 1,
+        "wrong_direction": 0
+      },
+      "correct": 20,
+      "total": 40
+    },
+    "train": {
+      "accuracy": 0.5,
+      "by_kind": {
+        "association_not_cause": 1,
+        "causal_chain": 0,
+        "feedback_contradiction": 1,
+        "wrong_direction": 0
+      },
+      "correct": 20,
+      "total": 40
+    }
+  },
+  "selected_policy": {
+    "causal_only": true,
+    "max_depth": 6,
+    "reject_feedback_cycles": true
+  },
+  "selected_scores": {
+    "fresh": {
+      "accuracy": 1,
+      "by_kind": {
+        "association_not_cause": 1,
+        "causal_chain": 1,
+        "feedback_contradiction": 1,
+        "wrong_direction": 1
+      },
+      "correct": 40,
+      "total": 40
+    },
+    "hidden": {
+      "accuracy": 1,
+      "by_kind": {
+        "association_not_cause": 1,
+        "causal_chain": 1,
+        "feedback_contradiction": 1,
+        "wrong_direction": 1
+      },
+      "correct": 40,
+      "total": 40
+    },
+    "train": {
+      "accuracy": 1,
+      "by_kind": {
+        "association_not_cause": 1,
+        "causal_chain": 1,
+        "feedback_contradiction": 1,
+        "wrong_direction": 1
+      },
+      "correct": 40,
+      "total": 40
+    }
+  },
   "candidate_path": "candidates/cognitive/yado_relational_causal_logic_policy_v1.py",
+  "candidate_sha256": "9d2e2e95be576638bae66dc83a92479fa6a0048abc373a4769a090c1075b9422",
+  "external_model_used": false,
+  "downloaded_code_executed": false,
   "canonical_mutation": false,
   "automatic_main_mutation": false,
   "consciousness_claimed": false,
-  "claim_boundary": "Static fail-closed placeholder. CI must replace this with fresh train/hidden/fresh evidence before admission."
-}
+  "limitations": [
+    "synthetic bounded relational/causal tasks",
+    "task generator and policy search space are externally authored",
+    "passing demonstrates functional holdout improvement, not general intelligence"
+  ],
+  "verification": {
+    "workflow_run_id": 35344915174,
+    "workflow_name": "YADO Relational Causal Logic Holdout V1",
+    "artifact_id": 10546449767,
+    "artifact_digest": "sha256:046259b744a1c688f7c309964c16e6473a00e92317606ffb42b450f45ea097e8",
+    "tested_head_sha": "6f25e3aec6346616f862c118d802aaa2c509d30d",
+    "full_kernel_audit": "PASS",
+    "successor_regression_tests": 431
+  }
+}\n
