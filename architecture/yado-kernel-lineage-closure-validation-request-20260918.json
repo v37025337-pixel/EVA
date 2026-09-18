@@ -1,0 +1,21 @@
+{
+  "schema": "yado.kernel_lineage_closure_validation_request.v1",
+  "status": "REQUEST",
+  "base_sha": "ddaffa95ae4ab4cb83bfa064ca0e469cdb777f65",
+  "objective": "Validate the kernel-selected physical Git lineage closure, then continue autonomous deep development only if all mandatory gates pass.",
+  "required_gates": [
+    "FULL_KERNEL_AUDIT_PASS_WITH_ZERO_FINDINGS",
+    "FULL_REGRESSION_PASS",
+    "AUTONOMOUS_SUCCESSOR_DEVELOPMENT",
+    "20_ENDOGENOUS_CYCLES",
+    "FINAL_CANONICAL_IMMUTABILITY_PASS"
+  ],
+  "constraints": {
+    "automatic_main_mutation": false,
+    "canonical_mutation": false,
+    "credentials": false,
+    "external_writes": false,
+    "downloaded_code_execution": false,
+    "consciousness_claim": false
+  }
+}
