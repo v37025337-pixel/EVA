@@ -30,7 +30,7 @@ permissions:
 
 concurrency:
   group: yado-autonomous-deep-development-v1
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deep-development:
@@ -169,6 +169,121 @@ jobs:
           print("PASS_AUTONOMOUS_DEEP_DEVELOPMENT_20_CYCLES")
           PY
 
+      - name: Restore checkpoint and continue five state-derived cycles
+        run: |
+          python - <<'PY'
+          """Host-authored checkpoint verifier; all goal choices stay in SuccessorKernel."""
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import shutil
+          import sqlite3
+          import subprocess
+          import sys
+
+          from successor.kernel import SuccessorKernel
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          checkpoint = root / "yado-continuation-checkpoint-v1"
+          checkpoint.mkdir(exist_ok=False)
+          receipt_path = checkpoint / "continuation-receipt.json"
+          receipt = {
+              "schema": "yado.stateful_restart_continuation.v1",
+              "status": "WITHHOLD_CHECKPOINT_UNVERIFIED",
+              "tested_commit": os.environ["GITHUB_SHA"],
+              "source_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "source_run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+              "transport_authorship": "ASSISTANT_AUTHORED_CHECKPOINT_VERIFIER",
+              "goal_instance_authorship": "YADO_STATE_DERIVED",
+              "goal_grammar_authorship": "ASSISTANT_AUTHORED_BOUNDED_GRAMMAR",
+              "scope": "SAME_IDENTITY_FRESH_PROCESS_RESUME_WITHIN_THIS_JOB",
+              "cross_workflow_state_restored": False,
+              "runtime_decision_code_modified": False,
+              "automatic_canonical_promotion": False,
+              "consciousness_established": False,
+          }
+          receipt_path.write_text(json.dumps(receipt, indent=2) + "\n")
+          manifest = root / "yado-successor-birth/manifest.json"
+          initial = json.loads((root / "yado-endogenous-run.json").read_text())
+          assert initial["status"] == "PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1"
+          assert initial["cycles_completed"] == initial["cycles_verified"] == 20
+          assert initial["host_goal_count"] == 0
+          state = checkpoint / "kernel.sqlite"
+          old = SuccessorKernel(manifest, root / "yado-endogenous.sqlite")
+          try:
+              before = old.verify_state()
+              identity = old.identity
+              prefix = [tuple(row) for row in old.db.execute("SELECT * FROM events ORDER BY tick")]
+              old_goals = set(old.cognitive_snapshot()["goals"])
+              assert before["status"] == "PASS" and before["tick"] > 0
+              assert before == initial["state_verification"]
+              with sqlite3.connect(state) as restored:
+                  old.db.backup(restored)
+          finally:
+              old.close()
+          restored = SuccessorKernel(manifest, state)
+          try:
+              assert restored.identity == identity
+              assert restored.verify_state() == before
+              assert [tuple(row) for row in restored.db.execute("SELECT * FROM events ORDER BY tick")] == prefix
+          finally:
+              restored.close()
+          resumed_path = checkpoint / "resumed-five-cycles.json"
+          subprocess.run([
+              sys.executable, "-m", "successor.endogenous_run", "--manifest", str(manifest),
+              "--state", str(state), "--output", str(resumed_path), "--cycles", "5", "--budget", "3",
+          ], check=True, timeout=180)
+          resumed = json.loads(resumed_path.read_text())
+          assert resumed["status"] == "PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1"
+          assert resumed["cycles_completed"] == resumed["cycles_verified"] == 5
+          assert resumed["host_goal_count"] == 0
+          new = SuccessorKernel(manifest, state)
+          try:
+              after = new.verify_state()
+              events = [tuple(row) for row in new.db.execute("SELECT * FROM events ORDER BY tick")]
+              assert new.identity == identity
+              assert after["status"] == "PASS" and after["tick"] > before["tick"]
+              assert after == resumed["state_verification"]
+              assert events[:len(prefix)] == prefix
+              goals = new.cognitive_snapshot()["goals"]
+              assert all(str(row["goal_id"]) not in old_goals for row in resumed["results"])
+              assert all(row["proposal_tick"] > before["tick"] for row in resumed["results"])
+              assert all(row["status"] == goals[str(row["goal_id"])]["status"] == "VERIFIED" for row in resumed["results"])
+              assert {row["spec_digest"] for row in initial["results"]}.isdisjoint(
+                  row["spec_digest"] for row in resumed["results"]
+              )
+          finally:
+              new.close()
+          shutil.copytree(manifest.parent, checkpoint / "birth")
+          shutil.copy2(root / "yado-endogenous-run.json", checkpoint / "initial-twenty-cycles.json")
+          for relative in (
+              "runtime/yado_bounded_autonomous_learning_v1.py",
+              "runtime/yado_cognitive_tri_organ_policy_v3.py",
+          ):
+              destination = checkpoint / "source-overlay" / relative
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(relative, destination)
+          files = {str(p.relative_to(checkpoint)): hashlib.sha256(p.read_bytes()).hexdigest()
+                   for p in sorted(checkpoint.rglob("*")) if p.is_file() and p != receipt_path}
+          receipt.update({
+              "status": "PASS_SHADOW_STATEFUL_RESTART_CONTINUATION_V1",
+              "identity_digest": identity,
+              "initial_cycles_verified": 20,
+              "resumed_cycles_verified": 5,
+              "total_cycles_verified": 25,
+              "host_goal_count": 0,
+              "state_restored_before_resume": True,
+              "prior_events_preserved_exactly": True,
+              "fresh_goal_instances_verified": True,
+              "state_before": before,
+              "state_after": after,
+              "checkpoint_files_sha256": files,
+          })
+          receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
+          print(json.dumps(receipt, sort_keys=True))
+          PY
+
       - name: Final canonical immutability check
         run: |
           git diff --exit-code -- canonical architecture/evolution-ledger.json
@@ -189,3 +304,11 @@ jobs:
             audits/yado-full-kernel-audit-v1-summary.md
             audits/yado-full-regression-v1-report.json
             audits/yado-full-regression-v1.log
+
+      - name: Preserve stateful continuation checkpoint
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-continuation-checkpoint-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/yado-continuation-checkpoint-v1/
+          if-no-files-found: error
