@@ -9,6 +9,19 @@ OUTDIR.mkdir(exist_ok=True)
 REPORT=OUTDIR/'yado-full-kernel-audit-v1-report.json'
 SUMMARY=OUTDIR/'yado-full-kernel-audit-v1-summary.md'
 
+ACTIVE_MANAGED_BRANCHES={
+  'yado-bounded-autonomous-learning-v1':'ACTIVE_MANAGED_EXPERIENCE_FEED',
+}
+
+def managed_branch_path_allowed(branch,path):
+    if branch!='yado-bounded-autonomous-learning-v1':
+        return False
+    return (
+      path.startswith('experience/autonomous/')
+      or path=='candidates/autonomous/yado-bounded-autonomous-learning-v1.json'
+      or (path.startswith('candidates/autonomous/yado_learned_recall_') and path.endswith('.py'))
+    )
+
 def load(p): return json.loads(p.read_text(encoding='utf-8'))
 def sha_bytes(b): return hashlib.sha256(b).hexdigest()
 def sha_file(p): return sha_bytes(p.read_bytes())
@@ -226,11 +239,23 @@ for ref in refs:
         if hp['code']!=0:branch_only.append(path)
         elif hp['stdout'].strip()==bp['stdout'].strip():exact+=1
         else:drift.append(path)
-    branches.append({'branch':name,'active_only_commits':left,'branch_only_commits':right,
+    role=ACTIVE_MANAGED_BRANCHES.get(name,'HISTORICAL')
+    managed_scope_violations=(
+      [path for path in sorted(changed) if not managed_branch_path_allowed(name,path)]
+      if role!='HISTORICAL' else []
+    )
+    branches.append({'branch':name,'branch_role':role,'active_only_commits':left,'branch_only_commits':right,
         'unique_commits':commits,'unique_changed_path_count':len(changed),'exact_tip_path_matches':exact,
-        'drift_paths':drift[:80],'branch_only_paths':branch_only[:80]})
+        'drift_paths':drift[:80],'branch_only_paths':branch_only[:80],
+        'managed_scope_violations':managed_scope_violations[:80]})
 
-diverged=[b for b in branches if b['branch_only_commits']>0]
+managed_scope_bad=[b for b in branches if b.get('branch_role')!='HISTORICAL' and b.get('managed_scope_violations')]
+if managed_scope_bad:
+    add(findings,'HIGH','ACTIVE_MANAGED_BRANCH_SCOPE_VIOLATION',
+        f'{len(managed_scope_bad)} active managed branches changed paths outside their strict role allowlist.',
+        [{'branch':b['branch'],'role':b['branch_role'],'violations':b['managed_scope_violations']} for b in managed_scope_bad])
+
+diverged=[b for b in branches if b['branch_only_commits']>0 and b.get('branch_role')=='HISTORICAL']
 if diverged:
     add(findings,'HIGH','PHYSICAL_BRANCH_DIVERGENCE',
         f'{len(diverged)} historical branches retain commits not in active branch ancestry. Logical closure is not physical Git closure.',
@@ -257,7 +282,9 @@ report={
    'active_capabilities':len(head.get('active_capabilities',[])),
    'architecture_planes':len(planes),'ledger_events':ledger.get('event_count'),
    'duplicate_python_groups':len(duplicate_groups),'module_stem_collisions':len(stem_collisions),
-   'local_import_edges':import_edges,'historical_branches_audited':len(branches)
+   'local_import_edges':import_edges,
+   'historical_branches_audited':sum(1 for b in branches if b.get('branch_role')=='HISTORICAL'),
+   'active_managed_branches_audited':sum(1 for b in branches if b.get('branch_role')!='HISTORICAL')
  },
  'canonical':{
    'generation':head.get('generation_id'),'g3_genesis_performed':head.get('g3_genesis_performed'),
@@ -297,7 +324,7 @@ if findings:
 else:lines.append('- No audit findings.')
 lines += ['','## Branches']
 for b in branches:
-    lines.append(f"- `{b['branch']}`: active-only {b['active_only_commits']}, branch-only {b['branch_only_commits']}, drift paths {len(b['drift_paths'])}, branch-only paths {len(b['branch_only_paths'])}.")
+    lines.append(f"- `{b['branch']}` ({b.get('branch_role','HISTORICAL')}): active-only {b['active_only_commits']}, branch-only {b['branch_only_commits']}, drift paths {len(b['drift_paths'])}, branch-only paths {len(b['branch_only_paths'])}, managed-scope violations {len(b.get('managed_scope_violations') or [])}.")
 SUMMARY.write_text('\n'.join(lines)+'\n',encoding='utf-8')
 print(json.dumps({'status':status,'findings':report['findings'],'counts':report['counts'],'canonical':report['canonical']},indent=2,default=str))
 raise SystemExit(0 if status == 'PASS' else 1)
