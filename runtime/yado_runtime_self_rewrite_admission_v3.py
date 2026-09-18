@@ -144,10 +144,22 @@ def analyze(root: Path = ROOT) -> dict[str, Any]:
             )
 
     source_text = target_path.read_text(encoding="utf-8")
+    source_tree = ast.parse(source_text)
+    call_names = {
+        node.func.id
+        for node in ast.walk(source_tree)
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+    }
+    imported_roots = set()
+    for node in ast.walk(source_tree):
+        if isinstance(node, ast.Import):
+            imported_roots.update(alias.name.split(".")[0] for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            imported_roots.add(node.module.split(".")[0])
     unsafe_tokens = {
-        "eval_call": "eval(" in source_text,
-        "exec_call": "exec(" in source_text,
-        "subprocess_import": "import subprocess" in source_text or "from subprocess" in source_text,
+        "eval_call": "eval" in call_names,
+        "exec_call": "exec" in call_names,
+        "subprocess_import": "subprocess" in imported_roots,
     }
     safety_delta = dict(receipt.get("safety_delta") or {})
     new_dangerous = dict(safety_delta.get("new_dangerous_calls") or {})
