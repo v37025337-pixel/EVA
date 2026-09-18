@@ -1,0 +1,25 @@
+{
+  "schema": "yado.active_managed_branch_policy.v1",
+  "status": "ACTIVE",
+  "date": "2026-09-18",
+  "branches": {
+    "yado-bounded-autonomous-learning-v1": {
+      "role": "ACTIVE_MANAGED_EXPERIENCE_FEED",
+      "purpose": "Persist verified bounded public-web learning experience and generated recall artifacts.",
+      "allowed_paths": [
+        "experience/autonomous/**",
+        "candidates/autonomous/yado-bounded-autonomous-learning-v1.json",
+        "candidates/autonomous/yado_learned_recall_*.py"
+      ],
+      "forbidden_classes": [
+        "runtime/**",
+        "canonical/**",
+        "architecture/**",
+        ".github/workflows/**"
+      ],
+      "branch_divergence_allowed": true,
+      "branch_scope_violation": "HIGH_FAIL"
+    }
+  },
+  "boundary": "Managed divergence is permitted only for the declared experience-feed paths. This does not authorize runtime, canonical, architecture, workflow, credential or external-write mutations."
+}
