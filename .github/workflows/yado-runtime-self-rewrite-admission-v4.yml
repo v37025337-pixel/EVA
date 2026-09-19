@@ -7,7 +7,6 @@ on:
       - "runtime/yado_runtime_self_rewrite_admission_v4.py"
       - "runtime/test_yado_runtime_self_rewrite_admission_v4.py"
       - "architecture/yado-runtime-self-rewrite-admission-v4.json"
-      - "candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json"
       - ".github/workflows/yado-runtime-self-rewrite-admission-v4.yml"
   pull_request:
     branches: [main]
@@ -15,15 +14,14 @@ on:
       - "runtime/yado_runtime_self_rewrite_admission_v4.py"
       - "runtime/test_yado_runtime_self_rewrite_admission_v4.py"
       - "architecture/yado-runtime-self-rewrite-admission-v4.json"
-      - "candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json"
       - ".github/workflows/yado-runtime-self-rewrite-admission-v4.yml"
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  isolated-admission-v4:
+  historical-v4-and-active-runtime:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -37,126 +35,86 @@ jobs:
       - name: Reconstruct runtime and install dependencies
         run: |
           python runtime/reconstruct_rc8v36.py
-          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
-          python -m pip install --disable-pip-version-check pyyaml
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt pyyaml
 
-      - name: Outer admission probe and tests
+      - name: Validate historical candidate and committed active generation
         env:
           PYTHONPATH: runtime
         run: |
-          python -m py_compile runtime/yado_runtime_self_rewrite_admission_v4.py runtime/test_yado_runtime_self_rewrite_admission_v4.py
-          python -m unittest runtime.test_yado_runtime_self_rewrite_admission_v4 -v
-          python runtime/yado_runtime_self_rewrite_admission_v4.py
+          python -m unittest runtime.test_yado_runtime_self_rewrite_admission_v3 runtime.test_yado_runtime_self_rewrite_admission_v4 -v
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from yado_runtime_self_rewrite_admission_v4 import analyze_committed
+          result = analyze_committed()
+          assert result["status"] == "PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE", result
+          assert result["repository_view"] == "COMMITTED_HEAD", result
+          Path("audits").mkdir(exist_ok=True)
+          Path("audits/yado-runtime-self-rewrite-admission-v4-probe.json").write_text(json.dumps(result, indent=2) + "\n")
+          PY
 
-      - name: Outer full kernel audit
+      - name: Verify V4 at its recorded historical promotion commit
+        env:
+          PYTHONPATH: runtime
         run: |
-          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-regression-v1-report.json audits/yado-full-regression-v1-report.log
+          python - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          root = Path.cwd()
+          receipt = json.loads((root / "candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json").read_text())
+          revision = receipt["promotion_merge_commit"]
+          commit = subprocess.check_output(["git", "rev-parse", revision + "^{commit}"], text=True).strip()
+          assert commit == revision, (commit, revision)
+          subprocess.run(["git", "merge-base", "--is-ancestor", commit, "HEAD"], check=True)
+          shadow = Path(os.environ["RUNNER_TEMP"]) / "yado-historical-v4-promotion"
+          subprocess.run(["git", "worktree", "add", "--detach", str(shadow), commit], check=True)
+          expected = receipt["candidate_sha256"]
+          for relative in ("runtime/yado_bounded_autonomous_learning_v1.py", "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py"):
+              data = (shadow / relative).read_bytes()
+              assert hashlib.sha256(data).hexdigest() == expected, relative
+              compile(data, relative, "exec")
+          script = 'import json; from yado_runtime_self_rewrite_admission_v4 import analyze; print(json.dumps(analyze()))'
+          env = dict(os.environ, PYTHONPATH=str(shadow / "runtime"), PYTHONDONTWRITEBYTECODE="1")
+          result = json.loads(subprocess.check_output(["python", "-c", script], cwd=shadow, env=env, text=True))
+          assert result["status"] == "PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE", result
+          assert result["runtime_state"] == "V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE", result
+          assert result["target_sha256"] == expected, result
+          result["tested_commit"] = commit
+          result["verification_scope"] = "HISTORICAL_V4_BYTES_AND_ADMISSION_PROBE"
+          (root / "audits/yado-historical-v4-promotion-probe.json").write_text(json.dumps(result, indent=2) + "\n")
+          PY
+
+      - name: Audit the current active kernel
+        run: |
           python runtime/yado_full_kernel_audit_v1.py
           python - <<'PY'
           import json
-          d=json.load(open("audits/yado-full-kernel-audit-v1-report.json"))
-          assert d["status"]=="PASS", d
-          assert d["findings"]==[], d["findings"]
+          report = json.load(open("audits/yado-full-kernel-audit-v1-report.json"))
+          assert report["status"] == "PASS" and report["findings"] == [], report
           PY
 
-      - name: Create isolated worktree and apply V4 candidate
+      - name: Regress the current active runtime without substituting historical V4
         run: |
-          SHADOW="$RUNNER_TEMP/yado-v4-admission-shadow"
-          rm -rf "$SHADOW"
-          git worktree add --detach "$SHADOW" "$GITHUB_SHA"
-          cp "$SHADOW/candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py" "$SHADOW/runtime/yado_bounded_autonomous_learning_v1.py"
-
-      - name: Verify isolated V4 application
-        run: |
-          SHADOW="$RUNNER_TEMP/yado-v4-admission-shadow"
-          cd "$SHADOW"
-          export PYTHONPATH=runtime
-          python -m py_compile runtime/yado_bounded_autonomous_learning_v1.py runtime/yado_runtime_self_rewrite_admission_v4.py
-          python -m unittest runtime.test_yado_runtime_self_rewrite_admission_v4 -v
-          python runtime/yado_runtime_self_rewrite_admission_v4.py
+          python -m successor build --output "$RUNNER_TEMP/yado-successor-active-v4-maintenance"
+          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-active-v4-maintenance/manifest.json"
           python - <<'PY'
           import json
-          d=json.load(open("candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json"))
-          assert d["status"]=="PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE", d
-          assert d["runtime_state"]=="V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE", d
-          assert d["checks"]["target_matches_candidate_when_shadow_applied"] is True, d
+          report = json.load(open("audits/yado-full-regression-v1-report.json"))
+          assert report["status"] == "PASS", report
+          assert report["tests_run"] == report["expected_tests"], report
+          assert not report["failures"] and not report["errors"] and not report["skipped"], report
+          assert report["source_unchanged"] is True, report
           PY
 
-      - name: Complete isolated Successor regression
-        run: |
-          SHADOW="$RUNNER_TEMP/yado-v4-admission-shadow"
-          cd "$SHADOW"
-          rm -rf "$RUNNER_TEMP/yado-successor-v4-admission"
-          python -m successor build --output "$RUNNER_TEMP/yado-successor-v4-admission"
-          python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-successor-v4-admission/manifest.json"
-          python - <<'PY'
-          import json
-          d=json.load(open("audits/yado-full-regression-v1-report.json"))
-          assert d["status"].startswith("PASS"), d
-          assert d["tests_run"]==d["expected_tests"], d
-          assert not d["failures"] and not d["errors"] and not d["skipped"], d
-          assert d["source_unchanged"] is True, d
-          print("PASS_ISOLATED_V4_REGRESSION",d["tests_run"])
-          PY
-
-      - name: Build final admission receipt
-        run: |
-          SHADOW="$RUNNER_TEMP/yado-v4-admission-shadow"
-          python - <<'PY'
-          import hashlib,json,os
-          from pathlib import Path
-          root=Path(".")
-          shadow=Path(os.environ["RUNNER_TEMP"])/"yado-v4-admission-shadow"
-          target=root/"runtime/yado_bounded_autonomous_learning_v1.py"
-          candidate=root/"candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py"
-          v4=json.loads((root/"candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json").read_text())
-          reg=json.loads((shadow/"audits/yado-full-regression-v1-report.json").read_text())
-          outer_sha=hashlib.sha256(target.read_bytes()).hexdigest()
-          cand_sha=hashlib.sha256(candidate.read_bytes()).hexdigest()
-          parent_sha=str(v4["parent_runtime_sha256"])
-          assert cand_sha==v4["candidate_sha256"]
-          assert outer_sha in {parent_sha,cand_sha}, (outer_sha,parent_sha,cand_sha)
-          already_promoted=(outer_sha==cand_sha)
-          final={
-            "schema":"yado.runtime_self_rewrite_admission.v4",
-            "status":"PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4",
-            "admission_mode":"ISOLATED_GIT_WORKTREE_FULL_REGRESSION",
-            "parent_runtime_sha256":parent_sha,
-            "candidate_sha256":cand_sha,
-            "outer_runtime_sha256":outer_sha,
-            "outer_runtime_state":"V4_ALREADY_PHYSICALLY_PRESENT" if already_promoted else "PARENT_RUNTIME_PENDING_PROMOTION",
-            "latest_experience_digest":v4["latest_experience_digest"],
-            "isolated_full_regression":True,
-            "isolated_regression_tests":reg["tests_run"],
-            "outer_runtime_unchanged":True,
-            "physical_runtime_promotion":already_promoted,
-            "automatic_main_mutation":False,
-            "canonical_mutation":False,
-            "next_required_capability":"POST_MERGE_CANONICAL_AUDIT" if already_promoted else "PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_CANONICAL_GATE"
-          }
-          (root/"candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json").write_text(json.dumps(final,indent=2,sort_keys=True)+"\n")
-          print(json.dumps(final,sort_keys=True))
-          PY
-
-      - name: Persist deterministic admission receipt on push
-        if: github.event_name == 'push'
-        run: |
-          git config user.name "YADO Runtime Self Rewrite Admission V4"
-          git config user.email "actions@users.noreply.github.com"
-          git add candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json
-          if git diff --cached --quiet; then
-            echo "V4 admission receipt already persisted"
-          else
-            git commit -m "YADO V4: persist isolated runtime admission evidence"
-            git push origin HEAD:yado-runtime-self-rewrite-admission-v4-20260918
-          fi
-
-      - name: Preserve admission evidence
+      - name: Preserve separate historical and active verification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: yado-runtime-self-rewrite-admission-v4
+          name: yado-runtime-self-rewrite-admission-v4-${{ github.run_id }}
           path: |
-            candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json
+            audits/yado-runtime-self-rewrite-admission-v4-probe.json
+            audits/yado-historical-v4-promotion-probe.json
             audits/yado-full-kernel-audit-v1-report.json
+            audits/yado-full-regression-v1-report.json
+            audits/yado-full-regression-v1-report.log
           if-no-files-found: warn

@@ -84,7 +84,7 @@ def collect():
 
 def source_digests():
     paths = set()
-    for directory in ("runtime", "successor", "tests", "canonical", "resources", ".github"):
+    for directory in ("runtime", "successor", "tests", "canonical", "resources", ".github", "api", "architecture"):
         paths.update(p for p in (ROOT / directory).rglob("*")
                      if p.is_file() and p.suffix in {".py", ".json", ".yml", ".yaml"}
                      and "state" not in p.relative_to(ROOT).parts)

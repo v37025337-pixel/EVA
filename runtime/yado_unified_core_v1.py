@@ -98,9 +98,10 @@ class UnifiedYADOCoreV1:
         checks={
             'core_id':self.manifest.get('core_id')==self.CORE_ID,
             'generation_is_g2':self.head.get('generation_id')=='G2_CANDIDATE_TRCG_V1',
-            'one_active_experience_lineage':len(active)==1 and active[0].get('branch')=='yado-architecture-shadow-search',
-            'all_other_branches_experience_only':len(legacy)==13 and all(x.get('mode')=='EXPERIENCE_ONLY' for x in legacy),
-            'branch_inventory_complete':len(branches)==14,
+            'one_active_experience_lineage':len(active)==1 and active[0].get('branch')==self.experience.get('policy',{}).get('active_branch'),
+            'single_execution_lineage':self.manifest.get('execution_branch')==self.head.get('execution_branch')=='main' and self.experience.get('execution_lineage',{}).get('branch')=='main',
+            'all_other_branches_experience_only':len(legacy)==len(branches)-1 and all(x.get('mode')=='EXPERIENCE_ONLY' for x in legacy),
+            'branch_inventory_complete':len(branches)==self.experience.get('closure',{}).get('remote_branch_count') and len({x.get('branch') for x in branches})==len(branches),
             'legacy_auto_execution_forbidden':self.experience.get('policy',{}).get('legacy_code_import_forbidden_without_fresh_admission_gate') is True,
             'ledger_head_matches_generation':self.ledger.get('current_head')==self.head.get('generation_id'),
             'ledger_head_digest_matches':self.ledger.get('current_head_digest')==self.head.get('canonical_head_digest'),

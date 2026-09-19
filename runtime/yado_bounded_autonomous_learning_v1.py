@@ -1,8 +1,11 @@
 from __future__ import annotations
 LEARNED_EXTERNAL_EVIDENCE_V2 = {'experience_digest': 'b582f865cd9d5638a5c8c0baa7ed5201782eb5d9642d8748bf9390acab8206f0', 'successful_source_ids': ['PYTHON_AST', 'PYTHON_HTMLPARSER', 'PYTHON_UNITTEST'], 'failed_source_ids': [], 'successful_hosts': ['docs.python.org'], 'fact_count': 72, 'learning_tokens': ['3147', 'abstract', 'addition', 'also', 'alternatives', 'applications', 'arguments', 'asterisk', 'attribute', 'attributes', 'because', 'between', 'built', 'byte', 'call', 'capturing', 'change', 'child', 'class', 'classes', 'code', 'compare', 'compiled', 'compiling', 'concrete', 'constructor', 'corresponding', 'created', 'current', 'defined', 'dictionary', 'distinguish', 'documentation', 'each', 'ever', 'example', 'extra', 'field', 'find', 'first', 'from', 'generated', 'gives', 'grammar', 'hand', 'handles', 'have', 'helps', 'identifier', 'indexed', 'inherit', 'instance', 'instances', 'internally', 'into', 'itself', 'keys', 'keyword', 'kwargs', 'last', 'left', 'like', 'line', 'listed', 'lists', 'looks', 'mapping', 'marked', 'matchmapping', 'might', 'module', 'more', 'must', 'names', 'need', 'node', 'nodes', 'note', 'null', 'numbers', 'object', 'offset', 'offsets', 'only', 'optional', 'parameter', 'parser', 'positions', 'possible', 'present', 'process', 'production', 'programmatically', 'python', 'recorded', 'release', 'represented', 'required', 'rest', 'right', 'rules', 'sequences', 'side', 'source', 'span', 'specific', 'sums', 'supplied', 'symbol', 'syntax', 'text', 'that', 'there', 'these', 'this', 'tokens', 'tree', 'trees', 'type', 'uses', 'using', 'valid', 'values', 'what', 'when', 'which', 'with', 'zero']}
 import ast
+from yado_active_kernel_contract_v1 import active_kernel_identity
+from yado_personal_public_web_access_v2 import _PinnedHTTPSConnection
 import hashlib
 import html
+import http.client
 import ipaddress
 import json
 import os
@@ -96,28 +99,33 @@ def fetch_public_readonly(url: str) -> dict[str, Any]:
     headers = {'User-Agent': 'YADO-Bounded-Autonomous-Learning/1', 'Accept': 'text/html, text/plain;q=0.9, application/json;q=0.8'}
     if any((k.lower() in FORBIDDEN_HEADER_NAMES for k in headers)):
         raise RuntimeError('CREDENTIAL_HEADER_PRESENT')
-    req = urllib.request.Request(url, method='GET', headers=headers)
-    opener = urllib.request.build_opener(NoRedirect())
+    request_path = (p.path or '/') + ('?' + p.query if p.query else '')
     started = time.monotonic()
-    try:
-        with opener.open(req, timeout=TIMEOUT) as resp:
+    last_error = None
+    for ip in ips:
+        # The socket is pinned to this validated address; TLS still verifies the
+        # original hostname. Proxy environment variables cannot change its peer.
+        connection = _PinnedHTTPSConnection(host, ip, TIMEOUT)
+        try:
+            connection.request('GET', request_path, headers=headers)
+            resp = connection.getresponse()
             status = int(resp.status)
-            if status < 200 or status >= 300:
+            if status >= 300:
+                raise RuntimeError('HTTP_ERROR:' + str(status))
+            if status < 200:
                 raise RuntimeError('NON_SUCCESS_STATUS:' + str(status))
-            final = urllib.parse.urlsplit(resp.geturl())
-            if (final.hostname or '').lower().strip('.') != host:
-                raise RuntimeError('REDIRECT_HOST_CHANGE')
             data = resp.read(MAX_BYTES + 1)
             if len(data) > MAX_BYTES:
                 raise RuntimeError('RESPONSE_TOO_LARGE')
             ctype = (resp.headers.get('Content-Type') or '').split(';', 1)[0].strip().lower()
             if data and ctype not in ALLOWED_CONTENT_TYPES and (not ctype.endswith('+json')):
                 raise RuntimeError('CONTENT_TYPE_REJECTED:' + ctype)
-            return {'url': url, 'host': host, 'resolved_ips': ips, 'status': status, 'content_type': ctype, 'bytes': len(data), 'sha256': sha_bytes(data), 'latency_ms': round((time.monotonic() - started) * 1000, 2), 'body': data.decode('utf-8', 'replace'), 'network_executed': True, 'read_only': True, 'credentials_used': False, 'redirects_followed': False}
-    except urllib.error.HTTPError as e:
-        raise RuntimeError('HTTP_ERROR:' + str(e.code)) from e
-    except urllib.error.URLError as e:
-        raise RuntimeError('NETWORK_ERROR:' + str(e.reason)) from e
+            return {'url': url, 'host': host, 'resolved_ips': ips, 'connected_ip': ip, 'status': status, 'content_type': ctype, 'bytes': len(data), 'sha256': sha_bytes(data), 'latency_ms': round((time.monotonic() - started) * 1000, 2), 'body': data.decode('utf-8', 'replace'), 'network_executed': True, 'read_only': True, 'credentials_used': False, 'redirects_followed': False}
+        except (OSError, http.client.HTTPException) as exc:
+            last_error = exc
+        finally:
+            connection.close()
+    raise RuntimeError('NETWORK_ERROR:' + str(last_error)) from last_error
 
 def normalized_text(body: str, ctype: str) -> str:
     if ctype == 'text/html':
@@ -208,6 +216,7 @@ def synthesize_recall_module(experience: dict[str, Any], path: Path) -> dict[str
     return {'path': str(path.relative_to(REPO)), 'sha256': hashlib.sha256(source.encode('utf-8')).hexdigest(), 'compile': True, 'fact_count': len(facts), 'external_text_executed': False}
 
 def main() -> None:
+    execution_identity = active_kernel_identity(REPO)
     priority = load_current_priority()
     ranking = rank_sources(priority)
     selected = ranking[:MAX_SOURCES_PER_RUN]
@@ -224,6 +233,8 @@ def main() -> None:
             failures.append({'source_id': row['id'], 'error': type(e).__name__ + ':' + str(e)[:500]})
     if not source_results:
         raise RuntimeError('NO_PUBLIC_LEARNING_SOURCE_REACHED:' + json.dumps(failures, sort_keys=True))
+    if not any(row['facts'] for row in source_results):
+        raise RuntimeError('NO_USEFUL_EXTERNAL_EVIDENCE')
     core_id = None
     if UnifiedYADOCoreV1 is not None:
         try:
@@ -231,6 +242,7 @@ def main() -> None:
         except Exception:
             core_id = None
     experience = {'schema': SCHEMA, 'status': 'PASS_SHADOW_BOUNDED_AUTONOMOUS_EXTERNAL_LEARNING_V1', 'run_id': os.getenv('GITHUB_RUN_ID') or 'LOCAL', 'kernel_core_id': core_id, 'priority': priority, 'source_ranking': [{k: v for k, v in x.items() if k != 'url'} for x in ranking], 'sources': source_results, 'failures': failures, 'network_policy': {'https_only': True, 'allowed_hosts': sorted(ALLOWED_HOSTS), 'methods': ['GET'], 'credentials_allowed': False, 'redirects_followed': False, 'max_bytes': MAX_BYTES, 'external_writes': False, 'downloaded_code_executed': False}, 'self_model_effect': 'EXTERNAL_EVIDENCE_AVAILABLE_FOR_FUTURE_SELECTION', 'canonical_mutation': False, 'automatic_main_mutation': False, 'consciousness_claimed': False}
+    experience['execution_identity'] = execution_identity
     experience['experience_digest'] = digest(experience)
     out = REPO / 'experience/autonomous/yado-autonomous-learning-latest.json'
     out.parent.mkdir(parents=True, exist_ok=True)

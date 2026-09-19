@@ -75,20 +75,44 @@ jobs:
         run: |
           python runtime/yado_native_experience_to_runtime_self_rewrite_v2.py
           python - <<'PY'
-          import hashlib
-          import json
+          import hashlib, json, subprocess, sys
           from pathlib import Path
-          root=Path(".")
           receipt=json.loads(Path("candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json").read_text())
           assert receipt["status"]=="PASS_SHADOW_NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_CANDIDATE_V2",receipt
-          target=root/receipt["target_path"]
-          candidate=root/receipt["candidate_path"]
-          before=hashlib.sha256(target.read_bytes()).hexdigest()
-          target.write_bytes(candidate.read_bytes())
-          compile(target.read_text(encoding="utf-8"),str(target),"exec")
-          after=hashlib.sha256(target.read_bytes()).hexdigest()
-          assert before != after == receipt["candidate_sha256"],(before,after,receipt)
-          print("PASS_NATIVE_SHADOW_MATERIALIZATION",target,before,after)
+          target=Path(receipt["target_path"])
+          candidate=Path(receipt["candidate_path"])
+          parent_sha=hashlib.sha256(target.read_bytes()).hexdigest()
+          candidate_sha=hashlib.sha256(candidate.read_bytes()).hexdigest()
+          assert parent_sha==receipt["parent_sha256"]!=candidate_sha==receipt["candidate_sha256"],receipt
+          compile(candidate.read_text(encoding="utf-8"),str(candidate),"exec")
+          # Execute the candidate's bounded decision function in a separate
+          # process. Full canonical admission remains a later, distinct gate.
+          probe = """
+          import importlib.util, json, math, sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path('runtime').resolve()))
+          def load(name, path):
+              spec=importlib.util.spec_from_file_location(name,path)
+              module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+              return module
+          parent=load('parent_learner',sys.argv[1]); child=load('candidate_learner',sys.argv[2])
+          rows=[]
+          for code in ('MEMORY_AND_EXPERIENCE','CODE_REPAIR','NETWORK_EVIDENCE'):
+              priority={'code':code,'area':code,'recommended_action':'learn code network tests'}
+              before=parent.rank_sources(priority); after=child.rank_sources(priority)
+              assert {x['id'] for x in after}=={x['id'] for x in child.SOURCE_CATALOG}
+              assert all(math.isfinite(x['score']) for x in after)
+              assert after==sorted(after,key=lambda x:(-x['score'],x['id']))
+              rows.append({'priority':code,'parent':before,'candidate':after})
+          assert any(x['parent']!=x['candidate'] for x in rows)
+          print(json.dumps(rows))
+          """
+          rows=json.loads(subprocess.check_output([sys.executable,'-c',probe,str(target),str(candidate)],text=True,timeout=30))
+          assert hashlib.sha256(target.read_bytes()).hexdigest()==parent_sha
+          result={'schema':'yado.native_candidate_probe.v1','status':'PASS_SHADOW_CANDIDATE_PROBE_REQUIRES_ADMISSION','parent_sha256':parent_sha,'candidate_sha256':candidate_sha,'ranking_probes':rows,'canonical_active':False,'candidate_full_regression_admission':False,'canonical_runtime_mutated':False}
+          Path('audits').mkdir(exist_ok=True)
+          Path('audits/yado-native-candidate-probe-v1.json').write_text(json.dumps(result,indent=2)+'\n')
+          print(result['status'],candidate_sha)
           PY
 
       - name: Evolve logic thinking intelligence candidate
@@ -100,7 +124,7 @@ jobs:
           receipt=json.loads(Path("candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json").read_text())
           assert receipt["status"]=="PASS_SHADOW_BOUNDED_TRI_ORGAN_COGNITIVE_EVOLUTION_V2",receipt
           assert min(receipt["selected_hidden"].values()) >= 0.80,receipt
-          destination=Path("runtime/yado_cognitive_tri_organ_policy_v3.py")
+          destination=Path("candidates/cognitive/yado_cognitive_tri_organ_policy_v3.py")
           source=(
               "from __future__ import annotations\n\n"
               f"COGNITIVE_POLICY = {receipt['selected_genome']!r}\n"
@@ -115,7 +139,7 @@ jobs:
           PY
           python -m compileall -q runtime successor candidates
 
-      - name: Audit mutated shadow runtime
+      - name: Audit active kernel after isolated candidate probes
         run: |
           python runtime/yado_canonical_invariant_guard_v1.py
           python runtime/yado_full_kernel_audit_v1.py
@@ -127,7 +151,7 @@ jobs:
           assert report["canonical"]["canonical_guard"]=="PASS",report
           assert report["canonical"]["ledger_validation"]=="PASS",report
           assert report["canonical"]["g3_genesis_performed"] is False,report
-          print("PASS_SHADOW_ALL_LAYER_KERNEL_AUDIT")
+          print("PASS_ACTIVE_KERNEL_WITH_UNADMITTED_SHADOW_CANDIDATES")
           PY
 
       - name: Build Successor identity and complete regression
@@ -260,6 +284,8 @@ jobs:
           for relative in (
               "runtime/yado_bounded_autonomous_learning_v1.py",
               "runtime/yado_cognitive_tri_organ_policy_v3.py",
+              "candidates/cognitive/yado_cognitive_tri_organ_policy_v3.py",
+              "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v2.py",
           ):
               destination = checkpoint / "source-overlay" / relative
               destination.parent.mkdir(parents=True, exist_ok=True)
@@ -299,7 +325,8 @@ jobs:
             candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json
             candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v2.py
             candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json
-            runtime/yado_cognitive_tri_organ_policy_v3.py
+            candidates/cognitive/yado_cognitive_tri_organ_policy_v3.py
+            audits/yado-native-candidate-probe-v1.json
             audits/yado-full-kernel-audit-v1-report.json
             audits/yado-full-kernel-audit-v1-summary.md
             audits/yado-full-regression-v1-report.json

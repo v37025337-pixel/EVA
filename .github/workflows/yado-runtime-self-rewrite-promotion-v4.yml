@@ -37,18 +37,17 @@ jobs:
           python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
           python -m pip install --disable-pip-version-check pyyaml
 
-      - name: Verify exact V4 physical binding
+      - name: Verify historical V4 and the exact active implementation
         env:
           PYTHONPATH: runtime
         run: |
           python -m py_compile runtime/yado_bounded_autonomous_learning_v1.py runtime/yado_runtime_self_rewrite_admission_v4.py
-          cp candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json "$RUNNER_TEMP/yado-runtime-self-rewrite-admission-v4-verified.json"
           python -m unittest runtime.test_yado_runtime_self_rewrite_admission_v4 -v
-          cp "$RUNNER_TEMP/yado-runtime-self-rewrite-admission-v4-verified.json" candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json
           python - <<'PY'
-          import hashlib, json
+          import hashlib, json, subprocess
           from pathlib import Path
-          from yado_runtime_self_rewrite_admission_v4 import analyze
+          from yado_runtime_self_rewrite_admission_v4 import MAINTENANCE_STATE, analyze_committed
+          from yado_active_kernel_contract_v1 import active_kernel_identity
 
           root=Path(".")
           target=root/"runtime/yado_bounded_autonomous_learning_v1.py"
@@ -61,13 +60,28 @@ jobs:
           assert admission["isolated_full_regression"] is True, admission
           assert admission["isolated_regression_tests"] >= 467, admission
           assert candidate_sha==admission["candidate_sha256"], (candidate_sha,admission)
-          assert target_sha==candidate_sha, (target_sha,candidate_sha)
-
-          probe=analyze()
+          probe=analyze_committed()
           assert probe["status"]=="PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE", probe
-          assert probe["runtime_state"]=="V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE", probe
-          assert probe["checks"]["target_matches_candidate_when_shadow_applied"] is True, probe
-          print("PASS_EXACT_PHYSICAL_V4_BINDING",target_sha)
+          assert probe["repository_view"]=="COMMITTED_HEAD", probe
+          assert probe["target_sha256"]==target_sha, (probe,target_sha)
+          assert probe["candidate_sha256"]==candidate_sha, (probe,candidate_sha)
+          recorded_admission=subprocess.check_output([
+              "git", "show", probe["tested_commit"]+":candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json"
+          ])
+          assert recorded_admission==(root/"candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json").read_bytes()
+          if probe["runtime_state"]==MAINTENANCE_STATE:
+              identity=active_kernel_identity(root)
+              assert identity==probe["active_kernel_identity"], (identity,probe)
+              assert identity["controller_sha256"]==target_sha, identity
+              assert target_sha!=candidate_sha, (target_sha,candidate_sha)
+              print("PASS_VERIFIED_V4_MAINTENANCE_BINDING",target_sha)
+          else:
+              assert probe["runtime_state"]=="V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE", probe
+              assert target_sha==candidate_sha, (target_sha,candidate_sha)
+              assert probe["checks"]["target_matches_candidate_when_shadow_applied"] is True, probe
+              print("PASS_EXACT_PHYSICAL_V4_BINDING",target_sha)
+          (root/"audits").mkdir(exist_ok=True)
+          (root/"audits/yado-physical-v4-active-binding-probe.json").write_text(json.dumps(probe,indent=2,sort_keys=True)+"\n")
           PY
 
       - name: Full kernel audit and canonical guard
@@ -85,7 +99,7 @@ jobs:
           print("PASS_PHYSICAL_V4_FULL_KERNEL_AUDIT")
           PY
 
-      - name: Complete Successor regression on physical V4
+      - name: Complete Successor regression on the active implementation
         run: |
           rm -rf "$RUNNER_TEMP/yado-successor-v4-physical"
           python -m successor build --output "$RUNNER_TEMP/yado-successor-v4-physical"
@@ -100,35 +114,64 @@ jobs:
           print("PASS_PHYSICAL_V4_REGRESSION",d["tests_run"])
           PY
 
-      - name: Final canonical immutability and promotion receipt
+      - name: Verify immutability and record separate active implementation evidence
+        env:
+          PYTHONPATH: runtime
         run: |
-          git diff --exit-code -- canonical architecture/evolution-ledger.json
+          git diff HEAD --exit-code -- canonical architecture/evolution-ledger.json candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json
           python runtime/yado_canonical_invariant_guard_v1.py
           python - <<'PY'
-          import hashlib, json, os
+          import hashlib, json, os, subprocess
           from pathlib import Path
+          from yado_runtime_self_rewrite_admission_v4 import MAINTENANCE_STATE, analyze_committed
+          from yado_active_kernel_contract_v1 import active_kernel_identity
           root=Path(".")
           target=root/"runtime/yado_bounded_autonomous_learning_v1.py"
           admission=json.loads((root/"candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json").read_text())
           regression=json.loads((root/"audits/yado-full-regression-v1-report.json").read_text())
+          audit=json.loads((root/"audits/yado-full-kernel-audit-v1-report.json").read_text())
+          probe=analyze_committed()
+          commit=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          assert probe["status"]=="PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE", probe
+          assert probe["repository_view"]=="COMMITTED_HEAD" and probe["tested_commit"]==commit, probe
+          assert commit==os.environ["GITHUB_SHA"]==regression["tested_commit"], (commit,regression)
+          assert regression["status"]=="PASS" and regression["tests_run"]==regression["expected_tests"], regression
+          assert not regression["failures"] and not regression["errors"] and not regression["skipped"], regression
+          assert regression["source_unchanged"] is True, regression
+          assert audit["status"]=="PASS" and audit["findings"]==[], audit
+          target_sha=hashlib.sha256(target.read_bytes()).hexdigest()
+          assert target_sha==probe["target_sha256"], (target_sha,probe)
+          candidate_sha=hashlib.sha256((root/"candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py").read_bytes()).hexdigest()
+          assert candidate_sha==probe["candidate_sha256"]==admission["candidate_sha256"], (candidate_sha,probe,admission)
+          maintenance=probe["runtime_state"]==MAINTENANCE_STATE
+          if maintenance:
+              assert active_kernel_identity(root)==probe["active_kernel_identity"], probe
+              assert target_sha!=admission["candidate_sha256"], (target_sha,admission)
+          else:
+              assert probe["runtime_state"]=="V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE", probe
+              assert target_sha==admission["candidate_sha256"], (target_sha,admission)
           receipt={
-            "schema":"yado.runtime_self_rewrite_promotion.v4",
-            "status":"PASS_SHADOW_PHYSICAL_RUNTIME_PROMOTION_V4",
-            "tested_commit":os.environ["GITHUB_SHA"],
+            "schema":"yado.runtime_maintenance_verification.v1" if maintenance else "yado.runtime_self_rewrite_promotion.v4",
+            "status":"PASS_VERIFIED_V4_MAINTENANCE_IMPLEMENTATION" if maintenance else "PASS_SHADOW_PHYSICAL_RUNTIME_PROMOTION_V4",
+            "tested_commit":commit,
+            "runtime_state":probe["runtime_state"],
+            "active_kernel_identity":probe["active_kernel_identity"],
             "parent_runtime_sha256":admission["parent_runtime_sha256"],
             "candidate_sha256":admission["candidate_sha256"],
-            "target_sha256":hashlib.sha256(target.read_bytes()).hexdigest(),
-            "physical_runtime_promotion":True,
-            "exact_candidate_binding":True,
+            "target_sha256":target_sha,
+            "physical_runtime_promotion":not maintenance,
+            "exact_candidate_binding":not maintenance,
+            "historical_v4_candidate_binding_verified":True,
+            "verified_maintenance_binding":maintenance,
             "full_kernel_audit":True,
             "canonical_guard":True,
             "full_regression":True,
             "regression_tests":regression["tests_run"],
             "automatic_canonical_metadata_mutation":False,
             "consciousness_claimed":False,
-            "next_required_capability":"MERGE_PROMOTION_AND_POST_MERGE_CANONICAL_AUDIT"
+            "next_required_capability":"POST_MERGE_MAINTENANCE_VALIDATION" if maintenance else "MERGE_PROMOTION_AND_POST_MERGE_CANONICAL_AUDIT"
           }
-          out=root/"candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json"
+          out=root/"audits"/("yado-runtime-v4-maintenance-verification.json" if maintenance else "yado-runtime-self-rewrite-promotion-v4-verification.json")
           out.write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
           print(json.dumps(receipt,sort_keys=True))
           PY
@@ -140,6 +183,9 @@ jobs:
           name: yado-physical-runtime-promotion-v4
           path: |
             candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json
+            audits/yado-physical-v4-active-binding-probe.json
+            audits/yado-runtime-v4-maintenance-verification.json
+            audits/yado-runtime-self-rewrite-promotion-v4-verification.json
             audits/yado-full-kernel-audit-v1-report.json
             audits/yado-full-regression-v1-report.json
           if-no-files-found: warn
