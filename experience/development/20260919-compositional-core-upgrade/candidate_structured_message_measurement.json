@@ -1,0 +1,148 @@
+{
+  "automatic_canonical_promotion": false,
+  "compiled": true,
+  "grammar": "YADO_TYPED_COMPOSITION_V1",
+  "input_signature": [
+    [
+      "message",
+      "str"
+    ]
+  ],
+  "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+  "parent_source_sha256": [
+    "ecebf878c6b3ac64ee92bb4212127d0e0b4440139cc037283863c2e944c7b3dd"
+  ],
+  "predictions": [
+    {
+      "input": "g3: tab\t雪",
+      "serialized_size": 134
+    },
+    {
+      "input": "g3: final \"ok\"\n\\",
+      "serialized_size": 144
+    }
+  ],
+  "program": {
+    "items": [
+      [
+        "serialized_size",
+        {
+          "args": [
+            {
+              "args": [
+                {
+                  "items": [
+                    [
+                      "jsonrpc",
+                      {
+                        "op": "literal",
+                        "value": "2.0"
+                      }
+                    ],
+                    [
+                      "id",
+                      {
+                        "op": "literal",
+                        "value": 1
+                      }
+                    ],
+                    [
+                      "method",
+                      {
+                        "op": "literal",
+                        "value": "tools/call"
+                      }
+                    ],
+                    [
+                      "params",
+                      {
+                        "items": [
+                          [
+                            "name",
+                            {
+                              "op": "literal",
+                              "value": "hive_add_comment"
+                            }
+                          ],
+                          [
+                            "arguments",
+                            {
+                              "items": [
+                                [
+                                  "id",
+                                  {
+                                    "op": "literal",
+                                    "value": "YADO-1"
+                                  }
+                                ],
+                                [
+                                  "message",
+                                  {
+                                    "key": "message",
+                                    "op": "input"
+                                  }
+                                ]
+                              ],
+                              "op": "object"
+                            }
+                          ]
+                        ],
+                        "op": "object"
+                      }
+                    ]
+                  ],
+                  "op": "object"
+                }
+              ],
+              "name": "json_compact",
+              "op": "call"
+            }
+          ],
+          "name": "length",
+          "op": "call"
+        }
+      ],
+      [
+        "input",
+        {
+          "key": "message",
+          "op": "input"
+        }
+      ]
+    ],
+    "op": "object"
+  },
+  "schema": "yado.compositional_source.v1",
+  "search_attempts": 11,
+  "search_states": 11,
+  "source": "def solve(component_id, program_id, inputs):\n    return {'serialized_size': _primitive('length', _primitive('json_compact', {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/call', 'params': {'name': 'hive_add_comment', 'arguments': {'id': 'YADO-1', 'message': _input(inputs, 'message')}}})), 'input': _input(inputs, 'message')}\n",
+  "source_context": "native_source:317dcdb56dd50691ca75d7f4bffa61b49c52ea88a63570b4cc27559f8870ab69",
+  "source_sha256": "53706bd7bdef8921c96f39437bedce952011a397f3e8afc67a178275965a407f",
+  "status": "CANDIDATE",
+  "synthesis_inputs": "TRAINING_ONLY",
+  "training_digest": "89264a9df0f12ab67f19f16e97bec68b697536ce524357ed7d7422d628a1c638",
+  "training_predictions": [
+    {
+      "input": "g3: plain",
+      "serialized_size": 133
+    },
+    {
+      "input": "g3: \"quoted\"",
+      "serialized_size": 138
+    },
+    {
+      "input": "g3: line\nnext",
+      "serialized_size": 138
+    }
+  ],
+  "validation_predictions": [
+    {
+      "input": "g3: данные 😀",
+      "serialized_size": 136
+    },
+    {
+      "input": "g3: back\\slash",
+      "serialized_size": 139
+    }
+  ]
+}

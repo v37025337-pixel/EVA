@@ -1,0 +1,133 @@
+{
+  "automatic_canonical_promotion": false,
+  "compiled": true,
+  "grammar": "YADO_TYPED_COMPOSITION_V1",
+  "input_signature": [
+    [
+      "message",
+      "str"
+    ]
+  ],
+  "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+  "parent_source_sha256": [
+    "53706bd7bdef8921c96f39437bedce952011a397f3e8afc67a178275965a407f"
+  ],
+  "predictions": [
+    "{\"serialized_size\":134,\"input\":\"g4: tab\\t雪\"}",
+    "{\"serialized_size\":144,\"input\":\"g4: final \\\"ok\\\"\\n\\\\\"}"
+  ],
+  "program": {
+    "args": [
+      {
+        "items": [
+          [
+            "serialized_size",
+            {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "items": [
+                        [
+                          "jsonrpc",
+                          {
+                            "op": "literal",
+                            "value": "2.0"
+                          }
+                        ],
+                        [
+                          "id",
+                          {
+                            "op": "literal",
+                            "value": 1
+                          }
+                        ],
+                        [
+                          "method",
+                          {
+                            "op": "literal",
+                            "value": "tools/call"
+                          }
+                        ],
+                        [
+                          "params",
+                          {
+                            "items": [
+                              [
+                                "name",
+                                {
+                                  "op": "literal",
+                                  "value": "hive_add_comment"
+                                }
+                              ],
+                              [
+                                "arguments",
+                                {
+                                  "items": [
+                                    [
+                                      "id",
+                                      {
+                                        "op": "literal",
+                                        "value": "YADO-1"
+                                      }
+                                    ],
+                                    [
+                                      "message",
+                                      {
+                                        "key": "message",
+                                        "op": "input"
+                                      }
+                                    ]
+                                  ],
+                                  "op": "object"
+                                }
+                              ]
+                            ],
+                            "op": "object"
+                          }
+                        ]
+                      ],
+                      "op": "object"
+                    }
+                  ],
+                  "name": "json_compact",
+                  "op": "call"
+                }
+              ],
+              "name": "length",
+              "op": "call"
+            }
+          ],
+          [
+            "input",
+            {
+              "key": "message",
+              "op": "input"
+            }
+          ]
+        ],
+        "op": "object"
+      }
+    ],
+    "name": "json_compact",
+    "op": "call"
+  },
+  "schema": "yado.compositional_source.v1",
+  "search_attempts": 17,
+  "search_states": 16,
+  "source": "def solve(component_id, program_id, inputs):\n    return _primitive('json_compact', {'serialized_size': _primitive('length', _primitive('json_compact', {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/call', 'params': {'name': 'hive_add_comment', 'arguments': {'id': 'YADO-1', 'message': _input(inputs, 'message')}}})), 'input': _input(inputs, 'message')})\n",
+  "source_context": "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89",
+  "source_sha256": "975e2300fc32163886f4e2d07e84b542679081a45655fc90f270aead88ae0a4d",
+  "status": "CANDIDATE",
+  "synthesis_inputs": "TRAINING_ONLY",
+  "training_digest": "a250d8ea14cc5367c07095f625548b9281c45a35236a62c619e4a7a7536ad122",
+  "training_predictions": [
+    "{\"serialized_size\":133,\"input\":\"g4: plain\"}",
+    "{\"serialized_size\":138,\"input\":\"g4: \\\"quoted\\\"\"}",
+    "{\"serialized_size\":138,\"input\":\"g4: line\\nnext\"}"
+  ],
+  "validation_predictions": [
+    "{\"serialized_size\":136,\"input\":\"g4: данные 😀\"}",
+    "{\"serialized_size\":139,\"input\":\"g4: back\\\\slash\"}"
+  ]
+}

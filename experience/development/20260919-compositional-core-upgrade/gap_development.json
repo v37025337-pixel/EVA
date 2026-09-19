@@ -1,0 +1,428 @@
+{
+  "background_process_running": false,
+  "general_intelligence_established": false,
+  "language": {
+    "budgets": {
+      "bindings_per_memory": 64,
+      "container_items": 128,
+      "input_text_characters": 8192,
+      "memories": 16,
+      "named_inputs": 8,
+      "per_type_beam": 96,
+      "program_depth": 16,
+      "program_nodes": 128,
+      "search_attempts": 20000,
+      "search_states": 4096,
+      "search_value_units": 2000000,
+      "unary_search_depth": 3,
+      "value_nodes": 8192,
+      "value_text_characters": 65536
+    },
+    "grammar": "YADO_TYPED_COMPOSITION_V1",
+    "new_primitive_invention": false,
+    "operators": [
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "strip"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "lower"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "upper"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "reverse"
+      },
+      {
+        "arguments": [
+          "str|list|dict"
+        ],
+        "name": "length"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "splitlines"
+      },
+      {
+        "arguments": [
+          "list"
+        ],
+        "name": "join"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "json_parse"
+      },
+      {
+        "arguments": [
+          "json"
+        ],
+        "name": "json_compact"
+      },
+      {
+        "arguments": [
+          "json"
+        ],
+        "name": "json_ascii"
+      },
+      {
+        "arguments": [
+          "json"
+        ],
+        "name": "json_default"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "parse_python"
+      },
+      {
+        "arguments": [
+          "ast"
+        ],
+        "name": "top_level_functions"
+      },
+      {
+        "arguments": [
+          "ast|list"
+        ],
+        "name": "ast_dump"
+      },
+      {
+        "arguments": [
+          "dict",
+          "str"
+        ],
+        "name": "field"
+      },
+      {
+        "arguments": [
+          "list",
+          "int"
+        ],
+        "name": "index"
+      },
+      {
+        "arguments": [
+          "any",
+          "any"
+        ],
+        "name": "equal"
+      },
+      {
+        "arguments": [
+          "any",
+          "any"
+        ],
+        "name": "not_equal"
+      },
+      {
+        "arguments": [
+          "str",
+          "str"
+        ],
+        "name": "concat"
+      },
+      {
+        "arguments": [
+          "int",
+          "int"
+        ],
+        "name": "add"
+      },
+      {
+        "arguments": [
+          "int",
+          "int"
+        ],
+        "name": "subtract"
+      },
+      {
+        "arguments": [
+          "int",
+          "int"
+        ],
+        "name": "multiply"
+      },
+      {
+        "arguments": [
+          "list",
+          "list",
+          "str",
+          "str"
+        ],
+        "name": "unified_diff"
+      }
+    ],
+    "primitive_authorship": "MAINTAINER",
+    "schema": "yado.compositional_source.v1",
+    "selection_inputs": "TRAINING_ONLY"
+  },
+  "schema": "yado.native_program_development_status.v1",
+  "self_model": {
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_compositional_v1": {
+      "cost": 4,
+      "failures": 0,
+      "squared_error": 0.25,
+      "successes": 1
+    },
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_evolved_v2": {
+      "cost": 4,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_v2": {
+      "cost": 2,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_v3": {
+      "cost": 4,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_v4": {
+      "cost": 6,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_compositional_v1": {
+      "cost": 4,
+      "failures": 0,
+      "squared_error": 0.25,
+      "successes": 1
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_evolved_v2": {
+      "cost": 4,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_v2": {
+      "cost": 2,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_v3": {
+      "cost": 4,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_v4": {
+      "cost": 6,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_compositional_v1": {
+      "cost": 4,
+      "failures": 0,
+      "squared_error": 0.25,
+      "successes": 1
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_evolved_v2": {
+      "cost": 4,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_v2": {
+      "cost": 2,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_v3": {
+      "cost": 4,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_v4": {
+      "cost": 6,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    }
+  },
+  "sessions": [
+    {
+      "awaiting_goal": false,
+      "budget": 30,
+      "child_goal_id": null,
+      "id": 114,
+      "max_goals": 3,
+      "outcomes": [
+        {
+          "development_id": 114,
+          "goal_id": 116,
+          "kind": "DEV_OUTCOME",
+          "source_sha256": "8711575a1cad7d0a879de63a336fbc787e317aa3aeb1524f9a03d18e2362a912",
+          "spent": 4,
+          "status": "VALIDATED_ON_HOLDOUT",
+          "terminal_tick": 121,
+          "tick": 122
+        },
+        {
+          "development_id": 114,
+          "goal_id": 124,
+          "kind": "DEV_OUTCOME",
+          "source_sha256": "dcb01c7a9054f815dade2c6b8bea5c3ffb4cebe5f0c84c9b954735c3ce018cb6",
+          "spent": 4,
+          "status": "VALIDATED_ON_HOLDOUT",
+          "terminal_tick": 129,
+          "tick": 130
+        }
+      ],
+      "reason": "NO_ELIGIBLE_EXPERIENCE_WITHIN_BUDGET",
+      "remaining": 2,
+      "retry_policy": "untried_strategies_v2",
+      "selection_tick": 123,
+      "selections": [
+        {
+          "budget": 14,
+          "failure_verification_ticks": [
+            4,
+            8,
+            12
+          ],
+          "parent_finish_tick": 14,
+          "parent_goal_id": 1,
+          "priority": 0.125,
+          "self_model_digest": "6cb24c29e439edc416009ed3f552eead3c66d682cbfe3b17195508557888d65d",
+          "spec_digest": "8c9ef621409924347a5421bd083c037f21d12247c1ebdabe883ad416e4cbdf7a",
+          "untried": [
+            {
+              "cost": 4,
+              "estimated_success": 0.5,
+              "observations": 0,
+              "strategy": "native_compositional_v1"
+            }
+          ]
+        },
+        {
+          "budget": 14,
+          "failure_verification_ticks": [
+            19,
+            23,
+            27
+          ],
+          "parent_finish_tick": 29,
+          "parent_goal_id": 16,
+          "priority": 0.125,
+          "self_model_digest": "8aa03f5584c2e94c0c870e4fc83e43812fdedfdf0e005c4f7b0258495e2031ce",
+          "spec_digest": "65272a007583eba680fe4c779ae3b4cb204036ea09c7cae81c97b6dd1b8bfb02",
+          "untried": [
+            {
+              "cost": 4,
+              "estimated_success": 0.5,
+              "observations": 0,
+              "strategy": "native_compositional_v1"
+            }
+          ]
+        }
+      ],
+      "status": "COMPLETE"
+    },
+    {
+      "awaiting_goal": false,
+      "budget": 30,
+      "child_goal_id": null,
+      "id": 132,
+      "max_goals": 3,
+      "outcomes": [
+        {
+          "development_id": 132,
+          "goal_id": 134,
+          "kind": "DEV_OUTCOME",
+          "source_sha256": "07d80c790d380242216284ab8d10f120ccd30b77b647a0af464e39eaa9e64e4c",
+          "spent": 4,
+          "status": "VALIDATED_ON_HOLDOUT",
+          "terminal_tick": 139,
+          "tick": 140
+        }
+      ],
+      "reason": "NO_ELIGIBLE_EXPERIENCE_WITHIN_BUDGET",
+      "remaining": 16,
+      "retry_policy": "untried_strategies_v2",
+      "selection_tick": 133,
+      "selections": [
+        {
+          "budget": 14,
+          "failure_verification_ticks": [
+            34,
+            38,
+            42
+          ],
+          "parent_finish_tick": 44,
+          "parent_goal_id": 31,
+          "priority": 0.125,
+          "self_model_digest": "be035585fabb6510a95350c5c9bccb3375a3c05864eb0262331fc4d9c39f9344",
+          "spec_digest": "c9daafbfcfc19a6e18f11cbbf9e2457a67264d73def67c5fe7ef1ed693d3f893",
+          "untried": [
+            {
+              "cost": 4,
+              "estimated_success": 0.5,
+              "observations": 0,
+              "strategy": "native_compositional_v1"
+            }
+          ]
+        }
+      ],
+      "status": "COMPLETE"
+    },
+    {
+      "awaiting_goal": false,
+      "budget": 30,
+      "child_goal_id": null,
+      "id": 142,
+      "max_goals": 3,
+      "outcomes": [],
+      "reason": "NO_ELIGIBLE_EXPERIENCE_WITHIN_BUDGET",
+      "remaining": 30,
+      "retry_policy": "untried_strategies_v2",
+      "selection_tick": null,
+      "selections": [],
+      "status": "COMPLETE"
+    }
+  ],
+  "synthesis_active": true,
+  "unresolved_goal_ids": [],
+  "verified_programs": [
+    {
+      "parent_source_sha256": [],
+      "source_sha256": "07d80c790d380242216284ab8d10f120ccd30b77b647a0af464e39eaa9e64e4c"
+    },
+    {
+      "parent_source_sha256": [],
+      "source_sha256": "dcb01c7a9054f815dade2c6b8bea5c3ffb4cebe5f0c84c9b954735c3ce018cb6"
+    },
+    {
+      "parent_source_sha256": [],
+      "source_sha256": "8711575a1cad7d0a879de63a336fbc787e317aa3aeb1524f9a03d18e2362a912"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "acceptance_task_authorship": "MAINTAINER",
+  "candidate_solution_source_supplied": false,
+  "name": "serialized_measurement_record",
+  "observer_query_expected": [
+    "{\"serialized_size\":134,\"input\":\"g4: tab\\t雪\"}",
+    "{\"serialized_size\":144,\"input\":\"g4: final \\\"ok\\\"\\n\\\\\"}"
+  ],
+  "spec": {
+    "domain": "native_source",
+    "queries": [
+      {
+        "input": {
+          "message": "g4: tab\t雪"
+        }
+      },
+      {
+        "input": {
+          "message": "g4: final \"ok\"\n\\"
+        }
+      }
+    ],
+    "schema": "yado.native_program_goal.v1",
+    "training": [
+      {
+        "expected": "{\"serialized_size\":133,\"input\":\"g4: plain\"}",
+        "input": {
+          "message": "g4: plain"
+        }
+      },
+      {
+        "expected": "{\"serialized_size\":138,\"input\":\"g4: \\\"quoted\\\"\"}",
+        "input": {
+          "message": "g4: \"quoted\""
+        }
+      },
+      {
+        "expected": "{\"serialized_size\":138,\"input\":\"g4: line\\nnext\"}",
+        "input": {
+          "message": "g4: line\nnext"
+        }
+      }
+    ],
+    "validation": [
+      {
+        "expected": "{\"serialized_size\":136,\"input\":\"g4: данные 😀\"}",
+        "input": {
+          "message": "g4: данные 😀"
+        }
+      },
+      {
+        "expected": "{\"serialized_size\":139,\"input\":\"g4: back\\\\slash\"}",
+        "input": {
+          "message": "g4: back\\slash"
+        }
+      }
+    ]
+  }
+}

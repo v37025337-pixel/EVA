@@ -1,0 +1,58 @@
+{
+  "acceptance_task_authorship": "MAINTAINER",
+  "candidate_solution_source_supplied": false,
+  "name": "serialized_message_length",
+  "observer_query_expected": [
+    134,
+    144
+  ],
+  "spec": {
+    "domain": "native_source",
+    "queries": [
+      {
+        "input": {
+          "message": "g2: tab\t雪"
+        }
+      },
+      {
+        "input": {
+          "message": "g2: final \"ok\"\n\\"
+        }
+      }
+    ],
+    "training": [
+      {
+        "expected": 133,
+        "input": {
+          "message": "g2: plain"
+        }
+      },
+      {
+        "expected": 138,
+        "input": {
+          "message": "g2: \"quoted\""
+        }
+      },
+      {
+        "expected": 138,
+        "input": {
+          "message": "g2: line\nnext"
+        }
+      }
+    ],
+    "validation": [
+      {
+        "expected": 136,
+        "input": {
+          "message": "g2: данные 😀"
+        }
+      },
+      {
+        "expected": 139,
+        "input": {
+          "message": "g2: back\\slash"
+        }
+      }
+    ]
+  }
+}
