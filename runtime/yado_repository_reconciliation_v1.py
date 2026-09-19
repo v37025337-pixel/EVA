@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import hashlib
 import json
 import os
@@ -16,6 +17,7 @@ CORE = ROOT / "canonical" / "yado-unified-core-v1.json"
 EXP = ROOT / "canonical" / "yado-unified-experience-registry-v1.json"
 LEDGER = ROOT / "architecture" / "evolution-ledger.json"
 CONTRACT = ROOT / "architecture" / "yado-unified-architecture-v2.json"
+MANAGED_POLICY = ROOT / "architecture" / "yado-active-managed-branch-policy-v1.json"
 PROMOTION = ROOT / "candidates" / "autonomous" / "yado-runtime-self-rewrite-promotion-v4.json"
 TARGET = ROOT / "runtime" / "yado_bounded_autonomous_learning_v1.py"
 V4 = ROOT / "candidates" / "autonomous" / "yado_bounded_autonomous_learning_runtime_candidate_v4.py"
@@ -52,7 +54,11 @@ def tracked_files() -> list[Path]:
     return [ROOT / x for x in raw.split("\0") if x]
 
 
-def branch_inventory() -> dict[str, Any]:
+def _path_allowed(path: str, patterns: list[str]) -> bool:
+    return any(fnmatch.fnmatch(path, pattern) for pattern in patterns)
+
+
+def branch_inventory(managed_policy: dict[str, Any]) -> dict[str, Any]:
     try:
         refs = [
             x for x in git("for-each-ref", "--format=%(refname:short)", "refs/remotes/origin").splitlines()
@@ -64,37 +70,86 @@ def branch_inventory() -> dict[str, Any]:
                 current = git("branch", "--show-current")
             except Exception:
                 current = ""
+        managed = managed_policy.get("branches", {})
         rows = []
+        blocking = []
+        managed_divergence = []
         for ref in refs:
             name = ref.removeprefix("origin/")
             if name == current:
                 continue
             ahead = int(git("rev-list", "--count", "origin/main.." + ref) or "0")
             behind = int(git("rev-list", "--count", ref + "..origin/main") or "0")
-            rows.append({"branch": name, "ahead": ahead, "behind": behind})
+            changed = []
+            if ahead:
+                changed = [
+                    x for x in git("diff", "--name-only", "origin/main..." + ref).splitlines()
+                    if x
+                ]
+            policy = managed.get(name)
+            allowed = False
+            violations: list[str] = []
+            if ahead and policy and policy.get("branch_divergence_allowed") is True:
+                patterns = list(policy.get("allowed_paths", []))
+                violations = [x for x in changed if not _path_allowed(x, patterns)]
+                allowed = not violations
+            row = {
+                "branch": name,
+                "ahead": ahead,
+                "behind": behind,
+                "managed": bool(policy),
+                "managed_role": policy.get("role") if policy else None,
+                "changed_paths": changed,
+                "scope_violations": violations,
+                "divergence_allowed": allowed,
+            }
+            rows.append(row)
+            if ahead:
+                if allowed:
+                    managed_divergence.append(row)
+                else:
+                    blocking.append(row)
         return {
             "available": True,
             "branch_count": len(rows),
             "ahead_branches": [x for x in rows if x["ahead"] > 0],
+            "blocking_ahead_branches": blocking,
+            "managed_divergence": managed_divergence,
             "rows": rows,
         }
     except Exception as exc:
-        return {"available": False, "error": repr(exc), "branch_count": 0, "ahead_branches": [], "rows": []}
+        return {
+            "available": False,
+            "error": repr(exc),
+            "branch_count": 0,
+            "ahead_branches": [],
+            "blocking_ahead_branches": [],
+            "managed_divergence": [],
+            "rows": [],
+        }
 
 
 def conflict_markers(paths: list[Path]) -> list[str]:
     bad = []
     suffixes = {".py", ".json", ".yml", ".yaml", ".toml", ".ini", ".cfg"}
+    left = "<" * 7
+    middle = "=" * 7
+    right = ">" * 7
     for path in paths:
         if path.suffix.lower() not in suffixes or not path.is_file():
             continue
         try:
             if path.stat().st_size > 2_000_000:
                 continue
-            text = path.read_text(encoding="utf-8", errors="replace")
+            lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
         except Exception:
             continue
-        if "<<<<<<< " in text or "\n=======" in text or ">>>>>>> " in text:
+        if any(
+            line.startswith(left + " ")
+            or line == middle
+            or line.startswith(right + " ")
+            for line in lines
+        ):
             bad.append(path.relative_to(ROOT).as_posix())
     return bad
 
@@ -109,6 +164,7 @@ def run(strict: bool = False) -> dict[str, Any]:
     exp = load(EXP)
     ledger = load(LEDGER)
     contract = load(CONTRACT)
+    managed_policy = load(MANAGED_POLICY)
     promotion = load(PROMOTION)
 
     branches = exp.get("branches", [])
@@ -125,7 +181,7 @@ def run(strict: bool = False) -> dict[str, Any]:
     markers = conflict_markers(tracked)
 
     unified_source = UNIFIED_RUNTIME.read_text(encoding="utf-8")
-    branch_state = branch_inventory()
+    branch_state = branch_inventory(managed_policy)
 
     execution_versions = [
         head.get("execution_fabric_v1", {}),
@@ -168,7 +224,7 @@ def run(strict: bool = False) -> dict[str, Any]:
             "ADMIT_OR_ROLLBACK",
             "DERIVE_NEXT_DEFICIT_FROM_ADMITTED_STATE",
         ],
-        "remote_branches_absorbed_when_inventory_available": (not branch_state.get("available")) or not branch_state.get("ahead_branches"),
+        "remote_branch_divergence_policy_satisfied": (not branch_state.get("available")) or not branch_state.get("blocking_ahead_branches"),
     }
 
     findings = []
@@ -199,6 +255,8 @@ def run(strict: bool = False) -> dict[str, Any]:
         "runtime_generation": report["runtime_generation"],
         "failed_checks": [k for k, v in checks.items() if not v],
         "ahead_branches": branch_state.get("ahead_branches", []),
+        "managed_divergence": branch_state.get("managed_divergence", []),
+        "blocking_ahead_branches": branch_state.get("blocking_ahead_branches", []),
         "report": str(OUT.relative_to(ROOT)),
     }, sort_keys=True))
     if strict and report["status"] != "PASS":
