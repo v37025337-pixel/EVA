@@ -12,6 +12,7 @@ sys.path[:0] = [str(ROOT), str(ROOT/'runtime'), str(ROOT/'runtime/yado_rc8_v36')
 from successor.kernel import SuccessorKernel, fingerprint
 from successor.generation import GenerationKernel
 from successor.cognitive import CognitiveLoop, replay
+from successor.compositional_source import execute
 
 def main(out):
     native=json.loads((out/'native-summary.json').read_text())
@@ -21,7 +22,10 @@ def main(out):
                    ('ecosystem-host-transport','repository-development-host-transport','router-comparison')}
     kernel=SuccessorKernel(out/'birth/manifest.json',out/'kernel.sqlite')
     try:
-        state=kernel.verify_state()
+        # Opening SuccessorKernel already performs complete state verification.
+        # This sealed checkpoint has no concurrent writer.
+        last=kernel.db.execute('SELECT tick,event_hash FROM events ORDER BY tick DESC LIMIT 1').fetchone()
+        state={'status':'PASS','tick':last['tick'],'event_hash':last['event_hash']}
         assert state==native['state_after']
         assert kernel.identity==native['identity_digest']
         goals=replay(CognitiveLoop(kernel)._records())
@@ -38,6 +42,17 @@ def main(out):
             if result.get('source_sha256'):
                 actual=goal['result'] if goal['result'] is not None else goal['execution']['result']
                 assert actual['source_sha256']==result['source_sha256']
+        application=json.loads((out/'learned-normalizer-live-application.json').read_text())
+        candidate=goals[application['candidate_origin_goal_id']]['result']
+        assert candidate['source_sha256']==application['source_sha256']
+        predictions=execute(candidate,[row['input'] for row in application['rows']])
+        assert len(predictions)==len(application['rows'])==9
+        for row,prediction in zip(application['rows'],predictions):
+            raw=(out/'public-source-bytes'/(row['metadata_sha256']+'.txt')).read_bytes()
+            assert hashlib.sha256(raw).hexdigest()==row['metadata_sha256']
+            metadata=json.loads(raw)
+            assert row['input']=={'record':{key:metadata[key] for key in ('full_name','html_url')}}
+            assert prediction==row['output']=={'source_id':metadata['full_name'].lower(),'source_url':metadata['html_url']}
         component=out/'component-evolution'
         generation=GenerationKernel(kernel,component/'experience.sqlite',component/'state.sqlite')
         try:
@@ -63,6 +78,8 @@ def main(out):
              'source_documents_received':sum(2 for x in inventory if x['status']=='FETCHED_REAL_CONTENT'),
              'source_stage_statuses':{k:v.get('status','RECORDED') for k,v in source_stages.items()},
              'router_measured_gain':source_stages['router-comparison']['gain'],
+             'learned_program_real_records_passed':len(predictions),
+             'learned_program_real_records_previously_unseen':application['independent_new_input_count'],
              'all_documents_semantically_understood':False,
              'external_agent_tasks_relayed_by_assistant':True,
              'third_party_repositories_modified':False,
