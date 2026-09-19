@@ -8,6 +8,40 @@ from yado_unified_core_external_dev_self_development_v1 import UnifiedYADOCoreEx
 
 
 class ExternalDevSelfDevelopmentTests(unittest.TestCase):
+    def router_source(self):
+        core = UnifiedYADOCoreExternalDevSelfDevelopmentV1()
+        refresh = core.refresh_external_dev_capabilities(fetch_override=fake_fetch)
+        return ExternalDevSelfDevelopmentV1.render_router_source(
+            ExternalDevSelfDevelopmentV1.derive_router_policy(refresh))
+
+    def test_router_rejects_top_level_execution_before_side_effect(self):
+        source = self.router_source()
+        with tempfile.TemporaryDirectory() as td:
+            sentinel = Path(td) / 'executed'
+            injected = source + f"\n__import__('pathlib').Path({str(sentinel)!r}).write_text('bad')\n"
+            with self.assertRaisesRegex(ValueError, 'ROUTER_SOURCE_INVALID'):
+                ExternalDevSelfDevelopmentV1.load_router(injected)
+            self.assertFalse(sentinel.exists())
+
+    def test_router_rejects_replaced_function_even_with_original_digests(self):
+        source = self.router_source().replace('    tokens = _tokens(deficit)', '    while True: pass')
+        with self.assertRaisesRegex(ValueError, 'ROUTER_TEMPLATE_MISMATCH'):
+            ExternalDevSelfDevelopmentV1.load_router(source)
+
+    def test_router_rejects_expressions_in_literal_slots(self):
+        source = self.router_source()
+        source = 'PACK_DIGEST = str(123)\n' + source.split('\n', 1)[1]
+        with self.assertRaisesRegex(ValueError, 'ROUTER_SOURCE_INVALID'):
+            ExternalDevSelfDevelopmentV1.load_router(source)
+
+    def test_router_rejects_unbounded_and_unknown_policy_data(self):
+        source = self.router_source()
+        with self.assertRaisesRegex(ValueError, 'ROUTER_SOURCE_BUDGET'):
+            ExternalDevSelfDevelopmentV1.load_router(source + ' ' * 65536)
+        source = source.replace('TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN', 'UNADMITTED_CAPABILITY')
+        with self.assertRaisesRegex(ValueError, 'ROUTER_POLICY_SHAPE'):
+            ExternalDevSelfDevelopmentV1.load_router(source)
+
     def test_router_is_derived_and_beats_fixed_baseline(self):
         core = UnifiedYADOCoreExternalDevSelfDevelopmentV1()
         with tempfile.TemporaryDirectory() as td:

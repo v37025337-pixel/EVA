@@ -235,6 +235,9 @@ def main(args):
                 new_verified_programs=sorted(current - previous),
                 programs_before=len(previous),
                 programs_after=len(current),
+                completed_sessions=len(development["sessions"]),
+                stop_reasons=[s.get("reason") for s in development["sessions"]],
+                selected_goals=sum(len(s["selections"]) for s in development["sessions"]),
                 host_supplied_new_goals=0,
                 general_capability_gain_proven=False,
             )
@@ -271,7 +274,8 @@ def main(args):
         "implementation_upgraded": upgrade is not None,
         "native_program_development": None if development is None else {
             key: development[key] for key in ("status", "rounds_requested", "new_verified_programs",
-                                              "programs_before", "programs_after", "host_supplied_new_goals")},
+                                              "programs_before", "programs_after", "host_supplied_new_goals",
+                                              "completed_sessions", "stop_reasons", "selected_goals")},
         "prior_events_preserved_exactly": True, "new_cycles_verified": continuation["cycles_verified"],
         "host_goals_in_continuation": continuation["host_goal_count"],
         "ghidra_research_generations": results.get("ghidra", {}).get("generation_count", 0),

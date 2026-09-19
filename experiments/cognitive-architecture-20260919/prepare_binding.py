@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'runtime'))
 from yado_evolution_ledger_v2 import event_hash, validate_ledger_v2
 
-UPGRADE = 'YADO_UNIFIED_COGNITIVE_DEVELOPMENT_BINDING_V1'
+UPGRADE = 'YADO_UNIFIED_COGNITIVE_DEVELOPMENT_ROUTER_REPAIR_V1'
 REPORT = 'experiments/cognitive-architecture-20260919/cognitive-verification.json'
 
 def digest(value):
@@ -21,7 +21,7 @@ def file_sha(relative):
     return hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
 
 def base(relative):
-    return json.loads(subprocess.check_output(['git', 'show', '81e61776a3702d0f7566e44ed7dae6c4ebb3fdef:' + relative], cwd=ROOT))
+    return json.loads(subprocess.check_output(['git', 'show', '73cd9b19f0f8f75dc485602309d638f2eb447cd1:' + relative], cwd=ROOT))
 
 def seal(value, key):
     value[key] = digest({k: v for k, v in value.items() if k != key})
@@ -41,8 +41,8 @@ metadata = {
     'selection': 'EXISTING_KERNEL_SELECTORS_FROM_DURABLE_DEFICITS',
     'rounds_per_campaign': 3,
     'endogenous_cycles_per_campaign': 20,
-    'predecessor_checkpoint_run': 35453219380,
-    'predecessor_tick': 1142,
+    'predecessor_checkpoint_run': 35454873271,
+    'predecessor_tick': 1334,
     'public_web_modules': [
         'runtime/yado_unified_core_self_directed_web_research_v1.py',
         'runtime/yado_unified_core_peer_systems_learning_v1.py',
@@ -55,6 +55,7 @@ metadata = {
         'runtime/yado_cognitive_integration_holdout_v1.py'],
     'cognitive_validation_scope': 'SHADOW_BOUNDED_FIXED_SEED_REVALIDATION',
     'cognitive_report': REPORT,
+    'router_loading': 'EXACT_TEMPLATE_VALIDATION_AND_BOUNDED_DATA_INTERPRETATION_NO_EXEC',
     'integration_authorship': 'ASSISTANT_USER_AUTHORIZED',
     'general_capability_gain_proven': False,
     'automatic_canonical_promotion': False,
@@ -114,7 +115,7 @@ event = {'event_id': UPGRADE + '_MAINTENANCE_' + str(index), 'index': index,
          'implementation_id': head['implementation_id'], 'capability_upgrade': UPGRADE,
          'effect': 'BIND_EXISTING_WEB_AND_COGNITIVE_MODULES_AND_BOUNDED_DURABLE_DEVELOPMENT; NEXT=' + ledger['open_deficits'][0],
          'validation_required_before_main_merge': ['FULL_REGRESSION', 'FULL_KERNEL_AUDIT_V2',
-             'CANONICAL_INVARIANT_GUARD', 'STATEFUL_CONTINUATION_FROM_1142_AND_BOUNDED_PROGRAM_DEVELOPMENT'],
+             'CANONICAL_INVARIANT_GUARD', 'STATEFUL_CONTINUATION_FROM_1334_AND_BOUNDED_PROGRAM_DEVELOPMENT'],
          'source_path': 'architecture/yado-unified-architecture-v2.json',
          'source_digest': file_sha('architecture/yado-unified-architecture-v2.json')}
 event['event_hash'] = event_hash(event)
