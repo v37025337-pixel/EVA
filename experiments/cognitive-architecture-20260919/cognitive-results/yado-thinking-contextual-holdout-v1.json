@@ -1,0 +1,114 @@
+{
+  "adapter_limits": {
+    "max_lookback": 128,
+    "max_stream_contexts": 1024
+  },
+  "adapter_path": "runtime/yado_g2_contextual_stream_capability_adapter_v1.py",
+  "adapter_sha256": "d53d853ab641025edeb31a2a19483b06a61061ca02f82f53fa10175559c1647b",
+  "automatic_main_mutation": false,
+  "baseline_scores": {
+    "fresh": {
+      "accuracy": 0.0,
+      "by_family": {
+        "context_update": 0.0,
+        "cross_stream_isolation": 0.0,
+        "long_gap": 0.0,
+        "short_interleave": 0.0
+      },
+      "correct": 0,
+      "total": 32
+    },
+    "hidden": {
+      "accuracy": 0.0,
+      "by_family": {
+        "context_update": 0.0,
+        "cross_stream_isolation": 0.0,
+        "long_gap": 0.0,
+        "short_interleave": 0.0
+      },
+      "correct": 0,
+      "total": 32
+    },
+    "train": {
+      "accuracy": 0.0,
+      "by_family": {
+        "context_update": 0.0,
+        "cross_stream_isolation": 0.0,
+        "long_gap": 0.0,
+        "short_interleave": 0.0
+      },
+      "correct": 0,
+      "total": 32
+    }
+  },
+  "baseline_strategy": "BASE_ROUTER_ONLY",
+  "candidate_path": "candidates/cognitive/yado_thinking_contextual_policy_v1.py",
+  "candidate_sha256": "b6a6d4233416313d21046a8d8080d633ebdcd457851f0b8b2a4d9aa964071b8d",
+  "canonical_mutation": false,
+  "consciousness_claimed": false,
+  "downloaded_code_executed": false,
+  "external_model_used": false,
+  "limitations": [
+    "bounded contextual routing benchmark",
+    "scenario generator and strategy selection objective are externally authored",
+    "passing demonstrates stream-context handling only, not general reasoning"
+  ],
+  "real_yado_component": "ALG-G2-CONTEXTUAL-STREAM-CAPABILITY-ADAPTER-V1",
+  "real_yado_context_adapter_used": true,
+  "scenario_counts": {
+    "fresh": 32,
+    "hidden": 32,
+    "train": 32
+  },
+  "schema": "yado.thinking_contextual_holdout.v1",
+  "seeds": {
+    "fresh": 2026091823,
+    "hidden": 2026091822,
+    "train": 2026091821
+  },
+  "selected_action": "derive and test a contextual reasoning holdout",
+  "selected_scores": {
+    "fresh": {
+      "accuracy": 1.0,
+      "by_family": {
+        "context_update": 1.0,
+        "cross_stream_isolation": 1.0,
+        "long_gap": 1.0,
+        "short_interleave": 1.0
+      },
+      "correct": 32,
+      "total": 32
+    },
+    "hidden": {
+      "accuracy": 1.0,
+      "by_family": {
+        "context_update": 1.0,
+        "cross_stream_isolation": 1.0,
+        "long_gap": 1.0,
+        "short_interleave": 1.0
+      },
+      "correct": 32,
+      "total": 32
+    },
+    "train": {
+      "accuracy": 1.0,
+      "by_family": {
+        "context_update": 1.0,
+        "cross_stream_isolation": 1.0,
+        "long_gap": 1.0,
+        "short_interleave": 1.0
+      },
+      "correct": 32,
+      "total": 32
+    }
+  },
+  "selected_strategy": "BOUNDED_STREAM_CONTEXT_MAP",
+  "selected_strategy_metadata": {
+    "complexity": 0.3,
+    "novelty": 0.95,
+    "risk": 0.05,
+    "strategy_id": "BOUNDED_STREAM_CONTEXT_MAP"
+  },
+  "selected_target": "THINKING",
+  "status": "PASS_SHADOW_THINKING_CONTEXTUAL_HOLDOUT_V1"
+}

@@ -10,15 +10,16 @@ on:
       checkpoint_name:
         description: Exact checkpoint artifact name when source_run is provided
         required: false
-        default: yado-repository-learning-checkpoint-35452596993-1
+        default: yado-repository-learning-checkpoint-35453219380-1
   push:
-    branches: [codex/yado-external-dev-self-development-v1-20260916, codex/yado-repository-learning-resume-20260919]
+    branches: [codex/yado-external-dev-self-development-v1-20260916, codex/yado-repository-learning-resume-20260919, codex/yado-cognitive-architecture-20260919]
     paths:
       - '.github/workflows/yado-external-dev-self-development-v1.yml'
       - 'runtime/yado_external_dev_self_development_v1.py'
       - 'runtime/yado_unified_core_external_dev_self_development_v1.py'
       - 'runtime/test_yado_external_dev_self_development_v1.py'
       - 'experiments/repository-learning-resume-20260919/**'
+      - 'experiments/cognitive-architecture-20260919/**'
 
 permissions:
   contents: write
@@ -29,7 +30,7 @@ concurrency:
 
 jobs:
   self-develop:
-    if: github.ref != 'refs/heads/codex/yado-repository-learning-resume-20260919' && !inputs.source_run
+    if: github.ref != 'refs/heads/codex/yado-repository-learning-resume-20260919' && github.ref != 'refs/heads/codex/yado-cognitive-architecture-20260919' && !inputs.source_run
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -133,7 +134,7 @@ jobs:
             audits/yado-full-regression-v1-report.json
 
   learn-and-resume:
-    if: github.ref == 'refs/heads/codex/yado-repository-learning-resume-20260919' || inputs.source_run != ''
+    if: github.ref == 'refs/heads/codex/yado-repository-learning-resume-20260919' || github.ref == 'refs/heads/codex/yado-cognitive-architecture-20260919' || inputs.source_run != ''
     permissions:
       contents: read
       actions: read
@@ -154,9 +155,11 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.source_run || '35452596993' }}
-          name: ${{ inputs.checkpoint_name || 'yado-repository-learning-checkpoint-35452596993-1' }}
+          run-id: ${{ inputs.source_run || '35453219380' }}
+          name: ${{ inputs.checkpoint_name || 'yado-repository-learning-checkpoint-35453219380-1' }}
           path: ${{ runner.temp }}/yado-predecessor
+      - name: Re-execute logic, thinking, transfer, memory and integration gates
+        run: python experiments/cognitive-architecture-20260919/verify_cognition.py
       - name: Install the previously verified Hivemind release
         run: |
           curl --fail --location --retry 2 --output "$RUNNER_TEMP/hive" https://github.com/dip497/hivemind/releases/download/v1.17.1/hive-linux-x86_64
@@ -164,11 +167,13 @@ jobs:
           chmod +x "$RUNNER_TEMP/hive"
       - name: Run live learning, local Hivemind transport and native continuation
         env:
-          SOURCE_RUN: ${{ inputs.source_run || '35452596993' }}
+          SOURCE_RUN: ${{ inputs.source_run || '35453219380' }}
         run: |
           python experiments/repository-learning-resume-20260919/run.py \
             --checkpoint "$RUNNER_TEMP/yado-predecessor" --source-run "$SOURCE_RUN" \
-            --output "$RUNNER_TEMP/yado-learning-checkpoint" --hive "$RUNNER_TEMP/hive" --cycles 20
+            --output "$RUNNER_TEMP/yado-learning-checkpoint" --hive "$RUNNER_TEMP/hive" --cycles 20 \
+            --program-rounds 3 \
+            --source-updates experiments/cognitive-architecture-20260919/source-update.json
       - name: Verify canonical continuity
         run: |
           git diff --exit-code -- canonical architecture/evolution-ledger.json

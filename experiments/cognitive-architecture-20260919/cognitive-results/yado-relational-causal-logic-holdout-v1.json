@@ -1,0 +1,108 @@
+{
+  "automatic_main_mutation": false,
+  "baseline_policy": {
+    "causal_only": false,
+    "max_depth": 1,
+    "reject_feedback_cycles": false
+  },
+  "baseline_scores": {
+    "fresh": {
+      "accuracy": 0.5,
+      "by_kind": {
+        "association_not_cause": 1.0,
+        "causal_chain": 0.0,
+        "feedback_contradiction": 1.0,
+        "wrong_direction": 0.0
+      },
+      "correct": 20,
+      "total": 40
+    },
+    "hidden": {
+      "accuracy": 0.5,
+      "by_kind": {
+        "association_not_cause": 1.0,
+        "causal_chain": 0.0,
+        "feedback_contradiction": 1.0,
+        "wrong_direction": 0.0
+      },
+      "correct": 20,
+      "total": 40
+    },
+    "train": {
+      "accuracy": 0.5,
+      "by_kind": {
+        "association_not_cause": 1.0,
+        "causal_chain": 0.0,
+        "feedback_contradiction": 1.0,
+        "wrong_direction": 0.0
+      },
+      "correct": 20,
+      "total": 40
+    }
+  },
+  "candidate_path": "candidates/cognitive/yado_relational_causal_logic_policy_v1.py",
+  "candidate_sha256": "9d2e2e95be576638bae66dc83a92479fa6a0048abc373a4769a090c1075b9422",
+  "canonical_mutation": false,
+  "consciousness_claimed": false,
+  "downloaded_code_executed": false,
+  "external_model_used": false,
+  "limitations": [
+    "synthetic bounded relational/causal tasks",
+    "task generator and policy search space are externally authored",
+    "passing demonstrates functional holdout improvement, not general intelligence"
+  ],
+  "schema": "yado.relational_causal_logic_holdout.v1",
+  "seeds": {
+    "fresh": 2026091803,
+    "hidden": 2026091802,
+    "train": 2026091801
+  },
+  "selected_action": "derive and test a new relational/causal logic holdout",
+  "selected_policy": {
+    "causal_only": true,
+    "max_depth": 6,
+    "reject_feedback_cycles": true
+  },
+  "selected_scores": {
+    "fresh": {
+      "accuracy": 1.0,
+      "by_kind": {
+        "association_not_cause": 1.0,
+        "causal_chain": 1.0,
+        "feedback_contradiction": 1.0,
+        "wrong_direction": 1.0
+      },
+      "correct": 40,
+      "total": 40
+    },
+    "hidden": {
+      "accuracy": 1.0,
+      "by_kind": {
+        "association_not_cause": 1.0,
+        "causal_chain": 1.0,
+        "feedback_contradiction": 1.0,
+        "wrong_direction": 1.0
+      },
+      "correct": 40,
+      "total": 40
+    },
+    "train": {
+      "accuracy": 1.0,
+      "by_kind": {
+        "association_not_cause": 1.0,
+        "causal_chain": 1.0,
+        "feedback_contradiction": 1.0,
+        "wrong_direction": 1.0
+      },
+      "correct": 40,
+      "total": 40
+    }
+  },
+  "selected_target": "LOGIC",
+  "status": "PASS_SHADOW_RELATIONAL_CAUSAL_LOGIC_HOLDOUT_V1",
+  "task_counts": {
+    "fresh": 40,
+    "hidden": 40,
+    "train": 40
+  }
+}

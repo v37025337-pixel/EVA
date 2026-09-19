@@ -61,15 +61,15 @@ def restore(checkpoint, out, expected_run):
     return receipt
 
 
-def upgrade_research_sources(out):
-    """Admit only the explicitly documented two-file research repair."""
+def upgrade_research_sources(out, source_updates=None):
+    """Admit only an exact, reviewed predecessor-to-current source map."""
     parent_path = out / "birth/manifest.json"
     parent = json.loads(parent_path.read_text())
     drift = {name: {"previous_sha256": digest, "current_sha256": sha(ROOT / name)}
              for name, digest in parent["inherited_files"].items() if sha(ROOT / name) != digest}
     if not drift:
         return None
-    allowed = json.loads((Path(__file__).parent / "research-source-update.json").read_text())
+    allowed = json.loads((source_updates or Path(__file__).parent / "research-source-update.json").read_text())
     if drift != allowed:
         raise ValueError("UNDECLARED_RESEARCH_IMPLEMENTATION_CHANGE")
     from successor.continuity import prepare_upgrade
@@ -156,7 +156,7 @@ def main(args):
     out.mkdir(parents=True, exist_ok=False)
     save(out, "summary", {"status": "WITHHOLD_INCOMPLETE"})
     predecessor = restore(args.checkpoint, out, args.source_run)
-    upgrade = upgrade_research_sources(out)
+    upgrade = upgrade_research_sources(out, args.source_updates)
     # Imports happen after restoring the exact sources pinned by the predecessor.
     from successor.kernel import SuccessorKernel
     from successor.endogenous_run import propose_endogenous_goal, run_endogenous_cycles
@@ -220,6 +220,25 @@ def main(args):
 
     kernel = SuccessorKernel(manifest, state)
     try:
+        development = None
+        if args.program_rounds:
+            programs_before = kernel.native_program_status()
+            development = kernel.develop_native_programs(rounds=args.program_rounds)
+            if not development["sessions"] or any(s["status"] != "COMPLETE" for s in development["sessions"]):
+                raise ValueError("INCOMPLETE_NATIVE_PROGRAM_DEVELOPMENT")
+            previous = {p["source_sha256"] for p in programs_before["verified_programs"]}
+            current = {p["source_sha256"] for p in development["verified_programs"]}
+            assert previous.issubset(current)
+            development.update(
+                status="PASS_BOUNDED_NATIVE_PROGRAM_DEVELOPMENT",
+                rounds_requested=args.program_rounds,
+                new_verified_programs=sorted(current - previous),
+                programs_before=len(previous),
+                programs_after=len(current),
+                host_supplied_new_goals=0,
+                general_capability_gain_proven=False,
+            )
+            save(out, "native-program-development", development)
         continuation = run_endogenous_cycles(kernel, cycles=args.cycles, budget=3)
         save(out, "continuation", continuation)
         after = kernel.verify_state()
@@ -249,6 +268,10 @@ def main(args):
         "tested_commit": os.environ.get("GITHUB_SHA"), "predecessor_run_id": args.source_run,
         "identity_digest": identity, "cross_workflow_state_restored": True,
         "research_implementation_upgraded": upgrade is not None,
+        "implementation_upgraded": upgrade is not None,
+        "native_program_development": None if development is None else {
+            key: development[key] for key in ("status", "rounds_requested", "new_verified_programs",
+                                              "programs_before", "programs_after", "host_supplied_new_goals")},
         "prior_events_preserved_exactly": True, "new_cycles_verified": continuation["cycles_verified"],
         "host_goals_in_continuation": continuation["host_goal_count"],
         "ghidra_research_generations": results.get("ghidra", {}).get("generation_count", 0),
@@ -276,4 +299,6 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--hive", type=Path, required=True)
     parser.add_argument("--cycles", type=int, default=20)
+    parser.add_argument("--source-updates", type=Path)
+    parser.add_argument("--program-rounds", type=int, choices=range(0, 9), default=0)
     raise SystemExit(main(parser.parse_args()))
