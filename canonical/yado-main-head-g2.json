@@ -46,9 +46,9 @@
     "status": "CANONICAL_ACTIVE"
   },
   "algorithm_provenance_registry": {
-    "current_execution_label": "G2_RAW_TASK_REPRESENTATION_V6_RESIDUAL_REPAIR_CANONICAL",
+    "current_execution_label": "YADO_UNIFIED_KERNEL_REPAIR_V1",
     "registry": "canonical/yado-algorithm-provenance-registry-v1.json",
-    "registry_digest": "56daf9cb03c9184aef5c14928bafbe38b756d604df19504a92de359e46137339",
+    "registry_digest": "e69e3c4bc0b044454ea43bc234edc19cfd2e2306c587939de6e28df98a2ae9e3",
     "registry_id": "YADO_G2_ALGORITHM_PROVENANCE_REGISTRY_V1"
   },
   "all_experience_tri_organ_v1": {
@@ -180,11 +180,12 @@
     "historical_branch_count": 13,
     "physical_branch_closure_merge_commit": "c1b949bdb59ad681f3a02b9a8be8e85cd52a1830",
     "physical_ref_convergence": "VERIFIED",
-    "physical_ref_convergence_required": false
+    "physical_ref_convergence_required": false,
+    "scope": "HISTORICAL_CHECKPOINT_NOT_CURRENT_EXECUTION"
   },
   "candidate_architecture_digest": "6478ffdb8dc9b4d29f10f358bac742c225e984f47daa08597577b43c7fe9cb27",
   "candidate_digest": "b292c7ed0bd9e060a2ce736a33ac30e92403ca8d57c94a8f2d354538f584eaa0",
-  "canonical_head_digest": "80e423e3da3b106039aafccc92d2c724f4334aa52e7b180be3b07d57cd70f96c",
+  "canonical_head_digest": "3ab7f26ac0e0e50e3458ad221d4e6c4b7e5ce8eb503d671da6fe1b32eda98f06",
   "capability_scores": {
     "integrity": 1,
     "intelligence": 1,
@@ -271,6 +272,7 @@
     "latest_shadow_selected_child_digest": "60ed901d6078f8631fc65664d9c879a83fc9e6aacc5772d1186d5d0bfac2d32a",
     "status": "CANONICAL_ACTIVE"
   },
+  "execution_branch": "main",
   "execution_fabric_v1": {
     "canonical_active": false,
     "canonical_component_digest": "90af29830876386ce69438d53eab067e6f398df71252d04406190fedeb3c2403",
@@ -390,6 +392,7 @@
     "status": "CANONICAL_ACTIVE",
     "v4_replaced": false
   },
+  "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
   "inherited_capabilities": [
     "ALG-CONJUNCTIVE-RULE-INDUCER-V1",
     "ALG-BOUNDED-DNF-RELATION-POLICY-INDUCER-V1",
@@ -398,6 +401,16 @@
   ],
   "internal_consolidation_applied": true,
   "lineage_id": "YADO_MAIN_LINEAGE",
+  "maintenance": {
+    "authorship": "ASSISTANT_IMPLEMENTED_USER_REQUESTED_REPAIR",
+    "formal_generation_changed": false,
+    "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
+    "integrated_feed_commit": "b5e812b48df75e50f9398a194802b87cf3150c51",
+    "parent_main_commit": "ea122cb6413c763e026aa2a0e5b99d8f6370b257",
+    "parent_reconciliation_commit": "7ae7b49947ee6a609170f2041c4a39b41a772d83",
+    "runtime_generation": "V4_MAINTENANCE_R1",
+    "validation_report": "audits/yado-unified-kernel-repair-v1-validation.json"
+  },
   "native_selector_canonical_binding_v5": {
     "binding_digest": "8f8d9240ef296a0de5afd458e41cc43be651030151a7ba1b1c7bcee3065275ad",
     "fresh_extrapolation_score": 1.0,
@@ -476,12 +489,14 @@
     "status": "CANONICAL_ACTIVE"
   },
   "openapi_readonly_executor_v1": {
-    "canonical_component_digest": "0c3b4f13d0218423f3e3dc93b90e800dec603506f0f92aa02d73b2711e1b8e31",
+    "canonical_component_digest": "27dd170780599f7dc556adee994d5eac6eb1baa1d205fc66116f6de5373237f9",
     "component_id": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
     "credentials_allowed": false,
+    "fresh_receipt_scope": "HISTORICAL_PRE_MAINTENANCE_ADMISSION",
     "network_execute": true,
     "read_only_only": true,
     "redirects_followed": false,
+    "runtime_sha256": "ee8c3c5fbaede13264915d6b0edeea1b89cb29ea29f6ec933bee452aefc4107e",
     "status": "CANONICAL_ACTIVE"
   },
   "parent_artifact_digest": "f67eeacb3430150b8df4a8e415884c748d87cb287f213d538911f206d71d9bf6",
@@ -811,9 +826,9 @@
     "single_active_context": true
   },
   "unified_core": {
-    "algorithm_provenance_registry_digest": "56daf9cb03c9184aef5c14928bafbe38b756d604df19504a92de359e46137339",
+    "algorithm_provenance_registry_digest": "e69e3c4bc0b044454ea43bc234edc19cfd2e2306c587939de6e28df98a2ae9e3",
     "audit_invariant": "HEAD_MANIFEST_CONSISTENT_WITH_LEDGER",
-    "bounded_program_repair_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+    "bounded_program_repair_source_sha256": "a393286959f307edcf81ac23dc710f5e243b33ba85d987dd2145190d2031ed88",
     "canonical_write_guard_source_sha256": "a200096ea63d74426a12e1ebe4fa1e5c6e3facee29215eb355ff6106fa321e9d",
     "causal_external_learning_binding": {
       "component_id": "RUNTIME-G2-CAUSAL-EXTERNAL-LEARNING-BINDING-V1",
@@ -828,11 +843,11 @@
     "contextual_stream_adapter_source_sha256": "8a51fc279f030e38fc0dca7154372c952b953141a208b4af2b83e711ad80df52",
     "control_plane_binding": "CANONICAL",
     "control_plane_binding_gate_run_id": "33391800337",
-    "core_digest": "79e901afd96a62cd5b4b285e0757cb9e33c6c93147068326899f09f2b93b7629",
+    "core_digest": "b94b12114dd04ef7a5cba75fc4c00343181312905f7e26a443ae82fcd8109ab1",
     "core_id": "UNIFIED_YADO_CORE_V1",
     "counterexample_lineage_memory_binding": "architecture/evolution-ledger.json+receipts/",
     "deep_self_audit_source_sha256": "4e093e1acea7db1809fa7c0e7b5c68c4506d0683a3e1ef3ac55007c52471bf59",
-    "experience_registry_digest": "77e95480b48d8c7a824f235993a7309f4c003228c3d8b9018a994b6fb910498a",
+    "experience_registry_digest": "c7b416085f7b410cdc8041f092fa62cd44be34e21ba06a6d60fa442a5b88025c",
     "g2_runtime_sha256": "79eba84158de120f026e164b4914bec0fd00358bfe8a56e81b0497e924b7e762",
     "intelligence_active_router_component": "ALG-G2-COVERAGE-PRUNED-COMPOSITIONAL-SCHEMA-ROUTER-V3",
     "intelligence_additive_components": [
@@ -850,8 +865,8 @@
     "logic_ceiling_source_sha256": "9cd440b4dadbf21fc98befee39a7d6c775a1fab20e9aae0c3fa4b311196d633a",
     "raw_task_representation_component_digest": "64bb15e3a9b53f75a9f5eec51d3571c5bb4a3de38f7760db3348b4c2da68894d",
     "raw_task_representation_runtime_sha256": "075d33c2003f46e0087d1d346720f962e1514f8066f27bec31eead5c13d39fe2",
-    "runtime_integrity_manifest_digest": "3e84fdedded0abdc7137acbb10310ff7472f6cfee9151c697d82ba34b63034eb",
-    "runtime_sha256": "4154f08e801aa3c91934aa78bbe2ee0e957737d27e4a3aa4082dd25ce6068a62",
+    "runtime_integrity_manifest_digest": "beb1eab37f6c3e21048f17dc4ec485c3a06e7c2114c04a5ab2812b5fd7eb457b",
+    "runtime_sha256": "07ff49b664e9a3c739d451e52486bb15cdec52dcff4993e1ca1b81f7adfc379e",
     "scientific_data_reasoner_source_sha256": "7a3032455dfaffa1fb5b31ad197f592f7eb51b62d59bdeb0ec0feb5502cb0e8b",
     "semantic_expression_synthesizer_source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7",
     "single_active_lineage": true,

@@ -44,14 +44,14 @@ jobs:
             candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v3.py
           python -m unittest runtime.test_yado_runtime_self_rewrite_admission_v3 -v
 
-      - name: Verify V3 admission or exact V4 successor
+      - name: Verify historical V3 or its verified active successor
         env:
           PYTHONPATH: runtime
         run: |
           python - <<'PY'
           import json
           from yado_runtime_self_rewrite_admission_v3 import analyze_committed
-          from yado_runtime_self_rewrite_admission_v4 import analyze as analyze_v4
+          from yado_runtime_self_rewrite_admission_v4 import MAINTENANCE_STATE, analyze_committed as analyze_v4
 
           d=analyze_committed()
           assert d["checks"]["candidate_sha_matches_receipt"] is True, d
@@ -71,9 +71,12 @@ jobs:
               assert d["checks"]["target_sha_matches_candidate"] is False, d
               successor=analyze_v4()
               assert successor["status"]=="PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE", successor
-              assert successor["runtime_state"]=="V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE", successor
+              assert successor["runtime_state"] in {"V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE", MAINTENANCE_STATE}, successor
+              assert successor["repository_view"]=="COMMITTED_HEAD", successor
+              assert successor["target_sha256"]==d["target_sha256"], successor
               assert successor["checks"]["target_matches_candidate_when_shadow_applied"] is True, successor
-              state="V3_SUPERSEDED_BY_EXACT_VERIFIED_V4"
+              state=("V3_SUPERSEDED_BY_VERIFIED_V4_MAINTENANCE" if successor["runtime_state"]==MAINTENANCE_STATE
+                     else "V3_SUPERSEDED_BY_EXACT_VERIFIED_V4")
 
           print(json.dumps({
               "status":d["status"],

@@ -54,7 +54,7 @@ class _CanonicalSplitBaseV10:
         out=[(copy.deepcopy(base),'IDENTITY',1),
              (ast.Call(func=ast.Name(id='abs',ctx=ast.Load()),args=[copy.deepcopy(base)],keywords=[]),'ABS',2)]
         ys=[e for _,e in vals]
-        if all(y==ys[0] for y in ys):out.append((ast.Constant(ys[0]),'CONSTANT',3))
+        if all(cls.BASE.equivalent(y,ys[0]) for y in ys):out.append((ast.Constant(ys[0]),'CONSTANT',3))
         try:
             diffs=[Fraction(y)-Fraction(x) for x,y in vals]
             if diffs and all(d==diffs[0] for d in diffs) and diffs[0].denominator==1:
@@ -95,8 +95,8 @@ class _CanonicalSplitBaseV10:
         for expr,label,complexity in cls._raw_models(tree,function_name,base,subset):
             try:
                 src=cls._emit(tree,expr)
-                if not all(cls.execute(src,function_name,args)==expected for args,expected in subset):continue
-                support=sum(cls.execute(src,function_name,args)==expected for args,expected in global_examples)
+                if not all(cls.BASE.equivalent(cls.execute(src,function_name,args),expected) for args,expected in subset):continue
+                support=sum(cls.BASE.equivalent(cls.execute(src,function_name,args),expected) for args,expected in global_examples)
                 candidates.append((support,-complexity,label,ast.dump(expr),expr))
             except Exception:continue
         candidates.sort(key=lambda z:(-z[0],-z[1],z[2],z[3]))
@@ -216,7 +216,7 @@ class AmbiguityAwareProgramRepairV11(_CanonicalSplitBaseV10):
                     try:
                         a=cls.execute(source,function_name,args);b=cls.execute(alt,function_name,args)
                     except Exception:continue
-                    if a!=b:
+                    if not cls.BASE.equivalent(a,b):
                         return {'ambiguous':True,'arg':name,'threshold':k,'alternative_threshold':alt_k,'probe_value':pv,'outputs':[a,b]}
         return {'ambiguous':False}
 

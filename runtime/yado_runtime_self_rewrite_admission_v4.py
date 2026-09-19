@@ -14,6 +14,11 @@ V4_RECEIPT = Path("candidates/autonomous/yado-native-self-rewrite-v4-fresh-exper
 CANDIDATE = Path("candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py")
 TARGET = Path("runtime/yado_bounded_autonomous_learning_v1.py")
 OUT = Path("candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json")
+PROBE_OUT = Path("audits/yado-runtime-self-rewrite-admission-v4-probe.json")
+CONTRACT = Path("architecture/yado-unified-architecture-v2.json")
+CORE = Path("canonical/yado-unified-core-v1.json")
+PROMOTION = Path("candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json")
+MAINTENANCE_STATE = "V4_SUPERSEDED_BY_VERIFIED_MAINTENANCE"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -70,18 +75,44 @@ def analyze(root: Path = ROOT) -> dict[str, Any]:
     else:
         state="UNEXPECTED_RUNTIME_STATE"
 
+    maintenance_identity=None
+    maintenance_error=None
+    if state=="UNEXPECTED_RUNTIME_STATE":
+        try:
+            from yado_active_kernel_contract_v1 import active_kernel_identity
+            contract=load_json(root/CONTRACT)
+            lineage=contract["runtime_lineage"]
+            promotion=load_json(root/PROMOTION)
+            maintenance_identity=active_kernel_identity(root)
+            if not (
+                maintenance_identity["implementation_id"]=="YADO_UNIFIED_KERNEL_REPAIR_V1"
+                and maintenance_identity["controller_sha256"]==target_sha
+                and lineage.get("generation")=="V4_MAINTENANCE_R1"
+                and lineage.get("candidate_sha256")==candidate_sha==expected_candidate
+                and promotion.get("status")=="PASS_POST_MERGE_PHYSICAL_RUNTIME_PROMOTION_V4"
+                and promotion.get("candidate_sha256")==candidate_sha
+                and promotion.get("target_sha256")==candidate_sha
+            ):
+                raise ValueError("MAINTENANCE_V4_LINEAGE_MISMATCH")
+            state=MAINTENANCE_STATE
+        except Exception as exc:
+            maintenance_identity=None
+            maintenance_error=type(exc).__name__+":"+str(exc)
+
     compile(candidate.read_text(encoding="utf-8"),str(candidate),"exec")
     compile(target.read_text(encoding="utf-8"),str(target),"exec")
     candidate_binding=binding(candidate)
     target_binding=binding(target)
 
-    module=load_module(candidate)
     priority={
         "code":"AUTONOMOUS_LEARNING_BOOTSTRAP",
         "area":"MEMORY_AND_EXPERIENCE",
         "recommended_action":"For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.",
     }
-    observed={str(row["id"]):float(row["score"]) for row in module.rank_sources(priority)}
+    observed={}
+    if candidate_sha==expected_candidate and state!="UNEXPECTED_RUNTIME_STATE":
+        module=load_module(candidate)
+        observed={str(row["id"]):float(row["score"]) for row in module.rank_sources(priority)}
     expected={str(k):float(v) for k,v in (receipt.get("ranking_after") or {}).items()}
 
     source=candidate.read_text(encoding="utf-8")
@@ -100,7 +131,7 @@ def analyze(root: Path = ROOT) -> dict[str, Any]:
     checks={
         "candidate_sha_matches_v4_receipt":candidate_sha==expected_candidate,
         "candidate_differs_from_parent":candidate_sha!=parent_sha,
-        "runtime_state_recognized":state in {"PARENT_RUNTIME_PENDING_SHADOW_APPLY","V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE"},
+        "runtime_state_recognized":state in {"PARENT_RUNTIME_PENDING_SHADOW_APPLY","V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE",MAINTENANCE_STATE},
         "candidate_binding_matches_v4_receipt":candidate_binding==dict(receipt.get("candidate_learned_binding") or {}),
         "candidate_binds_latest_experience":candidate_binding.get("experience_digest")==receipt.get("latest_experience_digest"),
         "candidate_ranking_matches_v4_receipt":observed==expected,
@@ -122,8 +153,14 @@ def analyze(root: Path = ROOT) -> dict[str, Any]:
         "candidate_sha256":candidate_sha,
         "target_sha256":target_sha,
         "latest_experience_digest":receipt.get("latest_experience_digest"),
+        "active_kernel_identity":maintenance_identity,
+        "maintenance_verification_error":maintenance_error,
         "checks":checks,
-        "next_required_capability":"ISOLATED_FULL_REGRESSION_V4" if state=="PARENT_RUNTIME_PENDING_SHADOW_APPLY" else "PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_GATE",
+        "next_required_capability":(
+            "NEXT_GENERATION_FROM_VERIFIED_MAINTENANCE_RUNTIME" if state==MAINTENANCE_STATE
+            else "ISOLATED_FULL_REGRESSION_V4" if state=="PARENT_RUNTIME_PENDING_SHADOW_APPLY"
+            else "PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_GATE"
+        ),
     }
 
 
@@ -135,35 +172,49 @@ def analyze_committed(root: Path = ROOT) -> dict[str, Any]:
         result["repository_view"]="WORKTREE_FALLBACK_NO_GIT"
         return result
 
-    required=(V4_RECEIPT,CANDIDATE,TARGET)
+    commit=subprocess.check_output(["git","rev-parse","HEAD"],cwd=root,text=True).strip()
+    def committed(relative: Path, *, optional: bool = False):
+        cp=subprocess.run(
+            ["git","show",commit+":"+relative.as_posix()],cwd=root,capture_output=True,timeout=30,
+        )
+        if cp.returncode != 0:
+            if optional:
+                return None
+            raise RuntimeError("COMMITTED_ARTIFACT_READ_FAILED:"+relative.as_posix()+":"+cp.stderr.decode("utf-8","replace")[-500:])
+        return cp.stdout
+
+    required={path:committed(path) for path in (V4_RECEIPT,CANDIDATE,TARGET)}
+    contract_bytes=committed(CONTRACT,optional=True)
+    if contract_bytes is not None:
+        contract=json.loads(contract_bytes)
+        if contract.get("runtime_lineage",{}).get("generation")=="V4_MAINTENANCE_R1":
+            required[CONTRACT]=contract_bytes
+            for path in (CORE,Path("canonical/yado-main-head-g2.json"),Path("architecture/evolution-ledger.json"),PROMOTION):
+                required[path]=committed(path)
+            manifest=json.loads(required[CORE])["runtime_integrity_manifest"]["sources"]
+            for relative in manifest:
+                path=Path(relative)
+                if path.is_absolute() or ".." in path.parts:
+                    raise ValueError("UNSAFE_COMMITTED_SOURCE_PATH:"+relative)
+                if path not in required:
+                    required[path]=committed(path)
     with tempfile.TemporaryDirectory(prefix="yado-v4-admission-head-") as directory:
         shadow=Path(directory)
-        for relative in required:
-            cp=subprocess.run(
-                ["git","show","HEAD:"+relative.as_posix()],
-                cwd=root,
-                capture_output=True,
-                timeout=30,
-            )
-            if cp.returncode != 0:
-                raise RuntimeError(
-                    "COMMITTED_ARTIFACT_READ_FAILED:"
-                    +relative.as_posix()
-                    +":"
-                    +cp.stderr.decode("utf-8","replace")[-500:]
-                )
+        for relative,data in required.items():
             out=shadow/relative
             out.parent.mkdir(parents=True,exist_ok=True)
-            out.write_bytes(cp.stdout)
+            out.write_bytes(data)
         result=analyze(shadow)
         result["repository_view"]="COMMITTED_HEAD"
+        result["tested_commit"]=commit
         return result
 
 
 def run(root: Path = ROOT) -> dict[str, Any]:
     root=Path(root).resolve()
     result=analyze(root)
-    out=root/OUT
+    # A fresh probe is not a replacement for the immutable historical admission.
+    out=root/PROBE_OUT
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     print(json.dumps(result,sort_keys=True))

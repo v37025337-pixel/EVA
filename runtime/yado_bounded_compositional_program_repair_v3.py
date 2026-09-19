@@ -1,5 +1,6 @@
 from __future__ import annotations
 import ast,copy
+from yado_isolated_program_executor_v1 import execute as execute_isolated, equivalent, MAX_SOURCE_BYTES
 
 class BoundedCompositionalProgramRepairV3:
     COMPONENT_ID="ALG-G2-BOUNDED-COMPOSITIONAL-PROGRAM-REPAIR-V3"
@@ -10,6 +11,7 @@ class BoundedCompositionalProgramRepairV3:
     MAX_EDIT_DEPTH=2
     MAX_CANDIDATES=20000
     MAX_STRUCTURAL_CONSTANTS=12
+    equivalent=staticmethod(equivalent)
 
     @classmethod
     def _validate(cls,tree):
@@ -29,11 +31,11 @@ class BoundedCompositionalProgramRepairV3:
 
     @classmethod
     def execute(cls,source,function_name,args):
+        if type(source) is not str or len(source.encode('utf-8'))>MAX_SOURCE_BYTES:
+            raise ValueError("PROGRAM_SOURCE_BUDGET")
         tree=ast.parse(source);fname=cls._validate(tree)
         if fname!=function_name:raise ValueError("FUNCTION_NAME_MISMATCH")
-        env=dict(cls.SAFE_CALLS);env["__builtins__"]={}
-        exec(compile(tree,"<yado-bounded-program-v3>","exec"),env,env)
-        return env[function_name](*args)
+        return execute_isolated(source,function_name,args,cls.SAFE_CALLS,getattr(cls,"ALLOWED_ATTRS",()))
 
     @staticmethod
     def _const_pool(tree,train_examples):
@@ -91,7 +93,7 @@ class BoundedCompositionalProgramRepairV3:
         for args,expected in examples:
             try:got=cls.execute(source,function_name,args)
             except Exception:return False
-            if got!=expected:return False
+            if not cls.equivalent(got,expected):return False
         return True
 
     @classmethod

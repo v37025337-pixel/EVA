@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "80e423e3da3b106039aafccc92d2c724f4334aa52e7b180be3b07d57cd70f96c",
+  "current_head_digest": "3ab7f26ac0e0e50e3458ad221d4e6c4b7e5ce8eb503d671da6fe1b32eda98f06",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 311,
+  "event_count": 312,
   "events": [
     {
       "canonical_mutation": false,
@@ -5472,10 +5472,31 @@
       "source_digest": "1fbb210f5b41a702585f512107eb47bc9a3b0e2fec63a874465daf397290ea5e",
       "source_path": "canonical/yado-g2-causal-external-learning-binding-v1.json",
       "status": "PASS"
+    },
+    {
+      "canonical_mutation": true,
+      "effect": "SINGLE_MAIN_EXECUTION_AND_VERIFIABLE_MAINTENANCE; NEXT=KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
+      "event_hash": "bd717823aef491591d85a2371ec06c2c9a80d7d0c8fce1abb935ae660100541a",
+      "event_id": "YADO_UNIFIED_KERNEL_REPAIR_V1_20260919",
+      "event_type": "USER_AUTHORIZED_MAINTENANCE_BINDING",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
+      "index": 311,
+      "new_head_digest": "3ab7f26ac0e0e50e3458ad221d4e6c4b7e5ce8eb503d671da6fe1b32eda98f06",
+      "parent_event_hash": "e156667c44a3cff6be2ae8294271c701d11c47c9c8eac0c7ac2c2100238c75c8",
+      "previous_head_digest": "80e423e3da3b106039aafccc92d2c724f4334aa52e7b180be3b07d57cd70f96c",
+      "promotion_applied": false,
+      "source_digest": "9c6275e0a475be8ac849f96d54536ed3ed9efbda6b0d08a1d83d9846630b8f34",
+      "source_path": "architecture/yado-unified-architecture-v2.json",
+      "validation_required_before_main_merge": [
+        "FULL_REGRESSION",
+        "FULL_KERNEL_AUDIT_V2",
+        "CANONICAL_INVARIANT_GUARD"
+      ]
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "2a430b64d5dbc874c847100255888d2ae9f6ca45821d0d20ba611c5a171ab63b",
+  "ledger_digest": "7cc414aed7da6a4127f277cb13e8724951657bd0afce1bfc72494b62a1c0565c",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -5514,5 +5535,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "e156667c44a3cff6be2ae8294271c701d11c47c9c8eac0c7ac2c2100238c75c8"
+  "tail_event_hash": "bd717823aef491591d85a2371ec06c2c9a80d7d0c8fce1abb935ae660100541a"
 }

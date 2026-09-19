@@ -10,7 +10,7 @@ from yado_runtime_self_rewrite_admission_v3 import (
     TARGET,
     analyze_committed,
 )
-from yado_runtime_self_rewrite_admission_v4 import analyze_committed as analyze_v4_committed
+from yado_runtime_self_rewrite_admission_v4 import MAINTENANCE_STATE, analyze_committed as analyze_v4_committed
 
 V4_CANDIDATE = Path("candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py")
 
@@ -27,6 +27,11 @@ def generation_state(result: dict) -> str:
         return "V3"
     if target_sha == v4_sha:
         return "V4"
+    successor = analyze_v4_committed()
+    if (successor["target_sha256"] == target_sha
+            and successor["runtime_state"] == MAINTENANCE_STATE
+            and successor["status"] == "PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE"):
+        return "V4_MAINTENANCE_R1"
     raise AssertionError("UNRECOGNIZED_RUNTIME_GENERATION:" + target_sha)
 
 
@@ -46,7 +51,9 @@ class RuntimeSelfRewriteAdmissionV3Tests(unittest.TestCase):
             self.assertEqual(result["status"], "WITHHOLD_RUNTIME_SELF_REWRITE_ADMISSION_V3")
             successor = analyze_v4_committed()
             self.assertEqual(successor["status"], "PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE")
-            self.assertEqual(successor["runtime_state"], "V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE")
+            self.assertEqual(successor["runtime_state"],
+                             MAINTENANCE_STATE if state == "V4_MAINTENANCE_R1"
+                             else "V4_CANDIDATE_APPLIED_IN_ISOLATED_WORKTREE")
             self.assertTrue(successor["checks"]["target_matches_candidate_when_shadow_applied"])
 
     def test_experience_binding_tracks_active_generation(self):
@@ -95,7 +102,8 @@ class RuntimeSelfRewriteAdmissionV3Tests(unittest.TestCase):
             successor = analyze_v4_committed()
             self.assertEqual(
                 successor["next_required_capability"],
-                "PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_GATE",
+                "NEXT_GENERATION_FROM_VERIFIED_MAINTENANCE_RUNTIME" if state == "V4_MAINTENANCE_R1"
+                else "PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_GATE",
             )
 
 

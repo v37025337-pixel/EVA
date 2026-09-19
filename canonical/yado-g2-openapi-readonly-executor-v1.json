@@ -1,6 +1,6 @@
 {
   "architecture_mutation": false,
-  "canonical_component_digest": "0c3b4f13d0218423f3e3dc93b90e800dec603506f0f92aa02d73b2711e1b8e31",
+  "canonical_component_digest": "27dd170780599f7dc556adee994d5eac6eb1baa1d205fc66116f6de5373237f9",
   "component": {
     "architecture_mutation": false,
     "canonical_active": false,
@@ -23,23 +23,32 @@
   "component_id": "ALG-G2-OPENAPI-READONLY-EXECUTOR-V1",
   "credentials_allowed": false,
   "explicit_host_allowlist": true,
-  "fresh_checks": {
-    "credential_header_rejected": true,
-    "host_not_allowlisted_rejected": true,
-    "http_rejected": true,
-    "live_network_executed": true,
-    "live_no_credentials": true,
-    "live_no_redirects": true,
-    "live_repo_identity": true,
-    "live_response_bounded": true,
-    "planner_get_allowed": true,
-    "post_rejected": true,
-    "private_ip_rejected": true,
-    "undeclared_query_rejected": true
+  "historical_admission": {
+    "fresh_checks": {
+      "credential_header_rejected": true,
+      "host_not_allowlisted_rejected": true,
+      "http_rejected": true,
+      "live_network_executed": true,
+      "live_no_credentials": true,
+      "live_no_redirects": true,
+      "live_repo_identity": true,
+      "live_response_bounded": true,
+      "planner_get_allowed": true,
+      "post_rejected": true,
+      "private_ip_rejected": true,
+      "undeclared_query_rejected": true
+    },
+    "fresh_gate_artifact": "candidates/kernel-self-generated/g2-openapi-readonly-executor-v1.json",
+    "fresh_gate_receipt_sha256": "fdac28f57f5521cbc1580c09da00bf42ab9bd8e0997420ba9292b1be013c7566",
+    "runtime_sha256": "9d7bc5289377a790e81263eeef27a4d0960312825b8c1184d6bdde303acc355e"
   },
-  "fresh_gate_artifact": "candidates/kernel-self-generated/g2-openapi-readonly-executor-v1.json",
-  "fresh_gate_receipt_sha256": "fdac28f57f5521cbc1580c09da00bf42ab9bd8e0997420ba9292b1be013c7566",
   "https_only": true,
+  "maintenance": {
+    "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
+    "live_network_revalidation_claimed": false,
+    "transport": "VALIDATED_IP_PINNED_TLS_HOSTNAME_VERIFIED",
+    "validation_report": "audits/yado-unified-kernel-repair-v1-validation.json"
+  },
   "methods": [
     "GET",
     "HEAD"
@@ -49,7 +58,7 @@
   "private_address_access": false,
   "read_only_only": true,
   "redirects_followed": false,
-  "runtime_sha256": "9d7bc5289377a790e81263eeef27a4d0960312825b8c1184d6bdde303acc355e",
+  "runtime_sha256": "ee8c3c5fbaede13264915d6b0edeea1b89cb29ea29f6ec933bee452aefc4107e",
   "runtime_source": "runtime/yado_g2_openapi_readonly_executor_v1.py",
   "schema": "yado.g2.openapi_readonly_executor.canonical.v1",
   "semantic_boundary": "CANONICAL SAME-G2 REAL NETWORK EXECUTOR LIMITED TO PRE-APPROVED READ-ONLY OPENAPI GET/HEAD PLANS. CREDENTIALS, REDIRECTS, PRIVATE ADDRESSES AND NON-HTTPS ARE REJECTED.",

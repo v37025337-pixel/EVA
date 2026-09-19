@@ -1,12 +1,9 @@
 from __future__ import annotations
-import hashlib,ipaddress,json,socket,urllib.error,urllib.parse,urllib.request
+import hashlib,http.client,ipaddress,json,socket,urllib.parse
+from yado_personal_public_web_access_v2 import _PinnedHTTPSConnection
 
 def _canon(o):return json.dumps(o,sort_keys=True,separators=(',',':'),default=str)
 def _digest(o):return hashlib.sha256(_canon(o).encode()).hexdigest()
-
-class _NoRedirect(urllib.request.HTTPRedirectHandler):
-    def redirect_request(self,req,fp,code,msg,headers,newurl):
-        return None
 
 class G2OpenAPIReadOnlyExecutorV1:
     COMPONENT_ID='ALG-G2-OPENAPI-READONLY-EXECUTOR-V1'
@@ -20,7 +17,6 @@ class G2OpenAPIReadOnlyExecutorV1:
         if not self.allowed_hosts:raise ValueError('EMPTY_HOST_ALLOWLIST')
         self.max_bytes=max(1024,min(int(max_bytes),4*1024*1024))
         self.timeout=max(1.0,min(float(timeout),20.0))
-        self.opener=urllib.request.build_opener(_NoRedirect())
 
     @staticmethod
     def _public_host(host):
@@ -70,12 +66,17 @@ class G2OpenAPIReadOnlyExecutorV1:
 
         base=urllib.parse.urlunsplit(('https',host,path,'',''))
         url=base+('?' + urllib.parse.urlencode(q) if q else '')
-        req=urllib.request.Request(url,headers=safe_headers,method=method)
-        try:
-            with self.opener.open(req,timeout=self.timeout) as resp:
+        request_path=path+('?' + urllib.parse.urlencode(q) if q else '')
+        last_error=None
+        # Connect only to the addresses validated above. The shared transport
+        # preserves hostname TLS verification and does not consume proxy env vars.
+        for ip in ips:
+            connection=_PinnedHTTPSConnection(host,ip,self.timeout)
+            try:
+                connection.request(method,request_path,headers=safe_headers)
+                resp=connection.getresponse()
                 status=int(resp.status)
-                final=urllib.parse.urlsplit(resp.geturl())
-                if (final.hostname or '').lower().strip('.')!=host:raise RuntimeError('REDIRECT_HOST_CHANGE')
+                if 300<=status<400:raise RuntimeError('REDIRECT_REJECTED:'+str(status))
                 if status<200 or status>=300:raise RuntimeError('NON_SUCCESS_STATUS:'+str(status))
                 body=resp.read(self.max_bytes+1) if method!='HEAD' else b''
                 if len(body)>self.max_bytes:raise RuntimeError('RESPONSE_TOO_LARGE')
@@ -86,7 +87,7 @@ class G2OpenAPIReadOnlyExecutorV1:
                   'schema':'yado.g2.openapi_readonly_execution.v1',
                   'capability_id':self.COMPONENT_ID,
                   'contract_id':plan.get('contract_id'),
-                  'method':method,'url':url,'host':host,'resolved_ips':ips,
+                  'method':method,'url':url,'host':host,'resolved_ips':ips,'connected_ip':ip,
                   'status':status,'content_type':ctype,'response_bytes':len(body),
                   'body_sha256':hashlib.sha256(body).hexdigest(),
                   'network_executed':True,'read_only_enforced':True,
@@ -96,11 +97,11 @@ class G2OpenAPIReadOnlyExecutorV1:
                 if body:
                     meta['body_text']=body.decode('utf-8','replace')
                 return meta
-        except urllib.error.HTTPError as e:
-            if 300<=int(e.code)<400:raise RuntimeError('REDIRECT_REJECTED:'+str(e.code)) from e
-            raise RuntimeError('HTTP_ERROR:'+str(e.code)) from e
-        except urllib.error.URLError as e:
-            raise RuntimeError('NETWORK_ERROR:'+str(e.reason)) from e
+            except (OSError,http.client.HTTPException) as exc:
+                last_error=exc
+            finally:
+                connection.close()
+        raise RuntimeError('NETWORK_ERROR:'+str(last_error)) from last_error
 
     @classmethod
     def component(cls):

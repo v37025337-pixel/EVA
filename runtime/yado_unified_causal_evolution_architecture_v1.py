@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+import copy
 import hashlib
 import json
 
@@ -132,6 +133,8 @@ class UnifiedCausalEvolutionArchitecture:
         self._generations: Dict[str,GenerationRecord]={}
         self._head_id: Optional[str]=None
         self._decisions: List[PromotionDecision]=[]
+        # Approval binds immutable digests, never caller-owned record mappings.
+        self._admissions: Dict[str,Tuple[str,str,str]]={}
         self._historical_nodes: Dict[str,Dict[str,Any]]={}
 
     @property
@@ -147,6 +150,7 @@ class UnifiedCausalEvolutionArchitecture:
         }
 
     def register_root(self,g:GenerationRecord)->None:
+        g=copy.deepcopy(g)
         if g.parent_generation_id is not None:
             raise ValueError("ROOT_MUST_HAVE_NO_PARENT")
         if self._head_id is not None:
@@ -177,6 +181,7 @@ class UnifiedCausalEvolutionArchitecture:
         if self._head_id is None:
             raise ValueError("NO_DEVELOPMENTAL_HEAD")
         parent=self._generations[self._head_id]
+        candidate=copy.deepcopy(candidate)
         self._validate_record(candidate)
 
         reasons=[]
@@ -190,6 +195,12 @@ class UnifiedCausalEvolutionArchitecture:
         for key in self.policy.required_constraints:
             if not bool(candidate.hard_constraints.get(key,False)):
                 reasons.append(f"HARD_CONSTRAINT_FAIL:{key}")
+
+        for key in sorted(parent.protected_capabilities):
+            if key not in candidate.capability_scores:
+                reasons.append(f"INHERITED_PROTECTED_CAPABILITY_MISSING_SCORE:{key}")
+            if key not in candidate.protected_capabilities:
+                reasons.append(f"INHERITED_PROTECTED_CAPABILITY_REMOVED:{key}")
 
         common=sorted(set(parent.capability_scores)&set(candidate.capability_scores))
         gains={k:float(candidate.capability_scores[k])-float(parent.capability_scores[k]) for k in common}
@@ -222,6 +233,8 @@ class UnifiedCausalEvolutionArchitecture:
                 reasons.append("INSUFFICIENT_CROSS_DOMAIN_EVIDENCE")
 
         action="PROMOTE_GENERATION" if not reasons else "WITHHOLD_CANDIDATE"
+        parent_digest=parent.digest()
+        candidate_digest=candidate.digest()
         payload={
             "action":action,
             "parent_generation_id":parent.generation_id,
@@ -231,6 +244,8 @@ class UnifiedCausalEvolutionArchitecture:
             "protected_regressions":regressions,
             "significant_improvements":significant,
             "mean_gain":mean_gain,
+            "parent_record_digest":parent_digest,
+            "candidate_record_digest":candidate_digest,
         }
         decision=PromotionDecision(
             action=action,
@@ -243,16 +258,29 @@ class UnifiedCausalEvolutionArchitecture:
             mean_gain=mean_gain,
             decision_digest=digest_obj(payload),
         )
-        self._decisions.append(decision)
+        self._decisions.append(copy.deepcopy(decision))
+        if action=="PROMOTE_GENERATION":
+            self._admissions[decision.decision_digest]=(
+                parent_digest,candidate_digest,digest_obj(decision.canonical()),
+            )
         return decision
 
     def promote(self,candidate:GenerationRecord,decision:PromotionDecision)->None:
+        candidate=copy.deepcopy(candidate)
+        decision=copy.deepcopy(decision)
         if decision.action!="PROMOTE_GENERATION":
             raise ValueError("CANDIDATE_NOT_ADMITTED")
         if decision.candidate_generation_id!=candidate.generation_id:
             raise ValueError("DECISION_CANDIDATE_MISMATCH")
         if decision.parent_generation_id!=self._head_id:
             raise ValueError("HEAD_CHANGED_SINCE_DECISION")
+        binding=self._admissions.get(decision.decision_digest)
+        if binding is None or digest_obj(decision.canonical())!=binding[2]:
+            raise ValueError("DECISION_NOT_ISSUED_OR_CHANGED")
+        if self._generations[self._head_id].digest()!=binding[0]:
+            raise ValueError("PARENT_CHANGED_SINCE_DECISION")
+        if candidate.digest()!=binding[1]:
+            raise ValueError("CANDIDATE_CHANGED_SINCE_DECISION")
         self._generations[candidate.generation_id]=candidate
         self._head_id=candidate.generation_id
 
@@ -271,7 +299,7 @@ class UnifiedCausalEvolutionArchitecture:
             "decisions":decisions,
         }
         out["snapshot_digest"]=digest_obj(out)
-        return out
+        return copy.deepcopy(out)
 
 
 def self_test()->Dict[str,Any]:

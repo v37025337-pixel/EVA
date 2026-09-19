@@ -47,10 +47,7 @@ def git(*args: str) -> str:
 
 
 def tracked_files() -> list[Path]:
-    try:
-        raw = git("ls-files", "-z")
-    except Exception:
-        return []
+    raw = git("ls-files", "-z")
     return [ROOT / x for x in raw.split("\0") if x]
 
 
@@ -60,30 +57,28 @@ def _path_allowed(path: str, patterns: list[str]) -> bool:
 
 def branch_inventory(managed_policy: dict[str, Any]) -> dict[str, Any]:
     try:
+        git("rev-parse", "--verify", "refs/remotes/origin/main")
+        if git("rev-parse", "--is-shallow-repository") != "false":
+            raise RuntimeError("COMPLETE_HISTORY_REQUIRED")
         refs = [
-            x for x in git("for-each-ref", "--format=%(refname:short)", "refs/remotes/origin").splitlines()
-            if x and x not in {"origin/HEAD", "origin/main"}
+            x.split("\t", 1)[0]
+            for x in git("for-each-ref", "--format=%(refname)%09%(symref)", "refs/remotes/origin").splitlines()
+            if x and not ("\t" in x and x.split("\t", 1)[1])
         ]
-        current = os.getenv("GITHUB_HEAD_REF") or ""
-        if not current:
-            try:
-                current = git("branch", "--show-current")
-            except Exception:
-                current = ""
+        if not refs:
+            raise RuntimeError("REMOTE_BRANCH_INVENTORY_EMPTY")
         managed = managed_policy.get("branches", {})
         rows = []
         blocking = []
         managed_divergence = []
         for ref in refs:
-            name = ref.removeprefix("origin/")
-            if name == current:
-                continue
-            ahead = int(git("rev-list", "--count", "origin/main.." + ref) or "0")
-            behind = int(git("rev-list", "--count", ref + "..origin/main") or "0")
+            name = ref.removeprefix("refs/remotes/origin/")
+            ahead = int(git("rev-list", "--count", "HEAD.." + ref))
+            behind = int(git("rev-list", "--count", ref + "..HEAD"))
             changed = []
             if ahead:
                 changed = [
-                    x for x in git("diff", "--name-only", "origin/main..." + ref).splitlines()
+                    x for x in git("diff", "--name-only", "HEAD..." + ref).splitlines()
                     if x
                 ]
             policy = managed.get(name)
@@ -181,6 +176,21 @@ def run(strict: bool = False) -> dict[str, Any]:
     markers = conflict_markers(tracked)
 
     branch_state = branch_inventory(managed_policy)
+    try:
+        from yado_active_kernel_contract_v1 import active_kernel_identity
+        identity = active_kernel_identity(ROOT)
+        identity_error = None
+    except Exception as exc:
+        identity = None
+        identity_error = type(exc).__name__ + ":" + str(exc)
+    try:
+        import yaml
+        workflow = yaml.safe_load((ROOT / ".github/workflows/yado-bounded-autonomous-learning-v1.yml").read_text())
+        checkouts = [step for job in workflow["jobs"].values() for step in job.get("steps", [])
+                     if str(step.get("uses", "")).startswith("actions/checkout@")]
+        main_execution = bool(checkouts) and all(step.get("with", {}).get("ref") == "main" for step in checkouts)
+    except Exception:
+        main_execution = False
 
     execution_versions = [
         head.get("execution_fabric_v1", {}),
@@ -195,6 +205,8 @@ def run(strict: bool = False) -> dict[str, Any]:
     ]
 
     checks = {
+        "active_implementation_identity_verified": identity is not None,
+        "learning_workflow_executes_main": main_execution,
         "head_ledger_generation": head.get("generation_id") == ledger.get("current_head"),
         "head_ledger_digest": head.get("canonical_head_digest") == ledger.get("current_head_digest"),
         "core_generation_matches_head": core.get("generation") == head.get("generation_id"),
@@ -203,8 +215,8 @@ def run(strict: bool = False) -> dict[str, Any]:
         "registry_entries_partitioned": len(active) + len(legacy) == len(branches),
         "registry_count_self_consistent": closure.get("remote_branch_count") == len(branches),
         "registry_scope_explicit": contract.get("branch_policy", {}).get("experience_registry_scope") == "CURATED_LEGACY_EXPERIENCE_NOT_REMOTE_REF_INVENTORY",
-        "runtime_v4_target_exact": TARGET.exists() and V4.exists() and sha256(TARGET) == sha256(V4),
-        "runtime_v4_digest_bound": sha256(V4) == promotion.get("candidate_sha256") == contract.get("runtime_lineage", {}).get("candidate_sha256"),
+        "runtime_active_target_exact": TARGET.exists() and sha256(TARGET) == contract.get("runtime_lineage", {}).get("active_sha256", contract.get("runtime_lineage", {}).get("candidate_sha256")),
+        "runtime_v4_parent_digest_bound": sha256(V4) == promotion.get("candidate_sha256") == contract.get("runtime_lineage", {}).get("candidate_sha256"),
         "runtime_v4_promotion_closed": promotion.get("status") == "PASS_POST_MERGE_PHYSICAL_RUNTIME_PROMOTION_V4",
         "runtime_v4_gates_recorded": (
             promotion.get("physical_runtime_promotion") is True
@@ -230,7 +242,7 @@ def run(strict: bool = False) -> dict[str, Any]:
             "ADMIT_OR_ROLLBACK",
             "DERIVE_NEXT_DEFICIT_FROM_ADMITTED_STATE",
         ],
-        "remote_branch_divergence_policy_satisfied": (not branch_state.get("available")) or not branch_state.get("blocking_ahead_branches"),
+        "remote_branch_divergence_policy_satisfied": branch_state.get("available") is True and not branch_state.get("blocking_ahead_branches"),
     }
 
     findings = []
@@ -251,6 +263,8 @@ def run(strict: bool = False) -> dict[str, Any]:
         "tracked_bytecode": tracked_bytecode,
         "conflict_marker_files": markers,
         "branch_inventory": branch_state,
+        "active_kernel_identity": identity,
+        "identity_error": identity_error,
         "claim_boundary": contract.get("claim_boundary"),
     }
     OUT.parent.mkdir(exist_ok=True)
@@ -263,7 +277,7 @@ def run(strict: bool = False) -> dict[str, Any]:
         "ahead_branches": branch_state.get("ahead_branches", []),
         "managed_divergence": branch_state.get("managed_divergence", []),
         "blocking_ahead_branches": branch_state.get("blocking_ahead_branches", []),
-        "report": str(OUT.relative_to(ROOT)),
+        "report": str(OUT.relative_to(ROOT)) if OUT.is_relative_to(ROOT) else str(OUT),
     }, sort_keys=True))
     if strict and report["status"] != "PASS":
         raise SystemExit(1)

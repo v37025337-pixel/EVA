@@ -215,14 +215,18 @@ if yaml_errors:add(findings,'HIGH','WORKFLOW_YAML_ERRORS',f'{len(yaml_errors)} w
 
 # ---------- branches / physical closure ----------
 branches=[]
-br=run(['git','for-each-ref','--format=%(refname:short)','refs/remotes/origin'])
-refs=[x.strip() for x in br['stdout'].splitlines() if x.strip() and x.strip()!='origin/HEAD']
+br_process=subprocess.run(['git','for-each-ref','--format=%(refname)%09%(symref)','refs/remotes/origin'],cwd=ROOT,capture_output=True,text=True,timeout=120)
+br={'code':br_process.returncode,'stdout':br_process.stdout,'stderr':br_process.stderr}
+refs=[x.split('\t',1)[0] for x in br['stdout'].splitlines() if x and not ('\t' in x and x.split('\t',1)[1])]
+if br['code'] or not refs:
+    add(findings,'HIGH','REMOTE_BRANCH_INVENTORY_UNAVAILABLE','Complete remote refs are required for a full audit.',br)
 for ref in refs:
-    name=ref.removeprefix('origin/')
-    if name=='yado-architecture-shadow-search':continue
+    name=ref.removeprefix('refs/remotes/origin/')
     cnt=run(['git','rev-list','--left-right','--count',f'HEAD...{ref}'])
     try:left,right=[int(x) for x in cnt['stdout'].strip().split()[:2]]
-    except:left=right=-1
+    except Exception:
+        left=right=-1
+        add(findings,'HIGH','BRANCH_HISTORY_COMPARISON_FAILED','Cannot verify branch ancestry.',{'branch':name,'result':cnt})
     unique=run(['git','log','--format=%H%x09%s',f'HEAD..{ref}'])
     commits=[]
     changed=set()
@@ -274,6 +278,11 @@ report={
  'schema':'yado.full_kernel_audit.v1',
  'status':status,
  'audited_commit':run(['git','rev-parse','HEAD'])['stdout'].strip(),
+ 'source_sha256':{p.relative_to(ROOT).as_posix():sha_file(p)
+    for top in ['runtime','successor','tests','canonical','resources','.github','api','architecture']
+    for p in sorted((ROOT/top).rglob('*'))
+    if p.is_file() and p.suffix in {'.py','.json','.yml','.yaml'}
+    and 'state' not in p.relative_to(ROOT).parts},
  'elapsed_seconds':time.time()-started,
  'inventory':inventory,
  'counts':{
