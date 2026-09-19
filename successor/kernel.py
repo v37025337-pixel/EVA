@@ -423,21 +423,22 @@ class SuccessorKernel:
         from .cognitive import CognitiveLoop
         return CognitiveLoop(self).activate_native_synthesis()
 
-    def set_compositional_synthesis(self, enabled=True):
+    def set_compositional_synthesis(self, enabled=True, *, grammar=None):
         from .cognitive import CognitiveLoop
-        return CognitiveLoop(self).set_compositional_synthesis(enabled)
+        return CognitiveLoop(self).set_compositional_synthesis(enabled, grammar=grammar)
 
     def native_program_status(self):
         from .cognitive import CognitiveLoop, replay, consolidated_stats
-        from .compositional_binding import active, memories
+        from .compositional_binding import active, grammar_at, memories
         from .compositional_source import catalog
         self.verify_state()
         records = CognitiveLoop(self)._records()
         goals = replay(records)
+        grammar = grammar_at(records)
         return {'schema': 'yado.native_program_development_status.v1',
-                'synthesis_active': active(records), 'language': catalog(),
+                'synthesis_active': active(records), 'language': catalog(grammar=grammar),
                 'verified_programs': [{'source_sha256': c['source_sha256'],
-                    'parent_source_sha256': c.get('parent_source_sha256', [])} for c in memories(records)],
+                    'parent_source_sha256': c.get('parent_source_sha256', [])} for c in memories(records, grammar=grammar)],
                 'unresolved_goal_ids': [g['id'] for g in goals.values()
                     if g['spec']['domain'] == 'native_source' and g['status'] == 'WITHHOLD'
                     and not any(fingerprint(other['spec']) == fingerprint(g['spec']) and other['status'] == 'VALIDATED_ON_HOLDOUT'

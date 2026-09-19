@@ -636,21 +636,21 @@ class CognitiveLoop:
                                             GRAMMAR, GRAMMARS, ACTIVATE, DEACTIVATE)
         if type(enabled) is not bool:
             raise ValueError('COMPOSITIONAL_BINDING_REQUIRES_BOOLEAN')
-        grammar = GRAMMAR if grammar is None else grammar
-        if grammar not in GRAMMARS:
+        if grammar is not None and grammar not in GRAMMARS:
             raise ValueError('COMPOSITION_GRAMMAR_VERSION')
         def change():
             records = self._records()
+            selected_grammar = grammar_at(records) if grammar is None else grammar
             if (any(g['status'] == 'ACTIVE' for g in replay(records).values())
                     or any(s['status'] == 'ACTIVE' for s in self.kernel.development_snapshot()['sessions'].values())
                     or any(s['status'] == 'ACTIVE' for s in self.kernel.autonomy_snapshot()['sessions'].values())):
                 raise ValueError('COMPOSITIONAL_BINDING_REQUIRES_IDLE_KERNEL')
             if active(records) == enabled:
-                if enabled and grammar_at(records) != grammar:
+                if enabled and grammar_at(records) != selected_grammar:
                     raise ValueError('COMPOSITIONAL_PROFILE_REQUIRES_DEACTIVATION')
                 return next((r for r in reversed(records) if r['kind'] in {ACTIVATE, DEACTIVATE}),
                             {'status': 'INACTIVE', 'strategy': 'native_compositional_v1'})
-            return self.kernel._append(activation(grammar=grammar) if enabled else deactivation())
+            return self.kernel._append(activation(grammar=selected_grammar) if enabled else deactivation())
         return self._transaction(change)
 
     def _transaction(self, operation):
