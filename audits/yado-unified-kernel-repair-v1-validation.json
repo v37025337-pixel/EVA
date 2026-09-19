@@ -50,14 +50,17 @@
     "full_kernel_audit_v2": true,
     "full_regression": true,
     "maintenance_admission": true,
-    "native_core": true
+    "native_core": true,
+    "workflow_sequences_locally_verified": true
   },
   "evidence_sha256": {
-    "audits/yado-full-kernel-audit-v1-report.json": "14ba50c0b8be5c27a47e6ec696b4a30ca5d943ae672b3fc9ed4b60205ba453ee",
-    "audits/yado-full-kernel-audit-v2-report.json": "37ec5041a0a88d3891829954b73b7b9105243ae8bd889faade18e9c8bdc349ee",
+    "audits/yado-full-kernel-audit-v1-report.json": "49750e0ac55fe04169a65015381bc49018b3bba5723323227a5f7041fd5b6113",
+    "audits/yado-full-kernel-audit-v2-report.json": "06e936ec10edaceb5b249e84c25dc4049f3e4e7b7558b2ea259113aac0a32f45",
     "audits/yado-full-regression-v1-report.json": "d5bd646ad703ecb15bebb6399624688dfb7e3a7e14313378399c0c6efd7f49dc",
     "audits/yado-historical-v4-promotion-probe.json": "3dfe2653dd4039da56753d08c31f8bfe8c9a03d34f04bdc66fc7a381fe73c278",
-    "audits/yado-repository-reconciliation-v1-report.json": "7bf6148ccca7b5242a59f7b16fc0b59be19c3b9ea1377c373451f27e8805a6a0"
+    "audits/yado-native-candidate-probe-v1.json": "fa0f88f39c3e7719d9beefadb225029d19be55ac9cd0b5f9a06c8b12325bc69c",
+    "audits/yado-physical-v4-active-binding-probe.json": "460903802e9f6820589fb5d2770d3a10d27c5aed29c488193e817138730ca410",
+    "audits/yado-repository-reconciliation-v1-report.json": "bb9d225c512e27bbe2e0f6b60cc8c2588bad1bec4642c1c025d408cea6634eb0"
   },
   "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
   "local_tested_commit": "6279da2c96011ab6f2b959168e53f63073885428",
@@ -126,20 +129,36 @@
     ],
     "pass": true
   },
-  "published_source_commit": "bda180a3399536efe4a17c9732d3df5a592080cd",
+  "published_source_commit": "41dd913c65daf35f09bce442834308f781ce992a",
   "schema": "yado.unified_kernel_repair.v1.validation",
   "scope": {
     "deployment_performed": false,
     "formal_generation_changed": false,
     "historical_v4_evidence_preserved": true,
     "live_network_revalidation": false,
+    "regression_scope": "526 TESTS ON UNCHANGED RUNTIME/TEST/CANONICAL SOURCES; TWO SUBSEQUENT WORKFLOW SEQUENCE CHANGES VERIFIED SEPARATELY LOCALLY, FINAL CI REQUIRED BEFORE MAIN MERGE",
     "remote_main_merge_verified_in_this_report": false
   },
   "source_unchanged": true,
   "status": "PASS",
   "tests_run": 526,
   "verified_git_trees": {
+    "41dd913c65daf35f09bce442834308f781ce992a": "1a24a51da387a01e134eb82d7a2807b2ec4a4555",
     "6279da2c96011ab6f2b959168e53f63073885428": "418e69ae8f9fb43202ab497d9cef7e11cd3a6f40",
+    "85769ea5a9e551d1e6f6138d30561f0247f6665b": "1a24a51da387a01e134eb82d7a2807b2ec4a4555",
     "bda180a3399536efe4a17c9732d3df5a592080cd": "418e69ae8f9fb43202ab497d9cef7e11cd3a6f40"
+  },
+  "workflow_sequence_followup": {
+    "candidate_full_regression_admission_claimed": false,
+    "changed_since_full_regression": [
+      ".github/workflows/yado-autonomous-deep-development-v1.yml",
+      ".github/workflows/yado-runtime-self-rewrite-promotion-v4.yml"
+    ],
+    "ci_status_at_recording": "PENDING_FINAL_WORKFLOW_RUNS",
+    "cognitive_candidate_matches_committed_generation_receipt": true,
+    "native_candidate_probe": "PASS_SHADOW_CANDIDATE_PROBE_REQUIRES_ADMISSION",
+    "physical_v4_maintenance_binding": "PASS",
+    "runtime_tests_and_canonical_sources_unchanged": true,
+    "yaml_bash_embedded_python": "PASS"
   }
 }
