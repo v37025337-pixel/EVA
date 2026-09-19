@@ -35,9 +35,10 @@ unless it closes that whole chain.
 
 ## Branch rule
 
-main is the only active integration line. Other branches are historical or work in progress.
-The reconciliation gate fetches the full remote topology and fails when another branch still
-retains commits ahead of main, excluding the PR branch currently being tested.
+main is the only active code-integration line. Historical and work-in-progress branches must not retain unabsorbed commits.
+The declared managed experience feed is the only exception: it may diverge only inside the paths allowed by
+architecture/yado-active-managed-branch-policy-v1.json. Its output is incoming evidence, not automatic canonical state.
+The reconciliation gate fetches the full remote topology and fails on any unmanaged ahead branch or managed-feed scope violation.
 
 ## Claim boundary
 
