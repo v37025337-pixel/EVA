@@ -53,30 +53,44 @@ jobs:
           python -m py_compile runtime/yado_native_self_rewrite_v4_fresh_experience.py runtime/test_yado_native_self_rewrite_v4_fresh_experience.py
           python -m unittest runtime.test_yado_native_self_rewrite_v4_fresh_experience -v
 
-      - name: Materialize V4 shadow candidate from fresh experience
+      - name: Reproduce and verify V4 from committed V3 parent
         env:
           PYTHONPATH: runtime
         run: |
-          python runtime/yado_native_self_rewrite_v4_fresh_experience.py
           python - <<'PY'
+          import hashlib
           import json
           from pathlib import Path
-          d=json.loads(Path("candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json").read_text())
-          assert d["status"]=="PASS_SHADOW_NATIVE_SELF_REWRITE_V4_FRESH_EXPERIENCE", d
-          assert d["candidate_sha256"] != d["parent_runtime_sha256"], d
-          assert d["latest_experience_digest"] != d["parent_experience_digest"], d
-          assert d["checks"]["structural_ast_unchanged_except_learned_binding"] is True, d
-          assert d["checks"]["python_unittest_new_success_affinity"] is True, d
-          assert d["checks"]["former_failed_source_penalty_removed"] is True, d
-          assert d["runtime_mutation_applied"] is False, d
-          assert d["next_required_capability"]=="ISOLATED_RUNTIME_EXECUTION_AND_REGRESSION_ADMISSION_V4", d
+          from yado_native_self_rewrite_v4_fresh_experience import build_committed
+
+          reproduced=build_committed()
+          persisted=json.loads(Path("candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json").read_text())
+          candidate=Path("candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py")
+          candidate_sha=hashlib.sha256(candidate.read_bytes()).hexdigest()
+
+          assert reproduced["status"]=="PASS_SHADOW_NATIVE_SELF_REWRITE_V4_FRESH_EXPERIENCE", reproduced
+          assert reproduced["historical_parent_reconstructed_from_v3_candidate"] is True, reproduced
+          assert reproduced["candidate_sha256"] != reproduced["parent_runtime_sha256"], reproduced
+          assert reproduced["latest_experience_digest"] != reproduced["parent_experience_digest"], reproduced
+          assert reproduced["checks"]["structural_ast_unchanged_except_learned_binding"] is True, reproduced
+          assert reproduced["checks"]["python_unittest_new_success_affinity"] is True, reproduced
+          assert reproduced["checks"]["former_failed_source_penalty_removed"] is True, reproduced
+          assert reproduced["runtime_mutation_applied"] is False, reproduced
+          assert reproduced["next_required_capability"]=="ISOLATED_RUNTIME_EXECUTION_AND_REGRESSION_ADMISSION_V4", reproduced
+
+          assert persisted["status"]=="PASS_SHADOW_NATIVE_SELF_REWRITE_V4_FRESH_EXPERIENCE", persisted
+          assert persisted["candidate_sha256"]==reproduced["candidate_sha256"]==candidate_sha, (persisted,reproduced,candidate_sha)
+          assert persisted["parent_runtime_sha256"]==reproduced["parent_runtime_sha256"], (persisted,reproduced)
+          assert persisted["latest_experience_digest"]==reproduced["latest_experience_digest"], (persisted,reproduced)
+
           print(json.dumps({
-              "status":d["status"],
-              "parent_sha":d["parent_runtime_sha256"],
-              "candidate_sha":d["candidate_sha256"],
-              "parent_experience":d["parent_experience_digest"],
-              "latest_experience":d["latest_experience_digest"],
-              "score_deltas":d["ranking_score_deltas"]
+              "status":reproduced["status"],
+              "parent_sha":reproduced["parent_runtime_sha256"],
+              "candidate_sha":reproduced["candidate_sha256"],
+              "parent_experience":reproduced["parent_experience_digest"],
+              "latest_experience":reproduced["latest_experience_digest"],
+              "score_deltas":reproduced["ranking_score_deltas"],
+              "persisted_evidence_exact":True
           },sort_keys=True))
           PY
 

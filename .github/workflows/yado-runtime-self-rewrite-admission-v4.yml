@@ -113,22 +113,26 @@ jobs:
           reg=json.loads((shadow/"audits/yado-full-regression-v1-report.json").read_text())
           outer_sha=hashlib.sha256(target.read_bytes()).hexdigest()
           cand_sha=hashlib.sha256(candidate.read_bytes()).hexdigest()
-          assert outer_sha==v4["parent_runtime_sha256"]
+          parent_sha=str(v4["parent_runtime_sha256"])
           assert cand_sha==v4["candidate_sha256"]
+          assert outer_sha in {parent_sha,cand_sha}, (outer_sha,parent_sha,cand_sha)
+          already_promoted=(outer_sha==cand_sha)
           final={
             "schema":"yado.runtime_self_rewrite_admission.v4",
             "status":"PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4",
             "admission_mode":"ISOLATED_GIT_WORKTREE_FULL_REGRESSION",
-            "parent_runtime_sha256":outer_sha,
+            "parent_runtime_sha256":parent_sha,
             "candidate_sha256":cand_sha,
+            "outer_runtime_sha256":outer_sha,
+            "outer_runtime_state":"V4_ALREADY_PHYSICALLY_PRESENT" if already_promoted else "PARENT_RUNTIME_PENDING_PROMOTION",
             "latest_experience_digest":v4["latest_experience_digest"],
             "isolated_full_regression":True,
             "isolated_regression_tests":reg["tests_run"],
             "outer_runtime_unchanged":True,
-            "physical_runtime_promotion":False,
+            "physical_runtime_promotion":already_promoted,
             "automatic_main_mutation":False,
             "canonical_mutation":False,
-            "next_required_capability":"PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_CANONICAL_GATE"
+            "next_required_capability":"POST_MERGE_CANONICAL_AUDIT" if already_promoted else "PHYSICAL_RUNTIME_PROMOTION_V4_REQUIRES_SEPARATE_CANONICAL_GATE"
           }
           (root/"candidates/autonomous/yado-runtime-self-rewrite-admission-v4.json").write_text(json.dumps(final,indent=2,sort_keys=True)+"\n")
           print(json.dumps(final,sort_keys=True))

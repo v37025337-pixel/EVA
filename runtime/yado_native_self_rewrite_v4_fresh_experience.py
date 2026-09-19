@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 EXPERIENCE = Path("experience/autonomous/yado-autonomous-learning-latest.json")
 TARGET = Path("runtime/yado_bounded_autonomous_learning_v1.py")
 V3_ADMISSION = Path("candidates/autonomous/yado-runtime-self-rewrite-admission-v3.json")
+V3_CANDIDATE = Path("candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v3.py")
 CANDIDATE = Path("candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py")
 OUT = Path("candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json")
 
@@ -242,9 +243,10 @@ def build_committed(root: Path = ROOT) -> dict[str, Any]:
         result["repository_view"] = "WORKTREE_FALLBACK_NO_GIT"
         return result
 
-    required = (EXPERIENCE, TARGET, V3_ADMISSION)
+    required = (EXPERIENCE, V3_ADMISSION, V3_CANDIDATE)
     with tempfile.TemporaryDirectory(prefix="yado-v4-committed-head-") as directory:
         shadow = Path(directory)
+        committed: dict[Path, bytes] = {}
         for relative in required:
             cp = subprocess.run(
                 ["git", "show", "HEAD:" + relative.as_posix()],
@@ -259,11 +261,26 @@ def build_committed(root: Path = ROOT) -> dict[str, Any]:
                     + ":"
                     + cp.stderr.decode("utf-8", "replace")[-500:]
                 )
+            committed[relative] = cp.stdout
+
+        for relative in (EXPERIENCE, V3_ADMISSION):
             out = shadow / relative
             out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_bytes(cp.stdout)
+            out.write_bytes(committed[relative])
+
+        admission = _load_json(shadow / V3_ADMISSION)
+        v3_parent = committed[V3_CANDIDATE]
+        v3_parent_sha = hashlib.sha256(v3_parent).hexdigest()
+        if v3_parent_sha != admission.get("target_sha256"):
+            raise RuntimeError("COMMITTED_V3_PARENT_SHA_MISMATCH")
+
+        target = shadow / TARGET
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(v3_parent)
+
         result = build(shadow)
         result["repository_view"] = "COMMITTED_HEAD"
+        result["historical_parent_reconstructed_from_v3_candidate"] = True
         return result
 
 
