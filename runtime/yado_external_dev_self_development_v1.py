@@ -8,6 +8,7 @@ a YADO-authored Python candidate, and validates it on fresh deficits. Third-part
 source code is never copied or executed and canonical main is never auto-mutated.
 """
 
+import ast
 import hashlib
 import json
 import re
@@ -132,13 +133,62 @@ class ExternalDevSelfDevelopmentV1:
 
     @staticmethod
     def load_router(source: str):
-        # Deliberately no __import__, open, eval, exec, compile, OS or network APIs.
-        allowed = {"str": str, "set": set, "len": len, "enumerate": enumerate, "list": list}
-        scope = {"__builtins__": allowed}
-        exec(compile(source, "<yado-external-dev-router-eval>", "exec"), scope, scope)
-        if not callable(scope.get("route")) or not callable(scope.get("snapshot")):
-            raise RuntimeError("ROUTER_CANDIDATE_INTERFACE_MISSING")
-        return scope["route"], scope["snapshot"]
+        """Validate the exact emitted template, then interpret its bounded data.
+
+        Candidate Python is never executed. A hash or restricted builtins alone
+        cannot establish that supplied text belongs to the router grammar.
+        """
+        if type(source) is not str or len(source) > 65536:
+            raise ValueError("ROUTER_SOURCE_BUDGET")
+        names = ("PACK_DIGEST", "POLICY_SHA256", "RULES", "PRIORITY")
+        try:
+            tree = ast.parse(source)
+            if len(tree.body) != 7 or sum(1 for _ in ast.walk(tree)) > 4096:
+                raise ValueError("ROUTER_SOURCE_SHAPE")
+            values = {}
+            for name, node in zip(names, tree.body[:4]):
+                if (not isinstance(node, ast.Assign) or len(node.targets) != 1
+                        or not isinstance(node.targets[0], ast.Name) or node.targets[0].id != name):
+                    raise ValueError("ROUTER_LITERAL_REQUIRED")
+                values[name] = ast.literal_eval(node.value)
+        except (SyntaxError, TypeError, ValueError, RecursionError) as exc:
+            raise ValueError("ROUTER_SOURCE_INVALID") from exc
+        rules, priority = values["RULES"], values["PRIORITY"]
+        capabilities = {row["capability"] for row in SOURCES.values()}
+        if (any(type(values[key]) is not str or not re.fullmatch(r"[0-9a-f]{64}", values[key])
+                for key in names[:2])
+                or type(rules) is not dict or set(rules) != capabilities
+                or type(priority) is not list or len(priority) != 5
+                or any(type(key) is not str for key in priority) or set(priority) != capabilities
+                or any(type(words) is not list or not 1 <= len(words) <= 128
+                       or any(type(word) is not str or not 1 <= len(word) <= 128 for word in words)
+                       for words in rules.values())):
+            raise ValueError("ROUTER_POLICY_SHAPE")
+        policy = dict(pack_digest=values["PACK_DIGEST"], policy_sha256=values["POLICY_SHA256"],
+                      rules=rules, priority=priority)
+        if source != ExternalDevSelfDevelopmentV1.render_router_source(policy):
+            raise ValueError("ROUTER_TEMPLATE_MISMATCH")
+
+        def route(deficit):
+            cleaned = ''.join(ch.lower() if ch.isalnum() else ' ' for ch in str(deficit))
+            tokens = set(cleaned.split())
+            ranked = []
+            for index, capability in enumerate(priority):
+                matched = [word for word in rules[capability] if word in tokens]
+                ranked.append((len(matched), -index, capability, matched))
+            ranked.sort(reverse=True)
+            identity = dict(pack_digest=values["PACK_DIGEST"], policy_sha256=values["POLICY_SHA256"])
+            if not ranked or ranked[0][0] <= 0:
+                return dict(status="WITHHOLD_ROUTER_NO_MATCH", capability=None, matched=[], **identity)
+            top = ranked[0]
+            return dict(status="PASS_ROUTER_SELECTION", capability=top[2], matched=top[3], score=top[0], **identity)
+
+        def snapshot():
+            return dict(schema="yado.external_dev_capability_router_candidate.v1",
+                        pack_digest=values["PACK_DIGEST"], policy_sha256=values["POLICY_SHA256"],
+                        capability_count=len(priority), automatic_main_mutation=False, g3_genesis_performed=False)
+
+        return route, snapshot
 
     @classmethod
     def evaluate_router_source(cls, source: str, cases=FRESH_CASES) -> dict:
