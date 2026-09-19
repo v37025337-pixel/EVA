@@ -11,6 +11,7 @@ from pathlib import Path
 import secrets
 import shutil
 import sqlite3
+import subprocess
 import sys
 from unittest.mock import patch
 
@@ -81,6 +82,20 @@ def events(path, table='events'):
         return list(db.execute('SELECT * FROM ' + table + ' ORDER BY 1'))
 
 
+def canonical_source_updates(manifest_path):
+    """Only the three explicit maintenance-binding files may also transition."""
+    manifest = json.loads(Path(manifest_path).read_text())
+    allowed = {'canonical/yado-unified-core-v1.json', 'canonical/yado-main-head-g2.json',
+               'architecture/evolution-ledger.json'}
+    changes = {p: {'previous_sha256': old, 'current_sha256': file_sha(ROOT / p)}
+               for p, old in manifest['inherited_files'].items() if file_sha(ROOT / p) != old}
+    if not set(changes) <= allowed:
+        raise ValueError('UNREVIEWED_INHERITED_SOURCE_CHANGE')
+    subprocess.run([sys.executable, str(ROOT / 'runtime/yado_canonical_invariant_guard_v1.py')],
+                   check=True, capture_output=True)
+    return changes or None
+
+
 def run(predecessor, output):
     predecessor, output = predecessor.resolve(), output.resolve()
     if output.exists():
@@ -91,7 +106,8 @@ def run(predecessor, output):
     for name in ('summary.json', 'continuation-receipt.json'):
         (output / name).rename(evidence / ('predecessor-' + name))
     print('PREPARING_NATIVE_IMPLEMENTATION_UPGRADE', flush=True)
-    transition = prepare_upgrade(predecessor / 'birth/manifest.json', predecessor / 'kernel.sqlite', output / 'birth')
+    transition = prepare_upgrade(predecessor / 'birth/manifest.json', predecessor / 'kernel.sqlite', output / 'birth',
+                                 source_updates=canonical_source_updates(predecessor / 'birth/manifest.json'))
     shutil.copyfile(output / 'birth/kernel.sqlite', output / 'kernel.sqlite')
     save(evidence, 'native-transition', transition)
     report = {'status': 'RUNNING', 'identity_digest': transition['identity_digest'],

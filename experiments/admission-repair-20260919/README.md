@@ -23,6 +23,13 @@ and pins. Only the explicitly reviewed component predecessor is accepted.
 Component execution stays blocked until a fresh `READMISSION` rechecks the
 frozen profile and all memory through the new native boundary.
 
+The canonical integrity manifest also pins these four successor modules.
+`prepare_binding.py` rebinds exactly their reviewed hashes and appends maintenance
+event 317, preserving the ledger prefix and formal generation. The code change
+initially tripped that guard; the binding commit restores it. A completed local
+checkpoint from before this metadata binding is carried forward one native event
+by `seal_binding.py`, with the same component admission and logical identity.
+
 Run from the repository with the checkpoint's existing runtime source overlay
 applied, then the reviewed successor implementation from this PR:
 
