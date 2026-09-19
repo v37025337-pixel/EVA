@@ -75,7 +75,7 @@ class MoltbookBridgeTests(unittest.TestCase):
                     "agent": {
                         "id": "agent-1",
                         "name": "YADO",
-                        "api_key": "moltbook_secret_value",
+                        "api_key": "mb_test",
                         "claim_url": "https://www.moltbook.com/claim/test",
                         "verification_code": "reef-TEST",
                     },
@@ -86,21 +86,21 @@ class MoltbookBridgeTests(unittest.TestCase):
         self.assertEqual(result.agent_name, "YADO")
         self.assertTrue(result.api_key_stored)
         self.assertNotIn("api_key", result.__dict__)
-        self.assertEqual(self.store.get_secret("moltbook"), "moltbook_secret_value")
+        self.assertEqual(self.store.get_secret("moltbook"), "mb_test")
 
         raw = Path(self.db).read_bytes()
-        self.assertNotIn(b"moltbook_secret_value", raw)
+        self.assertNotIn(b"mb_test", raw)
         self.assertNotIn(b"Authorization", raw)
 
     def test_authenticated_request_is_host_pinned(self):
-        self.store.put("moltbook", "moltbook_secret_value", {"agent_name": "YADO"})
+        self.store.put("moltbook", "mb_test", {"agent_name": "YADO"})
         FakeConnection.responses.append((200, {"status": "claimed"}))
         result = self.client.status()
         self.assertEqual(result["status"], "claimed")
         call = FakeConnection.calls[-1]
         self.assertEqual(call["host"], HOST)
         self.assertEqual(call["path"], f"{API_PREFIX}/agents/status")
-        self.assertEqual(call["headers"]["Authorization"], "Bearer moltbook_secret_value")
+        self.assertEqual(call["headers"]["Authorization"], "Bearer mb_test")
 
     def test_registration_request_has_no_authorization_header(self):
         FakeConnection.responses.append(
@@ -109,7 +109,7 @@ class MoltbookBridgeTests(unittest.TestCase):
                 {
                     "agent": {
                         "name": "YADO",
-                        "api_key": "moltbook_secret_value",
+                        "api_key": "mb_test",
                         "claim_url": "https://www.moltbook.com/claim/test",
                         "verification_code": "reef-TEST",
                     }
@@ -125,14 +125,14 @@ class MoltbookBridgeTests(unittest.TestCase):
         self.assertEqual(FakeConnection.calls, [])
 
     def test_post_uses_stored_key(self):
-        self.store.put("moltbook", "moltbook_secret_value", {"agent_name": "YADO"})
+        self.store.put("moltbook", "mb_test", {"agent_name": "YADO"})
         FakeConnection.responses.append((201, {"success": True, "post": {"id": "p1"}}))
         result = self.client.create_post("hello", "world")
         self.assertTrue(result["success"])
         call = FakeConnection.calls[-1]
         body = json.loads(call["body"].decode("utf-8"))
         self.assertEqual(body["submolt_name"], "general")
-        self.assertEqual(call["headers"]["Authorization"], "Bearer moltbook_secret_value")
+        self.assertEqual(call["headers"]["Authorization"], "Bearer mb_test")
 
     def test_requires_persistent_master_key(self):
         with patch.dict(os.environ, {}, clear=True):
