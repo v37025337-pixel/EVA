@@ -1,0 +1,72 @@
+{
+  "schema": "yado.unified_architecture.v2",
+  "architecture_id": "YADO_UNIFIED_ARCHITECTURE_V2",
+  "status": "CANDIDATE_FOR_MAIN_ADMISSION",
+  "base_main_sha": "effafcefa62c2c0f817f2015fe6088470544df04",
+  "formal_architecture": {
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "head": "canonical/yado-main-head-g2.json",
+    "core_manifest": "canonical/yado-unified-core-v1.json",
+    "ledger": "architecture/evolution-ledger.json",
+    "rule": "FORMAL_ARCHITECTURE_GENERATION_IS_SEPARATE_FROM_RUNTIME_SELF_REWRITE_GENERATION"
+  },
+  "runtime_lineage": {
+    "component": "runtime/yado_bounded_autonomous_learning_v1.py",
+    "generation": "V4",
+    "candidate": "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py",
+    "promotion_receipt": "candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json",
+    "candidate_sha256": "541c1d9dc5a5ce5c0a3de59ffb0a09c10c6778899251f020494f2d523411a20f",
+    "promotion_workflow_run_id": 35427934490
+  },
+  "planes": [
+    {
+      "id": "IDENTITY_AND_LINEAGE",
+      "source_of_truth": ["canonical/yado-main-head-g2.json", "architecture/evolution-ledger.json"],
+      "invariant": "ONE_FORMAL_HEAD_AND_APPEND_ONLY_CAUSAL_LEDGER"
+    },
+    {
+      "id": "COGNITIVE_RUNTIME",
+      "source_of_truth": ["canonical/yado-unified-core-v1.json", "runtime/yado_unified_core_v1.py"],
+      "invariant": "ONE_ACTIVE_VERSION_PER_CAPABILITY_FAMILY"
+    },
+    {
+      "id": "RUNTIME_EVOLUTION",
+      "source_of_truth": ["runtime/yado_bounded_autonomous_learning_v1.py", "candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json"],
+      "invariant": "PHYSICAL_BYTES_AND_PROMOTION_METADATA_MUST_AGREE"
+    },
+    {
+      "id": "MEMORY_AND_EXPERIENCE",
+      "source_of_truth": ["canonical/yado-unified-experience-registry-v1.json"],
+      "invariant": "REGISTRY_IS_CURATED_EXPERIENCE_NOT_A_LIVE_GIT_BRANCH_INVENTORY"
+    },
+    {
+      "id": "VERIFICATION_AND_ADMISSION",
+      "source_of_truth": ["runtime/yado_full_kernel_audit_v1.py", "runtime/yado_full_regression_v1.py", "runtime/yado_repository_reconciliation_v1.py"],
+      "invariant": "NO_PROMOTION_WITHOUT_FRESH_AUDIT_REGRESSION_AND_ROLLBACK_EVIDENCE"
+    }
+  ],
+  "version_policy": {
+    "one_active_version_per_capability_family": true,
+    "superseded_versions": "ROLLBACK_REGRESSION_AND_PROVENANCE_ONLY",
+    "pending_metadata_for_active_bytes_forbidden": true,
+    "hardcoded_git_branch_count_in_runtime_audits_forbidden": true,
+    "hardcoded_historical_branch_name_in_runtime_audits_forbidden": true
+  },
+  "branch_policy": {
+    "main": "ONLY_ACTIVE_CODE_INTEGRATION_LINE",
+    "non_main": "HISTORY_OR_WORK_IN_PROGRESS",
+    "admission_rule": "NO_NON_MAIN_BRANCH_MAY_RETAIN_UNABSORBED_COMMITS_WHEN RECONCILIATION PASSES",
+    "experience_registry_scope": "CURATED_LEGACY_EXPERIENCE_NOT_REMOTE_REF_INVENTORY"
+  },
+  "development_continuity": [
+    "MEASURE_DEFICIT",
+    "SELECT_TARGET_FROM_CURRENT_STATE",
+    "MATERIALIZE_CHANGE",
+    "FRESH_TEST",
+    "FULL_REGRESSION",
+    "FULL_KERNEL_AUDIT",
+    "ADMIT_OR_ROLLBACK",
+    "DERIVE_NEXT_DEFICIT_FROM_ADMITTED_STATE"
+  ],
+  "claim_boundary": "THIS RECONCILES SOFTWARE ARCHITECTURE, VERSIONING, LINEAGE AND DEVELOPMENT CONTINUITY. IT DOES NOT ESTABLISH G3 OR CONSCIOUSNESS."
+}
