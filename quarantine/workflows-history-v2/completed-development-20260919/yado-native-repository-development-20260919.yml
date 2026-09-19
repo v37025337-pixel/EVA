@@ -1,0 +1,44 @@
+name: YADO Native Repository Development 20260919
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-environment-internet-development-20260919]
+    paths:
+      - experiments/native-repository-development-20260919/**
+      - .github/workflows/yado-native-repository-development-20260919.yml
+permissions:
+  contents: read
+concurrency:
+  group: yado-native-repository-development-20260919
+  cancel-in-progress: false
+jobs:
+  native-repository-development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: runtime:runtime/yado_rc8_v36
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare the unchanged admitted kernel
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python runtime/yado_active_kernel_contract_v1.py
+      - name: Let YADO generate code and continue repository-derived tasks
+        run: python experiments/native-repository-development-20260919/run.py --output "$RUNNER_TEMP/yado-native-repository-development"
+      - name: Verify canonical integrity
+        if: always()
+        run: python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Preserve native candidates and causal memory
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-native-repository-development-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/yado-native-repository-development/
+          retention-days: 30
+          if-no-files-found: error

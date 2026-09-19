@@ -1,0 +1,62 @@
+name: YADO Environment and Internet Development 20260919
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [yado-environment-internet-development-20260919]
+    paths:
+      - experiments/environment-internet-20260919/**
+      - .github/workflows/yado-environment-internet-development-20260919.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yado-environment-internet-development-20260919
+  cancel-in-progress: false
+
+jobs:
+  develop:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: runtime:runtime/yado_rc8_v36
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare admitted kernel
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt
+          python runtime/yado_active_kernel_contract_v1.py
+          python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Study environment, official assistant documentation and real external data
+        run: python experiments/environment-internet-20260919/run.py --output "$RUNNER_TEMP/yado-environment-development"
+      - name: Continue 20 state-derived endogenous cycles
+        run: |
+          python -m successor build --output "$RUNNER_TEMP/yado-environment-development/birth"
+          python -m successor.endogenous_run --manifest "$RUNNER_TEMP/yado-environment-development/birth/manifest.json" --state "$RUNNER_TEMP/yado-environment-development/kernel.sqlite" --output "$RUNNER_TEMP/yado-environment-development/endogenous.json" --cycles 20 --budget 3
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path(os.environ['RUNNER_TEMP']) / 'yado-environment-development/endogenous.json'
+          r = json.loads(p.read_text())
+          assert r['status'] == 'PASS_BOUNDED_ENDOGENOUS_CONTINUATION_V1', r
+          assert r['cycles_completed'] == r['cycles_verified'] == 20, r
+          assert r['host_goal_count'] == 0, r
+          assert r['state_verification']['status'] == 'PASS', r
+          print('YADO_EVIDENCE ' + json.dumps({'name': 'endogenous', 'value': r}, sort_keys=True))
+          PY
+          python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Preserve evidence and durable state
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-environment-development-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/yado-environment-development/
+          retention-days: 30
+          if-no-files-found: error

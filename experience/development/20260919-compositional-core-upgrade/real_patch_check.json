@@ -1,0 +1,18 @@
+{
+  "after_source": "def add(x, y):\n    return x + y\n",
+  "after_test_exit_code": 0,
+  "before_source": "def add(x, y):\n    return x - y\n",
+  "before_test_exit_code": 1,
+  "bug_fix_algorithm_invented_by_kernel": false,
+  "candidate_source_sha256": "dcb01c7a9054f815dade2c6b8bea5c3ffb4cebe5f0c84c9b954735c3ce018cb6",
+  "desired_change_and_acceptance_task_author": "MAINTAINER",
+  "external_repository_written": false,
+  "git_apply_check_exit_code": 0,
+  "git_apply_exit_code": 0,
+  "independent_assertion_count": 3,
+  "patch": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def add(x, y):\n-    return x - y\n+    return x + y\n",
+  "patch_bytes_author": "KERNEL_LEARNED_PROGRAM",
+  "patch_sha256": "2418c076d086c0f069b380a0e6275023c340059e471da51d4dea6e99a39deaaa",
+  "scope": "REAL_TEMPORARY_LOCAL_REPOSITORY",
+  "status": "PASS"
+}

@@ -1,0 +1,207 @@
+{
+  "boundaries": {
+    "automatic_main_mutation": false,
+    "canonical_mutation": false,
+    "consciousness_claimed": false,
+    "credentials_used": false,
+    "downloaded_code_executed": false,
+    "external_writes": false,
+    "self_weight_update": false
+  },
+  "cognitive_evidence": {
+    "INTELLIGENCE": {
+      "evidence_kind": "FRESH_HOLDOUT",
+      "evidence_level": 3,
+      "score": 1,
+      "source": "candidates/cognitive/yado-intelligence-transfer-holdout-v1.json",
+      "status": "PASS_SHADOW_INTELLIGENCE_TRANSFER_HOLDOUT_V1"
+    },
+    "LOGIC": {
+      "evidence_kind": "FRESH_HOLDOUT",
+      "evidence_level": 3,
+      "score": 1,
+      "source": "candidates/cognitive/yado-relational-causal-logic-holdout-v1.json",
+      "status": "PASS_SHADOW_RELATIONAL_CAUSAL_LOGIC_HOLDOUT_V1"
+    },
+    "MEMORY_EXPERIENCE": {
+      "evidence_kind": "FRESH_HOLDOUT",
+      "evidence_level": 3,
+      "score": 1,
+      "source": "candidates/cognitive/yado-memory-experience-holdout-v1.json",
+      "status": "PASS_SHADOW_MEMORY_EXPERIENCE_HOLDOUT_V1"
+    },
+    "THINKING": {
+      "evidence_kind": "FRESH_HOLDOUT",
+      "evidence_level": 3,
+      "score": 1,
+      "source": "candidates/cognitive/yado-thinking-contextual-holdout-v1.json",
+      "status": "PASS_SHADOW_THINKING_CONTEXTUAL_HOLDOUT_V1"
+    }
+  },
+  "development_sequence": [
+    {
+      "action": "native candidate -> compile -> isolated execution",
+      "gate": "compile",
+      "layer": "CODE",
+      "stage": 1
+    },
+    {
+      "action": "architecture binding -> canonical guard -> audit",
+      "gate": "canonical_guard",
+      "layer": "LAYERS",
+      "stage": 2
+    },
+    {
+      "action": "module inventory -> connectivity -> regression",
+      "gate": "full_regression",
+      "layer": "MODULES",
+      "stage": 3
+    },
+    {
+      "action": "verified receipt -> provenance -> replay",
+      "gate": "provenance_replay",
+      "layer": "MEMORY_EXPERIENCE",
+      "stage": 4
+    },
+    {
+      "action": "logic holdout -> contradiction/causal check",
+      "gate": "fresh_holdout",
+      "layer": "LOGIC",
+      "stage": 5
+    },
+    {
+      "action": "context holdout -> bounded reasoning check",
+      "gate": "fresh_holdout",
+      "layer": "THINKING",
+      "stage": 6
+    },
+    {
+      "action": "transfer holdout -> ambiguity guard",
+      "gate": "fresh_holdout",
+      "layer": "INTELLIGENCE",
+      "stage": 7
+    }
+  ],
+  "layers": {
+    "CODE": {
+      "evidence_digest": "3dcfddf7a54aea8265e194449f7de54c371f511bb42eb8b3a0272a70c1bf9ce5",
+      "file_count": 772,
+      "sample": [
+        "runtime/external_consciousness_cycle_v36.py",
+        "runtime/reconstruct_rc8v36.py",
+        "runtime/test_yado_api_readiness_v1.py",
+        "runtime/test_yado_architecture_admission_integrity.py",
+        "runtime/test_yado_authorized_access_inventory_v1.py",
+        "runtime/test_yado_autonomous_deep_development_v1.py",
+        "runtime/test_yado_blind_deficit_analysis_v1.py",
+        "runtime/test_yado_causal_learning_state.py"
+      ]
+    },
+    "INTELLIGENCE": {
+      "evidence_digest": "92e1160bb8a7f7e8f7f38ae7db2d3773d295aa908127b1df95f267523106cae5",
+      "file_count": 591,
+      "sample": [
+        ".github/workflows/yado-autonomous-external-library-discovery-v5.yml",
+        ".github/workflows/yado-autonomous-meta-grammar-evolution-v4.yml",
+        ".github/workflows/yado-autonomous-meta-source-evolution-v2.yml",
+        ".github/workflows/yado-cognitive-10x10-evolution-v1.yml",
+        ".github/workflows/yado-experience-conditioned-cognitive-evolution-v4.yml",
+        ".github/workflows/yado-external-dev-capability-pack-v1.yml",
+        ".github/workflows/yado-external-dev-multigoal-campaign-v1.yml",
+        ".github/workflows/yado-external-dev-self-development-v1.yml"
+      ]
+    },
+    "LAYERS": {
+      "evidence_digest": "745f7c6366d2950d3b38e3e9ce0177d11d590392c82badcd8914b9e667c47774",
+      "file_count": 523,
+      "sample": [
+        "architecture/developmental-head-manifest.json",
+        "architecture/developmental-self-model-overlay.json",
+        "architecture/evolution-ledger.json",
+        "architecture/g1-developmental-capability-registry-v1.json",
+        "architecture/g1-training-request.json",
+        "architecture/g1-training-state-v1.json",
+        "architecture/g2-applied-workload-request.json",
+        "architecture/g2-applied-workload-state-v1.json"
+      ]
+    },
+    "LOGIC": {
+      "evidence_digest": "e626cfb9e0a8497ec4c39e42b1d784c4e1ae31dada7df3e9f28568429dda6558",
+      "file_count": 149,
+      "sample": [
+        ".github/workflows/yado-cross-structure-invariant-repair-transfer-v1.yml",
+        ".github/workflows/yado-endogenous-data-invariant-repair-v1.yml",
+        ".github/workflows/yado-g2-causal-external-learning-binding-v1.yml",
+        ".github/workflows/yado-g2-causal-external-learning-hash-rebind-v1.yml",
+        ".github/workflows/yado-relational-causal-logic-holdout-v1.yml",
+        "architecture/yado-core-audit-invariant-canonical-integration-request.json",
+        "architecture/yado-core-audit-invariant-evolution-request.json",
+        "architecture/yado-core-audit-invariant-fresh-admission-request.json"
+      ]
+    },
+    "MEMORY_EXPERIENCE": {
+      "evidence_digest": "94a38741f67911264fb79bc571f4f94831f7a32c4c5273875da6179743b39409",
+      "file_count": 447,
+      "sample": [
+        "experience/autonomous/archive/run-34999034554-yado-autonomous-learning-latest.json",
+        "experience/autonomous/archive/yado-learning-commit-579c95bb.json",
+        "experience/autonomous/archive/yado-learning-run-35025646756.json",
+        "experience/autonomous/history/run-34965604344/experience.json",
+        "experience/autonomous/history/run-34965604344/provenance.json",
+        "experience/autonomous/history/run-34965604344/receipt.json",
+        "experience/autonomous/yado-autonomous-learning-0e18e1460b0473fe.json",
+        "experience/autonomous/yado-autonomous-learning-2059b091e4049726.json"
+      ]
+    },
+    "MODULES": {
+      "evidence_digest": "ccbf1b9e7089bde2f94a41849abc58119fda2684967e8b3feaf61bcc602406a9",
+      "file_count": 866,
+      "sample": [
+        "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v2.py",
+        "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v3.py",
+        "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py",
+        "candidates/autonomous/yado_causal_learning_chain_v1.py",
+        "candidates/autonomous/yado_evidence_consistency_gate_v1.py",
+        "candidates/autonomous/yado_external_dev_capability_router_candidate_v1.py",
+        "candidates/autonomous/yado_external_dev_experience_router_candidate_v2.py",
+        "candidates/autonomous/yado_full_layer_self_evolution_controller_v1.py"
+      ]
+    },
+    "THINKING": {
+      "evidence_digest": "72d8265a1e4d09b0a1924f0a9604c4e6d3cdbbe4b6a9f0f93a2aacf63e83ca93",
+      "file_count": 344,
+      "sample": [
+        ".github/workflows/yado-cognitive-10x10-evolution-v1.yml",
+        ".github/workflows/yado-cognitive-10x10-policy-admission-v1.yml",
+        ".github/workflows/yado-cognitive-integration-holdout-v1.yml",
+        ".github/workflows/yado-cognitive-tri-organ-admission-v3.yml",
+        ".github/workflows/yado-experience-conditioned-cognitive-evolution-v4.yml",
+        ".github/workflows/yado-g2-cognitive-experience-consolidation-v4.yml",
+        ".github/workflows/yado-main-native-cognitive-evolution-v2.yml",
+        ".github/workflows/yado-thinking-boundary-adaptive-repair-v1.yml"
+      ]
+    }
+  },
+  "mode": "EVENT_DRIVEN_SHADOW",
+  "next_gate": "native candidate -> compile -> isolated execution -> full audit -> successor regression -> 20 endogenous cycles",
+  "preexisting_evidence": {
+    "full_kernel_audit": {
+      "failures": 0,
+      "findings": 0,
+      "path": "audits/yado-full-kernel-audit-v1-report.json",
+      "status": "PASS"
+    },
+    "full_regression": {
+      "failures": 0,
+      "findings": 0,
+      "path": "audits/yado-full-regression-v1-report.json",
+      "status": "PASS"
+    }
+  },
+  "schema": "yado.autonomous_deep_development.v1",
+  "selected_action": "execute the verified native runtime self-rewrite candidate in isolation and require full regression admission",
+  "selected_target": "RUNTIME_SELF_REWRITE_ADMISSION",
+  "selection_reason": "cross-cognitive integration passed and native runtime self-rewrite V3 is waiting for isolated execution/regression admission",
+  "selector_version": "EVIDENCE_AWARE_DEFICIT_SELECTOR_V2",
+  "status": "PASS_SHADOW_AUTONOMOUS_DEEP_DEVELOPMENT_PLAN_V1"
+}

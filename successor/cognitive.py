@@ -81,6 +81,9 @@ def _replay_context(snapshot):
     if 'COG_ACTIVATE_NATIVE_SYNTHESIS' in kinds:
         from .native_binding import activation
         context.append(activation())
+    if 'COG_ACTIVATE_COMPOSITIONAL_SYNTHESIS' in kinds:
+        from .compositional_binding import activation
+        context.append(activation())
     if any(kind.startswith('COG_RUNTIME_') for kind in kinds):
         from .archive import file_sha
         from .native_mechanism import ROOT, DONOR_PATH
@@ -165,6 +168,9 @@ def validate_goal(spec):
     spec = copy.deepcopy(spec)
     domain = spec['domain']
     if domain == 'native_source':
+        if 'schema' in spec:
+            from .program_goals import validate_goal as validate_program_goal
+            return validate_program_goal(spec)
         return validate_source_goal(spec)
     if domain == 'library_discovery':
         if spec != {'domain': 'library_discovery', 'objective': 'html_xml_parser'}:
@@ -255,6 +261,8 @@ def learned_sources(records, goal, limit=SOURCE_MEMORY_CAPACITY):
     sources, seen = [], set()
     for record in reversed(records):
         result = record.get('result') or {}
+        if goal['spec'].get('schema') == 'yado.native_program_goal.v1' and result.get('schema') != 'yado.compositional_source.v1':
+            continue
         if (record['kind'] == 'COG_FINISH' and record['status'] == 'VALIDATED_ON_HOLDOUT'
                 and result.get('source_context') == context and 'source' in result
                 and result['source_sha256'] not in seen):
@@ -329,9 +337,19 @@ def available_strategies(goal, records):
     from .native_binding import STRATEGY, COST, active
     from .runtime_evolution import active_candidates, COST as runtime_cost
     strategies = STRATEGIES[goal['spec']['domain']]
+    if goal['spec'].get('schema') == 'yado.native_program_goal.v1':
+        from .compositional_binding import active as compositional_active, STRATEGY as composition, COST as composition_cost
+        strategies = (('reuse_verified_source', 1),)
+        if compositional_active(records):
+            strategies += ((composition, composition_cost),)
+        return [(s, c) for s, c in strategies
+                if s != 'reuse_verified_source' or learned_source(records, goal) is not None]
     if goal['spec']['domain'] == 'native_source' and active(records):
         strategies += ((STRATEGY, COST),)
     if goal['spec']['domain'] == 'native_source':
+        from .compositional_binding import active as compositional_active, STRATEGY as composition, COST as composition_cost
+        if compositional_active(records):
+            strategies += ((composition, composition_cost),)
         row = goal['spec']['training'][0]
         if len(row['input']) == 1 and type(next(iter(row['input'].values()))) is int and type(row['expected']) is int:
             strategies += tuple((name, runtime_cost) for name in active_candidates(records))
@@ -387,8 +405,19 @@ def _replay_uncached(records):
             if (body != activation() or active(past)
                     or any(g['status'] == 'ACTIVE' for g in goals.values())):
                 raise ValueError('COGNITIVE_NATIVE_BINDING_PROVENANCE')
+        elif kind in {'COG_ACTIVATE_COMPOSITIONAL_SYNTHESIS', 'COG_DEACTIVATE_COMPOSITIONAL_SYNTHESIS'}:
+            from .compositional_binding import activation, deactivation, active, ACTIVATE
+            body = {k: v for k, v in r.items() if k not in {'tick', 'event_hash'}}
+            expected = activation() if kind == ACTIVATE else deactivation()
+            if (fingerprint(body) != fingerprint(expected) or active(past) == (kind == ACTIVATE)
+                    or any(g['status'] == 'ACTIVE' for g in goals.values())):
+                raise ValueError('COGNITIVE_COMPOSITIONAL_BINDING_PROVENANCE')
         elif kind == 'COG_GOAL':
             validate_goal(r['spec'])
+            if r['spec'].get('schema') == 'yado.native_program_goal.v1':
+                from .compositional_binding import active
+                if not active(past):
+                    raise ValueError('PROGRAM_GOAL_REQUIRES_COMPOSITIONAL_ACTIVATION')
             if (r['mode'] not in MODES or type(r['budget']) is not int or not 1 <= r['budget'] <= 30
                     or r['spec_digest'] != fingerprint(r['spec'])):
                 raise ValueError('COGNITIVE_GOAL_CONTRACT')
@@ -450,11 +479,33 @@ def _replay_uncached(records):
                         if (result['source'] != generated['source'] or result.get('runtime_mechanism_sha256')
                                 != generated['runtime_mechanism_sha256']):
                             raise ValueError('COGNITIVE_RUNTIME_MECHANISM_EXECUTION_PROVENANCE')
+                    if strategy == 'native_compositional_v1':
+                        from .compositional_binding import synthesize
+                        try:
+                            history = [event for event in past if event['tick'] < g['decision']['tick']]
+                            generated = synthesize(g['spec']['training'], history, use_memory=g['mode'] != 'no_memory')
+                        except Exception as error:
+                            raise ValueError('COGNITIVE_COMPOSITIONAL_EMISSION_PROVENANCE') from error
+                        if any(key not in result or fingerprint(result[key]) != fingerprint(value)
+                               for key, value in generated.items() if key != 'status'):
+                            raise ValueError('COGNITIVE_COMPOSITIONAL_EMISSION_PROVENANCE')
                     if g['decision']['choice']['strategy'] == 'reuse_verified_source':
                         prior = replay_recalled_source(past, g, result)
                         if (prior is None or result.get('reused_finish_tick') != prior['tick']
                                 or result['source_sha256'] != prior['result']['source_sha256']):
                             raise ValueError('COGNITIVE_NATIVE_SOURCE_REUSE_PROVENANCE')
+                        if prior['result'].get('schema') == 'yado.compositional_source.v1':
+                            execution_fields = {'status', 'source_context', 'training_predictions',
+                                                'validation_predictions', 'predictions',
+                                                'reused_finish_tick', 'memory_retrieval'}
+                            if any(key not in result or fingerprint(result[key]) != fingerprint(value) for key, value in prior['result'].items()
+                                   if key not in execution_fields):
+                                raise ValueError('COGNITIVE_COMPOSITIONAL_REUSE_PROVENANCE')
+                    if result.get('schema') == 'yado.compositional_source.v1':
+                        from .compositional_binding import verify_execution
+                        if strategy not in {'native_compositional_v1', 'reuse_verified_source'}:
+                            raise ValueError('COGNITIVE_COMPOSITIONAL_STRATEGY_PROVENANCE')
+                        verify_execution(result, g['spec'])
                 g['remaining'] -= g['decision']['choice']['cost']
                 g['attempted'].append(g['decision']['choice']['strategy'])
                 g.update(phase='VERIFY', execution=r)
@@ -577,6 +628,22 @@ class CognitiveLoop:
             return self.kernel._append(activation())
         return self._transaction(admit)
 
+    def set_compositional_synthesis(self, enabled=True):
+        from .compositional_binding import activation, deactivation, active, ACTIVATE, DEACTIVATE
+        if type(enabled) is not bool:
+            raise ValueError('COMPOSITIONAL_BINDING_REQUIRES_BOOLEAN')
+        def change():
+            records = self._records()
+            if (any(g['status'] == 'ACTIVE' for g in replay(records).values())
+                    or any(s['status'] == 'ACTIVE' for s in self.kernel.development_snapshot()['sessions'].values())
+                    or any(s['status'] == 'ACTIVE' for s in self.kernel.autonomy_snapshot()['sessions'].values())):
+                raise ValueError('COMPOSITIONAL_BINDING_REQUIRES_IDLE_KERNEL')
+            if active(records) == enabled:
+                return next((r for r in reversed(records) if r['kind'] in {ACTIVATE, DEACTIVATE}),
+                            {'status': 'INACTIVE', 'strategy': 'native_compositional_v1'})
+            return self.kernel._append(activation() if enabled else deactivation())
+        return self._transaction(change)
+
     def _transaction(self, operation):
         self.kernel._check_sources()
         self.kernel.db.execute('BEGIN IMMEDIATE')
@@ -594,6 +661,10 @@ class CognitiveLoop:
         if type(budget) is not int or not 1 <= budget <= 30 or mode not in MODES:
             raise ValueError('INVALID_COGNITIVE_BUDGET_OR_MODE')
         def submit():
+            if spec.get('schema') == 'yado.native_program_goal.v1':
+                from .compositional_binding import active
+                if not active(self._records()):
+                    raise ValueError('PROGRAM_GOAL_REQUIRES_COMPOSITIONAL_ACTIVATION')
             if sum(g['status'] == 'ACTIVE' for g in replay(self._records()).values()) >= 64:
                 raise ValueError('ACTIVE_GOAL_BUDGET')
             return self.kernel._append({'kind': 'COG_GOAL', 'spec': spec, 'budget': budget,
@@ -659,6 +730,10 @@ class CognitiveLoop:
                 elif choice['strategy'] == 'native_evolved_v2':
                     from .native_binding import synthesize
                     candidate = synthesize(spec['training'])
+                elif choice['strategy'] == 'native_compositional_v1':
+                    from .compositional_binding import synthesize
+                    history = [r for r in self._records() if r['tick'] < g['decision']['tick']]
+                    candidate = synthesize(spec['training'], history, use_memory=g['mode'] != 'no_memory')
                 elif choice['strategy'].startswith('native_materialized_'):
                     from .runtime_evolution import strategy_candidate
                     # Historical retention replays the mechanism available at
@@ -713,6 +788,9 @@ class CognitiveLoop:
         evidence = {}
         if result['status'] == 'CANDIDATE':
             if spec['domain'] == 'native_source':
+                if result.get('schema') == 'yado.compositional_source.v1':
+                    from .compositional_binding import verify_execution
+                    verify_execution(result, spec)
                 checks = len(spec['validation'])
                 scope = 'INDEPENDENT_VALIDATION_LABELS_AFTER_SOURCE_FREEZE'
                 passed = source_sha(result['source']) == result['source_sha256']

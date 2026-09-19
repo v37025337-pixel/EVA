@@ -64,6 +64,12 @@ def validate_source_goal(spec):
 
 def synthesize_source(training, strategy):
     """No validation labels or query answers are accepted by this seam."""
+    if strategy == 'native_compositional_v1':
+        from successor.compositional_source import synthesize
+        candidate = synthesize(training)
+        if not candidate.get('source'):
+            raise ValueError('COMPOSITIONAL_SYNTHESIS_WITHHOLD:' + str(candidate.get('reason')))
+        return candidate
     cases = copy.deepcopy(training)
     if strategy not in {'native_v2', 'native_v3', 'native_v4'}:
         raise ValueError('UNKNOWN_NATIVE_STRATEGY')
@@ -96,6 +102,11 @@ def synthesize_source(training, strategy):
 
 
 def execute_source(candidate, inputs):
+    if candidate.get('schema') == 'yado.compositional_source.v1':
+        from successor.compositional_source import execute
+        return execute(candidate, inputs)
+    if 'schema' in candidate or 'parent_source_sha256' in candidate:
+        raise ValueError('UNKNOWN_NATIVE_SOURCE_SCHEMA')
     source = candidate['source']
     if source_sha(source) != candidate['source_sha256']:
         raise ValueError('NATIVE_SOURCE_DIGEST_MISMATCH')

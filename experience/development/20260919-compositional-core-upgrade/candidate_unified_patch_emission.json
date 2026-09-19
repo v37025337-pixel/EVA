@@ -1,0 +1,79 @@
+{
+  "automatic_canonical_promotion": false,
+  "compiled": true,
+  "grammar": "YADO_TYPED_COMPOSITION_V1",
+  "input_signature": [
+    [
+      "after",
+      "str"
+    ],
+    [
+      "before",
+      "str"
+    ]
+  ],
+  "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+  "parent_source_sha256": [],
+  "predictions": [
+    "--- a/target.py\n+++ b/target.py\n@@ -1 +1,2 @@\n a = 9\n+b = 10\n",
+    "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x * 2\n+    return x * 3\n"
+  ],
+  "program": {
+    "args": [
+      {
+        "args": [
+          {
+            "args": [
+              {
+                "key": "before",
+                "op": "input"
+              }
+            ],
+            "name": "splitlines",
+            "op": "call"
+          },
+          {
+            "args": [
+              {
+                "key": "after",
+                "op": "input"
+              }
+            ],
+            "name": "splitlines",
+            "op": "call"
+          },
+          {
+            "op": "literal",
+            "value": "a/target.py"
+          },
+          {
+            "op": "literal",
+            "value": "b/target.py"
+          }
+        ],
+        "name": "unified_diff",
+        "op": "call"
+      }
+    ],
+    "name": "join",
+    "op": "call"
+  },
+  "schema": "yado.compositional_source.v1",
+  "search_attempts": 3740,
+  "search_states": 2468,
+  "source": "def solve(component_id, program_id, inputs):\n    return _primitive('join', _primitive('unified_diff', _primitive('splitlines', _input(inputs, 'before')), _primitive('splitlines', _input(inputs, 'after')), 'a/target.py', 'b/target.py'))\n",
+  "source_context": "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7",
+  "source_sha256": "dcb01c7a9054f815dade2c6b8bea5c3ffb4cebe5f0c84c9b954735c3ce018cb6",
+  "status": "CANDIDATE",
+  "synthesis_inputs": "TRAINING_ONLY",
+  "training_digest": "988d7b3583b1c22e93cc9c9776d11b4b82fdb0d46ea1e85576675f3b3b24644f",
+  "training_predictions": [
+    "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-x = 1\n+x = 2\n",
+    "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x\n+    return x + 1\n",
+    "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1 @@\n a = 3\n-b = 4\n"
+  ],
+  "validation_predictions": [
+    "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-flag = False\n+flag = True\n",
+    "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-name = \"старое\"\n+name = \"новое\"\n"
+  ]
+}

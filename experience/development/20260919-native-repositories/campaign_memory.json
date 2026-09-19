@@ -1,0 +1,326 @@
+{
+  "artifacts": {
+    "api_probe": {
+      "assertion_pass": true,
+      "content_type": "application/json; charset=utf-8",
+      "http_status": 200,
+      "read_only": true,
+      "schema": "yado.external_dev.api_probe.v1",
+      "sha256": "eb4c99ef595308af313027cf08536810cf769db074486a3c94ab0fd5b9fdc604",
+      "source_pattern": "hoppscotch/hoppscotch",
+      "status": "PASS_READ_ONLY_API_ASSERTION",
+      "url": "https://api.github.com/repos/dip497/hivemind"
+    },
+    "build_plan": {
+      "automatic_canonical_mutation": false,
+      "automatic_deploy": false,
+      "local_first": true,
+      "objective": "Bind the admitted router into a restartable five-goal development campaign",
+      "phases": [
+        "SPEC",
+        "CANDIDATE",
+        "BUILD",
+        "LOCAL_PREVIEW",
+        "TEST",
+        "REGRESSION",
+        "ADMISSION"
+      ],
+      "required_tests": [
+        "compile",
+        "fresh-router-selection",
+        "restart-continuity",
+        "full-regression"
+      ],
+      "restricted_reference_paths": [
+        "src/pro"
+      ],
+      "schema": "yado.external_dev.local_app_build_plan.v1",
+      "source_pattern": "dyad-sh/dyad",
+      "stack": "Python stdlib + current YADO G2 core"
+    },
+    "continuation_digest": {
+      "local_only": true,
+      "network_used": false,
+      "operation": "sha256",
+      "output": "a08f4a5e0a6ea4067ff8d306e7c3c1682e64321e5aef7d307c18165fee60ab51",
+      "schema": "yado.external_dev.local_utility.v1",
+      "source_pattern": "nexustools-dev/nexus-tools"
+    },
+    "evidence_digest": {
+      "local_only": true,
+      "network_used": false,
+      "operation": "sha256",
+      "output": "a64934b1725be8c9a4ba5c5485992b27cf745a277a8ca6747ac6b83fab3bfed0",
+      "schema": "yado.external_dev.local_utility.v1",
+      "source_pattern": "nexustools-dev/nexus-tools"
+    },
+    "resource_options": {
+      "catalog_reference_only": true,
+      "catalog_sha256": "b21b8dddde78f06bcc3caa9eec17a6b5808704c36a75cc5b21e07aaa19648fe1",
+      "credentials_used": false,
+      "external_write": false,
+      "keywords": [
+        "serverless",
+        "compute",
+        "ci"
+      ],
+      "result_count": 8,
+      "results": [
+        {
+          "description": "Lightweight test automation tool for web applications. It is easy to learn and doesn't require coding. You can run unlimited tests on your own computer for free. You also get cloud monitoring and CI/CD integration for an additional monthly fee.",
+          "name": "BugBug",
+          "score": 2,
+          "url": "https://bugbug.io/"
+        },
+        {
+          "description": "Reactive backend as a service, hosting your data (documents with relationships & serializable ACID transactions), serverless functions, and WebSockets to stream updates to various clients. Free for small projects - up to 1M records, 5M monthly function calls.",
+          "name": "convex.dev",
+          "score": 2,
+          "url": "https://convex.dev/"
+        },
+        {
+          "description": "Customer Support management with three agents, private knowledge base, and email tickets. Integrates with [Assist](https://zoho.com/assist) for one remote technician & 5 unattended computers.",
+          "name": "Desk",
+          "score": 2,
+          "url": "https://zoho.com/desk"
+        },
+        {
+          "description": "Offers access to over 4,000 free online courses from 250 leading institutions, including Harvard and MIT, specializing in computer science, engineering, and data science.",
+          "name": "edX",
+          "score": 2,
+          "url": "https://www.edx.org/"
+        },
+        {
+          "description": "Serverless platform with a free Hobby plan providing 550 free compute hours/month (512 MB RAM Free tier), 1 free PostgreSQL database, and custom domain SSL.",
+          "name": "Koyeb",
+          "score": 2,
+          "url": "https://www.koyeb.com/"
+        },
+        {
+          "description": "A complete platform for dataflow automation. Free plan includes 5 deployed workflows and 500 minutes of serverless compute credits per month.",
+          "name": "PrefectCloud",
+          "score": 2,
+          "url": "https://www.prefect.io/cloud/"
+        },
+        {
+          "description": "All-in-one platform to connect APIs and services in a serverless environment. It brings all the agility and benefits of NoCode tools but with all the power of using programming languages. The free tier includes [1.000 yeps](https://yepcode.io/pricing/).",
+          "name": "YepCode",
+          "score": 2,
+          "url": "https://yepcode.io"
+        },
+        {
+          "description": "A free tool to search a username across 90+ social platforms to find matching profiles.",
+          "name": "360username",
+          "score": 1,
+          "url": "https://360username.com/"
+        }
+      ],
+      "schema": "yado.external_dev.free_resource_discovery.v1",
+      "source_pattern": "ripienaar/free-for-dev",
+      "status": "PASS_FREE_TIER_RESOURCE_DISCOVERY"
+    },
+    "resource_validation_plan": {
+      "automatic_canonical_mutation": false,
+      "automatic_deploy": false,
+      "candidate": {
+        "description": "Lightweight test automation tool for web applications. It is easy to learn and doesn't require coding. You can run unlimited tests on your own computer for free. You also get cloud monitoring and CI/CD integration for an additional monthly fee.",
+        "name": "BugBug",
+        "score": 2,
+        "url": "https://bugbug.io/"
+      },
+      "derived_from_resource_discovery": true,
+      "local_first": true,
+      "objective": "Validate discovered free compute candidate BugBug without deploying or creating an account",
+      "phases": [
+        "SPEC",
+        "CANDIDATE",
+        "BUILD",
+        "LOCAL_PREVIEW",
+        "TEST",
+        "REGRESSION",
+        "ADMISSION"
+      ],
+      "required_tests": [
+        "compile",
+        "offline-config-validation",
+        "public-doc-recheck",
+        "regression",
+        "rollback",
+        "admission"
+      ],
+      "restricted_reference_paths": [
+        "src/pro"
+      ],
+      "schema": "yado.external_dev.local_app_build_plan.v1",
+      "source_pattern": "dyad-sh/dyad",
+      "stack": "Python stdlib + current YADO G2 core + retained read-only evidence"
+    },
+    "task_contract": {
+      "acceptance_criteria": [
+        "router selects from deficit text without a host tool name",
+        "campaign state survives a process restart",
+        "all external access remains read-only and credential-free",
+        "five causally chained goals complete before admission"
+      ],
+      "automatic_external_agent_spawn": false,
+      "human_review_supported": true,
+      "isolation_preference": "BRANCH_OR_WORKTREE",
+      "objective": "Develop reusable source from verified repository experience, select tasks from measured deficits, and continue from retained state.",
+      "schema": "yado.external_dev.task_contract.v1",
+      "source_pattern": "dip497/hivemind",
+      "states": [
+        "BACKLOG",
+        "TODO",
+        "IN_PROGRESS",
+        "IN_REVIEW",
+        "DONE",
+        "WITHHOLD"
+      ]
+    }
+  },
+  "component_id": "RUNTIME-G2-EXTERNAL-DEV-MULTIGOAL-CAMPAIGN-V1",
+  "continuation_component_id": "RUNTIME-G2-EXTERNAL-DEV-RESIDUAL-CONTINUATION-V2",
+  "continuation_schema": "yado.external_dev_residual_continuation.v2",
+  "events": [
+    {
+      "cycle": 1,
+      "event_sha256": "db44a441d9d8c4a83b26e9a9d644b8b957be6d58fb3056a16b9b1f17361067f8",
+      "goal": "Turn the broad development objective 'Develop reusable source from verified repository experience, select tasks from measured deficits, and continue from retained state.' into an isolated work plan with explicit review criteria before any change.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "and",
+        "criteria",
+        "review"
+      ],
+      "previous_event_sha256": null,
+      "result_status": "PASS_TASK_CONTRACT",
+      "result_summary": {
+        "criteria": 4
+      },
+      "router_score": 3,
+      "selected_capability": "TASK_CONTRACT_AND_AGENT_SUPERVISION_PATTERN"
+    },
+    {
+      "cycle": 2,
+      "event_sha256": "65ad6b2631822a8bbf27033712ae26cfd36ffaf6e81cf62f77695399194aa06d",
+      "goal": "The work plan now has 4 acceptance checks, but current upstream repository identity has not been independently confirmed through a public endpoint response.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "endpoint",
+        "response"
+      ],
+      "previous_event_sha256": "db44a441d9d8c4a83b26e9a9d644b8b957be6d58fb3056a16b9b1f17361067f8",
+      "result_status": "PASS_READ_ONLY_API_ASSERTION",
+      "result_summary": {
+        "http_status": 200,
+        "sha256": "eb4c99ef595308af313027cf08536810cf769db074486a3c94ab0fd5b9fdc604"
+      },
+      "router_score": 2,
+      "selected_capability": "READ_ONLY_API_ASSERTION_WORKBENCH"
+    },
+    {
+      "cycle": 3,
+      "event_sha256": "09aead989247fd012ce96efd3a9f459bc3c8652b47aacdbcd50563c1e941d0ea",
+      "goal": "Upstream evidence returned PASS_READ_ONLY_API_ASSERTION; prepare a local candidate preview with compile, tests, regression and an admission gate before any integration.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "admission",
+        "candidate",
+        "compile",
+        "preview",
+        "regression"
+      ],
+      "previous_event_sha256": "65ad6b2631822a8bbf27033712ae26cfd36ffaf6e81cf62f77695399194aa06d",
+      "result_status": "PASS_BUILD_PLAN",
+      "result_summary": {
+        "phases": 7
+      },
+      "router_score": 5,
+      "selected_capability": "LOCAL_APP_BUILD_ADMISSION_LOOP"
+    },
+    {
+      "cycle": 4,
+      "event_sha256": "3625a3cb5d61dc4d795fe4e45d5dc518b3eb1c5264e4b66660ac1cc7dcf50f9b",
+      "goal": "The candidate plan contains 7 phases; canonicalize the campaign evidence and freeze an offline digest so continuation can detect drift.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "digest",
+        "offline"
+      ],
+      "previous_event_sha256": "09aead989247fd012ce96efd3a9f459bc3c8652b47aacdbcd50563c1e941d0ea",
+      "result_status": "PASS_LOCAL_EVIDENCE_DIGEST",
+      "result_summary": {
+        "digest": "a64934b1725be8c9a4ba5c5485992b27cf745a277a8ca6747ac6b83fab3bfed0"
+      },
+      "router_score": 2,
+      "selected_capability": "PURE_LOCAL_DEV_UTILITY_LIBRARY"
+    },
+    {
+      "cycle": 5,
+      "event_sha256": "866c8ba70900624045b4b24e3629f2666a2a8b78b2ced41c516922fa9dfa5857",
+      "goal": "Evidence identity a64934b1725b is frozen; find a free serverless or compute option for a disposable future validation run without creating an account or changing an external service.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "compute",
+        "for",
+        "free",
+        "serverless"
+      ],
+      "previous_event_sha256": "3625a3cb5d61dc4d795fe4e45d5dc518b3eb1c5264e4b66660ac1cc7dcf50f9b",
+      "result_status": "PASS_FREE_TIER_RESOURCE_DISCOVERY",
+      "result_summary": {
+        "catalog_sha256": "b21b8dddde78f06bcc3caa9eec17a6b5808704c36a75cc5b21e07aaa19648fe1",
+        "result_count": 8
+      },
+      "router_score": 4,
+      "selected_capability": "FREE_TIER_RESOURCE_DISCOVERY"
+    },
+    {
+      "cycle": 6,
+      "event_sha256": "c00c5ed8c808264b380ee72d875f0691ff4be6ad216819a4922e9cd6f2a6760c",
+      "goal": "The completed discovery produced 8 free compute candidates and the leading candidate is 'BugBug'. Before any deployment, build a local candidate validation plan with compile, test, regression, rollback and admission checks using only the evidence already collected.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "admission",
+        "build",
+        "candidate",
+        "compile",
+        "regression",
+        "test"
+      ],
+      "previous_event_sha256": "866c8ba70900624045b4b24e3629f2666a2a8b78b2ced41c516922fa9dfa5857",
+      "result_status": "PASS_RESOURCE_VALIDATION_PLAN",
+      "result_summary": {
+        "candidate_name": "BugBug",
+        "candidate_url": "https://bugbug.io/",
+        "phases": 7
+      },
+      "router_score": 6,
+      "selected_capability": "LOCAL_APP_BUILD_ADMISSION_LOOP"
+    },
+    {
+      "cycle": 7,
+      "event_sha256": "de3955bfe120bc370bb3b1f49df9b243012f727be7c1b832ba9fc2bddb5fb3c7",
+      "goal": "The state-derived validation plan contains 7 phases; freeze an offline digest and hash of its continuation evidence so a later restart can detect drift before execution.",
+      "goal_derived_from_state": true,
+      "matched": [
+        "digest",
+        "hash",
+        "offline"
+      ],
+      "previous_event_sha256": "c00c5ed8c808264b380ee72d875f0691ff4be6ad216819a4922e9cd6f2a6760c",
+      "result_status": "PASS_RESIDUAL_CONTINUATION_DIGEST",
+      "result_summary": {
+        "digest": "a08f4a5e0a6ea4067ff8d306e7c3c1682e64321e5aef7d307c18165fee60ab51"
+      },
+      "router_score": 3,
+      "selected_capability": "PURE_LOCAL_DEV_UTILITY_LIBRARY"
+    }
+  ],
+  "objective": "Develop reusable source from verified repository experience, select tasks from measured deficits, and continue from retained state.",
+  "restart_count": 1,
+  "router_policy_sha256": "3a682eedbadb61d8d68256fe18c1d66b2e61e340aa43845a9798806d610b32f2",
+  "router_source_sha256": "3c73ba3632b3a77b826de467c5984bd831b3edcd2dffecaa04f9adde097e7ebb",
+  "schema": "yado.external_dev_multigoal_campaign.v1",
+  "state_sha256": "ec08a2c4e8e0cc55c939c1ce604b7a10bf4068c2dd37fa7972766676db6ede33"
+}

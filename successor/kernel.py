@@ -423,6 +423,43 @@ class SuccessorKernel:
         from .cognitive import CognitiveLoop
         return CognitiveLoop(self).activate_native_synthesis()
 
+    def set_compositional_synthesis(self, enabled=True):
+        from .cognitive import CognitiveLoop
+        return CognitiveLoop(self).set_compositional_synthesis(enabled)
+
+    def native_program_status(self):
+        from .cognitive import CognitiveLoop, replay, consolidated_stats
+        from .compositional_binding import active, memories
+        from .compositional_source import catalog
+        self.verify_state()
+        records = CognitiveLoop(self)._records()
+        goals = replay(records)
+        return {'schema': 'yado.native_program_development_status.v1',
+                'synthesis_active': active(records), 'language': catalog(),
+                'verified_programs': [{'source_sha256': c['source_sha256'],
+                    'parent_source_sha256': c.get('parent_source_sha256', [])} for c in memories(records)],
+                'unresolved_goal_ids': [g['id'] for g in goals.values()
+                    if g['spec']['domain'] == 'native_source' and g['status'] == 'WITHHOLD'
+                    and not any(fingerprint(other['spec']) == fingerprint(g['spec']) and other['status'] == 'VALIDATED_ON_HOLDOUT'
+                                for other in goals.values())],
+                'self_model': consolidated_stats(records),
+                'background_process_running': False, 'general_intelligence_established': False}
+
+    def develop_native_programs(self, *, rounds=3):
+        """Finite continuation from durable failures using existing selectors."""
+        if type(rounds) is not int or not 1 <= rounds <= 8:
+            raise ValueError('PROGRAM_DEVELOPMENT_ROUND_BUDGET')
+        self.set_compositional_synthesis(True)
+        sessions = []
+        for _ in range(rounds):
+            sid = self.start_development(budget=30, max_goals=3)
+            self.develop(max_steps=200)
+            session = self.development_snapshot()['sessions'][sid]
+            sessions.append(session)
+            if session['status'] != 'COMPLETE' or not session['selections']:
+                break
+        return {'sessions': sessions, **self.native_program_status()}
+
     def think(self, max_steps=20):
         from .cognitive import CognitiveLoop
         return CognitiveLoop(self).run(max_steps)

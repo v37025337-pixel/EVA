@@ -1,0 +1,1435 @@
+{
+  "1": {
+    "attempted": [
+      "native_v2",
+      "native_v3",
+      "native_v4"
+    ],
+    "budget": 7,
+    "id": 1,
+    "remaining": 1,
+    "result": null,
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "message": "tab\there"
+          }
+        },
+        {
+          "input": {
+            "message": "done: \"ok\"\nещё"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"ready\"}}}",
+          "input": {
+            "message": "ready"
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"quoted \\\"value\\\"\"}}}",
+          "input": {
+            "message": "quoted \"value\""
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"line\\nnext\"}}}",
+          "input": {
+            "message": "line\nnext"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"back\\\\slash\"}}}",
+          "input": {
+            "message": "back\\slash"
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"данные\"}}}",
+          "input": {
+            "message": "данные"
+          }
+        }
+      ]
+    },
+    "status": "WITHHOLD"
+  },
+  "16": {
+    "attempted": [
+      "native_v2",
+      "native_v3",
+      "native_v4"
+    ],
+    "budget": 7,
+    "id": 16,
+    "remaining": 1,
+    "result": null,
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "after": "a = 9\nb = 10\n",
+            "before": "a = 9\n"
+          }
+        },
+        {
+          "input": {
+            "after": "def f(x):\n    return x * 3\n",
+            "before": "def f(x):\n    return x * 2\n"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-x = 1\n+x = 2\n",
+          "input": {
+            "after": "x = 2\n",
+            "before": "x = 1\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x\n+    return x + 1\n",
+          "input": {
+            "after": "def f(x):\n    return x + 1\n",
+            "before": "def f(x):\n    return x\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1 @@\n a = 3\n-b = 4\n",
+          "input": {
+            "after": "a = 3\n",
+            "before": "a = 3\nb = 4\n"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-flag = False\n+flag = True\n",
+          "input": {
+            "after": "flag = True\n",
+            "before": "flag = False\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-name = \"старое\"\n+name = \"новое\"\n",
+          "input": {
+            "after": "name = \"новое\"\n",
+            "before": "name = \"старое\"\n"
+          }
+        }
+      ]
+    },
+    "status": "WITHHOLD"
+  },
+  "31": {
+    "attempted": [
+      "native_v2",
+      "native_v3",
+      "native_v4"
+    ],
+    "budget": 7,
+    "id": 31,
+    "remaining": 1,
+    "result": null,
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "after": "PACK_DIGEST = 'k'\ndef route(x):\n    return x + 4\n",
+            "before": "PACK_DIGEST = 'j'\ndef route(x):\n    return x + 3\n"
+          }
+        },
+        {
+          "input": {
+            "after": "PACK_DIGEST = 'm'\ndef route(x):\n    return x % 2\n",
+            "before": "PACK_DIGEST = 'l'\ndef route(x):\n    return x % 2\n"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'b'\ndef route(x):\n    return x\n",
+            "before": "PACK_DIGEST = 'a'\ndef route(x):\n    return x\n"
+          }
+        },
+        {
+          "expected": true,
+          "input": {
+            "after": "PACK_DIGEST = 'c'\ndef route(x):\n    return x + 2\n",
+            "before": "PACK_DIGEST = 'c'\ndef route(x):\n    return x + 1\n"
+          }
+        },
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'e'\ndef route(x):\n    return x * 2\n",
+            "before": "PACK_DIGEST = 'd'\ndef route(x):\n    return x * 2\n"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": true,
+          "input": {
+            "after": "PACK_DIGEST = 'g'\ndef route(x):\n    return x - 2\n",
+            "before": "PACK_DIGEST = 'f'\ndef route(x):\n    return x - 1\n"
+          }
+        },
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'i'\ndef route(x):\n    return x == 2\n",
+            "before": "PACK_DIGEST = 'h'\ndef route(x):\n    return x == 2\n"
+          }
+        }
+      ]
+    },
+    "status": "WITHHOLD"
+  },
+  "49": {
+    "attempted": [
+      "native_evolved_v2",
+      "native_v2",
+      "native_v3",
+      "native_v4"
+    ],
+    "budget": 10,
+    "id": 49,
+    "remaining": 0,
+    "result": null,
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "message": "tab\there"
+          }
+        },
+        {
+          "input": {
+            "message": "done: \"ok\"\nещё"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"ready\"}}}",
+          "input": {
+            "message": "ready"
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"quoted \\\"value\\\"\"}}}",
+          "input": {
+            "message": "quoted \"value\""
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"line\\nnext\"}}}",
+          "input": {
+            "message": "line\nnext"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"back\\\\slash\"}}}",
+          "input": {
+            "message": "back\\slash"
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"данные\"}}}",
+          "input": {
+            "message": "данные"
+          }
+        }
+      ]
+    },
+    "status": "WITHHOLD"
+  },
+  "69": {
+    "attempted": [
+      "native_evolved_v2",
+      "native_v2",
+      "native_v3",
+      "native_v4"
+    ],
+    "budget": 10,
+    "id": 69,
+    "remaining": 0,
+    "result": null,
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "after": "a = 9\nb = 10\n",
+            "before": "a = 9\n"
+          }
+        },
+        {
+          "input": {
+            "after": "def f(x):\n    return x * 3\n",
+            "before": "def f(x):\n    return x * 2\n"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-x = 1\n+x = 2\n",
+          "input": {
+            "after": "x = 2\n",
+            "before": "x = 1\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x\n+    return x + 1\n",
+          "input": {
+            "after": "def f(x):\n    return x + 1\n",
+            "before": "def f(x):\n    return x\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1 @@\n a = 3\n-b = 4\n",
+          "input": {
+            "after": "a = 3\n",
+            "before": "a = 3\nb = 4\n"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-flag = False\n+flag = True\n",
+          "input": {
+            "after": "flag = True\n",
+            "before": "flag = False\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-name = \"старое\"\n+name = \"новое\"\n",
+          "input": {
+            "after": "name = \"новое\"\n",
+            "before": "name = \"старое\"\n"
+          }
+        }
+      ]
+    },
+    "status": "WITHHOLD"
+  },
+  "89": {
+    "attempted": [
+      "native_evolved_v2",
+      "native_v2",
+      "native_v3",
+      "native_v4"
+    ],
+    "budget": 10,
+    "id": 89,
+    "remaining": 0,
+    "result": null,
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "after": "PACK_DIGEST = 'k'\ndef route(x):\n    return x + 4\n",
+            "before": "PACK_DIGEST = 'j'\ndef route(x):\n    return x + 3\n"
+          }
+        },
+        {
+          "input": {
+            "after": "PACK_DIGEST = 'm'\ndef route(x):\n    return x % 2\n",
+            "before": "PACK_DIGEST = 'l'\ndef route(x):\n    return x % 2\n"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'b'\ndef route(x):\n    return x\n",
+            "before": "PACK_DIGEST = 'a'\ndef route(x):\n    return x\n"
+          }
+        },
+        {
+          "expected": true,
+          "input": {
+            "after": "PACK_DIGEST = 'c'\ndef route(x):\n    return x + 2\n",
+            "before": "PACK_DIGEST = 'c'\ndef route(x):\n    return x + 1\n"
+          }
+        },
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'e'\ndef route(x):\n    return x * 2\n",
+            "before": "PACK_DIGEST = 'd'\ndef route(x):\n    return x * 2\n"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": true,
+          "input": {
+            "after": "PACK_DIGEST = 'g'\ndef route(x):\n    return x - 2\n",
+            "before": "PACK_DIGEST = 'f'\ndef route(x):\n    return x - 1\n"
+          }
+        },
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'i'\ndef route(x):\n    return x == 2\n",
+            "before": "PACK_DIGEST = 'h'\ndef route(x):\n    return x == 2\n"
+          }
+        }
+      ]
+    },
+    "status": "WITHHOLD"
+  },
+  "116": {
+    "attempted": [
+      "native_compositional_v1"
+    ],
+    "budget": 14,
+    "id": 116,
+    "remaining": 10,
+    "result": {
+      "automatic_canonical_promotion": false,
+      "compiled": true,
+      "grammar": "YADO_TYPED_COMPOSITION_V1",
+      "input_signature": [
+        [
+          "message",
+          "str"
+        ]
+      ],
+      "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+      "parent_source_sha256": [],
+      "predictions": [
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"tab\\there\"}}}",
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"done: \\\"ok\\\"\\nещё\"}}}"
+      ],
+      "program": {
+        "args": [
+          {
+            "items": [
+              [
+                "jsonrpc",
+                {
+                  "op": "literal",
+                  "value": "2.0"
+                }
+              ],
+              [
+                "id",
+                {
+                  "op": "literal",
+                  "value": 1
+                }
+              ],
+              [
+                "method",
+                {
+                  "op": "literal",
+                  "value": "tools/call"
+                }
+              ],
+              [
+                "params",
+                {
+                  "items": [
+                    [
+                      "name",
+                      {
+                        "op": "literal",
+                        "value": "hive_add_comment"
+                      }
+                    ],
+                    [
+                      "arguments",
+                      {
+                        "items": [
+                          [
+                            "id",
+                            {
+                              "op": "literal",
+                              "value": "YADO-1"
+                            }
+                          ],
+                          [
+                            "message",
+                            {
+                              "key": "message",
+                              "op": "input"
+                            }
+                          ]
+                        ],
+                        "op": "object"
+                      }
+                    ]
+                  ],
+                  "op": "object"
+                }
+              ]
+            ],
+            "op": "object"
+          }
+        ],
+        "name": "json_compact",
+        "op": "call"
+      },
+      "schema": "yado.compositional_source.v1",
+      "search_attempts": 23,
+      "search_states": 22,
+      "source": "def solve(component_id, program_id, inputs):\n    return _primitive('json_compact', {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/call', 'params': {'name': 'hive_add_comment', 'arguments': {'id': 'YADO-1', 'message': _input(inputs, 'message')}}})\n",
+      "source_context": "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89",
+      "source_sha256": "8711575a1cad7d0a879de63a336fbc787e317aa3aeb1524f9a03d18e2362a912",
+      "status": "CANDIDATE",
+      "synthesis_inputs": "TRAINING_ONLY",
+      "training_digest": "e8fc2dd8bb4c72912852c269823703fc0044ec2b63ef168d60435b0454e8f1c5",
+      "training_predictions": [
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"ready\"}}}",
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"quoted \\\"value\\\"\"}}}",
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"line\\nnext\"}}}"
+      ],
+      "validation_predictions": [
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"back\\\\slash\"}}}",
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"данные\"}}}"
+      ]
+    },
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "message": "tab\there"
+          }
+        },
+        {
+          "input": {
+            "message": "done: \"ok\"\nещё"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"ready\"}}}",
+          "input": {
+            "message": "ready"
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"quoted \\\"value\\\"\"}}}",
+          "input": {
+            "message": "quoted \"value\""
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"line\\nnext\"}}}",
+          "input": {
+            "message": "line\nnext"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"back\\\\slash\"}}}",
+          "input": {
+            "message": "back\\slash"
+          }
+        },
+        {
+          "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"данные\"}}}",
+          "input": {
+            "message": "данные"
+          }
+        }
+      ]
+    },
+    "status": "VALIDATED_ON_HOLDOUT"
+  },
+  "124": {
+    "attempted": [
+      "native_compositional_v1"
+    ],
+    "budget": 14,
+    "id": 124,
+    "remaining": 10,
+    "result": {
+      "automatic_canonical_promotion": false,
+      "compiled": true,
+      "grammar": "YADO_TYPED_COMPOSITION_V1",
+      "input_signature": [
+        [
+          "after",
+          "str"
+        ],
+        [
+          "before",
+          "str"
+        ]
+      ],
+      "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+      "parent_source_sha256": [],
+      "predictions": [
+        "--- a/target.py\n+++ b/target.py\n@@ -1 +1,2 @@\n a = 9\n+b = 10\n",
+        "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x * 2\n+    return x * 3\n"
+      ],
+      "program": {
+        "args": [
+          {
+            "args": [
+              {
+                "args": [
+                  {
+                    "key": "before",
+                    "op": "input"
+                  }
+                ],
+                "name": "splitlines",
+                "op": "call"
+              },
+              {
+                "args": [
+                  {
+                    "key": "after",
+                    "op": "input"
+                  }
+                ],
+                "name": "splitlines",
+                "op": "call"
+              },
+              {
+                "op": "literal",
+                "value": "a/target.py"
+              },
+              {
+                "op": "literal",
+                "value": "b/target.py"
+              }
+            ],
+            "name": "unified_diff",
+            "op": "call"
+          }
+        ],
+        "name": "join",
+        "op": "call"
+      },
+      "schema": "yado.compositional_source.v1",
+      "search_attempts": 3740,
+      "search_states": 2468,
+      "source": "def solve(component_id, program_id, inputs):\n    return _primitive('join', _primitive('unified_diff', _primitive('splitlines', _input(inputs, 'before')), _primitive('splitlines', _input(inputs, 'after')), 'a/target.py', 'b/target.py'))\n",
+      "source_context": "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7",
+      "source_sha256": "dcb01c7a9054f815dade2c6b8bea5c3ffb4cebe5f0c84c9b954735c3ce018cb6",
+      "status": "CANDIDATE",
+      "synthesis_inputs": "TRAINING_ONLY",
+      "training_digest": "988d7b3583b1c22e93cc9c9776d11b4b82fdb0d46ea1e85576675f3b3b24644f",
+      "training_predictions": [
+        "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-x = 1\n+x = 2\n",
+        "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x\n+    return x + 1\n",
+        "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1 @@\n a = 3\n-b = 4\n"
+      ],
+      "validation_predictions": [
+        "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-flag = False\n+flag = True\n",
+        "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-name = \"старое\"\n+name = \"новое\"\n"
+      ]
+    },
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "after": "a = 9\nb = 10\n",
+            "before": "a = 9\n"
+          }
+        },
+        {
+          "input": {
+            "after": "def f(x):\n    return x * 3\n",
+            "before": "def f(x):\n    return x * 2\n"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-x = 1\n+x = 2\n",
+          "input": {
+            "after": "x = 2\n",
+            "before": "x = 1\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x\n+    return x + 1\n",
+          "input": {
+            "after": "def f(x):\n    return x + 1\n",
+            "before": "def f(x):\n    return x\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1 @@\n a = 3\n-b = 4\n",
+          "input": {
+            "after": "a = 3\n",
+            "before": "a = 3\nb = 4\n"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-flag = False\n+flag = True\n",
+          "input": {
+            "after": "flag = True\n",
+            "before": "flag = False\n"
+          }
+        },
+        {
+          "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-name = \"старое\"\n+name = \"новое\"\n",
+          "input": {
+            "after": "name = \"новое\"\n",
+            "before": "name = \"старое\"\n"
+          }
+        }
+      ]
+    },
+    "status": "VALIDATED_ON_HOLDOUT"
+  },
+  "134": {
+    "attempted": [
+      "native_compositional_v1"
+    ],
+    "budget": 14,
+    "id": 134,
+    "remaining": 10,
+    "result": {
+      "automatic_canonical_promotion": false,
+      "compiled": true,
+      "grammar": "YADO_TYPED_COMPOSITION_V1",
+      "input_signature": [
+        [
+          "after",
+          "str"
+        ],
+        [
+          "before",
+          "str"
+        ]
+      ],
+      "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+      "parent_source_sha256": [],
+      "predictions": [
+        true,
+        false
+      ],
+      "program": {
+        "args": [
+          {
+            "args": [
+              {
+                "args": [
+                  {
+                    "key": "after",
+                    "op": "input"
+                  }
+                ],
+                "name": "parse_python",
+                "op": "call"
+              }
+            ],
+            "name": "top_level_functions",
+            "op": "call"
+          },
+          {
+            "args": [
+              {
+                "args": [
+                  {
+                    "key": "before",
+                    "op": "input"
+                  }
+                ],
+                "name": "parse_python",
+                "op": "call"
+              }
+            ],
+            "name": "top_level_functions",
+            "op": "call"
+          }
+        ],
+        "name": "not_equal",
+        "op": "call"
+      },
+      "schema": "yado.compositional_source.v1",
+      "search_attempts": 4039,
+      "search_states": 729,
+      "source": "def solve(component_id, program_id, inputs):\n    return _primitive('not_equal', _primitive('top_level_functions', _primitive('parse_python', _input(inputs, 'after'))), _primitive('top_level_functions', _primitive('parse_python', _input(inputs, 'before'))))\n",
+      "source_context": "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be",
+      "source_sha256": "07d80c790d380242216284ab8d10f120ccd30b77b647a0af464e39eaa9e64e4c",
+      "status": "CANDIDATE",
+      "synthesis_inputs": "TRAINING_ONLY",
+      "training_digest": "f462fa3f7dfd84e483bce08e34ff1b299709f684dcb1026ec33714b5a529480d",
+      "training_predictions": [
+        false,
+        true,
+        false
+      ],
+      "validation_predictions": [
+        true,
+        false
+      ]
+    },
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "after": "PACK_DIGEST = 'k'\ndef route(x):\n    return x + 4\n",
+            "before": "PACK_DIGEST = 'j'\ndef route(x):\n    return x + 3\n"
+          }
+        },
+        {
+          "input": {
+            "after": "PACK_DIGEST = 'm'\ndef route(x):\n    return x % 2\n",
+            "before": "PACK_DIGEST = 'l'\ndef route(x):\n    return x % 2\n"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'b'\ndef route(x):\n    return x\n",
+            "before": "PACK_DIGEST = 'a'\ndef route(x):\n    return x\n"
+          }
+        },
+        {
+          "expected": true,
+          "input": {
+            "after": "PACK_DIGEST = 'c'\ndef route(x):\n    return x + 2\n",
+            "before": "PACK_DIGEST = 'c'\ndef route(x):\n    return x + 1\n"
+          }
+        },
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'e'\ndef route(x):\n    return x * 2\n",
+            "before": "PACK_DIGEST = 'd'\ndef route(x):\n    return x * 2\n"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": true,
+          "input": {
+            "after": "PACK_DIGEST = 'g'\ndef route(x):\n    return x - 2\n",
+            "before": "PACK_DIGEST = 'f'\ndef route(x):\n    return x - 1\n"
+          }
+        },
+        {
+          "expected": false,
+          "input": {
+            "after": "PACK_DIGEST = 'i'\ndef route(x):\n    return x == 2\n",
+            "before": "PACK_DIGEST = 'h'\ndef route(x):\n    return x == 2\n"
+          }
+        }
+      ]
+    },
+    "status": "VALIDATED_ON_HOLDOUT"
+  },
+  "144": {
+    "attempted": [
+      "native_v2",
+      "native_v3",
+      "native_v4",
+      "native_compositional_v1"
+    ],
+    "budget": 20,
+    "id": 144,
+    "remaining": 10,
+    "result": {
+      "automatic_canonical_promotion": false,
+      "compiled": true,
+      "grammar": "YADO_TYPED_COMPOSITION_V1",
+      "input_signature": [
+        [
+          "message",
+          "str"
+        ]
+      ],
+      "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+      "parent_source_sha256": [
+        "8711575a1cad7d0a879de63a336fbc787e317aa3aeb1524f9a03d18e2362a912"
+      ],
+      "predictions": [
+        134,
+        144
+      ],
+      "program": {
+        "args": [
+          {
+            "args": [
+              {
+                "items": [
+                  [
+                    "jsonrpc",
+                    {
+                      "op": "literal",
+                      "value": "2.0"
+                    }
+                  ],
+                  [
+                    "id",
+                    {
+                      "op": "literal",
+                      "value": 1
+                    }
+                  ],
+                  [
+                    "method",
+                    {
+                      "op": "literal",
+                      "value": "tools/call"
+                    }
+                  ],
+                  [
+                    "params",
+                    {
+                      "items": [
+                        [
+                          "name",
+                          {
+                            "op": "literal",
+                            "value": "hive_add_comment"
+                          }
+                        ],
+                        [
+                          "arguments",
+                          {
+                            "items": [
+                              [
+                                "id",
+                                {
+                                  "op": "literal",
+                                  "value": "YADO-1"
+                                }
+                              ],
+                              [
+                                "message",
+                                {
+                                  "key": "message",
+                                  "op": "input"
+                                }
+                              ]
+                            ],
+                            "op": "object"
+                          }
+                        ]
+                      ],
+                      "op": "object"
+                    }
+                  ]
+                ],
+                "op": "object"
+              }
+            ],
+            "name": "json_compact",
+            "op": "call"
+          }
+        ],
+        "name": "length",
+        "op": "call"
+      },
+      "schema": "yado.compositional_source.v1",
+      "search_attempts": 60,
+      "search_states": 32,
+      "source": "def solve(component_id, program_id, inputs):\n    return _primitive('length', _primitive('json_compact', {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/call', 'params': {'name': 'hive_add_comment', 'arguments': {'id': 'YADO-1', 'message': _input(inputs, 'message')}}}))\n",
+      "source_context": "native_source:dd7247169507358e825fe3931b637521e1cd33a2e4fd749c0ab74b7c4d32947f",
+      "source_sha256": "ecebf878c6b3ac64ee92bb4212127d0e0b4440139cc037283863c2e944c7b3dd",
+      "status": "CANDIDATE",
+      "synthesis_inputs": "TRAINING_ONLY",
+      "training_digest": "b5c80493d8241e103d2d705cd79c382541012891a47b270303f0637dc0c9a9a0",
+      "training_predictions": [
+        133,
+        138,
+        138
+      ],
+      "validation_predictions": [
+        136,
+        139
+      ]
+    },
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "message": "g2: tab\t雪"
+          }
+        },
+        {
+          "input": {
+            "message": "g2: final \"ok\"\n\\"
+          }
+        }
+      ],
+      "training": [
+        {
+          "expected": 133,
+          "input": {
+            "message": "g2: plain"
+          }
+        },
+        {
+          "expected": 138,
+          "input": {
+            "message": "g2: \"quoted\""
+          }
+        },
+        {
+          "expected": 138,
+          "input": {
+            "message": "g2: line\nnext"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": 136,
+          "input": {
+            "message": "g2: данные 😀"
+          }
+        },
+        {
+          "expected": 139,
+          "input": {
+            "message": "g2: back\\slash"
+          }
+        }
+      ]
+    },
+    "status": "VALIDATED_ON_HOLDOUT"
+  },
+  "163": {
+    "attempted": [
+      "native_compositional_v1"
+    ],
+    "budget": 20,
+    "id": 163,
+    "remaining": 16,
+    "result": {
+      "automatic_canonical_promotion": false,
+      "compiled": true,
+      "grammar": "YADO_TYPED_COMPOSITION_V1",
+      "input_signature": [
+        [
+          "message",
+          "str"
+        ]
+      ],
+      "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+      "parent_source_sha256": [
+        "ecebf878c6b3ac64ee92bb4212127d0e0b4440139cc037283863c2e944c7b3dd"
+      ],
+      "predictions": [
+        {
+          "input": "g3: tab\t雪",
+          "serialized_size": 134
+        },
+        {
+          "input": "g3: final \"ok\"\n\\",
+          "serialized_size": 144
+        }
+      ],
+      "program": {
+        "items": [
+          [
+            "serialized_size",
+            {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "items": [
+                        [
+                          "jsonrpc",
+                          {
+                            "op": "literal",
+                            "value": "2.0"
+                          }
+                        ],
+                        [
+                          "id",
+                          {
+                            "op": "literal",
+                            "value": 1
+                          }
+                        ],
+                        [
+                          "method",
+                          {
+                            "op": "literal",
+                            "value": "tools/call"
+                          }
+                        ],
+                        [
+                          "params",
+                          {
+                            "items": [
+                              [
+                                "name",
+                                {
+                                  "op": "literal",
+                                  "value": "hive_add_comment"
+                                }
+                              ],
+                              [
+                                "arguments",
+                                {
+                                  "items": [
+                                    [
+                                      "id",
+                                      {
+                                        "op": "literal",
+                                        "value": "YADO-1"
+                                      }
+                                    ],
+                                    [
+                                      "message",
+                                      {
+                                        "key": "message",
+                                        "op": "input"
+                                      }
+                                    ]
+                                  ],
+                                  "op": "object"
+                                }
+                              ]
+                            ],
+                            "op": "object"
+                          }
+                        ]
+                      ],
+                      "op": "object"
+                    }
+                  ],
+                  "name": "json_compact",
+                  "op": "call"
+                }
+              ],
+              "name": "length",
+              "op": "call"
+            }
+          ],
+          [
+            "input",
+            {
+              "key": "message",
+              "op": "input"
+            }
+          ]
+        ],
+        "op": "object"
+      },
+      "schema": "yado.compositional_source.v1",
+      "search_attempts": 11,
+      "search_states": 11,
+      "source": "def solve(component_id, program_id, inputs):\n    return {'serialized_size': _primitive('length', _primitive('json_compact', {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/call', 'params': {'name': 'hive_add_comment', 'arguments': {'id': 'YADO-1', 'message': _input(inputs, 'message')}}})), 'input': _input(inputs, 'message')}\n",
+      "source_context": "native_source:317dcdb56dd50691ca75d7f4bffa61b49c52ea88a63570b4cc27559f8870ab69",
+      "source_sha256": "53706bd7bdef8921c96f39437bedce952011a397f3e8afc67a178275965a407f",
+      "status": "CANDIDATE",
+      "synthesis_inputs": "TRAINING_ONLY",
+      "training_digest": "89264a9df0f12ab67f19f16e97bec68b697536ce524357ed7d7422d628a1c638",
+      "training_predictions": [
+        {
+          "input": "g3: plain",
+          "serialized_size": 133
+        },
+        {
+          "input": "g3: \"quoted\"",
+          "serialized_size": 138
+        },
+        {
+          "input": "g3: line\nnext",
+          "serialized_size": 138
+        }
+      ],
+      "validation_predictions": [
+        {
+          "input": "g3: данные 😀",
+          "serialized_size": 136
+        },
+        {
+          "input": "g3: back\\slash",
+          "serialized_size": 139
+        }
+      ]
+    },
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "message": "g3: tab\t雪"
+          }
+        },
+        {
+          "input": {
+            "message": "g3: final \"ok\"\n\\"
+          }
+        }
+      ],
+      "schema": "yado.native_program_goal.v1",
+      "training": [
+        {
+          "expected": {
+            "input": "g3: plain",
+            "serialized_size": 133
+          },
+          "input": {
+            "message": "g3: plain"
+          }
+        },
+        {
+          "expected": {
+            "input": "g3: \"quoted\"",
+            "serialized_size": 138
+          },
+          "input": {
+            "message": "g3: \"quoted\""
+          }
+        },
+        {
+          "expected": {
+            "input": "g3: line\nnext",
+            "serialized_size": 138
+          },
+          "input": {
+            "message": "g3: line\nnext"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": {
+            "input": "g3: данные 😀",
+            "serialized_size": 136
+          },
+          "input": {
+            "message": "g3: данные 😀"
+          }
+        },
+        {
+          "expected": {
+            "input": "g3: back\\slash",
+            "serialized_size": 139
+          },
+          "input": {
+            "message": "g3: back\\slash"
+          }
+        }
+      ]
+    },
+    "status": "VALIDATED_ON_HOLDOUT"
+  },
+  "170": {
+    "attempted": [
+      "reuse_verified_source",
+      "native_compositional_v1"
+    ],
+    "budget": 20,
+    "id": 170,
+    "remaining": 15,
+    "result": {
+      "automatic_canonical_promotion": false,
+      "compiled": true,
+      "grammar": "YADO_TYPED_COMPOSITION_V1",
+      "input_signature": [
+        [
+          "message",
+          "str"
+        ]
+      ],
+      "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+      "parent_source_sha256": [
+        "53706bd7bdef8921c96f39437bedce952011a397f3e8afc67a178275965a407f"
+      ],
+      "predictions": [
+        "{\"serialized_size\":134,\"input\":\"g4: tab\\t雪\"}",
+        "{\"serialized_size\":144,\"input\":\"g4: final \\\"ok\\\"\\n\\\\\"}"
+      ],
+      "program": {
+        "args": [
+          {
+            "items": [
+              [
+                "serialized_size",
+                {
+                  "args": [
+                    {
+                      "args": [
+                        {
+                          "items": [
+                            [
+                              "jsonrpc",
+                              {
+                                "op": "literal",
+                                "value": "2.0"
+                              }
+                            ],
+                            [
+                              "id",
+                              {
+                                "op": "literal",
+                                "value": 1
+                              }
+                            ],
+                            [
+                              "method",
+                              {
+                                "op": "literal",
+                                "value": "tools/call"
+                              }
+                            ],
+                            [
+                              "params",
+                              {
+                                "items": [
+                                  [
+                                    "name",
+                                    {
+                                      "op": "literal",
+                                      "value": "hive_add_comment"
+                                    }
+                                  ],
+                                  [
+                                    "arguments",
+                                    {
+                                      "items": [
+                                        [
+                                          "id",
+                                          {
+                                            "op": "literal",
+                                            "value": "YADO-1"
+                                          }
+                                        ],
+                                        [
+                                          "message",
+                                          {
+                                            "key": "message",
+                                            "op": "input"
+                                          }
+                                        ]
+                                      ],
+                                      "op": "object"
+                                    }
+                                  ]
+                                ],
+                                "op": "object"
+                              }
+                            ]
+                          ],
+                          "op": "object"
+                        }
+                      ],
+                      "name": "json_compact",
+                      "op": "call"
+                    }
+                  ],
+                  "name": "length",
+                  "op": "call"
+                }
+              ],
+              [
+                "input",
+                {
+                  "key": "message",
+                  "op": "input"
+                }
+              ]
+            ],
+            "op": "object"
+          }
+        ],
+        "name": "json_compact",
+        "op": "call"
+      },
+      "schema": "yado.compositional_source.v1",
+      "search_attempts": 17,
+      "search_states": 16,
+      "source": "def solve(component_id, program_id, inputs):\n    return _primitive('json_compact', {'serialized_size': _primitive('length', _primitive('json_compact', {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/call', 'params': {'name': 'hive_add_comment', 'arguments': {'id': 'YADO-1', 'message': _input(inputs, 'message')}}})), 'input': _input(inputs, 'message')})\n",
+      "source_context": "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89",
+      "source_sha256": "975e2300fc32163886f4e2d07e84b542679081a45655fc90f270aead88ae0a4d",
+      "status": "CANDIDATE",
+      "synthesis_inputs": "TRAINING_ONLY",
+      "training_digest": "a250d8ea14cc5367c07095f625548b9281c45a35236a62c619e4a7a7536ad122",
+      "training_predictions": [
+        "{\"serialized_size\":133,\"input\":\"g4: plain\"}",
+        "{\"serialized_size\":138,\"input\":\"g4: \\\"quoted\\\"\"}",
+        "{\"serialized_size\":138,\"input\":\"g4: line\\nnext\"}"
+      ],
+      "validation_predictions": [
+        "{\"serialized_size\":136,\"input\":\"g4: данные 😀\"}",
+        "{\"serialized_size\":139,\"input\":\"g4: back\\\\slash\"}"
+      ]
+    },
+    "spec": {
+      "domain": "native_source",
+      "queries": [
+        {
+          "input": {
+            "message": "g4: tab\t雪"
+          }
+        },
+        {
+          "input": {
+            "message": "g4: final \"ok\"\n\\"
+          }
+        }
+      ],
+      "schema": "yado.native_program_goal.v1",
+      "training": [
+        {
+          "expected": "{\"serialized_size\":133,\"input\":\"g4: plain\"}",
+          "input": {
+            "message": "g4: plain"
+          }
+        },
+        {
+          "expected": "{\"serialized_size\":138,\"input\":\"g4: \\\"quoted\\\"\"}",
+          "input": {
+            "message": "g4: \"quoted\""
+          }
+        },
+        {
+          "expected": "{\"serialized_size\":138,\"input\":\"g4: line\\nnext\"}",
+          "input": {
+            "message": "g4: line\nnext"
+          }
+        }
+      ],
+      "validation": [
+        {
+          "expected": "{\"serialized_size\":136,\"input\":\"g4: данные 😀\"}",
+          "input": {
+            "message": "g4: данные 😀"
+          }
+        },
+        {
+          "expected": "{\"serialized_size\":139,\"input\":\"g4: back\\\\slash\"}",
+          "input": {
+            "message": "g4: back\\slash"
+          }
+        }
+      ]
+    },
+    "status": "VALIDATED_ON_HOLDOUT"
+  }
+}

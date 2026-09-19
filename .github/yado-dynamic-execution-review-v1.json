@@ -2,11 +2,11 @@
   "reviews": [
     {
       "ast_call_sha256": "f004c1baeb68103cf3e1eae8d1d8d2edbcfa48286c1b179357f3145b3eaedcdf",
-      "boundary": "Trusted internal execution seam, not an untrusted-source API. Fresh callers supply reviewed grammar emissions (quoted scalar keys, finite template families; polynomial profile degree<=5; inductive expression node<=7/state<=50000). For journal-restored candidates, successor.cognitive.replay now re-emits native_v2/v3/v4/native_evolved_v2 from the original validated training and strategy and requires exact source equality; native_materialized routes already do so. Reuse can reference only previously replay-validated source. The self-SHA check and restricted builtins are supplementary and are not the provenance boundary. Direct Python callers supplying arbitrary source are explicitly outside this contract.",
+      "boundary": "Trusted internal execution seam, not an untrusted-source API. Fresh callers supply reviewed grammar emissions (quoted scalar keys, finite template families; polynomial profile degree<=5; inductive expression node<=7/state<=50000). For journal-restored candidates, successor.cognitive.replay now re-emits native_v2/v3/v4/native_evolved_v2 from the original validated training and strategy and requires exact source equality; native_materialized routes already do so. Reuse can reference only previously replay-validated source. The self-SHA check and restricted builtins are supplementary and are not the provenance boundary. Direct Python callers supplying arbitrary source are explicitly outside this contract. Compositional candidates are dispatched before this legacy exec into their separate typed-IR/re-emission validator. Unknown schema markers and unrecognized parent_source_sha256 metadata are rejected rather than falling back to legacy execution.",
       "call": "exec",
-      "call_identity": "exec:106:4",
+      "call_identity": "exec:117:4",
       "path": "runtime/yado_active_native_learning_v1.py",
-      "source_sha256": "50bf47b8720bd7fc0af45ffd4df11c63e9a1fa2cfd7e23459d96d14da162da53",
+      "source_sha256": "a700ffd7c09d078d605e0218b48e899537f95535ae5a5f18ffd4ab748694085f",
       "test_references": [
         "successor/tests/test_native_source_replay_boundary.py::NativeSourceReplayBoundaryTests.test_rehashed_source_cannot_enter_executable_memory",
         "successor/tests/test_native_source_replay_boundary.py::NativeSourceReplayBoundaryTests.test_correct_stored_predictions_do_not_attest_wrong_source",
@@ -19,9 +19,9 @@
       "ast_call_sha256": "c588678dea378e7c6387eace5b732b9bc1090be87ac593c4d86ccb5056bb44fc",
       "boundary": "The executed source is the no-argument V3 extension_function_source literal in the reviewed local grammar module. Scalar JSON goals are validated by validate_source_goal before synthesis (3..64 training rows, exact bool/int<=1e6/string<=256 values, identifier keys); labels only rank a fixed five-template string grammar. No downloaded or caller-supplied code enters this call. Full builtins here are a trusted local-template execution mechanism, not a Python sandbox.",
       "call": "exec",
-      "call_identity": "exec:75:8",
+      "call_identity": "exec:81:8",
       "path": "runtime/yado_active_native_learning_v1.py",
-      "source_sha256": "50bf47b8720bd7fc0af45ffd4df11c63e9a1fa2cfd7e23459d96d14da162da53",
+      "source_sha256": "a700ffd7c09d078d605e0218b48e899537f95535ae5a5f18ffd4ab748694085f",
       "test_references": [
         "successor/tests/test_native_source_replay_boundary.py::NativeSourceReplayBoundaryTests.test_valid_v3_and_v4_sources_remain_replayable_and_reusable",
         "successor/tests/test_native_source_replay_boundary.py::NativeSourceReplayBoundaryTests.test_source_goal_rejects_code_fields_and_non_scalar_inputs"
@@ -31,9 +31,9 @@
       "ast_call_sha256": "9c0b6463456440cab83cad7bfd62af82c218356d053e2bf544ca0df33d7b0d28",
       "boundary": "The executed source is the no-argument V4 meta_strategy_extension_source literal from the reviewed local grammar. It defines a bounded int-to-bool template selector; caller code is not interpolated. Public cognitive goals have exact bounded scalar values and identifier keys before this route is selected. Full builtins execute trusted template definitions only.",
       "call": "exec",
-      "call_identity": "exec:80:8",
+      "call_identity": "exec:86:8",
       "path": "runtime/yado_active_native_learning_v1.py",
-      "source_sha256": "50bf47b8720bd7fc0af45ffd4df11c63e9a1fa2cfd7e23459d96d14da162da53",
+      "source_sha256": "a700ffd7c09d078d605e0218b48e899537f95535ae5a5f18ffd4ab748694085f",
       "test_references": [
         "successor/tests/test_native_source_replay_boundary.py::NativeSourceReplayBoundaryTests.test_valid_v3_and_v4_sources_remain_replayable_and_reusable",
         "successor/tests/test_native_source_replay_boundary.py::NativeSourceReplayBoundaryTests.test_source_goal_rejects_code_fields_and_non_scalar_inputs"
@@ -43,9 +43,9 @@
       "ast_call_sha256": "513ebeafdd64bd39d57d11be2f87af232891b9ba26abb6bf9c3cf082566123d0",
       "boundary": "rule is returned immediately by the locally compiled derive_missing_route_rule, never accepted in the goal. It chooses one of five fixed int-to-bool operator bodies. The input key is embedded with repr, selected names are fixed, and other inserted values are trusted primitive lists/literals. Source values are not interpolated as Python instructions. Validated integers are bounded to 1e6, bounding digit loops and digit-power expressions.",
       "call": "exec",
-      "call_identity": "exec:82:8",
+      "call_identity": "exec:88:8",
       "path": "runtime/yado_active_native_learning_v1.py",
-      "source_sha256": "50bf47b8720bd7fc0af45ffd4df11c63e9a1fa2cfd7e23459d96d14da162da53",
+      "source_sha256": "a700ffd7c09d078d605e0218b48e899537f95535ae5a5f18ffd4ab748694085f",
       "test_references": [
         "successor/tests/test_native_source_replay_boundary.py::NativeSourceReplayBoundaryTests.test_valid_v3_and_v4_sources_remain_replayable_and_reusable",
         "successor/tests/test_native_source_replay_boundary.py::NativeSourceReplayBoundaryTests.test_source_goal_rejects_code_fields_and_non_scalar_inputs"
@@ -65,6 +65,26 @@
         "runtime/test_yado_program_repair_isolation_v1.py::ProgramRepairIsolationTests.test_argument_objects_and_mutation_do_not_cross_process_boundary",
         "runtime/test_yado_program_repair_isolation_v1.py::ProgramRepairIsolationTests.test_worker_reuse_has_no_globals_or_mutable_default_leak",
         "successor/tests/test_oracle_isolation.py::OracleIsolationTests.test_unbounded_power_is_contained_in_worker_and_recovers"
+      ]
+    },
+    {
+      "ast_call_sha256": "c46d821d2cd25a0275a23ad09ea74451628d4a730eb1a5bbd21abec27427e84e",
+      "boundary": "Executes only a fresh exact lowering of a validated, versioned finite program IR. execute snapshots the candidate, validates exact dict/list/scalar node shapes, referenced identifier inputs, a fixed primitive-name/arity/type registry, at most 128 IR nodes and depth 16, and source equality with _emit(program) plus SHA-256 before compilation. Literal values and object keys are repr-quoted; emitted code has one fixed solve function and only literal constructors, _input and _primitive calls, with empty builtins. The two helper globals expose no file, network, import, attribute-access or dynamic-evaluation operation. Python text is parsed to bounded AST data and never executed; unified diff produces text and does not apply patches. Inputs/intermediate values have finite type, depth, total node/text and sequence budgets; each diff is capped at 128 lines per side and 16384 total text characters. Search has independent finite state, attempt, memory and observation-size budgets. Cognitive admission additionally re-synthesizes from original training and verified historical memory, binds typed metadata and recomputes training/holdout/query execution on replay; a matching source hash or stored PASS is insufficient. This is an in-process reviewed-language executor, not arbitrary Python/process isolation. Entry values are validated JSON journal/goal data; arbitrary live Python objects or custom deepcopy hooks from direct Python callers are outside this boundary.",
+      "call": "exec",
+      "call_identity": "exec:366:4",
+      "path": "successor/compositional_source.py",
+      "source_sha256": "d9741e99432cb1e07d56f1e2543b90b1b3b1f3b2d12b91bacca9993c4f8fcdaf",
+      "test_references": [
+        "successor/tests/test_compositional_source.py::CompositionalSourceTests.test_source_spoofing_with_updated_digest_is_rejected",
+        "successor/tests/test_compositional_source.py::CompositionalSourceTests.test_unknown_primitive_and_malformed_ir_are_rejected",
+        "successor/tests/test_compositional_source.py::CompositionalSourceTests.test_invalid_memory_never_becomes_an_execution_seed",
+        "successor/tests/test_compositional_source.py::CompositionalSourceTests.test_global_value_and_program_budgets_reject_cycles_and_shared_large_trees",
+        "successor/tests/test_compositional_source.py::CompositionalSourceTests.test_type_boundaries_distinguish_bool_and_int_and_reject_wrong_execution_inputs",
+        "successor/tests/test_compositional_source.py::CompositionalSourceTests.test_json_shape_is_inferred_for_unrelated_protocol_and_nested_lists",
+        "successor/tests/test_compositional_binding.py::CompositionalBindingTests.test_rehashed_execution_or_source_forgery_is_rejected",
+        "successor/tests/test_compositional_binding.py::CompositionalBindingTests.test_child_composes_verified_parent_and_rejects_forged_lineage",
+        "successor/tests/test_compositional_binding.py::CompositionalBindingTests.test_generated_and_reused_metadata_reject_boolean_to_integer_forgery",
+        "successor/tests/test_program_goals.py::ProgramGoalContractTests.test_floats_custom_objects_large_trees_and_cycles_rejected"
       ]
     },
     {

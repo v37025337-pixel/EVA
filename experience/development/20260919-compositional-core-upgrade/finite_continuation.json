@@ -1,0 +1,357 @@
+{
+  "background_process_running": false,
+  "general_intelligence_established": false,
+  "language": {
+    "budgets": {
+      "bindings_per_memory": 64,
+      "container_items": 128,
+      "input_text_characters": 8192,
+      "memories": 16,
+      "named_inputs": 8,
+      "per_type_beam": 96,
+      "program_depth": 16,
+      "program_nodes": 128,
+      "search_attempts": 20000,
+      "search_states": 4096,
+      "search_value_units": 2000000,
+      "unary_search_depth": 3,
+      "value_nodes": 8192,
+      "value_text_characters": 65536
+    },
+    "grammar": "YADO_TYPED_COMPOSITION_V1",
+    "new_primitive_invention": false,
+    "operators": [
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "strip"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "lower"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "upper"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "reverse"
+      },
+      {
+        "arguments": [
+          "str|list|dict"
+        ],
+        "name": "length"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "splitlines"
+      },
+      {
+        "arguments": [
+          "list"
+        ],
+        "name": "join"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "json_parse"
+      },
+      {
+        "arguments": [
+          "json"
+        ],
+        "name": "json_compact"
+      },
+      {
+        "arguments": [
+          "json"
+        ],
+        "name": "json_ascii"
+      },
+      {
+        "arguments": [
+          "json"
+        ],
+        "name": "json_default"
+      },
+      {
+        "arguments": [
+          "str"
+        ],
+        "name": "parse_python"
+      },
+      {
+        "arguments": [
+          "ast"
+        ],
+        "name": "top_level_functions"
+      },
+      {
+        "arguments": [
+          "ast|list"
+        ],
+        "name": "ast_dump"
+      },
+      {
+        "arguments": [
+          "dict",
+          "str"
+        ],
+        "name": "field"
+      },
+      {
+        "arguments": [
+          "list",
+          "int"
+        ],
+        "name": "index"
+      },
+      {
+        "arguments": [
+          "any",
+          "any"
+        ],
+        "name": "equal"
+      },
+      {
+        "arguments": [
+          "any",
+          "any"
+        ],
+        "name": "not_equal"
+      },
+      {
+        "arguments": [
+          "str",
+          "str"
+        ],
+        "name": "concat"
+      },
+      {
+        "arguments": [
+          "int",
+          "int"
+        ],
+        "name": "add"
+      },
+      {
+        "arguments": [
+          "int",
+          "int"
+        ],
+        "name": "subtract"
+      },
+      {
+        "arguments": [
+          "int",
+          "int"
+        ],
+        "name": "multiply"
+      },
+      {
+        "arguments": [
+          "list",
+          "list",
+          "str",
+          "str"
+        ],
+        "name": "unified_diff"
+      }
+    ],
+    "primitive_authorship": "MAINTAINER",
+    "schema": "yado.compositional_source.v1",
+    "selection_inputs": "TRAINING_ONLY"
+  },
+  "schema": "yado.native_program_development_status.v1",
+  "self_model": {
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_compositional_v1": {
+      "cost": 4,
+      "failures": 0,
+      "squared_error": 0.25,
+      "successes": 1
+    },
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_evolved_v2": {
+      "cost": 4,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_v2": {
+      "cost": 2,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_v3": {
+      "cost": 4,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:20337366ede42bad0246bf6a81b76e503df704fa9ed62ed4f06a91f439088bc7/native_v4": {
+      "cost": 6,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_compositional_v1": {
+      "cost": 8,
+      "failures": 0,
+      "squared_error": 0.36111111111111116,
+      "successes": 2
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_evolved_v2": {
+      "cost": 4,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_v2": {
+      "cost": 2,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_v3": {
+      "cost": 4,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/native_v4": {
+      "cost": 6,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:253885c0f73c5c10a842fe3a27ca587d6b19c73bdd84b7f36b69614ddc468b89/reuse_verified_source": {
+      "cost": 1,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:317dcdb56dd50691ca75d7f4bffa61b49c52ea88a63570b4cc27559f8870ab69/native_compositional_v1": {
+      "cost": 4,
+      "failures": 0,
+      "squared_error": 0.25,
+      "successes": 1
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_compositional_v1": {
+      "cost": 4,
+      "failures": 0,
+      "squared_error": 0.25,
+      "successes": 1
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_evolved_v2": {
+      "cost": 4,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_v2": {
+      "cost": 2,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_v3": {
+      "cost": 4,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be/native_v4": {
+      "cost": 6,
+      "failures": 2,
+      "squared_error": 0.3611111111111111,
+      "successes": 0
+    },
+    "native_source:dd7247169507358e825fe3931b637521e1cd33a2e4fd749c0ab74b7c4d32947f/native_compositional_v1": {
+      "cost": 4,
+      "failures": 0,
+      "squared_error": 0.25,
+      "successes": 1
+    },
+    "native_source:dd7247169507358e825fe3931b637521e1cd33a2e4fd749c0ab74b7c4d32947f/native_v2": {
+      "cost": 1,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:dd7247169507358e825fe3931b637521e1cd33a2e4fd749c0ab74b7c4d32947f/native_v3": {
+      "cost": 2,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    },
+    "native_source:dd7247169507358e825fe3931b637521e1cd33a2e4fd749c0ab74b7c4d32947f/native_v4": {
+      "cost": 3,
+      "failures": 1,
+      "squared_error": 0.25,
+      "successes": 0
+    }
+  },
+  "sessions": [
+    {
+      "awaiting_goal": false,
+      "budget": 30,
+      "child_goal_id": null,
+      "id": 183,
+      "max_goals": 3,
+      "outcomes": [],
+      "reason": "NO_ELIGIBLE_EXPERIENCE_WITHIN_BUDGET",
+      "remaining": 30,
+      "retry_policy": "untried_strategies_v2",
+      "selection_tick": null,
+      "selections": [],
+      "status": "COMPLETE"
+    }
+  ],
+  "synthesis_active": true,
+  "unresolved_goal_ids": [],
+  "verified_programs": [
+    {
+      "parent_source_sha256": [
+        "53706bd7bdef8921c96f39437bedce952011a397f3e8afc67a178275965a407f"
+      ],
+      "source_sha256": "975e2300fc32163886f4e2d07e84b542679081a45655fc90f270aead88ae0a4d"
+    },
+    {
+      "parent_source_sha256": [
+        "ecebf878c6b3ac64ee92bb4212127d0e0b4440139cc037283863c2e944c7b3dd"
+      ],
+      "source_sha256": "53706bd7bdef8921c96f39437bedce952011a397f3e8afc67a178275965a407f"
+    },
+    {
+      "parent_source_sha256": [
+        "8711575a1cad7d0a879de63a336fbc787e317aa3aeb1524f9a03d18e2362a912"
+      ],
+      "source_sha256": "ecebf878c6b3ac64ee92bb4212127d0e0b4440139cc037283863c2e944c7b3dd"
+    },
+    {
+      "parent_source_sha256": [],
+      "source_sha256": "07d80c790d380242216284ab8d10f120ccd30b77b647a0af464e39eaa9e64e4c"
+    },
+    {
+      "parent_source_sha256": [],
+      "source_sha256": "dcb01c7a9054f815dade2c6b8bea5c3ffb4cebe5f0c84c9b954735c3ce018cb6"
+    },
+    {
+      "parent_source_sha256": [],
+      "source_sha256": "8711575a1cad7d0a879de63a336fbc787e317aa3aeb1524f9a03d18e2362a912"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "automatic_canonical_promotion": false,
+  "compiled": true,
+  "grammar": "YADO_TYPED_COMPOSITION_V1",
+  "input_signature": [
+    [
+      "message",
+      "str"
+    ]
+  ],
+  "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+  "parent_source_sha256": [
+    "8711575a1cad7d0a879de63a336fbc787e317aa3aeb1524f9a03d18e2362a912"
+  ],
+  "predictions": [
+    134,
+    144
+  ],
+  "program": {
+    "args": [
+      {
+        "args": [
+          {
+            "items": [
+              [
+                "jsonrpc",
+                {
+                  "op": "literal",
+                  "value": "2.0"
+                }
+              ],
+              [
+                "id",
+                {
+                  "op": "literal",
+                  "value": 1
+                }
+              ],
+              [
+                "method",
+                {
+                  "op": "literal",
+                  "value": "tools/call"
+                }
+              ],
+              [
+                "params",
+                {
+                  "items": [
+                    [
+                      "name",
+                      {
+                        "op": "literal",
+                        "value": "hive_add_comment"
+                      }
+                    ],
+                    [
+                      "arguments",
+                      {
+                        "items": [
+                          [
+                            "id",
+                            {
+                              "op": "literal",
+                              "value": "YADO-1"
+                            }
+                          ],
+                          [
+                            "message",
+                            {
+                              "key": "message",
+                              "op": "input"
+                            }
+                          ]
+                        ],
+                        "op": "object"
+                      }
+                    ]
+                  ],
+                  "op": "object"
+                }
+              ]
+            ],
+            "op": "object"
+          }
+        ],
+        "name": "json_compact",
+        "op": "call"
+      }
+    ],
+    "name": "length",
+    "op": "call"
+  },
+  "schema": "yado.compositional_source.v1",
+  "search_attempts": 60,
+  "search_states": 32,
+  "source": "def solve(component_id, program_id, inputs):\n    return _primitive('length', _primitive('json_compact', {'jsonrpc': '2.0', 'id': 1, 'method': 'tools/call', 'params': {'name': 'hive_add_comment', 'arguments': {'id': 'YADO-1', 'message': _input(inputs, 'message')}}}))\n",
+  "source_context": "native_source:dd7247169507358e825fe3931b637521e1cd33a2e4fd749c0ab74b7c4d32947f",
+  "source_sha256": "ecebf878c6b3ac64ee92bb4212127d0e0b4440139cc037283863c2e944c7b3dd",
+  "status": "CANDIDATE",
+  "synthesis_inputs": "TRAINING_ONLY",
+  "training_digest": "b5c80493d8241e103d2d705cd79c382541012891a47b270303f0637dc0c9a9a0",
+  "training_predictions": [
+    133,
+    138,
+    138
+  ],
+  "validation_predictions": [
+    136,
+    139
+  ]
+}

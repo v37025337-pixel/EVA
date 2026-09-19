@@ -1,0 +1,77 @@
+{
+  "automatic_canonical_promotion": false,
+  "compiled": true,
+  "grammar": "YADO_TYPED_COMPOSITION_V1",
+  "input_signature": [
+    [
+      "after",
+      "str"
+    ],
+    [
+      "before",
+      "str"
+    ]
+  ],
+  "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+  "parent_source_sha256": [],
+  "predictions": [
+    true,
+    false
+  ],
+  "program": {
+    "args": [
+      {
+        "args": [
+          {
+            "args": [
+              {
+                "key": "after",
+                "op": "input"
+              }
+            ],
+            "name": "parse_python",
+            "op": "call"
+          }
+        ],
+        "name": "top_level_functions",
+        "op": "call"
+      },
+      {
+        "args": [
+          {
+            "args": [
+              {
+                "key": "before",
+                "op": "input"
+              }
+            ],
+            "name": "parse_python",
+            "op": "call"
+          }
+        ],
+        "name": "top_level_functions",
+        "op": "call"
+      }
+    ],
+    "name": "not_equal",
+    "op": "call"
+  },
+  "schema": "yado.compositional_source.v1",
+  "search_attempts": 4039,
+  "search_states": 729,
+  "source": "def solve(component_id, program_id, inputs):\n    return _primitive('not_equal', _primitive('top_level_functions', _primitive('parse_python', _input(inputs, 'after'))), _primitive('top_level_functions', _primitive('parse_python', _input(inputs, 'before'))))\n",
+  "source_context": "native_source:d32cc549346ccbb52bcf5f8e180059a0535d56f32065f49fb5ef5745baa9b5be",
+  "source_sha256": "07d80c790d380242216284ab8d10f120ccd30b77b647a0af464e39eaa9e64e4c",
+  "status": "CANDIDATE",
+  "synthesis_inputs": "TRAINING_ONLY",
+  "training_digest": "f462fa3f7dfd84e483bce08e34ff1b299709f684dcb1026ec33714b5a529480d",
+  "training_predictions": [
+    false,
+    true,
+    false
+  ],
+  "validation_predictions": [
+    true,
+    false
+  ]
+}
