@@ -1,0 +1,235 @@
+{
+  "candidate_implementation_authored_by_assistant": false,
+  "previous_request": {
+    "automatic_future_execution_claimed": false,
+    "goal_authorship": "USER",
+    "measured_deficits": [
+      {
+        "id": "NATIVE_ALGORITHM_NOVELTY",
+        "observation": "The emitted repository router has identical function ASTs, RULES and PRIORITY. Only PACK_DIGEST and POLICY_SHA256 changed.",
+        "required_evidence": "Kernel-emitted executable semantic change, independent fresh transfer, comparison against current implementation, regression and preserved rollback."
+      },
+      {
+        "id": "LIVE_AGENT_COMMUNICATION_ADAPTER",
+        "observation": "The existing Hivemind client exposes six issue operations and no agent messaging operation. No hive executable was available in this run.",
+        "required_evidence": "An actual available peer endpoint and permitted protocol, a kernel-generated adapter, and verified request/reply provenance."
+      },
+      {
+        "id": "REPOSITORY_EDIT_EXECUTE_ADAPTER",
+        "observation": "The connected development pack reads project metadata and documentation; it does not apply patches to those projects.",
+        "required_evidence": "Kernel-generated patch in an authorized checkout, real project tests, source diff provenance and rollback."
+      }
+    ],
+    "note": "This preserves the user objective and measured gaps. It is not evidence that the current kernel can implement these missing adapters.",
+    "observation_authorship": "ASSISTANT_VERIFIER",
+    "observed_run_ids": [
+      35443373599,
+      35443567745
+    ],
+    "queued_in_durable_native_scheduler": false,
+    "request_ru": "Ядро должно само писать код и алгоритмы, развивать свои слои и доступы, работать с подключёнными репозиториями и общаться с агентами. Ассистент только запускает и наблюдает.",
+    "schema": "yado.user_requested_native_development_gap.v1",
+    "status": "WITHHOLD_UNIMPLEMENTED_CAPABILITIES"
+  },
+  "previous_request_sha256": "68d514d0e55240b85a9a20292f8b28f1529c77e43694eb500abfdf3f6d17e6d5",
+  "prior_binary_state_restored": false,
+  "prior_deficit_observations_imported": true,
+  "run_id": "35444372742",
+  "tasks": [
+    {
+      "acceptance_examples_authorship": "MAINTAINER",
+      "name": "mcp_comment_serialization",
+      "observer_query_expected": [
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"tab\\there\"}}}",
+        "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"done: \\\"ok\\\"\\nещё\"}}}"
+      ],
+      "parent_deficit": "LIVE_AGENT_COMMUNICATION_ADAPTER",
+      "solution_source_supplied": false,
+      "spec": {
+        "domain": "native_source",
+        "queries": [
+          {
+            "input": {
+              "message": "tab\there"
+            }
+          },
+          {
+            "input": {
+              "message": "done: \"ok\"\nещё"
+            }
+          }
+        ],
+        "training": [
+          {
+            "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"ready\"}}}",
+            "input": {
+              "message": "ready"
+            }
+          },
+          {
+            "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"quoted \\\"value\\\"\"}}}",
+            "input": {
+              "message": "quoted \"value\""
+            }
+          },
+          {
+            "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"line\\nnext\"}}}",
+            "input": {
+              "message": "line\nnext"
+            }
+          }
+        ],
+        "validation": [
+          {
+            "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"back\\\\slash\"}}}",
+            "input": {
+              "message": "back\\slash"
+            }
+          },
+          {
+            "expected": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"hive_add_comment\",\"arguments\":{\"id\":\"YADO-1\",\"message\":\"данные\"}}}",
+            "input": {
+              "message": "данные"
+            }
+          }
+        ]
+      },
+      "task_scope": "NECESSARY_COMPONENT_PROBE_NOT_COMPLETE_CAPABILITY"
+    },
+    {
+      "acceptance_examples_authorship": "MAINTAINER",
+      "name": "unified_patch_emission",
+      "observer_query_expected": [
+        "--- a/target.py\n+++ b/target.py\n@@ -1 +1,2 @@\n a = 9\n+b = 10\n",
+        "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x * 2\n+    return x * 3\n"
+      ],
+      "parent_deficit": "REPOSITORY_EDIT_EXECUTE_ADAPTER",
+      "solution_source_supplied": false,
+      "spec": {
+        "domain": "native_source",
+        "queries": [
+          {
+            "input": {
+              "after": "a = 9\nb = 10\n",
+              "before": "a = 9\n"
+            }
+          },
+          {
+            "input": {
+              "after": "def f(x):\n    return x * 3\n",
+              "before": "def f(x):\n    return x * 2\n"
+            }
+          }
+        ],
+        "training": [
+          {
+            "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-x = 1\n+x = 2\n",
+            "input": {
+              "after": "x = 2\n",
+              "before": "x = 1\n"
+            }
+          },
+          {
+            "expected": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1,2 @@\n def f(x):\n-    return x\n+    return x + 1\n",
+            "input": {
+              "after": "def f(x):\n    return x + 1\n",
+              "before": "def f(x):\n    return x\n"
+            }
+          },
+          {
+            "expected": "--- a/target.py\n+++ b/target.py\n@@ -1,2 +1 @@\n a = 3\n-b = 4\n",
+            "input": {
+              "after": "a = 3\n",
+              "before": "a = 3\nb = 4\n"
+            }
+          }
+        ],
+        "validation": [
+          {
+            "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-flag = False\n+flag = True\n",
+            "input": {
+              "after": "flag = True\n",
+              "before": "flag = False\n"
+            }
+          },
+          {
+            "expected": "--- a/target.py\n+++ b/target.py\n@@ -1 +1 @@\n-name = \"старое\"\n+name = \"новое\"\n",
+            "input": {
+              "after": "name = \"новое\"\n",
+              "before": "name = \"старое\"\n"
+            }
+          }
+        ]
+      },
+      "task_scope": "NECESSARY_COMPONENT_PROBE_NOT_COMPLETE_CAPABILITY"
+    },
+    {
+      "acceptance_examples_authorship": "MAINTAINER",
+      "name": "function_ast_change_detection",
+      "observer_query_expected": [
+        true,
+        false
+      ],
+      "parent_deficit": "NATIVE_ALGORITHM_NOVELTY",
+      "solution_source_supplied": false,
+      "spec": {
+        "domain": "native_source",
+        "queries": [
+          {
+            "input": {
+              "after": "PACK_DIGEST = 'k'\ndef route(x):\n    return x + 4\n",
+              "before": "PACK_DIGEST = 'j'\ndef route(x):\n    return x + 3\n"
+            }
+          },
+          {
+            "input": {
+              "after": "PACK_DIGEST = 'm'\ndef route(x):\n    return x % 2\n",
+              "before": "PACK_DIGEST = 'l'\ndef route(x):\n    return x % 2\n"
+            }
+          }
+        ],
+        "training": [
+          {
+            "expected": false,
+            "input": {
+              "after": "PACK_DIGEST = 'b'\ndef route(x):\n    return x\n",
+              "before": "PACK_DIGEST = 'a'\ndef route(x):\n    return x\n"
+            }
+          },
+          {
+            "expected": true,
+            "input": {
+              "after": "PACK_DIGEST = 'c'\ndef route(x):\n    return x + 2\n",
+              "before": "PACK_DIGEST = 'c'\ndef route(x):\n    return x + 1\n"
+            }
+          },
+          {
+            "expected": false,
+            "input": {
+              "after": "PACK_DIGEST = 'e'\ndef route(x):\n    return x * 2\n",
+              "before": "PACK_DIGEST = 'd'\ndef route(x):\n    return x * 2\n"
+            }
+          }
+        ],
+        "validation": [
+          {
+            "expected": true,
+            "input": {
+              "after": "PACK_DIGEST = 'g'\ndef route(x):\n    return x - 2\n",
+              "before": "PACK_DIGEST = 'f'\ndef route(x):\n    return x - 1\n"
+            }
+          },
+          {
+            "expected": false,
+            "input": {
+              "after": "PACK_DIGEST = 'i'\ndef route(x):\n    return x == 2\n",
+              "before": "PACK_DIGEST = 'h'\ndef route(x):\n    return x == 2\n"
+            }
+          }
+        ]
+      },
+      "task_scope": "NECESSARY_COMPONENT_PROBE_NOT_COMPLETE_CAPABILITY"
+    }
+  ],
+  "tested_commit": "b9a54ad18fb85fb7a357bf6109ca700745867f27"
+}
