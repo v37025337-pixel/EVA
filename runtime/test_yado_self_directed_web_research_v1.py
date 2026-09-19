@@ -78,6 +78,41 @@ class SelfDirectedWebResearchTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             d.import_state(bad)
 
+    def test_restored_memory_allows_revalidation_of_known_hosts(self):
+        c = SelfDirectedWebResearchV1(prepare, meta)
+        urls = [f"https://{host}/doc" for host in HOSTS[:2]]
+        c.research("alpha protocol evidence", fetch=fake_fetch, seed_urls=urls,
+                   use_search=False, max_sources=2, closure_source_target=2)
+        previous = c.export_state()
+        restored = SelfDirectedWebResearchV1(prepare, meta)
+        restored.import_state(previous)
+        result = restored.research("alpha protocol evidence", fetch=fake_fetch,
+            seed_urls=urls, use_search=False, max_sources=2, closure_source_target=2)
+        self.assertEqual(result["status"], "PASS_SELF_DIRECTED_WEB_RESEARCH_V1")
+        self.assertEqual(result["comparison"]["new_independent_host_count"], 0)
+        self.assertEqual(result["comparison"]["revisited_hosts"], sorted(HOSTS[:2]))
+        self.assertTrue(all(s["previously_observed_host"] for s in result["sources"]))
+        self.assertEqual(restored.export_state()["episodes"][:1], previous["episodes"])
+
+    def test_known_hosts_do_not_displace_available_new_hosts(self):
+        c = SelfDirectedWebResearchV1(prepare, meta)
+        urls = [f"https://{host}/doc" for host in HOSTS]
+        c.research("alpha protocol evidence", fetch=fake_fetch, seed_urls=urls[:2],
+                   use_search=False, max_sources=2, closure_source_target=4)
+        result = c.research("alpha protocol evidence", fetch=fake_fetch, seed_urls=urls,
+                            use_search=False, max_sources=2, closure_source_target=4)
+        self.assertEqual({s["host"] for s in result["sources"]}, set(HOSTS[2:]))
+        self.assertEqual(result["comparison"]["new_independent_host_count"], 2)
+
+    def test_revisiting_one_host_cannot_fake_independent_corroboration(self):
+        c = SelfDirectedWebResearchV1(prepare, meta)
+        urls = [f"https://{HOSTS[0]}/{name}" for name in ("one", "two", "three")]
+        for _ in range(2):
+            result = c.research("alpha protocol evidence", fetch=fake_fetch,
+                seed_urls=urls, use_search=False, max_sources=3, closure_source_target=2)
+            self.assertEqual(result["status"], "WITHHOLD_SELF_DIRECTED_WEB_RESEARCH_V1")
+            self.assertEqual(result["comparison"]["current_independent_source_count"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
