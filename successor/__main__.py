@@ -103,6 +103,8 @@ def main():
     successor.add_argument('--parent-manifest', required=True)
     successor.add_argument('--output', required=True)
     for command in ("status", "run", "submit", "resume", "verify", "search", "goal", "think", "cognitive-status", "stop", "native-synthesis-activate",
+                    "compositional-synthesis-activate", "compositional-synthesis-deactivate",
+                    "program-status", "program-develop",
                     "development-start", "develop", "development-status", "development-stop",
                     "autonomy-start", "autonomy-run", "autonomy-status", "autonomy-stop"):
         item = sub.add_parser(command)
@@ -122,6 +124,8 @@ def main():
         if command == 'development-start':
             item.add_argument('--budget', type=int, default=12)
             item.add_argument('--max-goals', type=int, default=2)
+        if command == 'program-develop':
+            item.add_argument('--rounds', type=int, default=3)
         if command == 'development-stop':
             item.add_argument('--session-id', type=int, required=True)
         if command == 'autonomy-start':
@@ -157,6 +161,12 @@ def main():
                 output = kernel.think(args.max_steps)
             elif args.command == 'cognitive-status':
                 output = kernel.cognitive_snapshot()
+            elif args.command in {'compositional-synthesis-activate', 'compositional-synthesis-deactivate'}:
+                output = kernel.set_compositional_synthesis(args.command == 'compositional-synthesis-activate')
+            elif args.command == 'program-status':
+                output = kernel.native_program_status()
+            elif args.command == 'program-develop':
+                output = kernel.develop_native_programs(rounds=args.rounds)
             elif args.command == 'stop':
                 output = kernel.stop_goal(args.goal_id)
             elif args.command == 'development-start':

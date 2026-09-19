@@ -1,0 +1,17 @@
+{
+  "schema": "yado.native_program_goal.v1",
+  "domain": "native_source",
+  "training": [
+    {"input": {"record": {"label": "alpha", "count": 3}}, "expected": {"name": "ALPHA"}},
+    {"input": {"record": {"label": "beta", "count": 8}}, "expected": {"name": "BETA"}},
+    {"input": {"record": {"label": "данные", "count": 2}}, "expected": {"name": "ДАННЫЕ"}}
+  ],
+  "validation": [
+    {"input": {"record": {"label": "gamma", "count": 12}}, "expected": {"name": "GAMMA"}},
+    {"input": {"record": {"label": "delta", "count": 6}}, "expected": {"name": "DELTA"}}
+  ],
+  "queries": [
+    {"input": {"record": {"label": "epsilon", "count": 11}}},
+    {"input": {"record": {"label": "опыт", "count": 4}}}
+  ]
+}

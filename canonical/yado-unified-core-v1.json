@@ -1,8 +1,8 @@
 {
   "active_native_loop_v1": {
     "artifact": "canonical/yado-active-native-loop-v1.json",
-    "binding_digest": "9121c88e23d527bfc09ba4887b554be1c30c87aa159e0f38b11f4cedc6d46fcb",
-    "runtime_sha256": "50bf47b8720bd7fc0af45ffd4df11c63e9a1fa2cfd7e23459d96d14da162da53",
+    "binding_digest": "c65a602c00bd27b29a9a033e9d9234bf7340e15fdfd7281dc1dd7147def42e8c",
+    "runtime_sha256": "a700ffd7c09d078d605e0218b48e899537f95535ae5a5f18ffd4ab748694085f",
     "status": "CANONICAL_ACTIVE"
   },
   "active_patch_registry": {
@@ -91,6 +91,8 @@
     "successor/arithmetic_source.py",
     "successor/autonomy.py",
     "successor/cognitive.py",
+    "successor/compositional_binding.py",
+    "successor/compositional_source.py",
     "successor/continuity.py",
     "successor/development.py",
     "successor/development_run.py",
@@ -110,6 +112,7 @@
     "successor/lineage.py",
     "successor/native_binding.py",
     "successor/native_mechanism.py",
+    "successor/program_goals.py",
     "successor/real_coding_intelligence_run.py",
     "successor/real_coding_self_improvement_entry.py",
     "successor/real_coding_self_improvement_run.py",
@@ -405,7 +408,7 @@
   },
   "control_plane_binding": "CANONICAL",
   "control_plane_binding_gate_run_id": "33391800337",
-  "core_digest": "3b1ea9bdd84b54f9af79c2fa29e3bf71e5f7dd8875392fb3e0ba8d9e22664a56",
+  "core_digest": "a4bbe267e3307db15be082b0cd3cedee0fca991cbf8d468bf4ac3c04ee7af297",
   "core_id": "UNIFIED_YADO_CORE_V1",
   "counterexample_lineage_memory": {
     "component_id": "COUNTEREXAMPLE_LINEAGE_MEMORY_V1",
@@ -834,13 +837,14 @@
     "supersedes": "ALG-G2-BOUNDED-COMPOSITIONAL-LOGIC-V1"
   },
   "maintenance": {
-    "authorship": "ASSISTANT_IMPLEMENTED_USER_REQUESTED_REPAIR",
+    "authorship": "ASSISTANT_IMPLEMENTED_USER_AUTHORIZED_GENERATOR_AND_CORE_UPGRADE",
+    "capability_upgrade": "YADO_COMPOSITIONAL_PROGRAM_EVOLUTION_V1",
     "formal_generation_changed": false,
     "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V2",
     "native_capability_gain_claimed": false,
-    "parent_main_commit": "48f703ab5942faa58a99e2f626e17a88b6e12502",
+    "parent_main_commit": "b53c828e14990961eef67ee7a700fe3261a1019e",
     "runtime_generation": "V4_MAINTENANCE_R2",
-    "validation_report": "audits/yado-unified-kernel-repair-v2-validation.json"
+    "validation_report": "audits/yado-compositional-core-upgrade-v1-validation.json"
   },
   "maintenance_history": [
     {
@@ -852,6 +856,15 @@
       "parent_reconciliation_commit": "7ae7b49947ee6a609170f2041c4a39b41a772d83",
       "runtime_generation": "V4_MAINTENANCE_R1",
       "validation_report": "audits/yado-unified-kernel-repair-v1-validation.json"
+    },
+    {
+      "authorship": "ASSISTANT_IMPLEMENTED_USER_REQUESTED_REPAIR",
+      "formal_generation_changed": false,
+      "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V2",
+      "native_capability_gain_claimed": false,
+      "parent_main_commit": "48f703ab5942faa58a99e2f626e17a88b6e12502",
+      "runtime_generation": "V4_MAINTENANCE_R2",
+      "validation_report": "audits/yado-unified-kernel-repair-v2-validation.json"
     }
   ],
   "mathematical_reasoning": {
@@ -862,6 +875,21 @@
     "gate_run_id": "33416690004",
     "mode": "ACTIVE_BOUNDED_SEMANTIC_EXPRESSION_SYNTHESIS",
     "source_sha256": "3122a7b2fc789d1e849454b4736fdf63e0b2512a64c9c67adb19f5c232b1b8b7"
+  },
+  "native_program_development": {
+    "activation": "EXPLICIT_VERSIONED_DURABLE_EVENT",
+    "automatic_canonical_promotion": false,
+    "binding": "successor/compositional_binding.py",
+    "capability_scope": "BOUNDED_EXTENSIBLE_PROGRAM_COMPOSITION",
+    "consciousness_established": false,
+    "general_intelligence_established": false,
+    "generator": "successor/compositional_source.py",
+    "goal_schema": "yado.native_program_goal.v1",
+    "grammar_authorship": "MAINTAINER_AUTHORIZED_BY_USER",
+    "id": "YADO_COMPOSITIONAL_PROGRAM_EVOLUTION_V1",
+    "program_admission": "FROZEN_SOURCE_INDEPENDENT_HOLDOUT_AND_EXECUTION_REPLAY",
+    "program_selection": "KERNEL_TRAINING_ONLY_WITH_VERIFIED_MEMORY",
+    "validation_report": "audits/yado-compositional-core-upgrade-v1-validation.json"
   },
   "native_selector_canonical_binding_v5": {
     "binding_digest": "8f8d9240ef296a0de5afd458e41cc43be651030151a7ba1b1c7bcee3065275ad",
@@ -1722,13 +1750,13 @@
   },
   "runtime_integrity_manifest": {
     "algorithm": "SHA256",
-    "manifest_digest": "b4159dadda135df1080f8cbe8ae5d8186a7c07179765bae86ddb928eb2ce90ea",
+    "manifest_digest": "d5fc5c9da8c78130a85f7fb1538af9ab1bc711284bd7a4d44fd39c37fb105fcc",
     "scope": "ACTIVE_ENTRYPOINTS_AND_TRANSITIVE_LOCAL_IMPORTS_WITH_EXPLICIT_VERIFIERS",
     "sources": {
       "api/index.py": "c21de66cb7cc660d3cedbff0e4c057b3555162a4d984ea648e32d3ebd8ff066c",
       "architecture/yado_unified_causal_evolution_architecture_v1.py": "2eb2a6bd53206e017831c583288a5c1d96fe04e94b31837b64aec364a961860b",
       "runtime/yado_active_kernel_contract_v1.py": "6f94bf4573cdd32bc4b9b19a83a8e6a9720a62f508693bc555b0f4dfe7befa97",
-      "runtime/yado_active_native_learning_v1.py": "50bf47b8720bd7fc0af45ffd4df11c63e9a1fa2cfd7e23459d96d14da162da53",
+      "runtime/yado_active_native_learning_v1.py": "a700ffd7c09d078d605e0218b48e899537f95535ae5a5f18ffd4ab748694085f",
       "runtime/yado_ambiguity_aware_program_repair_v11.py": "a393286959f307edcf81ac23dc710f5e243b33ba85d987dd2145190d2031ed88",
       "runtime/yado_autonomous_external_library_discovery_v5.py": "85c74e115c3e33aafc0349d57b7ed2890770f6be25b65b559e8c5afa72b42f17",
       "runtime/yado_autonomous_grammar_extension_v3.py": "dee597939b17f3df49f51f1c4e6b6494f6d1c0b73ddc8a2a6302d9ca7e80a6c1",
@@ -1799,12 +1827,14 @@
       "runtime/yado_unified_core_v1.py": "07ff49b664e9a3c739d451e52486bb15cdec52dcff4993e1ca1b81f7adfc379e",
       "runtime/yado_work_budget_adaptive_contingent_planner_v2.py": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5",
       "successor/__init__.py": "27bd4d4d75d20bb4d0af340fa03266cb663af2cd5d664e4a091a028e8cd2b083",
-      "successor/__main__.py": "985add657dae4929ffb50db437a96e45ce50b6182a6ab5d8e9337ee1eebca3fe",
+      "successor/__main__.py": "a44836c747aa79e3fdc1baa590d640996d6944a4b39437d32cf3fc4f56f01140",
       "successor/active_run.py": "1698ffb39d5162b8678fcb54559d4caba6fdd8336f979584db72cf7b1031b996",
       "successor/archive.py": "745d0b3b313fff2d98542de78350f82770ee32ae9114cc15855a010c05218069",
       "successor/arithmetic_source.py": "7466f710b3d5bbb33aa4dfa562a869974bf75e2d6f473c6d5cba31756c457300",
       "successor/autonomy.py": "e2a682836037f6bd23ea06dac5ad2ccdaa7b1f0659117532edc2da88c2ade789",
-      "successor/cognitive.py": "0869977682a047dbec1068195368ffb3375493cab9b8afd4a0c92b157b0d3b31",
+      "successor/cognitive.py": "39ec723722ea405bea5c45f0107572477bd51985813c7d033be19c48d26597ce",
+      "successor/compositional_binding.py": "8f5d445a98f141ad1eb2846f8615f377e101ae885a4f137f38d10fa5628b1032",
+      "successor/compositional_source.py": "d9741e99432cb1e07d56f1e2543b90b1b3b1f3b2d12b91bacca9993c4f8fcdaf",
       "successor/continuity.py": "f7bdaea15616fda0405f129f9c31812a78e7cfde9ac44df22f3a62e7498d753d",
       "successor/development.py": "3a7395c3c524bbdadfe7eb21437d78c5f1ce7f732bcdbab32b2b784b97cdc65e",
       "successor/development_run.py": "27b9ecbd8f225cd532f3514fd8958f3b9c3979fec52cec17c080d86e3456d6af",
@@ -1820,10 +1850,11 @@
       "successor/hivemind_evolution.py": "241aadbf634eacd489a03461a05e8c54a70a54dca5ba4d33e0650f93a1496932",
       "successor/hivemind_lineage.py": "367790133e7da1667a1af43081b5b63641707b7c556321bed20eb26ff7364a28",
       "successor/inductive_mechanism.py": "e5c03195f45790f87b08147a3df8ac96f9ab9552a0255fccc838bf05b9804bce",
-      "successor/kernel.py": "2f9c9955e0229a6f96a6a576ea34ad2d82ea13bfbd8fe48cb338e5a264cda804",
+      "successor/kernel.py": "1718ed31d116ee0c01943eb88950141c181177399b550e2c7f9d0f76d39fe4d1",
       "successor/lineage.py": "3cf6eec29ed60402eb2c32cfcb4d0da429b7ea75fd642a5141bac08e9c571246",
       "successor/native_binding.py": "9a6b7366cbd7df9b6f1b0f24fed4736b383f4f581cc0b20193a22201e821e880",
       "successor/native_mechanism.py": "423f5a47c35ea6cdbf161ff82b57b0d971b57d552a28617b52434571f17c8758",
+      "successor/program_goals.py": "438861282ebee4ef593eafbcc3b75f69870f991731ad0612a7df15dfeae14843",
       "successor/real_coding_intelligence_run.py": "64e6bb170822614aea9817b2d0e86d1f63ee08af01ac0c7f42f165ff74fba242",
       "successor/real_coding_self_improvement_entry.py": "69a3a8f259deb0fab76a6a55f61d7523b51525a15f2df935784418bad2074e01",
       "successor/real_coding_self_improvement_run.py": "c7ea777a1f57ff64e21153a619bb3960747f782ecc8fa91095e6e3ec5daf4ddb",
