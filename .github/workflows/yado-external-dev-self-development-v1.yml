@@ -10,15 +10,21 @@ on:
       checkpoint_name:
         description: Exact checkpoint artifact name when source_run is provided
         required: false
-        default: yado-repository-learning-checkpoint-35452596993-1
+        default: yado-repository-learning-checkpoint-35453219380-1
+      evolve_runtime:
+        description: Run one measured runtime evolution cycle from the checkpoint
+        type: boolean
+        required: false
+        default: false
   push:
-    branches: [codex/yado-external-dev-self-development-v1-20260916, codex/yado-repository-learning-resume-20260919]
+    branches: [codex/yado-external-dev-self-development-v1-20260916, codex/yado-repository-learning-resume-20260919, codex/yado-stateful-runtime-evolution-20260919]
     paths:
       - '.github/workflows/yado-external-dev-self-development-v1.yml'
       - 'runtime/yado_external_dev_self_development_v1.py'
       - 'runtime/yado_unified_core_external_dev_self_development_v1.py'
       - 'runtime/test_yado_external_dev_self_development_v1.py'
       - 'experiments/repository-learning-resume-20260919/**'
+      - 'experiments/stateful-runtime-evolution-20260919/**'
 
 permissions:
   contents: write
@@ -29,7 +35,7 @@ concurrency:
 
 jobs:
   self-develop:
-    if: github.ref != 'refs/heads/codex/yado-repository-learning-resume-20260919' && !inputs.source_run
+    if: github.ref != 'refs/heads/codex/yado-repository-learning-resume-20260919' && github.ref != 'refs/heads/codex/yado-stateful-runtime-evolution-20260919' && !inputs.source_run && !inputs.evolve_runtime
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -133,7 +139,7 @@ jobs:
             audits/yado-full-regression-v1-report.json
 
   learn-and-resume:
-    if: github.ref == 'refs/heads/codex/yado-repository-learning-resume-20260919' || inputs.source_run != ''
+    if: github.ref == 'refs/heads/codex/yado-repository-learning-resume-20260919' || github.ref == 'refs/heads/codex/yado-stateful-runtime-evolution-20260919' || inputs.source_run != '' || inputs.evolve_runtime
     permissions:
       contents: read
       actions: read
@@ -154,21 +160,31 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.source_run || '35452596993' }}
-          name: ${{ inputs.checkpoint_name || 'yado-repository-learning-checkpoint-35452596993-1' }}
+          run-id: ${{ inputs.source_run || '35453219380' }}
+          name: ${{ inputs.checkpoint_name || 'yado-repository-learning-checkpoint-35453219380-1' }}
           path: ${{ runner.temp }}/yado-predecessor
       - name: Install the previously verified Hivemind release
+        if: github.ref != 'refs/heads/codex/yado-stateful-runtime-evolution-20260919' && !inputs.evolve_runtime
         run: |
           curl --fail --location --retry 2 --output "$RUNNER_TEMP/hive" https://github.com/dip497/hivemind/releases/download/v1.17.1/hive-linux-x86_64
           echo "32a9f345f1bb69f0bda237449bbd28b8fb6262f1e1b7a13efff7dafe9d5c764d  $RUNNER_TEMP/hive" | sha256sum --check
           chmod +x "$RUNNER_TEMP/hive"
       - name: Run live learning, local Hivemind transport and native continuation
+        if: github.ref != 'refs/heads/codex/yado-stateful-runtime-evolution-20260919' && !inputs.evolve_runtime
         env:
-          SOURCE_RUN: ${{ inputs.source_run || '35452596993' }}
+          SOURCE_RUN: ${{ inputs.source_run || '35453219380' }}
         run: |
           python experiments/repository-learning-resume-20260919/run.py \
             --checkpoint "$RUNNER_TEMP/yado-predecessor" --source-run "$SOURCE_RUN" \
             --output "$RUNNER_TEMP/yado-learning-checkpoint" --hive "$RUNNER_TEMP/hive" --cycles 20
+      - name: Run stateful deficit selection, module emission and independent gates
+        if: github.ref == 'refs/heads/codex/yado-stateful-runtime-evolution-20260919' || inputs.evolve_runtime
+        env:
+          SOURCE_RUN: ${{ inputs.source_run || '35453219380' }}
+        run: |
+          python experiments/stateful-runtime-evolution-20260919/run.py \
+            --checkpoint "$RUNNER_TEMP/yado-predecessor" --source-run "$SOURCE_RUN" \
+            --output "$RUNNER_TEMP/yado-learning-checkpoint"
       - name: Verify canonical continuity
         run: |
           git diff --exit-code -- canonical architecture/evolution-ledger.json
