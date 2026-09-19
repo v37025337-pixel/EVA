@@ -21,27 +21,42 @@
   "planes": [
     {
       "id": "IDENTITY_AND_LINEAGE",
-      "source_of_truth": ["canonical/yado-main-head-g2.json", "architecture/evolution-ledger.json"],
+      "source_of_truth": [
+        "canonical/yado-main-head-g2.json",
+        "architecture/evolution-ledger.json"
+      ],
       "invariant": "ONE_FORMAL_HEAD_AND_APPEND_ONLY_CAUSAL_LEDGER"
     },
     {
       "id": "COGNITIVE_RUNTIME",
-      "source_of_truth": ["canonical/yado-unified-core-v1.json", "runtime/yado_unified_core_v1.py"],
+      "source_of_truth": [
+        "canonical/yado-unified-core-v1.json",
+        "runtime/yado_unified_core_v1.py"
+      ],
       "invariant": "ONE_ACTIVE_VERSION_PER_CAPABILITY_FAMILY"
     },
     {
       "id": "RUNTIME_EVOLUTION",
-      "source_of_truth": ["runtime/yado_bounded_autonomous_learning_v1.py", "candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json"],
+      "source_of_truth": [
+        "runtime/yado_bounded_autonomous_learning_v1.py",
+        "candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json"
+      ],
       "invariant": "PHYSICAL_BYTES_AND_PROMOTION_METADATA_MUST_AGREE"
     },
     {
       "id": "MEMORY_AND_EXPERIENCE",
-      "source_of_truth": ["canonical/yado-unified-experience-registry-v1.json"],
+      "source_of_truth": [
+        "canonical/yado-unified-experience-registry-v1.json"
+      ],
       "invariant": "REGISTRY_IS_CURATED_EXPERIENCE_NOT_A_LIVE_GIT_BRANCH_INVENTORY"
     },
     {
       "id": "VERIFICATION_AND_ADMISSION",
-      "source_of_truth": ["runtime/yado_full_kernel_audit_v1.py", "runtime/yado_full_regression_v1.py", "runtime/yado_repository_reconciliation_v1.py"],
+      "source_of_truth": [
+        "runtime/yado_full_kernel_audit_v2.py",
+        "runtime/yado_full_regression_v1.py",
+        "runtime/yado_repository_reconciliation_v1.py"
+      ],
       "invariant": "NO_PROMOTION_WITHOUT_FRESH_AUDIT_REGRESSION_AND_ROLLBACK_EVIDENCE"
     }
   ],
