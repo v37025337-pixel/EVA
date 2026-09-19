@@ -6,6 +6,7 @@ on:
     paths:
       - "architecture/yado-unified-architecture-v2.json"
       - "runtime/yado_repository_reconciliation_v1.py"
+      - "runtime/yado_full_kernel_audit_v2.py"
       - "runtime/yado_unified_core_v1.py"
       - "candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json"
       - ".github/workflows/yado-repository-reconciliation-v2.yml"
@@ -14,6 +15,7 @@ on:
     paths:
       - "architecture/yado-unified-architecture-v2.json"
       - "runtime/yado_repository_reconciliation_v1.py"
+      - "runtime/yado_full_kernel_audit_v2.py"
       - "runtime/yado_unified_core_v1.py"
       - "candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json"
       - ".github/workflows/yado-repository-reconciliation-v2.yml"
@@ -46,7 +48,7 @@ jobs:
 
       - name: Compile reconciliation surface
         run: |
-          python -m py_compile runtime/yado_repository_reconciliation_v1.py runtime/yado_unified_core_v1.py
+          python -m py_compile runtime/yado_repository_reconciliation_v1.py runtime/yado_full_kernel_audit_v2.py runtime/yado_unified_core_v1.py
 
       - name: Repository architecture reconciliation
         run: python runtime/yado_repository_reconciliation_v1.py --strict
@@ -54,18 +56,17 @@ jobs:
       - name: Canonical invariant guard
         run: python runtime/yado_canonical_invariant_guard_v1.py
 
-      - name: Full kernel audit
+      - name: Full kernel audit V2
         run: |
-          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md
-          python runtime/yado_full_kernel_audit_v1.py
+          rm -f audits/yado-full-kernel-audit-v1-report.json audits/yado-full-kernel-audit-v1-summary.md audits/yado-full-kernel-audit-v2-report.json audits/yado-full-kernel-audit-v2-summary.md
+          python runtime/yado_full_kernel_audit_v2.py
           python - <<'PY'
           import json
-          d=json.load(open("audits/yado-full-kernel-audit-v1-report.json"))
+          d=json.load(open("audits/yado-full-kernel-audit-v2-report.json"))
           assert d["status"]=="PASS", d
-          assert d["findings"]==[], d
-          assert d["canonical"]["canonical_guard"]=="PASS", d
-          assert d["canonical"]["ledger_validation"]=="PASS", d
-          print("PASS_FULL_KERNEL_AUDIT")
+          assert d["repository_reconciliation"]["status"]=="PASS", d
+          assert d["kernel_audit_v1"]["status"]=="PASS", d
+          print("PASS_FULL_KERNEL_AUDIT_V2")
           PY
 
       - name: Unified core native audit
@@ -108,5 +109,7 @@ jobs:
             audits/yado-repository-reconciliation-v1-report.json
             audits/yado-full-kernel-audit-v1-report.json
             audits/yado-full-kernel-audit-v1-summary.md
+            audits/yado-full-kernel-audit-v2-report.json
+            audits/yado-full-kernel-audit-v2-summary.md
             audits/yado-full-regression-v1-report.json
           if-no-files-found: warn
