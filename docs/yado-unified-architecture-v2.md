@@ -17,7 +17,9 @@ if they were one version axis. They are now separate planes with explicit bindin
 
 A capability family may have many historical versions, but only one is active. Older versions remain
 only for rollback, regression and provenance. A physical runtime change may not remain paired with a
-PENDING promotion receipt.
+PENDING promotion receipt. The existing G2 unified runtime remains byte-bound to its canonical manifest;
+its curated experience-registry assumptions are treated as a versioned contract, not as a live Git inventory.
+Live branch topology is checked only by the repository reconciliation layer.
 
 Formal architecture generation and runtime rewrite generation are intentionally independent:
 G2_CANDIDATE_TRCG_V1 can remain the formal architecture while the bounded autonomous-learning
