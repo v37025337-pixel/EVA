@@ -60,7 +60,7 @@ def restore(checkpoint, out, expected_run):
     return receipt
 
 
-def external_learning(out):
+def external_learning(out, prior_web_memory=None):
     from yado_unified_core_self_directed_web_research_v1 import UnifiedYADOCoreSelfDirectedWebResearchV1
     from yado_unified_core_peer_systems_learning_v1 import UnifiedYADOCorePeerSystemsLearningV1
     from yado_unified_core_external_dev_self_development_v1 import UnifiedYADOCoreExternalDevSelfDevelopmentV1
@@ -74,6 +74,9 @@ def external_learning(out):
             if stage == "ghidra":
                 core = UnifiedYADOCoreSelfDirectedWebResearchV1(ROOT)
                 assert core.audit()["pass"]
+                if prior_web_memory is not None:
+                    core.restore_self_directed_research_state(prior_web_memory)
+                old_episodes = core.export_self_directed_research_state()["episodes"]
                 request = json.loads((ROOT / "architecture/yado-ghidra-information-genetics-v1.json").read_text())
                 result = core.self_directed_web_research_generations(
                     request["objective"], seed_urls=request["seed_urls"],
@@ -82,11 +85,15 @@ def external_learning(out):
                     closure_source_target=request["closure_source_target"],
                     max_search_results=request["max_search_results"], timeout=15)
                 state = core.export_self_directed_research_state()
+                assert state["episodes"][:len(old_episodes)] == old_episodes
                 save(out, "web-memory", state)
                 restarted = UnifiedYADOCoreSelfDirectedWebResearchV1(ROOT)
                 restarted.restore_self_directed_research_state(state)
                 assert restarted.export_self_directed_research_state() == state
                 result["memory_roundtrip_verified"] = True
+                result["prior_research_episodes"] = len(old_episodes)
+                result["retained_research_episodes"] = len(state["episodes"])
+                result["prior_research_events_preserved_exactly"] = True
                 results[stage] = result
                 save(out, stage, result)
                 assert result["status"].startswith("PASS_")
@@ -144,7 +151,10 @@ def main(args):
         identity = kernel.identity
     finally:
         kernel.close()
-    results, errors = external_learning(out)
+    prior_web_memory = None
+    if "web-memory.json" in predecessor["checkpoint_files_sha256"]:
+        prior_web_memory = json.loads((args.checkpoint / "web-memory.json").read_text())
+    results, errors = external_learning(out, prior_web_memory)
 
     try:
         if sha(args.hive) != HIVE_SHA:
@@ -214,6 +224,8 @@ def main(args):
         "prior_events_preserved_exactly": True, "new_cycles_verified": continuation["cycles_verified"],
         "host_goals_in_continuation": continuation["host_goal_count"],
         "ghidra_research_generations": results.get("ghidra", {}).get("generation_count", 0),
+        "prior_research_episodes": results.get("ghidra", {}).get("prior_research_episodes", 0),
+        "retained_research_episodes": results.get("ghidra", {}).get("retained_research_episodes", 0),
         "repository_sources": results.get("repositories", {}).get("used_source_patterns", []),
         "peer_sources_verified": results.get("peers", {}).get("verified_source_count", 0),
         "hivemind_real_transport_passed": results.get("hivemind", {}).get("passed", False),

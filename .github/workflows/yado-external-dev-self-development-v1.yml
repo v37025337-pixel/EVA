@@ -10,7 +10,7 @@ on:
       checkpoint_name:
         description: Exact checkpoint artifact name when source_run is provided
         required: false
-        default: yado-continuation-checkpoint-v1-35451019074-1
+        default: yado-repository-learning-checkpoint-35451765200-1
   push:
     branches: [codex/yado-external-dev-self-development-v1-20260916, codex/yado-repository-learning-resume-20260919]
     paths:
@@ -154,8 +154,8 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.source_run || '35451019074' }}
-          name: ${{ inputs.checkpoint_name || 'yado-continuation-checkpoint-v1-35451019074-1' }}
+          run-id: ${{ inputs.source_run || '35451765200' }}
+          name: ${{ inputs.checkpoint_name || 'yado-repository-learning-checkpoint-35451765200-1' }}
           path: ${{ runner.temp }}/yado-predecessor
       - name: Install the previously verified Hivemind release
         run: |
@@ -164,7 +164,7 @@ jobs:
           chmod +x "$RUNNER_TEMP/hive"
       - name: Run live learning, local Hivemind transport and native continuation
         env:
-          SOURCE_RUN: ${{ inputs.source_run || '35451019074' }}
+          SOURCE_RUN: ${{ inputs.source_run || '35451765200' }}
         run: |
           python experiments/repository-learning-resume-20260919/run.py \
             --checkpoint "$RUNNER_TEMP/yado-predecessor" --source-run "$SOURCE_RUN" \

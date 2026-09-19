@@ -1,7 +1,8 @@
 # Live repository learning with retained state
 
-This experiment continues the verified native checkpoint from main workflow
-35451019074. It restores the exact source overlay, manifest, archive and SQLite
+The first campaign continued the verified native checkpoint from main workflow
+35451019074. The next run resumes campaign 35451765200, including its retained
+web-research memory. It restores the exact source overlay, manifest, archive and SQLite
 journal, checks their hashes, and verifies the operational identity and old event
 prefix before and after a new run. It does not create a fresh native identity.
 
@@ -22,7 +23,8 @@ repository patch. The CLI release is checked against its published SHA-256.
 
 Twenty further goals are selected by the existing endogenous controller. The
 host provides the cycle count; the goal grammar is inherited and finite.
-Research memory is roundtrip-checked separately. No causal transfer from web
+Research memory is restored from the predecessor when present, its exact event
+prefix is retained, and it is roundtrip-checked separately. No causal transfer from web
 reading to general native intelligence is asserted by these separate stages.
 
 The workflow saves the full checkpoint and partial evidence even if a network
