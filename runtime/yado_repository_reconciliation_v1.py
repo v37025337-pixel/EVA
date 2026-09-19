@@ -206,8 +206,17 @@ def run(strict: bool = False) -> dict[str, Any]:
         "registry_scope_explicit": contract.get("branch_policy", {}).get("experience_registry_scope") == "CURATED_LEGACY_EXPERIENCE_NOT_REMOTE_REF_INVENTORY",
         "runtime_v4_target_exact": TARGET.exists() and V4.exists() and sha256(TARGET) == sha256(V4),
         "runtime_v4_digest_bound": sha256(V4) == promotion.get("candidate_sha256") == contract.get("runtime_lineage", {}).get("candidate_sha256"),
-        "runtime_v4_promotion_closed": promotion.get("status") == "MERGED_PHYSICAL_RUNTIME_PROMOTION_V4",
-        "runtime_v4_gates_recorded": all(promotion.get(k) is True for k in ("physical_runtime_promotion", "exact_candidate_binding", "full_kernel_audit", "canonical_guard", "full_regression")),
+        "runtime_v4_promotion_closed": promotion.get("status") == "PASS_POST_MERGE_PHYSICAL_RUNTIME_PROMOTION_V4",
+        "runtime_v4_gates_recorded": (
+            promotion.get("physical_runtime_promotion") is True
+            and promotion.get("exact_candidate_binding") is True
+            and promotion.get("premerge_full_kernel_audit") is True
+            and promotion.get("premerge_canonical_guard") is True
+            and promotion.get("premerge_full_regression") is True
+            and promotion.get("post_merge_full_kernel_audit") is True
+            and promotion.get("post_merge_full_regression") is True
+            and promotion.get("post_merge_canonical_invariant_guard") == "PASS_CANONICAL_INVARIANT_GUARD_V1"
+        ),
         "single_active_execution_fabric": sum(active_status(x) for x in execution_versions) == 1 and active_status(head.get("execution_fabric_v5", {})),
         "single_active_experience_layer": sum(active_status(x) for x in experience_versions) == 1 and active_status(head.get("experience_conditioned_cognitive_layer_v4", {})),
         "no_tracked_bytecode": not tracked_bytecode,
