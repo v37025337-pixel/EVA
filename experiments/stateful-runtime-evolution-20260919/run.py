@@ -109,11 +109,12 @@ def main(args):
     error = None
     try:
         evolution = RuntimeEvolution(kernel)
-        initial = evolution.propose("stateful-evolution", "initial-" + before["event_hash"], REQUEST)
+        workspace_id = "stateful-evolution-" + before["event_hash"]
+        initial = evolution.propose(workspace_id, "YADO-1", REQUEST)
         resume.save(out, "initial-proposal", initial)
         if initial["selection"] is None:
             observe_numeric_memory(kernel, out)
-            proposal = evolution.propose("stateful-evolution", "observed-" + before["event_hash"], REQUEST)
+            proposal = evolution.propose(workspace_id, "YADO-2", REQUEST)
         else:
             proposal = initial
         resume.save(out, "proposal", proposal)
