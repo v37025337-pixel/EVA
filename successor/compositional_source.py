@@ -19,6 +19,8 @@ import warnings
 
 SCHEMA = 'yado.compositional_source.v1'
 GRAMMAR = 'YADO_TYPED_COMPOSITION_V1'
+GRAMMAR_V2 = 'YADO_TYPED_COMPOSITION_V2'
+GRAMMARS = (GRAMMAR, GRAMMAR_V2)
 MAX_TEXT = 8192
 MAX_VALUE_TEXT = 65536
 MAX_ITEMS = 128
@@ -111,6 +113,26 @@ def _freeze(value):
     return (kind, value)
 
 
+def _json_key_v2(value):
+    """Semantic JSON key, separate from order-observing search signatures.
+
+    The existing bounded domain still excludes floats, non-string object keys,
+    and ASTs. Arrays retain order; object keys do not. Scalar types stay exact.
+    """
+    kind = _kind(value)
+    if kind == 'ast':
+        raise ValueError('COMPOSITION_JSON_VALUE_TYPE')
+    if kind == 'list':
+        return (kind, tuple(_json_key_v2(child) for child in value))
+    if kind == 'dict':
+        return (kind, tuple((key, _json_key_v2(value[key])) for key in sorted(value)))
+    return (kind, value)
+
+
+def _json_equal_v2(left, right):
+    return _json_key_v2(_bounded(left)) == _json_key_v2(_bounded(right))
+
+
 def _ast_dump(value):
     if isinstance(value, ast.AST):
         return ast.dump(value, include_attributes=False)
@@ -178,14 +200,28 @@ _RESULT_TYPES = {
     'index': {'str', 'int', 'bool', 'null', 'list', 'dict', 'ast'},
     'equal': {'bool'}, 'not_equal': {'bool'}, 'concat': {'str'},
     'add': {'int'}, 'subtract': {'int'}, 'multiply': {'int'}, 'unified_diff': {'list'},
+    'json_equal_v2': {'bool'}, 'json_not_equal_v2': {'bool'},
+}
+_OPERATIONS_V2 = {
+    **_OPERATIONS,
+    'json_equal_v2': (('json', 'json'), _json_equal_v2),
+    'json_not_equal_v2': (('json', 'json'), lambda x, y: not _json_equal_v2(x, y)),
 }
 
 
-def catalog():
+def _operations(grammar):
+    if grammar == GRAMMAR:
+        return _OPERATIONS
+    if grammar == GRAMMAR_V2:
+        return _OPERATIONS_V2
+    raise ValueError('COMPOSITION_GRAMMAR_VERSION')
+
+
+def catalog(*, grammar=GRAMMAR):
     """Return a detached description, never a mutable operator registry."""
-    return {'schema': SCHEMA, 'grammar': GRAMMAR,
+    return {'schema': SCHEMA, 'grammar': grammar,
             'operators': [{'name': name, 'arguments': list(signature)}
-                          for name, (signature, _) in _OPERATIONS.items()],
+                          for name, (signature, _) in _operations(grammar).items()],
             'budgets': {'program_nodes': MAX_NODES, 'program_depth': MAX_DEPTH,
                         'input_text_characters': MAX_TEXT, 'value_text_characters': MAX_VALUE_TEXT,
                         'value_nodes': 8192, 'container_items': MAX_ITEMS, 'named_inputs': 8,
@@ -203,7 +239,7 @@ def _accepts(signature, value):
 
 
 def _primitive(name, *arguments):
-    signatures, implementation = _OPERATIONS[name]
+    signatures, implementation = _OPERATIONS_V2[name]
     if len(arguments) != len(signatures) or not all(_accepts(s, v) for s, v in zip(signatures, arguments)):
         raise ValueError('COMPOSITION_PRIMITIVE_SIGNATURE')
     return _bounded(implementation(*arguments), internal=True)
@@ -225,8 +261,9 @@ def _literal(value):
     return _node('literal', value=value)
 
 
-def _validate_program(program, signature):
+def _validate_program(program, signature, *, grammar=GRAMMAR):
     count = 0
+    operations = _operations(grammar)
     keys = {key for key, _ in signature}
     kinds = dict(signature)
 
@@ -251,10 +288,10 @@ def _validate_program(program, signature):
             return {_kind(node['value'])}
         elif op == 'call':
             if (set(node) != {'op', 'name', 'args'} or type(node['name']) is not str
-                    or node['name'] not in _OPERATIONS or type(node['args']) is not list
-                    or len(node['args']) != len(_OPERATIONS[node['name']][0])):
+                    or node['name'] not in operations or type(node['args']) is not list
+                    or len(node['args']) != len(operations[node['name']][0])):
                 raise ValueError('COMPOSITION_CALL_SCHEMA')
-            for expected, child in zip(_OPERATIONS[node['name']][0], node['args']):
+            for expected, child in zip(operations[node['name']][0], node['args']):
                 possible = visit(child, depth + 1)
                 accepted = ({'str', 'int', 'bool', 'null', 'list', 'dict'} if expected == 'json'
                             else {'str', 'int', 'bool', 'null', 'list', 'dict', 'ast'} if expected == 'any'
@@ -323,11 +360,11 @@ def validate(candidate):
         raise ValueError('COMPOSITION_CANDIDATE_SCHEMA')
     required = {'schema', 'grammar', 'program', 'source', 'source_sha256', 'input_signature',
                 'training_digest', 'parent_source_sha256', 'synthesis_inputs'}
-    if (not required <= set(candidate) or candidate['schema'] != SCHEMA or candidate['grammar'] != GRAMMAR
+    if (not required <= set(candidate) or candidate['schema'] != SCHEMA or candidate['grammar'] not in GRAMMARS
             or candidate['synthesis_inputs'] != 'TRAINING_ONLY'):
         raise ValueError('COMPOSITION_CANDIDATE_SCHEMA')
     signature = _signature(candidate['input_signature'])
-    _validate_program(candidate['program'], signature)
+    _validate_program(candidate['program'], signature, grammar=candidate['grammar'])
     expected = _emit(candidate['program'])
     if type(candidate['source']) is not str or candidate['source'] != expected:
         raise ValueError('COMPOSITION_SOURCE_REEMISSION_MISMATCH')
@@ -427,13 +464,14 @@ def _withhold(reason, **stats):
             'synthesis_inputs': 'TRAINING_ONLY', 'automatic_canonical_promotion': False, **stats}
 
 
-def synthesize(training, *, memories=()):
+def synthesize(training, *, memories=(), grammar=GRAMMAR):
     """Infer a program from training alone and previously verified memory seeds.
 
     The caller supplies memories exclusively from its verified durable journal;
     a valid candidate proves grammar origin, not prior holdout success. Inlining
     records the exact parent programs used. Memory contains no new callables.
     """
+    operations = _operations(grammar)
     try:
         rows, signature, output_kind = _training(training)
     except (ValueError, TypeError, UnicodeError, RecursionError) as error:
@@ -442,6 +480,8 @@ def synthesize(training, *, memories=()):
         raise ValueError('COMPOSITION_MEMORY_BUDGET')
     for memory in memories:
         validate(memory)
+        if grammar == GRAMMAR and memory['grammar'] != GRAMMAR:
+            raise ValueError('COMPOSITION_MEMORY_GRAMMAR')
     target = tuple(_freeze(row['expected']) for row in rows)
     pool, by_behavior, attempts, value_units = [], {}, 0, 0
     match = None
@@ -452,7 +492,7 @@ def synthesize(training, *, memories=()):
         if attempts > MAX_ATTEMPTS or len(pool) >= MAX_STATES:
             raise OverflowError('COMPOSITION_SEARCH_BUDGET')
         try:
-            _validate_program(program, signature)
+            _validate_program(program, signature, grammar=grammar)
             values = [_bounded(_evaluate(program, row['input']), internal=True) for row in rows]
             behavior = tuple(_freeze(value) for value in values)
         except (ValueError, TypeError, KeyError, IndexError, SyntaxError, UnicodeError, RecursionError, OverflowError):
@@ -566,7 +606,7 @@ def synthesize(training, *, memories=()):
             for kind in ('str', 'int', 'bool', 'null', 'list', 'dict', 'ast'):
                 selected.extend([x for x in frontier if x['kind'] == kind][:MAX_PER_TYPE])
             for entry in selected:
-                for name, (arg_types, _) in _OPERATIONS.items():
+                for name, (arg_types, _) in operations.items():
                     if len(arg_types) == 1 and all(_accepts(arg_types[0], v) for v in entry['values']):
                         unary(name, entry)
                 if entry['kind'] == 'dict':
@@ -583,12 +623,22 @@ def synthesize(training, *, memories=()):
             pairs = []
             for kind in ('ast', 'list', 'str', 'int', 'bool', 'dict', 'null'):
                 for left, right in itertools.combinations(entries(kind), 2):
-                    cost = (_validate_program(left['program'], signature)
-                            + _validate_program(right['program'], signature))
+                    cost = (_validate_program(left['program'], signature, grammar=grammar)
+                            + _validate_program(right['program'], signature, grammar=grammar))
                     pairs.append((cost, left, right))
-            for _, left, right in sorted(pairs, key=lambda item: item[0]):
-                for name in ('equal', 'not_equal'):
-                    add(_call(name, left['program'], right['program']), left['parents'] | right['parents'])
+            # V1 retains its exact comparator order and attempt counts. V2 first
+            # tries explicit JSON semantics, then the unchanged AST/general ops.
+            phases = [('equal', 'not_equal')]
+            if grammar == GRAMMAR_V2:
+                phases.insert(0, ('json_equal_v2', 'json_not_equal_v2'))
+            for names in phases:
+                for _, left, right in sorted(pairs, key=lambda item: item[0]):
+                    if names[0] == 'json_equal_v2' and left['kind'] == 'ast':
+                        continue
+                    for name in names:
+                        add(_call(name, left['program'], right['program']), left['parents'] | right['parents'])
+                        if match is not None:
+                            break
                     if match is not None:
                         break
                 if match is not None:
@@ -621,7 +671,7 @@ def synthesize(training, *, memories=()):
     if match is None:
         return _withhold('COMPOSITION_NO_PROGRAM_WITHIN_GRAMMAR', search_states=len(pool), search_attempts=attempts)
     source = _emit(match['program'])
-    candidate = {'schema': SCHEMA, 'grammar': GRAMMAR, 'program': match['program'],
+    candidate = {'schema': SCHEMA, 'grammar': grammar, 'program': match['program'],
                  'source': source, 'source_sha256': _sha(source), 'input_signature': signature,
                  'training_digest': _sha(_canonical(rows)), 'synthesis_inputs': 'TRAINING_ONLY',
                  'parent_source_sha256': sorted(match['parents']), 'compiled': True,

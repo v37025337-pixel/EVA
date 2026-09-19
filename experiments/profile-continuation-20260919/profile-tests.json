@@ -1,0 +1,13 @@
+{
+  "status": "PASS_PUBLIC_V2_PROFILE_REGRESSION",
+  "tests_run": 3,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "baseline": "3 errors; default activation and development reject active V2; status reports V1 and omits V2 memory",
+  "command": "PYTHONPATH=.:runtime:runtime/yado_rc8_v36 YADO_SUCCESSOR_TEST_MANIFEST=<fresh-birth>/manifest.json python -m unittest successor.tests.test_native_program_profile",
+  "source_sha256": {
+    "successor/cognitive.py": "4ba5a02693ae97e3b9872ece1796a4821f7a170c844398abaec06d2fbd9a0d06",
+    "successor/kernel.py": "a4075cbcbaf27367587b3ad8c7c735db6d013781ca6e4f34f045d700dd8233ab"
+  }
+}
