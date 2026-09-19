@@ -1,0 +1,145 @@
+{
+  "active_kernel_identity": {
+    "canonical_head_digest": "3ab7f26ac0e0e50e3458ad221d4e6c4b7e5ce8eb503d671da6fe1b32eda98f06",
+    "controller_sha256": "3a0f3231d779521338dfea2b8280956d033dfb4cab96ce7a18840d1f06813269",
+    "execution_branch": "main",
+    "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
+    "runtime_manifest_digest": "beb1eab37f6c3e21048f17dc4ec485c3a06e7c2114c04a5ab2812b5fd7eb457b"
+  },
+  "api_readiness": {
+    "audit_freshness": "SOURCE_SHA256_MATCH",
+    "audited_commit": "6279da2c96011ab6f2b959168e53f63073885428",
+    "canonical_active": true,
+    "canonical_status": "VERIFIED",
+    "full_kernel_audit_pass": true,
+    "g3_genesis_performed": false,
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "mode": "read_only_bootstrap",
+    "persistent_state": "external_required",
+    "service": "YADO Successor V2 runtime facade",
+    "status": "ok"
+  },
+  "canonical_guard": {
+    "active_capability_count": 34,
+    "checks": {
+      "active_capabilities_explicit": true,
+      "active_runtime_sources_hash_manifest": true,
+      "core_content_digest": true,
+      "deep_audit_hash_bound": true,
+      "frontier_head_core": true,
+      "frontier_single": true,
+      "g3_not_started": true,
+      "head_content_digest": true,
+      "head_ledger_digest": true,
+      "head_ledger_generation": true,
+      "ledger_valid": true,
+      "provenance_content_digest": true,
+      "provenance_digest_bound": true,
+      "provenance_frontier_current": true,
+      "unified_runtime_hash_bound": true
+    },
+    "deep_audit_sha256_actual": "4e093e1acea7db1809fa7c0e7b5c68c4506d0683a3e1ef3ac55007c52471bf59",
+    "frontier": "KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
+    "schema": "yado.g2.canonical_invariant_guard.v1",
+    "status": "PASS_CANONICAL_INVARIANT_GUARD_V1",
+    "unified_runtime_sha256_actual": "07ff49b664e9a3c739d451e52486bb15cdec52dcff4993e1ca1b81f7adfc379e"
+  },
+  "checks": {
+    "api_readiness": true,
+    "canonical_guard": true,
+    "full_kernel_audit_v2": true,
+    "full_regression": true,
+    "maintenance_admission": true,
+    "native_core": true
+  },
+  "evidence_sha256": {
+    "audits/yado-full-kernel-audit-v1-report.json": "14ba50c0b8be5c27a47e6ec696b4a30ca5d943ae672b3fc9ed4b60205ba453ee",
+    "audits/yado-full-kernel-audit-v2-report.json": "37ec5041a0a88d3891829954b73b7b9105243ae8bd889faade18e9c8bdc349ee",
+    "audits/yado-full-regression-v1-report.json": "d5bd646ad703ecb15bebb6399624688dfb7e3a7e14313378399c0c6efd7f49dc",
+    "audits/yado-historical-v4-promotion-probe.json": "3dfe2653dd4039da56753d08c31f8bfe8c9a03d34f04bdc66fc7a381fe73c278",
+    "audits/yado-repository-reconciliation-v1-report.json": "7bf6148ccca7b5242a59f7b16fc0b59be19c3b9ea1377c373451f27e8805a6a0"
+  },
+  "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
+  "local_tested_commit": "6279da2c96011ab6f2b959168e53f63073885428",
+  "maintenance_admission": {
+    "active_kernel_identity": {
+      "canonical_head_digest": "3ab7f26ac0e0e50e3458ad221d4e6c4b7e5ce8eb503d671da6fe1b32eda98f06",
+      "controller_sha256": "3a0f3231d779521338dfea2b8280956d033dfb4cab96ce7a18840d1f06813269",
+      "execution_branch": "main",
+      "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
+      "runtime_manifest_digest": "beb1eab37f6c3e21048f17dc4ec485c3a06e7c2114c04a5ab2812b5fd7eb457b"
+    },
+    "candidate_sha256": "541c1d9dc5a5ce5c0a3de59ffb0a09c10c6778899251f020494f2d523411a20f",
+    "checks": {
+      "automatic_main_mutation": false,
+      "candidate_binding_matches_v4_receipt": true,
+      "candidate_binds_latest_experience": true,
+      "candidate_differs_from_parent": true,
+      "candidate_ranking_matches_v4_receipt": true,
+      "candidate_sha_matches_v4_receipt": true,
+      "canonical_mutation": false,
+      "no_eval_exec_subprocess": true,
+      "probe_mutated_runtime": false,
+      "runtime_state_recognized": true,
+      "target_matches_candidate_when_shadow_applied": true
+    },
+    "latest_experience_digest": "b582f865cd9d5638a5c8c0baa7ed5201782eb5d9642d8748bf9390acab8206f0",
+    "maintenance_verification_error": null,
+    "next_required_capability": "NEXT_GENERATION_FROM_VERIFIED_MAINTENANCE_RUNTIME",
+    "parent_runtime_sha256": "38b7e76da64e3828a866ffe044ab55c3f4d70a77e28ee2fe3f54e7e61e8b9c6b",
+    "repository_view": "COMMITTED_HEAD",
+    "runtime_state": "V4_SUPERSEDED_BY_VERIFIED_MAINTENANCE",
+    "schema": "yado.runtime_self_rewrite_admission.v4.probe.v1",
+    "status": "PASS_SHADOW_RUNTIME_SELF_REWRITE_ADMISSION_V4_PROBE",
+    "target_sha256": "3a0f3231d779521338dfea2b8280956d033dfb4cab96ce7a18840d1f06813269",
+    "tested_commit": "6279da2c96011ab6f2b959168e53f63073885428"
+  },
+  "native_core_audit": {
+    "branch_count": 14,
+    "checks": {
+      "all_other_branches_experience_only": true,
+      "branch_inventory_complete": true,
+      "causal_external_learning_binding_active": true,
+      "context_adapter_binding_coherent": true,
+      "core_id": true,
+      "developmental_frontier_coherent": true,
+      "experience_registry_bound": true,
+      "g2_architecture_canonical": true,
+      "g3_blocked": true,
+      "generation_is_g2": true,
+      "ledger_head_digest_matches": true,
+      "ledger_head_matches_generation": true,
+      "legacy_auto_execution_forbidden": true,
+      "one_active_experience_lineage": true,
+      "required_active_families_present": true,
+      "single_execution_lineage": true
+    },
+    "core_id": "UNIFIED_YADO_CORE_V1",
+    "current_frontier": "KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
+    "frontier_source": "architecture/evolution-ledger.json:open_deficits",
+    "generation": "G2_CANDIDATE_TRCG_V1",
+    "head_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
+    "legacy_experience_count": 13,
+    "manifest_frontier_snapshot": "KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
+    "open_deficits": [
+      "KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1"
+    ],
+    "pass": true
+  },
+  "published_source_commit": "bda180a3399536efe4a17c9732d3df5a592080cd",
+  "schema": "yado.unified_kernel_repair.v1.validation",
+  "scope": {
+    "deployment_performed": false,
+    "formal_generation_changed": false,
+    "historical_v4_evidence_preserved": true,
+    "live_network_revalidation": false,
+    "remote_main_merge_verified_in_this_report": false
+  },
+  "source_unchanged": true,
+  "status": "PASS",
+  "tests_run": 526,
+  "verified_git_trees": {
+    "6279da2c96011ab6f2b959168e53f63073885428": "418e69ae8f9fb43202ab497d9cef7e11cd3a6f40",
+    "bda180a3399536efe4a17c9732d3df5a592080cd": "418e69ae8f9fb43202ab497d9cef7e11cd3a6f40"
+  }
+}
