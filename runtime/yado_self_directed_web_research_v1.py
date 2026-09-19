@@ -293,7 +293,10 @@ class SelfDirectedWebResearchV1:
                 break
 
         prior_hosts = self._prior_hosts(root)
+        # Prefer new hosts for diversity, but retain known public sources as
+        # revalidation candidates. History must not permanently ban a domain.
         sources = []
+        revisits = []
         source_errors = []
         current_hosts = set()
         for url in deduped:
@@ -301,7 +304,7 @@ class SelfDirectedWebResearchV1:
                 page = fetch(url)
                 receipt = deepcopy(page.get("receipt") or {})
                 host = str(receipt.get("final_host") or (urlsplit(str(receipt.get("final_url") or url)).hostname or "")).lower()
-                if not host or host in prior_hosts or host in current_hosts:
+                if not host or host in current_hosts:
                     continue
                 text = _plain_text(str(page.get("content") or ""))
                 if len(text) < 80:
@@ -310,7 +313,7 @@ class SelfDirectedWebResearchV1:
                 words = set(_tokens(text))
                 covered = [k for k in keywords if k in words]
                 excerpts = _best_excerpts(text, keywords)
-                sources.append({
+                source = {
                     "url": receipt.get("final_url", url),
                     "host": host,
                     "sha256": receipt.get("sha256"),
@@ -321,12 +324,24 @@ class SelfDirectedWebResearchV1:
                     "credentials_used": receipt.get("credentials_used") is True,
                     "external_write": receipt.get("external_write") is True,
                     "private_network_access": receipt.get("private_network_access") is True,
-                })
+                    "previously_observed_host": host in prior_hosts,
+                }
+                if host in prior_hosts:
+                    revisits.append(source)
+                    continue
+                sources.append(source)
                 current_hosts.add(host)
                 if len(sources) >= max_sources:
                     break
             except Exception as exc:
                 source_errors.append({"url": url, "error_type": type(exc).__name__, "reason": str(exc)[:240]})
+
+        for source in revisits:
+            if len(sources) >= max_sources:
+                break
+            if source["host"] not in current_hosts:
+                sources.append(source)
+                current_hosts.add(source["host"])
 
         counts = {key: sum(key in set(src["covered_keywords"]) for src in sources) for key in keywords}
         covered = [key for key in keywords if counts.get(key, 0) >= 1]
@@ -370,6 +385,8 @@ class SelfDirectedWebResearchV1:
             "coverage_ratio": round(coverage_ratio, 6),
             "corroboration_ratio": round(corroboration_ratio, 6),
             "current_independent_source_count": len(current_hosts),
+            "new_independent_host_count": len(current_hosts - prior_hosts),
+            "revisited_hosts": sorted(current_hosts & prior_hosts),
             "prior_independent_hosts": sorted(prior_hosts),
             "combined_independent_hosts": sorted(combined_hosts),
             "closure_source_target": closure_source_target,

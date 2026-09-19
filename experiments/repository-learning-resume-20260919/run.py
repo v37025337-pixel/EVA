@@ -7,6 +7,7 @@ its inherited grammar. Reading documents does not prove general understanding.
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 import hashlib
 import json
 import os
@@ -54,10 +55,30 @@ def restore(checkpoint, out, expected_run):
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(checkpoint / "source-overlay" / relative, destination)
     shutil.copytree(checkpoint / "birth", out / "birth")
-    with sqlite3.connect((checkpoint / "kernel.sqlite").resolve().as_uri() + "?mode=ro", uri=True) as source:
-        with sqlite3.connect(out / "kernel.sqlite") as target:
+    with closing(sqlite3.connect((checkpoint / "kernel.sqlite").resolve().as_uri() + "?mode=ro", uri=True)) as source:
+        with closing(sqlite3.connect(out / "kernel.sqlite")) as target:
             source.backup(target)
     return receipt
+
+
+def upgrade_research_sources(out):
+    """Admit only the explicitly documented two-file research repair."""
+    parent_path = out / "birth/manifest.json"
+    parent = json.loads(parent_path.read_text())
+    drift = {name: {"previous_sha256": digest, "current_sha256": sha(ROOT / name)}
+             for name, digest in parent["inherited_files"].items() if sha(ROOT / name) != digest}
+    if not drift:
+        return None
+    allowed = json.loads((Path(__file__).parent / "research-source-update.json").read_text())
+    if drift != allowed:
+        raise ValueError("UNDECLARED_RESEARCH_IMPLEMENTATION_CHANGE")
+    from successor.continuity import prepare_upgrade
+    (out / "birth").rename(out / "predecessor-birth")
+    upgrade = prepare_upgrade(out / "predecessor-birth/manifest.json", out / "kernel.sqlite",
+                              out / "birth", source_updates=allowed)
+    shutil.copy2(out / "birth/kernel.sqlite", out / "kernel.sqlite")
+    save(out, "implementation-upgrade", upgrade)
+    return upgrade
 
 
 def external_learning(out, prior_web_memory=None):
@@ -135,6 +156,7 @@ def main(args):
     out.mkdir(parents=True, exist_ok=False)
     save(out, "summary", {"status": "WITHHOLD_INCOMPLETE"})
     predecessor = restore(args.checkpoint, out, args.source_run)
+    upgrade = upgrade_research_sources(out)
     # Imports happen after restoring the exact sources pinned by the predecessor.
     from successor.kernel import SuccessorKernel
     from successor.endogenous_run import propose_endogenous_goal, run_endogenous_cycles
@@ -144,10 +166,15 @@ def main(args):
     manifest, state = out / "birth/manifest.json", out / "kernel.sqlite"
     kernel = SuccessorKernel(manifest, state)
     try:
-        before = kernel.verify_state()
-        assert before == predecessor["state_after"]
+        verified = kernel.verify_state()
+        before = predecessor["state_after"]
+        assert verified["tick"] == before["tick"] + int(upgrade is not None)
+        if upgrade is None:
+            assert verified == before
         assert kernel.identity == predecessor["identity_digest"]
-        prefix = [tuple(row) for row in kernel.db.execute("SELECT * FROM events ORDER BY tick")]
+        prefix = [tuple(row) for row in kernel.db.execute(
+            "SELECT * FROM events WHERE tick<=? ORDER BY tick", (before["tick"],))]
+        assert prefix[-1][3] == before["event_hash"]
         identity = kernel.identity
     finally:
         kernel.close()
@@ -221,6 +248,7 @@ def main(args):
         "status": "PASS_REPOSITORY_LEARNING_AND_STATEFUL_CONTINUATION" if not errors else "WITHHOLD_PARTIAL_CAMPAIGN",
         "tested_commit": os.environ.get("GITHUB_SHA"), "predecessor_run_id": args.source_run,
         "identity_digest": identity, "cross_workflow_state_restored": True,
+        "research_implementation_upgraded": upgrade is not None,
         "prior_events_preserved_exactly": True, "new_cycles_verified": continuation["cycles_verified"],
         "host_goals_in_continuation": continuation["host_goal_count"],
         "ghidra_research_generations": results.get("ghidra", {}).get("generation_count", 0),

@@ -1,10 +1,23 @@
 # Live repository learning with retained state
 
 The first campaign continued the verified native checkpoint from main workflow
-35451019074. The next run resumes campaign 35451765200, including its retained
-web-research memory. It restores the exact source overlay, manifest, archive and SQLite
+35451019074. The repaired run resumes campaign 35452077271, including its retained
+web-research memory and its honest partial result. It restores the exact source overlay, manifest, archive and SQLite
 journal, checks their hashes, and verifies the operational identity and old event
 prefix before and after a new run. It does not create a fresh native identity.
+
+The restored run exposed a real research defect: every previously visited host
+was permanently excluded. This exhausted the official Ghidra sources on restart.
+The repair prefers new hosts, then freshly revalidates known hosts if necessary.
+Each current host counts once, and `new_independent_host_count` and
+`revisited_hosts` distinguish fresh diversity from revalidation. Repeated reading
+is not labelled novel knowledge. Three regression cases cover restored research,
+new-host priority and the inability of one host to fake independent evidence.
+
+`research-source-update.json` explicitly pins the old and new hashes of the
+controller and its tests. The existing continuity mechanism admits precisely
+that implementation change, retains the old journal and operational identity,
+and appends an implementation-upgrade event. Unlisted source drift still fails.
 
 The existing YADO mechanisms perform three public-network studies: Ghidra and
 its graph-analysis documentation; the five connected developer repositories
