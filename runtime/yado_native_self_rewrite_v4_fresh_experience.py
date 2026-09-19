@@ -18,7 +18,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from yado_native_experience_to_runtime_self_rewrite_v3 import synthesize_candidate
+from yado_native_experience_to_runtime_self_rewrite_v3 import digest, synthesize_candidate
 
 ROOT = Path(__file__).resolve().parent.parent
 EXPERIENCE = Path("experience/autonomous/yado-autonomous-learning-latest.json")
@@ -236,20 +236,19 @@ def build(root: Path = ROOT) -> dict[str, Any]:
 
 
 def build_committed(root: Path = ROOT) -> dict[str, Any]:
-    """Build V4 against committed Git HEAD, insulated from transient shadow mutations."""
+    """Reproduce the sealed V4 transition using its original reachable experience."""
     root = Path(root).resolve()
     if not (root / ".git").exists():
-        result = build(root)
-        result["repository_view"] = "WORKTREE_FALLBACK_NO_GIT"
-        return result
+        raise RuntimeError("HISTORICAL_GIT_EVIDENCE_REQUIRED")
 
-    required = (EXPERIENCE, V3_ADMISSION, V3_CANDIDATE)
+    commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    required = (EXPERIENCE, V3_ADMISSION, V3_CANDIDATE, OUT, CANDIDATE)
     with tempfile.TemporaryDirectory(prefix="yado-v4-committed-head-") as directory:
         shadow = Path(directory)
         committed: dict[Path, bytes] = {}
         for relative in required:
             cp = subprocess.run(
-                ["git", "show", "HEAD:" + relative.as_posix()],
+                ["git", "show", commit + ":" + relative.as_posix()],
                 cwd=root,
                 capture_output=True,
                 timeout=30,
@@ -262,6 +261,30 @@ def build_committed(root: Path = ROOT) -> dict[str, Any]:
                     + cp.stderr.decode("utf-8", "replace")[-500:]
                 )
             committed[relative] = cp.stdout
+
+        sealed = json.loads(committed[OUT])
+        if (sealed.get("status") != "PASS_SHADOW_NATIVE_SELF_REWRITE_V4_FRESH_EXPERIENCE"
+                or hashlib.sha256(committed[CANDIDATE]).hexdigest() != sealed.get("candidate_sha256")):
+            raise RuntimeError("HISTORICAL_V4_CANDIDATE_RECEIPT_MISMATCH")
+        expected_digest = sealed["latest_experience_digest"]
+        historical_commit = commit
+        if json.loads(committed[EXPERIENCE]).get("experience_digest") != expected_digest:
+            history = subprocess.check_output(
+                ["git", "log", "--format=%H", commit, "--", EXPERIENCE.as_posix()],
+                cwd=root, text=True, timeout=30,
+            ).splitlines()
+            for revision in history:
+                cp = subprocess.run(["git", "show", revision + ":" + EXPERIENCE.as_posix()],
+                                    cwd=root, capture_output=True, timeout=30)
+                if cp.returncode == 0 and json.loads(cp.stdout).get("experience_digest") == expected_digest:
+                    committed[EXPERIENCE] = cp.stdout
+                    historical_commit = revision
+                    break
+            else:
+                raise RuntimeError("HISTORICAL_V4_EXPERIENCE_NOT_REACHABLE")
+        historical_experience = json.loads(committed[EXPERIENCE])
+        if digest({k: v for k, v in historical_experience.items() if k != "experience_digest"}) != expected_digest:
+            raise RuntimeError("HISTORICAL_V4_EXPERIENCE_CONTENT_MISMATCH")
 
         for relative in (EXPERIENCE, V3_ADMISSION):
             out = shadow / relative
@@ -279,15 +302,26 @@ def build_committed(root: Path = ROOT) -> dict[str, Any]:
         target.write_bytes(v3_parent)
 
         result = build(shadow)
+        for key in ("candidate_sha256", "parent_runtime_sha256", "latest_experience_digest", "candidate_learned_binding"):
+            if result[key] != sealed[key]:
+                raise RuntimeError("HISTORICAL_V4_REPRODUCTION_MISMATCH:" + key)
         result["repository_view"] = "COMMITTED_HEAD"
         result["historical_parent_reconstructed_from_v3_candidate"] = True
+        result["historical_experience_commit"] = historical_commit
+        result["historical_experience_content_verified"] = True
         return result
 
 
 def main() -> int:
-    result = build()
-    print(json.dumps(result, sort_keys=True))
-    return 0 if result["status"].startswith("PASS_") else 2
+    import sys
+    # Historical fixtures are explicit; ordinary continuation must use the
+    # current canonical parent and must never replace immutable V4 evidence.
+    if sys.argv[1:] == ['--historical-v4']:
+        result = build_committed()
+        print(json.dumps(result, sort_keys=True))
+        return 0 if result["status"].startswith("PASS_") else 2
+    from yado_native_self_rewrite_continuation import main as continue_main
+    return continue_main()
 
 
 if __name__ == "__main__":

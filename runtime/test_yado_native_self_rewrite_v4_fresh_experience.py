@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import unittest
 
 from yado_native_self_rewrite_v4_fresh_experience import ROOT, TARGET, build, build_committed
@@ -11,6 +12,13 @@ def sha(path):
 
 
 class NativeSelfRewriteV4FreshExperienceTests(unittest.TestCase):
+    def test_historical_reproduction_matches_the_sealed_v4_bytes(self):
+        receipt = json.loads((ROOT / 'candidates/autonomous/yado-native-self-rewrite-v4-fresh-experience.json').read_text())
+        result = build_committed()
+        self.assertEqual(result['latest_experience_digest'], receipt['latest_experience_digest'])
+        self.assertEqual(result['candidate_sha256'], receipt['candidate_sha256'])
+        self.assertEqual(result['candidate_sha256'], sha(ROOT / 'candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py'))
+
     def test_fresh_experience_produces_new_generation_candidate(self):
         result = build_committed()
         self.assertEqual(result["status"], "PASS_SHADOW_NATIVE_SELF_REWRITE_V4_FRESH_EXPERIENCE")
