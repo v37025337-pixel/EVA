@@ -22,7 +22,11 @@ from successor.cognitive import CognitiveLoop, replay
 from successor.generation import retained_memory
 from successor.continuity import prepare_upgrade
 from successor.lineage import ConsecutiveLineage, REQUEST
+from successor.hivemind import _key
 from yado_unified_core_v1 import UnifiedYADOCoreV1
+
+WORKSPACE_ID = 'local-authorized-rewrite-continuation'
+ISSUE_ID = 'YADO-20260919.2'
 
 def save(path, data):
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
@@ -32,6 +36,7 @@ def rows(path):
         return list(db.execute('SELECT * FROM events ORDER BY tick'))
 
 def main():
+    _key(WORKSPACE_ID, ISSUE_ID)
     receipt=json.loads((BASE/'continuation-receipt.json').read_text())
     for name,digest in receipt['checkpoint_files_sha256'].items():
         p=(BASE/name).resolve()
@@ -85,7 +90,7 @@ def main():
             assert autonomy['status']=='COMPLETE',autonomy['status']
             print('AUTONOMY_COMPLETED',flush=True)
             lineage=ConsecutiveLineage(kernel)
-            lid=lineage.start('local-authorized-rewrite-continuation','YADO-CURRENT-PARENT-20260919',REQUEST)
+            lid=lineage.start(WORKSPACE_ID,ISSUE_ID,REQUEST)
             result=lineage.run(lid,evidence/'lineage-gates',progress=lambda r:print(json.dumps({'phase':'LINEAGE',**r}),flush=True))
             (evidence/'lineage.typed.json').write_text(encode(result)+'\n')
             memory=retained_memory(kernel)
