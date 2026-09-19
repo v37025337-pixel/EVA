@@ -2,7 +2,7 @@
   "schema": "yado.unified_architecture.v2",
   "architecture_id": "YADO_UNIFIED_ARCHITECTURE_V2",
   "status": "CANDIDATE_FOR_MAIN_ADMISSION",
-  "base_main_sha": "effafcefa62c2c0f817f2015fe6088470544df04",
+  "base_main_sha": "ea122cb6413c763e026aa2a0e5b99d8f6370b257",
   "formal_architecture": {
     "generation": "G2_CANDIDATE_TRCG_V1",
     "head": "canonical/yado-main-head-g2.json",
@@ -16,7 +16,11 @@
     "candidate": "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py",
     "promotion_receipt": "candidates/autonomous/yado-runtime-self-rewrite-promotion-v4.json",
     "candidate_sha256": "541c1d9dc5a5ce5c0a3de59ffb0a09c10c6778899251f020494f2d523411a20f",
-    "promotion_workflow_run_id": 35427934490
+    "promotion_workflow_run_id": 35427934490,
+    "promotion_status": "PASS_POST_MERGE_PHYSICAL_RUNTIME_PROMOTION_V4",
+    "post_merge_validation_run_id": 35428406686,
+    "post_merge_regression_tests": 467,
+    "post_merge_total_cycles_verified": 25
   },
   "planes": [
     {
@@ -71,7 +75,11 @@
     "main": "ONLY_ACTIVE_CODE_INTEGRATION_LINE",
     "non_main": "HISTORY_OR_WORK_IN_PROGRESS",
     "admission_rule": "NO_NON_MAIN_BRANCH_MAY_RETAIN_UNABSORBED_COMMITS_WHEN RECONCILIATION PASSES",
-    "experience_registry_scope": "CURATED_LEGACY_EXPERIENCE_NOT_REMOTE_REF_INVENTORY"
+    "experience_registry_scope": "CURATED_LEGACY_EXPERIENCE_NOT_REMOTE_REF_INVENTORY",
+    "managed_experience_feeds": {
+      "policy": "architecture/yado-active-managed-branch-policy-v1.json",
+      "rule": "DECLARED_FEEDS_MAY_DIVERGE_ONLY_INSIDE_ALLOWED_EXPERIENCE_PATHS; THEIR OUTPUT IS INCOMING_EVIDENCE, NOT AUTOMATIC_CANONICAL_STATE"
+    }
   },
   "development_continuity": [
     "MEASURE_DEFICIT",
@@ -83,5 +91,6 @@
     "ADMIT_OR_ROLLBACK",
     "DERIVE_NEXT_DEFICIT_FROM_ADMITTED_STATE"
   ],
-  "claim_boundary": "THIS RECONCILES SOFTWARE ARCHITECTURE, VERSIONING, LINEAGE AND DEVELOPMENT CONTINUITY. IT DOES NOT ESTABLISH G3 OR CONSCIOUSNESS."
+  "claim_boundary": "THIS RECONCILES SOFTWARE ARCHITECTURE, VERSIONING, LINEAGE AND DEVELOPMENT CONTINUITY. IT DOES NOT ESTABLISH G3 OR CONSCIOUSNESS.",
+  "development_continuity_input_rule": "NEW_MANAGED_FEED_EVIDENCE_ENTERS_AS_INCOMING_EXPERIENCE_AND MUST PASS THE FULL DEVELOPMENT_CONTINUITY CHAIN BEFORE CANONICAL ADMISSION"
 }
