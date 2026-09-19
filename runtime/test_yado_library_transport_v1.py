@@ -36,7 +36,7 @@ class ResponseSocket:
 class LibraryTransportTests(unittest.TestCase):
     IP = '93.184.216.34'
 
-    def request(self, *, wire=None, url='https://pypi.org/pypi/networkx/json', limit=1000, proxy=False):
+    def request(self, *, wire=None, url='https://pypi.org/pypi/networkx/json', limit=1000, proxy=False, catalog=False):
         wire = wire or ResponseSocket()
         connections, lookups = [], []
 
@@ -56,7 +56,11 @@ class LibraryTransportTests(unittest.TestCase):
                 patch('socket.getaddrinfo', side_effect=resolve), \
                 patch('socket.create_connection', side_effect=connect), \
                 patch.object(ssl.SSLContext, 'wrap_socket', return_value=wire) as tls:
-            result = library.guarded_fetch(url, accept='application/octet-stream', max_bytes=limit)
+            if catalog:
+                from yado_autonomous_open_catalog_discovery_v6 import discover_from_open_catalog
+                result = discover_from_open_catalog()
+            else:
+                result = library.guarded_fetch(url, accept='application/octet-stream', max_bytes=limit)
         return result, connections, lookups, tls
 
     def test_redirect_is_rejected_before_any_second_request(self):
@@ -111,6 +115,24 @@ class LibraryTransportTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'BYTE_BUDGET'):
                     library.guarded_fetch('https://pypi.org/', accept='application/json', max_bytes=limit)
                 connect.assert_not_called()
+
+    def test_v6_catalog_budget_reaches_the_pinned_transport_without_widening_package_budget(self):
+        (names, evidence), connections, *_ = self.request(
+            wire=ResponseSocket(body=b'{"projects":[{"name":"html"}]}'), catalog=True)
+        self.assertEqual(names, ['html'])
+        self.assertEqual(connections, [(self.IP, 443)])
+        self.assertEqual(evidence['source']['requested_url'], 'https://pypi.org/simple/')
+        self.assertFalse(evidence['source']['redirects_followed'])
+        with patch('socket.create_connection') as connect:
+            for url, accept, limit in (
+                ('https://pypi.org/simple/', 'application/vnd.pypi.simple.v1+json', 100_000_001),
+                ('https://pypi.org/simple/networkx/', 'application/vnd.pypi.simple.v1+json', 100_000_000),
+                ('https://pypi.org/simple/', 'application/octet-stream', 100_000_000),
+                ('https://files.pythonhosted.org/packages/test.whl', 'application/octet-stream', 100_000_000),
+            ):
+                with self.subTest(url=url, accept=accept, limit=limit), self.assertRaisesRegex(ValueError, 'BYTE_BUDGET'):
+                    library.guarded_fetch(url, accept=accept, max_bytes=limit)
+            connect.assert_not_called()
 
 
 if __name__ == '__main__':

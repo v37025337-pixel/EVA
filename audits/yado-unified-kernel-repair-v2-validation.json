@@ -4,7 +4,7 @@
   "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V2",
   "authorship": "ASSISTANT_IMPLEMENTED_USER_REQUESTED_REPAIR",
   "formal_generation_changed": false,
-  "canonical_head_digest": "23605095040aca2227a31004e9057fdb0a45480112d94e848178923df9510106",
+  "canonical_head_digest": "8fbb82444a733baa2f1db1c5ce7555f0b28223b65ca79279046f6c5a7a795f02",
   "local_completed_regression": {
     "status": "PASS",
     "tests_run": 590,
@@ -28,10 +28,16 @@
     }
   ],
   "required_before_main_merge": [
-    "COMPLETE_593_TEST_REGRESSION",
+    "COMPLETE_594_TEST_REGRESSION",
     "FRESH_PUBLIC_NETWORK_LEARNING",
     "SUCCESSOR_20_PLUS_5_RESTART_CYCLES",
     "FRESH_SECURITY_AUDIT"
   ],
-  "capability_gain_proven": false
+  "capability_gain_proven": false,
+  "ci_found_and_repaired": {
+    "defect": "V5 wheel byte cap rejected V6 bounded catalog request",
+    "fix": "Exact public catalog URL and media type retain the existing 100 MB catalog budget; package requests remain capped at 5 MB",
+    "targeted_transport_tests": 7,
+    "fail_first_observed": true
+  }
 }

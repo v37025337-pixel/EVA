@@ -14,7 +14,7 @@ RECEIPT = ROOT / "receipts" / "yado-autonomous-open-catalog-discovery-v6.json"
 SIMPLE_ROOT = "https://pypi.org/simple/"
 OBJECTIVE = "find and connect to a Python library for parsing HTML/XML/markup content"
 DISCOVERY_ANCHORS = ("html", "xml", "markup", "parser", "scrap")
-MAX_INDEX_BYTES = 100_000_000
+MAX_INDEX_BYTES = v5.MAX_CATALOG_BYTES
 MAX_DISCOVERED_CANDIDATES = 32
 
 

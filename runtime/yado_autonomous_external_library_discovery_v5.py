@@ -26,6 +26,7 @@ OBJECTIVE_TOKENS = ("html", "xml", "markup", "parser", "parse", "scrap")
 ALLOWED_HOSTS = {"pypi.org", "files.pythonhosted.org"}
 MAX_JSON_BYTES = 4_000_000
 MAX_WHEEL_BYTES = 5_000_000
+MAX_CATALOG_BYTES = 100_000_000
 MAX_WHEEL_UNCOMPRESSED = 20_000_000
 MAX_WHEEL_MEMBERS = 2000
 MAX_METADATA_BYTES = 1_000_000
@@ -45,7 +46,9 @@ def normalize_name(value: str) -> str:
 
 
 def guarded_fetch(url: str, *, accept: str, max_bytes: int) -> tuple[bytes, dict[str, Any]]:
-    if type(max_bytes) is not int or not 1 <= max_bytes <= MAX_WHEEL_BYTES:
+    catalog_request = url == 'https://pypi.org/simple/' and accept == 'application/vnd.pypi.simple.v1+json'
+    byte_limit = MAX_CATALOG_BYTES if catalog_request else MAX_WHEEL_BYTES
+    if type(max_bytes) is not int or not 1 <= max_bytes <= byte_limit:
         raise ValueError("LIBRARY_BYTE_BUDGET")
     parsed = urllib.parse.urlsplit(url)
     if parsed.scheme != "https" or parsed.hostname not in ALLOWED_HOSTS:
