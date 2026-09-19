@@ -1,0 +1,98 @@
+{
+  "development": {
+    "awaiting_goal": false,
+    "budget": 10,
+    "child_goal_id": null,
+    "id": 16,
+    "max_goals": 2,
+    "outcomes": [],
+    "reason": "NO_ELIGIBLE_EXPERIENCE_WITHIN_BUDGET",
+    "remaining": 10,
+    "retry_policy": "untried_strategies_v2",
+    "selection_tick": null,
+    "selections": [],
+    "status": "COMPLETE"
+  },
+  "failed_goal": {
+    "attempted": [
+      "native_compositional_v1"
+    ],
+    "budget": 5,
+    "id": 2,
+    "mode": "full",
+    "phase": "DONE",
+    "remaining": 1,
+    "result": null,
+    "status": "WITHHOLD"
+  },
+  "identity": "265477c26d3f155d465c84414646ceab0dbccc663f264faca280fbca394723f2",
+  "learned_goal": {
+    "attempted": [
+      "native_compositional_v1"
+    ],
+    "budget": 5,
+    "id": 9,
+    "mode": "full",
+    "phase": "DONE",
+    "remaining": 1,
+    "result": {
+      "automatic_canonical_promotion": false,
+      "compiled": true,
+      "grammar": "YADO_TYPED_COMPOSITION_V1",
+      "input_signature": [
+        [
+          "x",
+          "int"
+        ],
+        [
+          "y",
+          "int"
+        ]
+      ],
+      "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+      "parent_source_sha256": [],
+      "predictions": [
+        48
+      ],
+      "program": {
+        "args": [
+          {
+            "key": "x",
+            "op": "input"
+          },
+          {
+            "key": "y",
+            "op": "input"
+          }
+        ],
+        "name": "add",
+        "op": "call"
+      },
+      "schema": "yado.compositional_source.v1",
+      "search_attempts": 471,
+      "search_states": 160,
+      "source": "def solve(component_id, program_id, inputs):\n    return _primitive('add', _input(inputs, 'x'), _input(inputs, 'y'))\n",
+      "source_context": "native_source:81d7e0873b95111058413d0a7e079165e07b18851bd28e9b3d81df29b5a1c2cd",
+      "source_sha256": "168c7a99ee0f8d214143ad1b6aaadf5ba07343683bb934d50a7926448db66096",
+      "status": "CANDIDATE",
+      "synthesis_inputs": "TRAINING_ONLY",
+      "training_digest": "530b469a69b00526cbc6a38a78ca047bb55429226a1bff748658f0d03838454e",
+      "training_predictions": [
+        9,
+        2,
+        9
+      ],
+      "validation_predictions": [
+        5,
+        -17
+      ]
+    },
+    "status": "VALIDATED_ON_HOLDOUT"
+  },
+  "state_verification": {
+    "event_hash": "0ab99ea5a01fc330d524c490c096219f68ac188e6314a25b4a9e24bea501f83c",
+    "status": "PASS",
+    "tick": 17
+  },
+  "status": "REPRODUCED_MEMORY_RETRY_DISCONNECT"
+}

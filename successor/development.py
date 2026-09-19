@@ -8,12 +8,51 @@ Only numeric and native-source work can be scheduled here.
 from __future__ import annotations
 
 import copy
+from collections import Counter
 
 from .cognitive import (CognitiveLoop, available_strategies, consolidated_stats,
-                        goal_context, replay as cognitive_replay)
+                        goal_context, learned_sources, replay as cognitive_replay)
 from .kernel import decode, fingerprint
 
-RETRY_POLICY = 'untried_strategies_v2'
+RETRY_POLICY = 'verified_memory_context_v3'
+RETRY_POLICIES = ('untried_strategies_v2', RETRY_POLICY)
+MEMORY_STRATEGIES = ('reuse_verified_source', 'native_compositional_v1')
+
+
+def memory_context(strategy, records, goal):
+    """Identify distinct usable programs, not timestamps or repeated admissions.
+
+    Reordering or re-admitting the same code does not justify another retry.
+    Holdout labels and failed candidates never enter this context.
+    """
+    if strategy == 'reuse_verified_source':
+        sources = [r['result'] for r in learned_sources(records, goal)]
+    elif strategy == 'native_compositional_v1':
+        from .compositional_binding import memories
+        from .compositional_source import _kind
+        kinds = Counter(_kind(v) for v in goal['spec']['training'][0]['input'].values())
+        sources = [source for source in memories(records)
+                   if not (Counter(kind for _, kind in source['input_signature']) - kinds)]
+    else:
+        return None
+    return fingerprint(sorted({source['source_sha256'] for source in sources}))
+
+
+def attempted_memory_contexts(cognitive, goals):
+    """Reconstruct what memory each executed strategy could see at selection."""
+    past, decisions, attempted = [], {}, {}
+    for record in cognitive:
+        if record['kind'] == 'COG_DECIDE':
+            strategy = record['choice']['strategy']
+            goal = goals[record['goal_id']]
+            if goal['mode'] == 'full' and strategy in MEMORY_STRATEGIES:
+                decisions[record['tick']] = (
+                    (fingerprint(goal['spec']), strategy), memory_context(strategy, past, goal))
+        elif record['kind'] == 'COG_EXECUTE' and record['decision_tick'] in decisions:
+            key, context = decisions[record['decision_tick']]
+            attempted.setdefault(key, set()).add(context)
+        past.append(record)
+    return attempted
 
 
 def limits(budget, max_goals):
@@ -24,7 +63,9 @@ def limits(budget, max_goals):
 
 def candidates(cognitive, sessions, session):
     goals = cognitive_replay(cognitive)
-    current_policy = session.get('retry_policy') == RETRY_POLICY
+    current_policy = session.get('retry_policy') in RETRY_POLICIES
+    memory_policy = session.get('retry_policy') == RETRY_POLICY
+    memory_attempts = attempted_memory_contexts(cognitive, goals) if memory_policy else {}
     used = {choice['spec_digest'] for s in sessions.values() for choice in s['selections']}
     attempted = {}
     if current_policy:
@@ -44,7 +85,10 @@ def candidates(cognitive, sessions, session):
             continue
         allowed = available_strategies(g, cognitive)
         tried = attempted.get(spec_digest, set()) if current_policy else g['attempted']
-        untried = [(s, c) for s, c in allowed if s not in tried]
+        contexts = {s: memory_context(s, cognitive, g) for s, _ in allowed
+                    if memory_policy and s in MEMORY_STRATEGIES}
+        untried = [(s, c) for s, c in allowed if s not in tried or
+                   s in contexts and contexts[s] not in memory_attempts.get((spec_digest, s), set())]
         budget = sum(c for _, c in allowed)
         failures = [r['tick'] for r in cognitive if r['kind'] == 'COG_VERIFY'
                     and r['goal_id'] == g['id'] and not r['passed']]
@@ -58,6 +102,9 @@ def candidates(cognitive, sessions, session):
             probability = (evidence.get('successes', 0) + 1) / (observations + 2)
             estimates.append({'strategy': strategy, 'cost': cost, 'observations': observations,
                               'estimated_success': probability})
+            if strategy in contexts:
+                estimates[-1].update(memory_context_digest=contexts[strategy],
+                                     retry_reason='NEW_VERIFIED_MEMORY' if strategy in tried else 'UNTRIED_STRATEGY')
         finish = next(r for r in reversed(cognitive)
                       if r['kind'] == 'COG_FINISH' and r['goal_id'] == g['id'])
         proposals.append({'parent_goal_id': g['id'], 'parent_finish_tick': finish['tick'],
@@ -118,7 +165,7 @@ def replay(records):
             fields = {'kind', 'budget', 'max_goals'}
             if 'retry_policy' in r:
                 fields.add('retry_policy')
-            if (set(r) != fields or 'retry_policy' in r and r['retry_policy'] != RETRY_POLICY
+            if (set(r) != fields or 'retry_policy' in r and r['retry_policy'] not in RETRY_POLICIES
                     or any(s['status'] == 'ACTIVE' for s in sessions.values())
                     or any(g['status'] == 'ACTIVE' for g in cognitive_replay(cognitive).values())):
                 raise ValueError('DEVELOPMENT_START_CONTRACT')
