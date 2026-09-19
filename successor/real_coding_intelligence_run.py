@@ -105,16 +105,36 @@ def _source_for(args: list[str], expr: ast.AST) -> str:
     return f"def solve({', '.join(args)}):\n    return {ast.unparse(expr)}\n"
 
 
-def _compile_oracle(source: str):
+def _bounded_oracle(source: str, expression_check, max_arity: int, safe_calls: dict, prefix: str):
+    from yado_isolated_program_executor_v1 import MAX_SOURCE_BYTES
+    if type(source) is not str or len(source.encode('utf-8')) > MAX_SOURCE_BYTES:
+        raise ValueError(prefix + '_SOURCE_BUDGET')
     tree = ast.parse(source)
-    for node in ast.walk(tree):
-        if isinstance(node, (ast.Import, ast.ImportFrom, ast.Attribute, ast.Call, ast.Subscript,
-                             ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp,
-                             ast.Lambda, ast.Assign, ast.AugAssign, ast.While, ast.For)):
-            raise ValueError("ORACLE_SOURCE_ESCAPED_SAFE_EXPRESSION_SUBSET")
-    ns: dict[str, Any] = {"__builtins__": {}}
-    exec(compile(tree, "<real-source-oracle>", "exec"), ns)
-    return ns["solve"]
+    if len(tree.body) != 1 or not isinstance(tree.body[0], ast.FunctionDef):
+        raise ValueError(prefix + '_FUNCTION_COUNT')
+    fn = tree.body[0]
+    if (fn.name != 'solve' or fn.decorator_list or fn.returns or getattr(fn, 'type_params', [])
+            or fn.args.defaults or fn.args.kw_defaults or fn.args.vararg or fn.args.kwarg
+            or fn.args.kwonlyargs or fn.args.posonlyargs
+            or any(arg.annotation for arg in fn.args.args)):
+        raise ValueError(prefix + '_FUNCTION_CONTRACT')
+    args = {arg.arg for arg in fn.args.args}
+    if not 1 <= len(args) <= max_arity or len(args) != len(fn.args.args):
+        raise ValueError(prefix + '_ARGUMENT_CONTRACT')
+    body = _docless_body(fn)
+    if len(body) != 1 or not isinstance(body[0], ast.Return) or body[0].value is None:
+        raise ValueError(prefix + '_BODY')
+    if not expression_check(body[0].value, args):
+        raise ValueError(prefix + '_ESCAPED_SAFE_EXPRESSION_SUBSET')
+
+    def oracle(*arguments):
+        from yado_isolated_program_executor_v1 import execute
+        return execute(source, 'solve', arguments, safe_calls)
+    return oracle
+
+
+def _compile_oracle(source: str):
+    return _bounded_oracle(source, _safe_expr, 2, {}, 'ORACLE')
 
 
 def _sample_inputs(argc: int) -> list[tuple[int, ...]]:

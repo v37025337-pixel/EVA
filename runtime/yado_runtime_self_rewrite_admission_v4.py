@@ -85,9 +85,11 @@ def analyze(root: Path = ROOT) -> dict[str, Any]:
             promotion=load_json(root/PROMOTION)
             maintenance_identity=active_kernel_identity(root)
             if not (
-                maintenance_identity["implementation_id"]=="YADO_UNIFIED_KERNEL_REPAIR_V1"
+                (maintenance_identity["implementation_id"], lineage.get("generation")) in {
+                    ("YADO_UNIFIED_KERNEL_REPAIR_V1", "V4_MAINTENANCE_R1"),
+                    ("YADO_UNIFIED_KERNEL_REPAIR_V2", "V4_MAINTENANCE_R2"),
+                }
                 and maintenance_identity["controller_sha256"]==target_sha
-                and lineage.get("generation")=="V4_MAINTENANCE_R1"
                 and lineage.get("candidate_sha256")==candidate_sha==expected_candidate
                 and promotion.get("status")=="PASS_POST_MERGE_PHYSICAL_RUNTIME_PROMOTION_V4"
                 and promotion.get("candidate_sha256")==candidate_sha
@@ -187,7 +189,7 @@ def analyze_committed(root: Path = ROOT) -> dict[str, Any]:
     contract_bytes=committed(CONTRACT,optional=True)
     if contract_bytes is not None:
         contract=json.loads(contract_bytes)
-        if contract.get("runtime_lineage",{}).get("generation")=="V4_MAINTENANCE_R1":
+        if contract.get("runtime_lineage",{}).get("generation") in {"V4_MAINTENANCE_R1", "V4_MAINTENANCE_R2"}:
             required[CONTRACT]=contract_bytes
             for path in (CORE,Path("canonical/yado-main-head-g2.json"),Path("architecture/evolution-ledger.json"),PROMOTION):
                 required[path]=committed(path)

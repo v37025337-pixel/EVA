@@ -428,6 +428,22 @@ def _replay_uncached(records):
                     if (source_sha(result['source']) != result['source_sha256']
                             or result['source_context'] != goal_context(g['spec'])):
                         raise ValueError('COGNITIVE_NATIVE_SOURCE_INTEGRITY')
+                    strategy = g['decision']['choice']['strategy']
+                    if strategy in {'native_v2', 'native_v3', 'native_v4', 'native_evolved_v2'}:
+                        # Journal hashes and stored prediction labels cannot
+                        # attest executable provenance. Re-emit from the original
+                        # training partition before admitting source to memory.
+                        try:
+                            if strategy == 'native_evolved_v2':
+                                from .native_binding import synthesize
+                                generated = synthesize(g['spec']['training'])
+                            else:
+                                from yado_active_native_learning_v1 import synthesize_source
+                                generated = synthesize_source(g['spec']['training'], strategy)
+                        except Exception as error:
+                            raise ValueError('COGNITIVE_NATIVE_SOURCE_EMISSION_PROVENANCE') from error
+                        if result['source'] != generated.get('source'):
+                            raise ValueError('COGNITIVE_NATIVE_SOURCE_EMISSION_PROVENANCE')
                     if g['decision']['choice']['strategy'].startswith('native_materialized_'):
                         from .runtime_evolution import strategy_candidate
                         generated = strategy_candidate(past, g['decision']['choice']['strategy'], g['spec']['training'])
@@ -447,6 +463,15 @@ def _replay_uncached(records):
                         or type(r['passed']) is not bool
                         or r['workspace_digest'] != g['decision']['workspace_digest']):
                     raise ValueError('COGNITIVE_VERIFICATION_CAUSAL_LINK')
+                # A valid chain proves stored bytes, not the truth of a PASS.
+                # Recheck local oracles; replay external proof bindings offline.
+                try:
+                    expected = CognitiveLoop(None)._verify(g, recorded_verification=r)
+                    fields = ('passed', 'checks', 'scope', 'evidence')
+                    if fingerprint({k: r[k] for k in fields}) != fingerprint({k: expected[k] for k in fields}):
+                        raise ValueError('mismatched verification')
+                except (KeyError, TypeError, ValueError, OverflowError) as error:
+                    raise ValueError('COGNITIVE_VERIFICATION_RESULT_MISMATCH') from error
                 g.update(phase='REFLECT', verification=r)
             elif kind == 'COG_REFLECT':
                 choice = g['decision']['choice']
@@ -497,6 +522,33 @@ def empirical_model(records, goal):
     for r in recent[-RECENT_OBSERVATIONS:]:
         _update(stats, r)
     return stats, {'consolidation_tick': source, 'recent_reflection_ticks': [r['tick'] for r in recent[-RECENT_OBSERVATIONS:]]}
+
+
+def _stored_library_verification(candidate, record):
+    """Check persisted proof consistency; never repeat an external observation.
+
+    A frozen HTTP receipt cannot prove that PyPI is still unchanged. Replay binds
+    its filename/hash to the frozen bundle and preserves that historical scope.
+    Recorded network failures remain failures, without requiring a live network.
+    """
+    from yado_autonomous_external_library_discovery_v5 import sha_json
+    evidence = record['evidence']
+    if record['scope'] == 'LIBRARY_VALIDATION_ERROR':
+        if (set(evidence) != {'error_type', 'error'}
+                or not all(type(evidence[k]) is str for k in evidence)):
+            raise ValueError('LIBRARY_FAILURE_PROOF_CONTRACT')
+        return False, 0, 'LIBRARY_VALIDATION_ERROR', evidence
+    bundle, proof = candidate['bundle'], evidence['proof']
+    if (sha_json(bundle) != candidate['bundle_sha256']
+            or proof['filename'] != bundle['filename'] or proof['sha256'] != bundle['artifact_sha256']
+            or type(proof['matched']) is not bool or proof['selection_data_used'] is not False
+            or not isinstance(proof['source'], dict)):
+        raise ValueError('LIBRARY_FROZEN_PROOF_MISMATCH')
+    passed = proof['matched'] and bundle['artifact_sha256'] == candidate['artifact']['expected_sha256']
+    if (evidence['passed'] is not passed or type(evidence['checks']) is not int or evidence['checks'] != 1
+            or evidence['scope'] != 'SEPARATE_PYPI_SIMPLE_AFTER_BUNDLE_FREEZE'):
+        raise ValueError('LIBRARY_VERIFICATION_PROOF_MISMATCH')
+    return passed, 1, 'SEPARATE_PYPI_SIMPLE_AFTER_BUNDLE_FREEZE', evidence
 
 
 class CognitiveLoop:
@@ -655,7 +707,7 @@ class CognitiveLoop:
                 'workspace_digest': g['decision']['workspace_digest'], 'result': result,
                 'elapsed_ms': (time.perf_counter() - start) * 1000}
 
-    def _verify(self, g):
+    def _verify(self, g, *, recorded_verification=None):
         spec, result = g['spec'], g['execution']['result']
         passed, checks, scope = False, 0, 'NO_CANDIDATE'
         evidence = {}
@@ -670,17 +722,21 @@ class CognitiveLoop:
                         equivalent(a, row['expected']) for a, row in zip(predictions, spec[name]))
                 evidence = {'source_sha256': result['source_sha256']}
             elif spec['domain'] == 'library_discovery':
-                try:
-                    evidence = self.kernel.parent.verify_native_library(result)
-                    passed, checks, scope = evidence['passed'], evidence['checks'], evidence['scope']
-                except Exception as error:
-                    evidence = {'error_type': type(error).__name__, 'error': str(error)}
-                    scope = 'LIBRARY_VALIDATION_ERROR'
+                if recorded_verification is not None:
+                    passed, checks, scope, evidence = _stored_library_verification(result, recorded_verification)
+                else:
+                    try:
+                        evidence = self.kernel.parent.verify_native_library(result)
+                        passed, checks, scope = evidence['passed'], evidence['checks'], evidence['scope']
+                    except Exception as error:
+                        evidence = {'error_type': type(error).__name__, 'error': str(error)}
+                        scope = 'LIBRARY_VALIDATION_ERROR'
             elif spec['domain'] == 'numeric':
                 _, holdout = split_examples(spec['rows'])
                 answers = result['holdout_predictions']
                 checks, scope = len(holdout), 'INDEPENDENT_HELD_OUT_LABELS'
-                passed = len(answers) == checks and all(Fraction(a) == Fraction(r['expected']) for a, r in zip(answers, holdout))
+                passed = len(answers) == checks and all(not isinstance(a, bool) and Fraction(a) == Fraction(r['expected'])
+                                                       for a, r in zip(answers, holdout))
             elif spec['domain'] == 'relation':
                 edges = spec['relation']
                 reach = {n: {n} for n in [spec['start']] + [x for e in edges for x in e]}
@@ -692,7 +748,8 @@ class CognitiveLoop:
                             reach[node].update(reach[middle])
                 expected = reach[spec['start']]
                 answer = result['answer']
-                passed = isinstance(answer, (list, tuple, set)) and set(answer) == expected and len(answer) == len(expected)
+                passed = (isinstance(answer, (list, tuple, set)) and all(type(n) in (int, str) for n in answer)
+                          and set(answer) == expected and len(answer) == len(expected))
                 checks, scope = 1, 'INDEPENDENT_TRANSITIVE_CLOSURE'
             else:
                 opened, valid = [], True

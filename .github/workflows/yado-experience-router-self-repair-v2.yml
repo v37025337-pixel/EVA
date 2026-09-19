@@ -76,6 +76,7 @@ jobs:
       - name: Run complete inherited and Successor regression
         run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-experience-router-v2-successor-birth/manifest.json"
       - name: Persist verified self-repair candidate and receipt in shadow branch
+        if: github.ref == 'refs/heads/codex/yado-experience-router-self-repair-v2-20260917'
         run: |
           git config user.name 'YADO Experience Router Self Repair'
           git config user.email 'actions@users.noreply.github.com'
@@ -85,7 +86,7 @@ jobs:
             echo 'No experience-router artifacts changed'
           else
             git commit -m 'YADO router: persist experience-derived self-repair proof [skip ci]'
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+            git push origin HEAD:codex/yado-experience-router-self-repair-v2-20260917
           fi
       - name: Preserve self-repair evidence
         if: always()

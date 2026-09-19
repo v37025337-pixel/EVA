@@ -1,6 +1,7 @@
 name: YADO Autonomous Deep Development V1
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
     branches: [main]
@@ -71,49 +72,12 @@ jobs:
           python runtime/yado_canonical_invariant_guard_v1.py
           python -m compileall -q runtime successor candidates
 
-      - name: Generate bounded native source candidate
+      - name: Acquire fresh experience and verify effective native binding
         run: |
-          python runtime/yado_native_experience_to_runtime_self_rewrite_v2.py
-          python - <<'PY'
-          import hashlib, json, subprocess, sys
-          from pathlib import Path
-          receipt=json.loads(Path("candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json").read_text())
-          assert receipt["status"]=="PASS_SHADOW_NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_CANDIDATE_V2",receipt
-          target=Path(receipt["target_path"])
-          candidate=Path(receipt["candidate_path"])
-          parent_sha=hashlib.sha256(target.read_bytes()).hexdigest()
-          candidate_sha=hashlib.sha256(candidate.read_bytes()).hexdigest()
-          assert parent_sha==receipt["parent_sha256"]!=candidate_sha==receipt["candidate_sha256"],receipt
-          compile(candidate.read_text(encoding="utf-8"),str(candidate),"exec")
-          # Execute the candidate's bounded decision function in a separate
-          # process. Full canonical admission remains a later, distinct gate.
-          probe = """
-          import importlib.util, json, math, sys
-          from pathlib import Path
-          sys.path.insert(0, str(Path('runtime').resolve()))
-          def load(name, path):
-              spec=importlib.util.spec_from_file_location(name,path)
-              module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
-              return module
-          parent=load('parent_learner',sys.argv[1]); child=load('candidate_learner',sys.argv[2])
-          rows=[]
-          for code in ('MEMORY_AND_EXPERIENCE','CODE_REPAIR','NETWORK_EVIDENCE'):
-              priority={'code':code,'area':code,'recommended_action':'learn code network tests'}
-              before=parent.rank_sources(priority); after=child.rank_sources(priority)
-              assert {x['id'] for x in after}=={x['id'] for x in child.SOURCE_CATALOG}
-              assert all(math.isfinite(x['score']) for x in after)
-              assert after==sorted(after,key=lambda x:(-x['score'],x['id']))
-              rows.append({'priority':code,'parent':before,'candidate':after})
-          assert any(x['parent']!=x['candidate'] for x in rows)
-          print(json.dumps(rows))
-          """
-          rows=json.loads(subprocess.check_output([sys.executable,'-c',probe,str(target),str(candidate)],text=True,timeout=30))
-          assert hashlib.sha256(target.read_bytes()).hexdigest()==parent_sha
-          result={'schema':'yado.native_candidate_probe.v1','status':'PASS_SHADOW_CANDIDATE_PROBE_REQUIRES_ADMISSION','parent_sha256':parent_sha,'candidate_sha256':candidate_sha,'ranking_probes':rows,'canonical_active':False,'candidate_full_regression_admission':False,'canonical_runtime_mutated':False}
-          Path('audits').mkdir(exist_ok=True)
-          Path('audits/yado-native-candidate-probe-v1.json').write_text(json.dumps(result,indent=2)+'\n')
-          print(result['status'],candidate_sha)
-          PY
+          python runtime/yado_bounded_autonomous_learning_v1.py --output-root "$RUNNER_TEMP/yado-fresh-learning"
+          python runtime/yado_native_learning_cycle_v1.py \
+            --experience-root "$RUNNER_TEMP/yado-fresh-learning" \
+            --output audits/yado-native-learning-cycle-v1
 
       - name: Evolve logic thinking intelligence candidate
         run: |
@@ -285,7 +249,8 @@ jobs:
               "runtime/yado_bounded_autonomous_learning_v1.py",
               "runtime/yado_cognitive_tri_organ_policy_v3.py",
               "candidates/cognitive/yado_cognitive_tri_organ_policy_v3.py",
-              "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v2.py",
+              "audits/yado-native-learning-cycle-v1/runtime_candidate.py",
+              "audits/yado-native-learning-cycle-v1/receipt.json",
           ):
               destination = checkpoint / "source-overlay" / relative
               destination.parent.mkdir(parents=True, exist_ok=True)
@@ -322,15 +287,14 @@ jobs:
           name: yado-autonomous-deep-development-v1
           path: |
             candidates/kernel-self-generated/yado-autonomous-deep-development-v1.json
-            candidates/autonomous/yado-native-experience-to-runtime-self-rewrite-v2.json
-            candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v2.py
+            audits/yado-native-learning-cycle-v1/
+            ${{ runner.temp }}/yado-fresh-learning/
             candidates/cognitive/yado-cognitive-tri-organ-evolution-v2.json
             candidates/cognitive/yado_cognitive_tri_organ_policy_v3.py
-            audits/yado-native-candidate-probe-v1.json
             audits/yado-full-kernel-audit-v1-report.json
             audits/yado-full-kernel-audit-v1-summary.md
             audits/yado-full-regression-v1-report.json
-            audits/yado-full-regression-v1.log
+            audits/yado-full-regression-v1-report.log
 
       - name: Preserve stateful continuation checkpoint
         if: always()

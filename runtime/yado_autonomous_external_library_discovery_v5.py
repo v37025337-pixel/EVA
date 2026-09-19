@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import hashlib
+import http.client
 import io
 import json
 import re
+import socket
 import urllib.parse
 import urllib.request
 import zipfile
@@ -11,6 +13,7 @@ from email import policy
 from email.parser import Parser
 from pathlib import Path
 from typing import Any
+from yado_personal_public_web_access_v2 import _PinnedHTTPSConnection, validate_public_https_url
 
 ROOT = Path(__file__).resolve().parents[1]
 RECEIPT = ROOT / "receipts" / "yado-autonomous-external-library-discovery-v5.json"
@@ -42,42 +45,52 @@ def normalize_name(value: str) -> str:
 
 
 def guarded_fetch(url: str, *, accept: str, max_bytes: int) -> tuple[bytes, dict[str, Any]]:
+    if type(max_bytes) is not int or not 1 <= max_bytes <= MAX_WHEEL_BYTES:
+        raise ValueError("LIBRARY_BYTE_BUDGET")
     parsed = urllib.parse.urlsplit(url)
     if parsed.scheme != "https" or parsed.hostname not in ALLOWED_HOSTS:
         raise RuntimeError(f"blocked external host: {url}")
     if parsed.username or parsed.password or parsed.fragment:
         raise RuntimeError(f"blocked URL form: {url}")
-    request = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "YADO-Autonomous-External-Library-Discovery-V5/1.0",
-            "Accept": accept,
-        },
-        method="GET",
-    )
-    with urllib.request.urlopen(request, timeout=30) as response:
-        final_url = response.geturl()
-        final = urllib.parse.urlsplit(final_url)
-        if final.scheme != "https" or final.hostname not in ALLOWED_HOSTS:
-            raise RuntimeError(f"redirect escaped allowlist: {final_url}")
-        status = int(getattr(response, "status", 200) or 200)
-        raw = response.read(max_bytes + 1)
-        content_type = response.headers.get("Content-Type", "")
-    if status != 200:
-        raise RuntimeError(f"HTTP {status}: {url}")
-    if len(raw) > max_bytes:
-        raise RuntimeError(f"external payload exceeds cap: {len(raw)} > {max_bytes}")
-    return raw, {
-        "requested_url": url,
-        "final_url": final_url,
-        "host": final.hostname,
-        "http_status": status,
-        "bytes": len(raw),
-        "sha256": sha_bytes(raw),
-        "content_type": content_type,
-        "method": "GET",
-        "read_only": True,
-    }
+    target = validate_public_https_url(url, resolver=socket.getaddrinfo)
+    request_path = (parsed.path or "/") + ("?" + parsed.query if parsed.query else "")
+    headers = {"User-Agent": "YADO-Autonomous-External-Library-Discovery-V5/1.0", "Accept": accept}
+    last_error = None
+    for ip in target["approved_ips"]:
+        # Binary wheels use this same pinned transport, with their larger byte
+        # budget. No redirect or environment proxy may cross the host allowlist.
+        connection = _PinnedHTTPSConnection(target["host"], ip, 30)
+        try:
+            connection.request("GET", request_path, headers=headers)
+            response = connection.getresponse()
+            status = int(response.status)
+            if status != 200:
+                raise RuntimeError(f"HTTP {status}: {url}")
+            raw = response.read(max_bytes + 1)
+            content_type = response.headers.get("Content-Type", "")
+            if len(raw) > max_bytes:
+                raise RuntimeError(f"external payload exceeds cap: {len(raw)} > {max_bytes}")
+            return raw, {
+                "requested_url": url,
+                "final_url": target["url"],
+                "host": target["host"],
+                "resolved_ips": target["approved_ips"],
+                "connected_ip": ip,
+                "http_status": status,
+                "bytes": len(raw),
+                "sha256": sha_bytes(raw),
+                "content_type": content_type,
+                "method": "GET",
+                "read_only": True,
+                "redirects_followed": False,
+                "credentials_used": False,
+                "proxy_used": False,
+            }
+        except (OSError, http.client.HTTPException) as exc:
+            last_error = exc
+        finally:
+            connection.close()
+    raise RuntimeError("LIBRARY_NETWORK_ERROR:" + str(last_error)) from last_error
 
 
 def fetch_json(url: str, *, simple: bool = False) -> tuple[dict[str, Any], dict[str, Any]]:

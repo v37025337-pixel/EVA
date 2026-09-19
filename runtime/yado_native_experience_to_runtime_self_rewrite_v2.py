@@ -91,6 +91,15 @@ def assert_no_new_dangerous_constructs(parent_src, candidate_src):
 
 def synthesize_candidate(parent_src, exp):
     tree = ast.parse(parent_src)
+    # V2 is retained for bootstrap compatibility. A learned parent must use
+    # the idempotent refresh path; inserting another assignment would let
+    # the old binding override the new experience at module import time.
+    if any(isinstance(node, ast.Assign) and any(
+        isinstance(target, ast.Name) and target.id == 'LEARNED_EXTERNAL_EVIDENCE_V2'
+        for target in node.targets
+    ) for node in tree.body):
+        from yado_native_experience_to_runtime_self_rewrite_v3 import synthesize_candidate as refresh
+        return refresh(parent_src, exp)
     evidence_digest = str(exp.get('experience_digest') or '')
     if not evidence_digest:
         raise RuntimeError('EXPERIENCE_DIGEST_MISSING')

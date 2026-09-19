@@ -46,6 +46,58 @@ class ArchitectureAdmissionIntegrityTests(unittest.TestCase):
         self.assertEqual(self.arch.snapshot()['generation_count'], 2)
         self.assertEqual(self_test()['status'], 'PASS_UNIFIED_CAUSAL_EVOLUTION_ARCHITECTURE_V1_SELF_TEST')
 
+    def test_non_boolean_gate_values_are_rejected_before_evaluation(self):
+        invalid_values = ('false', 'true', 0, 1, 0.0, 1.0, [], [True], {}, {'pass': True}, None)
+        for value in invalid_values:
+            with self.subTest(value=value):
+                gates = dict(self.candidate.hard_constraints, regression_pass=value)
+                before = self.arch.snapshot()
+                with self.assertRaisesRegex(ValueError, 'HARD_CONSTRAINT_MUST_BE_BOOL'):
+                    self.arch.evaluate_candidate(replace(self.candidate, hard_constraints=gates))
+                self.assertEqual(self.arch.snapshot(), before)
+
+    def test_canonical_serialization_cannot_hide_invalid_gate_types(self):
+        for value in ('false', 'true', 0, 1, 0.0, 1.0, [], [True], {}, {'pass': True}, None):
+            with self.subTest(value=value):
+                record = replace(self.candidate, hard_constraints={'regression_pass': value})
+                with self.assertRaisesRegex(ValueError, 'HARD_CONSTRAINT_MUST_BE_BOOL'):
+                    record.canonical()
+                with self.assertRaisesRegex(ValueError, 'HARD_CONSTRAINT_MUST_BE_BOOL'):
+                    record.digest()
+
+    def test_gate_type_substitution_after_approval_cannot_promote(self):
+        for value in ('false', 'true', 0, 1, 0.0, 1.0, [], [True], {}, {'pass': True}, None):
+            with self.subTest(value=value):
+                arch = UnifiedCausalEvolutionArchitecture()
+                arch.register_root(self.parent)
+                decision = arch.evaluate_candidate(self.candidate)
+                before = arch.snapshot()
+                gates = dict(self.candidate.hard_constraints, regression_pass=value)
+                with self.assertRaisesRegex(ValueError, 'HARD_CONSTRAINT_MUST_BE_BOOL'):
+                    arch.promote(replace(self.candidate, hard_constraints=gates), decision)
+                self.assertEqual(arch.snapshot(), before)
+
+    def test_root_registration_rejects_non_boolean_gates(self):
+        arch = UnifiedCausalEvolutionArchitecture()
+        invalid = replace(self.parent, hard_constraints={'regression_pass': 'false'})
+        with self.assertRaisesRegex(ValueError, 'HARD_CONSTRAINT_MUST_BE_BOOL'):
+            arch.register_root(invalid)
+        self.assertIsNone(arch.developmental_head)
+
+    def test_each_real_false_gate_withholds_and_retains_boolean_serialization(self):
+        for key in PromotionPolicy().required_constraints:
+            with self.subTest(gate=key):
+                gates = dict(self.candidate.hard_constraints, **{key: False})
+                candidate = replace(self.candidate, hard_constraints=gates)
+                self.assertIs(candidate.canonical()['hard_constraints'][key], False)
+                self.assertNotEqual(candidate.digest(), self.candidate.digest())
+                decision = self.arch.evaluate_candidate(candidate)
+                self.assertEqual(decision.action, 'WITHHOLD_CANDIDATE')
+                self.assertIn('HARD_CONSTRAINT_FAIL:' + key, decision.reasons)
+                with self.assertRaises(ValueError):
+                    self.arch.promote(candidate, decision)
+                self.assertEqual(self.arch.developmental_head, 'parent')
+
     def test_same_id_substituted_artifact_cannot_use_previous_approval(self):
         decision = self.arch.evaluate_candidate(self.candidate)
         before = self.arch.snapshot()

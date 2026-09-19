@@ -63,10 +63,19 @@ class UnifiedExecutionContinuityTests(unittest.TestCase):
             self.identity_fixture(source)
             identity = contract.active_kernel_identity(source)
             experience = {'evidence_text': 'Проверенный внешний факт', 'status': 'PASS_SHADOW_BOUNDED_AUTONOMOUS_EXTERNAL_LEARNING_V1', 'execution_identity': identity}
+            experience.update(sources=[{'source_id': 'TEST', 'facts': ['Проверенный внешний факт'],
+                'fact_count': 1, 'network': {'network_executed': True, 'status': 200,
+                'credentials_used': False, 'read_only': True}}], failures=[],
+                canonical_mutation=False, automatic_main_mutation=False,
+                network_policy={'https_only': True, 'methods': ['GET'], 'credentials_allowed': False,
+                                'external_writes': False, 'downloaded_code_executed': False})
             experience['experience_digest'] = learner.digest(experience)
             candidate = 'candidates/autonomous/yado_learned_recall_test.py'
             p = source / candidate; p.parent.mkdir(parents=True); p.write_text('FACTS = ["evidence"]\n')
             receipt = {'status': experience['status'], 'experience_digest': experience['experience_digest'], 'generated_capability': {'path': candidate, 'fact_count': 1, 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}}
+            receipt.update(source_success_count=1, source_failure_count=0, real_network_used=True,
+                           credentials_used=False, external_mutation=False, external_model_used=False,
+                           candidate_canonical_active=False)
             receipt['receipt_sha256'] = learner.digest(receipt)
             for name, value in [(EXPERIENCE, experience), (RECEIPT, receipt)]:
                 p = source / name; p.parent.mkdir(parents=True, exist_ok=True); p.write_text(json.dumps(value))
