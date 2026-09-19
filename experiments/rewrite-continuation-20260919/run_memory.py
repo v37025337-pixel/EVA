@@ -47,7 +47,8 @@ def main():
     manifest=json.loads((OUT/'pre-rewrite-birth/manifest.json').read_text())
     changes={p:{'previous_sha256':h,'current_sha256':file_sha(ROOT/p)}
              for p,h in manifest['inherited_files'].items() if file_sha(ROOT/p)!=h}
-    assert set(changes)=={'runtime/yado_native_self_rewrite_v4_fresh_experience.py'}, changes
+    assert set(changes)=={'runtime/yado_native_self_rewrite_v4_fresh_experience.py',
+                          'runtime/test_yado_native_self_rewrite_v4_fresh_experience.py'}, changes
     transition=prepare_upgrade(OUT/'pre-rewrite-birth/manifest.json',OUT/'kernel.sqlite',
                                OUT/'birth',source_updates=changes)
     shutil.copyfile(OUT/'birth/kernel.sqlite',OUT/'kernel.sqlite')

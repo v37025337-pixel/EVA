@@ -39,11 +39,17 @@ Every output directory must be new. Failed attempts are retained and cannot
 overwrite a positive receipt. Historical V4 candidate/admission paths and active
 sources are not written. The old historical CLI is explicit: `--historical-v4`.
 `build_committed()` continues to reproduce its original historical evidence.
+It locates the original experience by the sealed V4 digest in reachable Git
+history, verifies that document's content digest and requires exact reproduction
+of the persisted candidate bytes. A later learning receipt cannot silently
+replace the historical input. Missing history or mismatched bytes fail closed.
 
 The fresh-learning CI workflow collects public data on its runner, checks the
 whole learning receipt, performs this continuation and uploads all evidence.
 Its permissions are read-only. A healthy WITHHOLD passes the *controller contract*
 check; it does not count as a successful rewrite. Other rejections fail CI.
+This specific workflow is registered in the exact active-workflow inventory with
+a read-only diagnostic role; it is absent from the write-authorized inventory.
 
 This adapter and its tests are authored by the assistant under user direction.
 It reuses the existing bounded synthesis policy. Blind utility, negative transfer,
