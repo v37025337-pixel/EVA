@@ -82,8 +82,8 @@ def _replay_context(snapshot):
         from .native_binding import activation
         context.append(activation())
     if 'COG_ACTIVATE_COMPOSITIONAL_SYNTHESIS' in kinds:
-        from .compositional_binding import activation
-        context.append(activation())
+        from .compositional_binding import activation, GRAMMAR_V2
+        context.append([activation(), activation(grammar=GRAMMAR_V2)])
     if any(kind.startswith('COG_RUNTIME_') for kind in kinds):
         from .archive import file_sha
         from .native_mechanism import ROOT, DONOR_PATH
@@ -406,10 +406,13 @@ def _replay_uncached(records):
                     or any(g['status'] == 'ACTIVE' for g in goals.values())):
                 raise ValueError('COGNITIVE_NATIVE_BINDING_PROVENANCE')
         elif kind in {'COG_ACTIVATE_COMPOSITIONAL_SYNTHESIS', 'COG_DEACTIVATE_COMPOSITIONAL_SYNTHESIS'}:
-            from .compositional_binding import activation, deactivation, active, ACTIVATE
+            from .compositional_binding import activation_grammar, deactivation, active, ACTIVATE
             body = {k: v for k, v in r.items() if k not in {'tick', 'event_hash'}}
-            expected = activation() if kind == ACTIVATE else deactivation()
-            if (fingerprint(body) != fingerprint(expected) or active(past) == (kind == ACTIVATE)
+            if kind == ACTIVATE:
+                activation_grammar(body)
+            elif fingerprint(body) != fingerprint(deactivation()):
+                raise ValueError('COGNITIVE_COMPOSITIONAL_BINDING_PROVENANCE')
+            if (active(past) == (kind == ACTIVATE)
                     or any(g['status'] == 'ACTIVE' for g in goals.values())):
                 raise ValueError('COGNITIVE_COMPOSITIONAL_BINDING_PROVENANCE')
         elif kind == 'COG_GOAL':
@@ -628,10 +631,14 @@ class CognitiveLoop:
             return self.kernel._append(activation())
         return self._transaction(admit)
 
-    def set_compositional_synthesis(self, enabled=True):
-        from .compositional_binding import activation, deactivation, active, ACTIVATE, DEACTIVATE
+    def set_compositional_synthesis(self, enabled=True, *, grammar=None):
+        from .compositional_binding import (activation, deactivation, active, grammar_at,
+                                            GRAMMAR, GRAMMARS, ACTIVATE, DEACTIVATE)
         if type(enabled) is not bool:
             raise ValueError('COMPOSITIONAL_BINDING_REQUIRES_BOOLEAN')
+        grammar = GRAMMAR if grammar is None else grammar
+        if grammar not in GRAMMARS:
+            raise ValueError('COMPOSITION_GRAMMAR_VERSION')
         def change():
             records = self._records()
             if (any(g['status'] == 'ACTIVE' for g in replay(records).values())
@@ -639,9 +646,11 @@ class CognitiveLoop:
                     or any(s['status'] == 'ACTIVE' for s in self.kernel.autonomy_snapshot()['sessions'].values())):
                 raise ValueError('COMPOSITIONAL_BINDING_REQUIRES_IDLE_KERNEL')
             if active(records) == enabled:
+                if enabled and grammar_at(records) != grammar:
+                    raise ValueError('COMPOSITIONAL_PROFILE_REQUIRES_DEACTIVATION')
                 return next((r for r in reversed(records) if r['kind'] in {ACTIVATE, DEACTIVATE}),
                             {'status': 'INACTIVE', 'strategy': 'native_compositional_v1'})
-            return self.kernel._append(activation() if enabled else deactivation())
+            return self.kernel._append(activation(grammar=grammar) if enabled else deactivation())
         return self._transaction(change)
 
     def _transaction(self, operation):

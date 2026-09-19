@@ -15,6 +15,7 @@ import math
 from pathlib import Path
 import secrets
 import sqlite3
+from contextlib import closing
 
 from .archive import ExperienceArchive, canonical, file_sha, sha
 from .kernel import ROOT, SuccessorKernel, decode, encode, equivalent, fingerprint
@@ -24,6 +25,15 @@ GENOME_SOURCE = 'runtime/yado_evolutionary_genome_v1.py'
 LINEAGE_SOURCE = 'runtime/yado_evolutionary_multigeneration_lineage_v1.py'
 GENOME_RECEIPT = 'candidates/kernel-self-generated/g2-evolutionary-genome-v1.json'
 LINEAGE_RECEIPT = 'candidates/kernel-self-generated/g2-evolutionary-multigeneration-lineage-v1.json'
+
+# Reviewed predecessor from main 05488e8d. Compatibility is restricted to
+# this implementation, never to source hashes supplied by an arbitrary journal.
+LEGACY_SOURCES = {
+    'successor/generation.py': '895170e691d8c637358b91dc0c7d6669998682ac206d89b5c81338062f2096f4',
+    'successor/generation_tasks.py': '4ab843e44b10a7da28ff0609e7781cf0231edd42414f8433358ebfd4b3b409b5',
+    GENOME_SOURCE: '186479a62f08662a767c47dffcf499f3294eaaecefd21327dbdccc012ed08531',
+    LINEAGE_SOURCE: 'a471c4a4c53044db94f482ad7d6f2c4758bad3f9d60c68f2252b88759b7a1cc3',
+}
 
 
 def sources():
@@ -234,6 +244,14 @@ def retained_memory(kernel, through_tick=None):
             checks.append({'goal_id': goal['id'], 'status': goal['status'], 'retained': True, 'scope': 'REJECTION_PRESERVED'})
             continue
         replayed = copy.deepcopy(goal)
+        if goal['spec']['domain'] == 'library_discovery':
+            # This is historical retention, not fresh package discovery. Replay
+            # already verified the saved candidate/proof binding. Verify that
+            # exact frozen observation again without consulting today's PyPI.
+            check = loop._verify(replayed, recorded_verification=goal['verification'])
+            checks.append({'goal_id': goal['id'], 'status': goal['status'], 'retained': check['passed'],
+                           'scope': check['scope'], 'checks': check['checks']})
+            continue
         if goal['spec']['domain'] == 'native_source' and goal['decision']['choice']['strategy'] == 'reuse_verified_source':
             # The original admitted program is re-executed. This is retention
             # of a learned result, not a rerun of its historical selection.
@@ -270,7 +288,8 @@ class GenerationKernel:
                     'branches': inventory(self.archive), 'scope': 'EXECUTABLE_COMPONENT_GENERATIONS',
                     'canonical_generation': kernel.parent_audit['generation']})
             self.birth = self.records()[0]
-            if (self.birth['kind'] != 'BIRTH' or self.birth['sources'] != sources() or self.birth['parent_identity'] != kernel.identity
+            self.pinned_sources = self._source_lineage(self.records())
+            if (self.birth['kind'] != 'BIRTH' or self.pinned_sources != sources() or self.birth['parent_identity'] != kernel.identity
                     or self.birth['archive_sha256'] != file_sha(archive_path)
                     or self.birth['branches'] != inventory(self.archive)):
                 raise ValueError('GENERATION_SOURCE_OR_LINEAGE_DRIFT')
@@ -304,9 +323,38 @@ class GenerationKernel:
             previous = digest
         return records
 
+    def _check_parent_state(self, state):
+        tick = state.get('tick')
+        if type(tick) is not int or tick < 0 or state.get('status') != 'PASS':
+            raise ValueError('GENERATION_PARENT_MEMORY_DRIFT')
+        row = self.kernel.db.execute('SELECT event_hash FROM events WHERE tick=?', (tick,)).fetchone()
+        if state.get('event_hash') != (row[0] if row else '0' * 64) or (tick and row is None):
+            raise ValueError('GENERATION_PARENT_MEMORY_DRIFT')
+
+    def _source_lineage(self, records):
+        pinned, upgraded = records[0]['sources'], False
+        for row in records[1:]:
+            if row['kind'] != 'SOURCE_UPGRADE':
+                continue
+            if (upgraded or pinned != LEGACY_SOURCES or row['previous_sources'] != pinned
+                    or row['sources'] != sources()
+                    or any(row['sources'].get(p) != h for p, h in pinned.items()
+                           if p != 'successor/generation.py')
+                    or row['predecessor_tick'] != row['tick'] - 1
+                    or row['predecessor_event_hash'] != records[row['tick'] - 2]['event_hash']):
+                raise ValueError('GENERATION_SOURCE_UPGRADE_PROVENANCE')
+            self._check_parent_state(row['parent_state'])
+            if row['parent_state']['tick'] < records[0]['parent_state']['tick']:
+                raise ValueError('GENERATION_SOURCE_UPGRADE_MEMORY_BOUNDARY')
+            pinned, upgraded = row['sources'], True
+        return pinned
+
     def snapshot(self):
         records = self.records()
+        if self._source_lineage(records) != sources():
+            raise ValueError('GENERATION_SOURCE_DRIFT')
         profile, generation, proposal, admission, activated = parent_profile(), 0, None, None, False
+        upgrade, readmission, execution_admitted = None, None, True
         for row in records[1:]:
             if row['kind'] == 'PROPOSE':
                 if proposal is not None or row['profile_digest'] != fingerprint(row['profile']):
@@ -348,18 +396,40 @@ class GenerationKernel:
                     raise ValueError('GENERATION_ROLLBACK_WITHOUT_CHILD')
                 profile, generation = parent_profile(), 0
             elif row['kind'] == 'EXECUTE':
+                if not execution_admitted:
+                    raise ValueError('GENERATION_REQUIRES_READMISSION')
                 if row['profile_digest'] != fingerprint(profile) or row['generation'] != generation:
                     raise ValueError('GENERATION_EXECUTION_WRONG_PROFILE')
+            elif row['kind'] == 'SOURCE_UPGRADE':
+                upgrade, execution_admitted = row, False
+            elif row['kind'] == 'READMISSION':
+                if (upgrade is None or readmission is not None or proposal is None
+                        or row['upgrade_tick'] != upgrade['tick']
+                        or row['proposal_tick'] != proposal['tick']
+                        or row['profile_digest'] != fingerprint(profile)
+                        or row['passed'] != admission_passed(row)
+                        or row['parent_state']['tick'] < upgrade['parent_state']['tick']):
+                    raise ValueError('GENERATION_READMISSION_PROVENANCE')
+                self._check_parent_state(row['parent_state'])
+                if row['event_hash'] not in self._verified_replays:
+                    cases, protected = challenge(row['fresh_seed']), challenge(row['fresh_seed'], retention=True)
+                    expected = self._measure(profile, cases, protected, row['parent_state']['tick'], proposal)
+                    if any(row[k] != v for k, v in expected.items()):
+                        raise ValueError('GENERATION_READMISSION_NOT_REPRODUCIBLE')
+                    self._verified_replays.add(row['event_hash'])
+                readmission, execution_admitted = row, row['passed']
             else:
                 raise ValueError('GENERATION_UNKNOWN_EVENT')
         return {'component_generation': generation, 'profile': profile, 'profile_digest': fingerprint(profile),
+            'execution_admitted': execution_admitted,
+            'readmission_passed': None if readmission is None else readmission['passed'],
             'events': len(records), 'event_hash': records[-1]['event_hash'],
             'remote_branches': len(self.birth['branches']), 'canonical_generation': self.birth['canonical_generation'],
             'formal_g3_transition': False, 'consciousness_established': False, 'background_process_running': False}
 
     def _transaction(self, operation):
         self.kernel._check_sources()
-        if self.birth['sources'] != sources():
+        if self.pinned_sources != sources():
             raise ValueError('GENERATION_SOURCE_DRIFT')
         self.db.execute('BEGIN IMMEDIATE')
         try:
@@ -417,10 +487,39 @@ class GenerationKernel:
 
     def _execute(self, task):
         snapshot = self.snapshot()
+        if not snapshot['execution_admitted']:
+            raise ValueError('GENERATION_REQUIRES_READMISSION')
         result = execute_component(snapshot['profile'][task['organ']], copy.deepcopy(task))
         return self._append({'kind': 'EXECUTE', 'generation': snapshot['component_generation'],
             'profile_digest': snapshot['profile_digest'], 'task': task, 'result': result,
             'status': 'EXECUTED_REQUIRES_INDEPENDENT_CHECK'})
+
+    def _measure(self, profile, cases, protected, through_tick, proposal):
+        return {'parent': evaluate(parent_profile(), cases), 'child': evaluate(profile, cases),
+            'parent_retention': evaluate(parent_profile(), protected),
+            'child_retention': evaluate(profile, protected),
+            'inherited_memory': retained_memory(self.kernel, through_tick),
+            'memory_ablation': fingerprint(select([], challenge(proposal['development_seed']),
+                challenge(proposal['development_seed'], retention=True))[0]) == fingerprint(parent_profile()),
+            'canonical_audit': self.kernel.parent.audit()['pass']}
+
+    def readmit(self):
+        return self._transaction(self._readmit)
+
+    def _readmit(self):
+        records, state = self.records(), self.snapshot()
+        upgrades = [r for r in records if r['kind'] == 'SOURCE_UPGRADE']
+        proposal = next((r for r in records if r['kind'] == 'PROPOSE'), None)
+        if not upgrades or proposal is None or any(r['kind'] == 'READMISSION' for r in records):
+            raise ValueError('GENERATION_READMISSION_NOT_AVAILABLE')
+        seed, parent_state = secrets.token_hex(16), self.kernel.verify_state()
+        row = {'kind': 'READMISSION', 'upgrade_tick': upgrades[-1]['tick'],
+            'proposal_tick': proposal['tick'], 'profile_digest': state['profile_digest'],
+            'parent_state': parent_state, 'fresh_seed': seed,
+            **self._measure(state['profile'], challenge(seed), challenge(seed, retention=True),
+                            parent_state['tick'], proposal)}
+        row['passed'] = admission_passed(row)
+        return self._append(row)
 
     def rollback(self):
         return self._transaction(self._rollback)
@@ -429,6 +528,41 @@ class GenerationKernel:
         if self.snapshot()['component_generation'] != 1:
             raise ValueError('GENERATION_NO_ACTIVE_CHILD')
         return self._append({'kind': 'ROLLBACK', 'reason': 'EXPLICIT_ROLLBACK'})
+
+
+def upgrade_component_state(kernel, archive_path, predecessor_state, output):
+    """Copy a reviewed journal, append provenance, and require fresh admission.
+
+    Both the predecessor's events and source pins remain unchanged. Opening the
+    result recomputes the historical proposal/admission under offline retention.
+    """
+    predecessor, output = Path(predecessor_state).resolve(), Path(output).resolve()
+    if output.exists() or not predecessor.is_file():
+        raise ValueError('GENERATION_UPGRADE_REQUIRES_NEW_OUTPUT')
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with closing(sqlite3.connect(predecessor.as_uri() + '?mode=ro', uri=True)) as old:
+        with closing(sqlite3.connect(output)) as new:
+            old.backup(new)
+    holder = GenerationKernel.__new__(GenerationKernel)
+    holder.db = sqlite3.connect(output, isolation_level=None)
+    try:
+        holder.db.execute('PRAGMA journal_mode=DELETE')
+        holder.db.execute('PRAGMA synchronous=FULL')
+        records = holder.records()
+        if (not records or records[0].get('sources') != LEGACY_SOURCES
+                or any(r['kind'] == 'SOURCE_UPGRADE' for r in records)):
+            raise ValueError('GENERATION_UNREVIEWED_PREDECESSOR')
+        last = records[-1]
+        holder._append({'kind': 'SOURCE_UPGRADE', 'previous_sources': LEGACY_SOURCES,
+            'sources': sources(), 'predecessor_tick': last['tick'],
+            'predecessor_event_hash': last['event_hash'], 'parent_state': kernel.verify_state()})
+    finally:
+        holder.db.close()
+    migrated = GenerationKernel(kernel, archive_path, output)
+    try:
+        return migrated.snapshot()
+    finally:
+        migrated.close()
 
 
 def admission_passed(row):
@@ -445,7 +579,7 @@ def admission_passed(row):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('propose', 'admit', 'status', 'execute', 'rollback'))
+    parser.add_argument('command', choices=('propose', 'admit', 'readmit', 'status', 'execute', 'rollback'))
     parser.add_argument('--manifest', required=True)
     parser.add_argument('--kernel-state', required=True)
     parser.add_argument('--archive', required=True)
