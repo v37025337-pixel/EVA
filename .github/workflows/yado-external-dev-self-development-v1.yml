@@ -10,7 +10,7 @@ on:
       checkpoint_name:
         description: Exact checkpoint artifact name when source_run is provided
         required: false
-        default: yado-repository-learning-checkpoint-35454873271-1
+        default: yado-repository-learning-checkpoint-35455459324-1
       evolve_runtime:
         description: Run one measured runtime evolution cycle from the checkpoint
         type: boolean
@@ -161,8 +161,8 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.source_run || '35454873271' }}
-          name: ${{ inputs.checkpoint_name || 'yado-repository-learning-checkpoint-35454873271-1' }}
+          run-id: ${{ inputs.source_run || '35455459324' }}
+          name: ${{ inputs.checkpoint_name || 'yado-repository-learning-checkpoint-35455459324-1' }}
           path: ${{ runner.temp }}/yado-predecessor
       - name: Re-execute logic, thinking, transfer, memory and integration gates
         run: python experiments/cognitive-architecture-20260919/verify_cognition.py
@@ -175,7 +175,7 @@ jobs:
       - name: Run live learning, local Hivemind transport and native continuation
         if: github.ref != 'refs/heads/codex/yado-stateful-runtime-evolution-20260919' && !inputs.evolve_runtime
         env:
-          SOURCE_RUN: ${{ inputs.source_run || '35454873271' }}
+          SOURCE_RUN: ${{ inputs.source_run || '35455459324' }}
         run: |
           python experiments/repository-learning-resume-20260919/run.py \
             --checkpoint "$RUNNER_TEMP/yado-predecessor" --source-run "$SOURCE_RUN" \
@@ -185,7 +185,7 @@ jobs:
       - name: Run stateful deficit selection, module emission and independent gates
         if: github.ref == 'refs/heads/codex/yado-stateful-runtime-evolution-20260919' || inputs.evolve_runtime
         env:
-          SOURCE_RUN: ${{ inputs.source_run || '35454873271' }}
+          SOURCE_RUN: ${{ inputs.source_run || '35455459324' }}
         run: |
           python experiments/stateful-runtime-evolution-20260919/run.py \
             --checkpoint "$RUNNER_TEMP/yado-predecessor" --source-run "$SOURCE_RUN" \

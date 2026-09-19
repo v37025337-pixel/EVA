@@ -154,6 +154,10 @@ def main(args):
                 report.update(status="PASS_STATEFUL_RUNTIME_EVOLUTION", retry_goal_id=retry_id,
                               retry_status=retry["status"], admitted_strategy=admission["strategy"],
                               old_failure_preserved=old["status"] == "WITHHOLD")
+                from learning_application import run_learning_application
+                application = run_learning_application(kernel, manifest, state, out / "learning-application")
+                report["learning_application"] = application
+                resume.save(out, "learning-application", application)
             else:
                 report["reason"] = "GATES_FAILED"
     except Exception as exc:
