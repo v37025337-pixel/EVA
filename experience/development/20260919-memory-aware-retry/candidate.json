@@ -1,0 +1,74 @@
+{
+  "automatic_canonical_promotion": false,
+  "compiled": true,
+  "grammar": "YADO_TYPED_COMPOSITION_V1",
+  "input_signature": [
+    [
+      "x",
+      "int"
+    ],
+    [
+      "y",
+      "int"
+    ]
+  ],
+  "origin": "KERNEL_SELECTED_COMPOSITION_OF_REVIEWED_PRIMITIVES",
+  "parent_source_sha256": [
+    "168c7a99ee0f8d214143ad1b6aaadf5ba07343683bb934d50a7926448db66096"
+  ],
+  "predictions": [
+    {
+      "total": 48
+    }
+  ],
+  "program": {
+    "items": [
+      [
+        "total",
+        {
+          "args": [
+            {
+              "key": "x",
+              "op": "input"
+            },
+            {
+              "key": "y",
+              "op": "input"
+            }
+          ],
+          "name": "add",
+          "op": "call"
+        }
+      ]
+    ],
+    "op": "object"
+  },
+  "schema": "yado.compositional_source.v1",
+  "search_attempts": 12,
+  "search_states": 11,
+  "source": "def solve(component_id, program_id, inputs):\n    return {'total': _primitive('add', _input(inputs, 'x'), _input(inputs, 'y'))}\n",
+  "source_context": "native_source:f20913abef7c2dd244a43da46581865756fe29c3feca554b03426449c624d0a0",
+  "source_sha256": "5890bdfda08c44365d3b80d1dd6f1bac6619acffb9b80b5506bb140c85235f2c",
+  "status": "CANDIDATE",
+  "synthesis_inputs": "TRAINING_ONLY",
+  "training_digest": "315d5b75b6703f79861ef8e5ab648fa2a9efe919d88df7b4d74caa35d0760c53",
+  "training_predictions": [
+    {
+      "total": 9
+    },
+    {
+      "total": 2
+    },
+    {
+      "total": 9
+    }
+  ],
+  "validation_predictions": [
+    {
+      "total": 5
+    },
+    {
+      "total": -17
+    }
+  ]
+}

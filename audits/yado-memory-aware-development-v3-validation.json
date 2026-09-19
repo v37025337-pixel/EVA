@@ -1,0 +1,142 @@
+{
+  "base_main_commit": "46232e4859851c2db0fb8fdad217b96f648b516b",
+  "before": {
+    "command": "python -m unittest successor.tests.test_memory_retry -v",
+    "expected_failure_reason": "No retry selection after useful memory; autonomy selected EXPLORE.",
+    "failures": 4,
+    "tests_run": 4
+  },
+  "canonical_head_digest": "42a852bfce8330526b709ecfdbf9503a381550293824bca99707c2e73d93bbcc",
+  "consciousness_established": false,
+  "continuation": {
+    "consciousness_established": false,
+    "controller_and_fixtures_authorship": "MAINTAINER",
+    "development": {
+      "awaiting_goal": false,
+      "budget": 10,
+      "child_goal_id": null,
+      "id": 19,
+      "max_goals": 2,
+      "outcomes": [
+        {
+          "development_id": 19,
+          "goal_id": 21,
+          "kind": "DEV_OUTCOME",
+          "source_sha256": "5890bdfda08c44365d3b80d1dd6f1bac6619acffb9b80b5506bb140c85235f2c",
+          "spent": 4,
+          "status": "VALIDATED_ON_HOLDOUT",
+          "terminal_tick": 26,
+          "tick": 27
+        }
+      ],
+      "reason": "NO_ELIGIBLE_EXPERIENCE_WITHIN_BUDGET",
+      "remaining": 6,
+      "retry_policy": "verified_memory_context_v3",
+      "selection_tick": 20,
+      "selections": [
+        {
+          "budget": 4,
+          "failure_verification_ticks": [
+            5
+          ],
+          "parent_finish_tick": 7,
+          "parent_goal_id": 2,
+          "priority": 0.08333333333333333,
+          "self_model_digest": "e0bc58156a6b375b942bb91ec7a5328127d52754bf1fdc519047151c810d16fc",
+          "spec_digest": "be8bc80f9513c1247471484267d46962030f7799c350317353801ec465bbf700",
+          "untried": [
+            {
+              "cost": 4,
+              "estimated_success": 0.3333333333333333,
+              "memory_context_digest": "5a090d46359a283099c1327ff49e26d443a14fee854c03c312afcb6165506382",
+              "observations": 1,
+              "retry_reason": "NEW_VERIFIED_MEMORY",
+              "strategy": "native_compositional_v1"
+            }
+          ]
+        }
+      ],
+      "status": "COMPLETE"
+    },
+    "inherited_events": 17,
+    "operational_identity": "265477c26d3f155d465c84414646ceab0dbccc663f264faca280fbca394723f2",
+    "parent_sources": [
+      "168c7a99ee0f8d214143ad1b6aaadf5ba07343683bb934d50a7926448db66096"
+    ],
+    "predecessor_events_unchanged": true,
+    "predecessor_results_unchanged": true,
+    "program_and_retry_selection": "YADO",
+    "query_predictions": [
+      {
+        "total": 48
+      }
+    ],
+    "redundant_retry_count": 0,
+    "restart_verified": true,
+    "state_verification": {
+      "event_hash": "8dac76b8e3d6d18a94bd5eb0d26f30a59e72578c026eac2f19a9a32693fd70b5",
+      "status": "PASS",
+      "tick": 30
+    },
+    "status": "PASS_VERIFIED_MEMORY_DEVELOPMENT_CONTINUATION"
+  },
+  "controller_authorship": "MAINTAINER_AUTHORIZED_BY_USER",
+  "defect": "An exhausted strategy was never retried after a usable verified program entered memory.",
+  "evidence_files": {
+    "experience/development/20260919-memory-aware-retry/candidate.json": "87e47ed9e57955be861f89e84140ea94415e24d76d4518432e9924f5c60db9af",
+    "experience/development/20260919-memory-aware-retry/continuation-journal.json": "3f5ba842bcc23d6f45e6308e534a881404e120d4517aec3ebd5a4894ca88c5a9",
+    "experience/development/20260919-memory-aware-retry/continuation-summary.json": "6099560269b17e8be5e6e64cfe2e998ab4a22491ec9c8301305253a85a70c0a0",
+    "experience/development/20260919-memory-aware-retry/historical-replay.json": "6e287be5d690c6f4de49bd21c40cdf76b633c4490882c436c7140aad37850224",
+    "experience/development/20260919-memory-aware-retry/predecessor-journal.json": "3da010382628330a890e95e7584fe7e9d40b1f2dd9843ce5d4194bd47cef623c",
+    "experience/development/20260919-memory-aware-retry/predecessor-summary.json": "5a3f0e789f97dd662621290f9c99b047a5a8a9385c035fa0a4b518636d271000"
+  },
+  "focused": {
+    "command": "python -m unittest successor.tests.test_memory_retry -v",
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "status": "PASS",
+    "tests_run": 7
+  },
+  "formal_generation_changed": false,
+  "historical_replay": {
+    "development_sessions": 6,
+    "events": 184,
+    "goals": 12,
+    "journal_sha256": "dfb5edf92e54c872071f30c94ba8945ecc41aa9fbcc00f3a77df1f63eb0a109b",
+    "status": "PASS"
+  },
+  "kernel_audit": {
+    "counts": {
+      "active_capabilities": 34,
+      "active_managed_branches_audited": 1,
+      "active_runtime_sources": 109,
+      "architecture_planes": 9,
+      "duplicate_python_groups": 0,
+      "historical_branches_audited": 153,
+      "json_files": 1322,
+      "ledger_events": 315,
+      "local_import_edges": 1667,
+      "module_stem_collisions": 0,
+      "runtime_python_files": 709,
+      "workflow_files": 131
+    },
+    "findings": [],
+    "status": "PASS"
+  },
+  "new_permissions_or_resource_limits": false,
+  "policy": "verified_memory_context_v3",
+  "predecessor_status": "REPRODUCED_MEMORY_RETRY_DISCONNECT",
+  "program_and_retry_selection": "YADO_RUNTIME",
+  "schema": "yado.memory_aware_development_validation.v3",
+  "scope": "Attests focused tests, exact predecessor continuation, historical replay and listed local audits. Full regression and remote CI are separate evidence, required before merge.",
+  "security_audit": {
+    "blocking_findings": [],
+    "status": "PASS"
+  },
+  "sources": {
+    "successor/autonomy.py": "e81afccb0e5d351c6a6f81211fc1f2d8427eb66b67f500d2872b0f78fe4654ed",
+    "successor/development.py": "d0b79183f42b3bb90dc025c5cf469f0e5cee2e1cb6a41215d50c648ba9c99f45"
+  },
+  "status": "PASS_FOCUSED_AND_CONTINUITY"
+}

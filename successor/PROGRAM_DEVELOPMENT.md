@@ -38,6 +38,21 @@ python -m successor program-develop --manifest successor/state/program-birth/man
 
 This command ends after its finite budget. It is not a background service.
 
+Development and autonomy sessions now record retry policy
+`verified_memory_context_v3`. A previously exhausted memory-dependent strategy
+becomes eligible again when its usable set of verified programs changes. The
+selection records the memory-context digest and its reason; replay reconstructs
+the context visible at the earlier decision. Failed candidates, incompatible
+input types, repeated admissions and program ordering alone do not justify a
+retry. An already attempted context is not repeated. Historical sessions without
+a policy or with `untried_strategies_v2` retain their original decisions.
+
+This repairs continuation after learning: for example, a structured-output task
+can first fail, then become solvable after the kernel learns an arithmetic
+program on another task. The controller can select the old deficit and compose
+the new verified program into its output structure. The old failure stays in the
+journal; the new attempt must still pass its held-out examples.
+
 ## Data and compatibility
 
 Legacy `native_source` goals keep their original scalar contract. The additive

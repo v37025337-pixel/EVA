@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "df559477f1afdf87fe72cf2010012283b0dbc5ccf6f58a07be9ef07de7f5b3d1",
+  "current_head_digest": "42a852bfce8330526b709ecfdbf9503a381550293824bca99707c2e73d93bbcc",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 314,
+  "event_count": 315,
   "events": [
     {
       "canonical_mutation": false,
@@ -5538,10 +5538,27 @@
         "CANONICAL_INVARIANT_GUARD",
         "NATIVE_PROGRAM_FRESH_TRANSFER_RESTART_AND_ROLLBACK"
       ]
+    },
+    {
+      "canonical_mechanism_mutation": true,
+      "canonical_mutation": true,
+      "effect": "Retry exhausted memory-dependent strategies after a new verified program; preserve earlier results and policy replay.",
+      "event_hash": "408440dd32c9e7f70feb3add7b08dea479f95a143c9fa7085584c143b7034c56",
+      "event_id": "E0315_VERIFIED_MEMORY_DEVELOPMENT_V3",
+      "event_type": "MAINTAINER_DEVELOPMENT_CONTINUATION_REPAIR",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "generation_transition": false,
+      "index": 314,
+      "new_head_digest": "42a852bfce8330526b709ecfdbf9503a381550293824bca99707c2e73d93bbcc",
+      "parent_event_hash": "2dbb714ad0dec4a18b267fa4cb3b66b9fc73eb7a63189a0282faa952ed38a7ee",
+      "previous_head_digest": "df559477f1afdf87fe72cf2010012283b0dbc5ccf6f58a07be9ef07de7f5b3d1",
+      "promotion_applied": false,
+      "source_path": "audits/yado-memory-aware-development-v3-validation.json",
+      "status": "PASS_FOCUSED_MEMORY_RETRY_REGRESSION"
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "b5742aeef145277d6ca92e375affaf070a48f88b6bf85e71308c8adfaabb3bfa",
+  "ledger_digest": "b2c29a927f34406015e7bb038f1fa6e74b5831b372a026c33a974d557ad33291",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -5580,5 +5597,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "2dbb714ad0dec4a18b267fa4cb3b66b9fc73eb7a63189a0282faa952ed38a7ee"
+  "tail_event_hash": "408440dd32c9e7f70feb3add7b08dea479f95a143c9fa7085584c143b7034c56"
 }

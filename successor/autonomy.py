@@ -9,7 +9,7 @@ from __future__ import annotations
 import copy
 
 from .cognitive import CognitiveLoop, consolidated_stats, replay as cognitive_replay
-from .development import RETRY_POLICY, candidates as retry_candidates, replay as development_replay
+from .development import RETRY_POLICY, RETRY_POLICIES, candidates as retry_candidates, replay as development_replay
 from .endogenous_run import _events_spec, _pressure, _relation_spec
 from .kernel import decode, fingerprint
 
@@ -117,7 +117,9 @@ def replay(records, identity):
             limits(r['budget'], r['max_cycles'])
             expected = {'kind': kind, 'budget': r['budget'], 'max_cycles': r['max_cycles'], 'objective': OBJECTIVE}
             if 'retry_policy' in r:
-                expected['retry_policy'] = RETRY_POLICY
+                if r['retry_policy'] not in RETRY_POLICIES:
+                    raise ValueError('AUTONOMY_START_CONTRACT')
+                expected['retry_policy'] = r['retry_policy']
             if (r != expected
                     or any(s['status'] == 'ACTIVE' for s in sessions.values())
                     or any(g['status'] == 'ACTIVE' for g in cognitive_replay(_cognitive(past)).values())
