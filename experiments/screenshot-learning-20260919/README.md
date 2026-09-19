@@ -42,8 +42,11 @@ Stages:
    The pinned CLI SHA is checked before launch. A dedicated tracker is used.
    An interrupted campaign can resume the same tracker and journal with
    `--resume --cycles 3`; already recorded tasks are not submitted twice.
-4. Run `finalize.py OUTPUT` after the native and source stages finish. This checks
-   reopening both native and component executors and hashes the complete state.
+4. For the observed component admission failure, run
+   `finalize.py OUTPUT --predecessor PREDECESSOR`. This verifies native reopening,
+   exact old event preservation, candidate application and program memory. It
+   compares the five historical component admission sections without bypassing
+   the component gate, then hashes the checkpoint with a WITHHOLD campaign status.
 
 Run scripts from the EVA checkout using its dependency-complete Python runtime.
 Use a fresh output directory; do not apply them concurrently to an existing live
@@ -51,10 +54,22 @@ kernel. Preserve the original checkpoint. Source overlay restoration intentional
 reinstates its exact pinned runtime bytes before opening the old identity.
 
 Evidence distinguishes external agent tasks, a kernel-selected Hivemind goal,
-three endogenous continuation cycles, and twelve fresh component tasks. A task
+three endogenous continuation cycles, and an attempted component reopening. A task
 that fails held-out validation remains in review. The complete campaign status
 is not an assertion that every task passed. The router is compared against the
 already present router on the same disclosed five-case suite; zero gain is zero.
+
+Observed run: the native journal reached tick 1840 from 1787. The normalizer
+passed held-out checks and processed nine real metadata records, including three
+previously unseen inputs. The JSON equivalence task was withheld for key-order
+sensitivity. Three subsequent endogenous cycles verified. Development selected
+no further eligible experience. Component reopening raised
+`GENERATION_ADMISSION_NOT_REPRODUCIBLE`; the planned twelve component tasks did
+not execute. The separate admission diagnostic records exact differing sections.
+The original component files remain byte-identical to the predecessor checkpoint.
+Historical library replay makes live PyPI requests, so network availability can
+affect admission reproducibility; this does not invalidate the native journal.
+No source-pinned component implementation was patched to suppress the failure.
 
 The scripts do not modify canonical files, merge main, or start a background
 service. The durable result is the new checkpoint. Existing runtime grammar and

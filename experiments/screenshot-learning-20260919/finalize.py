@@ -5,19 +5,25 @@ import importlib.util
 import json
 from pathlib import Path
 import shutil
+import sqlite3
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT), str(ROOT/'runtime'), str(ROOT/'runtime/yado_rc8_v36')]
-from successor.kernel import SuccessorKernel, fingerprint
-from successor.generation import GenerationKernel
+from successor.kernel import SuccessorKernel, fingerprint, decode, encode
+from successor.generation import retained_memory, evaluate, parent_profile
+from successor.generation_tasks import challenge
 from successor.cognitive import CognitiveLoop, replay
 from successor.compositional_source import execute
+from successor.compositional_binding import memories
+from successor.runtime_evolution import active_candidates
 
-def main(out):
+def main(out, predecessor):
     native=json.loads((out/'native-summary.json').read_text())
-    if native['status']!='COMPLETED_WITH_MEASURED_RESULTS':
-        raise ValueError('NATIVE_CAMPAIGN_INCOMPLETE')
+    assert native['status']=='WITHHOLD'
+    assert native['error']=='ValueError:GENERATION_ADMISSION_NOT_REPRODUCIBLE'
+    continuation=json.loads((out/'native-continuation.json').read_text())
+    native['hivemind_results']=json.loads((out/'hivemind-agent-results.json').read_text())
     source_stages={name:json.loads((out/(name+'.json')).read_text()) for name in
                    ('ecosystem-host-transport','repository-development-host-transport','router-comparison')}
     kernel=SuccessorKernel(out/'birth/manifest.json',out/'kernel.sqlite')
@@ -26,9 +32,19 @@ def main(out):
         # This sealed checkpoint has no concurrent writer.
         last=kernel.db.execute('SELECT tick,event_hash FROM events ORDER BY tick DESC LIMIT 1').fetchone()
         state={'status':'PASS','tick':last['tick'],'event_hash':last['event_hash']}
-        assert state==native['state_after']
+        assert state==continuation['state_verification']
         assert kernel.identity==native['identity_digest']
-        goals=replay(CognitiveLoop(kernel)._records())
+        with sqlite3.connect((predecessor/'kernel.sqlite').as_uri()+'?mode=ro',uri=True) as db:
+            prefix=[tuple(r) for r in db.execute('SELECT * FROM events ORDER BY tick')]
+        assert [tuple(r) for r in kernel.db.execute('SELECT * FROM events WHERE tick<=? ORDER BY tick',
+                (native['state_before']['tick'],))]==prefix
+        records=CognitiveLoop(kernel)._records()
+        old_records=[r for r in records if r['tick']<=native['state_before']['tick']]
+        previous={p['source_sha256'] for p in memories(old_records)}
+        current={p['source_sha256'] for p in memories(records)}
+        assert previous <= current
+        assert active_candidates(old_records)==active_candidates(records)
+        goals=replay(records)
         tasks=json.loads((out/'agent-tasks.json').read_text())
         expected={row['name']:row['spec'] for row in tasks['tasks']}
         expected['kernel-own-goal']=json.loads((out/'kernel-own-proposal.json').read_text())['spec']
@@ -54,12 +70,43 @@ def main(out):
             assert row['input']=={'record':{key:metadata[key] for key in ('full_name','html_url')}}
             assert prediction==row['output']=={'source_id':metadata['full_name'].lower(),'source_url':metadata['html_url']}
         component=out/'component-evolution'
-        generation=GenerationKernel(kernel,component/'experience.sqlite',component/'state.sqlite')
-        try:
-            profile=generation.snapshot()
-            assert profile['component_generation']==1
-        finally:
-            generation.close()
+        component_hashes={}
+        for filename in ('experience.sqlite','state.sqlite'):
+            component_hashes[filename]=hashlib.sha256((component/filename).read_bytes()).hexdigest()
+            assert component_hashes[filename]==hashlib.sha256((predecessor/'component-evolution'/filename).read_bytes()).hexdigest()
+        with sqlite3.connect((component/'state.sqlite').as_uri()+'?mode=ro',uri=True) as db:
+            component_records=[decode(r[0]) for r in db.execute('SELECT body FROM events ORDER BY tick')]
+        birth=component_records[0]
+        proposal=next(r for r in component_records if r['kind']=='PROPOSE')
+        admission=next(r for r in component_records if r['kind']=='ADMISSION')
+        cases=challenge(admission['fresh_seed'])
+        protected=challenge(admission['fresh_seed'],retention=True)
+        # Diagnostic calculations only. No component gate is bypassed or activated.
+        expected={'parent':evaluate(parent_profile(),cases),'child':evaluate(proposal['profile'],cases),
+                  'parent_retention':evaluate(parent_profile(),protected),
+                  'child_retention':evaluate(proposal['profile'],protected),
+                  'inherited_memory':retained_memory(kernel,birth['parent_state']['tick'])}
+        comparisons={key:admission[key]==value for key,value in expected.items()}
+        old_checks={r['goal_id']:r for r in admission['inherited_memory']['checks']}
+        diffs=[{'goal_id':r['goal_id'],'archived':old_checks.get(r['goal_id']),'replayed':r}
+               for r in expected['inherited_memory']['checks'] if old_checks.get(r['goal_id'])!=r]
+        diagnostic={'status':'WITHHOLD','error':native['error'],'matching_sections':comparisons,
+                    'differing_memory_checks':diffs,'component_files_preserved_exactly':component_hashes,
+                    'historical_parent_tick':birth['parent_state']['tick'],
+                    'current_replay_passed':expected['inherited_memory']['passed'],
+                    'component_fresh_tasks_executed':0,'gate_bypassed':False}
+        (out/'component-admission-diagnostic.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
+        (out/'component-inherited-memory-replay.typed.json').write_text(encode(expected['inherited_memory'])+'\n')
+        assert not all(comparisons.values()), 'EXPECTED_FAILURE_NOT_REPRODUCED'
+        development=decode((out/'native-development.typed.json').read_text())
+        native.update(state_after=state,prior_events_preserved_exactly=True,
+            inherited_runtime_strategies_preserved=True,agent_tasks=2,
+            agent_tasks_passed=sum(r['passed'] for r in native['hivemind_results'] if r['task_origin']=='EXTERNAL_MODEL_AGENT'),
+            endogenous_cycles_verified=continuation['cycles_verified'],native_programs_before=len(previous),
+            native_programs_after=len(current),new_program_hashes=sorted(current-previous),
+            component_fresh_tasks=0,component_fresh_passed=0,
+            component_historical_memory_replay_passed=expected['inherited_memory']['passed'],
+            general_intelligence_proven=False,development_selections=sum(len(s['selections']) for s in development['sessions']))
     finally:
         kernel.close()
     loader=importlib.util.spec_from_file_location('resume',ROOT/'experiments/repository-learning-resume-20260919/run.py')
@@ -72,7 +119,8 @@ def main(out):
     script_hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
                    for p in sorted(Path(__file__).parent.glob('*.py'))}
     inventory=json.loads((out/'screenshot-source-inventory.json').read_text())
-    summary={**native, 'restart_verified':True,'component_restart_verified':True,
+    summary={**native, 'restart_verified':True,'component_restart_verified':False,
+             'native_progress_status':'VERIFIED_PARTIAL_PROGRESS',
              'source_repositories_received':sum(x['status']=='FETCHED_REAL_CONTENT' for x in inventory),
              'source_repositories_requested':len(inventory),
              'source_documents_received':sum(2 for x in inventory if x['status']=='FETCHED_REAL_CONTENT'),
@@ -90,7 +138,7 @@ def main(out):
                                     'Direct Exa MCP POST: HTTP 403; Exa connector fetch succeeded'],
              'source_processing_scope':'Public content receipts and existing marker checks; native training uses explicitly agent-authored structured tasks'}
     (out/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
-    receipt={'status':'PASS_SHADOW_STATEFUL_RESTART_CONTINUATION_V1',
+    receipt={'status':'PASS_NATIVE_CHECKPOINT_INTEGRITY_COMPONENT_WITHHELD',
              'source_run_id':0,'local_checkpoint_id':summary['local_checkpoint_id'],
              'predecessor_run_id':native['predecessor_run_id'],'identity_digest':native['identity_digest'],
              'state_before':native['state_before'],'state_after':state,
@@ -104,4 +152,6 @@ def main(out):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output',type=Path)
-    main(parser.parse_args().output.resolve())
+    parser.add_argument('--predecessor',type=Path,required=True)
+    args=parser.parse_args()
+    main(args.output.resolve(),args.predecessor.resolve())
