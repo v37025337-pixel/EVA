@@ -69,11 +69,11 @@
     },
     {
       "ast_call_sha256": "c46d821d2cd25a0275a23ad09ea74451628d4a730eb1a5bbd21abec27427e84e",
-      "boundary": "Executes only a fresh exact lowering of a validated, versioned finite program IR. execute snapshots the candidate, validates exact dict/list/scalar node shapes, referenced identifier inputs, a fixed primitive-name/arity/type registry, at most 128 IR nodes and depth 16, and source equality with _emit(program) plus SHA-256 before compilation. Literal values and object keys are repr-quoted; emitted code has one fixed solve function and only literal constructors, _input and _primitive calls, with empty builtins. The two helper globals expose no file, network, import, attribute-access or dynamic-evaluation operation. Python text is parsed to bounded AST data and never executed; unified diff produces text and does not apply patches. Inputs/intermediate values have finite type, depth, total node/text and sequence budgets; each diff is capped at 128 lines per side and 16384 total text characters. Search has independent finite state, attempt, memory and observation-size budgets. Cognitive admission additionally re-synthesizes from original training and verified historical memory, binds typed metadata and recomputes training/holdout/query execution on replay; a matching source hash or stored PASS is insufficient. This is an in-process reviewed-language executor, not arbitrary Python/process isolation. Entry values are validated JSON journal/goal data; arbitrary live Python objects or custom deepcopy hooks from direct Python callers are outside this boundary.",
+      "boundary": "Executes only a fresh exact lowering of a validated, versioned finite program IR. execute snapshots the candidate, validates exact dict/list/scalar node shapes, referenced identifier inputs, a fixed primitive-name/arity/type registry, at most 128 IR nodes and depth 16, and source equality with _emit(program) plus SHA-256 before compilation. Literal values and object keys are repr-quoted; emitted code has one fixed solve function and only literal constructors, _input and _primitive calls, with empty builtins. The two helper globals expose no file, network, import, attribute-access or dynamic-evaluation operation. Python text is parsed to bounded AST data and never executed; unified diff produces text and does not apply patches. Inputs/intermediate values have finite type, depth, total node/text and sequence budgets; each diff is capped at 128 lines per side and 16384 total text characters. Search has independent finite state, attempt, memory and observation-size budgets. Cognitive admission additionally re-synthesizes from original training and verified historical memory, binds typed metadata and recomputes training/holdout/query execution on replay; a matching source hash or stored PASS is insufficient. This is an in-process reviewed-language executor, not arbitrary Python/process isolation. Entry values are validated JSON journal/goal data; arbitrary live Python objects or custom deepcopy hooks from direct Python callers are outside this boundary. V2 additionally exposes only bounded recursive JSON equality/inequality; its object keys are unordered while scalar tags and array order remain exact. Grammar-version validation prevents V2 operations from being relabelled as V1; V1 search behavior and memory profile remain unchanged. The execute/emitter/input-boundary ASTs and all eleven MAX_* limits were compared with the reviewed V1 bytes and are unchanged.",
       "call": "exec",
-      "call_identity": "exec:366:4",
+      "call_identity": "exec:403:4",
       "path": "successor/compositional_source.py",
-      "source_sha256": "d9741e99432cb1e07d56f1e2543b90b1b3b1f3b2d12b91bacca9993c4f8fcdaf",
+      "source_sha256": "9c65126370750c8b039c35f199f14e6a1e635f8053d6c31043e0b835a50a1309",
       "test_references": [
         "successor/tests/test_compositional_source.py::CompositionalSourceTests.test_source_spoofing_with_updated_digest_is_rejected",
         "successor/tests/test_compositional_source.py::CompositionalSourceTests.test_unknown_primitive_and_malformed_ir_are_rejected",
@@ -84,7 +84,10 @@
         "successor/tests/test_compositional_binding.py::CompositionalBindingTests.test_rehashed_execution_or_source_forgery_is_rejected",
         "successor/tests/test_compositional_binding.py::CompositionalBindingTests.test_child_composes_verified_parent_and_rejects_forged_lineage",
         "successor/tests/test_compositional_binding.py::CompositionalBindingTests.test_generated_and_reused_metadata_reject_boolean_to_integer_forgery",
-        "successor/tests/test_program_goals.py::ProgramGoalContractTests.test_floats_custom_objects_large_trees_and_cycles_rejected"
+        "successor/tests/test_program_goals.py::ProgramGoalContractTests.test_floats_custom_objects_large_trees_and_cycles_rejected",
+        "successor/tests/test_json_semantics_v2.py::JsonSemanticsV2Tests.test_v1_rejects_relabelled_v2_operation",
+        "successor/tests/test_json_semantics_v2.py::JsonSemanticsV2Tests.test_v2_does_not_expand_supported_json_domain",
+        "successor/tests/test_json_semantics_v2.py::HistoricalProfileTests.test_exact_legacy_activation_and_body_tampering"
       ]
     },
     {

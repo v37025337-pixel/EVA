@@ -221,7 +221,7 @@ def run(predecessor, output):
     save(evidence, 'summary', report); save(output, 'summary', report)
     # All required source bytes, including the prior runtime overlay, are pinned.
     manifest = json.loads((output / 'birth/manifest.json').read_text())
-    for relative in manifest['assembly_sources']:
+    for relative in set(manifest['assembly_sources']) | set(manifest.get('inherited_source_updates', {})):
         target = output / 'source-overlay' / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / relative, target)

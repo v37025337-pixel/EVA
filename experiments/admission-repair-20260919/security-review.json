@@ -1,0 +1,37 @@
+{
+  "status": "PASS_FOCUSED_BOUNDARY_REVIEW",
+  "reviewer": "independent source_tasks agent",
+  "source": "successor/compositional_source.py",
+  "source_sha256": "9c65126370750c8b039c35f199f14e6a1e635f8053d6c31043e0b835a50a1309",
+  "call_identity": "exec:403:4",
+  "ast_call_sha256": "c46d821d2cd25a0275a23ad09ea74451628d4a730eb1a5bbd21abec27427e84e",
+  "tests_passed": 32,
+  "test_groups": [
+    "test_compositional_source (18)",
+    "test_json_semantics_v2 (9)",
+    "test_program_goals (5)"
+  ],
+  "additional_pre_exec_rejections": [
+    "forged_source_and_rehashed_digest",
+    "wrong_source_digest",
+    "unknown_import_operator",
+    "v2_operation_relabelled_v1",
+    "unknown_grammar",
+    "ast_operand"
+  ],
+  "code_shaped_string_remains_data": true,
+  "unchanged_ast_functions": [
+    "execute",
+    "_emit",
+    "_expression",
+    "_bounded",
+    "_signature",
+    "_checked_inputs",
+    "_freeze"
+  ],
+  "max_constants_unchanged": 11,
+  "source_bound_reviews_validated": 9,
+  "invalid_reviews": 0,
+  "policy_gate_disabled": false,
+  "scope": "REVIEWED_BOUNDED_LANGUAGE_NOT_ARBITRARY_PYTHON_ISOLATION"
+}
