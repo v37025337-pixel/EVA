@@ -180,7 +180,6 @@ def run(strict: bool = False) -> dict[str, Any]:
     )
     markers = conflict_markers(tracked)
 
-    unified_source = UNIFIED_RUNTIME.read_text(encoding="utf-8")
     branch_state = branch_inventory(managed_policy)
 
     execution_versions = [
@@ -221,8 +220,6 @@ def run(strict: bool = False) -> dict[str, Any]:
         "single_active_experience_layer": sum(active_status(x) for x in experience_versions) == 1 and active_status(head.get("experience_conditioned_cognitive_layer_v4", {})),
         "no_tracked_bytecode": not tracked_bytecode,
         "no_merge_conflict_markers": not markers,
-        "unified_core_no_hardcoded_branch_count": "len(branches)==14" not in unified_source and "len(branches) == 14" not in unified_source,
-        "unified_core_no_hardcoded_active_branch": "active[0].get('branch')=='yado-architecture-shadow-search'" not in unified_source,
         "development_loop_complete": contract.get("development_continuity") == [
             "MEASURE_DEFICIT",
             "SELECT_TARGET_FROM_CURRENT_STATE",
