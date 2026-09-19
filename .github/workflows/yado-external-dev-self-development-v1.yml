@@ -2,13 +2,23 @@ name: YADO External Dev Self Development V1
 
 on:
   workflow_dispatch:
+    inputs:
+      source_run:
+        description: Optional prior run ID to resume its verified native checkpoint
+        required: false
+        default: ''
+      checkpoint_name:
+        description: Exact checkpoint artifact name when source_run is provided
+        required: false
+        default: yado-continuation-checkpoint-v1-35451019074-1
   push:
-    branches: [codex/yado-external-dev-self-development-v1-20260916]
+    branches: [codex/yado-external-dev-self-development-v1-20260916, codex/yado-repository-learning-resume-20260919]
     paths:
       - '.github/workflows/yado-external-dev-self-development-v1.yml'
       - 'runtime/yado_external_dev_self_development_v1.py'
       - 'runtime/yado_unified_core_external_dev_self_development_v1.py'
       - 'runtime/test_yado_external_dev_self_development_v1.py'
+      - 'experiments/repository-learning-resume-20260919/**'
 
 permissions:
   contents: write
@@ -19,6 +29,7 @@ concurrency:
 
 jobs:
   self-develop:
+    if: github.ref != 'refs/heads/codex/yado-repository-learning-resume-20260919' && !inputs.source_run
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -120,3 +131,54 @@ jobs:
             candidates/autonomous/yado-external-dev-self-development-v1.json
             audits/yado-full-kernel-audit-v1-report.json
             audits/yado-full-regression-v1-report.json
+
+  learn-and-resume:
+    if: github.ref == 'refs/heads/codex/yado-repository-learning-resume-20260919' || inputs.source_run != ''
+    permissions:
+      contents: read
+      actions: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reconstruct runtime and install dependencies
+        run: |
+          python runtime/reconstruct_rc8v36.py
+          python -m pip install --disable-pip-version-check -r runtime/yado_rc8_v36/requirements-github.txt -r successor/requirements.txt pyyaml
+      - name: Download predecessor checkpoint
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.source_run || '35451019074' }}
+          name: ${{ inputs.checkpoint_name || 'yado-continuation-checkpoint-v1-35451019074-1' }}
+          path: ${{ runner.temp }}/yado-predecessor
+      - name: Install the previously verified Hivemind release
+        run: |
+          curl --fail --location --retry 2 --output "$RUNNER_TEMP/hive" https://github.com/dip497/hivemind/releases/download/v1.17.1/hive-linux-x86_64
+          echo "32a9f345f1bb69f0bda237449bbd28b8fb6262f1e1b7a13efff7dafe9d5c764d  $RUNNER_TEMP/hive" | sha256sum --check
+          chmod +x "$RUNNER_TEMP/hive"
+      - name: Run live learning, local Hivemind transport and native continuation
+        env:
+          SOURCE_RUN: ${{ inputs.source_run || '35451019074' }}
+        run: |
+          python experiments/repository-learning-resume-20260919/run.py \
+            --checkpoint "$RUNNER_TEMP/yado-predecessor" --source-run "$SOURCE_RUN" \
+            --output "$RUNNER_TEMP/yado-learning-checkpoint" --hive "$RUNNER_TEMP/hive" --cycles 20
+      - name: Verify canonical continuity
+        run: |
+          git diff --exit-code -- canonical architecture/evolution-ledger.json
+          python runtime/yado_canonical_invariant_guard_v1.py
+      - name: Preserve complete state and learning evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yado-repository-learning-checkpoint-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/yado-learning-checkpoint/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90

@@ -33,8 +33,11 @@ use the new run ID and its exact artifact name to continue from that checkpoint.
 The named initial source is deliberate: automatic selection of an arbitrary
 latest artifact could silently change the predecessor.
 
-The workflow runs once on the campaign branch, and supports `workflow_dispatch`
-after admission. It does not start an unattended permanent process. The
+The existing `yado-external-dev-self-development-v1.yml` workflow runs this
+campaign once on its branch, and supports `workflow_dispatch` with `source_run`
+and `checkpoint_name` after admission. Its original mode remains available when
+`source_run` is empty. No new workflow or change to the workflow allowlist is
+required. It does not start an unattended permanent process. The
 experiment and transport are assistant-authored; source emission and concrete
 goal selection use existing YADO mechanisms. There is no evidence here for
 consciousness, general intelligence, or invention of an unrestricted mind.

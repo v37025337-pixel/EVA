@@ -158,17 +158,20 @@ def main(args):
         try:
             proposal = propose_endogenous_goal(kernel)
             save(out, "hivemind-kernel-proposal", proposal)
+            # Every fresh tracker starts at YADO-1. Bind its namespace to the
+            # predecessor state so later restored campaigns cannot alias it.
+            workspace_id = "yado-repository-learning-" + before["event_hash"]
             with HivemindClient([str(args.hive), "mcp-stdio"], workspace / ".hivemind", env=env) as client:
                 issue = client.call("hive_create_issue", {
                     "title": "YADO state-derived continuation",
                     "description": json.dumps({"schema": "yado.hivemind.goal.v1", "spec": proposal["spec"],
                                                "budget": 3, "mode": "full"}),
                     "acceptance_criteria": list(CRITERIA), "state": "todo"})
-                result = run_issue(kernel, client, "yado-repository-learning-20260919", issue["id"])
+                result = run_issue(kernel, client, workspace_id, issue["id"])
                 save(out, "hivemind", result)
                 assert result["passed"] and result["tracker_state"] == "done"
                 tick = kernel.verify_state()["tick"]
-                retry = run_issue(kernel, client, "yado-repository-learning-20260919", issue["id"])
+                retry = run_issue(kernel, client, workspace_id, issue["id"])
                 assert retry["goal_id"] == result["goal_id"] and kernel.verify_state()["tick"] == tick
                 save(out, "hivemind-retry", {"status": "PASS", "same_goal": True, "no_duplicate_events": True})
                 results["hivemind"] = result
