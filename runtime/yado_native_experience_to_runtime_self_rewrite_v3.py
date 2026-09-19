@@ -117,14 +117,19 @@ def synthesize_candidate(parent_src, exp):
 
     learned_value = ast.parse(repr(learned), mode='eval').body
     learned_updated = False
-    for i, node in enumerate(tree.body):
+    refreshed_body = []
+    for node in tree.body:
         if _assigns_name(node, 'LEARNED_EXTERNAL_EVIDENCE_V2'):
-            tree.body[i] = ast.Assign(
-                targets=[ast.Name(id='LEARNED_EXTERNAL_EVIDENCE_V2', ctx=ast.Store())],
-                value=learned_value,
-            )
-            learned_updated = True
-            break
+            if not learned_updated:
+                refreshed_body.append(ast.Assign(
+                    targets=[ast.Name(id='LEARNED_EXTERNAL_EVIDENCE_V2', ctx=ast.Store())],
+                    value=learned_value,
+                ))
+                learned_updated = True
+            # Discard stale duplicates emitted by the former V2 generator.
+            continue
+        refreshed_body.append(node)
+    tree.body = refreshed_body
     if not learned_updated:
         insertion_index = 0
         for i, node in enumerate(tree.body):

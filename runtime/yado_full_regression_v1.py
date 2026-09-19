@@ -93,6 +93,21 @@ def source_digests():
             for p in sorted(paths)}
 
 
+def write_report(output, report):
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=output.parent,
+                                         prefix=output.name + ".", delete=False) as stream:
+            temporary = Path(stream.name)
+            stream.write(json.dumps(report, indent=2, sort_keys=True) + "\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        temporary.replace(output)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", required=True)
@@ -102,10 +117,12 @@ def main():
     output.parent.mkdir(parents=True, exist_ok=True)
     started = time.time()
     report = {"schema": "yado.full_regression.v1", "status": "WITHHOLD",
-              "tested_commit": subprocess.check_output(
-                  ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+              "tested_commit": None,
               "python": sys.version, "suites": list(SUITES)}
+    write_report(output, report)
     try:
+        report["tested_commit"] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
         manifest = Path(args.manifest).resolve(strict=True)
         report["manifest_sha256"] = hashlib.sha256(manifest.read_bytes()).hexdigest()
         report["identity_digest"] = json.loads(manifest.read_text())["identity_digest"]
@@ -132,7 +149,7 @@ def main():
     except Exception as exc:
         report["error"] = type(exc).__name__ + ": " + str(exc)
     report["elapsed_seconds"] = time.time() - started
-    output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    write_report(output, report)
     print(json.dumps({key: value for key, value in report.items()
                       if key not in {"passed_ids", "source_sha256"}}, indent=2))
     return 0 if report["status"] == "PASS" else 1

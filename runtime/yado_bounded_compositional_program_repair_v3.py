@@ -90,16 +90,29 @@ class BoundedCompositionalProgramRepairV3:
 
     @classmethod
     def _passes(cls,source,function_name,examples):
+        observed=False
         for args,expected in examples:
+            observed=True
             try:got=cls.execute(source,function_name,args)
             except Exception:return False
             if not cls.equivalent(got,expected):return False
-        return True
+        return observed
 
     @classmethod
     def repair(cls,source,function_name,train_examples,max_candidates=None,max_edit_depth=None,
                enabled=("binop","compare","boolop","constant","structural")):
-        cls._validate(ast.parse(source))
+        # Validate before parsing or searching in the host process. Execution's
+        # worker limits cannot bound allocations made by the repair frontend.
+        if (type(source) is not str or len(source)>MAX_SOURCE_BYTES
+                or len(source.encode('utf-8'))>MAX_SOURCE_BYTES):
+            raise ValueError("PROGRAM_SOURCE_BUDGET")
+        if type(train_examples) not in (list,tuple) or not train_examples:
+            raise ValueError("REPAIR_TRAINING_EXAMPLES_REQUIRED")
+        if any(type(row) not in (list,tuple) or len(row)!=2
+               or type(row[0]) not in (list,tuple) for row in train_examples):
+            raise ValueError("REPAIR_TRAINING_EXAMPLE_SCHEMA")
+        fname=cls._validate(ast.parse(source))
+        if fname!=function_name:raise ValueError("FUNCTION_NAME_MISMATCH")
         max_candidates=min(int(max_candidates or cls.MAX_CANDIDATES),cls.MAX_CANDIDATES)
         max_depth=min(int(max_edit_depth or cls.MAX_EDIT_DEPTH),cls.MAX_EDIT_DEPTH)
         if cls._passes(source,function_name,train_examples):

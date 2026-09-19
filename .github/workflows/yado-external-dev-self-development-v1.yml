@@ -98,6 +98,7 @@ jobs:
       - name: Run complete inherited and Successor regression
         run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-self-dev-successor/manifest.json"
       - name: Persist YADO-generated shadow candidate and receipt
+        if: github.ref == 'refs/heads/codex/yado-external-dev-self-development-v1-20260916'
         run: |
           git config user.name 'YADO External Dev Self Development'
           git config user.email 'actions@users.noreply.github.com'
@@ -106,7 +107,7 @@ jobs:
             echo 'No generated candidate change to persist'
           else
             git commit -m 'YADO self-development: materialize external dev capability router [skip ci]'
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+            git push origin HEAD:codex/yado-external-dev-self-development-v1-20260916
           fi
       - name: Preserve self-development evidence
         if: always()

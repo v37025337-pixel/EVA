@@ -110,6 +110,7 @@ jobs:
       - name: Run complete inherited and Successor regression
         run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-residual-successor-birth/manifest.json"
       - name: Persist verified residual continuation receipt in shadow branch
+        if: github.ref == 'refs/heads/codex/yado-residual-goal-continuation-v2-20260916'
         run: |
           git config user.name 'YADO Residual Goal Continuation'
           git config user.email 'actions@users.noreply.github.com'
@@ -118,7 +119,7 @@ jobs:
             echo 'No residual continuation receipt change to persist'
           else
             git commit -m 'YADO campaign: persist residual-goal continuation proof [skip ci]'
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+            git push origin HEAD:codex/yado-residual-goal-continuation-v2-20260916
           fi
       - name: Preserve residual continuation evidence
         if: always()

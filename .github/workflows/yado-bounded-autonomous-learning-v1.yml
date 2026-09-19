@@ -7,6 +7,10 @@ on:
   schedule:
     - cron: '17 */6 * * *'
 
+concurrency:
+  group: yado-bounded-autonomous-learning-v1
+  cancel-in-progress: false
+
 jobs:
   learn:
     runs-on: ubuntu-24.04
@@ -63,6 +67,8 @@ jobs:
           assert x['execution_identity'] == active_kernel_identity(Path('.'))
           print(json.dumps({'status':r['status'],'sources':r['source_success_count'],'candidate':r['generated_capability']['path'],'next':r['next_required_capability']},sort_keys=True))
           PY
+      - name: Verify native refresh from this exact learning run
+        run: python runtime/yado_native_learning_cycle_v1.py --output audits/yado-native-learning-cycle-v1
       - name: Persist bounded experience to shadow branch
         run: |
           git fetch origin yado-bounded-autonomous-learning-v1
@@ -84,6 +90,7 @@ jobs:
         with:
           name: yado-bounded-autonomous-learning-v1-${{ github.run_id }}
           path: |
+            audits/yado-native-learning-cycle-v1/
             experience/autonomous/yado-autonomous-learning-latest.json
             candidates/autonomous/yado-bounded-autonomous-learning-v1.json
             candidates/autonomous/yado_learned_recall_*.py

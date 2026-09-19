@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+from contextlib import contextmanager
 import json
 from pathlib import Path
 import sqlite3
@@ -116,7 +117,26 @@ class SuccessorKernel:
         self.db.close()
         self.archive.close()
 
+    @contextmanager
+    def _state_read_snapshot(self):
+        """Read one SQLite version without ending a caller's write transaction."""
+        owns_transaction = not self.db.in_transaction
+        if owns_transaction:
+            self.db.execute("BEGIN")
+        try:
+            yield
+            if owns_transaction:
+                self.db.execute("COMMIT")
+        except BaseException:
+            if owns_transaction and self.db.in_transaction:
+                self.db.execute("ROLLBACK")
+            raise
+
     def verify_state(self):
+        with self._state_read_snapshot():
+            return self._verify_state()
+
+    def _verify_state(self):
         from .continuity import verify_prefix
         verify_prefix(self)
         previous, tick = "0" * 64, 0
@@ -344,8 +364,12 @@ class SuccessorKernel:
                for task in tasks):
             raise ValueError("TASK_AND_PAYLOAD_MUST_BE_OBJECTS")
         encoded = [encode(task) for task in tasks]
+        self._check_sources()
         self.db.execute("BEGIN IMMEDIATE")
         try:
+            # Refresh lineage guards under the same write lock as the append;
+            # another connection may have started a lineage since we opened.
+            self.verify_state()
             ids = [self.db.execute("INSERT INTO jobs(goal,task) VALUES(?,?)", (str(goal), task)).lastrowid for task in encoded]
             self._append({"kind": "GOAL_SUBMITTED", "goal": str(goal), "job_ids": ids,
                           "tasks_digest": sha(canonical(encoded).encode())})
@@ -379,16 +403,17 @@ class SuccessorKernel:
         return outputs
 
     def snapshot(self):
-        last = self.recent(1)
-        return {"kernel_id": self.KERNEL_ID, "identity_digest": self.identity,
-                "implementation_identity_digest": self.implementation_identity,
-                "parent_generation": self.parent.head["generation_id"],
-                "inherited_capabilities": len(self.parent.head["active_capabilities"]),
-                "task_kinds": list(self.TASK_KINDS), "archive": self.archive.summary["counts"],
-                "state_integrity": self.verify_state(),
-                "jobs": dict(self.db.execute("SELECT state,count(*) FROM jobs GROUP BY state")),
-                "last_result": {k: last[0].get(k) for k in ("tick", "status", "next_action")} if last else None,
-                "consciousness_established": False, "g3_genesis_performed": False}
+        with self._state_read_snapshot():
+            last = self.recent(1)
+            return {"kernel_id": self.KERNEL_ID, "identity_digest": self.identity,
+                    "implementation_identity_digest": self.implementation_identity,
+                    "parent_generation": self.parent.head["generation_id"],
+                    "inherited_capabilities": len(self.parent.head["active_capabilities"]),
+                    "task_kinds": list(self.TASK_KINDS), "archive": self.archive.summary["counts"],
+                    "state_integrity": self.verify_state(),
+                    "jobs": dict(self.db.execute("SELECT state,count(*) FROM jobs GROUP BY state")),
+                    "last_result": {k: last[0].get(k) for k in ("tick", "status", "next_action")} if last else None,
+                    "consciousness_established": False, "g3_genesis_performed": False}
 
     def open_goal(self, spec, *, budget=6, mode="full"):
         from .cognitive import CognitiveLoop

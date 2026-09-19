@@ -98,6 +98,7 @@ jobs:
       - name: Run complete inherited and Successor regression
         run: python runtime/yado_full_regression_v1.py --manifest "$RUNNER_TEMP/yado-multigoal-successor-birth/manifest.json"
       - name: Persist verified campaign receipt in shadow branch
+        if: github.ref == 'refs/heads/codex/yado-self-directed-dev-campaign-v1-20260916'
         run: |
           git config user.name 'YADO External Dev MultiGoal Campaign'
           git config user.email 'actions@users.noreply.github.com'
@@ -106,7 +107,7 @@ jobs:
             echo 'No campaign receipt change to persist'
           else
             git commit -m 'YADO campaign: persist five-goal self-directed development proof [skip ci]'
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+            git push origin HEAD:codex/yado-self-directed-dev-campaign-v1-20260916
           fi
       - name: Preserve campaign evidence
         if: always()

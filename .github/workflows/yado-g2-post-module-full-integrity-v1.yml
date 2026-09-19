@@ -42,6 +42,10 @@ jobs:
         run: python runtime/yado_canonical_invariant_guard_v1.py
       - name: Persist integrity evidence
         run: |
+          # An advanced source branch requires a fresh integrity run.
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          git fetch origin "${GITHUB_REF_NAME}"
+          test "$(git rev-parse FETCH_HEAD)" = "$GITHUB_SHA"
           mkdir -p receipts
           cp runtime/yado_unified_core_deep_self_audit_v1_receipt.json "receipts/yado-unified-core-deep-self-audit-v1-run-${GITHUB_RUN_ID}.json"
           git config user.name "YADO G2 Integrity Audit"
@@ -50,7 +54,6 @@ jobs:
           git diff --cached --quiet || git commit -m "Persist post-module G2 full integrity evidence [skip ci]"
           git reset --hard HEAD
           git clean -fd runtime/yado_rc8_v36
-          git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

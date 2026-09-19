@@ -11,13 +11,24 @@ RECEIPT = "candidates/autonomous/yado-bounded-autonomous-learning-v1.json"
 EXPERIENCE = "experience/autonomous/yado-autonomous-learning-latest.json"
 
 
-def copy_verified_outputs(source, destination):
-    source, destination = Path(source).resolve(), Path(destination).resolve()
-    from yado_active_kernel_contract_v1 import active_kernel_identity
+def _data_path(root, relative):
+    path = root
+    for part in Path(relative).parts:
+        path = path / part
+        if path.is_symlink():
+            raise ValueError("FEED_PATH_SYMLINK")
+    resolved = path.resolve()
+    if not resolved.is_relative_to(root):
+        raise ValueError("FEED_PATH_ESCAPE")
+    return resolved
+
+
+def verified_learning_outputs(source, identity):
+    """Validate data and its provenance without executing generated recall code."""
+    source = Path(source).resolve()
     from yado_bounded_autonomous_learning_v1 import digest
-    identity = active_kernel_identity(source)
-    receipt = json.loads((source / RECEIPT).read_text())
-    experience = json.loads((source / EXPERIENCE).read_text())
+    receipt = json.loads(_data_path(source, RECEIPT).read_text())
+    experience = json.loads(_data_path(source, EXPERIENCE).read_text())
     expected = digest({k: v for k, v in experience.items() if k != "experience_digest"})
     capability = receipt["generated_capability"]
     name = capability["path"]
@@ -32,13 +43,43 @@ def copy_verified_outputs(source, destination):
         or capability.get("fact_count", 0) <= 0
         or receipt.get("receipt_sha256") != digest({k: v for k, v in receipt.items() if k != "receipt_sha256"})):
         raise ValueError("UNVERIFIED_LEARNING_OUTPUT")
+    sources = experience.get("sources") or []
+    failures = experience.get("failures", [])
+    policy = experience.get("network_policy") or {}
+    facts = sum(len(row.get("facts", [])) for row in sources)
+    if (not sources or facts != capability.get("fact_count")
+        or len({row.get("source_id") for row in sources}) != len(sources)
+        or any(not row.get("source_id") or row.get("fact_count") != len(row.get("facts", []))
+               or any(not isinstance(fact, str) or not fact.strip() for fact in row.get("facts", []))
+               for row in sources)
+        or receipt.get("source_success_count") != len(sources)
+        or receipt.get("source_failure_count") != len(failures)
+        or receipt.get("real_network_used") is not True
+        or any(receipt.get(key) is not False for key in ("credentials_used", "external_mutation", "external_model_used", "candidate_canonical_active"))
+        or any(experience.get(key) is not False for key in ("canonical_mutation", "automatic_main_mutation"))
+        or policy.get("https_only") is not True or policy.get("methods") != ["GET"]
+        or any(policy.get(key) is not False for key in ("credentials_allowed", "external_writes", "downloaded_code_executed"))
+        or any((row.get("network") or {}).get("network_executed") is not True
+               or row["network"].get("status") != 200
+               or row["network"].get("credentials_used") is not False
+               or row["network"].get("read_only") is not True for row in sources)):
+        raise ValueError("INCONSISTENT_LEARNING_EVIDENCE")
     paths = (RECEIPT, EXPERIENCE, name)
     for item in paths:
-        src, dst = (source / item).resolve(), (destination / item).resolve()
-        if not src.is_relative_to(source) or not dst.is_relative_to(destination) or not src.is_file():
+        src = _data_path(source, item)
+        if not src.is_file():
             raise ValueError("FEED_PATH_ESCAPE")
         if item == name and hashlib.sha256(src.read_bytes()).hexdigest() != capability["sha256"]:
             raise ValueError("CAPABILITY_SOURCE_DRIFT")
+    return experience, receipt, paths
+
+
+def copy_verified_outputs(source, destination):
+    source, destination = Path(source).resolve(), Path(destination).resolve()
+    from yado_active_kernel_contract_v1 import active_kernel_identity
+    _, _, paths = verified_learning_outputs(source, active_kernel_identity(source))
+    for item in paths:
+        _data_path(destination, item)
     for item in paths:
         dst = destination / item
         dst.parent.mkdir(parents=True, exist_ok=True)

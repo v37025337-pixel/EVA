@@ -13,6 +13,14 @@ def digest_obj(obj: Any) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def _canonical_hard_constraints(constraints: Mapping[str,bool])->Dict[str,bool]:
+    # A gate is an observed boolean, never a truthiness conversion of input.
+    for key,value in constraints.items():
+        if type(value) is not bool:
+            raise ValueError(f"HARD_CONSTRAINT_MUST_BE_BOOL:{key}")
+    return {str(k):v for k,v in sorted(constraints.items())}
+
+
 @dataclass(frozen=True)
 class CausalClaim:
     claim_id: str
@@ -55,7 +63,7 @@ class GenerationRecord:
             "artifact_digest":self.artifact_digest,
             "capability_scores":{str(k):float(v) for k,v in sorted(self.capability_scores.items())},
             "protected_capabilities":sorted(map(str,self.protected_capabilities)),
-            "hard_constraints":{str(k):bool(v) for k,v in sorted(self.hard_constraints.items())},
+            "hard_constraints":_canonical_hard_constraints(self.hard_constraints),
             "change_set":sorted(map(str,self.change_set)),
             "evidence_ids":sorted(map(str,self.evidence_ids)),
             "causal_claims":[x.canonical() for x in sorted(self.causal_claims,key=lambda c:c.claim_id)],
@@ -160,6 +168,7 @@ class UnifiedCausalEvolutionArchitecture:
         self._head_id=g.generation_id
 
     def _validate_record(self,g:GenerationRecord)->None:
+        _canonical_hard_constraints(g.hard_constraints)
         if not g.generation_id or not g.lineage_id or not g.artifact_digest:
             raise ValueError("GENERATION_ID_LINEAGE_ARTIFACT_REQUIRED")
         if any(not (0.0<=float(v)<=1.0) for v in g.capability_scores.values()):
@@ -193,7 +202,7 @@ class UnifiedCausalEvolutionArchitecture:
             reasons.append("GENERATION_ID_ALREADY_EXISTS")
 
         for key in self.policy.required_constraints:
-            if not bool(candidate.hard_constraints.get(key,False)):
+            if candidate.hard_constraints.get(key) is not True:
                 reasons.append(f"HARD_CONSTRAINT_FAIL:{key}")
 
         for key in sorted(parent.protected_capabilities):
@@ -268,6 +277,7 @@ class UnifiedCausalEvolutionArchitecture:
     def promote(self,candidate:GenerationRecord,decision:PromotionDecision)->None:
         candidate=copy.deepcopy(candidate)
         decision=copy.deepcopy(decision)
+        self._validate_record(candidate)
         if decision.action!="PROMOTE_GENERATION":
             raise ValueError("CANDIDATE_NOT_ADMITTED")
         if decision.candidate_generation_id!=candidate.generation_id:

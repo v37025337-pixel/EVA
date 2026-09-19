@@ -31,7 +31,15 @@
     "ledger": "architecture/evolution-ledger.json",
     "rule": "FORMAL_ARCHITECTURE_GENERATION_IS_SEPARATE_FROM_RUNTIME_SELF_REWRITE_GENERATION"
   },
-  "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V1",
+  "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V2",
+  "learning_execution": {
+    "automatic_promotion": false,
+    "binding_probe": "runtime/yado_native_learning_cycle_v1.py",
+    "experience_source": "SAME_RUN_VERIFIED_PUBLIC_WEB_OUTPUT",
+    "historical_experience_preserved": true,
+    "native_generator": "runtime/yado_native_experience_to_runtime_self_rewrite_v3.py",
+    "repeated_content_is_capability_gain": false
+  },
   "planes": [
     {
       "id": "IDENTITY_AND_LINEAGE",
@@ -75,12 +83,12 @@
     }
   ],
   "runtime_lineage": {
-    "active_admission_evidence": "audits/yado-unified-kernel-repair-v1-validation.json",
-    "active_sha256": "3a0f3231d779521338dfea2b8280956d033dfb4cab96ce7a18840d1f06813269",
+    "active_admission_evidence": "audits/yado-unified-kernel-repair-v2-validation.json",
+    "active_sha256": "826ea55b5c740b6beaf24d82fafc61f72eb3279e4495cfa8ca071d013a64f319",
     "candidate": "candidates/autonomous/yado_bounded_autonomous_learning_runtime_candidate_v4.py",
     "candidate_sha256": "541c1d9dc5a5ce5c0a3de59ffb0a09c10c6778899251f020494f2d523411a20f",
     "component": "runtime/yado_bounded_autonomous_learning_v1.py",
-    "generation": "V4_MAINTENANCE_R1",
+    "generation": "V4_MAINTENANCE_R2",
     "historical_promotion_scope": "UNCHANGED_V4_PARENT_ONLY",
     "maintenance_authorship": "ASSISTANT_IMPLEMENTED_USER_REQUESTED_REPAIR",
     "post_merge_regression_tests": 467,

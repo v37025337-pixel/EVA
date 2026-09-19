@@ -24,6 +24,7 @@ from .real_coding_intelligence_run import (
     ALGORITHMS_URL,
     INPUT_VALUES,
     _mutate_expr,
+    _bounded_oracle,
     discover_real_code_tasks,
     run_repair,
 )
@@ -109,20 +110,7 @@ def _source_for(args: list[str], expr: ast.AST) -> str:
 
 
 def _compile_extended(source: str):
-    tree = ast.parse(source)
-    fns = [node for node in tree.body if isinstance(node, ast.FunctionDef)]
-    if len(fns) != 1:
-        raise ValueError("EXTENDED_ORACLE_FUNCTION_COUNT")
-    fn = fns[0]
-    args = {arg.arg for arg in fn.args.args}
-    body = _docless_body(fn)
-    if len(body) != 1 or not isinstance(body[0], ast.Return) or body[0].value is None:
-        raise ValueError("EXTENDED_ORACLE_BODY")
-    if not _safe_extended_expr(body[0].value, args):
-        raise ValueError("EXTENDED_ORACLE_ESCAPED_SAFE_SUBSET")
-    ns: dict[str, Any] = {"__builtins__": {}, **SAFE_CALLS}
-    exec(compile(tree, "<second-cycle-oracle>", "exec"), ns)
-    return ns["solve"]
+    return _bounded_oracle(source, _safe_extended_expr, 3, SAFE_CALLS, 'EXTENDED_ORACLE')
 
 
 def _sample_inputs(argc: int) -> list[tuple[int, ...]]:

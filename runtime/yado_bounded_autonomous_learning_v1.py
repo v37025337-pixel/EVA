@@ -198,7 +198,7 @@ def evidence_facts(text: str, query_tokens: set[str]) -> list[str]:
             break
     return rows
 
-def synthesize_recall_module(experience: dict[str, Any], path: Path) -> dict[str, Any]:
+def synthesize_recall_module(experience: dict[str, Any], path: Path, output_root=None) -> dict[str, Any]:
     facts = []
     for src in experience['sources']:
         for fact in src.get('facts', []):
@@ -213,10 +213,11 @@ def synthesize_recall_module(experience: dict[str, Any], path: Path) -> dict[str
         raise RuntimeError('UNSAFE_GENERATED_SOURCE')
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(source, encoding='utf-8')
-    return {'path': str(path.relative_to(REPO)), 'sha256': hashlib.sha256(source.encode('utf-8')).hexdigest(), 'compile': True, 'fact_count': len(facts), 'external_text_executed': False}
+    return {'path': str(path.relative_to(REPO if output_root is None else output_root)), 'sha256': hashlib.sha256(source.encode('utf-8')).hexdigest(), 'compile': True, 'fact_count': len(facts), 'external_text_executed': False}
 
-def main() -> None:
+def main(output_root=None) -> None:
     execution_identity = active_kernel_identity(REPO)
+    destination = REPO if output_root is None else Path(output_root).resolve()
     priority = load_current_priority()
     ranking = rank_sources(priority)
     selected = ranking[:MAX_SOURCES_PER_RUN]
@@ -244,15 +245,18 @@ def main() -> None:
     experience = {'schema': SCHEMA, 'status': 'PASS_SHADOW_BOUNDED_AUTONOMOUS_EXTERNAL_LEARNING_V1', 'run_id': os.getenv('GITHUB_RUN_ID') or 'LOCAL', 'kernel_core_id': core_id, 'priority': priority, 'source_ranking': [{k: v for k, v in x.items() if k != 'url'} for x in ranking], 'sources': source_results, 'failures': failures, 'network_policy': {'https_only': True, 'allowed_hosts': sorted(ALLOWED_HOSTS), 'methods': ['GET'], 'credentials_allowed': False, 'redirects_followed': False, 'max_bytes': MAX_BYTES, 'external_writes': False, 'downloaded_code_executed': False}, 'self_model_effect': 'EXTERNAL_EVIDENCE_AVAILABLE_FOR_FUTURE_SELECTION', 'canonical_mutation': False, 'automatic_main_mutation': False, 'consciousness_claimed': False}
     experience['execution_identity'] = execution_identity
     experience['experience_digest'] = digest(experience)
-    out = REPO / 'experience/autonomous/yado-autonomous-learning-latest.json'
+    out = destination / 'experience/autonomous/yado-autonomous-learning-latest.json'
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(experience, indent=2, ensure_ascii=False, sort_keys=True) + '\n', encoding='utf-8')
-    cap = REPO / 'candidates/autonomous' / f"yado_learned_recall_{experience['experience_digest'][:16]}.py"
-    generated = synthesize_recall_module(experience, cap)
+    cap = destination / 'candidates/autonomous' / f"yado_learned_recall_{experience['experience_digest'][:16]}.py"
+    generated = synthesize_recall_module(experience, cap, destination)
     receipt = {'schema': 'yado.bounded_autonomous_learning_receipt.v1', 'status': experience['status'], 'experience_digest': experience['experience_digest'], 'source_success_count': len(source_results), 'source_failure_count': len(failures), 'generated_capability': generated, 'candidate_self_written': True, 'candidate_canonical_active': False, 'real_network_used': True, 'external_model_used': False, 'credentials_used': False, 'external_mutation': False, 'next_required_capability': 'NATIVE_EXPERIENCE_TO_RUNTIME_SELF_REWRITE_AND_REGRESSION_GATE_V2', 'semantic_boundary': 'REAL PUBLIC INTERNET LEARNING + PERSISTENT EXPERIENCE + DATA-DERIVED PYTHON CAPABILITY GENESIS. NO ARBITRARY INTERNET, NO CREDENTIALS, NO EXTERNAL WRITES, NO DOWNLOADED-CODE EXECUTION, NO AUTOMATIC MAIN MUTATION, AND NO CLAIM OF CONSCIOUSNESS.'}
     receipt['receipt_sha256'] = digest(receipt)
-    rp = REPO / 'candidates/autonomous/yado-bounded-autonomous-learning-v1.json'
+    rp = destination / 'candidates/autonomous/yado-bounded-autonomous-learning-v1.json'
     rp.write_text(json.dumps(receipt, indent=2, sort_keys=True) + '\n', encoding='utf-8')
     print(json.dumps(receipt, indent=2, sort_keys=True))
 if __name__ == '__main__':
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output-root', type=Path)
+    main(parser.parse_args().output_root)
