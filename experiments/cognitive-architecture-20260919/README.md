@@ -52,6 +52,12 @@ router and campaign tests pass locally. Existing audit rules are unchanged.
 The second maintenance event appends to the first campaign's ledger event;
 neither canonical event is rewritten.
 
+During CI, branch `codex/yado-stateful-runtime-evolution-20260919` appeared with
+two additional experiment commits. They are included as merge ancestry, with
+both workflow routes retained. Its optional evolution harness now uses the same
+explicit source transition and verifies the restored identity and event prefix.
+Including that harness does not claim its candidate has passed admission.
+
 The workflow preserves a complete new checkpoint as an artifact. Its run summary
 reports actual program additions and event counts. Completion does not leave a
 background process running. Existing recurring learning is a separate workflow.
