@@ -1,0 +1,28 @@
+{
+  "schema": "yado.user_requested_native_development_gap.v1",
+  "goal_authorship": "USER",
+  "observation_authorship": "ASSISTANT_VERIFIER",
+  "status": "WITHHOLD_UNIMPLEMENTED_CAPABILITIES",
+  "request_ru": "Ядро должно само писать код и алгоритмы, развивать свои слои и доступы, работать с подключёнными репозиториями и общаться с агентами. Ассистент только запускает и наблюдает.",
+  "observed_run_ids": [35443373599, 35443567745],
+  "measured_deficits": [
+    {
+      "id": "NATIVE_ALGORITHM_NOVELTY",
+      "observation": "The emitted repository router has identical function ASTs, RULES and PRIORITY. Only PACK_DIGEST and POLICY_SHA256 changed.",
+      "required_evidence": "Kernel-emitted executable semantic change, independent fresh transfer, comparison against current implementation, regression and preserved rollback."
+    },
+    {
+      "id": "LIVE_AGENT_COMMUNICATION_ADAPTER",
+      "observation": "The existing Hivemind client exposes six issue operations and no agent messaging operation. No hive executable was available in this run.",
+      "required_evidence": "An actual available peer endpoint and permitted protocol, a kernel-generated adapter, and verified request/reply provenance."
+    },
+    {
+      "id": "REPOSITORY_EDIT_EXECUTE_ADAPTER",
+      "observation": "The connected development pack reads project metadata and documentation; it does not apply patches to those projects.",
+      "required_evidence": "Kernel-generated patch in an authorized checkout, real project tests, source diff provenance and rollback."
+    }
+  ],
+  "queued_in_durable_native_scheduler": false,
+  "automatic_future_execution_claimed": false,
+  "note": "This preserves the user objective and measured gaps. It is not evidence that the current kernel can implement these missing adapters."
+}
