@@ -1,0 +1,62 @@
+name: YADO Current Parent Rewrite Continuation
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'runtime/yado_native_self_rewrite_continuation.py'
+      - 'runtime/yado_rewrite_ranking_probe.py'
+      - 'runtime/yado_native_self_rewrite_v4_fresh_experience.py'
+      - 'runtime/test_yado_native_self_rewrite_continuation.py'
+      - '.github/workflows/yado-current-parent-rewrite-continuation.yml'
+permissions:
+  contents: read
+jobs:
+  continuation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Collect fresh experience from the verified active learner
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python runtime/yado_bounded_autonomous_learning_v1.py --output-root "$RUNNER_TEMP/current-parent-learning"
+      - name: Verify this learning run and continue from the current parent
+        env:
+          PYTHONPATH: runtime
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from yado_active_kernel_contract_v1 import active_kernel_identity
+          from yado_persist_learning_feed_v1 import verified_learning_outputs
+          from yado_native_self_rewrite_continuation import continue_from_active
+          root = Path.cwd()
+          learning = Path(os.environ['RUNNER_TEMP']) / 'current-parent-learning'
+          verified_learning_outputs(learning, active_kernel_identity(root))
+          result = continue_from_active(root, learning / 'rewrite-attempt',
+              learning / 'experience/autonomous/yado-autonomous-learning-latest.json')
+          assert result['active_admission_performed'] is False
+          assert result['capability_gain_claimed'] is False
+          assert result['g3_genesis_performed'] is False
+          assert result['checks']['parent_verified'] is True
+          if result['status'] == 'WITHHOLD':
+              assert result['reason'] in {'NO_FRESH_EXPERIENCE', 'NO_OBSERVABLE_SELECTION_CHANGE'}, result
+          else:
+              assert result['status'] == 'READY_FOR_INDEPENDENT_EVALUATION', result
+              assert result['checks']['ablation_restores_parent'] is True
+              assert result['diagnostic']['selection_changes'] > 0
+          print(json.dumps(result, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: yado-current-parent-continuation-${{ github.run_id }}
+          path: ${{ runner.temp }}/current-parent-learning/
+          if-no-files-found: warn

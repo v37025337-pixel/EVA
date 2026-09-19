@@ -285,9 +285,15 @@ def build_committed(root: Path = ROOT) -> dict[str, Any]:
 
 
 def main() -> int:
-    result = build()
-    print(json.dumps(result, sort_keys=True))
-    return 0 if result["status"].startswith("PASS_") else 2
+    import sys
+    # Historical fixtures are explicit; ordinary continuation must use the
+    # current canonical parent and must never replace immutable V4 evidence.
+    if sys.argv[1:] == ['--historical-v4']:
+        result = build()
+        print(json.dumps(result, sort_keys=True))
+        return 0 if result["status"].startswith("PASS_") else 2
+    from yado_native_self_rewrite_continuation import main as continue_main
+    return continue_main()
 
 
 if __name__ == "__main__":

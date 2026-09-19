@@ -159,7 +159,7 @@ jobs:
         env:
           PYTHONPATH: runtime
         run: |
-          python runtime/yado_native_self_rewrite_v4_fresh_experience.py
+          python runtime/yado_native_self_rewrite_v4_fresh_experience.py --historical-v4
           python - <<'PY'
           import json
           from pathlib import Path
