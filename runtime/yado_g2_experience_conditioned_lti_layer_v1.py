@@ -7,7 +7,8 @@ _ROOT=Path(__file__).resolve().parent
 _PKG=_ROOT/'yado_rc8_v36'
 if str(_PKG) not in sys.path:sys.path.insert(0,str(_PKG))
 
-from yado_organ_runtime_native_v1 import plan_with_edges, tree_predict
+from yado_organ_runtime_native_v1 import tree_predict
+from yado_legacy_planning_boundary_v1 import plan_with_edges
 from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
 from yado_work_budget_adaptive_contingent_planner_v2 import WorkBudgetAdaptiveContingentPlannerV2
 from yado_coverage_pruned_compositional_schema_router_v3 import CoveragePrunedCompositionalSchemaRouterV3

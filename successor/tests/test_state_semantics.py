@@ -1,5 +1,6 @@
 """Persistence invariants with real SQLite connections and explicit oracles."""
 import copy
+from fractions import Fraction
 from pathlib import Path
 import sqlite3
 import tempfile
@@ -191,8 +192,15 @@ class CognitiveSemanticReplayTests(unittest.TestCase):
         spec = {'domain': 'numeric', 'rows': [{'x': x, 'y': y, 'expected': x + y}
                                              for x in range(4) for y in range(4)],
                 'queries': [{'x': 9, 'y': 9}]}
-        holdout = split_examples(spec['rows'])[1]
-        result = {'status': 'CANDIDATE', 'holdout_predictions': [r['expected'] for r in holdout], 'predictions': [18]}
+        training, holdout = split_examples(spec['rows'])
+        result = {'status': 'CANDIDATE',
+                  'model': {'kind': 'EXACT_BOUNDED_POLYNOMIAL_V2', 'degree': 1,
+                            'basis': [(0, 0), (0, 1), (1, 0)],
+                            'coeff': [Fraction(0), Fraction(1), Fraction(1)],
+                            'term_count': 3, 'row_count': len(training)},
+                  'train_count': len(training), 'holdout_count': len(holdout),
+                  'holdout_predictions': [Fraction(r['expected']) for r in holdout],
+                  'predictions': [Fraction(18)]}
         verification = {'passed': True, 'checks': len(holdout), 'scope': 'INDEPENDENT_HELD_OUT_LABELS', 'evidence': {}}
         records = candidate_records(spec, 'polynomial_1', 1, result, verification)
         self.assertEqual(replay(records)[1]['status'], 'VALIDATED_ON_HOLDOUT')

@@ -182,7 +182,7 @@ class AmbiguityAwareProgramRepairV11(_CanonicalSplitBaseV10):
     @classmethod
     def _mutate_threshold(cls,source,node_index,new_value):
         tree=ast.parse(source)
-        comps=[n for n in ast.walk(tree) if isinstance(n,ast.Compare) and len(n.ops)==1 and len(n.comparators)==1 and isinstance(n.comparators[0],ast.Constant)]
+        comps=[n for n in ast.walk(tree) if isinstance(n,ast.Compare) and len(n.ops)==1 and len(n.comparators)==1 and isinstance(n.left,ast.Name) and isinstance(n.comparators[0],ast.Constant)]
         if node_index>=len(comps):return None
         comps[node_index].comparators[0].value=new_value
         ast.fix_missing_locations(tree)

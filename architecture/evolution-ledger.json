@@ -20,9 +20,9 @@
     }
   ],
   "current_head": "G2_CANDIDATE_TRCG_V1",
-  "current_head_digest": "d973fe9786cc49934334ca35ed1ae11683bc5f8ba860ee235edcb98e3bf4a3e8",
+  "current_head_digest": "b154ede76364407fd93f0e8e5382432d7898956dcb8141c50bf18f2266e9a5d7",
   "current_head_event_id": "E0044_G2_PROMOTION",
-  "event_count": 320,
+  "event_count": 322,
   "events": [
     {
       "canonical_mutation": false,
@@ -5669,10 +5669,54 @@
         "FULL_REGRESSION",
         "FULL_KERNEL_AUDIT_V2"
       ]
+    },
+    {
+      "canonical_mutation": true,
+      "capability_upgrade": "YADO_G0_TO_CURRENT_DEEP_AUDIT_REPAIR_V1",
+      "effect": "BIND_REVIEWED_RUNTIME_REPAIRS_AND_COMPLETE_SOURCE_AUDIT; NEXT=KERNEL_G2_RAW_REPRESENTATION_V6_POST_ADMISSION_AUDIT_V1",
+      "event_hash": "df656b57b49f46cdcbff93481328d268425dccf077b43a5ce78ab0db33b660b4",
+      "event_id": "YADO_G0_TO_CURRENT_DEEP_AUDIT_REPAIR_V1_MAINTENANCE_320",
+      "event_type": "USER_AUTHORIZED_MAINTENANCE_BINDING",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V2",
+      "index": 320,
+      "new_head_digest": "6743dcc539a2a59d55c2906b2aecdc41bf2b3ab5edf440fc429ff2d113387ee7",
+      "parent_event_hash": "d51ef5b972f554fb850e048130a121317b5e78ddf2f54c2d7f77aacbe243ecdf",
+      "previous_head_digest": "d973fe9786cc49934334ca35ed1ae11683bc5f8ba860ee235edcb98e3bf4a3e8",
+      "promotion_applied": false,
+      "source_digest": "8d7b38445fa955eb7bcc7ae857f3865137e9b9f6e24c06d130762449dc83714c",
+      "source_path": "experiments/deep-audit-20260920/focused-validation.json",
+      "validation_required_before_main_merge": [
+        "FULL_REGRESSION",
+        "FULL_KERNEL_AUDIT_V2",
+        "CANONICAL_INVARIANT_GUARD"
+      ]
+    },
+    {
+      "canonical_mutation": true,
+      "capability_upgrade": "IMMUTABLE_SQLITE_REPOSITORY_AUDIT_V1",
+      "effect": "READ_COMMITTED_SQLITE_WITHOUT_CREATING_SIDECAR_FILES",
+      "event_hash": "cadea1755de0aeb393692eb89e00e129dbdb61b98b80313255bdbfa4fdb22afc",
+      "event_id": "IMMUTABLE_SQLITE_REPOSITORY_AUDIT_V1",
+      "event_type": "USER_AUTHORIZED_MAINTENANCE_BINDING",
+      "generation": "G2_CANDIDATE_TRCG_V1",
+      "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V2",
+      "index": 321,
+      "new_head_digest": "b154ede76364407fd93f0e8e5382432d7898956dcb8141c50bf18f2266e9a5d7",
+      "parent_event_hash": "df656b57b49f46cdcbff93481328d268425dccf077b43a5ce78ab0db33b660b4",
+      "previous_head_digest": "6743dcc539a2a59d55c2906b2aecdc41bf2b3ab5edf440fc429ff2d113387ee7",
+      "promotion_applied": false,
+      "source_digest": "03677a6b0a801c70c7712a2a766961126b486a767200707d7cd080535ef08301",
+      "source_path": "experiments/deep-audit-20260920/sqlite-readonly-validation.json",
+      "validation_required_before_main_merge": [
+        "FULL_REGRESSION",
+        "FULL_KERNEL_AUDIT_V2",
+        "CANONICAL_INVARIANT_GUARD"
+      ]
     }
   ],
   "invariant": "APPEND_ONLY_HASH_CHAIN; HISTORICAL_PROMOTIONS_ALLOWED; EXACTLY_ONE_CURRENT_HEAD",
-  "ledger_digest": "1805b3ff2b1fc241f52777c61cc553552edf93a8a0a4c6f36af778a3f860316b",
+  "ledger_digest": "bf251025db053509a9690c752cbd8dc6390b62ec684c34cb7e1c65f551c4a123",
   "ledger_semantics_version": 2,
   "lineage_id": "YADO_MAIN_LINEAGE",
   "open_deficits": [
@@ -5711,5 +5755,5 @@
     "RUN_INHERITED_SHADOW_CAPABILITY_INSIDE_G1_CANDIDATE",
     "THINKING_BOUNDARY_REASONING"
   ],
-  "tail_event_hash": "d51ef5b972f554fb850e048130a121317b5e78ddf2f54c2d7f77aacbe243ecdf"
+  "tail_event_hash": "cadea1755de0aeb393692eb89e00e129dbdb61b98b80313255bdbfa4fdb22afc"
 }

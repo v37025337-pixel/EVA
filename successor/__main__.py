@@ -105,7 +105,7 @@ def main():
     for command in ("status", "run", "submit", "resume", "verify", "search", "goal", "think", "cognitive-status", "stop", "native-synthesis-activate",
                     "compositional-synthesis-activate", "compositional-synthesis-deactivate",
                     "program-status", "program-develop",
-                    "component-propose", "component-admit", "component-status", "component-rollback",
+                    "component-propose", "component-admit", "component-readmit", "component-status", "component-rollback",
                     "development-start", "develop", "development-status", "development-stop",
                     "autonomy-start", "autonomy-run", "autonomy-status", "autonomy-stop"):
         item = sub.add_parser(command)
@@ -170,6 +170,8 @@ def main():
                 output = kernel.propose_component_generation()
             elif args.command == 'component-admit':
                 output = kernel.admit_component_generation()
+            elif args.command == 'component-readmit':
+                output = kernel.readmit_component_generation()
             elif args.command == 'component-status':
                 output = kernel.component_generation_snapshot()
             elif args.command == 'component-rollback':

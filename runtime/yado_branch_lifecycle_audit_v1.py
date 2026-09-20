@@ -95,7 +95,7 @@ def _changed_paths(main_sha: str, tip: str) -> list[str]:
         timeout=60,
     )
     if cp.returncode != 0:
-        return []
+        raise RuntimeError('BRANCH_DIFF_FAILED:' + cp.stderr[-500:])
     return sorted({line.strip() for line in cp.stdout.splitlines() if line.strip()})
 
 

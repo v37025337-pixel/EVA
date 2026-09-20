@@ -35,10 +35,40 @@ LEGACY_SOURCES = {
     LINEAGE_SOURCE: 'a471c4a4c53044db94f482ad7d6f2c4758bad3f9d60c68f2252b88759b7a1cc3',
 }
 
+# Exact last implementation before the reviewed genome-fitness maintenance.
+# These are immutable history pins, not aliases for whichever files are live.
+PRE_MAINTENANCE_SOURCES = {
+    **LEGACY_SOURCES,
+    'successor/generation.py': 'f5bf60db4e90cd4a7fdc1ff256616365b1767d853f0d53337c242321f12b2c1f',
+}
+SOURCE_TRANSITION = 'GENOME_FITNESS_BINDING_MAINTENANCE_V1'
+REVIEWED_GENOME_SHA256 = '65400f0aadce57e21d8c2c97e7f89e76c6d085ef934fcaab2765ff9c1f8c5f8c'
+
 
 def sources():
     paths = (GENOME_SOURCE, LINEAGE_SOURCE, 'successor/generation.py', 'successor/generation_tasks.py')
     return {p: file_sha(ROOT / p) for p in paths}
+
+
+def reviewed_upgrade_sources(previous):
+    """Authorize only the named, inspected runtime change; never arbitrary pins."""
+    if previous not in (LEGACY_SOURCES, PRE_MAINTENANCE_SOURCES):
+        raise ValueError('GENERATION_UNREVIEWED_PREDECESSOR')
+    current = sources()
+    expected = {**PRE_MAINTENANCE_SOURCES, GENOME_SOURCE: REVIEWED_GENOME_SHA256,
+                'successor/generation.py': current.get('successor/generation.py')}
+    if current != expected:
+        raise ValueError('GENERATION_UNREVIEWED_CURRENT_SOURCES')
+    return current
+
+
+def _source_transition(previous, current, transition):
+    if transition is None:
+        # Preserve the original offline-retention repair event byte-for-byte.
+        return previous == LEGACY_SOURCES and current == PRE_MAINTENANCE_SOURCES
+    return (transition == SOURCE_TRANSITION
+            and previous in (LEGACY_SOURCES, PRE_MAINTENANCE_SOURCES)
+            and current == reviewed_upgrade_sources(previous))
 
 
 def inventory(archive):
@@ -50,8 +80,15 @@ def inventory(archive):
     return rows
 
 
-def discover(archive):
+def discover(archive, *, source_pins=None):
     """Only known typed adapters over byte-matched inherited code may execute."""
+    current = sources()
+    expected = current if source_pins is None else source_pins
+    if expected not in (LEGACY_SOURCES, PRE_MAINTENANCE_SOURCES, current):
+        raise ValueError('GENERATION_UNREVIEWED_DISCOVERY_SOURCES')
+    reviewed_current = (current == {**PRE_MAINTENANCE_SOURCES,
+        'successor/generation.py': current.get('successor/generation.py'),
+        GENOME_SOURCE: REVIEWED_GENOME_SHA256})
     found = {}
     for ref in (x['ref'] for x in inventory(archive)):
         for receipt, source, family in ((GENOME_RECEIPT, GENOME_SOURCE, 'genome'),
@@ -59,8 +96,13 @@ def discover(archive):
             rows = archive.db.execute('''SELECT b.path,o.digest FROM branch_files b JOIN git_objects o
                 ON b.oid=o.oid WHERE b.ref=? AND b.path IN (?,?)''', (ref, receipt, source)).fetchall()
             blobs = {r['path']: r['digest'] for r in rows}
-            if (receipt not in blobs or source not in blobs
-                    or blobs[source] != file_sha(ROOT / source)):
+            accepted = {expected[source]}
+            if reviewed_current and expected == current and source == GENOME_SOURCE:
+                # Reuse descriptors from the exact reviewed predecessor. The
+                # repaired typed adapter remeasures them; archived code/PASS
+                # never executes or authorizes admission.
+                accepted.add(PRE_MAINTENANCE_SOURCES[source])
+            if receipt not in blobs or source not in blobs or blobs[source] not in accepted:
                 continue
             # Reading rechecks decompression and SHA. Historical code is never imported.
             archive.read(blobs[source])
@@ -75,8 +117,12 @@ def discover(archive):
                     validate_option(option)
                     key = fingerprint(option)
                     item = found.setdefault(key, {**option, 'option_digest': key, 'evidence': []})
-                    item['evidence'].append({'ref': ref, 'receipt_digest': blobs[receipt],
-                        'source_digest': blobs[source], 'source': source, 'genome_index': index})
+                    proof = {'ref': ref, 'receipt_digest': blobs[receipt],
+                        'source_digest': blobs[source], 'source': source, 'genome_index': index}
+                    if blobs[source] != expected[source]:
+                        proof.update(source_transition=SOURCE_TRANSITION,
+                                     current_source_digest=expected[source])
+                    item['evidence'].append(proof)
     if len(found) > 32:
         raise ValueError('GENERATION_OPTION_BUDGET')
     return sorted(found.values(), key=lambda x: x['option_digest'])
@@ -332,21 +378,20 @@ class GenerationKernel:
             raise ValueError('GENERATION_PARENT_MEMORY_DRIFT')
 
     def _source_lineage(self, records):
-        pinned, upgraded = records[0]['sources'], False
-        for row in records[1:]:
+        pinned = records[0]['sources']
+        parent_tick = records[0]['parent_state']['tick']
+        for index, row in enumerate(records[1:], 1):
             if row['kind'] != 'SOURCE_UPGRADE':
                 continue
-            if (upgraded or pinned != LEGACY_SOURCES or row['previous_sources'] != pinned
-                    or row['sources'] != sources()
-                    or any(row['sources'].get(p) != h for p, h in pinned.items()
-                           if p != 'successor/generation.py')
-                    or row['predecessor_tick'] != row['tick'] - 1
-                    or row['predecessor_event_hash'] != records[row['tick'] - 2]['event_hash']):
+            if (row['previous_sources'] != pinned
+                    or not _source_transition(pinned, row['sources'], row.get('transition_id'))
+                    or row['predecessor_tick'] != records[index - 1]['tick']
+                    or row['predecessor_event_hash'] != records[index - 1]['event_hash']):
                 raise ValueError('GENERATION_SOURCE_UPGRADE_PROVENANCE')
             self._check_parent_state(row['parent_state'])
-            if row['parent_state']['tick'] < records[0]['parent_state']['tick']:
+            if row['parent_state']['tick'] < parent_tick:
                 raise ValueError('GENERATION_SOURCE_UPGRADE_MEMORY_BOUNDARY')
-            pinned, upgraded = row['sources'], True
+            pinned, parent_tick = row['sources'], row['parent_state']['tick']
         return pinned
 
     def snapshot(self):
@@ -355,12 +400,13 @@ class GenerationKernel:
             raise ValueError('GENERATION_SOURCE_DRIFT')
         profile, generation, proposal, admission, activated = parent_profile(), 0, None, None, False
         upgrade, readmission, execution_admitted = None, None, True
+        event_sources = self.birth['sources']
         for row in records[1:]:
             if row['kind'] == 'PROPOSE':
                 if proposal is not None or row['profile_digest'] != fingerprint(row['profile']):
                     raise ValueError('GENERATION_PROPOSAL_PROVENANCE')
                 if row['event_hash'] not in self._verified_replays:
-                    options = discover(self.archive)
+                    options = discover(self.archive, source_pins=event_sources)
                     seed = self.birth['parent_state']['event_hash']
                     chosen, evidence = select(options, challenge(seed), challenge(seed, retention=True))
                     if (row['options'] != options or row['development_seed'] != seed
@@ -401,7 +447,8 @@ class GenerationKernel:
                 if row['profile_digest'] != fingerprint(profile) or row['generation'] != generation:
                     raise ValueError('GENERATION_EXECUTION_WRONG_PROFILE')
             elif row['kind'] == 'SOURCE_UPGRADE':
-                upgrade, execution_admitted = row, False
+                upgrade, readmission, execution_admitted = row, None, False
+                event_sources = row['sources']
             elif row['kind'] == 'READMISSION':
                 if (upgrade is None or readmission is not None or proposal is None
                         or row['upgrade_tick'] != upgrade['tick']
@@ -510,7 +557,8 @@ class GenerationKernel:
         records, state = self.records(), self.snapshot()
         upgrades = [r for r in records if r['kind'] == 'SOURCE_UPGRADE']
         proposal = next((r for r in records if r['kind'] == 'PROPOSE'), None)
-        if not upgrades or proposal is None or any(r['kind'] == 'READMISSION' for r in records):
+        if (not upgrades or proposal is None
+                or any(r['kind'] == 'READMISSION' and r['upgrade_tick'] == upgrades[-1]['tick'] for r in records)):
             raise ValueError('GENERATION_READMISSION_NOT_AVAILABLE')
         seed, parent_state = secrets.token_hex(16), self.kernel.verify_state()
         row = {'kind': 'READMISSION', 'upgrade_tick': upgrades[-1]['tick'],
@@ -544,17 +592,19 @@ def upgrade_component_state(kernel, archive_path, predecessor_state, output):
         with closing(sqlite3.connect(output)) as new:
             old.backup(new)
     holder = GenerationKernel.__new__(GenerationKernel)
+    holder.kernel = kernel
     holder.db = sqlite3.connect(output, isolation_level=None)
     try:
         holder.db.execute('PRAGMA journal_mode=DELETE')
         holder.db.execute('PRAGMA synchronous=FULL')
         records = holder.records()
-        if (not records or records[0].get('sources') != LEGACY_SOURCES
-                or any(r['kind'] == 'SOURCE_UPGRADE' for r in records)):
+        if not records:
             raise ValueError('GENERATION_UNREVIEWED_PREDECESSOR')
+        previous = holder._source_lineage(records)
+        current = reviewed_upgrade_sources(previous)
         last = records[-1]
-        holder._append({'kind': 'SOURCE_UPGRADE', 'previous_sources': LEGACY_SOURCES,
-            'sources': sources(), 'predecessor_tick': last['tick'],
+        holder._append({'kind': 'SOURCE_UPGRADE', 'transition_id': SOURCE_TRANSITION,
+            'previous_sources': previous, 'sources': current, 'predecessor_tick': last['tick'],
             'predecessor_event_hash': last['event_hash'], 'parent_state': kernel.verify_state()})
     finally:
         holder.db.close()

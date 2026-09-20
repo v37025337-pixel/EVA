@@ -6,7 +6,8 @@ from typing import Any,Mapping
 from yado_g2_experience_conditioned_cognitive_layer_v3 import G2ExperienceConditionedCognitiveLayerV3
 from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2
 from yado_organ_runtime_native_v1 import tree_predict
-from yado_cognitive_growth_runtime_v1 import plan_multicontext,knn_predict,centroid_predict
+from yado_cognitive_growth_runtime_v1 import knn_predict,centroid_predict
+from yado_legacy_planning_boundary_v1 import plan_multicontext
 
 class G2ExperienceConditionedCognitiveLayerV4:
     COMPONENT_ID='RUNTIME-G2-EXPERIENCE-CONDITIONED-COGNITIVE-LAYER-V4'

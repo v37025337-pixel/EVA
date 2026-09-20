@@ -288,10 +288,13 @@ class SuccessorKernel:
         signature_input = task
         if task.get('kind') == 'component':
             from .component_binding import ComponentJournal
+            component = ComponentJournal(self).snapshot()
+            if not component['execution_admitted']:
+                raise ValueError('GENERATION_REQUIRES_READMISSION')
             # The same deficit is eligible after a measured component change.
             # Historical failures retain their original profile and outcome.
             signature_input = {'task': task, 'component_profile_digest':
-                               ComponentJournal(self).snapshot()['profile_digest']}
+                               component['profile_digest']}
         signature = sha((self.identity + fingerprint(signature_input)).encode())
         previous = self._last_attempt(signature)
         history = self.archive.search(task.get("history_query") or task.get("kind", ""), 4)
@@ -446,6 +449,10 @@ class SuccessorKernel:
     def admit_component_generation(self):
         from .component_binding import ComponentJournal
         return ComponentJournal(self).admit()
+
+    def readmit_component_generation(self):
+        from .component_binding import ComponentJournal
+        return ComponentJournal(self).readmit()
 
     def rollback_component_generation(self):
         from .component_binding import ComponentJournal

@@ -37,6 +37,19 @@ def add(findings,severity,code,message,details=None):
 started=time.time()
 findings=[]
 
+# The legacy runtime-only scan omitted successor, candidate and experiment code.
+from yado_repository_file_audit_v1 import audit_files
+from yado_current_manifest_source_audit_v1 import audit_current_sources
+repository_files = audit_files(ROOT)
+if repository_files['errors']:
+    add(findings,'HIGH','REPOSITORY_FILE_INTEGRITY_FAILED',
+        'Tracked repository files failed syntax or container integrity checks.',
+        repository_files['errors'])
+current_sources = audit_current_sources(ROOT)
+if current_sources['errors']:
+    add(findings,'HIGH','CURRENT_COMPONENT_SOURCE_DRIFT',
+        'Current component source pointers disagree with executing bytes.',current_sources['errors'])
+
 # ---------- repository inventory ----------
 tracked=run(['git','ls-files'])
 files=[x for x in tracked['stdout'].splitlines() if x]
@@ -285,7 +298,13 @@ report={
     and 'state' not in p.relative_to(ROOT).parts},
  'elapsed_seconds':time.time()-started,
  'inventory':inventory,
+ 'repository_file_validation':repository_files,
+ 'current_component_source_validation':current_sources,
  'counts':{
+   'tracked_repository_files':repository_files['file_count'],
+   'repository_python_files':repository_files['counts'].get('PYTHON_COMPILED',0),
+   'repository_json_files':repository_files['counts'].get('JSON_PARSED',0),
+   'repository_yaml_files':repository_files['counts'].get('YAML_PARSED',0),
    'runtime_python_files':len(py_files),'json_files':json_count,'workflow_files':len(workflows),
    'active_runtime_sources':len(core.get('active_runtime_sources',[])),
    'active_capabilities':len(head.get('active_capabilities',[])),

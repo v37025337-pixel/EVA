@@ -165,12 +165,21 @@ def prepare_upgrade(parent_manifest, parent_state, output, *, source_updates=Non
     shutil.copyfile(snapshot, state)
     raw, tick = encode(upgrade_event(manifest)), len(records) + 1
     digest = sha((previous + '\n' + str(tick) + '\n' + raw).encode())
+    from .component_binding import implementation_upgrade_event
+    component_upgrade = implementation_upgrade_event(records, {
+        **upgrade_event(manifest), 'tick': tick, 'event_hash': digest})
     with closing(sqlite3.connect(state)) as db:
         db.execute('INSERT INTO events VALUES(?,?,?,?)', (tick, previous, raw, digest))
+        if component_upgrade is not None:
+            component_raw = encode(component_upgrade)
+            component_digest = sha((digest + '\n' + str(tick + 1) + '\n' + component_raw).encode())
+            db.execute('INSERT INTO events VALUES(?,?,?,?)',
+                       (tick + 1, digest, component_raw, component_digest))
         db.commit()
     return {'status': 'PREPARED_REQUIRES_RUNTIME_VALIDATION', 'manifest': str(manifest_path),
             'state': str(state), 'identity_digest': identity,
-            'implementation_digest': manifest['identity_digest'], 'inherited_events': len(records)}
+            'implementation_digest': manifest['identity_digest'], 'inherited_events': len(records),
+            'component_readmission_required': component_upgrade is not None}
 
 
 def main():

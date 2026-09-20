@@ -156,9 +156,10 @@ class PolynomialReturnRepairGeneV1:
         return out
 
     @classmethod
-    def _fit_univariate(cls,examples):
+    def _fit_univariate(cls,examples,max_degree=None):
         pts=[(Fraction(args[0]),Fraction(expected)) for args,expected in examples]
-        for degree in range(cls.MAX_DEGREE+1):
+        limit=cls.MAX_DEGREE if max_degree is None else min(cls.MAX_DEGREE,int(max_degree))
+        for degree in range(limit+1):
             n=degree+1
             uniq=[]
             for x,y in pts:
@@ -183,14 +184,14 @@ class PolynomialReturnRepairGeneV1:
         return {'kind':'WITHHOLD','reason':'NO_UNIVARIATE_POLYNOMIAL_WITHIN_GENE_BUDGET'}
 
     @classmethod
-    def synthesize(cls,source,function_name,examples):
+    def synthesize(cls,source,function_name,examples,max_degree=None):
         tree=ast.parse(source)
         fname=cls.PARENT.BASE._validate(tree)
         if fname!=function_name:raise ValueError('FUNCTION_NAME_MISMATCH')
         func=next(n for n in tree.body if isinstance(n,ast.FunctionDef))
         if len(func.args.args)!=1:return {'source':None,'reason':'UNIVARIATE_ONLY'}
         arg=func.args.args[0].arg
-        model=cls._fit_univariate(examples)
+        model=cls._fit_univariate(examples,max_degree=max_degree)
         if model.get('kind')=='WITHHOLD':return {'source':None,'reason':model.get('reason'),'operator_gene':cls.GENE_ID}
         returns=[n for n in ast.walk(func) if isinstance(n,ast.Return) and n.value is not None]
         if len(returns)!=1:return {'source':None,'reason':'SINGLE_RETURN_REQUIRED','operator_gene':cls.GENE_ID}
@@ -235,40 +236,33 @@ class YADOEvolutionaryGenomeV1:
         g['genome_digest']=_digest(g);return g
 
     def observe_parent_deficits(self):
-        deficits={}
-
-        logic_rows=[]
-        for a,b,c in product((False,True),repeat=3):
-            for _ in range(4):
-                logic_rows.append({'input':{'a':a,'b':b,'c':c},'expected':'YES' if a and not b else 'NO'})
-        try:
-            BudgetAdaptiveCompositionalLogicV2.learn_symmetric_boolean(logic_rows)
-            deficits['LOGIC']={'deficit':False}
-        except Exception as e:
-            deficits['LOGIC']={'deficit':True,'signature':type(e).__name__+':'+str(e),'suggestion':'SYNTHESIZE_BOOLEAN_DNF_GENE'}
-
-        slow=ContingentStage('A_SLOW',1.0,.6,latency=9.0)
-        fast=ContingentStage('Z_FAST',1.0,.6,latency=1.0)
-        pp=WorkBudgetAdaptiveContingentPlannerV2.plan(.2,.8,2.0,[slow,fast])
-        deficits['THINKING']={'deficit':pp.action!='Z_FAST','signature':'EQUAL_UTILITY_LATENCY_TIE' if pp.action!='Z_FAST' else None,'parent_action':pp.action,'suggestion':'MUTATE_STATE_KEY_WITH_LATENCY'}
-
-        train=[]
-        for a,b,c in product((False,True),repeat=3):
-            for r in range(6):
-                train.append({'input':{'a':a,'b':b,'c':c,'noise':r%2},'expected':'SPECIAL' if a and b and c else 'BASE'})
-        pm=CoveragePrunedCompositionalSchemaRouterV3.fit(train,'BASE')
-        pr=CoveragePrunedCompositionalSchemaRouterV3.route(pm,{'a':True,'b':True,'c':True,'noise':True})
-        deficits['INTELLIGENCE']={'deficit':'SPECIAL' not in pr,'signature':'TRIGGER_WIDTH_2_CANNOT_EXPRESS_TRIPLE_CONJUNCTION','parent_route':pr,'suggestion':'INCREMENT_TRIGGER_WIDTH'}
-
-        source='def f(x):\n    return x\n'
-        train_code=[((x,),x*x+1) for x in (-3,-2,-1,0,1,2,3)]
-        parent_repair=AmbiguityAwareProgramRepairV11.repair(source,'f',train_code,max_candidates=12000)
-        hold=[((x,),x*x+1) for x in (4,5,-4,-5)]
-        parent_hold=0.0
-        if parent_repair.get('source'):
-            parent_hold=sum(AmbiguityAwareProgramRepairV11.execute(parent_repair['source'],'f',args)==y for args,y in hold)/len(hold)
-        deficits['CODE']={'deficit':parent_hold<1.0,'signature':'PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER','parent_holdout':parent_hold,'suggestion':'RECOMBINE_LOGIC_POLYNOMIAL_FIT_WITH_AST_RETURN_SYNTHESIS'}
-        return deficits
+        expressed=self._express_genome(self.parent)
+        scores,_,observations=self._measure_expressed_genome(expressed)
+        return {
+          'LOGIC':{
+            'deficit':scores['LOGIC']<1.0,
+            'signature':observations['logic_failure'] or ('INEXACT_ASYMMETRIC_BOOLEAN_TRANSFER' if scores['LOGIC']<1.0 else None),
+            'suggestion':'SYNTHESIZE_BOOLEAN_DNF_GENE',
+          },
+          'THINKING':{
+            'deficit':scores['THINKING']<1.0,
+            'signature':'EQUAL_UTILITY_LATENCY_TIE' if scores['THINKING']<1.0 else None,
+            'parent_action':observations['thinking_action'],
+            'suggestion':'MUTATE_STATE_KEY_WITH_LATENCY',
+          },
+          'INTELLIGENCE':{
+            'deficit':scores['INTELLIGENCE']<1.0,
+            'signature':'ACTIVE_TRIGGER_CANNOT_EXPRESS_TRIPLE_CONJUNCTION' if scores['INTELLIGENCE']<1.0 else None,
+            'parent_route':observations['intelligence_route'],
+            'suggestion':'INCREMENT_TRIGGER_WIDTH',
+          },
+          'CODE':{
+            'deficit':scores['CODE']<1.0,
+            'signature':'PARENT_REPAIR_FAILS_QUADRATIC_FRESH_TRANSFER' if scores['CODE']<1.0 else None,
+            'parent_holdout':scores['CODE'],
+            'suggestion':'RECOMBINE_LOGIC_POLYNOMIAL_FIT_WITH_AST_RETURN_SYNTHESIS',
+          },
+        }
 
     def mutate(self,deficits):
         genes={}
@@ -297,75 +291,138 @@ class YADOEvolutionaryGenomeV1:
         }
         child['genome_digest']=_digest(child);return child
 
-    @staticmethod
-    def evaluate(parent,child):
-        score={'parent':{},'child':{},'regression':{}}
+    @classmethod
+    def _express_genome(cls,genome):
+        """Resolve only implemented, integrity-bound chromosomes and settings."""
+        organs={'LOGIC','THINKING','INTELLIGENCE','CODE'}
+        if not isinstance(genome,dict) or genome.get('schema')!=cls.SCHEMA:
+            raise ValueError('GENOME_FITNESS_SCHEMA')
+        if genome.get('generation')!='G2_CANDIDATE_TRCG_V1':
+            raise ValueError('GENOME_FITNESS_GENERATION')
+        if genome.get('genome_digest')!=_digest({k:v for k,v in genome.items() if k!='genome_digest'}):
+            raise ValueError('GENOME_FITNESS_DIGEST_MISMATCH')
+        genes=genome.get('chromosomes')
+        if not isinstance(genes,dict) or set(genes)!=organs:
+            raise ValueError('GENOME_FITNESS_UNSUPPORTED_DIMENSIONS')
+        registry={
+          'LOGIC':{BudgetAdaptiveCompositionalLogicV2.COMPONENT_ID:BudgetAdaptiveCompositionalLogicV2,
+                   LogicDNFGeneV1.GENE_ID:LogicDNFGeneV1},
+          'THINKING':{WorkBudgetAdaptiveContingentPlannerV2.COMPONENT_ID:WorkBudgetAdaptiveContingentPlannerV2,
+                      LatencyAwarePlannerGeneV1.GENE_ID:LatencyAwarePlannerGeneV1},
+          'INTELLIGENCE':{CoveragePrunedCompositionalSchemaRouterV3.COMPONENT_ID:CoveragePrunedCompositionalSchemaRouterV3,
+                          TripleTriggerRouterGeneV1.GENE_ID:TripleTriggerRouterGeneV1},
+          'CODE':{AmbiguityAwareProgramRepairV11.COMPONENT_ID:AmbiguityAwareProgramRepairV11,
+                  PolynomialReturnRepairGeneV1.GENE_ID:PolynomialReturnRepairGeneV1},
+        }
+        expressed={}
+        for organ in sorted(organs):
+            gene=genes[organ]
+            if not isinstance(gene,dict) or not isinstance(gene.get('gene_id'),str):
+                raise ValueError('GENOME_FITNESS_GENE_SCHEMA:'+organ)
+            impl=registry[organ].get(gene['gene_id'])
+            if impl is None:raise ValueError('GENOME_FITNESS_UNIMPLEMENTED_GENE:'+organ)
+            if gene.get('gene_digest')!=_digest({k:v for k,v in gene.items() if k!='gene_digest'}):
+                raise ValueError('GENOME_FITNESS_GENE_DIGEST_MISMATCH:'+organ)
+            expr=gene.get('expression')
+            if not isinstance(expr,dict):raise ValueError('GENOME_FITNESS_EXPRESSION:'+organ)
+            if impl in (BudgetAdaptiveCompositionalLogicV2,WorkBudgetAdaptiveContingentPlannerV2):
+                valid=expr=={'mode':'CANONICAL_V2'}
+            elif impl is AmbiguityAwareProgramRepairV11:
+                valid=expr=={'mode':'CANONICAL_V11'}
+            elif impl is LatencyAwarePlannerGeneV1:
+                valid=set(expr)=={'latency_tiebreak'} and expr['latency_tiebreak'] is True
+            else:
+                field,lower,upper={
+                  LogicDNFGeneV1:('max_width',1,LogicDNFGeneV1.MAX_WIDTH),
+                  CoveragePrunedCompositionalSchemaRouterV3:('max_trigger_width',1,CoveragePrunedCompositionalSchemaRouterV3.MAX_TRIGGER_WIDTH),
+                  TripleTriggerRouterGeneV1:('max_trigger_width',1,TripleTriggerRouterGeneV1.MAX_TRIGGER_WIDTH),
+                  PolynomialReturnRepairGeneV1:('max_degree',0,PolynomialReturnRepairGeneV1.MAX_DEGREE),
+                }[impl]
+                fields={field}
+                if impl is TripleTriggerRouterGeneV1:fields.add('candidate_generator')
+                valid=set(expr)==fields and type(expr.get(field)) is int and lower<=expr[field]<=upper
+                if impl is TripleTriggerRouterGeneV1:
+                    valid=valid and expr.get('candidate_generator')=='GENERAL_COMBINATIONS_UP_TO_WIDTH'
+            if not valid:raise ValueError('GENOME_FITNESS_UNSUPPORTED_EXPRESSION:'+organ)
+            expressed[organ]=(impl,copy.deepcopy(expr))
+        return expressed
 
-        # LOGIC: asymmetric boolean rule; child must discover a bounded DNF gene.
+    @staticmethod
+    def _measure_expressed_genome(expressed):
+        """Apply the same bounded challenge and regression cases to either genome."""
+        scores={};regression={};observations={}
+        logic,logic_expr=expressed['LOGIC']
+        def logic_accuracy(rows,holdout):
+            try:
+                if logic is BudgetAdaptiveCompositionalLogicV2:
+                    model=logic.learn_symmetric_boolean(rows)
+                    predict=logic.predict_symmetric_boolean
+                else:
+                    model=logic.fit(rows,max_width=logic_expr['max_width'])
+                    predict=logic.predict
+                return sum(predict(model,row['input'])==row['expected'] for row in holdout)/len(holdout),None
+            except ValueError as exc:
+                return 0.0,type(exc).__name__+':'+str(exc)
         train=[]
         for a,b,c in product((False,True),repeat=3):
             for _ in range(5):train.append({'input':{'a':a,'b':b,'c':c},'expected':'YES' if a and not b else 'NO'})
-        try:
-            pm=BudgetAdaptiveCompositionalLogicV2.learn_symmetric_boolean(train)
-            pacc=sum(BudgetAdaptiveCompositionalLogicV2.predict_symmetric_boolean(pm,{'a':a,'b':b,'c':c})==('YES' if a and not b else 'NO') for a,b,c in product((False,True),repeat=3))/8
-        except Exception:pacc=0.0
-        cm=LogicDNFGeneV1.fit(train,max_width=3)
-        fresh=[{'a':a,'b':b,'c':c,'irrelevant':i%2==0} for i,(a,b,c) in enumerate(list(product((False,True),repeat=3))*8)]
-        cacc=sum(LogicDNFGeneV1.predict(cm,x)==('YES' if x['a'] and not x['b'] else 'NO') for x in fresh)/len(fresh)
-        score['parent']['LOGIC']=pacc;score['child']['LOGIC']=cacc
+        hold=[{'input':{'a':a,'b':b,'c':c,'irrelevant':i%2==0},'expected':'YES' if a and not b else 'NO'}
+              for i,(a,b,c) in enumerate(list(product((False,True),repeat=3))*8)]
+        scores['LOGIC'],observations['logic_failure']=logic_accuracy(train,hold)
+        sym=[{'input':{'a':a,'b':b},'expected':'EVEN' if a==b else 'ODD'}
+             for a,b in product((False,True),repeat=2) for _ in range(4)]
+        regression['LOGIC']=logic_accuracy(sym,sym)[0]==1.0
 
-        # THINKING: equal utility, lower latency is strictly preferable.
+        thinking,_=expressed['THINKING']
         slow=ContingentStage('A_SLOW',1.0,.6,latency=9.0);fast=ContingentStage('Z_FAST',1.0,.6,latency=1.0)
-        pp=WorkBudgetAdaptiveContingentPlannerV2.plan(.2,.8,2.0,[slow,fast])
-        cp=LatencyAwarePlannerGeneV1.plan(.2,.8,2.0,[slow,fast])
-        score['parent']['THINKING']=1.0 if pp.action=='Z_FAST' else 0.0
-        score['child']['THINKING']=1.0 if cp.action=='Z_FAST' else 0.0
-        # baseline where cost determines winner must remain identical.
+        action=thinking.plan(.2,.8,2.0,[slow,fast]).action
+        observations['thinking_action']=action
+        scores['THINKING']=float(action=='Z_FAST')
         b1=ContingentStage('CHEAP',1.0,.7,latency=5);b2=ContingentStage('EXPENSIVE',2.0,.7,latency=1)
-        score['regression']['THINKING']=WorkBudgetAdaptiveContingentPlannerV2.plan(.1,.7,3,[b1,b2]).action==LatencyAwarePlannerGeneV1.plan(.1,.7,3,[b1,b2]).action
+        regression['THINKING']=thinking.plan(.1,.7,3,[b1,b2]).action=='CHEAP'
 
-        # INTELLIGENCE: triple conjunction cannot be represented by width2.
+        intelligence,intel_expr=expressed['INTELLIGENCE']
         cases=[]
         for a,b,c in product((False,True),repeat=3):
             for n in range(8):cases.append({'input':{'a':a,'b':b,'c':c,'noise':n%2},'expected':'SPECIAL' if a and b and c else 'BASE'})
-        pm=CoveragePrunedCompositionalSchemaRouterV3.fit(cases,'BASE')
-        cm=TripleTriggerRouterGeneV1.fit(cases,'BASE')
-        p=CoveragePrunedCompositionalSchemaRouterV3.route(pm,{'a':True,'b':True,'c':True,'noise':False})
-        q=TripleTriggerRouterGeneV1.route(cm,{'a':True,'b':True,'c':True,'noise':True})
-        score['parent']['INTELLIGENCE']=1.0 if 'SPECIAL' in p else 0.0
-        score['child']['INTELLIGENCE']=1.0 if 'SPECIAL' in q else 0.0
-        simple=[]
-        for a,b in product((False,True),repeat=2):
-            for n in range(8):simple.append({'input':{'a':a,'b':b,'noise':n%2},'expected':'SPECIAL' if a and b else 'BASE'})
-        psm=CoveragePrunedCompositionalSchemaRouterV3.fit(simple,'BASE')
-        csm=TripleTriggerRouterGeneV1.fit(simple,'BASE')
-        score['regression']['INTELLIGENCE']=all(CoveragePrunedCompositionalSchemaRouterV3.route(psm,x)==TripleTriggerRouterGeneV1.route(csm,x) for x in [{'a':a,'b':b,'noise':n%2} for a,b in product((False,True),repeat=2) for n in range(4)])
+        model=intelligence.fit(cases,'BASE',max_trigger_width=intel_expr['max_trigger_width'])
+        route=intelligence.route(model,{'a':True,'b':True,'c':True,'noise':True})
+        observations['intelligence_route']=route
+        scores['INTELLIGENCE']=float('SPECIAL' in route)
+        simple=[{'input':{'a':a,'b':b,'noise':n%2},'expected':'SPECIAL' if a and b else 'BASE'}
+                for a,b in product((False,True),repeat=2) for n in range(8)]
+        simple_model=intelligence.fit(simple,'BASE',max_trigger_width=intel_expr['max_trigger_width'])
+        regression['INTELLIGENCE']=all(
+            intelligence.route(simple_model,{'a':a,'b':b,'noise':n%2})==('SPECIAL' if a and b else 'BASE',)
+            for a,b in product((False,True),repeat=2) for n in range(4))
 
-        # CODE: parent may overfit training; novel gene must transfer quadratically.
-        src='def f(x):\n    return x\n'
+        code,code_expr=expressed['CODE']
+        def code_accuracy(source,function_name,train,holdout,budget):
+            if code is AmbiguityAwareProgramRepairV11:
+                candidate=code.repair(source,function_name,train,max_candidates=budget)
+            else:
+                candidate=code.synthesize(source,function_name,train,max_degree=code_expr['max_degree'])
+            if not candidate.get('source'):return 0.0
+            return sum(AmbiguityAwareProgramRepairV11.execute(candidate['source'],function_name,args)==y
+                       for args,y in holdout)/len(holdout)
         tr=[((x,),x*x+1) for x in (-3,-2,-1,0,1,2,3)]
         hold=[((x,),x*x+1) for x in (4,5,6,-4,-5,-6)]
-        pr=AmbiguityAwareProgramRepairV11.repair(src,'f',tr,max_candidates=12000)
-        pacc=0.0
-        if pr.get('source'):
-            pacc=sum(AmbiguityAwareProgramRepairV11.execute(pr['source'],'f',args)==y for args,y in hold)/len(hold)
-        cr=PolynomialReturnRepairGeneV1.synthesize(src,'f',tr)
-        cacc=0.0
-        if cr.get('source'):
-            cacc=sum(AmbiguityAwareProgramRepairV11.execute(cr['source'],'f',args)==y for args,y in hold)/len(hold)
-        score['parent']['CODE']=pacc;score['child']['CODE']=cacc
-        # baseline offset repair remains handled by inherited V11.
+        scores['CODE']=code_accuracy('def f(x):\n    return x\n','f',tr,hold,12000)
         baseline=[((x,),x+2) for x in range(5)]
-        br=AmbiguityAwareProgramRepairV11.repair('def g(x):\n    return x + 1\n','g',baseline,max_candidates=4000)
-        score['regression']['CODE']=bool(br.get('source')) and all(AmbiguityAwareProgramRepairV11.execute(br['source'],'g',args)==y for args,y in baseline)
+        regression['CODE']=code_accuracy('def g(x):\n    return x + 1\n','g',baseline,baseline,4000)==1.0
+        return scores,regression,observations
 
-        # LOGIC regression: canonical symmetric problem remains solved by inherited parent path.
-        sym=[]
-        for a,b in product((False,True),repeat=2):
-            for _ in range(4):sym.append({'input':{'a':a,'b':b},'expected':'EVEN' if a==b else 'ODD'})
-        sm=BudgetAdaptiveCompositionalLogicV2.learn_symmetric_boolean(sym)
-        score['regression']['LOGIC']=all(BudgetAdaptiveCompositionalLogicV2.predict_symmetric_boolean(sm,{'a':a,'b':b})==('EVEN' if a==b else 'ODD') for a,b in product((False,True),repeat=2))
-
+    @classmethod
+    def evaluate(cls,parent,child):
+        # Unknown additions require an implemented evaluator, never a score
+        # based on metadata alone. Validate both before executing either one.
+        parent_impl=cls._express_genome(parent)
+        child_impl=cls._express_genome(child)
+        parent_score,parent_regression,_=cls._measure_expressed_genome(parent_impl)
+        child_score,child_regression,_=cls._measure_expressed_genome(child_impl)
+        score={'parent':parent_score,'child':child_score,
+               'regression':{k:parent_regression[k] and child_regression[k] for k in parent_regression},
+               'evaluated_genomes':{'parent':parent['genome_digest'],'child':child['genome_digest']}}
         score['parent_mean']=sum(score['parent'].values())/4
         score['child_mean']=sum(score['child'].values())/4
         score['fitness_gain']=score['child_mean']-score['parent_mean']

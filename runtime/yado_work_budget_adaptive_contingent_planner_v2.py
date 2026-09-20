@@ -33,7 +33,7 @@ class WorkBudgetAdaptiveContingentPlannerV2:
 
     @classmethod
     def _usable(cls,s,done):
-        if s.attempted or s.quota_remaining<=0:return False
+        if not s.available or s.attempted or s.quota_remaining<=0:return False
         if s.requires and cls.DEPENDENCY_AWARE:return all(x in done for x in s.requires)
         return bool(s.available)
 

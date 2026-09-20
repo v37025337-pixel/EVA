@@ -333,6 +333,44 @@ def replay_recalled_source(records, goal, result):
     return sources[0]
 
 
+def _verify_native_execution(result, spec):
+    """Re-execute source only after its emission or admitted-memory proof.
+
+    Stored labels and a valid source hash cannot attest outputs. Preserve both
+    successful and failed historical checks by comparing execution with the
+    frozen result, leaving the independent label verdict to COG_VERIFY.
+    """
+    from yado_active_native_learning_v1 import execute_source
+    for partition, field in (('training', 'training_predictions'),
+                             ('validation', 'validation_predictions'), ('queries', 'predictions')):
+        try:
+            actual = execute_source(result, [row['input'] for row in spec[partition]])
+            if field not in result or fingerprint(result[field]) != fingerprint(actual):
+                raise ValueError('OUTPUT_MISMATCH')
+        except Exception as error:
+            raise ValueError('COGNITIVE_VERIFICATION_RESULT_MISMATCH:NATIVE_EXECUTION_PROVENANCE:'
+                             + partition) from error
+
+
+def _verify_numeric_execution(result, goal):
+    """Recover the original training-only fit before checking frozen outputs."""
+    from yado_budget_adaptive_compositional_logic_v2 import BudgetAdaptiveCompositionalLogicV2 as logic
+    spec = goal['spec']
+    training, holdout = split_examples(spec['rows'])
+    strategy = goal['decision']['choice']['strategy']
+    model = logic.fit_polynomial(training, max_degree=int(strategy[-1]))
+    if (model.get('kind') == 'WITHHOLD' or 'model' not in result
+            or fingerprint(result['model']) != fingerprint(model)):
+        raise ValueError('COGNITIVE_VERIFICATION_RESULT_MISMATCH:NUMERIC_MODEL_PROVENANCE')
+    if (type(result.get('train_count')) is not int or result['train_count'] != len(training)
+            or type(result.get('holdout_count')) is not int or result['holdout_count'] != len(holdout)):
+        raise ValueError('COGNITIVE_VERIFICATION_RESULT_MISMATCH:NUMERIC_EXECUTION_PROVENANCE:PARTITION')
+    for field, rows in (('holdout_predictions', holdout), ('predictions', spec['queries'])):
+        actual = [logic.predict_polynomial(model, row['x'], row['y']) for row in rows]
+        if field not in result or fingerprint(result[field]) != fingerprint(actual):
+            raise ValueError('COGNITIVE_VERIFICATION_RESULT_MISMATCH:NUMERIC_EXECUTION_PROVENANCE:' + field)
+
+
 def available_strategies(goal, records):
     from .native_binding import STRATEGY, COST, active
     from .runtime_evolution import active_candidates, COST as runtime_cost
@@ -509,6 +547,10 @@ def _replay_uncached(records):
                         if strategy not in {'native_compositional_v1', 'reuse_verified_source'}:
                             raise ValueError('COGNITIVE_COMPOSITIONAL_STRATEGY_PROVENANCE')
                         verify_execution(result, g['spec'])
+                    else:
+                        _verify_native_execution(result, g['spec'])
+                elif g['spec']['domain'] == 'numeric' and result['status'] == 'CANDIDATE':
+                    _verify_numeric_execution(result, g)
                 g['remaining'] -= g['decision']['choice']['cost']
                 g['attempted'].append(g['decision']['choice']['strategy'])
                 g.update(phase='VERIFY', execution=r)

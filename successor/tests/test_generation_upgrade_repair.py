@@ -3,8 +3,10 @@ import copy
 import sqlite3
 from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
-from successor.generation import GenerationKernel, LEGACY_SOURCES, sources
+from successor.generation import (GenerationKernel, LEGACY_SOURCES, PRE_MAINTENANCE_SOURCES,
+                                  GENOME_SOURCE, SOURCE_TRANSITION, sources)
 
 
 class GenerationUpgradeProvenanceTests(unittest.TestCase):
@@ -32,7 +34,8 @@ class GenerationUpgradeProvenanceTests(unittest.TestCase):
 
     def upgrade(self, tick=9, **changes):
         previous = self.generation.records()[-1]
-        body = {'kind': 'SOURCE_UPGRADE', 'previous_sources': copy.deepcopy(LEGACY_SOURCES),
+        body = {'kind': 'SOURCE_UPGRADE', 'transition_id': SOURCE_TRANSITION,
+                'previous_sources': copy.deepcopy(LEGACY_SOURCES),
                 'sources': sources(), 'predecessor_tick': previous['tick'],
                 'predecessor_event_hash': previous['event_hash'], 'parent_state': self.parent_state(tick)}
         body.update(changes)
@@ -74,6 +77,32 @@ class GenerationUpgradeProvenanceTests(unittest.TestCase):
     def test_second_unreviewed_upgrade_is_rejected(self):
         self.upgrade()
         self.upgrade()
+        with self.assertRaisesRegex(ValueError, 'GENERATION_SOURCE_UPGRADE_PROVENANCE'):
+            self.generation.snapshot()
+
+    def test_original_upgrade_prefix_stays_unchanged_before_named_maintenance(self):
+        self.upgrade(sources=copy.deepcopy(PRE_MAINTENANCE_SOURCES), transition_id=None)
+        prefix = list(self.generation.db.execute('SELECT * FROM events ORDER BY tick'))
+        self.assertEqual(self.generation._source_lineage(self.generation.records()), PRE_MAINTENANCE_SOURCES)
+        self.upgrade(previous_sources=copy.deepcopy(PRE_MAINTENANCE_SOURCES))
+        self.assertFalse(self.generation.snapshot()['execution_admitted'])
+        self.assertEqual(list(self.generation.db.execute('SELECT * FROM events ORDER BY tick'))[:2], prefix)
+
+    def test_new_runtime_cannot_use_the_old_unnamed_transition(self):
+        self.upgrade(transition_id=None)
+        with self.assertRaisesRegex(ValueError, 'GENERATION_SOURCE_UPGRADE_PROVENANCE'):
+            self.generation.snapshot()
+
+    def test_named_transition_does_not_authorize_an_arbitrary_runtime_hash(self):
+        changed = sources()
+        changed[GENOME_SOURCE] = 'f' * 64
+        with patch('successor.generation.sources', return_value=changed):
+            self.upgrade(sources=changed)
+            with self.assertRaisesRegex(ValueError, 'GENERATION_UNREVIEWED_CURRENT_SOURCES'):
+                self.generation.snapshot()
+
+    def test_invented_transition_name_is_rejected(self):
+        self.upgrade(transition_id='UNREVIEWED_NEXT_VERSION')
         with self.assertRaisesRegex(ValueError, 'GENERATION_SOURCE_UPGRADE_PROVENANCE'):
             self.generation.snapshot()
 

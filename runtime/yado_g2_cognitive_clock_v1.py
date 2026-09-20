@@ -48,7 +48,7 @@ class G2CognitiveClockV1:
         sid=str(stream_id or 'GLOBAL')
         if sid not in self.streams:
             if len(self.streams)>=self.MAX_STREAMS:
-                victim=sorted(self.streams.items(),key=lambda kv:(kv[1].get('last_tick',0),kv[0]))[0][0]
+                victim=sorted(self.streams.items(),key=lambda kv:(kv[1].get('last_tick') or 0,kv[0]))[0][0]
                 del self.streams[victim]
             self.streams[sid]={
               'episode_tick':0,'last_tick':None,'last_progress_digest':None,

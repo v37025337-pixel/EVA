@@ -54,6 +54,19 @@ the existing continuity procedure to carry an older kernel state to a new
 implementation; a fresh manifest does not migrate an existing identity. This
 adapter does not import or relabel an older standalone generation journal.
 
+For the reviewed `GENOME_FITNESS_BINDING_MAINTENANCE_V1` source transition,
+continuity appends a component `SOURCE_UPGRADE` bound to the new implementation
+event. Historical source pins and events remain intact. Only the exact reviewed
+predecessor and genome SHA are accepted. Component execution then requires a
+fresh measurement of the inherited profile, protected tasks and cognitive memory:
+
+```bash
+python -m successor component-readmit --manifest /path/to/upgraded/manifest.json --state /path/to/upgraded/kernel.sqlite
+```
+
+The copied checkpoint can be inspected before readmission. Historical admission
+labels cannot authorize execution under the changed source.
+
 The connection was implemented by the assistant. The existing kernel selects
 the gene profile and generates individual program candidates. This remains the
 existing bounded component grammar and one activation/rollback lifecycle; it

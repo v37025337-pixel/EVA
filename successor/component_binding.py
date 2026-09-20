@@ -8,11 +8,33 @@ from __future__ import annotations
 
 import copy
 
-from .generation import GenerationKernel, execute_component, inventory, parent_profile, sources
+from .generation import (GenerationKernel, SOURCE_TRANSITION, execute_component,
+                         inventory, parent_profile, reviewed_upgrade_sources, sources)
 from .kernel import decode, fingerprint
 
 EVENT = 'COMPONENT_GENERATION'
 STORAGE = 'SUCCESSOR_CAUSAL_JOURNAL_V1'
+
+
+def implementation_upgrade_event(records, implementation):
+    """Prepare one exact component transition inside a copied main checkpoint."""
+    components = [{**row['event'], 'tick': row['tick'], 'event_hash': row['event_hash']}
+                  for row in records if row.get('kind') == EVENT]
+    if not components:
+        return None
+    previous = next((row['sources'] for row in reversed(components)
+                     if row['kind'] in {'BIRTH', 'SOURCE_UPGRADE'}), None)
+    if previous == sources():
+        return None
+    current = reviewed_upgrade_sources(previous)
+    last = components[-1]
+    return {'kind': EVENT, 'event': {
+        'kind': 'SOURCE_UPGRADE', 'transition_id': SOURCE_TRANSITION,
+        'previous_sources': previous, 'sources': current,
+        'predecessor_tick': last['tick'], 'predecessor_event_hash': last['event_hash'],
+        'implementation_identity': implementation['implementation_digest'],
+        'parent_state': {'status': 'PASS', 'tick': implementation['tick'],
+                         'event_hash': implementation['event_hash']}}}
 
 
 class ComponentJournal(GenerationKernel):
@@ -67,17 +89,28 @@ class ComponentJournal(GenerationKernel):
         self.birth = records[0]
         if (self.birth.get('kind') != 'BIRTH' or self.birth.get('storage') != STORAGE
                 or self.birth.get('parent_identity') != self.kernel.identity
-                or self.birth.get('sources') != sources()
                 or self.birth.get('archive_sha256') != self.kernel.manifest['archive_sha256']
                 or self.birth.get('branches') != inventory(self.archive)
                 or self.birth['parent_state']['tick'] != self.birth['tick'] - 1):
             raise ValueError('COMPONENT_JOURNAL_BIRTH_PROVENANCE')
         self._check_parent_state(self.birth['parent_state'])
-        # Source migrations belong to the existing continuity procedure. A
-        # separate GenerationKernel journal cannot be pasted into this stream.
-        if any(r['kind'] in {'SOURCE_UPGRADE', 'READMISSION', 'BIRTH'} for r in records[1:]):
+        if any(r['kind'] == 'BIRTH' for r in records[1:]):
             raise ValueError('COMPONENT_JOURNAL_UNSUPPORTED_TRANSITION')
-        self.pinned_sources = self.birth['sources']
+        for row in records[1:]:
+            if row['kind'] != 'SOURCE_UPGRADE':
+                continue
+            prior = self.db.execute('SELECT tick,event_hash,body FROM events WHERE tick=?',
+                                    (row['tick'] - 1,)).fetchone()
+            implementation = decode(prior['body']) if prior is not None else {}
+            if (row.get('transition_id') != SOURCE_TRANSITION
+                    or implementation.get('kind') != 'IMPLEMENTATION_UPGRADE'
+                    or row.get('implementation_identity') != implementation.get('implementation_digest')
+                    or row['parent_state'] != {'status': 'PASS', 'tick': prior['tick'],
+                                               'event_hash': prior['event_hash']}):
+                raise ValueError('COMPONENT_JOURNAL_IMPLEMENTATION_UPGRADE_BINDING')
+        # Only the reviewed transition inserted by continuity can bridge pins.
+        # The superclass retains historical checks and requires fresh readmission.
+        self.pinned_sources = self._source_lineage(records)
         state = super().snapshot()
         profile, proposal = parent_profile(), None
         executions = {}

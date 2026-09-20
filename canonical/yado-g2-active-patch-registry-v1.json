@@ -2,6 +2,15 @@
   "all_active_patch_bindings_verified": true,
   "context_memory_latest_readmission_evidence_digest": "2a40a0b1a7203a696f8c350a637a90bd1ec82da3fe7325e216d079ab5d0e42e2",
   "generation": "G2_CANDIDATE_TRCG_V1",
+  "maintenance_history": [
+    {
+      "full_integration_gates_required_before_main": true,
+      "original_gate_evidence_scope": "HISTORICAL_ADMISSION_ONLY",
+      "previous_digest": "e9311a0069632a27143d1fea29148afb72c316d533fc8d702209f0f9486c3aa2",
+      "repair": "YADO_G0_TO_CURRENT_DEEP_AUDIT_REPAIR_V1",
+      "validation_report": "experiments/deep-audit-20260920/focused-validation.json"
+    }
+  ],
   "patches": [
     {
       "component_id": "ALG-G2-AMBIGUITY-AWARE-PROGRAM-REPAIR-V11",
@@ -13,11 +22,19 @@
         }
       ],
       "evidence_ok": true,
-      "expected_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+      "expected_source_sha256": "5c32c17f2d324bc0e058eaf60c77d6f96b4274a917b1fa96b862803685e70873",
+      "maintenance_evidence": "experiments/deep-audit-20260920/focused-validation.json",
       "patch_id": "PROGRAM_REPAIR_V11",
       "source": "runtime/yado_ambiguity_aware_program_repair_v11.py",
+      "source_binding_history": [
+        {
+          "evidence_scope": "ORIGINAL_ADMISSION_IMPLEMENTATION",
+          "expected_source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+          "source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32"
+        }
+      ],
       "source_hash_ok": true,
-      "source_sha256": "56470d37a6ad79fa4c07783dfd420d366424045ada0dfe96238b4cf80e296f32",
+      "source_sha256": "5c32c17f2d324bc0e058eaf60c77d6f96b4274a917b1fa96b862803685e70873",
       "status": "PASS"
     },
     {
@@ -64,11 +81,19 @@
         }
       ],
       "evidence_ok": true,
-      "expected_source_sha256": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5",
+      "expected_source_sha256": "e36ed0277a00b0c8b803d753605570ef27b1d6c6a075676e3c031b20341ae183",
+      "maintenance_evidence": "experiments/deep-audit-20260920/focused-validation.json",
       "patch_id": "THINKING_V2",
       "source": "runtime/yado_work_budget_adaptive_contingent_planner_v2.py",
+      "source_binding_history": [
+        {
+          "evidence_scope": "ORIGINAL_ADMISSION_IMPLEMENTATION",
+          "expected_source_sha256": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5",
+          "source_sha256": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5"
+        }
+      ],
       "source_hash_ok": true,
-      "source_sha256": "cd9ffaba8f743d0832354f59b36b984bdef4a7fef568be49d4146b661ac7ded5",
+      "source_sha256": "e36ed0277a00b0c8b803d753605570ef27b1d6c6a075676e3c031b20341ae183",
       "status": "PASS"
     },
     {
@@ -118,7 +143,7 @@
       "status": "QUARANTINED_REDUNDANT"
     }
   ],
-  "registry_digest": "e9311a0069632a27143d1fea29148afb72c316d533fc8d702209f0f9486c3aa2",
+  "registry_digest": "014bad59cc014f9df1c3677ba4b617cb06fe2e499bf440ae85c92c0e9a54df2e",
   "schema": "yado.g2.active_patch_registry.v1",
   "semantic_boundary": "ACTIVE PATCH/REPAIR SOURCE AND EVIDENCE BINDINGS. HISTORICAL/SHADOW PATCHES ARE NOT ACTIVE BY PRESENCE ALONE.",
   "status": "CANONICAL_ACTIVE"
