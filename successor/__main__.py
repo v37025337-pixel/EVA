@@ -105,6 +105,7 @@ def main():
     for command in ("status", "run", "submit", "resume", "verify", "search", "goal", "think", "cognitive-status", "stop", "native-synthesis-activate",
                     "compositional-synthesis-activate", "compositional-synthesis-deactivate",
                     "program-status", "program-develop",
+                    "component-propose", "component-admit", "component-status", "component-rollback",
                     "development-start", "develop", "development-status", "development-stop",
                     "autonomy-start", "autonomy-run", "autonomy-status", "autonomy-stop"):
         item = sub.add_parser(command)
@@ -165,6 +166,14 @@ def main():
                 output = kernel.set_compositional_synthesis(args.command == 'compositional-synthesis-activate')
             elif args.command == 'program-status':
                 output = kernel.native_program_status()
+            elif args.command == 'component-propose':
+                output = kernel.propose_component_generation()
+            elif args.command == 'component-admit':
+                output = kernel.admit_component_generation()
+            elif args.command == 'component-status':
+                output = kernel.component_generation_snapshot()
+            elif args.command == 'component-rollback':
+                output = kernel.rollback_component_generation()
             elif args.command == 'program-develop':
                 output = kernel.develop_native_programs(rounds=args.rounds)
             elif args.command == 'stop':

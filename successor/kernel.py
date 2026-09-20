@@ -51,7 +51,7 @@ def equivalent(a, b):
 class SuccessorKernel:
     KERNEL_ID = "YADO_SUCCESSOR_CAUSAL_METACOGNITION_V2"
     TASK_KINDS = ("logic", "thinking", "intelligence", "plan", "science", "cognitive",
-                  "represent", "repair", "experience", "audit")
+                  "represent", "repair", "experience", "audit", "component")
 
     def __init__(self, manifest, state, *, repo=ROOT):
         self.repo = Path(repo).resolve()
@@ -196,6 +196,9 @@ class SuccessorKernel:
         if any(r.get('kind') == 'HIVEMIND_INTAKE' for r in autonomous_records):
             from .hivemind import verify_links
             verify_links(autonomous_records)
+        if any(r.get('kind') == 'COMPONENT_GENERATION' for r in autonomous_records):
+            from .component_binding import ComponentJournal
+            ComponentJournal(self).snapshot()
         if any(r.get('kind') == 'IMPLEMENTATION_UPGRADE'
                or r.get('kind', '').startswith('COG_RUNTIME_') for r in autonomous_records):
             from .runtime_evolution import verify_implementations
@@ -241,6 +244,9 @@ class SuccessorKernel:
 
     def _dispatch(self, task):
         kind, p = task.get("kind"), task.get("payload", {})
+        if kind == "component":
+            from .component_binding import ComponentJournal
+            return ComponentJournal.public_result(ComponentJournal(self).execute(p))
         if kind == "logic":
             return self.parent.all_experience_logic(p["relation"], p["start"])
         if kind == "thinking":
@@ -279,7 +285,14 @@ class SuccessorKernel:
         task = copy.deepcopy(task)
         if not isinstance(task, dict) or not isinstance(task.get("payload", {}), dict):
             raise ValueError("TASK_AND_PAYLOAD_MUST_BE_OBJECTS")
-        signature = sha((self.identity + fingerprint(task)).encode())
+        signature_input = task
+        if task.get('kind') == 'component':
+            from .component_binding import ComponentJournal
+            # The same deficit is eligible after a measured component change.
+            # Historical failures retain their original profile and outcome.
+            signature_input = {'task': task, 'component_profile_digest':
+                               ComponentJournal(self).snapshot()['profile_digest']}
+        signature = sha((self.identity + fingerprint(signature_input)).encode())
         previous = self._last_attempt(signature)
         history = self.archive.search(task.get("history_query") or task.get("kind", ""), 4)
         prior_failed = previous is not None and previous[1]["status"] in {"FAIL", "ERROR", "WITHHOLD"}
@@ -418,6 +431,25 @@ class SuccessorKernel:
     def open_goal(self, spec, *, budget=6, mode="full"):
         from .cognitive import CognitiveLoop
         return CognitiveLoop(self).open_goal(spec, budget, mode)
+
+    def component_generation_snapshot(self):
+        from .component_binding import ComponentJournal
+        self._check_sources()
+        with self._state_read_snapshot():
+            self.verify_state()
+            return ComponentJournal(self).snapshot()
+
+    def propose_component_generation(self):
+        from .component_binding import ComponentJournal
+        return ComponentJournal(self).propose()
+
+    def admit_component_generation(self):
+        from .component_binding import ComponentJournal
+        return ComponentJournal(self).admit()
+
+    def rollback_component_generation(self):
+        from .component_binding import ComponentJournal
+        return ComponentJournal(self).rollback()
 
     def activate_native_synthesis(self):
         from .cognitive import CognitiveLoop
