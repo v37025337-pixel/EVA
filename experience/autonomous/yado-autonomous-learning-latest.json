@@ -9,8 +9,13 @@
     "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V2",
     "runtime_manifest_digest": "c0d6914f1d7850a5b396cf13cdb999def2da4dd3d760ae0ca48d31a3c753e88b"
   },
-  "experience_digest": "9244d4bb4831a4f12dbfe6ef63bab08e0d7798465c30debe81a03dace047b16d",
-  "failures": [],
+  "experience_digest": "a325995953662e28ba0ddf952e9b14811393bc022136591fb12ad57dec3c67fd",
+  "failures": [
+    {
+      "error": "RuntimeError:HTTP_ERROR:503",
+      "source_id": "PYTHON_HTMLPARSER"
+    }
+  ],
   "kernel_core_id": "UNIFIED_YADO_CORE_V1",
   "network_policy": {
     "allowed_hosts": [
@@ -36,7 +41,7 @@
     "recommended_action": "For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.",
     "severity": "MEDIUM"
   },
-  "run_id": "36785071274",
+  "run_id": "36822960670",
   "schema": "yado.bounded_autonomous_learning.v1",
   "self_model_effect": "EXTERNAL_EVIDENCE_AVAILABLE_FOR_FUTURE_SELECTION",
   "source_ranking": [
@@ -174,7 +179,7 @@
         "content_type": "text/html",
         "credentials_used": false,
         "host": "docs.python.org",
-        "latency_ms": 50.95,
+        "latency_ms": 237.06,
         "network_executed": true,
         "read_only": true,
         "redirects_followed": false,
@@ -201,67 +206,6 @@
       "selection_score": 7,
       "source_id": "PYTHON_AST",
       "url": "https://docs.python.org/3/library/ast.html"
-    },
-    {
-      "fact_count": 24,
-      "facts": [
-        "html.parser — Simple HTML and XHTML parser — Python 3.14.8 documentation",
-        "which serves as the basis for parsing text files formatted in HTML (HyperText Mark-up Language) and XHTML.",
-        ") are automatically converted to the corresponding Unicode characters.",
-        "instance is fed HTML data and calls handler methods when start tags, end tags, text, comments, and other markup elements are encountered. The user should subclass",
-        "and override its methods to implement the desired behavior.",
-        "This parser does not check that end tags match start tags or call the end-tag handler for elements which are closed implicitly by closing an outer element.",
-        "class to print out start tags, end tags, and data as they are encountered:",
-        "'<html><head><title>Test</title></head>'",
-        "Encountered a start tag: html Encountered a start tag: head Encountered a start tag: title Encountered some data : Test Encountered an end tag : title Encountered an end tag : head Encountered a start tag: body Encountered a start tag: h1 Encountered some data : Parse me! Encountered an end tag : h1 Encountered an end tag : body Encountered an end tag : html",
-        "Force processing of all buffered data as if it were followed by an end-of-file mark. This method may be redefined by a derived class to define additional processing at the end of the input, but the redefined version should always call the",
-        "Return the text of the most recently opened start tag. This should not normally be needed for structured processing, but may be useful in dealing with HTML “as deployed” or for re-generating input with minimal changes (whitespace between attributes can be preserved, etc.).",
-        "The following methods are called when data or markup elements are encountered and they are meant to be overridden in a subclass. The base class implementations do nothing (except for",
-        "This method is called to handle the start tag of an element (e.g.",
-        "will be translated to lower case, and quotes in the",
-        "have been removed, and character and entity references have been replaced. For empty attributes,",
-        "This method is called to handle the end tag of an element (e.g.",
-        "). This method may be overridden by subclasses which require this particular lexical information; the default implementation simply calls",
-        "This method is called to process arbitrary data (e.g. text nodes and the content of elements like",
-        "This method is called to process a named character reference of the form",
-        "This method is called to process decimal and hexadecimal numeric character references of the form",
-        ". For example, the decimal equivalent for",
-        "The content of Internet Explorer conditional comments (condcoms) will also be sent to this method, so, for",
-        "This method is called to handle an HTML doctype declaration (e.g.",
-        "parameter will contain the entire processing instruction. For example, for the processing instruction"
-      ],
-      "network": {
-        "bytes": 55260,
-        "connected_ip": "151.101.0.223",
-        "content_type": "text/html",
-        "credentials_used": false,
-        "host": "docs.python.org",
-        "latency_ms": 44.14,
-        "network_executed": true,
-        "read_only": true,
-        "redirects_followed": false,
-        "resolved_ips": [
-          "151.101.0.223",
-          "151.101.128.223",
-          "151.101.192.223",
-          "151.101.64.223",
-          "2a04:4e42:200::223",
-          "2a04:4e42:400::223",
-          "2a04:4e42:600::223",
-          "2a04:4e42::223"
-        ],
-        "sha256": "079f38491e0d48b404790f0c879310f965d959538ba0c1ec45ec6b9732b76778",
-        "status": 200,
-        "url": "https://docs.python.org/3/library/html.parser.html"
-      },
-      "selection_overlap": [
-        "learning",
-        "parser",
-        "web"
-      ],
-      "selection_score": 6,
-      "source_id": "PYTHON_HTMLPARSER",
-      "url": "https://docs.python.org/3/library/html.parser.html"
     },
     {
       "fact_count": 24,
@@ -297,7 +241,7 @@
         "content_type": "text/html",
         "credentials_used": false,
         "host": "docs.python.org",
-        "latency_ms": 68.01,
+        "latency_ms": 259.91,
         "network_executed": true,
         "read_only": true,
         "redirects_followed": false,
