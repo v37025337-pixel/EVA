@@ -9,13 +9,8 @@
     "implementation_id": "YADO_UNIFIED_KERNEL_REPAIR_V2",
     "runtime_manifest_digest": "c0d6914f1d7850a5b396cf13cdb999def2da4dd3d760ae0ca48d31a3c753e88b"
   },
-  "experience_digest": "a325995953662e28ba0ddf952e9b14811393bc022136591fb12ad57dec3c67fd",
-  "failures": [
-    {
-      "error": "RuntimeError:HTTP_ERROR:503",
-      "source_id": "PYTHON_HTMLPARSER"
-    }
-  ],
+  "experience_digest": "55a14c8d4ad5a9e6db3168ed8fc3526aad934260a0e11c1dfbfbc05899790681",
+  "failures": [],
   "kernel_core_id": "UNIFIED_YADO_CORE_V1",
   "network_policy": {
     "allowed_hosts": [
@@ -41,7 +36,7 @@
     "recommended_action": "For each candidate branch, rederive evidence and provenance; admit only validated developmental experience, never branch names alone.",
     "severity": "MEDIUM"
   },
-  "run_id": "36822960670",
+  "run_id": "36868843687",
   "schema": "yado.bounded_autonomous_learning.v1",
   "self_model_effect": "EXTERNAL_EVIDENCE_AVAILABLE_FOR_FUTURE_SELECTION",
   "source_ranking": [
@@ -179,7 +174,7 @@
         "content_type": "text/html",
         "credentials_used": false,
         "host": "docs.python.org",
-        "latency_ms": 237.06,
+        "latency_ms": 93.17,
         "network_executed": true,
         "read_only": true,
         "redirects_followed": false,
@@ -193,7 +188,7 @@
           "2a04:4e42:600::223",
           "2a04:4e42::223"
         ],
-        "sha256": "5713893240a0ff5ae23b35b64cf7ce1b7750caf537ef083aad0ba8e997e74783",
+        "sha256": "5af27f3122c1d37dfa6afb3aa300a1cfe8ce6063434abf8e059e34484a2c5fe9",
         "status": 200,
         "url": "https://docs.python.org/3/library/ast.html"
       },
@@ -206,6 +201,67 @@
       "selection_score": 7,
       "source_id": "PYTHON_AST",
       "url": "https://docs.python.org/3/library/ast.html"
+    },
+    {
+      "fact_count": 24,
+      "facts": [
+        "html.parser — Simple HTML and XHTML parser — Python 3.14.8 documentation",
+        "which serves as the basis for parsing text files formatted in HTML (HyperText Mark-up Language) and XHTML.",
+        ") are automatically converted to the corresponding Unicode characters.",
+        "instance is fed HTML data and calls handler methods when start tags, end tags, text, comments, and other markup elements are encountered. The user should subclass",
+        "and override its methods to implement the desired behavior.",
+        "This parser does not check that end tags match start tags or call the end-tag handler for elements which are closed implicitly by closing an outer element.",
+        "class to print out start tags, end tags, and data as they are encountered:",
+        "'<html><head><title>Test</title></head>'",
+        "Encountered a start tag: html Encountered a start tag: head Encountered a start tag: title Encountered some data : Test Encountered an end tag : title Encountered an end tag : head Encountered a start tag: body Encountered a start tag: h1 Encountered some data : Parse me! Encountered an end tag : h1 Encountered an end tag : body Encountered an end tag : html",
+        "Force processing of all buffered data as if it were followed by an end-of-file mark. This method may be redefined by a derived class to define additional processing at the end of the input, but the redefined version should always call the",
+        "Return the text of the most recently opened start tag. This should not normally be needed for structured processing, but may be useful in dealing with HTML “as deployed” or for re-generating input with minimal changes (whitespace between attributes can be preserved, etc.).",
+        "The following methods are called when data or markup elements are encountered and they are meant to be overridden in a subclass. The base class implementations do nothing (except for",
+        "This method is called to handle the start tag of an element (e.g.",
+        "will be translated to lower case, and quotes in the",
+        "have been removed, and character and entity references have been replaced. For empty attributes,",
+        "This method is called to handle the end tag of an element (e.g.",
+        "). This method may be overridden by subclasses which require this particular lexical information; the default implementation simply calls",
+        "This method is called to process arbitrary data (e.g. text nodes and the content of elements like",
+        "This method is called to process a named character reference of the form",
+        "This method is called to process decimal and hexadecimal numeric character references of the form",
+        ". For example, the decimal equivalent for",
+        "The content of Internet Explorer conditional comments (condcoms) will also be sent to this method, so, for",
+        "This method is called to handle an HTML doctype declaration (e.g.",
+        "parameter will contain the entire processing instruction. For example, for the processing instruction"
+      ],
+      "network": {
+        "bytes": 55260,
+        "connected_ip": "151.101.0.223",
+        "content_type": "text/html",
+        "credentials_used": false,
+        "host": "docs.python.org",
+        "latency_ms": 88.74,
+        "network_executed": true,
+        "read_only": true,
+        "redirects_followed": false,
+        "resolved_ips": [
+          "151.101.0.223",
+          "151.101.128.223",
+          "151.101.192.223",
+          "151.101.64.223",
+          "2a04:4e42:200::223",
+          "2a04:4e42:400::223",
+          "2a04:4e42:600::223",
+          "2a04:4e42::223"
+        ],
+        "sha256": "680502b8742df79cfafc12758ad839ade38c6d30f6d5952506e231d7f209855f",
+        "status": 200,
+        "url": "https://docs.python.org/3/library/html.parser.html"
+      },
+      "selection_overlap": [
+        "learning",
+        "parser",
+        "web"
+      ],
+      "selection_score": 6,
+      "source_id": "PYTHON_HTMLPARSER",
+      "url": "https://docs.python.org/3/library/html.parser.html"
     },
     {
       "fact_count": 24,
@@ -241,7 +297,7 @@
         "content_type": "text/html",
         "credentials_used": false,
         "host": "docs.python.org",
-        "latency_ms": 259.91,
+        "latency_ms": 96.26,
         "network_executed": true,
         "read_only": true,
         "redirects_followed": false,
@@ -255,7 +311,7 @@
           "2a04:4e42:600::223",
           "2a04:4e42::223"
         ],
-        "sha256": "42661030624d577df2b636a394bb46760db06f67edba6d1642aecc23cdc46a8c",
+        "sha256": "35c4eed1d612ec6fa0dfcedf1bd6b056cb0c6a69e20da5a03f459d50a5336736",
         "status": 200,
         "url": "https://docs.python.org/3/library/unittest.html"
       },
